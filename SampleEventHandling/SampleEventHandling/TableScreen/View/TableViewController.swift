@@ -41,5 +41,22 @@ class TableViewController: UIViewController, ViewInput {
         let emailGenerator = TextWithLabelGenerator(model: model.email, text: "Email")
         emailGenerator.textShouldChange.valueListner = self.presenter.emailChange(email:)
         self.displayManager.addCellGenerator(emailGenerator)
+
+        let datePicker = DatePickerGenerator(date: model.birthDate)
+        let dateGenerator = LabelGenerator(date: model.birthDate)
+        datePicker.valueChanged += { [weak dateGenerator] (date: Date) in
+            dateGenerator?.date = date
+        }
+
+        dateGenerator.didSelectEvent += {
+            if !dateGenerator.didSelected {
+                self.displayManager.insertGenerator(datePicker, at: 4)
+            } else {
+                self.displayManager.removeGenerator(with: 4)
+            }
+
+        }
+
+        self.displayManager.addCellGenerator(dateGenerator)
     }
 }

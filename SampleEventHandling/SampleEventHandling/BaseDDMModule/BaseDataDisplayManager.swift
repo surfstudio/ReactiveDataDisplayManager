@@ -61,6 +61,29 @@ public class BaseTableDataDisplayManager: NSObject, TableDataManager, TableDispl
         guard let guardTable = self.tableView else { return }
         self.scrollEvent.invoke(with: guardTable)
     }
+
+    public func insertGenerator(_ generator: TableCellGenerator, at index: Int) {
+
+        if self.tableView == nil { return }
+
+        self.tableView?.registerNib(generator.identifier)
+        self.tableView?.beginUpdates()
+        self.cellGenerators.insert(generator, at: index)
+        let indexPath = IndexPath(row: index, section: 0)
+        self.tableView?.insertRows(at: [indexPath], with: .automatic)
+        self.tableView?.endUpdates()
+    }
+
+    public func removeGenerator(with index: Int) {
+
+        if self.tableView == nil { return }
+
+        self.tableView?.beginUpdates()
+        self.cellGenerators.remove(at: index)
+        let indexPath = IndexPath(row: index, section: 0)
+        self.tableView?.deleteRows(at: [indexPath], with: .automatic)
+        self.tableView?.endUpdates()
+    }
 }
 
 /// MARK: - UITableViewDelegate
@@ -73,6 +96,11 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.estimatedHeight
+    }
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectable = self.cellGenerators[indexPath.row] as? SelectableItem else { return }
+        selectable.didSelectEvent.invoke(with: ())
     }
 }
 

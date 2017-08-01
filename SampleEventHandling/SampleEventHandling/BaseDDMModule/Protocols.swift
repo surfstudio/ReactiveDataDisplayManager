@@ -55,3 +55,11 @@ public protocol ViewBuilder {
     /// - Parameter view: UIView которое необходимо сконфигурировать.
     func build(view: ViewType)
 }
+
+/// Аспект для итема, который можно выделить
+public protocol SelectableItem: class {
+
+    var didSelectEvent: BaseEvent<Void> { get }
+
+    var didSelected: Bool { get }
+}
