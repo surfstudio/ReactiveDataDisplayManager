@@ -32,7 +32,7 @@ extension TextWithLabelGenerator: TableCellGenerator {
     func generate(tableView: UITableView, forIndexPath indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TextWithLabelCell.nameOfClass, for: indexPath)
         if let convertedCell = cell as? TextWithLabelCell {
-            self.build(cell: convertedCell)
+            self.build(view: convertedCell)
         }
         cell.selectionStyle = .none
         cell.contentView.layoutMargins = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 20)
@@ -40,11 +40,11 @@ extension TextWithLabelGenerator: TableCellGenerator {
     }
 }
 
-extension TextWithLabelGenerator: TableCellBuilder {
+extension TextWithLabelGenerator: ViewBuilder {
 
-    func build(cell: TextWithLabelCell) {
-        cell.configure(title: self.model, text: self.text)
-        cell.textFeildDelegate = self
+    func build(view: TextWithLabelCell) {
+        view.configure(title: self.model, text: self.text)
+        view.textFeildDelegate = self
     }
 }
 

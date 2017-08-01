@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Event {
+public protocol Event {
 
     associatedtype Input
     typealias Lambda = (Input)->(Void)
@@ -25,7 +25,7 @@ protocol Event {
 }
 
 /// Эвент, реализующий событие, которое может возвращать значение
-protocol ValueEvent {
+public protocol ValueEvent {
 
     associatedtype Input
     associatedtype Return
@@ -36,36 +36,36 @@ protocol ValueEvent {
 }
 /// Базовая имплементация события, котоаря опять же может дополняться до необходимой, если это нужно.
 /// Если нужно иное поведение - либо сабкласимся, либо создаем новый класс и имлементим протоколы 💪
-class BaseEvent<Input>: Event {
+public class BaseEvent<Input>: Event {
 
     // MARK: - Other
 
-    typealias Lambda = (Input)->(Void)
+    public typealias Lambda = (Input)->(Void)
 
-    static func += (left: BaseEvent<Input>, right: @escaping Lambda) {
+    public static func += (left: BaseEvent<Input>, right: @escaping Lambda) {
         left.addListner(right)
     }
 
     private var listners: [Lambda]
 
-    init() {
+    public init() {
         self.listners = [Lambda]()
     }
 
-    func addListner(_ listner: @escaping Lambda) {
+    public func addListner(_ listner: @escaping Lambda) {
         self.listners.append(listner)
     }
 
-    func invoke(with input: Input) {
+    public func invoke(with input: Input) {
         self.listners.forEach({$0(input)})
     }
 }
 
 /// Базовая имплементация события, которое умеет возвращать значение. Эта имплементация опять же может дополняться до необходимой, если это нужно.
 /// Если нужно иное поведение - либо сабкласимся, либо создаем новый класс и имлементим протоколы 💪
-class BaseValueEvent<Input, Return>: ValueEvent {
+public class BaseValueEvent<Input, Return>: ValueEvent {
 
-    typealias Lambda = (Input)->(Return)
+    public typealias Lambda = (Input)->(Return)
 
-    var valueListner: Lambda?
+    public var valueListner: Lambda?
 }

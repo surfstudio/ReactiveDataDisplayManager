@@ -16,28 +16,50 @@ import UIKit
 /// Если нужно специфиыическое поведения то можно либо сабкласить, либо создавать новый - не важно, главное имплементить протоколы 💪
 public class BaseTableDataDisplayManager: NSObject, TableDataManager, TableDisplayManager {
 
-    fileprivate var generators = [TableCellGenerator]()
-    fileprivate weak var tableView: UITableView?
+    // MARK: - Events
 
+    /// Вызывается при скролле таблицы
+    public var scrollEvent = BaseEvent<UITableView>()
+
+    // MARK: - Fileprivate properties
+
+    fileprivate var cellGenerators: [TableCellGenerator]
+    fileprivate var sectionHeaderGenerator: [ViewGenerator]
+    fileprivate weak var tableView: UITableView?
     fileprivate let estimatedHeight: CGFloat
 
-    init(estimatedHeight: CGFloat = 40) {
+    // MARK: - Initialization and deinitialization
+
+    public init(estimatedHeight: CGFloat = 40) {
         self.estimatedHeight = estimatedHeight
+        self.cellGenerators = [TableCellGenerator]()
+        self.sectionHeaderGenerator = [ViewGenerator]()
         super.init()
     }
 
-    func addGenerator(_ generator: TableCellGenerator, needRegister: Bool = true) {
+    // MARK: - Public methods
+
+    public func addSectionHeaderGenerator(_ generator: ViewGenerator) {
+        self.sectionHeaderGenerator.append(generator)
+    }
+
+    public func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool = true) {
         if needRegister {
             self.tableView?.registerNib(generator.identifier)
         }
-        self.generators.append(generator)
+        self.cellGenerators.append(generator)
     }
 
-    func setTableView(_ tableView: UITableView) {
+    public func setTableView(_ tableView: UITableView) {
         self.tableView = tableView
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
         self.tableView?.separatorStyle = .none
+    }
+
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollEvent.invoke(with: guardTable)
     }
 }
 
@@ -58,11 +80,19 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
 
 extension BaseTableDataDisplayManager: UITableViewDataSource {
 
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section > self.sectionHeaderGenerator.count - 1 {
+            return nil
+        }
+
+        return self.sectionHeaderGenerator[section].generate()
+    }
+
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.generators.count
+        return self.cellGenerators.count
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.generators[indexPath.row].generate(tableView: tableView, forIndexPath: indexPath)
+        return self.cellGenerators[indexPath.row].generate(tableView: tableView, forIndexPath: indexPath)
     }
 }

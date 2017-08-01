@@ -32,14 +32,14 @@ class TableViewController: UIViewController, ViewInput {
 
         let nameGenerator = TextWithLabelGenerator(model: model.name, text: "Имя")
         nameGenerator.textShouldChange.valueListner = self.presenter.nameChange
-        self.displayManager.addGenerator(nameGenerator)
+        self.displayManager.addCellGenerator(nameGenerator)
 
         let surnameGenerator = TextWithLabelGenerator(model: model.surname, text: "Фамилия")
         surnameGenerator.textShouldChange.valueListner = self.presenter.surnameChange
-        self.displayManager.addGenerator(surnameGenerator)
+        self.displayManager.addCellGenerator(surnameGenerator)
 
         let emailGenerator = TextWithLabelGenerator(model: model.email, text: "Email")
         emailGenerator.textShouldChange.valueListner = self.presenter.emailChange(email:)
-        self.displayManager.addGenerator(emailGenerator)
+        self.displayManager.addCellGenerator(emailGenerator)
     }
 }

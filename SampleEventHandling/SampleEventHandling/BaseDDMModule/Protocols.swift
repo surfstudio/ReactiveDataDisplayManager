@@ -10,21 +10,30 @@ import Foundation
 import UIKit
 
 /// Протокол для общения между презентером и адаптером.
-protocol TableDataManager: class {
+public protocol TableDataManager: class {
 
-    /// Добавляет новый генератор к менеджеру данных.
-    func addGenerator(_ generator: TableCellGenerator, needRegister: Bool)
+    /// Добавляет генератор хедеров дял секций
+    func addSectionHeaderGenerator(_ generator: ViewGenerator)
+
+    /// Добавляет новый генератор ячейки к менеджеру данных.
+    func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool)
 }
 
 /// Протокол для общения между отображением и адаптером.
-protocol TableDisplayManager: class {
+public protocol TableDisplayManager: class {
 
     /// Устанавливает таблицу для данного менеджера.
     func setTableView(_ tableView: UITableView)
 }
 
+/// Протокол для передачи логики построения View адаптеру в виде абстрактной View
+public protocol ViewGenerator: class {
+
+    func generate() -> UIView
+}
+
 /// Протокол, для передачи логики построения ячейки адаптеру в виде абстрактной ячейки.
-protocol TableCellGenerator: class {
+public protocol TableCellGenerator: class {
 
     /// Тип ниба, который генерирует данный генератор.
     var identifier: UITableViewCell.Type { get }
@@ -36,13 +45,13 @@ protocol TableCellGenerator: class {
     func generate(tableView: UITableView, forIndexPath indexPath: IndexPath) -> UITableViewCell
 }
 
-/// Аспект билдера для конкретной ячейки ячейки.
-protocol TableCellBuilder {
+/// Аспект билдера для конкретной UIVIew.
+public protocol ViewBuilder {
 
-    associatedtype CellType: UITableViewCell
+    associatedtype ViewType: UIView
 
     /// Выполняет конфигурирование ячейки.
     ///
-    /// - Parameter cell: Ячейка которую необходимо сконфигурировать.
-    func build(cell: CellType)
+    /// - Parameter view: UIView которое необходимо сконфигурировать.
+    func build(view: ViewType)
 }
