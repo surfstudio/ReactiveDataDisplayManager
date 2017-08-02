@@ -27,8 +27,11 @@ class TableViewController: UIViewController, ViewInput {
     }
 
     func configure(with model: User) {
-
         self.displayManager.setTableView(self.tableView)
+        self.createGenerators(with: model)
+    }
+
+    func createGenerators(with model: User) {
 
         let nameGenerator = TextWithLabelGenerator(model: model.name, text: "Имя")
         nameGenerator.textShouldChange.valueListner = self.presenter.nameChange
@@ -44,6 +47,7 @@ class TableViewController: UIViewController, ViewInput {
 
         let datePicker = DatePickerGenerator(date: model.birthDate)
         let dateGenerator = LabelGenerator(date: model.birthDate)
+        
         datePicker.valueChanged += { [weak dateGenerator] (date: Date) in
             dateGenerator?.date = date
         }
