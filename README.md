@@ -52,7 +52,6 @@ extension SubscriptionServiceGenerator: ViewBuilder {
         view.delegate = self
         <# some logics #>
     }
-
 }
 
 // MARK: - SubscriptionServiceCellDelegate
