@@ -9,30 +9,21 @@
 import Foundation
 import UIKit
 
-extension NSObject {
+public extension NSObject {
     class var nameOfClass: String {
         return NSStringFromClass(self).components(separatedBy: ".").last!
     }
 }
 
-extension UIViewController {
-    class func controller() -> Self {
+public extension UIViewController {
+    public class func controller() -> Self {
         let classReference = self.self
         return classReference.init(nibName: self.nameOfClass, bundle: nil)
     }
 }
 
-extension UITableView {
-    func registerNib(_ cellType: UITableViewCell.Type) {
+public extension UITableView {
+    public func registerNib(_ cellType: UITableViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: nil), forCellReuseIdentifier: cellType.nameOfClass)
-    }
-}
-
-extension String {
-
-    var isValidName: Bool {
-        let regEx = "^[\\p{L} \\-]+$"
-        let predicate = NSPredicate(format: "SELF MATCHES %@", regEx)
-        return predicate.evaluate(with: self)
     }
 }
