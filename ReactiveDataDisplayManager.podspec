@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "ReactiveDataDisplayManager"
-  s.version = "1.0.1"
+  s.version = "1.0.0"
   s.summary = "Library with custom events and reusable adapter for UITableView"
   s.homepage = "https://github.com/LastSprint/ReactiveDataDisplayManager"
   s.license = "MIT"
@@ -9,4 +9,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Source/*.swift'
   s.public_header_files  = 'Source/*.h'
+  s.framework = 'Foundation' , 'UIKit'
+  s.ios.deployment_target = '7.0'
 end
