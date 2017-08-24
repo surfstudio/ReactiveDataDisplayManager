@@ -12,15 +12,18 @@
 		4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEB1F4E9F74006B7809 /* Extensions.swift */; };
 		4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BED1F4E9F74006B7809 /* Protocols.swift */; };
 		4F088BF41F4E9F74006B7809 /* ReactiveDataDisplayManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4F088BF61F4EAB86006B7809 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F088BF51F4EAB86006B7809 /* Info.plist */; };
+		4F088BF91F4EABA2006B7809 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F088BF81F4EABA2006B7809 /* UIKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		4F088BEA1F4E9F74006B7809 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		4F088BEB1F4E9F74006B7809 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		4F088BEC1F4E9F74006B7809 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F088BED1F4E9F74006B7809 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactiveDataDisplayManager.h; sourceTree = "<group>"; };
+		4F088BF51F4EAB86006B7809 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F088BF81F4EABA2006B7809 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F088BF91F4EABA2006B7809 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,18 +45,27 @@
 				4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */,
 				4F088BEA1F4E9F74006B7809 /* Event.swift */,
 				4F088BEB1F4E9F74006B7809 /* Extensions.swift */,
-				4F088BEC1F4E9F74006B7809 /* Info.plist */,
 				4F088BED1F4E9F74006B7809 /* Protocols.swift */,
 				4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
+		4F088BF71F4EABA1006B7809 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4F088BF81F4EABA2006B7809 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B971E2511F456825000FBB9A = {
 			isa = PBXGroup;
 			children = (
+				4F088BF51F4EAB86006B7809 /* Info.plist */,
 				4F088BE81F4E9F74006B7809 /* Source */,
 				B971E25C1F456825000FBB9A /* Products */,
+				4F088BF71F4EABA1006B7809 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +147,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F088BF61F4EAB86006B7809 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,7 +278,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.ReactiveDataDisplayManager;
@@ -284,7 +298,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.ReactiveDataDisplayManager;
