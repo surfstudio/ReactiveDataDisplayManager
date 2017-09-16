@@ -42,7 +42,6 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
         self.tableView = tableView
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
-        self.tableView?.separatorStyle = .none
     }
 }
 
