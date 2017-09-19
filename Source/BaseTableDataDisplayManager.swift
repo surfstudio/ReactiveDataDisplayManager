@@ -192,6 +192,9 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectable = self.cellGenerators[indexPath.row] as? SelectableItem else { return }
         selectable.didSelectEvent.invoke(with: ())
+        if selectable.isNeedDeselect {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
 
