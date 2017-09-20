@@ -64,7 +64,7 @@ extension SubscriptionServiceGenerator: SubscriptionServiceCellDelegate {
     }
 }
 ```
- - **Event**: is custom object, that may store closures, which have the same signatures, object that store a avent may call all stored closures for send objects, that provide this closures about event.
+ - **Event**: is custom object, that may store closures, which have the same signatures, object that store an avent may call all stored closures for send objects, that provide this closures about event.
 
  View wants to recive a message about user tap on button:
  ```
