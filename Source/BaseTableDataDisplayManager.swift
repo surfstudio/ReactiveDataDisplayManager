@@ -52,7 +52,7 @@ public extension BaseTableDataDisplayManager {
     /// Added new header for section generator.
     ///
     /// - Parameter generator: new generator.
-    public func addSectionHeaderGenerator(_ generator: ViewGenerator) {
+    public func addSectionHeaderGenerator(_ generator: HeaderGenerator) {
         self.sectionHeaderGenerator.append(generator)
     }
 

@@ -6,14 +6,13 @@
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 /// Protocol for work with cell.
 public protocol TableDataDisplayManager: class {
 
     /// Add generator of header for section.
-    func addSectionHeaderGenerator(_ generator: ViewGenerator)
+    func addSectionHeaderGenerator(_ generator: HeaderGenerator)
 
     /// Add generator for cell.
     func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool)
@@ -24,8 +23,11 @@ public protocol TableDataDisplayManager: class {
 
 /// Protocol that incapsulated build logics for current View
 public protocol ViewGenerator: class {
-
     func generate() -> UIView
+}
+
+public protocol HeaderGenerator: class, ViewGenerator {
+    func height(_ tableView: UITableView, forSection section: Int) -> CGFloat
 }
 
 /// Protocol that incapsulated type of current cell
@@ -64,6 +66,7 @@ public protocol SelectableItem: class {
     /// If the value of this property is **true** (the default), cells deselect
     /// immediately after tap. If you set it to **false**, they don't deselect.
     var isNeedDeselect: Bool { get }
+
 }
 
 extension SelectableItem {
