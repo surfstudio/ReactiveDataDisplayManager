@@ -77,7 +77,7 @@ public extension BaseTableDataDisplayManager {
 
 public extension BaseTableDataDisplayManager {
 
-    /// This method is used to remove generator from adapter. Generators compare by references.
+    /// This method is used to remove generator from adapter. Generators compares by references.
     ///
     /// - Parameters:
     ///   - generator: Generator to delete.
@@ -87,7 +87,7 @@ public extension BaseTableDataDisplayManager {
         self.removeGenerator(with: index, with: animation)
     }
 
-    /// This method is used to insert new generator after current generator.
+    /// This method is used to insert a new generator after current generator.
     ///
     /// - Parameters:
     ///   - generator: Current generator. Must contained this adapter.
@@ -99,7 +99,7 @@ public extension BaseTableDataDisplayManager {
         self.insertGenerator(newGenerator, at: index + 1, with: animation)
     }
 
-    /// This method is used to insert new generator before current generator.
+    /// This method is used to insert a new generator before current generator.
     ///
     /// - Parameters:
     ///   - generator: Current generator. Must contained this adapter.
@@ -112,7 +112,8 @@ public extension BaseTableDataDisplayManager {
     }
 
     /// This method is used to swap two adapters between each other.
-    /// Warning!!! Call reload data in tableView.
+    ///
+    /// - Warning: Calls reload data in tableView.
     ///
     /// - Parameters:
     ///   - firstGenerator: Generator which should be moved to a new place. Must contains in adapter.

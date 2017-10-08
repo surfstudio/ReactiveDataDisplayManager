@@ -32,7 +32,6 @@ public protocol TableDataDisplayManager: class {
 
 /// Protocol that incapsulated build logics for current View
 public protocol ViewGenerator: class {
-
     func generate() -> UIView
 }
 
@@ -42,7 +41,7 @@ public protocol TableCellGenerator: class {
     /// Nib type, which create this generator
     var identifier: UITableViewCell.Type { get }
 
-    /// This method is used to create cell.
+    /// This method is used to create a cell.
     ///
     /// - Parameter tableView: UITableView which contains cells.
     /// - Return: New (may reused) cell.
@@ -63,6 +62,7 @@ public protocol ViewBuilder {
 /// Protocol for selectable item.
 public protocol SelectableItem: class {
 
+    /// Event that calls when the item is now selected.
     var didSelectEvent: BaseEvent<Void> { get }
 
     var didSelected: Bool { get }
