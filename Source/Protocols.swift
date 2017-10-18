@@ -6,16 +6,13 @@
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 /// Protocol for work with cells and views adding.
 public protocol TableDataDisplayManager: class {
 
-    /// This method is used to add a new header to section generator.
-    ///
-    /// - Parameter generator: New view generator.
-    func addSectionHeaderGenerator(_ generator: ViewGenerator)
+    /// Add generator of header for section.
+    func addSectionHeaderGenerator(_ generator: HeaderGenerator)
 
     /// This method is used to add a new cell generator.
     ///
@@ -33,6 +30,10 @@ public protocol TableDataDisplayManager: class {
 /// Protocol that incapsulated build logics for current View
 public protocol ViewGenerator: class {
     func generate() -> UIView
+}
+
+public protocol HeaderGenerator: class, ViewGenerator {
+    func height(_ tableView: UITableView, forSection section: Int) -> CGFloat
 }
 
 /// Protocol that incapsulated type of current cell
@@ -72,6 +73,7 @@ public protocol SelectableItem: class {
     /// If the value of this property is **true** (the default), cells deselect
     /// immediately after tap. If you set it to **false**, they don't deselect.
     var isNeedDeselect: Bool { get }
+
 }
 
 extension SelectableItem {

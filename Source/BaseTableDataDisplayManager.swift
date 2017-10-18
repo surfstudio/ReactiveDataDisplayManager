@@ -46,7 +46,10 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
 
 public extension BaseTableDataDisplayManager {
 
-    public func addSectionHeaderGenerator(_ generator: ViewGenerator) {
+    /// Added new header for section generator.
+    ///
+    /// - Parameter generator: new generator.
+    public func addSectionHeaderGenerator(_ generator: HeaderGenerator) {
         self.sectionHeaderGenerator.append(generator)
     }
 
