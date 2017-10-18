@@ -1,9 +1,9 @@
 //
 //  HeaderableTableDataDisplayManager.swift
-//  ReactiveDataDisplayManager
+//  GoLamaGo
 //
-//  Created by Ivan Smetanin on 24/09/2017.
-//  Copyright © 2017 Александр Кравченков. All rights reserved.
+//  Created by Ivan Smetanin on 20/09/2017.
+//  Copyright © 2017 Surf. All rights reserved.
 //
 
 import Foundation
@@ -11,19 +11,19 @@ import Foundation
 /// Protocol for work with cell.
 public protocol HeaderableTableDataDisplayManager: class {
 
-    /// Add generator of header for section.
+    /// Adds the new header generator.
     func addSectionHeaderGenerator(_ generator: HeaderGenerator)
 
-    /// This method is used to add the new cell generator.
+    /// Adds the new cell generator.
     ///
     /// - Parameters:
     ///   - generator: Generator which should be added.
     ///   - header: Header in which is added to generator, if nil generator
     /// will be added to the last header.
-    ///   - needRegister: Pass true if needed to register the cell.
+    ///   - needRegister: Pass true to register the cell nib.
     func addCellGenerator(_ generator: TableCellGenerator, toHeader header: HeaderGenerator?, needRegister: Bool)
 
-    /// Set tableView for current manager
+    /// Sets tableView for current manager
     func setTableView(_ tableView: UITableView)
 }
 
@@ -31,15 +31,18 @@ public class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDat
 
     // MARK: - Events
 
-    /// Called if table scrolled
+    /// Calls if table scrolled
     public var scrollEvent = BaseEvent<UITableView>()
+
+    // MARK: - Constants
+
+    fileprivate let estimatedHeight: CGFloat
 
     // MARK: - Fileprivate properties
 
     fileprivate var cellGenerators: [[TableCellGenerator]]
     fileprivate var sectionHeaderGenerators: [HeaderGenerator]
     fileprivate weak var tableView: UITableView?
-    fileprivate let estimatedHeight: CGFloat
 
     // MARK: - Initialization and deinitialization
 
@@ -50,9 +53,9 @@ public class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDat
         super.init()
     }
 
-    /// Set TableView to current adapter.
+    /// Sets UITableView to current adapter.
     ///
-    /// - Parameter tableView: new TableView
+    /// - Parameter tableView: new UITableView
     public func setTableView(_ tableView: UITableView) {
         self.tableView = tableView
         self.tableView?.delegate = self
@@ -64,13 +67,31 @@ public class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDat
 
 public extension BaseHeaderableTableDataDisplayManager {
 
-    /// Added new header for section generator.
+    /// Adds the new header section generator.
     ///
     /// - Parameter generator: new generator.
     public func addSectionHeaderGenerator(_ generator: HeaderGenerator) {
         self.sectionHeaderGenerators.append(generator)
     }
 
+    /// Removes generator from adapter. Generators compare by references.
+    ///
+    /// - Parameters:
+    ///   - generator: Generator to delete.
+    ///   - animation: Animation for row action.
+    public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+        guard let index = self.findGenerator(generator) else { return }
+        self.removeGenerator(with: index, with: animation)
+    }
+
+
+    /// Added new cell generator to current header.
+    /// If header is nil, then generator will be added to last contained header
+    ///
+    /// - Parameters:
+    ///   - generator: New Generator
+    ///   - header: Header for adding generator
+    ///   - needRegister: needs register Generator view as nib
     public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: HeaderGenerator? = nil, needRegister: Bool = true) {
         if needRegister {
             self.tableView?.registerNib(generator.identifier)
@@ -83,27 +104,109 @@ public extension BaseHeaderableTableDataDisplayManager {
             if let index = self.sectionHeaderGenerators.index(where: { $0 === header }) {
                 self.cellGenerators[index].append(generator)
             }
+        } else if sectionHeaderGenerators.isEmpty {
+            fatalError("You try to add generator to Headerable manager without HeaderGenerators (Headers count = 0)")
         } else {
-            // Add to the last section if it exists
-            if self.cellGenerators.indices.contains(sectionHeaderGenerators.count - 1) {
-                self.cellGenerators[sectionHeaderGenerators.count - 1].append(generator)
-            }
+            self.cellGenerators[sectionHeaderGenerators.count - 1].append(generator)
         }
     }
 
-    /// Remove all cell generators.
+    /// Inserts new generator after current generator.
+    ///
+    /// - Parameters:
+    ///   - generator: Current generator. Must contained this adapter.
+    ///   - newGenerator: Generator wihics you wont to insert after current generator.
+    ///   - animation: Animation for row action.
+    public func insert(after generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+        guard let index = self.findGenerator(generator) else { return }
+
+        self.insertGenerator(newGenerator, at: (genIndex: index.genIndex + 1, arrIndex: index.arrIndex), with: animation)
+    }
+
+    public func insert(to header: HeaderGenerator, generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+        guard let headerIndex = self.sectionHeaderGenerators.index(where: {$0 === header}) else { return }
+
+        self.insertGenerator(generator, at: (genIndex: 0, arrIndex: headerIndex), with: animation)
+    }
+
+    /// Inserts new generator before current generator.
+    ///
+    /// - Parameters:
+    ///   - generator: Current generator. Must contained this adapter.
+    ///   - newGenerator: Generator wihics you wont to insert before current generator.
+    ///   - animation: Animation for row action.
+    public func insert(before generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+        guard let index = self.findGenerator(generator) else { return }
+
+        self.insertGenerator(newGenerator, at: (genIndex: index.genIndex - 1, arrIndex: index.arrIndex), with: animation)
+    }
+
+    /// Removes all cell generators.
     public func clearCellGenerators() {
         self.cellGenerators.removeAll()
     }
 
-    /// Remove all header generators.
+    /// Removes all header generators.
     public func clearHeaderGenerators() {
         self.sectionHeaderGenerators.removeAll()
     }
 
-    /// Calling if generators did removed and added again
+    /// Call this method if generators was removed or added.
     public func didRefill() {
         self.tableView?.reloadData()
+    }
+}
+
+private extension BaseHeaderableTableDataDisplayManager {
+
+    func findGenerator(_ toFindGenerator: TableCellGenerator) -> (genIndex: Int, arrIndex: Int)? {
+        for genIndex in 0..<self.cellGenerators.count {
+            if let index = self.cellGenerators[genIndex].index(where: { $0 === toFindGenerator }) {
+                return (index, genIndex)
+            }
+        }
+        return nil
+    }
+
+    func removeGenerator(with index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic) {
+        guard let table = self.tableView else { return }
+
+        table.beginUpdates()
+        self.cellGenerators[index.arrIndex].remove(at: index.genIndex)
+        let indexPath = IndexPath(row: index.genIndex, section: index.arrIndex)
+        table.deleteRows(at: [indexPath], with: animation)
+        if self.cellGenerators[index.arrIndex].isEmpty {
+            self.cellGenerators.remove(at: index.arrIndex)
+            self.sectionHeaderGenerators.remove(at: index.arrIndex)
+            table.deleteSections(IndexSet(integer: index.arrIndex), with: animation)
+        }
+
+        table.endUpdates()
+    }
+
+    func insertGenerator(_ generator: TableCellGenerator, at index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic) {
+
+        guard let table = self.tableView else { return }
+
+        table.registerNib(generator.identifier)
+        table.beginUpdates()
+        self.cellGenerators[index.arrIndex].insert(generator, at: index.genIndex)
+        let indexPath = IndexPath(row: index.genIndex, section: index.arrIndex)
+        table.insertRows(at: [indexPath], with: animation)
+        table.endUpdates()
+    }
+}
+
+extension BaseHeaderableTableDataDisplayManager {
+    public func insert(header: HeaderGenerator, after: HeaderGenerator, with animation: UITableViewRowAnimation = .automatic) {
+        guard let headerIndex = self.sectionHeaderGenerators.index(where: {$0 === header}) else { return }
+
+        guard let table = self.tableView else { return }
+
+        table.beginUpdates()
+        self.sectionHeaderGenerators.insert(header, at: headerIndex + 1)
+        table.insertSections(IndexSet(integer: headerIndex + 1), with: animation)
+        table.endUpdates()
     }
 }
 
@@ -162,17 +265,5 @@ extension BaseHeaderableTableDataDisplayManager: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cellGenerators[indexPath.section][indexPath.row].generate(tableView: tableView, for: indexPath)
-    }
-}
-
-public class PaginableHeaderableTableDataDisplayManager: BaseHeaderableTableDataDisplayManager {
-    /// Called if table shows last cell
-    public var lastCellShowingEvent = BaseEvent<Void>()
-
-    public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == cellGenerators[indexPath.section].count - 1 {
-            lastCellShowingEvent.invoke(with: ())
-        }
-        return super.tableView(tableView, cellForRowAt: indexPath)
     }
 }
