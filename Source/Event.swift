@@ -13,15 +13,15 @@ public protocol EmptyEvent {
 
     typealias Lambda = () -> Void
 
-    /// Add new listner.
+    /// This method is used to add a new listner.
     ///
     /// - Parameter listner: New listner.
     func addListner(_ listner: @escaping Lambda)
 
-    /// Notify all listners.
+    /// This method is used to notify all listners.
     func invoke()
 
-    /// Remove all listners.
+    /// This method is used to remove all listners.
     func clear()
 }
 
@@ -31,17 +31,17 @@ public protocol Event {
     associatedtype Input
     typealias Lambda = (Input) -> Void
 
-    /// Add new listner.
+    /// This method is used to add a new listner.
     ///
     /// - Parameter listner: New listner.
     func addListner(_ listner: @escaping Lambda)
 
-    /// Notify all listners.
+    /// This method is used to notify all listners.
     ///
     /// - Parameter input: Data for listners.
     func invoke(with input: Input)
 
-    /// Remove all listners.
+    /// This method is used to remove all listners.
     func clear()
 }
 
