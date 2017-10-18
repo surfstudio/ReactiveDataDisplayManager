@@ -8,16 +8,22 @@
 
 import UIKit
 
-/// Protocol for work with cell.
+/// Protocol for work with cells and views adding.
 public protocol TableDataDisplayManager: class {
 
     /// Add generator of header for section.
     func addSectionHeaderGenerator(_ generator: HeaderGenerator)
 
-    /// Add generator for cell.
+    /// This method is used to add a new cell generator.
+    ///
+    /// - Parameters:
+    ///   - generator: New cell generator.
+    ///   - needRegister: Pass **true** if needed to register generator nib.
     func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool)
 
-    /// Set tableView for current manager
+    /// This method is used to set UITableView to current adapter.
+    ///
+    /// - Parameter tableView: New UITableView.
     func setTableView(_ tableView: UITableView)
 }
 
@@ -36,9 +42,9 @@ public protocol TableCellGenerator: class {
     /// Nib type, which create this generator
     var identifier: UITableViewCell.Type { get }
 
-    /// Create cell.
+    /// This method is used to create a cell.
     ///
-    /// - Parameter tableView: TableView, which controlled cell grations
+    /// - Parameter tableView: UITableView which contains cells.
     /// - Return: New (may reused) cell.
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell
 }
@@ -48,15 +54,16 @@ public protocol ViewBuilder {
 
     associatedtype ViewType: UIView
 
-    /// Выполняет конфигурирование ячейки.
+    /// This method is used to configure cell.
     ///
-    /// - Parameter view: UIView которое необходимо сконфигурировать.
+    /// - Parameter view: UIView that should be configured.
     func build(view: ViewType)
 }
 
 /// Protocol for selectable item.
 public protocol SelectableItem: class {
 
+    /// Event that calls when the item is now selected.
     var didSelectEvent: BaseEvent<Void> { get }
 
     var didSelected: Bool { get }
