@@ -19,7 +19,7 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
     /// Called if table scrolled
     public var scrollEvent = BaseEvent<UITableView>()
 
-    // MARK: - Fileprivate properties
+    // MARK: - Properties
 
     fileprivate var cellGenerators: [TableCellGenerator]
     fileprivate var sectionHeaderGenerator: [ViewGenerator]
@@ -35,9 +35,6 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
         super.init()
     }
 
-    /// Set TableView to current adapter.
-    ///
-    /// - Parameter tableView: new TableView
     public func setTableView(_ tableView: UITableView) {
         self.tableView = tableView
         self.tableView?.delegate = self
@@ -49,18 +46,10 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
 
 public extension BaseTableDataDisplayManager {
 
-    /// Added new header for section generator.
-    ///
-    /// - Parameter generator: new generator.
     public func addSectionHeaderGenerator(_ generator: ViewGenerator) {
         self.sectionHeaderGenerator.append(generator)
     }
 
-    /// Added new cell generator.
-    ///
-    /// - Parameters:
-    ///   - generator: New cell generator.
-    ///   - needRegister: flag, that describe needed register generator nib.
     public func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool = true) {
         if needRegister {
             self.tableView?.registerNib(generator.identifier)
@@ -68,17 +57,17 @@ public extension BaseTableDataDisplayManager {
         self.cellGenerators.append(generator)
     }
 
-    /// Remove all cell generators.
+    /// This method is used to remove all cell generators.
     public func clearCellGenerators() {
         self.cellGenerators.removeAll()
     }
 
-    /// Remove all header generators.
+    /// This method is used to remove all header generators.
     public func clearHeaderGenerators() {
         self.sectionHeaderGenerator.removeAll()
     }
 
-    /// Calling if generators did removed and added again
+    /// Call this method if generators was removed or added.
     public func didRefill() {
         self.tableView?.reloadData()
     }
@@ -88,7 +77,7 @@ public extension BaseTableDataDisplayManager {
 
 public extension BaseTableDataDisplayManager {
 
-    /// Remove generator from adapter. Generators compare by references.
+    /// This method is used to remove generator from adapter. Generators compares by references.
     ///
     /// - Parameters:
     ///   - generator: Generator to delete.
@@ -98,7 +87,7 @@ public extension BaseTableDataDisplayManager {
         self.removeGenerator(with: index, with: animation)
     }
 
-    /// Insert new generator after current generator.
+    /// This method is used to insert a new generator after current generator.
     ///
     /// - Parameters:
     ///   - generator: Current generator. Must contained this adapter.
@@ -110,7 +99,7 @@ public extension BaseTableDataDisplayManager {
         self.insertGenerator(newGenerator, at: index + 1, with: animation)
     }
 
-    /// Insert new generator before current generator.
+    /// This method is used to insert a new generator before current generator.
     ///
     /// - Parameters:
     ///   - generator: Current generator. Must contained this adapter.
@@ -122,12 +111,14 @@ public extension BaseTableDataDisplayManager {
         self.insertGenerator(newGenerator, at: index - 1, with: animation)
     }
 
-    /// Swap two adapter betwwen each other.
-    /// Warning!!! Call reload data in tableView.
+    /// This method is used to swap two adapters between each other.
+    ///
+    /// - Warning: Calls reload data in tableView.
     ///
     /// - Parameters:
-    ///   - firstGenerator: Generator which must to move to new place. Must contins in adapter.
-    ///   - secondGenerator: Generator which must to replaced with firstGenerator and move to it place. Must contains id adapter.
+    ///   - firstGenerator: Generator which should be moved to a new place. Must contains in adapter.
+    ///   - secondGenerator: Generator which should be replaced with firstGenerator and moved to it place.
+    /// Must contains id adapter.
     public func swap(firstGenerator: TableCellGenerator, with secondGenerator: TableCellGenerator) {
         guard let firstIndex = self.cellGenerators.index(where: { $0 === firstGenerator }),
             let secondIndex = self.cellGenerators.index(where: { $0 === secondGenerator })
