@@ -79,7 +79,8 @@ public extension BaseHeaderableTableDataDisplayManager {
     /// - Parameters:
     ///   - generator: Generator to delete.
     ///   - animation: Animation for row action.
-    public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+    ///   - scrollPosition: If not nil than performs scroll before removing generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
+    public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
         guard let index = self.findGenerator(generator) else { return }
         self.removeGenerator(with: index, with: animation)
     }
@@ -110,13 +111,14 @@ public extension BaseHeaderableTableDataDisplayManager {
             self.cellGenerators[sectionHeaderGenerators.count - 1].append(generator)
         }
     }
-
+    
     /// Inserts new generator after current generator.
     ///
     /// - Parameters:
     ///   - generator: Current generator. Must contained this adapter.
     ///   - newGenerator: Generator wihics you wont to insert after current generator.
     ///   - animation: Animation for row action.
+    ///   - scrollPosition: If not nil than performs scroll after insert new generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     public func insert(after generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
         guard let index = self.findGenerator(generator) else { return }
 
@@ -135,6 +137,7 @@ public extension BaseHeaderableTableDataDisplayManager {
     ///   - generator: Current generator. Must contained this adapter.
     ///   - newGenerator: Generator wihics you wont to insert before current generator.
     ///   - animation: Animation for row action.
+    ///   - scrollPosition: If not nil than performs scroll after insert new generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     public func insert(before generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
         guard let index = self.findGenerator(generator) else { return }
 
