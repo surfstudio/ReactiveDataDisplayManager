@@ -1,3 +1,4 @@
+![Travis build status](https://travis-ci.org/LastSprint/ReactiveDataDisplayManager.svg?branch=master)
 # ReactiveDataDisplayManager
 It is the whole approach to working with UITableView. 
 The main idea of RDDM is to make development of table screen faster and clearly. So it provide reuse DDM and reuse cells both within a project and beetween projects.
