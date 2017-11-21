@@ -79,20 +79,36 @@ public extension BaseHeaderableTableDataDisplayManager {
     /// - Parameters:
     ///   - generator: Generator to delete.
     ///   - animation: Animation for row action.
-    ///   - scrollPosition: If not nil than performs scroll before removing generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
-    public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
         self.removeGenerator(with: index, with: animation)
     }
 
+    private func findGenerator(_ toFindGenerator: TableCellGenerator) -> (genIndex: Int, arrIndex: Int)? {
+        for genIndex in 0..<self.cellGenerators.count {
+            if let index = self.cellGenerators[genIndex].index(where: { $0 === toFindGenerator }) {
+                return (index, genIndex)
+            }
+        }
+        return nil
+    }
 
-    /// Added new cell generator to current header.
-    /// If header is nil, then generator will be added to last contained header
-    ///
-    /// - Parameters:
-    ///   - generator: New Generator
-    ///   - header: Header for adding generator
-    ///   - needRegister: needs register Generator view as nib
+    func removeGenerator(with index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic) {
+        guard let table = self.tableView else { return }
+
+        table.beginUpdates()
+        self.cellGenerators[index.arrIndex].remove(at: index.genIndex)
+        let indexPath = IndexPath(row: index.genIndex, section: index.arrIndex)
+        table.deleteRows(at: [indexPath], with: animation)
+        if self.cellGenerators[index.arrIndex].isEmpty {
+            self.cellGenerators.remove(at: index.arrIndex)
+            self.sectionHeaderGenerators.remove(at: index.arrIndex)
+            table.deleteSections(IndexSet(integer: index.arrIndex), with: animation)
+        }
+
+        table.endUpdates()
+    }
+
     public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: HeaderGenerator? = nil, needRegister: Bool = true) {
         if needRegister {
             self.tableView?.registerNib(generator.identifier)
@@ -105,30 +121,41 @@ public extension BaseHeaderableTableDataDisplayManager {
             if let index = self.sectionHeaderGenerators.index(where: { $0 === header }) {
                 self.cellGenerators[index].append(generator)
             }
-        } else if sectionHeaderGenerators.isEmpty {
-            fatalError("You try to add generator to Headerable manager without HeaderGenerators (Headers count = 0)")
         } else {
-            self.cellGenerators[sectionHeaderGenerators.count - 1].append(generator)
+            // Add to last section
+            // FIXME: crashes if there is not sectionHeaderGenerators
+            let index = sectionHeaderGenerators.count - 1
+            self.cellGenerators[index < 0 ? 0 : index].append(generator)
         }
     }
-    
+
     /// Inserts new generator after current generator.
     ///
     /// - Parameters:
     ///   - generator: Current generator. Must contained this adapter.
     ///   - newGenerator: Generator wihics you wont to insert after current generator.
     ///   - animation: Animation for row action.
-    ///   - scrollPosition: If not nil than performs scroll after insert new generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
-    public func insert(after generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    public func insert(after generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
 
-        self.insertGenerator(newGenerator, at: (genIndex: index.genIndex + 1, arrIndex: index.arrIndex), with: animation, needScrollAt: scrollPosition)
+        self.insertGenerator(newGenerator, at: (genIndex: index.genIndex + 1, arrIndex: index.arrIndex), with: animation)
     }
 
-    public func insert(to header: HeaderGenerator, generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: {$0 === header}) else { return }
+    public func insert(header: HeaderGenerator, after: HeaderGenerator, with animation: UITableViewRowAnimation = .automatic) {
+        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else { return }
 
-        self.insertGenerator(generator, at: (genIndex: 0, arrIndex: headerIndex), with: animation, needScrollAt: scrollPosition)
+        guard let table = self.tableView else { return }
+
+        table.beginUpdates()
+        self.sectionHeaderGenerators.insert(header, at: headerIndex + 1)
+        table.insertSections(IndexSet(integer: headerIndex + 1), with: animation)
+        table.endUpdates()
+    }
+
+    public func insert(to header: HeaderGenerator, generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else { return }
+
+        self.insertGenerator(generator, at: (genIndex: 0, arrIndex: headerIndex), with: animation)
     }
 
     /// Inserts new generator before current generator.
@@ -137,11 +164,22 @@ public extension BaseHeaderableTableDataDisplayManager {
     ///   - generator: Current generator. Must contained this adapter.
     ///   - newGenerator: Generator wihics you wont to insert before current generator.
     ///   - animation: Animation for row action.
-    ///   - scrollPosition: If not nil than performs scroll after insert new generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
-    public func insert(before generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    public func insert(before generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
 
-        self.insertGenerator(newGenerator, at: (genIndex: index.genIndex - 1, arrIndex: index.arrIndex), with: animation, needScrollAt: scrollPosition)
+        self.insertGenerator(newGenerator, at: (genIndex: index.genIndex - 1, arrIndex: index.arrIndex), with: animation)
+    }
+
+    func insertGenerator(_ generator: TableCellGenerator, at index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic) {
+
+        guard let table = self.tableView else { return }
+
+        table.registerNib(generator.identifier)
+        table.beginUpdates()
+        self.cellGenerators[index.arrIndex].insert(generator, at: index.genIndex)
+        let indexPath = IndexPath(row: index.genIndex, section: index.arrIndex)
+        table.insertRows(at: [indexPath], with: animation)
+        table.endUpdates()
     }
 
     /// Removes all cell generators.
@@ -157,68 +195,6 @@ public extension BaseHeaderableTableDataDisplayManager {
     /// Call this method if generators was removed or added.
     public func didRefill() {
         self.tableView?.reloadData()
-    }
-}
-
-private extension BaseHeaderableTableDataDisplayManager {
-
-    func findGenerator(_ toFindGenerator: TableCellGenerator) -> (genIndex: Int, arrIndex: Int)? {
-        for genIndex in 0..<self.cellGenerators.count {
-            if let index = self.cellGenerators[genIndex].index(where: { $0 === toFindGenerator }) {
-                return (index, genIndex)
-            }
-        }
-        return nil
-    }
-
-    func removeGenerator(with index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
-        guard let table = self.tableView else { return }
-        
-        if index.genIndex > 0 {
-            let previousIndexPath = IndexPath(row: index.genIndex - 1, section: index.arrIndex)
-            if let scrollPosition = scrollPosition {
-                table.scrollToRow(at: previousIndexPath, at: scrollPosition, animated: true)
-            }
-        }
-        table.beginUpdates()
-        self.cellGenerators[index.arrIndex].remove(at: index.genIndex)
-        let indexPath = IndexPath(row: index.genIndex, section: index.arrIndex)
-        table.deleteRows(at: [indexPath], with: animation)
-        if self.cellGenerators[index.arrIndex].isEmpty {
-            self.cellGenerators.remove(at: index.arrIndex)
-            self.sectionHeaderGenerators.remove(at: index.arrIndex)
-            table.deleteSections(IndexSet(integer: index.arrIndex), with: animation)
-        }
-
-        table.endUpdates()
-    }
-
-    func insertGenerator(_ generator: TableCellGenerator, at index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
-
-        guard let table = self.tableView else { return }
-
-        table.registerNib(generator.identifier)
-        table.beginUpdates()
-        self.cellGenerators[index.arrIndex].insert(generator, at: index.genIndex)
-        let indexPath = IndexPath(row: index.genIndex, section: index.arrIndex)
-        table.insertRows(at: [indexPath], with: animation)
-        table.endUpdates()
-        if let scrollPosition = scrollPosition {
-            table.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
-        }
-    }
-}
-
-extension BaseHeaderableTableDataDisplayManager {
-    public func insert(header: HeaderGenerator, after: HeaderGenerator, with animation: UITableViewRowAnimation = .automatic) {
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: {$0 === header}) else { return }
-
-        guard let table = self.tableView else { return }
-
-        table.beginUpdates()
-        self.sectionHeaderGenerators.insert(header, at: headerIndex + 1)
-        table.insertSections(IndexSet(integer: headerIndex + 1), with: animation)
-        table.endUpdates()
     }
 }
 
@@ -277,5 +253,23 @@ extension BaseHeaderableTableDataDisplayManager: UITableViewDataSource {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cellGenerators[indexPath.section][indexPath.row].generate(tableView: tableView, for: indexPath)
+    }
+}
+
+public class PaginableHeaderableTableDataDisplayManager: BaseHeaderableTableDataDisplayManager {
+    /// Called if table shows last cell
+    public var lastCellShowingEvent = BaseEvent<Void>()
+
+
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == cellGenerators[indexPath.section].count - 1 {
+            lastCellShowingEvent.invoke(with: ())
+        }
+    }
+}
+
+public class ExtendableHeaderableAdapter: BaseHeaderableTableDataDisplayManager {
+    public override func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionHeaderGenerators.isEmpty ? 1 : sectionHeaderGenerators.count
     }
 }
