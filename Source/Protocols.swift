@@ -34,7 +34,7 @@ public protocol ViewGenerator: class {
     func generate() -> UIView
 }
 
-public protocol HeaderGenerator: class, ViewGenerator {
+public protocol HeaderGenerator: ViewGenerator {
     func height(_ tableView: UITableView, forSection section: Int) -> CGFloat
 }
 
