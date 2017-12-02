@@ -12,7 +12,7 @@ RDDM contains next entites:
  
  Object which implement **ViewBuilder** and **TableCellGenerator** (or **ViewGenerator**), I called just **Generator**.
  And this object also response for events (notify listners) and response for store model. Usually view create generators, subscribe on events and send them to **TDDM**.
-```
+```swift
 class SubscriptionServiceGenerator {
 
     // MARK: - Events
@@ -68,7 +68,7 @@ extension SubscriptionServiceGenerator: SubscriptionServiceCellDelegate {
  - **Event**: is custom object, that may store closures, which have the same signatures, object that store an avent may call all stored closures for send objects, that provide this closures about event.
 
  View wants to recive a message about user tap on button:
- ```
+ ```swift
  var generator = SubscriptionServiceGenerator(model: service)
  generator.buyEvent += { (service: PaidService) -> Void in
     <# do something #>
