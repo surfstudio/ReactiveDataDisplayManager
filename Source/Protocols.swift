@@ -6,25 +6,27 @@
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
-/// Protocol for work with cells and views adding.
+/// Protocol for work with cell.
 public protocol TableDataDisplayManager: class {
 
-    /// Add generator of header for section.
+    /// Adds header generator.
     func addSectionHeaderGenerator(_ generator: HeaderGenerator)
 
-    /// This method is used to add a new cell generator.
+    /// Adds generator for cell.
+    func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool)
+
+    /// Sets tableView for current manager
+    func setTableView(_ tableView: UITableView)
+
+    /// This method is used to add new array of cell generators.
     ///
     /// - Parameters:
     ///   - generator: New cell generator.
-    ///   - needRegister: Pass **true** if needed to register generator nib.
-    func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool)
-
-    /// This method is used to set UITableView to current adapter.
-    ///
-    /// - Parameter tableView: New UITableView.
-    func setTableView(_ tableView: UITableView)
+    ///   - needRegister: Pass true if needed to register nibs of cells.
+    func addCellGenerators(_ generators: [TableCellGenerator], needRegister: Bool)
 }
 
 /// Protocol that incapsulated build logics for current View
@@ -42,28 +44,41 @@ public protocol TableCellGenerator: class {
     /// Nib type, which create this generator
     var identifier: UITableViewCell.Type { get }
 
-    /// This method is used to create a cell.
+    /// Creates a cell.
     ///
-    /// - Parameter tableView: UITableView which contains cells.
+    /// - Parameter tableView: TableView, which controlled cell grations
     /// - Return: New (may reused) cell.
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell
 }
+
+/// Protocol that incapsulated type of current cell
+public protocol CollectionCellGenerator: class {
+
+    /// Nib type, which create this generator
+    var identifier: UICollectionViewCell.Type { get }
+
+    /// Creates a cell.
+    ///
+    /// - Parameter tableView: TableView, which controlled cell grations
+    /// - Return: New (may reused) cell.
+    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell
+}
+
 
 /// Builder for concreate type of UIView
 public protocol ViewBuilder {
 
     associatedtype ViewType: UIView
 
-    /// This method is used to configure cell.
+    /// Выполняет конфигурирование ячейки.
     ///
-    /// - Parameter view: UIView that should be configured.
+    /// - Parameter view: UIView которое необходимо сконфигурировать.
     func build(view: ViewType)
 }
 
 /// Protocol for selectable item.
 public protocol SelectableItem: class {
 
-    /// Event that calls when the item is now selected.
     var didSelectEvent: BaseEvent<Void> { get }
 
     var didSelected: Bool { get }
@@ -76,8 +91,13 @@ public protocol SelectableItem: class {
 
 }
 
+public protocol DeletableGenerator {
+    var eventDelete: BaseEmptyEvent { get }
+}
+
 extension SelectableItem {
     var isNeedDeselect: Bool {
         return true
     }
 }
+

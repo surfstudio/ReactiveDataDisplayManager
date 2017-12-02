@@ -273,3 +273,4 @@ public class ExtendableHeaderableAdapter: BaseHeaderableTableDataDisplayManager 
         return sectionHeaderGenerators.isEmpty ? 1 : sectionHeaderGenerators.count
     }
 }
+
