@@ -81,8 +81,6 @@ public protocol SelectableItem: class {
 
     var didSelectEvent: BaseEvent<Void> { get }
 
-    var didSelected: Bool { get }
-
     /// A Boolean value that determines whether to perform a cell deselect.
     ///
     /// If the value of this property is **true** (the default), cells deselect

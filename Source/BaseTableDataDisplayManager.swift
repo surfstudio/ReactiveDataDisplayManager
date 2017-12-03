@@ -19,6 +19,7 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
     /// Called if table scrolled
     public var scrollEvent = BaseEvent<UITableView>()
     public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint>
+
     // MARK: - Fileprivate properties
 
     fileprivate(set) var cellGenerators: [TableCellGenerator]
