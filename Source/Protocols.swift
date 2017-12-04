@@ -70,15 +70,16 @@ public protocol ViewBuilder {
 
     associatedtype ViewType: UIView
 
-    /// Выполняет конфигурирование ячейки.
+    /// Configures view.
     ///
-    /// - Parameter view: UIView которое необходимо сконфигурировать.
+    /// - Parameter view: UIView that should be configured.
     func build(view: ViewType)
 }
 
 /// Protocol for selectable item.
 public protocol SelectableItem: class {
 
+    /// Invokes when user taps on the item.
     var didSelectEvent: BaseEvent<Void> { get }
 
     /// A Boolean value that determines whether to perform a cell deselect.
