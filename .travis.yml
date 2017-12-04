@@ -1,0 +1,10 @@
+language: Swift
+osx_image: xcode9.1
+xcode_project: ReactiveDataDisplayManager.xcodeproj # path to your xcodeproj folder
+xcode_scheme: ReactiveDataDisplayManager
+before_install:
+  - gem install xcpretty -N
+  - brew update
+  - brew install swiftlint || true
+script:
+  - set -o pipefail
