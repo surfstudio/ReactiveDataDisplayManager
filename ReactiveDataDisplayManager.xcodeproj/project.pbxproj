@@ -12,7 +12,6 @@
 		4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEB1F4E9F74006B7809 /* Extensions.swift */; };
 		4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BED1F4E9F74006B7809 /* Protocols.swift */; };
 		4F088BF41F4E9F74006B7809 /* ReactiveDataDisplayManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4F088BF61F4EAB86006B7809 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F088BF51F4EAB86006B7809 /* Info.plist */; };
 		4F088BF91F4EABA2006B7809 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F088BF81F4EABA2006B7809 /* UIKit.framework */; };
 		8BF1B9471F780300003A3355 /* HeaderableTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */; };
 /* End PBXBuildFile section */
@@ -150,7 +149,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F088BF61F4EAB86006B7809 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

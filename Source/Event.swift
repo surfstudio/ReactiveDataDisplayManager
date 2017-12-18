@@ -69,7 +69,7 @@ public class BaseEvent<Input>: Event {
     private var listners: [Lambda]
 
     public init() {
-        self.listners = [Lambda]()
+        self.listners = []
     }
 
     public func addListner(_ listner: @escaping Lambda) {
