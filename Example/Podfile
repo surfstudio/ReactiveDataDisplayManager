@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'ReactiveDataDisplayManagerExample' do
+  pod 'ReactiveDataDisplayManager', :path => '../'
+
+  target 'ReactiveDataDisplayManagerExampleTests' do
+    inherit! :search_paths
+
+    
+  end
+end
