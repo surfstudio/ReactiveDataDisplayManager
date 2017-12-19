@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		659F41F8127EE4F63B3914FD /* Pods_ReactiveDataDisplayManagerExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48D07F1D6BA77902525C1315 /* Pods_ReactiveDataDisplayManagerExampleTests.framework */; };
 		6B47FF2555FCB602BDC210A7 /* Pods_ReactiveDataDisplayManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD22438C1115B48FC3AFD6 /* Pods_ReactiveDataDisplayManagerTests.framework */; };
-		7F5C709DBE5D06C0685A3F7C /* Pods_ReactiveDataDisplayManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609C2C1EE26BDB981AADE45C /* Pods_ReactiveDataDisplayManager.framework */; };
+		8B04A1D71FE9020800407BED /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */; };
+		8B04A1D81FE9020800407BED /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */; };
+		8B04A1DD1FE9028300407BED /* TitleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B04A1DC1FE9028300407BED /* TitleGenerator.swift */; };
 		8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2DD1FE84F540080984A /* AppDelegate.swift */; };
 		8B85E2E01FE84F540080984A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2DF1FE84F540080984A /* ViewController.swift */; };
 		8B85E2E31FE84F540080984A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E11FE84F540080984A /* Main.storyboard */; };
 		8B85E2E51FE84F540080984A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E41FE84F540080984A /* Assets.xcassets */; };
 		8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E61FE84F540080984A /* LaunchScreen.storyboard */; };
 		8B85E2F31FE84F540080984A /* ReactiveDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2F21FE84F540080984A /* ReactiveDataDisplayManagerTests.swift */; };
+		F6FD540A5EAE2B1D7DACD20A /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,22 +32,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0C889F733B0F2490E32FB80F /* Pods-ReactiveDataDisplayManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerTests/Pods-ReactiveDataDisplayManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		330C919AD1E3E5E58F5DEFF0 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; sourceTree = "<group>"; };
+		48D07F1D6BA77902525C1315 /* Pods_ReactiveDataDisplayManagerExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		609C2C1EE26BDB981AADE45C /* Pods_ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D4685607C9DF9B15CE2358D /* Pods-ReactiveDataDisplayManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerTests/Pods-ReactiveDataDisplayManagerTests.release.xcconfig"; sourceTree = "<group>"; };
+		6596ACBB4B1B5F283547EF3B /* Pods-ReactiveDataDisplayManagerExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		72FD22438C1115B48FC3AFD6 /* Pods_ReactiveDataDisplayManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B85E2DA1FE84F540080984A /* ReactiveDataDisplayManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveDataDisplayManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
+		8B04A1DC1FE9028300407BED /* TitleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleGenerator.swift; sourceTree = "<group>"; };
+		8B85E2DA1FE84F540080984A /* ReactiveDataDisplayManagerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveDataDisplayManagerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B85E2DD1FE84F540080984A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B85E2DF1FE84F540080984A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8B85E2E21FE84F540080984A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B85E2E41FE84F540080984A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B85E2E71FE84F540080984A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B85E2E91FE84F540080984A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B85E2EE1FE84F540080984A /* ReactiveDataDisplayManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B85E2EE1FE84F540080984A /* ReactiveDataDisplayManagerExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B85E2F21FE84F540080984A /* ReactiveDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		8B85E2F41FE84F540080984A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CA02D57F6A33E29D9C110EAB /* Pods-ReactiveDataDisplayManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManager/Pods-ReactiveDataDisplayManager.release.xcconfig"; sourceTree = "<group>"; };
-		DAC521F5D5371B0DC59CE10D /* Pods-ReactiveDataDisplayManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManager/Pods-ReactiveDataDisplayManager.debug.xcconfig"; sourceTree = "<group>"; };
+		BD17C0A50AD2BCB785CEF383 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
+		E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE4EAF4DB2F7F2042259E38D /* Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F5C709DBE5D06C0685A3F7C /* Pods_ReactiveDataDisplayManager.framework in Frameworks */,
+				F6FD540A5EAE2B1D7DACD20A /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B47FF2555FCB602BDC210A7 /* Pods_ReactiveDataDisplayManagerTests.framework in Frameworks */,
+				659F41F8127EE4F63B3914FD /* Pods_ReactiveDataDisplayManagerExampleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,10 +79,10 @@
 		164C8A2FD95695EE6FBFF033 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DAC521F5D5371B0DC59CE10D /* Pods-ReactiveDataDisplayManager.debug.xcconfig */,
-				CA02D57F6A33E29D9C110EAB /* Pods-ReactiveDataDisplayManager.release.xcconfig */,
-				0C889F733B0F2490E32FB80F /* Pods-ReactiveDataDisplayManagerTests.debug.xcconfig */,
-				6D4685607C9DF9B15CE2358D /* Pods-ReactiveDataDisplayManagerTests.release.xcconfig */,
+				330C919AD1E3E5E58F5DEFF0 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */,
+				BD17C0A50AD2BCB785CEF383 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */,
+				6596ACBB4B1B5F283547EF3B /* Pods-ReactiveDataDisplayManagerExampleTests.debug.xcconfig */,
+				FE4EAF4DB2F7F2042259E38D /* Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -82,8 +92,21 @@
 			children = (
 				609C2C1EE26BDB981AADE45C /* Pods_ReactiveDataDisplayManager.framework */,
 				72FD22438C1115B48FC3AFD6 /* Pods_ReactiveDataDisplayManagerTests.framework */,
+				E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */,
+				48D07F1D6BA77902525C1315 /* Pods_ReactiveDataDisplayManagerExampleTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B04A1D91FE9021600407BED /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				8B85E2DD1FE84F540080984A /* AppDelegate.swift */,
+				8B85E2E91FE84F540080984A /* Info.plist */,
+				8B85E2E61FE84F540080984A /* LaunchScreen.storyboard */,
+				8B85E2E41FE84F540080984A /* Assets.xcassets */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		8B85E2D11FE84F540080984A = {
@@ -100,8 +123,8 @@
 		8B85E2DB1FE84F540080984A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8B85E2DA1FE84F540080984A /* ReactiveDataDisplayManager.app */,
-				8B85E2EE1FE84F540080984A /* ReactiveDataDisplayManagerTests.xctest */,
+				8B85E2DA1FE84F540080984A /* ReactiveDataDisplayManagerExample.app */,
+				8B85E2EE1FE84F540080984A /* ReactiveDataDisplayManagerExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,12 +132,12 @@
 		8B85E2DC1FE84F540080984A /* ReactiveDataDisplayManager */ = {
 			isa = PBXGroup;
 			children = (
-				8B85E2DD1FE84F540080984A /* AppDelegate.swift */,
+				8B04A1D91FE9021600407BED /* Application */,
 				8B85E2DF1FE84F540080984A /* ViewController.swift */,
+				8B04A1DC1FE9028300407BED /* TitleGenerator.swift */,
+				8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */,
+				8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */,
 				8B85E2E11FE84F540080984A /* Main.storyboard */,
-				8B85E2E41FE84F540080984A /* Assets.xcassets */,
-				8B85E2E61FE84F540080984A /* LaunchScreen.storyboard */,
-				8B85E2E91FE84F540080984A /* Info.plist */,
 			);
 			path = ReactiveDataDisplayManager;
 			sourceTree = "<group>";
@@ -131,9 +154,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8B85E2D91FE84F540080984A /* ReactiveDataDisplayManager */ = {
+		8B85E2D91FE84F540080984A /* ReactiveDataDisplayManagerExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B85E2F71FE84F540080984A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManager" */;
+			buildConfigurationList = 8B85E2F71FE84F540080984A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerExample" */;
 			buildPhases = (
 				928427C3A448F458AE462A68 /* [CP] Check Pods Manifest.lock */,
 				8B85E2D61FE84F540080984A /* Sources */,
@@ -146,14 +169,14 @@
 			);
 			dependencies = (
 			);
-			name = ReactiveDataDisplayManager;
+			name = ReactiveDataDisplayManagerExample;
 			productName = ReactiveDataDisplayManager;
-			productReference = 8B85E2DA1FE84F540080984A /* ReactiveDataDisplayManager.app */;
+			productReference = 8B85E2DA1FE84F540080984A /* ReactiveDataDisplayManagerExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8B85E2ED1FE84F540080984A /* ReactiveDataDisplayManagerTests */ = {
+		8B85E2ED1FE84F540080984A /* ReactiveDataDisplayManagerExampleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B85E2FA1FE84F540080984A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerTests" */;
+			buildConfigurationList = 8B85E2FA1FE84F540080984A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerExampleTests" */;
 			buildPhases = (
 				917585E263B630B1EA1F6E71 /* [CP] Check Pods Manifest.lock */,
 				8B85E2EA1FE84F540080984A /* Sources */,
@@ -167,9 +190,9 @@
 			dependencies = (
 				8B85E2F01FE84F540080984A /* PBXTargetDependency */,
 			);
-			name = ReactiveDataDisplayManagerTests;
+			name = ReactiveDataDisplayManagerExampleTests;
 			productName = ReactiveDataDisplayManagerTests;
-			productReference = 8B85E2EE1FE84F540080984A /* ReactiveDataDisplayManagerTests.xctest */;
+			productReference = 8B85E2EE1FE84F540080984A /* ReactiveDataDisplayManagerExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -193,7 +216,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8B85E2D51FE84F540080984A /* Build configuration list for PBXProject "ReactiveDataDisplayManager" */;
+			buildConfigurationList = 8B85E2D51FE84F540080984A /* Build configuration list for PBXProject "ReactiveDataDisplayManagerExample" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -206,8 +229,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8B85E2D91FE84F540080984A /* ReactiveDataDisplayManager */,
-				8B85E2ED1FE84F540080984A /* ReactiveDataDisplayManagerTests */,
+				8B85E2D91FE84F540080984A /* ReactiveDataDisplayManagerExample */,
+				8B85E2ED1FE84F540080984A /* ReactiveDataDisplayManagerExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +240,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B04A1D81FE9020800407BED /* TitleTableViewCell.xib in Resources */,
 				8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */,
 				8B85E2E51FE84F540080984A /* Assets.xcassets in Resources */,
 				8B85E2E31FE84F540080984A /* Main.storyboard in Resources */,
@@ -244,7 +268,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ReactiveDataDisplayManagerTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ReactiveDataDisplayManagerExampleTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -262,7 +286,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ReactiveDataDisplayManager-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ReactiveDataDisplayManagerExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -275,7 +299,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManager/Pods-ReactiveDataDisplayManager-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ReactiveDataDisplayManager/ReactiveDataDisplayManager.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -284,7 +308,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManager/Pods-ReactiveDataDisplayManager-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B0770C8A39360FF88FC85F6C /* [CP] Copy Pods Resources */ = {
@@ -299,7 +323,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManager/Pods-ReactiveDataDisplayManager-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BEA5E95647DBBCD510D15C7D /* [CP] Copy Pods Resources */ = {
@@ -314,7 +338,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManagerTests/Pods-ReactiveDataDisplayManagerTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D4E3D01DE2FFC55C7E97DEC5 /* [CP] Embed Pods Frameworks */ = {
@@ -329,7 +353,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManagerTests/Pods-ReactiveDataDisplayManagerTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -339,7 +363,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B04A1DD1FE9028300407BED /* TitleGenerator.swift in Sources */,
 				8B85E2E01FE84F540080984A /* ViewController.swift in Sources */,
+				8B04A1D71FE9020800407BED /* TitleTableViewCell.swift in Sources */,
 				8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,7 +383,7 @@
 /* Begin PBXTargetDependency section */
 		8B85E2F01FE84F540080984A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8B85E2D91FE84F540080984A /* ReactiveDataDisplayManager */;
+			target = 8B85E2D91FE84F540080984A /* ReactiveDataDisplayManagerExample */;
 			targetProxy = 8B85E2EF1FE84F540080984A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -491,13 +517,14 @@
 		};
 		8B85E2F81FE84F540080984A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAC521F5D5371B0DC59CE10D /* Pods-ReactiveDataDisplayManager.debug.xcconfig */;
+			baseConfigurationReference = 330C919AD1E3E5E58F5DEFF0 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ReactiveDataDisplayManager/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ReactiveDataDisplayManager/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Example.ReactiveDataDisplayManager;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -506,13 +533,14 @@
 		};
 		8B85E2F91FE84F540080984A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA02D57F6A33E29D9C110EAB /* Pods-ReactiveDataDisplayManager.release.xcconfig */;
+			baseConfigurationReference = BD17C0A50AD2BCB785CEF383 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ReactiveDataDisplayManager/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ReactiveDataDisplayManager/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Example.ReactiveDataDisplayManager;
+				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -521,7 +549,7 @@
 		};
 		8B85E2FB1FE84F540080984A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C889F733B0F2490E32FB80F /* Pods-ReactiveDataDisplayManagerTests.debug.xcconfig */;
+			baseConfigurationReference = 6596ACBB4B1B5F283547EF3B /* Pods-ReactiveDataDisplayManagerExampleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -532,13 +560,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveDataDisplayManager.app/ReactiveDataDisplayManager";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveDataDisplayManagerExample.app/ReactiveDataDisplayManagerExample";
 			};
 			name = Debug;
 		};
 		8B85E2FC1FE84F540080984A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D4685607C9DF9B15CE2358D /* Pods-ReactiveDataDisplayManagerTests.release.xcconfig */;
+			baseConfigurationReference = FE4EAF4DB2F7F2042259E38D /* Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -549,14 +577,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveDataDisplayManager.app/ReactiveDataDisplayManager";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveDataDisplayManagerExample.app/ReactiveDataDisplayManagerExample";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8B85E2D51FE84F540080984A /* Build configuration list for PBXProject "ReactiveDataDisplayManager" */ = {
+		8B85E2D51FE84F540080984A /* Build configuration list for PBXProject "ReactiveDataDisplayManagerExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B85E2F51FE84F540080984A /* Debug */,
@@ -565,7 +593,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B85E2F71FE84F540080984A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManager" */ = {
+		8B85E2F71FE84F540080984A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B85E2F81FE84F540080984A /* Debug */,
@@ -574,7 +602,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B85E2FA1FE84F540080984A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerTests" */ = {
+		8B85E2FA1FE84F540080984A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerExampleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8B85E2FB1FE84F540080984A /* Debug */,
