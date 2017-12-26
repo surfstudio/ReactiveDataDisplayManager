@@ -19,6 +19,7 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
     /// Called if table scrolled
     public var scrollEvent = BaseEvent<UITableView>()
     public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint>
+
     // MARK: - Fileprivate properties
 
     fileprivate(set) var cellGenerators: [TableCellGenerator]
@@ -46,7 +47,7 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
     }
 }
 
-// MRK: - Generator actions
+// MARK: - Generator actions
 
 public extension BaseTableDataDisplayManager {
 
@@ -57,28 +58,46 @@ public extension BaseTableDataDisplayManager {
         self.sectionHeaderGenerator.append(generator)
     }
 
-    /// Adds the new cell generator.
+    /// Adds a new cell generator.
     ///
     /// - Parameters:
     ///   - generator: New cell generator.
-    ///   - needRegister: flag, that describe needed register generator nib.
-    public func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool = true) {
+    ///   - after: Generator after which generator should be added.
+    ///   - needRegister: Pass true to register the cell nib.
+    public func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator? = nil, needRegister: Bool = true) {
         if needRegister {
             self.tableView?.registerNib(generator.identifier)
         }
-        self.cellGenerators.append(generator)
+
+        if let after = after {
+            guard let index = self.cellGenerators.index(where: { $0 === after }) else {
+                return
+            }
+            self.cellGenerators.insert(generator, at: index + 1)
+        } else {
+            self.cellGenerators.append(generator)
+        }
     }
 
-    /// Adds new array of cell generators.
+    /// Adds a new array of cell generators.
     ///
     /// - Parameters:
-    ///   - generator: New cell generator.
+    ///   - generator: New cell generators.
+    ///   - after: Generator after which generators should be added.
     ///   - needRegister: Pass true to register the cell nib.
-    public func addCellGenerators(_ generators: [TableCellGenerator], needRegister: Bool = true) {
+    public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator? = nil, needRegister: Bool = true) {
         if needRegister {
             generators.forEach { self.tableView?.registerNib($0.identifier) }
         }
-        self.cellGenerators.append(contentsOf: generators)
+        if let after = after {
+            guard let index = self.cellGenerators.index(where: { $0 === after }) else {
+                // TOTDO: Maybe here we should call fatalError
+                return
+            }
+            self.cellGenerators.insert(contentsOf: generators, at: index + 1)
+        } else {
+            self.cellGenerators.append(contentsOf: generators)
+        }
     }
 
     /// Removes all cell generators.
