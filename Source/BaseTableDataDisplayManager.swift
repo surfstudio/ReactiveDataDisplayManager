@@ -12,7 +12,7 @@ import UIKit
 /// Contains base implementation of TableDataManager and TableDisplayManager.
 /// Can register nib if needed, determinate EstimatedRowHeight.
 /// Can fill table with user data.
-public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
+open class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
 
     // MARK: - Events
 
