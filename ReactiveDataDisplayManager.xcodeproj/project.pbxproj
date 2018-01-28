@@ -13,6 +13,7 @@
 		4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BED1F4E9F74006B7809 /* Protocols.swift */; };
 		4F088BF41F4E9F74006B7809 /* ReactiveDataDisplayManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F088BF91F4EABA2006B7809 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F088BF81F4EABA2006B7809 /* UIKit.framework */; };
+		8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */; };
 		8BF1B9471F780300003A3355 /* HeaderableTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +25,7 @@
 		4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactiveDataDisplayManager.h; sourceTree = "<group>"; };
 		4F088BF51F4EAB86006B7809 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F088BF81F4EABA2006B7809 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
 		8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderableTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -43,6 +45,7 @@
 		4F088BE81F4E9F74006B7809 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */,
 				4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */,
 				8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */,
 				4F088BEA1F4E9F74006B7809 /* Event.swift */,
@@ -160,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F088BF01F4E9F74006B7809 /* Event.swift in Sources */,
+				8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */,
 				4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */,
 				8BF1B9471F780300003A3355 /* HeaderableTableDataDisplayManager.swift in Sources */,
 				4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */,

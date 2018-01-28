@@ -11,13 +11,17 @@
 		6B47FF2555FCB602BDC210A7 /* Pods_ReactiveDataDisplayManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD22438C1115B48FC3AFD6 /* Pods_ReactiveDataDisplayManagerTests.framework */; };
 		8B04A1D71FE9020800407BED /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */; };
 		8B04A1D81FE9020800407BED /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */; };
-		8B04A1DD1FE9028300407BED /* TitleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B04A1DC1FE9028300407BED /* TitleGenerator.swift */; };
+		8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B04A1DC1FE9028300407BED /* TitleTableGenerator.swift */; };
+		8B1D7907201C8BDA00F184BD /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D7906201C8BDA00F184BD /* CollectionViewController.swift */; };
+		8B1D790B201C957700F184BD /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B1D7909201C957700F184BD /* TitleCollectionViewCell.swift */; };
+		8B1D790C201C957700F184BD /* TitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B1D790A201C957700F184BD /* TitleCollectionViewCell.xib */; };
 		8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2DD1FE84F540080984A /* AppDelegate.swift */; };
-		8B85E2E01FE84F540080984A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2DF1FE84F540080984A /* ViewController.swift */; };
+		8B85E2E01FE84F540080984A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2DF1FE84F540080984A /* TableViewController.swift */; };
 		8B85E2E31FE84F540080984A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E11FE84F540080984A /* Main.storyboard */; };
 		8B85E2E51FE84F540080984A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E41FE84F540080984A /* Assets.xcassets */; };
 		8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E61FE84F540080984A /* LaunchScreen.storyboard */; };
 		8B85E2F31FE84F540080984A /* ReactiveDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2F21FE84F540080984A /* ReactiveDataDisplayManagerTests.swift */; };
+		8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */; };
 		F6FD540A5EAE2B1D7DACD20A /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,10 +43,13 @@
 		72FD22438C1115B48FC3AFD6 /* Pods_ReactiveDataDisplayManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
-		8B04A1DC1FE9028300407BED /* TitleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleGenerator.swift; sourceTree = "<group>"; };
+		8B04A1DC1FE9028300407BED /* TitleTableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableGenerator.swift; sourceTree = "<group>"; };
+		8B1D7906201C8BDA00F184BD /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		8B1D7909201C957700F184BD /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
+		8B1D790A201C957700F184BD /* TitleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCollectionViewCell.xib; sourceTree = "<group>"; };
 		8B85E2DA1FE84F540080984A /* ReactiveDataDisplayManagerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveDataDisplayManagerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B85E2DD1FE84F540080984A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8B85E2DF1FE84F540080984A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8B85E2DF1FE84F540080984A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		8B85E2E21FE84F540080984A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B85E2E41FE84F540080984A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B85E2E71FE84F540080984A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,6 +57,7 @@
 		8B85E2EE1FE84F540080984A /* ReactiveDataDisplayManagerExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B85E2F21FE84F540080984A /* ReactiveDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		8B85E2F41FE84F540080984A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionGenerator.swift; sourceTree = "<group>"; };
 		BD17C0A50AD2BCB785CEF383 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
 		E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE4EAF4DB2F7F2042259E38D /* Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +117,28 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		8B1D7905201C8BCC00F184BD /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				8B85E2DF1FE84F540080984A /* TableViewController.swift */,
+				8B04A1DC1FE9028300407BED /* TitleTableGenerator.swift */,
+				8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */,
+				8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		8B1D7908201C8BE100F184BD /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				8B1D7906201C8BDA00F184BD /* CollectionViewController.swift */,
+				8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */,
+				8B1D7909201C957700F184BD /* TitleCollectionViewCell.swift */,
+				8B1D790A201C957700F184BD /* TitleCollectionViewCell.xib */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		8B85E2D11FE84F540080984A = {
 			isa = PBXGroup;
 			children = (
@@ -133,10 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				8B04A1D91FE9021600407BED /* Application */,
-				8B85E2DF1FE84F540080984A /* ViewController.swift */,
-				8B04A1DC1FE9028300407BED /* TitleGenerator.swift */,
-				8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */,
-				8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */,
+				8B1D7908201C8BE100F184BD /* Collection */,
+				8B1D7905201C8BCC00F184BD /* Table */,
 				8B85E2E11FE84F540080984A /* Main.storyboard */,
 			);
 			path = ReactiveDataDisplayManager;
@@ -240,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B1D790C201C957700F184BD /* TitleCollectionViewCell.xib in Resources */,
 				8B04A1D81FE9020800407BED /* TitleTableViewCell.xib in Resources */,
 				8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */,
 				8B85E2E51FE84F540080984A /* Assets.xcassets in Resources */,
@@ -363,10 +392,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B04A1DD1FE9028300407BED /* TitleGenerator.swift in Sources */,
-				8B85E2E01FE84F540080984A /* ViewController.swift in Sources */,
+				8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */,
+				8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */,
+				8B85E2E01FE84F540080984A /* TableViewController.swift in Sources */,
 				8B04A1D71FE9020800407BED /* TitleTableViewCell.swift in Sources */,
+				8B1D790B201C957700F184BD /* TitleCollectionViewCell.swift in Sources */,
 				8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */,
+				8B1D7907201C8BDA00F184BD /* CollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,7 +553,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A4NNFV669G;
 				INFOPLIST_FILE = "$(SRCROOT)/ReactiveDataDisplayManager/Application/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Example.ReactiveDataDisplayManager;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
@@ -537,7 +571,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A4NNFV669G;
 				INFOPLIST_FILE = "$(SRCROOT)/ReactiveDataDisplayManager/Application/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Example.ReactiveDataDisplayManager;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";

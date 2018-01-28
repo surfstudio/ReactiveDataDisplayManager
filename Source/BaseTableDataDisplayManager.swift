@@ -1,6 +1,6 @@
 //
-//  BaseDataDisplayManager.swift
-//  SampleEventHandling
+//  BaseTableDataDisplayManager.swift
+//  ReactiveDataDisplayManager
 //
 //  Created by Alexander Kravchenkov on 01.08.17.
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
@@ -9,20 +9,26 @@
 import Foundation
 import UIKit
 
-/// Contains base implementation of TableDataManager and TableDisplayManager.
-/// Can register nib if needed, determinate EstimatedRowHeight.
+/// Contains base implementation of DataDisplayManager with UITableView.
+/// Registers nibs, determinates EstimatedRowHeight.
 /// Can fill table with user data.
-public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
+public class BaseTableDataDisplayManager: NSObject {
+
+    public typealias CollectionType = UITableView
+    public typealias CellGeneratorType = TableCellGenerator
+    public typealias HeaderGeneratorType = TableHeaderGenerator
+
 
     // MARK: - Events
 
     /// Called if table scrolled
     public var scrollEvent = BaseEvent<UITableView>()
     public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint>
+
     // MARK: - Fileprivate properties
 
     fileprivate(set) var cellGenerators: [TableCellGenerator]
-    fileprivate var sectionHeaderGenerator: [HeaderGenerator]
+    fileprivate var sectionHeaderGenerator: [TableHeaderGenerator]
     fileprivate weak var tableView: UITableView?
     fileprivate let estimatedHeight: CGFloat
 
@@ -31,67 +37,45 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
     public init(estimatedHeight: CGFloat = 40) {
         self.estimatedHeight = estimatedHeight
         self.cellGenerators = [TableCellGenerator]()
-        self.sectionHeaderGenerator = [HeaderGenerator]()
+        self.sectionHeaderGenerator = [TableHeaderGenerator]()
         self.scrollViewWillEndDraggingEvent = BaseEvent<CGPoint>()
         super.init()
     }
 
-    /// Set TableView to current adapter.
-    ///
-    /// - Parameter tableView: new TableView
-    public func setTableView(_ tableView: UITableView) {
-        self.tableView = tableView
+}
+
+// MARK: - Generator actions
+
+extension BaseTableDataDisplayManager: DataDisplayManager {
+
+    public func set(collection: UITableView) {
+        self.tableView = collection
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
     }
-}
 
-// MRK: - Generator actions
-
-public extension BaseTableDataDisplayManager {
-
-    /// Adds the new header generator.
-    ///
-    /// - Parameter generator: new generator.
-    public func addSectionHeaderGenerator(_ generator: HeaderGenerator) {
+    public func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sectionHeaderGenerator.append(generator)
     }
 
-    /// Adds the new cell generator.
-    ///
-    /// - Parameters:
-    ///   - generator: New cell generator.
-    ///   - needRegister: flag, that describe needed register generator nib.
-    public func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool = true) {
-        if needRegister {
-            self.tableView?.registerNib(generator.identifier)
-        }
+    public func addCellGenerator(_ generator: TableCellGenerator) {
+        self.tableView?.registerNib(generator.identifier)
         self.cellGenerators.append(generator)
     }
 
-    /// Adds new array of cell generators.
-    ///
-    /// - Parameters:
-    ///   - generator: New cell generator.
-    ///   - needRegister: Pass true to register the cell nib.
-    public func addCellGenerators(_ generators: [TableCellGenerator], needRegister: Bool = true) {
-        if needRegister {
-            generators.forEach { self.tableView?.registerNib($0.identifier) }
-        }
+    public func addCellGenerators(_ generators: [TableCellGenerator]) {
+        generators.forEach { self.tableView?.registerNib($0.identifier) }
         self.cellGenerators.append(contentsOf: generators)
     }
 
-    /// Removes all cell generators.
     public func clearCellGenerators() {
         self.cellGenerators.removeAll()
     }
 
-    /// Removes all header generators.
     public func clearHeaderGenerators() {
         self.sectionHeaderGenerator.removeAll()
     }
 
-    /// Call this method if generators was removed or added.
     public func didRefill() {
         self.tableView?.reloadData()
     }
@@ -106,7 +90,9 @@ public extension BaseTableDataDisplayManager {
     /// - Parameters:
     ///   - generator: Generator to delete.
     ///   - animation: Animation for row action.
-    ///   - scrollPosition: If not nil than performs scroll before removing generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
+    ///   - scrollPosition: If not nil than performs scroll before removing generator.
+    /// A constant that identifies a relative position in the table view (top, middle, bottom)
+    /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
         guard let index = self.cellGenerators.index(where: { $0 === generator }) else { return }
         self.removeGenerator(with: index, with: animation, needScrollAt: scrollPosition)
@@ -117,7 +103,9 @@ public extension BaseTableDataDisplayManager {
     /// - Parameters:
     ///   - newGenerator: Generator wihics you wont to insert after last generator.
     ///   - animation: Animation for row action.
-    ///   - scrollPosition: If not nil than performs scroll before removing generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
+    ///   - scrollPosition: If not nil than performs scroll before removing generator.
+    /// A constant that identifies a relative position in the table view (top, middle, bottom)
+    /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     public func insert(new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
         let index = self.cellGenerators.count
         self.insertGenerator(newGenerator, at: index, with: animation, needScrollAt: scrollPosition)
@@ -151,7 +139,9 @@ public extension BaseTableDataDisplayManager {
     ///   - generator: Current generator. Must contained this adapter.
     ///   - newGenerator: Generator wihics you wont to insert after current generator.
     ///   - animation: Animation for row action.
-    ///   - scrollPosition: If not nil than performs scroll before removing generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
+    ///   - scrollPosition: If not nil than performs scroll before removing generator.
+    /// A constant that identifies a relative position in the table view (top, middle, bottom)
+    /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     public func insert(after generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
         guard let index = self.cellGenerators.index(where: { $0 === generator }) else { return }
 
@@ -164,7 +154,9 @@ public extension BaseTableDataDisplayManager {
     ///   - generator: Current generator. Must contained this adapter.
     ///   - newGenerator: Generator wihics you wont to insert before current generator.
     ///   - animation: Animation for row action.
-    ///   - scrollPosition: If not nil than performs scroll before removing generator. A constant that identifies a relative position in the table view (top, middle, bottom) for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
+    ///   - scrollPosition: If not nil than performs scroll before removing generator.
+    /// A constant that identifies a relative position in the table view (top, middle, bottom)
+    /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     public func insert(before generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
         guard let index = self.cellGenerators.index(where: { $0 === generator }) else { return }
         if index == 0 {

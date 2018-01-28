@@ -1,6 +1,6 @@
 //
 //  Event.swift
-//  SampleEventHandling
+//  ReactiveDataDisplayManager
 //
 //  Created by Alexander Kravchenkov on 01.08.17.
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
