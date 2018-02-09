@@ -16,7 +16,7 @@ public protocol TableDataDisplayManager: class {
     func addSectionHeaderGenerator(_ generator: HeaderGenerator)
 
     /// Adds generator for cell.
-    func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool)
+    func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator?, needRegister: Bool)
 
     /// Sets tableView for current manager
     func setTableView(_ tableView: UITableView)
@@ -26,7 +26,7 @@ public protocol TableDataDisplayManager: class {
     /// - Parameters:
     ///   - generator: New cell generator.
     ///   - needRegister: Pass true if needed to register nibs of cells.
-    func addCellGenerators(_ generators: [TableCellGenerator], needRegister: Bool)
+    func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator?, needRegister: Bool)
 }
 
 /// Protocol that incapsulated build logics for current View
@@ -99,4 +99,3 @@ extension SelectableItem {
         return true
     }
 }
-
