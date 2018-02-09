@@ -26,7 +26,7 @@ public protocol HeaderableTableDataDisplayManager: class {
     func setTableView(_ tableView: UITableView)
 }
 
-public class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDataDisplayManager {
+open class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDataDisplayManager {
 
     // MARK: - Events
 

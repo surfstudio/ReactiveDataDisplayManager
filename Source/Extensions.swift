@@ -33,4 +33,3 @@ public extension UICollectionView {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: nil), forCellWithReuseIdentifier: cellType.nameOfClass)
     }
 }
-

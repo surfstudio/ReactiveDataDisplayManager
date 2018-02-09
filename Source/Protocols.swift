@@ -24,6 +24,10 @@ public protocol DataDisplayManager: class {
     /// - Parameter generator: The new generator.
     func addSectionHeaderGenerator(_ generator: HeaderGeneratorType)
 
+    /// Adds generator for cell.
+    func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator?, needRegister: Bool)
+
+
     /// Removes all header generators.
     func clearHeaderGenerators()
 
@@ -32,6 +36,11 @@ public protocol DataDisplayManager: class {
     /// - Parameters:
     ///   - generator: The new cell generator.
     func addCellGenerator(_ generator: CellGeneratorType)
+  
+    ///   - generator: New cell generator.
+    ///   - needRegister: Pass true if needed to register nibs of cells.
+    func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator?, needRegister: Bool)
+}
 
     /// Adds the new array of cell generators.
     ///
@@ -91,18 +100,17 @@ public protocol ViewBuilder {
 
     associatedtype ViewType: UIView
 
-    /// Выполняет конфигурирование ячейки.
+    /// Configures view.
     ///
-    /// - Parameter view: UIView которое необходимо сконфигурировать.
+    /// - Parameter view: UIView that should be configured.
     func build(view: ViewType)
 }
 
 /// Protocol for selectable item.
 public protocol SelectableItem: class {
 
+    /// Invokes when user taps on the item.
     var didSelectEvent: BaseEvent<Void> { get }
-
-    var didSelected: Bool { get }
 
     /// A Boolean value that determines whether to perform a cell deselect.
     ///
@@ -121,4 +129,3 @@ extension SelectableItem {
         return true
     }
 }
-
