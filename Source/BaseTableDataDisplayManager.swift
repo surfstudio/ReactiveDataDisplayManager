@@ -69,14 +69,15 @@ public extension BaseTableDataDisplayManager {
             self.tableView?.registerNib(generator.identifier)
         }
 
-        if let after = after {
-            guard let index = self.cellGenerators.index(where: { $0 === after }) else {
-                return
-            }
-            self.cellGenerators.insert(generator, at: index + 1)
-        } else {
+        guard let guardAfter = after else {
             self.cellGenerators.append(generator)
+            return
         }
+
+        guard let index = self.cellGenerators.index(where: { $0 === guardAfter }) else {
+            fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
+        }
+        self.cellGenerators.insert(generator, at: index + 1)
     }
 
     /// Adds a new array of cell generators.
@@ -89,15 +90,16 @@ public extension BaseTableDataDisplayManager {
         if needRegister {
             generators.forEach { self.tableView?.registerNib($0.identifier) }
         }
-        if let after = after {
-            guard let index = self.cellGenerators.index(where: { $0 === after }) else {
-                // TOTDO: Maybe here we should call fatalError
-                return
-            }
-            self.cellGenerators.insert(contentsOf: generators, at: index + 1)
-        } else {
+
+        guard let guardAfter = after else {
             self.cellGenerators.append(contentsOf: generators)
+            return
         }
+
+        guard let index = self.cellGenerators.index(where: { $0 === guardAfter }) else {
+            fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
+        }
+        self.cellGenerators.insert(contentsOf: generators, at: index + 1)
     }
 
     /// Removes all cell generators.
