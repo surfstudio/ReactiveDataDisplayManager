@@ -1,6 +1,6 @@
 //
 //  Protocols.swift
-//  SampleEventHandling
+//  ReactiveDataDisplayManager
 //
 //  Created by Alexander Kravchenkov on 01.08.17.
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
@@ -9,33 +9,15 @@
 import Foundation
 import UIKit
 
-/// Protocol for work with cell.
-public protocol TableDataDisplayManager: class {
+open class TableHeaderGenerator: ViewGenerator {
 
-    /// Adds header generator.
-    func addSectionHeaderGenerator(_ generator: HeaderGenerator)
+    open func generate() -> UIView {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
 
-    /// Adds generator for cell.
-    func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator?, needRegister: Bool)
-
-    /// Sets tableView for current manager
-    func setTableView(_ tableView: UITableView)
-
-    /// This method is used to add new array of cell generators.
-    ///
-    /// - Parameters:
-    ///   - generator: New cell generator.
-    ///   - needRegister: Pass true if needed to register nibs of cells.
-    func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator?, needRegister: Bool)
-}
-
-/// Protocol that incapsulated build logics for current View
-public protocol ViewGenerator: class {
-    func generate() -> UIView
-}
-
-public protocol HeaderGenerator: ViewGenerator {
-    func height(_ tableView: UITableView, forSection section: Int) -> CGFloat
+    open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
 }
 
 /// Protocol that incapsulated type of current cell
@@ -51,6 +33,21 @@ public protocol TableCellGenerator: class {
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell
 }
 
+
+open class CollectionHeaderGenerator: ViewGenerator {
+
+    /// Nib type, which create this generator
+    open var identifier: String
+
+    public required init(identifier: String) {
+        self.identifier = identifier
+    }
+
+    open func generate() -> UICollectionReusableView {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+}
+
 /// Protocol that incapsulated type of current cell
 public protocol CollectionCellGenerator: class {
 
@@ -64,6 +61,13 @@ public protocol CollectionCellGenerator: class {
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell
 }
 
+/// Protocol that incapsulated build logics for current View
+public protocol ViewGenerator: class {
+
+    associatedtype ViewType
+
+    func generate() -> ViewType
+}
 
 /// Builder for concreate type of UIView
 public protocol ViewBuilder {
@@ -87,7 +91,6 @@ public protocol SelectableItem: class {
     /// If the value of this property is **true** (the default), cells deselect
     /// immediately after tap. If you set it to **false**, they don't deselect.
     var isNeedDeselect: Bool { get }
-
 }
 
 public protocol DeletableGenerator {
