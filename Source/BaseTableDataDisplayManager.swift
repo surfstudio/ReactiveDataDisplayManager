@@ -12,7 +12,7 @@ import UIKit
 /// Contains base implementation of TableDataManager and TableDisplayManager.
 /// Can register nib if needed, determinate EstimatedRowHeight.
 /// Can fill table with user data.
-public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
+open class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
 
     // MARK: - Events
 
@@ -47,7 +47,7 @@ public class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
     }
 }
 
-// MRK: - Generator actions
+// MARK: - Generator actions
 
 public extension BaseTableDataDisplayManager {
 
@@ -58,28 +58,48 @@ public extension BaseTableDataDisplayManager {
         self.sectionHeaderGenerator.append(generator)
     }
 
-    /// Adds the new cell generator.
+    /// Adds a new cell generator.
     ///
     /// - Parameters:
     ///   - generator: New cell generator.
-    ///   - needRegister: flag, that describe needed register generator nib.
-    public func addCellGenerator(_ generator: TableCellGenerator, needRegister: Bool = true) {
+    ///   - after: Generator after which generator should be added.
+    ///   - needRegister: Pass true to register the cell nib.
+    public func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator? = nil, needRegister: Bool = true) {
         if needRegister {
             self.tableView?.registerNib(generator.identifier)
         }
-        self.cellGenerators.append(generator)
+
+        guard let guardAfter = after else {
+            self.cellGenerators.append(generator)
+            return
+        }
+
+        guard let index = self.cellGenerators.index(where: { $0 === guardAfter }) else {
+            fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
+        }
+        self.cellGenerators.insert(generator, at: index + 1)
     }
 
-    /// Adds new array of cell generators.
+    /// Adds a new array of cell generators.
     ///
     /// - Parameters:
-    ///   - generator: New cell generator.
+    ///   - generator: New cell generators.
+    ///   - after: Generator after which generators should be added.
     ///   - needRegister: Pass true to register the cell nib.
-    public func addCellGenerators(_ generators: [TableCellGenerator], needRegister: Bool = true) {
+    public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator? = nil, needRegister: Bool = true) {
         if needRegister {
             generators.forEach { self.tableView?.registerNib($0.identifier) }
         }
-        self.cellGenerators.append(contentsOf: generators)
+
+        guard let guardAfter = after else {
+            self.cellGenerators.append(contentsOf: generators)
+            return
+        }
+
+        guard let index = self.cellGenerators.index(where: { $0 === guardAfter }) else {
+            fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
+        }
+        self.cellGenerators.insert(contentsOf: generators, at: index + 1)
     }
 
     /// Removes all cell generators.

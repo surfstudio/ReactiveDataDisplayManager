@@ -27,4 +27,3 @@ public extension UITableView {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: nil), forCellReuseIdentifier: cellType.nameOfClass)
     }
 }
-
