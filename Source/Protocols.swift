@@ -9,54 +9,15 @@
 import Foundation
 import UIKit
 
-public protocol DataDisplayManager: class {
-    associatedtype CollectionType
-    associatedtype CellGeneratorType
-    associatedtype HeaderGeneratorType
+open class TableHeaderGenerator: ViewGenerator {
 
-    /// Sets collection to current data display manager.
-    ///
-    /// - Parameter collection: The collection that should be setted to data display manager.
-    func set(collection: CollectionType)
+    open func generate() -> UIView {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
 
-    /// Adds the new header generator.
-    ///
-    /// - Parameter generator: The new generator.
-    func addSectionHeaderGenerator(_ generator: HeaderGeneratorType)
-
-    /// Adds generator for cell.
-    func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator?, needRegister: Bool)
-
-
-    /// Removes all header generators.
-    func clearHeaderGenerators()
-
-    /// Adds the new cell generator.
-    ///
-    /// - Parameters:
-    ///   - generator: The new cell generator.
-    func addCellGenerator(_ generator: CellGeneratorType)
-  
-    ///   - generator: New cell generator.
-    ///   - needRegister: Pass true if needed to register nibs of cells.
-    func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator?, needRegister: Bool)
-}
-
-    /// Adds the new array of cell generators.
-    ///
-    /// - Parameters:
-    ///   - generator: Array of cell generators.
-    func addCellGenerators(_ generators: [CellGeneratorType])
-
-    /// Removes all cell generators.
-    func clearCellGenerators()
-
-    /// Reloads collection.
-    func didRefill()
-}
-
-public protocol TableHeaderGenerator: ViewGenerator {
-    func height(_ tableView: UITableView, forSection section: Int) -> CGFloat
+    open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
 }
 
 /// Protocol that incapsulated type of current cell
@@ -73,8 +34,18 @@ public protocol TableCellGenerator: class {
 }
 
 
-public protocol CollectionHeaderGenerator: ViewGenerator {
-    func height(_ collectionView: UICollectionView, forSection section: Int) -> CGFloat
+open class CollectionHeaderGenerator: ViewGenerator {
+
+    /// Nib type, which create this generator
+    open var identifier: String
+
+    public required init(identifier: String) {
+        self.identifier = identifier
+    }
+
+    open func generate() -> UICollectionReusableView {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
 }
 
 /// Protocol that incapsulated type of current cell
@@ -92,7 +63,10 @@ public protocol CollectionCellGenerator: class {
 
 /// Protocol that incapsulated build logics for current View
 public protocol ViewGenerator: class {
-    func generate() -> UIView
+
+    associatedtype ViewType
+
+    func generate() -> ViewType
 }
 
 /// Builder for concreate type of UIView
@@ -117,7 +91,6 @@ public protocol SelectableItem: class {
     /// If the value of this property is **true** (the default), cells deselect
     /// immediately after tap. If you set it to **false**, they don't deselect.
     var isNeedDeselect: Bool { get }
-
 }
 
 public protocol DeletableGenerator {

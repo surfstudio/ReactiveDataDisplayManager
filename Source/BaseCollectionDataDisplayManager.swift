@@ -15,7 +15,7 @@ public class BaseCollectionDataDisplayManager: NSObject {
 
     // MARK: - Events
 
-    /// Called if table scrolled
+    /// Called if content scrolled
     public var scrollEvent = BaseEvent<UICollectionView>()
     public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> = BaseEvent<CGPoint>()
 
@@ -25,19 +25,20 @@ public class BaseCollectionDataDisplayManager: NSObject {
     fileprivate var headerGenerators: [CollectionHeaderGenerator]
     fileprivate weak var collectionView: UICollectionView?
 
-    // MARK: - Initialization and deinitialization
+    // MARK: - Initialization
 
     public override init() {
         self.cellGenerators = [CollectionCellGenerator]()
         self.headerGenerators = [CollectionHeaderGenerator]()
         super.init()
     }
-
 }
 
 // MARK: - DataDisplayManager
 
 extension BaseCollectionDataDisplayManager: DataDisplayManager {
+
+    // MARK: - Typealiases
 
     public typealias CollectionType = UICollectionView
     public typealias CellGeneratorType = CollectionCellGenerator
@@ -47,6 +48,10 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
         self.collectionView = collection
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
+    }
+
+    public func forceRefill() {
+        self.collectionView?.reloadData()
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
@@ -63,16 +68,42 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
         self.headerGenerators.append(generator)
     }
 
+    public func addCellGenerator(_ generator: CollectionCellGenerator, after: CollectionCellGenerator? = nil) {
+
+        guard let guardedAfter = after else {
+            self.addCellGenerator(generator)
+            return
+        }
+
+        self.collectionView?.registerNib(generator.identifier)
+
+        guard let index = self.cellGenerators.index(where: { $0 === guardedAfter }) else {
+            fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
+        }
+        self.cellGenerators.insert(generator, at: index + 1)
+    }
+
+    public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator? = nil) {
+
+        guard let guardedAfter = after else {
+            self.addCellGenerators(generators)
+            return
+        }
+
+        generators.forEach { self.collectionView?.registerNib($0.identifier) }
+
+        guard let index = self.cellGenerators.index(where: { $0 === guardedAfter }) else {
+            fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
+        }
+        self.cellGenerators.insert(contentsOf: generators, at: index + 1)
+    }
+
     public func clearCellGenerators() {
         self.cellGenerators.removeAll()
     }
 
     public func clearHeaderGenerators() {
         self.headerGenerators.removeAll()
-    }
-
-    public func didRefill() {
-        self.collectionView?.reloadData()
     }
 }
 
@@ -96,7 +127,6 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDelegate {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
-
 }
 
 // MARK: - UITableViewDataSource
@@ -104,7 +134,7 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDelegate {
 extension BaseCollectionDataDisplayManager: UICollectionViewDataSource {
 
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return headerGenerators.isEmpty ? 1 : headerGenerators.count
+        return self.headerGenerators.isEmpty ? 1 : self.headerGenerators.count
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -115,4 +145,7 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDataSource {
         return self.cellGenerators[indexPath.row].generate(collectionView: collectionView, for: indexPath)
     }
 
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return self.headerGenerators.first { $0.identifier == kind }?.generate() ?? UICollectionReusableView()
+    }
 }

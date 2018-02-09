@@ -12,7 +12,7 @@ import UIKit
 /// Contains base implementation of DataDisplayManager with UITableView.
 /// Registers nibs, determinates EstimatedRowHeight.
 /// Can fill table with user data.
-open class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
+open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 
     // MARK: - Typealiases
 
@@ -35,19 +35,18 @@ open class BaseTableDataDisplayManager: NSObject, TableDataDisplayManager {
 
     // MARK: - Initialization and deinitialization
 
-    public init(estimatedHeight: CGFloat = 40) {
+    public init(estimatedHeight: CGFloat = 40, collection: UITableView? = nil) {
         self.estimatedHeight = estimatedHeight
         self.cellGenerators = [TableCellGenerator]()
         self.sectionHeaderGenerator = [TableHeaderGenerator]()
         self.scrollViewWillEndDraggingEvent = BaseEvent<CGPoint>()
         super.init()
     }
-
 }
 
 // MARK: - Generator actions
 
-extension BaseTableDataDisplayManager: DataDisplayManager {
+extension BaseTableDataDisplayManager {
 
     public func set(collection: UITableView) {
         self.tableView = collection
@@ -75,17 +74,16 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     ///   - generator: New cell generator.
     ///   - after: Generator after which generator should be added.
     ///   - needRegister: Pass true to register the cell nib.
-    public func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator? = nil, needRegister: Bool = true) {
-        if needRegister {
-            self.tableView?.registerNib(generator.identifier)
-        }
+    public func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator? = nil) {
 
-        guard let guardAfter = after else {
-            self.cellGenerators.append(generator)
+        guard let guardedAfter = after else {
+            self.addCellGenerator(generator)
             return
         }
 
-        guard let index = self.cellGenerators.index(where: { $0 === guardAfter }) else {
+        self.tableView?.registerNib(generator.identifier)
+
+        guard let index = self.cellGenerators.index(where: { $0 === guardedAfter }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
         }
         self.cellGenerators.insert(generator, at: index + 1)
@@ -97,21 +95,19 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     ///   - generator: New cell generators.
     ///   - after: Generator after which generators should be added.
     ///   - needRegister: Pass true to register the cell nib.
-    public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator? = nil, needRegister: Bool = true) {
-        if needRegister {
-            generators.forEach { self.tableView?.registerNib($0.identifier) }
-        }
+    public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator? = nil) {
 
-        guard let guardAfter = after else {
-            self.cellGenerators.append(contentsOf: generators)
+        guard let guardedAfter = after else {
+            self.addCellGenerators(generators)
             return
         }
 
-        guard let index = self.cellGenerators.index(where: { $0 === guardAfter }) else {
+        generators.forEach { self.tableView?.registerNib($0.identifier) }
+
+        guard let index = self.cellGenerators.index(where: { $0 === guardedAfter }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
         }
         self.cellGenerators.insert(contentsOf: generators, at: index + 1)
-
     }
 
     public func clearCellGenerators() {
@@ -122,7 +118,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
         self.sectionHeaderGenerator.removeAll()
     }
 
-    public func didRefill() {
+    public func forceRefill() {
         self.tableView?.reloadData()
     }
 }
