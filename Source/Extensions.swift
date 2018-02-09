@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  SampleEventHandling
+//  ReactiveDataDisplayManager
 //
 //  Created by Alexander Kravchenkov on 01.08.17.
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
@@ -25,5 +25,11 @@ public extension UIViewController {
 public extension UITableView {
     public func registerNib(_ cellType: UITableViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: nil), forCellReuseIdentifier: cellType.nameOfClass)
+    }
+}
+
+public extension UICollectionView {
+    public func registerNib(_ cellType: UICollectionViewCell.Type) {
+        self.register(UINib(nibName: cellType.nameOfClass, bundle: nil), forCellWithReuseIdentifier: cellType.nameOfClass)
     }
 }

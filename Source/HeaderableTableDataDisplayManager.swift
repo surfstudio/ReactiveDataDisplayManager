@@ -1,9 +1,8 @@
 //
 //  HeaderableTableDataDisplayManager.swift
-//  GoLamaGo
+//  ReactiveDataDisplayManager
 //
 //  Created by Ivan Smetanin on 20/09/2017.
-//  Copyright © 2017 Surf. All rights reserved.
 //
 
 import Foundation
@@ -12,7 +11,7 @@ import Foundation
 public protocol HeaderableTableDataDisplayManager: class {
 
     /// Adds the new header generator.
-    func addSectionHeaderGenerator(_ generator: HeaderGenerator)
+    func addSectionHeaderGenerator(_ generator: TableHeaderGenerator)
 
     /// Adds the new cell generator.
     ///
@@ -21,7 +20,7 @@ public protocol HeaderableTableDataDisplayManager: class {
     ///   - header: Header in which is added to generator, if nil generator
     /// will be added to the last header.
     ///   - needRegister: Pass true to register the cell nib.
-    func addCellGenerator(_ generator: TableCellGenerator, toHeader header: HeaderGenerator?, needRegister: Bool)
+    func addCellGenerator(_ generator: TableCellGenerator, toHeader header: TableHeaderGenerator?, needRegister: Bool)
 
     /// Sets tableView for current manager
     func setTableView(_ tableView: UITableView)
@@ -41,7 +40,7 @@ open class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDataD
     // MARK: - Fileprivate properties
 
     fileprivate var cellGenerators: [[TableCellGenerator]]
-    fileprivate var sectionHeaderGenerators: [HeaderGenerator]
+    fileprivate var sectionHeaderGenerators: [TableHeaderGenerator]
     fileprivate weak var tableView: UITableView?
 
     // MARK: - Initialization and deinitialization
@@ -49,7 +48,7 @@ open class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDataD
     public init(estimatedHeight: CGFloat = 40) {
         self.estimatedHeight = estimatedHeight
         self.cellGenerators = [[TableCellGenerator]]()
-        self.sectionHeaderGenerators = [HeaderGenerator]()
+        self.sectionHeaderGenerators = [TableHeaderGenerator]()
         super.init()
     }
 
@@ -70,7 +69,7 @@ public extension BaseHeaderableTableDataDisplayManager {
     /// Adds the new header section generator.
     ///
     /// - Parameter generator: new generator.
-    public func addSectionHeaderGenerator(_ generator: HeaderGenerator) {
+    public func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sectionHeaderGenerators.append(generator)
     }
 
@@ -109,7 +108,7 @@ public extension BaseHeaderableTableDataDisplayManager {
         table.endUpdates()
     }
 
-    public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: HeaderGenerator? = nil, needRegister: Bool = true) {
+    public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: TableHeaderGenerator? = nil, needRegister: Bool = true) {
         if needRegister {
             self.tableView?.registerNib(generator.identifier)
         }
@@ -141,7 +140,7 @@ public extension BaseHeaderableTableDataDisplayManager {
         self.insertGenerator(newGenerator, at: (genIndex: index.genIndex + 1, arrIndex: index.arrIndex), with: animation)
     }
 
-    public func insert(header: HeaderGenerator, after: HeaderGenerator, with animation: UITableViewRowAnimation = .automatic) {
+    public func insert(header: TableHeaderGenerator, after: TableHeaderGenerator, with animation: UITableViewRowAnimation = .automatic) {
         guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else { return }
 
         guard let table = self.tableView else { return }
@@ -152,7 +151,7 @@ public extension BaseHeaderableTableDataDisplayManager {
         table.endUpdates()
     }
 
-    public func insert(to header: HeaderGenerator, generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+    public func insert(to header: TableHeaderGenerator, generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
         guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else { return }
 
         self.insertGenerator(generator, at: (genIndex: 0, arrIndex: headerIndex), with: animation)

@@ -1,23 +1,24 @@
+
 //
-//  ViewController.swift
-//  ReactiveDataDisplayManager
+//  CollectionViewController.swift
+//  ReactiveDataDisplayManagerExample
 //
-//  Created by Ivan Smetanin on 18/12/2017.
-//  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
+//  Created by Ivan Smetanin on 27/01/2018.
+//  Copyright © 2018 Alexander Kravchenkov. All rights reserved.
 //
 
 import UIKit
 import ReactiveDataDisplayManager
 
-class ViewController: UIViewController {
+class CollectionViewController: UIViewController {
 
     // MARK: - IBOutlets
 
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var collectionView: UICollectionView!
 
     // MARK: - Properties
 
-    private lazy var adapter = BaseTableDataDisplayManager()
+    private lazy var adapter = BaseCollectionDataDisplayManager()
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController
@@ -32,16 +33,14 @@ class ViewController: UIViewController {
 
     /// This method is used to configure table adapter and set table delegate and data source
     private func configureAdapter() {
-        adapter.setTableView(tableView)
-        tableView.delegate = adapter
-        tableView.dataSource = adapter
+        adapter.set(collection: collectionView)
     }
 
     /// This method is used to fill adapter
     private func fillAdapter() {
         for title in titles {
             // Create generator
-            let generator = TitleGenerator(model: title)
+            let generator = TitleCollectionGenerator(model: title)
             generator.didSelectEvent += {
                 debugPrint("\(title) selected")
             }
@@ -52,5 +51,5 @@ class ViewController: UIViewController {
         // Tell adapter that we've changed generators
         adapter.didRefill()
     }
-}
 
+}

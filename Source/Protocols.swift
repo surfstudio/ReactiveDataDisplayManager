@@ -1,6 +1,6 @@
 //
 //  Protocols.swift
-//  SampleEventHandling
+//  ReactiveDataDisplayManager
 //
 //  Created by Alexander Kravchenkov on 01.08.17.
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
@@ -9,32 +9,53 @@
 import Foundation
 import UIKit
 
-/// Protocol for work with cell.
-public protocol TableDataDisplayManager: class {
+public protocol DataDisplayManager: class {
+    associatedtype CollectionType
+    associatedtype CellGeneratorType
+    associatedtype HeaderGeneratorType
 
-    /// Adds header generator.
-    func addSectionHeaderGenerator(_ generator: HeaderGenerator)
+    /// Sets collection to current data display manager.
+    ///
+    /// - Parameter collection: The collection that should be setted to data display manager.
+    func set(collection: CollectionType)
+
+    /// Adds the new header generator.
+    ///
+    /// - Parameter generator: The new generator.
+    func addSectionHeaderGenerator(_ generator: HeaderGeneratorType)
 
     /// Adds generator for cell.
     func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator?, needRegister: Bool)
 
-    /// Sets tableView for current manager
-    func setTableView(_ tableView: UITableView)
 
-    /// This method is used to add new array of cell generators.
+    /// Removes all header generators.
+    func clearHeaderGenerators()
+
+    /// Adds the new cell generator.
     ///
     /// - Parameters:
+    ///   - generator: The new cell generator.
+    func addCellGenerator(_ generator: CellGeneratorType)
+  
     ///   - generator: New cell generator.
     ///   - needRegister: Pass true if needed to register nibs of cells.
     func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator?, needRegister: Bool)
 }
 
-/// Protocol that incapsulated build logics for current View
-public protocol ViewGenerator: class {
-    func generate() -> UIView
+    /// Adds the new array of cell generators.
+    ///
+    /// - Parameters:
+    ///   - generator: Array of cell generators.
+    func addCellGenerators(_ generators: [CellGeneratorType])
+
+    /// Removes all cell generators.
+    func clearCellGenerators()
+
+    /// Reloads collection.
+    func didRefill()
 }
 
-public protocol HeaderGenerator: ViewGenerator {
+public protocol TableHeaderGenerator: ViewGenerator {
     func height(_ tableView: UITableView, forSection section: Int) -> CGFloat
 }
 
@@ -51,6 +72,11 @@ public protocol TableCellGenerator: class {
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell
 }
 
+
+public protocol CollectionHeaderGenerator: ViewGenerator {
+    func height(_ collectionView: UICollectionView, forSection section: Int) -> CGFloat
+}
+
 /// Protocol that incapsulated type of current cell
 public protocol CollectionCellGenerator: class {
 
@@ -64,6 +90,10 @@ public protocol CollectionCellGenerator: class {
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell
 }
 
+/// Protocol that incapsulated build logics for current View
+public protocol ViewGenerator: class {
+    func generate() -> UIView
+}
 
 /// Builder for concreate type of UIView
 public protocol ViewBuilder {
