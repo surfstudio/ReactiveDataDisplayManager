@@ -11,7 +11,7 @@ import UIKit
 
 open class TableHeaderGenerator: ViewGenerator {
 
-    open init() { }
+    public init() { }
     
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
