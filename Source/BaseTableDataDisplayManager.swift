@@ -153,6 +153,20 @@ public extension BaseTableDataDisplayManager {
         self.insertGenerator(newGenerator, at: index, with: animation, needScrollAt: scrollPosition)
     }
 
+    public func `switch`(new newGenerator: TableCellGenerator, and oldGenerator: TableCellGenerator, removeAnimation: UITableViewRowAnimation = .automatic, insertAnimation: UITableViewRowAnimation = .automatic) {
+        guard let index = self.cellGenerators.index(where: { $0 === oldGenerator }) else { return }
+
+        guard let table = self.tableView else { return }
+
+        table.beginUpdates()
+        self.cellGenerators.remove(at: index)
+        self.cellGenerators.insert(newGenerator, at: index)
+        let indexPath = IndexPath(row: index, section: 0)
+        table.deleteRows(at: [indexPath], with: removeAnimation)
+        table.insertRows(at: [indexPath], with: insertAnimation)
+        table.endUpdates()
+    }
+    
     public func insert(new newGenerators: [TableCellGenerator], after generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
         guard let index = self.cellGenerators.index(where: { $0 === generator }) else { return }
 
