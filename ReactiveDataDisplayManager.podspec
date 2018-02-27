@@ -10,4 +10,14 @@ Pod::Spec.new do |s|
   s.source_files = 'Source/*.swift'
   s.framework = 'UIKit'
   s.ios.deployment_target = '8.0'
+
+  s.default_subspec = 'Core'
+
+  s.subspec 'Core' do |co|
+    co.source_files = 'Source/*.swift'
+  end
+
+  s.subspec 'Events' do |co|
+    co.source_files = 'Source/Event.swift'
+  end
 end
