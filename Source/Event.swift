@@ -96,10 +96,6 @@ public class BaseEmptyEvent: EmptyEvent {
 
     public typealias Lambda = () -> Void
 
-    public static func += (left: BaseEmptyEvent, right: @escaping Lambda) {
-        left.addListner(right)
-    }
-
     public static func += (left: BaseEmptyEvent, right: Lambda?) {
         guard let right = right else {
             return

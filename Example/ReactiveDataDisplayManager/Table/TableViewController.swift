@@ -50,7 +50,7 @@ class TableViewController: UIViewController {
         }
 
         // Tell adapter that we've changed generators
-        adapter.didRefill()
+        adapter.forceRefill()
     }
 }
 
