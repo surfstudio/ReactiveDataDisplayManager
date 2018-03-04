@@ -100,6 +100,13 @@ public class BaseEmptyEvent: EmptyEvent {
         left.addListner(right)
     }
 
+    public static func += (left: BaseEmptyEvent, right: Lambda?) {
+        guard let right = right else {
+            return
+        }
+        left.addListner(right)
+    }
+
     private var listners: [Lambda]
 
     public init() {
