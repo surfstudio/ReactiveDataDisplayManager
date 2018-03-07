@@ -99,8 +99,33 @@ public protocol DeletableGenerator {
     var eventDelete: BaseEmptyEvent { get }
 }
 
-extension SelectableItem {
+public extension SelectableItem {
     var isNeedDeselect: Bool {
         return true
     }
 }
+
+public extension TableCellGenerator where Self: ViewBuilder {
+    func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
+            return UITableViewCell()
+        }
+
+        self.build(view: cell)
+
+        return cell as? UITableViewCell ?? UITableViewCell()
+    }
+}
+
+public extension CollectionCellGenerator where Self: ViewBuilder {
+    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
+            return UICollectionViewCell()
+        }
+
+        self.build(view: cell)
+
+        return cell as? UICollectionViewCell ?? UICollectionViewCell()
+    }
+}
+
