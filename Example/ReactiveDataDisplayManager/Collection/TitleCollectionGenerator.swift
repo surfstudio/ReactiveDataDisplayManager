@@ -35,16 +35,6 @@ extension TitleCollectionGenerator: CollectionCellGenerator {
         return TitleCollectionViewCell.self
     }
 
-    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identifier.nameOfClass, for: indexPath) as? TitleCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-
-        self.build(view: cell)
-
-        return cell
-    }
-
 }
 
 // MARK: - ViewBuilder

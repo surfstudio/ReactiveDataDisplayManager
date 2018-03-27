@@ -35,16 +35,6 @@ extension TitleTableGenerator: TableCellGenerator {
         return TitleTableViewCell.self
     }
 
-    func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier.nameOfClass, for: indexPath) as? TitleTableViewCell else {
-            return UITableViewCell()
-        }
-
-        self.build(view: cell)
-
-        return cell
-    }
-
 }
 
 // MARK: - ViewBuilder
