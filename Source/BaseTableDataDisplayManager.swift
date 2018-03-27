@@ -48,10 +48,12 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 
 extension BaseTableDataDisplayManager {
 
+    /// It causes register nib for all generators.
     public func set(collection: UITableView) {
         self.tableView = collection
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
+        self.cellGenerators.forEach { collection.registerNib($0.identifier) }
     }
 
     public func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
