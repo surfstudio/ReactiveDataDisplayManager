@@ -99,12 +99,18 @@ public extension BaseHeaderableTableDataDisplayManager {
         self.cellGenerators[index.arrIndex].remove(at: index.genIndex)
         let indexPath = IndexPath(row: index.genIndex, section: index.arrIndex)
         table.deleteRows(at: [indexPath], with: animation)
-        if self.cellGenerators[index.arrIndex].isEmpty {
-            self.cellGenerators.remove(at: index.arrIndex)
-            self.sectionHeaderGenerators.remove(at: index.arrIndex)
-            table.deleteSections(IndexSet(integer: index.arrIndex), with: animation)
-        }
+        table.endUpdates()
+    }
 
+    func removeSection(index: Int, with animation: UITableViewRowAnimation = .automatic) {
+        guard let table = self.tableView else { return }
+
+        table.beginUpdates()
+        if self.cellGenerators[index].isEmpty  {
+            self.cellGenerators.remove(at: index)
+            self.sectionHeaderGenerators.remove(at: index)
+            table.deleteSections(IndexSet(integer: index), with: animation)
+        }
         table.endUpdates()
     }
 
