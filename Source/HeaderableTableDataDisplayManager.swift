@@ -78,9 +78,9 @@ public extension BaseHeaderableTableDataDisplayManager {
     /// - Parameters:
     ///   - generator: Generator to delete.
     ///   - animation: Animation for row action.
-    public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+    public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needRemoveEmptySection: Bool = false) {
         guard let index = self.findGenerator(generator) else { return }
-        self.removeGenerator(with: index, with: animation)
+        self.removeGenerator(with: index, with: animation, needRemoveEmptySection: needRemoveEmptySection)
     }
 
     private func findGenerator(_ toFindGenerator: TableCellGenerator) -> (genIndex: Int, arrIndex: Int)? {
@@ -92,19 +92,18 @@ public extension BaseHeaderableTableDataDisplayManager {
         return nil
     }
 
-    func removeGenerator(with index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic) {
+    func removeGenerator(with index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic, needRemoveEmptySection: Bool = false) {
         guard let table = self.tableView else { return }
 
         table.beginUpdates()
         self.cellGenerators[index.arrIndex].remove(at: index.genIndex)
         let indexPath = IndexPath(row: index.genIndex, section: index.arrIndex)
         table.deleteRows(at: [indexPath], with: animation)
-        if self.cellGenerators[index.arrIndex].isEmpty {
+        if needRemoveEmptySection && self.cellGenerators[index.arrIndex].isEmpty {
             self.cellGenerators.remove(at: index.arrIndex)
             self.sectionHeaderGenerators.remove(at: index.arrIndex)
             table.deleteSections(IndexSet(integer: index.arrIndex), with: animation)
         }
-
         table.endUpdates()
     }
 
