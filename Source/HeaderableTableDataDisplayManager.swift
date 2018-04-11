@@ -71,6 +71,7 @@ public extension BaseHeaderableTableDataDisplayManager {
     /// - Parameter generator: new generator.
     public func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sectionHeaderGenerators.append(generator)
+        self.cellGenerators.append([])
     }
 
     /// Removes generator from adapter. Generators compare by references.
