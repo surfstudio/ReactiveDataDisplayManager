@@ -24,12 +24,12 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 
     /// Called if table scrolled
     public var scrollEvent = BaseEvent<UITableView>()
-    public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint>
+    public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> = BaseEvent<CGPoint>()
 
     // MARK: - Fileprivate properties
 
-    fileprivate(set) var cellGenerators: [TableCellGenerator]
-    fileprivate var sectionHeaderGenerator: [TableHeaderGenerator]
+    fileprivate(set) var cellGenerators: [[TableCellGenerator]]
+    fileprivate(set) var sectionHeaderGenerator: [TableHeaderGenerator]
     fileprivate weak var tableView: UITableView?
     fileprivate let estimatedHeight: CGFloat
 
@@ -37,24 +37,20 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 
     public init(estimatedHeight: CGFloat = 40, collection: UITableView? = nil) {
         self.estimatedHeight = estimatedHeight
-        self.cellGenerators = [TableCellGenerator]()
+        self.cellGenerators = [[TableCellGenerator]]()
         self.sectionHeaderGenerator = [TableHeaderGenerator]()
         self.scrollViewWillEndDraggingEvent = BaseEvent<CGPoint>()
+        self.tableView = collection
         super.init()
+        self.tableView?.delegate = self
+        self.tableView?.dataSource = self
     }
+
 }
 
 // MARK: - Generator actions
 
 extension BaseTableDataDisplayManager {
-
-    /// It causes register nib for all generators.
-    public func set(collection: UITableView) {
-        self.tableView = collection
-        self.tableView?.delegate = self
-        self.tableView?.dataSource = self
-        self.cellGenerators.forEach { collection.registerNib($0.identifier) }
-    }
 
     public func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sectionHeaderGenerator.append(generator)

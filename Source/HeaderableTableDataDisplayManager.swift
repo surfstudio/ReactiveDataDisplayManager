@@ -24,6 +24,7 @@ public protocol HeaderableTableDataDisplayManager: class {
 
     /// Sets tableView for current manager
     func setTableView(_ tableView: UITableView)
+
 }
 
 open class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDataDisplayManager {
@@ -60,6 +61,7 @@ open class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDataD
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
     }
+
 }
 
 // MRK: - Generator actions
@@ -253,23 +255,27 @@ extension BaseHeaderableTableDataDisplayManager: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cellGenerators[indexPath.section][indexPath.row].generate(tableView: tableView, for: indexPath)
     }
+
 }
 
 public class PaginableHeaderableTableDataDisplayManager: BaseHeaderableTableDataDisplayManager {
+
     /// Called if table shows last cell
     public var lastCellShowingEvent = BaseEvent<Void>()
-
 
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == cellGenerators[indexPath.section].count - 1 {
             lastCellShowingEvent.invoke(with: ())
         }
     }
+
 }
 
 public class ExtendableHeaderableAdapter: BaseHeaderableTableDataDisplayManager {
+
     public override func numberOfSections(in tableView: UITableView) -> Int {
         return sectionHeaderGenerators.isEmpty ? 1 : sectionHeaderGenerators.count
     }
+
 }
 
