@@ -27,11 +27,15 @@ open class BaseCollectionDataDisplayManager: NSObject {
 
     // MARK: - Initialization
 
-    public override init() {
+    public required init(collection: UICollectionView) {
         self.cellGenerators = [CollectionCellGenerator]()
         self.headerGenerators = [CollectionHeaderGenerator]()
+        self.collectionView = collection
         super.init()
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
     }
+
 }
 
 // MARK: - DataDisplayManager
@@ -43,12 +47,6 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     public typealias CollectionType = UICollectionView
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
-
-    public func set(collection: UICollectionView) {
-        self.collectionView = collection
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
-    }
 
     public func forceRefill() {
         self.collectionView?.reloadData()

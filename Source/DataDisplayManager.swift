@@ -20,10 +20,7 @@ public protocol DataDisplayManager: class {
 
     // MARK: Support methods
 
-    /// Sets collection to current data display manager.
-    ///
-    /// - Parameter collection: The collection that should be setted to data display manager.
-    func set(collection: CollectionType)
+    init(collection: CollectionType)
 
     /// Reloads collection.
     func forceRefill()

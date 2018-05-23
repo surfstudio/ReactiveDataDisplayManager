@@ -9,8 +9,10 @@
 import XCTest
 @testable import ReactiveDataDisplayManager
 
-class BaseTableDataDisplayManagerTests: XCTestCase {
-    
+final class BaseTableDataDisplayManagerTests: XCTestCase {
+
+    private lazy var ddm = BaseTableDataDisplayManager(collection: UITableView())
+
     override func setUp() {
         super.setUp()
     }
@@ -19,14 +21,44 @@ class BaseTableDataDisplayManagerTests: XCTestCase {
         super.tearDown()
     }
 
+    // MARK: - Initialization tests
+
     func testThatObjectPropertiesInitializeCorrectly() {
         // given
         let table = UITableView()
         // when
-        let object = BaseTableDataDisplayManager(estimatedHeight: 1, collection: table)
+        let ddm = BaseTableDataDisplayManager(collection: table)
         // then
-        XCTAssert(object.cellGenerators.isEmpty)
-        XCTAssert(object.sectionHeaderGenerator.isEmpty)
+        XCTAssert(ddm.cellGenerators.isEmpty)
+        XCTAssert(ddm.sectionHeaderGenerators.isEmpty)
+    }
+
+    // MARK: - Generator actions tests
+
+    func testThatAddSectionGeneratorWorksCorrectly() {
+        // given
+        let gen1 = HeaderGenerator()
+        let gen2 = HeaderGenerator()
+        // when
+        ddm.addSectionHeaderGenerator(gen1)
+        ddm.addSectionHeaderGenerator(gen1)
+        ddm.addSectionHeaderGenerator(gen2)
+        // then
+        XCTAssert(ddm.sectionHeaderGenerators.count == 3)
+    }
+
+    // MARK: - Mocks
+
+    final class HeaderGenerator: TableHeaderGenerator {
+
+        override func generate() -> UIView {
+            return UIView()
+        }
+
+        override func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
+            return 1
+        }
+
     }
 
 }
