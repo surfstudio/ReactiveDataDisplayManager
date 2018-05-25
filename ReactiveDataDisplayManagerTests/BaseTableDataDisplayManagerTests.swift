@@ -213,7 +213,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
         override func registerNib(_ cellType: UITableViewCell.Type) {
             registerNibWasCalled = true
-            // override not to call UI API
+            // don't call super for not calling UI API
         }
 
     }

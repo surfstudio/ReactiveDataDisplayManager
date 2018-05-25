@@ -74,25 +74,14 @@ extension BaseTableDataDisplayManager {
         }
     }
 
-    /// Adds a new cell generator.
-    ///
-    /// - Parameters:
-    ///   - generator: New cell generator.
-    ///   - after: Generator after which generator should be added.
-    ///   - needRegister: Pass true to register the cell nib.
     public func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator) {
         addCellGenerators([generator], after: after)
     }
 
-    /// Adds a new array of cell generators.
-    ///
-    /// - Parameters:
-    ///   - generator: New cell generators.
-    ///   - after: Generator after which generators should be added.
-    ///   - needRegister: Pass true to register the cell nib.
     public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
         generators.forEach { self.tableView?.registerNib($0.identifier) }
 
+        // find indexes
         var sectionIndex: Int?
         var generatorIndex: Int?
         for (sectionInd, section) in cellGenerators.enumerated() {
