@@ -66,31 +66,19 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
         self.headerGenerators.append(generator)
     }
 
-    public func addCellGenerator(_ generator: CollectionCellGenerator, after: CollectionCellGenerator? = nil) {
-
-        guard let guardedAfter = after else {
-            self.addCellGenerator(generator)
-            return
-        }
-
+    public func addCellGenerator(_ generator: CollectionCellGenerator, after: CollectionCellGenerator) {
         self.collectionView?.registerNib(generator.identifier)
 
-        guard let index = self.cellGenerators.index(where: { $0 === guardedAfter }) else {
+        guard let index = self.cellGenerators.index(where: { $0 === after }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
         }
         self.cellGenerators.insert(generator, at: index + 1)
     }
 
-    public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator? = nil) {
-
-        guard let guardedAfter = after else {
-            self.addCellGenerators(generators)
-            return
-        }
-
+    public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
         generators.forEach { self.collectionView?.registerNib($0.identifier) }
 
-        guard let index = self.cellGenerators.index(where: { $0 === guardedAfter }) else {
+        guard let index = self.cellGenerators.index(where: { $0 === after }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
         }
         self.cellGenerators.insert(contentsOf: generators, at: index + 1)

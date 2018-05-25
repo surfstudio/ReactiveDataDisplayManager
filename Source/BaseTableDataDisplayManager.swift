@@ -56,13 +56,22 @@ extension BaseTableDataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: TableCellGenerator) {
-//        self.tableView?.registerNib(generator.identifier)
-//        self.cellGenerators.append(generator)
+        self.tableView?.registerNib(generator.identifier)
+        if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
+            self.cellGenerators.append([TableCellGenerator]())
+        }
+        guard sectionHeaderGenerators.count > 0 else {
+            fatalError("Section generators is empty. Firstly you should add a section header generator.")
+        }
+        // Add to last section
+        let index = sectionHeaderGenerators.count - 1
+        self.cellGenerators[index < 0 ? 0 : index].append(generator)
     }
-//
+
     public func addCellGenerators(_ generators: [TableCellGenerator]) {
-//        generators.forEach { self.tableView?.registerNib($0.identifier) }
-//        self.cellGenerators.append(contentsOf: generators)
+        for generator in generators {
+            self.addCellGenerator(generator)
+        }
     }
 
     /// Adds a new cell generator.
@@ -71,52 +80,45 @@ extension BaseTableDataDisplayManager {
     ///   - generator: New cell generator.
     ///   - after: Generator after which generator should be added.
     ///   - needRegister: Pass true to register the cell nib.
-    public func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator? = nil) {
-//
-//        guard let guardedAfter = after else {
-//            self.addCellGenerator(generator)
-//            return
-//        }
-//
-//        self.tableView?.registerNib(generator.identifier)
-//
-//        guard let index = self.cellGenerators.index(where: { $0 === guardedAfter }) else {
-//            fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
-//        }
-//        self.cellGenerators.insert(generator, at: index + 1)
+    public func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator) {
+        addCellGenerators([generator], after: after)
     }
-//
+
     /// Adds a new array of cell generators.
     ///
     /// - Parameters:
     ///   - generator: New cell generators.
     ///   - after: Generator after which generators should be added.
     ///   - needRegister: Pass true to register the cell nib.
-    public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator? = nil) {
-//
-//        guard let guardedAfter = after else {
-//            self.addCellGenerators(generators)
-//            return
-//        }
-//
-//        generators.forEach { self.tableView?.registerNib($0.identifier) }
-//
-//        guard let index = self.cellGenerators.index(where: { $0 === guardedAfter }) else {
-//            fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
-//        }
-//        self.cellGenerators.insert(contentsOf: generators, at: index + 1)
+    public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
+        generators.forEach { self.tableView?.registerNib($0.identifier) }
+
+        var sectionIndex: Int?
+        var generatorIndex: Int?
+        for (sectionInd, section) in cellGenerators.enumerated() {
+            generatorIndex = section.index(where: { $0 === after })
+            if generatorIndex != nil {
+                sectionIndex = sectionInd
+                break
+            }
+        }
+
+        guard let y = sectionIndex, let x = generatorIndex else {
+            fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
+        }
+        self.cellGenerators[y].insert(contentsOf: generators, at: x + 1)
     }
 
     public func clearCellGenerators() {
-//        self.cellGenerators.removeAll()
+        self.cellGenerators.removeAll()
     }
 
     public func clearHeaderGenerators() {
-//        self.sectionHeaderGenerator.removeAll()
+        self.sectionHeaderGenerators.removeAll()
     }
 
     public func forceRefill() {
-//        self.tableView?.reloadData()
+        self.tableView?.reloadData()
     }
 
 }

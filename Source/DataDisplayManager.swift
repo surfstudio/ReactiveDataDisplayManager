@@ -43,14 +43,14 @@ public protocol DataDisplayManager: class {
     /// - Parameters:
     ///   - generators: New generators
     ///   - after: Generator after which you need to add a new generators
-    func addCellGenerators(_ generators: [CellGeneratorType], after: CellGeneratorType?)
+    func addCellGenerators(_ generators: [CellGeneratorType], after: CellGeneratorType)
 
     /// Adds generator for cell.
     ///
     /// - Parameters:
     ///   - generator: New generator
     ///   - after: Generator after which you need to add a new one
-    func addCellGenerator(_ generator: CellGeneratorType, after: CellGeneratorType?)
+    func addCellGenerator(_ generator: CellGeneratorType, after: CellGeneratorType)
 
     /// Adds the new array of cell generators.
     ///
@@ -63,4 +63,5 @@ public protocol DataDisplayManager: class {
 
     /// Removes all cell generators.
     func clearCellGenerators()
+
 }
