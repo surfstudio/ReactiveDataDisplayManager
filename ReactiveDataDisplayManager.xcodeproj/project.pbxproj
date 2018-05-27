@@ -18,9 +18,10 @@
 		8B7E265220B89B12001D7A93 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEA1F4E9F74006B7809 /* Event.swift */; };
 		8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */; };
 		8B9FEBDD20B493BF00002874 /* BaseTableDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */; };
+		8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */; };
+		8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */; };
 		8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */; };
 		8BC018FE20B4912100D82429 /* ReactiveDataDisplayManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */; };
-		8BF1B9471F780300003A3355 /* HeaderableTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,11 +46,12 @@
 		4FD38131202D791A0005EBFE /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
 		8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
 		8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
+		8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableBaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
+		8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendableBaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
 		8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		8BC018F920B4912100D82429 /* ReactiveDataDisplayManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC018FD20B4912100D82429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderableTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -77,13 +79,10 @@
 			isa = PBXGroup;
 			children = (
 				4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */,
-				8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */,
-				4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */,
-				8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */,
-				4F088BEB1F4E9F74006B7809 /* Extensions.swift */,
 				4F088BED1F4E9F74006B7809 /* Protocols.swift */,
 				4FD38131202D791A0005EBFE /* Operations.swift */,
-				4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */,
+				8BAB778B20BB416C0005C4E9 /* BaseCollectionDataDisplayManager */,
+				8BAB778A20BB41630005C4E9 /* BaseTableDataDisplayManager */,
 				8B7E265020B89AEA001D7A93 /* Utils */,
 			);
 			path = Source;
@@ -100,10 +99,29 @@
 		8B7E265020B89AEA001D7A93 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4F088BEB1F4E9F74006B7809 /* Extensions.swift */,
 				4F088BEA1F4E9F74006B7809 /* Event.swift */,
 				8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		8BAB778A20BB41630005C4E9 /* BaseTableDataDisplayManager */ = {
+			isa = PBXGroup;
+			children = (
+				4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */,
+				8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */,
+				8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */,
+			);
+			path = BaseTableDataDisplayManager;
+			sourceTree = "<group>";
+		};
+		8BAB778B20BB416C0005C4E9 /* BaseCollectionDataDisplayManager */ = {
+			isa = PBXGroup;
+			children = (
+				8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */,
+			);
+			path = BaseCollectionDataDisplayManager;
 			sourceTree = "<group>";
 		};
 		8BC018FA20B4912100D82429 /* ReactiveDataDisplayManagerTests */ = {
@@ -121,6 +139,7 @@
 			children = (
 				4F088BF51F4EAB86006B7809 /* Info.plist */,
 				4F088BE81F4E9F74006B7809 /* Source */,
+				4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */,
 				8BC018FA20B4912100D82429 /* ReactiveDataDisplayManagerTests */,
 				B971E25C1F456825000FBB9A /* Products */,
 				4F088BF71F4EABA1006B7809 /* Frameworks */,
@@ -256,13 +275,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */,
 				8B7E265220B89B12001D7A93 /* Event.swift in Sources */,
 				4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */,
 				8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */,
 				8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */,
 				4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */,
-				8BF1B9471F780300003A3355 /* HeaderableTableDataDisplayManager.swift in Sources */,
 				4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */,
+				8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */,
 				4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */,
 				4FD38132202D791A0005EBFE /* Operations.swift in Sources */,
 			);

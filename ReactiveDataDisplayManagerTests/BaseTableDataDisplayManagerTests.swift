@@ -175,6 +175,179 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         XCTAssert(table.reloadDataWasCalled)
     }
 
+    func testThatAddCellGeneratorToHeaderAddsGeneratorsToCorrectHeader() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addSectionHeaderGenerator(headerGen2)
+        // when
+        ddm.addCellGenerator(gen1, toHeader: headerGen1)
+        ddm.addCellGenerator(gen1, toHeader: headerGen1)
+        ddm.addCellGenerator(gen1, toHeader: headerGen1)
+        ddm.addCellGenerator(gen2, toHeader: headerGen2)
+        // then
+        XCTAssert(ddm.cellGenerators.first?.count == 3)
+        XCTAssert(ddm.cellGenerators.last?.count == 1)
+    }
+
+    // MARK: - Table actions tests
+
+    func testThatRemoveGeneratorRemovesEmptySections() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        let gen3 = CellGenerator()
+        let gen4 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
+        ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen3, gen4], toHeader: headerGen2)
+        // when
+        ddm.remove(gen3, needRemoveEmptySection: true)
+        ddm.remove(gen4, needRemoveEmptySection: true)
+        // then
+        XCTAssert(ddm.sectionHeaderGenerators.count == 1)
+        XCTAssert(ddm.cellGenerators.count == 1)
+    }
+
+    func testThatRemoveGeneratorCallsScrolling() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        let gen3 = CellGenerator()
+        let gen4 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
+        ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen3, gen4], toHeader: headerGen2)
+        // when
+        ddm.remove(gen3, needScrollAt: .top)
+        // then
+        XCTAssert(table.scrollToRowWasCalled == true)
+    }
+
+    func testThatRemoveGeneratorRemovesGenerators() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        let gen3 = CellGenerator()
+        let gen4 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
+        ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen3, gen4], toHeader: headerGen2)
+        // when
+        ddm.remove(gen1)
+        // then
+        XCTAssert(ddm.cellGenerators.first?.first === gen2)
+        XCTAssert(ddm.cellGenerators.first?.count == 1)
+    }
+
+    func testThatInsertGeneratorAfterGeneratorInsertsGeneratorOnCorrectPosition() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        let gen3 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        let gen4 = CellGenerator()
+        let gen5 = CellGenerator()
+        let gen6 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen1, gen3], toHeader: headerGen1)
+        ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen4, gen6], toHeader: headerGen2)
+        // when
+        ddm.insert(after: gen1, new: gen2)
+        ddm.insert(after: gen4, new: gen5)
+        // then
+        XCTAssert(ddm.cellGenerators[0][0] === gen1 && ddm.cellGenerators[0][1] === gen2 && ddm.cellGenerators[0][2] === gen3)
+        XCTAssert(ddm.cellGenerators[1][0] === gen4 && ddm.cellGenerators[1][1] === gen5 && ddm.cellGenerators[1][2] === gen6)
+    }
+
+    func testThatInsertGeneratorBeforeGeneratorInsertsGeneratorOnCorrectPosition() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        let gen3 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        let gen4 = CellGenerator()
+        let gen5 = CellGenerator()
+        let gen6 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen2, gen3], toHeader: headerGen1)
+        ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen5, gen6], toHeader: headerGen2)
+        // when
+        ddm.insert(before: gen2, new: gen1)
+        ddm.insert(before: gen5, new: gen4)
+        // then
+        XCTAssert(ddm.cellGenerators[0][0] === gen1 && ddm.cellGenerators[0][1] === gen2 && ddm.cellGenerators[0][2] === gen3)
+        XCTAssert(ddm.cellGenerators[1][0] === gen4 && ddm.cellGenerators[1][1] === gen5 && ddm.cellGenerators[1][2] === gen6)
+    }
+
+    func testThatInsertGeneratorToHeaderInsertsGeneratorOnCorrectPosition() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        let gen3 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        let gen4 = CellGenerator()
+        let gen5 = CellGenerator()
+        let gen6 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen2, gen3], toHeader: headerGen1)
+        ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen5, gen6], toHeader: headerGen2)
+        // when
+        ddm.insert(to: headerGen1, new: gen1)
+        ddm.insert(to: headerGen2, new: gen4)
+        // then
+        XCTAssert(ddm.cellGenerators[0][0] === gen1 && ddm.cellGenerators[0][1] === gen2 && ddm.cellGenerators[0][2] === gen3)
+        XCTAssert(ddm.cellGenerators[1][0] === gen4 && ddm.cellGenerators[1][1] === gen5 && ddm.cellGenerators[1][2] === gen6)
+    }
+
+    func testThatReplaceOldGeneratorOnNewReplacesGeneratorCorrectly() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        let gen3 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
+        // when
+        ddm.replace(oldGenerator: gen1, on: gen3)
+        // then
+        XCTAssert(ddm.cellGenerators[0][0] === gen3 && ddm.cellGenerators[0][1] === gen2)
+    }
+
+    func testThatSwapGeneratorWithGeneratorSwapsCorrectly() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        let gen2 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen1], toHeader: headerGen1)
+        ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen2], toHeader: headerGen2)
+        // when
+        ddm.swap(generator: gen1, with: gen2)
+        // then
+        XCTAssert(ddm.cellGenerators[0][0] === gen2 && ddm.cellGenerators[1][0] === gen1)
+    }
+
     // MARK: - Mocks
 
     final class HeaderGenerator: TableHeaderGenerator {
@@ -205,6 +378,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
         var reloadDataWasCalled: Bool = false
         var registerNibWasCalled: Bool = false
+        var scrollToRowWasCalled: Bool = false
 
         override func reloadData() {
             super.reloadData()
@@ -214,6 +388,10 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         override func registerNib(_ cellType: UITableViewCell.Type) {
             registerNibWasCalled = true
             // don't call super for not calling UI API
+        }
+
+        override func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
+            scrollToRowWasCalled = true
         }
 
     }
