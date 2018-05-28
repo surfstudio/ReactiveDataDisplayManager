@@ -62,8 +62,8 @@ extension BaseTableDataDisplayManager {
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([TableCellGenerator]())
         }
-        guard sectionHeaderGenerators.count > 0 else {
-            fatalError("Section generators is empty. Firstly you should add a section header generator.")
+        if sectionHeaderGenerators.count <= 0 {
+            sectionHeaderGenerators.append(EmptyTableHeaderGenerator())
         }
         // Add to last section
         let index = sectionHeaderGenerators.count - 1

@@ -75,12 +75,13 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         XCTAssert(table.registerNibWasCalled)
     }
 
-    func testThatAddCellGeneratorCallsFatalErrorIfThereIsNoCellHeaderGenerators() {
+    func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
         // given
         let gen = CellGenerator()
-        expectFatalError(expectedMessage: "Section generators is empty. Firstly you should add a section header generator.") { // then
-            self.ddm.addCellGenerator(gen) // when
-        }
+        // when
+        ddm.addCellGenerator(gen)
+        // then
+        XCTAssert(ddm.sectionHeaderGenerators.count == 1)
     }
 
     func testThatAddCellGeneratorAddsGeneratorCorrectly() {

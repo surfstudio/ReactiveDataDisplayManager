@@ -18,23 +18,17 @@ class CollectionViewController: UIViewController {
 
     // MARK: - Properties
 
-    private lazy var adapter = BaseCollectionDataDisplayManager()
+    private lazy var adapter = BaseCollectionDataDisplayManager(collection: collectionView)
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureAdapter()
         fillAdapter()
     }
 
     // MARK: - Private methods
-
-    /// This method is used to configure table adapter and set table delegate and data source
-    private func configureAdapter() {
-        adapter.set(collection: collectionView)
-    }
 
     /// This method is used to fill adapter
     private func fillAdapter() {

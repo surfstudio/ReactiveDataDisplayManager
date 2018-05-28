@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author = { "Alexander Kravchenkov" => "sprintend@gmail.com" }
   s.source = { :git => "https://github.com/LastSprint/ReactiveDataDisplayManager.git", :tag => s.version }
 
-  s.source_files = 'Source/*.swift'
+  s.source_files = 'Source/**/*.swift'
   s.framework = 'UIKit'
   s.ios.deployment_target = '8.0'
 
@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'Events' do |co|
-    co.source_files = 'Source/Event.swift'
+    co.source_files = 'Source/Utils/Event.swift'
   end
 end

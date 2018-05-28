@@ -20,6 +20,7 @@
 		8B9FEBDD20B493BF00002874 /* BaseTableDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */; };
 		8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */; };
 		8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */; };
+		8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */; };
 		8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */; };
 		8BC018FE20B4912100D82429 /* ReactiveDataDisplayManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
 		8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableBaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendableBaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
+		8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHeaderGenerator.swift; sourceTree = "<group>"; };
 		8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
 		8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		8BC018F920B4912100D82429 /* ReactiveDataDisplayManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +114,7 @@
 				4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */,
 				8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */,
 				8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */,
+				8BAB778E20BB45C50005C4E9 /* Support */,
 			);
 			path = BaseTableDataDisplayManager;
 			sourceTree = "<group>";
@@ -122,6 +125,14 @@
 				8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */,
 			);
 			path = BaseCollectionDataDisplayManager;
+			sourceTree = "<group>";
+		};
+		8BAB778E20BB45C50005C4E9 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		8BC018FA20B4912100D82429 /* ReactiveDataDisplayManagerTests */ = {
@@ -283,6 +294,7 @@
 				4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */,
 				4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */,
 				8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */,
+				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
 				4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */,
 				4FD38132202D791A0005EBFE /* Operations.swift in Sources */,
 			);
