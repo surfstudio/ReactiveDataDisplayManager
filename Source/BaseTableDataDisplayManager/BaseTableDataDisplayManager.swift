@@ -28,8 +28,8 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 
     // MARK: - Fileprivate properties
 
-    fileprivate(set) var cellGenerators: [[TableCellGenerator]]
-    fileprivate(set) var sectionHeaderGenerators: [TableHeaderGenerator]
+    public fileprivate(set) var cellGenerators: [[TableCellGenerator]]
+    public fileprivate(set) var sectionHeaderGenerators: [TableHeaderGenerator]
     fileprivate weak var tableView: UITableView?
     public var estimatedHeight: CGFloat = 40
 
