@@ -137,6 +137,25 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         }
     }
 
+    func testThatUpdateGeneratorsUpdatesNeededGenerators() {
+        // given
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        let gen3 = CellGenerator()
+        let gen4 = CellGenerator()
+        let gen5 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen1, gen2])
+        ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen3, gen4, gen5])
+        // when
+        ddm.update(generators: [gen1, gen4])
+        // then
+        XCTAssert(table.lastReloadedRows == [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 1)])
+    }
+
     func testThatClearCellGeneratorsWorksCorrectly() {
         // given
         let headerGen1 = HeaderGenerator()
@@ -380,6 +399,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         var reloadDataWasCalled: Bool = false
         var registerNibWasCalled: Bool = false
         var scrollToRowWasCalled: Bool = false
+        var lastReloadedRows: [IndexPath] = []
 
         override func reloadData() {
             super.reloadData()
@@ -393,6 +413,10 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
         override func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
             scrollToRowWasCalled = true
+        }
+
+        override func reloadRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+            lastReloadedRows = indexPaths
         }
 
     }

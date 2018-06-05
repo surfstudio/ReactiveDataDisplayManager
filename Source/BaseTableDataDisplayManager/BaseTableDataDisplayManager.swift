@@ -88,6 +88,12 @@ extension BaseTableDataDisplayManager {
         self.cellGenerators[sectionIndex].insert(contentsOf: generators, at: generatorIndex + 1)
     }
 
+    public func update(generators: [TableCellGenerator]) {
+        let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
+        let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
+        self.tableView?.reloadRows(at: indexPaths, with: .none)
+    }
+
     public func clearCellGenerators() {
         self.cellGenerators.removeAll()
     }

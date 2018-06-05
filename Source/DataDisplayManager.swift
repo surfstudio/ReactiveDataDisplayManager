@@ -58,6 +58,11 @@ public protocol DataDisplayManager: class {
     ///   - generator: Array of cell generators.
     func addCellGenerators(_ generators: [CellGeneratorType])
 
+    /// Updates generators
+    ///
+    /// - Parameter generators: generators to update
+    func update(generators: [CellGeneratorType])
+
     /// Removes all header generators.
     func clearHeaderGenerators()
 

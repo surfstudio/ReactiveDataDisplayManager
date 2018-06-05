@@ -84,6 +84,14 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
         self.cellGenerators.insert(contentsOf: generators, at: index + 1)
     }
 
+    public func update(generators: [CollectionCellGenerator]) {
+        let indexes = generators.compactMap { [weak self] generator in
+            self?.cellGenerators.index(where: { $0 === generator })
+        }
+        let indexPaths = indexes.compactMap { IndexPath(row: $0, section: 0) }
+        self.collectionView?.reloadItems(at: indexPaths)
+    }
+
     public func clearCellGenerators() {
         self.cellGenerators.removeAll()
     }
@@ -91,6 +99,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     public func clearHeaderGenerators() {
         self.headerGenerators.removeAll()
     }
+
 }
 
 // MARK: - UICollectionViewDelegate
