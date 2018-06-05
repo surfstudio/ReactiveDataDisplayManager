@@ -39,8 +39,8 @@ open class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDataD
 
     // MARK: - Fileprivate properties
 
-    fileprivate var cellGenerators: [[TableCellGenerator]]
-    fileprivate var sectionHeaderGenerators: [TableHeaderGenerator]
+    var cellGenerators: [[TableCellGenerator]]
+    var sectionHeaderGenerators: [TableHeaderGenerator]
     fileprivate weak var tableView: UITableView?
 
     // MARK: - Initialization and deinitialization
@@ -195,6 +195,15 @@ public extension BaseHeaderableTableDataDisplayManager {
     public func didRefill() {
         self.tableView?.reloadData()
     }
+
+    /// Updates generators
+    ///
+    /// - Parameter generators: generators to update
+    public func update(generators: [TableCellGenerator]) {
+        let indexes = generators.compactMap { [weak self] in  self?.findGenerator($0) }
+        let indexPaths = indexes.compactMap { IndexPath(row: $0.genIndex, section: $0.arrIndex) }
+        self.tableView?.reloadRows(at: indexPaths, with: .none)
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -255,7 +264,7 @@ extension BaseHeaderableTableDataDisplayManager: UITableViewDataSource {
     }
 }
 
-public class PaginableHeaderableTableDataDisplayManager: BaseHeaderableTableDataDisplayManager {
+open class PaginableHeaderableTableDataDisplayManager: BaseHeaderableTableDataDisplayManager {
     /// Called if table shows last cell
     public var lastCellShowingEvent = BaseEvent<Void>()
 
@@ -267,7 +276,7 @@ public class PaginableHeaderableTableDataDisplayManager: BaseHeaderableTableData
     }
 }
 
-public class ExtendableHeaderableAdapter: BaseHeaderableTableDataDisplayManager {
+open class ExtendableHeaderableAdapter: BaseHeaderableTableDataDisplayManager {
     public override func numberOfSections(in tableView: UITableView) -> Int {
         return sectionHeaderGenerators.isEmpty ? 1 : sectionHeaderGenerators.count
     }
