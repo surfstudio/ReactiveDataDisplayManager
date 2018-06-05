@@ -39,8 +39,8 @@ open class BaseHeaderableTableDataDisplayManager: NSObject, HeaderableTableDataD
 
     // MARK: - Fileprivate properties
 
-    var cellGenerators: [[TableCellGenerator]]
-    var sectionHeaderGenerators: [TableHeaderGenerator]
+    public fileprivate(set) var cellGenerators: [[TableCellGenerator]]
+    public fileprivate(set) var sectionHeaderGenerators: [TableHeaderGenerator]
     fileprivate weak var tableView: UITableView?
 
     // MARK: - Initialization and deinitialization
