@@ -8,16 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */; };
-		4F088BF01F4E9F74006B7809 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEA1F4E9F74006B7809 /* Event.swift */; };
 		4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEB1F4E9F74006B7809 /* Extensions.swift */; };
 		4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BED1F4E9F74006B7809 /* Protocols.swift */; };
 		4F088BF41F4E9F74006B7809 /* ReactiveDataDisplayManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F088BF91F4EABA2006B7809 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F088BF81F4EABA2006B7809 /* UIKit.framework */; };
 		4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */; };
 		4FD38132202D791A0005EBFE /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD38131202D791A0005EBFE /* Operations.swift */; };
+		8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */; };
+		8B7E265220B89B12001D7A93 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEA1F4E9F74006B7809 /* Event.swift */; };
+		8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */; };
+		8B9FEBDD20B493BF00002874 /* BaseTableDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */; };
+		8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */; };
+		8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */; };
+		8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */; };
 		8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */; };
-		8BF1B9471F780300003A3355 /* HeaderableTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */; };
+		8BC018FE20B4912100D82429 /* ReactiveDataDisplayManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8B9FEBDB20B4936E00002874 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B971E2521F456825000FBB9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B971E25A1F456825000FBB9A;
+			remoteInfo = ReactiveDataDisplayManager;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
@@ -29,12 +45,27 @@
 		4F088BF81F4EABA2006B7809 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayManager.swift; sourceTree = "<group>"; };
 		4FD38131202D791A0005EBFE /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
+		8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
+		8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableBaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
+		8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendableBaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
+		8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHeaderGenerator.swift; sourceTree = "<group>"; };
 		8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
-		8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderableTableDataDisplayManager.swift; sourceTree = "<group>"; };
+		8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableDataDisplayManagerTests.swift; sourceTree = "<group>"; };
+		8BC018F920B4912100D82429 /* ReactiveDataDisplayManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BC018FD20B4912100D82429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8BC018F620B4912100D82429 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8BC018FE20B4912100D82429 /* ReactiveDataDisplayManager.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B971E2571F456825000FBB9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -50,14 +81,11 @@
 			isa = PBXGroup;
 			children = (
 				4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */,
-				8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */,
-				4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */,
-				8BF1B9461F780300003A3355 /* HeaderableTableDataDisplayManager.swift */,
-				4F088BEA1F4E9F74006B7809 /* Event.swift */,
-				4F088BEB1F4E9F74006B7809 /* Extensions.swift */,
 				4F088BED1F4E9F74006B7809 /* Protocols.swift */,
-				4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */,
 				4FD38131202D791A0005EBFE /* Operations.swift */,
+				8BAB778B20BB416C0005C4E9 /* BaseCollectionDataDisplayManager */,
+				8BAB778A20BB41630005C4E9 /* BaseTableDataDisplayManager */,
+				8B7E265020B89AEA001D7A93 /* Utils */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -70,11 +98,60 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8B7E265020B89AEA001D7A93 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4F088BEB1F4E9F74006B7809 /* Extensions.swift */,
+				4F088BEA1F4E9F74006B7809 /* Event.swift */,
+				8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8BAB778A20BB41630005C4E9 /* BaseTableDataDisplayManager */ = {
+			isa = PBXGroup;
+			children = (
+				4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */,
+				8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */,
+				8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */,
+				8BAB778E20BB45C50005C4E9 /* Support */,
+			);
+			path = BaseTableDataDisplayManager;
+			sourceTree = "<group>";
+		};
+		8BAB778B20BB416C0005C4E9 /* BaseCollectionDataDisplayManager */ = {
+			isa = PBXGroup;
+			children = (
+				8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */,
+			);
+			path = BaseCollectionDataDisplayManager;
+			sourceTree = "<group>";
+		};
+		8BAB778E20BB45C50005C4E9 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		8BC018FA20B4912100D82429 /* ReactiveDataDisplayManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */,
+				8BC018FD20B4912100D82429 /* Info.plist */,
+				8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */,
+			);
+			path = ReactiveDataDisplayManagerTests;
+			sourceTree = "<group>";
+		};
 		B971E2511F456825000FBB9A = {
 			isa = PBXGroup;
 			children = (
 				4F088BF51F4EAB86006B7809 /* Info.plist */,
 				4F088BE81F4E9F74006B7809 /* Source */,
+				4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */,
+				8BC018FA20B4912100D82429 /* ReactiveDataDisplayManagerTests */,
 				B971E25C1F456825000FBB9A /* Products */,
 				4F088BF71F4EABA1006B7809 /* Frameworks */,
 			);
@@ -84,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */,
+				8BC018F920B4912100D82429 /* ReactiveDataDisplayManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,6 +180,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		8BC018F820B4912100D82429 /* ReactiveDataDisplayManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BC0190120B4912100D82429 /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerTests" */;
+			buildPhases = (
+				8BC018F520B4912100D82429 /* Sources */,
+				8BC018F620B4912100D82429 /* Frameworks */,
+				8BC018F720B4912100D82429 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B9FEBDC20B4936E00002874 /* PBXTargetDependency */,
+			);
+			name = ReactiveDataDisplayManagerTests;
+			productName = ReactiveDataDisplayManagerTests;
+			productReference = 8BC018F920B4912100D82429 /* ReactiveDataDisplayManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B971E25A1F456825000FBB9A /* ReactiveDataDisplayManager */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B971E2631F456825000FBB9A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManager" */;
@@ -126,12 +222,17 @@
 		B971E2521F456825000FBB9A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Александр Кравченков";
 				TargetAttributes = {
+					8BC018F820B4912100D82429 = {
+						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
+					};
 					B971E25A1F456825000FBB9A = {
 						CreatedOnToolsVersion = 8.3.3;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -149,11 +250,19 @@
 			projectRoot = "";
 			targets = (
 				B971E25A1F456825000FBB9A /* ReactiveDataDisplayManager */,
+				8BC018F820B4912100D82429 /* ReactiveDataDisplayManagerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8BC018F720B4912100D82429 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B971E2591F456825000FBB9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -164,16 +273,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8BC018F520B4912100D82429 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8B9FEBDD20B493BF00002874 /* BaseTableDataDisplayManagerTests.swift in Sources */,
+				8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B971E2561F456825000FBB9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F088BF01F4E9F74006B7809 /* Event.swift in Sources */,
+				8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */,
+				8B7E265220B89B12001D7A93 /* Event.swift in Sources */,
 				4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */,
 				8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */,
+				8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */,
 				4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */,
-				8BF1B9471F780300003A3355 /* HeaderableTableDataDisplayManager.swift in Sources */,
 				4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */,
+				8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */,
+				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
 				4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */,
 				4FD38132202D791A0005EBFE /* Operations.swift in Sources */,
 			);
@@ -181,7 +302,69 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8B9FEBDC20B4936E00002874 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B971E25A1F456825000FBB9A /* ReactiveDataDisplayManager */;
+			targetProxy = 8B9FEBDB20B4936E00002874 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		8BC0190220B4912100D82429 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ReactiveDataDisplayManagerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AK.ReactiveDataDisplayManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8BC0190320B4912100D82429 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ReactiveDataDisplayManagerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = AK.ReactiveDataDisplayManagerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		B971E2611F456825000FBB9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -299,7 +482,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -318,13 +502,23 @@
 				PRODUCT_BUNDLE_IDENTIFIER = AK.ReactiveDataDisplayManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8BC0190120B4912100D82429 /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8BC0190220B4912100D82429 /* Debug */,
+				8BC0190320B4912100D82429 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B971E2551F456825000FBB9A /* Build configuration list for PBXProject "ReactiveDataDisplayManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

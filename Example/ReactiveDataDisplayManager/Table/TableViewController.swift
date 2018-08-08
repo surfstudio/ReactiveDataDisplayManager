@@ -17,25 +17,17 @@ class TableViewController: UIViewController {
 
     // MARK: - Properties
 
-    private lazy var adapter = BaseTableDataDisplayManager()
+    private lazy var adapter = BaseTableDataDisplayManager(collection: tableView)
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureAdapter()
         fillAdapter()
     }
 
     // MARK: - Private methods
-
-    /// This method is used to configure table adapter and set table delegate and data source
-    private func configureAdapter() {
-        adapter.set(collection: tableView)
-        tableView.delegate = adapter
-        tableView.dataSource = adapter
-    }
 
     /// This method is used to fill adapter
     private func fillAdapter() {
@@ -52,5 +44,5 @@ class TableViewController: UIViewController {
         // Tell adapter that we've changed generators
         adapter.forceRefill()
     }
-}
 
+}
