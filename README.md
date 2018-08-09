@@ -80,3 +80,10 @@ extension SubscriptionServiceGenerator: SubscriptionServiceCellDelegate {
 ## How to install
 
 `pod 'ReactiveDataDisplayManager' ~> 3.0.1`
+
+## Versioning
+
+Version format is `x.y.z` where
+- x is major version number. Bumped only in major updates (implementaion changes, adding new functionality)
+- y is minor version number. Bumped only in minor updates (interface changes)
+- z is minor version number. Bumped in case of bug fixes and e.t.c.
