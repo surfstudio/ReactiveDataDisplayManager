@@ -76,3 +76,7 @@ extension SubscriptionServiceGenerator: SubscriptionServiceCellDelegate {
     <# do something #>
  }
 ```
+
+## How to install
+
+`pod 'ReactiveDataDisplayManager' ~> 3.0.1`
