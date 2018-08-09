@@ -240,7 +240,7 @@ public extension BaseTableDataDisplayManager {
 
 private extension BaseTableDataDisplayManager {
 
-    private func insertGenerator(_ generator: TableCellGenerator,
+    func insertGenerator(_ generator: TableCellGenerator,
                          at index: (sectionIndex: Int, generatorIndex: Int),
                          with animation: UITableViewRowAnimation = .automatic) {
         guard let table = self.tableView else { return }
@@ -254,7 +254,7 @@ private extension BaseTableDataDisplayManager {
     }
 
     // TODO: May be we should remove needScrollAt and move this responsibility to user
-    private func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
+    func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
                                  with animation: UITableViewRowAnimation = .automatic,
                                  needScrollAt scrollPosition: UITableViewScrollPosition? = nil,
                                  needRemoveEmptySection: Bool = false) {
@@ -281,7 +281,7 @@ private extension BaseTableDataDisplayManager {
         table.endUpdates()
     }
 
-    private func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
+    func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in cellGenerators.enumerated() {
             if let generatorIndex = section.index(where: { $0 === generator }) {
                 return (sectionIndex, generatorIndex)

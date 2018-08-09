@@ -1,7 +1,8 @@
 Pod::Spec.new do |s|
   s.name = "ReactiveDataDisplayManager"
   s.version = "3.0.0"
-  s.summary = "Library with custom events and reusable adapter for UITableView"
+  s.summary = "Library with custom events and reusable adapter for UI Collectionclear
+  "
   s.homepage = "https://github.com/surfstudio/ReactiveDataDisplayManager"
   s.license = "MIT"
   s.author = { "Alexander Kravchenkov" => "sprintend@gmail.com" }
@@ -9,6 +10,6 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Source/**/*.swift'
   s.framework = 'UIKit'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
 end
