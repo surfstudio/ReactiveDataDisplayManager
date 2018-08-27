@@ -206,7 +206,7 @@ public extension BaseHeaderableTableDataDisplayManager {
     }
 
     public func clearSection(by header: TableHeaderGenerator, needsUpdate: Bool) {
-        guard let index = self.sectionHeaderGenerators.index(where: { $0 === header }), self.cellGenerators.count < index else {
+        guard let index = self.sectionHeaderGenerators.index(where: { $0 === header }), self.cellGenerators.count > index else {
             return
         }
 
