@@ -204,6 +204,18 @@ public extension BaseHeaderableTableDataDisplayManager {
         let indexPaths = indexes.compactMap { IndexPath(row: $0.genIndex, section: $0.arrIndex) }
         self.tableView?.reloadRows(at: indexPaths, with: .none)
     }
+
+    public func clearSection(by header: TableHeaderGenerator, needsUpdate: Bool) {
+        guard let index = self.sectionHeaderGenerators.index(where: { $0 === header }), self.cellGenerators.count < index else {
+            return
+        }
+
+        self.cellGenerators[index].removeAll()
+
+        if needsUpdate {
+            self.didRefill()
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
