@@ -1,21 +1,12 @@
-- Переиспользуемые генераторы
-- Добавить возможность очищать секцию
-- Добавить воможность удалить конкретный генератор из конкретной секции
-- Добавить поддержку UICollectionView
-- Заменить cell indetifier с UITableViewCell.Type на строку
-- Сделать связь от генератора к адаптеру, для того, чтобы генератор мог вызывать update для определенной ячейки.
-- Добавить адаптер и генератор для расширяющихся (раскрывающихся) ячеек
-- Добавить PTR и спинер из-коробки.
-- Привести в порядок интерфейс
-- Добавить проксирование методов
-- Добавить обновление определенной секции
-- Добавить возможность производить "транзакцию" - выполнять определенные действия с генераторами и адаптером внутри beginUpdates и endUpdates
-- Добавить BaseGenerator, который просто умеет конфигурировать ячейку определенного типа с помощью модели поределенного типа. Например:
-`let generator = BaseGenerator<CandleCell>()`. Очевидно, что при этом нужно, чтобы ячейка реализовывала какой-нибудь протокол типа:
-```Swift
-public protocol Configurable {
-    associatedtype Model
-
-    func comfigure(with model: Model) 
-}
-```
+- Переиспользуемые генераторы [#29](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/29)
+- Добавить возможность очищать секцию [#21](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/21)
+- Добавить воможность удалить конкретный генератор из конкретной секции [#21](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/21)
+- Добавить поддержку UICollectionView [#30](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/30)
+- Заменить cell indetifier с UITableViewCell.Type на строку [#22](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/22)
+- Добавить адаптер и генератор для расширяющихся (раскрывающихся) ячеек [#31](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/31)
+- Добавить PTR и спинер из-коробки. [#32](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/32)
+- Привести в порядок интерфейс [#33](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/33)
+- Добавить проксирование методов [#34](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/34)
+- Добавить обновление определенной секции [#35](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/35)
+- Добавить возможность производить "транзакцию" - выполнять определенные действия с генераторами и адаптером внутри beginUpdates и endUpdates [#36](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/36)
+- Добавить BaseGenerator, который просто умеет конфигурировать ячейку определенного типа с помощью модели поределенного типа. [#37](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/37)
