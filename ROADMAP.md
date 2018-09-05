@@ -1,4 +1,3 @@
-- Переиспользуемые генераторы [#29](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/29)
 - Добавить возможность очищать секцию [#21](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/21)
 - Добавить воможность удалить конкретный генератор из конкретной секции [#21](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/21)
 - Добавить поддержку UICollectionView [#30](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/30)
@@ -10,3 +9,4 @@
 - Добавить обновление определенной секции [#35](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/35)
 - Добавить возможность производить "транзакцию" - выполнять определенные действия с генераторами и адаптером внутри beginUpdates и endUpdates [#36](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/36)
 - Добавить BaseGenerator, который просто умеет конфигурировать ячейку определенного типа с помощью модели поределенного типа. [#37](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/37)
+- Переиспользуемые генераторы [#29](https://github.com/surfstudio/ReactiveDataDisplayManager/issues/29)
