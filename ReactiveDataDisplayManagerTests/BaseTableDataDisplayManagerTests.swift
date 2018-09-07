@@ -406,9 +406,9 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
             reloadDataWasCalled = true
         }
 
-        override func registerNib(_ cellType: UITableViewCell.Type) {
+        override func register(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
             registerNibWasCalled = true
-            // don't call super for not calling UI API
+            // don't call super to avoid UI API call
         }
 
         override func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
