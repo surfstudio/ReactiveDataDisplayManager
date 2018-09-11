@@ -1,6 +1,6 @@
 language: Swift
-osx_image: xcode9.1
-xcode_project: ReactiveDataDisplayManager.xcodeproj # path to your xcodeproj folder
+osx_image: xcode9.4
+xcode_project: ReactiveDataDisplayManager.xcodeproj
 xcode_scheme: ReactiveDataDisplayManager
 before_install:
   - gem install xcpretty -N
@@ -8,3 +8,7 @@ before_install:
   - brew install swiftlint || true
 script:
   - set -o pipefail
+  - xcodebuild test -scheme ReactiveDataDisplayManager -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4' | xcpretty -c 
+  
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -t 3cc9e099-0607-47af-aa4e-d0dd33709e35
