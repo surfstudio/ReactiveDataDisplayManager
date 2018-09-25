@@ -79,7 +79,7 @@ public extension BaseHeaderableTableDataDisplayManager {
     /// - Parameters:
     ///   - generator: Generator to delete.
     ///   - animation: Animation for row action.
-    public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needRemoveEmptySection: Bool = false) {
+    public func remove(_ generator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic, needRemoveEmptySection: Bool = false) {
         guard let index = self.findGenerator(generator) else { return }
         self.removeGenerator(with: index, with: animation, needRemoveEmptySection: needRemoveEmptySection)
     }
@@ -93,7 +93,7 @@ public extension BaseHeaderableTableDataDisplayManager {
         return nil
     }
 
-    func removeGenerator(with index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic, needRemoveEmptySection: Bool = false) {
+    func removeGenerator(with index: (genIndex: Int, arrIndex: Int), with animation: UITableView.RowAnimation = .automatic, needRemoveEmptySection: Bool = false) {
         guard let table = self.tableView else { return }
 
         table.beginUpdates()
@@ -134,13 +134,13 @@ public extension BaseHeaderableTableDataDisplayManager {
     ///   - generator: Current generator. Must contained this adapter.
     ///   - newGenerator: Generator wihics you wont to insert after current generator.
     ///   - animation: Animation for row action.
-    public func insert(after generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+    public func insert(after generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
 
         self.insertGenerator(newGenerator, at: (genIndex: index.genIndex + 1, arrIndex: index.arrIndex), with: animation)
     }
 
-    public func insert(header: TableHeaderGenerator, after: TableHeaderGenerator, with animation: UITableViewRowAnimation = .automatic) {
+    public func insert(header: TableHeaderGenerator, after: TableHeaderGenerator, with animation: UITableView.RowAnimation = .automatic) {
         guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else { return }
 
         guard let table = self.tableView else { return }
@@ -151,7 +151,7 @@ public extension BaseHeaderableTableDataDisplayManager {
         table.endUpdates()
     }
 
-    public func insert(to header: TableHeaderGenerator, generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+    public func insert(to header: TableHeaderGenerator, generator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic) {
         guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else { return }
 
         self.insertGenerator(generator, at: (genIndex: 0, arrIndex: headerIndex), with: animation)
@@ -163,13 +163,13 @@ public extension BaseHeaderableTableDataDisplayManager {
     ///   - generator: Current generator. Must contained this adapter.
     ///   - newGenerator: Generator wihics you wont to insert before current generator.
     ///   - animation: Animation for row action.
-    public func insert(before generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+    public func insert(before generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
 
         self.insertGenerator(newGenerator, at: (genIndex: index.genIndex - 1, arrIndex: index.arrIndex), with: animation)
     }
 
-    func insertGenerator(_ generator: TableCellGenerator, at index: (genIndex: Int, arrIndex: Int), with animation: UITableViewRowAnimation = .automatic) {
+    func insertGenerator(_ generator: TableCellGenerator, at index: (genIndex: Int, arrIndex: Int), with animation: UITableView.RowAnimation = .automatic) {
 
         guard let table = self.tableView else { return }
 
@@ -207,7 +207,7 @@ extension BaseHeaderableTableDataDisplayManager: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

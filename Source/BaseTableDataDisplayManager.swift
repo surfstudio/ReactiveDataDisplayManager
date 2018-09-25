@@ -137,7 +137,7 @@ public extension BaseTableDataDisplayManager {
     ///   - scrollPosition: If not nil than performs scroll before removing generator.
     /// A constant that identifies a relative position in the table view (top, middle, bottom)
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
-    public func remove(_ generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    public func remove(_ generator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic, needScrollAt scrollPosition: UITableView.ScrollPosition? = nil) {
         guard let index = self.cellGenerators.index(where: { $0 === generator }) else { return }
         self.removeGenerator(with: index, with: animation, needScrollAt: scrollPosition)
     }
@@ -150,12 +150,12 @@ public extension BaseTableDataDisplayManager {
     ///   - scrollPosition: If not nil than performs scroll before removing generator.
     /// A constant that identifies a relative position in the table view (top, middle, bottom)
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
-    public func insert(new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    public func insert(new newGenerator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic, needScrollAt scrollPosition: UITableView.ScrollPosition? = nil) {
         let index = self.cellGenerators.count
         self.insertGenerator(newGenerator, at: index, with: animation, needScrollAt: scrollPosition)
     }
 
-    public func `switch`(new newGenerator: TableCellGenerator, and oldGenerator: TableCellGenerator, removeAnimation: UITableViewRowAnimation = .automatic, insertAnimation: UITableViewRowAnimation = .automatic) {
+    public func `switch`(new newGenerator: TableCellGenerator, and oldGenerator: TableCellGenerator, removeAnimation: UITableView.RowAnimation = .automatic, insertAnimation: UITableView.RowAnimation = .automatic) {
         guard let index = self.cellGenerators.index(where: { $0 === oldGenerator }) else { return }
 
         guard let table = self.tableView else { return }
@@ -169,7 +169,7 @@ public extension BaseTableDataDisplayManager {
         table.endUpdates()
     }
     
-    public func insert(new newGenerators: [TableCellGenerator], after generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    public func insert(new newGenerators: [TableCellGenerator], after generator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic, needScrollAt scrollPosition: UITableView.ScrollPosition? = nil) {
         guard let index = self.cellGenerators.index(where: { $0 === generator }) else { return }
 
         guard let table = self.tableView else { return }
@@ -200,7 +200,7 @@ public extension BaseTableDataDisplayManager {
     ///   - scrollPosition: If not nil than performs scroll before removing generator.
     /// A constant that identifies a relative position in the table view (top, middle, bottom)
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
-    public func insert(after generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    public func insert(after generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic, needScrollAt scrollPosition: UITableView.ScrollPosition? = nil) {
         guard let index = self.cellGenerators.index(where: { $0 === generator }) else { return }
 
         self.insertGenerator(newGenerator, at: index + 1, with: animation, needScrollAt: scrollPosition)
@@ -215,7 +215,7 @@ public extension BaseTableDataDisplayManager {
     ///   - scrollPosition: If not nil than performs scroll before removing generator.
     /// A constant that identifies a relative position in the table view (top, middle, bottom)
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
-    public func insert(before generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    public func insert(before generator: TableCellGenerator, new newGenerator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic, needScrollAt scrollPosition: UITableView.ScrollPosition? = nil) {
         guard let index = self.cellGenerators.index(where: { $0 === generator }) else { return }
         if index == 0 {
             self.insertFirst(generator: newGenerator, with: animation)
@@ -224,7 +224,7 @@ public extension BaseTableDataDisplayManager {
         }
     }
 
-    public func insertFirst(generator: TableCellGenerator, with animation: UITableViewRowAnimation = .automatic) {
+    public func insertFirst(generator: TableCellGenerator, with animation: UITableView.RowAnimation = .automatic) {
         self.insertGenerator(generator, at: 0, with: animation)
     }
 
@@ -255,7 +255,7 @@ public extension BaseTableDataDisplayManager {
 
 private extension BaseTableDataDisplayManager {
 
-    func insertGenerator(_ generator: TableCellGenerator, at index: Int, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    func insertGenerator(_ generator: TableCellGenerator, at index: Int, with animation: UITableView.RowAnimation = .automatic, needScrollAt scrollPosition: UITableView.ScrollPosition? = nil) {
 
         guard let table = self.tableView else { return }
 
@@ -270,7 +270,7 @@ private extension BaseTableDataDisplayManager {
         }
     }
 
-    func removeGenerator(with index: Int, with animation: UITableViewRowAnimation = .automatic, needScrollAt scrollPosition: UITableViewScrollPosition? = nil) {
+    func removeGenerator(with index: Int, with animation: UITableView.RowAnimation = .automatic, needScrollAt scrollPosition: UITableView.ScrollPosition? = nil) {
 
         guard let table = self.tableView else { return }
 
@@ -299,7 +299,7 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
