@@ -1,0 +1,6 @@
+framework module Pods_ReactiveDataDisplayManagerExampleTests {
+  umbrella header "Pods-ReactiveDataDisplayManagerExampleTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

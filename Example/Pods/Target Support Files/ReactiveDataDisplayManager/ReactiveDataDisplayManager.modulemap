@@ -1,0 +1,6 @@
+framework module ReactiveDataDisplayManager {
+  umbrella header "ReactiveDataDisplayManager-umbrella.h"
+
+  export *
+  module * { export * }
+}

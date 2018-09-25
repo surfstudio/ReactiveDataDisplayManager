@@ -1,0 +1,16 @@
+PODS:
+  - ReactiveDataDisplayManager (3.0.1)
+
+DEPENDENCIES:
+  - ReactiveDataDisplayManager (from `../`)
+
+EXTERNAL SOURCES:
+  ReactiveDataDisplayManager:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ReactiveDataDisplayManager: 11721fa2ca8d1136095ecd56efb7702b996184e3
+
+PODFILE CHECKSUM: caa8fee0ab4ec561b1a29155d1c09aebb33c1ce5
+
+COCOAPODS: 1.5.3
