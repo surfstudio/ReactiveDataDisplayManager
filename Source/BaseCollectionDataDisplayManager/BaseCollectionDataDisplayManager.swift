@@ -24,13 +24,15 @@ open class BaseCollectionDataDisplayManager: NSObject {
     fileprivate(set) var cellGenerators: [CollectionCellGenerator]
     fileprivate var headerGenerators: [CollectionHeaderGenerator]
     fileprivate weak var collectionView: UICollectionView?
+    fileprivate(set) var cellRegisterPolicy: CellRegisterPolicy
 
     // MARK: - Initialization
 
-    public required init(collection: UICollectionView) {
+    public required init(collection: UICollectionView, cellRegisterPolicy: CellRegisterPolicy = .uiNibBased) {
         self.cellGenerators = [CollectionCellGenerator]()
         self.headerGenerators = [CollectionHeaderGenerator]()
         self.collectionView = collection
+        self.cellRegisterPolicy = cellRegisterPolicy
         super.init()
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
@@ -53,12 +55,12 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
-        self.collectionView?.registerNib(generator.identifier)
+        self.collectionView?.registerCell(generator.identifier, cellRegisterPolicy: cellRegisterPolicy)
         self.cellGenerators.append(generator)
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator]) {
-        generators.forEach { self.collectionView?.registerNib($0.identifier) }
+        generators.forEach { self.collectionView?.registerCell($0.identifier, cellRegisterPolicy: cellRegisterPolicy) }
         self.cellGenerators.append(contentsOf: generators)
     }
 
@@ -67,7 +69,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator, after: CollectionCellGenerator) {
-        self.collectionView?.registerNib(generator.identifier)
+        self.collectionView?.registerCell(generator.identifier, cellRegisterPolicy: cellRegisterPolicy)
 
         guard let index = self.cellGenerators.index(where: { $0 === after }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
@@ -76,7 +78,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
-        generators.forEach { self.collectionView?.registerNib($0.identifier) }
+        generators.forEach { self.collectionView?.registerCell($0.identifier, cellRegisterPolicy: cellRegisterPolicy) }
 
         guard let index = self.cellGenerators.index(where: { $0 === after }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")

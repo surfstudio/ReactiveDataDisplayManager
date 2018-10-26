@@ -20,7 +20,7 @@ public protocol DataDisplayManager: class {
 
     // MARK: Support methods
 
-    init(collection: CollectionType)
+    init(collection: CollectionType, cellRegisterPolicy: CellRegisterPolicy)
 
     /// Reloads collection.
     func forceRefill()
