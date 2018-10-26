@@ -32,14 +32,16 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
     public fileprivate(set) var sectionHeaderGenerators: [TableHeaderGenerator]
     fileprivate weak var tableView: UITableView?
     public var estimatedHeight: CGFloat = 40
+    public fileprivate(set) var cellRegisterPolicy: CellRegisterPolicy
 
     // MARK: - Initialization and deinitialization
 
-    public required init(collection: UITableView) {
+    public required init(collection: UITableView, cellRegisterPolicy: CellRegisterPolicy = .uiNibBased) {
         self.cellGenerators = [[TableCellGenerator]]()
         self.sectionHeaderGenerators = [TableHeaderGenerator]()
         self.scrollViewWillEndDraggingEvent = BaseEvent<CGPoint>()
         self.tableView = collection
+        self.cellRegisterPolicy = cellRegisterPolicy
         super.init()
         self.tableView?.delegate = self
         self.tableView?.dataSource = self
@@ -58,7 +60,7 @@ extension BaseTableDataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: TableCellGenerator) {
-        self.tableView?.registerNib(generator.identifier)
+        self.tableView?.registerCell(generator.identifier, cellRegisterPolicy: cellRegisterPolicy)
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([TableCellGenerator]())
         }
@@ -81,7 +83,7 @@ extension BaseTableDataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
-        generators.forEach { self.tableView?.registerNib($0.identifier) }
+        generators.forEach { self.tableView?.registerCell($0.identifier, cellRegisterPolicy: cellRegisterPolicy) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
         }
@@ -110,7 +112,7 @@ extension BaseTableDataDisplayManager {
 
     // TODO: Move to DDM protocol and implement in BaseCollectionDDM
     public func addCellGenerators(_ generators: [TableCellGenerator], toHeader header: TableHeaderGenerator) {
-        generators.forEach { self.tableView?.registerNib($0.identifier) }
+        generators.forEach { self.tableView?.registerCell($0.identifier, cellRegisterPolicy: cellRegisterPolicy) }
 
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([TableCellGenerator]())
@@ -245,7 +247,7 @@ private extension BaseTableDataDisplayManager {
                          with animation: UITableViewRowAnimation = .automatic) {
         guard let table = self.tableView else { return }
 
-        table.registerNib(generator.identifier)
+        table.registerCell(generator.identifier, cellRegisterPolicy: cellRegisterPolicy)
         table.beginUpdates()
         self.cellGenerators[index.sectionIndex].insert(generator, at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
