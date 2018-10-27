@@ -84,10 +84,10 @@ View wants to recive a message about user tap on button:
 
 ## Errors
 
-### You get error `Could not load NIB in bundle ... with name 'YourCellName'`
-This error appearы because you are using class based cells (not UINib), but inside RDDM cells registering via UINib.
+- `Could not load NIB in bundle ... with name 'YourCellName'`
+This error appears because you are using class based cells (not UINib), but inside RDDM cells registering via UINib.
 
-**Your should override default registering in generator**
+  **Your should override default registering in generator**
 ```swift
 extension YourCellGenerator: TableCellGenerator {
   // ...
@@ -99,12 +99,6 @@ extension YourCellGenerator: TableCellGenerator {
   // ...
 }
 ```
-
-## History
-
-### 3.0.2 - 27.10.2018
-- Moved registering cells from RDDM to generator
-- Added ability to override default registering (for class based cells) in generator
 
 ## Versioning
 
