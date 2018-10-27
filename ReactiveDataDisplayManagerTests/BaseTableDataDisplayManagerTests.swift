@@ -392,6 +392,10 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
             return UITableViewCell()
         }
 
+        func registerCell(in tableView: UITableView) {
+            tableView.registerNib(identifier)
+        }
+
     }
 
     final class UITableViewSpy: UITableView {

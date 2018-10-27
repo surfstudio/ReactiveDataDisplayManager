@@ -58,7 +58,8 @@ extension BaseTableDataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: TableCellGenerator) {
-        self.tableView?.registerNib(generator.identifier)
+        guard let table = self.tableView else { return }
+        generator.registerCell(in: table)
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([TableCellGenerator]())
         }
@@ -81,7 +82,8 @@ extension BaseTableDataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
-        generators.forEach { self.tableView?.registerNib($0.identifier) }
+        guard let table = self.tableView else { return }
+        generators.forEach { $0.registerCell(in: table) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
         }
@@ -110,7 +112,8 @@ extension BaseTableDataDisplayManager {
 
     // TODO: Move to DDM protocol and implement in BaseCollectionDDM
     public func addCellGenerators(_ generators: [TableCellGenerator], toHeader header: TableHeaderGenerator) {
-        generators.forEach { self.tableView?.registerNib($0.identifier) }
+        guard let table = self.tableView else { return }
+        generators.forEach { $0.registerCell(in: table) }
 
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([TableCellGenerator]())
@@ -245,7 +248,7 @@ private extension BaseTableDataDisplayManager {
                          with animation: UITableViewRowAnimation = .automatic) {
         guard let table = self.tableView else { return }
 
-        table.registerNib(generator.identifier)
+        generator.registerCell(in: table)
         table.beginUpdates()
         self.cellGenerators[index.sectionIndex].insert(generator, at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
