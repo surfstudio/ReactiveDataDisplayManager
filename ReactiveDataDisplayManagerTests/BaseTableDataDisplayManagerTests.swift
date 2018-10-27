@@ -75,6 +75,30 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         XCTAssert(table.registerNibWasCalled)
     }
 
+    func testThatCustomOperationAddCellGeneratorCallsRegisterNib() {
+        // given
+        let headerGen = HeaderGenerator()
+        let gen = CellGenerator()
+        // when
+        ddm.addSectionHeaderGenerator(headerGen)
+        ddm += gen
+        // then
+        XCTAssert(table.registerNibWasCalled)
+    }
+
+    func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
+        // given
+        let headerGen = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        // when
+        ddm.addSectionHeaderGenerator(headerGen)
+        ddm += [gen1, gen2]
+        // then
+        XCTAssert(table.registerNibWasCalled)
+        XCTAssert(ddm.cellGenerators[0].count == 2)
+    }
+
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
         // given
         let gen = CellGenerator()
