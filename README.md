@@ -2,7 +2,7 @@
 [![codebeat badge](https://codebeat.co/badges/30f4100b-ee0e-4bc6-8aad-c2128544c0c6)](https://codebeat.co/projects/github-com-surfstudio-reactivedatadisplaymanager-master) [![codecov](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager/branch/master/graph/badge.svg)](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager)
 
 # ReactiveDataDisplayManager
-It is the whole approach to working with UITableView. 
+It is the whole approach to working with UITableView.
 The main idea of RDDM is to make development of table screen faster and clearly. So it provide reuse DDM and reuse cells both within a project and beetween projects.
 
 # Entites
@@ -11,9 +11,10 @@ RDDM contains next entites:
  - **ViewGenerator**: This entity is aspect of more difficult object. But exactly this entity provide interface to **TableDataDisplayManager** for store each similar objects in collection and get `UIView` for create SectionHeader.
  - **TableCellGenerator**: This entity is something like **ViewGenerator**. It reponse for create `UITableViewCell` for **TableDataDisplayManager**. In this way this **Generator** hide the concretate cell type from **TDDM** and show it only the abstract cell - `UITableViewCell`.
  - **ViewBuilder<ViewType>**: This object incapsulate logicks for fill view with model that needs to display. This object together with **TableCellGenerator** (or **ViewGenerator**) is a part of more difficult object.
- 
- Object which implement **ViewBuilder** and **TableCellGenerator** (or **ViewGenerator**), I called just **Generator**.
- And this object also response for events (notify listners) and response for store model. Usually view create generators, subscribe on events and send them to **TDDM**.
+
+Object which implement **ViewBuilder** and **TableCellGenerator** (or **ViewGenerator**), I called just **Generator**.
+And this object also response for events (notify listners) and response for store model. Usually view create generators, subscribe on events and send them to **TDDM**.
+
 ```swift
 class SubscriptionServiceGenerator {
 
@@ -69,8 +70,8 @@ extension SubscriptionServiceGenerator: SubscriptionServiceCellDelegate {
 ```
  - **Event**: is custom object, that may store closures, which have the same signatures, object that store an avent may call all stored closures for send objects, that provide this closures about event.
 
- View wants to recive a message about user tap on button:
- ```swift
+View wants to recive a message about user tap on button:
+```swift
  var generator = SubscriptionServiceGenerator(model: service)
  generator.buyEvent += { (service: PaidService) -> Void in
     <# do something #>
@@ -79,7 +80,25 @@ extension SubscriptionServiceGenerator: SubscriptionServiceCellDelegate {
 
 ## How to install
 
-`pod 'ReactiveDataDisplayManager' ~> 3.0.1`
+`pod 'ReactiveDataDisplayManager' ~> 3.0.2`
+
+## Errors
+
+- `Could not load NIB in bundle ... with name 'YourCellName'`
+This error appears because you are using class based cells (not UINib), but inside RDDM cells registering via UINib.
+
+  **Your should override default registering in generator**
+```swift
+extension YourCellGenerator: TableCellGenerator {
+  // ...
+
+  func registerCell(in tableView: UITableView) {
+      tableView.register(identifier, forCellReuseIdentifier: String(describing: identifier))
+  }
+
+  // ...
+}
+```
 
 ## Versioning
 

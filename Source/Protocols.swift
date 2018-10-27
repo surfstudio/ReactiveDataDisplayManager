@@ -33,6 +33,11 @@ public protocol TableCellGenerator: class {
     /// - Parameter tableView: TableView, which controlled cell grations
     /// - Return: New (may reused) cell.
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell
+
+    /// Register cell in tableView
+    ///
+    /// - Parameter in: TableView, in which cell will be registered
+    func registerCell(in tableView: UITableView)
 }
 
 
@@ -61,6 +66,11 @@ public protocol CollectionCellGenerator: class {
     /// - Parameter tableView: TableView, which controlled cell grations
     /// - Return: New (may reused) cell.
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell
+
+    /// Register cell in collectionView
+    ///
+    /// - Parameter in: CollectionView, in which cell will be registered
+    func registerCell(in collectionView: UICollectionView)
 }
 
 /// Protocol that incapsulated build logics for current View
@@ -115,6 +125,10 @@ public extension TableCellGenerator where Self: ViewBuilder {
 
         return cell as? UITableViewCell ?? UITableViewCell()
     }
+
+    func registerCell(in tableView: UITableView) {
+        tableView.registerNib(self.identifier)
+    }
 }
 
 public extension CollectionCellGenerator where Self: ViewBuilder {
@@ -126,6 +140,10 @@ public extension CollectionCellGenerator where Self: ViewBuilder {
         self.build(view: cell)
 
         return cell as? UICollectionViewCell ?? UICollectionViewCell()
+    }
+
+    func registerCell(in collectionView: UICollectionView) {
+        collectionView.registerNib(self.identifier)
     }
 }
 
