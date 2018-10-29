@@ -392,6 +392,27 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         XCTAssert(ddm.cellGenerators[0][0] === gen2 && ddm.cellGenerators[1][0] === gen1)
     }
 
+    func testThatReloadSectionCallTableViewMethod() {
+        // Arrange
+        let headerGenerator = HeaderGenerator()
+        ddm.addSectionHeaderGenerator(headerGenerator)
+        // Act
+        ddm.reloadSection(by: headerGenerator)
+        // Assert
+        XCTAssert(table.sectionWasReloaded)
+    }
+
+    func testThatReloadSectionWithInvalidHeaderGeneratorNotCallTableViewMethod() {
+        // Arrange
+        let headerGenerator = HeaderGenerator()
+        let wrongHeaderGenerator = HeaderGenerator()
+        ddm.addSectionHeaderGenerator(headerGenerator)
+        // Act
+        ddm.reloadSection(by: wrongHeaderGenerator)
+        // Assert
+        XCTAssertFalse(table.sectionWasReloaded)
+    }
+
     // MARK: - Mocks
 
     final class HeaderGenerator: TableHeaderGenerator {
@@ -428,6 +449,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         var registerNibWasCalled: Bool = false
         var scrollToRowWasCalled: Bool = false
         var lastReloadedRows: [IndexPath] = []
+        var sectionWasReloaded: Bool = false
 
         override func reloadData() {
             super.reloadData()
@@ -439,12 +461,16 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
             // don't call super to avoid UI API call
         }
 
-        override func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableViewScrollPosition, animated: Bool) {
+        override func scrollToRow(at indexPath: IndexPath, at scrollPosition: UITableView.ScrollPosition, animated: Bool) {
             scrollToRowWasCalled = true
         }
 
-        override func reloadRows(at indexPaths: [IndexPath], with animation: UITableViewRowAnimation) {
+        override func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
             lastReloadedRows = indexPaths
+        }
+
+        override func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
+            sectionWasReloaded = true
         }
 
     }
