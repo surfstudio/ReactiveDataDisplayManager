@@ -75,6 +75,30 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         XCTAssert(table.registerNibWasCalled)
     }
 
+    func testThatCustomOperationAddCellGeneratorCallsRegisterNib() {
+        // Arrange
+        let headerGen = HeaderGenerator()
+        let gen = CellGenerator()
+        // Act
+        ddm.addSectionHeaderGenerator(headerGen)
+        ddm += gen
+        // Assert
+        XCTAssert(table.registerNibWasCalled)
+    }
+
+    func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
+        // Arrange
+        let headerGen = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let gen2 = CellGenerator()
+        // Act
+        ddm.addSectionHeaderGenerator(headerGen)
+        ddm += [gen1, gen2]
+        // Assert
+        XCTAssert(table.registerNibWasCalled)
+        XCTAssert(ddm.cellGenerators[0].count == 2)
+    }
+
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
         // given
         let gen = CellGenerator()
@@ -390,6 +414,10 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
         func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
             return UITableViewCell()
+        }
+
+        func registerCell(in tableView: UITableView) {
+            tableView.registerNib(identifier)
         }
 
     }

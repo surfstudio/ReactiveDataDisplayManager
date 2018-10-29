@@ -53,12 +53,14 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
-        self.collectionView?.registerNib(generator.identifier)
+        guard let collection = self.collectionView else { return }
+        generator.registerCell(in: collection)
         self.cellGenerators.append(generator)
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator]) {
-        generators.forEach { self.collectionView?.registerNib($0.identifier) }
+        guard let collection = self.collectionView else { return }
+        generators.forEach { $0.registerCell(in: collection) }
         self.cellGenerators.append(contentsOf: generators)
     }
 
@@ -67,7 +69,8 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator, after: CollectionCellGenerator) {
-        self.collectionView?.registerNib(generator.identifier)
+        guard let collection = collectionView else { return }
+        generator.registerCell(in: collection)
 
         guard let index = self.cellGenerators.index(where: { $0 === after }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
@@ -76,7 +79,8 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
-        generators.forEach { self.collectionView?.registerNib($0.identifier) }
+        guard let collection = self.collectionView else { return }
+        generators.forEach { $0.registerCell(in: collection) }
 
         guard let index = self.cellGenerators.index(where: { $0 === after }) else {
             fatalError("Fatal Error in \(#function). You tried to add generators after unexisted generator")
