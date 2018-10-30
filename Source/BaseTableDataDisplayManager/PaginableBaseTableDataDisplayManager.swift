@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class PaginableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
+open class PaginableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
 
     /// Called if table shows last cell
     public var lastCellShowingEvent = BaseEvent<Void>()
