@@ -191,6 +191,20 @@ public extension BaseHeaderableTableDataDisplayManager {
         self.sectionHeaderGenerators.removeAll()
     }
 
+    public func move(generator: TableCellGenerator, on offset: Int) {
+
+        guard let (genIndex, arrIndex) = self.findGenerator(generator), let tableView = self.tableView else {
+            return
+        }
+
+        let newIndex = genIndex + offset
+
+        let oldValue = self.cellGenerators[arrIndex][genIndex]
+        self.cellGenerators[arrIndex][genIndex] = self.cellGenerators[arrIndex][newIndex]
+        self.cellGenerators[arrIndex][newIndex] = oldValue
+        self.tableView?.moveRow(at: IndexPath(row: genIndex, section: arrIndex), to: IndexPath(row: newIndex, section: arrIndex))
+    }
+
     /// Call this method if generators was removed or added.
     public func didRefill() {
         self.tableView?.reloadData()
