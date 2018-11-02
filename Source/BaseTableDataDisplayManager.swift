@@ -120,6 +120,22 @@ extension BaseTableDataDisplayManager {
         self.sectionHeaderGenerator.removeAll()
     }
 
+    public func move(generator: CellGeneratorType, on offset: Int) {
+        guard let index = cellGenerators.firstIndex(where: { $0 === generator }),
+            index + offset < self.cellGenerators.count,
+            let tableView = self.tableView else {
+            return
+        }
+
+        let newIndex = index + offset
+
+        let oldValue = self.cellGenerators[index]
+        self.cellGenerators[index] = self.cellGenerators[newIndex]
+        self.cellGenerators[newIndex] = oldValue
+        let section = self.numberOfSections(in: tableView)
+        self.tableView?.moveRow(at: IndexPath(row: index, section: section), to: IndexPath(row: newIndex, section: section))
+    }
+
     public func forceRefill() {
         self.tableView?.reloadData()
     }
