@@ -191,7 +191,7 @@ public extension BaseHeaderableTableDataDisplayManager {
         self.sectionHeaderGenerators.removeAll()
     }
 
-    public func move(generator: TableCellGenerator, on offset: Int, needsMoveRow: Bool) {
+    public func move(generator: TableCellGenerator, on offset: Int, needsMoveRow: Bool = true) {
 
         guard let (genIndex, arrIndex) = self.findGenerator(generator), let tableView = self.tableView else {
             return

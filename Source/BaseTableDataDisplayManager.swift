@@ -120,7 +120,7 @@ extension BaseTableDataDisplayManager {
         self.sectionHeaderGenerator.removeAll()
     }
 
-    public func move(generator: CellGeneratorType, on offset: Int, needsMoveRow: Bool) {
+    public func move(generator: CellGeneratorType, on offset: Int, needsMoveRow: Bool = true) {
         guard let index = cellGenerators.firstIndex(where: { $0 === generator }),
             index + offset < self.cellGenerators.count,
             let tableView = self.tableView else {
