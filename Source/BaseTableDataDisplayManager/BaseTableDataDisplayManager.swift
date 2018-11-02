@@ -108,6 +108,13 @@ extension BaseTableDataDisplayManager {
         self.tableView?.reloadData()
     }
 
+    public func reloadSection(by sectionHeaderGenerator: TableHeaderGenerator, with animation: UITableView.RowAnimation = .none) {
+        guard let index = sectionHeaderGenerators.firstIndex(where: { (headerGenerator) -> Bool in
+            return headerGenerator === sectionHeaderGenerator
+        }) else { return }
+        tableView?.reloadSections(IndexSet(integer: index), with: animation)
+    }
+
     // MARK: - BaseTableDataDisplayManager actions
 
     // TODO: Move to DDM protocol and implement in BaseCollectionDDM
@@ -144,8 +151,8 @@ public extension BaseTableDataDisplayManager {
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
     public func remove(_ generator: TableCellGenerator,
-                       with animation: UITableViewRowAnimation = .automatic,
-                       needScrollAt scrollPosition: UITableViewScrollPosition? = nil,
+                       with animation: UITableView.RowAnimation = .automatic,
+                       needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                        needRemoveEmptySection: Bool = false) {
         guard let index = self.findGenerator(generator) else { return }
         self.removeGenerator(with: index,
@@ -164,7 +171,7 @@ public extension BaseTableDataDisplayManager {
     ///   - with: Animation for row action.
     public func insert(after generator: TableCellGenerator,
                        new newGenerator: TableCellGenerator,
-                       with animation: UITableViewRowAnimation = .automatic) {
+                       with animation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
         self.insertGenerator(newGenerator, at: (sectionIndex: index.sectionIndex, generatorIndex: index.generatorIndex + 1), with: animation)
     }
@@ -177,7 +184,7 @@ public extension BaseTableDataDisplayManager {
     ///   - with: Animation for row action.
     public func insert(before generator: TableCellGenerator,
                        new newGenerator: TableCellGenerator,
-                       with animation: UITableViewRowAnimation = .automatic) {
+                       with animation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
         self.insertGenerator(newGenerator, at: (sectionIndex: index.sectionIndex, generatorIndex: index.generatorIndex), with: animation)
     }
@@ -190,7 +197,7 @@ public extension BaseTableDataDisplayManager {
     ///   - with: Animation for row action.
     public func insert(to header: TableHeaderGenerator,
                        new generator: TableCellGenerator,
-                       with animation: UITableViewRowAnimation = .automatic) {
+                       with animation: UITableView.RowAnimation = .automatic) {
         guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else { return }
         self.insertGenerator(generator, at: (sectionIndex: headerIndex, generatorIndex: 0), with: animation)
     }
@@ -204,8 +211,8 @@ public extension BaseTableDataDisplayManager {
     ///   - insertAnimation: Animation for insert action.
     public func replace(oldGenerator: TableCellGenerator,
                         on newGenerator: TableCellGenerator,
-                        removeAnimation: UITableViewRowAnimation = .automatic,
-                        insertAnimation: UITableViewRowAnimation = .automatic) {
+                        removeAnimation: UITableView.RowAnimation = .automatic,
+                        insertAnimation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(oldGenerator), let table = self.tableView else { return }
 
         table.beginUpdates()
@@ -245,7 +252,7 @@ private extension BaseTableDataDisplayManager {
 
     func insertGenerator(_ generator: TableCellGenerator,
                          at index: (sectionIndex: Int, generatorIndex: Int),
-                         with animation: UITableViewRowAnimation = .automatic) {
+                         with animation: UITableView.RowAnimation = .automatic) {
         guard let table = self.tableView else { return }
 
         generator.registerCell(in: table)
@@ -258,8 +265,8 @@ private extension BaseTableDataDisplayManager {
 
     // TODO: May be we should remove needScrollAt and move this responsibility to user
     func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
-                                 with animation: UITableViewRowAnimation = .automatic,
-                                 needScrollAt scrollPosition: UITableViewScrollPosition? = nil,
+                                 with animation: UITableView.RowAnimation = .automatic,
+                                 needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                                  needRemoveEmptySection: Bool = false) {
         guard let table = self.tableView else { return }
 
@@ -305,7 +312,7 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

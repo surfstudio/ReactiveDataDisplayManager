@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ExtendableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
+open class ExtendableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
 
     public override func numberOfSections(in tableView: UITableView) -> Int {
         return sectionHeaderGenerators.isEmpty ? 1 : sectionHeaderGenerators.count
