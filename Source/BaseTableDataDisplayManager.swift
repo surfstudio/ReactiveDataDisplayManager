@@ -124,17 +124,18 @@ extension BaseTableDataDisplayManager {
         guard let index = cellGenerators.firstIndex(where: { $0 === generator }),
             index + offset < self.cellGenerators.count,
             let tableView = self.tableView else {
-            return
+                return
         }
 
         let newIndex = index + offset
 
         let oldValue = self.cellGenerators[index]
-        self.cellGenerators[index] = self.cellGenerators[newIndex]
-        self.cellGenerators[newIndex] = oldValue
-        let section = self.numberOfSections(in: tableView)
+        print(index)
+        print(newIndex)
+        self.cellGenerators.remove(at: index)
+        self.cellGenerators.insert(oldValue, at: newIndex)
         if needsMoveRow {
-            self.tableView?.moveRow(at: IndexPath(row: index, section: section), to: IndexPath(row: newIndex, section: section))
+            self.tableView?.moveRow(at: IndexPath(row: index, section: 0), to: IndexPath(row: newIndex, section: 0))
         }
     }
 

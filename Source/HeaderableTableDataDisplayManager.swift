@@ -200,8 +200,9 @@ public extension BaseHeaderableTableDataDisplayManager {
         let newIndex = genIndex + offset
 
         let oldValue = self.cellGenerators[arrIndex][genIndex]
-        self.cellGenerators[arrIndex][genIndex] = self.cellGenerators[arrIndex][newIndex]
-        self.cellGenerators[arrIndex][newIndex] = oldValue
+
+        self.cellGenerators[arrIndex].remove(at: genIndex)
+        self.cellGenerators[arrIndex].insert(generator, at: newIndex)
         if needsMoveRow {
             self.tableView?.moveRow(at: IndexPath(row: genIndex, section: arrIndex), to: IndexPath(row: newIndex, section: arrIndex))
         }
