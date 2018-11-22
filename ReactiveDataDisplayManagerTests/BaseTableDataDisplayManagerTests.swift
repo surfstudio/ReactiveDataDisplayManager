@@ -413,6 +413,38 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         XCTAssertFalse(table.sectionWasReloaded)
     }
 
+    func testThatRemoveAllGeneratorsClearsSection() {
+        // Arrange
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        let gen2 = CellGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen1], toHeader: headerGen1)
+        ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen2], toHeader: headerGen2)
+        // Act
+        ddm.removeAllGenerators(in: headerGen2)
+        // Assert
+        XCTAssert(table.numberOfSections == 2)
+        XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
+        XCTAssert(table.numberOfRows(inSection: 1) == 0, "Expected 0, got \(table.numberOfRows(inSection: 0))")
+    }
+
+    func testThatRemoveAllGeneratorsDoesntClearInvalidSection() {
+        // Arrange
+        let headerGen1 = HeaderGenerator()
+        let gen1 = CellGenerator()
+        let headerGen2 = HeaderGenerator()
+        ddm.addSectionHeaderGenerator(headerGen1)
+        ddm.addCellGenerators([gen1], toHeader: headerGen1)
+        // Act
+        ddm.removeAllGenerators(in: headerGen2)
+        // Assert
+        XCTAssert(table.numberOfSections == 1)
+        XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
+    }
+
     // MARK: - Mocks
 
     final class HeaderGenerator: TableHeaderGenerator {

@@ -116,8 +116,8 @@ extension BaseTableDataDisplayManager {
     }
 
     // MARK: - BaseTableDataDisplayManager actions
-
     // TODO: Move to DDM protocol and implement in BaseCollectionDDM
+
     public func addCellGenerators(_ generators: [TableCellGenerator], toHeader header: TableHeaderGenerator) {
         guard let table = self.tableView else { return }
         generators.forEach { $0.registerCell(in: table) }
@@ -129,6 +129,15 @@ extension BaseTableDataDisplayManager {
         if let index = self.sectionHeaderGenerators.index(where: { $0 === header }) {
             self.cellGenerators[index].append(contentsOf: generators)
         }
+    }
+
+    /// Removes all cell generators from a given section
+    public func removeAllGenerators(in header: TableHeaderGenerator) {
+        guard let index = self.sectionHeaderGenerators.index(where: { $0 === header }), self.cellGenerators.count > index else {
+            return
+        }
+
+        self.cellGenerators[index].removeAll()
     }
 
     public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: TableHeaderGenerator) {
