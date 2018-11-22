@@ -22,6 +22,9 @@ public protocol DataDisplayManager: class {
 
     init(collection: CollectionType)
 
+    /// Sets a new collection to the ddm
+    func set(collection: CollectionType)
+
     /// Reloads collection.
     func forceRefill()
 

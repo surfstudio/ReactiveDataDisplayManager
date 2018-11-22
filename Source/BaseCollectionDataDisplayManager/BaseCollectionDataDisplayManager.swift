@@ -42,11 +42,15 @@ open class BaseCollectionDataDisplayManager: NSObject {
 
 extension BaseCollectionDataDisplayManager: DataDisplayManager {
 
-    // MARK: - Typealiases
-
     public typealias CollectionType = UICollectionView
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
+
+    public func set(collection: UICollectionView) {
+        self.collectionView = collection
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
+    }
 
     public func forceRefill() {
         self.collectionView?.reloadData()

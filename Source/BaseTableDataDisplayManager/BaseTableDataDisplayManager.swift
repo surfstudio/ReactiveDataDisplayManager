@@ -51,6 +51,12 @@ extension BaseTableDataDisplayManager {
 
     // MARK: - DataDisplayManager actions
 
+    public func set(collection: UITableView) {
+        self.tableView = collection
+        self.tableView?.delegate = self
+        self.tableView?.dataSource = self
+    }
+
     public func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sectionHeaderGenerators.append(generator)
     }
@@ -140,13 +146,6 @@ extension BaseTableDataDisplayManager {
 
     public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: TableHeaderGenerator) {
         addCellGenerators([generator], toHeader: header)
-    }
-
-    /// Sets a new collection to the ddm
-    public func set(collection: UITableView) {
-        self.tableView = collection
-        self.tableView?.delegate = self
-        self.tableView?.dataSource = self
     }
 
 }
