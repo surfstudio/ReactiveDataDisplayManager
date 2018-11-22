@@ -366,7 +366,11 @@ extension BaseTableDataDisplayManager: UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellGenerators[section].count
+        if cellGenerators.indices.contains(section) {
+            return cellGenerators[section].count
+        } else {
+            return 0
+        }
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
