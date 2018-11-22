@@ -39,10 +39,8 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
         self.cellGenerators = [[TableCellGenerator]]()
         self.sectionHeaderGenerators = [TableHeaderGenerator]()
         self.scrollViewWillEndDraggingEvent = BaseEvent<CGPoint>()
-        self.tableView = collection
         super.init()
-        self.tableView?.delegate = self
-        self.tableView?.dataSource = self
+        self.set(collection: collection)
     }
 
 }
@@ -142,6 +140,13 @@ extension BaseTableDataDisplayManager {
 
     public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: TableHeaderGenerator) {
         addCellGenerators([generator], toHeader: header)
+    }
+
+    /// Sets a new collection to the ddm
+    public func set(collection: UITableView) {
+        self.tableView = collection
+        self.tableView?.delegate = self
+        self.tableView?.dataSource = self
     }
 
 }
