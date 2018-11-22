@@ -35,7 +35,7 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 
     // MARK: - Initialization and deinitialization
 
-    public required init(collection: UITableView) {
+    public init(collection: UITableView) {
         self.cellGenerators = [[TableCellGenerator]]()
         self.sectionHeaderGenerators = [TableHeaderGenerator]()
         self.scrollViewWillEndDraggingEvent = BaseEvent<CGPoint>()
