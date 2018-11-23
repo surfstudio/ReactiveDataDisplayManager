@@ -46,12 +46,6 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
 
-    public func set(collection: UICollectionView) {
-        self.collectionView = collection
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
-    }
-
     public func forceRefill() {
         self.collectionView?.reloadData()
     }
@@ -130,6 +124,7 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDelegate {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
+
 }
 
 // MARK: - UITableViewDataSource
@@ -151,4 +146,5 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         return self.headerGenerators.first { $0.identifier == kind }?.generate() ?? UICollectionReusableView()
     }
+
 }

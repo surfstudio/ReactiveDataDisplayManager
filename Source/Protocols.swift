@@ -38,6 +38,11 @@ public protocol TableCellGenerator: class {
     ///
     /// - Parameter in: TableView, in which cell will be registered
     func registerCell(in tableView: UITableView)
+
+    /// Returns height for cell.
+    ///
+    /// Default implementation returns UITableView.automaticDimension
+    func heightForCell() -> CGFloat
 }
 
 
@@ -53,6 +58,7 @@ open class CollectionHeaderGenerator: ViewGenerator {
     open func generate() -> UICollectionReusableView {
         preconditionFailure("\(#function) must be overriden in child")
     }
+
 }
 
 /// Protocol that incapsulated type of current cell
@@ -110,12 +116,23 @@ public protocol DeletableGenerator {
 }
 
 public extension SelectableItem {
+
     var isNeedDeselect: Bool {
         return true
     }
+
+}
+
+public extension TableCellGenerator {
+
+    func heightForCell() -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
 }
 
 public extension TableCellGenerator where Self: ViewBuilder {
+
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
             return UITableViewCell()
@@ -129,9 +146,11 @@ public extension TableCellGenerator where Self: ViewBuilder {
     func registerCell(in tableView: UITableView) {
         tableView.registerNib(self.identifier)
     }
+
 }
 
 public extension CollectionCellGenerator where Self: ViewBuilder {
+
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
             return UICollectionViewCell()
@@ -145,5 +164,6 @@ public extension CollectionCellGenerator where Self: ViewBuilder {
     func registerCell(in collectionView: UICollectionView) {
         collectionView.registerNib(self.identifier)
     }
+
 }
 

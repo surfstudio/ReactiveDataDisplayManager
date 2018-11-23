@@ -26,11 +26,14 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
     public var scrollEvent = BaseEvent<UITableView>()
     public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> = BaseEvent<CGPoint>()
 
-    // MARK: - Fileprivate properties
+    // MARK: - Private properties
 
-    public fileprivate(set) var cellGenerators: [[TableCellGenerator]]
-    public fileprivate(set) var sectionHeaderGenerators: [TableHeaderGenerator]
-    fileprivate weak var tableView: UITableView?
+    public private(set) var cellGenerators: [[TableCellGenerator]]
+    public private(set) var sectionHeaderGenerators: [TableHeaderGenerator]
+    private weak var tableView: UITableView?
+
+    // MARK: - Public properties
+
     public var estimatedHeight: CGFloat = 40
 
     // MARK: - Initialization and deinitialization
@@ -40,7 +43,9 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
         self.sectionHeaderGenerators = [TableHeaderGenerator]()
         self.scrollViewWillEndDraggingEvent = BaseEvent<CGPoint>()
         super.init()
-        self.set(collection: collection)
+        self.tableView = collection
+        self.tableView?.delegate = self
+        self.tableView?.dataSource = self
     }
 
 }
@@ -50,12 +55,6 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 extension BaseTableDataDisplayManager {
 
     // MARK: - DataDisplayManager actions
-
-    public func set(collection: UITableView) {
-        self.tableView = collection
-        self.tableView?.delegate = self
-        self.tableView?.dataSource = self
-    }
 
     public func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sectionHeaderGenerators.append(generator)
@@ -325,7 +324,7 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return cellGenerators[indexPath.section][indexPath.row].heightForCell()
     }
 
     public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
