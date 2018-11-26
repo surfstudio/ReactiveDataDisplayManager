@@ -318,33 +318,27 @@ private extension BaseTableDataDisplayManager {
 
 extension BaseTableDataDisplayManager: UITableViewDelegate {
 
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let guardTable = self.tableView else { return }
         self.scrollEvent.invoke(with: guardTable)
     }
 
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard
-            cellGenerators.indices.contains(indexPath.section),
-            cellGenerators[indexPath.section].indices.contains(indexPath.row)
-        else {
-            return 0
-        }
         return cellGenerators[indexPath.section][indexPath.row].heightForCell()
     }
 
-    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.estimatedHeight
     }
 
-    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section > self.sectionHeaderGenerators.count - 1 {
             return nil
         }
         return self.sectionHeaderGenerators[section].generate()
     }
 
-    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         // This code needed to avoid empty header
         if section > sectionHeaderGenerators.count - 1 {
             return 0.01
@@ -352,7 +346,7 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
         return self.sectionHeaderGenerators[section].height(tableView, forSection: section)
     }
 
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectable = cellGenerators[indexPath.section][indexPath.row] as? SelectableItem else { return }
         selectable.didSelectEvent.invoke(with: ())
         if selectable.isNeedDeselect {
@@ -360,7 +354,7 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
         }
     }
 
-    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         self.scrollViewWillEndDraggingEvent.invoke(with: velocity)
     }
 
@@ -370,11 +364,11 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
 
 extension BaseTableDataDisplayManager: UITableViewDataSource {
 
-    public func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(in tableView: UITableView) -> Int {
         return sectionHeaderGenerators.count
     }
 
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if cellGenerators.indices.contains(section) {
             return cellGenerators[section].count
         } else {
@@ -382,7 +376,7 @@ extension BaseTableDataDisplayManager: UITableViewDataSource {
         }
     }
 
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cellGenerators[indexPath.section][indexPath.row].generate(tableView: tableView, for: indexPath)
     }
 
