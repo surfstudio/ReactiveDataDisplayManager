@@ -323,7 +323,13 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
         self.scrollEvent.invoke(with: guardTable)
     }
 
-    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard
+            cellGenerators.indices.contains(indexPath.section),
+            cellGenerators[indexPath.section].indices.contains(indexPath.row)
+        else {
+            return 0
+        }
         return cellGenerators[indexPath.section][indexPath.row].heightForCell()
     }
 
