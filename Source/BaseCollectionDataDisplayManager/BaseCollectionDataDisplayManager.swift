@@ -42,8 +42,6 @@ open class BaseCollectionDataDisplayManager: NSObject {
 
 extension BaseCollectionDataDisplayManager: DataDisplayManager {
 
-    // MARK: - Typealiases
-
     public typealias CollectionType = UICollectionView
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
@@ -126,6 +124,7 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDelegate {
             collectionView.deselectItem(at: indexPath, animated: true)
         }
     }
+
 }
 
 // MARK: - UITableViewDataSource
@@ -147,4 +146,5 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         return self.headerGenerators.first { $0.identifier == kind }?.generate() ?? UICollectionReusableView()
     }
+
 }
