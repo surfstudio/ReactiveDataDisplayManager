@@ -1,8 +1,7 @@
 Pod::Spec.new do |s|
   s.name = "ReactiveDataDisplayManager"
-  s.version = "3.1.1"
-  s.summary = "Library with custom events and reusable adapter for UI Collectionclear
-  "
+  s.version = "3.1.2"
+  s.summary = "Library with custom events and reusable adapter for UI Collections"
   s.homepage = "https://github.com/surfstudio/ReactiveDataDisplayManager"
   s.license = "MIT"
   s.author = { "Alexander Kravchenkov" => "sprintend@gmail.com" }
