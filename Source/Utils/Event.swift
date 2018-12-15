@@ -62,7 +62,10 @@ public class BaseEvent<Input>: Event {
 
     public typealias Lambda = (Input) -> Void
 
-    public static func += (left: BaseEvent<Input>, right: @escaping Lambda) {
+    public static func += (left: BaseEvent<Input>, right: Lambda?) {
+        guard let right = right else {
+            return
+        }
         left.addListner(right)
     }
 
