@@ -8,15 +8,6 @@
 
 import Foundation
 
-/// Protocol for UITableViewCell which is supposed to be used in BaseCellGenerator
-public protocol Configurable where Self: UITableViewCell {
-
-    associatedtype Model
-
-    func configure(with model: Model)
-
-}
-
 public class BaseCellGenerator<Cell: Configurable>: SelectableItem {
 
     // MARK: - Properties
@@ -26,11 +17,13 @@ public class BaseCellGenerator<Cell: Configurable>: SelectableItem {
     // MARK: - Private properties
 
     private let model: Cell.Model
+    private let registerClass: Bool
 
     // MARK: - Initialization
 
-    public init(with model: Cell.Model) {
+    public init(with model: Cell.Model, registerClass: Bool = false) {
         self.model = model
+        self.registerClass = registerClass
     }
 
 }
@@ -52,7 +45,11 @@ extension BaseCellGenerator: TableCellGenerator {
     }
 
     public func registerCell(in tableView: UITableView) {
-        tableView.registerNib(identifier)
+        if registerClass {
+            tableView.register(identifier, forCellReuseIdentifier: identifier.nameOfClass)
+        } else {
+            tableView.registerNib(identifier)
+        }
     }
 
 }
