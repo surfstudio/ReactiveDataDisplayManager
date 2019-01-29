@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import CoreEvents
 
 public class BaseCellGenerator<Cell: Configurable>: SelectableItem {
 
     // MARK: - Properties
 
-    public var didSelectEvent = BaseEvent<Void>()
+    public var didSelectEvent = FutureEmptyEvent()
 
     // MARK: - Private properties
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreEvents
 
 /// Contains base implementation of DataDisplayManager with UITableView.
 /// Registers nibs, determinates EstimatedRowHeight.
@@ -20,11 +21,32 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
     public typealias CellGeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
 
-    // MARK: - Events
+    // MARK: - Events (TableViewDelegate proxy)
 
     /// Called if table scrolled
-    public var scrollEvent = BaseEvent<UITableView>()
-    public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> = BaseEvent<CGPoint>()
+    public var scrollEvent = FutureEvent<UITableView>()
+    public var scrollViewWillEndDraggingEvent = FutureEvent<CGPoint>()
+    public var scrollViewDidZoomEvent = FutureEvent<UITableView>()
+    public var scrollViewDidScrollToTopEvent = FutureEvent<UITableView>()
+    public var scrollViewWillBeginDraggingEvent = FutureEvent<UITableView>()
+    public var scrollViewDidEndDeceleratingEvent = FutureEvent<UITableView>()
+    public var scrollViewWillBeginDeceleratingEvent = FutureEvent<UITableView>()
+    public var scrollViewDidEndScrollingAnimationEvent = FutureEvent<UITableView>()
+    public var scrollViewDidChangeAdjustedContentInsetEvent = FutureEvent<UITableView>()
+    public var scrollViewWillBeginZoomingEvent = FutureEvent<UITableView>()
+    public var scrollViewDidEndDraggingEvent = FutureEvent<UITableView>()
+    public var scrollViewDidEndZoomingEvent = FutureEvent<UITableView>()
+    public var tableViewDidDeselectRowAtIndexPathEvent = FutureEvent<IndexPath>()
+    public var tableViewDidHighlightRowAtIndexPathEvent = FutureEvent<IndexPath>()
+    public var tableViewDidEndEditingRowAtIndexPathEvent = FutureEvent<IndexPath?>()
+    public var tableViewDidUnhighlightRowAtIndexPathEvent = FutureEvent<IndexPath>()
+    public var tableViewWillBeginEditingRowAtIndexPathEvent = FutureEvent<IndexPath>()
+    public var tableViewWillDisplayFooterViewEvent = FutureEvent<UIView>()
+    public var tableViewWillDisplayHeaderViewEvent = FutureEvent<UIView>()
+    public var tableViewDidEndDisplayingFooterViewEvent = FutureEvent<UIView>()
+    public var tableViewDidEndDisplayingHeaderViewEvent = FutureEvent<UIView>()
+    public var tableViewWillDisplayCellAtIndexPathEvent = FutureEvent<IndexPath>()
+    public var tableViewDidEndDisplayingCellAtIndexPathEvent = FutureEvent<IndexPath>()
 
     // MARK: - Private properties
 
@@ -41,7 +63,6 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
     required public init(collection: UITableView) {
         self.cellGenerators = [[TableCellGenerator]]()
         self.sectionHeaderGenerators = [TableHeaderGenerator]()
-        self.scrollViewWillEndDraggingEvent = BaseEvent<CGPoint>()
         super.init()
         self.tableView = collection
         self.tableView?.delegate = self
@@ -323,6 +344,105 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
         self.scrollEvent.invoke(with: guardTable)
     }
 
+    open func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewDidZoomEvent.invoke(with: guardTable)
+    }
+
+    open func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewDidScrollToTopEvent.invoke(with: guardTable)
+    }
+
+    open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewWillBeginDraggingEvent.invoke(with: guardTable)
+    }
+
+    open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewDidEndDeceleratingEvent.invoke(with: guardTable)
+    }
+
+    open func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewWillBeginDeceleratingEvent.invoke(with: guardTable)
+    }
+
+    open func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewDidEndScrollingAnimationEvent.invoke(with: guardTable)
+    }
+
+    open func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewDidChangeAdjustedContentInsetEvent.invoke(with: guardTable)
+    }
+
+    open func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewWillBeginZoomingEvent.invoke(with: guardTable)
+    }
+
+    open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewDidEndDraggingEvent.invoke(with: guardTable)
+    }
+
+    open func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        guard let guardTable = self.tableView else { return }
+        self.scrollViewDidEndDraggingEvent.invoke(with: guardTable)
+    }
+
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        self.tableViewDidDeselectRowAtIndexPathEvent.invoke(with: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        self.tableViewDidHighlightRowAtIndexPathEvent.invoke(with: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        self.tableViewDidEndEditingRowAtIndexPathEvent.invoke(with: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        self.tableViewDidUnhighlightRowAtIndexPathEvent.invoke(with: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        self.tableViewWillBeginEditingRowAtIndexPathEvent.invoke(with: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        self.tableViewWillDisplayFooterViewEvent.invoke(with: view)
+    }
+
+    open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        self.tableViewWillDisplayHeaderViewEvent.invoke(with: view)
+    }
+
+    open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+        self.tableViewDidEndDisplayingFooterViewEvent.invoke(with: view)
+    }
+
+    open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        self.tableViewDidEndDisplayingHeaderViewEvent.invoke(with: view)
+    }
+
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.tableViewWillDisplayCellAtIndexPathEvent.invoke(with: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.tableViewDidEndDisplayingCellAtIndexPathEvent.invoke(with: indexPath)
+    }
+
+    open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        self.scrollViewWillEndDraggingEvent.invoke(with: velocity)
+    }
+
+
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellGenerators[indexPath.section][indexPath.row].heightForCell()
     }
@@ -348,14 +468,10 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
 
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectable = cellGenerators[indexPath.section][indexPath.row] as? SelectableItem else { return }
-        selectable.didSelectEvent.invoke(with: ())
+        selectable.didSelectEvent.invoke()
         if selectable.isNeedDeselect {
             tableView.deselectRow(at: indexPath, animated: true)
         }
-    }
-
-    open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        self.scrollViewWillEndDraggingEvent.invoke(with: velocity)
     }
 
 }

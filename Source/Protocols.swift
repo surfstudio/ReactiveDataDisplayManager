@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreEvents
 
 open class TableHeaderGenerator: ViewGenerator {
 
@@ -102,7 +103,7 @@ public protocol ViewBuilder {
 public protocol SelectableItem: class {
 
     /// Invokes when user taps on the item.
-    var didSelectEvent: BaseEvent<Void> { get }
+    var didSelectEvent: FutureEmptyEvent { get }
 
     /// A Boolean value that determines whether to perform a cell deselect.
     ///
@@ -112,7 +113,7 @@ public protocol SelectableItem: class {
 }
 
 public protocol DeletableGenerator {
-    var eventDelete: BaseEmptyEvent { get }
+    var eventDelete: FutureEmptyEvent { get }
 }
 
 public extension SelectableItem {

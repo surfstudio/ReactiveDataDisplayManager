@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreEvents
 
 /// Contains base implementation of TableDataManager and TableDisplayManager.
 /// Can register nib if needed, determinate EstimatedRowHeight.
@@ -16,8 +17,8 @@ open class BaseCollectionDataDisplayManager: NSObject {
     // MARK: - Events
 
     /// Called if content scrolled
-    public var scrollEvent = BaseEvent<UICollectionView>()
-    public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> = BaseEvent<CGPoint>()
+    public var scrollEvent = FutureEvent<UICollectionView>()
+    public var scrollViewWillEndDraggingEvent: FutureEvent<CGPoint> = FutureEvent<CGPoint>()
 
     // MARK: - Fileprivate properties
 
@@ -119,7 +120,7 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDelegate {
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectable = self.cellGenerators[indexPath.row] as? SelectableItem else { return }
-        selectable.didSelectEvent.invoke(with: ())
+        selectable.didSelectEvent.invoke()
         if selectable.isNeedDeselect {
             collectionView.deselectItem(at: indexPath, animated: true)
         }

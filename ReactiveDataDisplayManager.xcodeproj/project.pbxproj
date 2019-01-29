@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E970654F875DA02C41D7530 /* Pods_ReactiveDataDisplayManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 214EC33BA0C03DA27253D614 /* Pods_ReactiveDataDisplayManagerTests.framework */; };
 		4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */; };
 		4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEB1F4E9F74006B7809 /* Extensions.swift */; };
 		4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BED1F4E9F74006B7809 /* Protocols.swift */; };
@@ -17,7 +18,6 @@
 		8632735D21F0F7DA00620CEE /* ConfigurableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */; };
 		86F35A2C21EE7B51009D3001 /* BaseCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */; };
 		8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */; };
-		8B7E265220B89B12001D7A93 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEA1F4E9F74006B7809 /* Event.swift */; };
 		8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */; };
 		8B9FEBDD20B493BF00002874 /* BaseTableDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */; };
 		8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */; };
@@ -25,6 +25,7 @@
 		8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */; };
 		8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */; };
 		8BC018FE20B4912100D82429 /* ReactiveDataDisplayManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */; };
+		D3236C0637356C6381A2086E /* Pods_ReactiveDataDisplayManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B3C2DCD7E7C709A8B32523 /* Pods_ReactiveDataDisplayManager.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		214EC33BA0C03DA27253D614 /* Pods_ReactiveDataDisplayManagerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		291919A755E7028B3ADBA88C /* Pods-ReactiveDataDisplayManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerTests/Pods-ReactiveDataDisplayManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
-		4F088BEA1F4E9F74006B7809 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		4F088BEB1F4E9F74006B7809 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4F088BED1F4E9F74006B7809 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		4F088BEE1F4E9F74006B7809 /* ReactiveDataDisplayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactiveDataDisplayManager.h; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		4F088BF81F4EABA2006B7809 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayManager.swift; sourceTree = "<group>"; };
 		4FD38131202D791A0005EBFE /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		5ADA8BF357DC603B67EB6D94 /* Pods-ReactiveDataDisplayManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManager/Pods-ReactiveDataDisplayManager.debug.xcconfig"; sourceTree = "<group>"; };
 		8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableProtocol.swift; sourceTree = "<group>"; };
 		86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellGenerator.swift; sourceTree = "<group>"; };
 		8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
@@ -58,7 +61,10 @@
 		8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		8BC018F920B4912100D82429 /* ReactiveDataDisplayManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC018FD20B4912100D82429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F74242C6293DFB66D4939E4 /* Pods-ReactiveDataDisplayManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerTests/Pods-ReactiveDataDisplayManagerTests.release.xcconfig"; sourceTree = "<group>"; };
+		B8B3C2DCD7E7C709A8B32523 /* Pods_ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF811D66A29A583E91F3731D /* Pods-ReactiveDataDisplayManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManager/Pods-ReactiveDataDisplayManager.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BC018FE20B4912100D82429 /* ReactiveDataDisplayManager.framework in Frameworks */,
+				4E970654F875DA02C41D7530 /* Pods_ReactiveDataDisplayManagerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,12 +82,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F088BF91F4EABA2006B7809 /* UIKit.framework in Frameworks */,
+				D3236C0637356C6381A2086E /* Pods_ReactiveDataDisplayManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D6CF704087F51BFB3A806E4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5ADA8BF357DC603B67EB6D94 /* Pods-ReactiveDataDisplayManager.debug.xcconfig */,
+				CF811D66A29A583E91F3731D /* Pods-ReactiveDataDisplayManager.release.xcconfig */,
+				291919A755E7028B3ADBA88C /* Pods-ReactiveDataDisplayManagerTests.debug.xcconfig */,
+				9F74242C6293DFB66D4939E4 /* Pods-ReactiveDataDisplayManagerTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4F088BE81F4E9F74006B7809 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				4F088BF81F4EABA2006B7809 /* UIKit.framework */,
+				B8B3C2DCD7E7C709A8B32523 /* Pods_ReactiveDataDisplayManager.framework */,
+				214EC33BA0C03DA27253D614 /* Pods_ReactiveDataDisplayManagerTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -106,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				4F088BEB1F4E9F74006B7809 /* Extensions.swift */,
-				4F088BEA1F4E9F74006B7809 /* Event.swift */,
 				8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */,
 			);
 			path = Utils;
@@ -160,6 +180,7 @@
 				8BC018FA20B4912100D82429 /* ReactiveDataDisplayManagerTests */,
 				B971E25C1F456825000FBB9A /* Products */,
 				4F088BF71F4EABA1006B7809 /* Frameworks */,
+				1D6CF704087F51BFB3A806E4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,9 +211,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8BC0190120B4912100D82429 /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerTests" */;
 			buildPhases = (
+				E0E34D24599E2524E5F3AEBD /* [CP] Check Pods Manifest.lock */,
 				8BC018F520B4912100D82429 /* Sources */,
 				8BC018F620B4912100D82429 /* Frameworks */,
 				8BC018F720B4912100D82429 /* Resources */,
+				D1ACFD2933BBB7977DD8A82F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -208,6 +231,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B971E2631F456825000FBB9A /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManager" */;
 			buildPhases = (
+				3549078887701E8523AC359D /* [CP] Check Pods Manifest.lock */,
 				B971E2561F456825000FBB9A /* Sources */,
 				B971E2571F456825000FBB9A /* Frameworks */,
 				B971E2581F456825000FBB9A /* Headers */,
@@ -279,6 +303,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3549078887701E8523AC359D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReactiveDataDisplayManager-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1ACFD2933BBB7977DD8A82F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManagerTests/Pods-ReactiveDataDisplayManagerTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CoreEvents/CoreEvents.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreEvents.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReactiveDataDisplayManagerTests/Pods-ReactiveDataDisplayManagerTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0E34D24599E2524E5F3AEBD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReactiveDataDisplayManagerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8BC018F520B4912100D82429 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -294,7 +387,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */,
-				8B7E265220B89B12001D7A93 /* Event.swift in Sources */,
 				4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */,
 				8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */,
 				8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */,
@@ -322,6 +414,7 @@
 /* Begin XCBuildConfiguration section */
 		8BC0190220B4912100D82429 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 291919A755E7028B3ADBA88C /* Pods-ReactiveDataDisplayManagerTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -349,6 +442,7 @@
 		};
 		8BC0190320B4912100D82429 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F74242C6293DFB66D4939E4 /* Pods-ReactiveDataDisplayManagerTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -493,6 +587,7 @@
 		};
 		B971E2641F456825000FBB9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5ADA8BF357DC603B67EB6D94 /* Pods-ReactiveDataDisplayManager.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -513,6 +608,7 @@
 		};
 		B971E2651F456825000FBB9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF811D66A29A583E91F3731D /* Pods-ReactiveDataDisplayManager.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
