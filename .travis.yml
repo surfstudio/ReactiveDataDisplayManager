@@ -4,11 +4,12 @@ xcode_project: ReactiveDataDisplayManager.xcodeproj
 xcode_scheme: ReactiveDataDisplayManager
 before_install:
   - gem install xcpretty -N
+  - gem install cocoapods
   - brew update
   - brew install swiftlint || true
 script:
   - set -o pipefail
-  - xcodebuild test -scheme ReactiveDataDisplayManager -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4' | xcpretty -c
+  - xcodebuild test -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManager -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.4' | xcpretty -c
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J 'ReactiveDataDisplayManager'
