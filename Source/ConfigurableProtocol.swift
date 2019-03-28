@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// Protocol for UITableViewCell which is supposed to be used in BaseCellGenerator
-public protocol Configurable where Self: UITableViewCell {
+/// Protocol for UIView (basically for UICollectionViewCell&UITableViewCell) which is supposed to be used in CellGenerators
+public protocol Configurable where Self: UIView {
 
     associatedtype Model
 
