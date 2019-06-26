@@ -111,6 +111,16 @@ public protocol SelectableItem: class {
     var isNeedDeselect: Bool { get }
 }
 
+public protocol DisplayableFlow: class {
+
+    /// Invokes when cell will displaying.
+    var willDisplayEvent: BaseEvent<Void> { get }
+
+    /// Invokes when cell did end displaying.
+    var didEndDisplayEvent: BaseEvent<Void> { get }
+
+}
+
 public protocol DeletableGenerator {
     var eventDelete: BaseEmptyEvent { get }
 }

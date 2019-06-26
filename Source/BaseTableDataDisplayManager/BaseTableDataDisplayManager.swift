@@ -26,6 +26,10 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
     public var scrollEvent = BaseEvent<UITableView>()
     public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> = BaseEvent<CGPoint>()
 
+    /// Celled when cells displaying
+    public var willDislplayCellEvent = BaseEvent<(TableCellGenerator, IndexPath)>()
+    public var didEndDislplayCellEvent = BaseEvent<(TableCellGenerator, IndexPath)>()
+
     // MARK: - Private properties
 
     public private(set) var cellGenerators: [[TableCellGenerator]]
@@ -60,10 +64,13 @@ extension BaseTableDataDisplayManager {
         self.sectionHeaderGenerators.append(generator)
     }
 
-    public func insert(headGenerator: TableHeaderGenerator, by index: Int) {
+    public func insert(headGenerator: TableHeaderGenerator,
+                       by index: Int,
+                       animation: UITableView.RowAnimation = .none) {
         let index = min(max(index, 0), self.sectionHeaderGenerators.count)
         self.sectionHeaderGenerators.insert(headGenerator, at: index)
         self.cellGenerators.insert([], at: index)
+        tableView?.insertSections([index], with: animation)
     }
 
     public func insert(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) {
@@ -206,7 +213,7 @@ public extension BaseTableDataDisplayManager {
                        generators: [TableCellGenerator],
                        with animation: UITableView.RowAnimation = .automatic) {
 
-        self.insert(headGenerator: headGenerator, by: index)
+        self.insert(headGenerator: headGenerator, by: index, animation: animation)
         guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === headGenerator }) else {
             return
         }
@@ -505,6 +512,44 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let guardTable = self.tableView else { return }
         self.scrollEvent.invoke(with: guardTable)
+    }
+
+    open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let generator = self.cellGenerators[indexPath.section][indexPath.row]
+        self.willDislplayCellEvent.invoke(with: (generator, indexPath))
+        if let displayable = generator as? DisplayableFlow {
+            displayable.willDisplayEvent.invoke(with: ())
+        }
+    }
+
+    open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let displayable = self.sectionHeaderGenerators[section] as? DisplayableFlow else {
+            return
+        }
+        displayable.willDisplayEvent.invoke(with: ())
+    }
+
+    open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        guard let displayable = self.sectionHeaderGenerators[section] as? DisplayableFlow else {
+            return
+        }
+        displayable.didEndDisplayEvent.invoke(with: ())
+    }
+
+    open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if cellGenerators.count <= indexPath.section || cellGenerators.count == 0 {
+            return
+        }
+
+        if cellGenerators[indexPath.section].count <= indexPath.row || cellGenerators[indexPath.section].count == 0 {
+            return
+        }
+
+        let generator = self.cellGenerators[indexPath.section][indexPath.row]
+        self.didEndDislplayCellEvent.invoke(with: (generator, indexPath))
+        if let displayable = generator as? DisplayableFlow {
+            displayable.didEndDisplayEvent.invoke(with: ())
+        }
     }
 
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
