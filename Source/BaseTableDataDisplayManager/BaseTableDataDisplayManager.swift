@@ -34,7 +34,7 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 
     // MARK: - Public properties
 
-    public var estimatedHeight: CGFloat = 40
+    public var estimatedHeight: CGFloat?
 
     // MARK: - Initialization and deinitialization
 
@@ -328,7 +328,7 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.estimatedHeight
+        return self.estimatedHeight ?? cellGenerators[indexPath.section][indexPath.row].heightForCell()
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
