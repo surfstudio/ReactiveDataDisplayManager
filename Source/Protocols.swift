@@ -43,6 +43,11 @@ public protocol TableCellGenerator: class {
     ///
     /// Default implementation returns UITableView.automaticDimension
     func heightForCell() -> CGFloat
+
+    /// Returns estimated height for cell
+    ///
+    /// Default implementation returns nil
+    func estimatedHeightForCell() -> CGFloat?
 }
 
 
@@ -127,6 +132,10 @@ public extension TableCellGenerator {
 
     func heightForCell() -> CGFloat {
         return UITableView.automaticDimension
+    }
+
+    func estimatedHeightForCell() -> CGFloat? {
+        return nil
     }
 
 }
