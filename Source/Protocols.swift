@@ -115,6 +115,10 @@ public protocol DeletableGenerator {
     var eventDelete: BaseEmptyEvent { get }
 }
 
+public protocol MovableGenerator {
+    func canMove() -> Bool
+}
+
 public extension SelectableItem {
 
     var isNeedDeselect: Bool {
