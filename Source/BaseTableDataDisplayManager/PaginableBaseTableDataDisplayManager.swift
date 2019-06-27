@@ -14,7 +14,10 @@ open class PaginableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
     public var lastCellShowingEvent = BaseEvent<Void>()
 
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == cellGenerators[indexPath.section].count - 1 {
+        let lastSectionIndex = cellGenerators.count - 1
+        let lastCellInLastSectionIndex = cellGenerators[lastSectionIndex].count - 1
+        let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
+        if indexPath == lastCellIndexPath {
             lastCellShowingEvent.invoke(with: ())
         }
     }
