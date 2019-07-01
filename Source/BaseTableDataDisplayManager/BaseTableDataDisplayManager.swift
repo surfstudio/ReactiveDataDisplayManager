@@ -112,6 +112,15 @@ extension BaseTableDataDisplayManager {
         self.tableView?.reloadData()
     }
 
+    public func forceRefill(completion: @escaping (() -> Void)) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            completion()
+        }
+        forceRefill()
+        CATransaction.commit()
+    }
+
     public func reloadSection(by sectionHeaderGenerator: TableHeaderGenerator, with animation: UITableView.RowAnimation = .none) {
         guard let index = sectionHeaderGenerators.firstIndex(where: { (headerGenerator) -> Bool in
             return headerGenerator === sectionHeaderGenerator
