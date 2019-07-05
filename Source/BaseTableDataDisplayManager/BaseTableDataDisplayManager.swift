@@ -536,7 +536,9 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let generator = self.cellGenerators[indexPath.section][indexPath.row]
+        guard let generator = self.cellGenerators[safe: indexPath.section]?[safe: indexPath.row] else {
+            return
+        }
         self.willDisplayCellEvent.invoke(with: (generator, indexPath))
         if let displayable = generator as? DisplayableFlow {
             displayable.willDisplayEvent.invoke(with: ())
@@ -544,29 +546,23 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let displayable = self.sectionHeaderGenerators[section] as? DisplayableFlow else {
+        guard let displayable = self.sectionHeaderGenerators[safe: section] as? DisplayableFlow else {
             return
         }
         displayable.willDisplayEvent.invoke(with: ())
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        guard let displayable = self.sectionHeaderGenerators[section] as? DisplayableFlow else {
+        guard let displayable = self.sectionHeaderGenerators[safe: section] as? DisplayableFlow else {
             return
         }
         displayable.didEndDisplayEvent.invoke(with: ())
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if cellGenerators.count <= indexPath.section || cellGenerators.count == 0 {
+        guard let generator = self.cellGenerators[safe: indexPath.section]?[safe: indexPath.row] else {
             return
         }
-
-        if cellGenerators[indexPath.section].count <= indexPath.row || cellGenerators[indexPath.section].count == 0 {
-            return
-        }
-
-        let generator = self.cellGenerators[indexPath.section][indexPath.row]
         self.didEndDisplayCellEvent.invoke(with: (generator, indexPath))
         if let displayable = generator as? DisplayableFlow {
             displayable.didEndDisplayEvent.invoke(with: ())
@@ -630,4 +626,3 @@ extension BaseTableDataDisplayManager: UITableViewDataSource {
     }
 
 }
-

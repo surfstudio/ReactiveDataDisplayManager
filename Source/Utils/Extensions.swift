@@ -16,20 +16,29 @@ public extension NSObject {
 }
 
 public extension UIViewController {
-    public class func controller() -> Self {
+    class func controller() -> Self {
         let classReference = self.self
         return classReference.init(nibName: self.nameOfClass, bundle: nil)
     }
 }
 
 public extension UITableView {
-    public func registerNib(_ cellType: UITableViewCell.Type) {
+    func registerNib(_ cellType: UITableViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: nil), forCellReuseIdentifier: cellType.nameOfClass)
     }
 }
 
 public extension UICollectionView {
-    public func registerNib(_ cellType: UICollectionViewCell.Type) {
+    func registerNib(_ cellType: UICollectionViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: nil), forCellWithReuseIdentifier: cellType.nameOfClass)
     }
+}
+
+extension Array {
+
+    /// Index outside array
+    subscript (safe index: Int) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
+
 }
