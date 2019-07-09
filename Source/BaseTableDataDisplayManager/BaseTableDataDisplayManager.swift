@@ -244,7 +244,9 @@ public extension BaseTableDataDisplayManager {
                        with animation: UITableView.RowAnimation = .automatic) {
         self.insert(headGenerator: sectionHeader, before: header)
 
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else {
+        guard let headerIndex = self.sectionHeaderGenerators.index(where: {
+            $0 === header
+        }) else {
             return
         }
 
@@ -269,7 +271,9 @@ public extension BaseTableDataDisplayManager {
 
         self.insert(headGenerator: sectionHeader, after: header)
 
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else {
+        guard let headerIndex = self.sectionHeaderGenerators.index(where: {
+            $0 === header
+        }) else {
             return
         }
 
