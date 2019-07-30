@@ -60,6 +60,11 @@ extension BaseTableDataDisplayManager {
 
     // MARK: - DataDisplayManager actions
 
+    public func addSection(header generator: TableHeaderGenerator, cells: [TableCellGenerator]) {
+        self.sectionHeaderGenerators.append(generator)
+        self.cellGenerators.append(cells)
+    }
+
     public func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sectionHeaderGenerators.append(generator)
     }
