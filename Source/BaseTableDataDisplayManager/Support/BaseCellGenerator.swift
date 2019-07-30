@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class BaseCellGenerator<Cell: Configurable>: SelectableItem {
+public class BaseCellGenerator<Cell: Configurable>: SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Properties
 

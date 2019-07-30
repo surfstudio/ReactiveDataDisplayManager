@@ -18,19 +18,19 @@ public extension NSObject {
 public extension UIViewController {
     class func controller() -> Self {
         let classReference = self.self
-        return classReference.init(nibName: self.nameOfClass, bundle: nil)
+        return classReference.init(nibName: self.nameOfClass, bundle: Bundle(for: self))
     }
 }
 
 public extension UITableView {
     func registerNib(_ cellType: UITableViewCell.Type) {
-        self.register(UINib(nibName: cellType.nameOfClass, bundle: nil), forCellReuseIdentifier: cellType.nameOfClass)
+        self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellReuseIdentifier: cellType.nameOfClass)
     }
 }
 
 public extension UICollectionView {
     func registerNib(_ cellType: UICollectionViewCell.Type) {
-        self.register(UINib(nibName: cellType.nameOfClass, bundle: nil), forCellWithReuseIdentifier: cellType.nameOfClass)
+        self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellWithReuseIdentifier: cellType.nameOfClass)
     }
 }
 
