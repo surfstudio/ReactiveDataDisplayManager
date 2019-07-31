@@ -61,6 +61,12 @@ extension BaseTableDataDisplayManager {
     // MARK: - DataDisplayManager actions
 
     public func addSection(header generator: TableHeaderGenerator, cells: [TableCellGenerator]) {
+        guard let table = tableView else {
+            return
+        }
+        cells.forEach {
+            $0.registerCell(in: table)
+        }
         self.sectionHeaderGenerators.append(generator)
         self.cellGenerators.append(cells)
     }
