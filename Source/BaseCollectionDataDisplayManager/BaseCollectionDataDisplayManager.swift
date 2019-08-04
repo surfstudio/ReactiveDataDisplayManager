@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-/// Contains base implementation of TableDataManager and TableDisplayManager.
-/// Can register nib if needed, determinate EstimatedRowHeight.
-/// Can fill table with user data.
+/// Contains base implementation of CollectionDataManager and CollectionDisplayManager.
+/// Can register nib if needed.
+/// Can fill collection with user data.
 open class BaseCollectionDataDisplayManager: NSObject {
 
     // MARK: - Events

@@ -366,11 +366,11 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellGenerators[indexPath.section][indexPath.row].heightForCell()
+        return cellGenerators[indexPath.section][indexPath.row].cellHeight
     }
 
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.estimatedHeight
+        return cellGenerators[indexPath.section][indexPath.row].estimatedCellHeight ?? estimatedHeight
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
