@@ -39,10 +39,15 @@ public protocol TableCellGenerator: class {
     /// - Parameter in: TableView, in which cell will be registered
     func registerCell(in tableView: UITableView)
 
-    /// Returns height for cell.
+    /// Height for cell.
     ///
     /// Default implementation returns UITableView.automaticDimension
-    func heightForCell() -> CGFloat
+    var cellHeight: CGFloat { get }
+
+    /// Estimated height for cell
+    ///
+    /// Default implementation returns nil
+    var estimatedCellHeight: CGFloat? { get }
 }
 
 
@@ -135,8 +140,12 @@ public extension SelectableItem {
 
 public extension TableCellGenerator {
 
-    func heightForCell() -> CGFloat {
+    var cellHeight: CGFloat {
         return UITableView.automaticDimension
+    }
+
+    var estimatedCellHeight: CGFloat? {
+        return nil
     }
 
 }
