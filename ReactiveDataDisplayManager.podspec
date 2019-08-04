@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   s.framework = 'UIKit'
   s.ios.deployment_target = '9.0'
   s.dependancy = 'CoreEvents', '~> 1.2.0'
-
+  s.swift_version = '4.2'
 end
