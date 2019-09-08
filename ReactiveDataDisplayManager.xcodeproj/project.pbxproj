@@ -14,6 +14,7 @@
 		4F088BF91F4EABA2006B7809 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F088BF81F4EABA2006B7809 /* UIKit.framework */; };
 		4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */; };
 		4FD38132202D791A0005EBFE /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD38131202D791A0005EBFE /* Operations.swift */; };
+		816DB131224CC420001EAA47 /* BaseCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816DB130224CC420001EAA47 /* BaseCollectionCellGenerator.swift */; };
 		8632735D21F0F7DA00620CEE /* ConfigurableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */; };
 		86F35A2C21EE7B51009D3001 /* BaseCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */; };
 		8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */; };
@@ -47,6 +48,7 @@
 		4F088BF81F4EABA2006B7809 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayManager.swift; sourceTree = "<group>"; };
 		4FD38131202D791A0005EBFE /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		816DB130224CC420001EAA47 /* BaseCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableProtocol.swift; sourceTree = "<group>"; };
 		86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellGenerator.swift; sourceTree = "<group>"; };
 		8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */,
 				4F088BED1F4E9F74006B7809 /* Protocols.swift */,
 				4FD38131202D791A0005EBFE /* Operations.swift */,
+				8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */,
 				8BAB778B20BB416C0005C4E9 /* BaseCollectionDataDisplayManager */,
 				8BAB778A20BB41630005C4E9 /* BaseTableDataDisplayManager */,
 				8B7E265020B89AEA001D7A93 /* Utils */,
@@ -100,6 +103,14 @@
 				4F088BF81F4EABA2006B7809 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		816DB12F224CC402001EAA47 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				816DB130224CC420001EAA47 /* BaseCollectionCellGenerator.swift */,
+			);
+			path = Support;
 			sourceTree = "<group>";
 		};
 		8B7E265020B89AEA001D7A93 /* Utils */ = {
@@ -127,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */,
+				816DB12F224CC402001EAA47 /* Support */,
 			);
 			path = BaseCollectionDataDisplayManager;
 			sourceTree = "<group>";
@@ -135,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */,
-				8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */,
 				8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */,
 			);
 			path = Support;
@@ -305,6 +316,7 @@
 				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
 				4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */,
 				8632735D21F0F7DA00620CEE /* ConfigurableProtocol.swift in Sources */,
+				816DB131224CC420001EAA47 /* BaseCollectionCellGenerator.swift in Sources */,
 				4FD38132202D791A0005EBFE /* Operations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
