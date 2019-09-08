@@ -25,12 +25,13 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
     /// Called if table scrolled
     public var scrollEvent = BaseEvent<UITableView>()
     public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> = BaseEvent<CGPoint>()
+    public var cellChangedPosition = BaseEvent<(section: Int, oldIndex: Int, newIndex: Int)>()
 
-    // MARK: - Private properties
+    // MARK: - Readonly properties
 
+    public private(set) weak var tableView: UITableView?
     public private(set) var cellGenerators: [[TableCellGenerator]]
-    public var sectionHeaderGenerators: [TableHeaderGenerator]
-    public weak var tableView: UITableView?
+    public private(set) var sectionHeaderGenerators: [TableHeaderGenerator]
 
     // MARK: - Public properties
 
@@ -321,6 +322,38 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let guardTable = self.tableView else { return }
         self.scrollEvent.invoke(with: guardTable)
+    }
+
+    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if let generator = cellGenerators[indexPath.section][indexPath.row] as? MovableGenerator {
+            return generator.canMove()
+        }
+        return false
+    }
+
+    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard sourceIndexPath.section == destinationIndexPath.section else {
+            return
+        }
+        let section = sourceIndexPath.section
+        var oldCellGenerators = cellGenerators[section]
+        let itemToMove = oldCellGenerators[sourceIndexPath.row]
+        oldCellGenerators.remove(at: sourceIndexPath.row)
+        oldCellGenerators.insert(itemToMove, at: destinationIndexPath.row)
+
+        let sectionGenerator = sectionHeaderGenerators[section]
+        removeAllGenerators(in: sectionGenerator)
+        addCellGenerators(oldCellGenerators, toHeader: sectionGenerator)
+
+        cellChangedPosition.invoke(with: (section: section, oldIndex: sourceIndexPath.row, newIndex: destinationIndexPath.row))
+    }
+
+    open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
     }
 
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
