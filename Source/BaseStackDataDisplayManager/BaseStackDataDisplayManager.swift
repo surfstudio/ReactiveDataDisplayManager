@@ -44,8 +44,12 @@ open class BaseStackDataDisplayManager: NSObject, DataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [StackCellGenerator], after: StackCellGenerator) {
-        generators.forEach { [weak self] generator in
-            self?.addCellGenerator(generator, after: after)
+        if let index = self.index(of: after) {
+            generators.enumerated().forEach { offset, generator in
+                self.cellGenerators.insert(generator, at: index + offset + 1)
+            }
+        } else {
+            self.cellGenerators.append(contentsOf: generators)
         }
     }
 

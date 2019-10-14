@@ -18,6 +18,7 @@
 		8632735D21F0F7DA00620CEE /* ConfigurableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */; };
 		86F35A2C21EE7B51009D3001 /* BaseCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */; };
 		8987883D2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987883C2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift */; };
+		8987883F2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987883E2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift */; };
 		899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */; };
 		8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */; };
 		8B7E265220B89B12001D7A93 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEA1F4E9F74006B7809 /* Event.swift */; };
@@ -54,6 +55,7 @@
 		8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableProtocol.swift; sourceTree = "<group>"; };
 		86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellGenerator.swift; sourceTree = "<group>"; };
 		8987883C2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderDataDisplayManager.swift; sourceTree = "<group>"; };
+		8987883E2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackDataDisplatManagerTests.swift; sourceTree = "<group>"; };
 		899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackDataDisplayManager.swift; sourceTree = "<group>"; };
 		8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
 		8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */,
+				8987883E2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift */,
 				8BC018FD20B4912100D82429 /* Info.plist */,
 				8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */,
 			);
@@ -312,6 +315,7 @@
 			files = (
 				8B9FEBDD20B493BF00002874 /* BaseTableDataDisplayManagerTests.swift in Sources */,
 				8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */,
+				8987883F2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
