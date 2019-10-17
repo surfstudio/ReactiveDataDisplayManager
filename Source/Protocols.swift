@@ -192,3 +192,21 @@ public extension StackCellGenerator where Self: ViewBuilder {
         return view
     }
 }
+
+public protocol GravityTableCellGenerator: TableCellGenerator {
+    var heaviness: Int { get set }
+}
+
+open class GravityTableHeaderGenerator: TableHeaderGenerator {
+    open func getHeaviness() -> Int {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+}
+
+// MARK: - Equatable
+
+extension GravityTableHeaderGenerator: Equatable {
+    public static func == (lhs: GravityTableHeaderGenerator, rhs: GravityTableHeaderGenerator) -> Bool {
+        return lhs.generate() == rhs.generate() && lhs.getHeaviness() == rhs.getHeaviness()
+    }
+}

@@ -20,6 +20,8 @@
 		8987883D2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987883C2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift */; };
 		8987883F2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987883E2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift */; };
 		899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */; };
+		89FFDDBA23584B9F00D2C769 /* GravityTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */; };
+		89FFDDBC23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */; };
 		8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */; };
 		8B7E265220B89B12001D7A93 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEA1F4E9F74006B7809 /* Event.swift */; };
 		8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */; };
@@ -57,6 +59,8 @@
 		8987883C2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderDataDisplayManager.swift; sourceTree = "<group>"; };
 		8987883E2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackDataDisplatManagerTests.swift; sourceTree = "<group>"; };
 		899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackDataDisplayManager.swift; sourceTree = "<group>"; };
+		89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTableDataDisplayManager.swift; sourceTree = "<group>"; };
+		89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGravityTableHeaderGenerator.swift; sourceTree = "<group>"; };
 		8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
 		8B7E264E20B89AE0001D7A93 /* FatalErrorUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FatalErrorUtil.swift; sourceTree = "<group>"; };
 		8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableBaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 				4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */,
 				8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */,
 				8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */,
+				89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */,
 				8BAB778E20BB45C50005C4E9 /* Support */,
 			);
 			path = BaseTableDataDisplayManager;
@@ -164,6 +169,7 @@
 			children = (
 				86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */,
 				8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */,
+				89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -326,6 +332,7 @@
 				8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */,
 				8B7E265220B89B12001D7A93 /* Event.swift in Sources */,
 				4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */,
+				89FFDDBC23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift in Sources */,
 				8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */,
 				8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */,
 				4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */,
@@ -337,6 +344,7 @@
 				8632735D21F0F7DA00620CEE /* ConfigurableProtocol.swift in Sources */,
 				899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */,
 				8987883D2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift in Sources */,
+				89FFDDBA23584B9F00D2C769 /* GravityTableDataDisplayManager.swift in Sources */,
 				816DB131224CC420001EAA47 /* BaseCollectionCellGenerator.swift in Sources */,
 				4FD38132202D791A0005EBFE /* Operations.swift in Sources */,
 			);
