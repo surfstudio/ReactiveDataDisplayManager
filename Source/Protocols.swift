@@ -180,3 +180,15 @@ public extension CollectionCellGenerator where Self: ViewBuilder {
 
 }
 
+/// Protocol that incapsulated type of current cell
+public protocol StackCellGenerator: class {
+    func generate(stackView: UIStackView, index: Int) -> UIView
+}
+
+public extension StackCellGenerator where Self: ViewBuilder {
+    func generate(stackView: UIStackView, index: Int) -> UIView {
+        let view = Self.ViewType()
+        self.build(view: view)
+        return view
+    }
+}
