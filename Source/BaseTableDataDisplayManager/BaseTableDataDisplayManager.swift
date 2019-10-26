@@ -70,15 +70,6 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
         self.sectionHeaderGenerators.append(generator)
     }
 
-    public func insert(headGenerator: TableHeaderGenerator,
-                       by index: Int,
-                       animation: UITableView.RowAnimation = .none) {
-        let index = min(max(index, 0), self.sectionHeaderGenerators.count)
-        self.sectionHeaderGenerators.insert(headGenerator, at: index)
-        self.cellGenerators.insert([], at: index)
-        tableView?.insertSections([index], with: animation)
-    }
-
     public func insert(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) {
         guard self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) else {
             fatalError("Error adding header generator. Header generator was added earlier")
@@ -277,17 +268,14 @@ public extension BaseTableDataDisplayManager {
                        new sectionHeader: TableHeaderGenerator,
                        generators: [TableCellGenerator],
                        with animation: UITableView.RowAnimation = .automatic) {
-
         self.insert(headGenerator: sectionHeader, after: header)
 
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: {
-            $0 === header
-        }) else {
+        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else {
             return
         }
 
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
+        let elements = generators.enumerated().map { item in
+            (item.element, headerIndex, item.offset)
         }
 
         self.insert(elements: elements, with: animation)
@@ -304,8 +292,8 @@ public extension BaseTableDataDisplayManager {
                 with animation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
 
-        let elements = newGenerators.enumerated().map {
-            ($0.element, index.sectionIndex, index.generatorIndex + $0.offset + 1)
+        let elements = newGenerators.enumerated().map { item in
+            (item.element, index.sectionIndex, index.generatorIndex + item.offset + 1)
         }
         self.insert(elements: elements, with: animation)
     }
@@ -320,8 +308,8 @@ public extension BaseTableDataDisplayManager {
                 new newGenerators: [TableCellGenerator],
                 with animation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(generator) else { return }
-        let elements = newGenerators.enumerated().map {
-            ($0.element, index.sectionIndex, index.generatorIndex + $0.offset)
+        let elements = newGenerators.enumerated().map { item in
+            (item.element, index.sectionIndex, index.generatorIndex + item.offset)
         }
         self.insert(elements: elements, with: animation)
     }
@@ -379,8 +367,8 @@ public extension BaseTableDataDisplayManager {
         guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else {
             return
         }
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
+        let elements = generators.enumerated().map { item in
+            (item.element, headerIndex, item.offset)
         }
         self.insert(elements: elements, with: animation)
     }
@@ -398,8 +386,8 @@ public extension BaseTableDataDisplayManager {
             return
         }
         let base = self.cellGenerators[headerIndex].count
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, base + $0.offset)
+        let elements = generators.enumerated().map { item in
+            (item.element, headerIndex, base + item.offset)
         }
         self.insert(elements: elements, with: animation)
     }
@@ -453,6 +441,15 @@ public extension BaseTableDataDisplayManager {
 // MARK: - Private methods
 
 private extension BaseTableDataDisplayManager {
+
+    func insert(headGenerator: TableHeaderGenerator,
+                by index: Int,
+                animation: UITableView.RowAnimation = .none) {
+        let index = min(max(index, 0), self.sectionHeaderGenerators.count)
+        self.sectionHeaderGenerators.insert(headGenerator, at: index)
+        self.cellGenerators.insert([], at: index)
+        tableView?.insertSections([index], with: animation)
+    }
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
                 with animation: UITableView.RowAnimation = .automatic) {
@@ -527,12 +524,11 @@ public extension BaseTableDataDisplayManager {
     func scrollTo(generator: TableCellGenerator, scrollPosition: UITableView.ScrollPosition, animated: Bool) {
         for sectionElement in cellGenerators.enumerated() {
             for rowElement in sectionElement.element.enumerated() {
-                if rowElement.element !== generator {
-                    continue
+                if rowElement.element === generator {
+                    let indexPath = IndexPath(row: rowElement.offset, section: sectionElement.offset)
+                    tableView?.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
+                    return
                 }
-
-                let indexPath = IndexPath(row: rowElement.offset, section: sectionElement.offset)
-                tableView?.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
             }
         }
     }
