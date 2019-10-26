@@ -39,10 +39,15 @@ public protocol TableCellGenerator: class {
     /// - Parameter in: TableView, in which cell will be registered
     func registerCell(in tableView: UITableView)
 
-    /// Returns height for cell.
+    /// Height for cell.
     ///
     /// Default implementation returns UITableView.automaticDimension
-    func heightForCell() -> CGFloat
+    var cellHeight: CGFloat { get }
+
+    /// Estimated height for cell
+    ///
+    /// Default implementation returns nil
+    var estimatedCellHeight: CGFloat? { get }
 }
 
 
@@ -125,6 +130,10 @@ public protocol DeletableGenerator {
     var eventDelete: BaseEmptyEvent { get }
 }
 
+public protocol MovableGenerator {
+    func canMove() -> Bool
+}
+
 public extension SelectableItem {
 
     var isNeedDeselect: Bool {
@@ -135,8 +144,12 @@ public extension SelectableItem {
 
 public extension TableCellGenerator {
 
-    func heightForCell() -> CGFloat {
+    var cellHeight: CGFloat {
         return UITableView.automaticDimension
+    }
+
+    var estimatedCellHeight: CGFloat? {
+        return nil
     }
 
 }
@@ -177,3 +190,33 @@ public extension CollectionCellGenerator where Self: ViewBuilder {
 
 }
 
+/// Protocol that incapsulated type of current cell
+public protocol StackCellGenerator: class {
+    func generate(stackView: UIStackView, index: Int) -> UIView
+}
+
+public extension StackCellGenerator where Self: ViewBuilder {
+    func generate(stackView: UIStackView, index: Int) -> UIView {
+        let view = Self.ViewType()
+        self.build(view: view)
+        return view
+    }
+}
+
+public protocol GravityTableCellGenerator: TableCellGenerator {
+    var heaviness: Int { get set }
+}
+
+open class GravityTableHeaderGenerator: TableHeaderGenerator {
+    open func getHeaviness() -> Int {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+}
+
+// MARK: - Equatable
+
+extension GravityTableHeaderGenerator: Equatable {
+    public static func == (lhs: GravityTableHeaderGenerator, rhs: GravityTableHeaderGenerator) -> Bool {
+        return lhs.generate() == rhs.generate() && lhs.getHeaviness() == rhs.getHeaviness()
+    }
+}

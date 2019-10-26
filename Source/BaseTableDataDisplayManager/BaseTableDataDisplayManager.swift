@@ -12,7 +12,7 @@ import UIKit
 /// Contains base implementation of DataDisplayManager with UITableView.
 /// Registers nibs, determinates EstimatedRowHeight.
 /// Can fill table with user data.
-open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
+open class BaseTableDataDisplayManager: NSObject {
 
     // MARK: - Typealiases
 
@@ -25,16 +25,17 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
     /// Called if table scrolled
     public var scrollEvent = BaseEvent<UITableView>()
     public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> = BaseEvent<CGPoint>()
+    public var cellChangedPosition = BaseEvent<(section: Int, oldIndex: Int, newIndex: Int)>()
 
     /// Celled when cells displaying
     public var willDisplayCellEvent = BaseEvent<(TableCellGenerator, IndexPath)>()
     public var didEndDisplayCellEvent = BaseEvent<(TableCellGenerator, IndexPath)>()
 
-    // MARK: - Private properties
+    // MARK: - Readonly properties
 
+    public private(set) weak var tableView: UITableView?
     public private(set) var cellGenerators: [[TableCellGenerator]]
-    public var sectionHeaderGenerators: [TableHeaderGenerator]
-    public weak var tableView: UITableView?
+    public private(set) var sectionHeaderGenerators: [TableHeaderGenerator]
 
     // MARK: - Public properties
 
@@ -54,19 +55,13 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 
 }
 
-// MARK: - Generator actions
+// MARK: - DataDisplayManager
 
-extension BaseTableDataDisplayManager {
-
-    // MARK: - DataDisplayManager actions
+extension BaseTableDataDisplayManager: DataDisplayManager {
 
     public func addSection(header generator: TableHeaderGenerator, cells: [TableCellGenerator]) {
-        guard let table = tableView else {
-            return
-        }
-        cells.forEach {
-            $0.registerCell(in: table)
-        }
+        guard let table = tableView else { return }
+        cells.forEach { $0.registerCell(in: table) }
         self.sectionHeaderGenerators.append(generator)
         self.cellGenerators.append(cells)
     }
@@ -163,9 +158,13 @@ extension BaseTableDataDisplayManager {
         }) else { return }
         tableView?.reloadSections(IndexSet(integer: index), with: animation)
     }
+}
 
-    // MARK: - BaseTableDataDisplayManager actions
-    // TODO: Move to DDM protocol and implement in BaseCollectionDDM
+// MARK: - HeaderDataDisplayManager
+
+extension BaseTableDataDisplayManager: HeaderDataDisplayManager {
+
+    // TODO: Implement in BaseCollectionDDM
 
     public func addCellGenerators(_ generators: [TableCellGenerator], toHeader header: TableHeaderGenerator) {
         guard let table = self.tableView else { return }
@@ -181,7 +180,7 @@ extension BaseTableDataDisplayManager {
     }
 
     /// Removes all cell generators from a given section
-    public func removeAllGenerators(in header: TableHeaderGenerator) {
+    public func removeAllGenerators(from header: TableHeaderGenerator) {
         guard let index = self.sectionHeaderGenerators.index(where: { $0 === header }), self.cellGenerators.count > index else {
             return
         }
@@ -192,7 +191,6 @@ extension BaseTableDataDisplayManager {
     public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: TableHeaderGenerator) {
         addCellGenerators([generator], toHeader: header)
     }
-
 }
 
 // MARK: - TableView actions
@@ -584,12 +582,44 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
         }
     }
 
+    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if let generator = cellGenerators[indexPath.section][indexPath.row] as? MovableGenerator {
+            return generator.canMove()
+        }
+        return false
+    }
+
+    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        guard sourceIndexPath.section == destinationIndexPath.section else {
+            return
+        }
+        let section = sourceIndexPath.section
+        var oldCellGenerators = cellGenerators[section]
+        let itemToMove = oldCellGenerators[sourceIndexPath.row]
+        oldCellGenerators.remove(at: sourceIndexPath.row)
+        oldCellGenerators.insert(itemToMove, at: destinationIndexPath.row)
+
+        let sectionGenerator = sectionHeaderGenerators[section]
+        removeAllGenerators(from: sectionGenerator)
+        addCellGenerators(oldCellGenerators, toHeader: sectionGenerator)
+
+        cellChangedPosition.invoke(with: (section: section, oldIndex: sourceIndexPath.row, newIndex: destinationIndexPath.row))
+    }
+
+    open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    open func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellGenerators[indexPath.section][indexPath.row].heightForCell()
+        return cellGenerators[indexPath.section][indexPath.row].cellHeight
     }
 
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.estimatedHeight
+        return cellGenerators[indexPath.section][indexPath.row].estimatedCellHeight ?? estimatedHeight
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
