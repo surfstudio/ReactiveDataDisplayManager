@@ -16,7 +16,6 @@ public protocol DataDisplayManager: class {
 
     associatedtype CollectionType
     associatedtype CellGeneratorType
-    associatedtype HeaderGeneratorType
 
     // MARK: Support methods
 
@@ -26,11 +25,6 @@ public protocol DataDisplayManager: class {
     func forceRefill()
 
     // MARK: - Data source methods
-
-    /// Adds a new header generator.
-    ///
-    /// - Parameter generator: The new generator.
-    func addSectionHeaderGenerator(_ generator: HeaderGeneratorType)
 
     /// Adds a new cell generator.
     ///
@@ -62,9 +56,6 @@ public protocol DataDisplayManager: class {
     ///
     /// - Parameter generators: generators to update
     func update(generators: [CellGeneratorType])
-
-    /// Removes all header generators.
-    func clearHeaderGenerators()
 
     /// Removes all cell generators.
     func clearCellGenerators()
