@@ -80,7 +80,7 @@ View wants to recive a message about user tap on button:
 
 ## How to install
 
-`pod 'ReactiveDataDisplayManager' ~> 3.4.0`
+`pod 'ReactiveDataDisplayManager' ~> 3.5.0`
 
 ## Errors
 

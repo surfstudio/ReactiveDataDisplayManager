@@ -117,7 +117,7 @@ extension BaseTableDataDisplayManager {
         CATransaction.setCompletionBlock {
             completion()
         }
-        forceRefill()
+        self.forceRefill()
         CATransaction.commit()
     }
 
@@ -343,21 +343,21 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
         guard
-            let generator = cellGenerators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
+            let generator = self.cellGenerators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
             moveToTheSameSection || generator.canMoveInOtherSection()
         else {
             return
         }
 
-        let itemToMove = cellGenerators[sourceIndexPath.section][sourceIndexPath.row]
+        let itemToMove = self.cellGenerators[sourceIndexPath.section][sourceIndexPath.row]
 
         // find oldSection and remove item from this array
-        cellGenerators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+        self.cellGenerators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
 
         // findNewSection and add items to this array
-        cellGenerators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
+        self.cellGenerators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
 
-        cellChangedPosition.invoke(with: (oldIndexPath: sourceIndexPath, newIndexPath: destinationIndexPath))
+        self.cellChangedPosition.invoke(with: (oldIndexPath: sourceIndexPath, newIndexPath: destinationIndexPath))
 
         // need to prevent crash with internal inconsistency of UITableView
         DispatchQueue.main.async {
