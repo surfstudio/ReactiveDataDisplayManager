@@ -122,6 +122,19 @@ public protocol DeletableGenerator {
 
 public protocol MovableGenerator {
     func canMove() -> Bool
+    func canMoveInOtherSection() -> Bool
+}
+
+public extension MovableGenerator {
+
+    func canMove() -> Bool {
+        return true
+    }
+
+    func canMoveInOtherSection() -> Bool {
+        return true
+    }
+
 }
 
 public extension SelectableItem {

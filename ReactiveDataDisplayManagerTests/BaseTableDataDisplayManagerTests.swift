@@ -428,7 +428,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // Assert
         XCTAssert(table.numberOfSections == 2)
         XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
-        XCTAssert(table.numberOfRows(inSection: 1) == 0, "Expected 0, got \(table.numberOfRows(inSection: 0))")
+        XCTAssert(table.numberOfRows(inSection: 1) == 0, "Expected 0, got \(table.numberOfRows(inSection: 1))")
     }
 
     func testThatRemoveAllGeneratorsDoesntClearInvalidSection() {
@@ -445,6 +445,36 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
     }
 
+    func testThatMovableGeneratorIsntMoveToAnotherSection() {
+        // Arrange
+        let gen1 = NotMovableToAnotherSectionGenerator()
+        let gen2 = NotMovableToAnotherSectionGenerator()
+        ddm.addSectionHeaderGenerator(EmptyTableHeaderGenerator())
+        ddm.addCellGenerator(gen1)
+        ddm.addSectionHeaderGenerator(EmptyTableHeaderGenerator())
+        ddm.addCellGenerator(gen2)
+        // Act
+        ddm.tableView(table, moveRowAt: IndexPath(row: 0, section: 0), to: IndexPath(row: 0, section: 1))
+        // Assert
+        XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
+        XCTAssert(table.numberOfRows(inSection: 1) == 1, "Expected 1, got \(table.numberOfRows(inSection: 1))")
+    }
+
+    func testThatMovableGeneratorMoveToAnotherSection() {
+        // Arrange
+        let gen1 = MovableToAnotherSectionGenerator()
+        let gen2 = MovableToAnotherSectionGenerator()
+        ddm.addSectionHeaderGenerator(EmptyTableHeaderGenerator())
+        ddm.addCellGenerator(gen1)
+        ddm.addSectionHeaderGenerator(EmptyTableHeaderGenerator())
+        ddm.addCellGenerator(gen2)
+        // Act
+        ddm.tableView(table, moveRowAt: IndexPath(row: 0, section: 0), to: IndexPath(row: 0, section: 1))
+        // Assert
+        XCTAssert(table.numberOfRows(inSection: 0) == 0, "Expected 0, got \(table.numberOfRows(inSection: 0))")
+        XCTAssert(table.numberOfRows(inSection: 1) == 2, "Expected 2, got \(table.numberOfRows(inSection: 1))")
+    }
+
     // MARK: - Mocks
 
     final class HeaderGenerator: TableHeaderGenerator {
@@ -459,7 +489,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
     }
 
-    final class CellGenerator: TableCellGenerator {
+    class CellGenerator: TableCellGenerator {
 
         var identifier: UITableViewCell.Type {
             return UITableViewCell.self
@@ -473,6 +503,15 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
             tableView.registerNib(identifier)
         }
 
+    }
+
+    final class MovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
+    }
+
+    final class NotMovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
+        func canMoveInOtherSection() -> Bool {
+            return false
+        }
     }
 
     final class UITableViewSpy: UITableView {
@@ -503,6 +542,14 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
         override func reloadSections(_ sections: IndexSet, with animation: UITableView.RowAnimation) {
             sectionWasReloaded = true
+        }
+
+        override func beginUpdates() {
+            // don't call super to avoid UI API call
+        }
+
+        override func endUpdates() {
+            // don't call super to avoid UI API call
         }
 
     }

@@ -25,7 +25,7 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
     /// Called if table scrolled
     public var scrollEvent = BaseEvent<UITableView>()
     public var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> = BaseEvent<CGPoint>()
-    public var cellChangedPosition = BaseEvent<(section: Int, oldIndex: Int, newIndex: Int)>()
+    public var cellChangedPosition = BaseEvent<(oldIndexPath: IndexPath, newIndexPath: IndexPath)>()
 
     // MARK: - Readonly properties
 
@@ -341,20 +341,29 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard sourceIndexPath.section == destinationIndexPath.section else {
+        let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
+        guard
+            let generator = cellGenerators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
+            moveToTheSameSection || generator.canMoveInOtherSection()
+        else {
             return
         }
-        let section = sourceIndexPath.section
-        var oldCellGenerators = cellGenerators[section]
-        let itemToMove = oldCellGenerators[sourceIndexPath.row]
-        oldCellGenerators.remove(at: sourceIndexPath.row)
-        oldCellGenerators.insert(itemToMove, at: destinationIndexPath.row)
 
-        let sectionGenerator = sectionHeaderGenerators[section]
-        removeAllGenerators(in: sectionGenerator)
-        addCellGenerators(oldCellGenerators, toHeader: sectionGenerator)
+        let itemToMove = cellGenerators[sourceIndexPath.section][sourceIndexPath.row]
 
-        cellChangedPosition.invoke(with: (section: section, oldIndex: sourceIndexPath.row, newIndex: destinationIndexPath.row))
+        // find oldSection and remove item from this array
+        cellGenerators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+
+        // findNewSection and add items to this array
+        cellGenerators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
+
+        cellChangedPosition.invoke(with: (oldIndexPath: sourceIndexPath, newIndexPath: destinationIndexPath))
+
+        // need to prevent crash with internal inconsistency of UITableView
+        DispatchQueue.main.async {
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }
     }
 
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
