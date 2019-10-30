@@ -424,7 +424,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(headerGen2)
         ddm.addCellGenerators([gen2], toHeader: headerGen2)
         // Act
-        ddm.removeAllGenerators(in: headerGen2)
+        ddm.removeAllGenerators(from: headerGen2)
         // Assert
         XCTAssert(table.numberOfSections == 2)
         XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
@@ -439,7 +439,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1], toHeader: headerGen1)
         // Act
-        ddm.removeAllGenerators(in: headerGen2)
+        ddm.removeAllGenerators(from: headerGen2)
         // Assert
         XCTAssert(table.numberOfSections == 1)
         XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")

@@ -12,7 +12,7 @@ import UIKit
 /// Contains base implementation of DataDisplayManager with UITableView.
 /// Registers nibs, determinates EstimatedRowHeight.
 /// Can fill table with user data.
-open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
+open class BaseTableDataDisplayManager: NSObject {
 
     // MARK: - Typealiases
 
@@ -51,12 +51,9 @@ open class BaseTableDataDisplayManager: NSObject, DataDisplayManager {
 
 }
 
-// MARK: - Generator actions
+// MARK: - DataDisplayManager
 
-extension BaseTableDataDisplayManager {
-
-    // MARK: - DataDisplayManager actions
-
+extension BaseTableDataDisplayManager: DataDisplayManager {
     public func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sectionHeaderGenerators.append(generator)
     }
@@ -127,9 +124,12 @@ extension BaseTableDataDisplayManager {
         }) else { return }
         tableView?.reloadSections(IndexSet(integer: index), with: animation)
     }
+}
 
-    // MARK: - BaseTableDataDisplayManager actions
-    // TODO: Move to DDM protocol and implement in BaseCollectionDDM
+// MARK: - HeaderDataDisplayManager
+
+extension BaseTableDataDisplayManager: HeaderDataDisplayManager {
+    // TODO: Implement in BaseCollectionDDM
 
     public func addCellGenerators(_ generators: [TableCellGenerator], toHeader header: TableHeaderGenerator) {
         guard let table = self.tableView else { return }
@@ -145,7 +145,7 @@ extension BaseTableDataDisplayManager {
     }
 
     /// Removes all cell generators from a given section
-    public func removeAllGenerators(in header: TableHeaderGenerator) {
+    public func removeAllGenerators(from header: TableHeaderGenerator) {
         guard let index = self.sectionHeaderGenerators.index(where: { $0 === header }), self.cellGenerators.count > index else {
             return
         }
@@ -156,7 +156,6 @@ extension BaseTableDataDisplayManager {
     public func addCellGenerator(_ generator: TableCellGenerator, toHeader header: TableHeaderGenerator) {
         addCellGenerators([generator], toHeader: header)
     }
-
 }
 
 // MARK: - TableView actions
