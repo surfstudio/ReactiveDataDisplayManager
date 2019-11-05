@@ -24,6 +24,9 @@ public protocol DataDisplayManager: class {
     /// Reloads collection.
     func forceRefill()
 
+    /// Reloads collection with completion
+    func forceRefill(completion: @escaping (() -> Void))
+
     // MARK: - Data source methods
 
     /// Adds a new cell generator.

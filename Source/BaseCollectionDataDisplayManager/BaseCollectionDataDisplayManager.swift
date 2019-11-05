@@ -50,6 +50,15 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
         self.collectionView?.reloadData()
     }
 
+    public func forceRefill(completion: @escaping (() -> Void)) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            completion()
+        }
+        forceRefill()
+        CATransaction.commit()
+    }
+
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
         guard let collection = self.collectionView else { return }
         generator.registerCell(in: collection)
