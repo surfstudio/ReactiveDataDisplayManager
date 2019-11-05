@@ -33,3 +33,12 @@ public extension UICollectionView {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellWithReuseIdentifier: cellType.nameOfClass)
     }
 }
+
+extension Array {
+
+    /// Index outside array
+    subscript (safe index: Int) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
+
+}
