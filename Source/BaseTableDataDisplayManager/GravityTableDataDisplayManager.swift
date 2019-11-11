@@ -24,8 +24,8 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
 
     public var estimatedHeight: CGFloat = 40.0
     public weak var tableView: UITableView?
-    private var cellGenerators: [[GravityTableCellGenerator]]
-    private var headerGenerators: [GravityTableHeaderGenerator]
+    public private(set) var cellGenerators: [[GravityTableCellGenerator]]
+    public private(set) var headerGenerators: [GravityTableHeaderGenerator]
 
     // MARK: - DataDisplayManager
 
