@@ -8,9 +8,9 @@
 
 open class PaginableBaseCollectionDataDisplayManager: BaseCollectionDataDisplayManager {
 
-    var lastCellShowingEvent = BaseEvent<Void>()
+    public var lastCellShowingEvent = BaseEvent<Void>()
 
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == cellGenerators.count - 1 {
             lastCellShowingEvent.invoke(with: ())
         }
