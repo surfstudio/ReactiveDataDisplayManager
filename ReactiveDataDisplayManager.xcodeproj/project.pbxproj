@@ -24,6 +24,7 @@
 		89927C3F2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89927C3E2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift */; };
 		89927C412379B2FC006211D8 /* GravityFoldingHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89927C402379B2FC006211D8 /* GravityFoldingHeaderGenerator.swift */; };
 		899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */; };
+		89FA39C1238401970031D560 /* PaginableBaseCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FA39C0238401970031D560 /* PaginableBaseCollectionDataDisplayManager.swift */; };
 		89FFDDBA23584B9F00D2C769 /* GravityTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */; };
 		89FFDDBC23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */; };
 		8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */; };
@@ -67,6 +68,7 @@
 		89927C3E2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityFoldingTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		89927C402379B2FC006211D8 /* GravityFoldingHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityFoldingHeaderGenerator.swift; sourceTree = "<group>"; };
 		899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackDataDisplayManager.swift; sourceTree = "<group>"; };
+		89FA39C0238401970031D560 /* PaginableBaseCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableBaseCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
 		89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGravityTableHeaderGenerator.swift; sourceTree = "<group>"; };
 		8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */,
+				89FA39C0238401970031D560 /* PaginableBaseCollectionDataDisplayManager.swift */,
 				816DB12F224CC402001EAA47 /* Support */,
 			);
 			path = BaseCollectionDataDisplayManager;
@@ -357,6 +360,7 @@
 				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
 				897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */,
 				4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */,
+				89FA39C1238401970031D560 /* PaginableBaseCollectionDataDisplayManager.swift in Sources */,
 				8632735D21F0F7DA00620CEE /* ConfigurableProtocol.swift in Sources */,
 				899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */,
 				8987883D2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift in Sources */,

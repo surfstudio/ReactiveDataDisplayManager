@@ -21,8 +21,8 @@ open class BaseCollectionDataDisplayManager: NSObject {
 
     // MARK: - Fileprivate properties
 
-    fileprivate(set) var cellGenerators: [CollectionCellGenerator]
-    fileprivate var headerGenerators: [CollectionHeaderGenerator]
+    public private(set) var cellGenerators: [CollectionCellGenerator]
+    public private(set) var headerGenerators: [CollectionHeaderGenerator]
     fileprivate weak var collectionView: UICollectionView?
 
     // MARK: - Initialization
