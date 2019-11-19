@@ -35,7 +35,7 @@ open class BaseTableDataDisplayManager: NSObject {
 
     public private(set) weak var tableView: UITableView?
     public private(set) var cellGenerators: [[TableCellGenerator]]
-    public private(set) var sectionHeaderGenerators: [TableHeaderGenerator]
+    public var sectionHeaderGenerators: [TableHeaderGenerator]
 
     // MARK: - Public properties
 
