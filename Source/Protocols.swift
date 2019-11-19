@@ -116,6 +116,18 @@ public protocol SelectableItem: class {
     var isNeedDeselect: Bool { get }
 }
 
+public protocol FoldableItem: class {
+    var didFoldEvent: BaseEvent<Bool> { get }
+    var isExpanded: Bool { get set }
+    var childGenerators: [TableCellGenerator] { get set }
+}
+
+public protocol GravityFoldableItem: class {
+    var didFoldEvent: BaseEvent<Bool> { get }
+    var isExpanded: Bool { get set }
+    var childGenerators: [GravityTableCellGenerator] { get set }
+}
+
 public protocol DisplayableFlow: class {
 
     /// Invokes when cell will displaying.
