@@ -26,6 +26,7 @@
 		899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */; };
 		89FD21B0238BD9FB008D7ED3 /* BaseCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21AF238BD9FB008D7ED3 /* BaseCollectionDataDisplayManager.swift */; };
 		89FD21B2238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B1238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift */; };
+		89FD21BA238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B9238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift */; };
 		89FFDDBA23584B9F00D2C769 /* GravityTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */; };
 		89FFDDBC23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */; };
 		8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */; };
@@ -70,6 +71,7 @@
 		899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackDataDisplayManager.swift; sourceTree = "<group>"; };
 		89FD21AF238BD9FB008D7ED3 /* BaseCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
 		89FD21B1238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
+		89FD21B9238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGravityTableHeaderGenerator.swift; sourceTree = "<group>"; };
 		8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				8987883E2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift */,
 				897CFCC42379A6CC00E98BB8 /* FoldingTableDataDisplayManagerTests.swift */,
 				89927C402379B2FC006211D8 /* GravityFoldingHeaderGenerator.swift */,
+				89FD21B9238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift */,
 				8BC018FD20B4912100D82429 /* Info.plist */,
 				8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */,
 			);
@@ -335,6 +338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B9FEBDD20B493BF00002874 /* BaseTableDataDisplayManagerTests.swift in Sources */,
+				89FD21BA238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift in Sources */,
 				897CFCC52379A6CC00E98BB8 /* FoldingTableDataDisplayManagerTests.swift in Sources */,
 				8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */,
 				8987883F2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift in Sources */,
