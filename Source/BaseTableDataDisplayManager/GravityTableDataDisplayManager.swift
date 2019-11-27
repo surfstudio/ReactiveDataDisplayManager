@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Contains implementations DataDisplayManager and HeaderDisplayManager with weight parameters for sorting.
 open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderDataDisplayManager {
 
     // MARK: - Types
@@ -150,7 +151,7 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
        }
     }
 
-    public func removeAllGenerators(from header: TableHeaderGenerator) {
+    public func removeAllGenerators(from header: GravityTableHeaderGenerator) {
         guard
             let index = self.headerGenerators.index(where: { $0 === header }),
             self.cellGenerators.count > index

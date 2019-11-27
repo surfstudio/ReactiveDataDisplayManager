@@ -32,6 +32,8 @@ class CollectionViewController: UIViewController {
 
     /// This method is used to fill adapter
     private func fillAdapter() {
+        let header = TitleCollectionHeaderGenerator(title: "Header")
+        adapter.addSectionHeaderGenerator(header)
         for title in titles {
             // Create generator
             let generator = TitleCollectionGenerator(model: title)

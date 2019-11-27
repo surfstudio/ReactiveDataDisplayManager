@@ -32,6 +32,10 @@ public extension UICollectionView {
     func registerNib(_ cellType: UICollectionViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellWithReuseIdentifier: cellType.nameOfClass)
     }
+
+    func registerNib(_ viewType: UICollectionReusableView.Type, kind: String) {
+        self.register(UINib(nibName: viewType.nameOfClass, bundle: Bundle(for: viewType.self)), forSupplementaryViewOfKind: kind, withReuseIdentifier: viewType.nameOfClass)
+    }
 }
 
 extension Array {

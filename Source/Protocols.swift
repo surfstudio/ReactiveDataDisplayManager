@@ -51,19 +51,15 @@ public protocol TableCellGenerator: class {
 }
 
 
-open class CollectionHeaderGenerator: ViewGenerator {
+public protocol CollectionHeaderGenerator: class {
 
-    /// Nib type, which create this generator
-    open var identifier: String
+    var identifier: UICollectionReusableView.Type { get }
 
-    public required init(identifier: String) {
-        self.identifier = identifier
-    }
+    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView
 
-    open func generate() -> UICollectionReusableView {
-        preconditionFailure("\(#function) must be overriden in child")
-    }
+    func registerHeader(in collectionView: UICollectionView)
 
+    func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
 }
 
 /// Protocol that incapsulated type of current cell
@@ -213,6 +209,22 @@ public extension CollectionCellGenerator where Self: ViewBuilder {
         collectionView.registerNib(self.identifier)
     }
 
+}
+
+public extension CollectionHeaderGenerator where Self: ViewBuilder {
+    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
+            return UICollectionReusableView()
+        }
+
+        self.build(view: header)
+
+        return header as? UICollectionReusableView ?? UICollectionReusableView()
+    }
+
+    func registerHeader(in collectionView: UICollectionView) {
+        collectionView.registerNib(self.identifier, kind: UICollectionView.elementKindSectionHeader)
+    }
 }
 
 /// Protocol that incapsulated type of current cell

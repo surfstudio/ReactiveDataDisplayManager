@@ -28,7 +28,7 @@ public protocol HeaderDataDisplayManager: class {
 
     func addCellGenerators(_ generators: [CellGeneratorType], toHeader header: HeaderGeneratorType)
 
-    func removeAllGenerators(from header: TableHeaderGenerator)
+    func removeAllGenerators(from header: HeaderGeneratorType)
 
     /// Removes all header generators.
     func clearHeaderGenerators()

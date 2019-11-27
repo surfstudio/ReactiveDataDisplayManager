@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Contains extension of BaseTableDataDisplayManager for catching last cell showing event.
 open class PaginableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
 
     /// Called if table shows last cell
