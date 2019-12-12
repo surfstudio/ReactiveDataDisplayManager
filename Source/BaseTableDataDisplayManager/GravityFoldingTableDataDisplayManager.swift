@@ -6,8 +6,8 @@
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
 
-final class GravityFoldingTableDataDisplayManager: GravityTableDataDisplayManager {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+open class GravityFoldingTableDataDisplayManager: GravityTableDataDisplayManager {
+    override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectable = cellGenerators[indexPath.section][indexPath.row] as? SelectableItem {
             selectable.didSelectEvent.invoke(with: ())
 
