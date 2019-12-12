@@ -10,6 +10,9 @@
 		659F41F8127EE4F63B3914FD /* Pods_ReactiveDataDisplayManagerExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48D07F1D6BA77902525C1315 /* Pods_ReactiveDataDisplayManagerExampleTests.framework */; };
 		896B59712354962A00E8E2AB /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59702354962A00E8E2AB /* StackViewController.swift */; };
 		896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */; };
+		89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */; };
+		89FD21B7238C1445008D7ED3 /* TitleCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B5238C1445008D7ED3 /* TitleCollectionReusableView.swift */; };
+		89FD21B8238C1445008D7ED3 /* TitleCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89FD21B6238C1445008D7ED3 /* TitleCollectionReusableView.xib */; };
 		8B04A1D71FE9020800407BED /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */; };
 		8B04A1D81FE9020800407BED /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */; };
 		8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B04A1DC1FE9028300407BED /* TitleTableGenerator.swift */; };
@@ -43,6 +46,9 @@
 		6596ACBB4B1B5F283547EF3B /* Pods-ReactiveDataDisplayManagerExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		896B59702354962A00E8E2AB /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
+		89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
+		89FD21B5238C1445008D7ED3 /* TitleCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionReusableView.swift; sourceTree = "<group>"; };
+		89FD21B6238C1445008D7ED3 /* TitleCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCollectionReusableView.xib; sourceTree = "<group>"; };
 		8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
 		8B04A1DC1FE9028300407BED /* TitleTableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableGenerator.swift; sourceTree = "<group>"; };
@@ -142,8 +148,11 @@
 			children = (
 				8B1D7906201C8BDA00F184BD /* CollectionViewController.swift */,
 				8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */,
+				89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */,
 				8B1D7909201C957700F184BD /* TitleCollectionViewCell.swift */,
 				8B1D790A201C957700F184BD /* TitleCollectionViewCell.xib */,
+				89FD21B5238C1445008D7ED3 /* TitleCollectionReusableView.swift */,
+				89FD21B6238C1445008D7ED3 /* TitleCollectionReusableView.xib */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -279,6 +288,7 @@
 				8B04A1D81FE9020800407BED /* TitleTableViewCell.xib in Resources */,
 				8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */,
 				8B85E2E51FE84F540080984A /* Assets.xcassets in Resources */,
+				89FD21B8238C1445008D7ED3 /* TitleCollectionReusableView.xib in Resources */,
 				8B85E2E31FE84F540080984A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +364,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */,
+				89FD21B7238C1445008D7ED3 /* TitleCollectionReusableView.swift in Sources */,
 				8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */,
 				896B59712354962A00E8E2AB /* StackViewController.swift in Sources */,
 				8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */,

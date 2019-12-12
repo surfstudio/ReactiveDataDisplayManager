@@ -19,5 +19,4 @@ class TitleCollectionViewCell: UICollectionViewCell {
     func fill(with title: String) {
         titleLabel.text = title
     }
-
 }
