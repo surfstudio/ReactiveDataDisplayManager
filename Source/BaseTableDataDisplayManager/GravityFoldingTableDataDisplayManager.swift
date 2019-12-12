@@ -6,8 +6,15 @@
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
 
-final class GravityFoldingTableDataDisplayManager: GravityTableDataDisplayManager {
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+open class GravityFoldingTableDataDisplayManager: GravityTableDataDisplayManager {
+
+    // MARK: - Properties
+
+    public private(set) var foldingCellGenerators: [GravityTableCellGenerator] = []
+
+    // MARK: - GravityTableDataDisplayManager
+
+    override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectable = cellGenerators[indexPath.section][indexPath.row] as? SelectableItem {
             selectable.didSelectEvent.invoke(with: ())
 
@@ -18,16 +25,31 @@ final class GravityFoldingTableDataDisplayManager: GravityTableDataDisplayManage
 
         if let foldable = cellGenerators[indexPath.section][indexPath.row] as? GravityFoldableItem {
             if foldable.isExpanded {
-                foldable.childGenerators.forEach { self.remove($0, with: .none) }
+                foldingCellGenerators.append(contentsOf: foldable.childGenerators)
             } else {
-                addCellGenerators(foldable.childGenerators,
-                                  after: cellGenerators[indexPath.section][indexPath.row])
+                foldingCellGenerators.removeAll()
             }
 
             foldable.isExpanded = !foldable.isExpanded
             foldable.didFoldEvent.invoke(with: (foldable.isExpanded))
 
-            update(generators: foldable.childGenerators)
+            UIView.transition(
+                with: tableView,
+                duration: 0.3,
+                options: [.curveEaseInOut, .transitionCrossDissolve],
+                animations: {
+                    tableView.beginUpdates()
+                    tableView.endUpdates()
+                }
+            )
+        }
+    }
+
+    override open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if foldingCellGenerators.contains(where: { $0 === cellGenerators[indexPath.section][indexPath.row] }) {
+            return 0.0
+        } else {
+            return cellGenerators[indexPath.section][indexPath.row].cellHeight
         }
     }
 }
