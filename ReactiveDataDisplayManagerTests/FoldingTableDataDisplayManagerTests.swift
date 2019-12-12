@@ -92,12 +92,8 @@ final class FoldingTableDataDisplayManagerTests: XCTestCase {
 
         // then
 
-
         XCTAssert(ddm.cellGenerators[0][0] === header)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 0, section: 0)) != 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 1, section: 0)) == 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 2, section: 0)) == 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 3, section: 0)) == 0.0)
+        XCTAssert(ddm.cellGenerators[0].count == 1)
     }
 
     func testUnfolding() {
@@ -113,7 +109,6 @@ final class FoldingTableDataDisplayManagerTests: XCTestCase {
         header.isExpanded = false
 
         ddm.addCellGenerator(header)
-        ddm.addCellGenerators([childGenerator1, childGenerator2, childGenerator3])
 
         // when
 
@@ -122,9 +117,6 @@ final class FoldingTableDataDisplayManagerTests: XCTestCase {
         // then
 
         XCTAssert(ddm.cellGenerators[0][0] === header)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 0, section: 0)) != 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 1, section: 0)) != 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 2, section: 0)) != 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 3, section: 0)) != 0.0)
+        XCTAssert(ddm.cellGenerators[0].count == 4)
     }
 }

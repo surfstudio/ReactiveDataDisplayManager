@@ -6,15 +6,8 @@
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
 
-open class FoldingTableDataDisplayManager: BaseTableDataDisplayManager {
-
-    // MARK: - Properties
-
-    public private(set) var foldingCellGenerators: [TableCellGenerator] = []
-
-    // MARK: - BaseTableDataDisplayManager
-
-    override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+final class FoldingTableDataDisplayManager: BaseTableDataDisplayManager {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectable = cellGenerators[indexPath.section][indexPath.row] as? SelectableItem {
             selectable.didSelectEvent.invoke(with: ())
 
@@ -25,31 +18,16 @@ open class FoldingTableDataDisplayManager: BaseTableDataDisplayManager {
 
         if let foldable = cellGenerators[indexPath.section][indexPath.row] as? FoldableItem {
             if foldable.isExpanded {
-                foldingCellGenerators.append(contentsOf: foldable.childGenerators)
+                foldable.childGenerators.forEach { self.remove($0, with: .none) }
             } else {
-                foldingCellGenerators.removeAll()
+                addCellGenerators(foldable.childGenerators,
+                                  after: cellGenerators[indexPath.section][indexPath.row])
             }
 
             foldable.isExpanded = !foldable.isExpanded
             foldable.didFoldEvent.invoke(with: (foldable.isExpanded))
 
-            UIView.transition(
-                with: tableView,
-                duration: 0.3,
-                options: [.curveEaseInOut, .transitionCrossDissolve],
-                animations: {
-                    tableView.beginUpdates()
-                    tableView.endUpdates()
-                }
-            )
-        }
-    }
-
-    override open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if foldingCellGenerators.contains(where: { $0 === cellGenerators[indexPath.section][indexPath.row] }) {
-            return 0.0
-        } else {
-            return cellGenerators[indexPath.section][indexPath.row].cellHeight
+            update(generators: foldable.childGenerators)
         }
     }
 }

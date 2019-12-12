@@ -83,8 +83,6 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
         let childGenerator1 = GravityCellGenerator()
         let childGenerator2 = GravityCellGenerator()
         let childGenerator3 = GravityCellGenerator()
-        childGenerator2.heaviness = 12
-        childGenerator3.heaviness = 13
 
         let header = GravityFoldingHeaderGenerator()
         header.childGenerators = [childGenerator1, childGenerator2, childGenerator3]
@@ -98,12 +96,8 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
 
         // then
 
-
         XCTAssert(ddm.cellGenerators[0][0] === header)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 0, section: 0)) != 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 1, section: 0)) == 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 2, section: 0)) == 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 3, section: 0)) == 0.0)
+        XCTAssert(ddm.cellGenerators[0].count == 1)
     }
 
     func testUnfolding() {
@@ -113,14 +107,12 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
         let childGenerator1 = GravityCellGenerator()
         let childGenerator2 = GravityCellGenerator()
         let childGenerator3 = GravityCellGenerator()
-        childGenerator2.heaviness = 12
-        childGenerator3.heaviness = 13
 
         let header = GravityFoldingHeaderGenerator()
         header.childGenerators = [childGenerator1, childGenerator2, childGenerator3]
         header.isExpanded = false
 
-        ddm.addCellGenerators([header, childGenerator1, childGenerator2, childGenerator3])
+        ddm.addCellGenerator(header)
 
         // when
 
@@ -129,9 +121,6 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
         // then
 
         XCTAssert(ddm.cellGenerators[0][0] === header)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 0, section: 0)) != 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 1, section: 0)) != 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 2, section: 0)) != 0.0)
-        XCTAssert(ddm.tableView(ddm.tableView ?? UITableView(), heightForRowAt: IndexPath(row: 3, section: 0)) != 0.0)
+        XCTAssert(ddm.cellGenerators[0].count == 4)
     }
 }
