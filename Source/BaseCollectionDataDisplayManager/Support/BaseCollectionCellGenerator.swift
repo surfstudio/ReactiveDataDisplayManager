@@ -14,10 +14,10 @@ public class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem whe
 
     public var didSelectEvent = BaseEvent<Void>()
 
-    // MARK: - Private properties
+    // MARK: - Public properties
 
-    private let model: Cell.Model
-    private let registerClass: Bool
+    public let model: Cell.Model
+    public let registerClass: Bool
 
     // MARK: - Initialization
 

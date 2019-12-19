@@ -10,14 +10,11 @@ import Foundation
 
 public class BaseCellGenerator<Cell: Configurable>: SelectableItem where Cell: UITableViewCell {
 
-    // MARK: - Properties
+    // MARK: - Public properties
 
     public var didSelectEvent = BaseEvent<Void>()
-
-    // MARK: - Private properties
-
-    private let model: Cell.Model
-    private let registerClass: Bool
+    public let model: Cell.Model
+    public let registerClass: Bool
 
     // MARK: - Initialization
 
