@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Contains implementations DataDisplayManager and HeaderDisplayManager with weight parameters for sorting.
 open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderDataDisplayManager {
 
     // MARK: - Types
@@ -24,8 +25,8 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
 
     public var estimatedHeight: CGFloat = 40.0
     public weak var tableView: UITableView?
-    private var cellGenerators: [[GravityTableCellGenerator]]
-    private var headerGenerators: [GravityTableHeaderGenerator]
+    public private(set) var cellGenerators: [[GravityTableCellGenerator]]
+    public private(set) var headerGenerators: [GravityTableHeaderGenerator]
 
     // MARK: - DataDisplayManager
 
@@ -40,6 +41,15 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
 
     public func forceRefill() {
         tableView?.reloadData()
+    }
+
+    public func forceRefill(completion: @escaping (() -> Void)) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            completion()
+        }
+        self.forceRefill()
+        CATransaction.commit()
     }
 
     public func addCellGenerator(_ generator: GravityTableCellGenerator) {
@@ -141,7 +151,7 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
        }
     }
 
-    public func removeAllGenerators(from header: TableHeaderGenerator) {
+    public func removeAllGenerators(from header: GravityTableHeaderGenerator) {
         guard
             let index = self.headerGenerators.index(where: { $0 === header }),
             self.cellGenerators.count > index

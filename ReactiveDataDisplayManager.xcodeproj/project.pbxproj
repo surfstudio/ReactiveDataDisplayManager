@@ -17,9 +17,16 @@
 		816DB131224CC420001EAA47 /* BaseCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816DB130224CC420001EAA47 /* BaseCollectionCellGenerator.swift */; };
 		8632735D21F0F7DA00620CEE /* ConfigurableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */; };
 		86F35A2C21EE7B51009D3001 /* BaseCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */; };
+		897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897CFCC22379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift */; };
+		897CFCC52379A6CC00E98BB8 /* FoldingTableDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897CFCC42379A6CC00E98BB8 /* FoldingTableDataDisplayManagerTests.swift */; };
 		8987883D2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987883C2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift */; };
 		8987883F2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8987883E2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift */; };
+		89927C3F2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89927C3E2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift */; };
+		89927C412379B2FC006211D8 /* GravityFoldingHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89927C402379B2FC006211D8 /* GravityFoldingHeaderGenerator.swift */; };
 		899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */; };
+		89FD21B0238BD9FB008D7ED3 /* BaseCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21AF238BD9FB008D7ED3 /* BaseCollectionDataDisplayManager.swift */; };
+		89FD21B2238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B1238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift */; };
+		89FD21BA238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B9238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift */; };
 		89FFDDBA23584B9F00D2C769 /* GravityTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */; };
 		89FFDDBC23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */; };
 		8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */; };
@@ -29,7 +36,6 @@
 		8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */; };
 		8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */; };
 		8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */; };
-		8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */; };
 		8BC018FE20B4912100D82429 /* ReactiveDataDisplayManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,9 +62,16 @@
 		816DB130224CC420001EAA47 /* BaseCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		8632735C21F0F7DA00620CEE /* ConfigurableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableProtocol.swift; sourceTree = "<group>"; };
 		86F35A2B21EE7B51009D3001 /* BaseCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellGenerator.swift; sourceTree = "<group>"; };
+		897CFCC22379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingTableDataDisplayManager.swift; sourceTree = "<group>"; };
+		897CFCC42379A6CC00E98BB8 /* FoldingTableDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingTableDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		8987883C2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderDataDisplayManager.swift; sourceTree = "<group>"; };
 		8987883E2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackDataDisplatManagerTests.swift; sourceTree = "<group>"; };
+		89927C3E2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityFoldingTableDataDisplayManager.swift; sourceTree = "<group>"; };
+		89927C402379B2FC006211D8 /* GravityFoldingHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityFoldingHeaderGenerator.swift; sourceTree = "<group>"; };
 		899A3AEA2354882000E8615C /* BaseStackDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackDataDisplayManager.swift; sourceTree = "<group>"; };
+		89FD21AF238BD9FB008D7ED3 /* BaseCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
+		89FD21B1238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
+		89FD21B9238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyGravityTableHeaderGenerator.swift; sourceTree = "<group>"; };
 		8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FatalError.swift"; sourceTree = "<group>"; };
@@ -66,7 +79,6 @@
 		8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginableBaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendableBaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHeaderGenerator.swift; sourceTree = "<group>"; };
-		8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
 		8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableDataDisplayManagerTests.swift; sourceTree = "<group>"; };
 		8BC018F920B4912100D82429 /* ReactiveDataDisplayManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC018FD20B4912100D82429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				816DB130224CC420001EAA47 /* BaseCollectionCellGenerator.swift */,
+				89FD21B1238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -150,6 +163,8 @@
 				8BAB778620BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift */,
 				8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */,
 				89FFDDB923584B9F00D2C769 /* GravityTableDataDisplayManager.swift */,
+				897CFCC22379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift */,
+				89927C3E2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift */,
 				8BAB778E20BB45C50005C4E9 /* Support */,
 			);
 			path = BaseTableDataDisplayManager;
@@ -158,7 +173,7 @@
 		8BAB778B20BB416C0005C4E9 /* BaseCollectionDataDisplayManager */ = {
 			isa = PBXGroup;
 			children = (
-				8BBCA97A201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift */,
+				89FD21AF238BD9FB008D7ED3 /* BaseCollectionDataDisplayManager.swift */,
 				816DB12F224CC402001EAA47 /* Support */,
 			);
 			path = BaseCollectionDataDisplayManager;
@@ -179,6 +194,9 @@
 			children = (
 				8BC018F320B4905400D82429 /* BaseTableDataDisplayManagerTests.swift */,
 				8987883E2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift */,
+				897CFCC42379A6CC00E98BB8 /* FoldingTableDataDisplayManagerTests.swift */,
+				89927C402379B2FC006211D8 /* GravityFoldingHeaderGenerator.swift */,
+				89FD21B9238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift */,
 				8BC018FD20B4912100D82429 /* Info.plist */,
 				8B7E264C20B898D1001D7A93 /* XCTestCase+FatalError.swift */,
 			);
@@ -320,8 +338,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B9FEBDD20B493BF00002874 /* BaseTableDataDisplayManagerTests.swift in Sources */,
+				89FD21BA238C2AF2008D7ED3 /* BaseCollectionDataDisplayManagerTests.swift in Sources */,
+				897CFCC52379A6CC00E98BB8 /* FoldingTableDataDisplayManagerTests.swift in Sources */,
 				8B7E264D20B898D1001D7A93 /* XCTestCase+FatalError.swift in Sources */,
 				8987883F2354DC4F00AD8CF7 /* BaseStackDataDisplatManagerTests.swift in Sources */,
+				89927C412379B2FC006211D8 /* GravityFoldingHeaderGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,13 +354,16 @@
 				8B7E265220B89B12001D7A93 /* Event.swift in Sources */,
 				4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */,
 				89FFDDBC23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift in Sources */,
-				8BBCA97B201DFDE7007F866D /* BaseCollectionDataDisplayManager.swift in Sources */,
 				8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */,
 				4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */,
+				89FD21B0238BD9FB008D7ED3 /* BaseCollectionDataDisplayManager.swift in Sources */,
 				4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */,
 				8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */,
 				86F35A2C21EE7B51009D3001 /* BaseCellGenerator.swift in Sources */,
+				89927C3F2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift in Sources */,
+				89FD21B2238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift in Sources */,
 				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
+				897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */,
 				4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */,
 				8632735D21F0F7DA00620CEE /* ConfigurableProtocol.swift in Sources */,
 				899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */,

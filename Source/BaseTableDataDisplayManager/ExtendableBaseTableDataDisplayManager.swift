@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Contains extension of BaseTableDataDisplayManager for expand and collapse section headers.
 open class ExtendableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
 
     open override func numberOfSections(in tableView: UITableView) -> Int {
