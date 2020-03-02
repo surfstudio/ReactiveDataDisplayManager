@@ -41,7 +41,7 @@
 		C1AB77D3240D56D8000044F1 /* AccurateCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D2240D56D8000044F1 /* AccurateCellGenerator.swift */; };
 		C1AB77D6240D581D000044F1 /* BaseTableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D5240D581D000044F1 /* BaseTableCellGenerator.swift */; };
 		C1AB77D8240D5856000044F1 /* BaseNonReusableTableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D7240D5856000044F1 /* BaseNonReusableTableCellGenerator.swift */; };
-		C1AB77DA240D5A99000044F1 /* AccurateNonReusableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D9240D5A99000044F1 /* AccurateNonReusableCellGenerator.swift */; };
+		C1AB77DA240D5A99000044F1 /* AccurateNonReusableTableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D9240D5A99000044F1 /* AccurateNonReusableTableCellGenerator.swift */; };
 		C1AB77DC240D6796000044F1 /* AccurateHeightCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77DB240D6796000044F1 /* AccurateHeightCollectionCellGenerator.swift */; };
 		C1AB77DE240D6919000044F1 /* SizableCollectionCollectionDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77DD240D6919000044F1 /* SizableCollectionCollectionDataDisplayManager.swift */; };
 		C1AB77E2240D98D7000044F1 /* SizableCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77E1240D98D7000044F1 /* SizableCollectionCellGenerator.swift */; };
@@ -96,7 +96,7 @@
 		C1AB77D2240D56D8000044F1 /* AccurateCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccurateCellGenerator.swift; sourceTree = "<group>"; };
 		C1AB77D5240D581D000044F1 /* BaseTableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCellGenerator.swift; sourceTree = "<group>"; };
 		C1AB77D7240D5856000044F1 /* BaseNonReusableTableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNonReusableTableCellGenerator.swift; sourceTree = "<group>"; };
-		C1AB77D9240D5A99000044F1 /* AccurateNonReusableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccurateNonReusableCellGenerator.swift; sourceTree = "<group>"; };
+		C1AB77D9240D5A99000044F1 /* AccurateNonReusableTableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccurateNonReusableTableCellGenerator.swift; sourceTree = "<group>"; };
 		C1AB77DB240D6796000044F1 /* AccurateHeightCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccurateHeightCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		C1AB77DD240D6919000044F1 /* SizableCollectionCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
 		C1AB77E1240D98D7000044F1 /* SizableCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionCellGenerator.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 				C1AB77D5240D581D000044F1 /* BaseTableCellGenerator.swift */,
 				C1AB77D2240D56D8000044F1 /* AccurateCellGenerator.swift */,
 				C1AB77D7240D5856000044F1 /* BaseNonReusableTableCellGenerator.swift */,
-				C1AB77D9240D5A99000044F1 /* AccurateNonReusableCellGenerator.swift */,
+				C1AB77D9240D5A99000044F1 /* AccurateNonReusableTableCellGenerator.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -413,7 +413,7 @@
 				8B7E265220B89B12001D7A93 /* Event.swift in Sources */,
 				C1AB77CF240D5556000044F1 /* CellRegisterType.swift in Sources */,
 				C1AB77D8240D5856000044F1 /* BaseNonReusableTableCellGenerator.swift in Sources */,
-				C1AB77DA240D5A99000044F1 /* AccurateNonReusableCellGenerator.swift in Sources */,
+				C1AB77DA240D5A99000044F1 /* AccurateNonReusableTableCellGenerator.swift in Sources */,
 				4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */,
 				89FFDDBC23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift in Sources */,
 				8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */,
