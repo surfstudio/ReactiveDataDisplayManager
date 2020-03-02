@@ -2,7 +2,7 @@
 //  BaseTableCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Alexander Filimonov on 02/03/2020.
+//  Created by Mikhail Monakov on 15/01/2019.
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 

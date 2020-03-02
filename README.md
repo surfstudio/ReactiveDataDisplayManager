@@ -80,7 +80,7 @@ View wants to recive a message about user tap on button:
 
 ## How to install
 
-`pod 'ReactiveDataDisplayManager' ~> 5.0.2`
+`pod 'ReactiveDataDisplayManager' ~> 6.0.0`
 
 ## Errors
 
@@ -142,7 +142,7 @@ Generators with selection event. They build `Configurable & AccurateHeight` cell
 ||Reusable|Non-reusable|
 |---|---|---|
 |AutomaticDimension|`BaseTableCellGenerator`|`BaseNonReusableTableCellGenerator`|
-|Calculated heigh|`AccurateCellGenerator`|`AccurateNonReusableTableCellGenerator`|
+|Calculated height|`AccurateCellGenerator`|`AccurateNonReusableTableCellGenerator`|
 
 ## UICollectionView
 
