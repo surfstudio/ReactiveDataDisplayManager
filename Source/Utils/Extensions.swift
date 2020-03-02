@@ -38,6 +38,14 @@ public extension UICollectionView {
     }
 }
 
+public extension UIView {
+    /// Loads view from its .xib file
+    static func fromXib() -> Self? {
+        let view = Bundle(for: self).loadNibNamed(nameOfClass, owner: nil, options: nil)?.last
+        return view as? Self
+    }
+}
+
 extension Array {
 
     /// Index outside array

@@ -1,20 +1,23 @@
 //
-//  BaseCellGenerator.swift
+//  NonReusableTableCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Mikhail Monakov on 15/01/2019.
-//  Copyright © 2019 Александр Кравченков. All rights reserved.
+//  Created by Alexander Filimonov on 02/03/2020.
+//  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
 import Foundation
 
-/// Class for using with any Configurable UITableViewCell
-public class BaseTableCellGenerator<Cell: Configurable>: SelectableItem where Cell: UITableViewCell {
+/// Class for generating non-reusable Configurable UITableViewCell
+public class BaseNonReusableTableCellGenerator<Cell: Configurable>: SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 
     public var didSelectEvent = BaseEvent<Void>()
-    public let model: Cell.Model
+    private(set) public var model: Cell.Model
+    private(set) public lazy var cell: Cell? = {
+        return Cell.fromXib()
+    }()
 
     // MARK: - Private Properties
 
@@ -28,22 +31,26 @@ public class BaseTableCellGenerator<Cell: Configurable>: SelectableItem where Ce
         self.registerType = registerType
     }
 
+    // MARK: - Public Methods
+
+    public func update(model: Cell.Model) {
+        self.model = model
+        cell?.configure(with: model)
+    }
+
 }
 
 // MARK: - TableCellGenerator
 
-extension BaseTableCellGenerator: TableCellGenerator {
+extension BaseNonReusableTableCellGenerator: TableCellGenerator {
 
     public var identifier: UITableViewCell.Type {
         return Cell.self
     }
 
     public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier.nameOfClass, for: indexPath) as? Cell else {
-            return UITableViewCell()
-        }
-        cell.configure(with: model)
-        return cell
+        cell?.configure(with: model)
+        return cell ?? UITableViewCell()
     }
 
     public func registerCell(in tableView: UITableView) {

@@ -10,20 +10,21 @@ import Foundation
 
 public class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem where Cell: UICollectionViewCell {
 
-    // MARK: - Properties
+    // MARK: - Public Properties
 
     public var didSelectEvent = BaseEvent<Void>()
-
-    // MARK: - Public properties
-
     public let model: Cell.Model
-    public let registerClass: Bool
+
+    // MARK: - Private Properties
+
+    private let registerType: CellRegisterType
 
     // MARK: - Initialization
 
-    public init(with model: Cell.Model, registerClass: Bool = false) {
+    public init(with model: Cell.Model,
+                registerType: CellRegisterType = .nib) {
         self.model = model
-        self.registerClass = registerClass
+        self.registerType = registerType
     }
 
 }
@@ -44,9 +45,10 @@ extension BaseCollectionCellGenerator: CollectionCellGenerator {
     }
 
     public func registerCell(in collectionView: UICollectionView) {
-        if registerClass {
+        switch registerType {
+        case .nib:
             collectionView.register(identifier, forCellWithReuseIdentifier: identifier.nameOfClass)
-        } else {
+        case .class:
             collectionView.registerNib(identifier)
         }
     }

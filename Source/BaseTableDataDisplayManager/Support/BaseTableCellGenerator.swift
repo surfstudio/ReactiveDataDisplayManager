@@ -1,14 +1,14 @@
 //
-//  BaseCellGenerator.swift
+//  BaseTableCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Mikhail Monakov on 15/01/2019.
-//  Copyright © 2019 Александр Кравченков. All rights reserved.
+//  Created by Alexander Filimonov on 02/03/2020.
+//  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
 import Foundation
 
-/// Class for using with any Configurable UITableViewCell
+/// Class for generating reusable Configurable UITableViewCell
 public class BaseTableCellGenerator<Cell: Configurable>: SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
