@@ -9,11 +9,11 @@
 import Foundation
 
 /// Protocol for calculating height of element according to the model
-public protocol AccurateHeight where Self: Configurable {
+public protocol AccurateHeight: Configurable {
     static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat
 }
 
 /// Protocol for calculating width of element according to the model
-public protocol AccurateWidth where Self: Configurable {
+public protocol AccurateWidth: Configurable {
     static func getWidth(forHeight height: CGFloat, with model: Model) -> CGFloat
 }

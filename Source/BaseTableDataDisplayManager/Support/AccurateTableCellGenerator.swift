@@ -1,15 +1,15 @@
 //
-//  AccurateCellGenerator.swift
+//  AccurateTableCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Alexander Filimonov on 02/03/2020.
+//  Created by Alexander Filimonov on 03/03/2020.
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
 import Foundation
 
 /// Class for generating reusable Configurable UITableViewCell with calculated height
-public class AccurateCellGenerator<Cell: Configurable & AccurateHeight>: BaseTableCellGenerator<Cell> where Cell: UITableViewCell {
+public class AccurateTableCellGenerator<Cell: AccurateHeight>: BaseTableCellGenerator<Cell> where Cell: UITableViewCell {
 
     // MARK: - Private Properties
 
@@ -35,3 +35,4 @@ public class AccurateCellGenerator<Cell: Configurable & AccurateHeight>: BaseTab
     }
 
 }
+

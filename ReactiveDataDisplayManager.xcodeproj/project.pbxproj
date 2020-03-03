@@ -36,9 +36,9 @@
 		8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778820BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift */; };
 		8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */; };
 		8BC018FE20B4912100D82429 /* ReactiveDataDisplayManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */; };
+		C18E5172240E541200750D8C /* AccurateTableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18E5171240E541200750D8C /* AccurateTableCellGenerator.swift */; };
 		C1AB77CF240D5556000044F1 /* CellRegisterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77CE240D5556000044F1 /* CellRegisterType.swift */; };
 		C1AB77D1240D561D000044F1 /* Accurate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D0240D561D000044F1 /* Accurate.swift */; };
-		C1AB77D3240D56D8000044F1 /* AccurateCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D2240D56D8000044F1 /* AccurateCellGenerator.swift */; };
 		C1AB77D6240D581D000044F1 /* BaseTableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D5240D581D000044F1 /* BaseTableCellGenerator.swift */; };
 		C1AB77D8240D5856000044F1 /* BaseNonReusableTableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D7240D5856000044F1 /* BaseNonReusableTableCellGenerator.swift */; };
 		C1AB77DA240D5A99000044F1 /* AccurateNonReusableTableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB77D9240D5A99000044F1 /* AccurateNonReusableTableCellGenerator.swift */; };
@@ -91,9 +91,9 @@
 		8BC018F920B4912100D82429 /* ReactiveDataDisplayManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BC018FD20B4912100D82429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B971E25B1F456825000FBB9A /* ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C18E5171240E541200750D8C /* AccurateTableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccurateTableCellGenerator.swift; sourceTree = "<group>"; };
 		C1AB77CE240D5556000044F1 /* CellRegisterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRegisterType.swift; sourceTree = "<group>"; };
 		C1AB77D0240D561D000044F1 /* Accurate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accurate.swift; sourceTree = "<group>"; };
-		C1AB77D2240D56D8000044F1 /* AccurateCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccurateCellGenerator.swift; sourceTree = "<group>"; };
 		C1AB77D5240D581D000044F1 /* BaseTableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCellGenerator.swift; sourceTree = "<group>"; };
 		C1AB77D7240D5856000044F1 /* BaseNonReusableTableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNonReusableTableCellGenerator.swift; sourceTree = "<group>"; };
 		C1AB77D9240D5A99000044F1 /* AccurateNonReusableTableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccurateNonReusableTableCellGenerator.swift; sourceTree = "<group>"; };
@@ -201,9 +201,9 @@
 				8BAB778C20BB45B90005C4E9 /* EmptyHeaderGenerator.swift */,
 				89FFDDBB23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift */,
 				C1AB77D5240D581D000044F1 /* BaseTableCellGenerator.swift */,
-				C1AB77D2240D56D8000044F1 /* AccurateCellGenerator.swift */,
 				C1AB77D7240D5856000044F1 /* BaseNonReusableTableCellGenerator.swift */,
 				C1AB77D9240D5A99000044F1 /* AccurateNonReusableTableCellGenerator.swift */,
+				C18E5171240E541200750D8C /* AccurateTableCellGenerator.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -435,8 +435,8 @@
 				C1AB77D6240D581D000044F1 /* BaseTableCellGenerator.swift in Sources */,
 				899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */,
 				8987883D2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift in Sources */,
+				C18E5172240E541200750D8C /* AccurateTableCellGenerator.swift in Sources */,
 				89FFDDBA23584B9F00D2C769 /* GravityTableDataDisplayManager.swift in Sources */,
-				C1AB77D3240D56D8000044F1 /* AccurateCellGenerator.swift in Sources */,
 				816DB131224CC420001EAA47 /* BaseCollectionCellGenerator.swift in Sources */,
 				4FD38132202D791A0005EBFE /* Operations.swift in Sources */,
 			);

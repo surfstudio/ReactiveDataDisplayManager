@@ -6,9 +6,9 @@
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
 //
 
-import UIKit
+import ReactiveDataDisplayManager
 
-class TitleTableViewCell: UITableViewCell {
+class TitleTableViewCell: UITableViewCell, AccurateHeight {
 
     // MARK: - IBOutlets
 
@@ -18,6 +18,14 @@ class TitleTableViewCell: UITableViewCell {
 
     func fill(with title: String) {
         titleLabel.text = title
+    }
+
+    func configure(with model: String) {
+
+    }
+
+    static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
+        return 0
     }
     
 }

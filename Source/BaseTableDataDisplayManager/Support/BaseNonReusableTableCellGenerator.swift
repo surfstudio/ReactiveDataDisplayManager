@@ -9,7 +9,7 @@
 import Foundation
 
 /// Class for generating non-reusable Configurable UITableViewCell
-public class BaseNonReusableTableCellGenerator<Cell: Configurable>: SelectableItem where Cell: UITableViewCell {
+public class BaseNonReusableTableCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 
@@ -38,11 +38,7 @@ public class BaseNonReusableTableCellGenerator<Cell: Configurable>: SelectableIt
         cell?.configure(with: model)
     }
 
-}
-
-// MARK: - TableCellGenerator
-
-extension BaseNonReusableTableCellGenerator: TableCellGenerator {
+    // MARK: - TableCellGenerator
 
     public var identifier: UITableViewCell.Type {
         return Cell.self
