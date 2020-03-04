@@ -10,7 +10,7 @@ import Foundation
 
 public class AccurateHeightCollectionCellGenerator<Cell: Configurable & AccurateHeight>: BaseCollectionCellGenerator<Cell> & SizableCollectionCellGenerator where Cell: UICollectionViewCell {
 
-    // MARK: - Private Properties]
+    // MARK: - Private Properties
 
     private let width: CGFloat
 
