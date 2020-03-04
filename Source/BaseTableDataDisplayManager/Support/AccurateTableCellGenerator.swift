@@ -9,22 +9,33 @@
 import Foundation
 
 /// Class for generating reusable Configurable UITableViewCell with calculated height
-public class AccurateTableCellGenerator<Cell: AccurateHeight>: BaseTableCellGenerator<Cell> where Cell: UITableViewCell {
+public class AccurateTableCellGenerator<Cell: AccurateHeight>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
+
+    // MARK: - Public properties
+
+    public var didSelectEvent = BaseEvent<Void>()
+    public let model: Cell.Model
 
     // MARK: - Private Properties
 
     private let cellWidth: CGFloat
+    private let registerType: CellRegisterType
 
     // MARK: - Initialization
 
     public init(with model: Cell.Model,
                 cellWidth: CGFloat = UIScreen.main.bounds.width,
                 registerType: CellRegisterType = .nib) {
+        self.model = model
         self.cellWidth = cellWidth
-        super.init(with: model, registerType: registerType)
+        self.registerType = registerType
     }
 
     // MARK: - TableCellGenerator
+
+    public var identifier: UITableViewCell.Type {
+        return Cell.self
+    }
 
     public var cellHeight: CGFloat {
         return Cell.getHeight(forWidth: cellWidth, with: model)
@@ -34,5 +45,21 @@ public class AccurateTableCellGenerator<Cell: AccurateHeight>: BaseTableCellGene
         return Cell.getHeight(forWidth: cellWidth, with: model)
     }
 
-}
+    public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier.nameOfClass, for: indexPath) as? Cell else {
+            return UITableViewCell()
+        }
+        cell.configure(with: model)
+        return cell
+    }
 
+    public func registerCell(in tableView: UITableView) {
+        switch registerType {
+        case .nib:
+            tableView.registerNib(identifier)
+        case .class:
+            tableView.register(identifier, forCellReuseIdentifier: identifier.nameOfClass)
+        }
+    }
+
+}

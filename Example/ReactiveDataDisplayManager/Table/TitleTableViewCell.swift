@@ -21,11 +21,11 @@ class TitleTableViewCell: UITableViewCell, AccurateHeight {
     }
 
     func configure(with model: String) {
-
+        titleLabel.text = model
     }
 
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
-        return 0
+        return 44
     }
     
 }
