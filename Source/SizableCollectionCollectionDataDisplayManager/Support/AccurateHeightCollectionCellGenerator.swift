@@ -16,9 +16,9 @@ public class AccurateHeightCollectionCellGenerator<Cell: Configurable & Accurate
 
     // MARK: - Initializaion
 
-    init(with model: Cell.Model,
-         width: CGFloat,
-         registerType: CellRegisterType = .nib) {
+    public init(with model: Cell.Model,
+                width: CGFloat,
+                registerType: CellRegisterType = .nib) {
         self.width = width
         super.init(with: model, registerType: registerType)
     }
