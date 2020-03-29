@@ -85,7 +85,7 @@ extension BaseTableDataDisplayManager {
     }
 
     public func insert(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) {
-        guard self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) else {
+        if self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) {
             fatalError("Error adding header generator. Header generator was added earlier")
         }
         guard let anchorIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === after }) else {
@@ -96,7 +96,7 @@ extension BaseTableDataDisplayManager {
     }
 
     public func insert(headGenerator: TableHeaderGenerator, before: TableHeaderGenerator) {
-        guard self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) else {
+        if self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) {
             fatalError("Error adding header generator. Header generator was added earlier")
         }
         guard let anchorIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === before }) else {
@@ -256,7 +256,7 @@ public extension BaseTableDataDisplayManager {
         self.insert(headGenerator: sectionHeader, before: header)
 
         guard let headerIndex = self.sectionHeaderGenerators.index(where: {
-            $0 === header
+            $0 === sectionHeader
         }) else {
             return
         }
@@ -283,7 +283,7 @@ public extension BaseTableDataDisplayManager {
         self.insert(headGenerator: sectionHeader, after: header)
 
         guard let headerIndex = self.sectionHeaderGenerators.index(where: {
-            $0 === header
+            $0 === sectionHeader
         }) else {
             return
         }
