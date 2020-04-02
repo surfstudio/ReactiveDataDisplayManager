@@ -450,6 +450,24 @@ public extension BaseTableDataDisplayManager {
         self.tableView?.reloadData()
     }
 
+    func removeSections(indexes: Range<Int>,
+                        animation: UITableView.RowAnimation = .automatic) {
+        guard let table = self.tableView else { return }
+        
+        let indexPaths: [IndexPath] = indexes.compactMap { [weak self] section in
+            self?.cellGenerators[section].indices.map { IndexPath(row: $0, section: section) }
+        }.flatMap { $0 }
+
+        table.beginUpdates()
+        
+        self.cellGenerators.removeSubrange(indexes)
+        self.sectionHeaderGenerators.removeSubrange(indexes)
+        table.deleteRows(at: indexPaths, with: animation)
+        table.deleteSections(IndexSet(integersIn: indexes), with: animation)
+
+        table.endUpdates()
+    }
+
 }
 
 // MARK: - Private methods
