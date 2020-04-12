@@ -455,7 +455,7 @@ public extension BaseTableDataDisplayManager {
         guard let table = self.tableView else { return }
         
         let indexPaths: [IndexPath] = indexes.compactMap { [weak self] section in
-            self?.cellGenerators[section].indices.map { IndexPath(row: $0, section: section) }
+            self?.cellGenerators[safe: section]?.indices.map { IndexPath(row: $0, section: section) }
         }.flatMap { $0 }
 
         table.beginUpdates()
@@ -465,6 +465,36 @@ public extension BaseTableDataDisplayManager {
         table.deleteRows(at: indexPaths, with: animation)
         table.deleteSections(IndexSet(integersIn: indexes), with: animation)
 
+        table.endUpdates()
+    }
+
+    func remove(indexes: [Int: Set<Int>],
+                animation: UITableView.RowAnimation = .automatic,
+                needRemoveEmptySection: Bool = false) {
+        guard let table = self.tableView else { return }
+
+        var indexPathsForRemove: [IndexPath] = []
+        var sectionsForRemove: IndexSet = []
+        for (section, indexes) in indexes {
+            guard let generators = self.cellGenerators[safe: section] else {
+                continue
+            }
+            self.cellGenerators[section] = generators.enumerated().compactMap { index, generator in
+                if indexes.contains(index) {
+                    indexPathsForRemove.append(IndexPath(row: index, section: section))
+                    return nil
+                }
+                return generator
+            }
+            if needRemoveEmptySection, self.cellGenerators[section].isEmpty {
+                sectionsForRemove.insert(section)
+                self.sectionHeaderGenerators.remove(at: section)
+            }
+        }
+        
+        table.beginUpdates()
+        table.deleteRows(at: indexPathsForRemove, with: animation)
+        table.deleteSections(sectionsForRemove, with: animation)
         table.endUpdates()
     }
 
