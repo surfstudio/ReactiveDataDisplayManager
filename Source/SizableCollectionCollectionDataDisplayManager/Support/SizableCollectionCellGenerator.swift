@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Generator that describes collection cell generator that can returns size
 public protocol SizableCollectionCellGenerator: class {
     func getSize() -> CGSize
 }

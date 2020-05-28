@@ -1,23 +1,20 @@
 //
-//  AccurateNonReusableCellGenerator.swift
+//  BaseCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Alexander Filimonov on 02/03/2020.
+//  Created by Mikhail Monakov on 15/01/2019.
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
 import Foundation
 
-/// Class for generating non-reusable Configurable UITableViewCell with calculated height
-public class AccurateNonReusableTableCellGenerator<Cell: AccurateHeight>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
+/// Class for generating reusable Configurable UITableViewCell
+public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 
     public var didSelectEvent = BaseEvent<Void>()
-    private(set) public var model: Cell.Model
-    private(set) public lazy var cell: Cell? = {
-        return Cell.fromXib()
-    }()
+    public let model: Cell.Model
 
     // MARK: - Private Properties
 
@@ -31,30 +28,18 @@ public class AccurateNonReusableTableCellGenerator<Cell: AccurateHeight>: TableC
         self.registerType = registerType
     }
 
-    // MARK: - Public Methods
-
-    public func update(model: Cell.Model) {
-        self.model = model
-        cell?.configure(with: model)
-    }
-
     // MARK: - TableCellGenerator
 
     public var identifier: UITableViewCell.Type {
         return Cell.self
     }
 
-    public var cellHeight: CGFloat {
-        return Cell.getHeight(forWidth: cell?.frame.width ?? 0, with: model)
-    }
-
-    public var estimatedCellHeight: CGFloat? {
-        return Cell.getHeight(forWidth: cell?.frame.width ?? 0, with: model)
-    }
-
     public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        cell?.configure(with: model)
-        return cell ?? UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier.nameOfClass, for: indexPath) as? Cell else {
+            return UITableViewCell()
+        }
+        cell.configure(with: model)
+        return cell
     }
 
     public func registerCell(in tableView: UITableView) {
@@ -67,4 +52,3 @@ public class AccurateNonReusableTableCellGenerator<Cell: AccurateHeight>: TableC
     }
 
 }
-

@@ -109,13 +109,13 @@ Version format is `x.y.z` where
 
 # How to start
 
-In 99% of situations you don't need to create your own generators. There are plenty of generator that covers almost all you needs.
+In 99% of situations you don't need to create your own generators. There are plenty of generators that covers almost all you needs.
 
 - each cell in generator could be registered in two ways: as a nib or as a class
 
 ## UITableView
 
-### BaseTableCellGenerator & BaseNonReusableTableCellGenerator
+### BaseCellGenerator & BaseNonReusableCellGenerator
 
 Generators with selection event. They build `Configurable` cell and work with automatic demension. But the second one, as you can guess, doesen't reuse cell in tableView, so you can update your cell in any time.
 
@@ -123,26 +123,26 @@ Generators with selection event. They build `Configurable` cell and work with au
 
 - create `UITableViewCell`
 - realize `Configurable` protocol
-- initialize generator `let generator = BaseTableCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())` or `let nonReusableGenerator = BaseNonReusableTableCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())`
+- initialize generator `let generator = BaseCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())` or `let nonReusableGenerator = BaseNonReusableCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())`
 - if you have non-reusable generator, you can update cell `nonReusableGenerator.update(model: YourTableViewCellModel())`
 
-### AccurateCellGenerator & AccurateNonReusableTableCellGenerator
+### CalculatableHeightCellGenerator & CalculatableHeightNonReusableCellGenerator
 
-Generators with selection event. They build `Configurable & AccurateHeight` cell and work with cell that could calculate it's height. The second one, as you can guess, doesen't reuse cell in tableView, so you can update your cell in any time.
+Generators with selection event. They build `Configurable & CalculatableHeight` cell and work with cell that could calculate it's height. The second one, as you can guess, doesen't reuse cell in tableView, so you can update your cell in any time.
 
 **To work with it you should:**
 
 - create `UITableViewCell`
-- realize `Configurable` and `AccurateHeight` protocols
-- initialize generator `let generator = AccurateCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())` or `let nonReusableGenerator = AccurateNonReusableTableCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())`
+- realize `Configurable` and `CalculatableHeight` protocols
+- initialize generator `let generator = CalculatableHeightCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())` or `let nonReusableGenerator = CalculatableHeightNonReusableCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())`
 - if you have non-reusable generator, you can update cell `nonReusableGenerator.update(model: YourTableViewCellModel())`
 
 ### Which to choose
 
 ||Reusable|Non-reusable|
 |---|---|---|
-|AutomaticDimension|`BaseTableCellGenerator`|`BaseNonReusableTableCellGenerator`|
-|Calculated height|`AccurateCellGenerator`|`AccurateNonReusableTableCellGenerator`|
+|AutomaticDimension|`BaseCellGenerator`|`BaseNonReusableCellGenerator`|
+|Calculated height|`CalculatableHeightCellGenerator`|`CalculatableHeightNonReusableCellGenerator`|
 
 ## UICollectionView
 
@@ -150,7 +150,7 @@ Generators with selection event. They build `Configurable & AccurateHeight` cell
 
 Base generator with selection event. It builds `Configurable` cell.
 
-If you choose this generator, you should insert itemSize in collectionViewFlowLayout manually.
+If you choose this generator, you should insert `itemSize` in `collectionViewFlowLayout` manually.
 
 **To work with it you should:**
 
@@ -158,21 +158,21 @@ If you choose this generator, you should insert itemSize in collectionViewFlowLa
 - realize `Configurable` protocol
 - initialize generator `let generator = BaseCollectionCellGenerator<YourCollectionViewCell>(with: YourCollectionViewCellModel())`
 
-### SizableCollectionCollectionDataDisplayManager & AccurateHeightCollectionCellGenerator/AccurateWidthCollectionCellGenerator
+### SizableCollectionCollectionDataDisplayManager & CalculatableHeightCollectionCellGenerator/CalculatableWidthCollectionCellGenerator
 
 Manager and generators to work with different sizes (in one dimension - only different heights/widths).
 
 **To work with it you should:**
 
-- assign type of adapter - `SizableCollectionCollectionDataDisplayManager`
+- assign type of adapter - `SizableCollectionDataDisplayManager`
 - create `UICollectionViewCell`
-- realize `Configurable & AccurateHeight/AccurateWidth` protocols
-- initialize generator `let generator = AccurateHeightCollectionCellGenerator<YourCollectionViewCell>(with: YourCollectionViewCellModel(), width: 100) or let generator = AccurateWidthCollectionCellGenerator<YourCollectionViewCell>(with: YourCollectionViewCellModel(), height: 100)`
+- realize `Configurable & CalculatableHeight/CalculatableWidth` protocols
+- initialize generator `let generator = CalculatableHeightCollectionCellGenerator<YourCollectionViewCell>(with: YourCollectionViewCellModel(), width: 100) or let generator = CalculatableWidthCollectionCellGenerator<YourCollectionViewCell>(with: YourCollectionViewCellModel(), height: 100)`
 
 ### Which to choose
 
 If you have cells with equal sizes, you should choose `BaseCollectionCellGenerator`.
 
-But if you cell's should have different sizes in one dimension (only different heights/widths), you should user `SizableCollectionCollectionDataDisplayManager` and accurate collection generators.
+But if you cell's should have different sizes in **one dimension**, you should use `SizableCollectionCollectionDataDisplayManager` and calculatable collection generators.
 
-Otherwise you should provide your own adapter with collectionView delegates.
+Otherwise you should provide your own adapter with collectionView delegate.

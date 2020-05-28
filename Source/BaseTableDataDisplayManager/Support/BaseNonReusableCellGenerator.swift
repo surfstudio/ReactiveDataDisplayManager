@@ -1,5 +1,5 @@
 //
-//  NonReusableTableCellGenerator.swift
+//  BaseNonReusableCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Alexander Filimonov on 02/03/2020.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// Class for generating non-reusable Configurable UITableViewCell
-public class BaseNonReusableTableCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
+public class BaseNonReusableCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 

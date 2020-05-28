@@ -1,5 +1,5 @@
 //
-//  AccurateWidthCollectionCellGenerator.swift
+//  CalculatableHeightCollectionCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Alexander Filimonov on 02/03/2020.
@@ -8,25 +8,25 @@
 
 import Foundation
 
-public class AccurateWidthCollectionCellGenerator<Cell: Configurable & AccurateWidth>: BaseCollectionCellGenerator<Cell> & SizableCollectionCellGenerator where Cell: UICollectionViewCell {
+public class CalculatableHeightCollectionCellGenerator<Cell: Configurable & CalculatableHeight>: BaseCollectionCellGenerator<Cell> & SizableCollectionCellGenerator where Cell: UICollectionViewCell {
 
-    // MARK: - Private ProAccurateWidthperties]
+    // MARK: - Private Properties
 
-    private let height: CGFloat
+    private let width: CGFloat
 
     // MARK: - Initializaion
 
     public init(with model: Cell.Model,
-                height: CGFloat,
+                width: CGFloat,
                 registerType: CellRegisterType = .nib) {
-        self.height = height
+        self.width = width
         super.init(with: model, registerType: registerType)
     }
 
     // MARK: - SizableCollectionCellGenerator
 
     public func getSize() -> CGSize {
-        return .init(width: Cell.getWidth(forHeight: height, with: model), height: height)
+        return .init(width: width, height: Cell.getHeight(forWidth: width, with: model))
     }
 
 }

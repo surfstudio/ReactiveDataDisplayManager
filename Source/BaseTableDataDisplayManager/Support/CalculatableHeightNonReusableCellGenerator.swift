@@ -1,34 +1,41 @@
 //
-//  AccurateTableCellGenerator.swift
+//  CalculatableHeightNonReusableCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Alexander Filimonov on 03/03/2020.
+//  Created by Alexander Filimonov on 02/03/2020.
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
 import Foundation
 
-/// Class for generating reusable Configurable UITableViewCell with calculated height
-public class AccurateTableCellGenerator<Cell: AccurateHeight>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
+/// Class for generating non-reusable Configurable UITableViewCell with calculated height
+public class CalculatableHeightNonReusableCellGenerator<Cell: CalculatableHeight>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 
     public var didSelectEvent = BaseEvent<Void>()
-    public let model: Cell.Model
+    private(set) public var model: Cell.Model
+    private(set) public lazy var cell: Cell? = {
+        return Cell.fromXib()
+    }()
 
     // MARK: - Private Properties
 
-    private let cellWidth: CGFloat
     private let registerType: CellRegisterType
 
     // MARK: - Initialization
 
     public init(with model: Cell.Model,
-                cellWidth: CGFloat = UIScreen.main.bounds.width,
                 registerType: CellRegisterType = .nib) {
         self.model = model
-        self.cellWidth = cellWidth
         self.registerType = registerType
+    }
+
+    // MARK: - Public Methods
+
+    public func update(model: Cell.Model) {
+        self.model = model
+        cell?.configure(with: model)
     }
 
     // MARK: - TableCellGenerator
@@ -38,19 +45,16 @@ public class AccurateTableCellGenerator<Cell: AccurateHeight>: TableCellGenerato
     }
 
     public var cellHeight: CGFloat {
-        return Cell.getHeight(forWidth: cellWidth, with: model)
+        return Cell.getHeight(forWidth: cell?.frame.width ?? 0, with: model)
     }
 
     public var estimatedCellHeight: CGFloat? {
-        return Cell.getHeight(forWidth: cellWidth, with: model)
+        return Cell.getHeight(forWidth: cell?.frame.width ?? 0, with: model)
     }
 
     public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier.nameOfClass, for: indexPath) as? Cell else {
-            return UITableViewCell()
-        }
-        cell.configure(with: model)
-        return cell
+        cell?.configure(with: model)
+        return cell ?? UITableViewCell()
     }
 
     public func registerCell(in tableView: UITableView) {
@@ -63,3 +67,4 @@ public class AccurateTableCellGenerator<Cell: AccurateHeight>: TableCellGenerato
     }
 
 }
+

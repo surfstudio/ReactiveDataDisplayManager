@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-class TitleTableViewCell: UITableViewCell, AccurateHeight {
+class TitleTableViewCell: UITableViewCell, CalculatableHeight {
 
     // MARK: - IBOutlets
 

@@ -1,5 +1,5 @@
 //
-//  SizableCollectionCollectionDataDisplayManager.swift
+//  SizableCollectionDataDisplayManager.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Alexander Filimonov on 02/03/2020.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-public class SizableCollectionCollectionDataDisplayManager: BaseCollectionDataDisplayManager {
+/// CollectionDataDisplayManager that supports sizable generators
+public class SizableCollectionDataDisplayManager: BaseCollectionDataDisplayManager {
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let sizableCell = cellGenerators[indexPath.section][indexPath.row] as? SizableCollectionCellGenerator else {
