@@ -21,13 +21,16 @@ public class CalculatableHeightNonReusableCellGenerator<Cell: CalculatableHeight
 
     // MARK: - Private Properties
 
+    private let cellWidth: CGFloat
     private let registerType: CellRegisterType
 
     // MARK: - Initialization
 
     public init(with model: Cell.Model,
+                cellWidth: CGFloat = UIScreen.main.bounds.width,
                 registerType: CellRegisterType = .nib) {
         self.model = model
+        self.cellWidth = cellWidth
         self.registerType = registerType
     }
 
@@ -45,11 +48,11 @@ public class CalculatableHeightNonReusableCellGenerator<Cell: CalculatableHeight
     }
 
     public var cellHeight: CGFloat {
-        return Cell.getHeight(forWidth: cell?.frame.width ?? 0, with: model)
+        return Cell.getHeight(forWidth: cellWidth, with: model)
     }
 
     public var estimatedCellHeight: CGFloat? {
-        return Cell.getHeight(forWidth: cell?.frame.width ?? 0, with: model)
+        return Cell.getHeight(forWidth: cellWidth, with: model)
     }
 
     public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {

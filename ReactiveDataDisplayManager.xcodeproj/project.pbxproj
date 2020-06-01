@@ -251,6 +251,7 @@
 				4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */,
 				8987883C2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift */,
 				4F088BED1F4E9F74006B7809 /* Protocols.swift */,
+				C1AB77E1240D98D7000044F1 /* SizableCollectionCellGenerator.swift */,
 				4FD38131202D791A0005EBFE /* Operations.swift */,
 			);
 			path = Protocols;
@@ -276,7 +277,6 @@
 		C1AB77E6240D9A9A000044F1 /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				C1AB77E1240D98D7000044F1 /* SizableCollectionCellGenerator.swift */,
 				C1AB77DB240D6796000044F1 /* CalculatableHeightCollectionCellGenerator.swift */,
 				C1AB77E3240D9A0E000044F1 /* CalculatableWidthCollectionCellGenerator.swift */,
 			);
