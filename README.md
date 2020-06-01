@@ -158,7 +158,7 @@ If you choose this generator, you should insert `itemSize` in `collectionViewFlo
 - realize `Configurable` protocol
 - initialize generator `let generator = BaseCollectionCellGenerator<YourCollectionViewCell>(with: YourCollectionViewCellModel())`
 
-### SizableCollectionCollectionDataDisplayManager & CalculatableHeightCollectionCellGenerator/CalculatableWidthCollectionCellGenerator
+### SizableCollectionDataDisplayManager & CalculatableHeightCollectionCellGenerator/CalculatableWidthCollectionCellGenerator
 
 Manager and generators to work with different sizes (in one dimension - only different heights/widths).
 
