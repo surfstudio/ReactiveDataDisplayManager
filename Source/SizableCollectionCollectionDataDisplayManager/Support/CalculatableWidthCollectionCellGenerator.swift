@@ -10,7 +10,7 @@ import Foundation
 
 public class CalculatableWidthCollectionCellGenerator<Cell: Configurable & CalculatableWidth>: BaseCollectionCellGenerator<Cell> & SizableCollectionCellGenerator where Cell: UICollectionViewCell {
 
-    // MARK: - Private ProAccurateWidthperties]
+    // MARK: - Private Properties
 
     private let height: CGFloat
 
