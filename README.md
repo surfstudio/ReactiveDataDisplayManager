@@ -117,7 +117,7 @@ In 99% of situations you don't need to create your own generators. There are ple
 
 ### BaseCellGenerator & BaseNonReusableCellGenerator
 
-Generators with selection event. They build `Configurable` cell and work with automatic demension. But the second one, as you can guess, doesen't reuse cell in tableView, so you can update your cell in any time.
+Generators with selection event. They build `Configurable` cell and work with automatic demension. But the second one, as you can guess, doesn't reuse cell in tableView, so you can update your cell in any time.
 
 **To work with it you should:**
 
