@@ -1,15 +1,15 @@
 //
-//  BaseCellGenerator.swift
+//  CalculatableHeightCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Mikhail Monakov on 15/01/2019.
+//  Created by Alexander Filimonov on 03/03/2020.
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
 import Foundation
 
-/// Class for generating reusable Configurable UITableViewCell
-public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
+/// Class for generating reusable Configurable UITableViewCell with calculated height
+public class CalculatableHeightCellGenerator<Cell: CalculatableHeight>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 
@@ -18,13 +18,16 @@ public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectab
 
     // MARK: - Private Properties
 
+    private let cellWidth: CGFloat
     private let registerType: CellRegisterType
 
     // MARK: - Initialization
 
     public init(with model: Cell.Model,
+                cellWidth: CGFloat = UIScreen.main.bounds.width,
                 registerType: CellRegisterType = .nib) {
         self.model = model
+        self.cellWidth = cellWidth
         self.registerType = registerType
     }
 
@@ -32,6 +35,14 @@ public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectab
 
     public var identifier: UITableViewCell.Type {
         return Cell.self
+    }
+
+    public var cellHeight: CGFloat {
+        return Cell.getHeight(forWidth: cellWidth, with: model)
+    }
+
+    public var estimatedCellHeight: CGFloat? {
+        return Cell.getHeight(forWidth: cellWidth, with: model)
     }
 
     public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
