@@ -9,32 +9,40 @@
 import Foundation
 import UIKit
 
-public extension NSObject {
+extension NSObject {
     class var nameOfClass: String {
         return NSStringFromClass(self).components(separatedBy: ".").last!
     }
 }
 
-public extension UIViewController {
+extension UIViewController {
     class func controller() -> Self {
         let classReference = self.self
         return classReference.init(nibName: self.nameOfClass, bundle: Bundle(for: self))
     }
 }
 
-public extension UITableView {
+extension UITableView {
     func registerNib(_ cellType: UITableViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellReuseIdentifier: cellType.nameOfClass)
     }
 }
 
-public extension UICollectionView {
+extension UICollectionView {
     func registerNib(_ cellType: UICollectionViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellWithReuseIdentifier: cellType.nameOfClass)
     }
 
     func registerNib(_ viewType: UICollectionReusableView.Type, kind: String) {
         self.register(UINib(nibName: viewType.nameOfClass, bundle: Bundle(for: viewType.self)), forSupplementaryViewOfKind: kind, withReuseIdentifier: viewType.nameOfClass)
+    }
+}
+
+extension UIView {
+    /// Loads view from its .xib file
+    static func fromXib() -> Self? {
+        let view = Bundle(for: self).loadNibNamed(nameOfClass, owner: nil, options: nil)?.last
+        return view as? Self
     }
 }
 

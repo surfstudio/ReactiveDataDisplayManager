@@ -1,20 +1,23 @@
 //
-//  BaseCellGenerator.swift
+//  BaseNonReusableCellGenerator.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Mikhail Monakov on 15/01/2019.
+//  Created by Alexander Filimonov on 02/03/2020.
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
 import Foundation
 
-/// Class for generating reusable Configurable UITableViewCell
-public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
+/// Class for generating non-reusable Configurable UITableViewCell
+public class BaseNonReusableCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 
     public var didSelectEvent = BaseEvent<Void>()
-    public let model: Cell.Model
+    private(set) public var model: Cell.Model
+    private(set) public lazy var cell: Cell? = {
+        return Cell.fromXib()
+    }()
 
     // MARK: - Private Properties
 
@@ -28,6 +31,13 @@ public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectab
         self.registerType = registerType
     }
 
+    // MARK: - Public Methods
+
+    public func update(model: Cell.Model) {
+        self.model = model
+        cell?.configure(with: model)
+    }
+
     // MARK: - TableCellGenerator
 
     public var identifier: UITableViewCell.Type {
@@ -35,11 +45,8 @@ public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectab
     }
 
     public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier.nameOfClass, for: indexPath) as? Cell else {
-            return UITableViewCell()
-        }
-        cell.configure(with: model)
-        return cell
+        cell?.configure(with: model)
+        return cell ?? UITableViewCell()
     }
 
     public func registerCell(in tableView: UITableView) {
