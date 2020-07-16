@@ -71,7 +71,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     }
 
     public func insert(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) {
-        guard self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) else {
+        guard !self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) else {
             fatalError("Error adding header generator. Header generator was added earlier")
         }
         guard let anchorIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === after }) else {
@@ -82,7 +82,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     }
 
     public func insert(headGenerator: TableHeaderGenerator, before: TableHeaderGenerator) {
-        guard self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) else {
+        guard !self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) else {
             fatalError("Error adding header generator. Header generator was added earlier")
         }
         guard let anchorIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === before }) else {
@@ -215,6 +215,26 @@ public extension BaseTableDataDisplayManager {
                              with: animation,
                              needScrollAt: scrollPosition,
                              needRemoveEmptySection: needRemoveEmptySection)
+    }
+    
+    /// Removes section from data display manager by TableHeaderGenerator
+    ///
+    /// - Parameters:
+    ///   - by: Header of section
+    ///   - animation: Animation for row action.
+    func removeSection(by header: TableHeaderGenerator,
+                       with animation: UITableView.RowAnimation = .automatic) {
+        guard let table = self.tableView else {
+            return
+        }
+        guard let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }) else {
+            return
+        }
+        table.beginUpdates()
+        self.cellGenerators.remove(at: index)
+        self.sectionHeaderGenerators.remove(at: index)
+        table.deleteSections(IndexSet(integer: index), with: animation)
+        table.endUpdates()
     }
 
     /// Inserts new head generator.
