@@ -584,6 +584,7 @@ extension BaseTableDataDisplayManager: UITableViewDelegate {
         self.didEndDisplayCellEvent.invoke(with: (generator, indexPath))
         if let displayable = generator as? DisplayableFlow {
             displayable.didEndDisplayEvent.invoke(with: ())
+            displayable.didEndDisplayCellEvent?.invoke(with: cell)
         }
     }
 
