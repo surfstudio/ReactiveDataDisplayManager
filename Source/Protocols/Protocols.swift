@@ -26,7 +26,7 @@ open class TableHeaderGenerator: ViewGenerator {
 public protocol TableCellGenerator: class {
 
     /// Nib type, which create this generator
-    var identifier: UITableViewCell.Type { get }
+    var identifier: String { get }
 
     /// Creates a cell.
     ///
@@ -66,7 +66,7 @@ public protocol CollectionHeaderGenerator: class {
 public protocol CollectionCellGenerator: class {
 
     /// Nib type, which create this generator
-    var identifier: UICollectionViewCell.Type { get }
+    var identifier: String { get }
 
     /// Creates a cell.
     ///
@@ -178,7 +178,7 @@ public extension TableCellGenerator {
 public extension TableCellGenerator where Self: ViewBuilder {
 
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier, for: indexPath) as? Self.ViewType else {
             return UITableViewCell()
         }
 
@@ -196,7 +196,7 @@ public extension TableCellGenerator where Self: ViewBuilder {
 public extension CollectionCellGenerator where Self: ViewBuilder {
 
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.identifier, for: indexPath) as? Self.ViewType else {
             return UICollectionViewCell()
         }
 

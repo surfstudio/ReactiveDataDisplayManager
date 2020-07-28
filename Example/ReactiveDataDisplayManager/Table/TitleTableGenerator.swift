@@ -31,8 +31,8 @@ class TitleTableGenerator: SelectableItem {
 
 extension TitleTableGenerator: TableCellGenerator {
 
-    var identifier: UITableViewCell.Type {
-        return TitleTableViewCell.self
+    var identifier: String {
+        return String(describing: TitleTableViewCell.self) 
     }
 
 }

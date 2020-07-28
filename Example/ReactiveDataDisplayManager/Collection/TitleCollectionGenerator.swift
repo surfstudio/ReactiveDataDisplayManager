@@ -31,8 +31,8 @@ class TitleCollectionGenerator: SelectableItem {
 
 extension TitleCollectionGenerator: CollectionCellGenerator {
 
-    var identifier: UICollectionViewCell.Type {
-        return TitleCollectionViewCell.self
+    var identifier: String {
+        return String(describing: TitleCollectionViewCell.self)
     }
 
 }
