@@ -6,7 +6,7 @@
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Generator that describes collection cell generator that can returns size
 public protocol SizableCollectionCellGenerator: class {

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Contains extension of BaseTableDataDisplayManager for catching last cell showing event.
 open class PaginableBaseTableDataDisplayManager: BaseTableDataDisplayManager {

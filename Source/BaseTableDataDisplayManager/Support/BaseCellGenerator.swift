@@ -6,7 +6,7 @@
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Class for generating reusable Configurable UITableViewCell
 public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {

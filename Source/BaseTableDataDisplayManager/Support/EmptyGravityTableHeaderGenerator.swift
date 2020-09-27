@@ -6,6 +6,8 @@
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 public class EmptyGravityTableHeaderGenerator: GravityTableHeaderGenerator {
     open override func generate() -> UIView {
         let view = UIView()
