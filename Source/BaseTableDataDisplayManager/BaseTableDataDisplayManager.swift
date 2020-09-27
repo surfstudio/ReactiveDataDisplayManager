@@ -174,14 +174,14 @@ extension BaseTableDataDisplayManager: HeaderDataDisplayManager {
             self.cellGenerators.append([TableCellGenerator]())
         }
 
-        if let index = self.sectionHeaderGenerators.index(where: { $0 === header }) {
+        if let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }) {
             self.cellGenerators[index].append(contentsOf: generators)
         }
     }
 
     /// Removes all cell generators from a given section
     public func removeAllGenerators(from header: TableHeaderGenerator) {
-        guard let index = self.sectionHeaderGenerators.index(where: { $0 === header }), self.cellGenerators.count > index else {
+        guard let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }), self.cellGenerators.count > index else {
             return
         }
 
@@ -229,7 +229,7 @@ public extension BaseTableDataDisplayManager {
                 generators: [TableCellGenerator],
                 with animation: UITableView.RowAnimation = .automatic) {
         self.insert(headGenerator: headGenerator, by: index, animation: animation)
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === headGenerator }) else {
+        guard let headerIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === headGenerator }) else {
             return
         }
 
@@ -253,7 +253,7 @@ public extension BaseTableDataDisplayManager {
                        with animation: UITableView.RowAnimation = .automatic) {
         self.insert(headGenerator: sectionHeader, before: header)
 
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: {
+        guard let headerIndex = self.sectionHeaderGenerators.firstIndex(where: {
             $0 === header
         }) else {
             return
@@ -279,7 +279,7 @@ public extension BaseTableDataDisplayManager {
                        with animation: UITableView.RowAnimation = .automatic) {
         self.insert(headGenerator: sectionHeader, after: header)
 
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else {
+        guard let headerIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }) else {
             return
         }
 
@@ -358,7 +358,7 @@ public extension BaseTableDataDisplayManager {
     func insert(to header: TableHeaderGenerator,
                 new generator: TableCellGenerator,
                 with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else {
+        guard let headerIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }) else {
             return
         }
         self.insert(elements: [(generator, headerIndex, 0)], with: animation)
@@ -373,7 +373,7 @@ public extension BaseTableDataDisplayManager {
     func insertAtBeginning(to header: TableHeaderGenerator,
                            new generators: [TableCellGenerator],
                            with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else {
+        guard let headerIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }) else {
             return
         }
         let elements = generators.enumerated().map { item in
@@ -391,7 +391,7 @@ public extension BaseTableDataDisplayManager {
     func insertAtEnd(to header: TableHeaderGenerator,
                      new generators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: { $0 === header }) else {
+        guard let headerIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }) else {
             return
         }
         let base = self.cellGenerators[headerIndex].count
@@ -510,7 +510,7 @@ private extension BaseTableDataDisplayManager {
 
     func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in cellGenerators.enumerated() {
-            if let generatorIndex = section.index(where: { $0 === generator }) {
+            if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
                 return (sectionIndex, generatorIndex)
             }
         }

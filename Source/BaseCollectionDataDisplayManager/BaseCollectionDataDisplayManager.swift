@@ -124,14 +124,14 @@ extension BaseCollectionDataDisplayManager: HeaderDataDisplayManager {
             self.cellGenerators.append([CollectionCellGenerator]())
         }
 
-        if let index = self.sectionHeaderGenerators.index(where: { $0 === header }) {
+        if let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }) {
             self.cellGenerators[index].append(contentsOf: generators)
         }
     }
 
     public func removeAllGenerators(from header: CollectionHeaderGenerator) {
         guard
-           let index = self.sectionHeaderGenerators.index(where: { $0 === header }),
+            let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }),
            self.cellGenerators.count > index
        else {
            return
@@ -150,7 +150,7 @@ extension BaseCollectionDataDisplayManager: HeaderDataDisplayManager {
 private extension BaseCollectionDataDisplayManager {
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in cellGenerators.enumerated() {
-            if let generatorIndex = section.index(where: { $0 === generator }) {
+            if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
                 return (sectionIndex, generatorIndex)
             }
         }
