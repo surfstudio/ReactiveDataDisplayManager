@@ -26,11 +26,19 @@ extension UITableView {
     func registerNib(_ cellType: UITableViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellReuseIdentifier: cellType.nameOfClass)
     }
+
+    func registerNib(_ cellType: String) {
+        self.register(UINib(nibName: cellType, bundle: Bundle(path: cellType) ), forCellReuseIdentifier: cellType)
+    }
 }
 
 extension UICollectionView {
     func registerNib(_ cellType: UICollectionViewCell.Type) {
         self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellWithReuseIdentifier: cellType.nameOfClass)
+    }
+
+    func registerNib(_ cellType: String) {
+        self.register(UINib(nibName: cellType, bundle: Bundle(path: cellType)), forCellWithReuseIdentifier: cellType)
     }
 
     func registerNib(_ viewType: UICollectionReusableView.Type, kind: String) {

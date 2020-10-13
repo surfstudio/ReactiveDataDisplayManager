@@ -30,12 +30,12 @@ public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectab
 
     // MARK: - TableCellGenerator
 
-    public var identifier: UITableViewCell.Type {
-        return Cell.self
+    public var identifier: String {
+        return String(describing: Cell.self)
     }
 
     public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier.nameOfClass, for: indexPath) as? Cell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? Cell else {
             return UITableViewCell()
         }
         cell.configure(with: model)
@@ -47,7 +47,7 @@ public class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectab
         case .nib:
             tableView.registerNib(identifier)
         case .class:
-            tableView.register(identifier, forCellReuseIdentifier: identifier.nameOfClass)
+            tableView.register(Cell.self, forCellReuseIdentifier: identifier)
         }
     }
 
