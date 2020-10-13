@@ -32,12 +32,12 @@ public class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem whe
 // MARK: - CollectionCellGenerator
 
 extension BaseCollectionCellGenerator: CollectionCellGenerator {
-    public var identifier: UICollectionViewCell.Type {
-        return Cell.self
+    public var identifier: String {
+        return String(describing: Cell.self)
     }
 
     public func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier.nameOfClass, for: indexPath) as? Cell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? Cell else {
             return UICollectionViewCell()
         }
         cell.configure(with: model)
@@ -49,7 +49,7 @@ extension BaseCollectionCellGenerator: CollectionCellGenerator {
         case .nib:
             collectionView.registerNib(identifier)
         case .class:
-            collectionView.register(identifier, forCellWithReuseIdentifier: identifier.nameOfClass)
+            collectionView.register(Cell.self, forCellWithReuseIdentifier: identifier)
         }
     }
 }

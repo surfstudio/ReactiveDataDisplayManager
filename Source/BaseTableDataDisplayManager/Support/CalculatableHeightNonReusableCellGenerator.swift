@@ -43,8 +43,8 @@ public class CalculatableHeightNonReusableCellGenerator<Cell: CalculatableHeight
 
     // MARK: - TableCellGenerator
 
-    public var identifier: UITableViewCell.Type {
-        return Cell.self
+    public var identifier: String {
+        return String(describing: Cell.self)
     }
 
     public var cellHeight: CGFloat {
@@ -65,7 +65,7 @@ public class CalculatableHeightNonReusableCellGenerator<Cell: CalculatableHeight
         case .nib:
             tableView.registerNib(identifier)
         case .class:
-            tableView.register(identifier, forCellReuseIdentifier: identifier.nameOfClass)
+            tableView.register(Cell.self, forCellReuseIdentifier: identifier)
         }
     }
 

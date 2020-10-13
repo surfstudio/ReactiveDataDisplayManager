@@ -40,8 +40,8 @@ public class BaseNonReusableCellGenerator<Cell: Configurable>: TableCellGenerato
 
     // MARK: - TableCellGenerator
 
-    public var identifier: UITableViewCell.Type {
-        return Cell.self
+    public var identifier: String {
+        return String(describing: Cell.self)
     }
 
     public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
@@ -54,7 +54,7 @@ public class BaseNonReusableCellGenerator<Cell: Configurable>: TableCellGenerato
         case .nib:
             tableView.registerNib(identifier)
         case .class:
-            tableView.register(identifier, forCellReuseIdentifier: identifier.nameOfClass)
+            tableView.register(Cell.self, forCellReuseIdentifier: identifier)
         }
     }
 

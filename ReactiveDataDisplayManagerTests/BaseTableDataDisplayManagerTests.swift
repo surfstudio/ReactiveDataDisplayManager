@@ -491,8 +491,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
     class CellGenerator: TableCellGenerator {
 
-        var identifier: UITableViewCell.Type {
-            return UITableViewCell.self
+        var identifier: String {
+            return String(describing: UITableViewCell.self) 
         }
 
         func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
