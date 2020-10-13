@@ -6,7 +6,7 @@
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Protocol for calculating height of element according to the model
 public protocol CalculatableHeight: Configurable {

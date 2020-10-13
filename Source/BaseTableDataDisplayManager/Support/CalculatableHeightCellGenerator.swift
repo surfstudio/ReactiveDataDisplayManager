@@ -6,7 +6,7 @@
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Class for generating reusable Configurable UITableViewCell with calculated height
 public class CalculatableHeightCellGenerator<Cell: CalculatableHeight>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {

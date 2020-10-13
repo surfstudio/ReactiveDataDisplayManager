@@ -6,7 +6,7 @@
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Protocol for UIView (basically for UICollectionViewCell&UITableViewCell) which is supposed to be used in CellGenerators
 public protocol Configurable where Self: UIView {

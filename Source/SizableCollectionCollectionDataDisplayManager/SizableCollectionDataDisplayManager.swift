@@ -6,7 +6,7 @@
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// CollectionDataDisplayManager that supports sizable generators
 public class SizableCollectionDataDisplayManager: BaseCollectionDataDisplayManager {

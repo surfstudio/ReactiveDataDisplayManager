@@ -6,7 +6,7 @@
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
     public func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
