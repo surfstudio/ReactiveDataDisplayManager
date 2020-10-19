@@ -6,7 +6,7 @@
 //  Copyright © 2018 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 open class PaginableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
 

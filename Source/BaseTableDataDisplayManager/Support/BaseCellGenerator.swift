@@ -6,7 +6,7 @@
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public class BaseCellGenerator<Cell: Configurable>: SelectableItem where Cell: UITableViewCell {
 
