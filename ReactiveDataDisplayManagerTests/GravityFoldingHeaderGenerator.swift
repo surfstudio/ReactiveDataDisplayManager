@@ -21,8 +21,8 @@ final class GravityFoldingHeaderGenerator: GravityTableCellGenerator, GravityFol
 
     var heaviness = 10
 
-    var identifier: UITableViewCell.Type {
-        return UITableViewCell.self
+    var identifier: String {
+        return String(describing: UITableViewCell.self)
     }
 
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
@@ -40,8 +40,8 @@ final class GravityCellGenerator: GravityTableCellGenerator {
 
     var heaviness = 11
 
-    var identifier: UITableViewCell.Type {
-        return UITableViewCell.self
+    var identifier: String {
+        return String(describing: UITableViewCell.self)
     }
 
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {

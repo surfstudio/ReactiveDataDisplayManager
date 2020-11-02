@@ -34,8 +34,8 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
     }
 
     final class CellGenerator: CollectionCellGenerator {
-        var identifier: UICollectionViewCell.Type {
-            return UICollectionViewCell.self
+        var identifier: String {
+            return String(describing: UICollectionViewCell.self)
         }
 
         func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {

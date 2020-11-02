@@ -19,8 +19,8 @@ final class FoldingHeaderGenerator: TableCellGenerator, FoldableItem {
 
     // MARK: - TableCellGenerator
 
-    var identifier: UITableViewCell.Type {
-        return UITableViewCell.self
+    var identifier: String {
+        return String(describing: UITableViewCell.self)
     }
 
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
@@ -36,8 +36,8 @@ final class CellGenerator: TableCellGenerator {
 
     // MARK: - TableCellGenerator
 
-    var identifier: UITableViewCell.Type {
-        return UITableViewCell.self
+    var identifier: String {
+        return String(describing: UITableViewCell.self)
     }
 
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
