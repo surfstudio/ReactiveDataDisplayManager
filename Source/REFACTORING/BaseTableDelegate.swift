@@ -68,6 +68,13 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
         return false
     }
 
+    open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
+        if let generator = self.adapter?.stateManager.generators[indexPath.section][indexPath.row] as? MovableGenerator {
+            return generator.canMove()
+        }
+        return false
+    }
+
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
         guard

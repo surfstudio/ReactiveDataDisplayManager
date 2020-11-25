@@ -9,7 +9,7 @@
 import Foundation
 
 //Base implementation of a TableStateManager. Handles all operations with generators and sections.
-open class BaseTableStateManager {
+open class BaseTableStateManager: AbstractStateManager {
 
     // MARK: - Public properties
 
@@ -20,13 +20,18 @@ open class BaseTableStateManager {
 
     // MARK: - Initialization
 
-    init() {
+    public init() {
         self.generators = [[TableCellGenerator]]()
         self.sections = [TableHeaderGenerator]()
     }
 
     // MARK: - State Management Methods
 
+    /// Adds section header generator and its section's generators to the end of collection
+    ///
+    /// - Parameters:
+    ///   - generator: Generator for new section header.
+    ///   - cells: Generators for this section.
     open func addSection(header generator: TableHeaderGenerator, cells: [TableCellGenerator]) {
         guard let table = adapter?.tableView else { return }
         cells.forEach { $0.registerCell(in: table) }
@@ -34,10 +39,19 @@ open class BaseTableStateManager {
         self.generators.append(cells)
     }
 
+    /// Adds section header generator  to the end of collection
+    ///
+    /// - Parameters:
+    ///   - generator: Generator for new section header.
     open func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sections.append(generator)
     }
 
+    /// Inserts new header generator after another.
+    ///
+    /// - Parameters:
+    ///   - headGenerator: Header which you want to insert.
+    ///   - after: Header, after which new header will be added.
     open func insert(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) {
         if self.sections.contains(where: { $0 === headGenerator }) {
             fatalError("Error adding header generator. Header generator was added earlier")
@@ -49,6 +63,11 @@ open class BaseTableStateManager {
         self.insert(headGenerator: headGenerator, by: newIndex)
     }
 
+    /// Inserts new header generator after another.
+    ///
+    /// - Parameters:
+    ///   - headGenerator: Header which you want to insert.
+    ///   - after: Header, before which new header will be added.
     open func insert(headGenerator: TableHeaderGenerator, before: TableHeaderGenerator) {
         if self.sections.contains(where: { $0 === headGenerator }) {
             fatalError("Error adding header generator. Header generator was added earlier")
@@ -103,6 +122,7 @@ open class BaseTableStateManager {
         self.generators.removeAll()
     }
 
+    /// Removes all headers generators
     open func clearHeaderGenerators() {
         self.sections.removeAll()
     }
@@ -120,6 +140,11 @@ open class BaseTableStateManager {
         CATransaction.commit()
     }
 
+    /// Reloads only one section with specified animation
+    ///
+    /// - Parameters:
+    ///   - sectionHeaderGenerator: Header of section which you want to reload.
+    ///   - animation: Type of reload animation
     open func reloadSection(by sectionHeaderGenerator: TableHeaderGenerator, with animation: UITableView.RowAnimation = .none) {
         guard let index = sections.firstIndex(where: { (headerGenerator) -> Bool in
             return headerGenerator === sectionHeaderGenerator
@@ -127,6 +152,11 @@ open class BaseTableStateManager {
         self.adapter?.tableView.reloadSections(IndexSet(integer: index), with: animation)
     }
 
+    /// Inserts new generators to provided header generator.
+    ///
+    /// - Parameters:
+    ///   - generators: Generators to insert
+    ///   - header: Header generator in which you want to insert.
     open func addCellGenerators(_ generators: [TableCellGenerator], toHeader header: TableHeaderGenerator) {
         guard let table = self.adapter?.tableView else { return }
         generators.forEach { $0.registerCell(in: table) }
