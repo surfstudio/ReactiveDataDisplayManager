@@ -6,8 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-open class UITableViewCellGenerator<Cell: UITableViewCell>: CellGenerator {
-    public typealias Cell = UITableViewCell
+open class UITableViewCellGenerator<Cell: UITableViewCell>: CellGenerator, TableCellGenerator {
+
     public typealias Collection = UITableView
 
     // MARK: - Private Properties
@@ -35,27 +35,16 @@ open class UITableViewCellGenerator<Cell: UITableViewCell>: CellGenerator {
             tableView.register(Cell.self, forCellReuseIdentifier: identifier)
         }
     }
-}
 
-extension CellGenerator where Cell: UITableViewCell, Collection: UITableView {
-
-    /// Nib type, which create this generator
-    var identifier: String {
+    public var identifier: String {
         String(describing: Cell.self)
     }
 
-    /// Height for cell.
-    ///
-    /// Default implementation returns UITableView.automaticDimension
-    var cellHeight: CGFloat {
+    public var cellHeight: CGFloat {
         UITableView.automaticDimension
     }
-
-    /// Estimated height for cell
-    ///
-    /// Default implementation returns nil
-    var estimatedCellHeight: CGFloat? {
+    
+    public var estimatedCellHeight: CGFloat? {
         nil
     }
-
 }

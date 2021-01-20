@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01B283E225B8B37C0022B789 /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B283E125B8B37C0022B789 /* Plugin.swift */; };
+		01B283EC25B8B5F70022B789 /* PluginCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B283EB25B8B5F70022B789 /* PluginCollection.swift */; };
 		01B8FB1A25B83E4B0080F10D /* AbstractCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B8FB1925B83E4B0080F10D /* AbstractCellGenerator.swift */; };
 		01B8FB1E25B83EFC0080F10D /* UITableViewCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B8FB1D25B83EFC0080F10D /* UITableViewCellGenerator.swift */; };
+		01B8FB2225B84F9C0080F10D /* UITableViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B8FB2125B84F9C0080F10D /* UITableViewAdapter.swift */; };
 		4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */; };
 		4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BEB1F4E9F74006B7809 /* Extensions.swift */; };
 		4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F088BED1F4E9F74006B7809 /* Protocols.swift */; };
@@ -72,8 +75,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01B283E125B8B37C0022B789 /* Plugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plugin.swift; sourceTree = "<group>"; };
+		01B283EB25B8B5F70022B789 /* PluginCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginCollection.swift; sourceTree = "<group>"; };
 		01B8FB1925B83E4B0080F10D /* AbstractCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCellGenerator.swift; sourceTree = "<group>"; };
 		01B8FB1D25B83EFC0080F10D /* UITableViewCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellGenerator.swift; sourceTree = "<group>"; };
+		01B8FB2125B84F9C0080F10D /* UITableViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewAdapter.swift; sourceTree = "<group>"; };
 		4F088BE91F4E9F74006B7809 /* BaseTableDataDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		4F088BEA1F4E9F74006B7809 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		4F088BEB1F4E9F74006B7809 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -150,6 +156,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01B283E025B8B2D80022B789 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				01B283E125B8B37C0022B789 /* Plugin.swift */,
+				01B283EB25B8B5F70022B789 /* PluginCollection.swift */,
+			);
+			path = Plugins;
+			sourceTree = "<group>";
+		};
+		01B283EF25B8B8C90022B789 /* PlugableAdapter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PlugableAdapter;
+			sourceTree = "<group>";
+		};
 		4F088BE81F4E9F74006B7809 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +275,7 @@
 		B20633C0256672FA00C65D25 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				01B283E025B8B2D80022B789 /* Plugins */,
 				B20633C12567AD8D00C65D25 /* AbstractAdapter.swift */,
 				B20633C72567AD9C00C65D25 /* AbstractStateManager.swift */,
 				01B8FB1925B83E4B0080F10D /* AbstractCellGenerator.swift */,
@@ -263,6 +286,7 @@
 		B20633CB2567C92600C65D25 /* Example Adapters */ = {
 			isa = PBXGroup;
 			children = (
+				01B283EF25B8B8C90022B789 /* PlugableAdapter */,
 				B20633D5256B8F2500C65D25 /* GravityMovableTableAdapter */,
 				9E10E3B9256F6A350042962B /* Sandbox.swift */,
 				9EB4E58E256F87E800DC3359 /* EXAMPLE_BUILDER.swift */,
@@ -299,6 +323,7 @@
 				B2B4FB4A2550220500E6365B /* BaseTableDelegate.swift */,
 				B2B4FB4E2550221200E6365B /* BaseTableDataSource.swift */,
 				01B8FB1D25B83EFC0080F10D /* UITableViewCellGenerator.swift */,
+				01B8FB2125B84F9C0080F10D /* UITableViewAdapter.swift */,
 			);
 			path = REFACTORING;
 			sourceTree = "<group>";
@@ -508,14 +533,17 @@
 				B20633C22567AD8D00C65D25 /* AbstractAdapter.swift in Sources */,
 				4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */,
 				B20633C82567AD9C00C65D25 /* AbstractStateManager.swift in Sources */,
+				01B283E225B8B37C0022B789 /* Plugin.swift in Sources */,
 				89FD21B0238BD9FB008D7ED3 /* BaseCollectionDataDisplayManager.swift in Sources */,
 				4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */,
 				B2B4FB4B2550220500E6365B /* BaseTableDelegate.swift in Sources */,
+				01B8FB2225B84F9C0080F10D /* UITableViewAdapter.swift in Sources */,
 				8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */,
 				C1AB77E4240D9A0E000044F1 /* CalculatableWidthCollectionCellGenerator.swift in Sources */,
 				89927C3F2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift in Sources */,
 				89FD21B2238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift in Sources */,
 				C1AB77DC240D6796000044F1 /* CalculatableHeightCollectionCellGenerator.swift in Sources */,
+				01B283EC25B8B5F70022B789 /* PluginCollection.swift in Sources */,
 				C1AB77DE240D6919000044F1 /* SizableCollectionDataDisplayManager.swift in Sources */,
 				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
 				897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */,
