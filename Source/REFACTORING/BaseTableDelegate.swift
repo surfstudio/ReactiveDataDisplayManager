@@ -8,12 +8,38 @@
 
 import Foundation
 
+public protocol TableStateManager: AbstractStateManager {
+    func remove(_ generator: CellGeneratorType,
+                              with animation: UITableView.RowAnimation,
+                              needScrollAt scrollPosition: UITableView.ScrollPosition?,
+                              needRemoveEmptySection: Bool)
+}
+
+public protocol TableAdapter: AnyObject {
+    var tableView: UITableView { get }
+    var scrollEvent: BaseEvent<UITableView> { get set }
+    var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> { get set }
+    var cellChangedPosition: BaseEvent<(oldIndexPath: IndexPath, newIndexPath: IndexPath)> { get set }
+
+    /// Celled when cells displaying
+    var willDisplayCellEvent: BaseEvent<(TableCellGenerator, IndexPath)> { get set }
+    var didEndDisplayCellEvent: BaseEvent<(TableCellGenerator, IndexPath)> { get set }
+}
+
+
+extension BaseTableDelegate: TableDelegate { }
+
 // Base implementation for UITableViewDelegate protocol. Use it if NO special logic required.
-open class BaseTableDelegate: NSObject, UITableViewDelegate {
+open class BaseTableDelegate<A: TableStateManager>: NSObject, UITableViewDelegate where A.CellGeneratorType == TableCellGenerator, A.HeaderGeneratorType == TableHeaderGenerator {
 
     // MARK: - Properties
 
-    weak var adapter: BaseTableAdapter?
+    weak public var adapter: TableAdapter?
+    weak var stateManager: A?
+
+    init(stateManager: A) {
+        self.stateManager = stateManager
+    }
 
     // MARK: - Public properties
 
@@ -27,7 +53,7 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let generator = self.adapter?.stateManager.generators[safe: indexPath.section]?[safe: indexPath.row] else {
+        guard let generator = self.stateManager?.generators[safe: indexPath.section]?[safe: indexPath.row] else {
             return
         }
         self.adapter?.willDisplayCellEvent.invoke(with: (generator, indexPath))
@@ -37,21 +63,21 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let displayable = self.adapter?.stateManager.sections[safe: section] as? DisplayableFlow else {
+        guard let displayable = self.stateManager?.sections[safe: section] as? DisplayableFlow else {
             return
         }
         displayable.willDisplayEvent.invoke(with: ())
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        guard let displayable = self.adapter?.stateManager.sections[safe: section] as? DisplayableFlow else {
+        guard let displayable = self.stateManager?.sections[safe: section] as? DisplayableFlow else {
             return
         }
         displayable.didEndDisplayEvent.invoke(with: ())
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let generator = self.adapter?.stateManager.generators[safe: indexPath.section]?[safe: indexPath.row] else {
+        guard let generator = self.stateManager?.generators[safe: indexPath.section]?[safe: indexPath.row] else {
             return
         }
         self.adapter?.didEndDisplayCellEvent.invoke(with: (generator, indexPath))
@@ -62,14 +88,14 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        if let generator = self.adapter?.stateManager.generators[indexPath.section][indexPath.row] as? MovableGenerator {
+        if let generator = self.stateManager?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
             return generator.canMove()
         }
         return false
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-        if let generator = self.adapter?.stateManager.generators[indexPath.section][indexPath.row] as? MovableGenerator {
+        if let generator = self.stateManager?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
             return generator.canMove()
         }
         return false
@@ -78,21 +104,21 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
         guard
-            let generator = self.adapter?.stateManager.generators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
+            let generator = self.stateManager?.generators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
             moveToTheSameSection || generator.canMoveInOtherSection()
         else {
             return
         }
 
-        guard let itemToMove = self.adapter?.stateManager.generators[sourceIndexPath.section][sourceIndexPath.row] else {
+        guard let itemToMove = self.stateManager?.generators[sourceIndexPath.section][sourceIndexPath.row] else {
             return
         }
 
         // find oldSection and remove item from this array
-        self.adapter?.stateManager.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+        self.stateManager?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
 
         // findNewSection and add items to this array
-        self.adapter?.stateManager.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
+        self.stateManager?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
 
         self.adapter?.cellChangedPosition.invoke(with: (oldIndexPath: sourceIndexPath, newIndexPath: destinationIndexPath))
 
@@ -112,21 +138,21 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.adapter?.stateManager.generators[indexPath.section][indexPath.row].cellHeight ?? 0
+        return self.stateManager?.generators[indexPath.section][indexPath.row].cellHeight ?? 0
     }
 
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.adapter?.stateManager.generators[indexPath.section][indexPath.row].estimatedCellHeight ?? estimatedHeight
+        return self.stateManager?.generators[indexPath.section][indexPath.row].estimatedCellHeight ?? estimatedHeight
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let adapter = self.adapter else {
             return nil
         }
-        if section > adapter.stateManager.sections.count - 1 {
+        if section > stateManager!.sections.count - 1 {
             return nil
         }
-        return adapter.stateManager.sections[section].generate()
+        return stateManager!.sections[section].generate()
     }
 
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -134,14 +160,14 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
             return 0
         }
         // This code needed to avoid empty header
-        if section > adapter.stateManager.sections.count - 1 {
+        if section > stateManager!.sections.count - 1 {
             return 0.01
         }
-        return adapter.stateManager.sections[section].height(tableView, forSection: section)
+        return stateManager!.sections[section].height(tableView, forSection: section)
     }
 
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let selectable = self.adapter?.stateManager.generators[indexPath.section][indexPath.row] as? SelectableItem else { return }
+        guard let selectable = self.stateManager?.generators[indexPath.section][indexPath.row] as? SelectableItem else { return }
         selectable.didSelectEvent.invoke(with: ())
         if selectable.isNeedDeselect {
             tableView.deselectRow(at: indexPath, animated: true)

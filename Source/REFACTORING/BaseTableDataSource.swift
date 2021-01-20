@@ -8,31 +8,45 @@
 
 import Foundation
 
+protocol TableDataSource: UITableViewDataSource {}
+
+public protocol TableGeneratorsProvider: AnyObject {
+    var generators: [[TableCellGenerator]] { get set }
+    var sections: [TableHeaderGenerator] { get set }
+}
+
+extension BaseTableStateManager: TableGeneratorsProvider { }
+
+
 // Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
-open class BaseTableDataSource: NSObject, UITableViewDataSource {
+open class BaseTableDataSource<G: TableGeneratorsProvider>: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    weak var adapter: BaseTableAdapter?
+    weak var stateManager: G?
+
+    init(stateManager: G) {
+        self.stateManager = stateManager
+    }
 
     // MARK: - UITableViewDataSource
 
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return adapter?.stateManager.sections.count ?? 0
+        return stateManager?.sections.count ?? 0
     }
 
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let adapter = adapter else {
+        guard let stateManager = stateManager else {
             return 0
         }
-        if adapter.stateManager.generators.indices.contains(section) {
-            return adapter.stateManager.generators[section].count
+        if stateManager.generators.indices.contains(section) {
+            return stateManager.generators[section].count
         }
         return 0
     }
 
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return adapter?.stateManager.generators[indexPath.section][indexPath.row].generate(tableView: tableView, for: indexPath) ?? UITableViewCell()
+        return stateManager?.generators[indexPath.section][indexPath.row].generate(tableView: tableView, for: indexPath) ?? UITableViewCell()
     }
 
 }

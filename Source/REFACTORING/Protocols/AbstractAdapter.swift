@@ -13,18 +13,7 @@ public protocol AbstractAdapter: class {
 
     // MARK: Associated types
 
-    associatedtype CollectionType
     associatedtype CellGeneratorType
-    associatedtype CollectionDelegateType
-    associatedtype CollectionDataSourceType
-    associatedtype CollectionStateManagerType
-
-    // MARK: Support methods
-
-    init(collection: CollectionType,
-        stateManager: CollectionStateManagerType,
-        delegate: CollectionDelegateType,
-        dataSource: CollectionDataSourceType)
 
     // MARK: - Support methods (Proxies for AbstractAdapter methods)
 

@@ -8,7 +8,11 @@
 //
 //import Foundation
 //
-//open class GravityMovableTableAdapter: AbstractAdapter {
+//open class GravityMovableTableAdapter: AbstractAdapter, TableAdapter {
+//    public var tableView: UITableView {
+//        return self.collection
+//    }
+//
 //
 //    // MARK: - Typealiases
 //
@@ -41,9 +45,9 @@
 //    // MARK: - Initialization
 //
 //    public required init(collection: UITableView,
-//                         stateManager: GravityTableStateManager = GravityTableStateManager(),
-//                         delegate: MovableTableDelegate = MovableTableDelegate(),
-//                         dataSource: BaseTableDataSource = BaseTableDataSource()) {
+//                         stateManager: GravityTableStateManager,
+//                         delegate: MovableTableDelegate,
+//                         dataSource: UITableViewDataSource) {
 //        self.collection = collection
 //
 //        self.stateManager = stateManager
@@ -54,7 +58,6 @@
 //        self.delegate = delegate
 //
 //        self.collection.dataSource = dataSource
-//        dataSource.adapter = self
 //        self.dataSource = dataSource
 //    }
 //

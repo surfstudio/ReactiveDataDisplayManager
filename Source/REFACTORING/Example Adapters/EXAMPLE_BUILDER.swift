@@ -7,3 +7,30 @@
 //
 
 import Foundation
+
+//func buildCommon(cl: UITableView) -> BaseTableAdapter {
+//    let stateManager = BaseTableStateManager()
+//    return BaseTableAdapter(collection: cl,
+//                            stateManager: stateManager,
+//                            delegate: BaseTableDelegate(stateManager: stateManager),
+//                            dataSource: BaseTableDataSource(stateManager: stateManager))
+//}
+
+
+func build(cl: UITableView) -> BaseTableAdapter<BaseTableStateManager> {
+
+    let stateManager = BaseTableStateManager()
+    let delegate = BaseTableDelegate(stateManager: stateManager)
+    let dataSource = BaseTableDataSource(stateManager: stateManager)
+
+    return BaseTableAdapter(collection: cl, stateManager: stateManager, delegate: delegate, dataSource: dataSource)
+}
+
+
+func buildBaseGravity(cl: UITableView) -> BaseTableAdapter<GravityTableStateManager> {
+    let stateManager = GravityTableStateManager()
+    let delegate = BaseTableDelegate(stateManager: stateManager)
+    let dataSource = BaseTableDataSource(stateManager: stateManager)
+
+    return BaseTableAdapter(collection: cl, stateManager: stateManager, delegate: delegate, dataSource: dataSource)
+}
