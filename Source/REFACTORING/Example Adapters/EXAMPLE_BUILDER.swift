@@ -32,6 +32,13 @@ func build(cl: UITableView) -> BaseTableAdapter<BaseTableStateManager> {
     return BaseTableAdapter(collection: cl, stateManager: stateManager, delegate: delegate, dataSource: dataSource)
 }
 
+func buildWithBuilder(cl: UITableView) -> BaseTableStateManager {
+    cl.rddm.baseBuilder
+        .add(plugin: TableSelectablePlugin())
+        .add(plugin: TableFoldablePlugin())
+        .add(plugin: TableDisplayablePlugin())
+        .build()
+}
 
 func buildBaseGravity(cl: UITableView) -> BaseTableAdapter<BaseTableStateManager> {
     let stateManager = GravityTableStateManager()
@@ -45,3 +52,5 @@ func buildBaseGravity(cl: UITableView) -> BaseTableAdapter<BaseTableStateManager
 
     return BaseTableAdapter(collection: cl, stateManager: stateManager, delegate: delegate, dataSource: dataSource)
 }
+
+
