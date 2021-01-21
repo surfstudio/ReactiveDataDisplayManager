@@ -33,7 +33,8 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
 
     var stateManager: BaseTableStateManager
 
-    var plugins = PluginCollection<TableEvent, BaseTableStateManager>()
+    var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
+    var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
 
     init(stateManager: BaseTableStateManager) {
         self.stateManager = stateManager
@@ -46,23 +47,23 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // TODO: - broadcast event through plugins
+        scrollPlugins.process(event: .didScroll, with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        plugins.process(event: .willDisplayCell(indexPath), with: stateManager)
+        tablePlugins.process(event: .willDisplayCell(indexPath), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        plugins.process(event: .willDisplayHeader(section), with: stateManager)
+        tablePlugins.process(event: .willDisplayHeader(section), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        plugins.process(event: .didEndDisplayHeader(section), with: stateManager)
+        tablePlugins.process(event: .didEndDisplayHeader(section), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        plugins.process(event: .didEndDisplayCell(indexPath), with: stateManager)
+        tablePlugins.process(event: .didEndDisplayCell(indexPath), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -80,27 +81,7 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
-        guard
-            let generator = self.stateManager.generators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
-            moveToTheSameSection || generator.canMoveInOtherSection()
-        else {
-            return
-        }
-
-        let itemToMove = self.stateManager.generators[sourceIndexPath.section][sourceIndexPath.row]
-
-        // find oldSection and remove item from this array
-        self.stateManager.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-
-        // findNewSection and add items to this array
-        self.stateManager.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
-
-        // need to prevent crash with internal inconsistency of UITableView
-        DispatchQueue.main.async {
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        }
+        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
@@ -135,11 +116,11 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        plugins.process(event: .didSelect(indexPath), with: stateManager)
+        tablePlugins.process(event: .didSelect(indexPath), with: stateManager)
     }
 
     open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        // TODO: - broadcast event through plugin
+        scrollPlugins.process(event: .willEndDragging(targetContentOffset.pointee), with: stateManager)
     }
 
 }

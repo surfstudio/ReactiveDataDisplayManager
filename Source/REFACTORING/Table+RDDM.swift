@@ -35,7 +35,12 @@ public class TableBuilder<T: BaseTableStateManager> {
     }
 
     func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder<T> {
-        delegate.plugins.add(plugin)
+        delegate.tablePlugins.add(plugin)
+        return self
+    }
+
+    func add(plugin: PluginAction<ScrollEvent, BaseTableStateManager>) -> TableBuilder<T> {
+        delegate.scrollPlugins.add(plugin)
         return self
     }
 
