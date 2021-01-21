@@ -23,6 +23,7 @@ func build(cl: UITableView) -> BaseTableAdapter<BaseTableStateManager> {
     let delegate = BaseTableDelegate(stateManager: stateManager)
     delegate.plugins.add(TableSelectablePlugin())
     delegate.plugins.add(TableFoldablePlugin())
+    delegate.plugins.add(TableDisplayablePlugin())
     delegate.plugins.add(TableLastCellIsVisiblePlugin(action: {
         print("LastCellIsVisible")
     }))

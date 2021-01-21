@@ -55,42 +55,19 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        plugins.process(event: .willDisplay(indexPath), with: stateManager)
-
-        guard let generator = self.stateManager.generators[safe: indexPath.section]?[safe: indexPath.row] else {
-            return
-        }
-        self.adapter?.willDisplayCellEvent.invoke(with: (generator, indexPath))
-        if let displayable = generator as? DisplayableFlow {
-            displayable.willDisplayEvent.invoke(with: ())
-        }
+        plugins.process(event: .willDisplayCell(indexPath), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let displayable = self.stateManager.sections[safe: section] as? DisplayableFlow else {
-            return
-        }
-        displayable.willDisplayEvent.invoke(with: ())
+        plugins.process(event: .willDisplayHeader(section), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        guard let displayable = self.stateManager.sections[safe: section] as? DisplayableFlow else {
-            return
-        }
-        displayable.didEndDisplayEvent.invoke(with: ())
+        plugins.process(event: .didEndDisplayHeader(section), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        plugins.process(event: .didEndDisplay(indexPath), with: stateManager)
-
-        guard let generator = self.stateManager.generators[safe: indexPath.section]?[safe: indexPath.row] else {
-            return
-        }
-        self.adapter?.didEndDisplayCellEvent.invoke(with: (generator, indexPath))
-        if let displayable = generator as? DisplayableFlow {
-            displayable.didEndDisplayEvent.invoke(with: ())
-            displayable.didEndDisplayCellEvent?.invoke(with: cell)
-        }
+        plugins.process(event: .didEndDisplayCell(indexPath), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -150,9 +127,6 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let adapter = self.adapter else {
-            return nil
-        }
         if section > stateManager.sections.count - 1 {
             return nil
         }
@@ -160,9 +134,6 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard let adapter = self.adapter else {
-            return 0
-        }
         // This code needed to avoid empty header
         if section > stateManager.sections.count - 1 {
             return 0.01

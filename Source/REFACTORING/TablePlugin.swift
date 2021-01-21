@@ -55,6 +55,37 @@ public class TableFoldablePlugin: PluginAction<TableEvent, BaseTableStateManager
 
 }
 
+public class TableDisplayablePlugin: PluginAction<TableEvent, BaseTableStateManager> {
+
+    override func process(event: TableEvent, with manager: BaseTableStateManager) {
+        switch event {
+        case .willDisplayCell(let indexPath):
+            guard let displayable = manager.generators[safe: indexPath.section]?[safe: indexPath.row] as? DisplayableFlow else {
+                return
+            }
+            displayable.willDisplayEvent.invoke(with: ())
+        case .didEndDisplayCell(let indexPath):
+            guard let displayable = manager.generators[safe: indexPath.section]?[safe: indexPath.row] as? DisplayableFlow else {
+                return
+            }
+            displayable.didEndDisplayEvent.invoke(with: ())
+        case .willDisplayHeader(let section):
+            guard let displayable = manager.sections[safe: section] as? DisplayableFlow else {
+                return
+            }
+            displayable.willDisplayEvent.invoke(with: ())
+        case .didEndDisplayHeader(let section):
+            guard let displayable = manager.sections[safe: section] as? DisplayableFlow else {
+                return
+            }
+            displayable.didEndDisplayEvent.invoke(with: ())
+        default:
+            break
+        }
+    }
+
+}
+
 public class TableLastCellIsVisiblePlugin: PluginAction<TableEvent, BaseTableStateManager> {
 
     private let action: () -> Void
@@ -66,7 +97,7 @@ public class TableLastCellIsVisiblePlugin: PluginAction<TableEvent, BaseTableSta
     override func process(event: TableEvent, with manager: BaseTableStateManager) {
 
         switch event {
-        case .willDisplay(let indexPath):
+        case .willDisplayCell(let indexPath):
             let lastSectionIndex = manager.generators.count - 1
             let lastCellInLastSectionIndex = manager.generators[lastSectionIndex].count - 1
 

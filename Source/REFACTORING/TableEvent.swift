@@ -8,6 +8,8 @@
 
 public enum TableEvent {
     case didSelect(IndexPath)
-    case willDisplay(IndexPath)
-    case didEndDisplay(IndexPath)
+    case willDisplayCell(IndexPath)
+    case didEndDisplayCell(IndexPath)
+    case willDisplayHeader(Int)
+    case didEndDisplayHeader(Int)
 }
