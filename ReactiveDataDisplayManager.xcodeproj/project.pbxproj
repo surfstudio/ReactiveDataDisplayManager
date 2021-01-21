@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01AF582E25B95B0700AE4286 /* TablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF582D25B95B0700AE4286 /* TablePlugin.swift */; };
+		01AF583225B95B1100AE4286 /* TableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF583125B95B1100AE4286 /* TableEvent.swift */; };
 		01B283E225B8B37C0022B789 /* Plugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B283E125B8B37C0022B789 /* Plugin.swift */; };
 		01B283EC25B8B5F70022B789 /* PluginCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B283EB25B8B5F70022B789 /* PluginCollection.swift */; };
 		01B8FB1A25B83E4B0080F10D /* AbstractCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B8FB1925B83E4B0080F10D /* AbstractCellGenerator.swift */; };
@@ -71,6 +73,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01AF582D25B95B0700AE4286 /* TablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePlugin.swift; sourceTree = "<group>"; };
+		01AF583125B95B1100AE4286 /* TableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableEvent.swift; sourceTree = "<group>"; };
 		01B283E125B8B37C0022B789 /* Plugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plugin.swift; sourceTree = "<group>"; };
 		01B283EB25B8B5F70022B789 /* PluginCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginCollection.swift; sourceTree = "<group>"; };
 		01B8FB1925B83E4B0080F10D /* AbstractCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCellGenerator.swift; sourceTree = "<group>"; };
@@ -304,6 +308,8 @@
 				B2B4FB4A2550220500E6365B /* BaseTableDelegate.swift */,
 				B2B4FB4E2550221200E6365B /* BaseTableDataSource.swift */,
 				01B8FB1D25B83EFC0080F10D /* UITableViewCellGenerator.swift */,
+				01AF582D25B95B0700AE4286 /* TablePlugin.swift */,
+				01AF583125B95B1100AE4286 /* TableEvent.swift */,
 			);
 			path = REFACTORING;
 			sourceTree = "<group>";
@@ -516,9 +522,11 @@
 				4F088BEF1F4E9F74006B7809 /* BaseTableDataDisplayManager.swift in Sources */,
 				B2B4FB4B2550220500E6365B /* BaseTableDelegate.swift in Sources */,
 				8BAB778920BB41260005C4E9 /* ExtendableBaseTableDataDisplayManager.swift in Sources */,
+				01AF582E25B95B0700AE4286 /* TablePlugin.swift in Sources */,
 				C1AB77E4240D9A0E000044F1 /* CalculatableWidthCollectionCellGenerator.swift in Sources */,
 				89927C3F2379B044006211D8 /* GravityFoldingTableDataDisplayManager.swift in Sources */,
 				89FD21B2238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift in Sources */,
+				01AF583225B95B1100AE4286 /* TableEvent.swift in Sources */,
 				C1AB77DC240D6796000044F1 /* CalculatableHeightCollectionCellGenerator.swift in Sources */,
 				01B283EC25B8B5F70022B789 /* PluginCollection.swift in Sources */,
 				C1AB77DE240D6919000044F1 /* SizableCollectionDataDisplayManager.swift in Sources */,
