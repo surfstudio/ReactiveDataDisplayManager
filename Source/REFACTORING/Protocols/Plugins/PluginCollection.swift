@@ -7,9 +7,9 @@
 //
 
 /// 
-struct PluginCollection<Event, Adapter> {
+struct PluginCollection<Event, Manager> {
 
-    typealias Plugin = PluginAction<Event, Adapter>
+    typealias Plugin = PluginAction<Event, Manager>
 
     private var plugins = [Plugin]()
 
@@ -17,9 +17,9 @@ struct PluginCollection<Event, Adapter> {
         plugins.append(plugin)
     }
 
-    func process(event: Event, with adapter: Adapter) {
+    func process(event: Event, with manager: Manager) {
         plugins.forEach {
-            $0.process(event: event, with: adapter)
+            $0.process(event: event, with: manager)
         }
     }
 }
