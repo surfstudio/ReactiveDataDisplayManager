@@ -32,10 +32,15 @@ func build(cl: UITableView) -> BaseTableAdapter<BaseTableStateManager> {
 }
 
 
-//func buildBaseGravity(cl: UITableView) -> BaseTableAdapter<GravityTableStateManager> {
-//    let stateManager = GravityTableStateManager()
-//    let delegate = BaseTableDelegate(stateManager: stateManager)
-//    let dataSource = BaseTableDataSource(stateManager: stateManager)
-//
-//    return BaseTableAdapter(collection: cl, stateManager: stateManager, delegate: delegate, dataSource: dataSource)
-//}
+func buildBaseGravity(cl: UITableView) -> BaseTableAdapter<GravityTableStateManager> {
+    let stateManager = GravityTableStateManager()
+    let delegate = BaseTableDelegate(stateManager: stateManager)
+    delegate.plugins.add(TableSelectablePlugin())
+    delegate.plugins.add(TableFoldablePlugin())
+    delegate.plugins.add(TableLastCellIsVisiblePlugin(action: {
+        print("LastCellIsVisible")
+    }))
+    let dataSource = BaseTableDataSource(provider: stateManager)
+
+    return BaseTableAdapter(collection: cl, stateManager: stateManager, delegate: delegate, dataSource: dataSource)
+}
