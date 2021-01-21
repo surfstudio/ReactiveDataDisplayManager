@@ -32,7 +32,7 @@ func build(cl: UITableView) -> BaseTableAdapter<BaseTableStateManager> {
 }
 
 
-func buildBaseGravity(cl: UITableView) -> BaseTableAdapter<GravityTableStateManager> {
+func buildBaseGravity(cl: UITableView) -> BaseTableAdapter<BaseTableStateManager> {
     let stateManager = GravityTableStateManager()
     let delegate = BaseTableDelegate(stateManager: stateManager)
     delegate.plugins.add(TableSelectablePlugin())

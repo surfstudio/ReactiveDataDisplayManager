@@ -37,8 +37,9 @@ open class GravityTableStateManager: BaseTableStateManager {
 
     // MARK: - Properties
 
+    /// Это все неправда и так не заработает. Нужно абстрагировать StateManager от таблицы
     private var gravityGenerators: [[CellGeneratorType]] = []
-    private var gravitySections: [HeaderGeneratorType] =  []
+    private var gravitySections: [HeaderGeneratorType] = []
 
     // MARK: - Public methods
 
