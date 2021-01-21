@@ -10,32 +10,36 @@ extension UITableView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UITableView {
 
-    var baseBuilder: TableBuilder {
+    var baseBuilder: TableBuilder<BaseTableStateManager> {
         TableBuilder(view: base, stateManager: BaseTableStateManager())
+    }
+
+    var gravityBuilder: TableBuilder<GravityTableStateManager> {
+        TableBuilder(view: base, stateManager: GravityTableStateManager())
     }
 
 }
 
-public class TableBuilder {
+public class TableBuilder<T: BaseTableStateManager> {
 
     let view: UITableView
-    let stateManager: BaseTableStateManager
+    let stateManager: T
     let delegate: BaseTableDelegate
     let dataSource: BaseTableDataSource
     
-    init(view: UITableView, stateManager: BaseTableStateManager) {
+    init(view: UITableView, stateManager: T) {
         self.view = view
         self.stateManager = stateManager
         delegate = BaseTableDelegate(stateManager: stateManager)
         dataSource = BaseTableDataSource(provider: stateManager)
     }
 
-    func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder {
+    func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder<T> {
         delegate.plugins.add(plugin)
         return self
     }
 
-    func build() -> BaseTableStateManager {
+    func build() -> T {
         view.delegate = delegate
         view.dataSource = dataSource
         return stateManager

@@ -19,7 +19,7 @@ public class TableSelectablePlugin: PluginAction<TableEvent, BaseTableStateManag
             selectable.didSelectEvent.invoke(with: ())
 
             if selectable.isNeedDeselect {
-                manager.adapter?.tableView.deselectRow(at: indexPath, animated: true)
+                manager.tableView?.deselectRow(at: indexPath, animated: true)
             }
         default:
             break

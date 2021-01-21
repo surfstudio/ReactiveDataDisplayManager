@@ -26,15 +26,11 @@ public protocol TableAdapter: AnyObject {
     var didEndDisplayCellEvent: BaseEvent<(TableCellGenerator, IndexPath)> { get set }
 }
 
-
-extension BaseTableDelegate: TableDelegate { }
-
 // Base implementation for UITableViewDelegate protocol. Use it if NO special logic required.
 open class BaseTableDelegate: NSObject, UITableViewDelegate {
 
     // MARK: - Properties
 
-    weak public var adapter: TableAdapter?
     var stateManager: BaseTableStateManager
 
     var plugins = PluginCollection<TableEvent, BaseTableStateManager>()
@@ -50,8 +46,7 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let guardTable = self.adapter?.tableView else { return }
-        self.adapter?.scrollEvent.invoke(with: guardTable)
+        // TODO: - broadcast event through plugins
     }
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -101,8 +96,6 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
         // findNewSection and add items to this array
         self.stateManager.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
 
-        self.adapter?.cellChangedPosition.invoke(with: (oldIndexPath: sourceIndexPath, newIndexPath: destinationIndexPath))
-
         // need to prevent crash with internal inconsistency of UITableView
         DispatchQueue.main.async {
             tableView.beginUpdates()
@@ -146,7 +139,7 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        self.adapter?.scrollViewWillEndDraggingEvent.invoke(with: velocity)
+        // TODO: - broadcast event through plugin
     }
 
 }

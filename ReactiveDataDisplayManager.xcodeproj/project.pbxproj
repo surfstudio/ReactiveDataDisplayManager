@@ -48,7 +48,6 @@
 		9EB4E58F256F87E800DC3359 /* EXAMPLE_BUILDER.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4E58E256F87E800DC3359 /* EXAMPLE_BUILDER.swift */; };
 		B20633C82567AD9C00C65D25 /* AbstractStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20633C72567AD9C00C65D25 /* AbstractStateManager.swift */; };
 		B20633DB256B902F00C65D25 /* GravityTableStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20633DA256B902F00C65D25 /* GravityTableStateManager.swift */; };
-		B2B4FB3F255021D200E6365B /* BaseTableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B4FB3E255021D200E6365B /* BaseTableAdapter.swift */; };
 		B2B4FB45255021E000E6365B /* BaseTableStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B4FB44255021E000E6365B /* BaseTableStateManager.swift */; };
 		B2B4FB4B2550220500E6365B /* BaseTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B4FB4A2550220500E6365B /* BaseTableDelegate.swift */; };
 		B2B4FB4F2550221200E6365B /* BaseTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B4FB4E2550221200E6365B /* BaseTableDataSource.swift */; };
@@ -119,7 +118,6 @@
 		B20633C72567AD9C00C65D25 /* AbstractStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractStateManager.swift; sourceTree = "<group>"; };
 		B20633DA256B902F00C65D25 /* GravityTableStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTableStateManager.swift; sourceTree = "<group>"; };
 		B20633DE256BA55100C65D25 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		B2B4FB3E255021D200E6365B /* BaseTableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableAdapter.swift; sourceTree = "<group>"; };
 		B2B4FB44255021E000E6365B /* BaseTableStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableStateManager.swift; sourceTree = "<group>"; };
 		B2B4FB4A2550220500E6365B /* BaseTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableDelegate.swift; sourceTree = "<group>"; };
 		B2B4FB4E2550221200E6365B /* BaseTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableDataSource.swift; sourceTree = "<group>"; };
@@ -316,7 +314,6 @@
 				B20633CC2567C93F00C65D25 /* Docs */,
 				B20633CB2567C92600C65D25 /* Example Adapters */,
 				B20633C0256672FA00C65D25 /* Protocols */,
-				B2B4FB3E255021D200E6365B /* BaseTableAdapter.swift */,
 				B2B4FB44255021E000E6365B /* BaseTableStateManager.swift */,
 				B2B4FB4A2550220500E6365B /* BaseTableDelegate.swift */,
 				B2B4FB4E2550221200E6365B /* BaseTableDataSource.swift */,
@@ -522,7 +519,6 @@
 				C1AB77D8240D5856000044F1 /* BaseNonReusableCellGenerator.swift in Sources */,
 				01B8FB1A25B83E4B0080F10D /* AbstractCellGenerator.swift in Sources */,
 				B2B4FB4F2550221200E6365B /* BaseTableDataSource.swift in Sources */,
-				B2B4FB3F255021D200E6365B /* BaseTableAdapter.swift in Sources */,
 				C1AB77DA240D5A99000044F1 /* CalculatableHeightNonReusableCellGenerator.swift in Sources */,
 				4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */,
 				89FFDDBC23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift in Sources */,

@@ -46,7 +46,7 @@ open class GravityTableStateManager: BaseTableStateManager {
     public func addCellGenerator(_ generator: CellGeneratorType) {
         guard
             checkDuplicate(generator: generator),
-            let tableView = self.adapter?.tableView
+            let tableView = self.tableView
         else {
             return
         }
@@ -94,7 +94,7 @@ open class GravityTableStateManager: BaseTableStateManager {
 
     public func update(gravityGenerators: [CellGeneratorType]) {
         let indexPaths = gravityGenerators.compactMap { self.indexPath(for: $0) }
-        adapter?.tableView.reloadRows(at: indexPaths, with: .none)
+        tableView?.reloadRows(at: indexPaths, with: .none)
     }
 
     public func clearCellgravityGenerators() {
@@ -125,7 +125,7 @@ open class GravityTableStateManager: BaseTableStateManager {
     }
 
     public func addCellgravityGenerators(_ gravityGenerators: [CellGeneratorType], toHeader header: HeaderGeneratorType) {
-        guard let tableView = self.adapter?.tableView else { return }
+        guard let tableView = self.tableView else { return }
 
         gravityGenerators.forEach { $0.registerCell(in: tableView) }
 
@@ -159,7 +159,7 @@ open class GravityTableStateManager: BaseTableStateManager {
                  on newGenerator: CellGeneratorType,
                  removeAnimation: UITableView.RowAnimation = .automatic,
                  insertAnimation: UITableView.RowAnimation = .automatic) {
-        guard let index = self.findGenerator(oldGenerator), let table = self.adapter?.tableView else { return }
+        guard let index = self.findGenerator(oldGenerator), let table = self.tableView else { return }
 
         table.beginUpdates()
         self.gravityGenerators[index.sectionIndex].remove(at: index.generatorIndex)
@@ -177,7 +177,7 @@ open class GravityTableStateManager: BaseTableStateManager {
         }
 
         self.gravitySections[indexOfHeader] = header
-        self.adapter?.tableView.reloadSections(IndexSet(arrayLiteral: indexOfHeader), with: animation)
+        self.tableView?.reloadSections(IndexSet(arrayLiteral: indexOfHeader), with: animation)
     }
 
     open func remove(_ generator: CellGeneratorType,
@@ -223,7 +223,7 @@ private extension GravityTableStateManager {
             return IndexPath(row: index, section: section)
         }
 
-        adapter?.tableView.insertRows(at: indexPaths, with: .none)
+        tableView?.insertRows(at: indexPaths, with: .none)
     }
 
     func nearestIndex(for generator: CellGeneratorType, in section: Int) -> Int? {
@@ -260,7 +260,7 @@ private extension GravityTableStateManager {
                          with animation: UITableView.RowAnimation = .automatic,
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
-        guard let table = self.adapter?.tableView else { return }
+        guard let table = self.tableView else { return }
 
         // perform update
         table.beginUpdates()
