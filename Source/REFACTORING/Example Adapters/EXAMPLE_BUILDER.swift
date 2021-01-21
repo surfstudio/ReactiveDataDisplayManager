@@ -26,7 +26,7 @@ func build(cl: UITableView) -> BaseTableAdapter<BaseTableStateManager> {
     delegate.plugins.add(TableLastCellIsVisiblePlugin(action: {
         print("LastCellIsVisible")
     }))
-    let dataSource = BaseTableDataSource(stateManager: stateManager)
+    let dataSource = BaseTableDataSource(provider: stateManager)
 
     return BaseTableAdapter(collection: cl, stateManager: stateManager, delegate: delegate, dataSource: dataSource)
 }

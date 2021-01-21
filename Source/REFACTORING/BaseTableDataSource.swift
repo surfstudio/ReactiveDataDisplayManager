@@ -19,34 +19,33 @@ extension BaseTableStateManager: TableGeneratorsProvider { }
 
 
 // Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
-open class BaseTableDataSource<G: TableGeneratorsProvider>: NSObject, TableDataSource {
+open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    weak var stateManager: G?
+    var provider: TableGeneratorsProvider
 
-    init(stateManager: G) {
-        self.stateManager = stateManager
+    init(provider: TableGeneratorsProvider) {
+        self.provider = provider
     }
 
     // MARK: - UITableViewDataSource
 
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return stateManager?.sections.count ?? 0
+        return provider.sections.count
     }
 
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let stateManager = stateManager else {
-            return 0
-        }
-        if stateManager.generators.indices.contains(section) {
-            return stateManager.generators[section].count
+        if provider.generators.indices.contains(section) {
+            return provider.generators[section].count
         }
         return 0
     }
 
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return stateManager?.generators[indexPath.section][indexPath.row].generate(tableView: tableView, for: indexPath) ?? UITableViewCell()
+        return provider
+            .generators[indexPath.section][indexPath.row]
+            .generate(tableView: tableView, for: indexPath)
     }
 
 }
