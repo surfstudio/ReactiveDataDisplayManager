@@ -19,8 +19,3 @@ public enum TableEvent {
     case didEndDisplayHeader(Int)
     case move(from: IndexPath, to: IndexPath)
 }
-
-public enum TableCondition {
-    case canMove(IndexPath)
-    case canFocus(IndexPath)
-}
