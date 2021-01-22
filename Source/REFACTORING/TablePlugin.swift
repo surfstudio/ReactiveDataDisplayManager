@@ -86,53 +86,6 @@ public class TableDisplayablePlugin: PluginAction<TableEvent, BaseTableStateMana
 
 }
 
-public class TableMovablePlugin: PluginAction<TableEvent, BaseTableStateManager> {
-
-    override func process(event: TableEvent, with manager: BaseTableStateManager) {
-
-        switch event {
-        case .move(let from, let to):
-            let moveToTheSameSection = from.section == to.section
-            guard
-                let generator = manager.generators[from.section][from.row] as? MovableGenerator,
-                moveToTheSameSection || generator.canMoveInOtherSection()
-            else {
-                return
-            }
-
-            let itemToMove = manager.generators[from.section][from.row]
-
-            // find oldSection and remove item from this array
-            manager.generators[from.section].remove(at: from.row)
-
-            // findNewSection and add items to this array
-            manager.generators[to.section].insert(itemToMove, at: to.row)
-
-            // need to prevent crash with internal inconsistency of UITableView
-            DispatchQueue.main.async {
-                manager.tableView?.beginUpdates()
-                manager.tableView?.endUpdates()
-            }
-        default:
-            break
-        }
-    }
-
-//    override func processBool(event: TableEvent, with manager: BaseTableStateManager) -> Bool? {
-//
-//        switch event {
-//        case .canMove(let indexPath), .canFocus(let indexPath):
-//            if let generator = manager.generators[indexPath.section][indexPath.row] as? MovableGenerator {
-//                return generator.canMove()
-//            }
-//            return nil
-//        default:
-//            return nil
-//        }
-//    }
-
-}
-
 public class TableLastCellIsVisiblePlugin: PluginAction<TableEvent, BaseTableStateManager> {
 
     private let action: () -> Void

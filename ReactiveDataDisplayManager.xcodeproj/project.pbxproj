@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016B9E9025BAAE200038B3CF /* MovableTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */; };
 		01AF582E25B95B0700AE4286 /* TablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF582D25B95B0700AE4286 /* TablePlugin.swift */; };
 		01AF583225B95B1100AE4286 /* TableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF583125B95B1100AE4286 /* TableEvent.swift */; };
 		01AF586D25B9A35900AE4286 /* DataDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF586C25B9A35900AE4286 /* DataDisplay.swift */; };
@@ -74,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableDelegate.swift; sourceTree = "<group>"; };
 		01AF582D25B95B0700AE4286 /* TablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePlugin.swift; sourceTree = "<group>"; };
 		01AF583125B95B1100AE4286 /* TableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableEvent.swift; sourceTree = "<group>"; };
 		01AF586C25B9A35900AE4286 /* DataDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplay.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				B20633C0256672FA00C65D25 /* Protocols */,
 				B2B4FB44255021E000E6365B /* BaseTableStateManager.swift */,
 				B2B4FB4A2550220500E6365B /* BaseTableDelegate.swift */,
+				016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */,
 				B2B4FB4E2550221200E6365B /* BaseTableDataSource.swift */,
 				01B8FB1D25B83EFC0080F10D /* UITableViewCellGenerator.swift */,
 				01AF582D25B95B0700AE4286 /* TablePlugin.swift */,
@@ -512,6 +515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				016B9E9025BAAE200038B3CF /* MovableTableDelegate.swift in Sources */,
 				8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */,
 				8B7E265220B89B12001D7A93 /* Event.swift in Sources */,
 				C1AB77CF240D5556000044F1 /* CellRegisterType.swift in Sources */,

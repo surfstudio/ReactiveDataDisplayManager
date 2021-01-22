@@ -24,14 +24,28 @@ public class TableBuilder<T: BaseTableStateManager> {
 
     let view: UITableView
     let stateManager: T
-    let delegate: BaseTableDelegate
-    let dataSource: BaseTableDataSource
+    var delegate: BaseTableDelegate
+    var dataSource: BaseTableDataSource
     
     init(view: UITableView, stateManager: T) {
         self.view = view
         self.stateManager = stateManager
         delegate = BaseTableDelegate(stateManager: stateManager)
         dataSource = BaseTableDataSource(provider: stateManager)
+    }
+
+    /// Change delegate
+    ///
+    /// Warning. This call will erase all plugins
+    func set(delegateCreation: (BaseTableStateManager) -> BaseTableDelegate) -> TableBuilder<T> {
+        delegate = delegateCreation(stateManager)
+        return self
+    }
+
+    /// Change dataSource
+    func set(dataSourceCreation: (BaseTableStateManager) -> BaseTableDataSource) -> TableBuilder<T> {
+        dataSource = dataSourceCreation(stateManager)
+        return self
     }
 
     func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder<T> {

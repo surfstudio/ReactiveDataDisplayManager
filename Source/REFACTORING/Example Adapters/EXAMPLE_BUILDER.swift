@@ -53,6 +53,15 @@ func buildWithBuilder(cl: UITableView) -> BaseTableStateManager {
         .build()
 }
 
+func buildMovableWithBuilder(cl: UITableView) -> BaseTableStateManager {
+    cl.rddm.baseBuilder
+        .set(delegateCreation: { MovableTableDelegate(stateManager: $0) })
+        .add(plugin: TableSelectablePlugin())
+        .add(plugin: TableFoldablePlugin())
+        .add(plugin: TableDisplayablePlugin())
+        .build()
+}
+
 func buildGravityWithBuilder(cl: UITableView) -> BaseTableStateManager {
     cl.rddm.gravityBuilder
         .add(plugin: TableSelectablePlugin())
