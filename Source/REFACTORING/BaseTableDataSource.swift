@@ -23,26 +23,25 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    var provider: TableGeneratorsProvider
-
-    init(provider: TableGeneratorsProvider) {
-        self.provider = provider
-    }
+    weak var provider: TableGeneratorsProvider?
 
     // MARK: - UITableViewDataSource
 
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return provider.sections.count
+        return provider?.sections.count ?? 0
     }
 
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if provider.generators.indices.contains(section) {
-            return provider.generators[section].count
+        guard let provider = provider, provider.generators.indices.contains(section) else {
+            return 0
         }
-        return 0
+        return provider.generators[section].count
     }
 
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let provider = provider else {
+            return UITableViewCell()
+        }
         return provider
             .generators[indexPath.section][indexPath.row]
             .generate(tableView: tableView, for: indexPath)

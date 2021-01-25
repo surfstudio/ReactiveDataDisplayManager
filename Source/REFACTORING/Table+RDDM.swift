@@ -31,7 +31,7 @@ public class TableBuilder<T: BaseTableStateManager> {
         self.view = view
         self.stateManager = stateManager
         delegate = BaseTableDelegate(stateManager: stateManager)
-        dataSource = BaseTableDataSource(provider: stateManager)
+        dataSource = BaseTableDataSource()
     }
 
     /// Change delegate
@@ -59,8 +59,12 @@ public class TableBuilder<T: BaseTableStateManager> {
     }
 
     func build() -> T {
+
+        dataSource.provider = stateManager
+
         view.delegate = delegate
         view.dataSource = dataSource
+
         return stateManager
     }
 }
