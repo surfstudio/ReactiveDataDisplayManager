@@ -38,31 +38,31 @@ public class TableBuilder<T: BaseTableStateManager> {
     }
 
     /// Change delegate
-    func set(delegate: BaseTableDelegate) -> TableBuilder<T> {
+    public func set(delegate: BaseTableDelegate) -> TableBuilder<T> {
         self.delegate = delegate
         return self
     }
 
     /// Change dataSource
-    func set(dataSource: BaseTableDataSource) -> TableBuilder<T> {
+    public func set(dataSource: BaseTableDataSource) -> TableBuilder<T> {
         self.dataSource = dataSource
         return self
     }
 
     /// Add plugin functionality based on UITableViewDelegate  events
-    func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder<T> {
+    public func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder<T> {
         tablePlugins.add(plugin)
         return self
     }
 
     /// Add plugin functionality based on UIScrollViewDelegate  events
-    func add(plugin: PluginAction<ScrollEvent, BaseTableStateManager>) -> TableBuilder<T> {
+    public func add(plugin: PluginAction<ScrollEvent, BaseTableStateManager>) -> TableBuilder<T> {
         scrollPlugins.add(plugin)
         return self
     }
 
     /// Build delegate, dataSource, view and data display manager together and returns DatatDisplayManager
-    func build() -> T {
+    public func build() -> T {
 
         delegate.stateManager = stateManager
         delegate.tablePlugins = tablePlugins
@@ -72,6 +72,9 @@ public class TableBuilder<T: BaseTableStateManager> {
         dataSource.provider = stateManager
         view.dataSource = dataSource
 
+        stateManager.tableView = view
+        stateManager.delegate = delegate
+        stateManager.dataSource = dataSource
         return stateManager
     }
 }

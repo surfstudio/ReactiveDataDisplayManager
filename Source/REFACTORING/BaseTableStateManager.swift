@@ -21,6 +21,9 @@ open class BaseTableStateManager: TableStateManager {
     public var generators: [[TableCellGenerator]]
     public var sections: [TableHeaderGenerator]
 
+    var delegate: BaseTableDelegate?
+    var dataSource: BaseTableDataSource?
+
     public init() {
         self.generators = [[TableCellGenerator]]()
         self.sections = [TableHeaderGenerator]()

@@ -17,7 +17,9 @@ class TableViewController: UIViewController {
 
     // MARK: - Properties
 
-    private lazy var adapter = BaseTableDataDisplayManager(collection: tableView)
+    private lazy var adapter = tableView.rddm.baseBuilder
+        .add(plugin: TableSelectablePlugin())
+        .build()
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController
