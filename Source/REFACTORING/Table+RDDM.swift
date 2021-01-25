@@ -26,43 +26,49 @@ public class TableBuilder<T: BaseTableStateManager> {
     let stateManager: T
     var delegate: BaseTableDelegate
     var dataSource: BaseTableDataSource
+
+    var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
+    var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
     
     init(view: UITableView, stateManager: T) {
         self.view = view
         self.stateManager = stateManager
-        delegate = BaseTableDelegate(stateManager: stateManager)
+        delegate = BaseTableDelegate()
         dataSource = BaseTableDataSource()
     }
 
     /// Change delegate
-    ///
-    /// Warning. This call will erase all plugins
-    func set(delegateCreation: (BaseTableStateManager) -> BaseTableDelegate) -> TableBuilder<T> {
-        delegate = delegateCreation(stateManager)
+    func set(delegate: BaseTableDelegate) -> TableBuilder<T> {
+        self.delegate = delegate
         return self
     }
 
     /// Change dataSource
-    func set(dataSourceCreation: (BaseTableStateManager) -> BaseTableDataSource) -> TableBuilder<T> {
-        dataSource = dataSourceCreation(stateManager)
+    func set(dataSource: BaseTableDataSource) -> TableBuilder<T> {
+        self.dataSource = dataSource
         return self
     }
 
+    /// Add plugin functionality based on UITableViewDelegate  events
     func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder<T> {
-        delegate.tablePlugins.add(plugin)
+        tablePlugins.add(plugin)
         return self
     }
 
+    /// Add plugin functionality based on UIScrollViewDelegate  events
     func add(plugin: PluginAction<ScrollEvent, BaseTableStateManager>) -> TableBuilder<T> {
-        delegate.scrollPlugins.add(plugin)
+        scrollPlugins.add(plugin)
         return self
     }
 
     func build() -> T {
 
-        dataSource.provider = stateManager
-
+        delegate.stateManager = stateManager
+        delegate.tablePlugins = tablePlugins
+        delegate.scrollPlugins = scrollPlugins
         view.delegate = delegate
+
+        dataSource.provider = stateManager
         view.dataSource = dataSource
 
         return stateManager

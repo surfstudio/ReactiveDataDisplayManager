@@ -55,7 +55,7 @@ func buildWithBuilder(cl: UITableView) -> BaseTableStateManager {
 
 func buildMovableWithBuilder(cl: UITableView) -> BaseTableStateManager {
     cl.rddm.baseBuilder
-        .set(delegateCreation: { MovableTableDelegate(stateManager: $0) })
+        .set(delegate: MovableTableDelegate())
         .add(plugin: TableSelectablePlugin())
         .add(plugin: TableFoldablePlugin())
         .add(plugin: TableDisplayablePlugin())

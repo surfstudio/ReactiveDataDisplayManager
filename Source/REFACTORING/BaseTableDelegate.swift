@@ -31,14 +31,10 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
 
     // MARK: - Properties
 
-    var stateManager: BaseTableStateManager
+    weak var stateManager: BaseTableStateManager?
 
     var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
     var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
-
-    init(stateManager: BaseTableStateManager) {
-        self.stateManager = stateManager
-    }
 
     // MARK: - Public properties
 
@@ -67,16 +63,10 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        if let generator = self.stateManager.generators[indexPath.section][indexPath.row] as? MovableGenerator {
-            return generator.canMove()
-        }
         return false
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-        if let generator = self.stateManager.generators[indexPath.section][indexPath.row] as? MovableGenerator {
-            return generator.canMove()
-        }
         return false
     }
 
@@ -93,24 +83,23 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.stateManager.generators[indexPath.section][indexPath.row].cellHeight
+        stateManager?.generators[indexPath.section][indexPath.row].cellHeight ?? UITableView.automaticDimension
     }
 
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return self.stateManager.generators[indexPath.section][indexPath.row].estimatedCellHeight ?? estimatedHeight
+        stateManager?.generators[indexPath.section][indexPath.row].estimatedCellHeight ?? estimatedHeight
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section > stateManager.sections.count - 1 {
+        guard let stateManager = stateManager, section <= stateManager.sections.count - 1 else {
             return nil
         }
         return stateManager.sections[section].generate()
     }
 
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        // This code needed to avoid empty header
-        if section > stateManager.sections.count - 1 {
-            return 0.01
+        guard let stateManager = stateManager, section <= stateManager.sections.count - 1 else {
+            return 0.1
         }
         return stateManager.sections[section].height(tableView, forSection: section)
     }

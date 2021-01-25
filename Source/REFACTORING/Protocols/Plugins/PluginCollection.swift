@@ -17,7 +17,7 @@ struct PluginCollection<Event, Manager> {
         plugins.append(plugin)
     }
 
-    func process(event: Event, with manager: Manager) {
+    func process(event: Event, with manager: Manager?) {
         plugins.forEach {
             $0.process(event: event, with: manager)
         }

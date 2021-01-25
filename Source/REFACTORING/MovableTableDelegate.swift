@@ -9,17 +9,17 @@
 open class MovableTableDelegate: BaseTableDelegate {
 
     open override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        if let generator = self.stateManager.generators[indexPath.section][indexPath.row] as? MovableGenerator {
+        if let generator = stateManager?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
             return generator.canMove()
         }
-        return false
+        return super.tableView(tableView, canMoveRowAt: indexPath)
     }
 
     open override func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-        if let generator = self.stateManager.generators[indexPath.section][indexPath.row] as? MovableGenerator {
+        if let generator = stateManager?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
             return generator.canMove()
         }
-        return false
+        return super.tableView(tableView, canFocusRowAt: indexPath)
     }
 
     open override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -27,6 +27,7 @@ open class MovableTableDelegate: BaseTableDelegate {
 
         let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
         guard
+            let stateManager = stateManager,
             let generator = stateManager.generators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
             moveToTheSameSection || generator.canMoveInOtherSection()
         else {
