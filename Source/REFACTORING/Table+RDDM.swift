@@ -10,8 +10,8 @@ extension UITableView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UITableView {
 
-    var baseBuilder: TableBuilder<BaseTableStateManager> {
-        TableBuilder(view: base, stateManager: BaseTableStateManager())
+    var baseBuilder: TableBuilder<ManualTableStateManager> {
+        TableBuilder(view: base, stateManager: ManualTableStateManager())
     }
 
     var gravityBuilder: TableBuilder<GravityTableStateManager> {
@@ -61,6 +61,7 @@ public class TableBuilder<T: BaseTableStateManager> {
         return self
     }
 
+    /// Build delegate, dataSource, view and data display manager together and returns DatatDisplayManager
     func build() -> T {
 
         delegate.stateManager = stateManager

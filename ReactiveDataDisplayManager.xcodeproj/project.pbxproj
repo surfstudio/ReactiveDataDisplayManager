@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		016B9E9025BAAE200038B3CF /* MovableTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */; };
+		0183560C25BEE60B00141448 /* ManualTableStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183560B25BEE60B00141448 /* ManualTableStateManager.swift */; };
 		01AF582E25B95B0700AE4286 /* TablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF582D25B95B0700AE4286 /* TablePlugin.swift */; };
 		01AF583225B95B1100AE4286 /* TableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF583125B95B1100AE4286 /* TableEvent.swift */; };
 		01AF586D25B9A35900AE4286 /* DataDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF586C25B9A35900AE4286 /* DataDisplay.swift */; };
@@ -76,6 +77,7 @@
 
 /* Begin PBXFileReference section */
 		016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableDelegate.swift; sourceTree = "<group>"; };
+		0183560B25BEE60B00141448 /* ManualTableStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableStateManager.swift; sourceTree = "<group>"; };
 		01AF582D25B95B0700AE4286 /* TablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePlugin.swift; sourceTree = "<group>"; };
 		01AF583125B95B1100AE4286 /* TableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableEvent.swift; sourceTree = "<group>"; };
 		01AF586C25B9A35900AE4286 /* DataDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplay.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				B20633CB2567C92600C65D25 /* Example Adapters */,
 				B20633C0256672FA00C65D25 /* Protocols */,
 				B2B4FB44255021E000E6365B /* BaseTableStateManager.swift */,
+				0183560B25BEE60B00141448 /* ManualTableStateManager.swift */,
 				B2B4FB4A2550220500E6365B /* BaseTableDelegate.swift */,
 				016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */,
 				B2B4FB4E2550221200E6365B /* BaseTableDataSource.swift */,
@@ -528,6 +531,7 @@
 				89FFDDBC23584C9E00D2C769 /* EmptyGravityTableHeaderGenerator.swift in Sources */,
 				9EB4E58F256F87E800DC3359 /* EXAMPLE_BUILDER.swift in Sources */,
 				8B7E265320B89B15001D7A93 /* FatalErrorUtil.swift in Sources */,
+				0183560C25BEE60B00141448 /* ManualTableStateManager.swift in Sources */,
 				B2B4FB45255021E000E6365B /* BaseTableStateManager.swift in Sources */,
 				4F088BF11F4E9F74006B7809 /* Extensions.swift in Sources */,
 				01AF587325B9A3F100AE4286 /* Table+RDDM.swift in Sources */,

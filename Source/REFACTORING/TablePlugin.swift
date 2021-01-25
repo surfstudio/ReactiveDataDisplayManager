@@ -39,7 +39,11 @@ public class TableFoldablePlugin: PluginAction<TableEvent, BaseTableStateManager
                 return
             }
             if foldable.isExpanded {
-                foldable.childGenerators.forEach { manager?.remove($0, with: .none) }
+                foldable.childGenerators.forEach { manager?.remove($0,
+                                                                   with: .none,
+                                                                   needScrollAt: nil,
+                                                                   needRemoveEmptySection: false)
+                }
             } else {
                 manager?.addCellGenerators(foldable.childGenerators,
                                            after: generator)

@@ -106,7 +106,7 @@ open class GravityTableStateManager: BaseTableStateManager {
         sections = combined.map { $0.0 }
         generators = combined.map { $0.1 }
     }
-    
+
     public func addCellGenerator(_ generator: CellGeneratorType, toHeader header: HeaderGeneratorType) {
         guard checkDuplicate(generator: generator) else { return }
         addCellgenerators([generator], toHeader: header)
@@ -180,6 +180,8 @@ open class GravityTableStateManager: BaseTableStateManager {
     }
 }
 
+// MARK: - Private
+
 private extension GravityTableStateManager {
 
     func checkDuplicate(header: HeaderGeneratorType) {
@@ -234,37 +236,9 @@ private extension GravityTableStateManager {
         return nil
     }
 
-    func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
-        for (sectionIndex, section) in generators.enumerated() {
-            if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
-                return (sectionIndex, generatorIndex)
-            }
-        }
-        return nil
-    }
-
-    // TODO: May be we should remove needScrollAt and move this responsibility to user
-    func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
-                         with animation: UITableView.RowAnimation = .automatic,
-                         needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
-                         needRemoveEmptySection: Bool = false) {
-        guard let table = self.tableView else { return }
-
-        // perform update
-        table.beginUpdates()
-        self.generators[index.sectionIndex].remove(at: index.generatorIndex)
-        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        table.deleteRows(at: [indexPath], with: animation)
-
-        // scroll if needed
-        if let scrollPosition = scrollPosition {
-            table.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
-        }
-
-        table.endUpdates()
-    }
-
 }
+
+// MARK: - Adapter
 
 fileprivate extension Array where Element == [TableCellGenerator] {
 
