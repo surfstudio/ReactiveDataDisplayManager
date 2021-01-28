@@ -11,11 +11,7 @@
 /// For example: add support of SelectableItem without overriding whole adapter
 open class PluginAction<Event, Manager> {
 
-    public init() {
+    public init() {}
 
-    }
-
-    func process(event: Event, with manager: Manager?) {
-
-    }
+    func process(event: Event, with manager: Manager?) {}
 }
