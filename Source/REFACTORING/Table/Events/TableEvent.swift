@@ -6,11 +6,6 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public enum ScrollEvent {
-    case didScroll
-    case willEndDragging(CGPoint)
-}
-
 public enum TableEvent {
     case didSelect(IndexPath)
     case willDisplayCell(IndexPath)
