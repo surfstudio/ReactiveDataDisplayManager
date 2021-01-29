@@ -42,10 +42,6 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
 
     // MARK: - UITableViewDelegate
 
-    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollPlugins.process(event: .didScroll, with: stateManager)
-    }
-
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tablePlugins.process(event: .willDisplayCell(indexPath), with: stateManager)
     }
@@ -108,8 +104,54 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
         tablePlugins.process(event: .didSelect(indexPath), with: stateManager)
     }
 
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didScroll(scrollView), with: stateManager)
+    }
+
+    open func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didScrollToTop(scrollView), with: stateManager)
+    }
+
+    open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .willBeginDragging(scrollView), with: stateManager)
+    }
+
     open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        scrollPlugins.process(event: .willEndDragging(targetContentOffset.pointee), with: stateManager)
+        scrollPlugins.process(event: .willEndDragging(scrollView: scrollView,
+                                                      velocity: velocity,
+                                                      targetContentOffset: targetContentOffset.pointee), with: stateManager)
+    }
+
+    open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        scrollPlugins.process(event: .didEndDragging(scrollView, decelerate: decelerate), with: stateManager)
+    }
+
+    open func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .willBeginDecelerating(scrollView), with: stateManager)
+    }
+
+    open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didEndDecelerating(scrollView), with: stateManager)
+    }
+
+    open func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        scrollPlugins.process(event: .willBeginZooming(scrollView: scrollView, view: view), with: stateManager)
+    }
+
+    open func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        scrollPlugins.process(event: .didEndZooming(scrollView: scrollView, view: view, scale: scale), with: stateManager)
+    }
+
+    open func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didZoom(scrollView), with: stateManager)
+    }
+
+    open func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didEndScrollingAnimation(scrollView), with: stateManager)
+    }
+
+    open func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didChangeAdjustedContentInset(scrollView), with: stateManager)
     }
 
 }
