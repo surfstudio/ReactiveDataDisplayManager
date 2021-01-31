@@ -9,31 +9,31 @@
 /// Added support for determining the direction of the scroll
 public class TableDirectionScrollablePlugin: PluginAction<ScrollEvent, BaseTableStateManager> {
 
-    // MARK: - Properties
-
-    public private(set) var userDidScrolled = false
-    public var onScrollUp = BaseEmptyEvent()
-    public var onScrollDown = BaseEmptyEvent()
-
     // MARK: - Private Properties
 
-    private var lastContentOffset: CGFloat = 0
+    private var lastContentOffset: CGFloat = .zero
+    private let action: (ScrollDirection) -> Void
+
+    // MARK: - Initialization
+
+    /// - parameter action: closure returns the scrolling direction
+    public init(action: @escaping (ScrollDirection) -> Void) {
+        self.action = action
+    }
 
     // MARK: - PluginAction
 
     override func process(event: ScrollEvent, with manager: BaseTableStateManager?) {
-        switch event {
-        case .willBeginDragging(let scrollView):
-            lastContentOffset = scrollView.contentOffset.y
-        case .didScroll(let scrollView):
-            if lastContentOffset > scrollView.contentOffset.y {
-                onScrollUp.invoke()
-            } else if lastContentOffset < scrollView.contentOffset.y {
-                onScrollDown.invoke()
-            }
+        guard let tableView = manager?.tableView else { return }
 
-            if !userDidScrolled {
-                userDidScrolled = true
+        switch event {
+        case .willBeginDragging:
+            lastContentOffset = tableView.contentOffset.y
+        case .didScroll:
+            if lastContentOffset > tableView.contentOffset.y {
+                action(.up)
+            } else if lastContentOffset < tableView.contentOffset.y {
+                action(.down)
             }
         default:
             break

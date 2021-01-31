@@ -6,6 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+/// Adds the definition of the section that started to be displayed
 public class TableHeaderVisiblePlugin: PluginAction<TableEvent, BaseTableStateManager> {
 
     // MARK: - Private Properties
@@ -14,6 +15,7 @@ public class TableHeaderVisiblePlugin: PluginAction<TableEvent, BaseTableStateMa
 
     // MARK: - Initialization
 
+    /// - parameter action: closure returns the index of the section that started showing
     public init(action: @escaping (Int) -> Void) {
         self.action = action
     }

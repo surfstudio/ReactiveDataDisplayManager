@@ -29,6 +29,7 @@
 		4F088BF91F4EABA2006B7809 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F088BF81F4EABA2006B7809 /* UIKit.framework */; };
 		4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */; };
 		4FD38132202D791A0005EBFE /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD38131202D791A0005EBFE /* Operations.swift */; };
+		6D2795F925C7DA7F0085B845 /* ScrollDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2795F825C7DA7F0085B845 /* ScrollDirection.swift */; };
 		6DA32EC925C3F3A700F6F2D3 /* TableScrollablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA32EC825C3F3A700F6F2D3 /* TableScrollablePlugin.swift */; };
 		6DA32ED725C42F6500F6F2D3 /* TableHeaderVisiblePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA32ED625C42F6500F6F2D3 /* TableHeaderVisiblePlugin.swift */; };
 		6DA32EDD25C4339400F6F2D3 /* TableDirectionScrollablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA32EDC25C4339400F6F2D3 /* TableDirectionScrollablePlugin.swift */; };
@@ -106,6 +107,7 @@
 		4F088BF81F4EABA2006B7809 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4FD3812F202D6F510005EBFE /* DataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayManager.swift; sourceTree = "<group>"; };
 		4FD38131202D791A0005EBFE /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		6D2795F825C7DA7F0085B845 /* ScrollDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDirection.swift; sourceTree = "<group>"; };
 		6DA32EC825C3F3A700F6F2D3 /* TableScrollablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableScrollablePlugin.swift; sourceTree = "<group>"; };
 		6DA32ED625C42F6500F6F2D3 /* TableHeaderVisiblePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderVisiblePlugin.swift; sourceTree = "<group>"; };
 		6DA32EDC25C4339400F6F2D3 /* TableDirectionScrollablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDirectionScrollablePlugin.swift; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 				B20633C0256672FA00C65D25 /* Protocols */,
 				01B8FB1D25B83EFC0080F10D /* UITableViewCellGenerator.swift */,
 				01AF217025C2E481004996E9 /* ScrollEvent.swift */,
+				6D2795F825C7DA7F0085B845 /* ScrollDirection.swift */,
 			);
 			path = REFACTORING;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 			files = (
 				016B9E9025BAAE200038B3CF /* MovableTableDelegate.swift in Sources */,
 				01AF217825C2E514004996E9 /* TableSelectablePlugin.swift in Sources */,
+				6D2795F925C7DA7F0085B845 /* ScrollDirection.swift in Sources */,
 				8BAB778720BB41120005C4E9 /* PaginableBaseTableDataDisplayManager.swift in Sources */,
 				8B7E265220B89B12001D7A93 /* Event.swift in Sources */,
 				6DA32ED725C42F6500F6F2D3 /* TableHeaderVisiblePlugin.swift in Sources */,
