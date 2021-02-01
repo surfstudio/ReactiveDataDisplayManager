@@ -124,6 +124,10 @@ public protocol GravityFoldableItem: class {
     var childGenerators: [GravityTableCellGenerator] { get set }
 }
 
+public protocol PreheaterableFlow: class {
+    var requestId: Any? { get }
+}
+
 public protocol DisplayableFlow: class {
 
     /// Invokes when cell will displaying.
