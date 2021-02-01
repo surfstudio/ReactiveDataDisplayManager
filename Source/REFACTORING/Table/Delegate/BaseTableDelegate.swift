@@ -27,7 +27,7 @@ public protocol TableAdapter: AnyObject {
 }
 
 // Base implementation for UITableViewDelegate protocol. Use it if NO special logic required.
-open class BaseTableDelegate: NSObject, UITableViewDelegate {
+open class BaseTableDelegate: NSObject {
 
     // MARK: - Properties
 
@@ -36,15 +36,25 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
     var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
     var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
 
-    // MARK: - Public properties
+    // MARK: - Public Properties
 
     public var estimatedHeight: CGFloat = 40
 
-    // MARK: - UITableViewDelegate
+    // MARK: - Public Methods
 
-    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        scrollPlugins.process(event: .didScroll, with: stateManager)
+    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: stateManager)
     }
+
+    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+}
+
+// MARK: - UITableViewDelegate
+
+extension BaseTableDelegate: UITableViewDelegate {
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tablePlugins.process(event: .willDisplayCell(indexPath), with: stateManager)
@@ -62,16 +72,16 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
         tablePlugins.process(event: .didEndDisplayCell(indexPath), with: stateManager)
     }
 
-    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return false
+    open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        tablePlugins.process(event: .willDisplayFooter(section), with: stateManager)
+    }
+
+    open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
+        tablePlugins.process(event: .didEndDisplayFooter(section), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         return false
-    }
-
-    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: stateManager)
     }
 
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
@@ -108,8 +118,95 @@ open class BaseTableDelegate: NSObject, UITableViewDelegate {
         tablePlugins.process(event: .didSelect(indexPath), with: stateManager)
     }
 
+    open func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tablePlugins.process(event: .didDeselect(indexPath), with: stateManager)
+    }
+
+    open func tableView(_ tableView: UITableView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
+        tablePlugins.process(event: .didBeginMultipleSelectionInteraction(indexPath), with: stateManager)
+    }
+
+    open func tableViewDidEndMultipleSelectionInteraction(_ tableView: UITableView) {
+        tablePlugins.process(event: .didEndMultipleSelectionInteraction, with: stateManager)
+    }
+
+    open func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        tablePlugins.process(event: .accessoryButtonTapped(indexPath), with: stateManager)
+    }
+
+    open func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        tablePlugins.process(event: .didHighlight(indexPath), with: stateManager)
+    }
+
+    open func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        tablePlugins.process(event: .didUnhighlight(indexPath), with: stateManager)
+    }
+
+    open func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        tablePlugins.process(event: .willBeginEditing(indexPath), with: stateManager)
+    }
+
+    open func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        tablePlugins.process(event: .didEndEditing(indexPath), with: stateManager)
+    }
+
+    open func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        tablePlugins.process(event: .didUpdateFocus(context: context, coordinator: coordinator), with: stateManager)
+    }
+
+}
+
+// MARK: UIScrollViewDelegate
+
+extension BaseTableDelegate {
+
+    open func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didScroll, with: stateManager)
+    }
+
+    open func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didScrollToTop, with: stateManager)
+    }
+
+    open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .willBeginDragging, with: stateManager)
+    }
+
     open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        scrollPlugins.process(event: .willEndDragging(targetContentOffset.pointee), with: stateManager)
+        scrollPlugins.process(event: .willEndDragging(velocity: velocity,
+                                                      targetContentOffset: targetContentOffset.pointee), with: stateManager)
+    }
+
+    open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        scrollPlugins.process(event: .didEndDragging(decelerate), with: stateManager)
+    }
+
+    open func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .willBeginDecelerating, with: stateManager)
+    }
+
+    open func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didEndDecelerating, with: stateManager)
+    }
+
+    open func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        scrollPlugins.process(event: .willBeginZooming(view), with: stateManager)
+    }
+
+    open func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        scrollPlugins.process(event: .didEndZooming(view: view, scale: scale), with: stateManager)
+    }
+
+    open func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didZoom, with: stateManager)
+    }
+
+    open func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didEndScrollingAnimation, with: stateManager)
+    }
+
+    open func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
+        scrollPlugins.process(event: .didChangeAdjustedContentInset, with: stateManager)
     }
 
 }

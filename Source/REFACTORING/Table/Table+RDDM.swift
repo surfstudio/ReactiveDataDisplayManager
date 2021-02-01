@@ -29,7 +29,7 @@ public class TableBuilder<T: BaseTableStateManager> {
 
     var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
     var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
-    
+
     init(view: UITableView, stateManager: T) {
         self.view = view
         self.stateManager = stateManager

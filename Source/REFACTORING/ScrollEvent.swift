@@ -8,5 +8,15 @@
 
 public enum ScrollEvent {
     case didScroll
-    case willEndDragging(CGPoint)
+    case willBeginDragging
+    case willEndDragging(velocity: CGPoint, targetContentOffset: CGPoint)
+    case didEndDragging(Bool)
+    case didScrollToTop
+    case willBeginDecelerating
+    case didEndDecelerating
+    case willBeginZooming(UIView?)
+    case didEndZooming(view: UIView?, scale: CGFloat)
+    case didZoom
+    case didEndScrollingAnimation
+    case didChangeAdjustedContentInset
 }
