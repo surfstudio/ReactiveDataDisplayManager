@@ -124,8 +124,10 @@ public protocol GravityFoldableItem: class {
     var childGenerators: [GravityTableCellGenerator] { get set }
 }
 
-public protocol PreheaterableFlow: class {
-    var requestId: Any? { get }
+public protocol PrefetcherableFlow: class {
+    associatedtype IdType: Hashable
+
+    var requestId: IdType? { get }
 }
 
 public protocol DisplayableFlow: class {

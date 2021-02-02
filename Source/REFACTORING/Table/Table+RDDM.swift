@@ -69,6 +69,7 @@ public class TableBuilder<T: BaseTableStateManager> {
     }
 
     /// Add plugin functionality based on UITableViewDataSourcePrefetching events
+    @available(iOS 10.0, *)
     public func add(plugin: PluginAction<PrefetchEvent, BaseTableStateManager>) -> TableBuilder<T> {
         prefetchPlugins.add(plugin)
         return self
