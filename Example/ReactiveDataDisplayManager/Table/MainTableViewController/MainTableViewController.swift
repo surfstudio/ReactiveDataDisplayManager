@@ -9,13 +9,13 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-class TableViewController: UIViewController {
+final class MainTableViewController: UIViewController {
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var tableView: UITableView!
 
-    // MARK: - Properties
+    // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: TableSelectablePlugin())
@@ -29,15 +29,30 @@ class TableViewController: UIViewController {
         fillAdapter()
     }
 
-    // MARK: - Private methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isNavigationBarHidden = false
+    }
+
+}
+
+// MARK: - Private methods
+
+private extension MainTableViewController {
 
     /// This method is used to fill adapter
-    private func fillAdapter() {
+    func fillAdapter() {
         for title in titles {
             // Create generator
             let generator = TitleTableGenerator(model: title)
             generator.didSelectEvent += {
                 debugPrint("\(title) selected")
+                self.openPrefetchingTableViewController()
             }
             // Add generator to adapter
             adapter.addCellGenerator(generator)
@@ -45,6 +60,11 @@ class TableViewController: UIViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+    }
+
+    func openPrefetchingTableViewController() {
+        let controller = PrefetchingTableViewController()
+        navigationController?.pushViewController(controller, animated: true)
     }
 
 }

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hq5-cx-QgE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="haM-wg-zn2">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Table-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="TableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,6 +22,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fjz-vb-COx" secondAttribute="bottom" id="Mdf-71-gW1"/>
@@ -28,9 +30,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fjz-vb-COx" secondAttribute="trailing" id="Vs7-bt-J10"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="fjz-vb-COx" secondAttribute="top" id="XxQ-xu-AM2"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Table" id="LIe-sw-SOr"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="fjz-vb-COx" id="tsu-jB-zKn"/>
                     </connections>
@@ -59,6 +61,7 @@
                                 <cells/>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="t5a-RY-cbh"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="t5a-RY-cbh" firstAttribute="trailing" secondItem="DS7-fX-y8h" secondAttribute="trailing" id="3LC-gI-lNA"/>
@@ -66,7 +69,6 @@
                             <constraint firstItem="t5a-RY-cbh" firstAttribute="bottom" secondItem="DS7-fX-y8h" secondAttribute="bottom" id="Pi2-o1-tfA"/>
                             <constraint firstItem="DS7-fX-y8h" firstAttribute="leading" secondItem="t5a-RY-cbh" secondAttribute="leading" id="Tj7-1U-g2S"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="t5a-RY-cbh"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Collection" id="6NW-eD-Ssr"/>
                     <connections>
@@ -105,14 +107,14 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="SH3-pd-KUN"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="NXb-6Y-QwD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="pq0-0S-VT6" firstAttribute="top" secondItem="NXb-6Y-QwD" secondAttribute="top" id="6iB-3u-rPo"/>
                             <constraint firstItem="NXb-6Y-QwD" firstAttribute="bottom" secondItem="pq0-0S-VT6" secondAttribute="bottom" id="bLs-u3-CLl"/>
                             <constraint firstItem="NXb-6Y-QwD" firstAttribute="trailing" secondItem="pq0-0S-VT6" secondAttribute="trailing" id="dBC-wJ-KmW"/>
                             <constraint firstItem="pq0-0S-VT6" firstAttribute="leading" secondItem="NXb-6Y-QwD" secondAttribute="leading" id="j9e-Zg-eUg"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="NXb-6Y-QwD"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Stack" id="sQ3-dv-Atc"/>
                     <connections>
@@ -123,11 +125,29 @@
             </objects>
             <point key="canvasLocation" x="652" y="1326"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7SR-bl-OnR">
+            <objects>
+                <navigationController id="haM-wg-zn2" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tmh-Qh-gRs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hq5-cx-QgE" kind="relationship" relationship="rootViewController" id="fdH-Jo-V5l"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gR9-Dk-nzg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1079" y="148"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="SCH-ww-g01">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="hq5-cx-QgE" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="mfi-oG-krd"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1aS-Jz-7SR">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -144,4 +164,9 @@
             <point key="canvasLocation" x="-163.19999999999999" y="132.23388305847078"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
