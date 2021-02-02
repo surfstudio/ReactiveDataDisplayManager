@@ -1,5 +1,5 @@
 //
-//  NukePreheater.swift
+//  NukeImagePrefetcher.swift
 //  ReactiveDataDisplayManagerExample
 //
 //  Created by Anton Eysner on 29.01.2021.
@@ -9,7 +9,7 @@
 import Nuke
 import ReactiveDataDisplayManager
 
-final class NukePreheater: RddmPreheater {
+final class NukeImagePrefetcher: ContentPrefetcher {
 
     // MARK: - Private Properties
 
@@ -21,15 +21,13 @@ final class NukePreheater: RddmPreheater {
         ImageLoadingOptions.shared.failureImage = #imageLiteral(resourceName: "imageNotFound")
     }
 
-    // MARK: - RddmPreheater
+    // MARK: - ContentPrefetcher
 
-    func startPrefetching(for requestId: [Any]) {
-        guard let urls = requestId as? [URL] else { return }
+    func startPrefetching(for urls: [URL]) {
         imagePreheater.startPreheating(with: urls)
     }
 
-    func cancelPrefetching(for requestId: [Any]) {
-        guard let urls = requestId as? [URL] else { return }
+    func cancelPrefetching(for urls: [URL]) {
         imagePreheater.stopPreheating(with: urls)
     }
 

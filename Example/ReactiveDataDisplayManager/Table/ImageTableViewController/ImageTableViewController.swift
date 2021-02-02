@@ -1,8 +1,8 @@
 //
-//  PrefetchingTableViewController.swift
+//  ImageTableViewController.swift
 //  ReactiveDataDisplayManagerExample
 //
-//  Created by Anton Eysner on 29.01.2021.
+//  Created by Anton Eysner on 02.02.2021.
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import ReactiveDataDisplayManager
 import Nuke
 
-final class PrefetchingTableViewController: UIViewController {
+final class ImageTableViewController: UIViewController {
 
     // MARK: - IBOutlet
 
@@ -18,11 +18,7 @@ final class PrefetchingTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private let preheater = NukeImagePrefetcher()
-    private lazy var prefetcherablePlugin = TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator>(prefetcher: preheater)
-
     private lazy var adapter = tableView.rddm.baseBuilder
-        .add(plugin: prefetcherablePlugin)
         .build()
 
     // MARK: - UIViewController
@@ -30,7 +26,7 @@ final class PrefetchingTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .none
-        title = "Gallery with prefetching"
+        title = "Gallery without prefetching"
 
         fillAdapter()
     }
@@ -45,7 +41,7 @@ final class PrefetchingTableViewController: UIViewController {
 
 // MARK: - Private Methods
 
-private extension PrefetchingTableViewController {
+private extension ImageTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
@@ -54,7 +50,7 @@ private extension PrefetchingTableViewController {
             guard let viewModel = ImageTableViewCell.ViewModel.make() else { continue }
 
             // Create generator
-            let generator = ImageTableGenerator(model: viewModel)
+            let generator = BaseCellGenerator<ImageTableViewCell>(with: viewModel)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)

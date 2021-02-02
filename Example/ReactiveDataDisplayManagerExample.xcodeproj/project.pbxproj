@@ -12,7 +12,8 @@
 		6D27964A25C85E680085B845 /* ImageTableGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27964925C85E680085B845 /* ImageTableGenerator.swift */; };
 		6D27964F25C85EA10085B845 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27964D25C85EA10085B845 /* ImageTableViewCell.swift */; };
 		6D27965025C85EA10085B845 /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */; };
-		6D27965425C90FA60085B845 /* NukePreheater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27965325C90FA60085B845 /* NukePreheater.swift */; };
+		6D27965425C90FA60085B845 /* NukeImagePrefetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27965325C90FA60085B845 /* NukeImagePrefetcher.swift */; };
+		6D4B322F25C980BC00FC7979 /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */; };
 		896B59712354962A00E8E2AB /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59702354962A00E8E2AB /* StackViewController.swift */; };
 		896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */; };
 		89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */; };
@@ -53,7 +54,8 @@
 		6D27964925C85E680085B845 /* ImageTableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableGenerator.swift; sourceTree = "<group>"; };
 		6D27964D25C85EA10085B845 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
-		6D27965325C90FA60085B845 /* NukePreheater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukePreheater.swift; sourceTree = "<group>"; };
+		6D27965325C90FA60085B845 /* NukeImagePrefetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeImagePrefetcher.swift; sourceTree = "<group>"; };
+		6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewController.swift; sourceTree = "<group>"; };
 		896B59702354962A00E8E2AB /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
 		89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
@@ -122,13 +124,47 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D0F01F725C977B70031295B /* TitleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */,
+				8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */,
+			);
+			path = TitleTableViewCell;
+			sourceTree = "<group>";
+		};
+		6D0F01F825C977C30031295B /* ImageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6D27964D25C85EA10085B845 /* ImageTableViewCell.swift */,
+				6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */,
+			);
+			path = ImageTableViewCell;
+			sourceTree = "<group>";
+		};
+		6D0F01FB25C977D30031295B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6D0F01FE25C977F70031295B /* Generators */,
+				6D0F01F825C977C30031295B /* ImageTableViewCell */,
+				6D0F01F725C977B70031295B /* TitleTableViewCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		6D0F01FE25C977F70031295B /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				8B04A1DC1FE9028300407BED /* TitleTableGenerator.swift */,
+				6D27964925C85E680085B845 /* ImageTableGenerator.swift */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
 		6D27963F25C85DDB0085B845 /* MainTableViewController */ = {
 			isa = PBXGroup;
 			children = (
 				8B85E2DF1FE84F540080984A /* MainTableViewController.swift */,
-				8B04A1DC1FE9028300407BED /* TitleTableGenerator.swift */,
-				8B04A1D51FE9020800407BED /* TitleTableViewCell.swift */,
-				8B04A1D61FE9020800407BED /* TitleTableViewCell.xib */,
 			);
 			path = MainTableViewController;
 			sourceTree = "<group>";
@@ -137,12 +173,17 @@
 			isa = PBXGroup;
 			children = (
 				6D27964225C85DFF0085B845 /* PrefetchingTableViewController.swift */,
-				6D27964925C85E680085B845 /* ImageTableGenerator.swift */,
-				6D27964D25C85EA10085B845 /* ImageTableViewCell.swift */,
-				6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */,
-				6D27965325C90FA60085B845 /* NukePreheater.swift */,
+				6D27965325C90FA60085B845 /* NukeImagePrefetcher.swift */,
 			);
 			path = PrefetchingTableViewController;
+			sourceTree = "<group>";
+		};
+		6D4B323225C986F000FC7979 /* ImageTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */,
+			);
+			path = ImageTableViewController;
 			sourceTree = "<group>";
 		};
 		896B59722354963900E8E2AB /* Stack */ = {
@@ -168,8 +209,10 @@
 		8B1D7905201C8BCC00F184BD /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				6D0F01FB25C977D30031295B /* Cells */,
 				6D27963F25C85DDB0085B845 /* MainTableViewController */,
 				6D27964625C85E4A0085B845 /* PrefetchingTableViewController */,
+				6D4B323225C986F000FC7979 /* ImageTableViewController */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -401,7 +444,8 @@
 				89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */,
 				6D27964325C85DFF0085B845 /* PrefetchingTableViewController.swift in Sources */,
 				89FD21B7238C1445008D7ED3 /* TitleCollectionReusableView.swift in Sources */,
-				6D27965425C90FA60085B845 /* NukePreheater.swift in Sources */,
+				6D4B322F25C980BC00FC7979 /* ImageTableViewController.swift in Sources */,
+				6D27965425C90FA60085B845 /* NukeImagePrefetcher.swift in Sources */,
 				8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */,
 				896B59712354962A00E8E2AB /* StackViewController.swift in Sources */,
 				8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */,

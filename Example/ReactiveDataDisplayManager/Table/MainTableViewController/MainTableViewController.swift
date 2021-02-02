@@ -11,6 +11,22 @@ import ReactiveDataDisplayManager
 
 final class MainTableViewController: UIViewController {
 
+    // MARK: - SegueIdentifiers
+
+    fileprivate enum SegueIdentifier: String {
+        case prefetchingTable
+        case imageTable
+    }
+
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let models: [(title: String, segueId: SegueIdentifier)] = [
+            ("gallery without prefetching", .imageTable),
+            ("gallery with prefetching", .prefetchingTable)
+        ]
+    }
+    
     // MARK: - IBOutlets
 
     @IBOutlet private weak var tableView: UITableView!
@@ -20,23 +36,12 @@ final class MainTableViewController: UIViewController {
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: TableSelectablePlugin())
         .build()
-    private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
         fillAdapter()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.isNavigationBarHidden = true
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.isNavigationBarHidden = false
     }
 
 }
@@ -47,24 +52,21 @@ private extension MainTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        for title in titles {
+        for model in Constants.models {
             // Create generator
-            let generator = TitleTableGenerator(model: title)
-            generator.didSelectEvent += {
-                debugPrint("\(title) selected")
-                self.openPrefetchingTableViewController()
+            let generator = TitleTableGenerator(model: model.title)
+
+            generator.didSelectEvent += { [weak self] in
+                guard let self = self else { return }
+                self.performSegue(withIdentifier: model.segueId.rawValue, sender: self.tableView)
             }
+
             // Add generator to adapter
             adapter.addCellGenerator(generator)
         }
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
-    }
-
-    func openPrefetchingTableViewController() {
-        let controller = PrefetchingTableViewController()
-        navigationController?.pushViewController(controller, animated: true)
     }
 
 }

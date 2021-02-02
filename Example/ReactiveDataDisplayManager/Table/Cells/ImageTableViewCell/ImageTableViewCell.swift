@@ -17,6 +17,12 @@ final class ImageTableViewCell: UITableViewCell {
     struct ViewModel {
         let imageUrl: URL
         let title: String
+
+        static func make() -> Self? {
+            let stringImageUrl = "https://picsum.photos/id/\(Int.random(in: 0...1000))/1280/720"
+            guard let imageUrl = URL(string: stringImageUrl) else { return nil }
+            return .init(imageUrl: imageUrl, title: stringImageUrl)
+        }
     }
 
     // MARK: - Constants
@@ -38,7 +44,9 @@ final class ImageTableViewCell: UITableViewCell {
         setupInitialState()
     }
 
-    // MARK: - Internal Methods
+}
+
+extension ImageTableViewCell: Configurable {
 
     func configure(with viewModel: ViewModel) {
         titleLabel.text = String(format: "URL: %@", viewModel.title)
@@ -58,6 +66,7 @@ private extension ImageTableViewCell {
         titleLabel.font = Constants.titleFont
 
         // configure iconView
+        iconView.backgroundColor = .lightGray
         iconView.contentMode = .scaleAspectFill
         iconView.layer.cornerRadius = Constants.cornerRadius
         iconView.layer.masksToBounds = true

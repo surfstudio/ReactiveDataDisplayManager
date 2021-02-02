@@ -8,11 +8,11 @@
 
 import ReactiveDataDisplayManager
 
-final class ImageTableGenerator: PreheaterableFlow {
+final class ImageTableGenerator: PrefetcherableFlow {
 
     // MARK: - Properties
 
-    var requestId: Any?
+    var requestId: URL?
 
     // MARK: - Private Properties
 
