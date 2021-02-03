@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class FoldableCellGenerator: SelectableItem, FoldableItem {
+final class FoldableCellGenerator: SelectableItem, TableFoldableItem {
 
     // MARK: - SelectableItem
 

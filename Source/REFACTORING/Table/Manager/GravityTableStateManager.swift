@@ -29,22 +29,21 @@ extension EmptyTableHeaderGenerator: Gravity {
     }
 }
 
-/// Warning. Do not forget to conform TableCellGenerator to Gravity
+/// Warning. Do not forget to conform TableCellGenerator to Gravity (GravityTableCellGenerator)
 open class GravityTableStateManager: BaseTableStateManager {
 
-    public typealias CellGeneratorType = TableCellGenerator & Gravity
-    public typealias HeaderGeneratorType = TableHeaderGenerator & Gravity
-
-    // MARK: - Properties
+    public typealias CellGeneratorType = GravityTableCellGenerator
+    public typealias HeaderGeneratorType = GravityTableHeaderGenerator
 
     // MARK: - Public methods
 
     open override func addCellGenerator(_ generator: TableCellGenerator) {
         assert(generator is CellGeneratorType, "This strategy support only \(CellGeneratorType.Type.self)")
 
-        guard let gravityGenerator = generator as? CellGeneratorType,
+        guard
+            let gravityGenerator = generator as? CellGeneratorType,
             checkDuplicate(generator: gravityGenerator),
-            let tableView = self.tableView
+            let tableView = tableView
         else {
             return
         }
@@ -66,13 +65,21 @@ open class GravityTableStateManager: BaseTableStateManager {
         insert(generators: [gravityGenerator], to: currentIndex)
     }
 
+    open override func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
+        guard let table = tableView else { return }
+        generators.forEach {
+            $0.registerCell(in: table)
+            addCellGenerator($0, after: after)
+        }
+    }
+
     open override func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator) {
         assert(generator is CellGeneratorType, "This strategy support only \(CellGeneratorType.Type.self)")
         assert(after is CellGeneratorType, "This strategy support only \(CellGeneratorType.Type.self)")
 
         guard let gravityGenerator = generator as? CellGeneratorType,
-              let gravityGeneratorAfter = generator as? CellGeneratorType,
-            let path = indexPath(for: gravityGeneratorAfter)
+              let gravityGeneratorAfter = after as? CellGeneratorType,
+              let path = indexPath(for: gravityGeneratorAfter)
         else {
             assertionFailure("Generator doesn't exist")
             return
@@ -109,10 +116,10 @@ open class GravityTableStateManager: BaseTableStateManager {
 
     public func addCellGenerator(_ generator: CellGeneratorType, toHeader header: HeaderGeneratorType) {
         guard checkDuplicate(generator: generator) else { return }
-        addCellgenerators([generator], toHeader: header)
+        addCellGenerators([generator], toHeader: header)
     }
 
-    public func addCellgenerators(_ generators: [CellGeneratorType], toHeader header: HeaderGeneratorType) {
+    public func addCellGenerators(_ generators: [CellGeneratorType], toHeader header: HeaderGeneratorType) {
         guard let tableView = self.tableView else { return }
 
         generators.forEach { $0.registerCell(in: tableView) }
@@ -139,14 +146,14 @@ open class GravityTableStateManager: BaseTableStateManager {
     }
 
 
-    public func clearHeadergenerators() {
+    public func clearHeaderGenerators() {
         sections.removeAll()
     }
 
     open func replace(oldGenerator: CellGeneratorType,
-                 on newGenerator: CellGeneratorType,
-                 removeAnimation: UITableView.RowAnimation = .automatic,
-                 insertAnimation: UITableView.RowAnimation = .automatic) {
+                      on newGenerator: CellGeneratorType,
+                      removeAnimation: UITableView.RowAnimation = .automatic,
+                      insertAnimation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(oldGenerator), let table = self.tableView else { return }
 
         table.beginUpdates()
@@ -169,15 +176,16 @@ open class GravityTableStateManager: BaseTableStateManager {
     }
 
     open func remove(_ generator: CellGeneratorType,
-                              with animation: UITableView.RowAnimation = .automatic,
-                              needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
-                              needRemoveEmptySection: Bool = false) {
+                     with animation: UITableView.RowAnimation = .automatic,
+                     needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
+                     needRemoveEmptySection: Bool = false) {
         guard let index = self.findGenerator(generator) else { return }
         self.removeGenerator(with: index,
                              with: animation,
                              needScrollAt: scrollPosition,
                              needRemoveEmptySection: needRemoveEmptySection)
     }
+
 }
 
 // MARK: - Private

@@ -10,9 +10,9 @@ import Foundation
 
 public protocol TableStateManager: AbstractStateManager {
     func remove(_ generator: CellGeneratorType,
-                              with animation: UITableView.RowAnimation,
-                              needScrollAt scrollPosition: UITableView.ScrollPosition?,
-                              needRemoveEmptySection: Bool)
+                with animation: UITableView.RowAnimation,
+                needScrollAt scrollPosition: UITableView.ScrollPosition?,
+                needRemoveEmptySection: Bool)
 }
 
 public protocol TableAdapter: AnyObject {

@@ -112,6 +112,15 @@ public protocol SelectableItem: class {
     var isNeedDeselect: Bool { get }
 }
 
+public protocol TableFoldableItem: class {
+    associatedtype Generator
+
+    var didFoldEvent: BaseEvent<Bool> { get }
+    var isExpanded: Bool { get set }
+    var childGenerators: [Generator] { get set }
+}
+
+// TODO: - Remove FoldableItem and GravityFoldableItem after release 7.0
 public protocol FoldableItem: class {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
@@ -251,11 +260,11 @@ public extension StackCellGenerator where Self: ViewBuilder {
     }
 }
 
-public protocol GravityTableCellGenerator: TableCellGenerator {
-    var heaviness: Int { get set }
-}
+public typealias GravityTableCellGenerator = TableCellGenerator & Gravity
 
-open class GravityTableHeaderGenerator: TableHeaderGenerator {
+open class GravityTableHeaderGenerator: TableHeaderGenerator, Gravity {
+    open var heaviness: Int = .zero
+
     open func getHeaviness() -> Int {
         preconditionFailure("\(#function) must be overriden in child")
     }
