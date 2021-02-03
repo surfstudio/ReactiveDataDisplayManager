@@ -18,6 +18,9 @@
 		6D4B326025CA9A3500FC7979 /* FoldableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */; };
 		6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B326325CA9A4400FC7979 /* FoldableTableViewCell.swift */; };
 		6D4B326825CA9A4C00FC7979 /* FoldableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D4B326725CA9A4C00FC7979 /* FoldableTableViewCell.xib */; };
+		6D4B327B25CAA79000FC7979 /* GravityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B327A25CAA79000FC7979 /* GravityTableViewController.swift */; };
+		6D4B328225CAAC0600FC7979 /* GravityFoldableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B328125CAAC0600FC7979 /* GravityFoldableCellGenerator.swift */; };
+		6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */; };
 		896B59712354962A00E8E2AB /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59702354962A00E8E2AB /* StackViewController.swift */; };
 		896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */; };
 		89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */; };
@@ -64,6 +67,9 @@
 		6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableCellGenerator.swift; sourceTree = "<group>"; };
 		6D4B326325CA9A4400FC7979 /* FoldableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableTableViewCell.swift; sourceTree = "<group>"; };
 		6D4B326725CA9A4C00FC7979 /* FoldableTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoldableTableViewCell.xib; sourceTree = "<group>"; };
+		6D4B327A25CAA79000FC7979 /* GravityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTableViewController.swift; sourceTree = "<group>"; };
+		6D4B328125CAAC0600FC7979 /* GravityFoldableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityFoldableCellGenerator.swift; sourceTree = "<group>"; };
+		6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityCellGenerator.swift; sourceTree = "<group>"; };
 		896B59702354962A00E8E2AB /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
 		89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
@@ -167,6 +173,8 @@
 				8B04A1DC1FE9028300407BED /* TitleTableGenerator.swift */,
 				6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */,
 				6D27964925C85E680085B845 /* ImageTableGenerator.swift */,
+				6D4B328125CAAC0600FC7979 /* GravityFoldableCellGenerator.swift */,
+				6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -213,6 +221,14 @@
 			path = FoldableTableViewCell;
 			sourceTree = "<group>";
 		};
+		6D4B327E25CAA7D600FC7979 /* GravityTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D4B327A25CAA79000FC7979 /* GravityTableViewController.swift */,
+			);
+			path = GravityTableViewController;
+			sourceTree = "<group>";
+		};
 		896B59722354963900E8E2AB /* Stack */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +257,7 @@
 				6D27964625C85E4A0085B845 /* PrefetchingTableViewController */,
 				6D4B323225C986F000FC7979 /* ImageTableViewController */,
 				6D4B325C25CA99CD00FC7979 /* FoldableTableViewController */,
+				6D4B327E25CAA7D600FC7979 /* GravityTableViewController */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -470,6 +487,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */,
 				89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */,
 				6D27964325C85DFF0085B845 /* PrefetchingTableViewController.swift in Sources */,
 				89FD21B7238C1445008D7ED3 /* TitleCollectionReusableView.swift in Sources */,
@@ -478,6 +496,8 @@
 				8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */,
 				896B59712354962A00E8E2AB /* StackViewController.swift in Sources */,
 				8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */,
+				6D4B327B25CAA79000FC7979 /* GravityTableViewController.swift in Sources */,
+				6D4B328225CAAC0600FC7979 /* GravityFoldableCellGenerator.swift in Sources */,
 				8B85E2E01FE84F540080984A /* MainTableViewController.swift in Sources */,
 				6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */,
 				6D4B325925CA99C100FC7979 /* FoldableTableViewController.swift in Sources */,
