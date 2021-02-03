@@ -37,11 +37,12 @@
                         <outlet property="tableView" destination="fjz-vb-COx" id="tsu-jB-zKn"/>
                         <segue destination="HbH-nQ-nM8" kind="show" identifier="prefetchingTable" id="Mpd-B8-7hj"/>
                         <segue destination="x5K-kL-ew7" kind="show" identifier="imageTable" id="eWu-52-Kbs"/>
+                        <segue destination="1D9-rJ-NEt" kind="show" identifier="foldableCellTable" id="SsS-H3-qag"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652" y="-141"/>
+            <point key="canvasLocation" x="652" y="-998"/>
         </scene>
         <!--Image Table View Controller-->
         <scene sceneID="1kH-t8-h7Q">
@@ -72,7 +73,38 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="762-6b-Rgd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1625" y="-225"/>
+            <point key="canvasLocation" x="2278" y="-728"/>
+        </scene>
+        <!--Foldable Table View Controller-->
+        <scene sceneID="ueU-dX-sdt">
+            <objects>
+                <viewController id="1D9-rJ-NEt" customClass="FoldableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cxv-BG-ZTw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4OR-Lm-uXb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uyk-jT-Gwb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uyk-jT-Gwb" firstAttribute="trailing" secondItem="4OR-Lm-uXb" secondAttribute="trailing" id="NrI-0Y-fYI"/>
+                            <constraint firstItem="4OR-Lm-uXb" firstAttribute="leading" secondItem="uyk-jT-Gwb" secondAttribute="leading" id="WHe-Xw-FLU"/>
+                            <constraint firstItem="uyk-jT-Gwb" firstAttribute="bottom" secondItem="4OR-Lm-uXb" secondAttribute="bottom" id="nuY-na-TYb"/>
+                            <constraint firstItem="4OR-Lm-uXb" firstAttribute="top" secondItem="uyk-jT-Gwb" secondAttribute="top" id="xgc-Gt-0eP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CV5-sR-LjS"/>
+                    <connections>
+                        <outlet property="tableView" destination="4OR-Lm-uXb" id="JeI-6R-b9W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QeC-Eg-2Ue" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2278" y="43"/>
         </scene>
         <!--Prefetching Table View Controller-->
         <scene sceneID="jcz-27-XRy">
@@ -103,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxZ-6h-ZJH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1626" y="-995"/>
+            <point key="canvasLocation" x="2279" y="-1416"/>
         </scene>
         <!--Collection-->
         <scene sceneID="cQP-3e-Boa">

@@ -14,6 +14,10 @@
 		6D27965025C85EA10085B845 /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */; };
 		6D27965425C90FA60085B845 /* NukeImagePrefetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27965325C90FA60085B845 /* NukeImagePrefetcher.swift */; };
 		6D4B322F25C980BC00FC7979 /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */; };
+		6D4B325925CA99C100FC7979 /* FoldableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B325825CA99C100FC7979 /* FoldableTableViewController.swift */; };
+		6D4B326025CA9A3500FC7979 /* FoldableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */; };
+		6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B326325CA9A4400FC7979 /* FoldableTableViewCell.swift */; };
+		6D4B326825CA9A4C00FC7979 /* FoldableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D4B326725CA9A4C00FC7979 /* FoldableTableViewCell.xib */; };
 		896B59712354962A00E8E2AB /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59702354962A00E8E2AB /* StackViewController.swift */; };
 		896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */; };
 		89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */; };
@@ -56,6 +60,10 @@
 		6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		6D27965325C90FA60085B845 /* NukeImagePrefetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeImagePrefetcher.swift; sourceTree = "<group>"; };
 		6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewController.swift; sourceTree = "<group>"; };
+		6D4B325825CA99C100FC7979 /* FoldableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableTableViewController.swift; sourceTree = "<group>"; };
+		6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableCellGenerator.swift; sourceTree = "<group>"; };
+		6D4B326325CA9A4400FC7979 /* FoldableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableTableViewCell.swift; sourceTree = "<group>"; };
+		6D4B326725CA9A4C00FC7979 /* FoldableTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoldableTableViewCell.xib; sourceTree = "<group>"; };
 		896B59702354962A00E8E2AB /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
 		89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
@@ -148,6 +156,7 @@
 				6D0F01FE25C977F70031295B /* Generators */,
 				6D0F01F825C977C30031295B /* ImageTableViewCell */,
 				6D0F01F725C977B70031295B /* TitleTableViewCell */,
+				6D4B326B25CA9A5700FC7979 /* FoldableTableViewCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -156,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				8B04A1DC1FE9028300407BED /* TitleTableGenerator.swift */,
+				6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */,
 				6D27964925C85E680085B845 /* ImageTableGenerator.swift */,
 			);
 			path = Generators;
@@ -186,6 +196,23 @@
 			path = ImageTableViewController;
 			sourceTree = "<group>";
 		};
+		6D4B325C25CA99CD00FC7979 /* FoldableTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D4B325825CA99C100FC7979 /* FoldableTableViewController.swift */,
+			);
+			path = FoldableTableViewController;
+			sourceTree = "<group>";
+		};
+		6D4B326B25CA9A5700FC7979 /* FoldableTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				6D4B326325CA9A4400FC7979 /* FoldableTableViewCell.swift */,
+				6D4B326725CA9A4C00FC7979 /* FoldableTableViewCell.xib */,
+			);
+			path = FoldableTableViewCell;
+			sourceTree = "<group>";
+		};
 		896B59722354963900E8E2AB /* Stack */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +240,7 @@
 				6D27963F25C85DDB0085B845 /* MainTableViewController */,
 				6D27964625C85E4A0085B845 /* PrefetchingTableViewController */,
 				6D4B323225C986F000FC7979 /* ImageTableViewController */,
+				6D4B325C25CA99CD00FC7979 /* FoldableTableViewController */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -364,6 +392,7 @@
 				8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */,
 				8B85E2E51FE84F540080984A /* Assets.xcassets in Resources */,
 				89FD21B8238C1445008D7ED3 /* TitleCollectionReusableView.xib in Resources */,
+				6D4B326825CA9A4C00FC7979 /* FoldableTableViewCell.xib in Resources */,
 				8B85E2E31FE84F540080984A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,8 +479,11 @@
 				896B59712354962A00E8E2AB /* StackViewController.swift in Sources */,
 				8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */,
 				8B85E2E01FE84F540080984A /* MainTableViewController.swift in Sources */,
+				6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */,
+				6D4B325925CA99C100FC7979 /* FoldableTableViewController.swift in Sources */,
 				6D27964F25C85EA10085B845 /* ImageTableViewCell.swift in Sources */,
 				8B04A1D71FE9020800407BED /* TitleTableViewCell.swift in Sources */,
+				6D4B326025CA9A3500FC7979 /* FoldableCellGenerator.swift in Sources */,
 				8B1D790B201C957700F184BD /* TitleCollectionViewCell.swift in Sources */,
 				896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */,
 				8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */,
