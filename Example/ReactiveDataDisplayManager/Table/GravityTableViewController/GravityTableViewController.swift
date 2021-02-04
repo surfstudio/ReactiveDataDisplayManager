@@ -18,7 +18,7 @@ final class GravityTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.gravityBuilder
-        .add(plugin: TableFoldablePlugin<GravityFoldableCellGenerator>())
+        .add(plugin: TableFoldablePlugin())
         .build()
 
     // MARK: - UIViewController

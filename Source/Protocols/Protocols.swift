@@ -112,15 +112,6 @@ public protocol SelectableItem: class {
     var isNeedDeselect: Bool { get }
 }
 
-public protocol TableFoldableItem: class {
-    associatedtype Generator
-
-    var didFoldEvent: BaseEvent<Bool> { get }
-    var isExpanded: Bool { get set }
-    var childGenerators: [Generator] { get set }
-}
-
-// TODO: - Remove FoldableItem and GravityFoldableItem after release 7.0
 public protocol FoldableItem: class {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
