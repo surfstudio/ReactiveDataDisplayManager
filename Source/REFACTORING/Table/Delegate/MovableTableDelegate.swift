@@ -8,45 +8,11 @@
 
 open class MovableTableDelegate: BaseTableDelegate {
 
-    open override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        if let generator = stateManager?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
-            return generator.canMove()
-        }
-        return super.tableView(tableView, canMoveRowAt: indexPath)
-    }
-
     open override func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         if let generator = stateManager?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
             return generator.canMove()
         }
         return super.tableView(tableView, canFocusRowAt: indexPath)
-    }
-
-    open override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        super.tableView(tableView, moveRowAt: sourceIndexPath, to: destinationIndexPath)
-
-        let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
-        guard
-            let stateManager = stateManager,
-            let generator = stateManager.generators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
-            moveToTheSameSection || generator.canMoveInOtherSection()
-        else {
-            return
-        }
-
-        let itemToMove = stateManager.generators[sourceIndexPath.section][sourceIndexPath.row]
-
-        // find oldSection and remove item from this array
-        stateManager.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-
-        // findNewSection and add items to this array
-        stateManager.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
-
-        // need to prevent crash with internal inconsistency of UITableView
-        DispatchQueue.main.async {
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        }
     }
 
 }
