@@ -8,12 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class FoldableCellGenerator: SelectableItem, TableFoldableItem {
-
-    // MARK: - SelectableItem
-
-    var didSelectEvent = BaseEvent<Void>()
-    var isNeedDeselect = true
+final class FoldableCellGenerator: FoldableItem {
 
     // MARK: - FoldableItem
 

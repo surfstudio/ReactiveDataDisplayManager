@@ -8,13 +8,13 @@
 
 import ReactiveDataDisplayManager
 
-final class GravityFoldableCellGenerator: TableFoldableItem {
+final class GravityFoldableCellGenerator: FoldableItem {
 
     // MARK: - Properties
 
     var didFoldEvent = BaseEvent<Bool>()
     var isExpanded = false
-    var childGenerators: [GravityTableCellGenerator] = []
+    var childGenerators: [TableCellGenerator] = []
     var heaviness: Int
 
     // MARK: - Initialization
