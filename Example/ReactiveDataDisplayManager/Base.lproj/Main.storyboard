@@ -38,7 +38,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aVf-WT-lXI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2375" y="-1855"/>
+            <point key="canvasLocation" x="1074" y="-2127"/>
         </scene>
         <!--Gravity Table View Controller-->
         <scene sceneID="l5W-wb-yvE">
