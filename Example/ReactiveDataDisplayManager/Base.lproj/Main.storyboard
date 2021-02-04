@@ -9,6 +9,37 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Movable Table View Controller-->
+        <scene sceneID="rqj-Fd-t0M">
+            <objects>
+                <viewController id="Uy9-MG-PUc" customClass="MovableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mhf-Ir-fN5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rrK-EE-cmH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RP3-Wf-ZK7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RP3-Wf-ZK7" firstAttribute="bottom" secondItem="rrK-EE-cmH" secondAttribute="bottom" id="2fz-sp-eCK"/>
+                            <constraint firstItem="RP3-Wf-ZK7" firstAttribute="trailing" secondItem="rrK-EE-cmH" secondAttribute="trailing" id="CoQ-Zl-JHZ"/>
+                            <constraint firstItem="rrK-EE-cmH" firstAttribute="leading" secondItem="RP3-Wf-ZK7" secondAttribute="leading" id="DLT-9u-NVX"/>
+                            <constraint firstItem="rrK-EE-cmH" firstAttribute="top" secondItem="RP3-Wf-ZK7" secondAttribute="top" id="I9C-cw-UK5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="vwO-oI-eca"/>
+                    <connections>
+                        <outlet property="tableView" destination="rrK-EE-cmH" id="dMN-GL-5lN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aVf-WT-lXI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1074" y="-2127"/>
+        </scene>
         <!--Gravity Table View Controller-->
         <scene sceneID="l5W-wb-yvE">
             <objects>
@@ -70,6 +101,7 @@
                         <segue destination="x5K-kL-ew7" kind="show" identifier="imageTable" id="eWu-52-Kbs"/>
                         <segue destination="1D9-rJ-NEt" kind="show" identifier="foldableCellTable" id="SsS-H3-qag"/>
                         <segue destination="Zf5-Tg-tyH" kind="show" identifier="gravityTable" id="CXS-Hh-zZI"/>
+                        <segue destination="Uy9-MG-PUc" kind="show" identifier="movableTable" id="FOj-3E-vba"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
