@@ -30,7 +30,6 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     // MARK: - Private Properties
 
     private var _swipeActionsPlugin: FeaturePlugin?
-
 }
 
 // MARK: - UITableViewDelegate
