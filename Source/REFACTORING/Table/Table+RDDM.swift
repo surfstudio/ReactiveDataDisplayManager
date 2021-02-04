@@ -22,6 +22,8 @@ public extension DataDisplayWrapper where Base: UITableView {
 
 public class TableBuilder<T: BaseTableStateManager> {
 
+    // MARK: - Properties
+
     let view: UITableView
     let stateManager: T
     var delegate: BaseTableDelegate
@@ -29,6 +31,9 @@ public class TableBuilder<T: BaseTableStateManager> {
 
     var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
     var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
+    var prefetchPlugins = PluginCollection<PrefetchEvent, BaseTableStateManager>()
+
+    // MARK: - Initialization
 
     init(view: UITableView, stateManager: T) {
         self.view = view
@@ -36,6 +41,8 @@ public class TableBuilder<T: BaseTableStateManager> {
         delegate = BaseTableDelegate()
         dataSource = BaseTableDataSource()
     }
+
+    // MARK: - Public Methods
 
     /// Change delegate
     public func set(delegate: BaseTableDelegate) -> TableBuilder<T> {
@@ -49,21 +56,27 @@ public class TableBuilder<T: BaseTableStateManager> {
         return self
     }
 
-    /// Add plugin functionality based on UITableViewDelegate  events
+    /// Add plugin functionality based on UITableViewDelegate events
     public func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder<T> {
         tablePlugins.add(plugin)
         return self
     }
 
-    /// Add plugin functionality based on UIScrollViewDelegate  events
+    /// Add plugin functionality based on UIScrollViewDelegate events
     public func add(plugin: PluginAction<ScrollEvent, BaseTableStateManager>) -> TableBuilder<T> {
         scrollPlugins.add(plugin)
         return self
     }
 
-    /// Build delegate, dataSource, view and data display manager together and returns DatatDisplayManager
-    public func build() -> T {
+    /// Add plugin functionality based on UITableViewDataSourcePrefetching events
+    @available(iOS 10.0, *)
+    public func add(plugin: PluginAction<PrefetchEvent, BaseTableStateManager>) -> TableBuilder<T> {
+        prefetchPlugins.add(plugin)
+        return self
+    }
 
+    /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
+    public func build() -> T {
         delegate.stateManager = stateManager
         delegate.tablePlugins = tablePlugins
         delegate.scrollPlugins = scrollPlugins
@@ -72,9 +85,15 @@ public class TableBuilder<T: BaseTableStateManager> {
         dataSource.provider = stateManager
         view.dataSource = dataSource
 
+        if #available(iOS 10.0, *) {
+            dataSource.prefetchPlugins = prefetchPlugins
+            view.prefetchDataSource = dataSource
+        }
+
         stateManager.tableView = view
         stateManager.delegate = delegate
         stateManager.dataSource = dataSource
         return stateManager
     }
+
 }

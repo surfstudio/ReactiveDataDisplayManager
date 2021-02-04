@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'ReactiveDataDisplayManagerExample' do
   pod 'ReactiveDataDisplayManager', :path => '../'
+  pod 'Nuke'
 
   target 'ReactiveDataDisplayManagerExampleTests' do
     inherit! :search_paths

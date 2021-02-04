@@ -1,0 +1,28 @@
+//
+//  TablePrefetchProxyPlugin.swift
+//  ReactiveDataDisplayManager
+//
+//  Created by Anton Eysner on 29.01.2021.
+//  Copyright © 2021 Александр Кравченков. All rights reserved.
+//
+
+/// Proxy of all UITableViewDataSourcePrefetching events
+public class TablePrefetchProxyPlugin: PluginAction<PrefetchEvent, BaseTableStateManager> {
+
+    // MARK: - Properties
+
+    public var prefetchEvent = BaseEvent<[IndexPath]>()
+    public var cancelPrefetchingEvent = BaseEvent<[IndexPath]>()
+
+    // MARK: - PluginAction
+
+    override func process(event: PrefetchEvent, with manager: BaseTableStateManager?) {
+        switch event {
+        case .prefetch(let indexPaths):
+            prefetchEvent.invoke(with: indexPaths)
+        case .cancelPrefetching(let indexPaths):
+            cancelPrefetchingEvent.invoke(with: indexPaths)
+        }
+    }
+
+}

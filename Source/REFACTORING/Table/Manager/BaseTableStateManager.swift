@@ -25,14 +25,14 @@ open class BaseTableStateManager: TableStateManager {
     var dataSource: BaseTableDataSource?
 
     public init() {
-        self.generators = [[TableCellGenerator]]()
-        self.sections = [TableHeaderGenerator]()
+        generators = [[TableCellGenerator]]()
+        sections = [TableHeaderGenerator]()
     }
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        self.tableView?.reloadData()
+        tableView?.reloadData()
     }
 
     public func forceRefill(completion: @escaping (() -> Void)) {
@@ -97,7 +97,7 @@ open class BaseTableStateManager: TableStateManager {
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
     open func remove(_ generator: TableCellGenerator, with animation: UITableView.RowAnimation, needScrollAt scrollPosition: UITableView.ScrollPosition?, needRemoveEmptySection: Bool) {
-        guard let index = self.findGenerator(generator) else { return }
+        guard let index = findGenerator(generator) else { return }
         self.removeGenerator(with: index,
                              with: animation,
                              needScrollAt: scrollPosition,
@@ -120,10 +120,10 @@ extension BaseTableStateManager {
     }
 
     func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
-                                 with animation: UITableView.RowAnimation = .automatic,
-                                 needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
-                                 needRemoveEmptySection: Bool = false) {
-        guard let table = self.tableView else { return }
+                         with animation: UITableView.RowAnimation = .automatic,
+                         needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
+                         needRemoveEmptySection: Bool = false) {
+        guard let table = tableView else { return }
 
         // perform update
         table.beginUpdates()

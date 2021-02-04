@@ -144,6 +144,51 @@ Generators with selection event. They build `Configurable & CalculatableHeight` 
 |AutomaticDimension|`BaseCellGenerator`|`BaseNonReusableCellGenerator`|
 |Calculated height|`CalculatableHeightCellGenerator`|`CalculatableHeightNonReusableCellGenerator`|
 
+### TablePrefetcherablePlugin & PrefetcherableFlow
+
+Adds support for [UITableViewDataSourcePrefetching](https://developer.apple.com/documentation/uikit/uitableviewdatasourceprefetching).
+
+**To work with it you should:**
+
+- create `Generator`
+- realize `PrefetcherableFlow` protocol
+- create `YourDataPrefetcher`
+- realize `ContentPrefetcher` protocol
+- add `TablePrefetcherablePlugin` to builder
+
+```swift
+class YourController: UIViewController {
+    // ...
+
+    let tableView = UITableView()
+    let preheater = YourDataPrefetcher()
+    lazy var prefetcherablePlugin = TablePrefetcherablePlugin<YourDataPrefetcher, YourCellGenerator>(prefetcher: preheater)
+    lazy var adapter = tableView.rddm.baseBuilder
+        .add(plugin: prefetcherablePlugin)
+        .build()
+
+    // ...
+}
+```
+
+- initialize generator and add to adapter
+
+```swift
+class YourController: UIViewController {
+    // ...
+
+    func fillAdapter(with model: YourTableViewCellModel) {
+        let generator = YourCellGenerator(model: model)
+
+        // Add generator to adapter
+        adapter.addCellGenerator(generator)
+    }
+
+    // ...
+}
+```
+**See more in example project**
+
 ## UICollectionView
 
 ### BaseCollectionCellGenerator
