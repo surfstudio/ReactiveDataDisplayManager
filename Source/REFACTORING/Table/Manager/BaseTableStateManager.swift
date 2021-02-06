@@ -22,7 +22,7 @@ open class BaseTableStateManager: TableStateManager {
     public var sections: [TableHeaderGenerator]
 
     var delegate: BaseTableDelegate?
-    var dataSource: BaseTableDataSource?
+    var dataSource: TableDataSource?
 
     public init() {
         generators = [[TableCellGenerator]]()

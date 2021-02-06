@@ -12,7 +12,7 @@ public protocol ContentPrefetcher {
     /// Start prefetching data for the given identifiers.
     func startPrefetching(for requestIds: [Content])
 
-    /// Stops prefetching images for the given identifiers.
+    /// Stops prefetching data for the given identifiers.
     func cancelPrefetching(for requestIds: [Content])
 }
 
@@ -50,13 +50,13 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
 private extension TablePrefetcherablePlugin {
 
     func startPrefetching(from manager: BaseTableStateManager?, at indexPaths: [IndexPath]) {
-        let imageUrls = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
-        prefetcher.startPrefetching(for: imageUrls)
+        let contents = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
+        prefetcher.startPrefetching(for: contents)
     }
 
     func cancelPrefetching(from manager: BaseTableStateManager?, at indexPaths: [IndexPath]) {
-        let imageUrls = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
-        prefetcher.cancelPrefetching(for: imageUrls)
+        let contents = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
+        prefetcher.cancelPrefetching(for: contents)
     }
 
     func getPrefetcherableFlowCell(from manager: BaseTableStateManager?, at indexPath: IndexPath) -> Generator? {

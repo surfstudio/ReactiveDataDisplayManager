@@ -8,7 +8,11 @@
 
 import Foundation
 
-protocol TableDataSource: UITableViewDataSource {}
+protocol TableDataSource: UITableViewDataSource, UITableViewDataSourcePrefetching {
+    var provider: TableGeneratorsProvider? { get set }
+    var prefetchPlugins: PluginCollection<PrefetchEvent, BaseTableStateManager> { get set }
+    var tablePlugins: PluginCollection<TableEvent, BaseTableStateManager> { get set }
+}
 
 public protocol TableGeneratorsProvider: AnyObject {
     var generators: [[TableCellGenerator]] { get set }

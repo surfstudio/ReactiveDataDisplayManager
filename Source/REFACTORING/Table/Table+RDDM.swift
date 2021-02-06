@@ -18,6 +18,31 @@ public extension DataDisplayWrapper where Base: UITableView {
         TableBuilder(view: base, stateManager: GravityTableStateManager())
     }
 
+    @available(iOS 13.0, *)
+    var diffableBuilder: DiffableTableBuilder<DiffableTableStateManager> {
+        DiffableTableBuilder(view: base, stateManager: DiffableTableStateManager())
+    }
+
+}
+
+@available(iOS 13.0, *)
+public class DiffableTableBuilder<T: DiffableTableStateManager>: TableBuilder<T> {
+
+    // MARK: - Initialization
+
+    override init(view: UITableView, stateManager: T) {
+        super.init(view: view, stateManager: stateManager)
+        stateManager.tableView = view
+        dataSource = DiffableTableDataSource(provider: stateManager)
+    }
+
+    // MARK: - Public Methods
+
+    public func set(dataSource: DiffableTableDataSource) -> TableBuilder<T> {
+        self.dataSource = dataSource
+        return self
+    }
+
 }
 
 public class TableBuilder<T: BaseTableStateManager> {
@@ -27,7 +52,7 @@ public class TableBuilder<T: BaseTableStateManager> {
     let view: UITableView
     let stateManager: T
     var delegate: BaseTableDelegate
-    var dataSource: BaseTableDataSource
+    var dataSource: TableDataSource
 
     var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
     var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
@@ -86,15 +111,25 @@ public class TableBuilder<T: BaseTableStateManager> {
         dataSource.tablePlugins = tablePlugins
         view.dataSource = dataSource
 
-        if #available(iOS 10.0, *) {
-            dataSource.prefetchPlugins = prefetchPlugins
-            view.prefetchDataSource = dataSource
-        }
+        setPrefetchDataSourceIfNeeded()
 
         stateManager.tableView = view
         stateManager.delegate = delegate
         stateManager.dataSource = dataSource
         return stateManager
+    }
+
+}
+
+// MARK: - Private Methods
+
+private extension TableBuilder {
+
+    func setPrefetchDataSourceIfNeeded() {
+        if #available(iOS 10.0, *) {
+            dataSource.prefetchPlugins = prefetchPlugins
+            view.prefetchDataSource = dataSource
+        }
     }
 
 }
