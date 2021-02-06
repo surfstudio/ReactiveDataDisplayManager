@@ -14,7 +14,7 @@ public protocol ContentPrefetcher {
     /// Start prefetching data for the given identifiers.
     func startPrefetching(for requestIds: [Content])
 
-    /// Stops prefetching images for the given identifiers.
+    /// Stops prefetching data for the given identifiers.
     func cancelPrefetching(for requestIds: [Content])
 }
 

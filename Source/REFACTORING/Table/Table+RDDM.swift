@@ -24,6 +24,31 @@ public extension DataDisplayWrapper where Base: UITableView {
         TableBuilder(view: base, manager: GravityTableManager())
     }
 
+    @available(iOS 13.0, *)
+    var diffableBuilder: DiffableTableBuilder<DiffableTableStateManager> {
+        DiffableTableBuilder(view: base, stateManager: DiffableTableStateManager())
+    }
+
+}
+
+@available(iOS 13.0, *)
+public class DiffableTableBuilder<T: DiffableTableStateManager>: TableBuilder<T> {
+
+    // MARK: - Initialization
+
+    override init(view: UITableView, stateManager: T) {
+        super.init(view: view, stateManager: stateManager)
+        stateManager.tableView = view
+        dataSource = DiffableTableDataSource(provider: stateManager)
+    }
+
+    // MARK: - Public Methods
+
+    public func set(dataSource: DiffableTableDataSource) -> TableBuilder<T> {
+        self.dataSource = dataSource
+        return self
+    }
+
 }
 
 public class TableBuilder<T: BaseTableManager> {
@@ -39,6 +64,7 @@ public class TableBuilder<T: BaseTableManager> {
     // MARK: - Properties
 
     let view: UITableView
+
     let manager: T
     var delegate: TableDelegate
     var dataSource: TableDataSource
