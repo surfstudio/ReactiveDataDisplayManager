@@ -22,6 +22,12 @@ public extension DataDisplayWrapper where Base: UITableView {
 
 public class TableBuilder<T: BaseTableStateManager> {
 
+    // MARK: - Aliases
+
+    typealias TablePluginsCollection = PluginCollection<BaseTablePlugin<TableEvent>>
+    typealias ScrollPluginsCollection = PluginCollection<BaseTablePlugin<ScrollEvent>>
+    typealias PrefetchPluginsCollection = PluginCollection<BaseTablePlugin<PrefetchEvent>>
+
     // MARK: - Properties
 
     let view: UITableView
@@ -29,9 +35,9 @@ public class TableBuilder<T: BaseTableStateManager> {
     var delegate: BaseTableDelegate
     var dataSource: BaseTableDataSource
 
-    var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
-    var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
-    var prefetchPlugins = PluginCollection<PrefetchEvent, BaseTableStateManager>()
+    var tablePlugins = TablePluginsCollection()
+    var scrollPlugins = ScrollPluginsCollection()
+    var prefetchPlugins = PrefetchPluginsCollection()
 
     // MARK: - Initialization
 
@@ -57,20 +63,20 @@ public class TableBuilder<T: BaseTableStateManager> {
     }
 
     /// Add plugin functionality based on UITableViewDelegate events
-    public func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder<T> {
+    public func add(plugin: BaseTablePlugin<TableEvent>) -> TableBuilder<T> {
         tablePlugins.add(plugin)
         return self
     }
 
     /// Add plugin functionality based on UIScrollViewDelegate events
-    public func add(plugin: PluginAction<ScrollEvent, BaseTableStateManager>) -> TableBuilder<T> {
+    public func add(plugin: BaseTablePlugin<ScrollEvent>) -> TableBuilder<T> {
         scrollPlugins.add(plugin)
         return self
     }
 
     /// Add plugin functionality based on UITableViewDataSourcePrefetching events
     @available(iOS 10.0, *)
-    public func add(plugin: PluginAction<PrefetchEvent, BaseTableStateManager>) -> TableBuilder<T> {
+    public func add(plugin: BaseTablePlugin<PrefetchEvent>) -> TableBuilder<T> {
         prefetchPlugins.add(plugin)
         return self
     }

@@ -7,7 +7,7 @@
 //
 
 /// Adds the definition of the section that started to be displayed
-public class TableHeaderVisiblePlugin: PluginAction<TableEvent, BaseTableStateManager> {
+public class TableHeaderVisiblePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - Private Properties
 
@@ -22,7 +22,7 @@ public class TableHeaderVisiblePlugin: PluginAction<TableEvent, BaseTableStateMa
 
     // MARK: - PluginAction
 
-    override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
         switch event {
         case .willDisplayHeader(let section):
             willDisplayHeader(with: section, manager: manager)

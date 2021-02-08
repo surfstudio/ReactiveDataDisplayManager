@@ -7,9 +7,9 @@
 //
 
 // Adds support for Selectable item triggering
-public class TableSelectablePlugin: PluginAction<TableEvent, BaseTableStateManager> {
+public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
-    override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
 
         switch event {
         case .didSelect(let indexPath):

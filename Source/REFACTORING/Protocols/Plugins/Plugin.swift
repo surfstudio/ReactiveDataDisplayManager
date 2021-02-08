@@ -9,9 +9,9 @@
 /// Use this class to extend collection functionality.
 ///
 /// For example: add support of SelectableItem without overriding whole adapter
-open class PluginAction<Event, Manager> {
+public protocol PluginAction {
+    associatedtype Event
+    associatedtype Manager
 
-    public init() {}
-
-    func process(event: Event, with manager: Manager?) {}
+    func process(event: Event, with manager: Manager?)
 }

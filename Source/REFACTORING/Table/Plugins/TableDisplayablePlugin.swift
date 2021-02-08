@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public class TableDisplayablePlugin: PluginAction<TableEvent, BaseTableStateManager> {
+public class TableDisplayablePlugin: BaseTablePlugin<TableEvent> {
 
     private func getDisplayableFlowCell(from manager: BaseTableStateManager?, at indexPath: IndexPath) -> DisplayableFlow? {
         manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? DisplayableFlow
@@ -16,7 +16,7 @@ public class TableDisplayablePlugin: PluginAction<TableEvent, BaseTableStateMana
         manager?.sections[safe: section] as? DisplayableFlow
     }
 
-    override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
         switch event {
         case .willDisplayCell(let indexPath):
             let displayable = getDisplayableFlowCell(from: manager, at: indexPath)

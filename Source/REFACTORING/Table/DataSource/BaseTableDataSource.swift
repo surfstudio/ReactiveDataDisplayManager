@@ -24,7 +24,7 @@ open class BaseTableDataSource: NSObject {
     // MARK: - Properties
 
     weak var provider: TableGeneratorsProvider?
-    var prefetchPlugins = PluginCollection<PrefetchEvent, BaseTableStateManager>()
+    var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
 
 }
 

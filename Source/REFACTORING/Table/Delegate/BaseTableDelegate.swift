@@ -33,8 +33,8 @@ open class BaseTableDelegate: NSObject {
 
     weak var stateManager: BaseTableStateManager?
 
-    var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
-    var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
+    var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
+    var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
 
     // MARK: - Public Properties
 

@@ -19,7 +19,7 @@ public protocol ContentPrefetcher {
 /// Adds support for PrefetcherableFlow with prefetcher
 ///
 /// ContentPrefetcher prefetches and caches data to eliminate delays when requesting the same data later.
-public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: PluginAction<PrefetchEvent, BaseTableStateManager> {
+public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
 
@@ -34,7 +34,7 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
 
     // MARK: - PluginAction
 
-    override func process(event: PrefetchEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: PrefetchEvent, with manager: BaseTableStateManager?) {
         switch event {
         case .prefetch(let indexPaths):
             startPrefetching(from: manager, at: indexPaths)

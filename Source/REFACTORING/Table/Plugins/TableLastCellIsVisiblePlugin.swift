@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public class TableLastCellIsVisiblePlugin: PluginAction<TableEvent, BaseTableStateManager> {
+public class TableLastCellIsVisiblePlugin: BaseTablePlugin<TableEvent> {
 
     private let action: () -> Void
 
@@ -14,7 +14,7 @@ public class TableLastCellIsVisiblePlugin: PluginAction<TableEvent, BaseTableSta
         self.action = action
     }
 
-    override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
 
         switch event {
         case .willDisplayCell(let indexPath):

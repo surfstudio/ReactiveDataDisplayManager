@@ -6,10 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// 
-struct PluginCollection<Event, Manager> {
-
-    typealias Plugin = PluginAction<Event, Manager>
+/// Collection to store and execute pluginActions
+struct PluginCollection<Plugin: PluginAction> {
 
     private var plugins = [Plugin]()
 
@@ -17,7 +15,7 @@ struct PluginCollection<Event, Manager> {
         plugins.append(plugin)
     }
 
-    func process(event: Event, with manager: Manager?) {
+    func process(event: Plugin.Event, with manager: Plugin.Manager?) {
         plugins.forEach {
             $0.process(event: event, with: manager)
         }

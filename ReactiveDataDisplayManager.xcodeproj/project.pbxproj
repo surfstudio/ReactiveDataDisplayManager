@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		016B9E9025BAAE200038B3CF /* MovableTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */; };
 		0183560C25BEE60B00141448 /* ManualTableStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183560B25BEE60B00141448 /* ManualTableStateManager.swift */; };
+		0191C05725D14BD900DF9081 /* BaseTablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0191C05625D14BD900DF9081 /* BaseTablePlugin.swift */; };
 		01AF216625C2E247004996E9 /* DataDisplayCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF216525C2E247004996E9 /* DataDisplayCompatible.swift */; };
 		01AF217125C2E481004996E9 /* ScrollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF217025C2E481004996E9 /* ScrollEvent.swift */; };
 		01AF217825C2E514004996E9 /* TableSelectablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF217725C2E514004996E9 /* TableSelectablePlugin.swift */; };
@@ -88,6 +89,7 @@
 /* Begin PBXFileReference section */
 		016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableDelegate.swift; sourceTree = "<group>"; };
 		0183560B25BEE60B00141448 /* ManualTableStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableStateManager.swift; sourceTree = "<group>"; };
+		0191C05625D14BD900DF9081 /* BaseTablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTablePlugin.swift; sourceTree = "<group>"; };
 		01AF216525C2E247004996E9 /* DataDisplayCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayCompatible.swift; sourceTree = "<group>"; };
 		01AF217025C2E481004996E9 /* ScrollEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollEvent.swift; sourceTree = "<group>"; };
 		01AF217725C2E514004996E9 /* TableSelectablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSelectablePlugin.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				6DA32EC825C3F3A700F6F2D3 /* TableScrollablePlugin.swift */,
 				6DA32ED625C42F6500F6F2D3 /* TableHeaderVisiblePlugin.swift */,
 				6DA32EDC25C4339400F6F2D3 /* TableDirectionScrollablePlugin.swift */,
+				0191C05625D14BD900DF9081 /* BaseTablePlugin.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				01B8FB1E25B83EFC0080F10D /* UITableViewCellGenerator.swift in Sources */,
 				4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */,
 				8632735D21F0F7DA00620CEE /* Configurable.swift in Sources */,
+				0191C05725D14BD900DF9081 /* BaseTablePlugin.swift in Sources */,
 				C1AB77E2240D98D7000044F1 /* SizableCollectionCellGenerator.swift in Sources */,
 				C1AB77D1240D561D000044F1 /* CalculatableSize.swift in Sources */,
 				C1AB77D6240D581D000044F1 /* BaseCellGenerator.swift in Sources */,

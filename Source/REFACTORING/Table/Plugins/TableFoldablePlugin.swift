@@ -6,9 +6,9 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public class TableFoldablePlugin: PluginAction<TableEvent, BaseTableStateManager> {
+public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
 
-    override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
 
         switch event {
         case .didSelect(let indexPath):

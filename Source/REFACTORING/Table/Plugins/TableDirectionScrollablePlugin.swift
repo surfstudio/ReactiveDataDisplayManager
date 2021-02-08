@@ -7,7 +7,7 @@
 //
 
 /// Added support for determining the direction of the scroll
-public class TableDirectionScrollablePlugin: PluginAction<ScrollEvent, BaseTableStateManager> {
+public class TableDirectionScrollablePlugin: BaseTablePlugin<ScrollEvent> {
 
     // MARK: - Private Properties
 
@@ -23,7 +23,7 @@ public class TableDirectionScrollablePlugin: PluginAction<ScrollEvent, BaseTable
 
     // MARK: - PluginAction
 
-    override func process(event: ScrollEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: ScrollEvent, with manager: BaseTableStateManager?) {
         guard let tableView = manager?.tableView else { return }
 
         switch event {
