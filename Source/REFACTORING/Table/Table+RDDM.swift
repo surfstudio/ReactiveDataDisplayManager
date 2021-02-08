@@ -10,7 +10,11 @@ extension UITableView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UITableView {
 
-    var baseBuilder: TableBuilder<ManualTableManager> {
+    var baseBuilder: TableBuilder<BaseTableManager> {
+        TableBuilder(view: base, manager: BaseTableManager())
+    }
+
+    var manualBuilder: TableBuilder<ManualTableManager> {
         TableBuilder(view: base, manager: ManualTableManager())
     }
 
