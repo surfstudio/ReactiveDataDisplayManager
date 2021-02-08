@@ -9,6 +9,7 @@
 import UIKit
 
 /// Contains implementations DataDisplayManager and HeaderDisplayManager with weight parameters for sorting.
+@available(*, deprecated, message: "Use GravityTableManager instead")
 open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderDataDisplayManager {
 
     // MARK: - Types

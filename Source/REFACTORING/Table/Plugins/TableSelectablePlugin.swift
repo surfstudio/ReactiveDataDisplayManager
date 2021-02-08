@@ -11,7 +11,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
     public override init() {}
 
-    public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableManager?) {
 
         switch event {
         case .didSelect(let indexPath):

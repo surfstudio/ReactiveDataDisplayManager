@@ -14,7 +14,7 @@ public class TableLastCellIsVisiblePlugin: BaseTablePlugin<TableEvent> {
         self.action = action
     }
 
-    public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableManager?) {
 
         switch event {
         case .willDisplayCell(let indexPath):

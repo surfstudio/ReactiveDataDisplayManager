@@ -23,7 +23,7 @@ public class TableDirectionScrollablePlugin: BaseTablePlugin<ScrollEvent> {
 
     // MARK: - PluginAction
 
-    public override func process(event: ScrollEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: ScrollEvent, with manager: BaseTableManager?) {
         guard let tableView = manager?.view else { return }
 
         switch event {

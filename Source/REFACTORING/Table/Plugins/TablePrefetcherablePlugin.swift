@@ -34,7 +34,7 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
 
     // MARK: - PluginAction
 
-    public override func process(event: PrefetchEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: PrefetchEvent, with manager: BaseTableManager?) {
         switch event {
         case .prefetch(let indexPaths):
             startPrefetching(from: manager, at: indexPaths)
@@ -49,17 +49,17 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
 
 private extension TablePrefetcherablePlugin {
 
-    func startPrefetching(from manager: BaseTableStateManager?, at indexPaths: [IndexPath]) {
+    func startPrefetching(from manager: BaseTableManager?, at indexPaths: [IndexPath]) {
         let imageUrls = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
         prefetcher.startPrefetching(for: imageUrls)
     }
 
-    func cancelPrefetching(from manager: BaseTableStateManager?, at indexPaths: [IndexPath]) {
+    func cancelPrefetching(from manager: BaseTableManager?, at indexPaths: [IndexPath]) {
         let imageUrls = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
         prefetcher.cancelPrefetching(for: imageUrls)
     }
 
-    func getPrefetcherableFlowCell(from manager: BaseTableStateManager?, at indexPath: IndexPath) -> Generator? {
+    func getPrefetcherableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> Generator? {
         return manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? Generator
     }
 

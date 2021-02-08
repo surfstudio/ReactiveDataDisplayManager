@@ -9,6 +9,7 @@
 import UIKit
 
 /// Contains extension of BaseTableDataDisplayManager for catching last cell showing event.
+@available(*, deprecated, message: "Use any BaseTableManager with TableLastCellIsVisiblePlugin instead")
 open class PaginableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
 
     /// Called if table shows last cell

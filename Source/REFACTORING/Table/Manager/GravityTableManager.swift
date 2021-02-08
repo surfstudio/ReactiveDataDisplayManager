@@ -1,5 +1,5 @@
 //
-//  GravityTableStateManager.swift
+//  GravityTableManager.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Aleksandr Smirnov on 23.11.2020.
@@ -30,7 +30,7 @@ extension EmptyTableHeaderGenerator: Gravity {
 }
 
 /// Warning. Do not forget to conform TableCellGenerator to Gravity (GravityTableCellGenerator)
-open class GravityTableStateManager: BaseTableStateManager {
+open class GravityTableManager: BaseTableManager {
 
     public typealias CellGeneratorType = GravityTableCellGenerator
     public typealias HeaderGeneratorType = GravityTableHeaderGenerator
@@ -190,7 +190,7 @@ open class GravityTableStateManager: BaseTableStateManager {
 
 // MARK: - Private
 
-private extension GravityTableStateManager {
+private extension GravityTableManager {
 
     func checkDuplicate(header: HeaderGeneratorType) {
         guard
@@ -250,10 +250,10 @@ private extension GravityTableStateManager {
 
 fileprivate extension Array where Element == [TableCellGenerator] {
 
-    var asGravityCellCompatible: [[GravityTableStateManager.CellGeneratorType]] {
+    var asGravityCellCompatible: [[GravityTableManager.CellGeneratorType]] {
         map { cells in
             cells.compactMap {
-                $0 as? GravityTableStateManager.CellGeneratorType
+                $0 as? GravityTableManager.CellGeneratorType
             }
         }
     }
@@ -262,9 +262,9 @@ fileprivate extension Array where Element == [TableCellGenerator] {
 
 fileprivate extension Array where Element: TableCellGenerator {
 
-    var asGravityCellCompatible: [GravityTableStateManager.CellGeneratorType] {
+    var asGravityCellCompatible: [GravityTableManager.CellGeneratorType] {
         compactMap {
-            $0 as? GravityTableStateManager.CellGeneratorType
+            $0 as? GravityTableManager.CellGeneratorType
         }
     }
 
@@ -272,9 +272,9 @@ fileprivate extension Array where Element: TableCellGenerator {
 
 fileprivate extension Array where Element: TableHeaderGenerator {
 
-    var asGravityHeaderCompatible: [GravityTableStateManager.HeaderGeneratorType] {
+    var asGravityHeaderCompatible: [GravityTableManager.HeaderGeneratorType] {
         compactMap {
-            $0 as? GravityTableStateManager.HeaderGeneratorType
+            $0 as? GravityTableManager.HeaderGeneratorType
         }
     }
 

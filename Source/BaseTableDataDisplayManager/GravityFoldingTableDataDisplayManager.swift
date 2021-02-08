@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(*, deprecated, message: "Use GravityTableManager with TableFoldablePlugin instead")
 open class GravityFoldingTableDataDisplayManager: GravityTableDataDisplayManager {
     override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectable = cellGenerators[indexPath.section][indexPath.row] as? SelectableItem {

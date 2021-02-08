@@ -10,17 +10,17 @@ extension UITableView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UITableView {
 
-    var baseBuilder: TableBuilder<ManualTableStateManager> {
-        TableBuilder(view: base, stateManager: ManualTableStateManager())
+    var baseBuilder: TableBuilder<ManualTableManager> {
+        TableBuilder(view: base, manager: ManualTableManager())
     }
 
-    var gravityBuilder: TableBuilder<GravityTableStateManager> {
-        TableBuilder(view: base, stateManager: GravityTableStateManager())
+    var gravityBuilder: TableBuilder<GravityTableManager> {
+        TableBuilder(view: base, manager: GravityTableManager())
     }
 
 }
 
-public class TableBuilder<T: BaseTableStateManager> {
+public class TableBuilder<T: BaseTableManager> {
 
     // MARK: - Aliases
 
@@ -31,7 +31,7 @@ public class TableBuilder<T: BaseTableStateManager> {
     // MARK: - Properties
 
     let view: UITableView
-    let stateManager: T
+    let manager: T
     var delegate: BaseTableDelegate
     var dataSource: BaseTableDataSource
 
@@ -41,9 +41,9 @@ public class TableBuilder<T: BaseTableStateManager> {
 
     // MARK: - Initialization
 
-    init(view: UITableView, stateManager: T) {
+    init(view: UITableView, manager: T) {
         self.view = view
-        self.stateManager = stateManager
+        self.manager = manager
         delegate = BaseTableDelegate()
         dataSource = BaseTableDataSource()
     }
@@ -83,12 +83,12 @@ public class TableBuilder<T: BaseTableStateManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
-        delegate.stateManager = stateManager
+        delegate.manager = manager
         delegate.tablePlugins = tablePlugins
         delegate.scrollPlugins = scrollPlugins
         view.delegate = delegate
 
-        dataSource.provider = stateManager
+        dataSource.provider = manager
         view.dataSource = dataSource
 
         if #available(iOS 10.0, *) {
@@ -96,10 +96,10 @@ public class TableBuilder<T: BaseTableStateManager> {
             view.prefetchDataSource = dataSource
         }
 
-        stateManager.view = view
-        stateManager.delegate = delegate
-        stateManager.dataSource = dataSource
-        return stateManager
+        manager.view = view
+        manager.delegate = delegate
+        manager.dataSource = dataSource
+        return manager
     }
 
 }

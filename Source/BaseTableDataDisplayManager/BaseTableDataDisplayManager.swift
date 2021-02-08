@@ -12,6 +12,7 @@ import UIKit
 /// Contains base implementation of DataDisplayManager with UITableView.
 /// Registers nibs, determinates EstimatedRowHeight.
 /// Can fill table with user data.
+@available(*, deprecated, message: "Use ManualTableManager instead")
 open class BaseTableDataDisplayManager: NSObject {
 
     // MARK: - Typealiases

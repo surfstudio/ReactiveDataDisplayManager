@@ -10,7 +10,7 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
 
     public override init() {}
 
-    public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableManager?) {
 
         switch event {
         case .didSelect(let indexPath):
@@ -48,16 +48,16 @@ private extension TableFoldablePlugin {
 
     func addCellGenerators(_ childGenerators: [TableCellGenerator],
                            after generator: TableCellGenerator,
-                           with manager: BaseTableStateManager?) {
-        if let manager = manager as? ManualTableStateManager {
+                           with manager: BaseTableManager?) {
+        if let manager = manager as? ManualTableManager {
             manager.insert(after: generator, new: childGenerators, with: .fade)
-        } else if let manager = manager as? GravityTableStateManager {
+        } else if let manager = manager as? GravityTableManager {
             manager.addCellGenerators(childGenerators, after: generator)
         }
     }
 
-    func updateIfNeeded(_ childGenerators: [TableCellGenerator], with manager: BaseTableStateManager?) {
-        guard let manager = manager as? GravityTableStateManager else { return }
+    func updateIfNeeded(_ childGenerators: [TableCellGenerator], with manager: BaseTableManager?) {
+        guard let manager = manager as? GravityTableManager else { return }
         manager.update(generators: childGenerators)
     }
 

@@ -15,7 +15,7 @@ public protocol TableGeneratorsProvider: AnyObject {
     var sections: [TableHeaderGenerator] { get set }
 }
 
-extension BaseTableStateManager: TableGeneratorsProvider { }
+extension BaseTableManager: TableGeneratorsProvider { }
 
 
 // Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
@@ -57,11 +57,11 @@ extension BaseTableDataSource: TableDataSource {
 extension BaseTableDataSource: UITableViewDataSourcePrefetching {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseTableStateManager)
+        prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseTableManager)
     }
 
     open func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? BaseTableStateManager)
+        prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? BaseTableManager)
     }
 
 }

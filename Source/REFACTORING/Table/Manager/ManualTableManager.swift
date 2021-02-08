@@ -1,5 +1,5 @@
 //
-//  ManualTableStateManager.swift
+//  ManualTableManager.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Никита Коробейников on 25.01.2021.
@@ -7,7 +7,7 @@
 //
 
 ////Base implementation of a TableStateManager. Handles all operations with generators and sections.
-public class ManualTableStateManager: BaseTableStateManager {
+public class ManualTableManager: BaseTableManager {
 
     // MARK: - State Management Methods
 
@@ -345,7 +345,7 @@ public class ManualTableStateManager: BaseTableStateManager {
 
 // MARK: - Private
 
-private extension ManualTableStateManager {
+private extension ManualTableManager {
 
     // MARK: - Private methods
 

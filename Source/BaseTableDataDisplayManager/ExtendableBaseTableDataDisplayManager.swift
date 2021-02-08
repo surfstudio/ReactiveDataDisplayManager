@@ -9,6 +9,7 @@
 import UIKit
 
 /// Contains extension of BaseTableDataDisplayManager for expand and collapse section headers.
+@available(*, deprecated, message: "Use any BaseTableManager with custom BaseTableDelegate instead")
 open class ExtendableBaseTableDataDisplayManager: BaseTableDataDisplayManager {
 
     open override func numberOfSections(in tableView: UITableView) -> Int {

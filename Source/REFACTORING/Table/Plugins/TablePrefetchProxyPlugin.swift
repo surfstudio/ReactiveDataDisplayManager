@@ -16,7 +16,7 @@ public class TablePrefetchProxyPlugin: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - PluginAction
 
-    public override func process(event: PrefetchEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: PrefetchEvent, with manager: BaseTableManager?) {
         switch event {
         case .prefetch(let indexPaths):
             prefetchEvent.invoke(with: indexPaths)

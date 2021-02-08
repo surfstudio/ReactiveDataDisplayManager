@@ -1,5 +1,5 @@
 ////
-////  BaseTableStateManager.swift
+////  BaseTableManager.swift
 ////  ReactiveDataDisplayManager
 ////
 ////  Created by Aleksandr Smirnov on 02.11.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class BaseTableStateManager: DataDisplayManager {
+open class BaseTableManager: DataDisplayManager {
 
     public typealias CollectionType = UITableView
     public typealias CellGeneratorType = TableCellGenerator
@@ -108,7 +108,7 @@ open class BaseTableStateManager: DataDisplayManager {
 
 // MARK: - Helper
 
-extension BaseTableStateManager {
+extension BaseTableManager {
 
     func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in generators.enumerated() {

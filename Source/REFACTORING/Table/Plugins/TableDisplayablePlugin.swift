@@ -8,15 +8,15 @@
 
 public class TableDisplayablePlugin: BaseTablePlugin<TableEvent> {
 
-    private func getDisplayableFlowCell(from manager: BaseTableStateManager?, at indexPath: IndexPath) -> DisplayableFlow? {
+    private func getDisplayableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> DisplayableFlow? {
         manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? DisplayableFlow
     }
 
-    private func getDisplayableFlowHeader(from manager: BaseTableStateManager?, at section: Int) -> DisplayableFlow? {
+    private func getDisplayableFlowHeader(from manager: BaseTableManager?, at section: Int) -> DisplayableFlow? {
         manager?.sections[safe: section] as? DisplayableFlow
     }
 
-    public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
         case .willDisplayCell(let indexPath):
             let displayable = getDisplayableFlowCell(from: manager, at: indexPath)
