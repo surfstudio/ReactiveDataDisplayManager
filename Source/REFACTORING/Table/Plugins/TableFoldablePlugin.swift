@@ -8,6 +8,8 @@
 
 public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
 
+    public override init() {}
+
     public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
 
         switch event {

@@ -9,6 +9,8 @@
 // Adds support for Selectable item triggering
 public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
+    public override init() {}
+
     public override func process(event: TableEvent, with manager: BaseTableStateManager?) {
 
         switch event {

@@ -12,6 +12,6 @@
 public protocol PluginAction {
     associatedtype Event
     associatedtype Manager
-
+    
     func process(event: Event, with manager: Manager?)
 }
