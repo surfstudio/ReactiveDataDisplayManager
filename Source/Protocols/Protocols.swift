@@ -251,11 +251,11 @@ public extension StackCellGenerator where Self: ViewBuilder {
     }
 }
 
-public protocol GravityTableCellGenerator: TableCellGenerator {
-    var heaviness: Int { get set }
-}
+public typealias GravityTableCellGenerator = TableCellGenerator & Gravity
 
-open class GravityTableHeaderGenerator: TableHeaderGenerator {
+open class GravityTableHeaderGenerator: TableHeaderGenerator, Gravity {
+    open var heaviness: Int = .zero
+
     open func getHeaviness() -> Int {
         preconditionFailure("\(#function) must be overriden in child")
     }

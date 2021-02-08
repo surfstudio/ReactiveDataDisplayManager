@@ -16,17 +16,19 @@ final class MainTableViewController: UIViewController {
     fileprivate enum SegueIdentifier: String {
         case prefetchingTable
         case imageTable
+        case foldableCellTable
     }
 
     // MARK: - Constants
-    
+
     private enum Constants {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
             ("gallery without prefetching", .imageTable),
-            ("gallery with prefetching", .prefetchingTable)
+            ("gallery with prefetching", .prefetchingTable),
+            ("table with foldable cell", .foldableCellTable)
         ]
     }
-    
+
     // MARK: - IBOutlets
 
     @IBOutlet private weak var tableView: UITableView!
