@@ -41,7 +41,7 @@ private extension TableHeaderVisiblePlugin {
 
     func willDisplayHeader(with section: Int, manager: BaseTableStateManager?) {
         guard
-            let pathsForVisibleRows = manager?.tableView?.indexPathsForVisibleRows,
+            let pathsForVisibleRows = manager?.view?.indexPathsForVisibleRows,
             let firstPath = pathsForVisibleRows.first
         else { return }
 
@@ -52,7 +52,7 @@ private extension TableHeaderVisiblePlugin {
 
     func didEndDisplayHeader(with section: Int, manager: BaseTableStateManager?) {
         guard
-            let pathsForVisibleRows = manager?.tableView?.indexPathsForVisibleRows,
+            let pathsForVisibleRows = manager?.view?.indexPathsForVisibleRows,
             let lastPath = pathsForVisibleRows.last
         else { return }
 

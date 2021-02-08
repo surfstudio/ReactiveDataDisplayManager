@@ -27,7 +27,7 @@ public class TableScrollViewDelegateProxyPlugin: BaseTablePlugin<ScrollEvent> {
     // MARK: - PluginAction
 
     public override func process(event: ScrollEvent, with manager: BaseTableStateManager?) {
-        guard let tableView = manager?.tableView else { return }
+        guard let tableView = manager?.view else { return }
 
         switch event {
         case .didScroll:

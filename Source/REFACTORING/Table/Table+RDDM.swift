@@ -96,7 +96,7 @@ public class TableBuilder<T: BaseTableStateManager> {
             view.prefetchDataSource = dataSource
         }
 
-        stateManager.tableView = view
+        stateManager.view = view
         stateManager.delegate = delegate
         stateManager.dataSource = dataSource
         return stateManager

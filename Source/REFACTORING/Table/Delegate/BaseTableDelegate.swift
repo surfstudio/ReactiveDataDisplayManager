@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol TableStateManager: AbstractStateManager {
+public protocol TableStateManager: DataDisplayManager {
     func remove(_ generator: CellGeneratorType,
                 with animation: UITableView.RowAnimation,
                 needScrollAt scrollPosition: UITableView.ScrollPosition?,
