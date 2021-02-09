@@ -204,7 +204,7 @@
         <!--Collection-->
         <scene sceneID="cQP-3e-Boa">
             <objects>
-                <viewController id="lyU-aU-2OK" customClass="CollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lyU-aU-2OK" customClass="CollectionListViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C5u-Ma-r1Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

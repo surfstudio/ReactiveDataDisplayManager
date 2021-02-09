@@ -7,10 +7,9 @@
 //
 
 import UIKit
-
-import UIKit
 import ReactiveDataDisplayManager
 
+@available(iOS 14.0, *)
 class CollectionListViewController: UIViewController {
 
     // MARK: - IBOutlets
@@ -22,17 +21,26 @@ class CollectionListViewController: UIViewController {
     private lazy var adapter = BaseCollectionDataDisplayManager(collection: collectionView)
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
 
+    private var appearance = UICollectionLayoutListConfiguration.Appearance.plain
+
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
         fillAdapter()
+
+        configureLayoutFlow()
+        updateBarButtonItem()
     }
 
-    // MARK: - Private methods
+}
 
-    /// This method is used to fill adapter
-    private func fillAdapter() {
+// MARK: - Private Methods
+
+@available(iOS 14.0, *)
+private extension CollectionListViewController {
+
+    func fillAdapter() {
         let header = TitleCollectionHeaderGenerator(title: "Header")
         adapter.addSectionHeaderGenerator(header)
         for title in titles {
@@ -49,6 +57,40 @@ class CollectionListViewController: UIViewController {
         adapter.forceRefill()
     }
 
-}
+    func configureLayoutFlow() {
+        let configuration = UICollectionLayoutListConfiguration(appearance: appearance)
+        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
+        collectionView.setCollectionViewLayout(layout, animated: false)
+    }
 
+    func updateBarButtonItem() {
+        var title: String? = nil
+        switch appearance {
+        case .plain: title = "Plain"
+        case .sidebarPlain: title = "Sidebar Plain"
+        case .sidebar: title = "Sidebar"
+        case .grouped: title = "Grouped"
+        case .insetGrouped: title = "Inset Grouped"
+        default: break
+        }
+
+        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeListAppearance))
+    }
+
+    @objc
+    private func changeListAppearance() {
+        switch appearance {
+        case .plain: appearance = .sidebarPlain
+        case .sidebarPlain: appearance = .sidebar
+        case .sidebar: appearance = .grouped
+        case .grouped:  appearance = .insetGrouped
+        case .insetGrouped: appearance = .plain
+        default: break
+        }
+
+        updateBarButtonItem()
+        configureLayoutFlow()
+    }
+
+}
 
