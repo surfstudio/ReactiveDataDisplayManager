@@ -40,7 +40,6 @@ final class GravityFoldingHeaderGenerator: GravityTableCellGenerator, GravityFol
 
 final class GravityCellGenerator: GravityTableCellGenerator {
 
-
     // MARK: - TableCellGenerator
 
     var heaviness = 11
