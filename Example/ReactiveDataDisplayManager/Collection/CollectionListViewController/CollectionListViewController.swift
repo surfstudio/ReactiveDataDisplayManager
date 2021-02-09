@@ -61,33 +61,52 @@ private extension CollectionListViewController {
     }
 
     func updateBarButtonItem() {
-        var title: String? = nil
-        switch appearance {
-        case .plain: title = "Plain"
-        case .sidebarPlain: title = "Sidebar Plain"
-        case .sidebar: title = "Sidebar"
-        case .grouped: title = "Grouped"
-        case .insetGrouped: title = "Inset Grouped"
-        default: break
-        }
-
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeListAppearance))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: appearance.title, style: .plain, target: self, action: #selector(changeListAppearance))
     }
 
     @objc
-    private func changeListAppearance() {
-        switch appearance {
-        case .plain: appearance = .sidebarPlain
-        case .sidebarPlain: appearance = .sidebar
-        case .sidebar: appearance = .grouped
-        case .grouped:  appearance = .insetGrouped
-        case .insetGrouped: appearance = .plain
-        default: break
-        }
+    func changeListAppearance() {
+        appearance = appearance.next
 
         updateBarButtonItem()
         configureLayoutFlow()
     }
 
+}
+
+// MARK: - Appearance
+
+@available(iOS 14.0, *)
+private extension UICollectionLayoutListConfiguration.Appearance {
+
+    var title: String {
+        switch self {
+        case .plain:
+            return "Plain"
+        case .sidebarPlain:
+            return "Sidebar Plain"
+        case .sidebar:
+            return "Sidebar"
+        case .grouped:
+            return "Grouped"
+        case .insetGrouped:
+            return "Inset Grouped"
+        }
+    }
+
+    var next: UICollectionLayoutListConfiguration.Appearance {
+        switch self {
+        case .plain:
+            return .sidebarPlain
+        case .sidebarPlain:
+            return .sidebar
+        case .sidebar:
+            return .grouped
+        case .grouped:
+            return .insetGrouped
+        case .insetGrouped:
+            return .plain
+        }
+    }
 }
 
