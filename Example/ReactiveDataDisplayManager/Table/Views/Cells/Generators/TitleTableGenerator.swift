@@ -44,4 +44,5 @@ extension TitleTableGenerator: ViewBuilder {
     func build(view: TitleTableViewCell) {
         view.fill(with: model)
     }
+
 }
