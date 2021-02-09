@@ -60,14 +60,14 @@ private extension MainCollectionViewController {
                 guard let self = self else { return }
 
                 switch model.segueId {
-                case .baseCollection:
-                    self.performSegue(withIdentifier: model.segueId.rawValue, sender: self.tableView)
                 case .listAppearances:
                     if #available(iOS 14.0, *) {
                         self.performSegue(withIdentifier: model.segueId.rawValue, sender: self.tableView)
                     } else {
                         self.showAlert("Available from 14 IOS")
                     }
+                default:
+                    self.performSegue(withIdentifier: model.segueId.rawValue, sender: self.tableView)
                 }
             }
 
