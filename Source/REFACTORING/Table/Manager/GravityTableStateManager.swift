@@ -67,7 +67,7 @@ open class GravityTableStateManager: BaseTableStateManager {
 
     open override func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
         guard let table = tableView else { return }
-        generators.forEach {
+        generators.reversed().forEach {
             $0.registerCell(in: table)
             addCellGenerator($0, after: after)
         }
