@@ -9,6 +9,37 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Diffable Table View Controller-->
+        <scene sceneID="F4X-k0-NMY">
+            <objects>
+                <viewController id="16i-RQ-fbT" customClass="DiffableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eXV-VK-YbN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iG8-pi-esT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eza-kD-Shk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eza-kD-Shk" firstAttribute="bottom" secondItem="iG8-pi-esT" secondAttribute="bottom" id="Jdx-zx-A6p"/>
+                            <constraint firstItem="iG8-pi-esT" firstAttribute="leading" secondItem="eza-kD-Shk" secondAttribute="leading" id="LTl-fQ-riO"/>
+                            <constraint firstItem="eza-kD-Shk" firstAttribute="trailing" secondItem="iG8-pi-esT" secondAttribute="trailing" id="m7S-BG-kQC"/>
+                            <constraint firstItem="iG8-pi-esT" firstAttribute="top" secondItem="eza-kD-Shk" secondAttribute="top" id="u4Z-ci-LZB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="96V-cD-ciu"/>
+                    <connections>
+                        <outlet property="tableView" destination="iG8-pi-esT" id="rsB-1G-EwL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-ez-GUy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="246" y="-1846"/>
+        </scene>
         <!--Movable Table View Controller-->
         <scene sceneID="rqj-Fd-t0M">
             <objects>
@@ -198,6 +229,7 @@
                         <segue destination="3d6-cJ-r4V" kind="show" identifier="alphabetizeSectionsTable" id="4ij-Od-GU8"/>
                         <segue destination="5Ed-1O-hbB" kind="show" identifier="sectionTitlesTable" id="I64-ri-eG8"/>
                         <segue destination="bkM-th-DfT" kind="show" identifier="swipeableTable" id="M3i-W7-3jk"/>
+                        <segue destination="16i-RQ-fbT" kind="show" identifier="diffableTable" id="jVz-x7-sBa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

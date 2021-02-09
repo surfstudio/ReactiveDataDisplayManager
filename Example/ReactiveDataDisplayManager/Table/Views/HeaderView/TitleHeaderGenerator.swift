@@ -8,8 +8,8 @@
 
 import ReactiveDataDisplayManager
 
-final class TitleHeaderGenerator: TableHeaderGenerator {
-    
+final class TitleHeaderGenerator: TableHeaderGenerator, Diffable {
+
     // MARK: - Constants
     
     private enum Constants {
@@ -25,6 +25,12 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
 
     init(model: String) {
         self.model = model
+    }
+
+    // MARK: - Diffable
+
+    var item: DiffableItem {
+        return DiffableItem(identifier: model)
     }
 
     // MARK: - TableHeaderGenerator

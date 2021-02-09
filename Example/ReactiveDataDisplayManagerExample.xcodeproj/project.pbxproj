@@ -18,6 +18,8 @@
 		6D2AD36625D3A6080077900F /* SectionTitleHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2AD36525D3A6080077900F /* SectionTitleHeaderGenerator.swift */; };
 		6D3B9A5F25D5AE4D00F6E05C /* SwipeableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B9A5E25D5AE4D00F6E05C /* SwipeableTableViewController.swift */; };
 		6D3B9AEC25D6903000F6E05C /* SwipeActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B9AEB25D6903000F6E05C /* SwipeActionProvider.swift */; };
+		6D463CC125D1186100A1E61D /* DiffableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D463CC025D1186100A1E61D /* DiffableTableViewController.swift */; };
+		6D463CC825D1382B00A1E61D /* DiffableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D463CC725D1382B00A1E61D /* DiffableCellGenerator.swift */; };
 		6D4B322F25C980BC00FC7979 /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */; };
 		6D4B325925CA99C100FC7979 /* FoldableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B325825CA99C100FC7979 /* FoldableTableViewController.swift */; };
 		6D4B326025CA9A3500FC7979 /* FoldableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */; };
@@ -103,6 +105,8 @@
 		6D2AD36525D3A6080077900F /* SectionTitleHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleHeaderGenerator.swift; sourceTree = "<group>"; };
 		6D3B9A5E25D5AE4D00F6E05C /* SwipeableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableTableViewController.swift; sourceTree = "<group>"; };
 		6D3B9AEB25D6903000F6E05C /* SwipeActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionProvider.swift; sourceTree = "<group>"; };
+		6D463CC025D1186100A1E61D /* DiffableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableTableViewController.swift; sourceTree = "<group>"; };
+		6D463CC725D1382B00A1E61D /* DiffableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableCellGenerator.swift; sourceTree = "<group>"; };
 		6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewController.swift; sourceTree = "<group>"; };
 		6D4B325825CA99C100FC7979 /* FoldableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableTableViewController.swift; sourceTree = "<group>"; };
 		6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableCellGenerator.swift; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */,
 				6DB6B0F825CBB4FE008951D2 /* MovableCellGenerator.swift */,
 				6DA4BF8425DA313B00C23D85 /* SwipeableTableGenerator.swift */,
+				6D463CC725D1382B00A1E61D /* DiffableCellGenerator.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -292,6 +297,12 @@
 				6D3B9AEB25D6903000F6E05C /* SwipeActionProvider.swift */,
 			);
 			path = SwipeableTableViewController;
+		6D463CC425D1186900A1E61D /* DiffableTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D463CC025D1186100A1E61D /* DiffableTableViewController.swift */,
+			);
+			path = DiffableTableViewController;
 			sourceTree = "<group>";
 		};
 		6D4B323225C986F000FC7979 /* ImageTableViewController */ = {
@@ -486,6 +497,7 @@
 				6D2AD36F25D3B9AB0077900F /* AlphabeticalTableViewController */,
 				6D2AD35C25D398FC0077900F /* SectionTitleTableViewController */,
 				6D3B9A6225D5B07D00F6E05C /* SwipeableTableViewController */,
+				6D463CC425D1186900A1E61D /* DiffableTableViewController */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -863,6 +875,7 @@
 				6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */,
 				89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */,
 				DD31B12325DCEA1C00A266A7 /* FoldableCollectionViewController.swift in Sources */,
+				6D463CC825D1382B00A1E61D /* DiffableCellGenerator.swift in Sources */,
 				6D27964325C85DFF0085B845 /* PrefetchingTableViewController.swift in Sources */,
 				89FD21B7238C1445008D7ED3 /* TitleCollectionReusableView.swift in Sources */,
 				6D3B9A5F25D5AE4D00F6E05C /* SwipeableTableViewController.swift in Sources */,
@@ -896,6 +909,7 @@
 				6DB6B0FD25CBB626008951D2 /* MovableTableViewController.swift in Sources */,
 				6D4B326025CA9A3500FC7979 /* FoldableCellGenerator.swift in Sources */,
 				6DB6B0F925CBB4FE008951D2 /* MovableCellGenerator.swift in Sources */,
+				6D463CC125D1186100A1E61D /* DiffableTableViewController.swift in Sources */,
 				8B1D790B201C957700F184BD /* TitleCollectionViewCell.swift in Sources */,
 				896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */,
 				DD31B12E25DCEB8900A266A7 /* FoldableCollectionViewCell.swift in Sources */,
