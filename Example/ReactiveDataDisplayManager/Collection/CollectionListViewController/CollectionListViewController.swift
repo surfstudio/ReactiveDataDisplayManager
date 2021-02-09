@@ -19,7 +19,7 @@ class CollectionListViewController: UIViewController {
     // MARK: - Properties
 
     private lazy var adapter = BaseCollectionDataDisplayManager(collection: collectionView)
-    private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
+    private lazy var titles: [String] = ["Item 1", "Item 2", "Item 3", "Item 4"]
 
     private var appearance = UICollectionLayoutListConfiguration.Appearance.plain
 
@@ -41,11 +41,11 @@ class CollectionListViewController: UIViewController {
 private extension CollectionListViewController {
 
     func fillAdapter() {
-        let header = TitleCollectionHeaderGenerator(title: "Header")
+        let header = HeaderCollectionListGenerator(title: "Section header")
         adapter.addSectionHeaderGenerator(header)
 
         for title in titles {
-            let generator = TitleCollectionGenerator(model: title)
+            let generator = TitleCollectionListGenerator(model: title)
             generator.didSelectEvent += { debugPrint("\(title) selected") }
             adapter.addCellGenerator(generator)
         }
@@ -54,7 +54,8 @@ private extension CollectionListViewController {
     }
 
     func configureLayoutFlow() {
-        let configuration = UICollectionLayoutListConfiguration(appearance: appearance)
+        var configuration = UICollectionLayoutListConfiguration(appearance: appearance)
+        configuration.headerMode = .supplementary
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         collectionView.setCollectionViewLayout(layout, animated: false)
     }

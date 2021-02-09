@@ -46,6 +46,12 @@
 		8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */; };
 		DD6AEDFE25D287F90059E312 /* CollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */; };
 		DD6AEE1725D28EEF0059E312 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */; };
+		DDB8CC6125D2A66D00439FB9 /* TitleCollectionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC6025D2A66D00439FB9 /* TitleCollectionListCell.swift */; };
+		DDB8CC6525D2A67E00439FB9 /* TitleCollectionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDB8CC6425D2A67E00439FB9 /* TitleCollectionListCell.xib */; };
+		DDB8CC6925D2A69500439FB9 /* HeaderCollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC6825D2A69500439FB9 /* HeaderCollectionListView.swift */; };
+		DDB8CC6D25D2A69F00439FB9 /* HeaderCollectionListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDB8CC6C25D2A69F00439FB9 /* HeaderCollectionListView.xib */; };
+		DDB8CC7125D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */; };
+		DDB8CC7525D2A6CB00439FB9 /* TitleCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */; };
 		F6FD540A5EAE2B1D7DACD20A /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +113,12 @@
 		BD17C0A50AD2BCB785CEF383 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
 		DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListViewController.swift; sourceTree = "<group>"; };
 		DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
+		DDB8CC6025D2A66D00439FB9 /* TitleCollectionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionListCell.swift; sourceTree = "<group>"; };
+		DDB8CC6425D2A67E00439FB9 /* TitleCollectionListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCollectionListCell.xib; sourceTree = "<group>"; };
+		DDB8CC6825D2A69500439FB9 /* HeaderCollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionListView.swift; sourceTree = "<group>"; };
+		DDB8CC6C25D2A69F00439FB9 /* HeaderCollectionListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionListView.xib; sourceTree = "<group>"; };
+		DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionListGenerator.swift; sourceTree = "<group>"; };
+		DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionListGenerator.swift; sourceTree = "<group>"; };
 		E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE4EAF4DB2F7F2042259E38D /* Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -308,7 +320,6 @@
 		8B1D7908201C8BE100F184BD /* Collection */ = {
 			isa = PBXGroup;
 			children = (
-				DD6AEE0625D288980059E312 /* Cells */,
 				DD6AEE1525D28EB20059E312 /* MainCollectionViewController */,
 				DD6AEE0225D2882B0059E312 /* CollectionViewController */,
 				DD6AEE0125D288050059E312 /* CollectionListViewController */,
@@ -360,6 +371,7 @@
 		DD6AEE0125D288050059E312 /* CollectionListViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DDB8CC5C25D2A63000439FB9 /* Cells */,
 				DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */,
 			);
 			path = CollectionListViewController;
@@ -368,6 +380,7 @@
 		DD6AEE0225D2882B0059E312 /* CollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DD6AEE0625D288980059E312 /* Cells */,
 				8B1D7906201C8BDA00F184BD /* CollectionViewController.swift */,
 			);
 			path = CollectionViewController;
@@ -416,6 +429,43 @@
 				DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */,
 			);
 			path = MainCollectionViewController;
+			sourceTree = "<group>";
+		};
+		DDB8CC5C25D2A63000439FB9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DDB8CC5D25D2A63700439FB9 /* Generators */,
+				DDB8CC5F25D2A64C00439FB9 /* HeaderCell */,
+				DDB8CC5E25D2A63E00439FB9 /* TitleCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		DDB8CC5D25D2A63700439FB9 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */,
+				DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		DDB8CC5E25D2A63E00439FB9 /* TitleCell */ = {
+			isa = PBXGroup;
+			children = (
+				DDB8CC6025D2A66D00439FB9 /* TitleCollectionListCell.swift */,
+				DDB8CC6425D2A67E00439FB9 /* TitleCollectionListCell.xib */,
+			);
+			path = TitleCell;
+			sourceTree = "<group>";
+		};
+		DDB8CC5F25D2A64C00439FB9 /* HeaderCell */ = {
+			isa = PBXGroup;
+			children = (
+				DDB8CC6825D2A69500439FB9 /* HeaderCollectionListView.swift */,
+				DDB8CC6C25D2A69F00439FB9 /* HeaderCollectionListView.xib */,
+			);
+			path = HeaderCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -504,6 +554,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDB8CC6D25D2A69F00439FB9 /* HeaderCollectionListView.xib in Resources */,
 				6D27965025C85EA10085B845 /* ImageTableViewCell.xib in Resources */,
 				8B1D790C201C957700F184BD /* TitleCollectionViewCell.xib in Resources */,
 				8B04A1D81FE9020800407BED /* TitleTableViewCell.xib in Resources */,
@@ -513,6 +564,7 @@
 				6D568AB725CBE60300D38685 /* HeaderView.xib in Resources */,
 				6D4B326825CA9A4C00FC7979 /* FoldableTableViewCell.xib in Resources */,
 				8B85E2E31FE84F540080984A /* Main.storyboard in Resources */,
+				DDB8CC6525D2A67E00439FB9 /* TitleCollectionListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,8 +664,10 @@
 				6DB6B0F925CBB4FE008951D2 /* MovableCellGenerator.swift in Sources */,
 				8B1D790B201C957700F184BD /* TitleCollectionViewCell.swift in Sources */,
 				896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */,
+				DDB8CC6925D2A69500439FB9 /* HeaderCollectionListView.swift in Sources */,
 				8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */,
 				8B1D7907201C8BDA00F184BD /* CollectionViewController.swift in Sources */,
+				DDB8CC6125D2A66D00439FB9 /* TitleCollectionListCell.swift in Sources */,
 				6D27964A25C85E680085B845 /* ImageTableGenerator.swift in Sources */,
 				6D568ABC25CBEBBC00D38685 /* HeaderView.swift in Sources */,
 			);
