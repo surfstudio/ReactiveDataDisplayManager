@@ -7,9 +7,11 @@
 //
 
 // Adds support for Selectable item triggering
-public class TableSelectablePlugin: PluginAction<TableEvent, BaseTableStateManager> {
+public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
-    override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override init() {}
+
+    public override func process(event: TableEvent, with manager: BaseTableManager?) {
 
         switch event {
         case .didSelect(let indexPath):
@@ -19,7 +21,7 @@ public class TableSelectablePlugin: PluginAction<TableEvent, BaseTableStateManag
             selectable.didSelectEvent.invoke(with: ())
 
             if selectable.isNeedDeselect {
-                manager?.tableView?.deselectRow(at: indexPath, animated: true)
+                manager?.view?.deselectRow(at: indexPath, animated: true)
             }
         default:
             break

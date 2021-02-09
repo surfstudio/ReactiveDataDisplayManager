@@ -10,34 +10,44 @@ extension UITableView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UITableView {
 
-    var baseBuilder: TableBuilder<ManualTableStateManager> {
-        TableBuilder(view: base, stateManager: ManualTableStateManager())
+    var baseBuilder: TableBuilder<BaseTableManager> {
+        TableBuilder(view: base, manager: BaseTableManager())
     }
 
-    var gravityBuilder: TableBuilder<GravityTableStateManager> {
-        TableBuilder(view: base, stateManager: GravityTableStateManager())
+    var manualBuilder: TableBuilder<ManualTableManager> {
+        TableBuilder(view: base, manager: ManualTableManager())
+    }
+
+    var gravityBuilder: TableBuilder<GravityTableManager> {
+        TableBuilder(view: base, manager: GravityTableManager())
     }
 
 }
 
-public class TableBuilder<T: BaseTableStateManager> {
+public class TableBuilder<T: BaseTableManager> {
+
+    // MARK: - Aliases
+
+    typealias TablePluginsCollection = PluginCollection<BaseTablePlugin<TableEvent>>
+    typealias ScrollPluginsCollection = PluginCollection<BaseTablePlugin<ScrollEvent>>
+    typealias PrefetchPluginsCollection = PluginCollection<BaseTablePlugin<PrefetchEvent>>
 
     // MARK: - Properties
 
     let view: UITableView
-    let stateManager: T
+    let manager: T
     var delegate: BaseTableDelegate
     var dataSource: BaseTableDataSource
 
-    var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
-    var scrollPlugins = PluginCollection<ScrollEvent, BaseTableStateManager>()
-    var prefetchPlugins = PluginCollection<PrefetchEvent, BaseTableStateManager>()
+    var tablePlugins = TablePluginsCollection()
+    var scrollPlugins = ScrollPluginsCollection()
+    var prefetchPlugins = PrefetchPluginsCollection()
 
     // MARK: - Initialization
 
-    init(view: UITableView, stateManager: T) {
+    init(view: UITableView, manager: T) {
         self.view = view
-        self.stateManager = stateManager
+        self.manager = manager
         delegate = BaseTableDelegate()
         dataSource = BaseTableDataSource()
     }
@@ -57,33 +67,34 @@ public class TableBuilder<T: BaseTableStateManager> {
     }
 
     /// Add plugin functionality based on UITableViewDelegate events
-    public func add(plugin: PluginAction<TableEvent, BaseTableStateManager>) -> TableBuilder<T> {
+    public func add(plugin: BaseTablePlugin<TableEvent>) -> TableBuilder<T> {
         tablePlugins.add(plugin)
         return self
     }
 
     /// Add plugin functionality based on UIScrollViewDelegate events
-    public func add(plugin: PluginAction<ScrollEvent, BaseTableStateManager>) -> TableBuilder<T> {
+    public func add(plugin: BaseTablePlugin<ScrollEvent>) -> TableBuilder<T> {
         scrollPlugins.add(plugin)
         return self
     }
 
     /// Add plugin functionality based on UITableViewDataSourcePrefetching events
     @available(iOS 10.0, *)
-    public func add(plugin: PluginAction<PrefetchEvent, BaseTableStateManager>) -> TableBuilder<T> {
+    public func add(plugin: BaseTablePlugin<PrefetchEvent>) -> TableBuilder<T> {
         prefetchPlugins.add(plugin)
         return self
     }
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
-        delegate.stateManager = stateManager
+        delegate.manager = manager
         delegate.tablePlugins = tablePlugins
         delegate.scrollPlugins = scrollPlugins
         view.delegate = delegate
 
-        dataSource.provider = stateManager
+        dataSource.provider = manager
         dataSource.tablePlugins = tablePlugins
+
         view.dataSource = dataSource
 
         if #available(iOS 10.0, *) {
@@ -91,10 +102,10 @@ public class TableBuilder<T: BaseTableStateManager> {
             view.prefetchDataSource = dataSource
         }
 
-        stateManager.tableView = view
-        stateManager.delegate = delegate
-        stateManager.dataSource = dataSource
-        return stateManager
+        manager.view = view
+        manager.delegate = delegate
+        manager.dataSource = dataSource
+        return manager
     }
 
 }

@@ -1,5 +1,5 @@
 //
-//  ManualTableStateManager.swift
+//  ManualTableManager.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Никита Коробейников on 25.01.2021.
@@ -7,7 +7,7 @@
 //
 
 ////Base implementation of a TableStateManager. Handles all operations with generators and sections.
-public class ManualTableStateManager: BaseTableStateManager {
+public class ManualTableManager: BaseTableManager {
 
     // MARK: - State Management Methods
 
@@ -17,7 +17,7 @@ public class ManualTableStateManager: BaseTableStateManager {
     ///   - generator: Generator for new section TableHeaderGenerator.
     ///   - cells: Generators for this section.
     open func addSection(TableHeaderGenerator generator: TableHeaderGenerator, cells: [TableCellGenerator]) {
-        guard let table = tableView else { return }
+        guard let table = view else { return }
         cells.forEach { $0.registerCell(in: table) }
         self.sections.append(generator)
         self.generators.append(cells)
@@ -77,7 +77,7 @@ public class ManualTableStateManager: BaseTableStateManager {
         guard let index = sections.firstIndex(where: { (headerGenerator) -> Bool in
             return headerGenerator === sectionHeaderGenerator
         }) else { return }
-        self.tableView?.reloadSections(IndexSet(integer: index), with: animation)
+        self.view?.reloadSections(IndexSet(integer: index), with: animation)
     }
 
     /// Inserts new generators to provided TableHeaderGenerator generator.
@@ -86,7 +86,7 @@ public class ManualTableStateManager: BaseTableStateManager {
     ///   - generators: Generators to insert
     ///   - TableHeaderGenerator: TableHeaderGenerator generator in which you want to insert.
     open func addCellGenerators(_ generators: [TableCellGenerator], toHeader TableHeaderGenerator: TableHeaderGenerator) {
-        guard let table = self.tableView else { return }
+        guard let table = self.view else { return }
         generators.forEach { $0.registerCell(in: table) }
 
         if self.generators.count != self.sections.count || sections.isEmpty {
@@ -308,7 +308,7 @@ public class ManualTableStateManager: BaseTableStateManager {
                       on newGenerator: TableCellGenerator,
                       removeAnimation: UITableView.RowAnimation = .automatic,
                       insertAnimation: UITableView.RowAnimation = .automatic) {
-        guard let index = self.findGenerator(oldGenerator), let table = self.tableView else { return }
+        guard let index = self.findGenerator(oldGenerator), let table = self.view else { return }
 
         table.beginUpdates()
         self.generators[index.sectionIndex].remove(at: index.generatorIndex)
@@ -338,14 +338,14 @@ public class ManualTableStateManager: BaseTableStateManager {
         self.generators[secondIndex.sectionIndex].insert(firstGenerator, at: secondIndex.generatorIndex)
         self.generators[firstIndex.sectionIndex].insert(secondGenerator, at: firstIndex.generatorIndex)
 
-        self.tableView?.reloadData()
+        self.view?.reloadData()
     }
 
 }
 
 // MARK: - Private
 
-private extension ManualTableStateManager {
+private extension ManualTableManager {
 
     // MARK: - Private methods
 
@@ -355,12 +355,12 @@ private extension ManualTableStateManager {
         let index = min(max(index, 0), self.sections.count)
         self.sections.insert(headGenerator, at: index)
         self.generators.insert([], at: index)
-        self.tableView?.insertSections([index], with: animation)
+        self.view?.insertSections([index], with: animation)
     }
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
                 with animation: UITableView.RowAnimation = .automatic) {
-        guard let table = self.tableView else {
+        guard let table = self.view else {
             return
         }
 

@@ -27,7 +27,7 @@ open class BaseCollectionDataDisplayManager: NSObject {
 
     // MARK: - Readonly properties
 
-    public private(set) weak var collectionView: UICollectionView?
+    public private(set) weak var view: UICollectionView?
     public private(set) var cellGenerators: [[CollectionCellGenerator]]
     public private(set) var sectionHeaderGenerators: [CollectionHeaderGenerator]
 
@@ -37,9 +37,9 @@ open class BaseCollectionDataDisplayManager: NSObject {
         self.cellGenerators = [[CollectionCellGenerator]]()
         self.sectionHeaderGenerators = [CollectionHeaderGenerator]()
         super.init()
-        self.collectionView = collection
-        self.collectionView?.delegate = self
-        self.collectionView?.dataSource = self
+        self.view = collection
+        self.view?.delegate = self
+        self.view?.dataSource = self
     }
 }
 
@@ -47,7 +47,7 @@ open class BaseCollectionDataDisplayManager: NSObject {
 
 extension BaseCollectionDataDisplayManager: DataDisplayManager {
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
-        guard let collection = self.collectionView else { return }
+        guard let collection = self.view else { return }
         generator.registerCell(in: collection)
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([CollectionCellGenerator]())
@@ -67,7 +67,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
-        guard let collection = self.collectionView else { return }
+        guard let collection = self.view else { return }
         generators.forEach { $0.registerCell(in: collection) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
@@ -82,7 +82,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     public func update(generators: [CollectionCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        self.collectionView?.reloadItems(at: indexPaths)
+        self.view?.reloadItems(at: indexPaths)
     }
 
     public func clearCellGenerators() {
@@ -90,7 +90,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     }
 
     public func forceRefill() {
-        self.collectionView?.reloadData()
+        self.view?.reloadData()
     }
 
     public func forceRefill(completion: @escaping (() -> Void)) {
@@ -107,7 +107,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
 
 extension BaseCollectionDataDisplayManager: HeaderDataDisplayManager {
     public func addSectionHeaderGenerator(_ generator: CollectionHeaderGenerator) {
-        guard let collection = self.collectionView else { return }
+        guard let collection = self.view else { return }
         generator.registerHeader(in: collection)
         self.sectionHeaderGenerators.append(generator)
     }
@@ -117,7 +117,7 @@ extension BaseCollectionDataDisplayManager: HeaderDataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toHeader header: CollectionHeaderGenerator) {
-        guard let collection = self.collectionView else { return }
+        guard let collection = self.view else { return }
         generators.forEach { $0.registerCell(in: collection) }
 
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
@@ -194,7 +194,7 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDelegateFlowLayout {
 
 extension BaseCollectionDataDisplayManager: UICollectionViewDelegate {
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let collection = self.collectionView else { return }
+        guard let collection = self.view else { return }
         self.scrollEvent.invoke(with: collection)
     }
 

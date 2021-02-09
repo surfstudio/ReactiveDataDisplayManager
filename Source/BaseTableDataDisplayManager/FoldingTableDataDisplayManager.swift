@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(*, deprecated, message: "Use any BaseTableManager with TableFoldablePlugin instead")
 open class FoldingTableDataDisplayManager: BaseTableDataDisplayManager {
     override open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let selectable = cellGenerators[indexPath.section][indexPath.row] as? SelectableItem {

@@ -15,7 +15,7 @@ public protocol TableGeneratorsProvider: AnyObject {
     var sections: [TableHeaderGenerator] { get set }
 }
 
-extension BaseTableStateManager: TableGeneratorsProvider { }
+extension BaseTableManager: TableGeneratorsProvider { }
 
 
 // Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
@@ -24,8 +24,9 @@ open class BaseTableDataSource: NSObject {
     // MARK: - Properties
 
     weak var provider: TableGeneratorsProvider?
-    var prefetchPlugins = PluginCollection<PrefetchEvent, BaseTableStateManager>()
-    var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
+
+    var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
+    var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
 
 }
 
@@ -54,7 +55,7 @@ extension BaseTableDataSource: TableDataSource {
     }
 
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableStateManager)
+        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
     }
 
     open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -66,11 +67,11 @@ extension BaseTableDataSource: TableDataSource {
 extension BaseTableDataSource: UITableViewDataSourcePrefetching {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseTableStateManager)
+        prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseTableManager)
     }
 
     open func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? BaseTableStateManager)
+        prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? BaseTableManager)
     }
 
 }
