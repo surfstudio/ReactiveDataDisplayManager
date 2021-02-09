@@ -44,14 +44,14 @@
 		8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E61FE84F540080984A /* LaunchScreen.storyboard */; };
 		8B85E2F31FE84F540080984A /* ReactiveDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2F21FE84F540080984A /* ReactiveDataDisplayManagerTests.swift */; };
 		8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */; };
-		DD6AEDFE25D287F90059E312 /* CollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */; };
+		DD67C1FE25D2B49100A1C149 /* CollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */; };
+		DD67C20125D2B4A600A1C149 /* HeaderCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */; };
+		DD67C20425D2B4A800A1C149 /* TitleCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */; };
 		DD6AEE1725D28EEF0059E312 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */; };
 		DDB8CC6125D2A66D00439FB9 /* TitleCollectionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC6025D2A66D00439FB9 /* TitleCollectionListCell.swift */; };
 		DDB8CC6525D2A67E00439FB9 /* TitleCollectionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDB8CC6425D2A67E00439FB9 /* TitleCollectionListCell.xib */; };
 		DDB8CC6925D2A69500439FB9 /* HeaderCollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC6825D2A69500439FB9 /* HeaderCollectionListView.swift */; };
 		DDB8CC6D25D2A69F00439FB9 /* HeaderCollectionListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDB8CC6C25D2A69F00439FB9 /* HeaderCollectionListView.xib */; };
-		DDB8CC7125D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */; };
-		DDB8CC7525D2A6CB00439FB9 /* TitleCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */; };
 		F6FD540A5EAE2B1D7DACD20A /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -641,11 +641,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD67C1FE25D2B49100A1C149 /* CollectionListViewController.swift in Sources */,
 				6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */,
 				89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */,
 				6D27964325C85DFF0085B845 /* PrefetchingTableViewController.swift in Sources */,
 				89FD21B7238C1445008D7ED3 /* TitleCollectionReusableView.swift in Sources */,
 				6D4B322F25C980BC00FC7979 /* ImageTableViewController.swift in Sources */,
+				DD67C20425D2B4A800A1C149 /* TitleCollectionListGenerator.swift in Sources */,
 				6D27965425C90FA60085B845 /* NukeImagePrefetcher.swift in Sources */,
 				6D568AAD25CBDD8300D38685 /* TitleHeaderGenerator.swift in Sources */,
 				8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */,
@@ -657,6 +659,7 @@
 				6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */,
 				6D4B325925CA99C100FC7979 /* FoldableTableViewController.swift in Sources */,
 				6D27964F25C85EA10085B845 /* ImageTableViewCell.swift in Sources */,
+				DD67C20125D2B4A600A1C149 /* HeaderCollectionListGenerator.swift in Sources */,
 				DD6AEE1725D28EEF0059E312 /* MainCollectionViewController.swift in Sources */,
 				8B04A1D71FE9020800407BED /* TitleTableViewCell.swift in Sources */,
 				6DB6B0FD25CBB626008951D2 /* MovableTableViewController.swift in Sources */,
