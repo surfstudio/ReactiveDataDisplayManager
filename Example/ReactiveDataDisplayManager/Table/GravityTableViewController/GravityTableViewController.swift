@@ -37,37 +37,53 @@ private extension GravityTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        
-        // Make cell generators
-        let generators: [[TableCellGenerator]] = [
-            makeGravityFoldableCellGenerator(),
-            makeGravityCellGenerators(),
-            makeGravityFoldableCellGenerator()
-        ]
-
-        // Add generators into adapter
-        generators.forEach { adapter.addCellGenerators($0) }
-
-        // Tell adapter that we've changed generators
+        adapter.addCellGenerator(self.makeGravityCellGenerator(with: 3))
         adapter.forceRefill()
-    }
 
-    func makeGravityFoldableCellGenerator() -> [GravityFoldableCellGenerator] {
-        let generator = GravityFoldableCellGenerator(heaviness: Int.random(in: 1...20))
-        generator.childGenerators = makeGravityCellGenerators()
-        return [generator]
-    }
-
-    func makeGravityCellGenerators() -> [GravityCellGenerator] {
-        var generators = [GravityCellGenerator]()
-
-        for _ in 0...2 {
-            let heaviness = Int.random(in: 0...20)
-            let title = String(format: "Regular cell with heaviness: %d", heaviness)
-            generators.append(.init(model: title, heaviness: heaviness))
+        // Add generators with heaviness = 5 after delay equal 1 second
+        delay(.now() + .seconds(1)) { [weak self] in
+            guard let self = self else { return }
+            self.adapter.addCellGenerator(self.makeGravityCellGenerator(with: 5))
+            self.adapter.forceRefill()
         }
 
-        return generators
+        // Add generators with heaviness = 2 and 1 after delay equal 3 second
+        delay(.now() + .seconds(3)) { [weak self] in
+            guard let self = self else { return }
+            self.adapter.addCellGenerator(self.makeGravityCellGenerator(with: 2))
+            self.adapter.addCellGenerator(self.makeGravityCellGenerator(with: 1))
+            self.adapter.forceRefill()
+        }
+
+        // Add generators with heaviness = 4 (with children's generators have heaviness equal 1 and 2) after delay equal 2 second
+        delay(.now() + .seconds(2)) { [weak self] in
+            guard let self = self else { return }
+            self.adapter.addCellGenerator(self.makeGravityFoldableCellGenerator(with: 4))
+            self.adapter.forceRefill()
+        }
+
+    }
+
+    func delay(_ deadline: DispatchTime, completion: @escaping () -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: deadline) {
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+    }
+
+    func makeGravityCellGenerator(with heaviness: Int) -> GravityCellGenerator {
+        let title = String(format: "Regular cell with heaviness: %d", heaviness)
+        return GravityCellGenerator(model: title, heaviness: heaviness)
+    }
+
+    func makeGravityFoldableCellGenerator(with heaviness: Int) -> GravityFoldableCellGenerator {
+        let generator = GravityFoldableCellGenerator(heaviness: heaviness)
+        generator.childGenerators = [
+            makeGravityCellGenerator(with: 1),
+            makeGravityCellGenerator(with: 2)
+        ]
+        return generator
     }
 
 }
