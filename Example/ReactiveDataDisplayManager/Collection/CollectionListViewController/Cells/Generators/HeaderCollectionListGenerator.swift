@@ -19,25 +19,31 @@ final class HeaderCollectionListGenerator {
     init(title: String) {
         self.title = title
     }
+
 }
 
 // MARK: - CollectionHeaderGenerator
 
 extension HeaderCollectionListGenerator: CollectionHeaderGenerator {
+
     var identifier: UICollectionReusableView.Type {
         return HeaderCollectionListView.self
     }
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 44.0)
+        // This method used only with default layout.
+        return .zero
     }
+
 }
 
 // MARK: - ViewBuilder
 
 extension HeaderCollectionListGenerator: ViewBuilder {
+
     func build(view: HeaderCollectionListView) {
         view.fill(title: title)
     }
+
 }
 

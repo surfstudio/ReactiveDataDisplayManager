@@ -25,6 +25,7 @@ class TitleCollectionListGenerator: SelectableItem {
     public init(model: String) {
         self.model = model
     }
+    
 }
 
 // MARK: - TableCellGenerator
@@ -44,4 +45,5 @@ extension TitleCollectionListGenerator: ViewBuilder {
     func build(view: TitleCollectionListCell) {
         view.fill(with: model)
     }
+
 }

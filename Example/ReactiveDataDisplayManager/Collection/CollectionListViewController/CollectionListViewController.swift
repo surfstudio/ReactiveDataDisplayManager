@@ -109,5 +109,6 @@ private extension UICollectionLayoutListConfiguration.Appearance {
             return .plain
         }
     }
+
 }
 

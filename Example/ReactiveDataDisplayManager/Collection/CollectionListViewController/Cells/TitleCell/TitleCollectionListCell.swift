@@ -19,4 +19,5 @@ class TitleCollectionListCell: UICollectionViewCell {
     func fill(with title: String) {
         titleLabel.text = title
     }
+
 }

@@ -19,4 +19,5 @@ final class HeaderCollectionListView: UICollectionReusableView {
     func fill(title: String) {
         self.titleLabel.text = title
     }
+    
 }
