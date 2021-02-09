@@ -16,7 +16,7 @@ class CollectionListViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    // MARK: - Properties
+    // MARK: - Private Properties
 
     private lazy var adapter = BaseCollectionDataDisplayManager(collection: collectionView)
     private lazy var titles: [String] = ["Item 1", "Item 2", "Item 3", "Item 4"]
@@ -29,8 +29,8 @@ class CollectionListViewController: UIViewController {
         super.viewDidLoad()
         fillAdapter()
 
-        configureLayoutFlow()
-        updateBarButtonItem()
+        configureLayoutFlow(with: appearance)
+        updateBarButtonItem(with: appearance.title)
     }
 
 }
@@ -53,23 +53,24 @@ private extension CollectionListViewController {
         adapter.forceRefill()
     }
 
-    func configureLayoutFlow() {
+    func configureLayoutFlow(with appearance: UICollectionLayoutListConfiguration.Appearance) {
         var configuration = UICollectionLayoutListConfiguration(appearance: appearance)
         configuration.headerMode = .supplementary
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
 
-    func updateBarButtonItem() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: appearance.title, style: .plain, target: self, action: #selector(changeListAppearance))
+    func updateBarButtonItem(with title: String) {
+        let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeListAppearance))
+        navigationItem.rightBarButtonItem = button
     }
 
     @objc
     func changeListAppearance() {
         appearance = appearance.next
 
-        updateBarButtonItem()
-        configureLayoutFlow()
+        configureLayoutFlow(with: appearance)
+        updateBarButtonItem(with: appearance.title)
     }
 
 }
