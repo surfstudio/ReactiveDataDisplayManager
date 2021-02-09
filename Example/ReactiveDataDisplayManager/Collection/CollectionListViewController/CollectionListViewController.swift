@@ -43,17 +43,13 @@ private extension CollectionListViewController {
     func fillAdapter() {
         let header = TitleCollectionHeaderGenerator(title: "Header")
         adapter.addSectionHeaderGenerator(header)
+
         for title in titles {
-            // Create generator
             let generator = TitleCollectionGenerator(model: title)
-            generator.didSelectEvent += {
-                debugPrint("\(title) selected")
-            }
-            // Add generator to adapter
+            generator.didSelectEvent += { debugPrint("\(title) selected") }
             adapter.addCellGenerator(generator)
         }
 
-        // Tell adapter that we've changed generators
         adapter.forceRefill()
     }
 
@@ -74,7 +70,7 @@ private extension CollectionListViewController {
         default: break
         }
 
-        tabBarController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeListAppearance))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeListAppearance))
     }
 
     @objc
