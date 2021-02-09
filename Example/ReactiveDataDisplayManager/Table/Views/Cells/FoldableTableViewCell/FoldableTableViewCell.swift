@@ -13,7 +13,7 @@ final class FoldableTableViewCell: UITableViewCell {
     // MARK: - Constants
 
     private enum Constants {
-        static let titleLabelText = "Foldable cell with subcells"
+        static let titleLabelText = "Foldable cell"
         static let animationDuration: TimeInterval = 0.3
     }
 
@@ -31,7 +31,8 @@ final class FoldableTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func fill(expanded: Bool) {
+    func fill(title: String = "", expanded: Bool) {
+        titleLabel.text = String(format: "Foldable cell %@", title)
         arrowImageView.transform = expanded ? .identity : CGAffineTransform(rotationAngle: .pi)
     }
 
@@ -49,8 +50,6 @@ private extension FoldableTableViewCell {
 
     func setupInitialState() {
         selectionStyle = .none
-
-        titleLabel.text = Constants.titleLabelText
         arrowImageView.image = #imageLiteral(resourceName: "upArrow")
     }
 

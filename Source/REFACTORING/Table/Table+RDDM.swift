@@ -93,6 +93,8 @@ public class TableBuilder<T: BaseTableManager> {
         view.delegate = delegate
 
         dataSource.provider = manager
+        dataSource.tablePlugins = tablePlugins
+
         view.dataSource = dataSource
 
         if #available(iOS 10.0, *) {

@@ -24,7 +24,9 @@ open class BaseTableDataSource: NSObject {
     // MARK: - Properties
 
     weak var provider: TableGeneratorsProvider?
+
     var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
+    var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
 
 }
 
@@ -50,6 +52,14 @@ extension BaseTableDataSource: TableDataSource {
         return provider
             .generators[indexPath.section][indexPath.row]
             .generate(tableView: tableView, for: indexPath)
+    }
+
+    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
+    }
+
+    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 
 }

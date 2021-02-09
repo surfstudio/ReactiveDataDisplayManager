@@ -17,6 +17,8 @@ final class MainTableViewController: UIViewController {
         case prefetchingTable
         case imageTable
         case foldableCellTable
+        case gravityTable
+        case movableTable
     }
 
     // MARK: - Constants
@@ -25,7 +27,9 @@ final class MainTableViewController: UIViewController {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
             ("gallery without prefetching", .imageTable),
             ("gallery with prefetching", .prefetchingTable),
-            ("table with foldable cell", .foldableCellTable)
+            ("table with foldable cell", .foldableCellTable),
+            ("gravity table with foldable cell", .gravityTable),
+            ("table with movable cell", .movableTable)
         ]
     }
 

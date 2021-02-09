@@ -40,16 +40,6 @@ open class BaseTableDelegate: NSObject {
 
     public var estimatedHeight: CGFloat = 40
 
-    // MARK: - Public Methods
-
-    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: manager)
-    }
-
-    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
 }
 
 // MARK: - UITableViewDelegate
