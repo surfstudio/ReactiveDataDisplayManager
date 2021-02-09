@@ -44,6 +44,7 @@
 		8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E61FE84F540080984A /* LaunchScreen.storyboard */; };
 		8B85E2F31FE84F540080984A /* ReactiveDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2F21FE84F540080984A /* ReactiveDataDisplayManagerTests.swift */; };
 		8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */; };
+		DD6AEDFE25D287F90059E312 /* CollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */; };
 		F6FD540A5EAE2B1D7DACD20A /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +104,7 @@
 		8B85E2F41FE84F540080984A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionGenerator.swift; sourceTree = "<group>"; };
 		BD17C0A50AD2BCB785CEF383 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
+		DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListViewController.swift; sourceTree = "<group>"; };
 		E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE4EAF4DB2F7F2042259E38D /* Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -304,13 +306,9 @@
 		8B1D7908201C8BE100F184BD /* Collection */ = {
 			isa = PBXGroup;
 			children = (
-				8B1D7906201C8BDA00F184BD /* CollectionViewController.swift */,
-				8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */,
-				89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */,
-				8B1D7909201C957700F184BD /* TitleCollectionViewCell.swift */,
-				8B1D790A201C957700F184BD /* TitleCollectionViewCell.xib */,
-				89FD21B5238C1445008D7ED3 /* TitleCollectionReusableView.swift */,
-				89FD21B6238C1445008D7ED3 /* TitleCollectionReusableView.xib */,
+				DD6AEE0625D288980059E312 /* Cells */,
+				DD6AEE0225D2882B0059E312 /* CollectionViewController */,
+				DD6AEE0125D288050059E312 /* CollectionListViewController */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -354,6 +352,59 @@
 				8B85E2F41FE84F540080984A /* Info.plist */,
 			);
 			path = ReactiveDataDisplayManagerTests;
+			sourceTree = "<group>";
+		};
+		DD6AEE0125D288050059E312 /* CollectionListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */,
+			);
+			path = CollectionListViewController;
+			sourceTree = "<group>";
+		};
+		DD6AEE0225D2882B0059E312 /* CollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8B1D7906201C8BDA00F184BD /* CollectionViewController.swift */,
+			);
+			path = CollectionViewController;
+			sourceTree = "<group>";
+		};
+		DD6AEE0325D288430059E312 /* TitleCell */ = {
+			isa = PBXGroup;
+			children = (
+				8B1D7909201C957700F184BD /* TitleCollectionViewCell.swift */,
+				8B1D790A201C957700F184BD /* TitleCollectionViewCell.xib */,
+			);
+			path = TitleCell;
+			sourceTree = "<group>";
+		};
+		DD6AEE0425D288530059E312 /* TitleHeader */ = {
+			isa = PBXGroup;
+			children = (
+				89FD21B5238C1445008D7ED3 /* TitleCollectionReusableView.swift */,
+				89FD21B6238C1445008D7ED3 /* TitleCollectionReusableView.xib */,
+			);
+			path = TitleHeader;
+			sourceTree = "<group>";
+		};
+		DD6AEE0525D2885A0059E312 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */,
+				89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		DD6AEE0625D288980059E312 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AEE0525D2885A0059E312 /* Generators */,
+				DD6AEE0425D288530059E312 /* TitleHeader */,
+				DD6AEE0325D288430059E312 /* TitleCell */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
