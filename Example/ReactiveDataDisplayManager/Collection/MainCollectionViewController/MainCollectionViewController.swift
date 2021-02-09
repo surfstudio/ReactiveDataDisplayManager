@@ -57,18 +57,7 @@ private extension MainCollectionViewController {
             let generator = TitleTableGenerator(model: model.title)
 
             generator.didSelectEvent += { [weak self] in
-                guard let self = self else { return }
-
-                switch model.segueId {
-                case .listAppearances:
-                    if #available(iOS 14.0, *) {
-                        self.performSegue(withIdentifier: model.segueId.rawValue, sender: self.tableView)
-                    } else {
-                        self.showAlert("Available from 14 IOS")
-                    }
-                default:
-                    self.performSegue(withIdentifier: model.segueId.rawValue, sender: self.tableView)
-                }
+                self?.openScreen(by: model.segueId)
             }
 
             // Add generator to adapter
@@ -77,6 +66,19 @@ private extension MainCollectionViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+    }
+
+    func openScreen(by segueId: SegueIdentifier) {
+        switch segueId {
+        case .listAppearances:
+            if #available(iOS 14.0, *) {
+                performSegue(withIdentifier: segueId.rawValue, sender: tableView)
+            } else {
+                showAlert("Available from 14 IOS")
+            }
+        default:
+            performSegue(withIdentifier: segueId.rawValue, sender: tableView)
+        }
     }
 
     func showAlert(_ message: String) {
