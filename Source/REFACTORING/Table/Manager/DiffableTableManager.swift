@@ -1,5 +1,5 @@
 //
-//  DiffableTableStateManager.swift
+//  DiffableTableManager.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 04.02.2021.
