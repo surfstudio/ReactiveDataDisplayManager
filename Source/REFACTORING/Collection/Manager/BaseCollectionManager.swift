@@ -10,6 +10,8 @@ import UIKit
 
 open class BaseCollectionManager: DataDisplayManager {
 
+    // MARK: - Typealias
+
     public typealias CollectionType = UICollectionView
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
@@ -23,6 +25,8 @@ open class BaseCollectionManager: DataDisplayManager {
 
     var delegate: BaseCollectionDelegate?
     var dataSource: BaseCollectionDataSource?
+
+    // MARK: - Initialization
 
     public init() {
         generators = [[CollectionCellGenerator]]()
@@ -124,11 +128,11 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
 
     public func removeAllGenerators(from header: CollectionHeaderGenerator) {
         guard
-           let index = self.sections.index(where: { $0 === header }),
-           self.generators.count > index
-       else {
-           return
-       }
+            let index = self.sections.index(where: { $0 === header }),
+            self.generators.count > index
+        else {
+            return
+        }
 
         self.generators[index].removeAll()
     }

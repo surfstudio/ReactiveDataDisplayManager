@@ -36,7 +36,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet private weak var iconView: UIImageView!
 
-    // MARK: - UITableViewCell
+    // MARK: - UICollectionViewCell
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,6 +44,8 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     }
 
 }
+
+// MARK: - Configurable
 
 extension ImageCollectionViewCell: Configurable {
 
