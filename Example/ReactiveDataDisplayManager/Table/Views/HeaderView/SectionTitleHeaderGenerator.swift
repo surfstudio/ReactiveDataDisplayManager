@@ -11,14 +11,16 @@ import ReactiveDataDisplayManager
 
 final class SectionTitleHeaderGenerator: TableHeaderGenerator, SectionTitleDisplayble {
 
-    var title: String?
-    var needSectionIndexTitle: Bool
-
     // MARK: - Constants
 
     private enum Constants {
         static let defaultHeight: CGFloat = 30
     }
+
+    // MARK: - Property
+
+    var title: String
+    var needSectionIndexTitle: Bool
 
     // MARK: - Private Property
 
