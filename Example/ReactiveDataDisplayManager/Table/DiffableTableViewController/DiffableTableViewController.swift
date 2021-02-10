@@ -9,6 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
+@available(iOS 13.0, *)
 final class DiffableTableViewController: UIViewController {
 
     // MARK: - Constants
@@ -24,7 +25,6 @@ final class DiffableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    @available(iOS 13.0, *)
     private lazy var adapter = tableView.rddm.diffableBuilder.build()
 
     // MARK: - UIViewController
@@ -33,19 +33,17 @@ final class DiffableTableViewController: UIViewController {
         super.viewDidLoad()
         title = "Table with diffableDataSource"
 
-        if #available(iOS 13.0, *) {
-            fillAdapter()
-        }
+        fillAdapter()
     }
 
 }
 
 // MARK: - Private methods
 
+@available(iOS 13.0, *)
 private extension DiffableTableViewController {
 
     /// This method is used to fill adapter
-    @available(iOS 13.0, *)
     func fillAdapter() {
         // Add generator to adapter
         adapter.addCellGenerator(DiffableCellGenerator(model: Constants.models[0]))
@@ -56,17 +54,15 @@ private extension DiffableTableViewController {
         // Add generator to adapter
         adapter.addCellGenerators(makeCellGenerators())
 
+        // Tell adapter that we've changed generators and need updates the UI to reflect the state of the data
         adapter.apply()
     }
 
     // Create cells generators
     func makeCellGenerators() -> [DiffableCellGenerator] {
-        var generators = [DiffableCellGenerator]()
-        for (index, title) in Constants.models.enumerated() {
-            generators.append(DiffableCellGenerator(model: title + " \(index)"))
+        return Constants.models.enumerated().map { index, title in
+            DiffableCellGenerator(model: title + " \(index)")
         }
-
-        return generators
     }
 
 }

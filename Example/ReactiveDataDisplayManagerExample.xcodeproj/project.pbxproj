@@ -13,6 +13,7 @@
 		6D27964F25C85EA10085B845 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27964D25C85EA10085B845 /* ImageTableViewCell.swift */; };
 		6D27965025C85EA10085B845 /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */; };
 		6D27965425C90FA60085B845 /* NukeImagePrefetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27965325C90FA60085B845 /* NukeImagePrefetcher.swift */; };
+		6D3B994025D421BC00F6E05C /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B993F25D421BC00F6E05C /* UIViewController.swift */; };
 		6D463CC125D1186100A1E61D /* DiffableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D463CC025D1186100A1E61D /* DiffableTableViewController.swift */; };
 		6D463CC825D1382B00A1E61D /* DiffableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D463CC725D1382B00A1E61D /* DiffableCellGenerator.swift */; };
 		6D4B322F25C980BC00FC7979 /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */; };
@@ -77,6 +78,7 @@
 		6D27964D25C85EA10085B845 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		6D27965325C90FA60085B845 /* NukeImagePrefetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeImagePrefetcher.swift; sourceTree = "<group>"; };
+		6D3B993F25D421BC00F6E05C /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		6D463CC025D1186100A1E61D /* DiffableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableTableViewController.swift; sourceTree = "<group>"; };
 		6D463CC725D1382B00A1E61D /* DiffableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableCellGenerator.swift; sourceTree = "<group>"; };
 		6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewController.swift; sourceTree = "<group>"; };
@@ -228,6 +230,14 @@
 			path = PrefetchingTableViewController;
 			sourceTree = "<group>";
 		};
+		6D3B994325D421C300F6E05C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6D3B993F25D421BC00F6E05C /* UIViewController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		6D463CC425D1186900A1E61D /* DiffableTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +379,7 @@
 				8B1D7905201C8BCC00F184BD /* Table */,
 				896B59722354963900E8E2AB /* Stack */,
 				8B85E2E11FE84F540080984A /* Main.storyboard */,
+				6D3B994325D421C300F6E05C /* Extensions */,
 			);
 			path = ReactiveDataDisplayManager;
 			sourceTree = "<group>";
@@ -669,6 +680,7 @@
 				896B59712354962A00E8E2AB /* StackViewController.swift in Sources */,
 				8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */,
 				6D4B327B25CAA79000FC7979 /* GravityTableViewController.swift in Sources */,
+				6D3B994025D421BC00F6E05C /* UIViewController.swift in Sources */,
 				6D4B328225CAAC0600FC7979 /* GravityFoldableCellGenerator.swift in Sources */,
 				8B85E2E01FE84F540080984A /* MainTableViewController.swift in Sources */,
 				6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */,
