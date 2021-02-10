@@ -12,6 +12,12 @@ import Nuke
 
 final class ImageCollectionViewController: UIViewController {
 
+    // MARK: - Constants
+
+    private enum Constants {
+        static let cellSize = CGSize(width: 100, height: 100)
+    }
+
     // MARK: - IBOutlet
 
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -47,7 +53,7 @@ private extension ImageCollectionViewController {
 
     func makeFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: 100, height: 100)
+        flowLayout.itemSize = Constants.cellSize
         flowLayout.minimumLineSpacing = 10.0
         flowLayout.minimumInteritemSpacing = 10.0
         flowLayout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
@@ -60,7 +66,7 @@ private extension ImageCollectionViewController {
     func fillAdapter() {
         for _ in 0...300 {
             // Create viewModels for cell
-            guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
+            guard let viewModel = ImageCollectionViewCell.ViewModel.make(for: Constants.cellSize) else { continue }
 
             // Create generator
             let generator = BaseCollectionCellGenerator<ImageCollectionViewCell>(with: viewModel)
