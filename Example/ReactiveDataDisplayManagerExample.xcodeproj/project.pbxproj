@@ -13,6 +13,9 @@
 		6D27964F25C85EA10085B845 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27964D25C85EA10085B845 /* ImageTableViewCell.swift */; };
 		6D27965025C85EA10085B845 /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */; };
 		6D27965425C90FA60085B845 /* NukeImagePrefetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27965325C90FA60085B845 /* NukeImagePrefetcher.swift */; };
+		6D2AD35925D398F40077900F /* AlphabeticalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2AD35825D398F40077900F /* AlphabeticalTableViewController.swift */; };
+		6D2AD36225D3A4870077900F /* SectionTitleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2AD36125D3A4870077900F /* SectionTitleTableViewController.swift */; };
+		6D2AD36625D3A6080077900F /* SectionTitleHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2AD36525D3A6080077900F /* SectionTitleHeaderGenerator.swift */; };
 		6D4B322F25C980BC00FC7979 /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */; };
 		6D4B325925CA99C100FC7979 /* FoldableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B325825CA99C100FC7979 /* FoldableTableViewController.swift */; };
 		6D4B326025CA9A3500FC7979 /* FoldableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */; };
@@ -67,6 +70,9 @@
 		6D27964D25C85EA10085B845 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		6D27964E25C85EA10085B845 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		6D27965325C90FA60085B845 /* NukeImagePrefetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NukeImagePrefetcher.swift; sourceTree = "<group>"; };
+		6D2AD35825D398F40077900F /* AlphabeticalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabeticalTableViewController.swift; sourceTree = "<group>"; };
+		6D2AD36125D3A4870077900F /* SectionTitleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleTableViewController.swift; sourceTree = "<group>"; };
+		6D2AD36525D3A6080077900F /* SectionTitleHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleHeaderGenerator.swift; sourceTree = "<group>"; };
 		6D4B322E25C980BC00FC7979 /* ImageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewController.swift; sourceTree = "<group>"; };
 		6D4B325825CA99C100FC7979 /* FoldableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableTableViewController.swift; sourceTree = "<group>"; };
 		6D4B325F25CA9A3500FC7979 /* FoldableCellGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableCellGenerator.swift; sourceTree = "<group>"; };
@@ -207,6 +213,22 @@
 			path = PrefetchingTableViewController;
 			sourceTree = "<group>";
 		};
+		6D2AD35C25D398FC0077900F /* SectionTitleTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D2AD36125D3A4870077900F /* SectionTitleTableViewController.swift */,
+			);
+			path = SectionTitleTableViewController;
+			sourceTree = "<group>";
+		};
+		6D2AD36F25D3B9AB0077900F /* AlphabeticalTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D2AD35825D398F40077900F /* AlphabeticalTableViewController.swift */,
+			);
+			path = AlphabeticalTableViewController;
+			sourceTree = "<group>";
+		};
 		6D4B323225C986F000FC7979 /* ImageTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +268,7 @@
 				6D568ABB25CBEBBC00D38685 /* HeaderView.swift */,
 				6D568AB625CBE60300D38685 /* HeaderView.xib */,
 				6D568AAC25CBDD8300D38685 /* TitleHeaderGenerator.swift */,
+				6D2AD36525D3A6080077900F /* SectionTitleHeaderGenerator.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -297,6 +320,8 @@
 				6D4B325C25CA99CD00FC7979 /* FoldableTableViewController */,
 				6D4B327E25CAA7D600FC7979 /* GravityTableViewController */,
 				6DB6B10025CBB635008951D2 /* MovableTableViewController */,
+				6D2AD36F25D3B9AB0077900F /* AlphabeticalTableViewController */,
+				6D2AD35C25D398FC0077900F /* SectionTitleTableViewController */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -534,10 +559,12 @@
 				6D4B322F25C980BC00FC7979 /* ImageTableViewController.swift in Sources */,
 				6D27965425C90FA60085B845 /* NukeImagePrefetcher.swift in Sources */,
 				6D568AAD25CBDD8300D38685 /* TitleHeaderGenerator.swift in Sources */,
+				6D2AD35925D398F40077900F /* AlphabeticalTableViewController.swift in Sources */,
 				8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */,
 				896B59712354962A00E8E2AB /* StackViewController.swift in Sources */,
 				8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */,
 				6D4B327B25CAA79000FC7979 /* GravityTableViewController.swift in Sources */,
+				6D2AD36625D3A6080077900F /* SectionTitleHeaderGenerator.swift in Sources */,
 				6D4B328225CAAC0600FC7979 /* GravityFoldableCellGenerator.swift in Sources */,
 				8B85E2E01FE84F540080984A /* MainTableViewController.swift in Sources */,
 				6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */,
@@ -552,6 +579,7 @@
 				8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */,
 				8B1D7907201C8BDA00F184BD /* CollectionViewController.swift in Sources */,
 				6D27964A25C85E680085B845 /* ImageTableGenerator.swift in Sources */,
+				6D2AD36225D3A4870077900F /* SectionTitleTableViewController.swift in Sources */,
 				6D568ABC25CBEBBC00D38685 /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

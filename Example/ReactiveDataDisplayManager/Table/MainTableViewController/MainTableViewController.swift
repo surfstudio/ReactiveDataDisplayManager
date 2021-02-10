@@ -19,6 +19,8 @@ final class MainTableViewController: UIViewController {
         case foldableCellTable
         case gravityTable
         case movableTable
+        case alphabetizeSectionsTable
+        case sectionTitlesTable
     }
 
     // MARK: - Constants
@@ -29,7 +31,9 @@ final class MainTableViewController: UIViewController {
             ("gallery with prefetching", .prefetchingTable),
             ("table with foldable cell", .foldableCellTable),
             ("gravity table with foldable cell", .gravityTable),
-            ("table with movable cell", .movableTable)
+            ("table with movable cell", .movableTable),
+            ("table with alphabetize sections", .alphabetizeSectionsTable),
+            ("table with sections titles", .sectionTitlesTable)
         ]
     }
 
