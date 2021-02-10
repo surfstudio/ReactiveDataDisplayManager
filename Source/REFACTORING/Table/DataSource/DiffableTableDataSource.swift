@@ -11,14 +11,14 @@ import Foundation
 @available(iOS 13.0, *)
 public typealias DiffableSnapshot = NSDiffableDataSourceSnapshot<DiffableItem, DiffableItem>
 
-/// All diffable cell and header should be include this item
+/// All diffable cells and headers should include this item
 open class DiffableItem: NSObject {
 
     // MARK: - Properties
 
     public var identifier: String
 
-    // MARK: - Initializable
+    // MARK: - Initialization
 
     public init(identifier: String) {
         self.identifier = identifier
