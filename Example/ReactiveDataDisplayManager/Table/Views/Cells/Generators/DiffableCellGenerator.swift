@@ -24,14 +24,20 @@ final class DiffableCellGenerator {
 
 // MARK: - TableCellGenerator
 
-extension DiffableCellGenerator: TableCellGenerator, Diffable {
-
-    var item: DiffableItem {
-        return DiffableItem(identifier: model)
-    }
+extension DiffableCellGenerator: TableCellGenerator {
 
     var identifier: String {
         return String(describing: TitleTableViewCell.self)
+    }
+
+}
+
+// MARK: - Diffable
+
+extension DiffableCellGenerator: Diffable {
+
+    var item: DiffableItem {
+        return DiffableItem(identifier: model)
     }
 
 }

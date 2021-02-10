@@ -71,8 +71,7 @@ private extension MainTableViewController {
             let generator = TitleTableGenerator(model: model.title)
 
             generator.didSelectEvent += { [weak self] in
-                guard let self = self else { return }
-                self.performSegue(withIdentifier: model.segueId.rawValue, sender: self.tableView)
+                self?.openScreen(by: model.segueId)
             }
 
             // Add generator to adapter
@@ -81,6 +80,19 @@ private extension MainTableViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+    }
+
+    func openScreen(by segueId: SegueIdentifier) {
+        switch segueId {
+        case .diffableTable:
+            if #available(iOS 13.0, *) {
+                performSegue(withIdentifier: segueId.rawValue, sender: tableView)
+            } else {
+                showAlert("Available from iOS 13")
+            }
+        default:
+            performSegue(withIdentifier: segueId.rawValue, sender: tableView)
+        }
     }
 
 }

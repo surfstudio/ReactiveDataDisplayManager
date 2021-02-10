@@ -182,8 +182,8 @@ public class DiffableTableStateManager: BaseTableStateManager {
         safeApplySnapshot()
     }
 
-    open func apply() {
-        safeApplySnapshot()
+    open func apply(animated: Bool = false) {
+        safeApplySnapshot(animated: animated)
     }
 
 }
