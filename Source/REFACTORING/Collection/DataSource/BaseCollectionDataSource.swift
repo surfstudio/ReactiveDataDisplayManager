@@ -63,6 +63,14 @@ extension BaseCollectionDataSource: CollectionDataSource {
             .generate(collectionView: collectionView, for: indexPath)
     }
 
+    open func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        collectionPlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseCollectionManager)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
 }
 
 extension BaseCollectionDataSource: UICollectionViewDataSourcePrefetching {

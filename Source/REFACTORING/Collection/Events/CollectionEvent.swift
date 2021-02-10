@@ -15,4 +15,5 @@ public enum CollectionEvent {
     case didEndDisplayCell(IndexPath)
     case willDisplaySupplementaryView(IndexPath)
     case didEndDisplayingSupplementaryView(IndexPath)
+    case move(from: IndexPath, to: IndexPath)
 }
