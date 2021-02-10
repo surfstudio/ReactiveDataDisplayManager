@@ -28,8 +28,8 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     let view: UICollectionView
     let manager: T
-    var delegate: BaseCollectionDelegate
-    var dataSource: BaseCollectionDataSource
+    var delegate: CollectionDelegate
+    var dataSource: CollectionDataSource
 
     var collectionPlugins = CollectionPluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()

@@ -8,6 +8,12 @@
 
 import Foundation
 
+protocol CollectionDelegate: UICollectionViewDelegate {
+    var manager: BaseCollectionManager? { get set }
+    var collectionPlugins: PluginCollection<BaseCollectionPlugin<CollectionEvent>> { get set }
+    var scrollPlugins: PluginCollection<BaseCollectionPlugin<ScrollEvent>> { get set }
+}
+
 // Base implementation for UICollectionViewDelegate protocol. Use it if NO special logic required.
 open class BaseCollectionDelegate: NSObject {
 
@@ -22,7 +28,7 @@ open class BaseCollectionDelegate: NSObject {
 
 // MARK: - UICollectionViewDelegate
 
-extension BaseCollectionDelegate: UICollectionViewDelegate {
+extension BaseCollectionDelegate: CollectionDelegate {
 
     open func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         collectionPlugins.process(event: .didHighlight(indexPath), with: manager)

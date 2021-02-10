@@ -8,7 +8,11 @@
 
 import Foundation
 
-protocol CollectionDataSource: UICollectionViewDataSource {}
+protocol CollectionDataSource: UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+    var provider: CollectionGeneratorsProvider? { get set }
+    var prefetchPlugins: PluginCollection< BaseCollectionPlugin <PrefetchEvent>> { get set }
+    var collectionPlugins: PluginCollection< BaseCollectionPlugin <CollectionEvent>> { get set }
+}
 
 public protocol CollectionGeneratorsProvider: AnyObject {
     var generators: [[CollectionCellGenerator]] { get set }

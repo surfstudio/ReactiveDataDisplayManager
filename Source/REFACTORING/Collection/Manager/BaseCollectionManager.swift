@@ -23,8 +23,8 @@ open class BaseCollectionManager: DataDisplayManager {
     public var generators: [[CollectionCellGenerator]]
     public var sections: [CollectionHeaderGenerator]
 
-    var delegate: BaseCollectionDelegate?
-    var dataSource: BaseCollectionDataSource?
+    var delegate: CollectionDelegate?
+    var dataSource: CollectionDataSource?
 
     // MARK: - Initialization
 
