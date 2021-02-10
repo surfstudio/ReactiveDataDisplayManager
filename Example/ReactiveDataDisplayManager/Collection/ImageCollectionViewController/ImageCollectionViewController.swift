@@ -27,6 +27,9 @@ final class ImageCollectionViewController: UIViewController {
         super.viewDidLoad()
         title = "Gallery without prefetching"
 
+        let flowLayout = makeFlowLayout()
+        collectionView.setCollectionViewLayout(flowLayout, animated: false)
+
         fillAdapter()
     }
 
@@ -41,6 +44,17 @@ final class ImageCollectionViewController: UIViewController {
 // MARK: - Private Methods
 
 private extension ImageCollectionViewController {
+
+    func makeFlowLayout() -> UICollectionViewFlowLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: 100, height: 100)
+        flowLayout.minimumLineSpacing = 10.0
+        flowLayout.minimumInteritemSpacing = 10.0
+        flowLayout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        flowLayout.scrollDirection = .vertical
+
+        return flowLayout
+    }
 
     /// This method is used to fill adapter
     func fillAdapter() {
