@@ -153,13 +153,3 @@ private extension BaseCollectionManager {
     }
 
 }
-
-// MARK: - UICollectionViewDelegateFlowLayout
-
-//extension BaseCollectionManager: UICollectionViewDelegateFlowLayout {
-//
-//    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return self.sections[section].size(collectionView, forSection: section)
-//    }
-//
-//}

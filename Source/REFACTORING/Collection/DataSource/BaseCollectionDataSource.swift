@@ -26,7 +26,7 @@ open class BaseCollectionDataSource: NSObject {
     weak var provider: CollectionGeneratorsProvider?
 
     var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
-    var collectionPlugins = PluginCollection<BaseCollectionPlugin<TableEvent>>()
+    var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
 
 }
 
@@ -61,6 +61,18 @@ extension BaseCollectionDataSource: CollectionDataSource {
         return provider
             .sections[indexPath.section]
             .generate(collectionView: collectionView, for: indexPath)
+    }
+
+}
+
+extension BaseCollectionDataSource: UICollectionViewDataSourcePrefetching {
+
+    open func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseCollectionManager)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? BaseCollectionManager)
     }
 
 }
