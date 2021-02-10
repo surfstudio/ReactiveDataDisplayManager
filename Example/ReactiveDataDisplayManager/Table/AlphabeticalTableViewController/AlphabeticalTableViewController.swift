@@ -24,8 +24,9 @@ final class AlphabeticalTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
+    private let sectionTitleWrapper = TableSectionTitleWrapper()
     private lazy var adapter = tableView.rddm.manualBuilder
-        .set(dataSource: SectionTitleTableDataSource(titles: Constants.alphabets))
+        .set(dataSource: SectionTitleTableDataSource(titleWrapper: sectionTitleWrapper))
         .build()
 
     // MARK: - UIViewController
@@ -44,6 +45,9 @@ private extension AlphabeticalTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+
+        // Set array with section titles to wrapper
+        sectionTitleWrapper.titles = Constants.alphabets
 
         // Add generators to adapter
         Constants.alphabets.forEach {
