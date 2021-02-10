@@ -45,13 +45,13 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
     // MARK: - Properties
 
     weak var provider: TableGeneratorsProvider?
-    var prefetchPlugins = PluginCollection<PrefetchEvent, BaseTableStateManager>()
-    var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
+    var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
+    var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
 
     // MARK: - Initialization
 
-    public init(provider: BaseTableStateManager) {
-        let tableView = provider.tableView ?? UITableView()
+    public init(provider: BaseTableManager) {
+        let tableView = provider.view ?? UITableView()
 
         super.init(tableView: tableView) { (table, indexPath, item) -> UITableViewCell? in
             return provider
@@ -62,10 +62,10 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
         self.provider = provider
     }
 
-    // MARK: - UITableViewDiffableDataSource
+    // MARK: - UITableViewDataSource
 
     open override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableStateManager)
+        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
     }
 
     open override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -80,11 +80,11 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 extension DiffableTableDataSource: UITableViewDataSourcePrefetching {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? DiffableTableStateManager)
+        prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? DiffableTableManager)
     }
 
     open func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? DiffableTableStateManager)
+        prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? DiffableTableManager)
     }
 
 }

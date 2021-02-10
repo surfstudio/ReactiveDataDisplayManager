@@ -46,6 +46,14 @@
 		8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E61FE84F540080984A /* LaunchScreen.storyboard */; };
 		8B85E2F31FE84F540080984A /* ReactiveDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2F21FE84F540080984A /* ReactiveDataDisplayManagerTests.swift */; };
 		8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */; };
+		DD67C1FE25D2B49100A1C149 /* CollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */; };
+		DD67C20125D2B4A600A1C149 /* HeaderCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */; };
+		DD67C20425D2B4A800A1C149 /* TitleCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */; };
+		DD6AEE1725D28EEF0059E312 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */; };
+		DDB8CC6125D2A66D00439FB9 /* TitleCollectionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC6025D2A66D00439FB9 /* TitleCollectionListCell.swift */; };
+		DDB8CC6525D2A67E00439FB9 /* TitleCollectionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDB8CC6425D2A67E00439FB9 /* TitleCollectionListCell.xib */; };
+		DDB8CC6925D2A69500439FB9 /* HeaderCollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC6825D2A69500439FB9 /* HeaderCollectionListView.swift */; };
+		DDB8CC6D25D2A69F00439FB9 /* HeaderCollectionListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDB8CC6C25D2A69F00439FB9 /* HeaderCollectionListView.xib */; };
 		F6FD540A5EAE2B1D7DACD20A /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +115,14 @@
 		8B85E2F41FE84F540080984A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionGenerator.swift; sourceTree = "<group>"; };
 		BD17C0A50AD2BCB785CEF383 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
+		DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListViewController.swift; sourceTree = "<group>"; };
+		DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
+		DDB8CC6025D2A66D00439FB9 /* TitleCollectionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionListCell.swift; sourceTree = "<group>"; };
+		DDB8CC6425D2A67E00439FB9 /* TitleCollectionListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCollectionListCell.xib; sourceTree = "<group>"; };
+		DDB8CC6825D2A69500439FB9 /* HeaderCollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionListView.swift; sourceTree = "<group>"; };
+		DDB8CC6C25D2A69F00439FB9 /* HeaderCollectionListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionListView.xib; sourceTree = "<group>"; };
+		DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionListGenerator.swift; sourceTree = "<group>"; };
+		DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionListGenerator.swift; sourceTree = "<group>"; };
 		E401DF6BBFC52003243A734A /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE4EAF4DB2F7F2042259E38D /* Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -318,13 +334,9 @@
 		8B1D7908201C8BE100F184BD /* Collection */ = {
 			isa = PBXGroup;
 			children = (
-				8B1D7906201C8BDA00F184BD /* CollectionViewController.swift */,
-				8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */,
-				89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */,
-				8B1D7909201C957700F184BD /* TitleCollectionViewCell.swift */,
-				8B1D790A201C957700F184BD /* TitleCollectionViewCell.xib */,
-				89FD21B5238C1445008D7ED3 /* TitleCollectionReusableView.swift */,
-				89FD21B6238C1445008D7ED3 /* TitleCollectionReusableView.xib */,
+				DD6AEE1525D28EB20059E312 /* MainCollectionViewController */,
+				DD6AEE0225D2882B0059E312 /* CollectionViewController */,
+				DD6AEE0125D288050059E312 /* CollectionListViewController */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -368,6 +380,106 @@
 				8B85E2F41FE84F540080984A /* Info.plist */,
 			);
 			path = ReactiveDataDisplayManagerTests;
+			sourceTree = "<group>";
+		};
+		DD6AEE0125D288050059E312 /* CollectionListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DDB8CC5C25D2A63000439FB9 /* Cells */,
+				DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */,
+			);
+			path = CollectionListViewController;
+			sourceTree = "<group>";
+		};
+		DD6AEE0225D2882B0059E312 /* CollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AEE0625D288980059E312 /* Cells */,
+				8B1D7906201C8BDA00F184BD /* CollectionViewController.swift */,
+			);
+			path = CollectionViewController;
+			sourceTree = "<group>";
+		};
+		DD6AEE0325D288430059E312 /* TitleCell */ = {
+			isa = PBXGroup;
+			children = (
+				8B1D7909201C957700F184BD /* TitleCollectionViewCell.swift */,
+				8B1D790A201C957700F184BD /* TitleCollectionViewCell.xib */,
+			);
+			path = TitleCell;
+			sourceTree = "<group>";
+		};
+		DD6AEE0425D288530059E312 /* TitleHeader */ = {
+			isa = PBXGroup;
+			children = (
+				89FD21B5238C1445008D7ED3 /* TitleCollectionReusableView.swift */,
+				89FD21B6238C1445008D7ED3 /* TitleCollectionReusableView.xib */,
+			);
+			path = TitleHeader;
+			sourceTree = "<group>";
+		};
+		DD6AEE0525D2885A0059E312 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */,
+				89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		DD6AEE0625D288980059E312 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AEE0525D2885A0059E312 /* Generators */,
+				DD6AEE0425D288530059E312 /* TitleHeader */,
+				DD6AEE0325D288430059E312 /* TitleCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		DD6AEE1525D28EB20059E312 /* MainCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */,
+			);
+			path = MainCollectionViewController;
+			sourceTree = "<group>";
+		};
+		DDB8CC5C25D2A63000439FB9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DDB8CC5D25D2A63700439FB9 /* Generators */,
+				DDB8CC5F25D2A64C00439FB9 /* HeaderCell */,
+				DDB8CC5E25D2A63E00439FB9 /* TitleCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		DDB8CC5D25D2A63700439FB9 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */,
+				DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		DDB8CC5E25D2A63E00439FB9 /* TitleCell */ = {
+			isa = PBXGroup;
+			children = (
+				DDB8CC6025D2A66D00439FB9 /* TitleCollectionListCell.swift */,
+				DDB8CC6425D2A67E00439FB9 /* TitleCollectionListCell.xib */,
+			);
+			path = TitleCell;
+			sourceTree = "<group>";
+		};
+		DDB8CC5F25D2A64C00439FB9 /* HeaderCell */ = {
+			isa = PBXGroup;
+			children = (
+				DDB8CC6825D2A69500439FB9 /* HeaderCollectionListView.swift */,
+				DDB8CC6C25D2A69F00439FB9 /* HeaderCollectionListView.xib */,
+			);
+			path = HeaderCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,6 +568,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDB8CC6D25D2A69F00439FB9 /* HeaderCollectionListView.xib in Resources */,
 				6D27965025C85EA10085B845 /* ImageTableViewCell.xib in Resources */,
 				8B1D790C201C957700F184BD /* TitleCollectionViewCell.xib in Resources */,
 				8B04A1D81FE9020800407BED /* TitleTableViewCell.xib in Resources */,
@@ -465,6 +578,7 @@
 				6D568AB725CBE60300D38685 /* HeaderView.xib in Resources */,
 				6D4B326825CA9A4C00FC7979 /* FoldableTableViewCell.xib in Resources */,
 				8B85E2E31FE84F540080984A /* Main.storyboard in Resources */,
+				DDB8CC6525D2A67E00439FB9 /* TitleCollectionListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,12 +655,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD67C1FE25D2B49100A1C149 /* CollectionListViewController.swift in Sources */,
 				6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */,
 				89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */,
 				6D463CC825D1382B00A1E61D /* DiffableCellGenerator.swift in Sources */,
 				6D27964325C85DFF0085B845 /* PrefetchingTableViewController.swift in Sources */,
 				89FD21B7238C1445008D7ED3 /* TitleCollectionReusableView.swift in Sources */,
 				6D4B322F25C980BC00FC7979 /* ImageTableViewController.swift in Sources */,
+				DD67C20425D2B4A800A1C149 /* TitleCollectionListGenerator.swift in Sources */,
 				6D27965425C90FA60085B845 /* NukeImagePrefetcher.swift in Sources */,
 				6D568AAD25CBDD8300D38685 /* TitleHeaderGenerator.swift in Sources */,
 				8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */,
@@ -558,6 +674,8 @@
 				6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */,
 				6D4B325925CA99C100FC7979 /* FoldableTableViewController.swift in Sources */,
 				6D27964F25C85EA10085B845 /* ImageTableViewCell.swift in Sources */,
+				DD67C20125D2B4A600A1C149 /* HeaderCollectionListGenerator.swift in Sources */,
+				DD6AEE1725D28EEF0059E312 /* MainCollectionViewController.swift in Sources */,
 				8B04A1D71FE9020800407BED /* TitleTableViewCell.swift in Sources */,
 				6DB6B0FD25CBB626008951D2 /* MovableTableViewController.swift in Sources */,
 				6D4B326025CA9A3500FC7979 /* FoldableCellGenerator.swift in Sources */,
@@ -565,8 +683,10 @@
 				6D463CC125D1186100A1E61D /* DiffableTableViewController.swift in Sources */,
 				8B1D790B201C957700F184BD /* TitleCollectionViewCell.swift in Sources */,
 				896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */,
+				DDB8CC6925D2A69500439FB9 /* HeaderCollectionListView.swift in Sources */,
 				8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */,
 				8B1D7907201C8BDA00F184BD /* CollectionViewController.swift in Sources */,
+				DDB8CC6125D2A66D00439FB9 /* TitleCollectionListCell.swift in Sources */,
 				6D27964A25C85E680085B845 /* ImageTableGenerator.swift in Sources */,
 				6D568ABC25CBEBBC00D38685 /* HeaderView.swift in Sources */,
 			);

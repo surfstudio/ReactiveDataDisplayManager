@@ -9,6 +9,7 @@
 import UIKit
 
 /// Contains implementations DataDisplayManager and HeaderDisplayManager with weight parameters for sorting.
+@available(*, deprecated, message: "Use GravityTableManager instead")
 open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderDataDisplayManager {
 
     // MARK: - Types
@@ -24,23 +25,23 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
     // MARK: - Public Properties
 
     public var estimatedHeight: CGFloat = 40.0
-    public weak var tableView: UITableView?
+    public weak var view: UITableView?
     public private(set) var cellGenerators: [[GravityTableCellGenerator]]
     public private(set) var headerGenerators: [GravityTableHeaderGenerator]
 
     // MARK: - DataDisplayManager
 
     public required init(collection: UITableView) {
-        self.tableView = collection
+        self.view = collection
         self.cellGenerators = [[]]
         self.headerGenerators = []
         super.init()
-        self.tableView?.dataSource = self
-        self.tableView?.delegate = self
+        self.view?.dataSource = self
+        self.view?.delegate = self
     }
 
     public func forceRefill() {
-        tableView?.reloadData()
+        view?.reloadData()
     }
 
     public func forceRefill(completion: @escaping (() -> Void)) {
@@ -55,7 +56,7 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
     public func addCellGenerator(_ generator: GravityTableCellGenerator) {
         guard
             checkDuplicate(generator: generator),
-            let tableView = self.tableView
+            let tableView = self.view
         else {
             return
         }
@@ -107,7 +108,7 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
 
     public func update(generators: [GravityTableCellGenerator]) {
         let indexPaths = generators.compactMap { self.indexPath(for: $0) }
-        tableView?.reloadRows(at: indexPaths, with: .none)
+        view?.reloadRows(at: indexPaths, with: .none)
     }
 
     public func clearCellGenerators() {
@@ -137,7 +138,7 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
     }
 
     public func addCellGenerators(_ generators: [GravityTableCellGenerator], toHeader header: GravityTableHeaderGenerator) {
-        guard let tableView = self.tableView else { return }
+        guard let tableView = self.view else { return }
 
        generators.forEach { $0.registerCell(in: tableView) }
 
@@ -192,7 +193,7 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
                  on newGenerator: GravityTableCellGenerator,
                  removeAnimation: UITableView.RowAnimation = .automatic,
                  insertAnimation: UITableView.RowAnimation = .automatic) {
-        guard let index = self.findGenerator(oldGenerator), let table = self.tableView else { return }
+        guard let index = self.findGenerator(oldGenerator), let table = self.view else { return }
 
         table.beginUpdates()
         self.cellGenerators[index.sectionIndex].remove(at: index.generatorIndex)
@@ -210,7 +211,7 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
         }
 
         self.headerGenerators[indexOfHeader] = header
-        self.tableView?.reloadSections(IndexSet(arrayLiteral: indexOfHeader), with: animation)
+        self.view?.reloadSections(IndexSet(arrayLiteral: indexOfHeader), with: animation)
     }
 
     open func remove(_ generator: TableCellGenerator,
@@ -255,7 +256,7 @@ private extension GravityTableDataDisplayManager {
             return IndexPath(row: index, section: section)
         }
 
-        tableView?.insertRows(at: indexPaths, with: .none)
+        view?.insertRows(at: indexPaths, with: .none)
     }
 
     func nearestIndex(for generator: GravityTableCellGenerator, in section: Int) -> Int? {
@@ -292,7 +293,7 @@ private extension GravityTableDataDisplayManager {
                          with animation: UITableView.RowAnimation = .automatic,
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
-        guard let table = self.tableView else { return }
+        guard let table = self.view else { return }
 
         // perform update
         table.beginUpdates()

@@ -7,7 +7,7 @@
 //
 
 /// Proxy of all UITableViewDataSourcePrefetching events
-public class TablePrefetchProxyPlugin: PluginAction<PrefetchEvent, BaseTableStateManager> {
+public class TablePrefetchProxyPlugin: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Properties
 
@@ -16,7 +16,7 @@ public class TablePrefetchProxyPlugin: PluginAction<PrefetchEvent, BaseTableStat
 
     // MARK: - PluginAction
 
-    override func process(event: PrefetchEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: PrefetchEvent, with manager: BaseTableManager?) {
         switch event {
         case .prefetch(let indexPaths):
             prefetchEvent.invoke(with: indexPaths)

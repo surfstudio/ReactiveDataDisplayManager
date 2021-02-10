@@ -1,5 +1,5 @@
 ////
-////  BaseTableStateManager.swift
+////  BaseTableManager.swift
 ////  ReactiveDataDisplayManager
 ////
 ////  Created by Aleksandr Smirnov on 02.11.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class BaseTableStateManager: TableStateManager {
+open class BaseTableManager: DataDisplayManager {
 
     public typealias CollectionType = UITableView
     public typealias CellGeneratorType = TableCellGenerator
@@ -16,7 +16,7 @@ open class BaseTableStateManager: TableStateManager {
 
     // MARK: - Public properties
 
-    weak var tableView: UITableView?
+    public weak var view: UITableView?
 
     public var generators: [[TableCellGenerator]]
     public var sections: [TableHeaderGenerator]
@@ -32,7 +32,7 @@ open class BaseTableStateManager: TableStateManager {
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        tableView?.reloadData()
+        view?.reloadData()
     }
 
     public func forceRefill(completion: @escaping (() -> Void)) {
@@ -45,7 +45,7 @@ open class BaseTableStateManager: TableStateManager {
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
-        guard let table = tableView else { return }
+        guard let table = view else { return }
         generator.registerCell(in: table)
         if self.generators.count != self.sections.count || sections.isEmpty {
             self.generators.append([TableCellGenerator]())
@@ -59,7 +59,7 @@ open class BaseTableStateManager: TableStateManager {
     }
 
     open func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
-        guard let table = tableView else { return }
+        guard let table = view else { return }
         generators.forEach { $0.registerCell(in: table) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
@@ -80,7 +80,7 @@ open class BaseTableStateManager: TableStateManager {
     open func update(generators: [TableCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        tableView?.reloadRows(at: indexPaths, with: .none)
+        view?.reloadRows(at: indexPaths, with: .none)
     }
 
     open func clearCellGenerators() {
@@ -108,7 +108,7 @@ open class BaseTableStateManager: TableStateManager {
 
 // MARK: - Helper
 
-extension BaseTableStateManager {
+extension BaseTableManager {
 
     func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in generators.enumerated() {
@@ -123,7 +123,7 @@ extension BaseTableStateManager {
                          with animation: UITableView.RowAnimation = .automatic,
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
-        guard let table = tableView else { return }
+        guard let table = view else { return }
 
         // perform update
         table.beginUpdates()

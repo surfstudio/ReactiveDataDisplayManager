@@ -12,6 +12,7 @@ import UIKit
 /// Contains base implementation of DataDisplayManager with UITableView.
 /// Registers nibs, determinates EstimatedRowHeight.
 /// Can fill table with user data.
+@available(*, deprecated, message: "Use ManualTableManager instead")
 open class BaseTableDataDisplayManager: NSObject {
 
     // MARK: - Typealiases
@@ -33,7 +34,7 @@ open class BaseTableDataDisplayManager: NSObject {
 
     // MARK: - Readonly properties
 
-    public private(set) weak var tableView: UITableView?
+    public private(set) weak var view: UITableView?
     public private(set) var cellGenerators: [[TableCellGenerator]]
     public private(set) var sectionHeaderGenerators: [TableHeaderGenerator]
 
@@ -48,9 +49,9 @@ open class BaseTableDataDisplayManager: NSObject {
         self.sectionHeaderGenerators = [TableHeaderGenerator]()
         self.scrollViewWillEndDraggingEvent = BaseEvent<CGPoint>()
         super.init()
-        self.tableView = collection
-        self.tableView?.delegate = self
-        self.tableView?.dataSource = self
+        self.view = collection
+        self.view?.delegate = self
+        self.view?.dataSource = self
     }
 
 }
@@ -60,7 +61,7 @@ open class BaseTableDataDisplayManager: NSObject {
 extension BaseTableDataDisplayManager: DataDisplayManager {
 
     public func addSection(header generator: TableHeaderGenerator, cells: [TableCellGenerator]) {
-        guard let table = tableView else { return }
+        guard let table = view else { return }
         cells.forEach { $0.registerCell(in: table) }
         self.sectionHeaderGenerators.append(generator)
         self.cellGenerators.append(cells)
@@ -93,7 +94,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: TableCellGenerator) {
-        guard let table = self.tableView else { return }
+        guard let table = self.view else { return }
         generator.registerCell(in: table)
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([TableCellGenerator]())
@@ -117,7 +118,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
-        guard let table = self.tableView else { return }
+        guard let table = self.view else { return }
         generators.forEach { $0.registerCell(in: table) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
@@ -128,7 +129,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     public func update(generators: [TableCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        self.tableView?.reloadRows(at: indexPaths, with: .none)
+        self.view?.reloadRows(at: indexPaths, with: .none)
     }
 
     public func clearCellGenerators() {
@@ -140,7 +141,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     }
 
     public func forceRefill() {
-        self.tableView?.reloadData()
+        self.view?.reloadData()
     }
 
     public func forceRefill(completion: @escaping (() -> Void)) {
@@ -156,7 +157,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
         guard let index = sectionHeaderGenerators.firstIndex(where: { (headerGenerator) -> Bool in
             return headerGenerator === sectionHeaderGenerator
         }) else { return }
-        tableView?.reloadSections(IndexSet(integer: index), with: animation)
+        view?.reloadSections(IndexSet(integer: index), with: animation)
     }
 }
 
@@ -167,7 +168,7 @@ extension BaseTableDataDisplayManager: HeaderDataDisplayManager {
     // TODO: Implement in BaseCollectionDDM
 
     public func addCellGenerators(_ generators: [TableCellGenerator], toHeader header: TableHeaderGenerator) {
-        guard let table = self.tableView else { return }
+        guard let table = self.view else { return }
         generators.forEach { $0.registerCell(in: table) }
 
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
@@ -414,7 +415,7 @@ public extension BaseTableDataDisplayManager {
                  on newGenerator: TableCellGenerator,
                  removeAnimation: UITableView.RowAnimation = .automatic,
                  insertAnimation: UITableView.RowAnimation = .automatic) {
-        guard let index = self.findGenerator(oldGenerator), let table = self.tableView else { return }
+        guard let index = self.findGenerator(oldGenerator), let table = self.view else { return }
 
         table.beginUpdates()
         self.cellGenerators[index.sectionIndex].remove(at: index.generatorIndex)
@@ -444,7 +445,7 @@ public extension BaseTableDataDisplayManager {
         self.cellGenerators[secondIndex.sectionIndex].insert(firstGenerator, at: secondIndex.generatorIndex)
         self.cellGenerators[firstIndex.sectionIndex].insert(secondGenerator, at: firstIndex.generatorIndex)
 
-        self.tableView?.reloadData()
+        self.view?.reloadData()
     }
 
 }
@@ -459,12 +460,12 @@ private extension BaseTableDataDisplayManager {
         let index = min(max(index, 0), self.sectionHeaderGenerators.count)
         self.sectionHeaderGenerators.insert(headGenerator, at: index)
         self.cellGenerators.insert([], at: index)
-        tableView?.insertSections([index], with: animation)
+        view?.insertSections([index], with: animation)
     }
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
                 with animation: UITableView.RowAnimation = .automatic) {
-        guard let table = self.tableView else {
+        guard let table = self.view else {
             return
         }
 
@@ -487,7 +488,7 @@ private extension BaseTableDataDisplayManager {
                                  with animation: UITableView.RowAnimation = .automatic,
                                  needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                                  needRemoveEmptySection: Bool = false) {
-        guard let table = self.tableView else { return }
+        guard let table = self.view else { return }
 
         // perform update
         table.beginUpdates()
@@ -529,7 +530,7 @@ public extension BaseTableDataDisplayManager {
         guard let index = sectionHeaderGenerators.firstIndex(where: { $0 === headGenerator }) else {
             return
         }
-        tableView?.scrollToRow(at: IndexPath(row: 0, section: index), at: scrollPosition, animated: animated)
+        view?.scrollToRow(at: IndexPath(row: 0, section: index), at: scrollPosition, animated: animated)
     }
 
     func scrollTo(generator: TableCellGenerator, scrollPosition: UITableView.ScrollPosition, animated: Bool) {
@@ -537,7 +538,7 @@ public extension BaseTableDataDisplayManager {
             for rowElement in sectionElement.element.enumerated() {
                 if rowElement.element === generator {
                     let indexPath = IndexPath(row: rowElement.offset, section: sectionElement.offset)
-                    tableView?.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
+                    view?.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
                     return
                 }
             }
@@ -551,7 +552,7 @@ public extension BaseTableDataDisplayManager {
 extension BaseTableDataDisplayManager: UITableViewDelegate {
 
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let guardTable = self.tableView else { return }
+        guard let guardTable = self.view else { return }
         self.scrollEvent.invoke(with: guardTable)
     }
 

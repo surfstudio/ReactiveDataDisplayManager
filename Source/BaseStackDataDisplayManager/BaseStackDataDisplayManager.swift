@@ -19,21 +19,21 @@ open class BaseStackDataDisplayManager: NSObject, DataDisplayManager {
 
     // MARK: - Properties
 
-    public private(set) weak var stackView: UIStackView?
+    public private(set) weak var view: UIStackView?
     public private(set) var cellGenerators: [StackCellGenerator]
 
     // MARK: - DataDisplayManager
 
     public required init(collection: UIStackView) {
-        self.stackView = collection
+        self.view = collection
         self.cellGenerators = []
     }
 
     public func forceRefill() {
-        self.stackView?.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        self.view?.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         self.cellGenerators.enumerated().forEach { [weak self] offset, generator in
-            guard let stackView = self?.stackView else { return }
+            guard let stackView = self?.view else { return }
             let view = generator.generate(stackView: stackView, index: offset)
             stackView.addArrangedSubview(view)
         }
@@ -92,6 +92,6 @@ open class BaseStackDataDisplayManager: NSObject, DataDisplayManager {
     }
 
     private func index(of view: UIView) -> Int? {
-        return self.stackView?.arrangedSubviews.firstIndex(where: { $0 == view })
+        return self.view?.arrangedSubviews.firstIndex(where: { $0 == view })
     }
 }

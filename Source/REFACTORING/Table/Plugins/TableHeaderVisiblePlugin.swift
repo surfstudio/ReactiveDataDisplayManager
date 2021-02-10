@@ -7,7 +7,7 @@
 //
 
 /// Adds the definition of the section that started to be displayed
-public class TableHeaderVisiblePlugin: PluginAction<TableEvent, BaseTableStateManager> {
+public class TableHeaderVisiblePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - Private Properties
 
@@ -22,7 +22,7 @@ public class TableHeaderVisiblePlugin: PluginAction<TableEvent, BaseTableStateMa
 
     // MARK: - PluginAction
 
-    override func process(event: TableEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
         case .willDisplayHeader(let section):
             willDisplayHeader(with: section, manager: manager)
@@ -39,9 +39,9 @@ public class TableHeaderVisiblePlugin: PluginAction<TableEvent, BaseTableStateMa
 
 private extension TableHeaderVisiblePlugin {
 
-    func willDisplayHeader(with section: Int, manager: BaseTableStateManager?) {
+    func willDisplayHeader(with section: Int, manager: BaseTableManager?) {
         guard
-            let pathsForVisibleRows = manager?.tableView?.indexPathsForVisibleRows,
+            let pathsForVisibleRows = manager?.view?.indexPathsForVisibleRows,
             let firstPath = pathsForVisibleRows.first
         else { return }
 
@@ -50,9 +50,9 @@ private extension TableHeaderVisiblePlugin {
         }
     }
 
-    func didEndDisplayHeader(with section: Int, manager: BaseTableStateManager?) {
+    func didEndDisplayHeader(with section: Int, manager: BaseTableManager?) {
         guard
-            let pathsForVisibleRows = manager?.tableView?.indexPathsForVisibleRows,
+            let pathsForVisibleRows = manager?.view?.indexPathsForVisibleRows,
             let lastPath = pathsForVisibleRows.last
         else { return }
 

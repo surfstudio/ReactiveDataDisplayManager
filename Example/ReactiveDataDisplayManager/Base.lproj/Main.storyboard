@@ -236,15 +236,48 @@
         <!--Collection-->
         <scene sceneID="cQP-3e-Boa">
             <objects>
-                <viewController id="lyU-aU-2OK" customClass="CollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lyU-aU-2OK" customClass="MainCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C5u-Ma-r1Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DS7-fX-y8h">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LQS-qa-UrS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oyD-TI-cjA">
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="t5a-RY-cbh"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="t5a-RY-cbh" firstAttribute="trailing" secondItem="LQS-qa-UrS" secondAttribute="trailing" id="F7M-KV-dw6"/>
+                            <constraint firstItem="LQS-qa-UrS" firstAttribute="leading" secondItem="t5a-RY-cbh" secondAttribute="leading" id="VcO-Mw-M0N"/>
+                            <constraint firstItem="LQS-qa-UrS" firstAttribute="top" secondItem="t5a-RY-cbh" secondAttribute="top" id="hzs-Bi-aql"/>
+                            <constraint firstItem="t5a-RY-cbh" firstAttribute="bottom" secondItem="LQS-qa-UrS" secondAttribute="bottom" id="izP-16-uR0"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Collection" id="6NW-eD-Ssr"/>
+                    <connections>
+                        <outlet property="tableView" destination="LQS-qa-UrS" id="64C-f0-C46"/>
+                        <segue destination="hhz-eY-DAz" kind="show" identifier="baseCollection" id="1a6-Ec-pKc"/>
+                        <segue destination="YeS-TG-zUj" kind="show" identifier="listAppearances" id="L5C-q8-dFx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1113" y="396"/>
+        </scene>
+        <!--Collection View Controller-->
+        <scene sceneID="syt-Nb-mT5">
+            <objects>
+                <viewController id="hhz-eY-DAz" customClass="CollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pm9-Wc-XGI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kXQ-NP-foe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FcD-aT-EXs">
                                     <size key="itemSize" width="100" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -253,23 +286,23 @@
                                 <cells/>
                             </collectionView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="t5a-RY-cbh"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="f5J-NT-X5U"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="t5a-RY-cbh" firstAttribute="trailing" secondItem="DS7-fX-y8h" secondAttribute="trailing" id="3LC-gI-lNA"/>
-                            <constraint firstItem="t5a-RY-cbh" firstAttribute="top" secondItem="DS7-fX-y8h" secondAttribute="top" id="DMI-s2-Nir"/>
-                            <constraint firstItem="t5a-RY-cbh" firstAttribute="bottom" secondItem="DS7-fX-y8h" secondAttribute="bottom" id="Pi2-o1-tfA"/>
-                            <constraint firstItem="DS7-fX-y8h" firstAttribute="leading" secondItem="t5a-RY-cbh" secondAttribute="leading" id="Tj7-1U-g2S"/>
+                            <constraint firstItem="kXQ-NP-foe" firstAttribute="leading" secondItem="f5J-NT-X5U" secondAttribute="leading" id="0KO-ky-per"/>
+                            <constraint firstItem="f5J-NT-X5U" firstAttribute="bottom" secondItem="kXQ-NP-foe" secondAttribute="bottom" id="EPm-A3-zBF"/>
+                            <constraint firstItem="kXQ-NP-foe" firstAttribute="top" secondItem="f5J-NT-X5U" secondAttribute="top" id="Rz4-a0-65f"/>
+                            <constraint firstItem="f5J-NT-X5U" firstAttribute="trailing" secondItem="kXQ-NP-foe" secondAttribute="trailing" id="TCT-z8-WOF"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Collection" id="6NW-eD-Ssr"/>
+                    <navigationItem key="navigationItem" id="wlg-ij-6HQ"/>
                     <connections>
-                        <outlet property="collectionView" destination="DS7-fX-y8h" id="ALG-I8-g4Q"/>
+                        <outlet property="collectionView" destination="kXQ-NP-foe" id="NuC-LV-JZZ"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zva-RD-pq9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652" y="599.55022488755628"/>
+            <point key="canvasLocation" x="2278" y="751"/>
         </scene>
         <!--Stack-->
         <scene sceneID="UXt-z6-X2a">
@@ -316,6 +349,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S5Q-xA-vpU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="652" y="1326"/>
+        </scene>
+        <!--Collection List View Controller-->
+        <scene sceneID="lQt-OD-lNV">
+            <objects>
+                <viewController id="YeS-TG-zUj" customClass="CollectionListViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X9a-8N-Qty">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zjH-21-W6U">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EfC-Oh-w1E">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0RC-bU-dCA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="zjH-21-W6U" firstAttribute="top" secondItem="0RC-bU-dCA" secondAttribute="top" id="7Jo-Hj-cs8"/>
+                            <constraint firstItem="0RC-bU-dCA" firstAttribute="trailing" secondItem="zjH-21-W6U" secondAttribute="trailing" id="9so-RB-P6M"/>
+                            <constraint firstItem="0RC-bU-dCA" firstAttribute="bottom" secondItem="zjH-21-W6U" secondAttribute="bottom" id="Fne-qg-ZTf"/>
+                            <constraint firstItem="zjH-21-W6U" firstAttribute="leading" secondItem="0RC-bU-dCA" secondAttribute="leading" id="MaV-YD-UaF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="jvM-wa-Jfo"/>
+                    <connections>
+                        <outlet property="collectionView" destination="zjH-21-W6U" id="d0Y-Ix-1yF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WVc-R0-LPb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2278" y="1469"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7SR-bl-OnR">

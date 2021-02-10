@@ -19,7 +19,7 @@ public protocol ContentPrefetcher {
 /// Adds support for PrefetcherableFlow with prefetcher
 ///
 /// ContentPrefetcher prefetches and caches data to eliminate delays when requesting the same data later.
-public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: PluginAction<PrefetchEvent, BaseTableStateManager> {
+public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
 
@@ -34,7 +34,7 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
 
     // MARK: - PluginAction
 
-    override func process(event: PrefetchEvent, with manager: BaseTableStateManager?) {
+    public override func process(event: PrefetchEvent, with manager: BaseTableManager?) {
         switch event {
         case .prefetch(let indexPaths):
             startPrefetching(from: manager, at: indexPaths)
@@ -49,17 +49,17 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
 
 private extension TablePrefetcherablePlugin {
 
-    func startPrefetching(from manager: BaseTableStateManager?, at indexPaths: [IndexPath]) {
+    func startPrefetching(from manager: BaseTableManager?, at indexPaths: [IndexPath]) {
         let contents = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
         prefetcher.startPrefetching(for: contents)
     }
 
-    func cancelPrefetching(from manager: BaseTableStateManager?, at indexPaths: [IndexPath]) {
+    func cancelPrefetching(from manager: BaseTableManager?, at indexPaths: [IndexPath]) {
         let contents = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
         prefetcher.cancelPrefetching(for: contents)
     }
 
-    func getPrefetcherableFlowCell(from manager: BaseTableStateManager?, at indexPath: IndexPath) -> Generator? {
+    func getPrefetcherableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> Generator? {
         return manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? Generator
     }
 

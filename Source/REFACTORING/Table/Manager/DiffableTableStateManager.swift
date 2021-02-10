@@ -13,7 +13,7 @@ public protocol Diffable {
 }
 
 @available(iOS 13.0, *)
-public class DiffableTableStateManager: BaseTableStateManager {
+public class DiffableTableManager: BaseTableManager {
 
     // MARK: - Typealias
 
@@ -37,12 +37,12 @@ public class DiffableTableStateManager: BaseTableStateManager {
 
         guard
             let generator = generator as? CellGeneratorType,
-            let tableView = tableView
+            let view = view
         else {
             return
         }
 
-        generator.registerCell(in: tableView)
+        generator.registerCell(in: view)
 
         addEmptyGeneratorsIfNeeded()
 
@@ -66,14 +66,14 @@ public class DiffableTableStateManager: BaseTableStateManager {
         assert(after is CellGeneratorType, "This strategy support only \(CellGeneratorType.Type.self)")
 
         guard
-            let table = tableView,
+            let view = view,
             let generators = generators as? [CellGeneratorType],
             let after = after as? CellGeneratorType
         else {
             return
         }
 
-        generators.forEach { $0.registerCell(in: table) }
+        generators.forEach { $0.registerCell(in: view) }
 
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
@@ -95,9 +95,9 @@ public class DiffableTableStateManager: BaseTableStateManager {
     }
 
     open func addCellGenerators(_ generators: [CellGeneratorType], toHeader header: HeaderGeneratorType) {
-        guard let tableView = tableView else { return }
+        guard let view = view else { return }
 
-        generators.forEach { $0.registerCell(in: tableView) }
+        generators.forEach { $0.registerCell(in: view) }
 
         addEmptyGeneratorsIfNeeded()
 
@@ -151,7 +151,7 @@ public class DiffableTableStateManager: BaseTableStateManager {
                      needRemoveEmptySection: Bool = false) {
         guard
             let index = findGenerator(generator),
-            let table = tableView
+            let view = view
         else {
             return
         }
@@ -169,7 +169,7 @@ public class DiffableTableStateManager: BaseTableStateManager {
 
         // scroll if needed
         if let scrollPosition = scrollPosition {
-            table.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
+            view.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
         }
 
         safeApplySnapshot(animated: animated)
@@ -189,7 +189,7 @@ public class DiffableTableStateManager: BaseTableStateManager {
 }
 
 @available(iOS 13.0, *)
-private extension DiffableTableStateManager {
+private extension DiffableTableManager {
 
     func insertGenerators(_ generators: [CellGeneratorType], after: CellGeneratorType) {
         let items = generators.map { $0.item }
