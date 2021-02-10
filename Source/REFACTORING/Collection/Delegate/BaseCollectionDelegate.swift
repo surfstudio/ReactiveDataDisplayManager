@@ -18,10 +18,6 @@ open class BaseCollectionDelegate: NSObject {
     var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
 
-    // MARK: - Public Properties
-
-    public var estimatedHeight: CGFloat = 40
-
 }
 
 // MARK: - UICollectionViewDelegate
