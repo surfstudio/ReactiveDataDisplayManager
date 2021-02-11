@@ -292,11 +292,12 @@
                         <outlet property="tableView" destination="LQS-qa-UrS" id="64C-f0-C46"/>
                         <segue destination="hhz-eY-DAz" kind="show" identifier="baseCollection" id="1a6-Ec-pKc"/>
                         <segue destination="YeS-TG-zUj" kind="show" identifier="listAppearances" id="L5C-q8-dFx"/>
+                        <segue destination="bcg-8S-Zba" kind="show" identifier="imageCollection" id="L5H-3Z-p7s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113" y="396"/>
+            <point key="canvasLocation" x="652" y="1218"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="syt-Nb-mT5">
@@ -334,7 +335,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zva-RD-pq9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2278" y="751"/>
+            <point key="canvasLocation" x="-468" y="2248"/>
         </scene>
         <!--Stack-->
         <scene sceneID="UXt-z6-X2a">
@@ -380,7 +381,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S5Q-xA-vpU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652" y="1326"/>
+            <point key="canvasLocation" x="-1978" y="1249"/>
         </scene>
         <!--Collection List View Controller-->
         <scene sceneID="lQt-OD-lNV">
@@ -418,7 +419,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WVc-R0-LPb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2278" y="1469"/>
+            <point key="canvasLocation" x="652" y="2248"/>
+        </scene>
+        <!--Image Collection View Controller-->
+        <scene sceneID="BHb-jD-yM3">
+            <objects>
+                <viewController id="bcg-8S-Zba" customClass="ImageCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PB1-CP-Gxz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1b4-Oi-ViC">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewLayout key="collectionViewLayout" id="XOs-CH-JEI"/>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UeC-Ym-pnK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1b4-Oi-ViC" firstAttribute="leading" secondItem="UeC-Ym-pnK" secondAttribute="leading" id="9e3-IH-3W3"/>
+                            <constraint firstItem="UeC-Ym-pnK" firstAttribute="bottom" secondItem="1b4-Oi-ViC" secondAttribute="bottom" id="HdQ-p4-bGh"/>
+                            <constraint firstItem="UeC-Ym-pnK" firstAttribute="trailing" secondItem="1b4-Oi-ViC" secondAttribute="trailing" id="wDc-7d-1Pg"/>
+                            <constraint firstItem="1b4-Oi-ViC" firstAttribute="top" secondItem="UeC-Ym-pnK" secondAttribute="top" id="xDh-5i-M5D"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="687-Yu-pb1"/>
+                    <connections>
+                        <outlet property="collectionView" destination="1b4-Oi-ViC" id="21w-N7-Mgi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kL7-PY-GEr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1596" y="2257"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7SR-bl-OnR">
