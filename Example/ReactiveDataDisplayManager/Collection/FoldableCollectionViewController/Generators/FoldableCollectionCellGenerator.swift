@@ -16,6 +16,17 @@ final class FoldableCollectionCellGenerator: CollectionFoldableItem {
     var isExpanded = false
     var childGenerators: [CollectionCellGenerator] = []
 
+    // MARK: - Private Properties
+
+    private let model: FoldableCollectionViewCell.ViewModel
+
+    // MARK: - Initialization
+
+    public init(with model: FoldableCollectionViewCell.ViewModel) {
+        self.model = model
+        self.isExpanded = model.expanded
+    }
+
 }
 
 // MARK: - TableCellGenerator
@@ -23,7 +34,7 @@ final class FoldableCollectionCellGenerator: CollectionFoldableItem {
 extension FoldableCollectionCellGenerator: CollectionCellGenerator {
 
     var identifier: String {
-        return String(describing: ImageCollectionViewCell.self)
+        return String(describing: FoldableCollectionViewCell.self)
     }
 
 }
@@ -32,12 +43,11 @@ extension FoldableCollectionCellGenerator: CollectionCellGenerator {
 
 extension FoldableCollectionCellGenerator: ViewBuilder {
 
-    func build(view: ImageCollectionViewCell) {
-//        view.fill(expanded: isExpanded)
-//
+    func build(view: FoldableCollectionViewCell) {
+        view.configure(with: model)
+
         didFoldEvent.addListner { isExpanded in
-//            view.configure(expanded: isExpanded)
-            print(isExpanded)
+            view.configure(expanded: isExpanded)
         }
     }
 
