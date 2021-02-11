@@ -16,6 +16,7 @@ final class MainCollectionViewController: UIViewController {
     fileprivate enum SegueIdentifier: String {
         case baseCollection
         case listAppearances
+        case imageCollection
     }
 
     // MARK: - Constants
@@ -23,7 +24,8 @@ final class MainCollectionViewController: UIViewController {
     private enum Constants {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
             ("Base collection view", .baseCollection),
-            ("List Appearances", .listAppearances)
+            ("List Appearances", .listAppearances),
+            ("Gallery without prefetching", .imageCollection)
         ]
     }
 
