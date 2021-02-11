@@ -1,20 +1,26 @@
 //
-//  TitleHeaderGenerator.swift
+//  SectionTitleHeaderGenerator.swift
 //  ReactiveDataDisplayManagerExample
 //
-//  Created by Anton Eysner on 02.02.2021.
+//  Created by Anton Eysner on 08.02.2021.
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
+import Foundation
 import ReactiveDataDisplayManager
 
-final class TitleHeaderGenerator: TableHeaderGenerator {
+final class SectionTitleHeaderGenerator: TableHeaderGenerator, SectionTitleDisplayble {
 
     // MARK: - Constants
 
     private enum Constants {
         static let defaultHeight: CGFloat = 30
     }
+
+    // MARK: - Property
+
+    var title: String
+    var needSectionIndexTitle: Bool
 
     // MARK: - Private Property
 
@@ -23,8 +29,10 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
 
     // MARK: - Initialization
 
-    init(model: String) {
+    init(model: String, needSectionIndexTitle: Bool) {
         self.model = model
+        self.title = model
+        self.needSectionIndexTitle = needSectionIndexTitle
     }
 
     // MARK: - TableHeaderGenerator

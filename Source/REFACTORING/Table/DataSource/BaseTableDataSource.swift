@@ -18,7 +18,7 @@ public protocol TableGeneratorsProvider: AnyObject {
 extension BaseTableManager: TableGeneratorsProvider { }
 
 
-// Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
+/// Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
 open class BaseTableDataSource: NSObject {
 
     // MARK: - Properties

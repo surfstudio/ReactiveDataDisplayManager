@@ -10,6 +10,8 @@ import Foundation
 
 open class BaseTableManager: DataDisplayManager {
 
+    // MARK: - Typealias
+
     public typealias CollectionType = UITableView
     public typealias CellGeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
@@ -23,6 +25,8 @@ open class BaseTableManager: DataDisplayManager {
 
     var delegate: BaseTableDelegate?
     var dataSource: BaseTableDataSource?
+
+    // MARK: - Initialization
 
     public init() {
         generators = [[TableCellGenerator]]()
