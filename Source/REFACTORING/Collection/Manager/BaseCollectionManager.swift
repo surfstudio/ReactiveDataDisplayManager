@@ -97,6 +97,21 @@ open class BaseCollectionManager: DataDisplayManager {
         self.generators.removeAll()
     }
 
+    /// Removes generator from data display manager. Generators compares by references.
+    ///
+    /// - Parameters:
+    ///   - generator: Generator to delete.
+    ///   - needScrollAt: If not nil than performs scroll before removing generator.
+    /// A constant that identifies a relative position in the collection view (top, middle, bottom)
+    /// for item when scrolling concludes. See UICollectionViewScrollPosition for descriptions of valid constants.
+    ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
+    open func remove(_ generator: CollectionCellGenerator, needScrollAt scrollPosition: UICollectionView.ScrollPosition?, needRemoveEmptySection: Bool) {
+        guard let index = findGenerator(generator) else { return }
+        self.removeGenerator(with: index,
+                             needScrollAt: scrollPosition,
+                             needRemoveEmptySection: needRemoveEmptySection)
+    }
+
 }
 
 // MARK: - HeaderDataDisplayManager
@@ -143,9 +158,9 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
 
 }
 
-// MARK: - Private Methods
+// MARK: - Helper
 
-private extension BaseCollectionManager {
+extension BaseCollectionManager {
 
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in generators.enumerated() {
@@ -154,6 +169,30 @@ private extension BaseCollectionManager {
             }
         }
         return nil
+    }
+
+    // TODO: May be we should remove needScrollAt and move this responsibility to user
+    func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
+                         needScrollAt scrollPosition: UICollectionView.ScrollPosition? = nil,
+                         needRemoveEmptySection: Bool = false) {
+        guard let collection = self.view else { return }
+
+        // perform update
+        self.generators[index.sectionIndex].remove(at: index.generatorIndex)
+        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+        collection.deleteItems(at: [indexPath])
+
+        // remove empty section if needed
+        if needRemoveEmptySection && self.generators[index.sectionIndex].isEmpty {
+            self.generators.remove(at: index.sectionIndex)
+            self.sections.remove(at: index.sectionIndex)
+            collection.deleteSections(IndexSet(integer: index.sectionIndex))
+        }
+
+        // scroll if needed
+        if let scrollPosition = scrollPosition {
+            collection.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
+        }
     }
 
 }

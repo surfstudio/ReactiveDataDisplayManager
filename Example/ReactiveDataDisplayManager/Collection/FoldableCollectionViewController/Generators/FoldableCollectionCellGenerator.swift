@@ -8,12 +8,6 @@
 
 import ReactiveDataDisplayManager
 
-public protocol CollectionFoldableItem: class {
-    var didFoldEvent: BaseEvent<Bool> { get }
-    var isExpanded: Bool { get set }
-    var childGenerators: [CollectionCellGenerator] { get set }
-}
-
 final class FoldableCollectionCellGenerator: CollectionFoldableItem {
 
     // MARK: - FoldableItem
@@ -41,9 +35,10 @@ extension FoldableCollectionCellGenerator: ViewBuilder {
     func build(view: ImageCollectionViewCell) {
 //        view.fill(expanded: isExpanded)
 //
-//        didFoldEvent.addListner { isExpanded in
+        didFoldEvent.addListner { isExpanded in
 //            view.configure(expanded: isExpanded)
-//        }
+            print(isExpanded)
+        }
     }
 
 }
