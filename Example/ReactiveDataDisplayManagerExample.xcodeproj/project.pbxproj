@@ -53,6 +53,8 @@
 		8B85E2E81FE84F540080984A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B85E2E61FE84F540080984A /* LaunchScreen.storyboard */; };
 		8B85E2F31FE84F540080984A /* ReactiveDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B85E2F21FE84F540080984A /* ReactiveDataDisplayManagerTests.swift */; };
 		8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */; };
+		DD31B12225DCEA1C00A266A7 /* FoldableCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD31B12025DCEA1C00A266A7 /* FoldableCollectionCellGenerator.swift */; };
+		DD31B12325DCEA1C00A266A7 /* FoldableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD31B12125DCEA1C00A266A7 /* FoldableCollectionViewController.swift */; };
 		DD67C1FE25D2B49100A1C149 /* CollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */; };
 		DD67C20125D2B4A600A1C149 /* HeaderCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */; };
 		DD67C20425D2B4A800A1C149 /* TitleCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */; };
@@ -136,6 +138,8 @@
 		8B85E2F41FE84F540080984A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BBCA97E201E0BEA007F866D /* TitleCollectionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionGenerator.swift; sourceTree = "<group>"; };
 		BD17C0A50AD2BCB785CEF383 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
+		DD31B12025DCEA1C00A266A7 /* FoldableCollectionCellGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableCollectionCellGenerator.swift; sourceTree = "<group>"; };
+		DD31B12125DCEA1C00A266A7 /* FoldableCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableCollectionViewController.swift; sourceTree = "<group>"; };
 		DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListViewController.swift; sourceTree = "<group>"; };
 		DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		DD7F280125D5016C00130C9B /* SizableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionViewController.swift; sourceTree = "<group>"; };
@@ -419,9 +423,9 @@
 			children = (
 				6DF430B525D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift */,
 			);
-            path = ImageHorizontalCollectionViewController;
-            sourceTree = "<group>";
-        };
+			path = ImageHorizontalCollectionViewController;
+			sourceTree = "<group>";
+		};
 		6DF4322225D9D1E30093A1EB /* PrefetchingCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -478,6 +482,7 @@
 				6DF430B925D984070093A1EB /* ImageHorizontalCollectionViewController */,
 				6DF4322225D9D1E30093A1EB /* PrefetchingCollectionViewController */,
 				DD7F280025D5015300130C9B /* SizableCollectionViewController */,
+				DD31B11E25DCEA1C00A266A7 /* FoldableCollectionViewController */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -522,6 +527,23 @@
 				8B85E2F41FE84F540080984A /* Info.plist */,
 			);
 			path = ReactiveDataDisplayManagerTests;
+			sourceTree = "<group>";
+		};
+		DD31B11E25DCEA1C00A266A7 /* FoldableCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DD31B11F25DCEA1C00A266A7 /* Generators */,
+				DD31B12125DCEA1C00A266A7 /* FoldableCollectionViewController.swift */,
+			);
+			path = FoldableCollectionViewController;
+			sourceTree = "<group>";
+		};
+		DD31B11F25DCEA1C00A266A7 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				DD31B12025DCEA1C00A266A7 /* FoldableCollectionCellGenerator.swift */,
+			);
+			path = Generators;
 			sourceTree = "<group>";
 		};
 		DD6AEE0125D288050059E312 /* CollectionListViewController */ = {
@@ -802,6 +824,7 @@
 				DD67C1FE25D2B49100A1C149 /* CollectionListViewController.swift in Sources */,
 				6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */,
 				89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */,
+				DD31B12325DCEA1C00A266A7 /* FoldableCollectionViewController.swift in Sources */,
 				6D27964325C85DFF0085B845 /* PrefetchingTableViewController.swift in Sources */,
 				89FD21B7238C1445008D7ED3 /* TitleCollectionReusableView.swift in Sources */,
 				6D3B9A5F25D5AE4D00F6E05C /* SwipeableTableViewController.swift in Sources */,
@@ -822,6 +845,7 @@
 				6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */,
 				6D4B325925CA99C100FC7979 /* FoldableTableViewController.swift in Sources */,
 				6D27964F25C85EA10085B845 /* ImageTableViewCell.swift in Sources */,
+				DD31B12225DCEA1C00A266A7 /* FoldableCollectionCellGenerator.swift in Sources */,
 				DD67C20125D2B4A600A1C149 /* HeaderCollectionListGenerator.swift in Sources */,
 				6D3B9AEC25D6903000F6E05C /* SwipeActionProvider.swift in Sources */,
 				DD6AEE1725D28EEF0059E312 /* MainCollectionViewController.swift in Sources */,

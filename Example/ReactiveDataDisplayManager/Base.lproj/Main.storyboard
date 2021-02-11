@@ -328,6 +328,7 @@
                         <segue destination="rjR-b9-Cch" kind="show" identifier="imageHorizontalCollection" id="sUF-JL-Kgv"/>
                         <segue destination="gbO-EY-csx" kind="show" identifier="prefetchingCollection" id="YAI-2Z-nWi"/>
                         <segue destination="GZX-q5-5fd" kind="show" identifier="sizableCollection" id="kbc-gq-BdS"/>
+                        <segue destination="pGI-i3-EWf" kind="show" identifier="foldableCollection" id="xiU-it-Uz9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -603,7 +604,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CBe-3z-hmN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2396" y="2257"/>
+            <point key="canvasLocation" x="2678" y="2248"/>
+        </scene>
+        <!--Foldable Collection View Controller-->
+        <scene sceneID="iBh-3t-ChM">
+            <objects>
+                <viewController id="pGI-i3-EWf" customClass="FoldableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gee-CA-GLt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZTf-ND-SJ3">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FiX-cI-hgh">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="B8O-V5-Yel"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="B8O-V5-Yel" firstAttribute="bottom" secondItem="ZTf-ND-SJ3" secondAttribute="bottom" id="0bu-c1-NiD"/>
+                            <constraint firstItem="ZTf-ND-SJ3" firstAttribute="top" secondItem="B8O-V5-Yel" secondAttribute="top" id="3UL-A4-bkZ"/>
+                            <constraint firstItem="ZTf-ND-SJ3" firstAttribute="leading" secondItem="B8O-V5-Yel" secondAttribute="leading" id="YIw-5L-zFX"/>
+                            <constraint firstItem="B8O-V5-Yel" firstAttribute="trailing" secondItem="ZTf-ND-SJ3" secondAttribute="trailing" id="tdI-Kp-Z5P"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="kgC-lr-KxV"/>
+                    <connections>
+                        <outlet property="collectionView" destination="ZTf-ND-SJ3" id="HvK-LM-jK7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jRY-Cy-okp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3394" y="2240"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7SR-bl-OnR">
