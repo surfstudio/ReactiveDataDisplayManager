@@ -54,6 +54,10 @@
 		DD67C20125D2B4A600A1C149 /* HeaderCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7025D2A6BB00439FB9 /* HeaderCollectionListGenerator.swift */; };
 		DD67C20425D2B4A800A1C149 /* TitleCollectionListGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC7425D2A6CB00439FB9 /* TitleCollectionListGenerator.swift */; };
 		DD6AEE1725D28EEF0059E312 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */; };
+		DD7F281625D501F700130C9B /* SizableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD7F281525D501F700130C9B /* SizableCollectionViewCell.xib */; };
+		DD7F281E25D506AC00130C9B /* VerticalSizableTextGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F281D25D506AC00130C9B /* VerticalSizableTextGenerator.swift */; };
+		DD7F282B25D53AB600130C9B /* SizableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F280125D5016C00130C9B /* SizableCollectionViewController.swift */; };
+		DD7F282E25D53ABA00130C9B /* SizableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7F281125D501ED00130C9B /* SizableCollectionViewCell.swift */; };
 		DDB8CC6125D2A66D00439FB9 /* TitleCollectionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC6025D2A66D00439FB9 /* TitleCollectionListCell.swift */; };
 		DDB8CC6525D2A67E00439FB9 /* TitleCollectionListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DDB8CC6425D2A67E00439FB9 /* TitleCollectionListCell.xib */; };
 		DDB8CC6925D2A69500439FB9 /* HeaderCollectionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8CC6825D2A69500439FB9 /* HeaderCollectionListView.swift */; };
@@ -128,6 +132,10 @@
 		BD17C0A50AD2BCB785CEF383 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
 		DD6AEDFD25D287F90059E312 /* CollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListViewController.swift; sourceTree = "<group>"; };
 		DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
+		DD7F280125D5016C00130C9B /* SizableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionViewController.swift; sourceTree = "<group>"; };
+		DD7F281125D501ED00130C9B /* SizableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionViewCell.swift; sourceTree = "<group>"; };
+		DD7F281525D501F700130C9B /* SizableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SizableCollectionViewCell.xib; sourceTree = "<group>"; };
+		DD7F281D25D506AC00130C9B /* VerticalSizableTextGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSizableTextGenerator.swift; sourceTree = "<group>"; };
 		DDB8CC6025D2A66D00439FB9 /* TitleCollectionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionListCell.swift; sourceTree = "<group>"; };
 		DDB8CC6425D2A67E00439FB9 /* TitleCollectionListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCollectionListCell.xib; sourceTree = "<group>"; };
 		DDB8CC6825D2A69500439FB9 /* HeaderCollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionListView.swift; sourceTree = "<group>"; };
@@ -372,6 +380,7 @@
 				DD6AEE0225D2882B0059E312 /* CollectionViewController */,
 				DD6AEE0125D288050059E312 /* CollectionListViewController */,
 				DDE16B5325D3B808005B988A /* ImageCollectionViewController */,
+				DD7F280025D5015300130C9B /* SizableCollectionViewController */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -478,6 +487,49 @@
 				DD6AEE1625D28EEF0059E312 /* MainCollectionViewController.swift */,
 			);
 			path = MainCollectionViewController;
+			sourceTree = "<group>";
+		};
+		DD7F280025D5015300130C9B /* SizableCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DD7F281925D504BA00130C9B /* Generators */,
+				DD7F280725D501BF00130C9B /* Cells */,
+				DD7F280125D5016C00130C9B /* SizableCollectionViewController.swift */,
+			);
+			path = SizableCollectionViewController;
+			sourceTree = "<group>";
+		};
+		DD7F280725D501BF00130C9B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DD7F280E25D501D800130C9B /* SizableCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		DD7F280E25D501D800130C9B /* SizableCell */ = {
+			isa = PBXGroup;
+			children = (
+				DD7F281125D501ED00130C9B /* SizableCollectionViewCell.swift */,
+				DD7F281525D501F700130C9B /* SizableCollectionViewCell.xib */,
+			);
+			path = SizableCell;
+			sourceTree = "<group>";
+		};
+		DD7F281925D504BA00130C9B /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				DD7F281C25D5068800130C9B /* SizableGenerator */,
+			);
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		DD7F281C25D5068800130C9B /* SizableGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				DD7F281D25D506AC00130C9B /* VerticalSizableTextGenerator.swift */,
+			);
+			path = SizableGenerator;
 			sourceTree = "<group>";
 		};
 		DDB8CC5C25D2A63000439FB9 /* Cells */ = {
@@ -641,6 +693,7 @@
 				8B85E2E31FE84F540080984A /* Main.storyboard in Resources */,
 				DDE16B5F25D3B8B0005B988A /* ImageCollectionViewCell.xib in Resources */,
 				DDB8CC6525D2A67E00439FB9 /* TitleCollectionListCell.xib in Resources */,
+				DD7F281625D501F700130C9B /* SizableCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,6 +796,7 @@
 				6D3B9AEC25D6903000F6E05C /* SwipeActionProvider.swift in Sources */,
 				DD6AEE1725D28EEF0059E312 /* MainCollectionViewController.swift in Sources */,
 				8B04A1D71FE9020800407BED /* TitleTableViewCell.swift in Sources */,
+				DD7F282B25D53AB600130C9B /* SizableCollectionViewController.swift in Sources */,
 				6DB6B0FD25CBB626008951D2 /* MovableTableViewController.swift in Sources */,
 				6D4B326025CA9A3500FC7979 /* FoldableCellGenerator.swift in Sources */,
 				6DB6B0F925CBB4FE008951D2 /* MovableCellGenerator.swift in Sources */,
@@ -752,7 +806,9 @@
 				DDB8CC6925D2A69500439FB9 /* HeaderCollectionListView.swift in Sources */,
 				DDE16B5525D3B829005B988A /* ImageCollectionViewController.swift in Sources */,
 				8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */,
+				DD7F281E25D506AC00130C9B /* VerticalSizableTextGenerator.swift in Sources */,
 				8B1D7907201C8BDA00F184BD /* CollectionViewController.swift in Sources */,
+				DD7F282E25D53ABA00130C9B /* SizableCollectionViewCell.swift in Sources */,
 				DDB8CC6125D2A66D00439FB9 /* TitleCollectionListCell.swift in Sources */,
 				6D27964A25C85E680085B845 /* ImageTableGenerator.swift in Sources */,
 				6D2AD36225D3A4870077900F /* SectionTitleTableViewController.swift in Sources */,
