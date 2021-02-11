@@ -27,6 +27,17 @@ open class BaseTableDataSource: NSObject {
 
     var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
+    var featurePlugins = [FeaturePlugin]()
+
+    // MARK: - Private Properties
+
+    private var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable? {
+        return featurePlugins.elementOfType(TableSectionTitleDisplayable.self)
+    }
+
+    private var movablePlugin: TableMovable? {
+        return featurePlugins.elementOfType(TableMovable.self)
+    }
 
 }
 
@@ -35,7 +46,7 @@ open class BaseTableDataSource: NSObject {
 extension BaseTableDataSource: TableDataSource {
 
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return provider?.sections.count ?? 0
+        return sectionTitleDisplayablePlugin?.numberOfSections(with: provider) ?? provider?.sections.count ?? 0
     }
 
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -55,11 +66,20 @@ extension BaseTableDataSource: TableDataSource {
     }
 
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider)
         tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
     }
 
     open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return movablePlugin?.canMoveRow(at: indexPath, with: provider) ?? false
+    }
+
+    open func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return sectionTitleDisplayablePlugin?.sectionIndexTitles(with: provider)
+    }
+
+    open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        return sectionTitleDisplayablePlugin?.sectionForSectionIndexTitle(title, at: index, with: provider) ?? -1
     }
 
 }

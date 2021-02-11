@@ -42,6 +42,7 @@ public class TableBuilder<T: BaseTableManager> {
     var tablePlugins = TablePluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
+    var featurePlugins = [FeaturePlugin]()
 
     // MARK: - Initialization
 
@@ -66,7 +67,13 @@ public class TableBuilder<T: BaseTableManager> {
         return self
     }
 
-    /// Add plugin functionality based on UITableViewDelegate events
+    /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
+    public func add(featurePlugin: FeaturePlugin) -> TableBuilder<T> {
+        featurePlugins.append(featurePlugin)
+        return self
+    }
+
+    /// Add plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(plugin: BaseTablePlugin<TableEvent>) -> TableBuilder<T> {
         tablePlugins.add(plugin)
         return self
@@ -90,9 +97,11 @@ public class TableBuilder<T: BaseTableManager> {
         delegate.manager = manager
         delegate.tablePlugins = tablePlugins
         delegate.scrollPlugins = scrollPlugins
+        delegate.featurePlugins = featurePlugins
         view.delegate = delegate
 
         dataSource.provider = manager
+        dataSource.featurePlugins = featurePlugins
         dataSource.tablePlugins = tablePlugins
 
         view.dataSource = dataSource
