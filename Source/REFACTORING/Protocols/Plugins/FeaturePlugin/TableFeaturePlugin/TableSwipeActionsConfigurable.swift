@@ -7,12 +7,6 @@
 //
 
 @available(iOS 11.0, *)
-public protocol SwipeableItem {
-    var actionTypes: [String] { get set }
-    var didSwipeEvent: BaseEvent<String> { get }
-}
-
-@available(iOS 11.0, *)
 public protocol TableSwipeActionsProvider {
     var isEnableSwipeActions: Bool { get set }
 
