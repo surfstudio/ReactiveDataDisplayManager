@@ -16,7 +16,6 @@ final class FoldableCollectionViewCell: UICollectionViewCell {
 
     struct ViewModel {
         let color: UIColor
-        let expanded: Bool
     }
 
     // MARK: - Constants
@@ -40,7 +39,6 @@ final class FoldableCollectionViewCell: UICollectionViewCell {
     // MARK: - Public Methods
 
     func configure(with viewModel: ViewModel) {
-        arrowImageView.transform = viewModel.expanded ? .identity : CGAffineTransform(rotationAngle: .pi)
         contentView.backgroundColor = viewModel.color
     }
 

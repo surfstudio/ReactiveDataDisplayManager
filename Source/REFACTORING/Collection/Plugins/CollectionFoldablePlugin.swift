@@ -19,15 +19,18 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
             else {
                 return
             }
-            
+
+            let visibleGenerators = foldable.childGenerators
+                .map { getVisibleGenerators(for: $0) }
+                .reduce([], +)
+
             if foldable.isExpanded {
-                foldable.childGenerators.forEach { manager?.remove($0,
-                                                                   needScrollAt: nil,
-                                                                   needRemoveEmptySection: false)
+                visibleGenerators.forEach {
+                    manager?.remove($0, needScrollAt: nil, needRemoveEmptySection: false)
                 }
             } else {
                 if let manager = manager as? ManualCollectionManager {
-                    manager.insert(after: generator, new: foldable.childGenerators)
+                    manager.insert(after: generator, new: visibleGenerators)
                 }
             }
 
@@ -35,6 +38,22 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
             foldable.didFoldEvent.invoke(with: (foldable.isExpanded))
         default:
             break
+        }
+    }
+
+}
+
+// MARK: - Private Methods
+
+private extension CollectionFoldablePlugin {
+
+    func getVisibleGenerators(for generator: CollectionCellGenerator) -> [CollectionCellGenerator] {
+        if let foldableItem = generator as? CollectionFoldableItem, foldableItem.isExpanded {
+            return foldableItem.childGenerators
+                .map { getVisibleGenerators(for: $0) }
+                .reduce([generator], +)
+        } else {
+            return [generator]
         }
     }
 

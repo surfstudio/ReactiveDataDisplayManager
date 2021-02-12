@@ -97,30 +97,36 @@ private extension FoldableCollectionViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+        // Create child generators
+        let child1 = makeRegularCellWithTitlesGenerators(count: 3)
+        let child2 = makeRegularCellWithTitlesGenerators(count: 5)
+        let child3 = makeRegularCellWithTitlesGenerators(count: 2)
+
+        // Create foldable generators
+        let folder1 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
+        let folder2 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
+        let folder3 = makeFoldableCellGenerator(color: .lightGray, expanded: true)
+
+        // Configure relationship
+        folder3.childGenerators = child3
+        folder2.childGenerators = child2 + [folder3]
+        folder1.childGenerators = child1 + [folder2]
+
         // Add foldable cell generators to adapter
-        adapter.addCellGenerator(makeFoldableCellGenerator(color: .lightGray,
-                                                           expanded: false,
-                                                           countChild: 3))
-
-        adapter.addCellGenerator(makeFoldableCellGenerator(color: .lightGray,
-                                                           expanded: false,
-                                                           countChild: 5))
-
-        adapter.addCellGenerator(makeFoldableCellGenerator(color: .lightGray,
-                                                           expanded: false,
-                                                           countChild: 2))
+        let visibleGenerators = getVisibleGenerators(for: folder1)
+        adapter.addCellGenerators(visibleGenerators)
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
     }
 
-    func makeFoldableCellGenerator(color: UIColor, expanded: Bool, countChild: Int) -> FoldableCollectionCellGenerator {
+    func makeFoldableCellGenerator(color: UIColor, expanded: Bool) -> FoldableCollectionCellGenerator {
         // Create foldable generator
-        let viewModel = FoldableCollectionViewCell.ViewModel(color: color, expanded: expanded)
+        let viewModel = FoldableCollectionViewCell.ViewModel(color: color)
         let generator = FoldableCollectionCellGenerator(with: viewModel)
 
-        // Create and add child generators
-        generator.childGenerators = makeRegularCellWithTitlesGenerators(count: countChild)
+        // Configure foldable initial state
+        generator.isExpanded = expanded
 
         return generator
     }
@@ -141,6 +147,16 @@ private extension FoldableCollectionViewController {
         }
 
         return generators
+    }
+
+    func getVisibleGenerators(for generator: CollectionCellGenerator) -> [CollectionCellGenerator] {
+        if let foldableItem = generator as? CollectionFoldableItem, foldableItem.isExpanded {
+            return foldableItem.childGenerators
+                .map { getVisibleGenerators(for: $0) }
+                .reduce([generator], +)
+        } else {
+            return [generator]
+        }
     }
 
     @objc

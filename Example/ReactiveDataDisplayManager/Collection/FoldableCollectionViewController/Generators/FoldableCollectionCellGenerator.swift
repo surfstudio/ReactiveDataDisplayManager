@@ -24,7 +24,6 @@ final class FoldableCollectionCellGenerator: CollectionFoldableItem {
 
     public init(with model: FoldableCollectionViewCell.ViewModel) {
         self.model = model
-        self.isExpanded = model.expanded
     }
 
 }
@@ -45,6 +44,7 @@ extension FoldableCollectionCellGenerator: ViewBuilder {
 
     func build(view: FoldableCollectionViewCell) {
         view.configure(with: model)
+        view.configure(expanded: isExpanded)
 
         didFoldEvent.addListner { isExpanded in
             view.configure(expanded: isExpanded)
