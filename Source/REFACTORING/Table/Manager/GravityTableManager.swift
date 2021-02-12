@@ -156,13 +156,13 @@ open class GravityTableManager: BaseTableManager {
                       insertAnimation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(oldGenerator), let table = self.view else { return }
 
-        table.beginUpdates()
-        self.generators[index.sectionIndex].remove(at: index.generatorIndex)
-        self.generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
-        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        table.deleteRows(at: [indexPath], with: removeAnimation)
-        table.insertRows(at: [indexPath], with: insertAnimation)
-        table.endUpdates()
+        animator?.perform(in: table) { [weak self] in
+            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
+            self?.generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
+            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+            table.deleteRows(at: [indexPath], with: removeAnimation)
+            table.insertRows(at: [indexPath], with: insertAnimation)
+        }
     }
 
     open func replace(header: HeaderGeneratorType, with animation: UITableView.RowAnimation = .fade) {

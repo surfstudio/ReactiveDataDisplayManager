@@ -9,6 +9,7 @@
 import UIKit
 
 /// CollectionDataDisplayManager that supports sizable generators
+@available(*, deprecated, message: "Use BaseCollectionManager instead")
 public class SizableCollectionDataDisplayManager: BaseCollectionDataDisplayManager {
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
