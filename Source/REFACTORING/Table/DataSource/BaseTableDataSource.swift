@@ -8,18 +8,6 @@
 
 import Foundation
 
-public protocol TableDataSource: UITableViewDataSource, UITableViewDataSourcePrefetching {
-    var provider: TableGeneratorsProvider? { get set }
-
-    var prefetchPlugins: PluginCollection<BaseTablePlugin<PrefetchEvent>> { get set }
-    var tablePlugins: PluginCollection<BaseTablePlugin<TableEvent>> { get set }
-}
-
-public protocol TableGeneratorsProvider: AnyObject {
-    var generators: [[TableCellGenerator]] { get set }
-    var sections: [TableHeaderGenerator] { get set }
-}
-
 /// Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
 open class BaseTableDataSource: NSObject, TableDataSource {
 

@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-////Base implementation of a TableStateManager. Handles all operations with generators and sections.
+/// Extended implementation of BaseTableManager with replace and insert shortcuts
 public class ManualTableManager: BaseTableManager {
 
     // MARK: - State Management Methods
