@@ -72,7 +72,7 @@ extension BaseTableDelegate: UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-        let plugin = featurePlugins.elementOfType(TableMovable.self)
+        let plugin = featurePlugins.elementOfType(TableMovableDelegate.self)
         return plugin?.canFocusRow(at: indexPath, with: manager) ?? false
     }
 

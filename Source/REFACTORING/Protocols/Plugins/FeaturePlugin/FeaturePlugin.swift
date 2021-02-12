@@ -14,8 +14,11 @@ public protocol TableSectionTitleDisplayable: FeaturePlugin {
     func sectionForSectionIndexTitle(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int
 }
 
-public protocol TableMovable: FeaturePlugin {
+public protocol TableMovableDataSource {
     func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool
     func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, with provider: TableGeneratorsProvider?)
+}
+
+public protocol TableMovableDelegate {
     func canFocusRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool
 }

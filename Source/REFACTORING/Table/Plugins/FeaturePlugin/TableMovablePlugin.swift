@@ -6,20 +6,30 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-open class TableMovablePlugin: TableMovable {
+open class TableMovablePlugin: FeaturePlugin {
 
     // MARK: - Initialization
 
     public init() {}
 
-    // MARK: - TableMovable
+}
 
+// MARK: - TableMovableDelegate
+
+extension TableMovablePlugin: TableMovableDelegate {
+    
     open func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
         if let generator = provider?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
             return generator.canMove()
         }
         return false
     }
+
+}
+
+// MARK: - TableMovableDataSource
+
+extension TableMovablePlugin: TableMovableDataSource {
 
     open func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, with provider: TableGeneratorsProvider?) {
         let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
