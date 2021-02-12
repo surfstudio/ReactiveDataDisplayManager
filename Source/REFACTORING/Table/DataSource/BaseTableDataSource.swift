@@ -17,7 +17,6 @@ public protocol TableGeneratorsProvider: AnyObject {
 
 extension BaseTableManager: TableGeneratorsProvider { }
 
-
 /// Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
 open class BaseTableDataSource: NSObject {
 
@@ -27,17 +26,8 @@ open class BaseTableDataSource: NSObject {
 
     var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
-    var featurePlugins = [FeaturePlugin]()
-
-    // MARK: - Private Properties
-
-    private var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable? {
-        return featurePlugins.elementOfType(TableSectionTitleDisplayable.self)
-    }
-
-    private var movablePlugin: TableMovable? {
-        return featurePlugins.elementOfType(TableMovable.self)
-    }
+    var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
+    var movablePlugin: TableMovableDataSource?
 
 }
 
