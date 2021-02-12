@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 public protocol TableDelegate: UITableViewDelegate {
 
     var manager: BaseTableManager? { get set }

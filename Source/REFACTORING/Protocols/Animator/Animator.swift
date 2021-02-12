@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 /// Entity to animate specific collection operations like insert or remove rows
 open class Animator<Collection: UIView> {
 

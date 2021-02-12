@@ -6,6 +6,9 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import Foundation
+import UIKit
+
 open class MovableTableDataSource: BaseTableDataSource {
 
     open override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {

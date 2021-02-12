@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 open class MovableTableDelegate: BaseTableDelegate {
 
     open override func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {

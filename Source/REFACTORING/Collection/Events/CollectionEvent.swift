@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 public enum CollectionEvent {
     case didSelect(IndexPath)
     case didDeselect(IndexPath)

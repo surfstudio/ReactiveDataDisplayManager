@@ -6,7 +6,7 @@
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // Base implementation for UITableViewDelegate protocol. Use it if NO special logic required.
 open class BaseTableDelegate: NSObject, TableDelegate {

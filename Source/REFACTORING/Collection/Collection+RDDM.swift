@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 extension UICollectionView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UICollectionView {

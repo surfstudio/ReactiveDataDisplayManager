@@ -6,7 +6,7 @@
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import UIKit
 
 extension NSObject {

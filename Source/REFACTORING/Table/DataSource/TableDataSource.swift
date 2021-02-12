@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 public protocol TableDataSource: UITableViewDataSource, UITableViewDataSourcePrefetching {
     var provider: TableGeneratorsProvider? { get set }
 

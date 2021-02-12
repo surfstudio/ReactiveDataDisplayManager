@@ -6,7 +6,7 @@
 ////  Copyright © 2020 Александр Кравченков. All rights reserved.
 ////
 
-import Foundation
+import UIKit
 
 /// Base implementation of DataDisplayManager for UITableView that contains minimal interface
 open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
@@ -120,7 +120,7 @@ extension BaseTableManager {
 
     func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in generators.enumerated() {
-            if let generatorIndex = section.index(where: { $0 === generator }) {
+            if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
                 return (sectionIndex, generatorIndex)
             }
         }

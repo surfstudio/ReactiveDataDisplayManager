@@ -6,7 +6,7 @@
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Determinantes interface for interaction with any display manager.
 /// It can hide implementation of UITableView or UICollection view or your custom control with any data source.
