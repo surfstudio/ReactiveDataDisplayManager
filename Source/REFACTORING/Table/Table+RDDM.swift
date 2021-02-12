@@ -39,7 +39,7 @@ public class TableBuilder<T: BaseTableManager> {
     let view: UITableView
     let manager: T
     var delegate: BaseTableDelegate
-    var dataSource: BaseTableDataSource
+    var dataSource: TableDataSource
     var animator: TableAnimator
 
     var tablePlugins = TablePluginsCollection()
@@ -74,7 +74,7 @@ public class TableBuilder<T: BaseTableManager> {
     }
 
     /// Change dataSource
-    public func set(dataSource: BaseTableDataSource) -> TableBuilder<T> {
+    public func set(dataSource: TableDataSource) -> TableBuilder<T> {
         self.dataSource = dataSource
         return self
     }

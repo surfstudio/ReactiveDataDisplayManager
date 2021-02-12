@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class BaseTableManager: DataDisplayManager {
+open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     // MARK: - Typealias
 
@@ -26,7 +26,7 @@ open class BaseTableManager: DataDisplayManager {
     public var sections: [TableHeaderGenerator]
 
     var delegate: BaseTableDelegate?
-    var dataSource: BaseTableDataSource?
+    var dataSource: TableDataSource?
     var animator: TableAnimator?
 
     // MARK: - Initialization
