@@ -26,17 +26,8 @@ open class BaseTableDataSource: NSObject {
 
     var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
-    var featurePlugins = [FeaturePlugin]()
-
-    // MARK: - Private Properties
-
-    private var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable? {
-        return featurePlugins.elementOfType(TableSectionTitleDisplayable.self)
-    }
-
-    private var movablePlugin: TableMovableDataSource? {
-        return featurePlugins.elementOfType(TableMovableDataSource.self)
-    }
+    var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
+    var movablePlugin: TableMovableDataSource?
 
 }
 

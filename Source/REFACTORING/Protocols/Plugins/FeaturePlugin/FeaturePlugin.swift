@@ -14,6 +14,8 @@ public protocol TableSectionTitleDisplayable: FeaturePlugin {
     func sectionForSectionIndexTitle(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int
 }
 
+public typealias TableMovable = FeaturePlugin & TableMovableDataSource & TableMovableDelegate
+
 public protocol TableMovableDataSource {
     func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool
     func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, with provider: TableGeneratorsProvider?)

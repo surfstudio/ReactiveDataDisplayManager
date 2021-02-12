@@ -61,8 +61,4 @@ extension Array {
         return indices ~= index ? self[index] : nil
     }
 
-    func elementOfType<T>(_ type: T.Type) -> T? {
-        return first(where: { $0 is T }) as? T
-    }
-
 }
