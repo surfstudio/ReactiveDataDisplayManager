@@ -8,14 +8,16 @@
 
 import ReactiveDataDisplayManager
 
-class TitleTableGenerator: SelectableItem {
+class TitleTableGenerator: SelectableItem, SwipeableItem {
 
     // MARK: - Events
 
     var didSelectEvent = BaseEvent<Void>()
+    var didSwipeEvent = BaseEvent<String>()
 
     // MARK: - Stored properties
 
+    var actionTypes = [String]()
     var didSelected: Bool = false
     var isNeedDeselect: Bool = true
     fileprivate let model: String
@@ -25,6 +27,7 @@ class TitleTableGenerator: SelectableItem {
     public init(model: String) {
         self.model = model
     }
+
 }
 
 // MARK: - TableCellGenerator
