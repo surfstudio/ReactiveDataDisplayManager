@@ -11,6 +11,7 @@ import UIKit
 /// Contains base implementation of DataDisplayManager and HeaderDataDisplayManager with UICollectionView.
 /// Registers nibs.
 /// Can fill collection with user data.
+@available(*, deprecated, message: "Use BaseCollectionManager instead")
 open class BaseCollectionDataDisplayManager: NSObject {
 
     // MARK: - Typealiases

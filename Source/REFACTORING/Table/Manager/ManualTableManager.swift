@@ -310,13 +310,13 @@ public class ManualTableManager: BaseTableManager {
                       insertAnimation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(oldGenerator), let table = self.view else { return }
 
-        table.beginUpdates()
-        self.generators[index.sectionIndex].remove(at: index.generatorIndex)
-        self.generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
-        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        table.deleteRows(at: [indexPath], with: removeAnimation)
-        table.insertRows(at: [indexPath], with: insertAnimation)
-        table.endUpdates()
+        animator?.perform(in: table) { [weak self] in
+            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
+            self?.generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
+            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+            table.deleteRows(at: [indexPath], with: removeAnimation)
+            table.insertRows(at: [indexPath], with: insertAnimation)
+        }
     }
 
     /// Swaps two generators between each other.
@@ -373,9 +373,9 @@ private extension ManualTableManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
-        table.beginUpdates()
-        table.insertRows(at: indexPaths, with: animation)
-        table.endUpdates()
+        animator?.perform(in: table) {
+            table.insertRows(at: indexPaths, with: animation)
+        }
     }
 
 }

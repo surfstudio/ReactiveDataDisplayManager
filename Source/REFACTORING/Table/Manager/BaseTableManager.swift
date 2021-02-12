@@ -16,6 +16,8 @@ open class BaseTableManager: DataDisplayManager {
     public typealias CellGeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
 
+    public typealias TableAnimator = Animator<CollectionType>
+
     // MARK: - Public properties
 
     public weak var view: UITableView?
@@ -25,6 +27,7 @@ open class BaseTableManager: DataDisplayManager {
 
     var delegate: BaseTableDelegate?
     var dataSource: BaseTableDataSource?
+    var animator: TableAnimator?
 
     // MARK: - Initialization
 
@@ -129,25 +132,24 @@ extension BaseTableManager {
                          needRemoveEmptySection: Bool = false) {
         guard let table = view else { return }
 
-        // perform update
-        table.beginUpdates()
-        self.generators[index.sectionIndex].remove(at: index.generatorIndex)
-        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        table.deleteRows(at: [indexPath], with: animation)
+        animator?.perform(in: table, animation: { [weak self] in
+            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
+            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+            table.deleteRows(at: [indexPath], with: animation)
 
-        // remove empty section if needed
-        if needRemoveEmptySection && self.generators[index.sectionIndex].isEmpty {
-            self.generators.remove(at: index.sectionIndex)
-            self.sections.remove(at: index.sectionIndex)
-            table.deleteSections(IndexSet(integer: index.sectionIndex), with: animation)
-        }
+            // remove empty section if needed
+            let sectionIsEmpty = self?.generators[index.sectionIndex].isEmpty ?? true
+            if needRemoveEmptySection && sectionIsEmpty {
+                self?.generators.remove(at: index.sectionIndex)
+                self?.sections.remove(at: index.sectionIndex)
+                table.deleteSections(IndexSet(integer: index.sectionIndex), with: animation)
+            }
 
-        // scroll if needed
-        if let scrollPosition = scrollPosition {
-            table.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
-        }
-
-        table.endUpdates()
+            // scroll if needed
+            if let scrollPosition = scrollPosition {
+                table.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
+            }
+        })
     }
 
 }

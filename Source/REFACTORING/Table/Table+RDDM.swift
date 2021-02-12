@@ -32,12 +32,15 @@ public class TableBuilder<T: BaseTableManager> {
     typealias ScrollPluginsCollection = PluginCollection<BaseTablePlugin<ScrollEvent>>
     typealias PrefetchPluginsCollection = PluginCollection<BaseTablePlugin<PrefetchEvent>>
 
+    public typealias TableAnimator = Animator<BaseTableManager.CollectionType>
+
     // MARK: - Properties
 
     let view: UITableView
     let manager: T
     var delegate: BaseTableDelegate
     var dataSource: BaseTableDataSource
+    var animator: TableAnimator
 
     var tablePlugins = TablePluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
@@ -50,6 +53,13 @@ public class TableBuilder<T: BaseTableManager> {
         self.manager = manager
         delegate = BaseTableDelegate()
         dataSource = BaseTableDataSource()
+        animator = {
+            if #available(iOS 11, *) {
+                return TableBatchUpdatesAnimator()
+            } else {
+                return TableUpdatesAnimator()
+            }
+        }()
     }
 
     // MARK: - Public Methods
@@ -63,6 +73,12 @@ public class TableBuilder<T: BaseTableManager> {
     /// Change dataSource
     public func set(dataSource: BaseTableDataSource) -> TableBuilder<T> {
         self.dataSource = dataSource
+        return self
+    }
+
+    /// Change animator
+    public func set(animator: TableAnimator) -> TableBuilder<T> {
+        self.animator = animator
         return self
     }
 
@@ -103,6 +119,7 @@ public class TableBuilder<T: BaseTableManager> {
         }
 
         manager.view = view
+        manager.animator = animator
         manager.delegate = delegate
         manager.dataSource = dataSource
         return manager

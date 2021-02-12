@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01157AFA25D51D2D00BFD55B /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157AF925D51D2D00BFD55B /* Animator.swift */; };
+		01157AFF25D5212100BFD55B /* TableUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */; };
+		01157B0325D5228C00BFD55B /* TableBatchUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */; };
 		016B9E9025BAAE200038B3CF /* MovableTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */; };
 		0183560C25BEE60B00141448 /* ManualTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183560B25BEE60B00141448 /* ManualTableManager.swift */; };
 		0191C05725D14BD900DF9081 /* BaseTablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0191C05625D14BD900DF9081 /* BaseTablePlugin.swift */; };
@@ -90,6 +93,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01157AF925D51D2D00BFD55B /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableUpdatesAnimator.swift; sourceTree = "<group>"; };
+		01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		016B9E8F25BAAE200038B3CF /* MovableTableDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableDelegate.swift; sourceTree = "<group>"; };
 		0183560B25BEE60B00141448 /* ManualTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableManager.swift; sourceTree = "<group>"; };
 		0191C05625D14BD900DF9081 /* BaseTablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTablePlugin.swift; sourceTree = "<group>"; };
@@ -186,9 +192,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01157AF825D51D1600BFD55B /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				01157AF925D51D2D00BFD55B /* Animator.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		01157AFD25D520E300BFD55B /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */,
+				01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
 		01AF216925C2E273004996E9 /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				01157AFD25D520E300BFD55B /* Animator */,
 				01AF217625C2E4E4004996E9 /* Plugins */,
 				01AF216F25C2E439004996E9 /* Events */,
 				01AF216C25C2E2C5004996E9 /* Manager */,
@@ -372,6 +396,7 @@
 		B20633C0256672FA00C65D25 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				01157AF825D51D1600BFD55B /* Animator */,
 				01AF586B25B9A33A00AE4286 /* Wrapper */,
 				01B283E025B8B2D80022B789 /* Plugins */,
 			);
@@ -640,6 +665,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01157AFA25D51D2D00BFD55B /* Animator.swift in Sources */,
 				016B9E9025BAAE200038B3CF /* MovableTableDelegate.swift in Sources */,
 				DD165F9F25D2CA53006F46CF /* BaseCollectionPlugin.swift in Sources */,
 				01AF217825C2E514004996E9 /* TableSelectablePlugin.swift in Sources */,
@@ -681,6 +707,7 @@
 				C1AB77DC240D6796000044F1 /* CalculatableHeightCollectionCellGenerator.swift in Sources */,
 				01B283EC25B8B5F70022B789 /* PluginCollection.swift in Sources */,
 				C1AB77DE240D6919000044F1 /* SizableCollectionDataDisplayManager.swift in Sources */,
+				01157AFF25D5212100BFD55B /* TableUpdatesAnimator.swift in Sources */,
 				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
 				897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */,
 				4F088BF31F4E9F74006B7809 /* Protocols.swift in Sources */,
@@ -694,6 +721,7 @@
 				899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */,
 				8987883D2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift in Sources */,
 				C18E5172240E541200750D8C /* CalculatableHeightCellGenerator.swift in Sources */,
+				01157B0325D5228C00BFD55B /* TableBatchUpdatesAnimator.swift in Sources */,
 				DDE16B4425D3A91C005B988A /* Collection+RDDM.swift in Sources */,
 				89FFDDBA23584B9F00D2C769 /* GravityTableDataDisplayManager.swift in Sources */,
 				01AF586D25B9A35900AE4286 /* DataDisplayWrapper.swift in Sources */,
