@@ -23,7 +23,7 @@ final class SizableCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = collectionView.rddm.baseBuilder
+    private lazy var adapter = collectionView.rddm.flowBuilder
         .build()
 
     // MARK: - UIViewController

@@ -14,6 +14,11 @@ public extension DataDisplayWrapper where Base: UICollectionView {
         CollectionBuilder(view: base, manager: BaseCollectionManager())
     }
 
+    var flowBuilder: CollectionBuilder<BaseCollectionManager> {
+        CollectionBuilder(view: base, manager: BaseCollectionManager())
+            .set(delegate: FlowCollectionDelegate())
+    }
+
 }
 
 public class CollectionBuilder<T: BaseCollectionManager> {

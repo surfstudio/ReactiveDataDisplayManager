@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CollectionDelegate: UICollectionViewDelegateFlowLayout {
+protocol CollectionDelegate: UICollectionViewDelegate {
     var manager: BaseCollectionManager? { get set }
     var collectionPlugins: PluginCollection<BaseCollectionPlugin<CollectionEvent>> { get set }
     var scrollPlugins: PluginCollection<BaseCollectionPlugin<ScrollEvent>> { get set }
@@ -60,25 +60,6 @@ extension BaseCollectionDelegate: CollectionDelegate {
 
     open func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         collectionPlugins.process(event: .didEndDisplayingSupplementaryView(indexPath), with: manager)
-    }
-
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension BaseCollectionDelegate: UICollectionViewDelegateFlowLayout {
-
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        if let sizableCell = manager?.generators[indexPath.section][indexPath.row] as? SizableCollectionCellGenerator {
-            return sizableCell.getSize()
-        }
-
-        if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-            return flowLayout.itemSize
-        }
-
-        return .zero
     }
 
 }
