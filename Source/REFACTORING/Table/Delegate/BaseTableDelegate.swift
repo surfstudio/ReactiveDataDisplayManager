@@ -146,6 +146,18 @@ extension BaseTableDelegate: UITableViewDelegate {
         tablePlugins.process(event: .didUpdateFocus(context: context, coordinator: coordinator), with: manager)
     }
 
+    @available(iOS 11.0, *)
+    open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let plugin = featurePlugins.elementOfType(TableSwipeActionsConfigurationPlugin.self)
+        return plugin?.leadingSwipeActionsConfigurationForRow(at: indexPath, with: manager)
+    }
+
+    @available(iOS 11.0, *)
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let plugin = featurePlugins.elementOfType(TableSwipeActionsConfigurationPlugin.self)
+        return plugin?.trailingSwipeActionsConfigurationForRow(at: indexPath, with: manager)
+    }
+
 }
 
 // MARK: UIScrollViewDelegate
