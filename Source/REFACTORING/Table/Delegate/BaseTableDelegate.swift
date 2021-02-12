@@ -8,33 +8,15 @@
 
 import Foundation
 
-public protocol TableStateManager: DataDisplayManager {
-    func remove(_ generator: CellGeneratorType,
-                with animation: UITableView.RowAnimation,
-                needScrollAt scrollPosition: UITableView.ScrollPosition?,
-                needRemoveEmptySection: Bool)
-}
-
-public protocol TableAdapter: AnyObject {
-    var tableView: UITableView { get }
-    var scrollEvent: BaseEvent<UITableView> { get set }
-    var scrollViewWillEndDraggingEvent: BaseEvent<CGPoint> { get set }
-    var cellChangedPosition: BaseEvent<(oldIndexPath: IndexPath, newIndexPath: IndexPath)> { get set }
-
-    /// Celled when cells displaying
-    var willDisplayCellEvent: BaseEvent<(TableCellGenerator, IndexPath)> { get set }
-    var didEndDisplayCellEvent: BaseEvent<(TableCellGenerator, IndexPath)> { get set }
-}
-
 // Base implementation for UITableViewDelegate protocol. Use it if NO special logic required.
-open class BaseTableDelegate: NSObject {
+open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Properties
 
-    weak var manager: BaseTableManager?
+    weak public var manager: BaseTableManager?
 
-    var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
-    var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
+    public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
+    public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
 
     // MARK: - Public Properties
 

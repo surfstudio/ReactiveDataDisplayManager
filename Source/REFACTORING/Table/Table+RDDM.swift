@@ -38,7 +38,7 @@ public class TableBuilder<T: BaseTableManager> {
 
     let view: UITableView
     let manager: T
-    var delegate: BaseTableDelegate
+    var delegate: TableDelegate
     var dataSource: TableDataSource
     var animator: TableAnimator
 
@@ -65,7 +65,7 @@ public class TableBuilder<T: BaseTableManager> {
     // MARK: - Public Methods
 
     /// Change delegate
-    public func set(delegate: BaseTableDelegate) -> TableBuilder<T> {
+    public func set(delegate: TableDelegate) -> TableBuilder<T> {
         self.delegate = delegate
         return self
     }

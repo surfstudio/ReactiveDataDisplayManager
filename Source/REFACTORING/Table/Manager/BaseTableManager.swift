@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Base implementation of DataDisplayManager for UITableView that contains minimal interface
 open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     // MARK: - Typealias
@@ -25,7 +26,7 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     public var generators: [[TableCellGenerator]]
     public var sections: [TableHeaderGenerator]
 
-    var delegate: BaseTableDelegate?
+    var delegate: TableDelegate?
     var dataSource: TableDataSource?
     var animator: TableAnimator?
 

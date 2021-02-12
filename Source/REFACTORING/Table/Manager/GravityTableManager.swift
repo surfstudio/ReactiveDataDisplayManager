@@ -29,6 +29,7 @@ extension EmptyTableHeaderGenerator: Gravity {
     }
 }
 
+/// DataDisplayManager for UITableView
 /// Warning. Do not forget to conform TableCellGenerator to Gravity (GravityTableCellGenerator)
 open class GravityTableManager: BaseTableManager {
 
