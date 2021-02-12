@@ -8,35 +8,21 @@
 
 import Foundation
 
-protocol CollectionDataSource: UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
-    var provider: CollectionGeneratorsProvider? { get set }
-    var prefetchPlugins: PluginCollection< BaseCollectionPlugin <PrefetchEvent>> { get set }
-    var collectionPlugins: PluginCollection< BaseCollectionPlugin <CollectionEvent>> { get set }
-}
-
-public protocol CollectionGeneratorsProvider: AnyObject {
-    var generators: [[CollectionCellGenerator]] { get set }
-    var sections: [CollectionHeaderGenerator] { get set }
-}
-
-extension BaseCollectionManager: CollectionGeneratorsProvider { }
-
-
 // Base implementation for UICollectionViewDataSource protocol. Use it if NO special logic required.
-open class BaseCollectionDataSource: NSObject {
+open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
     // MARK: - Properties
 
-    weak var provider: CollectionGeneratorsProvider?
+    weak public var provider: CollectionGeneratorsProvider?
 
-    var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
-    var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
+    public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
+    public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
 
 }
 
 // MARK: - UICollectionViewDataSource
 
-extension BaseCollectionDataSource: CollectionDataSource {
+extension BaseCollectionDataSource: UICollectionViewDataSource {
 
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return provider?.sections.count ?? 0
@@ -76,6 +62,8 @@ extension BaseCollectionDataSource: CollectionDataSource {
     }
 
 }
+
+// MARK: - UICollectionViewDataSourcePrefetching
 
 extension BaseCollectionDataSource: UICollectionViewDataSourcePrefetching {
 

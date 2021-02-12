@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class BaseCollectionManager: DataDisplayManager {
+open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvider {
 
     // MARK: - Typealias
 
