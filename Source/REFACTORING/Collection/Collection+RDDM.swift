@@ -52,13 +52,13 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     // MARK: - Public Methods
 
     /// Change delegate
-    public func set(delegate: BaseCollectionDelegate) -> CollectionBuilder<T> {
+    public func set(delegate: CollectionDelegate) -> CollectionBuilder<T> {
         self.delegate = delegate
         return self
     }
 
     /// Change dataSource
-    public func set(dataSource: BaseCollectionDataSource) -> CollectionBuilder<T> {
+    public func set(dataSource: CollectionDataSource) -> CollectionBuilder<T> {
         self.dataSource = dataSource
         return self
     }
