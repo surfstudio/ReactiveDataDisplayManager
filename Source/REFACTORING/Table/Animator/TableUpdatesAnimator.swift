@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 /// UITableView Animator based on beginUpdates and endUpdates
 public class TableUpdatesAnimator: Animator<UITableView> {
 

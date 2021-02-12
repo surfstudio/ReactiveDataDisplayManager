@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 public class TableDisplayablePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - BaseTablePlugin

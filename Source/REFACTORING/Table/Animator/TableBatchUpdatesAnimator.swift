@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 /// UITableView Animator based on performBatchUpdates
 @available(iOS 11, *)
 public class TableBatchUpdatesAnimator: Animator<UITableView> {

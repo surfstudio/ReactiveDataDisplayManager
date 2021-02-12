@@ -6,7 +6,7 @@
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public protocol Gravity: AnyObject {
     var heaviness: Int { get set }

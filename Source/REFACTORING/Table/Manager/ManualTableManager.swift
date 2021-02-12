@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 /// Extended implementation of BaseTableManager with replace and insert shortcuts
 public class ManualTableManager: BaseTableManager {
 
@@ -93,14 +95,14 @@ public class ManualTableManager: BaseTableManager {
             self.generators.append([TableCellGenerator]())
         }
 
-        if let index = self.sections.index(where: { $0 === TableHeaderGenerator }) {
+        if let index = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }) {
             self.generators[index].append(contentsOf: generators)
         }
     }
 
     /// Removes all TableCellGenerator generators from a given section
     open func removeAllGenerators(from TableHeaderGenerator: TableHeaderGenerator) {
-        guard let index = self.sections.index(where: { $0 === TableHeaderGenerator }), self.generators.count > index else {
+        guard let index = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }), self.generators.count > index else {
             return
         }
 
@@ -123,7 +125,7 @@ public class ManualTableManager: BaseTableManager {
                      generators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation = .automatic) {
         self.insert(headGenerator: headGenerator, by: index, animation: animation)
-        guard let headerIndex = self.sections.index(where: { $0 === headGenerator }) else {
+        guard let headerIndex = self.sections.firstIndex(where: { $0 === headGenerator }) else {
             return
         }
 
@@ -147,7 +149,7 @@ public class ManualTableManager: BaseTableManager {
                             with animation: UITableView.RowAnimation = .automatic) {
         self.insert(headGenerator: sectionHeader, before: TableHeaderGenerator)
 
-        guard let headerIndex = self.sections.index(where: {
+        guard let headerIndex = self.sections.firstIndex(where: {
             $0 === sectionHeader
         }) else {
             return
@@ -173,7 +175,7 @@ public class ManualTableManager: BaseTableManager {
                             with animation: UITableView.RowAnimation = .automatic) {
         self.insert(headGenerator: sectionHeader, after: TableHeaderGenerator)
 
-        guard let headerIndex = self.sections.index(where: {
+        guard let headerIndex = self.sections.firstIndex(where: {
             $0 === sectionHeader
         }) else {
             return
@@ -254,7 +256,7 @@ public class ManualTableManager: BaseTableManager {
     open func insert(to TableHeaderGenerator: TableHeaderGenerator,
                      new generator: TableCellGenerator,
                      with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sections.index(where: { $0 === TableHeaderGenerator }) else {
+        guard let headerIndex = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }) else {
             return
         }
         self.insert(elements: [(generator, headerIndex, 0)], with: animation)
@@ -269,7 +271,7 @@ public class ManualTableManager: BaseTableManager {
     open func insertAtBeginning(to TableHeaderGenerator: TableHeaderGenerator,
                                 new generators: [TableCellGenerator],
                                 with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sections.index(where: { $0 === TableHeaderGenerator }) else {
+        guard let headerIndex = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }) else {
             return
         }
         let elements = generators.enumerated().map { item in
@@ -287,7 +289,7 @@ public class ManualTableManager: BaseTableManager {
     open func insertAtEnd(to TableHeaderGenerator: TableHeaderGenerator,
                           new generators: [TableCellGenerator],
                           with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sections.index(where: { $0 === TableHeaderGenerator }) else {
+        guard let headerIndex = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }) else {
             return
         }
         let base = self.generators[headerIndex].count

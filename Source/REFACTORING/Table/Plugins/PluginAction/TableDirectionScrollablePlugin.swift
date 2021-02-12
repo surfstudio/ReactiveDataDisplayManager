@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 /// Added support for determining the direction of the scroll
 public class TableDirectionScrollablePlugin: BaseTablePlugin<ScrollEvent> {
 

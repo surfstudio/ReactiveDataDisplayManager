@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // Base implementation for UICollectionViewDataSource protocol. Use it if NO special logic required.
 open class BaseCollectionDataSource: NSObject, CollectionDataSource {
