@@ -29,6 +29,7 @@
 		6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */; };
 		6DB6B0F925CBB4FE008951D2 /* MovableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0F825CBB4FE008951D2 /* MovableCellGenerator.swift */; };
 		6DB6B0FD25CBB626008951D2 /* MovableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0FC25CBB626008951D2 /* MovableTableViewController.swift */; };
+		6DF430B625D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF430B525D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift */; };
 		896B59712354962A00E8E2AB /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59702354962A00E8E2AB /* StackViewController.swift */; };
 		896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */; };
 		89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */; };
@@ -97,6 +98,7 @@
 		6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityCellGenerator.swift; sourceTree = "<group>"; };
 		6DB6B0F825CBB4FE008951D2 /* MovableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCellGenerator.swift; sourceTree = "<group>"; };
 		6DB6B0FC25CBB626008951D2 /* MovableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableViewController.swift; sourceTree = "<group>"; };
+		6DF430B525D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHorizontalCollectionViewController.swift; sourceTree = "<group>"; };
 		896B59702354962A00E8E2AB /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
 		89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
@@ -312,6 +314,14 @@
 			path = MovableTableViewController;
 			sourceTree = "<group>";
 		};
+		6DF430B925D984070093A1EB /* ImageHorizontalCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6DF430B525D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift */,
+			);
+			path = ImageHorizontalCollectionViewController;
+			sourceTree = "<group>";
+		};
 		896B59722354963900E8E2AB /* Stack */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +365,7 @@
 				DD6AEE0225D2882B0059E312 /* CollectionViewController */,
 				DD6AEE0125D288050059E312 /* CollectionListViewController */,
 				DDE16B5325D3B808005B988A /* ImageCollectionViewController */,
+				6DF430B925D984070093A1EB /* ImageHorizontalCollectionViewController */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -682,11 +693,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveDataDisplayManager/ReactiveDataDisplayManager.framework",
+				"${BUILT_PRODUCTS_DIR}/SurfUtils/SurfUtils.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveDataDisplayManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SurfUtils.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -718,6 +731,7 @@
 				6D2AD36625D3A6080077900F /* SectionTitleHeaderGenerator.swift in Sources */,
 				6D4B328225CAAC0600FC7979 /* GravityFoldableCellGenerator.swift in Sources */,
 				8B85E2E01FE84F540080984A /* MainTableViewController.swift in Sources */,
+				6DF430B625D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift in Sources */,
 				6D4B326425CA9A4400FC7979 /* FoldableTableViewCell.swift in Sources */,
 				6D4B325925CA99C100FC7979 /* FoldableTableViewController.swift in Sources */,
 				6D27964F25C85EA10085B845 /* ImageTableViewCell.swift in Sources */,
