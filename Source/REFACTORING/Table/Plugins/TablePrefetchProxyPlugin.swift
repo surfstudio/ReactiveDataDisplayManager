@@ -14,7 +14,7 @@ public class TablePrefetchProxyPlugin: BaseTablePlugin<PrefetchEvent> {
     public var prefetchEvent = BaseEvent<[IndexPath]>()
     public var cancelPrefetchingEvent = BaseEvent<[IndexPath]>()
 
-    // MARK: - PluginAction
+    // MARK: - BaseTablePlugin
 
     public override func process(event: PrefetchEvent, with manager: BaseTableManager?) {
         switch event {

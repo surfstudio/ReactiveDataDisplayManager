@@ -8,10 +8,9 @@
 
 public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
 
-    public override init() {}
+    // MARK: - BaseTablePlugin
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
-
         switch event {
         case .didSelect(let indexPath):
             guard

@@ -9,10 +9,9 @@
 // Adds support for Selectable item triggering
 public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
-    public override init() {}
+    // MARK: - BaseTablePlugin
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
-
         switch event {
         case .didSelect(let indexPath):
             guard let selectable = manager?.generators[indexPath.section][indexPath.row] as? SelectableItem else {
