@@ -29,6 +29,8 @@
 		6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */; };
 		6DB6B0F925CBB4FE008951D2 /* MovableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0F825CBB4FE008951D2 /* MovableCellGenerator.swift */; };
 		6DB6B0FD25CBB626008951D2 /* MovableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0FC25CBB626008951D2 /* MovableTableViewController.swift */; };
+		6DF4321F25D9D1D70093A1EB /* PrefetchingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF4321E25D9D1D70093A1EB /* PrefetchingCollectionViewController.swift */; };
+		6DF4322825D9DAD10093A1EB /* ImageCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF4322725D9DAD10093A1EB /* ImageCollectionCellGenerator.swift */; };
 		896B59712354962A00E8E2AB /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59702354962A00E8E2AB /* StackViewController.swift */; };
 		896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */; };
 		89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */; };
@@ -97,6 +99,8 @@
 		6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityCellGenerator.swift; sourceTree = "<group>"; };
 		6DB6B0F825CBB4FE008951D2 /* MovableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCellGenerator.swift; sourceTree = "<group>"; };
 		6DB6B0FC25CBB626008951D2 /* MovableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableViewController.swift; sourceTree = "<group>"; };
+		6DF4321E25D9D1D70093A1EB /* PrefetchingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchingCollectionViewController.swift; sourceTree = "<group>"; };
+		6DF4322725D9DAD10093A1EB /* ImageCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		896B59702354962A00E8E2AB /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
 		89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
@@ -312,6 +316,15 @@
 			path = MovableTableViewController;
 			sourceTree = "<group>";
 		};
+		6DF4322225D9D1E30093A1EB /* PrefetchingCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6DF4321E25D9D1D70093A1EB /* PrefetchingCollectionViewController.swift */,
+				6DF4322725D9DAD10093A1EB /* ImageCollectionCellGenerator.swift */,
+			);
+			path = PrefetchingCollectionViewController;
+			sourceTree = "<group>";
+		};
 		896B59722354963900E8E2AB /* Stack */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +368,7 @@
 				DD6AEE0225D2882B0059E312 /* CollectionViewController */,
 				DD6AEE0125D288050059E312 /* CollectionListViewController */,
 				DDE16B5325D3B808005B988A /* ImageCollectionViewController */,
+				6DF4322225D9D1E30093A1EB /* PrefetchingCollectionViewController */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -700,6 +714,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DF4321F25D9D1D70093A1EB /* PrefetchingCollectionViewController.swift in Sources */,
 				DDE16B5B25D3B8AA005B988A /* ImageCollectionViewCell.swift in Sources */,
 				DD67C1FE25D2B49100A1C149 /* CollectionListViewController.swift in Sources */,
 				6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */,
@@ -714,6 +729,7 @@
 				8B04A1DD1FE9028300407BED /* TitleTableGenerator.swift in Sources */,
 				896B59712354962A00E8E2AB /* StackViewController.swift in Sources */,
 				8BBCA97F201E0BEA007F866D /* TitleCollectionGenerator.swift in Sources */,
+				6DF4322825D9DAD10093A1EB /* ImageCollectionCellGenerator.swift in Sources */,
 				6D4B327B25CAA79000FC7979 /* GravityTableViewController.swift in Sources */,
 				6D2AD36625D3A6080077900F /* SectionTitleHeaderGenerator.swift in Sources */,
 				6D4B328225CAAC0600FC7979 /* GravityFoldableCellGenerator.swift in Sources */,

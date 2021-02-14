@@ -17,6 +17,7 @@ final class MainCollectionViewController: UIViewController {
         case baseCollection
         case listAppearances
         case imageCollection
+        case prefetchingCollection
     }
 
     // MARK: - Constants
@@ -25,7 +26,8 @@ final class MainCollectionViewController: UIViewController {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
             ("Base collection view", .baseCollection),
             ("List Appearances", .listAppearances),
-            ("Gallery without prefetching", .imageCollection)
+            ("Gallery without prefetching", .imageCollection),
+            ("Gallery with prefetching", .prefetchingCollection)
         ]
     }
 
