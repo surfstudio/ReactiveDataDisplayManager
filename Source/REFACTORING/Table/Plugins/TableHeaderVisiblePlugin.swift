@@ -56,9 +56,9 @@ private extension TableHeaderVisiblePlugin {
             let lastPath = pathsForVisibleRows.last
         else { return }
 
-         if lastPath.section >= section {
+        if lastPath.section >= section {
             action(section + 1)
-         }
+        }
     }
 
 }
