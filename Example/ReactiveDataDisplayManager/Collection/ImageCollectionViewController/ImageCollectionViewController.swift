@@ -15,7 +15,10 @@ final class ImageCollectionViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let cellSize = CGSize(width: 100, height: 100)
+        static let insets = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        static let minimumSpacing: CGFloat = 10
+        static let cellWidth = (UIScreen.main.bounds.width - (insets.left + insets.right + minimumSpacing)) / 2
+        static let cellSize = CGSize(width: cellWidth, height: 240)
     }
 
     // MARK: - IBOutlet
@@ -43,6 +46,9 @@ final class ImageCollectionViewController: UIViewController {
         super.viewDidDisappear(animated)
         DataLoader.sharedUrlCache.removeAllCachedResponses()
         ImageCache.shared.removeAll()
+        if let dataCache = ImagePipeline.shared.configuration.dataCache as? DataCache {
+            dataCache.removeAll()
+        }
     }
 
 }
@@ -54,9 +60,9 @@ private extension ImageCollectionViewController {
     func makeFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = Constants.cellSize
-        flowLayout.minimumLineSpacing = 10.0
-        flowLayout.minimumInteritemSpacing = 10.0
-        flowLayout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        flowLayout.minimumLineSpacing = Constants.minimumSpacing
+        flowLayout.minimumInteritemSpacing = Constants.minimumSpacing
+        flowLayout.sectionInset = Constants.insets
         flowLayout.scrollDirection = .vertical
 
         return flowLayout
@@ -66,7 +72,7 @@ private extension ImageCollectionViewController {
     func fillAdapter() {
         for _ in 0...300 {
             // Create viewModels for cell
-            guard let viewModel = ImageCollectionViewCell.ViewModel.make(for: Constants.cellSize) else { continue }
+            guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
 
             // Create generator
             let generator = BaseCollectionCellGenerator<ImageCollectionViewCell>(with: viewModel)

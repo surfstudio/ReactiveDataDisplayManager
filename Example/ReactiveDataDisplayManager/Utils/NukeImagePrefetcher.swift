@@ -13,12 +13,22 @@ final class NukeImagePrefetcher: ContentPrefetcher {
 
     // MARK: - Private Properties
 
-    private let imagePreheater = Nuke.ImagePreheater()
+    private let imagePreheater: ImagePreheater
 
     // MARK: - Initialization
 
     init() {
+        DataLoader.sharedUrlCache.diskCapacity = 0
+
+        let pipeline = ImagePipeline {
+            let dataCache = try? DataCache(name: "ReactiveDataDisplayManagerExample.datacache")
+            dataCache?.sizeLimit = 300 * 1024 * 1024
+            $0.dataCache = dataCache
+        }
+
+        ImagePipeline.shared = pipeline
         ImageLoadingOptions.shared.failureImage = #imageLiteral(resourceName: "imageNotFound")
+        imagePreheater = Nuke.ImagePreheater(maxConcurrentRequestCount: 15)
     }
 
     // MARK: - ContentPrefetcher
