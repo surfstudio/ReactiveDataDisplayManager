@@ -52,13 +52,13 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
 private extension TablePrefetcherablePlugin {
 
     func startPrefetching(from manager: BaseTableManager?, at indexPaths: [IndexPath]) {
-        let imageUrls = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
-        prefetcher.startPrefetching(for: imageUrls)
+        let contents = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
+        prefetcher.startPrefetching(for: contents)
     }
 
     func cancelPrefetching(from manager: BaseTableManager?, at indexPaths: [IndexPath]) {
-        let imageUrls = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
-        prefetcher.cancelPrefetching(for: imageUrls)
+        let contents = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
+        prefetcher.cancelPrefetching(for: contents)
     }
 
     func getPrefetcherableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> Generator? {

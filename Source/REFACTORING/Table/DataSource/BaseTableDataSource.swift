@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 /// Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
 open class BaseTableDataSource: NSObject, TableDataSource {
@@ -17,6 +18,8 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
+    public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
+    public var movablePlugin: TableMovableDataSource?
 
 }
 
@@ -25,7 +28,7 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 extension BaseTableDataSource: UITableViewDataSource {
 
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return provider?.sections.count ?? 0
+        return sectionTitleDisplayablePlugin?.numberOfSections(with: provider) ?? provider?.sections.count ?? 0
     }
 
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,11 +48,20 @@ extension BaseTableDataSource: UITableViewDataSource {
     }
 
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider)
         tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
     }
 
     open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return movablePlugin?.canMoveRow(at: indexPath, with: provider) ?? false
+    }
+
+    open func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return sectionTitleDisplayablePlugin?.sectionIndexTitles(with: provider)
+    }
+
+    open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        return sectionTitleDisplayablePlugin?.sectionForSectionIndexTitle(title, at: index, with: provider) ?? -1
     }
 
 }

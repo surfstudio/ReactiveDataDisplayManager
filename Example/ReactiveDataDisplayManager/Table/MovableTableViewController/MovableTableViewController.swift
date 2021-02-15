@@ -25,8 +25,7 @@ final class MovableTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .set(dataSource: MovableTableDataSource())
-        .set(delegate: MovableTableDelegate())
+        .add(featurePlugin: TableMovablePlugin())
         .build()
 
     // MARK: - UIViewController
