@@ -14,17 +14,21 @@ class TitleTableGenerator: SelectableItem {
 
     var didSelectEvent = BaseEvent<Void>()
 
-    // MARK: - Stored properties
+    // MARK: - Properties
 
     var didSelected: Bool = false
     var isNeedDeselect: Bool = true
-    fileprivate let model: String
+    
+    // MARK: - Private Properties
+
+    private let model: String
 
     // MARK: - Initializers
 
     public init(model: String) {
         self.model = model
     }
+
 }
 
 // MARK: - TableCellGenerator

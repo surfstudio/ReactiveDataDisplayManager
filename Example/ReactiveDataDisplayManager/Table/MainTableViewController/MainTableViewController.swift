@@ -21,6 +21,7 @@ final class MainTableViewController: UIViewController {
         case movableTable
         case alphabetizeSectionsTable
         case sectionTitlesTable
+        case swipeableTable
     }
 
     // MARK: - Constants
@@ -33,7 +34,8 @@ final class MainTableViewController: UIViewController {
             ("gravity table with foldable cell", .gravityTable),
             ("table with movable cell", .movableTable),
             ("table with alphabetize sections", .alphabetizeSectionsTable),
-            ("table with sections titles", .sectionTitlesTable)
+            ("table with sections titles", .sectionTitlesTable),
+            ("table with swipeable cells", .swipeableTable)
         ]
     }
 
