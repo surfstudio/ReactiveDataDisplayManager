@@ -78,7 +78,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 `tableView.rddm.baseBuilder.set(plugin: TableMovablePlugin()).build()`
 
 #### Пример реализации
-TODO
+См. TableMovablePlugin.
 
 ### Delegate
 
@@ -104,11 +104,10 @@ TODO
 
 ### Animator
 
-- Молекула отвечающая за вставку и удаление ячеек
-- Оперирует только **IndexPath**
+- Молекула отвечающая за анимацию операций вставки или удаления
 
-Эта сущность нужна для возможности сменить метод анимации таблицы. C **beginUpdates/endUpdates** на **performBatchUpdates** или с использованием стронних библиотек.
-Выделение этой сущности в процессе разработки.
+Эта сущность нужна для возможности сменить метод анимации таблицы. 
+C **beginUpdates/endUpdates** (это deprecated) на **performBatchUpdates** или с использованием стронних библиотек.
 
 #### Пример подключения
 
