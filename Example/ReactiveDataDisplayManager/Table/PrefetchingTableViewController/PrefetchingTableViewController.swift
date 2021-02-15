@@ -29,16 +29,13 @@ final class PrefetchingTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        DataLoader.sharedUrlCache.removeAllCachedResponses()
+        ImageCache.shared.removeAll()
+
         tableView.separatorStyle = .none
         title = "Gallery with prefetching"
 
         fillAdapter()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        DataLoader.sharedUrlCache.removeAllCachedResponses()
-        ImageCache.shared.removeAll()
     }
 
 }

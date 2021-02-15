@@ -31,18 +31,15 @@ final class ImageCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        DataLoader.sharedUrlCache.removeAllCachedResponses()
+        ImageCache.shared.removeAll()
+
         title = "Gallery without prefetching"
 
         let flowLayout = makeFlowLayout()
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
 
         fillAdapter()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        DataLoader.sharedUrlCache.removeAllCachedResponses()
-        ImageCache.shared.removeAll()
     }
 
 }

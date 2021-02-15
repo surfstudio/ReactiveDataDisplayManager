@@ -49,12 +49,6 @@ final class ImageHorizontalCollectionViewController: UIViewController {
         fillAdapter()
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        DataLoader.sharedUrlCache.removeAllCachedResponses()
-        ImageCache.shared.removeAll()
-    }
-
 }
 
 // MARK: - Private Methods

@@ -25,16 +25,13 @@ final class ImageTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        DataLoader.sharedUrlCache.removeAllCachedResponses()
+        ImageCache.shared.removeAll()
+
         tableView.separatorStyle = .none
         title = "Gallery without prefetching"
 
         fillAdapter()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        DataLoader.sharedUrlCache.removeAllCachedResponses()
-        ImageCache.shared.removeAll()
     }
 
 }

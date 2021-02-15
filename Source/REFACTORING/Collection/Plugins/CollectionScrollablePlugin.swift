@@ -6,11 +6,6 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public protocol CollectionScrollProvider {
-    func setBeginDraggingOffset(_ contentOffsetX: CGFloat)
-    func setTargetContentOffset(_ targetContentOffset: UnsafeMutablePointer<CGPoint>, for scrollView: UIScrollView)
-}
-
 /// Adds support for organizing scrolling the collection.
 public class CollectionScrollablePlugin: BaseCollectionPlugin<ScrollEvent> {
 
