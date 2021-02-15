@@ -14,4 +14,5 @@ public protocol TableDelegate: UITableViewDelegate {
 
     var tablePlugins: PluginCollection<BaseTablePlugin<TableEvent>> { get set }
     var scrollPlugins: PluginCollection<BaseTablePlugin<ScrollEvent>> { get set }
+    var movablePlugin: TableMovableDelegate? { get set }
 }
