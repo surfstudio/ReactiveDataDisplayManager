@@ -44,6 +44,7 @@ public class TableBuilder<T: BaseTableManager> {
     var prefetchPlugins = PrefetchPluginsCollection()
     var movablePlugin: TableMovable?
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
+    var swipeActionsPlugin: FeaturePlugin?
 
     // MARK: - Initialization
 
@@ -70,6 +71,8 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(featurePlugin: FeaturePlugin) -> TableBuilder<T> {
+        checkSwipeActionsPlugin(with: featurePlugin)
+
         switch featurePlugin {
         case let plugin as TableMovable:
             movablePlugin = plugin
@@ -103,9 +106,12 @@ public class TableBuilder<T: BaseTableManager> {
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
         delegate.manager = manager
+
+        setSwipeActionsPluginIfNeeded()
         delegate.tablePlugins = tablePlugins
         delegate.scrollPlugins = scrollPlugins
         delegate.movablePlugin = movablePlugin
+
         view.delegate = delegate
 
         dataSource.provider = manager
@@ -115,15 +121,41 @@ public class TableBuilder<T: BaseTableManager> {
 
         view.dataSource = dataSource
 
-        if #available(iOS 10.0, *) {
-            dataSource.prefetchPlugins = prefetchPlugins
-            view.prefetchDataSource = dataSource
-        }
+        setPrefetchDataSourceIfNeeded()
 
         manager.view = view
         manager.delegate = delegate
         manager.dataSource = dataSource
         return manager
+    }
+
+}
+
+// MARK: - Private Methods
+
+private extension TableBuilder {
+
+    func checkSwipeActionsPlugin(with plugin: FeaturePlugin) {
+        guard #available(iOS 11.0, *),
+              let plugin = plugin as? TableSwipeActionsConfigurable
+        else { return }
+
+        swipeActionsPlugin = plugin
+    }
+
+    func setSwipeActionsPluginIfNeeded() {
+        guard #available(iOS 11.0, *),
+              let plugin = swipeActionsPlugin as? TableSwipeActionsConfigurable
+        else { return }
+
+        delegate.swipeActionsPlugin = plugin
+    }
+
+    func setPrefetchDataSourceIfNeeded() {
+        if #available(iOS 10.0, *) {
+            dataSource.prefetchPlugins = prefetchPlugins
+            view.prefetchDataSource = dataSource
+        }
     }
 
 }
