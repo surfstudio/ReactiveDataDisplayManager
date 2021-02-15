@@ -1,5 +1,5 @@
 //
-//  SectionTitleTableDataSource.swift
+//  TableSectionTitleDisplayablePlugin.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 08.02.2021.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-/// Use this dataSource if you need to configure the display of sectionIndexTitle
-open class SectionTitleTableDataSource: BaseTableDataSource {
+/// Use this plugin if you need to configure the display of sectionIndexTitle
+open class TableSectionTitleDisplayablePlugin: TableSectionTitleDisplayable {
 
     // MARK: - Private Properties
 
@@ -24,13 +24,13 @@ open class SectionTitleTableDataSource: BaseTableDataSource {
         self.titleWrapper = titleWrapper
     }
 
-    // MARK: - UITableViewDataSource
+    // MARK: - TableSectionTitleDisplayable
 
-    open override func numberOfSections(in tableView: UITableView) -> Int {
+    open func numberOfSections(with provider: TableGeneratorsProvider?) -> Int {
         titleWrapper?.titles?.count ?? provider?.sections.count ?? 0
     }
 
-    open func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+    open func sectionIndexTitles(with provider: TableGeneratorsProvider?) -> [String]? {
         let sectionTitles = provider?.sections.compactMap { generator -> String? in
             guard let generator = generator as? SectionTitleDisplayble else {
                 return nil
@@ -40,17 +40,17 @@ open class SectionTitleTableDataSource: BaseTableDataSource {
         return titleWrapper?.titles ?? sectionTitles
     }
 
-    open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        return titleWrapper?.titles != nil ? index : getIndexForTitleFromHeaderGenerators(title, at: index)
+    open func sectionForSectionIndexTitle(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int {
+        return titleWrapper?.titles != nil ? index : getIndexForTitleFromHeaderGenerators(title, at: index, with: provider)
     }
 
 }
 
 // MARK: - Private Methods
 
-private extension SectionTitleTableDataSource {
+private extension TableSectionTitleDisplayablePlugin {
 
-    func getIndexForTitleFromHeaderGenerators(_ title: String, at index: Int) -> Int {
+    func getIndexForTitleFromHeaderGenerators(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int {
         return provider?.sections.firstIndex(where: { ($0 as? SectionTitleDisplayble)?.title == title }) ?? -1
     }
 

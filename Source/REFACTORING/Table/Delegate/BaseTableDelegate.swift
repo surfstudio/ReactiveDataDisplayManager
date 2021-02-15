@@ -35,6 +35,7 @@ open class BaseTableDelegate: NSObject {
 
     var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
+    var movablePlugin: TableMovableDelegate?
 
     // MARK: - Public Properties
 
@@ -71,7 +72,7 @@ extension BaseTableDelegate: UITableViewDelegate {
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return movablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
     }
 
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {

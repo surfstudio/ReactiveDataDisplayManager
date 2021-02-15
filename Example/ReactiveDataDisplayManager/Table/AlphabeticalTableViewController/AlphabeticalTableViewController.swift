@@ -26,7 +26,7 @@ final class AlphabeticalTableViewController: UIViewController {
 
     private let sectionTitleWrapper = TableSectionTitleWrapper()
     private lazy var adapter = tableView.rddm.manualBuilder
-        .set(dataSource: SectionTitleTableDataSource(titleWrapper: sectionTitleWrapper))
+        .add(featurePlugin: TableSectionTitleDisplayablePlugin(titleWrapper: sectionTitleWrapper))
         .build()
 
     // MARK: - UIViewController
