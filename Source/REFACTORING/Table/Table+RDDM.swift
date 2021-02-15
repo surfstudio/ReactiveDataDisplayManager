@@ -42,6 +42,8 @@ public class TableBuilder<T: BaseTableManager> {
     var tablePlugins = TablePluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
+    var movablePlugin: TableMovable?
+    var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
 
     // MARK: - Initialization
 
@@ -66,7 +68,20 @@ public class TableBuilder<T: BaseTableManager> {
         return self
     }
 
-    /// Add plugin functionality based on UITableViewDelegate events
+    /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
+    public func add(featurePlugin: FeaturePlugin) -> TableBuilder<T> {
+        switch featurePlugin {
+        case let plugin as TableMovable:
+            movablePlugin = plugin
+        case let plugin as TableSectionTitleDisplayable:
+            sectionTitleDisplayablePlugin = plugin
+        default:
+            break
+        }
+        return self
+    }
+
+    /// Add plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(plugin: BaseTablePlugin<TableEvent>) -> TableBuilder<T> {
         tablePlugins.add(plugin)
         return self
@@ -90,9 +105,12 @@ public class TableBuilder<T: BaseTableManager> {
         delegate.manager = manager
         delegate.tablePlugins = tablePlugins
         delegate.scrollPlugins = scrollPlugins
+        delegate.movablePlugin = movablePlugin
         view.delegate = delegate
 
         dataSource.provider = manager
+        dataSource.movablePlugin = movablePlugin
+        dataSource.sectionTitleDisplayablePlugin = sectionTitleDisplayablePlugin
         dataSource.tablePlugins = tablePlugins
 
         view.dataSource = dataSource
