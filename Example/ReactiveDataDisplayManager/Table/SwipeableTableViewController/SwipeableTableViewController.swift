@@ -45,8 +45,8 @@ private extension SwipeableTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         // Create cell generators
-        let generators = Constants.models.map { model -> TitleTableGenerator in
-            let generator = TitleTableGenerator(model: model)
+        let generators = Constants.models.map { model -> SwipeableTableGenerator in
+            let generator = SwipeableTableGenerator(model: model)
 
             generator.didSwipeEvent += { actionType in
                 debugPrint("The action with type \(actionType) was selected from all available generator events \(generator.actionTypes)")

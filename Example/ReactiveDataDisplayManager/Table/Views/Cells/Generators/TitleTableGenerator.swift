@@ -8,19 +8,20 @@
 
 import ReactiveDataDisplayManager
 
-class TitleTableGenerator: SelectableItem, SwipeableItem {
+class TitleTableGenerator: SelectableItem {
 
     // MARK: - Events
 
     var didSelectEvent = BaseEvent<Void>()
-    var didSwipeEvent = BaseEvent<String>()
 
-    // MARK: - Stored properties
+    // MARK: - Properties
 
-    var actionTypes = [String]()
     var didSelected: Bool = false
     var isNeedDeselect: Bool = true
-    fileprivate let model: String
+    
+    // MARK: - Private Properties
+
+    private let model: String
 
     // MARK: - Initializers
 
