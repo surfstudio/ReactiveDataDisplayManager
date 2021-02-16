@@ -1,5 +1,5 @@
 //
-//  TableScrollablePlugin.swift
+//  TableScrollViewDelegateProxyPlugin.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 28.01.2021.
@@ -27,33 +27,33 @@ public class TableScrollViewDelegateProxyPlugin: BaseTablePlugin<ScrollEvent> {
     // MARK: - BaseTablePlugin
 
     public override func process(event: ScrollEvent, with manager: BaseTableManager?) {
-        guard let tableView = manager?.view else { return }
+        guard let view = manager?.view else { return }
 
         switch event {
         case .didScroll:
-            didScroll.invoke(with: tableView)
+            didScroll.invoke(with: view)
         case .willBeginDragging:
-            willBeginDragging.invoke(with: tableView)
+            willBeginDragging.invoke(with: view)
         case .willEndDragging(let velocity, let targetContentOffset):
-            willEndDragging.invoke(with:(tableView, velocity, targetContentOffset))
+            willEndDragging.invoke(with:(view, velocity, targetContentOffset.pointee))
         case .didEndDragging(let decelerate):
-            didEndDragging.invoke(with:(tableView, decelerate))
+            didEndDragging.invoke(with:(view, decelerate))
         case .didScrollToTop:
-            didScrollToTop.invoke(with: tableView)
+            didScrollToTop.invoke(with: view)
         case .willBeginDecelerating:
-            willBeginDecelerating.invoke(with: tableView)
+            willBeginDecelerating.invoke(with: view)
         case .didEndDecelerating:
-            didEndDecelerating.invoke(with: tableView)
-        case .willBeginZooming(let view):
-            willBeginZooming.invoke(with:(tableView, view))
-        case .didEndZooming(let view, let scale):
-            didEndZooming.invoke(with:(tableView, view, scale))
+            didEndDecelerating.invoke(with: view)
+        case .willBeginZooming(let zoomedView):
+            willBeginZooming.invoke(with:(view, zoomedView))
+        case .didEndZooming(let zoomedView, let scale):
+            didEndZooming.invoke(with:(view, zoomedView, scale))
         case .didZoom:
-            didZoom.invoke(with: tableView)
+            didZoom.invoke(with: view)
         case .didEndScrollingAnimation:
-            didEndScrollingAnimation.invoke(with: tableView)
+            didEndScrollingAnimation.invoke(with: view)
         case .didChangeAdjustedContentInset:
-            didChangeAdjustedContentInset.invoke(with: tableView)
+            didChangeAdjustedContentInset.invoke(with: view)
         }
     }
 

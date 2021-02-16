@@ -38,21 +38,18 @@ final class PrefetchingCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        DataLoader.sharedUrlCache.removeAllCachedResponses()
+        ImageCache.shared.removeAll()
+        if let dataCache = ImagePipeline.shared.configuration.dataCache as? DataCache {
+            dataCache.removeAll()
+        }
+
         title = "Gallery with prefetching"
 
         let flowLayout = makeFlowLayout()
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
 
         fillAdapter()
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        DataLoader.sharedUrlCache.removeAllCachedResponses()
-        ImageCache.shared.removeAll()
-        if let dataCache = ImagePipeline.shared.configuration.dataCache as? DataCache {
-            dataCache.removeAll()
-        }
     }
 
 }

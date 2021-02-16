@@ -9,7 +9,7 @@
 public enum ScrollEvent {
     case didScroll
     case willBeginDragging
-    case willEndDragging(velocity: CGPoint, targetContentOffset: CGPoint)
+    case willEndDragging(velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
     case didEndDragging(Bool)
     case didScrollToTop
     case willBeginDecelerating

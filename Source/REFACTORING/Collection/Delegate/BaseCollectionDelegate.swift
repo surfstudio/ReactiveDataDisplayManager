@@ -82,7 +82,7 @@ extension BaseCollectionDelegate {
 
     open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         scrollPlugins.process(event: .willEndDragging(velocity: velocity,
-                                                      targetContentOffset: targetContentOffset.pointee), with: manager)
+                                                      targetContentOffset: targetContentOffset), with: manager)
     }
 
     open func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
