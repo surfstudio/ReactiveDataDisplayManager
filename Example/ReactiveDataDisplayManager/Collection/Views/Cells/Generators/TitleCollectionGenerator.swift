@@ -8,26 +8,27 @@
 
 import ReactiveDataDisplayManager
 
-class TitleCollectionGenerator: SelectableItem {
+final class TitleCollectionGenerator: SelectableItem {
 
-    // MARK: - Events
+    // MARK: - Properties
 
     var didSelectEvent = BaseEvent<Void>()
-
-    // MARK: - Stored properties
-
     var didSelected: Bool = false
     var isNeedDeselect: Bool = true
-    fileprivate let model: String
 
-    // MARK: - Initializers
+    // MARK: - Private Properties
+
+    private let model: String
+
+    // MARK: - Initialization
 
     public init(model: String) {
         self.model = model
     }
+
 }
 
-// MARK: - TableCellGenerator
+// MARK: - CollectionCellGenerator
 
 extension TitleCollectionGenerator: CollectionCellGenerator {
 
@@ -44,4 +45,5 @@ extension TitleCollectionGenerator: ViewBuilder {
     func build(view: TitleCollectionViewCell) {
         view.fill(with: model)
     }
+
 }

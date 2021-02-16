@@ -14,9 +14,10 @@ final class TitleCollectionReusableView: UICollectionReusableView {
 
     @IBOutlet weak var titleLabel: UILabel!
 
-    // MARK: - Public Methods
+    // MARK: - Internal methods
 
     func fill(title: String) {
         self.titleLabel.text = title
     }
+
 }

@@ -72,7 +72,7 @@ private extension ImageHorizontalCollectionViewController {
     func fillAdapter() {
         for _ in 0...300 {
             // Create viewModels for cell
-            guard let viewModel = ImageCollectionViewCell.ViewModel.make(for: Constants.cellSize) else { continue }
+            guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
 
             // Create generator
             let generator = BaseCollectionCellGenerator<ImageCollectionViewCell>(with: viewModel)

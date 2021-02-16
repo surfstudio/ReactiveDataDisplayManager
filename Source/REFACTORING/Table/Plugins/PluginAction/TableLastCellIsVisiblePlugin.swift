@@ -8,11 +8,17 @@
 
 public class TableLastCellIsVisiblePlugin: BaseTablePlugin<TableEvent> {
 
+    // MARK: - Private Properties
+
     private let action: () -> Void
+
+    // MARK: - Initialization
 
     public init(action: @escaping () -> Void) {
         self.action = action
     }
+
+    // MARK: - BaseTablePlugin
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
 

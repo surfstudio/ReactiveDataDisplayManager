@@ -27,6 +27,9 @@ final class ImageTableViewController: UIViewController {
         super.viewDidLoad()
         DataLoader.sharedUrlCache.removeAllCachedResponses()
         ImageCache.shared.removeAll()
+        if let dataCache = ImagePipeline.shared.configuration.dataCache as? DataCache {
+            dataCache.removeAll()
+        }
 
         tableView.separatorStyle = .none
         title = "Gallery without prefetching"

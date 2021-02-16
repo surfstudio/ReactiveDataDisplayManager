@@ -18,8 +18,8 @@ final class PrefetchingTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private let preheater = NukeImagePrefetcher()
-    private lazy var prefetcherablePlugin = TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator>(prefetcher: preheater)
+    private let prefetcher = NukeImagePrefetcher()
+    private lazy var prefetcherablePlugin = TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator>(prefetcher: prefetcher)
 
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)
@@ -31,6 +31,9 @@ final class PrefetchingTableViewController: UIViewController {
         super.viewDidLoad()
         DataLoader.sharedUrlCache.removeAllCachedResponses()
         ImageCache.shared.removeAll()
+        if let dataCache = ImagePipeline.shared.configuration.dataCache as? DataCache {
+            dataCache.removeAll()
+        }
 
         tableView.separatorStyle = .none
         title = "Gallery with prefetching"

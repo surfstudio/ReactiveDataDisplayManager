@@ -14,7 +14,7 @@ final class HeaderCollectionListView: UICollectionReusableView {
 
     @IBOutlet weak var titleLabel: UILabel!
 
-    // MARK: - Public Methods
+    // MARK: - Internal Methods
 
     func fill(title: String) {
         self.titleLabel.text = title

@@ -20,7 +20,7 @@ public class TableHeaderVisiblePlugin: BaseTablePlugin<TableEvent> {
         self.action = action
     }
 
-    // MARK: - PluginAction
+    // MARK: - BaseTablePlugin
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {

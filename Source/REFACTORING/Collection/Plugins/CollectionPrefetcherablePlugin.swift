@@ -1,25 +1,15 @@
 //
-//  TablePrefetcherablePlugin.swift
+//  CollectionPrefetcherablePlugin.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Anton Eysner on 29.01.2021.
+//  Created by Anton Eysner on 12.02.2021.
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
-
-public protocol ContentPrefetcher {
-    associatedtype Content: Hashable
-
-    /// Start prefetching data for the given identifiers.
-    func startPrefetching(for requestIds: [Content])
-
-    /// Stops prefetching images for the given identifiers.
-    func cancelPrefetching(for requestIds: [Content])
-}
 
 /// Adds support for PrefetcherableFlow with prefetcher
 ///
 /// ContentPrefetcher prefetches and caches data to eliminate delays when requesting the same data later.
-public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseTablePlugin<PrefetchEvent> {
+public class CollectionPrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseCollectionPlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
 
@@ -32,9 +22,9 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
         self.prefetcher = prefetcher
     }
 
-    // MARK: - BaseTablePlugin
+    // MARK: - BaseCollectionPlugin
 
-    public override func process(event: PrefetchEvent, with manager: BaseTableManager?) {
+    public override func process(event: PrefetchEvent, with manager: BaseCollectionManager?) {
         switch event {
         case .prefetch(let indexPaths):
             startPrefetching(from: manager, at: indexPaths)
@@ -47,19 +37,19 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
 
 // MARK: - Private Methods
 
-private extension TablePrefetcherablePlugin {
+private extension CollectionPrefetcherablePlugin {
 
-    func startPrefetching(from manager: BaseTableManager?, at indexPaths: [IndexPath]) {
+    func startPrefetching(from manager: BaseCollectionManager?, at indexPaths: [IndexPath]) {
         let contents = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
         prefetcher.startPrefetching(for: contents)
     }
 
-    func cancelPrefetching(from manager: BaseTableManager?, at indexPaths: [IndexPath]) {
+    func cancelPrefetching(from manager: BaseCollectionManager?, at indexPaths: [IndexPath]) {
         let contents = indexPaths.compactMap { getPrefetcherableFlowCell(from: manager, at: $0)?.requestId as? Prefetcher.Content }
         prefetcher.cancelPrefetching(for: contents)
     }
 
-    func getPrefetcherableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> Generator? {
+    func getPrefetcherableFlowCell(from manager: BaseCollectionManager?, at indexPath: IndexPath) -> Generator? {
         return manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? Generator
     }
 

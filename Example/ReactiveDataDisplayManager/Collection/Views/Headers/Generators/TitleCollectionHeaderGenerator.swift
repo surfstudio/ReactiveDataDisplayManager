@@ -10,11 +10,11 @@ import ReactiveDataDisplayManager
 
 final class TitleCollectionHeaderGenerator {
 
-    // MARK: - Constants
+    // MARK: - Private Properties
 
     private let title: String
 
-    // MARK: - Initialization and deinitialization
+    // MARK: - Initialization
 
     init(title: String) {
         self.title = title
@@ -24,6 +24,7 @@ final class TitleCollectionHeaderGenerator {
 // MARK: - CollectionHeaderGenerator
 
 extension TitleCollectionHeaderGenerator: CollectionHeaderGenerator {
+
     var identifier: UICollectionReusableView.Type {
         return TitleCollectionReusableView.self
     }
@@ -31,12 +32,15 @@ extension TitleCollectionHeaderGenerator: CollectionHeaderGenerator {
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: 44.0)
     }
+
 }
 
 // MARK: - ViewBuilder
 
 extension TitleCollectionHeaderGenerator: ViewBuilder {
+
     func build(view: TitleCollectionReusableView) {
         view.fill(title: title)
     }
+
 }
