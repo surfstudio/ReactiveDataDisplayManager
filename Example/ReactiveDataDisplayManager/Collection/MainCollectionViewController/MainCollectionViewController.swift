@@ -18,6 +18,7 @@ final class MainCollectionViewController: UIViewController {
         case listAppearances
         case imageCollection
         case prefetchingCollection
+        case sizableCollection
     }
 
     // MARK: - Constants
@@ -27,7 +28,8 @@ final class MainCollectionViewController: UIViewController {
             ("Base collection view", .baseCollection),
             ("List Appearances", .listAppearances),
             ("Gallery without prefetching", .imageCollection),
-            ("Gallery with prefetching", .prefetchingCollection)
+            ("Gallery with prefetching", .prefetchingCollection),
+            ("Sizable collection", .sizableCollection)
         ]
     }
 
