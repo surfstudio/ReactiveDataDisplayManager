@@ -29,7 +29,7 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
                     manager?.remove($0, needScrollAt: nil, needRemoveEmptySection: false)
                 }
             } else {
-                if let manager = manager as? ManualCollectionManager {
+                if let manager = manager {
                     manager.insert(after: generator, new: visibleGenerators)
                 }
             }

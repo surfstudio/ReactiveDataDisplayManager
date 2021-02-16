@@ -97,21 +97,6 @@ open class BaseCollectionManager: DataDisplayManager {
         self.generators.removeAll()
     }
 
-    /// Removes generator from data display manager. Generators compares by references.
-    ///
-    /// - Parameters:
-    ///   - generator: Generator to delete.
-    ///   - needScrollAt: If not nil than performs scroll before removing generator.
-    /// A constant that identifies a relative position in the collection view (top, middle, bottom)
-    /// for item when scrolling concludes. See UICollectionViewScrollPosition for descriptions of valid constants.
-    ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
-    open func remove(_ generator: CollectionCellGenerator, needScrollAt scrollPosition: UICollectionView.ScrollPosition?, needRemoveEmptySection: Bool) {
-        guard let index = findGenerator(generator) else { return }
-        self.removeGenerator(with: index,
-                             needScrollAt: scrollPosition,
-                             needRemoveEmptySection: needRemoveEmptySection)
-    }
-
 }
 
 // MARK: - HeaderDataDisplayManager
@@ -161,6 +146,59 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
 // MARK: - Helper
 
 extension BaseCollectionManager {
+
+    /// Inserts new generators after provided generator.
+    ///
+    /// - Parameters:
+    ///   - after: Generator after which new generator will be added. Must be in the DDM.
+    ///   - new: Generators which you want to insert after current generator.
+    open func insert(after generator: CollectionCellGenerator,
+                     new newGenerators: [CollectionCellGenerator]) {
+        guard let index = self.findGenerator(generator) else { return }
+
+        let elements = newGenerators.enumerated().map { item in
+            (item.element, index.sectionIndex, index.generatorIndex + item.offset + 1)
+        }
+        self.insert(elements: elements)
+    }
+
+    /// Removes generator from data display manager. Generators compares by references.
+    ///
+    /// - Parameters:
+    ///   - generator: Generator to delete.
+    ///   - needScrollAt: If not nil than performs scroll before removing generator.
+    /// A constant that identifies a relative position in the collection view (top, middle, bottom)
+    /// for item when scrolling concludes. See UICollectionViewScrollPosition for descriptions of valid constants.
+    ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
+    open func remove(_ generator: CollectionCellGenerator, needScrollAt scrollPosition: UICollectionView.ScrollPosition?, needRemoveEmptySection: Bool) {
+        guard let index = findGenerator(generator) else { return }
+        self.removeGenerator(with: index,
+                             needScrollAt: scrollPosition,
+                             needRemoveEmptySection: needRemoveEmptySection)
+    }
+
+}
+
+// MARK: - Private Methods
+
+private extension BaseCollectionManager {
+
+    func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)]) {
+        guard let collection = self.view else {
+            return
+        }
+
+        elements.forEach { [weak self] element in
+            element.generator.registerCell(in: collection)
+            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+        }
+
+        let indexPaths = elements.map {
+            IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
+        }
+
+        collection.insertItems(at: indexPaths)
+    }
 
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
         for (sectionIndex, section) in generators.enumerated() {
