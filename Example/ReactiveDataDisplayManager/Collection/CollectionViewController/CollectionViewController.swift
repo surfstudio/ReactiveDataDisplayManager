@@ -16,7 +16,7 @@ class CollectionViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
 
-    // MARK: - Properties
+    // MARK: - Private Properties
 
     private lazy var adapter = BaseCollectionDataDisplayManager(collection: collectionView)
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]

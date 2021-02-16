@@ -20,7 +20,7 @@ public class TableHeaderVisiblePlugin: BaseTablePlugin<TableEvent> {
         self.action = action
     }
 
-    // MARK: - PluginAction
+    // MARK: - BaseTablePlugin
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
@@ -56,9 +56,9 @@ private extension TableHeaderVisiblePlugin {
             let lastPath = pathsForVisibleRows.last
         else { return }
 
-         if lastPath.section >= section {
+        if lastPath.section >= section {
             action(section + 1)
-         }
+        }
     }
 
 }

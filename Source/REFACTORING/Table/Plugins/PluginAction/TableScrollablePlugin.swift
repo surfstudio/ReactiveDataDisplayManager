@@ -24,7 +24,7 @@ public class TableScrollViewDelegateProxyPlugin: BaseTablePlugin<ScrollEvent> {
     public var didEndScrollingAnimation = BaseEvent<UITableView>()
     public var didChangeAdjustedContentInset = BaseEvent<UITableView>()
 
-    // MARK: - PluginAction
+    // MARK: - BaseTablePlugin
 
     public override func process(event: ScrollEvent, with manager: BaseTableManager?) {
         guard let tableView = manager?.view else { return }

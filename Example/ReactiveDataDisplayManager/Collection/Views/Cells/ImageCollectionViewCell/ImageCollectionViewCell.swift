@@ -17,10 +17,8 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     struct ViewModel {
         let imageUrl: URL
 
-        static func make(for cellSize: CGSize) -> Self? {
-            let width = Int(cellSize.width)
-            let height = Int(cellSize.height)
-            let stringImageUrl = "https://picsum.photos/id/\(Int.random(in: 0...1000))/\(width)/\(height)"
+        static func make() -> Self? {
+            let stringImageUrl = "https://picsum.photos/id/\(Int.random(in: 0...1000))/640/480"
             guard let imageUrl = URL(string: stringImageUrl) else { return nil }
             return .init(imageUrl: imageUrl)
         }

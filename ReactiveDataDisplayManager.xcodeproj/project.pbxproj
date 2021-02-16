@@ -22,6 +22,8 @@
 		4FD38132202D791A0005EBFE /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD38131202D791A0005EBFE /* Operations.swift */; };
 		6D2795BB25C71D650085B845 /* PrefetchEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2795BA25C71D650085B845 /* PrefetchEvent.swift */; };
 		6D2795F925C7DA7F0085B845 /* ScrollDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2795F825C7DA7F0085B845 /* ScrollDirection.swift */; };
+		6DF4321125D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF4321025D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift */; };
+		6DF4321525D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF4321425D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift */; };
 		6D3B99F525D51AA400F6E05C /* TablePrefetcherablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B99EB25D51AA300F6E05C /* TablePrefetcherablePlugin.swift */; };
 		6D3B99F625D51AA400F6E05C /* TableSelectablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B99EC25D51AA300F6E05C /* TableSelectablePlugin.swift */; };
 		6D3B99F725D51AA400F6E05C /* TableLastCellIsVisiblePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3B99ED25D51AA300F6E05C /* TableLastCellIsVisiblePlugin.swift */; };
@@ -118,6 +120,8 @@
 		4FD38131202D791A0005EBFE /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
 		6D2795BA25C71D650085B845 /* PrefetchEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchEvent.swift; sourceTree = "<group>"; };
 		6D2795F825C7DA7F0085B845 /* ScrollDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollDirection.swift; sourceTree = "<group>"; };
+		6DF4321025D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPrefetchProxyPlugin.swift; sourceTree = "<group>"; };
+		6DF4321425D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPrefetcherablePlugin.swift; sourceTree = "<group>"; };
 		6D3B99EB25D51AA300F6E05C /* TablePrefetcherablePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TablePrefetcherablePlugin.swift; sourceTree = "<group>"; };
 		6D3B99EC25D51AA300F6E05C /* TableSelectablePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableSelectablePlugin.swift; sourceTree = "<group>"; };
 		6D3B99ED25D51AA300F6E05C /* TableLastCellIsVisiblePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableLastCellIsVisiblePlugin.swift; sourceTree = "<group>"; };
@@ -569,6 +573,8 @@
 			isa = PBXGroup;
 			children = (
 				DD165F9E25D2CA53006F46CF /* BaseCollectionPlugin.swift */,
+				6DF4321025D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift */,
+				6DF4321425D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -759,6 +765,7 @@
 				B2B4FB4F2550221200E6365B /* BaseTableDataSource.swift in Sources */,
 				6D2795BB25C71D650085B845 /* PrefetchEvent.swift in Sources */,
 				C1AB77DA240D5A99000044F1 /* CalculatableHeightNonReusableCellGenerator.swift in Sources */,
+				6DF4321125D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift in Sources */,
 				4FD38130202D6F510005EBFE /* DataDisplayManager.swift in Sources */,
 				6D3B9A2525D51C6200F6E05C /* TableSectionTitleWrapper.swift in Sources */,
 				6D3B9A0F25D51BD000F6E05C /* PluginCollection.swift in Sources */,
@@ -797,6 +804,7 @@
 				C1AB77DC240D6796000044F1 /* CalculatableHeightCollectionCellGenerator.swift in Sources */,
 				C1AB77DE240D6919000044F1 /* SizableCollectionDataDisplayManager.swift in Sources */,
 				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
+				6DF4321525D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift in Sources */,
 				6D3B9A1725D51BE100F6E05C /* FeaturePlugin.swift in Sources */,
 				897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */,
 				6D3B99F625D51AA400F6E05C /* TableSelectablePlugin.swift in Sources */,

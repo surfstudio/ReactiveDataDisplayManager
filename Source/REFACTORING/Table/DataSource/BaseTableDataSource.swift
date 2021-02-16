@@ -74,6 +74,8 @@ extension BaseTableDataSource: TableDataSource {
 
 }
 
+// MARK: - UICollectionViewDataSourcePrefetching
+
 extension BaseTableDataSource: UITableViewDataSourcePrefetching {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {

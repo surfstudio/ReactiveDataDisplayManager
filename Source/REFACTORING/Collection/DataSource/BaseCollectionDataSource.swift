@@ -77,6 +77,8 @@ extension BaseCollectionDataSource: CollectionDataSource {
 
 }
 
+// MARK: - UICollectionViewDataSourcePrefetching
+
 extension BaseCollectionDataSource: UICollectionViewDataSourcePrefetching {
 
     open func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {

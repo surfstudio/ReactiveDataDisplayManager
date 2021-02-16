@@ -1,8 +1,8 @@
 //
-//  ImageCollectionViewController.swift
+//  PrefetchingCollectionViewController.swift
 //  ReactiveDataDisplayManagerExample
 //
-//  Created by Vadim Tikhonov on 10.02.2021.
+//  Created by Anton Eysner on 12.02.2021.
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 import ReactiveDataDisplayManager
 import Nuke
 
-final class ImageCollectionViewController: UIViewController {
+final class PrefetchingCollectionViewController: UIViewController {
 
     // MARK: - Constants
 
@@ -27,14 +27,18 @@ final class ImageCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
+    private let prefetcher = NukeImagePrefetcher()
+    private lazy var prefetcherablePlugin = CollectionPrefetcherablePlugin<NukeImagePrefetcher, ImageCollectionCellGenerator>(prefetcher: prefetcher)
+
     private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: prefetcherablePlugin)
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Gallery without prefetching"
+        title = "Gallery with prefetching"
 
         let flowLayout = makeFlowLayout()
         collectionView.setCollectionViewLayout(flowLayout, animated: false)
@@ -55,7 +59,7 @@ final class ImageCollectionViewController: UIViewController {
 
 // MARK: - Private Methods
 
-private extension ImageCollectionViewController {
+private extension PrefetchingCollectionViewController {
 
     func makeFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
@@ -86,3 +90,4 @@ private extension ImageCollectionViewController {
     }
 
 }
+
