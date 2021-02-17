@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 /// Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
 open class BaseTableDataSource: NSObject, TableDataSource {

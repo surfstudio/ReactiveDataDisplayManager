@@ -541,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				01157AF825D51D1600BFD55B /* Animator */,
+				6D3B9A5125D5203E00F6E05C /* SectionTitleDisplayble */,
 				01AF586B25B9A33A00AE4286 /* Wrapper */,
 				01B283E025B8B2D80022B789 /* Plugins */,
 			);
@@ -893,6 +894,7 @@
 				01157AFF25D5212100BFD55B /* TableUpdatesAnimator.swift in Sources */,
 				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
 				6DF4321525D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift in Sources */,
+				01BB764825D670FB00829C2D /* CollectionDelegate.swift in Sources */,
 				6D3B9A1725D51BE100F6E05C /* FeaturePlugin.swift in Sources */,
 				01BB764825D670FB00829C2D /* CollectionDelegate.swift in Sources */,
 				897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */,

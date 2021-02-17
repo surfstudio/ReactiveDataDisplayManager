@@ -81,6 +81,12 @@ public class TableBuilder<T: BaseTableManager> {
         return self
     }
 
+    /// Change animator
+    public func set(animator: TableAnimator) -> TableBuilder<T> {
+        self.animator = animator
+        return self
+    }
+
     /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(featurePlugin: FeaturePlugin) -> TableBuilder<T> {
         checkSwipeActionsPlugin(with: featurePlugin)
