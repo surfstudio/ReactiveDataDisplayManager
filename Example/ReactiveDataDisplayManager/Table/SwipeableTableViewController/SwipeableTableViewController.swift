@@ -48,8 +48,8 @@ private extension SwipeableTableViewController {
         let generators = Constants.models.map { model -> SwipeableTableGenerator in
             let generator = SwipeableTableGenerator(model: model)
 
-            generator.didSwipeEvent += { actionType in
-                debugPrint("The action with type \(actionType) was selected from all available generator events \(generator.actionTypes)")
+            generator.didSwipeEvent += { [weak generator] actionType in
+                debugPrint("The action with type \(actionType) was selected from all available generator events \(generator?.actionTypes ?? [])")
             }
 
             return generator
