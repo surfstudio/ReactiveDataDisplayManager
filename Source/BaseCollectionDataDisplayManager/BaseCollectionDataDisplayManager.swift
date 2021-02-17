@@ -28,7 +28,7 @@ open class BaseCollectionDataDisplayManager: NSObject {
 
     // MARK: - Readonly properties
 
-    public private(set) weak var view: UICollectionView?
+    public private(set) weak var view: UICollectionView!
     public private(set) var cellGenerators: [[CollectionCellGenerator]]
     public private(set) var sectionHeaderGenerators: [CollectionHeaderGenerator]
 
@@ -48,8 +48,7 @@ open class BaseCollectionDataDisplayManager: NSObject {
 
 extension BaseCollectionDataDisplayManager: DataDisplayManager {
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
-        guard let collection = self.view else { return }
-        generator.registerCell(in: collection)
+        generator.registerCell(in: view)
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([CollectionCellGenerator]())
         }
@@ -68,8 +67,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
-        guard let collection = self.view else { return }
-        generators.forEach { $0.registerCell(in: collection) }
+        generators.forEach { $0.registerCell(in: view) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
         }
@@ -108,8 +106,7 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
 
 extension BaseCollectionDataDisplayManager: HeaderDataDisplayManager {
     public func addSectionHeaderGenerator(_ generator: CollectionHeaderGenerator) {
-        guard let collection = self.view else { return }
-        generator.registerHeader(in: collection)
+        generator.registerHeader(in: view)
         self.sectionHeaderGenerators.append(generator)
     }
 
@@ -118,8 +115,7 @@ extension BaseCollectionDataDisplayManager: HeaderDataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toHeader header: CollectionHeaderGenerator) {
-        guard let collection = self.view else { return }
-        generators.forEach { $0.registerCell(in: collection) }
+        generators.forEach { $0.registerCell(in: view) }
 
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([CollectionCellGenerator]())

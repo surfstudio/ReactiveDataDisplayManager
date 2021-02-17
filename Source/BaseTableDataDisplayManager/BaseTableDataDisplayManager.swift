@@ -34,7 +34,7 @@ open class BaseTableDataDisplayManager: NSObject {
 
     // MARK: - Readonly properties
 
-    public private(set) weak var view: UITableView?
+    public private(set) weak var view: UITableView!
     public private(set) var cellGenerators: [[TableCellGenerator]]
     public private(set) var sectionHeaderGenerators: [TableHeaderGenerator]
 
@@ -61,8 +61,7 @@ open class BaseTableDataDisplayManager: NSObject {
 extension BaseTableDataDisplayManager: DataDisplayManager {
 
     public func addSection(header generator: TableHeaderGenerator, cells: [TableCellGenerator]) {
-        guard let table = view else { return }
-        cells.forEach { $0.registerCell(in: table) }
+        cells.forEach { $0.registerCell(in: view) }
         self.sectionHeaderGenerators.append(generator)
         self.cellGenerators.append(cells)
     }
@@ -94,8 +93,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerator(_ generator: TableCellGenerator) {
-        guard let table = self.view else { return }
-        generator.registerCell(in: table)
+        generator.registerCell(in: view)
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([TableCellGenerator]())
         }
@@ -118,8 +116,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
-        guard let table = self.view else { return }
-        generators.forEach { $0.registerCell(in: table) }
+        generators.forEach { $0.registerCell(in: view) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
         }
@@ -168,8 +165,7 @@ extension BaseTableDataDisplayManager: HeaderDataDisplayManager {
     // TODO: Implement in BaseCollectionDDM
 
     public func addCellGenerators(_ generators: [TableCellGenerator], toHeader header: TableHeaderGenerator) {
-        guard let table = self.view else { return }
-        generators.forEach { $0.registerCell(in: table) }
+        generators.forEach { $0.registerCell(in: view) }
 
         if self.cellGenerators.count != self.sectionHeaderGenerators.count || sectionHeaderGenerators.isEmpty {
             self.cellGenerators.append([TableCellGenerator]())
@@ -465,12 +461,9 @@ private extension BaseTableDataDisplayManager {
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
                 with animation: UITableView.RowAnimation = .automatic) {
-        guard let table = self.view else {
-            return
-        }
 
         elements.forEach { [weak self] element in
-            element.generator.registerCell(in: table)
+            element.generator.registerCell(in: view)
             self?.cellGenerators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
 
@@ -478,9 +471,9 @@ private extension BaseTableDataDisplayManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
-        table.beginUpdates()
-        table.insertRows(at: indexPaths, with: animation)
-        table.endUpdates()
+        view.beginUpdates()
+        view.insertRows(at: indexPaths, with: animation)
+        view.endUpdates()
     }
 
     // TODO: May be we should remove needScrollAt and move this responsibility to user
@@ -488,27 +481,25 @@ private extension BaseTableDataDisplayManager {
                                  with animation: UITableView.RowAnimation = .automatic,
                                  needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                                  needRemoveEmptySection: Bool = false) {
-        guard let table = self.view else { return }
-
         // perform update
-        table.beginUpdates()
+        view.beginUpdates()
         self.cellGenerators[index.sectionIndex].remove(at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        table.deleteRows(at: [indexPath], with: animation)
+        view.deleteRows(at: [indexPath], with: animation)
 
         // remove empty section if needed
         if needRemoveEmptySection && self.cellGenerators[index.sectionIndex].isEmpty {
             self.cellGenerators.remove(at: index.sectionIndex)
             self.sectionHeaderGenerators.remove(at: index.sectionIndex)
-            table.deleteSections(IndexSet(integer: index.sectionIndex), with: animation)
+            view.deleteSections(IndexSet(integer: index.sectionIndex), with: animation)
         }
 
         // scroll if needed
         if let scrollPosition = scrollPosition {
-            table.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
+            view.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
         }
 
-        table.endUpdates()
+        view.endUpdates()
     }
 
     func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {

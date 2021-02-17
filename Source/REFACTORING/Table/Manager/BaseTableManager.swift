@@ -21,7 +21,7 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     // MARK: - Public properties
 
-    public weak var view: UITableView?
+    public weak var view: UITableView!
 
     public var generators: [[TableCellGenerator]]
     public var sections: [TableHeaderGenerator]
@@ -67,8 +67,7 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     }
 
     open func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
-        guard let table = view else { return }
-        generators.forEach { $0.registerCell(in: table) }
+        generators.forEach { $0.registerCell(in: view) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
         }
@@ -131,24 +130,23 @@ extension BaseTableManager {
                          with animation: UITableView.RowAnimation = .automatic,
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
-        guard let table = view else { return }
 
-        animator?.perform(in: table, animation: { [weak self] in
+        animator?.perform(in: view, animation: { [weak self] in
             self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
             let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-            table.deleteRows(at: [indexPath], with: animation)
+            view.deleteRows(at: [indexPath], with: animation)
 
             // remove empty section if needed
             let sectionIsEmpty = self?.generators[index.sectionIndex].isEmpty ?? true
             if needRemoveEmptySection && sectionIsEmpty {
                 self?.generators.remove(at: index.sectionIndex)
                 self?.sections.remove(at: index.sectionIndex)
-                table.deleteSections(IndexSet(integer: index.sectionIndex), with: animation)
+                view.deleteSections(IndexSet(integer: index.sectionIndex), with: animation)
             }
 
             // scroll if needed
             if let scrollPosition = scrollPosition {
-                table.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
+                view.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
             }
         })
     }

@@ -19,7 +19,7 @@ open class BaseStackDataDisplayManager: NSObject, DataDisplayManager {
 
     // MARK: - Properties
 
-    public private(set) weak var view: UIStackView?
+    public private(set) weak var view: UIStackView!
     public private(set) var cellGenerators: [StackCellGenerator]
 
     // MARK: - DataDisplayManager
@@ -30,7 +30,7 @@ open class BaseStackDataDisplayManager: NSObject, DataDisplayManager {
     }
 
     public func forceRefill() {
-        self.view?.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        self.view.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         self.cellGenerators.enumerated().forEach { [weak self] offset, generator in
             guard let stackView = self?.view else { return }

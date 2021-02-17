@@ -25,7 +25,7 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
     // MARK: - Public Properties
 
     public var estimatedHeight: CGFloat = 40.0
-    public weak var view: UITableView?
+    public weak var view: UITableView!
     public private(set) var cellGenerators: [[GravityTableCellGenerator]]
     public private(set) var headerGenerators: [GravityTableHeaderGenerator]
 
@@ -293,20 +293,19 @@ private extension GravityTableDataDisplayManager {
                          with animation: UITableView.RowAnimation = .automatic,
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
-        guard let table = self.view else { return }
 
         // perform update
-        table.beginUpdates()
+        view.beginUpdates()
         self.cellGenerators[index.sectionIndex].remove(at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        table.deleteRows(at: [indexPath], with: animation)
+        view.deleteRows(at: [indexPath], with: animation)
 
         // scroll if needed
         if let scrollPosition = scrollPosition {
-            table.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
+            view.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
         }
 
-        table.endUpdates()
+        view.endUpdates()
     }
 }
 

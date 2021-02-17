@@ -17,7 +17,7 @@ public protocol DataDisplayManager: class {
     associatedtype CollectionType
     associatedtype CellGeneratorType
 
-    var view: CollectionType? { get }
+    var view: CollectionType! { get }
 
     /// Reloads collection.
     func forceRefill()
