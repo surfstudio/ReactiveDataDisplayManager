@@ -9,7 +9,7 @@
 import UIKit
 
 /// Class for generating non-reusable Configurable UITableViewCell
-public class BaseNonReusableCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
+open class BaseNonReusableCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 
