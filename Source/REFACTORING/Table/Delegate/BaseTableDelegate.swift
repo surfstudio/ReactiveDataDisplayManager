@@ -22,7 +22,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     public var movablePlugin: TableMovableDelegate?
 
     @available(iOS 11.0, *)
-    var swipeActionsPlugin: TableSwipeActionsConfigurable? {
+    public var swipeActionsPlugin: TableSwipeActionsConfigurable? {
         set { _swipeActionsPlugin = newValue }
         get { _swipeActionsPlugin as? TableSwipeActionsConfigurable }
     }
