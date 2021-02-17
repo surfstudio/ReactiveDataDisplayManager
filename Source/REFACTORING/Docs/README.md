@@ -104,11 +104,12 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
 ### Animator
 
-- Молекула отвечающая за анимацию операций вставки или удаления
+- Атом отвечающий за анимацию операций вставки или удаления
 
 Эта сущность нужна для возможности сменить метод анимации таблицы. 
-C **beginUpdates/endUpdates** (это deprecated) на **performBatchUpdates** или с использованием стронних библиотек.
+C **beginUpdates/endUpdates** (deprecated) на **performBatchUpdates** или с использованием стронних библиотек.
+По-умолчанию будет выбираться **TableBatchUpdatesAnimator** если  таргет = iOS 11.
 
 #### Пример подключения
 
-`tableView.rddm.baseBuilder.set(animator: YourCustomAnimator()).build()`
+`tableView.rddm.baseBuilder.set(animator: TableBatchUpdatesAnimator()).build()`
