@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-class SwipeableTableGenerator: TitleTableGenerator, SwipeableItem {
+class SwipeableTableGenerator: BaseTitleTableGenerator, SwipeableItem {
 
     // MARK: - Events
 

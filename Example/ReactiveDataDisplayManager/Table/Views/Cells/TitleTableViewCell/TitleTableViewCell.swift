@@ -20,8 +20,6 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeight {
         titleLabel.text = title
     }
 
-
-
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
         return 44
     }

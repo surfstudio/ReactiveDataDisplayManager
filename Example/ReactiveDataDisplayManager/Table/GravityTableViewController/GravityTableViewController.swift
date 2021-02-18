@@ -37,7 +37,7 @@ private extension GravityTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        adapter.addCellGenerator(self.makeGravityCellGenerator(with: 3))
+        adapter.addCellGenerator(makeGravityCellGenerator(with: 3))
         adapter.forceRefill()
 
         // Add generators with heaviness = 5 after delay equal 1 second
