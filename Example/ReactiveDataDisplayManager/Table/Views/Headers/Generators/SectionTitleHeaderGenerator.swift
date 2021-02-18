@@ -17,7 +17,13 @@ final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplay
         static let defaultHeight: CGFloat = 30
     }
 
-    // MARK: - Property
+    // MARK: - Events
+
+    var willDisplayEvent = BaseEvent<Void>()
+    var didEndDisplayEvent = BaseEvent<Void>()
+    var didEndDisplayCellEvent: BaseEvent<UITableViewCell>?
+
+    // MARK: - Properties
 
     var title: String
     var needIndexTitle: Bool
