@@ -46,7 +46,7 @@ extension GravityCellGenerator: GravityTableCellGenerator {
 extension GravityCellGenerator: ViewBuilder {
 
     func build(view: TitleTableViewCell) {
-        view.fill(with: model)
+        view.configure(with: model)
     }
 
 }

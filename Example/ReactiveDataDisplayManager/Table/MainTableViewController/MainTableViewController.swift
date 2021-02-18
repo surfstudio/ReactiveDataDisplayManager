@@ -66,7 +66,7 @@ private extension MainTableViewController {
     func fillAdapter() {
         for model in Constants.models {
             // Create generator
-            let generator = TitleTableGenerator(model: model.title)
+            let generator = BaseCellGenerator<TitleTableViewCell>(with: model.title)
 
             generator.didSelectEvent += { [weak self] in
                 guard let self = self else { return }

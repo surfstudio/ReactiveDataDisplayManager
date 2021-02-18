@@ -1,5 +1,5 @@
 //
-//  TitleTableGenerator.swift
+//  BaseTitleTableGenerator.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Ivan Smetanin on 19/12/2017.
@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-class TitleTableGenerator: SelectableItem {
+class BaseTitleTableGenerator: SelectableItem {
 
     // MARK: - Events
 
@@ -33,7 +33,7 @@ class TitleTableGenerator: SelectableItem {
 
 // MARK: - TableCellGenerator
 
-extension TitleTableGenerator: TableCellGenerator {
+extension BaseTitleTableGenerator: TableCellGenerator {
 
     var identifier: String {
         return String(describing: TitleTableViewCell.self) 
@@ -43,9 +43,10 @@ extension TitleTableGenerator: TableCellGenerator {
 
 // MARK: - ViewBuilder
 
-extension TitleTableGenerator: ViewBuilder {
+extension BaseTitleTableGenerator: ViewBuilder {
 
     func build(view: TitleTableViewCell) {
-        view.fill(with: model)
+        view.configure(with: model)
     }
+
 }

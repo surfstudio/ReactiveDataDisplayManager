@@ -16,10 +16,6 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeight {
 
     // MARK: - Internal methods
 
-    func fill(with title: String) {
-        titleLabel.text = title
-    }
-
     func configure(with model: String) {
         titleLabel.text = model
     }
