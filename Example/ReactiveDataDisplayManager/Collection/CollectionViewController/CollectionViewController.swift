@@ -36,7 +36,7 @@ class CollectionViewController: UIViewController {
         adapter.addSectionHeaderGenerator(header)
         for title in titles {
             // Create generator
-            let generator = TitleCollectionGenerator(model: title)
+            let generator = BaseCollectionCellGenerator<TitleCollectionViewCell>(with: title)
             generator.didSelectEvent += {
                 debugPrint("\(title) selected")
             }

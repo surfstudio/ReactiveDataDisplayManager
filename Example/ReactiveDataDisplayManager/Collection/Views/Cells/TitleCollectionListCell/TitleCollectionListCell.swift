@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
-class TitleCollectionListCell: UICollectionViewCell {
+class TitleCollectionListCell: UICollectionViewCell, Configurable {
 
     // MARK: - IBOutlets
 
     @IBOutlet weak var titleLabel: UILabel!
 
-    // MARK: - Internal methods
+    // MARK: - Configurable
 
-    func fill(with title: String) {
+    func configure(with title: String) {
         titleLabel.text = title
     }
 

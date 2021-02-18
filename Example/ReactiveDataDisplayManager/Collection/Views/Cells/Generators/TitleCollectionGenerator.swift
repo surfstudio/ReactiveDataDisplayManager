@@ -8,13 +8,10 @@
 
 import ReactiveDataDisplayManager
 
-final class TitleCollectionGenerator: SelectableItem, IndexTitleDisplayble {
+final class TitleCollectionGenerator: IndexTitleDisplayble {
 
     // MARK: - Properties
 
-    var didSelectEvent = BaseEvent<Void>()
-    var didSelected: Bool = false
-    var isNeedDeselect: Bool = true
     var title: String
     var needIndexTitle: Bool
 
