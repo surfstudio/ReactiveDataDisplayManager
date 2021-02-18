@@ -15,7 +15,7 @@ class TitleCollectionViewCell: UICollectionViewCell, Configurable {
 
     @IBOutlet weak var titleLabel: UILabel!
 
-    // MARK: - Internal methods
+    // MARK: - Configurable
 
     func configure(with title: String) {
         titleLabel.text = title
