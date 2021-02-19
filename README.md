@@ -5,7 +5,7 @@
 
 It is the whole approach to working with scrollable lists or collections.
 
-TBD logo here
+TBD logo here (need designer help)
 
 ## About
 
@@ -26,13 +26,110 @@ Please read our [migration guide](/Documentation/MigrationGuide.md) if you were 
 
 ## Usage
 
-TBD
+Step by step example of configuring simple list of labels.
+
+### Prepare cell
+
+You can layout your cell from xib or from code. It doesn't matter.
+Just extend your cell to `Configurable` to fill subviews with model, when cell will be created.
+
+```
+import ReactiveDataDisplayManager
+
+final class LabelCell: UITableViewCell {
+
+    // MARK: - IBOutlets
+
+    @IBOutlet private weak var titleLabel: UILabel!
+
+}
+
+// MARK: - Configurable
+
+extension LabelCell: Configurable {
+
+    typealias Model = String
+
+    func configure(with model: Model) {
+        titleLabel.text = model
+    }
+}
+```
+
+### Prepare collection
+
+Just call `rddm` from collection
+- add plugins for your needs
+- build your ReactiveDataDisplayManager
+
+```
+final class ExampleTableController: UIViewController {
+
+    // MARK: - IBOutlets
+
+    @IBOutlet private weak var tableView: UITableView!
+
+    // MARK: - Private Properties
+
+    private lazy var ddm = tableView.rddm.baseBuilder
+        .add(plugin: TableSelectablePlugin())
+        .build()
+
+    // MARK: - UIViewController
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fill()
+    }
+
+}
+```
+
+### Fill collection
+
+Convert models to generators and call `ddm.forceRefill()`
+
+```
+private extension MainTableViewController {
+
+    func fill() {
+
+        let models = ["First", "Second", "Third"]
+
+        let generators = models.map { text -> BaseCellGenerator<LabelCell> in
+            let generator = BaseCellGenerator<LabelCell>(with: text)
+
+            generator.didSelectEvent += {
+                // do some logic
+            }
+
+            return generator
+        }
+
+        ddm.addCellGenerators(generators)
+
+        ddm.forceRefill()
+    }
+
+}
+```
+
+### Enjoy
+
+As you can see, you don't need to conform `UITableViewDelegate` and `UITableViewDataSource`. This protocols are hidden inside ReactiveDataDisplayManager.
+You can extend table functionality with adding plugins and replacing generator.
+`Plugin + Generator = Feature`
+
+You can check more examples in our [example project](/Example/) or in full [documentation](/Documentation/)
+
 
 ## Installation
 
 Just add ReactiveDataDisplayManager to your `Podfile` like this
 
-`pod 'ReactiveDataDisplayManager' ~> 7.0.0`
+```
+pod 'ReactiveDataDisplayManager' ~> 7.0.0
+```
 
 ## Changelog
 
