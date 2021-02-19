@@ -13,7 +13,8 @@ This Framework was made to speed up development of scrollable collections like U
 
 ## Breaking changes
 
-We made a massive refactoring with version 7.0.0. Feel free to read our [Migration Guide](/Documentation/MigrationGuide.md) if you were using version 6 or older.
+We made a massive refactoring with version 7.0.0.
+Feel free to read our [migration guide](/Documentation/MigrationGuide.md) if you were using version 6 or older.
 
 
 ## Currently supported features
@@ -240,3 +241,25 @@ If you have cells with equal sizes, you should choose `BaseCollectionCellGenerat
 But if you cell's should have different sizes in **one dimension**, you should use `SizableCollectionCollectionDataDisplayManager` and calculatable collection generators.
 
 Otherwise you should provide your own adapter with collectionView delegate.
+
+## Changelog
+
+All notable changes to this project will be documented in [this file](./CHANGELOG.md).
+
+## Issues
+
+For issues, file directly in the [main ReactiveDataDisplayManager repo](https://github.com/surfstudio/ReactiveDataDisplayManager).
+
+## Contribute
+
+If you would like to contribute to the package (e.g. by improving the documentation, solving a bug or adding a cool new feature), please review our [contribution guide](/Documentation/ContributingGuide.md) first and send us your pull request.
+
+You PRs are always welcome.
+
+## How to reach us
+
+TBD
+
+## License
+
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
