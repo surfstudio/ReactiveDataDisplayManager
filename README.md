@@ -120,7 +120,7 @@ As you can see, you don't need to conform `UITableViewDelegate` and `UITableView
 You can extend table functionality with adding plugins and replacing generator.
 `Plugin + Generator = Feature`
 
-You can check more examples in our [example project](/Example/) or in full [documentation](/Documentation/)
+You can check more examples in our [example project](/Example/) or in full [documentation](/Documentation/Entities.md)
 
 
 ## Installation
