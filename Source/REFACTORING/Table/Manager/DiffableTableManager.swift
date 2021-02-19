@@ -21,7 +21,7 @@ extension EmptyTableHeaderGenerator: Diffable {
 }
 
 @available(iOS 13.0, *)
-public class DiffableTableStateManager: BaseTableStateManager {
+public class DiffableTableStateManager: BaseTableManager {
 
     // MARK: - Typealias
 
@@ -45,9 +45,7 @@ public class DiffableTableStateManager: BaseTableStateManager {
     }
 
     open func addCellGenerators(_ generators: [CellGeneratorType], toHeader header: HeaderGeneratorType) {
-        guard let tableView = tableView else { return }
-
-        generators.forEach { $0.registerCell(in: tableView) }
+        generators.forEach { $0.registerCell(in: view) }
 
         guard let index = sections.firstIndex(where: { $0 === header }) else { return }
 
@@ -86,8 +84,7 @@ public class DiffableTableStateManager: BaseTableStateManager {
                      needRemoveEmptySection: Bool = false,
                      completion: (() -> Void)? = nil) {
         guard
-            let index = findGenerator(generator),
-            let table = tableView
+            let index = findGenerator(generator)
         else {
             return
         }

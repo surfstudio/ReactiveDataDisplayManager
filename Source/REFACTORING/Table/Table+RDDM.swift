@@ -26,7 +26,7 @@ public extension DataDisplayWrapper where Base: UITableView {
 
     @available(iOS 13.0, *)
     var diffableBuilder: DiffableTableBuilder<DiffableTableStateManager> {
-        DiffableTableBuilder(view: base, stateManager: DiffableTableStateManager())
+        DiffableTableBuilder(view: base, manager: DiffableTableStateManager())
     }
 
 }
@@ -36,10 +36,10 @@ public class DiffableTableBuilder<T: DiffableTableStateManager>: TableBuilder<T>
 
     // MARK: - Initialization
 
-    override init(view: UITableView, stateManager: T) {
-        super.init(view: view, stateManager: stateManager)
-        stateManager.tableView = view
-        dataSource = DiffableTableDataSource(provider: stateManager)
+    override init(view: UITableView, manager: T) {
+        super.init(view: view, manager: manager)
+        manager.view = view
+        dataSource = DiffableTableDataSource(provider: manager)
     }
 
     // MARK: - Public Methods

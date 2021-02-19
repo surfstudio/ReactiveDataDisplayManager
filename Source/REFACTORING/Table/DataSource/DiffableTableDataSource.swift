@@ -44,16 +44,17 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
     // MARK: - Properties
 
-    weak var provider: TableGeneratorsProvider?
-    var prefetchPlugins = PluginCollection<PrefetchEvent, BaseTableStateManager>()
-    var tablePlugins = PluginCollection<TableEvent, BaseTableStateManager>()
-
+    public weak var provider: TableGeneratorsProvider?
+    public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
+    public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
+    public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
+    public var movablePlugin: TableMovableDataSource?
+    
     // MARK: - Initialization
 
-    public init(provider: BaseTableStateManager) {
-        let tableView = provider.tableView ?? UITableView()
+    public init(provider: BaseTableManager) {
 
-        super.init(tableView: tableView) { (table, indexPath, item) -> UITableViewCell? in
+        super.init(tableView: provider.view) { (table, indexPath, item) -> UITableViewCell? in
             return provider
                 .generators[indexPath.section][indexPath.row]
                 .generate(tableView: table, for: indexPath)
@@ -65,11 +66,12 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
     // MARK: - UITableViewDiffableDataSource
 
     open override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableStateManager)
+        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider as? BaseTableManager)
     }
 
     open override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return movablePlugin?.canMoveRow(at: indexPath, with: provider as? BaseTableManager) ?? false
     }
 
 }
