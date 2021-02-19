@@ -11,6 +11,11 @@ TBD logo here
 
 This Framework was made to speed up development of scrollable collections like UITableView or UICollectionView, and to provide new way to easy extend collections functionality.
 
+## Breaking changes
+
+We made a massive refactoring with version 7.0.0. Feel free to read our [Migration Guide](/Documentation/MigrationGuide.md) if you were using version 6 or older.
+
+
 ## Currently supported features
 
 - Populating cells without implementing delegate and datasource by yourself
