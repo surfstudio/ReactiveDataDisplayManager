@@ -3,13 +3,21 @@
 [![Build Status](https://travis-ci.org/surfstudio/ReactiveDataDisplayManager.svg?branch=master)](https://travis-ci.org/surfstudio/ReactiveDataDisplayManager)
 [![codebeat badge](https://codebeat.co/badges/30f4100b-ee0e-4bc6-8aad-c2128544c0c6)](https://codebeat.co/projects/github-com-surfstudio-reactivedatadisplaymanager-master) [![codecov](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager/branch/master/graph/badge.svg)](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager)
 
-It is the whole approach to working with UIView collections.
+It is the whole approach to working with scrollable lists or collections.
 
 TBD logo here
 
 ## About
 
-The main idea of RDDM is to make development of table screen faster and clearly. So it provide reuse DDM and reuse cells both within a project and beetween projects.
+This Framework was made to speed up development of scrollable collections like UITableView or UICollectionView, and to provide new way to easy extend collections functionality.
+
+## Currently supported features
+
+- Populating cells without implementing delegate and datasource by yourself
+- Inserting, replacing or removing cells without reload
+- Expanding and collapsing cells inside collection
+- Moving or Drag'n'Drop cells inside collection
+- Customisation of section headers and index titles
 
 # Entites
 RDDM contains next entites:        
