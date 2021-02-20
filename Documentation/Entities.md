@@ -4,9 +4,19 @@ Basically `DataDisplayManager` contains such set of entities.
 
 [![AbstractDataDisplayManager](https://i.ibb.co/rH9Kkp6/Abstract-Data-Display-Manager.png)](https://ibb.co/TtyDc08)
 
-## Manager
+To simplify explanation of entities relationships we can mark each entity with atomic architecture terms.
 
-It is main template with client interface which operating with `generators`.
+[![Atomic Architecture](https://i.ibb.co/3cMwnjZ/2021-02-20-18-52-59.png)](https://ibb.co/L1JM3c7)
+
+Greater component is more complex, and can directly or indirectly operate with smaller components.
+
+**RECOMMENDATION** Interact, customize or extend atoms and moleculas when it possible and not greater entities.
+
+## DataDisplayManager
+
+`DataDisplayManager` protocol it is main *template* with client interface which operating with `generators`.
+
+Concrete implementation with injected plugins is *page* in atomic terms.
 
 ### Example
 
@@ -16,7 +26,7 @@ TBD Gravity
 
 ## Generator
 
-- Atom
+- *Atom*
 - Can build cells
 - Can configure cells
 - Can store closures or current cell state
@@ -28,7 +38,7 @@ This is generic generator with only one requirement to cell - conforming to `Con
 
 Recommended way to create generator `YourCellType.rddm.baseGenerator(with: model)` where model is `Configurable.Model` instance.
 
-*NOTE* If you want store closures, current cell state or extend generator with some protocol, preferable extending `BaseCellGenerator` and not create your own.
+**NOTE** If you want store closures, current cell state or extend generator with some protocol, preferable extending `BaseCellGenerator` and not create your own.
 
 ### Example
 
@@ -80,7 +90,7 @@ or simply fix initialising of your BaseGenerator using ` BaseCellGenerator.init(
 
 ## Delegate
 
-- Organism
+- *Organism*
 - based on `UITableViewDelegate` or `UICollectionViewDelegate` (depends on collection type)
 - Proxy collection events to plugins
 
@@ -90,13 +100,13 @@ We hope, that bult-in delegate will cover 99% of your needs.
 
 Btw you always can replace delegate with your own implementation.
 
-*DO NOT FORGET* inherit BaseDelegate or add calls to plugins to not loose bult-in features.
+**DO NOT FORGET** inherit BaseDelegate or add calls to plugins to not loose bult-in features.
 
 `tableView.rddm.baseBuilder.set(delegate: YourCustomDelegate()).build()`
 
 ## DataSource
 
-- Organism
+- *Organism*
 - Based on `UITableViewDataSource` or `UICollectionViewDataSource` (depends on collection type)
 - Implement `UITableViewDataSourcePrefetching` or `UICollectionViewDataSourcePrefetching` (depends on collection type)
 - Proxy collection events to plugins
@@ -107,13 +117,13 @@ We hope, that bult-in datasource will cover 99% of your needs.
 
 Btw you always can replace datasource with your own implementation.
 
-*DO NOT FORGET* inherit BaseDataSource or add calls to plugins to not loose bult-in features.
+**DO NOT FORGET** inherit BaseDataSource or add calls to plugins to not loose bult-in features.
 
 `tableView.rddm.baseBuilder.set(dataSource: YourCustomDataSource()).build()`
 
 ## PluginAction
 
-- Атомарная единица. Основной инструмент при кастомизации.
+- *Molecula*
 - Описывает реакцию на событие коллекции.
 - Имеет доступ до генераторов
 - Собирается в **PluginCollection** - на одно событие может среагировать несколько плагинов
@@ -160,7 +170,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
 ## FeaturePlugin
 
-- Атомарная единица. Основной инструмент при кастомизации.
+- *Molecula*
 - Представляет собой протокол для отдельной части dataSource или delegate.
 - Интегрируется в единственном экземпляре
 
