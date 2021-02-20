@@ -1,13 +1,38 @@
-TBD translate
+# Entities overview
 
-## Сущности
+Basically `DataDisplayManager` contains such set of entities.
 
-Готовый **DataDisplayManager** может содержать в себе множество сущностей.  
-По уровню сложности можем считать его организмом. Наследоваться от него потребуется в крайнем случае.
+![AbstractDataDisplayManager](https://ibb.co/TtyDc08)
 
-![AbstractDataDisplayManager](AbstractDataDisplayManager.png)
+It is main organism with client interface which operating with `generators`.
 
-### PluginAction
+## Generator
+
+TBD
+
+## Delegate
+
+- Молекула. Заменяется лишь когда не получилось кастомизировать плагинами.
+- Реализует **UITableViewDelegate** или аналог для коллекции.
+- Может содержать в себе **PluginCollection** и набор **FeaturePlugin**
+- При модификации следует либо наследоваться от **BaseTableDelegate**, либо реализовать протокол **TableDelegate**, сохранив поддержку плагинов.
+
+### How to change
+
+`tableView.rddm.baseBuilder.set(delegate: YourCustomDelegate()).build()`
+
+## DataSource
+
+- Молекула. Заменяется лишь когда не получилось кастомизировать плагинами.
+- Реализует **UITableViewDataSource** и **UITableViewDataSourcePrefetching** или аналоги для коллекции.
+- Может содержать в себе **PluginCollection** и набор **FeaturePlugin**
+- При модификации следует либо наследоваться от **BaseTableDataSource**, либо реализовать протокол **TableDataSource**, сохранив поддержку плагинов.
+
+### How to change
+
+`tableView.rddm.baseBuilder.set(dataSource: YourCustomDataSource()).build()`
+
+## PluginAction
 
 - Атомарная единица. Основной инструмент при кастомизации.
 - Описывает реакцию на событие коллекции.
@@ -17,12 +42,12 @@ TBD translate
 На основе этого можно проксировать события delegate или dataSource, добавить реакцию на нажатия для **SelectableItem**  или разворот по нажатию для **FoldableItem**.
 Можно ознакомиться с готовыми плагинами в Example проекте.
 
-#### Пример подключения
+### How to add
 
 `tableView.rddm.baseBuilder.add(plugin: TableSelectablePlugin()).build()`
 
-#### Пример реализации
-```
+### Example
+```swift
 public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
     public override init() {}
@@ -47,7 +72,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 }
 ```
 
-### FeaturePlugin
+## FeaturePlugin
 
 - Атомарная единица. Основной инструмент при кастомизации.
 - Представляет собой протокол для отдельной части dataSource или delegate.
@@ -56,43 +81,19 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 На основе этого типа сущности можно добавить поддержку перетаскивания ячеек, поддержку алфавитного указателя.
 Когда фича требует задействование нескольких методов dataSource или delegate с возвращаемым значением - FeaturePlugin ваш выбор.
 
-#### Пример подключения
+### How to add
 
 `tableView.rddm.baseBuilder.set(plugin: TableMovablePlugin()).build()`
 
-#### Пример реализации
-TODO
 
-### Delegate
+## Animator
 
-- Молекула. Заменяется лишь когда не получилось кастомизировать плагинами.
-- Реализует **UITableViewDelegate** или аналог для коллекции.
-- Может содержать в себе **PluginCollection** и набор **FeaturePlugin**
-- При модификации следует либо наследоваться от **BaseTableDelegate**, либо реализовать протокол **TableDelegate**, сохранив поддержку плагинов.
+- Атом отвечающий за анимацию операций вставки или удаления
 
-#### Пример подключения
+Эта сущность нужна для возможности сменить метод анимации таблицы.
+C **beginUpdates/endUpdates** (deprecated) на **performBatchUpdates** или с использованием стронних библиотек.
+По-умолчанию будет выбираться **TableBatchUpdatesAnimator** если  таргет = iOS 11.
 
-`tableView.rddm.baseBuilder.set(delegate: YourCustomDelegate()).build()`
+### How to change
 
-### DataSource
-
-- Молекула. Заменяется лишь когда не получилось кастомизировать плагинами.
-- Реализует **UITableViewDataSource** и **UITableViewDataSourcePrefetching** или аналоги для коллекции.
-- Может содержать в себе **PluginCollection** и набор **FeaturePlugin**
-- При модификации следует либо наследоваться от **BaseTableDataSource**, либо реализовать протокол **TableDataSource**, сохранив поддержку плагинов.
-
-#### Пример подключения
-
-`tableView.rddm.baseBuilder.set(dataSource: YourCustomDataSource()).build()`
-
-### Animator
-
-- Молекула отвечающая за вставку и удаление ячеек
-- Оперирует только **IndexPath**
-
-Эта сущность нужна для возможности сменить метод анимации таблицы. C **beginUpdates/endUpdates** на **performBatchUpdates** или с использованием стронних библиотек.
-Выделение этой сущности в процессе разработки.
-
-#### Пример подключения
-
-`tableView.rddm.baseBuilder.set(animator: YourCustomAnimator()).build()`
+`tableView.rddm.baseBuilder.set(animator: TableBatchUpdatesAnimator()).build()`
