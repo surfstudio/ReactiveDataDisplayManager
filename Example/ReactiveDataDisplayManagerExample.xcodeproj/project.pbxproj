@@ -35,6 +35,7 @@
 		6DF430B625D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF430B525D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift */; };
 		6DF4321F25D9D1D70093A1EB /* PrefetchingCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF4321E25D9D1D70093A1EB /* PrefetchingCollectionViewController.swift */; };
 		6DF4322825D9DAD10093A1EB /* ImageCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF4322725D9DAD10093A1EB /* ImageCollectionCellGenerator.swift */; };
+		6DFDD4FD25DFF6BA00E2A4AC /* ItemTitleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFDD4FC25DFF6BA00E2A4AC /* ItemTitleCollectionViewController.swift */; };
 		896B59712354962A00E8E2AB /* StackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59702354962A00E8E2AB /* StackViewController.swift */; };
 		896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */; };
 		89FD21B4238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */; };
@@ -117,6 +118,7 @@
 		6DF430B525D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHorizontalCollectionViewController.swift; sourceTree = "<group>"; };
 		6DF4321E25D9D1D70093A1EB /* PrefetchingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchingCollectionViewController.swift; sourceTree = "<group>"; };
 		6DF4322725D9DAD10093A1EB /* ImageCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCellGenerator.swift; sourceTree = "<group>"; };
+		6DFDD4FC25DFF6BA00E2A4AC /* ItemTitleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTitleCollectionViewController.swift; sourceTree = "<group>"; };
 		896B59702354962A00E8E2AB /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		896B59732354970700E8E2AB /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
 		89FD21B3238C08C9008D7ED3 /* TitleCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
@@ -438,6 +440,14 @@
 			path = PrefetchingCollectionViewController;
 			sourceTree = "<group>";
 		};
+		6DFDD50025DFF77A00E2A4AC /* ItemTitleCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6DFDD4FC25DFF6BA00E2A4AC /* ItemTitleCollectionViewController.swift */,
+			);
+			path = ItemTitleCollectionViewController;
+			sourceTree = "<group>";
+		};
 		896B59722354963900E8E2AB /* Stack */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,14 +489,15 @@
 			isa = PBXGroup;
 			children = (
 				6DA4BFBB25DA5E3000C23D85 /* Views */,
-				DD6AEE1525D28EB20059E312 /* MainCollectionViewController */,
 				DD6AEE0225D2882B0059E312 /* CollectionViewController */,
+				DD6AEE1525D28EB20059E312 /* MainCollectionViewController */,
 				DD6AEE0125D288050059E312 /* CollectionListViewController */,
 				DDE16B5325D3B808005B988A /* ImageCollectionViewController */,
 				6DF430B925D984070093A1EB /* ImageHorizontalCollectionViewController */,
 				6DF4322225D9D1E30093A1EB /* PrefetchingCollectionViewController */,
 				DD7F280025D5015300130C9B /* SizableCollectionViewController */,
 				DD31B11E25DCEA1C00A266A7 /* FoldableCollectionViewController */,
+				6DFDD50025DFF77A00E2A4AC /* ItemTitleCollectionViewController */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -886,6 +897,7 @@
 				8B85E2DE1FE84F540080984A /* AppDelegate.swift in Sources */,
 				DD7F281E25D506AC00130C9B /* VerticalSizableTextGenerator.swift in Sources */,
 				8B1D7907201C8BDA00F184BD /* CollectionViewController.swift in Sources */,
+				6DFDD4FD25DFF6BA00E2A4AC /* ItemTitleCollectionViewController.swift in Sources */,
 				DD7F282E25D53ABA00130C9B /* SizableCollectionViewCell.swift in Sources */,
 				DDB8CC6125D2A66D00439FB9 /* TitleCollectionListCell.swift in Sources */,
 				6D27964A25C85E680085B845 /* ImageTableGenerator.swift in Sources */,

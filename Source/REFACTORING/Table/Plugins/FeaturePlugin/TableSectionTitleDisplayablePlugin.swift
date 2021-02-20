@@ -35,7 +35,7 @@ open class TableSectionTitleDisplayablePlugin: TableSectionTitleDisplayable {
             guard let generator = generator as? IndexTitleDisplayble else {
                 return nil
             }
-            return generator.needSectionIndexTitle ? generator.title : nil
+            return generator.needIndexTitle ? generator.title : nil
         }
         return titleWrapper?.titles ?? sectionTitles
     }

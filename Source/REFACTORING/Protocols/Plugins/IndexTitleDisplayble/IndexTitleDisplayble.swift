@@ -10,5 +10,5 @@ public protocol IndexTitleDisplayble {
     /// The title as displayed in the index of tableView/collectionView
     var title: String { get }
     /// When this property is set to true, then the title will be displayed in the index of tableView/collectionView
-    var needSectionIndexTitle: Bool { get }
+    var needIndexTitle: Bool { get }
 }
