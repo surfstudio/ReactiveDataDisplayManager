@@ -33,7 +33,7 @@ Step by step example of configuring simple list of labels.
 You can layout your cell from xib or from code. It doesn't matter.
 Just extend your cell to `Configurable` to fill subviews with model, when cell will be created.
 
-```
+```swift
 import ReactiveDataDisplayManager
 
 final class LabelCell: UITableViewCell {
@@ -62,7 +62,7 @@ Just call `rddm` from collection
 - add plugins for your needs
 - build your ReactiveDataDisplayManager
 
-```
+```swift
 final class ExampleTableController: UIViewController {
 
     // MARK: - IBOutlets
@@ -89,24 +89,23 @@ final class ExampleTableController: UIViewController {
 
 Convert models to generators and call `ddm.forceRefill()`
 
-```
+```swift
 private extension MainTableViewController {
 
     func fill() {
 
         let models = ["First", "Second", "Third"]
 
-        let generators = models.map { text -> BaseCellGenerator<LabelCell> in
-            let generator = BaseCellGenerator<LabelCell>(with: text)
+        for model in models {
+            let generator = TitleTableViewCell.rddm.baseGenerator(with: model)
 
-            generator.didSelectEvent += {
+            generator.didSelectEvent += { [weak self] in
                 // do some logic
             }
 
-            return generator
+            // Add generator to adapter
+            ddm.addCellGenerator(generator)
         }
-
-        ddm.addCellGenerators(generators)
 
         ddm.forceRefill()
     }
