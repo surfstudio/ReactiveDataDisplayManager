@@ -2,7 +2,7 @@
 
 Basically `DataDisplayManager` contains such set of entities.
 
-![AbstractDataDisplayManager](https://ibb.co/TtyDc08)
+[![AbstractDataDisplayManager](https://i.ibb.co/rH9Kkp6/Abstract-Data-Display-Manager.png)](https://ibb.co/TtyDc08)
 
 It is main organism with client interface which operating with `generators`.
 
