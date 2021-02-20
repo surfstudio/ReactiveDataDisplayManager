@@ -117,7 +117,8 @@ private extension MainTableViewController {
 
 As you can see, you don't need to conform `UITableViewDelegate` and `UITableViewDataSource`. This protocols are hidden inside ReactiveDataDisplayManager.
 You can extend table functionality with adding plugins and replacing generator.
-`Plugin + Generator = Feature`
+
+[![Feature](https://i.ibb.co/WFrzQNK/2021-02-20-15-52-34.png)](https://ibb.co/mtnymrz)
 
 You can check more examples in our [example project](/Example/) or in full [documentation](/Documentation/Entities.md)
 

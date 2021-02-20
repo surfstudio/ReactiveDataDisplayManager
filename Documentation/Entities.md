@@ -4,31 +4,88 @@ Basically `DataDisplayManager` contains such set of entities.
 
 [![AbstractDataDisplayManager](https://i.ibb.co/rH9Kkp6/Abstract-Data-Display-Manager.png)](https://ibb.co/TtyDc08)
 
-It is main organism with client interface which operating with `generators`.
+## Manager
+
+It is main template with client interface which operating with `generators`.
+
+### Example
+
+TBD Manual
+
+TBD Gravity
 
 ## Generator
 
-TBD
+- Atom
+- Can build cells
+- Can configure cells
+- Can store closures or current cell state
+- Stored inside `DataDisplayManager` and can cached to directly update concrete cell
+
+`BaseCellGenerator` is your choice if you need display cell and process selection event.
+
+This is generic generator with only one requirement to cell - conforming to `Configurable` protocol.
+
+Recommended way to create generator `YourCellType.rddm.baseGenerator(with: model)` where model is `Configurable.Model` instance.
+
+*NOTE* If you want store closures, current cell state or extend generator with some protocol, preferable extending `BaseCellGenerator` and not create your own.
+
+### Example
+
+Extending `BaseCellGenerator` to `FoldableItem`
+
+```swift
+
+```
+
+### Errors
+
+- `Could not load NIB in bundle ... with name 'YourCellName'`
+This error appears because you are using class based cells (not UINib), but inside RDDM cells registering via UINib.
+
+  **Your should override default registering in generator**
+```swift
+extension YourCellGenerator: TableCellGenerator {
+  // ...
+
+  func registerCell(in tableView: UITableView) {
+      tableView.register(identifier, forCellReuseIdentifier: String(describing: identifier))
+  }
+
+  // ...
+}
+```
 
 ## Delegate
 
-- Молекула. Заменяется лишь когда не получилось кастомизировать плагинами.
-- Реализует **UITableViewDelegate** или аналог для коллекции.
-- Может содержать в себе **PluginCollection** и набор **FeaturePlugin**
-- При модификации следует либо наследоваться от **BaseTableDelegate**, либо реализовать протокол **TableDelegate**, сохранив поддержку плагинов.
+- Organism
+- based on `UITableViewDelegate` or `UICollectionViewDelegate` (depends on collection type)
+- Proxy collection events to plugins
 
 ### How to change
+
+We hope, that bult-in delegate will cover 99% of your needs.
+
+Btw you always can replace delegate with your own implementation.
+
+*DO NOT FORGET* inherit BaseDelegate or add calls to plugins to not loose bult-in features.
 
 `tableView.rddm.baseBuilder.set(delegate: YourCustomDelegate()).build()`
 
 ## DataSource
 
-- Молекула. Заменяется лишь когда не получилось кастомизировать плагинами.
-- Реализует **UITableViewDataSource** и **UITableViewDataSourcePrefetching** или аналоги для коллекции.
-- Может содержать в себе **PluginCollection** и набор **FeaturePlugin**
-- При модификации следует либо наследоваться от **BaseTableDataSource**, либо реализовать протокол **TableDataSource**, сохранив поддержку плагинов.
+- Organism
+- Based on `UITableViewDataSource` or `UICollectionViewDataSource` (depends on collection type)
+- Implement `UITableViewDataSourcePrefetching` or `UICollectionViewDataSourcePrefetching` (depends on collection type)
+- Proxy collection events to plugins
 
 ### How to change
+
+We hope, that bult-in datasource will cover 99% of your needs.
+
+Btw you always can replace datasource with your own implementation.
+
+*DO NOT FORGET* inherit BaseDataSource or add calls to plugins to not loose bult-in features.
 
 `tableView.rddm.baseBuilder.set(dataSource: YourCustomDataSource()).build()`
 
@@ -44,11 +101,18 @@ TBD
 
 ### How to add
 
+Simply add plugin in stage of building
+
 `tableView.rddm.baseBuilder.add(plugin: TableSelectablePlugin()).build()`
 
+And conform generator to concrete `PluginAction.GeneratorType`
+
 ### Example
+
 ```swift
 public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
+
+    typealias GeneratorType = SelectableItem
 
     public override init() {}
 
@@ -56,7 +120,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
         switch event {
         case .didSelect(let indexPath):
-            guard let selectable = manager?.generators[indexPath.section][indexPath.row] as? SelectableItem else {
+            guard let selectable = manager?.generators[indexPath.section][indexPath.row] as? GeneratorType else {
                 return
             }
             selectable.didSelectEvent.invoke(with: ())
@@ -83,16 +147,25 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
 ### How to add
 
+Simply add plugin in stage of building
+
 `tableView.rddm.baseBuilder.set(plugin: TableMovablePlugin()).build()`
 
+And conform generator to concrete `FeaturePlugin.GeneratorType`
+
+### Examples
+
+Look at `TableMovablePlugin`, `TableSectionTitleDisplayablePlugin` or `TableSwipeActionsConfigurationPlugin` and analogs for `UICollectionView`.
 
 ## Animator
 
-- Атом отвечающий за анимацию операций вставки или удаления
+Little atom created for approaches to animate collection changes.
 
-Эта сущность нужна для возможности сменить метод анимации таблицы.
-C **beginUpdates/endUpdates** (deprecated) на **performBatchUpdates** или с использованием стронних библиотек.
-По-умолчанию будет выбираться **TableBatchUpdatesAnimator** если  таргет = iOS 11.
+`TableUpdatesAnimator` uses **beginUpdates/endUpdates** approach which will be deprecated soon.
+
+`TableBatchUpdatesAnimator` uses **performBatchUpdates** approach which available since iOS 11.
+
+Animator is selected based on iOS version, so most likely you never need to change this entity, but we've save such ability for you.
 
 ### How to change
 
