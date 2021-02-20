@@ -32,7 +32,7 @@ open class TableSectionTitleDisplayablePlugin: TableSectionTitleDisplayable {
 
     open func sectionIndexTitles(with provider: TableGeneratorsProvider?) -> [String]? {
         let sectionTitles = provider?.sections.compactMap { generator -> String? in
-            guard let generator = generator as? SectionTitleDisplayble else {
+            guard let generator = generator as? IndexTitleDisplayble else {
                 return nil
             }
             return generator.needSectionIndexTitle ? generator.title : nil
@@ -51,7 +51,7 @@ open class TableSectionTitleDisplayablePlugin: TableSectionTitleDisplayable {
 private extension TableSectionTitleDisplayablePlugin {
 
     func getIndexForTitleFromHeaderGenerators(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int {
-        return provider?.sections.firstIndex(where: { ($0 as? SectionTitleDisplayble)?.title == title }) ?? -1
+        return provider?.sections.firstIndex(where: { ($0 as? IndexTitleDisplayble)?.title == title }) ?? -1
     }
 
 }
