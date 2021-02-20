@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class FoldableCellGenerator: FoldableItem {
+final class FoldableCellGenerator: BaseCellGenerator<FoldableTableViewCell>, FoldableItem {
 
     // MARK: - FoldableItem
 
@@ -16,28 +16,16 @@ final class FoldableCellGenerator: FoldableItem {
     var isExpanded = false
     var childGenerators: [TableCellGenerator] = []
 
-}
+    // MARK: - ViewBuilder
 
-// MARK: - TableCellGenerator
-
-extension FoldableCellGenerator: TableCellGenerator {
-
-    var identifier: String {
-        return String(describing: FoldableTableViewCell.self)
-    }
-
-}
-
-// MARK: - ViewBuilder
-
-extension FoldableCellGenerator: ViewBuilder {
-
-    func build(view: FoldableTableViewCell) {
-        view.fill(expanded: isExpanded)
+    override func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
+        let view = super.generate(tableView: tableView, for: indexPath)
 
         didFoldEvent.addListner { isExpanded in
-            view.configure(expanded: isExpanded)
+            (view as? FoldableTableViewCell)?.update(expanded: isExpanded)
         }
+
+        return view
     }
 
 }

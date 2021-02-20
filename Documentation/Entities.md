@@ -35,7 +35,27 @@ Recommended way to create generator `YourCellType.rddm.baseGenerator(with: model
 Extending `BaseCellGenerator` to `FoldableItem`
 
 ```swift
+final class FoldableCellGenerator: BaseCellGenerator<FoldableTableViewCell>, FoldableItem {
 
+    // MARK: - FoldableItem
+
+    var didFoldEvent = BaseEvent<Bool>()
+    var isExpanded = false
+    var childGenerators: [TableCellGenerator] = []
+
+    // MARK: - ViewBuilder
+
+    override func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
+        let view = super.generate(tableView: tableView, for: indexPath)
+
+        didFoldEvent.addListner { isExpanded in
+            (view as? FoldableTableViewCell)?.update(expanded: isExpanded)
+        }
+
+        return view
+    }
+
+}
 ```
 
 ### Errors
@@ -55,6 +75,8 @@ extension YourCellGenerator: TableCellGenerator {
   // ...
 }
 ```
+
+or simply fix initialising of your BaseGenerator using ` BaseCellGenerator.init(with: Cell.Model, registerType: .class)`
 
 ## Delegate
 
@@ -169,4 +191,6 @@ Animator is selected based on iOS version, so most likely you never need to chan
 
 ### How to change
 
-`tableView.rddm.baseBuilder.set(animator: TableBatchUpdatesAnimator()).build()`
+Implement protocol `Animator` and set your implementation in builder
+
+`tableView.rddm.baseBuilder.set(animator: YourCustomAnimator()).build()`

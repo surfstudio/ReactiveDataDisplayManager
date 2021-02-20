@@ -34,7 +34,7 @@ open class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectable
         return String(describing: Cell.self)
     }
 
-    public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
+    open func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? Cell else {
             return UITableViewCell()
         }

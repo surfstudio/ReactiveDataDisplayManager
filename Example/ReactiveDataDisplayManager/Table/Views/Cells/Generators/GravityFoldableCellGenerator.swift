@@ -44,10 +44,10 @@ extension GravityFoldableCellGenerator: GravityTableCellGenerator {
 extension GravityFoldableCellGenerator: ViewBuilder {
 
     func build(view: FoldableTableViewCell) {
-        view.fill(title: "with heaviness \(heaviness)", expanded: isExpanded)
+        view.configure(with: .init(title: "with heaviness \(heaviness)", isExpanded: isExpanded))
 
         didFoldEvent.addListner { isExpanded in
-            view.configure(expanded: isExpanded)
+            view.update(expanded: isExpanded)
         }
     }
 
