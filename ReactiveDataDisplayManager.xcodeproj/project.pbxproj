@@ -11,6 +11,9 @@
 		01157AFF25D5212100BFD55B /* TableUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */; };
 		01157B0325D5228C00BFD55B /* TableBatchUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */; };
 		0183560C25BEE60B00141448 /* ManualTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183560B25BEE60B00141448 /* ManualTableManager.swift */; };
+		01A7585225E10BE800925C3F /* TableCell+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7585125E10BE800925C3F /* TableCell+RDDM.swift */; };
+		01A7585D25E10DBC00925C3F /* DataDisplayConstructable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7585C25E10DBC00925C3F /* DataDisplayConstructable.swift */; };
+		01A7586125E10F2D00925C3F /* CollectionCell+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7586025E10F2D00925C3F /* CollectionCell+RDDM.swift */; };
 		01AF216625C2E247004996E9 /* DataDisplayCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF216525C2E247004996E9 /* DataDisplayCompatible.swift */; };
 		01AF217125C2E481004996E9 /* ScrollEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF217025C2E481004996E9 /* ScrollEvent.swift */; };
 		01AF583225B95B1100AE4286 /* TableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF583125B95B1100AE4286 /* TableEvent.swift */; };
@@ -121,6 +124,9 @@
 		01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableUpdatesAnimator.swift; sourceTree = "<group>"; };
 		01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		0183560B25BEE60B00141448 /* ManualTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableManager.swift; sourceTree = "<group>"; };
+		01A7585125E10BE800925C3F /* TableCell+RDDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableCell+RDDM.swift"; sourceTree = "<group>"; };
+		01A7585C25E10DBC00925C3F /* DataDisplayConstructable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayConstructable.swift; sourceTree = "<group>"; };
+		01A7586025E10F2D00925C3F /* CollectionCell+RDDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+RDDM.swift"; sourceTree = "<group>"; };
 		01AF216525C2E247004996E9 /* DataDisplayCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayCompatible.swift; sourceTree = "<group>"; };
 		01AF217025C2E481004996E9 /* ScrollEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollEvent.swift; sourceTree = "<group>"; };
 		01AF583125B95B1100AE4286 /* TableEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableEvent.swift; sourceTree = "<group>"; };
@@ -269,6 +275,7 @@
 				01AF216B25C2E2A9004996E9 /* DataSource */,
 				01AF216A25C2E297004996E9 /* Delegate */,
 				01AF587225B9A3F100AE4286 /* Table+RDDM.swift */,
+				01A7585125E10BE800925C3F /* TableCell+RDDM.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";
@@ -325,6 +332,7 @@
 				01AF586C25B9A35900AE4286 /* DataDisplayWrapper.swift */,
 				01AF216525C2E247004996E9 /* DataDisplayCompatible.swift */,
 				6D3B9A2425D51C6200F6E05C /* TableSectionTitleWrapper.swift */,
+				01A7585C25E10DBC00925C3F /* DataDisplayConstructable.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -541,7 +549,6 @@
 			isa = PBXGroup;
 			children = (
 				01157AF825D51D1600BFD55B /* Animator */,
-				6D3B9A5125D5203E00F6E05C /* SectionTitleDisplayble */,
 				01AF586B25B9A33A00AE4286 /* Wrapper */,
 				01B283E025B8B2D80022B789 /* Plugins */,
 			);
@@ -664,6 +671,7 @@
 				DD67C20D25D2C2EF00A1C149 /* DataSource */,
 				DD67C20E25D2C2FA00A1C149 /* Delegate */,
 				DDE16B4325D3A91C005B988A /* Collection+RDDM.swift */,
+				01A7586025E10F2D00925C3F /* CollectionCell+RDDM.swift */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -888,6 +896,7 @@
 				01BB763C25D66F5600829C2D /* TableDataSource.swift in Sources */,
 				89FD21B2238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift in Sources */,
 				01AF583225B95B1100AE4286 /* TableEvent.swift in Sources */,
+				01A7586125E10F2D00925C3F /* CollectionCell+RDDM.swift in Sources */,
 				6D60FD0C25D6B248002D6082 /* TableMovable.swift in Sources */,
 				C1AB77DC240D6796000044F1 /* CalculatableHeightCollectionCellGenerator.swift in Sources */,
 				C1AB77DE240D6919000044F1 /* SizableCollectionDataDisplayManager.swift in Sources */,
@@ -895,6 +904,7 @@
 				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
 				6DF4321525D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift in Sources */,
 				01BB764825D670FB00829C2D /* CollectionDelegate.swift in Sources */,
+				01A7585225E10BE800925C3F /* TableCell+RDDM.swift in Sources */,
 				6D3B9A1725D51BE100F6E05C /* FeaturePlugin.swift in Sources */,
 				01BB764825D670FB00829C2D /* CollectionDelegate.swift in Sources */,
 				897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */,
@@ -908,6 +918,7 @@
 				C1AB77D6240D581D000044F1 /* BaseCellGenerator.swift in Sources */,
 				01BB764025D66F7200829C2D /* TableGeneratorsProvider.swift in Sources */,
 				899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */,
+				01A7585D25E10DBC00925C3F /* DataDisplayConstructable.swift in Sources */,
 				8987883D2354AE3400AD8CF7 /* HeaderDataDisplayManager.swift in Sources */,
 				6D3B9B1025D6A44C00F6E05C /* TableSwipeActionsConfigurationPlugin.swift in Sources */,
 				C18E5172240E541200750D8C /* CalculatableHeightCellGenerator.swift in Sources */,
