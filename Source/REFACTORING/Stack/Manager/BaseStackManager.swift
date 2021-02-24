@@ -18,7 +18,7 @@ open class BaseStackManager: DataDisplayManager {
 
     // MARK: - Properties
 
-    public weak var view: UIStackView?
+    public weak var view: UIStackView!
     public var cellGenerators: [StackCellGenerator]
 
     // MARK: - Initialization
@@ -30,22 +30,13 @@ open class BaseStackManager: DataDisplayManager {
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        view?.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        view.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         cellGenerators.enumerated().forEach { [weak self] offset, generator in
             guard let stackView = self?.view else { return }
             let view = generator.generate(stackView: stackView, index: offset)
             stackView.addArrangedSubview(view)
         }
-    }
-
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            completion()
-        }
-        forceRefill()
-        CATransaction.commit()
     }
 
     public func addCellGenerator(_ generator: StackCellGenerator) {
@@ -100,7 +91,7 @@ private extension BaseStackManager {
     }
 
     func index(of view: UIView) -> Int? {
-        return self.view?.arrangedSubviews.firstIndex(where: { $0 == view })
+        return self.view.arrangedSubviews.firstIndex(where: { $0 == view })
     }
 
 }

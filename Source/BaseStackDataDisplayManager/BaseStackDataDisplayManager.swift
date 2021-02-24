@@ -40,11 +40,6 @@ open class BaseStackDataDisplayManager: NSObject, DataDisplayManager {
         }
     }
 
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        forceRefill()
-        completion()
-    }
-
     public func addCellGenerator(_ generator: StackCellGenerator) {
         self.cellGenerators.append(generator)
     }
