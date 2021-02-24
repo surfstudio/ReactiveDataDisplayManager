@@ -20,9 +20,91 @@ Concrete implementation with injected plugins is *page* in atomic terms.
 
 ### Example
 
-TBD Manual
+In base implementation you can only add `generators` and reload collection.
 
-TBD Gravity
+But if your collection can change size dynamically, you need to choose between `Manual` and `Gravity` manager.
+
+Assume you have such screen with two cells and horizontal scrolling content
+```
+Screen:
+  Cell A:
+    - item 1
+    - item 2
+    ...
+  Cell B:
+    - item 1
+    - item 2
+    ...
+```
+
+Each cell content is loading from separate endpoint. It means that sometimes cell A can be loaded first, and sometimes cell B. But cells order should always be the same.
+
+Should we always wait loading of both sections before layout?
+
+No
+
+With `manual` approach
+
+```swift
+
+private lazy var ddm = tableView.rddm.manualBuilder.build()
+
+private var generatorA: TableCellGenerator?
+private var generatorB: TableCellGenerator?
+
+func onContentALoaded(items: [ItemA]) {
+
+  let generatorA = GeneratorA(items: items)
+
+  if let generatorB = self.generatorB {
+    ddm.insert(before: generatorB, new: [generatorA])
+  } else {
+    ddm.addCellGenerator(generatorA)
+    ddm.forceRefill()
+  }
+
+  self.generatorA = generatorA
+}
+
+func onContentBLoaded(items: [ItemB]) {
+
+  let generatorB = GeneratorB(items: items)
+
+  if let generatorA = self.generatorA {
+    ddm.insert(after: generatorA, new: [generatorB])
+  } else {
+    ddm.addCellGenerator(generatorB)
+    ddm.forceRefill()
+  }
+
+  self.generatorB = generatorB
+}
+
+```
+
+With `gravity` approach
+
+```swift
+
+private lazy var ddm = tableView.rddm.gravityBuilder.build()
+
+func onContentALoaded(items: [ItemA]) {
+  let generatorA = GeneratorA(items: items)
+  ddm.addCellGenerator(generatorA)
+  ddm.forceRefill()
+}
+
+func onContentBLoaded(items: [ItemB]) {
+  let generatorB = GeneratorB(items: items)
+  ddm.addCellGenerator(generatorB)
+  ddm.forceRefill()
+}
+
+```
+
+Secret in generators. Each `GravityGenerator` has property heaviness. This allow us to forget about sort order on fill stage.
+
+In this example you can see differences between managing approaches and choose one for your needs.
 
 ## Generator
 
