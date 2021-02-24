@@ -22,9 +22,9 @@ Base your branch from `develop` and select name with one from pattern
 
 Make sure that your code:
 
-- []	Does not contain errors
-- []	New functionality is covered by tests and new functionality passes old tests
-- []	Create example that demonstrate new functionality if it is possible
+- [ ]	Does not contain errors
+- [ ]	New functionality is covered by tests and new functionality passes old tests
+- [ ]	Create example that demonstrate new functionality if it is possible
 
 ## Accepting the changes
 
