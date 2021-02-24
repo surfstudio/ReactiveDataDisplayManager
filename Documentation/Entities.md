@@ -122,12 +122,12 @@ Btw you always can replace datasource with your own implementation.
 ## PluginAction
 
 - *Molecula*
-- Описывает реакцию на событие коллекции.
-- Имеет доступ до генераторов
-- Собирается в **PluginCollection** - на одно событие может среагировать несколько плагинов
+- is represent reaction on collection event or events.
+- Have access to manager. It means, that you have access to generators and can update collection from plugin.
+- Injected in `PluginCollection` - simple list wrapper. It means, that on **each** event we can have **many** reactions (plugin-actions).
+- can not return values to delegate or datasource
 
-На основе этого можно проксировать события delegate или dataSource, добавить реакцию на нажатия для **SelectableItem**  или разворот по нажатию для **FoldableItem**.
-Можно ознакомиться с готовыми плагинами в Example проекте.
+You can look at full list of proxy events in enums: `TableEvent`, `PrefetchEvent`, `CollectionEvent`, `ScrollEvent`.
 
 ### How to add
 
@@ -138,6 +138,8 @@ Simply add plugin in stage of building
 And conform generator to concrete `PluginAction.GeneratorType`
 
 ### Example
+
+Handling rows selection.
 
 ```swift
 public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
@@ -166,18 +168,20 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 }
 ```
 
+More examples in bult-in plugins and example project.
+
 ## FeaturePlugin
 
 - *Molecula*
-- Представляет собой протокол для отдельной части dataSource или delegate.
-- Интегрируется в единственном экземпляре
+- is implement part of delegate, datasource or both
+- injected as **one** optional instance to avoid conflicts
+- can return values to delegate or datasource
 
-На основе этого типа сущности можно добавить поддержку перетаскивания ячеек, поддержку алфавитного указателя.
-Когда фича требует задействование нескольких методов dataSource или delegate с возвращаемым значением - FeaturePlugin ваш выбор.
+Basically this entity is adding fixed part of functionality like moving or dragging of cells.
 
 ### How to add
 
-Simply add plugin in stage of building
+Simply set plugin in stage of building
 
 `tableView.rddm.baseBuilder.set(plugin: TableMovablePlugin()).build()`
 
