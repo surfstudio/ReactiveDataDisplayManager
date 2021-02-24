@@ -44,6 +44,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     var collectionPlugins = CollectionPluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
+    var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
 
     // MARK: - Initialization
 
@@ -75,6 +76,13 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         return self
     }
 
+    /// Add feature plugin functionality based on UICollectionViewDelegate/UICollectionViewDataSource events
+    public func add(featurePlugin: FeaturePlugin) -> CollectionBuilder<T> {
+        guard let plugin = featurePlugin as? CollectionItemTitleDisplayable else { return self }
+        itemTitleDisplayablePlugin = plugin
+        return self
+    }
+
     /// Add plugin functionality based on UICollectionViewDelegate events
     public func add(plugin: BaseCollectionPlugin<CollectionEvent>) -> CollectionBuilder<T> {
         collectionPlugins.add(plugin)
@@ -103,6 +111,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
         dataSource.provider = manager
         dataSource.collectionPlugins = collectionPlugins
+        dataSource.itemTitleDisplayablePlugin = itemTitleDisplayablePlugin
 
         view.dataSource = dataSource
 

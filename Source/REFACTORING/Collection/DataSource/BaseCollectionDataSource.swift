@@ -17,6 +17,7 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
+    public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
 
 }
 
@@ -59,6 +60,14 @@ extension BaseCollectionDataSource {
 
     open func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return false
+    }
+
+    open func indexTitles(for collectionView: UICollectionView) -> [String]? {
+        return itemTitleDisplayablePlugin?.indexTitles(with: provider)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
+        return itemTitleDisplayablePlugin?.indexPathForIndexTitle(title, at: index, with: provider) ?? IndexPath()
     }
 
 }
