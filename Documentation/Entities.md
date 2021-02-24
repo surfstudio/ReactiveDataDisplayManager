@@ -106,6 +106,8 @@ Secret in generators. Each `GravityGenerator` has property heaviness. This allow
 
 In this example you can see differences between managing approaches and choose one for your needs.
 
+`Manual` approach will be more useful in simple collections or when you updating cells based on user actions, like tap on plus button inside specific cell..
+
 ## Generator
 
 - *Atom*
