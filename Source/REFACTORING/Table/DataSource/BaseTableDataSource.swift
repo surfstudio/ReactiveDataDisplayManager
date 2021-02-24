@@ -6,34 +6,26 @@
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
-protocol TableDataSource: UITableViewDataSource {}
-
-public protocol TableGeneratorsProvider: AnyObject {
-    var generators: [[TableCellGenerator]] { get set }
-    var sections: [TableHeaderGenerator] { get set }
-}
-
-extension BaseTableManager: TableGeneratorsProvider { }
-
 /// Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
-open class BaseTableDataSource: NSObject {
+open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    weak var provider: TableGeneratorsProvider?
+    weak public var provider: TableGeneratorsProvider?
 
-    var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
-    var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
-    var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
-    var movablePlugin: TableMovableDataSource?
+    public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
+    public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
+    public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
+    public var movablePlugin: TableMovableDataSource?
 
 }
 
 // MARK: - UITableViewDataSource
 
-extension BaseTableDataSource: TableDataSource {
+extension BaseTableDataSource {
 
     open func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitleDisplayablePlugin?.numberOfSections(with: provider) ?? provider?.sections.count ?? 0
@@ -74,9 +66,9 @@ extension BaseTableDataSource: TableDataSource {
 
 }
 
-// MARK: - UICollectionViewDataSourcePrefetching
+// MARK: - UITableViewDataSourcePrefetching
 
-extension BaseTableDataSource: UITableViewDataSourcePrefetching {
+extension BaseTableDataSource {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseTableManager)

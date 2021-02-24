@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 extension UITableView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UITableView {
@@ -32,12 +34,15 @@ public class TableBuilder<T: BaseTableManager> {
     typealias ScrollPluginsCollection = PluginCollection<BaseTablePlugin<ScrollEvent>>
     typealias PrefetchPluginsCollection = PluginCollection<BaseTablePlugin<PrefetchEvent>>
 
+    public typealias TableAnimator = Animator<BaseTableManager.CollectionType>
+
     // MARK: - Properties
 
     let view: UITableView
     let manager: T
-    var delegate: BaseTableDelegate
-    var dataSource: BaseTableDataSource
+    var delegate: TableDelegate
+    var dataSource: TableDataSource
+    var animator: TableAnimator
 
     var tablePlugins = TablePluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
@@ -53,18 +58,25 @@ public class TableBuilder<T: BaseTableManager> {
         self.manager = manager
         delegate = BaseTableDelegate()
         dataSource = BaseTableDataSource()
+        animator = {
+            if #available(iOS 11, *) {
+                return TableBatchUpdatesAnimator()
+            } else {
+                return TableUpdatesAnimator()
+            }
+        }()
     }
 
     // MARK: - Public Methods
 
     /// Change delegate
-    public func set(delegate: BaseTableDelegate) -> TableBuilder<T> {
+    public func set(delegate: TableDelegate) -> TableBuilder<T> {
         self.delegate = delegate
         return self
     }
 
     /// Change dataSource
-    public func set(dataSource: BaseTableDataSource) -> TableBuilder<T> {
+    public func set(dataSource: TableDataSource) -> TableBuilder<T> {
         self.dataSource = dataSource
         return self
     }
@@ -81,6 +93,12 @@ public class TableBuilder<T: BaseTableManager> {
         default:
             break
         }
+        return self
+    }
+
+    /// Change animator
+    public func set(animator: TableAnimator) -> TableBuilder<T> {
+        self.animator = animator
         return self
     }
 
@@ -124,6 +142,7 @@ public class TableBuilder<T: BaseTableManager> {
         setPrefetchDataSourceIfNeeded()
 
         manager.view = view
+        manager.animator = animator
         manager.delegate = delegate
         manager.dataSource = dataSource
         return manager

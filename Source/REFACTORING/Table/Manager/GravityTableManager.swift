@@ -6,7 +6,7 @@
 //  Copyright © 2020 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public protocol Gravity: AnyObject {
     var heaviness: Int { get set }
@@ -29,6 +29,7 @@ extension EmptyTableHeaderGenerator: Gravity {
     }
 }
 
+/// DataDisplayManager for UITableView
 /// Warning. Do not forget to conform TableCellGenerator to Gravity (GravityTableCellGenerator)
 open class GravityTableManager: BaseTableManager {
 
@@ -156,13 +157,13 @@ open class GravityTableManager: BaseTableManager {
                       insertAnimation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(oldGenerator), let table = self.view else { return }
 
-        table.beginUpdates()
-        self.generators[index.sectionIndex].remove(at: index.generatorIndex)
-        self.generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
-        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        table.deleteRows(at: [indexPath], with: removeAnimation)
-        table.insertRows(at: [indexPath], with: insertAnimation)
-        table.endUpdates()
+        animator?.perform(in: table) { [weak self] in
+            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
+            self?.generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
+            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+            table.deleteRows(at: [indexPath], with: removeAnimation)
+            table.insertRows(at: [indexPath], with: insertAnimation)
+        }
     }
 
     open func replace(header: HeaderGeneratorType, with animation: UITableView.RowAnimation = .fade) {

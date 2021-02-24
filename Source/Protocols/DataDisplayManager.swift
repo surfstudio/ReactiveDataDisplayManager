@@ -6,7 +6,7 @@
 //  Copyright © 2018 Александр Кравченков. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Determinantes interface for interaction with any display manager.
 /// It can hide implementation of UITableView or UICollection view or your custom control with any data source.
@@ -17,13 +17,10 @@ public protocol DataDisplayManager: class {
     associatedtype CollectionType
     associatedtype CellGeneratorType
 
-    var view: CollectionType? { get }
+    var view: CollectionType! { get }
 
     /// Reloads collection.
     func forceRefill()
-
-    /// Reloads collection with completion
-    func forceRefill(completion: @escaping (() -> Void))
 
     // MARK: - Data source methods
 
@@ -60,5 +57,19 @@ public protocol DataDisplayManager: class {
 
     /// Removes all cell generators.
     func clearCellGenerators()
+
+}
+
+public extension DataDisplayManager {
+
+    /// Reloads collection with completion
+    func forceRefill(completion: @escaping (() -> Void)) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            completion()
+        }
+        self.forceRefill()
+        CATransaction.commit()
+    }
 
 }

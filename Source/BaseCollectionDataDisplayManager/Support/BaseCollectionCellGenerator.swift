@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem where Cell: UICollectionViewCell {
+open class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem where Cell: UICollectionViewCell {
 
     // MARK: - Public Properties
 

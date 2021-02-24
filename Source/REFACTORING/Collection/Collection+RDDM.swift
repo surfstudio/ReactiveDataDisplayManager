@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 extension UICollectionView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UICollectionView {
@@ -29,12 +31,15 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     typealias ScrollPluginsCollection = PluginCollection<BaseCollectionPlugin<ScrollEvent>>
     typealias PrefetchPluginsCollection = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>
 
+    public typealias CollectionAnimator = Animator<BaseCollectionManager.CollectionType>
+
     // MARK: - Properties
 
     let view: UICollectionView
     let manager: T
     var delegate: CollectionDelegate
     var dataSource: CollectionDataSource
+    var animator: CollectionAnimator
 
     var collectionPlugins = CollectionPluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
@@ -48,19 +53,26 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         self.manager = manager
         delegate = BaseCollectionDelegate()
         dataSource = BaseCollectionDataSource()
+        animator = CollectionBatchUpdatesAnimator()
     }
 
     // MARK: - Public Methods
 
     /// Change delegate
-    public func set(delegate: BaseCollectionDelegate) -> CollectionBuilder<T> {
+    public func set(delegate: CollectionDelegate) -> CollectionBuilder<T> {
         self.delegate = delegate
         return self
     }
 
     /// Change dataSource
-    public func set(dataSource: BaseCollectionDataSource) -> CollectionBuilder<T> {
+    public func set(dataSource: CollectionDataSource) -> CollectionBuilder<T> {
         self.dataSource = dataSource
+        return self
+    }
+
+    /// Change animator
+    public func set(animator: CollectionAnimator) -> CollectionBuilder<T> {
+        self.animator = animator
         return self
     }
 
@@ -111,6 +123,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         manager.view = view
         manager.delegate = delegate
         manager.dataSource = dataSource
+        manager.animator = animator
         return manager
     }
 

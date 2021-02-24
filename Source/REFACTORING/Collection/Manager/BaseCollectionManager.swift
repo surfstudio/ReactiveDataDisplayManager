@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class BaseCollectionManager: DataDisplayManager {
+open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvider {
 
     // MARK: - Typealias
 
@@ -16,15 +16,18 @@ open class BaseCollectionManager: DataDisplayManager {
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
 
+    public typealias CollectionAnimator = Animator<CollectionType>
+
     // MARK: - Public properties
 
-    public weak var view: UICollectionView?
+    public weak var view: UICollectionView!
 
     public var generators: [[CollectionCellGenerator]]
     public var sections: [CollectionHeaderGenerator]
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
+    var animator: CollectionAnimator?
 
     // MARK: - Initialization
 
@@ -37,15 +40,6 @@ open class BaseCollectionManager: DataDisplayManager {
 
     public func forceRefill() {
         self.view?.reloadData()
-    }
-
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            completion()
-        }
-        self.forceRefill()
-        CATransaction.commit()
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
@@ -72,9 +66,7 @@ open class BaseCollectionManager: DataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
-        guard let collection = self.view else { return }
-
-        generators.forEach { $0.registerCell(in: collection) }
+        generators.forEach { $0.registerCell(in: view) }
 
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
@@ -104,8 +96,7 @@ open class BaseCollectionManager: DataDisplayManager {
 extension BaseCollectionManager: HeaderDataDisplayManager {
 
     public func addSectionHeaderGenerator(_ generator: CollectionHeaderGenerator) {
-        guard let collection = self.view else { return }
-        generator.registerHeader(in: collection)
+        generator.registerHeader(in: view)
         self.sections.append(generator)
     }
 
@@ -114,8 +105,7 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toHeader header: CollectionHeaderGenerator) {
-        guard let collection = self.view else { return }
-        generators.forEach { $0.registerCell(in: collection) }
+        generators.forEach { $0.registerCell(in: view) }
 
         if self.generators.count != self.sections.count || sections.isEmpty {
             self.generators.append([CollectionCellGenerator]())
@@ -184,12 +174,9 @@ extension BaseCollectionManager {
 private extension BaseCollectionManager {
 
     func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)]) {
-        guard let collection = self.view else {
-            return
-        }
 
         elements.forEach { [weak self] element in
-            element.generator.registerCell(in: collection)
+            element.generator.registerCell(in: view)
             self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
 
@@ -197,7 +184,7 @@ private extension BaseCollectionManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
-        collection.insertItems(at: indexPaths)
+        view.insertItems(at: indexPaths)
     }
 
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
@@ -213,24 +200,25 @@ private extension BaseCollectionManager {
     func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
                          needScrollAt scrollPosition: UICollectionView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
-        guard let collection = self.view else { return }
 
-        // perform update
-        self.generators[index.sectionIndex].remove(at: index.generatorIndex)
-        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        collection.deleteItems(at: [indexPath])
+        animator?.perform(in: view, animation: { [weak self] in
+            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
+            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+            view.deleteItems(at: [indexPath])
 
-        // remove empty section if needed
-        if needRemoveEmptySection && self.generators[index.sectionIndex].isEmpty {
-            self.generators.remove(at: index.sectionIndex)
-            self.sections.remove(at: index.sectionIndex)
-            collection.deleteSections(IndexSet(integer: index.sectionIndex))
-        }
+            // remove empty section if needed
+            let sectionIsEmpty = self?.generators[index.sectionIndex].isEmpty ?? true
+            if needRemoveEmptySection && sectionIsEmpty {
+                self?.generators.remove(at: index.sectionIndex)
+                self?.sections.remove(at: index.sectionIndex)
+                view.deleteSections(IndexSet(integer: index.sectionIndex))
+            }
 
-        // scroll if needed
-        if let scrollPosition = scrollPosition {
-            collection.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
-        }
+            // scroll if needed
+            if let scrollPosition = scrollPosition {
+                view.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
+            }
+        })
     }
 
 }

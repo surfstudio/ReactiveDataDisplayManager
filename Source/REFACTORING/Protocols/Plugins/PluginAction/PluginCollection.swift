@@ -7,7 +7,7 @@
 //
 
 /// Collection to store and execute pluginActions
-struct PluginCollection<Plugin: PluginAction> {
+public struct PluginCollection<Plugin: PluginAction> {
 
     private var plugins = [Plugin]()
 

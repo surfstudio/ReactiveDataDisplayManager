@@ -6,7 +6,6 @@
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 open class TableHeaderGenerator: ViewGenerator {
