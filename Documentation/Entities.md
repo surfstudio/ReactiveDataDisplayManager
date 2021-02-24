@@ -53,16 +53,14 @@ final class FoldableCellGenerator: BaseCellGenerator<FoldableTableViewCell>, Fol
     var isExpanded = false
     var childGenerators: [TableCellGenerator] = []
 
-    // MARK: - ViewBuilder
+    // MARK: - Configuration
 
-    override func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        let view = super.generate(tableView: tableView, for: indexPath)
+    override func configure(cell: FoldableTableViewCell, with model: FoldableTableViewCell.Model) {
+        super.configure(cell: cell, with: model)
 
         didFoldEvent.addListner { isExpanded in
-            (view as? FoldableTableViewCell)?.update(expanded: isExpanded)
+            cell.update(expanded: isExpanded)
         }
-
-        return view
     }
 
 }
