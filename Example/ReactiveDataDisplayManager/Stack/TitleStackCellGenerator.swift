@@ -10,18 +10,25 @@ import ReactiveDataDisplayManager
 
 final class TitleStackCellGenerator: StackCellGenerator {
 
+    // MARK: - Properties
+
     var title: String
+
+    // MARK: - Initialization
 
     init(title: String) {
         self.title = title
     }
+
 }
 
-// MARK: - StackCellGenerator
+// MARK: - ViewBuilder
 
 extension TitleStackCellGenerator: ViewBuilder {
+
     func build(view: UILabel) {
         view.text = title
         view.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
     }
+
 }
