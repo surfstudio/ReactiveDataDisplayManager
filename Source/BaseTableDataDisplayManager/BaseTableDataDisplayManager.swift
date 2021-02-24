@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIKit
 
 /// Contains base implementation of DataDisplayManager with UITableView.
 /// Registers nibs, determinates EstimatedRowHeight.
@@ -139,15 +138,6 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
 
     public func forceRefill() {
         self.view?.reloadData()
-    }
-
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            completion()
-        }
-        self.forceRefill()
-        CATransaction.commit()
     }
 
     public func reloadSection(by sectionHeaderGenerator: TableHeaderGenerator, with animation: UITableView.RowAnimation = .none) {

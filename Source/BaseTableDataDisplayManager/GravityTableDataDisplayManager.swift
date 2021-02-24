@@ -44,15 +44,6 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
         view?.reloadData()
     }
 
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            completion()
-        }
-        self.forceRefill()
-        CATransaction.commit()
-    }
-
     public func addCellGenerator(_ generator: GravityTableCellGenerator) {
         guard
             checkDuplicate(generator: generator),

@@ -31,16 +31,20 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     typealias ScrollPluginsCollection = PluginCollection<BaseCollectionPlugin<ScrollEvent>>
     typealias PrefetchPluginsCollection = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>
 
+    public typealias CollectionAnimator = Animator<BaseCollectionManager.CollectionType>
+
     // MARK: - Properties
 
     let view: UICollectionView
     let manager: T
     var delegate: CollectionDelegate
     var dataSource: CollectionDataSource
+    var animator: CollectionAnimator
 
     var collectionPlugins = CollectionPluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
+    var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
 
     // MARK: - Initialization
 
@@ -49,6 +53,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         self.manager = manager
         delegate = BaseCollectionDelegate()
         dataSource = BaseCollectionDataSource()
+        animator = CollectionBatchUpdatesAnimator()
     }
 
     // MARK: - Public Methods
@@ -62,6 +67,19 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     /// Change dataSource
     public func set(dataSource: CollectionDataSource) -> CollectionBuilder<T> {
         self.dataSource = dataSource
+        return self
+    }
+
+    /// Change animator
+    public func set(animator: CollectionAnimator) -> CollectionBuilder<T> {
+        self.animator = animator
+        return self
+    }
+
+    /// Add feature plugin functionality based on UICollectionViewDelegate/UICollectionViewDataSource events
+    public func add(featurePlugin: FeaturePlugin) -> CollectionBuilder<T> {
+        guard let plugin = featurePlugin as? CollectionItemTitleDisplayable else { return self }
+        itemTitleDisplayablePlugin = plugin
         return self
     }
 
@@ -93,6 +111,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
         dataSource.provider = manager
         dataSource.collectionPlugins = collectionPlugins
+        dataSource.itemTitleDisplayablePlugin = itemTitleDisplayablePlugin
 
         view.dataSource = dataSource
 
@@ -104,6 +123,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         manager.view = view
         manager.delegate = delegate
         manager.dataSource = dataSource
+        manager.animator = animator
         return manager
     }
 

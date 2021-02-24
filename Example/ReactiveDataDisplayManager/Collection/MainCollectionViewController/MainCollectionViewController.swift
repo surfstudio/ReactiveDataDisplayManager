@@ -21,6 +21,7 @@ final class MainCollectionViewController: UIViewController {
         case prefetchingCollection
         case sizableCollection
         case foldableCollection
+        case itemTitleCollection
     }
 
     // MARK: - Constants
@@ -33,7 +34,8 @@ final class MainCollectionViewController: UIViewController {
             ("Gallery with prefetching", .prefetchingCollection),
             ("Horizontal image collection", .imageHorizontalCollection),
             ("Sizable collection", .sizableCollection),
-            ("Foldable collection", .foldableCollection)
+            ("Foldable collection", .foldableCollection),
+            ("Collection with item index titles", .itemTitleCollection)
         ]
     }
 

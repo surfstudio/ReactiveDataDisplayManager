@@ -329,6 +329,7 @@
                         <segue destination="gbO-EY-csx" kind="show" identifier="prefetchingCollection" id="YAI-2Z-nWi"/>
                         <segue destination="GZX-q5-5fd" kind="show" identifier="sizableCollection" id="kbc-gq-BdS"/>
                         <segue destination="pGI-i3-EWf" kind="show" identifier="foldableCollection" id="xiU-it-Uz9"/>
+                        <segue destination="cOD-zS-jLq" kind="show" identifier="itemTitleCollection" id="Tuv-8l-eFa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -527,6 +528,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kL7-PY-GEr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1305" y="2248"/>
+        </scene>
+        <!--Item Title Collection View Controller-->
+        <scene sceneID="BKF-72-lAj">
+            <objects>
+                <viewController id="cOD-zS-jLq" customClass="ItemTitleCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x8Z-9O-fAX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wda-6S-zyo">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="y0a-cq-Pli">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wJp-1H-DPI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wJp-1H-DPI" firstAttribute="bottom" secondItem="wda-6S-zyo" secondAttribute="bottom" id="4Sq-td-Nxf"/>
+                            <constraint firstItem="wda-6S-zyo" firstAttribute="top" secondItem="wJp-1H-DPI" secondAttribute="top" id="8yG-Sw-2w7"/>
+                            <constraint firstItem="wJp-1H-DPI" firstAttribute="trailing" secondItem="wda-6S-zyo" secondAttribute="trailing" id="OBu-9w-lf0"/>
+                            <constraint firstItem="wda-6S-zyo" firstAttribute="leading" secondItem="wJp-1H-DPI" secondAttribute="leading" id="oQ2-Hk-uTm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="97h-QS-8qv"/>
+                    <connections>
+                        <outlet property="collectionView" destination="wda-6S-zyo" id="hev-s7-tZO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PkU-fn-UZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1320.8" y="2927.5862068965521"/>
         </scene>
         <!--Sizable Collection View Controller-->
         <scene sceneID="tFY-fl-bt3">

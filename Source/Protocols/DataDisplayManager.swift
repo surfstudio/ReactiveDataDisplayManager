@@ -22,9 +22,6 @@ public protocol DataDisplayManager: class {
     /// Reloads collection.
     func forceRefill()
 
-    /// Reloads collection with completion
-    func forceRefill(completion: @escaping (() -> Void))
-
     // MARK: - Data source methods
 
     /// Adds a new cell generator.
@@ -60,5 +57,19 @@ public protocol DataDisplayManager: class {
 
     /// Removes all cell generators.
     func clearCellGenerators()
+
+}
+
+public extension DataDisplayManager {
+
+    /// Reloads collection with completion
+    func forceRefill(completion: @escaping (() -> Void)) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            completion()
+        }
+        self.forceRefill()
+        CATransaction.commit()
+    }
 
 }

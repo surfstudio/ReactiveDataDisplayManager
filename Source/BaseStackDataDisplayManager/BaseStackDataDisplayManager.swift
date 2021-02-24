@@ -10,6 +10,7 @@ import UIKit
 
 /// Contains base implementation of DataDisplayManager with UIStackView.
 /// Can fill stack with user data.
+@available(*, deprecated, message: "Use BaseStackManager instead")
 open class BaseStackDataDisplayManager: NSObject, DataDisplayManager {
 
     // MARK: - Typealiases
@@ -37,11 +38,6 @@ open class BaseStackDataDisplayManager: NSObject, DataDisplayManager {
             let view = generator.generate(stackView: stackView, index: offset)
             stackView.addArrangedSubview(view)
         }
-    }
-
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        forceRefill()
-        completion()
     }
 
     public func addCellGenerator(_ generator: StackCellGenerator) {

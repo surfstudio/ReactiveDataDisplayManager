@@ -43,15 +43,6 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
         view?.reloadData()
     }
 
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            completion()
-        }
-        self.forceRefill()
-        CATransaction.commit()
-    }
-
     open func addCellGenerator(_ generator: TableCellGenerator) {
         guard let table = view else { return }
         generator.registerCell(in: table)

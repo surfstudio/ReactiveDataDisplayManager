@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-// Wrap Base instanse for esasy access
+// Wrap Base instance for easy access
 public struct DataDisplayWrapper<Base> {
     public let base: Base
     public init(_ base: Base) {

@@ -25,7 +25,7 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
 // MARK: - UITableViewDataSource
 
-extension BaseTableDataSource: UITableViewDataSource {
+extension BaseTableDataSource {
 
     open func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitleDisplayablePlugin?.numberOfSections(with: provider) ?? provider?.sections.count ?? 0
@@ -68,7 +68,7 @@ extension BaseTableDataSource: UITableViewDataSource {
 
 // MARK: - UITableViewDataSourcePrefetching
 
-extension BaseTableDataSource: UITableViewDataSourcePrefetching {
+extension BaseTableDataSource {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseTableManager)

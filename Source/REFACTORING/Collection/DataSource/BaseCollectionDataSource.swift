@@ -17,12 +17,13 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
+    public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
 
 }
 
 // MARK: - UICollectionViewDataSource
 
-extension BaseCollectionDataSource: UICollectionViewDataSource {
+extension BaseCollectionDataSource {
 
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return provider?.sections.count ?? 0
@@ -61,11 +62,19 @@ extension BaseCollectionDataSource: UICollectionViewDataSource {
         return false
     }
 
+    open func indexTitles(for collectionView: UICollectionView) -> [String]? {
+        return itemTitleDisplayablePlugin?.indexTitles(with: provider)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
+        return itemTitleDisplayablePlugin?.indexPathForIndexTitle(title, at: index, with: provider) ?? IndexPath()
+    }
+
 }
 
 // MARK: - UICollectionViewDataSourcePrefetching
 
-extension BaseCollectionDataSource: UICollectionViewDataSourcePrefetching {
+extension BaseCollectionDataSource {
 
     open func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseCollectionManager)
