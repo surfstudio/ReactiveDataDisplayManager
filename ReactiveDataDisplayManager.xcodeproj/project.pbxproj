@@ -11,6 +11,7 @@
 		01157AFF25D5212100BFD55B /* TableUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */; };
 		01157B0325D5228C00BFD55B /* TableBatchUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */; };
 		0183560C25BEE60B00141448 /* ManualTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183560B25BEE60B00141448 /* ManualTableManager.swift */; };
+		019A067F25E6C303009CA8AE /* CollectionBatchUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A067E25E6C303009CA8AE /* CollectionBatchUpdatesAnimator.swift */; };
 		01A7585225E10BE800925C3F /* TableCell+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7585125E10BE800925C3F /* TableCell+RDDM.swift */; };
 		01A7585D25E10DBC00925C3F /* DataDisplayConstructable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7585C25E10DBC00925C3F /* DataDisplayConstructable.swift */; };
 		01A7586125E10F2D00925C3F /* CollectionCell+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7586025E10F2D00925C3F /* CollectionCell+RDDM.swift */; };
@@ -126,6 +127,7 @@
 		01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableUpdatesAnimator.swift; sourceTree = "<group>"; };
 		01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		0183560B25BEE60B00141448 /* ManualTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableManager.swift; sourceTree = "<group>"; };
+		019A067E25E6C303009CA8AE /* CollectionBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		01A7585125E10BE800925C3F /* TableCell+RDDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableCell+RDDM.swift"; sourceTree = "<group>"; };
 		01A7585C25E10DBC00925C3F /* DataDisplayConstructable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayConstructable.swift; sourceTree = "<group>"; };
 		01A7586025E10F2D00925C3F /* CollectionCell+RDDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionCell+RDDM.swift"; sourceTree = "<group>"; };
@@ -265,6 +267,14 @@
 			children = (
 				01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */,
 				01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		019A067925E6C2BA009CA8AE /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				019A067E25E6C303009CA8AE /* CollectionBatchUpdatesAnimator.swift */,
 			);
 			path = Animator;
 			sourceTree = "<group>";
@@ -686,6 +696,7 @@
 		DD67C20725D2C26A00A1C149 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				019A067925E6C2BA009CA8AE /* Animator */,
 				DD7F285725D54CE700130C9B /* Protocols */,
 				DD165F9D25D2CA3D006F46CF /* Plugins */,
 				DD165FA225D2CB84006F46CF /* Events */,
@@ -921,6 +932,7 @@
 				01AF583225B95B1100AE4286 /* TableEvent.swift in Sources */,
 				01A7586125E10F2D00925C3F /* CollectionCell+RDDM.swift in Sources */,
 				6D60FD0C25D6B248002D6082 /* TableMovable.swift in Sources */,
+				019A067F25E6C303009CA8AE /* CollectionBatchUpdatesAnimator.swift in Sources */,
 				C1AB77DC240D6796000044F1 /* CalculatableHeightCollectionCellGenerator.swift in Sources */,
 				C1AB77DE240D6919000044F1 /* SizableCollectionDataDisplayManager.swift in Sources */,
 				01157AFF25D5212100BFD55B /* TableUpdatesAnimator.swift in Sources */,
