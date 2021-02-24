@@ -22,7 +22,7 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
 // MARK: - UICollectionViewDataSource
 
-extension BaseCollectionDataSource: UICollectionViewDataSource {
+extension BaseCollectionDataSource {
 
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
         return provider?.sections.count ?? 0
@@ -65,7 +65,7 @@ extension BaseCollectionDataSource: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDataSourcePrefetching
 
-extension BaseCollectionDataSource: UICollectionViewDataSourcePrefetching {
+extension BaseCollectionDataSource {
 
     open func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseCollectionManager)

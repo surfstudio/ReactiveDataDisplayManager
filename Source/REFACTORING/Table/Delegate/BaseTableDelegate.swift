@@ -35,7 +35,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
 // MARK: - UITableViewDelegate
 
-extension BaseTableDelegate: UITableViewDelegate {
+extension BaseTableDelegate {
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tablePlugins.process(event: .willDisplayCell(indexPath), with: manager)

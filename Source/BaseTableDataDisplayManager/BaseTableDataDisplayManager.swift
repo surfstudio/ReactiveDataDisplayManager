@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIKit
 
 /// Contains base implementation of DataDisplayManager with UITableView.
 /// Registers nibs, determinates EstimatedRowHeight.

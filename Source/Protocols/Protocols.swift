@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIKit
 
 open class TableHeaderGenerator: ViewGenerator {
 

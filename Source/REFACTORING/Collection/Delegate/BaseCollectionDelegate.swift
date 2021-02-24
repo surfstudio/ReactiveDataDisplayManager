@@ -22,7 +22,7 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
 // MARK: - UICollectionViewDelegate
 
-extension BaseCollectionDelegate: UICollectionViewDelegate {
+extension BaseCollectionDelegate {
 
     open func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         collectionPlugins.process(event: .didHighlight(indexPath), with: manager)
