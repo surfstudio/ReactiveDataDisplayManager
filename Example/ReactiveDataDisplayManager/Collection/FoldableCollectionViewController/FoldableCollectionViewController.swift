@@ -10,31 +10,6 @@ import UIKit
 import ReactiveDataDisplayManager
 import Nuke
 
-// MARK: - Appearance
-
-private enum Appearance {
-    case grid
-    case table(width: CGFloat)
-
-    var cellSize: CGSize {
-        switch self {
-        case .grid:
-            return CGSize(width: 100, height: 100)
-        case .table(let width):
-            return CGSize(width: width, height: 50)
-        }
-    }
-
-    var title: String {
-        switch self {
-        case .grid:
-            return "Grid"
-        case .table:
-            return "Table"
-        }
-    }
-}
-
 final class FoldableCollectionViewController: UIViewController {
 
     // MARK: - Constants

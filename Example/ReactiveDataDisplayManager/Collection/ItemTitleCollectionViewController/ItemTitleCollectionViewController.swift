@@ -15,13 +15,6 @@ class ItemTitleCollectionViewController: UIViewController {
 
     private enum Constants {
         static let sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        static let itemWidth = UIScreen.main.bounds.width - sectionInset.left - sectionInset.right
-        static let itemSize = CGSize(width: itemWidth, height: 150)
-        static let models = [("One", true), ("Two", false),
-                             ("Three", false), ("Four", true),
-                             ("Five", true), ("Six", false),
-                             ("Seven", false), ("Eight",  true),
-                             ("Nine", false), ("Ten", true)]
     }
 
     // MARK: - IBOutlets
@@ -29,6 +22,8 @@ class ItemTitleCollectionViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
 
     // MARK: - Private Properties
+
+    private var appearance: Appearance = .grid
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(featurePlugin: CollectionItemTitleDisplayablePlugin())
@@ -38,9 +33,10 @@ class ItemTitleCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Collection with item index titles"
 
-        let flowLayout = makeFlowLayout()
-        collectionView.setCollectionViewLayout(flowLayout, animated: false)
+        configureLayoutFlow(with: appearance)
+        updateBarButtonItem(with: appearance.title)
 
         fillAdapter()
     }
@@ -51,14 +47,20 @@ class ItemTitleCollectionViewController: UIViewController {
 
 private extension ItemTitleCollectionViewController {
 
-    func makeFlowLayout() -> UICollectionViewFlowLayout {
+    func configureLayoutFlow(with appearance: Appearance) {
         let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = appearance.cellSize
         flowLayout.minimumLineSpacing = 10.0
+        flowLayout.minimumInteritemSpacing = 10.0
         flowLayout.sectionInset = Constants.sectionInset
         flowLayout.scrollDirection = .vertical
-        flowLayout.itemSize = Constants.itemSize
 
-        return flowLayout
+        collectionView.setCollectionViewLayout(flowLayout, animated: true)
+    }
+
+    func updateBarButtonItem(with title: String) {
+        let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeListAppearance))
+        navigationItem.rightBarButtonItem = button
     }
 
     /// This method is used to fill adapter
@@ -66,9 +68,9 @@ private extension ItemTitleCollectionViewController {
         let header = TitleCollectionHeaderGenerator(title: "Header")
         adapter.addSectionHeaderGenerator(header)
 
-        for model in Constants.models {
+        for index in 0...50 {
             // Create generator
-            let generator = TitleCollectionGenerator(model: model.0, needIndexTitle: model.1)
+            let generator = TitleCollectionGenerator(model: "Item \(index)", needIndexTitle: index % 2 == 0 ? true : false)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)
@@ -76,6 +78,22 @@ private extension ItemTitleCollectionViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+    }
+
+    @objc
+    func changeListAppearance() {
+        switch appearance {
+        case .grid:
+            let horizontalSectionInset = Constants.sectionInset.left + Constants.sectionInset.right
+            let maxWight = UIScreen.main.bounds.width - horizontalSectionInset
+
+            appearance = .table(width: maxWight)
+        case .table:
+            appearance = .grid
+        }
+
+        configureLayoutFlow(with: appearance)
+        updateBarButtonItem(with: appearance.title)
     }
 
 }
