@@ -14,10 +14,10 @@ final class StackViewController: UIViewController {
 
     @IBOutlet private weak var stackView: UIStackView!
     
-    // MARK: - Properties
+    // MARK: - Private Properties
 
-    private lazy var adapter = BaseStackDataDisplayManager(collection: stackView)
-    private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
+    private lazy var adapter = stackView.rddm.baseBuilder.build()
+    private let titles = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController
 
@@ -26,16 +26,19 @@ final class StackViewController: UIViewController {
         fillAdapter()
     }
 
-    // MARK: - Private methods
+}
+
+// MARK: - Private Methods
+
+private extension StackViewController {
 
     /// This method is used to fill adapter
-    private func fillAdapter() {
-        for title in titles {
-            // Create generator
-            let generator = TitleStackCellGenerator(title: title)
-            // Add generator to adapter
-            adapter.addCellGenerator(generator)
-        }
+    func fillAdapter() {
+        // Create generators
+        let generators = titles.map { TitleStackCellGenerator(title: $0) }
+
+        // Add generators to adapter
+        adapter.addCellGenerators(generators)
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()

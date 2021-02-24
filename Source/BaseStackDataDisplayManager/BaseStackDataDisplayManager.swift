@@ -10,6 +10,7 @@ import UIKit
 
 /// Contains base implementation of DataDisplayManager with UIStackView.
 /// Can fill stack with user data.
+@available(*, deprecated, message: "Use BaseStackManager instead")
 open class BaseStackDataDisplayManager: NSObject, DataDisplayManager {
 
     // MARK: - Typealiases

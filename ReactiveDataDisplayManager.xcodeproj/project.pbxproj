@@ -52,6 +52,8 @@
 		6DF431FC25D9BE2A0093A1EB /* CollectionSelectedItemScrollablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF431FB25D9BE2A0093A1EB /* CollectionSelectedItemScrollablePlugin.swift */; };
 		6DF4321125D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF4321025D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift */; };
 		6DF4321525D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF4321425D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift */; };
+		6DFDD4CA25DECDB500E2A4AC /* BaseStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFDD4C925DECDB500E2A4AC /* BaseStackManager.swift */; };
+		6DFDD4D425DECFE100E2A4AC /* Stack+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFDD4D325DECFE100E2A4AC /* Stack+RDDM.swift */; };
 		816DB131224CC420001EAA47 /* BaseCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816DB130224CC420001EAA47 /* BaseCollectionCellGenerator.swift */; };
 		8632735D21F0F7DA00620CEE /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8632735C21F0F7DA00620CEE /* Configurable.swift */; };
 		897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897CFCC22379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift */; };
@@ -155,6 +157,8 @@
 		6DF431FB25D9BE2A0093A1EB /* CollectionSelectedItemScrollablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSelectedItemScrollablePlugin.swift; sourceTree = "<group>"; };
 		6DF4321025D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPrefetchProxyPlugin.swift; sourceTree = "<group>"; };
 		6DF4321425D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPrefetcherablePlugin.swift; sourceTree = "<group>"; };
+		6DFDD4C925DECDB500E2A4AC /* BaseStackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackManager.swift; sourceTree = "<group>"; };
+		6DFDD4D325DECFE100E2A4AC /* Stack+RDDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stack+RDDM.swift"; sourceTree = "<group>"; };
 		816DB130224CC420001EAA47 /* BaseCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		8632735C21F0F7DA00620CEE /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		897CFCC22379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingTableDataDisplayManager.swift; sourceTree = "<group>"; };
@@ -421,6 +425,23 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
+		6DFDD4CD25DECDCC00E2A4AC /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				6DFDD4D025DECDDB00E2A4AC /* Manager */,
+				6DFDD4D325DECFE100E2A4AC /* Stack+RDDM.swift */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
+		6DFDD4D025DECDDB00E2A4AC /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6DFDD4C925DECDB500E2A4AC /* BaseStackManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		816DB12F224CC402001EAA47 /* Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +539,7 @@
 		B2B4FB3D254FF31800E6365B /* REFACTORING */ = {
 			isa = PBXGroup;
 			children = (
+				6DFDD4CD25DECDCC00E2A4AC /* Stack */,
 				DD67C20725D2C26A00A1C149 /* Collection */,
 				01AF216925C2E273004996E9 /* Table */,
 				B20633CC2567C93F00C65D25 /* Docs */,
@@ -836,6 +858,7 @@
 				6DA4C0A225DAEDD000C23D85 /* CollectionScrollProvider.swift in Sources */,
 				DD67C21425D2C33900A1C149 /* BaseCollectionDelegate.swift in Sources */,
 				DD165FA425D2CB9F006F46CF /* CollectionEvent.swift in Sources */,
+				6DFDD4D425DECFE100E2A4AC /* Stack+RDDM.swift in Sources */,
 				DD67C20A25D2C29400A1C149 /* BaseCollectionManager.swift in Sources */,
 				89FD21B2238C002C008D7ED3 /* EmptyCollectionHeaderGenerator.swift in Sources */,
 				01AF583225B95B1100AE4286 /* TableEvent.swift in Sources */,
@@ -863,6 +886,7 @@
 				89FFDDBA23584B9F00D2C769 /* GravityTableDataDisplayManager.swift in Sources */,
 				6D3B99FC25D51AA400F6E05C /* TableDisplayablePlugin.swift in Sources */,
 				01AF586D25B9A35900AE4286 /* DataDisplayWrapper.swift in Sources */,
+				6DFDD4CA25DECDB500E2A4AC /* BaseStackManager.swift in Sources */,
 				816DB131224CC420001EAA47 /* BaseCollectionCellGenerator.swift in Sources */,
 				4FD38132202D791A0005EBFE /* Operations.swift in Sources */,
 			);
