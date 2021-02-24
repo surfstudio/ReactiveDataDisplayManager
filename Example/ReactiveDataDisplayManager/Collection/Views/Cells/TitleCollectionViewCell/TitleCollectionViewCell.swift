@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
-class TitleCollectionViewCell: UICollectionViewCell {
+class TitleCollectionViewCell: UICollectionViewCell, Configurable {
 
     // MARK: - IBOutlets
 
@@ -16,7 +17,7 @@ class TitleCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Internal methods
 
-    func fill(with title: String) {
+    func configure(with title: String) {
         titleLabel.text = title
     }
 

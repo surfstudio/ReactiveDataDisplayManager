@@ -8,13 +8,15 @@
 
 import ReactiveDataDisplayManager
 
-final class TitleCollectionGenerator: SelectableItem {
+final class TitleCollectionGenerator: SelectableItem, IndexTitleDisplayble {
 
     // MARK: - Properties
 
     var didSelectEvent = BaseEvent<Void>()
     var didSelected: Bool = false
     var isNeedDeselect: Bool = true
+    var title: String
+    var needIndexTitle: Bool
 
     // MARK: - Private Properties
 
@@ -22,8 +24,10 @@ final class TitleCollectionGenerator: SelectableItem {
 
     // MARK: - Initialization
 
-    public init(model: String) {
+    public init(model: String, needIndexTitle: Bool = false) {
         self.model = model
+        self.title = model
+        self.needIndexTitle = needIndexTitle
     }
 
 }
@@ -43,7 +47,7 @@ extension TitleCollectionGenerator: CollectionCellGenerator {
 extension TitleCollectionGenerator: ViewBuilder {
 
     func build(view: TitleCollectionViewCell) {
-        view.fill(with: model)
+        view.configure(with: model)
     }
 
 }

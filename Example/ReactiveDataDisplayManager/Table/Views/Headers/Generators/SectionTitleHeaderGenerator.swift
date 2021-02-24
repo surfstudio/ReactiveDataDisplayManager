@@ -9,7 +9,7 @@
 import Foundation
 import ReactiveDataDisplayManager
 
-final class SectionTitleHeaderGenerator: TableHeaderGenerator, SectionTitleDisplayble {
+final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplayble {
 
     // MARK: - Constants
 
@@ -20,7 +20,7 @@ final class SectionTitleHeaderGenerator: TableHeaderGenerator, SectionTitleDispl
     // MARK: - Property
 
     var title: String
-    var needSectionIndexTitle: Bool
+    var needIndexTitle: Bool
 
     // MARK: - Private Property
 
@@ -32,7 +32,7 @@ final class SectionTitleHeaderGenerator: TableHeaderGenerator, SectionTitleDispl
     init(model: String, needSectionIndexTitle: Bool) {
         self.model = model
         self.title = model
-        self.needSectionIndexTitle = needSectionIndexTitle
+        self.needIndexTitle = needSectionIndexTitle
     }
 
     // MARK: - TableHeaderGenerator

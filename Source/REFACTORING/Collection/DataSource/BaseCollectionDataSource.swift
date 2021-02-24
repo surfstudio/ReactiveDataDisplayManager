@@ -12,6 +12,7 @@ protocol CollectionDataSource: UICollectionViewDataSource, UICollectionViewDataS
     var provider: CollectionGeneratorsProvider? { get set }
     var prefetchPlugins: PluginCollection< BaseCollectionPlugin <PrefetchEvent>> { get set }
     var collectionPlugins: PluginCollection< BaseCollectionPlugin <CollectionEvent>> { get set }
+    var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable? { get set }
 }
 
 public protocol CollectionGeneratorsProvider: AnyObject {
@@ -20,7 +21,6 @@ public protocol CollectionGeneratorsProvider: AnyObject {
 }
 
 extension BaseCollectionManager: CollectionGeneratorsProvider { }
-
 
 // Base implementation for UICollectionViewDataSource protocol. Use it if NO special logic required.
 open class BaseCollectionDataSource: NSObject {
@@ -31,6 +31,7 @@ open class BaseCollectionDataSource: NSObject {
 
     var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
+    var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
 
 }
 
@@ -73,6 +74,14 @@ extension BaseCollectionDataSource: CollectionDataSource {
 
     open func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return false
+    }
+
+    open func indexTitles(for collectionView: UICollectionView) -> [String]? {
+        return itemTitleDisplayablePlugin?.indexTitles(with: provider)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
+        return itemTitleDisplayablePlugin?.indexPathForIndexTitle(title, at: index, with: provider) ?? IndexPath()
     }
 
 }
