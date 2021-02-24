@@ -45,7 +45,7 @@ private extension CollectionListViewController {
         adapter.addSectionHeaderGenerator(header)
 
         for title in titles {
-            let generator = BaseCollectionCellGenerator<TitleCollectionListCell>(with: title)
+            let generator = TitleCollectionListCell.rddm.baseGenerator(with: title)
             generator.didSelectEvent += { debugPrint("\(title) selected") }
             adapter.addCellGenerator(generator)
         }

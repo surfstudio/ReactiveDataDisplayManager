@@ -27,6 +27,8 @@ open class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem where
         self.registerType = registerType
     }
 
+    // MARK: - Open methods
+
     open func configure(cell: Cell, with model: Cell.Model) {
         cell.configure(with: model)
     }

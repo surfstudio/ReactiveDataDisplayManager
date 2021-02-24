@@ -8,41 +8,17 @@
 
 import ReactiveDataDisplayManager
 
-final class ImageCollectionCellGenerator: PrefetcherableFlow {
+final class ImageCollectionCellGenerator: BaseCollectionCellGenerator<ImageCollectionViewCell>, PrefetcherableFlow {
 
-    // MARK: - Properties
+    // MARK: - PrefetcherableFlow
 
     var requestId: URL?
-
-    // MARK: - Private Properties
-
-    private let model: ImageCollectionViewCell.ViewModel
 
     // MARK: - Initialization
 
     init(model: ImageCollectionViewCell.ViewModel) {
         requestId = model.imageUrl
-        self.model = model
-    }
-
-}
-
-// MARK: - CollectionCellGenerator
-
-extension ImageCollectionCellGenerator: CollectionCellGenerator {
-
-    var identifier: String {
-        return String(describing: ImageCollectionViewCell.self)
-    }
-
-}
-
-// MARK: - ViewBuilder
-
-extension ImageCollectionCellGenerator: ViewBuilder {
-
-    func build(view: ImageCollectionViewCell) {
-        view.configure(with: model)
+        super.init(with: model)
     }
 
 }

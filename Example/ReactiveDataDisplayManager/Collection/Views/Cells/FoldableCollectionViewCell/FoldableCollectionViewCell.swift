@@ -36,16 +36,22 @@ final class FoldableCollectionViewCell: UICollectionViewCell {
         setupInitialState()
     }
 
-    // MARK: - Public Methods
+    // MARK: - Internal Methods
+
+    func update(isExpanded: Bool) {
+        UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
+            self?.arrowImageView.transform = isExpanded ? .identity : CGAffineTransform(rotationAngle: .pi)
+        }
+    }
+
+}
+
+// MARK: - Configurable
+
+extension FoldableCollectionViewCell: Configurable {
 
     func configure(with viewModel: ViewModel) {
         contentView.backgroundColor = viewModel.color
-    }
-
-    func configure(expanded: Bool) {
-        UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
-            self?.arrowImageView.transform = expanded ? .identity : CGAffineTransform(rotationAngle: .pi)
-        }
     }
 
 }
