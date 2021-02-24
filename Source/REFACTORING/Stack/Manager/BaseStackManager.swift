@@ -40,8 +40,12 @@ open class BaseStackManager: DataDisplayManager {
     }
 
     public func forceRefill(completion: @escaping (() -> Void)) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock {
+            completion()
+        }
         forceRefill()
-        completion()
+        CATransaction.commit()
     }
 
     public func addCellGenerator(_ generator: StackCellGenerator) {
