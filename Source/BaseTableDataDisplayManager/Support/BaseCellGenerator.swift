@@ -34,11 +34,11 @@ open class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectable
         return String(describing: Cell.self)
     }
 
-    open func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
+    public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? Cell else {
             return UITableViewCell()
         }
-        cell.configure(with: model)
+        configure(cell: cell, with: model)
         return cell
     }
 
@@ -49,6 +49,12 @@ open class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectable
         case .class:
             tableView.register(Cell.self, forCellReuseIdentifier: identifier)
         }
+    }
+
+    // MARK: - Open
+
+    open func configure(cell: Cell, with model: Cell.Model) {
+        cell.configure(with: model)
     }
 
 }
