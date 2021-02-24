@@ -8,14 +8,11 @@
 
 import ReactiveDataDisplayManager
 
-class SwipeableTableGenerator: BaseTitleTableGenerator, SwipeableItem {
+class SwipeableTableGenerator: BaseCellGenerator<TitleTableViewCell>, SwipeableItem {
 
-    // MARK: - Events
+    // MARK: - SwipeableItem
 
     var didSwipeEvent = BaseEvent<String>()
-
-    // MARK: - Properties
-
     var actionTypes = [String]()
 
 }

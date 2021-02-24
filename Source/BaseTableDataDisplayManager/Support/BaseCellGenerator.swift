@@ -28,6 +28,12 @@ open class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectable
         self.registerType = registerType
     }
 
+    // MARK: - Open methods
+
+    open func configure(cell: Cell, with model: Cell.Model) {
+        cell.configure(with: model)
+    }
+
     // MARK: - TableCellGenerator
 
     public var identifier: String {

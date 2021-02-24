@@ -65,7 +65,7 @@ private extension AlphabeticalTableViewController {
 
     // Make cells generators
     func makeCellGenerators() -> [TableCellGenerator] {
-        return Constants.models.map { BaseCellGenerator<TitleTableViewCell>(with: $0) }
+        return Constants.models.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
     }
 
 }

@@ -105,7 +105,7 @@ private extension AllPluginsTableViewController {
 
         Constants.titles.forEach {
             // Create generator
-            let generator = BaseCellGenerator<TitleTableViewCell>(with: $0)
+            let generator = TitleTableViewCell.rddm.baseGenerator(with: $0)
 
             generator.didSelectEvent += {
                 debugPrint("\($0) selected")
@@ -122,10 +122,10 @@ private extension AllPluginsTableViewController {
 
         for _ in 0...3 {
             // Create foldable generator
-            let generator = FoldableCellGenerator()
+            let generator = FoldableCellGenerator(with: .init(title: "", isExpanded: false))
 
             // Create and add child generators
-            generator.childGenerators = Constants.titles.map { BaseCellGenerator<TitleTableViewCell>(with: $0) }
+            generator.childGenerators = Constants.titles.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)
@@ -137,7 +137,7 @@ private extension AllPluginsTableViewController {
         addHeaderGenerator(with: "Movable")
 
         Constants.movableTitles.forEach {
-            let generator = MovableCellGenerator(model: $0)
+            let generator = MovableCellGenerator(with: $0)
             adapter.addCellGenerator(generator)
         }
     }
@@ -148,7 +148,7 @@ private extension AllPluginsTableViewController {
 
         Constants.titles.forEach {
             // Create generator
-            let generator = SwipeableTableGenerator(model: $0)
+            let generator = SwipeableTableGenerator(with: $0)
 
             generator.didSwipeEvent += { [weak generator] actionType in
                 guard let generator = generator else { return }
@@ -169,7 +169,7 @@ private extension AllPluginsTableViewController {
             guard let viewModel = ImageTableViewCell.ViewModel.make() else { continue }
 
             // Create generator
-            let generator = ImageTableGenerator(model: viewModel)
+            let generator = ImageTableGenerator(with: viewModel)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)

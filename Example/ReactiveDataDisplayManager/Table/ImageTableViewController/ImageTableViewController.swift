@@ -50,7 +50,7 @@ private extension ImageTableViewController {
             guard let viewModel = ImageTableViewCell.ViewModel.make() else { continue }
 
             // Create generator
-            let generator = BaseCellGenerator<ImageTableViewCell>(with: viewModel)
+            let generator = ImageTableViewCell.rddm.baseGenerator(with: viewModel)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)

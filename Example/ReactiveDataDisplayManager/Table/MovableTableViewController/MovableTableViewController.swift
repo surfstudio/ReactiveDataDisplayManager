@@ -57,7 +57,7 @@ private extension MovableTableViewController {
 
     // Create cells generators
     func makeMovableCellGenerators() -> [MovableCellGenerator] {
-        return Constants.models.map { MovableCellGenerator(model: $0) }
+        return Constants.models.map { MovableCellGenerator(with: $0) }
     }
 
 }

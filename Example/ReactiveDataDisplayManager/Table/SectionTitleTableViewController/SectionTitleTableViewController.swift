@@ -73,7 +73,7 @@ private extension SectionTitleTableViewController {
 
     // Make cells generators
     func makeCellGenerators() -> [TableCellGenerator] {
-        return Constants.сellModels.map { BaseCellGenerator<TitleTableViewCell>(with: $0) }
+        return Constants.сellModels.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
     }
 
 }
