@@ -57,10 +57,4 @@ open class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectable
         }
     }
 
-    // MARK: - Open
-
-    open func configure(cell: Cell, with model: Cell.Model) {
-        cell.configure(with: model)
-    }
-
 }
