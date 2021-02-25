@@ -54,7 +54,7 @@ private extension PrefetchingTableViewController {
             guard let viewModel = ImageTableViewCell.ViewModel.make() else { continue }
 
             // Create generator
-            let generator = ImageTableViewCell.rddm.baseGenerator(with: viewModel)
+            let generator = ImageTableGenerator(with: viewModel)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)

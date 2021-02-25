@@ -16,9 +16,9 @@ final class ImageTableGenerator: BaseCellGenerator<ImageTableViewCell>, Prefetch
 
     // MARK: - BaseCellGenerator
 
-    override func configure(cell: ImageTableViewCell, with model: ImageTableViewCell.Model) {
-        super.configure(cell: cell, with: model)
+    init(with model: ImageTableViewCell.Model) {
         requestId = model.imageUrl
+        super.init(with: model)
     }
 
 }
