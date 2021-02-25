@@ -45,7 +45,7 @@ final class MainTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = tableView.rddm.baseBuilder
+    private lazy var ddm = tableView.rddm.baseBuilder
         .add(plugin: TableSelectablePlugin())
         .build()
 
@@ -64,21 +64,21 @@ private extension MainTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+
         for model in Constants.models {
             // Create generator
             let generator = TitleTableViewCell.rddm.baseGenerator(with: model.title)
-            
+
             generator.didSelectEvent += { [weak self] in
                 guard let self = self else { return }
                 self.performSegue(withIdentifier: model.segueId.rawValue, sender: self.tableView)
             }
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            ddm.addCellGenerator(generator)
         }
 
-        // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        ddm.forceRefill()
     }
 
 }

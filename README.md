@@ -1,223 +1,154 @@
-[![Build Status](https://travis-ci.org/surfstudio/ReactiveDataDisplayManager.svg?branch=master)](https://travis-ci.org/surfstudio/ReactiveDataDisplayManager)
+# ReactiveDataDisplayManager
+
+[![Build](https://github.com/surfstudio/ReactiveDataDisplayManager/actions/workflows/Build.yml/badge.svg)](https://github.com/surfstudio/ReactiveDataDisplayManager/actions/workflows/Build.yml)
 [![codebeat badge](https://codebeat.co/badges/30f4100b-ee0e-4bc6-8aad-c2128544c0c6)](https://codebeat.co/projects/github-com-surfstudio-reactivedatadisplaymanager-master) [![codecov](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager/branch/master/graph/badge.svg)](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager)
 
-# ReactiveDataDisplayManager
-It is the whole approach to working with UITableView.
-The main idea of RDDM is to make development of table screen faster and clearly. So it provide reuse DDM and reuse cells both within a project and beetween projects.
+It is the whole approach to working with scrollable lists or collections.
 
-# Entites
-RDDM contains next entites:        
- - **TableDataDisplayManager**: This is something like adapter. This entity responses for add, remove, swap cells in `UITableView`. Also for fill table, reload data and other functionality, provided with `UITableViewDelegate` and `UITableViewDataSource`.
- - **ViewGenerator**: This entity is aspect of more difficult object. But exactly this entity provide interface to **TableDataDisplayManager** for store each similar objects in collection and get `UIView` for create SectionHeader.
- - **TableCellGenerator**: This entity is something like **ViewGenerator**. It reponse for create `UITableViewCell` for **TableDataDisplayManager**. In this way this **Generator** hide the concretate cell type from **TDDM** and show it only the abstract cell - `UITableViewCell`.
- - **ViewBuilder<ViewType>**: This object incapsulate logicks for fill view with model that needs to display. This object together with **TableCellGenerator** (or **ViewGenerator**) is a part of more difficult object.
+TBD logo here (need designer help)
 
-Object which implement **ViewBuilder** and **TableCellGenerator** (or **ViewGenerator**), I called just **Generator**.
-And this object also response for events (notify listners) and response for store model. Usually view create generators, subscribe on events and send them to **TDDM**.
+## About
+
+This Framework was made to speed up development of scrollable collections like UITableView or UICollectionView, and to provide new way to easy extend collections functionality.
+
+## Breaking changes
+
+We made a massive refactoring with version 7.0.0.
+Please read our [migration guide](/Documentation/MigrationGuide.md) if you were using version 6 or older.
+
+## Currently supported features
+
+- Populating cells without implementing delegate and datasource by yourself
+- Inserting, replacing or removing cells without reload
+- Expanding and collapsing cells inside collection
+- Moving or Drag'n'Drop cells inside collection
+- Customizing of section headers and index titles
+
+## Usage
+
+Step by step example of configuring simple list of labels.
+
+### Prepare cell
+
+You can layout your cell from xib or from code. It doesn't matter.
+Just extend your cell to `Configurable` to fill subviews with model, when cell will be created.
 
 ```swift
-class SubscriptionServiceGenerator {
+import ReactiveDataDisplayManager
 
-    // MARK: - Events
+final class LabelCell: UITableViewCell {
 
-    public var buyEvent: BaseEvent<PaidService>
+    // MARK: - IBOutlets
 
-    // MARK: - Stored properties
+    @IBOutlet private weak var titleLabel: UILabel!
 
-    fileprivate let model: PaidService?
-
-    // MARK: - Initializer
-
-    public init(model: PaidService?) { <#code#> }
 }
 
-// MARK: - TableCellGenerator
+// MARK: - Configurable
 
-extension SubscriptionServiceGenerator: TableCellGenerator {
-    var identifier: UITableViewCell.Type {
-        return SubscriptionServiceCell.self // it cocnreate cell
-    }
+extension LabelCell: Configurable {
 
-    func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
+    typealias Model = String
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: self.identifier.nameOfClass, for: indexPath) as? SubscriptionServiceCell else { return UITableViewCell() }
-
-        self.build(view: cell)
-
-        return cell
-    }
-}
-
-// MARK: - ViewBuilder
-
-extension SubscriptionServiceGenerator: ViewBuilder {
-
-    func build(view: SubscriptionServiceCell) {
-        view.delegate = self
-        <# some logics #>
-    }
-}
-
-// MARK: - SubscriptionServiceCellDelegate
-
-extension SubscriptionServiceGenerator: SubscriptionServiceCellDelegate {
-
-    func subscribtionButtonTouchid(in cell: SubscriptionServiceCell) {
-        guard let service = self.model else { return }
-        self.buyEvent.invoke(with: service)
+    func configure(with model: Model) {
+        titleLabel.text = model
     }
 }
 ```
- - **Event**: is custom object, that may store closures, which have the same signatures, object that store an avent may call all stored closures for send objects, that provide this closures about event.
 
-View wants to recive a message about user tap on button:
-```swift
- var generator = SubscriptionServiceGenerator(model: service)
- generator.buyEvent += { (service: PaidService) -> Void in
-    <# do something #>
- }
-```
+### Prepare collection
 
-## How to install
-
-`pod 'ReactiveDataDisplayManager' ~> 6.0.0`
-
-## Errors
-
-- `Could not load NIB in bundle ... with name 'YourCellName'`
-This error appears because you are using class based cells (not UINib), but inside RDDM cells registering via UINib.
-
-  **Your should override default registering in generator**
-```swift
-extension YourCellGenerator: TableCellGenerator {
-  // ...
-
-  func registerCell(in tableView: UITableView) {
-      tableView.register(identifier, forCellReuseIdentifier: String(describing: identifier))
-  }
-
-  // ...
-}
-```
-
-## Versioning
-
-Version format is `x.y.z` where
-- x is major version number. Bumped only in major updates (implementaion changes, adding new functionality)
-- y is minor version number. Bumped only in minor updates (interface changes)
-- z is minor version number. Bumped in case of bug fixes and e.t.c.
-
-# How to start
-
-In 99% of situations you don't need to create your own generators. There are plenty of generators that covers almost all you needs.
-
-- each cell in generator could be registered in two ways: as a nib or as a class
-
-## UITableView
-
-### BaseCellGenerator & BaseNonReusableCellGenerator
-
-Generators with selection event. They build `Configurable` cell and work with automatic demension. But the second one, as you can guess, doesn't reuse cell in tableView, so you can update your cell in any time.
-
-**To work with it you should:**
-
-- create `UITableViewCell`
-- realize `Configurable` protocol
-- initialize generator `let generator = BaseCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())` or `let nonReusableGenerator = BaseNonReusableCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())`
-- if you have non-reusable generator, you can update cell `nonReusableGenerator.update(model: YourTableViewCellModel())`
-
-### CalculatableHeightCellGenerator & CalculatableHeightNonReusableCellGenerator
-
-Generators with selection event. They build `Configurable & CalculatableHeight` cell and work with cell that could calculate it's height. The second one, as you can guess, doesen't reuse cell in tableView, so you can update your cell in any time.
-
-**To work with it you should:**
-
-- create `UITableViewCell`
-- realize `Configurable` and `CalculatableHeight` protocols
-- initialize generator `let generator = CalculatableHeightCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())` or `let nonReusableGenerator = CalculatableHeightNonReusableCellGenerator<YourTableViewCell>(with: YourTableViewCellModel())`
-- if you have non-reusable generator, you can update cell `nonReusableGenerator.update(model: YourTableViewCellModel())`
-
-### Which to choose
-
-||Reusable|Non-reusable|
-|---|---|---|
-|AutomaticDimension|`BaseCellGenerator`|`BaseNonReusableCellGenerator`|
-|Calculated height|`CalculatableHeightCellGenerator`|`CalculatableHeightNonReusableCellGenerator`|
-
-### TablePrefetcherablePlugin & PrefetcherableFlow
-
-Adds support for [UITableViewDataSourcePrefetching](https://developer.apple.com/documentation/uikit/uitableviewdatasourceprefetching).
-
-**To work with it you should:**
-
-- create `Generator`
-- realize `PrefetcherableFlow` protocol
-- create `YourDataPrefetcher`
-- realize `ContentPrefetcher` protocol
-- add `TablePrefetcherablePlugin` to builder
+Just call `rddm` from collection
+- add plugins for your needs
+- build your ReactiveDataDisplayManager
 
 ```swift
-class YourController: UIViewController {
-    // ...
+final class ExampleTableController: UIViewController {
 
-    let tableView = UITableView()
-    let preheater = YourDataPrefetcher()
-    lazy var prefetcherablePlugin = TablePrefetcherablePlugin<YourDataPrefetcher, YourCellGenerator>(prefetcher: preheater)
-    lazy var adapter = tableView.rddm.baseBuilder
-        .add(plugin: prefetcherablePlugin)
+    // MARK: - IBOutlets
+
+    @IBOutlet private weak var tableView: UITableView!
+
+    // MARK: - Private Properties
+
+    private lazy var ddm = tableView.rddm.baseBuilder
+        .add(plugin: TableSelectablePlugin())
         .build()
 
-    // ...
-}
-```
+    // MARK: - UIViewController
 
-- initialize generator and add to adapter
-
-```swift
-class YourController: UIViewController {
-    // ...
-
-    func fillAdapter(with model: YourTableViewCellModel) {
-        let generator = YourCellGenerator(model: model)
-
-        // Add generator to adapter
-        adapter.addCellGenerator(generator)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fill()
     }
 
-    // ...
 }
 ```
-**See more in example project**
 
-## UICollectionView
+### Fill collection
 
-### BaseCollectionCellGenerator
+Convert models to generators and call `ddm.forceRefill()`
 
-Base generator with selection event. It builds `Configurable` cell.
+```swift
+private extension MainTableViewController {
 
-If you choose this generator, you should insert `itemSize` in `collectionViewFlowLayout` manually.
+    func fill() {
 
-**To work with it you should:**
+        let models = ["First", "Second", "Third"]
 
-- create `UICollectionViewCell`
-- realize `Configurable` protocol
-- initialize generator `let generator = BaseCollectionCellGenerator<YourCollectionViewCell>(with: YourCollectionViewCellModel())`
+        for model in models {
+            let generator = TitleTableViewCell.rddm.baseGenerator(with: model)
 
-### SizableCollectionDataDisplayManager & CalculatableHeightCollectionCellGenerator/CalculatableWidthCollectionCellGenerator
+            generator.didSelectEvent += { [weak self] in
+                // do some logic
+            }
 
-Manager and generators to work with different sizes (in one dimension - only different heights/widths).
+            // Add generator to adapter
+            ddm.addCellGenerator(generator)
+        }
 
-**To work with it you should:**
+        ddm.forceRefill()
+    }
 
-- assign type of adapter - `SizableCollectionDataDisplayManager`
-- create `UICollectionViewCell`
-- realize `Configurable & CalculatableHeight/CalculatableWidth` protocols
-- initialize generator `let generator = CalculatableHeightCollectionCellGenerator<YourCollectionViewCell>(with: YourCollectionViewCellModel(), width: 100) or let generator = CalculatableWidthCollectionCellGenerator<YourCollectionViewCell>(with: YourCollectionViewCellModel(), height: 100)`
+}
+```
 
-### Which to choose
+### Enjoy
 
-If you have cells with equal sizes, you should choose `BaseCollectionCellGenerator`.
+As you can see, you don't need to conform `UITableViewDelegate` and `UITableViewDataSource`. This protocols are hidden inside ReactiveDataDisplayManager.
+You can extend table functionality with adding plugins and replacing generator.
 
-But if you cell's should have different sizes in **one dimension**, you should use `SizableCollectionCollectionDataDisplayManager` and calculatable collection generators.
+[![Feature](https://i.ibb.co/WFrzQNK/2021-02-20-15-52-34.png)](https://ibb.co/mtnymrz)
 
-Otherwise you should provide your own adapter with collectionView delegate.
+You can check more examples in our [example project](/Example/) or in full [documentation](/Documentation/Entities.md)
+
+
+## Installation
+
+Just add ReactiveDataDisplayManager to your `Podfile` like this
+
+```
+pod 'ReactiveDataDisplayManager' ~> 7.0.0
+```
+
+## Changelog
+
+All notable changes to this project will be documented in [this file](./CHANGELOG.md).
+
+## Issues
+
+For issues, file directly in the [main ReactiveDataDisplayManager repo](https://github.com/surfstudio/ReactiveDataDisplayManager).
+
+## Contribute
+
+If you would like to contribute to the package (e.g. by improving the documentation, solving a bug or adding a cool new feature), please review our [contribution guide](/Documentation/ContributingGuide.md) first and send us your pull request.
+
+You PRs are always welcome.
+
+## How to reach us
+
+TBD
+
+## License
+
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)

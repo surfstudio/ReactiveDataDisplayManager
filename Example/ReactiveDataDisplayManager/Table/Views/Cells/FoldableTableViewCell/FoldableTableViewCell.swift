@@ -6,7 +6,7 @@
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
-import UIKit
+import ReactiveDataDisplayManager
 
 final class FoldableTableViewCell: UITableViewCell {
 
@@ -31,15 +31,26 @@ final class FoldableTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func fill(title: String = "", expanded: Bool) {
-        titleLabel.text = String(format: "Foldable cell %@", title)
-        arrowImageView.transform = expanded ? .identity : CGAffineTransform(rotationAngle: .pi)
-    }
-
-    func configure(expanded: Bool) {
+    func update(expanded: Bool) {
         UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
             self?.arrowImageView.transform = expanded ? .identity : CGAffineTransform(rotationAngle: .pi)
         }
+    }
+
+}
+
+// MARK: - Configurable
+
+extension FoldableTableViewCell: Configurable {
+
+    struct Model {
+        let title: String
+        let isExpanded: Bool
+    }
+
+    func configure(with model: Model) {
+        titleLabel.text = String(format: "Foldable cell %@", model.title)
+        arrowImageView.transform = model.isExpanded ? .identity : CGAffineTransform(rotationAngle: .pi)
     }
 
 }

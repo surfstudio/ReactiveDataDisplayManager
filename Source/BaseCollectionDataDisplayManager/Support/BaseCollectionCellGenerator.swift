@@ -27,6 +27,10 @@ open class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem where
         self.registerType = registerType
     }
 
+    open func configure(cell: Cell, with model: Cell.Model) {
+        cell.configure(with: model)
+    }
+
 }
 
 // MARK: - CollectionCellGenerator
@@ -40,7 +44,7 @@ extension BaseCollectionCellGenerator: CollectionCellGenerator {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? Cell else {
             return UICollectionViewCell()
         }
-        cell.configure(with: model)
+        configure(cell: cell, with: model)
         return cell
     }
 
