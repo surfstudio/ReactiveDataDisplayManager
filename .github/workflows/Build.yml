@@ -10,8 +10,6 @@ jobs:
     - name: Build
       run: xcodebuild -target ReactiveDataDisplayManager
     - name: Run tests
-      run: xcodebuild test -scheme ReactiveDataDisplayManager -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8,OS=13.2' | xcpretty -c
+      run: xcodebuild test -scheme ReactiveDataDisplayManager -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8,OS=14.3' | xcpretty -c
     - name: Upload Coverage
       run: bash <(curl -s https://codecov.io/bash) -J 'ReactiveDataDisplayManager'
-    
-
