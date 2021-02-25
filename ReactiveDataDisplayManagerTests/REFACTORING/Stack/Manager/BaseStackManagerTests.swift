@@ -33,7 +33,7 @@ final class BaseStackManagerTests: XCTestCase {
         // when
         let ddm = BaseStackManager()
         // then
-        XCTAssert(ddm.cellGenerators.isEmpty)
+        XCTAssert(ddm.generators.isEmpty)
     }
 
     // MARK: - Generator actions tests
