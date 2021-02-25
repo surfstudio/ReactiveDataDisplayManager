@@ -160,11 +160,16 @@ extension BaseCollectionManager {
     /// A constant that identifies a relative position in the collection view (top, middle, bottom)
     /// for item when scrolling concludes. See UICollectionViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
-    open func remove(_ generator: CollectionCellGenerator, needScrollAt scrollPosition: UICollectionView.ScrollPosition?, needRemoveEmptySection: Bool) {
+    ///   - completion: A completion handler block to execute when all of the operations are finished
+    open func remove(_ generator: CollectionCellGenerator,
+                     needScrollAt scrollPosition: UICollectionView.ScrollPosition? = nil,
+                     needRemoveEmptySection: Bool,
+                     completion: (() -> Void)? = nil) {
         guard let index = findGenerator(generator) else { return }
         self.removeGenerator(with: index,
                              needScrollAt: scrollPosition,
-                             needRemoveEmptySection: needRemoveEmptySection)
+                             needRemoveEmptySection: needRemoveEmptySection,
+                             completion: completion)
     }
 
 }
@@ -199,9 +204,10 @@ private extension BaseCollectionManager {
     // TODO: May be we should remove needScrollAt and move this responsibility to user
     func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
                          needScrollAt scrollPosition: UICollectionView.ScrollPosition? = nil,
-                         needRemoveEmptySection: Bool = false) {
+                         needRemoveEmptySection: Bool = false,
+                         completion: (() -> Void)? = nil) {
 
-        animator?.perform(in: view, animation: { [weak self] in
+        animator?.perform(in: view) { [weak self] in
             self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
             let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
             view.deleteItems(at: [indexPath])
@@ -218,7 +224,9 @@ private extension BaseCollectionManager {
             if let scrollPosition = scrollPosition {
                 view.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
             }
-        })
+
+            completion?()
+        }
     }
 
 }
