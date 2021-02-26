@@ -8,8 +8,6 @@
 
 open class BaseTablePlugin<Event>: PluginAction {
 
-    public init() { }
-
     open func process(event: Event, with manager: BaseTableManager?) {}
 
 }

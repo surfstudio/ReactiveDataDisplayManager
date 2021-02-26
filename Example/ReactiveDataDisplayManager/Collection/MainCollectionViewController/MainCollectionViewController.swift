@@ -46,7 +46,7 @@ final class MainCollectionViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.baseBuilder
-        .add(plugin: TableSelectablePlugin())
+        .add(plugin: .selectable())
         .build()
 
     // MARK: - UIViewController

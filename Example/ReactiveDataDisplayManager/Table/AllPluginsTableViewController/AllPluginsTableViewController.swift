@@ -28,7 +28,7 @@ final class AllPluginsTableViewController: UIViewController {
 
     private let prefetcher = NukeImagePrefetcher()
     private let swipeActionProvider = SwipeActionProvider()
-    private lazy var prefetcherablePlugin = TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator>(prefetcher: prefetcher)
+    private lazy var prefetcherablePlugin: TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator> = .prefetch(prefetcher: prefetcher)
 
     private lazy var scrollDirectionEvent: (ScrollDirection) -> Void = { [weak self] direction in
         switch direction {
@@ -50,13 +50,13 @@ final class AllPluginsTableViewController: UIViewController {
     }
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(plugin: TableDisplayablePlugin())
-        .add(plugin: TableDirectionScrollablePlugin(action: scrollDirectionEvent))
-        .add(plugin: TableHeaderVisiblePlugin(action: headerVisibleEvent))
-        .add(plugin: TableLastCellIsVisiblePlugin(action: lastCellIsVisibleEvent))
-        .add(plugin: TableSelectablePlugin())
+        .add(plugin: .displayable())
+        .add(plugin: .direction(action: scrollDirectionEvent))
+        .add(plugin: .headerIsVisible(action: headerVisibleEvent))
+        .add(plugin: .lastCellIsVisible(action: lastCellIsVisibleEvent))
+        .add(plugin: .selectable())
         .add(plugin: prefetcherablePlugin)
-        .add(plugin: TableFoldablePlugin())
+        .add(plugin: .foldable())
         .add(featurePlugin: TableMovablePlugin())
         .add(featurePlugin: TableSwipeActionsConfigurationPlugin(swipeProvider: swipeActionProvider))
         .add(featurePlugin: TableSectionTitleDisplayablePlugin())

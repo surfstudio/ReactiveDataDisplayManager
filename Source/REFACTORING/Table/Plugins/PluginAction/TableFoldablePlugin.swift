@@ -6,6 +6,9 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+/// Plugin to support `FoldableItem`
+///
+/// Allow  expand or collapse child cells
 public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - BaseTablePlugin
@@ -58,6 +61,19 @@ private extension TableFoldablePlugin {
     func updateIfNeeded(_ childGenerators: [TableCellGenerator], with manager: BaseTableManager?) {
         guard let manager = manager as? GravityTableManager else { return }
         manager.update(generators: childGenerators)
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseTablePlugin {
+
+    /// Plugin to support `FoldableItem`
+    ///
+    /// Allow  expand or collapse child cells
+    static func foldable() -> BaseTablePlugin<TableEvent> {
+        TableFoldablePlugin()
     }
 
 }

@@ -18,9 +18,9 @@ public protocol ContentPrefetcher {
     func cancelPrefetching(for requestIds: [Content])
 }
 
-/// Adds support for PrefetcherableFlow with prefetcher
+/// Adds support for `PrefetcherableFlow` with prefetcher
 ///
-/// ContentPrefetcher prefetches and caches data to eliminate delays when requesting the same data later.
+/// `ContentPrefetcher` prefetches and caches data to eliminate delays when requesting the same data later.
 public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
@@ -30,7 +30,7 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
     // MARK: - Initialization
 
     /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
-    public init(prefetcher: Prefetcher) {
+    init(prefetcher: Prefetcher) {
         self.prefetcher = prefetcher
     }
 
@@ -63,6 +63,20 @@ private extension TablePrefetcherablePlugin {
 
     func getPrefetcherableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> Generator? {
         return manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? Generator
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseTablePlugin {
+
+    /// Plugin to proxy  events of `UITableViewDataSourcePrefetching`
+    ///
+    /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
+    static func prefetch<Prefetcher: ContentPrefetcher,
+                         Generator: PrefetcherableFlow>(prefetcher: Prefetcher) -> TablePrefetcherablePlugin<Prefetcher, Generator>{
+        TablePrefetcherablePlugin(prefetcher: prefetcher)
     }
 
 }

@@ -25,7 +25,7 @@ final class FoldableTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(plugin: TableFoldablePlugin())
+        .add(plugin: .foldable())
         .build()
 
     // MARK: - UIViewController

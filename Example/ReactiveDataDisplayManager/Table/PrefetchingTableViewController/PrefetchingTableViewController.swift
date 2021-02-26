@@ -19,7 +19,7 @@ final class PrefetchingTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private let prefetcher = NukeImagePrefetcher()
-    private lazy var prefetcherablePlugin = TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator>(prefetcher: prefetcher)
+    private lazy var prefetcherablePlugin: TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator> = .prefetch(prefetcher: prefetcher)
 
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)
