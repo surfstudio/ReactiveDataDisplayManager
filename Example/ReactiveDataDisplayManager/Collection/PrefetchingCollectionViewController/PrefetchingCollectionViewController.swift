@@ -76,7 +76,7 @@ private extension PrefetchingCollectionViewController {
             guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
 
             // Create generator
-            let generator = BaseCollectionCellGenerator<ImageCollectionViewCell>(with: viewModel)
+            let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)

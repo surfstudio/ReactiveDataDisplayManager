@@ -58,11 +58,11 @@ private extension FoldableTableViewController {
         // Tell adapter that we've changed generators
         adapter.forceRefill()
     }
-    
-    func makeRegularCellWithTitlesGenerators() -> [TitleTableGenerator] {
-        var generators = [TitleTableGenerator]()
+
+    func makeRegularCellWithTitlesGenerators() -> [TableCellGenerator] {
+        var generators = [TableCellGenerator]()
         for _ in 0...3 {
-            generators.append(TitleTableGenerator(model: Constants.titleForRegularCell))
+            generators.append(TitleTableViewCell.rddm.baseGenerator(with: Constants.titleForRegularCell))
         }
         return generators
     }
@@ -72,7 +72,7 @@ private extension FoldableTableViewController {
         let generator = FoldableCellGenerator(with: .init(title: "", isExpanded: false))
 
         // Create and add child generators
-        generator.childGenerators = Constants.titleForSubcells.map { TitleTableGenerator(model: $0) }
+        generator.childGenerators = Constants.titleForSubcells.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
         return generator
     }
 

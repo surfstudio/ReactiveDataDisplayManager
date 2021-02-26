@@ -117,7 +117,7 @@ private extension FoldableCollectionViewController {
 
         for _ in 0...endIndex {
             guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
-            let generator = BaseCollectionCellGenerator<ImageCollectionViewCell>(with: viewModel)
+            let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
             generators.append(generator)
         }
 

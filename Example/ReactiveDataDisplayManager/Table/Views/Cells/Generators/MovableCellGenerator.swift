@@ -9,36 +9,4 @@
 import Foundation
 import ReactiveDataDisplayManager
 
-final class MovableCellGenerator: MovableGenerator {
-
-    // MARK: - Private Properties
-
-    private let model: String
-
-    // MARK: - Initialization
-
-    public init(model: String) {
-        self.model = model
-    }
-
-}
-
-// MARK: - TableCellGenerator
-
-extension MovableCellGenerator: TableCellGenerator {
-
-    var identifier: String {
-        return String(describing: TitleTableViewCell.self)
-    }
-
-}
-
-// MARK: - ViewBuilder
-
-extension MovableCellGenerator: ViewBuilder {
-
-    func build(view: TitleTableViewCell) {
-        view.fill(with: model)
-    }
-
-}
+class MovableCellGenerator: BaseCellGenerator<TitleTableViewCell>, MovableGenerator {}

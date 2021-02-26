@@ -66,7 +66,7 @@ private extension MainCollectionViewController {
     func fillAdapter() {
         for model in Constants.models {
             // Create generator
-            let generator = TitleTableGenerator(model: model.title)
+            let generator = TitleTableViewCell.rddm.baseGenerator(with: model.title)
 
             generator.didSelectEvent += { [weak self] in
                 self?.openScreen(by: model.segueId)
