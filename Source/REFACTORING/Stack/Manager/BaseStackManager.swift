@@ -19,13 +19,7 @@ open class BaseStackManager: DataDisplayManager {
     // MARK: - Properties
 
     public weak var view: UIStackView!
-    public var cellGenerators: [StackCellGenerator]
-
-    // MARK: - Initialization
-
-    public init() {
-        cellGenerators = []
-    }
+    public var cellGenerators: [StackCellGenerator] = []
 
     // MARK: - DataDisplayManager
 

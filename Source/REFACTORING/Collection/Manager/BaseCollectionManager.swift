@@ -22,19 +22,12 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
 
     public weak var view: UICollectionView!
 
-    public var generators: [[CollectionCellGenerator]]
-    public var sections: [CollectionHeaderGenerator]
+    public var generators: [[CollectionCellGenerator]] = []
+    public var sections: [CollectionHeaderGenerator] = []
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
     var animator: CollectionAnimator?
-
-    // MARK: - Initialization
-
-    public init() {
-        generators = [[CollectionCellGenerator]]()
-        sections = [CollectionHeaderGenerator]()
-    }
 
     // MARK: - DataDisplayManager
 
