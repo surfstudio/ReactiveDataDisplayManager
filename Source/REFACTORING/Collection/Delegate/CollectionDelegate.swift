@@ -8,8 +8,10 @@
 
 import UIKit
 
-public protocol CollectionDelegate: UICollectionViewDelegate {
+public protocol CollectionDelegate: UICollectionViewDelegate, UICollectionViewDragDelegate, UICollectionViewDropDelegate {
     var manager: BaseCollectionManager? { get set }
     var collectionPlugins: PluginCollection<BaseCollectionPlugin<CollectionEvent>> { get set }
     var scrollPlugins: PluginCollection<BaseCollectionPlugin<ScrollEvent>> { get set }
+    @available(iOS 11, *)
+    var dragAndDroppablePlugin: CollectionDragAndDroppable? { get set }
 }

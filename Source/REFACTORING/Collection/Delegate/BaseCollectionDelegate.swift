@@ -18,6 +18,16 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
 
+    @available(iOS 11.0, *)
+    public var dragAndDroppablePlugin: CollectionDragAndDroppable? {
+        set { _dragAndDroppablePlugin = newValue }
+        get { _dragAndDroppablePlugin as? CollectionDragAndDroppable }
+    }
+
+    // MARK: - Private Properties
+
+    private var _dragAndDroppablePlugin: FeaturePlugin?
+
 }
 
 // MARK: - UICollectionViewDelegate
@@ -109,6 +119,33 @@ extension BaseCollectionDelegate {
 
     open func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
         scrollPlugins.process(event: .didChangeAdjustedContentInset, with: manager)
+    }
+
+}
+
+// MARK: - UICollectionViewDragDelegate
+
+@available(iOS 11.0, *)
+extension BaseCollectionDelegate {
+
+    open func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return dragAndDroppablePlugin?.makeDragItems(at: indexPath, with: manager) ?? []
+    }
+
+}
+
+// MARK: - UICollectionViewDropDelegate
+
+@available(iOS 11.0, *)
+extension BaseCollectionDelegate {
+
+    open func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        dragAndDroppablePlugin?.performDrop(with: coordinator, and: manager)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        let dropProposal = dragAndDroppablePlugin?.didUpdateItem(with: destinationIndexPath, and: manager)
+        return dropProposal ?? UICollectionViewDropProposal(operation: .forbidden)
     }
 
 }

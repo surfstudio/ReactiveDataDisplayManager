@@ -45,6 +45,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
     var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
+    var dragAndDroppablePlugin: FeaturePlugin?
 
     // MARK: - Initialization
 
@@ -78,6 +79,8 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     /// Add feature plugin functionality based on UICollectionViewDelegate/UICollectionViewDataSource events
     public func add(featurePlugin: FeaturePlugin) -> CollectionBuilder<T> {
+        checkDragAndDroppablePlugin(with: featurePlugin)
+
         guard let plugin = featurePlugin as? CollectionItemTitleDisplayable else { return self }
         itemTitleDisplayablePlugin = plugin
         return self
@@ -107,11 +110,14 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         delegate.manager = manager
         delegate.collectionPlugins = collectionPlugins
         delegate.scrollPlugins = scrollPlugins
+        setDragAndDroppablePluginIfNeeded()
+
         view.delegate = delegate
 
         dataSource.provider = manager
         dataSource.collectionPlugins = collectionPlugins
         dataSource.itemTitleDisplayablePlugin = itemTitleDisplayablePlugin
+        setPrefetchDataSourceIfNeeded()
 
         view.dataSource = dataSource
 
@@ -125,6 +131,35 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         manager.dataSource = dataSource
         manager.animator = animator
         return manager
+    }
+
+}
+
+private extension CollectionBuilder {
+
+    func checkDragAndDroppablePlugin(with plugin: FeaturePlugin) {
+        guard #available(iOS 11.0, *),
+              let plugin = plugin as? CollectionDragAndDroppable
+        else { return }
+
+        dragAndDroppablePlugin = plugin
+    }
+
+    func setDragAndDroppablePluginIfNeeded() {
+        guard #available(iOS 11.0, *),
+              let plugin = dragAndDroppablePlugin as? CollectionDragAndDroppable
+        else { return }
+
+        delegate.dragAndDroppablePlugin = plugin
+        view.dragDelegate = delegate
+        view.dropDelegate = delegate
+    }
+
+    func setPrefetchDataSourceIfNeeded() {
+        if #available(iOS 10.0, *) {
+            dataSource.prefetchPlugins = prefetchPlugins
+            view.prefetchDataSource = dataSource
+        }
     }
 
 }
