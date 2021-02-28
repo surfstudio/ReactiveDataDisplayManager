@@ -46,9 +46,7 @@ open class GravityTableManager: BaseTableManager {
 
         generator.registerCell(in: view)
 
-        if generators.count != sections.count || sections.isEmpty {
-            generators.append([CellGeneratorType]())
-        }
+        addEmptyGeneratorArrayIfNeeded()
 
         if sections.isEmpty {
             sections.append(EmptyTableHeaderGenerator())
@@ -97,9 +95,7 @@ open class GravityTableManager: BaseTableManager {
         checkDuplicate(header: generator)
         sections.append(generator)
 
-        if generators.count != sections.count || sections.isEmpty {
-            generators.append([CellGeneratorType]())
-        }
+        addEmptyGeneratorArrayIfNeeded()
 
         let combined = zip(sections.asGravityHeaderCompatible, generators).sorted { lhs, rhs in
             lhs.0.getHeaviness() < rhs.0.getHeaviness()
@@ -117,9 +113,7 @@ open class GravityTableManager: BaseTableManager {
     public func addCellGenerators(_ generators: [CellGeneratorType], toHeader header: HeaderGeneratorType) {
         generators.forEach { $0.registerCell(in: view) }
 
-        if self.generators.count != sections.count || sections.isEmpty {
-            self.generators.append([CellGeneratorType]())
-        }
+        addEmptyGeneratorArrayIfNeeded()
 
         if let index = sections.firstIndex(where: { $0 === header }) {
             self.generators[index].append(contentsOf: generators)

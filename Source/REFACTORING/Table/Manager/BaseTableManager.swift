@@ -45,9 +45,9 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
         generator.registerCell(in: view)
-        if generators.count != sections.count || sections.isEmpty {
-            generators.append([TableCellGenerator]())
-        }
+
+        addEmptyGeneratorArrayIfNeeded()
+
         if sections.count <= 0 {
             sections.append(EmptyTableHeaderGenerator())
         }
@@ -148,6 +148,14 @@ extension BaseTableManager {
 
             completion?()
         }
+    }
+
+    func addEmptyGeneratorArrayIfNeeded() {
+        guard generators.count != sections.count || sections.isEmpty else {
+            return
+        }
+
+        generators.append([CellGeneratorType]())
     }
 
 }

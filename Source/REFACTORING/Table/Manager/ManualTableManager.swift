@@ -30,6 +30,7 @@ public class ManualTableManager: BaseTableManager {
     ///   - generator: Generator for new section TableHeaderGenerator.
     open func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         sections.append(generator)
+        addEmptyGeneratorArrayIfNeeded()
     }
 
     /// Inserts new TableHeaderGenerator generator after another.
@@ -45,14 +46,14 @@ public class ManualTableManager: BaseTableManager {
             fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
         }
         let newIndex = anchorIndex + 1
-        self.insert(headerGenerator: headerGenerator, by: newIndex)
+        insert(headerGenerator: headerGenerator, by: newIndex)
     }
 
     /// Inserts new TableHeaderGenerator generator after another.
     ///
     /// - Parameters:
     ///   - headGenerator: TableHeaderGenerator which you want to insert.
-    ///   - after: TableHeaderGenerator, before which new TableHeaderGenerator will be added.
+    ///   - before: TableHeaderGenerator, before which new TableHeaderGenerator will be added.
     open func insert(headerGenerator: TableHeaderGenerator, before: TableHeaderGenerator) {
         if sections.contains(where: { $0 === headerGenerator }) {
             fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
@@ -60,7 +61,7 @@ public class ManualTableManager: BaseTableManager {
         guard let anchorIndex = sections.firstIndex(where: { $0 === before }) else {
             fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
         }
-        let newIndex = max(anchorIndex - 1, 0)
+        let newIndex = max(anchorIndex, 0)
         insert(headerGenerator: headerGenerator, by: newIndex)
     }
 
@@ -90,9 +91,7 @@ public class ManualTableManager: BaseTableManager {
     open func addCellGenerators(_ generators: [TableCellGenerator], toHeader headerGenerator: TableHeaderGenerator) {
         generators.forEach { $0.registerCell(in: view) }
 
-        if self.generators.count != sections.count || sections.isEmpty {
-            self.generators.append([TableCellGenerator]())
-        }
+        addEmptyGeneratorArrayIfNeeded()
 
         if let index = sections.firstIndex(where: { $0 === headerGenerator }) {
             self.generators[index].append(contentsOf: generators)
@@ -350,11 +349,9 @@ public class ManualTableManager: BaseTableManager {
 
 }
 
-// MARK: - Private
+// MARK: - Private methods
 
 private extension ManualTableManager {
-
-    // MARK: - Private methods
 
     func insert(headerGenerator: TableHeaderGenerator,
                 by index: Int,
