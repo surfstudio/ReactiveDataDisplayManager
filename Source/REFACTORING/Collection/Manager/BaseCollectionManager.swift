@@ -39,14 +39,13 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        self.view?.reloadData()
+        view.reloadData()
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
-        guard let collection = self.view else { return }
-        generator.registerCell(in: collection)
+        generator.registerCell(in: view)
 
-        if self.generators.count != self.sections.count || sections.isEmpty {
+        if self.generators.count != sections.count || sections.isEmpty {
             self.generators.append([CollectionCellGenerator]())
         }
 
@@ -56,12 +55,12 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
 
         // Add to last section
         let index = sections.count - 1
-        self.generators[index < 0 ? 0 : index].append(generator)
+        generators[index < 0 ? 0 : index].append(generator)
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator]) {
         for generator in generators {
-            self.addCellGenerator(generator)
+            addCellGenerator(generator)
         }
     }
 
@@ -82,11 +81,11 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     public func update(generators: [CollectionCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        self.view?.reloadItems(at: indexPaths)
+        view.reloadItems(at: indexPaths)
     }
 
     public func clearCellGenerators() {
-        self.generators.removeAll()
+        generators.removeAll()
     }
 
 }
@@ -97,7 +96,7 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
 
     public func addSectionHeaderGenerator(_ generator: CollectionHeaderGenerator) {
         generator.registerHeader(in: view)
-        self.sections.append(generator)
+        sections.append(generator)
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator, toHeader header: CollectionHeaderGenerator) {
@@ -107,28 +106,28 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toHeader header: CollectionHeaderGenerator) {
         generators.forEach { $0.registerCell(in: view) }
 
-        if self.generators.count != self.sections.count || sections.isEmpty {
+        if self.generators.count != sections.count || sections.isEmpty {
             self.generators.append([CollectionCellGenerator]())
         }
 
-        if let index = self.sections.index(where: { $0 === header }) {
+        if let index = sections.index(where: { $0 === header }) {
             self.generators[index].append(contentsOf: generators)
         }
     }
 
     public func removeAllGenerators(from header: CollectionHeaderGenerator) {
         guard
-            let index = self.sections.index(where: { $0 === header }),
-            self.generators.count > index
+            let index = sections.index(where: { $0 === header }),
+            generators.count > index
         else {
             return
         }
 
-        self.generators[index].removeAll()
+        generators[index].removeAll()
     }
 
     public func clearHeaderGenerators() {
-        self.sections.removeAll()
+        sections.removeAll()
     }
 
 }
@@ -144,12 +143,13 @@ extension BaseCollectionManager {
     ///   - new: Generators which you want to insert after current generator.
     open func insert(after generator: CollectionCellGenerator,
                      new newGenerators: [CollectionCellGenerator]) {
-        guard let index = self.findGenerator(generator) else { return }
+        guard let index = findGenerator(generator) else { return }
 
         let elements = newGenerators.enumerated().map { item in
             (item.element, index.sectionIndex, index.generatorIndex + item.offset + 1)
         }
-        self.insert(elements: elements)
+
+        insert(elements: elements)
     }
 
     /// Removes generator from data display manager. Generators compares by references.
@@ -166,10 +166,10 @@ extension BaseCollectionManager {
                      needRemoveEmptySection: Bool,
                      completion: (() -> Void)? = nil) {
         guard let index = findGenerator(generator) else { return }
-        self.removeGenerator(with: index,
-                             needScrollAt: scrollPosition,
-                             needRemoveEmptySection: needRemoveEmptySection,
-                             completion: completion)
+        removeGenerator(with: index,
+                        needScrollAt: scrollPosition,
+                        needRemoveEmptySection: needRemoveEmptySection,
+                        completion: completion)
     }
 
 }
@@ -180,9 +180,9 @@ private extension BaseCollectionManager {
 
     func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)]) {
 
-        elements.forEach { [weak self] element in
+        elements.forEach { element in
             element.generator.registerCell(in: view)
-            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
 
         let indexPaths = elements.map {
