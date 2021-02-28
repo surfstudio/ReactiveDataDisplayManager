@@ -40,21 +40,20 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        view?.reloadData()
+        view.reloadData()
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
-        guard let table = view else { return }
-        generator.registerCell(in: table)
-        if self.generators.count != self.sections.count || sections.isEmpty {
-            self.generators.append([TableCellGenerator]())
+        generator.registerCell(in: view)
+        if generators.count != sections.count || sections.isEmpty {
+            generators.append([TableCellGenerator]())
         }
         if sections.count <= 0 {
             sections.append(EmptyTableHeaderGenerator())
         }
         // Add to last section
         let index = sections.count - 1
-        self.generators[index < 0 ? 0 : index].append(generator)
+        generators[index < 0 ? 0 : index].append(generator)
     }
 
     open func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
@@ -71,14 +70,14 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     open func addCellGenerators(_ generators: [TableCellGenerator]) {
         for generator in generators {
-            self.addCellGenerator(generator)
+            addCellGenerator(generator)
         }
     }
 
     open func update(generators: [TableCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        view?.reloadRows(at: indexPaths, with: .none)
+        view.reloadRows(at: indexPaths, with: .none)
     }
 
     open func clearCellGenerators() {
@@ -101,11 +100,11 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
                      needRemoveEmptySection: Bool = false,
                      completion: (() -> Void)? = nil) {
         guard let index = findGenerator(generator) else { return }
-        self.removeGenerator(with: index,
-                             with: animation,
-                             needScrollAt: scrollPosition,
-                             needRemoveEmptySection: needRemoveEmptySection,
-                             completion: completion)
+        removeGenerator(with: index,
+                        with: animation,
+                        needScrollAt: scrollPosition,
+                        needRemoveEmptySection: needRemoveEmptySection,
+                        completion: completion)
     }
 
 }
