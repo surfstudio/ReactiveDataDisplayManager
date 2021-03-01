@@ -15,6 +15,8 @@ If you were using basic implemetation, just start from step 3.
 
 **Keep in mind** that support of `SelectableItem` now was moved to `TableSelectablePlugin` and you should add this plugin to builder.
 
+**Maybe useful** `tableView.add(plugin: .)` or `tableView.add(featurePlugin: .)` will produce autocomplete hints which can help you to inspect all bult-in plugins.
+
 More about new entities and plugins system in [documentation](/Entities.md)
 
 ## Updates
