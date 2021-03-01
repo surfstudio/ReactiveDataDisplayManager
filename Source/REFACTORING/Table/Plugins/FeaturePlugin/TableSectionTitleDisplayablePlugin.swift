@@ -8,8 +8,10 @@
 
 import UIKit
 
-/// Use this plugin if you need to configure the display of sectionIndexTitle
-open class TableSectionTitleDisplayablePlugin: TableSectionTitleDisplayable {
+/// Plugin to configure and display sectionIndexTitle
+open class TableSectionTitleDisplayablePlugin: TableFeaturePlugin, TableSectionTitleDisplayable {
+
+    public typealias GeneratorType = IndexTitleDisplayble
 
     // MARK: - Private Properties
 
@@ -19,8 +21,8 @@ open class TableSectionTitleDisplayablePlugin: TableSectionTitleDisplayable {
 
     /// - parameter titleWrapper: wrapper that stores an array of title as displayed in the section index of tableView
     ///
-    /// If you do not want to use a wrapper, use generators conforming to the SectionTitleDisplayble
-    public init(titleWrapper: TableSectionTitleWrapper? = nil) {
+    /// If you do not want to use a wrapper, use generators conforming to the `SectionTitleDisplayble`
+    init(titleWrapper: TableSectionTitleWrapper?) {
         self.titleWrapper = titleWrapper
     }
 
@@ -32,7 +34,7 @@ open class TableSectionTitleDisplayablePlugin: TableSectionTitleDisplayable {
 
     open func sectionIndexTitles(with provider: TableGeneratorsProvider?) -> [String]? {
         let sectionTitles = provider?.sections.compactMap { generator -> String? in
-            guard let generator = generator as? IndexTitleDisplayble else {
+            guard let generator = generator as? GeneratorType else {
                 return nil
             }
             return generator.needIndexTitle ? generator.title : nil
@@ -52,6 +54,21 @@ private extension TableSectionTitleDisplayablePlugin {
 
     func getIndexForTitleFromHeaderGenerators(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int {
         return provider?.sections.firstIndex(where: { ($0 as? IndexTitleDisplayble)?.title == title }) ?? -1
+    }
+
+}
+
+// MARK: - Public init
+
+public extension TableFeaturePlugin {
+
+    /// Plugin to configure and display sectionIndexTitle
+    ///
+    /// - parameter titleWrapper: wrapper that stores an array of title as displayed in the section index of tableView
+    ///
+    /// If you do not want to use a wrapper, use generators conforming to the `SectionTitleDisplayble`
+    static func sectionTitleDisplayable(titleWrapper: TableSectionTitleWrapper? = nil) -> TableSectionTitleDisplayablePlugin {
+        .init(titleWrapper: titleWrapper)
     }
 
 }

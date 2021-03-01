@@ -15,7 +15,7 @@ public protocol TableSwipeActionsProvider {
 }
 
 @available(iOS 11.0, *)
-public protocol TableSwipeActionsConfigurable: FeaturePlugin {
+public protocol TableSwipeActionsConfigurable: TableFeaturePlugin {
     func leadingSwipeActionsConfigurationForRow(at indexPath: IndexPath, with manager: BaseTableManager?) -> UISwipeActionsConfiguration?
     func trailingSwipeActionsConfigurationForRow(at indexPath: IndexPath, with manager: BaseTableManager?) -> UISwipeActionsConfiguration?
 }

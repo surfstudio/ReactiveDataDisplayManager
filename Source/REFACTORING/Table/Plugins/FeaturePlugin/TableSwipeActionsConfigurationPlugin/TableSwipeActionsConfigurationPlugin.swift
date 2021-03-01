@@ -6,9 +6,11 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Use this plugin if you need to configure of UISwipeActionsConfiguration
+/// Plugin to configure `UISwipeActionsConfiguration`
 @available(iOS 11.0, *)
-open class TableSwipeActionsConfigurationPlugin: TableSwipeActionsConfigurable {
+open class TableSwipeActionsConfigurationPlugin: TableFeaturePlugin, TableSwipeActionsConfigurable {
+
+    public typealias GeneratorType = SwipeableItem
 
     // MARK: - Private Properties
 
@@ -16,8 +18,8 @@ open class TableSwipeActionsConfigurationPlugin: TableSwipeActionsConfigurable {
 
     // MARK: - Public Methods
 
-    /// - parameter swipeProvider: provider is responsible for configuring the TableSwipeActionsConfiguration
-    public init(swipeProvider: TableSwipeActionsProvider) {
+    /// - parameter swipeProvider: provider is responsible for configuring the `TableSwipeActionsConfiguration`
+    init(swipeProvider: TableSwipeActionsProvider) {
         self.swipeProvider = swipeProvider
     }
 
@@ -25,7 +27,7 @@ open class TableSwipeActionsConfigurationPlugin: TableSwipeActionsConfigurable {
 
     open func leadingSwipeActionsConfigurationForRow(at indexPath: IndexPath, with manager: BaseTableManager?) -> UISwipeActionsConfiguration? {
         guard
-            let generator = manager?.generators[indexPath.section][indexPath.row] as? SwipeableItem,
+            let generator = manager?.generators[indexPath.section][indexPath.row] as? GeneratorType,
             let actions = swipeProvider.getLeadingSwipeActionsForGenerator(generator)
         else { return nil }
 
@@ -34,7 +36,7 @@ open class TableSwipeActionsConfigurationPlugin: TableSwipeActionsConfigurable {
 
     open func trailingSwipeActionsConfigurationForRow(at indexPath: IndexPath, with manager: BaseTableManager?) -> UISwipeActionsConfiguration? {
         guard
-            let generator = manager?.generators[indexPath.section][indexPath.row] as? SwipeableItem,
+            let generator = manager?.generators[indexPath.section][indexPath.row] as? GeneratorType,
             let actions = swipeProvider.getTrailingSwipeActionsForGenerator(generator)
         else { return nil }
 
@@ -77,6 +79,20 @@ private extension TableSwipeActionsConfigurationPlugin {
         configuration.performsFirstActionWithFullSwipe = swipeConfiguration.performsFirstActionWithFullSwipe
 
         return configuration
+    }
+
+}
+
+// MARK: - Public init
+
+public extension TableFeaturePlugin {
+
+    /// Plugin to configure `UISwipeActionsConfiguration`
+    ///
+    /// - parameter swipeProvider: provider is responsible for configuring the `TableSwipeActionsConfiguration`
+    @available(iOS 11.0, *)
+    static func swipeActions(swipeProvider: TableSwipeActionsProvider) -> TableSwipeActionsConfigurationPlugin {
+        .init(swipeProvider: swipeProvider)
     }
 
 }

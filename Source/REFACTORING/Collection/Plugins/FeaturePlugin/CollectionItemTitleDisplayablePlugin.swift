@@ -8,12 +8,10 @@
 
 import UIKit
 
-/// Use this plugin if you need to configure the display of itemIndexTitle
-open class CollectionItemTitleDisplayablePlugin: CollectionItemTitleDisplayable {
+/// Plugin to configure and display of itemIndexTitle
+open class CollectionItemTitleDisplayablePlugin: CollectionFeaturePlugin, CollectionItemTitleDisplayable {
 
-    // MARK: - Initialization
-
-    public init() {}
+    public typealias GeneratorType = IndexTitleDisplayble
 
     // MARK: - SectionTitleDisplayable
 
@@ -21,7 +19,7 @@ open class CollectionItemTitleDisplayablePlugin: CollectionItemTitleDisplayable 
         let generators = provider?.generators.reduce([], +)
 
         let itemTitles = generators?.compactMap { generator -> String? in
-            guard let generator = generator as? IndexTitleDisplayble else {
+            guard let generator = generator as? GeneratorType else {
                 return nil
             }
             return generator.needIndexTitle ? generator.title : nil
@@ -43,13 +41,24 @@ private extension CollectionItemTitleDisplayablePlugin {
     func getGeneratorIndexPath(with title: String, for provider: CollectionGeneratorsProvider?) -> IndexPath {
         guard let generators = provider?.generators else { return IndexPath() }
         for (sectionIndex, section) in generators.enumerated() {
-            let generatorIndex = section.index(where: { ($0 as? IndexTitleDisplayble)?.title == title })
+            let generatorIndex = section.index(where: { ($0 as? GeneratorType)?.title == title })
 
             if let generatorIndex = generatorIndex {
                 return IndexPath(item: generatorIndex, section: sectionIndex)
             }
         }
         return IndexPath()
+    }
+
+}
+
+// MARK: - Public init
+
+public extension CollectionFeaturePlugin {
+
+    /// Plugin to configure and display sectionIndexTitle
+    static func sectionTitleDisplayable() -> CollectionItemTitleDisplayablePlugin {
+        .init()
     }
 
 }

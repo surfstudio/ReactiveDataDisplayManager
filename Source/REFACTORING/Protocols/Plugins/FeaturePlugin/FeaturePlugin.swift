@@ -8,4 +8,6 @@
 
 import UIKit
 
-public protocol FeaturePlugin { }
+public protocol FeaturePlugin {
+    associatedtype CollectionType
+}

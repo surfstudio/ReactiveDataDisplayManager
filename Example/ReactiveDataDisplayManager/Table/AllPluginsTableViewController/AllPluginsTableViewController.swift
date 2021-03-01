@@ -57,9 +57,9 @@ final class AllPluginsTableViewController: UIViewController {
         .add(plugin: .selectable())
         .add(plugin: prefetcherablePlugin)
         .add(plugin: .foldable())
-        .add(featurePlugin: TableMovablePlugin())
-        .add(featurePlugin: TableSwipeActionsConfigurationPlugin(swipeProvider: swipeActionProvider))
-        .add(featurePlugin: TableSectionTitleDisplayablePlugin())
+        .add(featurePlugin: .movable())
+        .add(featurePlugin: .swipeActions(swipeProvider: swipeActionProvider))
+        .add(featurePlugin: .sectionTitleDisplayable())
         .build()
 
     // MARK: - UIViewController

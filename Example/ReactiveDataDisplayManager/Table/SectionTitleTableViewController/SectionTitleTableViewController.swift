@@ -38,7 +38,7 @@ final class SectionTitleTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(featurePlugin: TableSectionTitleDisplayablePlugin())
+        .add(featurePlugin: .sectionTitleDisplayable())
         .build()
 
     // MARK: - UIViewController

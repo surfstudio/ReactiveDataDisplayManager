@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public typealias TableMovable = FeaturePlugin & TableMovableDataSource & TableMovableDelegate
+public typealias TableMovable = TableFeaturePlugin & TableMovableDataSource & TableMovableDelegate
 
 public protocol TableMovableDataSource {
     func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool

@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public protocol TableSectionTitleDisplayable: FeaturePlugin {
+public protocol TableSectionTitleDisplayable: TableFeaturePlugin {
     func numberOfSections(with provider: TableGeneratorsProvider?) -> Int
     func sectionIndexTitles(with provider: TableGeneratorsProvider?) -> [String]?
     func sectionForSectionIndexTitle(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int

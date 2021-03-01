@@ -77,7 +77,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     }
 
     /// Add feature plugin functionality based on UICollectionViewDelegate/UICollectionViewDataSource events
-    public func add(featurePlugin: FeaturePlugin) -> CollectionBuilder<T> {
+    public func add(featurePlugin: CollectionFeaturePlugin) -> CollectionBuilder<T> {
         guard let plugin = featurePlugin as? CollectionItemTitleDisplayable else { return self }
         itemTitleDisplayablePlugin = plugin
         return self
