@@ -32,10 +32,9 @@ open class BaseStackManager: DataDisplayManager {
     public func forceRefill() {
         view.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        generators.enumerated().forEach { [weak self] offset, generator in
-            guard let stackView = self?.view else { return }
-            let view = generator.generate(stackView: stackView, index: offset)
-            stackView.addArrangedSubview(view)
+        generators.enumerated().forEach { offset, generator in
+            let subView = generator.generate(stackView: view, index: offset)
+            view.addArrangedSubview(subView)
         }
     }
 

@@ -291,7 +291,7 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen2], toHeader: headerGen2)
 
         // Act
-        ddm.removeAllgenerators(from: headerGen2)
+        ddm.removeAllGenerators(from: headerGen2)
 
         // Assert
         XCTAssert(table.numberOfSections == 2)
@@ -308,7 +308,7 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen1], toHeader: headerGen1)
 
         // Act
-        ddm.removeAllgenerators(from: headerGen2)
+        ddm.removeAllGenerators(from: headerGen2)
 
         // Assert
         XCTAssert(table.numberOfSections == 1)
