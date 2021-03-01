@@ -217,7 +217,7 @@ You can look at full list of proxy events in enums: `TableEvent`, `PrefetchEvent
 
 Simply add plugin in stage of building
 
-`tableView.rddm.baseBuilder.add(plugin: TableSelectablePlugin()).build()`
+`tableView.rddm.baseBuilder.add(plugin: YourCustomPlugin()).build()`
 
 And conform generator to concrete `PluginAction.GeneratorType`
 

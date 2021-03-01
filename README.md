@@ -72,7 +72,7 @@ final class ExampleTableController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var ddm = tableView.rddm.baseBuilder
-        .add(plugin: TableSelectablePlugin())
+        .add(plugin: .selectable())
         .build()
 
     // MARK: - UIViewController
