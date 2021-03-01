@@ -267,7 +267,7 @@ Basically this entity is adding fixed part of functionality like moving or dragg
 
 Simply set plugin in stage of building
 
-`tableView.rddm.baseBuilder.set(plugin: TableMovablePlugin()).build()`
+`tableView.rddm.baseBuilder.add(featurePlugin: YourCustomPlugin()).build()`
 
 And conform generator to concrete `FeaturePlugin.GeneratorType`
 
