@@ -364,6 +364,7 @@
                         <segue destination="pGI-i3-EWf" kind="show" identifier="foldableCollection" id="xiU-it-Uz9"/>
                         <segue destination="cOD-zS-jLq" kind="show" identifier="itemTitleCollection" id="Tuv-8l-eFa"/>
                         <segue destination="cRA-Pe-ICk" kind="show" identifier="dragAndDroppableCollection" id="LTU-1x-YPL"/>
+                        <segue destination="ovk-cq-tdJ" kind="show" identifier="swipeableListAppearances" id="d1t-ML-I2x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -638,6 +639,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PkU-fn-UZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="959" y="2937"/>
+        </scene>
+        <!--Swipeable Collection List View Controller-->
+        <scene sceneID="ktS-ob-0tI">
+            <objects>
+                <viewController id="ovk-cq-tdJ" customClass="SwipeableCollectionListViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="46l-Zr-fdo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="46e-CF-2wR">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5FO-0y-7hS">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Lgc-wO-GJq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Lgc-wO-GJq" firstAttribute="bottom" secondItem="46e-CF-2wR" secondAttribute="bottom" id="5gk-Gy-r5A"/>
+                            <constraint firstItem="46e-CF-2wR" firstAttribute="top" secondItem="Lgc-wO-GJq" secondAttribute="top" id="7bI-nX-152"/>
+                            <constraint firstItem="Lgc-wO-GJq" firstAttribute="trailing" secondItem="46e-CF-2wR" secondAttribute="trailing" id="DCq-BV-xBg"/>
+                            <constraint firstItem="46e-CF-2wR" firstAttribute="leading" secondItem="Lgc-wO-GJq" secondAttribute="leading" id="ceQ-TF-aAv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="IWT-Uu-7Pk"/>
+                    <connections>
+                        <outlet property="collectionView" destination="46e-CF-2wR" id="h1k-Jt-7RD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mr7-sa-NqW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1668" y="2937"/>
         </scene>
         <!--Sizable Collection View Controller-->
         <scene sceneID="tFY-fl-bt3">

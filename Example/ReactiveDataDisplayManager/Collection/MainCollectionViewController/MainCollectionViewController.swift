@@ -23,6 +23,7 @@ final class MainCollectionViewController: UIViewController {
         case foldableCollection
         case itemTitleCollection
         case dragAndDroppableCollection
+        case swipeableListAppearances
     }
 
     // MARK: - Constants
@@ -37,7 +38,8 @@ final class MainCollectionViewController: UIViewController {
             ("Sizable collection", .sizableCollection),
             ("Foldable collection", .foldableCollection),
             ("Collection with item index titles", .itemTitleCollection),
-            ("Collection with drag'n'drop items", .dragAndDroppableCollection)
+            ("Collection with drag'n'drop items", .dragAndDroppableCollection),
+            ("List Appearances with swipeable items", .swipeableListAppearances)
         ]
     }
 
@@ -84,7 +86,7 @@ private extension MainCollectionViewController {
 
     func openScreen(by segueId: SegueIdentifier) {
         switch segueId {
-        case .listAppearances:
+        case .listAppearances, .swipeableListAppearances:
             if #available(iOS 14.0, *) {
                 performSegue(withIdentifier: segueId.rawValue, sender: tableView)
             } else {

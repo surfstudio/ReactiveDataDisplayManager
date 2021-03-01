@@ -35,6 +35,8 @@
 		6DB6B0E125CAC91A008951D2 /* GravityCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */; };
 		6DB6B0F925CBB4FE008951D2 /* MovableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0F825CBB4FE008951D2 /* MovableCellGenerator.swift */; };
 		6DB6B0FD25CBB626008951D2 /* MovableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB6B0FC25CBB626008951D2 /* MovableTableViewController.swift */; };
+		6DCA4AF125EC889900829689 /* SwipeableCollectionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA4AF025EC889900829689 /* SwipeableCollectionGenerator.swift */; };
+		6DCA4B1225EC945000829689 /* SwipeableCollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA4B1125EC945000829689 /* SwipeableCollectionListViewController.swift */; };
 		6DDB4E1F25DDB3F800415FE0 /* AllPluginsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDB4E1E25DDB3F800415FE0 /* AllPluginsTableViewController.swift */; };
 		6DF3AF3525E136A900BBC621 /* TitleCollectionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF3AF3425E136A900BBC621 /* TitleCollectionGenerator.swift */; };
 		6DF430B625D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF430B525D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift */; };
@@ -120,6 +122,8 @@
 		6DB6B0E025CAC91A008951D2 /* GravityCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityCellGenerator.swift; sourceTree = "<group>"; };
 		6DB6B0F825CBB4FE008951D2 /* MovableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCellGenerator.swift; sourceTree = "<group>"; };
 		6DB6B0FC25CBB626008951D2 /* MovableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableViewController.swift; sourceTree = "<group>"; };
+		6DCA4AF025EC889900829689 /* SwipeableCollectionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCollectionGenerator.swift; sourceTree = "<group>"; };
+		6DCA4B1125EC945000829689 /* SwipeableCollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCollectionListViewController.swift; sourceTree = "<group>"; };
 		6DDB4E1E25DDB3F800415FE0 /* AllPluginsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPluginsTableViewController.swift; sourceTree = "<group>"; };
 		6DF3AF3425E136A900BBC621 /* TitleCollectionGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleCollectionGenerator.swift; sourceTree = "<group>"; };
 		6DF430B525D983FA0093A1EB /* ImageHorizontalCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHorizontalCollectionViewController.swift; sourceTree = "<group>"; };
@@ -444,6 +448,14 @@
 			path = MovableTableViewController;
 			sourceTree = "<group>";
 		};
+		6DCA4B1525EC946A00829689 /* SwipeableCollectionListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA4B1125EC945000829689 /* SwipeableCollectionListViewController.swift */,
+			);
+			path = SwipeableCollectionListViewController;
+			sourceTree = "<group>";
+		};
 		6DF430B925D984070093A1EB /* ImageHorizontalCollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,6 +541,7 @@
 				DD31B11E25DCEA1C00A266A7 /* FoldableCollectionViewController */,
 				6DFDD50025DFF77A00E2A4AC /* ItemTitleCollectionViewController */,
 				6D3A580D25EBEE6900E0AFD9 /* DragAndDroppableCollectionViewController */,
+				6DCA4B1525EC946A00829689 /* SwipeableCollectionListViewController */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -634,6 +647,7 @@
 				6DF3AF3425E136A900BBC621 /* TitleCollectionGenerator.swift */,
 				6DF4322725D9DAD10093A1EB /* ImageCollectionCellGenerator.swift */,
 				6D3A581725EBEF4800E0AFD9 /* DragAndDroppableCollectionGenerator.swift */,
+				6DCA4AF025EC889900829689 /* SwipeableCollectionGenerator.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -880,9 +894,11 @@
 				6DDB4E1F25DDB3F800415FE0 /* AllPluginsTableViewController.swift in Sources */,
 				6D27965425C90FA60085B845 /* NukeImagePrefetcher.swift in Sources */,
 				6D3A580625EBEDC600E0AFD9 /* DragAndDroppableCollectionViewController.swift in Sources */,
+				6DCA4B1225EC945000829689 /* SwipeableCollectionListViewController.swift in Sources */,
 				6D568AAD25CBDD8300D38685 /* TitleHeaderGenerator.swift in Sources */,
 				6D2AD35925D398F40077900F /* AlphabeticalTableViewController.swift in Sources */,
 				896B59712354962A00E8E2AB /* StackViewController.swift in Sources */,
+				6DCA4AF125EC889900829689 /* SwipeableCollectionGenerator.swift in Sources */,
 				6DF4322825D9DAD10093A1EB /* ImageCollectionCellGenerator.swift in Sources */,
 				6D4B327B25CAA79000FC7979 /* GravityTableViewController.swift in Sources */,
 				6D2AD36625D3A6080077900F /* SectionTitleHeaderGenerator.swift in Sources */,
