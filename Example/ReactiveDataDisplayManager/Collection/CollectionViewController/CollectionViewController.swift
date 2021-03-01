@@ -18,7 +18,9 @@ class CollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = BaseCollectionDataDisplayManager(collection: collectionView)
+    private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: .selectable())
+        .build()
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController

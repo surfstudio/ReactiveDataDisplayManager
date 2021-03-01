@@ -53,8 +53,8 @@ public extension BaseTablePlugin {
     /// Plugin to determine current `ScrollDirection`
     ///
     /// - parameter action: closure returns the scrolling direction
-    static func direction(action: @escaping TableDirectionScrollablePlugin.Action) -> BaseTablePlugin<ScrollEvent> {
-        TableDirectionScrollablePlugin(action: action)
+    static func direction(action: @escaping TableDirectionScrollablePlugin.Action) -> TableDirectionScrollablePlugin {
+        .init(action: action)
     }
 
 }

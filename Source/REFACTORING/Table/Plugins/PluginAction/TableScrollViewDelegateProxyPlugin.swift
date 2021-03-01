@@ -66,8 +66,8 @@ public class TableScrollViewDelegateProxyPlugin: BaseTablePlugin<ScrollEvent> {
 public extension BaseTablePlugin {
 
     /// Plugin to proxy of all `UIScrollViewDelegate` events
-    static func proxyScroll() -> BaseTablePlugin<ScrollEvent> {
-        TableScrollViewDelegateProxyPlugin()
+    static func proxyScroll() -> TableScrollViewDelegateProxyPlugin {
+        .init()
     }
 
 }

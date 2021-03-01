@@ -18,7 +18,9 @@ class CollectionListViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = BaseCollectionDataDisplayManager(collection: collectionView)
+    private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: .selectable())
+        .build()
     private var titles = ["Item 1", "Item 2", "Item 3", "Item 4"]
 
     private var appearance = UICollectionLayoutListConfiguration.Appearance.plain

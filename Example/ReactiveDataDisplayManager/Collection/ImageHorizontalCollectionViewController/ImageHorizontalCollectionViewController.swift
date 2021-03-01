@@ -34,8 +34,8 @@ final class ImageHorizontalCollectionViewController: UIViewController {
                                                    insets: Constants.sectionInset)
 
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(plugin: CollectionScrollablePlugin(scrollProvider: scrollManager))
-        .add(plugin: CollectionSelectedItemScrollablePlugin(scrollPosition: .centeredHorizontally))
+        .add(plugin: .scrollableBehaviour(scrollProvider: scrollManager))
+        .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
         .build()
 
     // MARK: - UIViewController

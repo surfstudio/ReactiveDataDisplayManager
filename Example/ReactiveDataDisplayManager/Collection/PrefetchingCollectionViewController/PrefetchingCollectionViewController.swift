@@ -28,7 +28,7 @@ final class PrefetchingCollectionViewController: UIViewController {
     // MARK: - Private Properties
 
     private let prefetcher = NukeImagePrefetcher()
-    private lazy var prefetcherablePlugin = CollectionPrefetcherablePlugin<NukeImagePrefetcher, ImageCollectionCellGenerator>(prefetcher: prefetcher)
+    private lazy var prefetcherablePlugin: CollectionPrefetcherablePlugin<NukeImagePrefetcher, ImageCollectionCellGenerator> = .prefetch(prefetcher: prefetcher)
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)

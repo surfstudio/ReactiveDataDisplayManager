@@ -38,8 +38,8 @@ public extension BaseTablePlugin {
     /// Plugin to support `SelectableItem`
     ///
     /// Handle `didSelect` event inside generator and `deselectRow`
-    static func selectable() -> BaseTablePlugin<TableEvent> {
-        TableSelectablePlugin()
+    static func selectable() -> TableSelectablePlugin {
+        .init()
     }
 
 }

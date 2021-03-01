@@ -52,8 +52,8 @@ public extension BaseTablePlugin {
     /// Plugin to add reaction on `willDisplayCell` of last cell
     ///
     /// - parameter action: closure with reaction to visibility of last cell
-    static func lastCellIsVisible(action: @escaping () -> Void) -> BaseTablePlugin<TableEvent> {
-        TableLastCellIsVisiblePlugin(action: action)
+    static func lastCellIsVisible(action: @escaping () -> Void) -> TableLastCellIsVisiblePlugin {
+        .init(action: action)
     }
 
 }

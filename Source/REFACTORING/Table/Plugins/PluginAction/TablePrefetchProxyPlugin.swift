@@ -34,8 +34,8 @@ public class TablePrefetchProxyPlugin: BaseTablePlugin<PrefetchEvent> {
 public extension BaseTablePlugin {
 
     /// Plugin to proxy  events of `UITableViewDataSourcePrefetching`
-    static func proxyPrefetch() -> BaseTablePlugin<PrefetchEvent> {
-        TablePrefetchProxyPlugin()
+    static func proxyPrefetch() -> TablePrefetchProxyPlugin {
+        .init()
     }
 
 }

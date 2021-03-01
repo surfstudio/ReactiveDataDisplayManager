@@ -72,8 +72,8 @@ public extension BaseTablePlugin {
     /// Plugin to define section that started to be displayed
     ///
     /// - parameter action: closure returns the index of the section that started showing
-    static func headerIsVisible(action: @escaping TableHeaderVisiblePlugin.Action) -> BaseTablePlugin<TableEvent> {
-        TableHeaderVisiblePlugin(action: action)
+    static func headerIsVisible(action: @escaping TableHeaderVisiblePlugin.Action) -> TableHeaderVisiblePlugin {
+        .init(action: action)
     }
 
 }

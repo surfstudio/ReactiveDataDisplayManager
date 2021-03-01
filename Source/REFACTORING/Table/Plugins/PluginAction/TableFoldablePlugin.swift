@@ -72,8 +72,8 @@ public extension BaseTablePlugin {
     /// Plugin to support `FoldableItem`
     ///
     /// Allow  expand or collapse child cells
-    static func foldable() -> BaseTablePlugin<TableEvent> {
-        TableFoldablePlugin()
+    static func foldable() -> TableFoldablePlugin {
+        .init()
     }
 
 }

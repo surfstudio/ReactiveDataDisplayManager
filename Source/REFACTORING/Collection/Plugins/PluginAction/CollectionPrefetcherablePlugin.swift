@@ -6,9 +6,9 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Adds support for PrefetcherableFlow with prefetcher
+/// Plugin to support `PrefetcherableFlow` with prefetcher
 ///
-/// ContentPrefetcher prefetches and caches data to eliminate delays when requesting the same data later.
+/// `ContentPrefetcher` prefetches and caches data to eliminate delays when requesting the same data later.
 public class CollectionPrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseCollectionPlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
@@ -18,7 +18,7 @@ public class CollectionPrefetcherablePlugin<Prefetcher: ContentPrefetcher, Gener
     // MARK: - Initialization
 
     /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
-    public init(prefetcher: Prefetcher) {
+    init(prefetcher: Prefetcher) {
         self.prefetcher = prefetcher
     }
 
@@ -51,6 +51,20 @@ private extension CollectionPrefetcherablePlugin {
 
     func getPrefetcherableFlowCell(from manager: BaseCollectionManager?, at indexPath: IndexPath) -> Generator? {
         return manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? Generator
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseCollectionPlugin {
+
+    /// Plugin to support `PrefetcherableFlow` with prefetcher
+    ///
+    /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
+    static func prefetch<Prefetcher: ContentPrefetcher,
+                         Generator: PrefetcherableFlow>(prefetcher: Prefetcher) -> CollectionPrefetcherablePlugin<Prefetcher, Generator> {
+        .init(prefetcher: prefetcher)
     }
 
 }

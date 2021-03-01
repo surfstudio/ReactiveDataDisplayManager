@@ -6,12 +6,10 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-// Adds support for Selectable item triggering
+/// Plugin to support `SelectableItem`
+///
+/// Handle `didSelect` event inside generator and `deselectItem`
 public class CollectionSelectablePlugin: BaseCollectionPlugin<CollectionEvent> {
-
-    // MARK: - Initialization
-
-    public override init() { }
 
     // MARK: - BaseCollectionPlugin
 
@@ -29,6 +27,19 @@ public class CollectionSelectablePlugin: BaseCollectionPlugin<CollectionEvent> {
         default:
             break
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseCollectionPlugin {
+
+    /// Plugin to support `SelectableItem`
+    ///
+    /// Handle `didSelect` event inside generator and `deselectItem`
+    static func selectable() -> CollectionSelectablePlugin {
+        .init()
     }
 
 }
