@@ -21,7 +21,7 @@ public protocol ContentPrefetcher {
 /// Adds support for PrefetcherableFlow with prefetcher
 ///
 /// ContentPrefetcher prefetches and caches data to eliminate delays when requesting the same data later.
-public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseTablePlugin<PrefetchEvent> {
+public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: RDDMPrefetcherableItem>: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
 

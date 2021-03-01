@@ -25,7 +25,7 @@ open class TableSwipeActionsConfigurationPlugin: TableSwipeActionsConfigurable {
 
     open func leadingSwipeActionsConfigurationForRow(at indexPath: IndexPath, with manager: BaseTableManager?) -> UISwipeActionsConfiguration? {
         guard
-            let generator = manager?.generators[indexPath.section][indexPath.row] as? SwipeableItem,
+            let generator = manager?.generators[indexPath.section][indexPath.row] as? RDDMSwipeableItem,
             let actions = swipeProvider.getLeadingSwipeActionsForGenerator(generator)
         else { return nil }
 
@@ -34,7 +34,7 @@ open class TableSwipeActionsConfigurationPlugin: TableSwipeActionsConfigurable {
 
     open func trailingSwipeActionsConfigurationForRow(at indexPath: IndexPath, with manager: BaseTableManager?) -> UISwipeActionsConfiguration? {
         guard
-            let generator = manager?.generators[indexPath.section][indexPath.row] as? SwipeableItem,
+            let generator = manager?.generators[indexPath.section][indexPath.row] as? RDDMSwipeableItem,
             let actions = swipeProvider.getTrailingSwipeActionsForGenerator(generator)
         else { return nil }
 
@@ -46,7 +46,7 @@ open class TableSwipeActionsConfigurationPlugin: TableSwipeActionsConfigurable {
 @available(iOS 11.0, *)
 private extension TableSwipeActionsConfigurationPlugin {
 
-    func makeSwipeActionsConfiguration(for generator: SwipeableItem,
+    func makeSwipeActionsConfiguration(for generator: RDDMSwipeableItem,
                                        with swipeConfiguration: TableSwipeActionsConfiguration) -> UISwipeActionsConfiguration? {
         var generator = generator
         var actionTypes = [String]()

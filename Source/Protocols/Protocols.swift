@@ -99,6 +99,7 @@ public protocol ViewBuilder {
 }
 
 /// Protocol for selectable item.
+@available(*, deprecated, renamed: "RDDMSelectableItem")
 public protocol SelectableItem: class {
 
     /// Invokes when user taps on the item.
@@ -111,24 +112,30 @@ public protocol SelectableItem: class {
     var isNeedDeselect: Bool { get }
 }
 
+@available(*, deprecated, renamed: "RDDMSelectableItem")
+public extension SelectableItem {
+
+    var isNeedDeselect: Bool {
+        return true
+    }
+
+}
+
+@available(*, deprecated, message: "Use RDDMFoldableItem")
 public protocol FoldableItem: class {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
     var childGenerators: [TableCellGenerator] { get set }
 }
 
+@available(*, deprecated, message: "Use RDDMFoldableItem")
 public protocol GravityFoldableItem: class {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
     var childGenerators: [GravityTableCellGenerator] { get set }
 }
 
-public protocol PrefetcherableFlow: class {
-    associatedtype IdType: Hashable
-
-    var requestId: IdType? { get }
-}
-
+@available(*, deprecated, message: "Use RDDMDisplayableItem")
 public protocol DisplayableFlow: class {
 
     /// Invokes when cell will displaying.
@@ -144,15 +151,18 @@ public protocol DisplayableFlow: class {
 
 }
 
+@available(*, deprecated, message: "Use RDDMDeletableItem")
 public protocol DeletableGenerator {
     var eventDelete: BaseEmptyEvent { get }
 }
 
+@available(*, deprecated, message: "Use RDDMMovableItem")
 public protocol MovableGenerator {
     func canMove() -> Bool
     func canMoveInOtherSection() -> Bool
 }
 
+@available(*, deprecated, message: "Use RDDMMovableItem")
 public extension MovableGenerator {
 
     func canMove() -> Bool {
@@ -160,14 +170,6 @@ public extension MovableGenerator {
     }
 
     func canMoveInOtherSection() -> Bool {
-        return true
-    }
-
-}
-
-public extension SelectableItem {
-
-    var isNeedDeselect: Bool {
         return true
     }
 
@@ -250,9 +252,15 @@ public extension StackCellGenerator where Self: ViewBuilder {
     }
 }
 
-public typealias GravityTableCellGenerator = TableCellGenerator & Gravity
+@available(*, deprecated, message: "Use RDDMGravityItem")
+public protocol Gravity: AnyObject {
+    var heaviness: Int { get set }
+    func getHeaviness() -> Int
+}
 
-open class GravityTableHeaderGenerator: TableHeaderGenerator, Gravity {
+public typealias GravityTableCellGenerator = TableCellGenerator & RDDMGravityItem
+
+open class GravityTableHeaderGenerator: TableHeaderGenerator, RDDMGravityItem {
     open var heaviness: Int = .zero
 
     open func getHeaviness() -> Int {

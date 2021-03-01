@@ -15,7 +15,7 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
         case .didSelect(let indexPath):
             guard
                 let generator = manager?.generators[indexPath.section][indexPath.row],
-                let foldable = generator as? FoldableItem
+                let foldable = generator as? RDDMFoldableItem
             else {
                 return
             }

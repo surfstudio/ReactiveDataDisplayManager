@@ -21,7 +21,7 @@ open class CollectionItemTitleDisplayablePlugin: CollectionItemTitleDisplayable 
         let generators = provider?.generators.reduce([], +)
 
         let itemTitles = generators?.compactMap { generator -> String? in
-            guard let generator = generator as? IndexTitleDisplayble else {
+            guard let generator = generator as? RDDMIndexTitleDisplaybleItem else {
                 return nil
             }
             return generator.needIndexTitle ? generator.title : nil
@@ -43,7 +43,7 @@ private extension CollectionItemTitleDisplayablePlugin {
     func getGeneratorIndexPath(with title: String, for provider: CollectionGeneratorsProvider?) -> IndexPath {
         guard let generators = provider?.generators else { return IndexPath() }
         for (sectionIndex, section) in generators.enumerated() {
-            let generatorIndex = section.index(where: { ($0 as? IndexTitleDisplayble)?.title == title })
+            let generatorIndex = section.index(where: { ($0 as? RDDMIndexTitleDisplaybleItem)?.title == title })
 
             if let generatorIndex = generatorIndex {
                 return IndexPath(item: generatorIndex, section: sectionIndex)

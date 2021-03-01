@@ -19,7 +19,7 @@ open class TableMovablePlugin: FeaturePlugin {
 extension TableMovablePlugin: TableMovableDelegate {
     
     open func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
-        if let generator = provider?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
+        if let generator = provider?.generators[indexPath.section][indexPath.row] as? RDDMMovableItem {
             return generator.canMove()
         }
         return false
@@ -36,7 +36,7 @@ extension TableMovablePlugin: TableMovableDataSource {
         guard
             let manager = provider as? BaseTableManager,
             let view = manager.view,
-            let generator = manager.generators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
+            let generator = manager.generators[sourceIndexPath.section][sourceIndexPath.row] as? RDDMMovableItem,
             moveToTheSameSection || generator.canMoveInOtherSection()
         else {
             return
@@ -58,7 +58,7 @@ extension TableMovablePlugin: TableMovableDataSource {
     }
 
     open func canFocusRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
-        if let generator = provider?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
+        if let generator = provider?.generators[indexPath.section][indexPath.row] as? RDDMMovableItem {
             return generator.canMove()
         }
         return false
