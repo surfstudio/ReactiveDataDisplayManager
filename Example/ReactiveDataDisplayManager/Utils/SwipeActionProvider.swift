@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class SwipeActionProvider: TableSwipeActionsProvider {
+final class SwipeActionProvider: SwipeActionsProvider {
 
     // MARK: - Enum
 
@@ -21,7 +21,7 @@ final class SwipeActionProvider: TableSwipeActionsProvider {
     // MARK: - Constants
 
     private enum Constants {
-        static let models: [TableSwipeAction] = [
+        static let models: [SwipeAction] = [
             .init(backgroundColor: .gray, image: #imageLiteral(resourceName: "edit"), type: SwipeActionType.edit.rawValue, style: .normal),
             .init(title: "More", backgroundColor: .blue, type: SwipeActionType.more.rawValue, style: .normal),
             .init(title: "Flag", backgroundColor: .systemRed, type: SwipeActionType.flag.rawValue, style: .normal)
@@ -34,13 +34,14 @@ final class SwipeActionProvider: TableSwipeActionsProvider {
 
     // MARK: - TableSwipeActionsProvider
 
-    func getLeadingSwipeActionsForGenerator(_ generator: SwipeableItem) -> TableSwipeActionsConfiguration? {
-        return nil
+    func getLeadingSwipeActionsForGenerator(_ generator: SwipeableItem) -> SwipeActionsConfiguration? {
+        guard isEnableSwipeActions else { return nil }
+        return SwipeActionsConfiguration(actions: Constants.models, performsFirstActionWithFullSwipe: false)
     }
 
-    func getTrailingSwipeActionsForGenerator(_ generator: SwipeableItem) -> TableSwipeActionsConfiguration? {
+    func getTrailingSwipeActionsForGenerator(_ generator: SwipeableItem) -> SwipeActionsConfiguration? {
         guard isEnableSwipeActions else { return nil }
-        return TableSwipeActionsConfiguration(actions: Constants.models, performsFirstActionWithFullSwipe: false)
+        return SwipeActionsConfiguration(actions: Constants.models, performsFirstActionWithFullSwipe: false)
     }
 
 }

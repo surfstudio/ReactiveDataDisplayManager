@@ -1,8 +1,8 @@
 //
-//  CollectionListViewController.swift
+//  SwipeableCollectionListViewController.swift
 //  ReactiveDataDisplayManagerExample
 //
-//  Created by Vadim Tikhonov on 09.02.2021.
+//  Created by Anton Eysner on 19.02.2021.
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
@@ -10,7 +10,13 @@ import UIKit
 import ReactiveDataDisplayManager
 
 @available(iOS 14.0, *)
-class CollectionListViewController: UIViewController {
+class SwipeableCollectionListViewController: UIViewController {
+    
+    // MARK: - Constants
+    
+    private enum Constants {
+        static let titles = ["Item 1", "Item 2", "Item 3", "Item 4"]
+    }
 
     // MARK: - IBOutlets
 
@@ -18,8 +24,11 @@ class CollectionListViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = BaseCollectionDataDisplayManager(collection: collectionView)
-    private var titles = ["Item 1", "Item 2", "Item 3", "Item 4"]
+    private let swipeProvider = SwipeActionProvider()
+    private lazy var plugin = CollectionSwipeActionsConfigurationPlugin(swipeProvider: swipeProvider)
+    private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(featurePlugin: plugin)
+        .build()
 
     private var appearance = UICollectionLayoutListConfiguration.Appearance.plain
 
@@ -27,6 +36,7 @@ class CollectionListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "List Appearances with swipeable items"
         fillAdapter()
 
         configureLayoutFlow(with: appearance)
@@ -38,15 +48,19 @@ class CollectionListViewController: UIViewController {
 // MARK: - Private Methods
 
 @available(iOS 14.0, *)
-private extension CollectionListViewController {
+private extension SwipeableCollectionListViewController {
 
     func fillAdapter() {
         let header = HeaderCollectionListGenerator(title: "Section header")
         adapter.addSectionHeaderGenerator(header)
 
-        for title in titles {
-            let generator = TitleCollectionListCell.rddm.baseGenerator(with: title)
-            generator.didSelectEvent += { debugPrint("\(title) selected") }
+        for title in Constants.titles {
+            let generator = SwipeableCollectionGenerator(with: title)
+
+            generator.didSwipeEvent += { [weak generator] actionType in
+                debugPrint("The action with type \(actionType) was selected from all available generator events \(generator?.actionTypes ?? [])")
+            }
+
             adapter.addCellGenerator(generator)
         }
 
@@ -56,6 +70,8 @@ private extension CollectionListViewController {
     func configureLayoutFlow(with appearance: UICollectionLayoutListConfiguration.Appearance) {
         var configuration = UICollectionLayoutListConfiguration(appearance: appearance)
         configuration.headerMode = .supplementary
+        plugin.configureSwipeActions(for: &configuration)
+
         let layout = UICollectionViewCompositionalLayout.list(using: configuration)
         collectionView.setCollectionViewLayout(layout, animated: false)
     }

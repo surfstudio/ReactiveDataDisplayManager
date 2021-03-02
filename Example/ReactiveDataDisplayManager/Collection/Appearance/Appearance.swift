@@ -30,3 +30,38 @@ enum Appearance {
         }
     }
 }
+
+@available(iOS 14.0, *)
+extension UICollectionLayoutListConfiguration.Appearance {
+
+    var title: String {
+        switch self {
+        case .plain:
+            return "Plain"
+        case .sidebarPlain:
+            return "Sidebar Plain"
+        case .sidebar:
+            return "Sidebar"
+        case .grouped:
+            return "Grouped"
+        case .insetGrouped:
+            return "Inset Grouped"
+        }
+    }
+
+    var next: UICollectionLayoutListConfiguration.Appearance {
+        switch self {
+        case .plain:
+            return .sidebarPlain
+        case .sidebarPlain:
+            return .sidebar
+        case .sidebar:
+            return .grouped
+        case .grouped:
+            return .insetGrouped
+        case .insetGrouped:
+            return .plain
+        }
+    }
+
+}

@@ -46,6 +46,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     var prefetchPlugins = PrefetchPluginsCollection()
     var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
     var dragAndDroppablePlugin: FeaturePlugin?
+    var swipeablePlugin: CollectionSwipeActionsConfigurable?
 
     // MARK: - Initialization
 
@@ -80,6 +81,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     /// Add feature plugin functionality based on UICollectionViewDelegate/UICollectionViewDataSource events
     public func add(featurePlugin: FeaturePlugin) -> CollectionBuilder<T> {
         checkDragAndDroppablePlugin(with: featurePlugin)
+        checkSwipeablePlugin(with: featurePlugin)
 
         guard let plugin = featurePlugin as? CollectionItemTitleDisplayable else { return self }
         itemTitleDisplayablePlugin = plugin
@@ -107,6 +109,8 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
+        swipeablePlugin?.manager = manager
+
         delegate.manager = manager
         delegate.collectionPlugins = collectionPlugins
         delegate.scrollPlugins = scrollPlugins
@@ -153,6 +157,14 @@ private extension CollectionBuilder {
         delegate.dragAndDroppablePlugin = plugin
         view.dragDelegate = delegate
         view.dropDelegate = delegate
+    }
+
+    func checkSwipeablePlugin(with plugin: FeaturePlugin) {
+        guard #available(iOS 14.0, *),
+              let plugin = plugin as? CollectionSwipeActionsConfigurable
+        else { return }
+
+        swipeablePlugin = plugin
     }
 
     func setPrefetchDataSourceIfNeeded() {
