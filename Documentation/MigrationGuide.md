@@ -2,6 +2,23 @@
 
 ## Deprecations
 
+### Item protocols
+
+`SelectableItem`, `DisplayableFlow`, `MovableGenerator` had a similar idea but not unified format. Thats why we introduced pattern `RDDM{ability}ableItem` and renamed all old protocols. We will remove old protocols in version *7.1.0*.
+
+| Old                 | New                 |
+| ------------------- | ------------------- |
+| SelectableItem      | RDDMSelectableItem  |
+| FoldableItem        | RDDMFoldableItem    |
+| GravityFoldableItem | RDDMFoldableItem    |
+| DisplayableFlow     | RDDMDisplayableItem |
+| Gravity             | RDDMGravityItem     |
+| MovableGenerator    | RDDMMovableItem     |
+
+**Maybe useful** Just type `RDDM` and you will see all possible protocols bult-in framework.
+
+### Managers
+
 Long-named managers like `BaseTableDataDisplayManager` or `PaginableBaseTableDataDisplayManager` marked as deprecated.
 Make attention to this deprecation warnings, because we will remove this managers in version *7.1.0*.
 
