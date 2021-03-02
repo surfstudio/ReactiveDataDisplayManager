@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem where Cell: UICollectionViewCell {
+open class BaseCollectionCellGenerator<Cell: RDDMConfigurableItem>: RDDMSelectableItem where Cell: UICollectionViewCell {
 
     // MARK: - Public Properties
 

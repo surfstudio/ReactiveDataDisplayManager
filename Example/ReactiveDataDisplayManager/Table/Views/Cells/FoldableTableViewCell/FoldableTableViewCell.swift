@@ -47,7 +47,7 @@ final class FoldableTableViewCell: UITableViewCell {
 
 // MARK: - Configurable
 
-extension FoldableTableViewCell: Configurable {
+extension FoldableTableViewCell: RDDMConfigurableItem {
 
     func configure(with model: Model) {
         titleLabel.text = String(format: "Foldable cell %@", model.title)

@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-class SwipeableTableGenerator: BaseCellGenerator<TitleTableViewCell>, SwipeableItem {
+class SwipeableTableGenerator: BaseCellGenerator<TitleTableViewCell>, RDDMSwipeableItem {
 
     // MARK: - SwipeableItem
 

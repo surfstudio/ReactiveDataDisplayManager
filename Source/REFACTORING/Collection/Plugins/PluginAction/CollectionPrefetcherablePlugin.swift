@@ -9,7 +9,7 @@
 /// Adds support for PrefetcherableFlow with prefetcher
 ///
 /// ContentPrefetcher prefetches and caches data to eliminate delays when requesting the same data later.
-public class CollectionPrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseCollectionPlugin<PrefetchEvent> {
+public class CollectionPrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: RDDMPrefetcherableItem>: BaseCollectionPlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
 

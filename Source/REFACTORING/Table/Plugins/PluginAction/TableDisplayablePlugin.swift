@@ -37,12 +37,12 @@ public class TableDisplayablePlugin: BaseTablePlugin<TableEvent> {
 
 private extension TableDisplayablePlugin {
 
-    func getDisplayableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> DisplayableFlow? {
-        manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? DisplayableFlow
+    func getDisplayableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> RDDMDisplayableItem? {
+        manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? RDDMDisplayableItem
     }
 
-    func getDisplayableFlowHeader(from manager: BaseTableManager?, at section: Int) -> DisplayableFlow? {
-        manager?.sections[safe: section] as? DisplayableFlow
+    func getDisplayableFlowHeader(from manager: BaseTableManager?, at section: Int) -> RDDMDisplayableItem? {
+        manager?.sections[safe: section] as? RDDMDisplayableItem
     }
 
 }

@@ -9,4 +9,4 @@
 import Foundation
 import ReactiveDataDisplayManager
 
-class MovableCellGenerator: BaseCellGenerator<TitleTableViewCell>, MovableGenerator {}
+class MovableCellGenerator: BaseCellGenerator<TitleTableViewCell>, RDDMMovableItem {}

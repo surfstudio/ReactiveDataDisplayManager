@@ -46,7 +46,7 @@ final class ImageTableViewCell: UITableViewCell {
 
 }
 
-extension ImageTableViewCell: Configurable {
+extension ImageTableViewCell: RDDMConfigurableItem {
 
     func configure(with viewModel: ViewModel) {
         titleLabel.text = String(format: "URL: %@", viewModel.title)

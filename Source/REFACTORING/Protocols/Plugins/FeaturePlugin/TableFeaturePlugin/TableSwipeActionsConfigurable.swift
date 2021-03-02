@@ -10,8 +10,8 @@
 public protocol TableSwipeActionsProvider {
     var isEnableSwipeActions: Bool { get set }
 
-    func getLeadingSwipeActionsForGenerator(_ generator: SwipeableItem) -> TableSwipeActionsConfiguration?
-    func getTrailingSwipeActionsForGenerator(_ generator: SwipeableItem) -> TableSwipeActionsConfiguration?
+    func getLeadingSwipeActionsForGenerator(_ generator: RDDMSwipeableItem) -> TableSwipeActionsConfiguration?
+    func getTrailingSwipeActionsForGenerator(_ generator: RDDMSwipeableItem) -> TableSwipeActionsConfiguration?
 }
 
 @available(iOS 11.0, *)

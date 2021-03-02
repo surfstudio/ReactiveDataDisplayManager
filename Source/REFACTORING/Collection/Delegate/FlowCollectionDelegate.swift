@@ -16,7 +16,7 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
 
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        if let sizableCell = manager?.generators[indexPath.section][indexPath.row] as? SizableCollectionCellGenerator {
+        if let sizableCell = manager?.generators[indexPath.section][indexPath.row] as? RDDMSizableItem {
             return sizableCell.getSize()
         }
 
