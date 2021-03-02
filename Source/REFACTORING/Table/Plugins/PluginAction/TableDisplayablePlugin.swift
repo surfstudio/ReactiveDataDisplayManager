@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Plugin to support `DisplayableFlow` generators
+/// Plugin to support `RDDMDisplayableItem` generators
 ///
 /// Allow track`willDisplay` or `didEndDisplay` events inside generator
 public class TableDisplayablePlugin: BaseTablePlugin<TableEvent> {
@@ -54,7 +54,7 @@ private extension TableDisplayablePlugin {
 
 public extension BaseTablePlugin {
 
-    /// Plugin to support `DisplayableFlow` generators
+    /// Plugin to support `RDDMDisplayableItem` generators
     ///
     /// Alllow track`willDisplay` or `didEndDisplay` events inside generator
     static func displayable() -> TableDisplayablePlugin {

@@ -5,7 +5,7 @@
 //  Created by Vadim Tikhonov on 11.02.2021.
 //
 
-/// Plugin to support `CollectionFoldableItem`
+/// Plugin to support `RDDMCollectionFoldableItem`
 ///
 /// Allow  expand or collapse child cells
 public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
@@ -16,7 +16,7 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
         case .didSelect(let indexPath):
             guard
                 let generator = manager?.generators[indexPath.section][indexPath.row],
-                let foldable = generator as? CollectionFoldableItem
+                let foldable = generator as? RDDMCollectionFoldableItem
             else {
                 return
             }
@@ -49,7 +49,7 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
 private extension CollectionFoldablePlugin {
 
     func getVisibleGenerators(for generator: CollectionCellGenerator) -> [CollectionCellGenerator] {
-        if let foldableItem = generator as? CollectionFoldableItem, foldableItem.isExpanded {
+        if let foldableItem = generator as? RDDMCollectionFoldableItem, foldableItem.isExpanded {
             return foldableItem.childGenerators
                 .map { getVisibleGenerators(for: $0) }
                 .reduce([generator], +)
@@ -64,7 +64,7 @@ private extension CollectionFoldablePlugin {
 
 public extension BaseCollectionPlugin {
 
-    /// Plugin to support `CollectionFoldableItem`
+    /// Plugin to support `RDDMCollectionFoldableItem`
     ///
     /// Allow  expand or collapse child cells
     static func foldable() -> BaseCollectionPlugin<CollectionEvent> {

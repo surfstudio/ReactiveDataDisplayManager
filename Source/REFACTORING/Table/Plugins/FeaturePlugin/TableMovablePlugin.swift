@@ -8,7 +8,7 @@
 
 /// Plugin to move cells
 ///
-/// Allow moving cells builded with `MovableGenerator` generators
+/// Allow moving cells builded with `RDDMMovableItem` generators
 open class TableMovablePlugin: TableFeaturePlugin {
 
     public typealias GeneratorType = RDDMMovableItem
@@ -73,7 +73,7 @@ public extension TableFeaturePlugin {
 
     /// Plugin to move cells
     ///
-    /// Allow moving cells builded with `MovableGenerator` generators
+    /// Allow moving cells builded with `RDDMMovableItem` generators
     static func movable() -> TableMovablePlugin {
         .init()
     }

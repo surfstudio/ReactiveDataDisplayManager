@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Plugin to support `FoldableItem`
+/// Plugin to support `RDDMFoldableItem`
 ///
 /// Allow  expand or collapse child cells
 public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
@@ -69,7 +69,7 @@ private extension TableFoldablePlugin {
 
 public extension BaseTablePlugin {
 
-    /// Plugin to support `FoldableItem`
+    /// Plugin to support `RDDMFoldableItem`
     ///
     /// Allow  expand or collapse child cells
     static func foldable() -> TableFoldablePlugin {

@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class FoldableCollectionCellGenerator: BaseCollectionCellGenerator<FoldableCollectionViewCell>, CollectionFoldableItem {
+final class FoldableCollectionCellGenerator: BaseCollectionCellGenerator<FoldableCollectionViewCell>, RDDMCollectionFoldableItem {
 
     // MARK: - FoldableItem
 

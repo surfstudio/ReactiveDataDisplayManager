@@ -118,20 +118,20 @@ In this example you can see differences between managing approaches and choose o
 
 `BaseCellGenerator` is your choice if you need display cell and process selection event.
 
-This is generic generator with only one requirement to cell - conforming to `Configurable` protocol.
+This is generic generator with only one requirement to cell - conforming to `RDDMConfigurableItem` protocol.
 
-Recommended way to create generator `YourCellType.rddm.baseGenerator(with: model)` where model is `Configurable.Model` instance.
+Recommended way to create generator `YourCellType.rddm.baseGenerator(with: model)` where model is `RDDMConfigurableItem.Model` instance.
 
 **NOTE** If you want store closures, current cell state or extend generator with some protocol, preferable extending `BaseCellGenerator` and not create your own.
 
 ### Example
 
-Extending `BaseCellGenerator` to `FoldableItem`
+Extending `BaseCellGenerator` to `RDDMFoldableItem`
 
 ```swift
-final class FoldableCellGenerator: BaseCellGenerator<FoldableTableViewCell>, FoldableItem {
+final class FoldableCellGenerator: BaseCellGenerator<FoldableTableViewCell>, RDDMFoldableItem {
 
-    // MARK: - FoldableItem
+    // MARK: - RDDMFoldableItem
 
     var didFoldEvent = BaseEvent<Bool>()
     var isExpanded = false
@@ -228,7 +228,7 @@ Handling rows selection.
 ```swift
 public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
-    typealias GeneratorType = SelectableItem
+    typealias GeneratorType = RDDMSelectableItem
 
     public override init() {}
 

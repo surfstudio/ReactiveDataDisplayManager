@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Plugin to support `SelectableItem`
+/// Plugin to support `RDDMSelectableItem`
 ///
 /// Handle `didSelect` event inside generator and `deselectRow`
 public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
@@ -35,7 +35,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
 public extension BaseTablePlugin {
 
-    /// Plugin to support `SelectableItem`
+    /// Plugin to support `RDDMSelectableItem`
     ///
     /// Handle `didSelect` event inside generator and `deselectRow`
     static func selectable() -> TableSelectablePlugin {

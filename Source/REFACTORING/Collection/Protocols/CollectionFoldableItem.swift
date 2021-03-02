@@ -1,12 +1,12 @@
 //
-//  CollectionFoldableItem.swift
+//  RDDMCollectionFoldableItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Vadim Tikhonov on 11.02.2021.
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public protocol CollectionFoldableItem: class {
+public protocol RDDMCollectionFoldableItem: class {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
     var childGenerators: [CollectionCellGenerator] { get set }

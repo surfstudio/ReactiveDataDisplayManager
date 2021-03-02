@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Plugin to support `PrefetcherableFlow` with prefetcher
+/// Plugin to support `RDDMPrefetcherableItem` with prefetcher
 ///
 /// `ContentPrefetcher` prefetches and caches data to eliminate delays when requesting the same data later.
 public class CollectionPrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: RDDMPrefetcherableItem>: BaseCollectionPlugin<PrefetchEvent> {
@@ -59,7 +59,7 @@ private extension CollectionPrefetcherablePlugin {
 
 public extension BaseCollectionPlugin {
 
-    /// Plugin to support `PrefetcherableFlow` with prefetcher
+    /// Plugin to support `RDDMPrefetcherableItem` with prefetcher
     ///
     /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
     static func prefetch<Prefetcher: ContentPrefetcher,

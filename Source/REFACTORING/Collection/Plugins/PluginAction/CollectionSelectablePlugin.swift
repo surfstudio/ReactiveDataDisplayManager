@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Plugin to support `SelectableItem`
+/// Plugin to support `RDDMSelectableItem`
 ///
 /// Handle `didSelect` event inside generator and `deselectItem`
 public class CollectionSelectablePlugin: BaseCollectionPlugin<CollectionEvent> {
@@ -35,7 +35,7 @@ public class CollectionSelectablePlugin: BaseCollectionPlugin<CollectionEvent> {
 
 public extension BaseCollectionPlugin {
 
-    /// Plugin to support `SelectableItem`
+    /// Plugin to support `RDDMSelectableItem`
     ///
     /// Handle `didSelect` event inside generator and `deselectItem`
     static func selectable() -> CollectionSelectablePlugin {

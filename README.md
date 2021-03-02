@@ -31,7 +31,7 @@ Step by step example of configuring simple list of labels.
 ### Prepare cell
 
 You can layout your cell from xib or from code. It doesn't matter.
-Just extend your cell to `Configurable` to fill subviews with model, when cell will be created.
+Just extend your cell to `RDDMConfigurableItem` to fill subviews with model, when cell will be created.
 
 ```swift
 import ReactiveDataDisplayManager
@@ -44,9 +44,9 @@ final class LabelCell: UITableViewCell {
 
 }
 
-// MARK: - Configurable
+// MARK: - RDDMConfigurableItem
 
-extension LabelCell: Configurable {
+extension LabelCell: RDDMConfigurableItem {
 
     typealias Model = String
 
