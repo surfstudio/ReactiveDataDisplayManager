@@ -27,7 +27,7 @@ final class VerticalSizableTextGenerator: BaseCollectionCellGenerator<SizableCol
 
 // MARK: - SizableCollectionCellGenerator
 
-extension VerticalSizableTextGenerator: SizableCollectionCellGenerator {
+extension VerticalSizableTextGenerator: RDDMSizableItem {
 
     func getSize() -> CGSize {
         return SizableCollectionViewCell.getCellSize(for: text, withWight: maxWight)

@@ -11,7 +11,7 @@
 /// Allow moving cells builded with `MovableGenerator` generators
 open class TableMovablePlugin: TableFeaturePlugin {
 
-    public typealias GeneratorType = MovableGenerator
+    public typealias GeneratorType = RDDMMovableItem
 
 }
 

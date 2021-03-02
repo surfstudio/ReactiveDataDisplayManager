@@ -9,7 +9,7 @@
 import Foundation
 import ReactiveDataDisplayManager
 
-final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplayble {
+final class SectionTitleHeaderGenerator: TableHeaderGenerator, RDDMIndexTitleDisplaybleItem {
 
     // MARK: - Constants
 

@@ -9,6 +9,7 @@
 import UIKit
 
 /// Generator that describes collection cell generator that can returns size
+@available(*, deprecated, renamed: "RDDMSizableItem")
 public protocol SizableCollectionCellGenerator: class {
     func getSize() -> CGSize
 }

@@ -16,7 +16,7 @@ public class CollectionSelectablePlugin: BaseCollectionPlugin<CollectionEvent> {
     public override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
         switch event {
         case .didSelect(let indexPath):
-            guard let selectable = manager?.generators[indexPath.section][indexPath.row] as? SelectableItem else {
+            guard let selectable = manager?.generators[indexPath.section][indexPath.row] as? RDDMSelectableItem else {
                 return
             }
             selectable.didSelectEvent.invoke(with: ())

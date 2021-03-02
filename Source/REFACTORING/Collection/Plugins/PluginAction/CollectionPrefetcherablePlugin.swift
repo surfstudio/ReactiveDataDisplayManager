@@ -9,7 +9,7 @@
 /// Plugin to support `PrefetcherableFlow` with prefetcher
 ///
 /// `ContentPrefetcher` prefetches and caches data to eliminate delays when requesting the same data later.
-public class CollectionPrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseCollectionPlugin<PrefetchEvent> {
+public class CollectionPrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: RDDMPrefetcherableItem>: BaseCollectionPlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
 
@@ -63,7 +63,7 @@ public extension BaseCollectionPlugin {
     ///
     /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
     static func prefetch<Prefetcher: ContentPrefetcher,
-                         Generator: PrefetcherableFlow>(prefetcher: Prefetcher) -> CollectionPrefetcherablePlugin<Prefetcher, Generator> {
+                         Generator: RDDMPrefetcherableItem>(prefetcher: Prefetcher) -> CollectionPrefetcherablePlugin<Prefetcher, Generator> {
         .init(prefetcher: prefetcher)
     }
 

@@ -21,7 +21,7 @@ public protocol ContentPrefetcher {
 /// Plugin to support `PrefetcherableFlow` with prefetcher
 ///
 /// `ContentPrefetcher` prefetches and caches data to eliminate delays when requesting the same data later.
-public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseTablePlugin<PrefetchEvent> {
+public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: RDDMPrefetcherableItem>: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
 
@@ -75,7 +75,7 @@ public extension BaseTablePlugin {
     ///
     /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
     static func prefetch<Prefetcher: ContentPrefetcher,
-                         Generator: PrefetcherableFlow>(prefetcher: Prefetcher) -> TablePrefetcherablePlugin<Prefetcher, Generator>{
+                         Generator: RDDMPrefetcherableItem>(prefetcher: Prefetcher) -> TablePrefetcherablePlugin<Prefetcher, Generator>{
         .init(prefetcher: prefetcher)
     }
 

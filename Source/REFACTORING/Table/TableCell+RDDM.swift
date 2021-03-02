@@ -8,7 +8,7 @@
 
 extension UITableViewCell: DataDisplayConstructable {}
 
-public extension StaticDataDisplayWrapper where Base: UITableViewCell & Configurable {
+public extension StaticDataDisplayWrapper where Base: UITableViewCell & RDDMConfigurableItem {
 
     func baseGenerator(with model: Base.Model, and registerType: CellRegisterType = .nib) -> BaseCellGenerator<Base> {
         .init(with: model, registerType: registerType)

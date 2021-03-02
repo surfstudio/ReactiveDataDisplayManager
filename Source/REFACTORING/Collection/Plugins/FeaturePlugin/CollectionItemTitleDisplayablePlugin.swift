@@ -11,7 +11,7 @@ import UIKit
 /// Plugin to configure and display of itemIndexTitle
 open class CollectionItemTitleDisplayablePlugin: CollectionFeaturePlugin, CollectionItemTitleDisplayable {
 
-    public typealias GeneratorType = IndexTitleDisplayble
+    public typealias GeneratorType = RDDMIndexTitleDisplaybleItem
 
     // MARK: - SectionTitleDisplayable
 

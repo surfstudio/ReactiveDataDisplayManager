@@ -10,7 +10,7 @@
 @available(iOS 11.0, *)
 open class TableSwipeActionsConfigurationPlugin: TableFeaturePlugin, TableSwipeActionsConfigurable {
 
-    public typealias GeneratorType = SwipeableItem
+    public typealias GeneratorType = RDDMSwipeableItem
 
     // MARK: - Private Properties
 
@@ -48,7 +48,7 @@ open class TableSwipeActionsConfigurationPlugin: TableFeaturePlugin, TableSwipeA
 @available(iOS 11.0, *)
 private extension TableSwipeActionsConfigurationPlugin {
 
-    func makeSwipeActionsConfiguration(for generator: SwipeableItem,
+    func makeSwipeActionsConfiguration(for generator: RDDMSwipeableItem,
                                        with swipeConfiguration: TableSwipeActionsConfiguration) -> UISwipeActionsConfiguration? {
         var generator = generator
         var actionTypes = [String]()

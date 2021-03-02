@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectionViewCell>, IndexTitleDisplayble {
+final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectionViewCell>, RDDMIndexTitleDisplaybleItem {
 
     // MARK: - IndexTitleDisplayble
 
