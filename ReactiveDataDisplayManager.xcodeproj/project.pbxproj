@@ -25,6 +25,7 @@
 		018630E125EF67E4005E9F0E /* MovableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018630D525EF67E4005E9F0E /* MovableItem.swift */; };
 		018630F025EF70E9005E9F0E /* TablePaginatablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018630EF25EF70E9005E9F0E /* TablePaginatablePlugin.swift */; };
 		018630F425EF71E9005E9F0E /* TableRefreshablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018630F325EF71E9005E9F0E /* TableRefreshablePlugin.swift */; };
+		018630F825EF95FA005E9F0E /* CollectionRefreshablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018630F725EF95FA005E9F0E /* CollectionRefreshablePlugin.swift */; };
 		019A067F25E6C303009CA8AE /* CollectionBatchUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A067E25E6C303009CA8AE /* CollectionBatchUpdatesAnimator.swift */; };
 		01A7585225E10BE800925C3F /* TableCell+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7585125E10BE800925C3F /* TableCell+RDDM.swift */; };
 		01A7585D25E10DBC00925C3F /* DataDisplayConstructable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7585C25E10DBC00925C3F /* DataDisplayConstructable.swift */; };
@@ -157,6 +158,7 @@
 		018630D525EF67E4005E9F0E /* MovableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovableItem.swift; sourceTree = "<group>"; };
 		018630EF25EF70E9005E9F0E /* TablePaginatablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePaginatablePlugin.swift; sourceTree = "<group>"; };
 		018630F325EF71E9005E9F0E /* TableRefreshablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRefreshablePlugin.swift; sourceTree = "<group>"; };
+		018630F725EF95FA005E9F0E /* CollectionRefreshablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRefreshablePlugin.swift; sourceTree = "<group>"; };
 		019A067E25E6C303009CA8AE /* CollectionBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		01A7585125E10BE800925C3F /* TableCell+RDDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableCell+RDDM.swift"; sourceTree = "<group>"; };
 		01A7585C25E10DBC00925C3F /* DataDisplayConstructable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayConstructable.swift; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 				6DF431FB25D9BE2A0093A1EB /* CollectionSelectedItemScrollablePlugin.swift */,
 				6DF4321025D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift */,
 				6DF4321425D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift */,
+				018630F725EF95FA005E9F0E /* CollectionRefreshablePlugin.swift */,
 			);
 			path = PluginAction;
 			sourceTree = "<group>";
@@ -1010,6 +1013,7 @@
 				C1AB77D6240D581D000044F1 /* BaseCellGenerator.swift in Sources */,
 				018630DD25EF67E4005E9F0E /* CalculatableSizeItem.swift in Sources */,
 				01BB764025D66F7200829C2D /* TableGeneratorsProvider.swift in Sources */,
+				018630F825EF95FA005E9F0E /* CollectionRefreshablePlugin.swift in Sources */,
 				899A3AEB2354882000E8615C /* BaseStackDataDisplayManager.swift in Sources */,
 				018630DA25EF67E4005E9F0E /* PrefetcherableItem.swift in Sources */,
 				018630DC25EF67E4005E9F0E /* IndexTitleDisplaybleItem.swift in Sources */,
