@@ -1,5 +1,5 @@
 //
-//  RDDMGravityItem.swift
+//  PrefetcherableItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 20.02.2021.
@@ -8,7 +8,8 @@
 
 import UIKit
 
-public protocol RDDMGravityItem: AnyObject {
-    var heaviness: Int { get set }
-    func getHeaviness() -> Int
+public protocol PrefetcherableItem: class {
+    associatedtype IdType: Hashable
+
+    var requestId: IdType? { get }
 }

@@ -34,11 +34,11 @@ final class SwipeActionProvider: TableSwipeActionsProvider {
 
     // MARK: - TableSwipeActionsProvider
 
-    func getLeadingSwipeActionsForGenerator(_ generator: RDDMSwipeableItem) -> TableSwipeActionsConfiguration? {
+    func getLeadingSwipeActionsForGenerator(_ generator: SwipeableItem) -> TableSwipeActionsConfiguration? {
         return nil
     }
 
-    func getTrailingSwipeActionsForGenerator(_ generator: RDDMSwipeableItem) -> TableSwipeActionsConfiguration? {
+    func getTrailingSwipeActionsForGenerator(_ generator: SwipeableItem) -> TableSwipeActionsConfiguration? {
         guard isEnableSwipeActions else { return nil }
         return TableSwipeActionsConfiguration(actions: Constants.models, performsFirstActionWithFullSwipe: false)
     }

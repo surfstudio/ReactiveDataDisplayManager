@@ -5,9 +5,10 @@
 //  Created by Vadim Tikhonov on 11.02.2021.
 //
 
+/// Plugin to support `CollectionFoldableItem`
+///
+/// Allow  expand or collapse child cells
 public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
-
-    public override init() {}
 
     public override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
 
@@ -55,6 +56,19 @@ private extension CollectionFoldablePlugin {
         } else {
             return [generator]
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseCollectionPlugin {
+
+    /// Plugin to support `CollectionFoldableItem`
+    ///
+    /// Allow  expand or collapse child cells
+    static func foldable() -> BaseCollectionPlugin<CollectionEvent> {
+        CollectionFoldablePlugin()
     }
 
 }

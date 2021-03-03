@@ -22,3 +22,4 @@
 - `GravityFoldingTableDataDisplayManager` class will be removed at **7.1.**. Use composition of `GravityTableManager` and `TableFoldablePlugin`
 - `SizableCollectionDataDisplayManager` class will be removed at **7.1.**. Part of `BaseCollectionManager`
 - `BaseCollectionDataDisplayManager` replaced with `BaseCollectionManager`
+- `SelectableItem`, `DisplayableFlow`, `MovableGenerator` and other item protocols will be removed at **7.1.**. Replaced with `{ability}ableItem` for example `SelectableItem`

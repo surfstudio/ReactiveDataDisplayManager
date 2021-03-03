@@ -45,7 +45,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Configurable
 
-extension ImageCollectionViewCell: RDDMConfigurableItem {
+extension ImageCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: ViewModel) {
         Nuke.loadImage(with: viewModel.imageUrl, into: iconView)

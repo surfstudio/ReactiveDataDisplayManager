@@ -1,5 +1,5 @@
 //
-//  RDDMIndexTitleDisplaybleItem.swift
+//  IndexTitleDisplaybleItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 10.02.2021.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol RDDMIndexTitleDisplaybleItem {
+public protocol IndexTitleDisplaybleItem {
     /// The title as displayed in the index of tableView/collectionView
     var title: String { get }
     /// When this property is set to true, then the title will be displayed in the index of tableView/collectionView

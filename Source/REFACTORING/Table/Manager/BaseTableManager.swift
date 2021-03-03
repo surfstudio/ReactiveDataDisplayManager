@@ -23,19 +23,12 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     public weak var view: UITableView!
 
-    public var generators: [[TableCellGenerator]]
-    public var sections: [TableHeaderGenerator]
+    public var generators: [[TableCellGenerator]] = []
+    public var sections: [TableHeaderGenerator] = []
 
     var delegate: TableDelegate?
     var dataSource: TableDataSource?
     var animator: TableAnimator?
-
-    // MARK: - Initialization
-
-    public init() {
-        generators = [[TableCellGenerator]]()
-        sections = [TableHeaderGenerator]()
-    }
 
     // MARK: - DataDisplayManager
 

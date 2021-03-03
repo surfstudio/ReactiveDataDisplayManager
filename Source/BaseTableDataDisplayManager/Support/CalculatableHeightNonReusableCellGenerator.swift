@@ -9,7 +9,7 @@
 import UIKit
 
 /// Class for generating non-reusable Configurable UITableViewCell with calculated height
-public class CalculatableHeightNonReusableCellGenerator<Cell: RDDMCalculatableHeightItem>: TableCellGenerator, RDDMSelectableItem where Cell: UITableViewCell {
+public class CalculatableHeightNonReusableCellGenerator<Cell: CalculatableHeightItem>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 

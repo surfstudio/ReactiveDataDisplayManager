@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-class TitleTableViewCell: UITableViewCell, RDDMCalculatableHeightItem {
+class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
 
     // MARK: - IBOutlets
 
@@ -26,7 +26,7 @@ class TitleTableViewCell: UITableViewCell, RDDMCalculatableHeightItem {
     
 }
 
-extension TitleTableViewCell: RDDMConfigurableItem {
+extension TitleTableViewCell: ConfigurableItem {
 
     func configure(with model: String) {
         titleLabel.text = model

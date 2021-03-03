@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Proxy of all UICollectionViewDataSourcePrefetching events
+/// Proxy of all `UICollectionViewDataSourcePrefetching` events
 public class CollectionPrefetchProxyPlugin: BaseCollectionPlugin<PrefetchEvent> {
 
     // MARK: - Properties
@@ -23,6 +23,17 @@ public class CollectionPrefetchProxyPlugin: BaseCollectionPlugin<PrefetchEvent> 
         case .cancelPrefetching(let indexPaths):
             cancelPrefetchingEvent.invoke(with: indexPaths)
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseCollectionPlugin {
+
+    /// Plugin to proxy events of `UICollectionViewDataSourcePrefetching`
+    static func proxyPrefetch(to scrollPosition: UICollectionView.ScrollPosition) -> CollectionPrefetchProxyPlugin {
+        .init()
     }
 
 }

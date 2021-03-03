@@ -118,9 +118,9 @@ In this example you can see differences between managing approaches and choose o
 
 `BaseCellGenerator` is your choice if you need display cell and process selection event.
 
-This is generic generator with only one requirement to cell - conforming to `Configurable` protocol.
+This is generic generator with only one requirement to cell - conforming to `ConfigurableItem` protocol.
 
-Recommended way to create generator `YourCellType.rddm.baseGenerator(with: model)` where model is `Configurable.Model` instance.
+Recommended way to create generator `YourCellType.rddm.baseGenerator(with: model)` where model is `ConfigurableItem.Model` instance.
 
 **NOTE** If you want store closures, current cell state or extend generator with some protocol, preferable extending `BaseCellGenerator` and not create your own.
 
@@ -217,7 +217,7 @@ You can look at full list of proxy events in enums: `TableEvent`, `PrefetchEvent
 
 Simply add plugin in stage of building
 
-`tableView.rddm.baseBuilder.add(plugin: TableSelectablePlugin()).build()`
+`tableView.rddm.baseBuilder.add(plugin: YourCustomPlugin()).build()`
 
 And conform generator to concrete `PluginAction.GeneratorType`
 
@@ -267,7 +267,7 @@ Basically this entity is adding fixed part of functionality like moving or dragg
 
 Simply set plugin in stage of building
 
-`tableView.rddm.baseBuilder.set(plugin: TableMovablePlugin()).build()`
+`tableView.rddm.baseBuilder.add(featurePlugin: YourCustomPlugin()).build()`
 
 And conform generator to concrete `FeaturePlugin.GeneratorType`
 

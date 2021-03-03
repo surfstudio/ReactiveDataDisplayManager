@@ -39,7 +39,7 @@ final class SizableCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Configurable
 
-extension SizableCollectionViewCell: RDDMConfigurableItem {
+extension SizableCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: String) {
         titleLabel.text = viewModel

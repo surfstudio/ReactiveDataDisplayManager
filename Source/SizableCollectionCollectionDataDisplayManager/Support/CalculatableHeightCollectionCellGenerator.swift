@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class CalculatableHeightCollectionCellGenerator<Cell: RDDMConfigurableItem & RDDMCalculatableHeightItem>: BaseCollectionCellGenerator<Cell> & RDDMSizableItem where Cell: UICollectionViewCell {
+public class CalculatableHeightCollectionCellGenerator<Cell: ConfigurableItem & CalculatableHeightItem>: BaseCollectionCellGenerator<Cell> & SizableItem where Cell: UICollectionViewCell {
 
     // MARK: - Private Properties
 

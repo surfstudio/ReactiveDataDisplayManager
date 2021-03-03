@@ -28,7 +28,7 @@ final class AllPluginsTableViewController: UIViewController {
 
     private let prefetcher = NukeImagePrefetcher()
     private let swipeActionProvider = SwipeActionProvider()
-    private lazy var prefetcherablePlugin = TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator>(prefetcher: prefetcher)
+    private lazy var prefetcherablePlugin: TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator> = .prefetch(prefetcher: prefetcher)
 
     private lazy var scrollDirectionEvent: (ScrollDirection) -> Void = { [weak self] direction in
         switch direction {
@@ -50,16 +50,17 @@ final class AllPluginsTableViewController: UIViewController {
     }
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(plugin: TableDisplayablePlugin())
-        .add(plugin: TableDirectionScrollablePlugin(action: scrollDirectionEvent))
-        .add(plugin: TableHeaderVisiblePlugin(action: headerVisibleEvent))
-        .add(plugin: TableLastCellIsVisiblePlugin(action: lastCellIsVisibleEvent))
-        .add(plugin: TableSelectablePlugin())
+        .add(plugin: .displayable())
+        .add(plugin: .direction(action: scrollDirectionEvent))
+        .add(plugin: .headerIsVisible(action: headerVisibleEvent))
+        .add(plugin: .lastCellIsVisible(action: lastCellIsVisibleEvent))
+        .add(plugin: .selectable())
         .add(plugin: prefetcherablePlugin)
-        .add(plugin: TableFoldablePlugin())
-        .add(featurePlugin: TableMovablePlugin())
-        .add(featurePlugin: TableSwipeActionsConfigurationPlugin(swipeProvider: swipeActionProvider))
-        .add(featurePlugin: TableSectionTitleDisplayablePlugin())
+        .add(plugin: .foldable())
+        .add(featurePlugin: .movable())
+        .add(plugin: .refreshable(refreshControl: UIRefreshControl(), output: self))
+        .add(featurePlugin: .swipeActions(swipeProvider: swipeActionProvider))
+        .add(featurePlugin: .sectionTitleDisplayable())
         .build()
 
     // MARK: - UIViewController
@@ -186,6 +187,22 @@ private extension AllPluginsTableViewController {
 
         // Add header generator into adapter
         adapter.addSectionHeaderGenerator(headerGenerator)
+    }
+
+}
+
+
+extension AllPluginsTableViewController: RefreshableOutput {
+
+    func refreshContent(with input: RefreshableInput) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(3)) { [weak self, weak input] in
+            DispatchQueue.main.async { [weak self, weak input] in
+                self?.adapter.clearCellGenerators()
+                self?.adapter.clearHeaderGenerators()
+                self?.fillAdapter()
+                input?.endRefreshing()
+            }
+        }
     }
 
 }

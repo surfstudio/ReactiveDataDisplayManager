@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Proxy of all UITableViewDataSourcePrefetching events
+/// Proxy of all `UITableViewDataSourcePrefetching` events
 public class TablePrefetchProxyPlugin: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Properties
@@ -25,6 +25,17 @@ public class TablePrefetchProxyPlugin: BaseTablePlugin<PrefetchEvent> {
         case .cancelPrefetching(let indexPaths):
             cancelPrefetchingEvent.invoke(with: indexPaths)
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseTablePlugin {
+
+    /// Plugin to proxy  events of `UITableViewDataSourcePrefetching`
+    static func proxyPrefetch() -> TablePrefetchProxyPlugin {
+        .init()
     }
 
 }

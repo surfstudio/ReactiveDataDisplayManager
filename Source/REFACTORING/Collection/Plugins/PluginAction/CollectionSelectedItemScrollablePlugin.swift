@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Adds support scrolling to selected item
+/// Plugin to scroll to selected item on `didSelect`
 public class CollectionSelectedItemScrollablePlugin: BaseCollectionPlugin<CollectionEvent> {
 
     // MARK: - Private Properties
@@ -16,7 +16,7 @@ public class CollectionSelectedItemScrollablePlugin: BaseCollectionPlugin<Collec
     // MARK: - Initialization
 
     /// - parameter scrollPosition: an option that specifies where the item should be positioned when scrolling finishes.
-    public init(scrollPosition: UICollectionView.ScrollPosition) {
+    init(scrollPosition: UICollectionView.ScrollPosition) {
         self.scrollPosition = scrollPosition
     }
 
@@ -29,6 +29,19 @@ public class CollectionSelectedItemScrollablePlugin: BaseCollectionPlugin<Collec
         default:
             break
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseCollectionPlugin {
+
+    /// Plugin to scroll to selected item on `didSelect`
+    ///
+    /// - parameter scrollPosition: an option that specifies where the item should be positioned when scrolling finishes.
+    static func scrollOnSelect(to scrollPosition: UICollectionView.ScrollPosition) -> CollectionSelectedItemScrollablePlugin {
+        .init(scrollPosition: scrollPosition)
     }
 
 }

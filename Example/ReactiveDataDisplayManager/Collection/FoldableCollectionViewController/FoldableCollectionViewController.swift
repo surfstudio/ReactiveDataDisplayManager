@@ -25,7 +25,7 @@ final class FoldableCollectionViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = collectionView.rddm.flowBuilder
-        .add(plugin: CollectionFoldablePlugin())
+        .add(plugin: .foldable())
         .build()
 
     private var appearance: Appearance = .grid

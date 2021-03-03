@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-class TitleCollectionListCell: UICollectionViewCell, RDDMConfigurableItem {
+class TitleCollectionListCell: UICollectionViewCell, ConfigurableItem {
 
     // MARK: - IBOutlets
 

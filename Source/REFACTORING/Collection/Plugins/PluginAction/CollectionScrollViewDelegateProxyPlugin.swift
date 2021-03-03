@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Proxy of all UIScrollViewDelegate events
+/// Proxy of all `UIScrollViewDelegate` events
 public class CollectionScrollViewDelegateProxyPlugin: BaseCollectionPlugin<ScrollEvent> {
 
     // MARK: - Properties
@@ -55,6 +55,17 @@ public class CollectionScrollViewDelegateProxyPlugin: BaseCollectionPlugin<Scrol
         case .didChangeAdjustedContentInset:
             didChangeAdjustedContentInset.invoke(with: view)
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseCollectionPlugin {
+
+    /// Plugin to proxy of all `UIScrollViewDelegate` events
+    static func proxyScroll() -> BaseCollectionPlugin<ScrollEvent> {
+        CollectionScrollViewDelegateProxyPlugin()
     }
 
 }

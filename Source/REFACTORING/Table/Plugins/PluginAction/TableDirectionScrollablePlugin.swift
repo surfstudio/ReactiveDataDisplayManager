@@ -8,18 +8,20 @@
 
 import UIKit
 
-/// Added support for determining the direction of the scroll
+/// Plugin to determine current `ScrollDirection`
 public class TableDirectionScrollablePlugin: BaseTablePlugin<ScrollEvent> {
+
+    public typealias Action = (ScrollDirection) -> Void
 
     // MARK: - Private Properties
 
     private var lastContentOffset: CGFloat = .zero
-    private let action: (ScrollDirection) -> Void
+    private let action: Action
 
     // MARK: - Initialization
 
     /// - parameter action: closure returns the scrolling direction
-    public init(action: @escaping (ScrollDirection) -> Void) {
+    init(action: @escaping Action) {
         self.action = action
     }
 
@@ -40,6 +42,19 @@ public class TableDirectionScrollablePlugin: BaseTablePlugin<ScrollEvent> {
         default:
             break
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseTablePlugin {
+
+    /// Plugin to determine current `ScrollDirection`
+    ///
+    /// - parameter action: closure returns the scrolling direction
+    static func direction(action: @escaping TableDirectionScrollablePlugin.Action) -> TableDirectionScrollablePlugin {
+        .init(action: action)
     }
 
 }

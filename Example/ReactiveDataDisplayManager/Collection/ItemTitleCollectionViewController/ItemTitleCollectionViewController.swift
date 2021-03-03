@@ -26,7 +26,7 @@ class ItemTitleCollectionViewController: UIViewController {
     private var appearance: Appearance = .grid
 
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(featurePlugin: CollectionItemTitleDisplayablePlugin())
+        .add(featurePlugin: .sectionTitleDisplayable())
         .build()
 
     // MARK: - UIViewController

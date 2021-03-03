@@ -26,7 +26,7 @@ final class GravityFoldableCellGenerator: FoldableCellGenerator {
 
 // MARK: - Gravity
 
-extension GravityFoldableCellGenerator: RDDMGravityItem {
+extension GravityFoldableCellGenerator: GravityItem {
 
     func getHeaviness() -> Int {
         return heaviness
