@@ -16,13 +16,3 @@ public protocol PluginAction {
     func setup(with manager: Manager?)
     func process(event: Event, with manager: Manager?)
 }
-
-// MARK: - Defaults
-
-public extension PluginAction {
-
-    func setup(with manager: Manager?) {
-        /// Most of plugins do not need any setup
-    }
-
-}

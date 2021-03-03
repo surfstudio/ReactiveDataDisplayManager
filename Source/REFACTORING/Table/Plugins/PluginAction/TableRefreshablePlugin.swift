@@ -9,7 +9,7 @@
 import UIKit
 
 /// Input signals to hide `UIRefreshControl`
-public protocol RefreshableInput {
+public protocol RefreshableInput: class {
 
     /// Call it to hide `UIRefreshControl`
     func endRefreshing()
@@ -25,12 +25,15 @@ public protocol RefreshableOutput: class {
 }
 
 /// Plugin to show and hide `refreshControl`
+@available(iOS 10, *)
 public class TableRefreshablePlugin: BaseTablePlugin<ScrollEvent> {
 
     // MARK: - Private Properties
 
     private let refreshControl: UIRefreshControl
     private weak var output: RefreshableOutput?
+
+    private var isRefreshingStarted = false
 
     // MARK: - Initialization
 
@@ -43,7 +46,7 @@ public class TableRefreshablePlugin: BaseTablePlugin<ScrollEvent> {
 
     // MARK: - BaseTablePlugin
 
-    public func setup(with manager: BaseTableManager?) {
+    public override func setup(with manager: BaseTableManager?) {
         manager?.view.refreshControl = refreshControl
     }
 
@@ -51,8 +54,9 @@ public class TableRefreshablePlugin: BaseTablePlugin<ScrollEvent> {
 
         switch event {
         case .willEndDragging:
-            if refreshControl.isRefreshing {
+            if refreshControl.isRefreshing && !isRefreshingStarted {
                 output?.refreshContent(with: self)
+                isRefreshingStarted = true
             }
         default:
             break
@@ -63,10 +67,12 @@ public class TableRefreshablePlugin: BaseTablePlugin<ScrollEvent> {
 
 // MARK: - RefreshableInput
 
+@available(iOS 10, *)
 extension TableRefreshablePlugin: RefreshableInput {
 
     public func endRefreshing() {
         refreshControl.endRefreshing()
+        isRefreshingStarted = false
     }
 
 }
@@ -82,6 +88,7 @@ public extension BaseTablePlugin {
     ///
     /// - parameter refreshControl: closure with reaction to visibility of last cell
     /// - parameter output: output signals to notify about refreshing
+    @available(iOS 10, *)
     static func refreshable(refreshControl: UIRefreshControl,
                             output: RefreshableOutput) -> TableRefreshablePlugin {
         .init(refreshControl: refreshControl, with: output)

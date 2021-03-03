@@ -9,12 +9,15 @@
 import UIKit
 
 /// Plugin to show and hide `refreshControl`
+@available(iOS 10, *)
 public class CollectionRefreshablePlugin: BaseCollectionPlugin<ScrollEvent> {
 
     // MARK: - Private Properties
 
     private let refreshControl: UIRefreshControl
     private weak var output: RefreshableOutput?
+
+    private var isRefreshingStarted = false
 
     // MARK: - Initialization
 
@@ -35,8 +38,9 @@ public class CollectionRefreshablePlugin: BaseCollectionPlugin<ScrollEvent> {
 
         switch event {
         case .willEndDragging:
-            if refreshControl.isRefreshing {
+            if refreshControl.isRefreshing && !isRefreshingStarted {
                 output?.refreshContent(with: self)
+                isRefreshingStarted = true
             }
         default:
             break
@@ -47,10 +51,12 @@ public class CollectionRefreshablePlugin: BaseCollectionPlugin<ScrollEvent> {
 
 // MARK: - RefreshableInput
 
+@available(iOS 10, *)
 extension CollectionRefreshablePlugin: RefreshableInput {
 
     public func endRefreshing() {
         refreshControl.endRefreshing()
+        isRefreshingStarted = false
     }
 
 }
@@ -66,6 +72,7 @@ public extension BaseCollectionPlugin {
     ///
     /// - parameter refreshControl: closure with reaction to visibility of last cell
     /// - parameter output: output signals to notify about refreshing
+    @available(iOS 10, *)
     static func refreshable(refreshControl: UIRefreshControl,
                             output: RefreshableOutput) -> CollectionRefreshablePlugin {
         .init(refreshControl: refreshControl, with: output)

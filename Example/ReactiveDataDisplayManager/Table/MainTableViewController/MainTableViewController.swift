@@ -22,6 +22,7 @@ final class MainTableViewController: UIViewController {
         case alphabetizeSectionsTable
         case sectionTitlesTable
         case swipeableTable
+        case refreshableTable
         case allPluginsTable
     }
 
@@ -37,6 +38,7 @@ final class MainTableViewController: UIViewController {
             ("table with alphabetize sections", .alphabetizeSectionsTable),
             ("table with sections titles", .sectionTitlesTable),
             ("table with swipeable cells", .swipeableTable),
+            ("table with refresh control", .refreshableTable),
             ("table with all plugins", .allPluginsTable)
         ]
     }

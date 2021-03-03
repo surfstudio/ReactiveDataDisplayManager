@@ -9,7 +9,7 @@
 import UIKit
 
 /// Input signals to control visibility of progressView in footer
-public protocol PaginatableInput {
+public protocol PaginatableInput: class {
 
     /// Call it to control visibility of progressView in footer
     ///
