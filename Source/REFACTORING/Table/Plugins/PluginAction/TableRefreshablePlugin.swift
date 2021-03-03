@@ -8,14 +8,14 @@
 
 import UIKit
 
-/// Input signals for `TableRefreshablePlugin`
+/// Input signals to hide `UIRefreshControl`
 public protocol RefreshableInput {
 
     /// Call it to hide `UIRefreshControl`
     func endRefreshing()
 }
 
-/// Output signals from `TableRefreshablePlugin`
+/// Output signals to refresh content
 public protocol RefreshableOutput: class {
 
     /// Called when  `UIRefreshControl` is activated

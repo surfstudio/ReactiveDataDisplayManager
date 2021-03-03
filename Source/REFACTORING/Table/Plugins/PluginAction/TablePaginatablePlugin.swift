@@ -8,18 +8,34 @@
 
 import UIKit
 
+/// Input signals to control visibility of progressView in footer
+public protocol PaginatableInput {
+
+    /// Call it to control visibility of progressView in footer
+    ///
+    /// - parameter canIterate: `true` if want to show `progressView` in footer
+    func update(canIterate: Bool)
+}
+
+/// Output signals for loading next page of content
+public protocol PaginatableOutput: class {
+
+    /// Called when collection scrolled to last cell
+    ///
+    /// - parameter input: input signals to hide  `progressView` from footer
+    func loadNextPage(with input: PaginatableInput)
+}
+
 /// Plugin to display `progressView` while next page is loading
 ///
 /// Show `progressView` on `willDisplay` last cell.
 /// Hide `progressView` when finish loading request
 public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
 
-    public typealias PaginatableAction = () -> Void
-
     // MARK: - Private Properties
 
     private let progressView: UIView
-    private let action: PaginatableAction
+    private weak var output: PaginatableOutput?
 
     /// Property which indicating availability of pages
     public private(set) var canIterate = false
@@ -27,10 +43,10 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
     // MARK: - Initialization
 
     /// - parameter progressView: indicator view to add inside footer
-    /// - parameter action: closure with reaction to visibility of last cell
-    init(progressView: UIView, action: @escaping PaginatableAction) {
+    /// - parameter output: output signals to hide  `progressView` from footer
+    init(progressView: UIView, with output: PaginatableOutput) {
         self.progressView = progressView
-        self.action = action
+        self.output = output
     }
 
     // MARK: - BaseTablePlugin
@@ -47,12 +63,22 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
 
             let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
             if indexPath == lastCellIndexPath {
-                manager?.view.tableFooterView = canIterate ? progressView : nil
-                action()
+                manager?.view.tableFooterView = progressView
+                output?.loadNextPage(with: self)
             }
         default:
             break
         }
+    }
+
+}
+
+// MARK: - RefreshableInput
+
+extension TablePaginatablePlugin: PaginatableInput {
+
+    public func update(canIterate: Bool) {
+        progressView.isHidden = !canIterate
     }
 
 }
@@ -67,10 +93,10 @@ public extension BaseTablePlugin {
     /// Hide `progressView` when finish loading request
     ///
     /// - parameter progressView: indicator view to add inside footer
-    /// - parameter action: closure with reaction to visibility of last cell
+    /// - parameter output: output signals to hide  `progressView` from footer
     static func paginatable(progressView: UIView,
-                            action: @escaping TablePaginatablePlugin.PaginatableAction) -> TablePaginatablePlugin {
-        .init(progressView: progressView, action: action)
+                            output: PaginatableOutput) -> TablePaginatablePlugin {
+        .init(progressView: progressView, with: output)
     }
 
 }
