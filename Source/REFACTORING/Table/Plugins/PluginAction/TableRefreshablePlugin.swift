@@ -8,23 +8,37 @@
 
 import UIKit
 
+/// Input signals for `TableRefreshablePlugin`
+public protocol RefreshableInput {
+
+    /// Call it to hide `UIRefreshControl`
+    func endRefreshing()
+}
+
+/// Output signals from `TableRefreshablePlugin`
+public protocol RefreshableOutput: class {
+
+    /// Called when  `UIRefreshControl` is activated
+    ///
+    /// - parameter input: input signals to hide  `UIRefreshControl` on loading finished
+    func refreshContent(with input: RefreshableInput)
+}
+
 /// Plugin to show and hide `refreshControl`
 public class TableRefreshablePlugin: BaseTablePlugin<ScrollEvent> {
-
-    public typealias RefreshableAction = () -> Void
 
     // MARK: - Private Properties
 
     private let refreshControl: UIRefreshControl
-    private let action: RefreshableAction
+    private weak var output: RefreshableOutput?
 
     // MARK: - Initialization
 
     /// - parameter refreshControl: closure with reaction to visibility of last cell
-    /// - parameter action: closure with reaction to visibility of last cell
-    init(refreshControl: UIRefreshControl, action: @escaping RefreshableAction) {
+    /// - parameter output: output signals to notify about refreshing
+    init(refreshControl: UIRefreshControl, with output: RefreshableOutput) {
         self.refreshControl = refreshControl
-        self.action = action
+        self.output = output
     }
 
     // MARK: - BaseTablePlugin
@@ -34,11 +48,21 @@ public class TableRefreshablePlugin: BaseTablePlugin<ScrollEvent> {
         switch event {
         case .willEndDragging:
             if refreshControl.isRefreshing {
-                action()
+                output?.refreshContent(with: self)
             }
         default:
             break
         }
+    }
+
+}
+
+// MARK: - RefreshableInput
+
+extension TableRefreshablePlugin: RefreshableInput {
+
+    public func endRefreshing() {
+        refreshControl.endRefreshing()
     }
 
 }
@@ -53,10 +77,10 @@ public extension BaseTablePlugin {
     /// Hide `refreshControl` when finish loading request
     ///
     /// - parameter refreshControl: closure with reaction to visibility of last cell
-    /// - parameter action: closure with reaction to visibility of last cell
+    /// - parameter output: output signals to notify about refreshing
     static func refreshable(refreshControl: UIRefreshControl,
-                            action: @escaping TableRefreshablePlugin.RefreshableAction) -> TableRefreshablePlugin {
-        .init(refreshControl: refreshControl, action: action)
+                            output: RefreshableOutput) -> TableRefreshablePlugin {
+        .init(refreshControl: refreshControl, with: output)
     }
 
 }
