@@ -25,7 +25,7 @@ class GravityCellGenerator: BaseCellGenerator<TitleTableViewCell> {
 
 // MARK: - Gravity
 
-extension GravityCellGenerator: RDDMGravityItem {
+extension GravityCellGenerator: GravityItem {
 
     func getHeaviness() -> Int {
         return heaviness

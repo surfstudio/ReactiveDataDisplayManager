@@ -98,44 +98,14 @@ public protocol ViewBuilder {
     func build(view: ViewType)
 }
 
-/// Protocol for selectable item.
-@available(*, deprecated, renamed: "RDDMSelectableItem")
-public protocol SelectableItem: class {
-
-    /// Invokes when user taps on the item.
-    var didSelectEvent: BaseEvent<Void> { get }
-
-    /// A Boolean value that determines whether to perform a cell deselect.
-    ///
-    /// If the value of this property is **true** (the default), cells deselect
-    /// immediately after tap. If you set it to **false**, they don't deselect.
-    var isNeedDeselect: Bool { get }
-}
-
-@available(*, deprecated, renamed: "RDDMSelectableItem")
-public extension SelectableItem {
-
-    var isNeedDeselect: Bool {
-        return true
-    }
-
-}
-
-@available(*, deprecated, message: "Use RDDMFoldableItem")
-public protocol FoldableItem: class {
-    var didFoldEvent: BaseEvent<Bool> { get }
-    var isExpanded: Bool { get set }
-    var childGenerators: [TableCellGenerator] { get set }
-}
-
-@available(*, deprecated, message: "Use RDDMFoldableItem")
+@available(*, deprecated, message: "Use FoldableItem")
 public protocol GravityFoldableItem: class {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
     var childGenerators: [GravityTableCellGenerator] { get set }
 }
 
-@available(*, deprecated, message: "Use RDDMDisplayableItem")
+@available(*, deprecated, message: "Use DisplayableItem")
 public protocol DisplayableFlow: class {
 
     /// Invokes when cell will displaying.
@@ -151,18 +121,18 @@ public protocol DisplayableFlow: class {
 
 }
 
-@available(*, deprecated, message: "Use RDDMDeletableItem")
+@available(*, deprecated, message: "Use DeletableItem")
 public protocol DeletableGenerator {
     var eventDelete: BaseEmptyEvent { get }
 }
 
-@available(*, deprecated, message: "Use RDDMMovableItem")
+@available(*, deprecated, message: "Use MovableItem")
 public protocol MovableGenerator {
     func canMove() -> Bool
     func canMoveInOtherSection() -> Bool
 }
 
-@available(*, deprecated, message: "Use RDDMMovableItem")
+@available(*, deprecated, message: "Use MovableItem")
 public extension MovableGenerator {
 
     func canMove() -> Bool {
@@ -252,15 +222,15 @@ public extension StackCellGenerator where Self: ViewBuilder {
     }
 }
 
-@available(*, deprecated, message: "Use RDDMGravityItem")
+@available(*, deprecated, message: "Use GravityItem")
 public protocol Gravity: AnyObject {
     var heaviness: Int { get set }
     func getHeaviness() -> Int
 }
 
-public typealias GravityTableCellGenerator = TableCellGenerator & RDDMGravityItem
+public typealias GravityTableCellGenerator = TableCellGenerator & GravityItem
 
-open class GravityTableHeaderGenerator: TableHeaderGenerator, RDDMGravityItem {
+open class GravityTableHeaderGenerator: TableHeaderGenerator, GravityItem {
     open var heaviness: Int = .zero
 
     open func getHeaviness() -> Int {

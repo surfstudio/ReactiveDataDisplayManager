@@ -1,5 +1,5 @@
 //
-//  RDDMDisplayableItem.swift
+//  DisplayableItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 20.02.2021.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol RDDMDisplayableItem: class {
+public protocol DisplayableItem: class {
 
     /// Invokes when cell will displaying.
     var willDisplayEvent: BaseEvent<Void> { get }

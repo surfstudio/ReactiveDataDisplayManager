@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Plugin to support `RDDMSelectableItem`
+/// Plugin to support `SelectableItem`
 ///
 /// Handle `didSelect` event inside generator and `deselectRow`
 public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
@@ -16,7 +16,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
         case .didSelect(let indexPath):
-            guard let selectable = manager?.generators[indexPath.section][indexPath.row] as? RDDMSelectableItem else {
+            guard let selectable = manager?.generators[indexPath.section][indexPath.row] as? SelectableItem else {
                 return
             }
             selectable.didSelectEvent.invoke(with: ())
@@ -35,7 +35,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
 public extension BaseTablePlugin {
 
-    /// Plugin to support `RDDMSelectableItem`
+    /// Plugin to support `SelectableItem`
     ///
     /// Handle `didSelect` event inside generator and `deselectRow`
     static func selectable() -> TableSelectablePlugin {

@@ -11,7 +11,7 @@ import UIKit
 /// Plugin to configure and display sectionIndexTitle
 open class TableSectionTitleDisplayablePlugin: TableFeaturePlugin, TableSectionTitleDisplayable {
 
-    public typealias GeneratorType = RDDMIndexTitleDisplaybleItem
+    public typealias GeneratorType = IndexTitleDisplaybleItem
 
     // MARK: - Private Properties
 
@@ -53,7 +53,7 @@ open class TableSectionTitleDisplayablePlugin: TableFeaturePlugin, TableSectionT
 private extension TableSectionTitleDisplayablePlugin {
 
     func getIndexForTitleFromHeaderGenerators(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int {
-        return provider?.sections.firstIndex(where: { ($0 as? RDDMIndexTitleDisplaybleItem)?.title == title }) ?? -1
+        return provider?.sections.firstIndex(where: { ($0 as? IndexTitleDisplaybleItem)?.title == title }) ?? -1
     }
 
 }

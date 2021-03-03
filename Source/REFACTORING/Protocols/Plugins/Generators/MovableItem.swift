@@ -1,5 +1,5 @@
 //
-//  RDDMMovableItem.swift
+//  MovableItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 20.02.2021.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-public protocol RDDMMovableItem {
+public protocol MovableItem {
     func canMove() -> Bool
     func canMoveInOtherSection() -> Bool
 }
 
-public extension RDDMMovableItem {
+public extension MovableItem {
 
     func canMove() -> Bool {
         return true

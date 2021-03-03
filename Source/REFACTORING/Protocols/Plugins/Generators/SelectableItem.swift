@@ -1,5 +1,5 @@
 //
-//  RDDMSelectableItem.swift
+//  SelectableItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 20.02.2021.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for selectable item.
-public protocol RDDMSelectableItem: class {
+public protocol SelectableItem: class {
 
     /// Invokes when user taps on the item.
     var didSelectEvent: BaseEvent<Void> { get }
@@ -21,7 +21,7 @@ public protocol RDDMSelectableItem: class {
     var isNeedDeselect: Bool { get }
 }
 
-public extension RDDMSelectableItem {
+public extension SelectableItem {
 
     var isNeedDeselect: Bool {
         return true

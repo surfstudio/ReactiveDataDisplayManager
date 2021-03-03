@@ -18,10 +18,10 @@ public protocol ContentPrefetcher {
     func cancelPrefetching(for requestIds: [Content])
 }
 
-/// Plugin to support `RDDMPrefetcherableItem` with prefetcher
+/// Plugin to support `PrefetcherableItem` with prefetcher
 ///
 /// `ContentPrefetcher` prefetches and caches data to eliminate delays when requesting the same data later.
-public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: RDDMPrefetcherableItem>: BaseTablePlugin<PrefetchEvent> {
+public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableItem>: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
 
@@ -71,11 +71,11 @@ private extension TablePrefetcherablePlugin {
 
 public extension BaseTablePlugin {
 
-    /// Plugin to support `RDDMPrefetcherableItem` with prefetcher
+    /// Plugin to support `PrefetcherableItem` with prefetcher
     ///
     /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
     static func prefetch<Prefetcher: ContentPrefetcher,
-                         Generator: RDDMPrefetcherableItem>(prefetcher: Prefetcher) -> TablePrefetcherablePlugin<Prefetcher, Generator>{
+                         Generator: PrefetcherableItem>(prefetcher: Prefetcher) -> TablePrefetcherablePlugin<Prefetcher, Generator>{
         .init(prefetcher: prefetcher)
     }
 

@@ -1,5 +1,5 @@
 //
-//  RDDMCalculatableSizeItem.swift
+//  CalculatableSizeItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 20.02.2021.
@@ -9,11 +9,11 @@
 import UIKit
 
 /// Protocol for calculating height of element according to the model
-public protocol RDDMCalculatableHeightItem: RDDMConfigurableItem {
+public protocol CalculatableHeightItem: ConfigurableItem {
     static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat
 }
 
 /// Protocol for calculating width of element according to the model
-public protocol RDDMCalculatableWidthItem: RDDMConfigurableItem {
+public protocol CalculatableWidthItem: ConfigurableItem {
     static func getWidth(forHeight height: CGFloat, with model: Model) -> CGFloat
 }

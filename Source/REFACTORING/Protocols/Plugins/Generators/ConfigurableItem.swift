@@ -1,5 +1,5 @@
 //
-//  RDDMConfigurableItem.swift
+//  ConfigurableItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 20.02.2021.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for UIView (basically for UICollectionViewCell&UITableViewCell) which is supposed to be used in CellGenerators
-public protocol RDDMConfigurableItem where Self: UIView {
+public protocol ConfigurableItem where Self: UIView {
 
     associatedtype Model
 

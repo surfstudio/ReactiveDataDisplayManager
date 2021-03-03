@@ -125,7 +125,7 @@ private extension FoldableCollectionViewController {
     }
 
     func getVisibleGenerators(for generator: CollectionCellGenerator) -> [CollectionCellGenerator] {
-        if let foldableItem = generator as? RDDMCollectionFoldableItem, foldableItem.isExpanded {
+        if let foldableItem = generator as? CollectionFoldableItem, foldableItem.isExpanded {
             return foldableItem.childGenerators
                 .map { getVisibleGenerators(for: $0) }
                 .reduce([generator], +)

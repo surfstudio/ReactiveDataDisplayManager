@@ -1,5 +1,5 @@
 //
-//  RDDMPrefetcherableItem.swift
+//  DeletableItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 20.02.2021.
@@ -8,8 +8,6 @@
 
 import UIKit
 
-public protocol RDDMPrefetcherableItem: class {
-    associatedtype IdType: Hashable
-
-    var requestId: IdType? { get }
+public protocol DeletableItem {
+    var eventDelete: BaseEmptyEvent { get }
 }

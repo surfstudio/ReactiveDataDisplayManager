@@ -1,5 +1,5 @@
 //
-//  RDDMSwipeableItem.swift
+//  SwipeableItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 12.02.2021.
@@ -9,7 +9,7 @@
 import UIKit
 
 @available(iOS 11.0, *)
-public protocol RDDMSwipeableItem {
+public protocol SwipeableItem {
     var actionTypes: [String] { get set }
     var didSwipeEvent: BaseEvent<String> { get }
 }

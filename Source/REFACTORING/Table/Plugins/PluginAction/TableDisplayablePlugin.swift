@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Plugin to support `RDDMDisplayableItem` generators
+/// Plugin to support `DisplayableItem` generators
 ///
 /// Allow track`willDisplay` or `didEndDisplay` events inside generator
 public class TableDisplayablePlugin: BaseTablePlugin<TableEvent> {
@@ -40,12 +40,12 @@ public class TableDisplayablePlugin: BaseTablePlugin<TableEvent> {
 
 private extension TableDisplayablePlugin {
 
-    func getDisplayableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> RDDMDisplayableItem? {
-        manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? RDDMDisplayableItem
+    func getDisplayableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> DisplayableItem? {
+        manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? DisplayableItem
     }
 
-    func getDisplayableFlowHeader(from manager: BaseTableManager?, at section: Int) -> RDDMDisplayableItem? {
-        manager?.sections[safe: section] as? RDDMDisplayableItem
+    func getDisplayableFlowHeader(from manager: BaseTableManager?, at section: Int) -> DisplayableItem? {
+        manager?.sections[safe: section] as? DisplayableItem
     }
 
 }
@@ -54,7 +54,7 @@ private extension TableDisplayablePlugin {
 
 public extension BaseTablePlugin {
 
-    /// Plugin to support `RDDMDisplayableItem` generators
+    /// Plugin to support `DisplayableItem` generators
     ///
     /// Alllow track`willDisplay` or `didEndDisplay` events inside generator
     static func displayable() -> TableDisplayablePlugin {

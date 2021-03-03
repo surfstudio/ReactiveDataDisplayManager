@@ -48,7 +48,7 @@ final class FoldableCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Configurable
 
-extension FoldableCollectionViewCell: RDDMConfigurableItem {
+extension FoldableCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: ViewModel) {
         contentView.backgroundColor = viewModel.color

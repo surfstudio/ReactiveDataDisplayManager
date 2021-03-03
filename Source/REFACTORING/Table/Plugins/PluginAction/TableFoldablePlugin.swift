@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Plugin to support `RDDMFoldableItem`
+/// Plugin to support `FoldableItem`
 ///
 /// Allow  expand or collapse child cells
 public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
@@ -18,7 +18,7 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
         case .didSelect(let indexPath):
             guard
                 let generator = manager?.generators[indexPath.section][indexPath.row],
-                let foldable = generator as? RDDMFoldableItem
+                let foldable = generator as? FoldableItem
             else {
                 return
             }
@@ -69,7 +69,7 @@ private extension TableFoldablePlugin {
 
 public extension BaseTablePlugin {
 
-    /// Plugin to support `RDDMFoldableItem`
+    /// Plugin to support `FoldableItem`
     ///
     /// Allow  expand or collapse child cells
     static func foldable() -> TableFoldablePlugin {

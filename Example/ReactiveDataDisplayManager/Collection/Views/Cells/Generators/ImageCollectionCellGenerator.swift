@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class ImageCollectionCellGenerator: BaseCollectionCellGenerator<ImageCollectionViewCell>, RDDMPrefetcherableItem {
+final class ImageCollectionCellGenerator: BaseCollectionCellGenerator<ImageCollectionViewCell>, PrefetcherableItem {
 
     // MARK: - PrefetcherableFlow
 

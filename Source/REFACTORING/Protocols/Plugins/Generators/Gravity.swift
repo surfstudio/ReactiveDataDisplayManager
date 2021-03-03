@@ -1,5 +1,5 @@
 //
-//  RDDMSizableItem.swift
+//  GravityItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 20.02.2021.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Generator that describes collection cell generator that can returns size
-public protocol RDDMSizableItem: class {
-    func getSize() -> CGSize
+public protocol GravityItem: AnyObject {
+    var heaviness: Int { get set }
+    func getHeaviness() -> Int
 }

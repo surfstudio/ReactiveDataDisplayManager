@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension EmptyTableHeaderGenerator: RDDMGravityItem {
+extension EmptyTableHeaderGenerator: GravityItem {
     public func getHeaviness() -> Int {
         .zero
     }
@@ -24,7 +24,7 @@ extension EmptyTableHeaderGenerator: RDDMGravityItem {
 }
 
 /// DataDisplayManager for UITableView
-/// Warning. Do not forget to conform TableCellGenerator to RDDMGravityItem (GravityTableCellGenerator)
+/// Warning. Do not forget to conform TableCellGenerator to GravityItem (GravityTableCellGenerator)
 open class GravityTableManager: BaseTableManager {
 
     public typealias CellGeneratorType = GravityTableCellGenerator

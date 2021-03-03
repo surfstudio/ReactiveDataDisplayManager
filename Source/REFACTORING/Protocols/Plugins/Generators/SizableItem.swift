@@ -1,5 +1,5 @@
 //
-//  RDDMDeletableItem.swift
+//  SizableItem.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 20.02.2021.
@@ -8,6 +8,7 @@
 
 import UIKit
 
-public protocol RDDMDeletableItem {
-    var eventDelete: BaseEmptyEvent { get }
+/// Generator that describes collection cell generator that can returns size
+public protocol SizableItem: class {
+    func getSize() -> CGSize
 }

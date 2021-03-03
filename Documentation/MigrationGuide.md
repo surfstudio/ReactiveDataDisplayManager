@@ -4,18 +4,15 @@
 
 ### Item protocols
 
-`SelectableItem`, `DisplayableFlow`, `MovableGenerator` had a similar idea but not unified format. Thats why we introduced pattern `RDDM{ability}ableItem` and renamed all old protocols. We will remove old protocols in version *7.1.0*.
+`SelectableItem`, `DisplayableFlow`, `MovableGenerator` had a similar idea but not unified format. Thats why we introduced pattern `{ability}ableItem` and renamed all old protocols. We will remove old protocols in version *7.1.0*.
 
 | Old                 | New                 |
 | ------------------- | ------------------- |
-| SelectableItem      | RDDMSelectableItem  |
-| FoldableItem        | RDDMFoldableItem    |
-| GravityFoldableItem | RDDMFoldableItem    |
-| DisplayableFlow     | RDDMDisplayableItem |
-| Gravity             | RDDMGravityItem     |
-| MovableGenerator    | RDDMMovableItem     |
-
-**Maybe useful** Just type `RDDM` and you will see all possible protocols bult-in framework.
+| Configurable        | ConfigurableItem    |
+| GravityFoldableItem | FoldableItem        |
+| DisplayableFlow     | DisplayableItem     |
+| Gravity             | GravityItem         |
+| MovableGenerator    | MovableItem         |
 
 ### Managers
 
@@ -30,7 +27,7 @@ If you have inherite from `BaseTableDataDisplayManager` or other deprecated mana
 
 If you were using basic implemetation, just start from step 3.
 
-**Keep in mind** that support of `RDDMSelectableItem` now was moved to `TableSelectablePlugin` and you should add this plugin to builder.
+**Keep in mind** that support of `SelectableItem` now was moved to `TableSelectablePlugin` and you should add this plugin to builder.
 
 **Maybe useful** `tableView.add(plugin: .)` or `tableView.add(featurePlugin: .)` will produce autocomplete hints which can help you to inspect all bult-in plugins.
 
