@@ -13,7 +13,12 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Properties
 
-    weak public var manager: BaseTableManager?
+    weak public var manager: BaseTableManager? {
+        didSet {
+            tablePlugins.setup(with: manager)
+            scrollPlugins.setup(with: manager)
+        }
+    }
 
     public var estimatedHeight: CGFloat = 40
 
