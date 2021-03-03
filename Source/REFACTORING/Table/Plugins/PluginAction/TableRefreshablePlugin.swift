@@ -43,6 +43,10 @@ public class TableRefreshablePlugin: BaseTablePlugin<ScrollEvent> {
 
     // MARK: - BaseTablePlugin
 
+    public func setup(with manager: BaseTableManager?) {
+        manager?.view.refreshControl = refreshControl
+    }
+
     public override func process(event: ScrollEvent, with manager: BaseTableManager?) {
 
         switch event {

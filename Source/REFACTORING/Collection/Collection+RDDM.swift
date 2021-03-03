@@ -104,15 +104,18 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
-        delegate.manager = manager
+        manager.view = view
+
         delegate.collectionPlugins = collectionPlugins
         delegate.scrollPlugins = scrollPlugins
+
+        delegate.manager = manager
         view.delegate = delegate
 
-        dataSource.provider = manager
         dataSource.collectionPlugins = collectionPlugins
         dataSource.itemTitleDisplayablePlugin = itemTitleDisplayablePlugin
 
+        dataSource.provider = manager
         view.dataSource = dataSource
 
         if #available(iOS 10.0, *) {
@@ -120,7 +123,6 @@ public class CollectionBuilder<T: BaseCollectionManager> {
             view.prefetchDataSource = dataSource
         }
 
-        manager.view = view
         manager.delegate = delegate
         manager.dataSource = dataSource
         manager.animator = animator

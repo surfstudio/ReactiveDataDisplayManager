@@ -14,7 +14,13 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    weak public var provider: TableGeneratorsProvider?
+    weak public var provider: TableGeneratorsProvider? {
+        didSet {
+            let manager = provider as? BaseTableManager
+            prefetchPlugins.setup(with: manager)
+            tablePlugins.setup(with: manager)
+        }
+    }
 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()

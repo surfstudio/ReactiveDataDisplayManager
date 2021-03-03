@@ -13,7 +13,13 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
     // MARK: - Properties
 
-    weak public var provider: CollectionGeneratorsProvider?
+    weak public var provider: CollectionGeneratorsProvider? {
+        didSet {
+            let manager = provider as? BaseCollectionManager
+            prefetchPlugins.setup(with: manager)
+            collectionPlugins.setup(with: manager)
+        }
+    }
 
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()

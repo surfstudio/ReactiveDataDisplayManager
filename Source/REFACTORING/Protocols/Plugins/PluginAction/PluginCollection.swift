@@ -15,6 +15,12 @@ public struct PluginCollection<Plugin: PluginAction> {
         plugins.append(plugin)
     }
 
+    func setup(with manager: Plugin.Manager?) {
+        plugins.forEach {
+            $0.setup(with: manager)
+        }
+    }
+
     func process(event: Plugin.Event, with manager: Plugin.Manager?) {
         plugins.forEach {
             $0.process(event: event, with: manager)
