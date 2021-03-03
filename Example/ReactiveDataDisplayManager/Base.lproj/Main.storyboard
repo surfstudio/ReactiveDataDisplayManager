@@ -226,6 +226,37 @@
             </objects>
             <point key="canvasLocation" x="5021" y="-1855"/>
         </scene>
+        <!--Paginatable Table View Controller-->
+        <scene sceneID="NEQ-Pc-8HZ">
+            <objects>
+                <viewController id="xQn-4x-xEX" customClass="PaginatableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3TZ-w0-vNn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Mp-mm-nX6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="VfY-IR-WY2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3Mp-mm-nX6" firstAttribute="leading" secondItem="VfY-IR-WY2" secondAttribute="leading" id="OTv-By-Z65"/>
+                            <constraint firstItem="VfY-IR-WY2" firstAttribute="trailing" secondItem="3Mp-mm-nX6" secondAttribute="trailing" id="RXj-hS-oZs"/>
+                            <constraint firstItem="VfY-IR-WY2" firstAttribute="bottom" secondItem="3Mp-mm-nX6" secondAttribute="bottom" id="wtg-Yd-gEW"/>
+                            <constraint firstItem="3Mp-mm-nX6" firstAttribute="top" secondItem="VfY-IR-WY2" secondAttribute="top" id="yIi-cU-Nl1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="XCn-cg-Cmd"/>
+                    <connections>
+                        <outlet property="tableView" destination="3Mp-mm-nX6" id="LjJ-Q1-2Ac"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qbx-zW-vbU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5779" y="-1831"/>
+        </scene>
         <!--Table-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -263,6 +294,7 @@
                         <segue destination="bkM-th-DfT" kind="show" identifier="swipeableTable" id="M3i-W7-3jk"/>
                         <segue destination="gFr-UQ-9p9" kind="show" identifier="allPluginsTable" id="QY8-TZ-bpF"/>
                         <segue destination="KPe-5j-jTE" kind="show" identifier="refreshableTable" id="lcW-uo-QUW"/>
+                        <segue destination="xQn-4x-xEX" kind="show" identifier="paginatableTable" id="2Xm-b9-jRj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

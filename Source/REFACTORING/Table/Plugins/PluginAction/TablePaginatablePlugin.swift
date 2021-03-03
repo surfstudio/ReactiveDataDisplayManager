@@ -8,13 +8,20 @@
 
 import UIKit
 
+public protocol ProgressDisplayableItem {
+
+    /// - parameter isLoading: `true` if want to animate loading progress in `progressView`
+    func showProgress(_ isLoading: Bool)
+
+}
+
 /// Input signals to control visibility of progressView in footer
 public protocol PaginatableInput: class {
 
     /// Call it to control visibility of progressView in footer
     ///
     /// - parameter canIterate: `true` if want to show `progressView` in footer
-    func update(canIterate: Bool)
+    func endLoading(canIterate: Bool)
 }
 
 /// Output signals for loading next page of content
@@ -30,26 +37,43 @@ public protocol PaginatableOutput: class {
 ///
 /// Show `progressView` on `willDisplay` last cell.
 /// Hide `progressView` when finish loading request
-public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
+public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
+
+    public typealias ProgressView = UIView & ProgressDisplayableItem
 
     // MARK: - Private Properties
 
-    private let progressView: UIView
+    private let progressView: ProgressView
     private weak var output: PaginatableOutput?
 
+    private weak var tableView: UITableView?
+
     /// Property which indicating availability of pages
-    public private(set) var canIterate = false
+    public private(set) var canIterate = true {
+        didSet {
+            if canIterate {
+                tableView?.tableFooterView = progressView
+            } else {
+                tableView?.tableFooterView = nil
+            }
+        }
+    }
 
     // MARK: - Initialization
 
-    /// - parameter progressView: indicator view to add inside footer
+    /// - parameter progressView: indicator view to add inside footer. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from footer
-    init(progressView: UIView, with output: PaginatableOutput) {
+    init(progressView: ProgressView, with output: PaginatableOutput) {
         self.progressView = progressView
         self.output = output
     }
 
     // MARK: - BaseTablePlugin
+
+    public override func setup(with manager: BaseTableManager?) {
+        self.tableView = manager?.view
+        self.canIterate = true
+    }
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
 
@@ -62,8 +86,8 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
             let lastCellInLastSectionIndex = generators[lastSectionIndex].count - 1
 
             let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
-            if indexPath == lastCellIndexPath {
-                manager?.view.tableFooterView = progressView
+            if indexPath == lastCellIndexPath && canIterate {
+                progressView.showProgress(true)
                 output?.loadNextPage(with: self)
             }
         default:
@@ -77,8 +101,9 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
 
 extension TablePaginatablePlugin: PaginatableInput {
 
-    public func update(canIterate: Bool) {
-        progressView.isHidden = !canIterate
+    public func endLoading(canIterate: Bool) {
+        progressView.showProgress(false)
+        self.canIterate = canIterate
     }
 
 }
@@ -92,9 +117,9 @@ public extension BaseTablePlugin {
     /// Show `progressView` on `willDisplay` last cell.
     /// Hide `progressView` when finish loading request
     ///
-    /// - parameter progressView: indicator view to add inside footer
+    /// - parameter progressView: indicator view to add inside footer. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from footer
-    static func paginatable(progressView: UIView,
+    static func paginatable(progressView: TablePaginatablePlugin.ProgressView,
                             output: PaginatableOutput) -> TablePaginatablePlugin {
         .init(progressView: progressView, with: output)
     }

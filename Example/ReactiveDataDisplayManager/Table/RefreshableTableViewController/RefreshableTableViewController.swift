@@ -67,7 +67,7 @@ private extension RefreshableTableViewController {
 extension RefreshableTableViewController: RefreshableOutput {
 
     func refreshContent(with input: RefreshableInput) {
-        delay(.now() + .seconds(3)) { [weak self] in
+        delay(.now() + .seconds(3)) { [weak self, weak input] in
             self?.adapter.clearCellGenerators()
 
             for _ in 0...3 {
@@ -78,7 +78,7 @@ extension RefreshableTableViewController: RefreshableOutput {
 
             self?.adapter.forceRefill()
 
-            input.endRefreshing()
+            input?.endRefreshing()
         }
     }
 
