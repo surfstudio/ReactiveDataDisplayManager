@@ -80,7 +80,7 @@ private extension PaginatableTableViewController {
 
         adapter.forceRefill()
 
-        return currentPage < Constants.pageSize
+        return currentPage < Constants.pagesCount
     }
 
 }
