@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 /// Proxy of all `UIScrollViewDelegate` events
 public class CollectionScrollViewDelegateProxyPlugin: BaseCollectionPlugin<ScrollEvent> {
 

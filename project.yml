@@ -1,0 +1,54 @@
+# Название проекта
+name: ReactiveDataDisplayManager
+options:
+  # Версия Xcode
+  xcodeVersion: 11.3.1
+  # Создание пустых директорий
+  generateEmptyDirectories: true
+  # Создание групп
+  createIntermediateGroups: true
+targets:
+    ReactiveDataDisplayManager:
+      dependencies:
+        - sdk: UIKit.framework
+      type: framework
+      platform: iOS
+      deploymentTarget: 10.0
+      scheme:
+        configVariants: all
+        testTargets: [ReactiveDataDisplayManagerTests]
+      sources:
+        - path: Source
+      info:
+        path: Tricolor/Application/Info/Debug/Info.plist
+        properties:
+          CFBundleName: ReactiveDataDisplayManager
+          CFBundleShortVersionString: $(MARKETING_VERSION)
+          CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+      settings:
+        base:
+          PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm
+          MARKETING_VERSION: "7.0.0"
+          CURRENT_PROJECT_VERSION: 0
+          VERSIONING_SYSTEM: "apple-generic"
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+          LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
+          CODE_SIGN_IDENTITY: "iPhone Developer"
+          CODE_SIGN_STYLE: Automatic
+
+    ReactiveDataDisplayManagerTests:
+      type: bundle.unit-test
+      platform: iOS
+      deploymentTarget: 11.0
+      scheme:
+        configVariants: all
+      sources: [ReactiveDataDisplayManagerTests]
+      info:
+        path: ReactiveDataDisplayManagerTests/Info.plist
+        properties: []
+      dependencies:
+        - target: ReactiveDataDisplayManager
+      settings:
+        configs:
+          Debug:
+            EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"

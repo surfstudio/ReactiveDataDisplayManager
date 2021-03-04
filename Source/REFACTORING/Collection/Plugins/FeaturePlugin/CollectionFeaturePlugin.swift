@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 open class CollectionFeaturePlugin: FeaturePlugin {
     public typealias CollectionType = UICollectionView
 }
