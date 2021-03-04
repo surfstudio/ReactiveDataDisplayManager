@@ -59,7 +59,10 @@ public class TableBuilder<T: BaseTableManager> {
     typealias ScrollPluginsCollection = PluginCollection<BaseTablePlugin<ScrollEvent>>
     typealias PrefetchPluginsCollection = PluginCollection<BaseTablePlugin<PrefetchEvent>>
 
-    public typealias TableAnimator = Animator<BaseTableManager.CollectionType>
+    public typealias CollectionType = BaseTableManager.CollectionType
+
+    public typealias TableAnimator = Animator<CollectionType>
+    public typealias TableModifier = Modifier<CollectionType, CollectionType.RowAnimation>
 
     // MARK: - Properties
 
@@ -76,6 +79,17 @@ public class TableBuilder<T: BaseTableManager> {
     var movablePlugin: TableMovable?
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     var swipeActionsPlugin: TableFeaturePlugin?
+
+    var modifier: TableModifier {
+        if #available(iOS 13.0, *) {
+            guard let difableDataSource = dataSource as? DiffableTableDataSource else {
+                return TableCommonModifier(view: view, animator: animator)
+            }
+            return TableDiffableModifier(view: view, provider: manager, dataSource: difableDataSource)
+        } else {
+            return TableCommonModifier(view: view, animator: animator)
+        }
+    }
 
     // MARK: - Initialization
 
@@ -168,6 +182,7 @@ public class TableBuilder<T: BaseTableManager> {
 
         setPrefetchDataSourceIfNeeded()
         manager.animator = animator
+        manager.modifier = modifier
         manager.delegate = delegate
         manager.dataSource = dataSource
         return manager

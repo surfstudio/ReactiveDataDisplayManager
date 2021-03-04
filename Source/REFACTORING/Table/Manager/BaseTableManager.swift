@@ -18,6 +18,7 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     public typealias HeaderGeneratorType = TableHeaderGenerator
 
     public typealias TableAnimator = Animator<CollectionType>
+    public typealias TableModifier = Modifier<CollectionType, CollectionType.RowAnimation>
 
     // MARK: - Public properties
 
@@ -29,6 +30,7 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     var delegate: TableDelegate?
     var dataSource: TableDataSource?
     var animator: TableAnimator?
+    var modifier: TableModifier?
 
     // MARK: - DataDisplayManager
 

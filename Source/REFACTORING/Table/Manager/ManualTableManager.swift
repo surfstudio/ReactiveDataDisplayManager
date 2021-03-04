@@ -310,13 +310,11 @@ public class ManualTableManager: BaseTableManager {
                       insertAnimation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(oldGenerator) else { return }
 
-        animator?.perform(in: view) { [weak self] in
-            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
-            self?.generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
-            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-            view.deleteRows(at: [indexPath], with: removeAnimation)
-            view.insertRows(at: [indexPath], with: insertAnimation)
-        }
+        generators[index.sectionIndex].remove(at: index.generatorIndex)
+        generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
+        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+
+        modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
     /// Swaps two generators between each other.
@@ -338,7 +336,7 @@ public class ManualTableManager: BaseTableManager {
         self.generators[secondIndex.sectionIndex].insert(firstGenerator, at: secondIndex.generatorIndex)
         self.generators[firstIndex.sectionIndex].insert(secondGenerator, at: firstIndex.generatorIndex)
 
-        self.view?.reloadData()
+        self.view.reloadData()
     }
 
 }
@@ -355,7 +353,8 @@ private extension ManualTableManager {
         let index = min(max(index, 0), self.sections.count)
         self.sections.insert(headGenerator, at: index)
         self.generators.insert([], at: index)
-        self.view?.insertSections([index], with: animation)
+
+        modifier?.insertSections(at: [index], with: animation)
     }
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
@@ -370,9 +369,7 @@ private extension ManualTableManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
-        animator?.perform(in: view) {
-            view.insertRows(at: indexPaths, with: animation)
-        }
+        modifier?.insertRows(at: indexPaths, with: animation)
     }
 
 }
