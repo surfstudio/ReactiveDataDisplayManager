@@ -22,6 +22,8 @@ targets:
       info:
         path: Tricolor/Application/Info/Debug/Info.plist
         properties:
+          UILaunchStoryboardName: LaunchScreen
+          UIMainStoryboardFile: Main
           CFBundleName: ReactiveDataDisplayManagerExample
           CFBundleShortVersionString: $(MARKETING_VERSION)
           CFBundleVersion: $(CURRENT_PROJECT_VERSION)
