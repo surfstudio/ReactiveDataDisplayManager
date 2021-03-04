@@ -54,7 +54,7 @@ public class DiffableTableStateManager: BaseTableManager {
 
     open func removeAllGenerators(from header: HeaderGeneratorType) {
         guard
-            let index = sections.index(where: { $0 === header }),
+            let index = sections.firstIndex(where: { $0 === header }),
             generators.count > index
         else {
             return

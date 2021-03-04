@@ -41,7 +41,7 @@ private extension CollectionItemTitleDisplayablePlugin {
     func getGeneratorIndexPath(with title: String, for provider: CollectionGeneratorsProvider?) -> IndexPath {
         guard let generators = provider?.generators else { return IndexPath() }
         for (sectionIndex, section) in generators.enumerated() {
-            let generatorIndex = section.index(where: { ($0 as? GeneratorType)?.title == title })
+            let generatorIndex = section.firstIndex(where: { ($0 as? GeneratorType)?.title == title })
 
             if let generatorIndex = generatorIndex {
                 return IndexPath(item: generatorIndex, section: sectionIndex)

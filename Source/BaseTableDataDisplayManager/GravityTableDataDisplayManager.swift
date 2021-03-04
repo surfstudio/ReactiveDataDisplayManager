@@ -145,7 +145,7 @@ open class GravityTableDataDisplayManager: NSObject, DataDisplayManager, HeaderD
 
     public func removeAllGenerators(from header: GravityTableHeaderGenerator) {
         guard
-            let index = self.headerGenerators.index(where: { $0 === header }),
+            let index = self.headerGenerators.firstIndex(where: { $0 === header }),
             self.cellGenerators.count > index
         else {
             return
