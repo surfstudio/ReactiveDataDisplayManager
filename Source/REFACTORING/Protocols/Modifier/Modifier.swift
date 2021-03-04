@@ -16,18 +16,18 @@ open class Modifier<View: UIView, Animation> {
     }
 
     open func reload() {
-        // Stub
+        preconditionFailure("\(#function) must be overriden in child")
     }
 
     open func replace(at indexPath: IndexPath, with removeAnimation: Animation, and insertAnimation: Animation) {
-        // Stub
+        preconditionFailure("\(#function) must be overriden in child")
     }
 
     open func insertSections(at indexPaths: IndexSet, with insertAnimation: Animation) {
-        // Stub
+        preconditionFailure("\(#function) must be overriden in child")
     }
 
     open func insertRows(at indexPaths: [IndexPath], with insertAnimation: Animation) {
-        // Stub
+        preconditionFailure("\(#function) must be overriden in child")
     }
 }

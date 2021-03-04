@@ -21,3 +21,13 @@ public class EmptyTableHeaderGenerator: TableHeaderGenerator {
     }
 
 }
+
+// MARK: - DiffableItemSource
+
+extension EmptyTableHeaderGenerator: DiffableItemSource {
+
+    public var item: DiffableItem {
+        .init(identifier: "RDDM.Diffable.EmptySection")
+    }
+
+}

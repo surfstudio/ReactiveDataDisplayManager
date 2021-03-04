@@ -11,10 +11,8 @@
 		008A94C8E6A8B128AF5D15AD /* CalculatableSizeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8354A9FF22528100858809D5 /* CalculatableSizeItem.swift */; };
 		012253A8DDEEE2299F9E8126 /* TableMovablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A1471D14614A728E99B3D3 /* TableMovablePlugin.swift */; };
 		01307B6321971A668981A9C5 /* BaseCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49B92C478A6EF8B56799CD5 /* BaseCollectionDataSource.swift */; };
-		018EB80B25F0F68F006A5C64 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EB80A25F0F68F006A5C64 /* Modifier.swift */; };
-		018EB81425F0FA9E006A5C64 /* TableCommonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EB81325F0FA9E006A5C64 /* TableCommonModifier.swift */; };
-		018EB81725F0FDFC006A5C64 /* TableDiffableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018EB81625F0FDFC006A5C64 /* TableDiffableModifier.swift */; };
 		01928B904277BA3B44EEFAF2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E8001091BE7A1E8E249055 /* UIKit.framework */; };
+		01ADB9EC25F15B720015EEA0 /* DiffableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADB9EB25F15B720015EEA0 /* DiffableItem.swift */; };
 		0234089D03B6F2B9CEC22CEB /* TableSwipeActionsConfigurationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3778B2B7B14BCCDE42D3C57E /* TableSwipeActionsConfigurationPlugin.swift */; };
 		02CEA251A7F688DD140F919A /* CalculatableSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00E1D85A29896C854CC272 /* CalculatableSize.swift */; };
 		036963D49CD38AF78249C55B /* TableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3106D9B099FE853FD1488E /* TableEvent.swift */; };
@@ -66,6 +64,7 @@
 		6D3767A4EF1F53A3CA763255 /* BaseCollectionPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1409EAF954B3C2A37EAF406 /* BaseCollectionPlugin.swift */; };
 		6E1E3BC4AA048D3286BED9CD /* ManualTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEA8C82BBCAC936842DF238 /* ManualTableManager.swift */; };
 		6E40BD01ADA552B2E44F02B0 /* FoldableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B295CE87BA328081A7C22F /* FoldableItem.swift */; };
+		6E4CC1639CBEDEA252449223 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53EB39A4EE5F36138996E85 /* Modifier.swift */; };
 		6FDA851C17A6DD36E136C768 /* TableFeaturePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE0F752761DCCA172D5942F /* TableFeaturePlugin.swift */; };
 		709F5EC7CC5151AFC0AFF39C /* CollectionCell+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B53B0B2221C7B42F4E90775 /* CollectionCell+RDDM.swift */; };
 		744BF0EC6436569E903E8D14 /* TablePrefetchProxyPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643D6FB2C312C4068E0C5D29 /* TablePrefetchProxyPlugin.swift */; };
@@ -81,6 +80,7 @@
 		812CE46DC21298031EBA8F78 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4DA0EEADD4BB90AC999D98C /* Configurable.swift */; };
 		86C88FD512B2D0BCE383CFE7 /* CollectionRefreshablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1661D0E7F5AAD7A7C9A94547 /* CollectionRefreshablePlugin.swift */; };
 		86D5ECAD13B489286F7CA6D6 /* CalculatableHeightCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864870490F8F3F9E8313207B /* CalculatableHeightCellGenerator.swift */; };
+		875390CB8CF199FBAA5282A2 /* TableCommonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F07CBAA5BC5F7810B0D007B /* TableCommonModifier.swift */; };
 		893CCD5BD2094DC682547AED /* CollectionFoldableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045709853C939F02AD98AA73 /* CollectionFoldableItem.swift */; };
 		897EDA95D082956A0192BD1D /* BaseTableDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4780CE6E353D105654A9F7 /* BaseTableDataDisplayManagerTests.swift */; };
 		8BC661FD876364449922F162 /* CollectionFeaturePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85988AE31CE4AAF6B897CB17 /* CollectionFeaturePlugin.swift */; };
@@ -95,6 +95,7 @@
 		92DC7F93A7983E0BC51879DA /* TableCell+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD7F2C343FE7CBDC421796C0 /* TableCell+RDDM.swift */; };
 		94C2986508173338D8CA92F2 /* GravityTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7AA59A7B2AA70E2802E678 /* GravityTableManager.swift */; };
 		995533FC0D4EB90811BB90F2 /* CollectionItemTitleDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31E52E811C5B4B45831FFB0B /* CollectionItemTitleDisplayable.swift */; };
+		9AA478EE48D989861E8070FE /* TableDiffableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB5C6FFEB0DBDC2E34E1E11 /* TableDiffableModifier.swift */; };
 		9C25E783343C24391AB3A643 /* Gravity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B80C30F6B3619BBDF7EFDC0 /* Gravity.swift */; };
 		9D75415A39D3B8BB80D21C24 /* PluginCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553C46C19F994D8FAB2702C4 /* PluginCollection.swift */; };
 		A018B6A8CC22192992041618 /* BaseTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6398853CD0D3D7F67A1068F8 /* BaseTableDataSource.swift */; };
@@ -162,9 +163,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		018EB80A25F0F68F006A5C64 /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
-		018EB81325F0FA9E006A5C64 /* TableCommonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCommonModifier.swift; sourceTree = "<group>"; };
-		018EB81625F0FDFC006A5C64 /* TableDiffableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDiffableModifier.swift; sourceTree = "<group>"; };
+		01ADB9EB25F15B720015EEA0 /* DiffableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableItem.swift; sourceTree = "<group>"; };
 		029CF758073A428168D45A5E /* TableBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		02E8001091BE7A1E8E249055 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		045709853C939F02AD98AA73 /* CollectionFoldableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFoldableItem.swift; sourceTree = "<group>"; };
@@ -235,7 +234,9 @@
 		6F6391E042EB8C7F3E807124 /* SelectableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
 		75CC19C2669A9CFDF96B523B /* FoldingTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		7B666DB92E53AFAF3A9ABC8D /* ConfigurableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableItem.swift; sourceTree = "<group>"; };
+		7CB5C6FFEB0DBDC2E34E1E11 /* TableDiffableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDiffableModifier.swift; sourceTree = "<group>"; };
 		7CC61C70CF18D8DC550E974B /* CollectionPrefetchProxyPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPrefetchProxyPlugin.swift; sourceTree = "<group>"; };
+		7F07CBAA5BC5F7810B0D007B /* TableCommonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCommonModifier.swift; sourceTree = "<group>"; };
 		8043B32B8DF7D7920D01D15E /* TableUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableUpdatesAnimator.swift; sourceTree = "<group>"; };
 		813694BFC4AF20F83B146A34 /* PrefetcherableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetcherableItem.swift; sourceTree = "<group>"; };
 		8314C71428C0C576C8BAA510 /* FeaturePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturePlugin.swift; sourceTree = "<group>"; };
@@ -274,6 +275,7 @@
 		CD7F2C343FE7CBDC421796C0 /* TableCell+RDDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableCell+RDDM.swift"; sourceTree = "<group>"; };
 		CF2E400A1CFD1CB665360BCA /* ScrollEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollEvent.swift; sourceTree = "<group>"; };
 		CFFD1D8A20A5980725CBD6BD /* TablePaginatablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePaginatablePlugin.swift; sourceTree = "<group>"; };
+		D53EB39A4EE5F36138996E85 /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
 		D656B621E1AA7442D8E564A7 /* CollectionScrollablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionScrollablePlugin.swift; sourceTree = "<group>"; };
 		D706EC7A6BD047EF3820E62C /* CollectionScrollViewDelegateProxyPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionScrollViewDelegateProxyPlugin.swift; sourceTree = "<group>"; };
 		D7B1372CC38EC9053F6F0C7F /* Stack+RDDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stack+RDDM.swift"; sourceTree = "<group>"; };
@@ -313,23 +315,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		018EB80925F0F56F006A5C64 /* Modifier */ = {
-			isa = PBXGroup;
-			children = (
-				018EB80A25F0F68F006A5C64 /* Modifier.swift */,
-			);
-			path = Modifier;
-			sourceTree = "<group>";
-		};
-		018EB80D25F0F92A006A5C64 /* Modifier */ = {
-			isa = PBXGroup;
-			children = (
-				018EB81325F0FA9E006A5C64 /* TableCommonModifier.swift */,
-				018EB81625F0FDFC006A5C64 /* TableDiffableModifier.swift */,
-			);
-			path = Modifier;
-			sourceTree = "<group>";
-		};
 		032CFE2A4BAA81D77BD0B945 /* REFACTORING */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,7 +333,6 @@
 		0464ABB7EF072B5B619ABDBE /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				018EB80D25F0F92A006A5C64 /* Modifier */,
 				D866003CE0E003204815859A /* Table+RDDM.swift */,
 				CD7F2C343FE7CBDC421796C0 /* TableCell+RDDM.swift */,
 				9780EBDA1326B79745DE8670 /* Animator */,
@@ -356,6 +340,7 @@
 				1C2B3EAB50FF815F3C60D849 /* Delegate */,
 				B98C7E8A43F804A43915C1AE /* Events */,
 				B9AC38A500EFE466445973AE /* Manager */,
+				5B502CBB972381E0A5D5276B /* Modifier */,
 				E14663C9E0C20AAE112DD387 /* Plugins */,
 			);
 			path = Table;
@@ -464,6 +449,15 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		5B502CBB972381E0A5D5276B /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				7F07CBAA5BC5F7810B0D007B /* TableCommonModifier.swift */,
+				7CB5C6FFEB0DBDC2E34E1E11 /* TableDiffableModifier.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
 		5E4DED0C836B95D4A2AA71EC /* PluginAction */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,6 +507,7 @@
 				6F6391E042EB8C7F3E807124 /* SelectableItem.swift */,
 				BBF2279B12A45694DB541501 /* SizableItem.swift */,
 				0E667E50AC6B700ED99E52CA /* SwipeableItem.swift */,
+				01ADB9EB25F15B720015EEA0 /* DiffableItem.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -702,8 +697,8 @@
 		A9CCFE74D85E93281C7B0A86 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				018EB80925F0F56F006A5C64 /* Modifier */,
 				B84A23D3681BA1B63FD8E35C /* Animator */,
+				CEDE225C933A61145BD0028D /* Modifier */,
 				5E5EEDC3878570795A67EE56 /* Plugins */,
 				68493AB254310F78E579F40C /* Wrapper */,
 			);
@@ -821,6 +816,14 @@
 				31E52E811C5B4B45831FFB0B /* CollectionItemTitleDisplayable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		CEDE225C933A61145BD0028D /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				D53EB39A4EE5F36138996E85 /* Modifier.swift */,
+			);
+			path = Modifier;
 			sourceTree = "<group>";
 		};
 		CFEE833B745C98DC4F06F8C3 /* Frameworks */ = {
@@ -964,7 +967,6 @@
 				055200FB04891A92E9D5BDBE /* CollectionPrefetchProxyPlugin.swift in Sources */,
 				F3A1F84015C4EC40F35FB128 /* CollectionPrefetcherablePlugin.swift in Sources */,
 				86C88FD512B2D0BCE383CFE7 /* CollectionRefreshablePlugin.swift in Sources */,
-				018EB81425F0FA9E006A5C64 /* TableCommonModifier.swift in Sources */,
 				678823B75241D9755CEB5676 /* CollectionScrollProvider.swift in Sources */,
 				CB614477A9965882AD11F37F /* CollectionScrollViewDelegateProxyPlugin.swift in Sources */,
 				35BD56E97DB6CB42CF1680DD /* CollectionScrollablePlugin.swift in Sources */,
@@ -974,7 +976,6 @@
 				1E97887FCE790188AD603DE3 /* ConfigurableItem.swift in Sources */,
 				7B777D112330B011F7500912 /* DataDisplayCompatible.swift in Sources */,
 				AB40B1702053061C45000D0B /* DataDisplayConstructable.swift in Sources */,
-				018EB81725F0FDFC006A5C64 /* TableDiffableModifier.swift in Sources */,
 				7C6D1AE1BD6E0BD8E9F55711 /* DataDisplayManager.swift in Sources */,
 				C3732E52730217218B115772 /* DataDisplayWrapper.swift in Sources */,
 				D13DCEDD874FE28660A4FF53 /* DeletableItem.swift in Sources */,
@@ -998,6 +999,7 @@
 				2F0D8711922B0334D439AA62 /* HeaderDataDisplayManager.swift in Sources */,
 				90E38A153E92C541CA272D96 /* IndexTitleDisplaybleItem.swift in Sources */,
 				6E1E3BC4AA048D3286BED9CD /* ManualTableManager.swift in Sources */,
+				6E4CC1639CBEDEA252449223 /* Modifier.swift in Sources */,
 				74D70140559A690AD12F08AF /* MovableItem.swift in Sources */,
 				4D8F9656B8B67A05C12C9CA2 /* Operations.swift in Sources */,
 				1A2251A0F5BC923D8583F586 /* PaginableBaseTableDataDisplayManager.swift in Sources */,
@@ -1017,8 +1019,11 @@
 				F97C30312631F6F4B39E04FA /* Table+RDDM.swift in Sources */,
 				4A603144E9F6BAF0C3AA189C /* TableBatchUpdatesAnimator.swift in Sources */,
 				92DC7F93A7983E0BC51879DA /* TableCell+RDDM.swift in Sources */,
+				875390CB8CF199FBAA5282A2 /* TableCommonModifier.swift in Sources */,
 				CCB04CB859732449F9038F45 /* TableDataSource.swift in Sources */,
 				301A155382A4EB3C45DADC3B /* TableDelegate.swift in Sources */,
+				01ADB9EC25F15B720015EEA0 /* DiffableItem.swift in Sources */,
+				9AA478EE48D989861E8070FE /* TableDiffableModifier.swift in Sources */,
 				7AA77621523D5F38F310F7E9 /* TableDirectionScrollablePlugin.swift in Sources */,
 				8E2EF8E535CA171B0B256280 /* TableDisplayablePlugin.swift in Sources */,
 				036963D49CD38AF78249C55B /* TableEvent.swift in Sources */,
@@ -1027,7 +1032,6 @@
 				48B0E876A87438F1C45E3AD7 /* TableGeneratorsProvider.swift in Sources */,
 				0047A941E6F8B72D187454D7 /* TableHeaderVisiblePlugin.swift in Sources */,
 				4AAABAE0643196A6910E1135 /* TableLastCellIsVisiblePlugin.swift in Sources */,
-				018EB80B25F0F68F006A5C64 /* Modifier.swift in Sources */,
 				B08030A57DDDA13F7400F3B6 /* TableMovable.swift in Sources */,
 				012253A8DDEEE2299F9E8126 /* TableMovablePlugin.swift in Sources */,
 				FC26FBA45ED04E8BF2A40648 /* TablePaginatablePlugin.swift in Sources */,

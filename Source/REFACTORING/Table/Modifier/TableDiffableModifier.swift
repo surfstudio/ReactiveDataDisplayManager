@@ -10,8 +10,8 @@ import UIKit
 @available(iOS 13, *)
 class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
-    typealias CellGeneratorType = TableCellGenerator & Diffable
-    typealias HeaderGeneratorType = TableHeaderGenerator & Diffable
+    typealias CellGeneratorType = TableCellGenerator & DiffableItemSource
+    typealias HeaderGeneratorType = TableHeaderGenerator & DiffableItemSource
 
     // MARK: - Properties
 

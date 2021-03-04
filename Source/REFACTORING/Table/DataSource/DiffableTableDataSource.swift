@@ -11,34 +11,9 @@ import UIKit
 @available(iOS 13.0, *)
 public typealias DiffableSnapshot = NSDiffableDataSourceSnapshot<DiffableItem, DiffableItem>
 
-/// All diffable cells and headers should include this item
-open class DiffableItem: NSObject {
-
-    // MARK: - Properties
-
-    public var identifier: String
-
-    // MARK: - Initialization
-
-    public init(identifier: String) {
-        self.identifier = identifier
-    }
-
-    // MARK: - Public Methods
-
-    public override var hash: Int {
-        var hasher = Hasher()
-        hasher.combine(identifier)
-        return hasher.finalize()
-    }
-
-    public override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? DiffableItem else { return false }
-        return identifier == object.identifier
-    }
-
-}
-
+/// DataSource based on `UITableViewDiffableDataSource` with automatic cells managing
+///
+/// - Warning: Required to conform all generators to `DiffableItemSource`
 @available(iOS 13.0, *)
 open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, DiffableItem>, TableDataSource {
 
@@ -61,6 +36,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
     
     // MARK: - Initialization
 
+    /// - parameter provider: provider of `UITableView` and `UITableViewCells`
     public init(provider: BaseTableManager) {
 
         super.init(tableView: provider.view) { (table, indexPath, item) -> UITableViewCell? in
@@ -91,11 +67,11 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 extension DiffableTableDataSource {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? DiffableTableStateManager)
+        prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseTableManager)
     }
 
     open func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? DiffableTableStateManager)
+        prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? BaseTableManager)
     }
 
 }
