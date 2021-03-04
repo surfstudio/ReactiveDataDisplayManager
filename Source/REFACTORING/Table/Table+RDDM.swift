@@ -24,31 +24,6 @@ public extension DataDisplayWrapper where Base: UITableView {
         TableBuilder(view: base, manager: GravityTableManager())
     }
 
-    @available(iOS 13.0, *)
-    var diffableBuilder: DiffableTableBuilder<DiffableTableStateManager> {
-        DiffableTableBuilder(view: base, manager: DiffableTableStateManager())
-    }
-
-}
-
-@available(iOS 13.0, *)
-public class DiffableTableBuilder<T: DiffableTableStateManager>: TableBuilder<T> {
-
-    // MARK: - Initialization
-
-    override init(view: UITableView, manager: T) {
-        super.init(view: view, manager: manager)
-        manager.view = view
-        dataSource = DiffableTableDataSource(provider: manager)
-    }
-
-    // MARK: - Public Methods
-
-    public func set(dataSource: DiffableTableDataSource) -> TableBuilder<T> {
-        self.dataSource = dataSource
-        return self
-    }
-
 }
 
 public class TableBuilder<T: BaseTableManager> {
@@ -96,6 +71,7 @@ public class TableBuilder<T: BaseTableManager> {
     init(view: UITableView, manager: T) {
         self.view = view
         self.manager = manager
+        self.manager.view = view
         delegate = BaseTableDelegate()
         dataSource = BaseTableDataSource()
         animator = {
@@ -116,8 +92,8 @@ public class TableBuilder<T: BaseTableManager> {
     }
 
     /// Change dataSource
-    public func set(dataSource: TableDataSource) -> TableBuilder<T> {
-        self.dataSource = dataSource
+    public func set(dataSource: (BaseTableManager) -> TableDataSource) -> TableBuilder<T> {
+        self.dataSource = dataSource(manager)
         return self
     }
 
@@ -163,7 +139,6 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
-        manager.view = view
 
         setSwipeActionsPluginIfNeeded()
         delegate.tablePlugins = tablePlugins

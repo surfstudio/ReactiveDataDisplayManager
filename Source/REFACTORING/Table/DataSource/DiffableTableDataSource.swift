@@ -44,7 +44,16 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
     // MARK: - Properties
 
-    public weak var provider: TableGeneratorsProvider?
+    public weak var provider: TableGeneratorsProvider? {
+        didSet {
+            let manager = provider as? BaseTableManager
+            prefetchPlugins.setup(with: manager)
+            tablePlugins.setup(with: manager)
+
+
+        }
+    }
+
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
@@ -79,7 +88,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 // MARK: - UITableViewDataSourcePrefetching
 
 @available(iOS 13.0, *)
-extension DiffableTableDataSource: UITableViewDataSourcePrefetching {
+extension DiffableTableDataSource {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? DiffableTableStateManager)

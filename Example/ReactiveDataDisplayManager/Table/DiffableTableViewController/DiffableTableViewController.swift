@@ -25,7 +25,9 @@ final class DiffableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = tableView.rddm.diffableBuilder.build()
+    private lazy var adapter = tableView.rddm.manualBuilder
+        .set(dataSource: { DiffableTableDataSource(provider: $0) })
+        .build()
 
     // MARK: - UIViewController
 
@@ -55,7 +57,7 @@ private extension DiffableTableViewController {
         adapter.addCellGenerators(makeCellGenerators())
 
         // Tell adapter that we've changed generators and need updates the UI to reflect the state of the data
-        adapter.apply()
+        adapter.forceRefill()
     }
 
     // Create cells generators

@@ -35,7 +35,7 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        view?.reloadData()
+        modifier?.reload()
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator) {

@@ -15,6 +15,10 @@ open class Modifier<View: UIView, Animation> {
         self.view = view
     }
 
+    open func reload() {
+        // Stub
+    }
+
     open func replace(at indexPath: IndexPath, with removeAnimation: Animation, and insertAnimation: Animation) {
         // Stub
     }

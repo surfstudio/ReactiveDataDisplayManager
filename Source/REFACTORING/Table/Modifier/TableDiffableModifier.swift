@@ -28,6 +28,11 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     // MARK: - Methods
 
+    /// Update snapshot
+    override func reload() {
+        apply(animated: true)
+    }
+
     /// Update snapshot after rows replaced
     ///
     /// - parameter indexPath: **ignored**, automatically calculated using `DiffableSnapshot`

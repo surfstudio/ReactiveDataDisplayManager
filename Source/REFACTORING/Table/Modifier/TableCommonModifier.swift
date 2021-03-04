@@ -20,6 +20,11 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
         self.animator = animator
     }
 
+    /// Reload all table content
+    override func reload() {
+        view?.reloadData()
+    }
+
     // MARK: - Methods
 
     /// Replace row at specified indexPath
