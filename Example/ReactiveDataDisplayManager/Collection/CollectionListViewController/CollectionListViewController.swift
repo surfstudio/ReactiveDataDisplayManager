@@ -94,6 +94,8 @@ private extension UICollectionLayoutListConfiguration.Appearance {
             return "Grouped"
         case .insetGrouped:
             return "Inset Grouped"
+        @unknown default:
+            fatalError()
         }
     }
 
@@ -109,6 +111,8 @@ private extension UICollectionLayoutListConfiguration.Appearance {
             return .insetGrouped
         case .insetGrouped:
             return .plain
+        @unknown default:
+            fatalError()
         }
     }
 
