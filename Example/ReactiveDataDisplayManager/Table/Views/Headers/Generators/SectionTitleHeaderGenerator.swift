@@ -9,7 +9,7 @@
 import Foundation
 import ReactiveDataDisplayManager
 
-final class SectionTitleHeaderGenerator: TableHeaderGenerator, SectionTitleDisplayble {
+final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplaybleItem {
 
     // MARK: - Constants
 
@@ -17,10 +17,16 @@ final class SectionTitleHeaderGenerator: TableHeaderGenerator, SectionTitleDispl
         static let defaultHeight: CGFloat = 30
     }
 
-    // MARK: - Property
+    // MARK: - Events
+
+    var willDisplayEvent = BaseEvent<Void>()
+    var didEndDisplayEvent = BaseEvent<Void>()
+    var didEndDisplayCellEvent: BaseEvent<UITableViewCell>?
+
+    // MARK: - Properties
 
     var title: String
-    var needSectionIndexTitle: Bool
+    var needIndexTitle: Bool
 
     // MARK: - Private Property
 
@@ -32,7 +38,7 @@ final class SectionTitleHeaderGenerator: TableHeaderGenerator, SectionTitleDispl
     init(model: String, needSectionIndexTitle: Bool) {
         self.model = model
         self.title = model
-        self.needSectionIndexTitle = needSectionIndexTitle
+        self.needIndexTitle = needSectionIndexTitle
     }
 
     // MARK: - TableHeaderGenerator

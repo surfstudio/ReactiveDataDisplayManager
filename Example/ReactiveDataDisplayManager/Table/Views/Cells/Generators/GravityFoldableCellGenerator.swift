@@ -8,47 +8,28 @@
 
 import ReactiveDataDisplayManager
 
-final class GravityFoldableCellGenerator: FoldableItem {
+final class GravityFoldableCellGenerator: FoldableCellGenerator {
 
     // MARK: - Properties
 
-    var didFoldEvent = BaseEvent<Bool>()
-    var isExpanded = false
-    var childGenerators: [TableCellGenerator] = []
     var heaviness: Int
 
     // MARK: - Initialization
 
-    init(heaviness: Int = .zero) {
+    init(heaviness: Int = .zero, isExpanded: Bool = false) {
         self.heaviness = heaviness
+        super.init(with: .init(title: "with heaviness \(heaviness)", isExpanded: isExpanded))
+        self.isExpanded = isExpanded
     }
 
 }
 
-// MARK: - TableCellGenerator
+// MARK: - Gravity
 
-extension GravityFoldableCellGenerator: GravityTableCellGenerator {
-
-    var identifier: String {
-        return String(describing: FoldableTableViewCell.self)
-    }
+extension GravityFoldableCellGenerator: GravityItem {
 
     func getHeaviness() -> Int {
         return heaviness
-    }
-
-}
-
-// MARK: - ViewBuilder
-
-extension GravityFoldableCellGenerator: ViewBuilder {
-
-    func build(view: FoldableTableViewCell) {
-        view.fill(title: "with heaviness \(heaviness)", expanded: isExpanded)
-
-        didFoldEvent.addListner { isExpanded in
-            view.configure(expanded: isExpanded)
-        }
     }
 
 }

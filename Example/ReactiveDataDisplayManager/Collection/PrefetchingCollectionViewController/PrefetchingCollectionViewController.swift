@@ -28,7 +28,7 @@ final class PrefetchingCollectionViewController: UIViewController {
     // MARK: - Private Properties
 
     private let prefetcher = NukeImagePrefetcher()
-    private lazy var prefetcherablePlugin = CollectionPrefetcherablePlugin<NukeImagePrefetcher, ImageCollectionCellGenerator>(prefetcher: prefetcher)
+    private lazy var prefetcherablePlugin: CollectionPrefetcherablePlugin<NukeImagePrefetcher, ImageCollectionCellGenerator> = .prefetch(prefetcher: prefetcher)
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)
@@ -76,7 +76,7 @@ private extension PrefetchingCollectionViewController {
             guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
 
             // Create generator
-            let generator = BaseCollectionCellGenerator<ImageCollectionViewCell>(with: viewModel)
+            let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)

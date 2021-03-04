@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
 final class FoldableTableViewCell: UITableViewCell {
+
+    struct Model {
+        let title: String
+        let isExpanded: Bool
+    }
 
     // MARK: - Constants
 
@@ -29,17 +35,23 @@ final class FoldableTableViewCell: UITableViewCell {
         setupInitialState()
     }
 
-    // MARK: - Public Methods
+    // MARK: - Internal Methods
 
-    func fill(title: String = "", expanded: Bool) {
-        titleLabel.text = String(format: "Foldable cell %@", title)
-        arrowImageView.transform = expanded ? .identity : CGAffineTransform(rotationAngle: .pi)
+    func update(isExpanded: Bool) {
+        UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
+            self?.arrowImageView.transform = isExpanded ? .identity : CGAffineTransform(rotationAngle: .pi)
+        }
     }
 
-    func configure(expanded: Bool) {
-        UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
-            self?.arrowImageView.transform = expanded ? .identity : CGAffineTransform(rotationAngle: .pi)
-        }
+}
+
+// MARK: - Configurable
+
+extension FoldableTableViewCell: ConfigurableItem {
+
+    func configure(with model: Model) {
+        titleLabel.text = String(format: "Foldable cell %@", model.title)
+        arrowImageView.transform = model.isExpanded ? .identity : CGAffineTransform(rotationAngle: .pi)
     }
 
 }

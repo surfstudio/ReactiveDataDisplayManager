@@ -10,31 +10,6 @@ import UIKit
 import ReactiveDataDisplayManager
 import Nuke
 
-// MARK: - Appearance
-
-private enum Appearance {
-    case grid
-    case table(width: CGFloat)
-
-    var cellSize: CGSize {
-        switch self {
-        case .grid:
-            return CGSize(width: 100, height: 100)
-        case .table(let width):
-            return CGSize(width: width, height: 50)
-        }
-    }
-
-    var title: String {
-        switch self {
-        case .grid:
-            return "Grid"
-        case .table:
-            return "Table"
-        }
-    }
-}
-
 final class FoldableCollectionViewController: UIViewController {
 
     // MARK: - Constants
@@ -50,7 +25,7 @@ final class FoldableCollectionViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = collectionView.rddm.flowBuilder
-        .add(plugin: CollectionFoldablePlugin())
+        .add(plugin: .foldable())
         .build()
 
     private var appearance: Appearance = .grid
@@ -142,7 +117,7 @@ private extension FoldableCollectionViewController {
 
         for _ in 0...endIndex {
             guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
-            let generator = BaseCollectionCellGenerator<ImageCollectionViewCell>(with: viewModel)
+            let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
             generators.append(generator)
         }
 

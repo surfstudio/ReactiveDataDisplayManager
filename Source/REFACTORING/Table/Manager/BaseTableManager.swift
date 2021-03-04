@@ -23,33 +23,17 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     public weak var view: UITableView!
 
-    public var generators: [[TableCellGenerator]]
-    public var sections: [TableHeaderGenerator]
+    public var generators: [[TableCellGenerator]] = []
+    public var sections: [TableHeaderGenerator] = []
 
     var delegate: TableDelegate?
     var dataSource: TableDataSource?
     var animator: TableAnimator?
 
-    // MARK: - Initialization
-
-    public init() {
-        generators = [[TableCellGenerator]]()
-        sections = [TableHeaderGenerator]()
-    }
-
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
         view?.reloadData()
-    }
-
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            completion()
-        }
-        self.forceRefill()
-        CATransaction.commit()
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator) {

@@ -13,7 +13,12 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
     // MARK: - Properties
 
-    weak public var manager: BaseCollectionManager?
+    weak public var manager: BaseCollectionManager? {
+        didSet {
+            collectionPlugins.setup(with: manager)
+            scrollPlugins.setup(with: manager)
+        }
+    }
 
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
@@ -22,7 +27,7 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
 // MARK: - UICollectionViewDelegate
 
-extension BaseCollectionDelegate: UICollectionViewDelegate {
+extension BaseCollectionDelegate {
 
     open func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         collectionPlugins.process(event: .didHighlight(indexPath), with: manager)

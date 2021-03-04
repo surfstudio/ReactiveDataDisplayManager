@@ -18,10 +18,10 @@ public protocol ContentPrefetcher {
     func cancelPrefetching(for requestIds: [Content])
 }
 
-/// Adds support for PrefetcherableFlow with prefetcher
+/// Plugin to support `PrefetcherableItem` with prefetcher
 ///
-/// ContentPrefetcher prefetches and caches data to eliminate delays when requesting the same data later.
-public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableFlow>: BaseTablePlugin<PrefetchEvent> {
+/// `ContentPrefetcher` prefetches and caches data to eliminate delays when requesting the same data later.
+public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator: PrefetcherableItem>: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Private Properties
 
@@ -30,7 +30,7 @@ public class TablePrefetcherablePlugin<Prefetcher: ContentPrefetcher, Generator:
     // MARK: - Initialization
 
     /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
-    public init(prefetcher: Prefetcher) {
+    init(prefetcher: Prefetcher) {
         self.prefetcher = prefetcher
     }
 
@@ -63,6 +63,20 @@ private extension TablePrefetcherablePlugin {
 
     func getPrefetcherableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> Generator? {
         return manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? Generator
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseTablePlugin {
+
+    /// Plugin to support `PrefetcherableItem` with prefetcher
+    ///
+    /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
+    static func prefetch<Prefetcher: ContentPrefetcher,
+                         Generator: PrefetcherableItem>(prefetcher: Prefetcher) -> TablePrefetcherablePlugin<Prefetcher, Generator>{
+        .init(prefetcher: prefetcher)
     }
 
 }

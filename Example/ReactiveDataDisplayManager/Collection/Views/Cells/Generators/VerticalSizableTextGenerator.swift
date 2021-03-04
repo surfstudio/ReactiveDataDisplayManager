@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class VerticalSizableTextGenerator {
+final class VerticalSizableTextGenerator: BaseCollectionCellGenerator<SizableCollectionViewCell> {
 
     // MARK: - Private Properties
 
@@ -20,33 +20,14 @@ final class VerticalSizableTextGenerator {
     public init(with text: String, maxWight: CGFloat) {
         self.text = text
         self.maxWight = maxWight
-    }
-
-}
-
-// MARK: - CollectionCellGenerator
-
-extension VerticalSizableTextGenerator: CollectionCellGenerator {
-
-    var identifier: String {
-        return String(describing: SizableCollectionViewCell.self)
-    }
-
-}
-
-// MARK: - ViewBuilder
-
-extension VerticalSizableTextGenerator: ViewBuilder {
-
-    func build(view: SizableCollectionViewCell) {
-        view.configure(with: text)
+        super.init(with: text)
     }
 
 }
 
 // MARK: - SizableCollectionCellGenerator
 
-extension VerticalSizableTextGenerator: SizableCollectionCellGenerator {
+extension VerticalSizableTextGenerator: SizableItem {
 
     func getSize() -> CGSize {
         return SizableCollectionViewCell.getCellSize(for: text, withWight: maxWight)

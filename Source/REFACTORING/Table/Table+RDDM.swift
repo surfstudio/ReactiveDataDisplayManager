@@ -75,7 +75,7 @@ public class TableBuilder<T: BaseTableManager> {
     var prefetchPlugins = PrefetchPluginsCollection()
     var movablePlugin: TableMovable?
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
-    var swipeActionsPlugin: FeaturePlugin?
+    var swipeActionsPlugin: TableFeaturePlugin?
 
     // MARK: - Initialization
 
@@ -108,7 +108,7 @@ public class TableBuilder<T: BaseTableManager> {
     }
 
     /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
-    public func add(featurePlugin: FeaturePlugin) -> TableBuilder<T> {
+    public func add(featurePlugin: TableFeaturePlugin) -> TableBuilder<T> {
         checkSwipeActionsPlugin(with: featurePlugin)
 
         switch featurePlugin {
@@ -149,25 +149,24 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
-        delegate.manager = manager
+        manager.view = view
 
         setSwipeActionsPluginIfNeeded()
         delegate.tablePlugins = tablePlugins
         delegate.scrollPlugins = scrollPlugins
         delegate.movablePlugin = movablePlugin
 
+        delegate.manager = manager
         view.delegate = delegate
 
-        dataSource.provider = manager
         dataSource.movablePlugin = movablePlugin
         dataSource.sectionTitleDisplayablePlugin = sectionTitleDisplayablePlugin
         dataSource.tablePlugins = tablePlugins
 
+        dataSource.provider = manager
         view.dataSource = dataSource
 
         setPrefetchDataSourceIfNeeded()
-
-        manager.view = view
         manager.animator = animator
         manager.delegate = delegate
         manager.dataSource = dataSource
@@ -180,7 +179,7 @@ public class TableBuilder<T: BaseTableManager> {
 
 private extension TableBuilder {
 
-    func checkSwipeActionsPlugin(with plugin: FeaturePlugin) {
+    func checkSwipeActionsPlugin(with plugin: TableFeaturePlugin) {
         guard #available(iOS 11.0, *),
               let plugin = plugin as? TableSwipeActionsConfigurable
         else { return }

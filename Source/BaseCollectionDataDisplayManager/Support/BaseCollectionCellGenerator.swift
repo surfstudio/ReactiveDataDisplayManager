@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem where Cell: UICollectionViewCell {
+open class BaseCollectionCellGenerator<Cell: ConfigurableItem>: SelectableItem where Cell: UICollectionViewCell {
 
     // MARK: - Public Properties
 
@@ -27,6 +27,12 @@ open class BaseCollectionCellGenerator<Cell: Configurable>: SelectableItem where
         self.registerType = registerType
     }
 
+    // MARK: - Open methods
+
+    open func configure(cell: Cell, with model: Cell.Model) {
+        cell.configure(with: model)
+    }
+
 }
 
 // MARK: - CollectionCellGenerator
@@ -40,7 +46,7 @@ extension BaseCollectionCellGenerator: CollectionCellGenerator {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? Cell else {
             return UICollectionViewCell()
         }
-        cell.configure(with: model)
+        configure(cell: cell, with: model)
         return cell
     }
 

@@ -6,11 +6,12 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-open class TableMovablePlugin: FeaturePlugin {
+/// Plugin to move cells
+///
+/// Allow moving cells builded with `MovableItem` generators
+open class TableMovablePlugin: TableFeaturePlugin {
 
-    // MARK: - Initialization
-
-    public init() {}
+    public typealias GeneratorType = MovableItem
 
 }
 
@@ -19,7 +20,7 @@ open class TableMovablePlugin: FeaturePlugin {
 extension TableMovablePlugin: TableMovableDelegate {
     
     open func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
-        if let generator = provider?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
+        if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
             return generator.canMove()
         }
         return false
@@ -36,7 +37,7 @@ extension TableMovablePlugin: TableMovableDataSource {
         guard
             let manager = provider as? BaseTableManager,
             let view = manager.view,
-            let generator = manager.generators[sourceIndexPath.section][sourceIndexPath.row] as? MovableGenerator,
+            let generator = manager.generators[sourceIndexPath.section][sourceIndexPath.row] as? GeneratorType,
             moveToTheSameSection || generator.canMoveInOtherSection()
         else {
             return
@@ -58,10 +59,23 @@ extension TableMovablePlugin: TableMovableDataSource {
     }
 
     open func canFocusRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
-        if let generator = provider?.generators[indexPath.section][indexPath.row] as? MovableGenerator {
+        if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
             return generator.canMove()
         }
         return false
+    }
+
+}
+
+// MARK: - Public init
+
+public extension TableFeaturePlugin {
+
+    /// Plugin to move cells
+    ///
+    /// Allow moving cells builded with `MovableItem` generators
+    static func movable() -> TableMovablePlugin {
+        .init()
     }
 
 }

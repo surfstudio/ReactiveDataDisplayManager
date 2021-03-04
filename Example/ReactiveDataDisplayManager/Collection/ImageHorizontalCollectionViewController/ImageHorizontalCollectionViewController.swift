@@ -34,8 +34,8 @@ final class ImageHorizontalCollectionViewController: UIViewController {
                                                    insets: Constants.sectionInset)
 
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(plugin: CollectionScrollablePlugin(scrollProvider: scrollManager))
-        .add(plugin: CollectionSelectedItemScrollablePlugin(scrollPosition: .centeredHorizontally))
+        .add(plugin: .scrollableBehaviour(scrollProvider: scrollManager))
+        .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
         .build()
 
     // MARK: - UIViewController
@@ -75,7 +75,7 @@ private extension ImageHorizontalCollectionViewController {
             guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
 
             // Create generator
-            let generator = BaseCollectionCellGenerator<ImageCollectionViewCell>(with: viewModel)
+            let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)

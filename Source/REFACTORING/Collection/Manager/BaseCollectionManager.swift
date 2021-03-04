@@ -16,36 +16,23 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
 
+    public typealias CollectionAnimator = Animator<CollectionType>
+
     // MARK: - Public properties
 
     public weak var view: UICollectionView!
 
-    public var generators: [[CollectionCellGenerator]]
-    public var sections: [CollectionHeaderGenerator]
+    public var generators: [[CollectionCellGenerator]] = []
+    public var sections: [CollectionHeaderGenerator] = []
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
-
-    // MARK: - Initialization
-
-    public init() {
-        generators = [[CollectionCellGenerator]]()
-        sections = [CollectionHeaderGenerator]()
-    }
+    var animator: CollectionAnimator?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
         self.view?.reloadData()
-    }
-
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            completion()
-        }
-        self.forceRefill()
-        CATransaction.commit()
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
@@ -207,22 +194,24 @@ private extension BaseCollectionManager {
                          needScrollAt scrollPosition: UICollectionView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 
-        // perform update
-        self.generators[index.sectionIndex].remove(at: index.generatorIndex)
-        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        view.deleteItems(at: [indexPath])
+        animator?.perform(in: view, animation: { [weak self] in
+            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
+            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+            view.deleteItems(at: [indexPath])
 
-        // remove empty section if needed
-        if needRemoveEmptySection && self.generators[index.sectionIndex].isEmpty {
-            self.generators.remove(at: index.sectionIndex)
-            self.sections.remove(at: index.sectionIndex)
-            view.deleteSections(IndexSet(integer: index.sectionIndex))
-        }
+            // remove empty section if needed
+            let sectionIsEmpty = self?.generators[index.sectionIndex].isEmpty ?? true
+            if needRemoveEmptySection && sectionIsEmpty {
+                self?.generators.remove(at: index.sectionIndex)
+                self?.sections.remove(at: index.sectionIndex)
+                view.deleteSections(IndexSet(integer: index.sectionIndex))
+            }
 
-        // scroll if needed
-        if let scrollPosition = scrollPosition {
-            view.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
-        }
+            // scroll if needed
+            if let scrollPosition = scrollPosition {
+                view.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
+            }
+        })
     }
 
 }

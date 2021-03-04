@@ -25,7 +25,7 @@ final class FoldableTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(plugin: TableFoldablePlugin())
+        .add(plugin: .foldable())
         .build()
 
     // MARK: - UIViewController
@@ -58,21 +58,21 @@ private extension FoldableTableViewController {
         // Tell adapter that we've changed generators
         adapter.forceRefill()
     }
-    
-    func makeRegularCellWithTitlesGenerators() -> [TitleTableGenerator] {
-        var generators = [TitleTableGenerator]()
+
+    func makeRegularCellWithTitlesGenerators() -> [TableCellGenerator] {
+        var generators = [TableCellGenerator]()
         for _ in 0...3 {
-            generators.append(TitleTableGenerator(model: Constants.titleForRegularCell))
+            generators.append(TitleTableViewCell.rddm.baseGenerator(with: Constants.titleForRegularCell))
         }
         return generators
     }
 
     func makeFoldableCellGenerator() -> FoldableCellGenerator {
         // Create foldable generator
-        let generator = FoldableCellGenerator()
+        let generator = FoldableCellGenerator(with: .init(title: "", isExpanded: false))
 
         // Create and add child generators
-        generator.childGenerators = Constants.titleForSubcells.map { TitleTableGenerator(model: $0) }
+        generator.childGenerators = Constants.titleForSubcells.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
         return generator
     }
 

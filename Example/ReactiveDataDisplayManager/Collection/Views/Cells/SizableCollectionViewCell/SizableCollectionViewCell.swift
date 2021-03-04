@@ -39,7 +39,7 @@ final class SizableCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Configurable
 
-extension SizableCollectionViewCell: Configurable {
+extension SizableCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: String) {
         titleLabel.text = viewModel

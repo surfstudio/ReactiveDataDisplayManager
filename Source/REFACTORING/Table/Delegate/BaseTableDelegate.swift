@@ -13,7 +13,12 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Properties
 
-    weak public var manager: BaseTableManager?
+    weak public var manager: BaseTableManager? {
+        didSet {
+            tablePlugins.setup(with: manager)
+            scrollPlugins.setup(with: manager)
+        }
+    }
 
     public var estimatedHeight: CGFloat = 40
 
@@ -29,12 +34,13 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Private Properties
 
-    private var _swipeActionsPlugin: FeaturePlugin?
+    private var _swipeActionsPlugin: TableFeaturePlugin?
+
 }
 
 // MARK: - UITableViewDelegate
 
-extension BaseTableDelegate: UITableViewDelegate {
+extension BaseTableDelegate {
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tablePlugins.process(event: .willDisplayCell(indexPath), with: manager)

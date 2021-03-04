@@ -6,17 +6,19 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-/// Adds the definition of the section that started to be displayed
+/// Plugin to define section that started to be displayed
 public class TableHeaderVisiblePlugin: BaseTablePlugin<TableEvent> {
+
+    public typealias Action = (Int) -> Void
 
     // MARK: - Private Properties
 
-    private let action: (Int) -> Void
+    private let action: Action
 
     // MARK: - Initialization
 
     /// - parameter action: closure returns the index of the section that started showing
-    public init(action: @escaping (Int) -> Void) {
+    init(action: @escaping Action) {
         self.action = action
     }
 
@@ -59,6 +61,19 @@ private extension TableHeaderVisiblePlugin {
         if lastPath.section >= section {
             action(section + 1)
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseTablePlugin {
+
+    /// Plugin to define section that started to be displayed
+    ///
+    /// - parameter action: closure returns the index of the section that started showing
+    static func headerIsVisible(action: @escaping TableHeaderVisiblePlugin.Action) -> TableHeaderVisiblePlugin {
+        .init(action: action)
     }
 
 }

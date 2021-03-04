@@ -6,7 +6,9 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-// Adds support for Selectable item triggering
+/// Plugin to support `SelectableItem`
+///
+/// Handle `didSelect` event inside generator and `deselectRow`
 public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - BaseTablePlugin
@@ -25,6 +27,19 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
         default:
             break
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseTablePlugin {
+
+    /// Plugin to support `SelectableItem`
+    ///
+    /// Handle `didSelect` event inside generator and `deselectRow`
+    static func selectable() -> TableSelectablePlugin {
+        .init()
     }
 
 }

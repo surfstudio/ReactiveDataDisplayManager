@@ -23,9 +23,9 @@ final class SwipeableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    let swipeActionProvider = SwipeActionProvider()
+    private let swipeActionProvider = SwipeActionProvider()
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(featurePlugin: TableSwipeActionsConfigurationPlugin(swipeProvider: swipeActionProvider))
+        .add(featurePlugin: .swipeActions(swipeProvider: swipeActionProvider))
         .build()
 
     // MARK: - UIViewController
@@ -46,7 +46,7 @@ private extension SwipeableTableViewController {
     func fillAdapter() {
         // Create cell generators
         let generators = Constants.models.map { model -> SwipeableTableGenerator in
-            let generator = SwipeableTableGenerator(model: model)
+            let generator = SwipeableTableGenerator(with: model)
 
             generator.didSwipeEvent += { [weak generator] actionType in
                 debugPrint("The action with type \(actionType) was selected from all available generator events \(generator?.actionTypes ?? [])")

@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Plugin to add reaction on `willDisplayCell` of last cell
 public class TableLastCellIsVisiblePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - Private Properties
@@ -16,7 +17,8 @@ public class TableLastCellIsVisiblePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - Initialization
 
-    public init(action: @escaping () -> Void) {
+    /// - parameter action: closure with reaction to visibility of last cell
+    init(action: @escaping () -> Void) {
         self.action = action
     }
 
@@ -39,6 +41,19 @@ public class TableLastCellIsVisiblePlugin: BaseTablePlugin<TableEvent> {
         default:
             break
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseTablePlugin {
+
+    /// Plugin to add reaction on `willDisplayCell` of last cell
+    ///
+    /// - parameter action: closure with reaction to visibility of last cell
+    static func lastCellIsVisible(action: @escaping () -> Void) -> TableLastCellIsVisiblePlugin {
+        .init(action: action)
     }
 
 }

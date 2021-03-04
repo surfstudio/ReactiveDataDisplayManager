@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Proxy of all UIScrollViewDelegate events
+/// Proxy of all `UIScrollViewDelegate` events
 public class TableScrollViewDelegateProxyPlugin: BaseTablePlugin<ScrollEvent> {
 
     // MARK: - Properties
@@ -57,6 +57,17 @@ public class TableScrollViewDelegateProxyPlugin: BaseTablePlugin<ScrollEvent> {
         case .didChangeAdjustedContentInset:
             didChangeAdjustedContentInset.invoke(with: view)
         }
+    }
+
+}
+
+// MARK: - Public init
+
+public extension BaseTablePlugin {
+
+    /// Plugin to proxy of all `UIScrollViewDelegate` events
+    static func proxyScroll() -> TableScrollViewDelegateProxyPlugin {
+        .init()
     }
 
 }

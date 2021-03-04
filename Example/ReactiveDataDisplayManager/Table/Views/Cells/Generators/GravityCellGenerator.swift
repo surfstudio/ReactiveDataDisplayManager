@@ -8,45 +8,27 @@
 
 import ReactiveDataDisplayManager
 
-final class GravityCellGenerator {
+class GravityCellGenerator: BaseCellGenerator<TitleTableViewCell> {
 
     // MARK: - Properties
 
     var heaviness: Int
 
-    // MARK: - Private Properties
+    // MARK: - Intialization
 
-    private let model: String
-
-    // MARK: - Initialization
-
-    public init(model: String, heaviness: Int = .zero) {
+    init(model: String, heaviness: Int = .zero) {
         self.heaviness = heaviness
-        self.model = model
+        super.init(with: model)
     }
 
 }
 
-// MARK: - TableCellGenerator
+// MARK: - Gravity
 
-extension GravityCellGenerator: GravityTableCellGenerator {
-
-    var identifier: String {
-        return String(describing: TitleTableViewCell.self)
-    }
+extension GravityCellGenerator: GravityItem {
 
     func getHeaviness() -> Int {
         return heaviness
-    }
-
-}
-
-// MARK: - ViewBuilder
-
-extension GravityCellGenerator: ViewBuilder {
-
-    func build(view: TitleTableViewCell) {
-        view.fill(with: model)
     }
 
 }

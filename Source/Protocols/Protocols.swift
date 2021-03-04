@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import UIKit
 
 open class TableHeaderGenerator: ViewGenerator {
 
     public init() { }
-    
+
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
     }
@@ -99,37 +98,14 @@ public protocol ViewBuilder {
     func build(view: ViewType)
 }
 
-/// Protocol for selectable item.
-public protocol SelectableItem: class {
-
-    /// Invokes when user taps on the item.
-    var didSelectEvent: BaseEvent<Void> { get }
-
-    /// A Boolean value that determines whether to perform a cell deselect.
-    ///
-    /// If the value of this property is **true** (the default), cells deselect
-    /// immediately after tap. If you set it to **false**, they don't deselect.
-    var isNeedDeselect: Bool { get }
-}
-
-public protocol FoldableItem: class {
-    var didFoldEvent: BaseEvent<Bool> { get }
-    var isExpanded: Bool { get set }
-    var childGenerators: [TableCellGenerator] { get set }
-}
-
+@available(*, deprecated, message: "Use FoldableItem")
 public protocol GravityFoldableItem: class {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
     var childGenerators: [GravityTableCellGenerator] { get set }
 }
 
-public protocol PrefetcherableFlow: class {
-    associatedtype IdType: Hashable
-
-    var requestId: IdType? { get }
-}
-
+@available(*, deprecated, message: "Use DisplayableItem")
 public protocol DisplayableFlow: class {
 
     /// Invokes when cell will displaying.
@@ -145,15 +121,18 @@ public protocol DisplayableFlow: class {
 
 }
 
+@available(*, deprecated, message: "Use DeletableItem")
 public protocol DeletableGenerator {
     var eventDelete: BaseEmptyEvent { get }
 }
 
+@available(*, deprecated, message: "Use MovableItem")
 public protocol MovableGenerator {
     func canMove() -> Bool
     func canMoveInOtherSection() -> Bool
 }
 
+@available(*, deprecated, message: "Use MovableItem")
 public extension MovableGenerator {
 
     func canMove() -> Bool {
@@ -161,14 +140,6 @@ public extension MovableGenerator {
     }
 
     func canMoveInOtherSection() -> Bool {
-        return true
-    }
-
-}
-
-public extension SelectableItem {
-
-    var isNeedDeselect: Bool {
         return true
     }
 
@@ -251,9 +222,15 @@ public extension StackCellGenerator where Self: ViewBuilder {
     }
 }
 
-public typealias GravityTableCellGenerator = TableCellGenerator & Gravity
+@available(*, deprecated, message: "Use GravityItem")
+public protocol Gravity: AnyObject {
+    var heaviness: Int { get set }
+    func getHeaviness() -> Int
+}
 
-open class GravityTableHeaderGenerator: TableHeaderGenerator, Gravity {
+public typealias GravityTableCellGenerator = TableCellGenerator & GravityItem
+
+open class GravityTableHeaderGenerator: TableHeaderGenerator, GravityItem {
     open var heaviness: Int = .zero
 
     open func getHeaviness() -> Int {

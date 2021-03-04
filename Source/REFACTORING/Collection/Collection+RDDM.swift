@@ -31,16 +31,20 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     typealias ScrollPluginsCollection = PluginCollection<BaseCollectionPlugin<ScrollEvent>>
     typealias PrefetchPluginsCollection = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>
 
+    public typealias CollectionAnimator = Animator<BaseCollectionManager.CollectionType>
+
     // MARK: - Properties
 
     let view: UICollectionView
     let manager: T
     var delegate: CollectionDelegate
     var dataSource: CollectionDataSource
+    var animator: CollectionAnimator
 
     var collectionPlugins = CollectionPluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
+    var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
 
     // MARK: - Initialization
 
@@ -49,6 +53,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         self.manager = manager
         delegate = BaseCollectionDelegate()
         dataSource = BaseCollectionDataSource()
+        animator = CollectionBatchUpdatesAnimator()
     }
 
     // MARK: - Public Methods
@@ -62,6 +67,19 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     /// Change dataSource
     public func set(dataSource: CollectionDataSource) -> CollectionBuilder<T> {
         self.dataSource = dataSource
+        return self
+    }
+
+    /// Change animator
+    public func set(animator: CollectionAnimator) -> CollectionBuilder<T> {
+        self.animator = animator
+        return self
+    }
+
+    /// Add feature plugin functionality based on UICollectionViewDelegate/UICollectionViewDataSource events
+    public func add(featurePlugin: CollectionFeaturePlugin) -> CollectionBuilder<T> {
+        guard let plugin = featurePlugin as? CollectionItemTitleDisplayable else { return self }
+        itemTitleDisplayablePlugin = plugin
         return self
     }
 
@@ -86,14 +104,18 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
-        delegate.manager = manager
+        manager.view = view
+
         delegate.collectionPlugins = collectionPlugins
         delegate.scrollPlugins = scrollPlugins
+
+        delegate.manager = manager
         view.delegate = delegate
 
-        dataSource.provider = manager
         dataSource.collectionPlugins = collectionPlugins
+        dataSource.itemTitleDisplayablePlugin = itemTitleDisplayablePlugin
 
+        dataSource.provider = manager
         view.dataSource = dataSource
 
         if #available(iOS 10.0, *) {
@@ -101,9 +123,9 @@ public class CollectionBuilder<T: BaseCollectionManager> {
             view.prefetchDataSource = dataSource
         }
 
-        manager.view = view
         manager.delegate = delegate
         manager.dataSource = dataSource
+        manager.animator = animator
         return manager
     }
 

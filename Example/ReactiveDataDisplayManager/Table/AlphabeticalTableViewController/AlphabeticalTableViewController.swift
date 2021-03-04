@@ -26,7 +26,7 @@ final class AlphabeticalTableViewController: UIViewController {
 
     private let sectionTitleWrapper = TableSectionTitleWrapper()
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(featurePlugin: TableSectionTitleDisplayablePlugin(titleWrapper: sectionTitleWrapper))
+        .add(featurePlugin: .sectionTitleDisplayable(titleWrapper: sectionTitleWrapper))
         .build()
 
     // MARK: - UIViewController
@@ -64,8 +64,8 @@ private extension AlphabeticalTableViewController {
     }
 
     // Make cells generators
-    func makeCellGenerators() -> [TitleTableGenerator] {
-        return Constants.models.map { TitleTableGenerator(model: $0) }
+    func makeCellGenerators() -> [TableCellGenerator] {
+        return Constants.models.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
     }
 
 }

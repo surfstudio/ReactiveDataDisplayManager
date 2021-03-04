@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UIKit
 
 /// Contains base implementation of DataDisplayManager with UITableView.
 /// Registers nibs, determinates EstimatedRowHeight.
@@ -141,15 +140,6 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
         self.view?.reloadData()
     }
 
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            completion()
-        }
-        self.forceRefill()
-        CATransaction.commit()
-    }
-
     public func reloadSection(by sectionHeaderGenerator: TableHeaderGenerator, with animation: UITableView.RowAnimation = .none) {
         guard let index = sectionHeaderGenerators.firstIndex(where: { (headerGenerator) -> Bool in
             return headerGenerator === sectionHeaderGenerator
@@ -276,8 +266,8 @@ public extension BaseTableDataDisplayManager {
                        with animation: UITableView.RowAnimation = .automatic) {
         self.insert(headGenerator: sectionHeader, after: header)
 
-        guard let headerIndex = self.sectionHeaderGenerators.index(where: { 
-            $0 === sectionHeader 
+        guard let headerIndex = self.sectionHeaderGenerators.index(where: {
+            $0 === sectionHeader
         }) else {
             return
         }

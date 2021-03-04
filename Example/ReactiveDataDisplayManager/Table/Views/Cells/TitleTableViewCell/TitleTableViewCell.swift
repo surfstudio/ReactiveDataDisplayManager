@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-class TitleTableViewCell: UITableViewCell, CalculatableHeight {
+class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
 
     // MARK: - IBOutlets
 
@@ -20,12 +20,16 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeight {
         titleLabel.text = title
     }
 
-    func configure(with model: String) {
-        titleLabel.text = model
-    }
-
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
         return 44
     }
     
+}
+
+extension TitleTableViewCell: ConfigurableItem {
+
+    func configure(with model: String) {
+        titleLabel.text = model
+    }
+
 }

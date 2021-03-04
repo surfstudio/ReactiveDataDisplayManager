@@ -8,13 +8,7 @@
 
 import UIKit
 
-public protocol Gravity: AnyObject {
-    var heaviness: Int { get set }
-
-    func getHeaviness() -> Int
-}
-
-extension EmptyTableHeaderGenerator: Gravity {
+extension EmptyTableHeaderGenerator: GravityItem {
     public func getHeaviness() -> Int {
         .zero
     }
@@ -30,7 +24,7 @@ extension EmptyTableHeaderGenerator: Gravity {
 }
 
 /// DataDisplayManager for UITableView
-/// Warning. Do not forget to conform TableCellGenerator to Gravity (GravityTableCellGenerator)
+/// Warning. Do not forget to conform TableCellGenerator to GravityItem (GravityTableCellGenerator)
 open class GravityTableManager: BaseTableManager {
 
     public typealias CellGeneratorType = GravityTableCellGenerator

@@ -21,6 +21,7 @@ final class MainCollectionViewController: UIViewController {
         case prefetchingCollection
         case sizableCollection
         case foldableCollection
+        case itemTitleCollection
     }
 
     // MARK: - Constants
@@ -33,7 +34,8 @@ final class MainCollectionViewController: UIViewController {
             ("Gallery with prefetching", .prefetchingCollection),
             ("Horizontal image collection", .imageHorizontalCollection),
             ("Sizable collection", .sizableCollection),
-            ("Foldable collection", .foldableCollection)
+            ("Foldable collection", .foldableCollection),
+            ("Collection with item index titles", .itemTitleCollection)
         ]
     }
 
@@ -44,7 +46,7 @@ final class MainCollectionViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.baseBuilder
-        .add(plugin: TableSelectablePlugin())
+        .add(plugin: .selectable())
         .build()
 
     // MARK: - UIViewController
@@ -64,7 +66,7 @@ private extension MainCollectionViewController {
     func fillAdapter() {
         for model in Constants.models {
             // Create generator
-            let generator = TitleTableGenerator(model: model.title)
+            let generator = TitleTableViewCell.rddm.baseGenerator(with: model.title)
 
             generator.didSelectEvent += { [weak self] in
                 self?.openScreen(by: model.segueId)

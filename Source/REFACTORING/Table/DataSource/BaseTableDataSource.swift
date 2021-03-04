@@ -14,7 +14,13 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    weak public var provider: TableGeneratorsProvider?
+    weak public var provider: TableGeneratorsProvider? {
+        didSet {
+            let manager = provider as? BaseTableManager
+            prefetchPlugins.setup(with: manager)
+            tablePlugins.setup(with: manager)
+        }
+    }
 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
@@ -25,7 +31,7 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
 // MARK: - UITableViewDataSource
 
-extension BaseTableDataSource: UITableViewDataSource {
+extension BaseTableDataSource {
 
     open func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitleDisplayablePlugin?.numberOfSections(with: provider) ?? provider?.sections.count ?? 0
@@ -68,7 +74,7 @@ extension BaseTableDataSource: UITableViewDataSource {
 
 // MARK: - UITableViewDataSourcePrefetching
 
-extension BaseTableDataSource: UITableViewDataSourcePrefetching {
+extension BaseTableDataSource {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         prefetchPlugins.process(event: .prefetch(indexPaths), with: provider as? BaseTableManager)

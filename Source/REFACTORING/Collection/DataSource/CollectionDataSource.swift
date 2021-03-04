@@ -12,4 +12,5 @@ public protocol CollectionDataSource: UICollectionViewDataSource, UICollectionVi
     var provider: CollectionGeneratorsProvider? { get set }
     var prefetchPlugins: PluginCollection< BaseCollectionPlugin <PrefetchEvent>> { get set }
     var collectionPlugins: PluginCollection< BaseCollectionPlugin <CollectionEvent>> { get set }
+    var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable? { get set }
 }

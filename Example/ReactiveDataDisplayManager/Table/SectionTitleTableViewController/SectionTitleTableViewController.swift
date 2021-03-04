@@ -38,7 +38,7 @@ final class SectionTitleTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(featurePlugin: TableSectionTitleDisplayablePlugin())
+        .add(featurePlugin: .sectionTitleDisplayable())
         .build()
 
     // MARK: - UIViewController
@@ -72,8 +72,8 @@ private extension SectionTitleTableViewController {
     }
 
     // Make cells generators
-    func makeCellGenerators() -> [TitleTableGenerator] {
-        return Constants.сellModels.map { TitleTableGenerator(model: $0) }
+    func makeCellGenerators() -> [TableCellGenerator] {
+        return Constants.сellModels.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
     }
 
 }

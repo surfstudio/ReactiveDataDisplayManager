@@ -8,42 +8,19 @@
 
 import ReactiveDataDisplayManager
 
-final class TitleCollectionGenerator: SelectableItem {
+final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectionViewCell>, IndexTitleDisplaybleItem {
 
-    // MARK: - Properties
+    // MARK: - IndexTitleDisplayble
 
-    var didSelectEvent = BaseEvent<Void>()
-    var didSelected: Bool = false
-    var isNeedDeselect: Bool = true
-
-    // MARK: - Private Properties
-
-    private let model: String
+    var title: String
+    var needIndexTitle: Bool
 
     // MARK: - Initialization
 
-    public init(model: String) {
-        self.model = model
-    }
-
-}
-
-// MARK: - CollectionCellGenerator
-
-extension TitleCollectionGenerator: CollectionCellGenerator {
-
-    var identifier: String {
-        return String(describing: TitleCollectionViewCell.self)
-    }
-
-}
-
-// MARK: - ViewBuilder
-
-extension TitleCollectionGenerator: ViewBuilder {
-
-    func build(view: TitleCollectionViewCell) {
-        view.fill(with: model)
+    public init(model: String, needIndexTitle: Bool = false) {
+        self.title = model
+        self.needIndexTitle = needIndexTitle
+        super.init(with: model)
     }
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 /// Class for generating reusable Configurable UITableViewCell
-open class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
+open class BaseCellGenerator<Cell: ConfigurableItem>: TableCellGenerator, SelectableItem where Cell: UITableViewCell {
 
     // MARK: - Public properties
 
@@ -28,6 +28,12 @@ open class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectable
         self.registerType = registerType
     }
 
+    // MARK: - Open methods
+
+    open func configure(cell: Cell, with model: Cell.Model) {
+        cell.configure(with: model)
+    }
+
     // MARK: - TableCellGenerator
 
     public var identifier: String {
@@ -38,7 +44,7 @@ open class BaseCellGenerator<Cell: Configurable>: TableCellGenerator, Selectable
         guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? Cell else {
             return UITableViewCell()
         }
-        cell.configure(with: model)
+        configure(cell: cell, with: model)
         return cell
     }
 

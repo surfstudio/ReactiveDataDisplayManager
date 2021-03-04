@@ -18,7 +18,9 @@ class CollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = BaseCollectionDataDisplayManager(collection: collectionView)
+    private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: .selectable())
+        .build()
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController
@@ -36,7 +38,7 @@ class CollectionViewController: UIViewController {
         adapter.addSectionHeaderGenerator(header)
         for title in titles {
             // Create generator
-            let generator = TitleCollectionGenerator(model: title)
+            let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
             generator.didSelectEvent += {
                 debugPrint("\(title) selected")
             }

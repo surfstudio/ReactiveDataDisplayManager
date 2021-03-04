@@ -91,15 +91,6 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
     public func forceRefill() {
         self.view?.reloadData()
     }
-
-    public func forceRefill(completion: @escaping (() -> Void)) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock {
-            completion()
-        }
-        self.forceRefill()
-        CATransaction.commit()
-    }
 }
 
 // MARK: - HeaderDataDisplayManager

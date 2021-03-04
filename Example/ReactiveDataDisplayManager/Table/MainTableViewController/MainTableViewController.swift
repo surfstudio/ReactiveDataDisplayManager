@@ -23,6 +23,9 @@ final class MainTableViewController: UIViewController {
         case sectionTitlesTable
         case swipeableTable
         case diffableTable
+        case refreshableTable
+        case paginatableTable
+        case allPluginsTable
     }
 
     // MARK: - Constants
@@ -36,8 +39,11 @@ final class MainTableViewController: UIViewController {
             ("table with movable cell", .movableTable),
             ("table with alphabetize sections", .alphabetizeSectionsTable),
             ("table with sections titles", .sectionTitlesTable),
-            ("table with swipeable cells", .swipeableTable)
-            ("table with diffableDataSource", .diffableTable)
+            ("table with diffableDataSource", .diffableTable),
+            ("table with swipeable cells", .swipeableTable),
+            ("table with refresh control", .refreshableTable),
+            ("table with pagination", .paginatableTable),
+            ("table with all plugins", .allPluginsTable)
         ]
     }
 
@@ -47,8 +53,8 @@ final class MainTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = tableView.rddm.baseBuilder
-        .add(plugin: TableSelectablePlugin())
+    private lazy var ddm = tableView.rddm.baseBuilder
+        .add(plugin: .selectable())
         .build()
 
     // MARK: - UIViewController
@@ -66,20 +72,20 @@ private extension MainTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+
         for model in Constants.models {
             // Create generator
-            let generator = TitleTableGenerator(model: model.title)
+            let generator = TitleTableViewCell.rddm.baseGenerator(with: model.title)
 
             generator.didSelectEvent += { [weak self] in
                 self?.openScreen(by: model.segueId)
             }
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            ddm.addCellGenerator(generator)
         }
 
-        // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        ddm.forceRefill()
     }
 
     func openScreen(by segueId: SegueIdentifier) {
