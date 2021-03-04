@@ -36,8 +36,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
-        guard let collection = self.view else { return }
-        generator.registerCell(in: collection)
+        generator.registerCell(in: view)
 
         if self.generators.count != self.sections.count || sections.isEmpty {
             self.generators.append([CollectionCellGenerator]())

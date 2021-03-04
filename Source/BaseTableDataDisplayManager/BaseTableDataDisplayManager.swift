@@ -401,15 +401,15 @@ public extension BaseTableDataDisplayManager {
                  on newGenerator: TableCellGenerator,
                  removeAnimation: UITableView.RowAnimation = .automatic,
                  insertAnimation: UITableView.RowAnimation = .automatic) {
-        guard let index = self.findGenerator(oldGenerator), let table = self.view else { return }
+        guard let index = self.findGenerator(oldGenerator) else { return }
 
-        table.beginUpdates()
+        view.beginUpdates()
         self.cellGenerators[index.sectionIndex].remove(at: index.generatorIndex)
         self.cellGenerators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        table.deleteRows(at: [indexPath], with: removeAnimation)
-        table.insertRows(at: [indexPath], with: insertAnimation)
-        table.endUpdates()
+        view.deleteRows(at: [indexPath], with: removeAnimation)
+        view.insertRows(at: [indexPath], with: insertAnimation)
+        view.endUpdates()
     }
 
     /// Swaps two generators between each other.

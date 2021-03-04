@@ -182,8 +182,7 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDelegateFlowLayout {
 
 extension BaseCollectionDataDisplayManager: UICollectionViewDelegate {
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let collection = self.view else { return }
-        self.scrollEvent.invoke(with: collection)
+        self.scrollEvent.invoke(with: view)
     }
 
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

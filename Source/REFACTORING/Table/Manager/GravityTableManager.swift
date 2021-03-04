@@ -61,9 +61,8 @@ open class GravityTableManager: BaseTableManager {
     }
 
     open override func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
-        guard let table = view else { return }
         generators.reversed().forEach {
-            $0.registerCell(in: table)
+            $0.registerCell(in: view)
             addCellGenerator($0, after: after)
         }
     }
@@ -149,14 +148,14 @@ open class GravityTableManager: BaseTableManager {
                       on newGenerator: CellGeneratorType,
                       removeAnimation: UITableView.RowAnimation = .automatic,
                       insertAnimation: UITableView.RowAnimation = .automatic) {
-        guard let index = self.findGenerator(oldGenerator), let table = self.view else { return }
+        guard let index = self.findGenerator(oldGenerator) else { return }
 
-        animator?.perform(in: table) { [weak self] in
+        animator?.perform(in: view) { [weak self] in
             self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
             self?.generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
             let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-            table.deleteRows(at: [indexPath], with: removeAnimation)
-            table.insertRows(at: [indexPath], with: insertAnimation)
+            view.deleteRows(at: [indexPath], with: removeAnimation)
+            view.insertRows(at: [indexPath], with: insertAnimation)
         }
     }
 
