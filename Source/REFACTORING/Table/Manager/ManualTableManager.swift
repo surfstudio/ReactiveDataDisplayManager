@@ -314,7 +314,7 @@ public class ManualTableManager: BaseTableManager {
         generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
-        modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
+        dataSource?.modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
     /// Swaps two generators between each other.
@@ -354,7 +354,7 @@ private extension ManualTableManager {
         self.sections.insert(headGenerator, at: index)
         self.generators.insert([], at: index)
 
-        modifier?.insertSections(at: [index], with: animation)
+        dataSource?.modifier?.insertSections(at: [index], with: animation)
     }
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
@@ -369,7 +369,7 @@ private extension ManualTableManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
-        modifier?.insertRows(at: indexPaths, with: animation)
+        dataSource?.modifier?.insertRows(at: indexPaths, with: animation)
     }
 
 }

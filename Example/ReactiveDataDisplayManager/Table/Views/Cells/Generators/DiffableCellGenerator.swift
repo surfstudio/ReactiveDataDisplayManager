@@ -34,7 +34,7 @@ extension DiffableCellGenerator: TableCellGenerator {
 
 // MARK: - Diffable
 
-extension DiffableCellGenerator: Diffable {
+extension DiffableCellGenerator: DiffableItemSource {
 
     var item: DiffableItem {
         return DiffableItem(identifier: model)

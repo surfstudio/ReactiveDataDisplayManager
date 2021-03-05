@@ -17,9 +17,6 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     public typealias CellGeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
 
-    public typealias TableAnimator = Animator<CollectionType>
-    public typealias TableModifier = Modifier<CollectionType, CollectionType.RowAnimation>
-
     // MARK: - Public properties
 
     public weak var view: UITableView!
@@ -29,13 +26,11 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     var delegate: TableDelegate?
     var dataSource: TableDataSource?
-    var animator: TableAnimator?
-    var modifier: TableModifier?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        modifier?.reload()
+        dataSource?.modifier?.reload()
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
@@ -116,24 +111,25 @@ extension BaseTableManager {
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 
-        animator?.perform(in: view, animation: { [weak self] in
-            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
-            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-            view.deleteRows(at: [indexPath], with: animation)
-
-            // remove empty section if needed
-            let sectionIsEmpty = self?.generators[index.sectionIndex].isEmpty ?? true
-            if needRemoveEmptySection && sectionIsEmpty {
-                self?.generators.remove(at: index.sectionIndex)
-                self?.sections.remove(at: index.sectionIndex)
-                view.deleteSections(IndexSet(integer: index.sectionIndex), with: animation)
-            }
-
-            // scroll if needed
-            if let scrollPosition = scrollPosition {
-                view.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
-            }
-        })
+        /// TODO: - refactor using dataSource?.modifier?`
+//        animator?.perform(in: view, animation: { [weak self] in
+//            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
+//            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+//            view.deleteRows(at: [indexPath], with: animation)
+//
+//            // remove empty section if needed
+//            let sectionIsEmpty = self?.generators[index.sectionIndex].isEmpty ?? true
+//            if needRemoveEmptySection && sectionIsEmpty {
+//                self?.generators.remove(at: index.sectionIndex)
+//                self?.sections.remove(at: index.sectionIndex)
+//                view.deleteSections(IndexSet(integer: index.sectionIndex), with: animation)
+//            }
+//
+//            // scroll if needed
+//            if let scrollPosition = scrollPosition {
+//                view.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
+//            }
+//        })
     }
 
 }

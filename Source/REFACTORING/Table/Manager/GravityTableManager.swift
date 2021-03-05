@@ -154,7 +154,7 @@ open class GravityTableManager: BaseTableManager {
         generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
 
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
+        dataSource?.modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
     open func replace(header: HeaderGeneratorType, with animation: UITableView.RowAnimation = .fade) {
@@ -213,7 +213,7 @@ private extension GravityTableManager {
             return IndexPath(row: index, section: section)
         }
 
-        modifier?.insertRows(at: indexPaths, with: .none)
+        dataSource?.modifier?.insertRows(at: indexPaths, with: .none)
     }
 
     func nearestIndex(for generator: CellGeneratorType, in section: Int) -> Int? {

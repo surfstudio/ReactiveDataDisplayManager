@@ -43,7 +43,7 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
 
 // MARK: - Diffable
 
-extension TitleHeaderGenerator: Diffable {
+extension TitleHeaderGenerator: DiffableItemSource {
 
     var item: DiffableItem {
         return DiffableItem(identifier: model)

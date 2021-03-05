@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol TableDataSource: UITableViewDataSource, UITableViewDataSourcePrefetching {
+public protocol TableDataSource: TableModifierSource, UITableViewDataSource, UITableViewDataSourcePrefetching {
     var provider: TableGeneratorsProvider? { get set }
 
     var prefetchPlugins: PluginCollection<BaseTablePlugin<PrefetchEvent>> { get set }

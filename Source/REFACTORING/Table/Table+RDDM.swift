@@ -55,17 +55,6 @@ public class TableBuilder<T: BaseTableManager> {
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     var swipeActionsPlugin: TableFeaturePlugin?
 
-    var modifier: TableModifier {
-        if #available(iOS 13.0, *) {
-            guard let difableDataSource = dataSource as? DiffableTableDataSource else {
-                return TableCommonModifier(view: view, animator: animator)
-            }
-            return TableDiffableModifier(view: view, provider: manager, dataSource: difableDataSource)
-        } else {
-            return TableCommonModifier(view: view, animator: animator)
-        }
-    }
-
     // MARK: - Initialization
 
     init(view: UITableView, manager: T) {
@@ -153,11 +142,10 @@ public class TableBuilder<T: BaseTableManager> {
         dataSource.tablePlugins = tablePlugins
 
         dataSource.provider = manager
+        dataSource.buildModifier(with: self)
         view.dataSource = dataSource
 
         setPrefetchDataSourceIfNeeded()
-        manager.animator = animator
-        manager.modifier = modifier
         manager.delegate = delegate
         manager.dataSource = dataSource
         return manager

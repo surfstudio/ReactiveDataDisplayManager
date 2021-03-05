@@ -14,7 +14,7 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    weak public var provider: TableGeneratorsProvider? {
+    public weak var provider: TableGeneratorsProvider? {
         didSet {
             let manager = provider as? BaseTableManager
             prefetchPlugins.setup(with: manager)
@@ -22,11 +22,21 @@ open class BaseTableDataSource: NSObject, TableDataSource {
         }
     }
 
+    public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
+
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     public var movablePlugin: TableMovableDataSource?
 
+}
+
+// MARK: - TableModifierSource
+
+extension BaseTableDataSource {
+    public func buildModifier<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+        modifier = TableCommonModifier(view: builder.view, animator: builder.animator)
+    }
 }
 
 // MARK: - UITableViewDataSource

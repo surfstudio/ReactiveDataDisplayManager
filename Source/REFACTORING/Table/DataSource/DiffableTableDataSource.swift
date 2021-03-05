@@ -24,10 +24,10 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
             let manager = provider as? BaseTableManager
             prefetchPlugins.setup(with: manager)
             tablePlugins.setup(with: manager)
-
-
         }
     }
+
+    public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
@@ -46,6 +46,12 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
         }
 
         self.provider = provider
+    }
+
+    // MARK: - TableModifierSource
+
+    public func buildModifier<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+        modifier = TableDiffableModifier(view: builder.view, provider: builder.manager, dataSource: self)
     }
 
     // MARK: - UITableViewDiffableDataSource
