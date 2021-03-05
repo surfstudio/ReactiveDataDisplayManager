@@ -111,25 +111,25 @@ extension BaseTableManager {
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 
-        /// TODO: - refactor using dataSource?.modifier?`
-//        animator?.perform(in: view, animation: { [weak self] in
-//            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
-//            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-//            view.deleteRows(at: [indexPath], with: animation)
-//
-//            // remove empty section if needed
-//            let sectionIsEmpty = self?.generators[index.sectionIndex].isEmpty ?? true
-//            if needRemoveEmptySection && sectionIsEmpty {
-//                self?.generators.remove(at: index.sectionIndex)
-//                self?.sections.remove(at: index.sectionIndex)
-//                view.deleteSections(IndexSet(integer: index.sectionIndex), with: animation)
-//            }
-//
-//            // scroll if needed
-//            if let scrollPosition = scrollPosition {
-//                view.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
-//            }
-//        })
+        generators[index.sectionIndex].remove(at: index.generatorIndex)
+        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+
+        // remove empty section if needed
+        var sectionIndexPath: IndexSet? = nil
+        let sectionIsEmpty = generators[index.sectionIndex].isEmpty
+        if needRemoveEmptySection && sectionIsEmpty {
+            generators.remove(at: index.sectionIndex)
+            sections.remove(at: index.sectionIndex)
+            sectionIndexPath = IndexSet(integer: index.sectionIndex)
+        }
+
+        // apply changes in table
+        dataSource?.modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: animation)
+
+        // scroll if needed
+        if let scrollPosition = scrollPosition {
+            view.scrollToRow(at: indexPath, at: scrollPosition, animated: true)
+        }
     }
 
 }

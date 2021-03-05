@@ -33,6 +33,22 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
         apply(animated: true)
     }
 
+    /// Reload rows with animation
+    ///
+    /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
+    /// - parameter updateAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
+    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: UITableView.RowAnimation) {
+        apply(animated: true)
+    }
+
+    /// Reload rows with animation
+    ///
+    /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
+    /// - parameter updateAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
+    override func reloadScetions(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
+        apply(animated: true)
+    }
+
     /// Update snapshot after rows replaced
     ///
     /// - parameter indexPath: **ignored**, automatically calculated using `DiffableSnapshot`
@@ -55,6 +71,15 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter insertAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
     override func insertRows(at indexPaths: [IndexPath], with insertAnimation: UITableView.RowAnimation) {
+        apply(animated: true)
+    }
+
+    /// Remove rows and section with animation
+    ///
+    /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
+    /// - parameter section: **ignored**, automatically calculated using `DiffableSnapshot`
+    /// - parameter removeAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
+    override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: UITableView.RowAnimation) {
         apply(animated: true)
     }
 

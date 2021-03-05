@@ -85,4 +85,19 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
         }
     }
 
+    /// Remove rows and section with animation
+    ///
+    /// - parameter indexPaths: index of removed rows
+    /// - parameter section: index of removed sections
+    /// - parameter removeAnimation: animation of removing old row
+    override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: UITableView.RowAnimation) {
+        guard let view = view else { return }
+        animator?.perform(in: view) { [weak view] in
+            view?.deleteRows(at: indexPaths, with: removeAnimation)
+            if let section = section {
+                view?.deleteSections(section, with: removeAnimation)
+            }
+        }
+    }
+
 }

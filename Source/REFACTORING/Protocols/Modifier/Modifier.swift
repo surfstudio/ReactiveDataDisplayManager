@@ -38,4 +38,8 @@ open class Modifier<View: UIView, Animation> {
     open func insertRows(at indexPaths: [IndexPath], with insertAnimation: Animation) {
         preconditionFailure("\(#function) must be overriden in child")
     }
+
+    open func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: Animation) {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
 }
