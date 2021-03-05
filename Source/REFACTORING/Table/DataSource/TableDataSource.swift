@@ -8,9 +8,9 @@
 
 import UIKit
 
-public protocol TableDataSource: TableModifierSource, UITableViewDataSource, UITableViewDataSourcePrefetching {
+public protocol TableDataSource: TableBuilderConfigurable, UITableViewDataSource, UITableViewDataSourcePrefetching {
     var provider: TableGeneratorsProvider? { get set }
-
+    var modifier: Modifier<UITableView, UITableView.RowAnimation>? { get }
     var prefetchPlugins: PluginCollection<BaseTablePlugin<PrefetchEvent>> { get set }
     var tablePlugins: PluginCollection<BaseTablePlugin<TableEvent>> { get set }
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable? { get set }

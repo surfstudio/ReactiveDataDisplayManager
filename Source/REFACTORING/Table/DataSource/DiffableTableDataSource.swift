@@ -48,10 +48,21 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
         self.provider = provider
     }
 
-    // MARK: - TableModifierSource
+    // MARK: - TableBuilderConfigurable
 
-    public func buildModifier<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+    open func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+
         modifier = TableDiffableModifier(view: builder.view, provider: builder.manager, dataSource: self)
+
+        movablePlugin = builder.movablePlugin
+        sectionTitleDisplayablePlugin = builder.sectionTitleDisplayablePlugin
+        tablePlugins = builder.tablePlugins
+        prefetchPlugins = builder.prefetchPlugins
+
+        provider = builder.manager
+
+        prefetchPlugins.setup(with: builder.manager)
+        tablePlugins.setup(with: builder.manager)
     }
 
     // MARK: - UITableViewDiffableDataSource
