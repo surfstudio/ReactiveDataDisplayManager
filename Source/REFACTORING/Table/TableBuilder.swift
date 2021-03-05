@@ -110,12 +110,7 @@ public class TableBuilder<T: BaseTableManager> {
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
 
-        setSwipeActionsPluginIfNeeded()
-        delegate.tablePlugins = tablePlugins
-        delegate.scrollPlugins = scrollPlugins
-        delegate.movablePlugin = movablePlugin
-
-        delegate.manager = manager
+        delegate.configure(with: self)
         view.delegate = delegate
 
         dataSource.configure(with: self)
@@ -141,14 +136,6 @@ private extension TableBuilder {
         else { return }
 
         swipeActionsPlugin = plugin
-    }
-
-    func setSwipeActionsPluginIfNeeded() {
-        guard #available(iOS 11.0, *),
-              let plugin = swipeActionsPlugin as? TableSwipeActionsConfigurable
-        else { return }
-
-        delegate.swipeActionsPlugin = plugin
     }
 
 }
