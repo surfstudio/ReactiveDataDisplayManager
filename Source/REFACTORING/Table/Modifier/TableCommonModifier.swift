@@ -33,7 +33,7 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter updateAnimation: animation of reloaded rows
     override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: UITableView.RowAnimation) {
         guard let view = view else { return }
-        animator?.perform(in: view) { [weak view] in
+        animator?.perform(in: view, animated: updateAnimation != .none) { [weak view] in
             view?.reloadRows(at: indexPaths, with: updateAnimation)
         }
     }
@@ -44,7 +44,7 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter updateAnimation: animation of reloaded sections
     override func reloadScetions(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
         guard let view = view else { return }
-        animator?.perform(in: view) { [weak view] in
+        animator?.perform(in: view, animated: updateAnimation != .none) { [weak view] in
             view?.reloadSections(indexPaths, with: updateAnimation)
         }
     }
@@ -57,7 +57,7 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter insertAnimation: animation of inserting new row
     override func replace(at indexPath: IndexPath, with removeAnimation: UITableView.RowAnimation, and insertAnimation: UITableView.RowAnimation) {
         guard let view = view else { return }
-        animator?.perform(in: view) { [weak view] in
+        animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
             view?.deleteRows(at: [indexPath], with: removeAnimation)
             view?.insertRows(at: [indexPath], with: insertAnimation)
         }
@@ -69,7 +69,7 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter insertAnimation: animation of inserted sections
     override func insertSections(at indexPaths: IndexSet, with insertAnimation: UITableView.RowAnimation) {
         guard let view = view else { return }
-        animator?.perform(in: view) { [weak view] in
+        animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
             view?.insertSections(indexPaths, with: insertAnimation)
         }
     }
@@ -80,7 +80,7 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter insertAnimation: animation of inserted rows
     override func insertRows(at indexPaths: [IndexPath], with insertAnimation: UITableView.RowAnimation) {
         guard let view = view else { return }
-        animator?.perform(in: view) { [weak view] in
+        animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
             view?.insertRows(at: indexPaths, with: insertAnimation)
         }
     }
@@ -92,7 +92,7 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter removeAnimation: animation of removing old row
     override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: UITableView.RowAnimation) {
         guard let view = view else { return }
-        animator?.perform(in: view) { [weak view] in
+        animator?.perform(in: view, animated: removeAnimation != .none) { [weak view] in
             view?.deleteRows(at: indexPaths, with: removeAnimation)
             if let section = section {
                 view?.deleteSections(section, with: removeAnimation)
