@@ -67,7 +67,7 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     open func update(generators: [TableCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        view?.reloadRows(at: indexPaths, with: .none)
+        dataSource?.modifier?.reloadRows(at: indexPaths, with: .none)
     }
 
     open func clearCellGenerators() {

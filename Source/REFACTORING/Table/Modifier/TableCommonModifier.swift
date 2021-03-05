@@ -11,7 +11,7 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     // MARK: - Properties
 
-    private weak var animator: Animator<UITableView>?
+    private var animator: Animator<UITableView>?
 
     // MARK: - Init
 
@@ -20,12 +20,35 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
         self.animator = animator
     }
 
+    // MARK: - Methods
+
     /// Reload all table content
     override func reload() {
         view?.reloadData()
     }
 
-    // MARK: - Methods
+    /// Reload rows with animation
+    ///
+    /// - parameter indexPaths: indexes of reloaded rows
+    /// - parameter updateAnimation: animation of reloaded rows
+    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: UITableView.RowAnimation) {
+        guard let view = view else { return }
+        animator?.perform(in: view) { [weak view] in
+            view?.reloadRows(at: indexPaths, with: updateAnimation)
+        }
+    }
+
+    /// Reload sections with animation
+    ///
+    /// - parameter indexPaths: indexes of reloaded sections
+    /// - parameter updateAnimation: animation of reloaded sections
+    override func reloadScetions(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
+        guard let view = view else { return }
+        animator?.perform(in: view) { [weak view] in
+            view?.reloadSections(indexPaths, with: updateAnimation)
+        }
+    }
+
 
     /// Replace row at specified indexPath
     ///

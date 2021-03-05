@@ -19,6 +19,14 @@ open class Modifier<View: UIView, Animation> {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
+    open func reloadRows(at indexPaths: [IndexPath], with updateAnimation: Animation) {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+
+    open func reloadScetions(at indexPaths: IndexSet, with updateAnimation: Animation) {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+
     open func replace(at indexPath: IndexPath, with removeAnimation: Animation, and insertAnimation: Animation) {
         preconditionFailure("\(#function) must be overriden in child")
     }

@@ -78,7 +78,7 @@ public class ManualTableManager: BaseTableManager {
         guard let index = sections.firstIndex(where: { (headerGenerator) -> Bool in
             return headerGenerator === sectionHeaderGenerator
         }) else { return }
-        self.view?.reloadSections(IndexSet(integer: index), with: animation)
+        dataSource?.modifier?.reloadScetions(at: [index], with: animation)
     }
 
     /// Inserts new generators to provided TableHeaderGenerator generator.
@@ -330,13 +330,13 @@ public class ManualTableManager: BaseTableManager {
             return
         }
 
-        self.generators[firstIndex.sectionIndex].remove(at: firstIndex.generatorIndex)
-        self.generators[secondIndex.sectionIndex].remove(at: secondIndex.generatorIndex)
+        generators[firstIndex.sectionIndex].remove(at: firstIndex.generatorIndex)
+        generators[secondIndex.sectionIndex].remove(at: secondIndex.generatorIndex)
 
-        self.generators[secondIndex.sectionIndex].insert(firstGenerator, at: secondIndex.generatorIndex)
-        self.generators[firstIndex.sectionIndex].insert(secondGenerator, at: firstIndex.generatorIndex)
+        generators[secondIndex.sectionIndex].insert(firstGenerator, at: secondIndex.generatorIndex)
+        generators[firstIndex.sectionIndex].insert(secondGenerator, at: firstIndex.generatorIndex)
 
-        self.view.reloadData()
+        dataSource?.modifier?.reload()
     }
 
 }
