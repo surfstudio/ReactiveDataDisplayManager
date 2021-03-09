@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 extension UITableViewCell: DataDisplayConstructable {}
 
 public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem {

@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import Foundation
+
 /// Plugin to move cells
 ///
 /// Allow moving cells builded with `MovableItem` generators

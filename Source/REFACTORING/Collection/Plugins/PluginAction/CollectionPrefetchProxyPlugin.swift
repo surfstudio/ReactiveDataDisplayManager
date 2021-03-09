@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import Foundation
+
 /// Proxy of all `UICollectionViewDataSourcePrefetching` events
 public class CollectionPrefetchProxyPlugin: BaseCollectionPlugin<PrefetchEvent> {
 

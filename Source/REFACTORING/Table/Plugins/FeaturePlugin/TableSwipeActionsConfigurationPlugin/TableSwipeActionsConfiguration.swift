@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 @available(iOS 11.0, *)
 public struct TableSwipeActionsConfiguration {
 

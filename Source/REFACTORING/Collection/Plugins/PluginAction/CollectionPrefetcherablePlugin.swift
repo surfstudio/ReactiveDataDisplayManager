@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import Foundation
+
 /// Plugin to support `PrefetcherableItem` with prefetcher
 ///
 /// `ContentPrefetcher` prefetches and caches data to eliminate delays when requesting the same data later.
