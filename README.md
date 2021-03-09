@@ -5,7 +5,7 @@
 
 It is the whole approach to working with scrollable lists or collections.
 
-TBD logo here (need designer help)
+[![Logo](https://i.ibb.co/zs8P9c3/716-225-Reactive-Logo.jpg)](https://ibb.co/Q98YSBW)
 
 ## About
 
