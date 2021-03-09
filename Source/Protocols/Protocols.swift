@@ -47,6 +47,18 @@ public protocol TableCellGenerator: class {
     ///
     /// Default implementation returns nil
     var estimatedCellHeight: CGFloat? { get }
+
+    /// Method for SPM support
+    /// If you use SPM return Bundle.module
+    static func bundle() -> Bundle?
+}
+
+public extension TableCellGenerator {
+
+    static func bundle() -> Bundle? {
+        return nil
+    }
+
 }
 
 
@@ -59,6 +71,18 @@ public protocol CollectionHeaderGenerator: class {
     func registerHeader(in collectionView: UICollectionView)
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
+
+    /// Method for SPM support
+    /// If you use SPM return Bundle.module
+    static func bundle() -> Bundle?
+}
+
+public extension CollectionHeaderGenerator {
+
+    static func bundle() -> Bundle? {
+        return nil
+    }
+
 }
 
 /// Protocol that incapsulated type of current cell
@@ -77,6 +101,18 @@ public protocol CollectionCellGenerator: class {
     ///
     /// - Parameter in: CollectionView, in which cell will be registered
     func registerCell(in collectionView: UICollectionView)
+
+    /// Method for SPM support
+    /// If you use SPM return Bundle.module
+    static func bundle() -> Bundle?
+}
+
+public extension CollectionCellGenerator {
+
+    static func bundle() -> Bundle? {
+        return nil
+    }
+
 }
 
 /// Protocol that incapsulated build logics for current View
@@ -170,7 +206,7 @@ public extension TableCellGenerator where Self: ViewBuilder {
     }
 
     func registerCell(in tableView: UITableView) {
-        tableView.registerNib(self.identifier)
+        tableView.registerNib(self.identifier, bundle: Self.bundle())
     }
 
 }
@@ -188,7 +224,7 @@ public extension CollectionCellGenerator where Self: ViewBuilder {
     }
 
     func registerCell(in collectionView: UICollectionView) {
-        collectionView.registerNib(self.identifier)
+        collectionView.registerNib(self.identifier, bundle: Self.bundle())
     }
 
 }
@@ -205,7 +241,9 @@ public extension CollectionHeaderGenerator where Self: ViewBuilder {
     }
 
     func registerHeader(in collectionView: UICollectionView) {
-        collectionView.registerNib(self.identifier, kind: UICollectionView.elementKindSectionHeader)
+        collectionView.registerNib(self.identifier,
+                                   kind: UICollectionView.elementKindSectionHeader,
+                                   bundle: Self.bundle())
     }
 }
 
