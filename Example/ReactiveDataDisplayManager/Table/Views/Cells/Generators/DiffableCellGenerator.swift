@@ -8,46 +8,10 @@
 
 import ReactiveDataDisplayManager
 
-final class DiffableCellGenerator {
-
-    // MARK: - Private Properties
-
-    private let model: String
-
-    // MARK: - Initialization
-
-    public init(model: String) {
-        self.model = model
-    }
-
-}
-
-// MARK: - TableCellGenerator
-
-extension DiffableCellGenerator: TableCellGenerator {
-
-    var identifier: String {
-        return String(describing: TitleTableViewCell.self)
-    }
-
-}
-
-// MARK: - Diffable
-
-extension DiffableCellGenerator: DiffableItemSource {
+final class DiffableCellGenerator: BaseCellGenerator<TitleTableViewCell>, DiffableItemSource {
 
     var item: DiffableItem {
         return DiffableItem(identifier: model)
-    }
-
-}
-
-// MARK: - ViewBuilder
-
-extension DiffableCellGenerator: ViewBuilder {
-
-    func build(view: TitleTableViewCell) {
-        view.fill(with: model)
     }
 
 }

@@ -48,7 +48,7 @@ private extension DiffableTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         // Add generator to adapter
-        adapter.addCellGenerator(DiffableCellGenerator(model: Constants.models[0]))
+        adapter.addCellGenerator(DiffableCellGenerator(with: Constants.models[0]))
 
         // Add header generator
         adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
@@ -63,7 +63,7 @@ private extension DiffableTableViewController {
     // Create cells generators
     func makeCellGenerators() -> [DiffableCellGenerator] {
         return Constants.models.enumerated().map { index, title in
-            DiffableCellGenerator(model: title + " \(index)")
+            DiffableCellGenerator(with: title + " \(index)")
         }
     }
 
