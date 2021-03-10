@@ -23,7 +23,8 @@ public protocol ConfigurableItem where Self: UIView {
 
 public extension ConfigurableItem {
 
-    func bundle() -> Bundle? {
+    static func bundle() -> Bundle? {
         return nil
     }
+
 }
