@@ -16,7 +16,22 @@ final class DiffableTableViewController: UIViewController {
 
     private enum Constants {
         static let titleForSection = "Section"
-        static let models = [String](repeating: "Cell", count: 5)
+        static let models = ["Afghanistan",
+                             "Albania",
+                             "Algeria",
+                             "Andorra",
+                             "Angola",
+                             "Antigua and Barbuda",
+                             "Argentina",
+                             "Armenia",
+                             "Australia",
+                             "Austria",
+                             "Azerbaijan",
+                             "Bahamas",
+                             "Bahrain",
+                             "Bangladesh",
+                             "Barbados",
+                             "Belarus"]
     }
 
     // MARK: - IBOutlets
@@ -35,6 +50,7 @@ final class DiffableTableViewController: UIViewController {
         super.viewDidLoad()
         title = "Table with diffableDataSource"
 
+        setupSearch()
         fillAdapter()
     }
 
@@ -45,13 +61,19 @@ final class DiffableTableViewController: UIViewController {
 @available(iOS 13.0, *)
 private extension DiffableTableViewController {
 
+    func setupSearch() {
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        navigationItem.titleView = searchBar
+    }
+
     /// This method is used to fill adapter
     func fillAdapter() {
         // Add generator to adapter
-        adapter.addCellGenerator(DiffableCellGenerator(with: Constants.models[0]))
+//        adapter.addCellGenerator(DiffableCellGenerator(with: Constants.models[0]))
 
         // Add header generator
-        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
+//        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
 
         // Add generator to adapter
         adapter.addCellGenerators(makeCellGenerators())
@@ -61,10 +83,34 @@ private extension DiffableTableViewController {
     }
 
     // Create cells generators
-    func makeCellGenerators() -> [DiffableCellGenerator] {
-        return Constants.models.enumerated().map { index, title in
-            DiffableCellGenerator(with: title + " \(index)")
+    func makeCellGenerators(with filter: String? = nil) -> [DiffableCellGenerator] {
+        guard let filter = filter, !filter.isEmpty else {
+            return Constants.models.map { title in
+                DiffableCellGenerator(with: title)
+            }
         }
+        return Constants.models.filter { $0.starts(with: filter) }
+            .map { title in
+                DiffableCellGenerator(with: title)
+            }
+
+    }
+
+}
+
+// MARK: - SearchDelegate
+
+@available(iOS 13.0, *)
+extension DiffableTableViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        adapter.clearCellGenerators()
+
+        adapter.addCellGenerators(makeCellGenerators(with: searchText))
+
+        adapter.forceRefill()
+
     }
 
 }
