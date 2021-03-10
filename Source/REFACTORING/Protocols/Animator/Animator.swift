@@ -16,5 +16,7 @@ open class Animator<Collection: UIView> {
     /// - Parameters:
     ///     - collection: Collection containing animating rows
     ///     - animation: Animation block
-    func perform(in collection: Collection, animated: Bool, animation: () -> Void) {}
+    func perform(in collection: Collection, animated: Bool, animation: () -> Void) {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
 }
