@@ -54,6 +54,7 @@ final class DiffableTableViewController: UIViewController {
         title = "Table with diffableDataSource"
 
         setupSearch()
+        setupBarButtonItem()
         fillAdapter()
     }
 
@@ -68,6 +69,11 @@ private extension DiffableTableViewController {
         let searchBar = UISearchBar()
         searchBar.delegate = self
         navigationItem.titleView = searchBar
+    }
+
+    func setupBarButtonItem() {
+        let button = UIBarButtonItem(title: "Remove First", style: .plain, target: self, action: #selector(removeFirst))
+        navigationItem.rightBarButtonItem = button
     }
 
     /// This method is used to fill adapter
@@ -95,6 +101,23 @@ private extension DiffableTableViewController {
             return generators
         }
         return generators.filter { $0.model.starts(with: filter) }
+    }
+
+    @objc
+    func removeFirst() {
+
+        generators.removeFirst()
+
+        // clear existing generators
+        adapter.clearCellGenerators()
+
+        // add generators
+        adapter.addCellGenerators(generators)
+
+        // apply snapshot
+        adapter.forceRefill()
+
+        // expected remove animation
     }
 
 }
