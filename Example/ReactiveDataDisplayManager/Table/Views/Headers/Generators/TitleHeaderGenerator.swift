@@ -46,7 +46,7 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
 extension TitleHeaderGenerator: DiffableItemSource {
 
     var item: DiffableItem {
-        return DiffableItem(identifier: model)
+        DiffableItem(id: uuid, state: .init(model))
     }
 
 }

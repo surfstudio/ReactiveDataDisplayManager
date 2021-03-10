@@ -10,6 +10,8 @@ import UIKit
 
 open class TableHeaderGenerator: ViewGenerator {
 
+    public let uuid = UUID().uuidString
+
     public init() { }
 
     open func generate() -> UIView {

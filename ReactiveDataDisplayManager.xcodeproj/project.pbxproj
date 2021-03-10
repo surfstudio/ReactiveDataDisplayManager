@@ -15,6 +15,7 @@
 		01734A6A25F22E4000F1A208 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01734A6925F22E4000F1A208 /* TableBuilder.swift */; };
 		01928B904277BA3B44EEFAF2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E8001091BE7A1E8E249055 /* UIKit.framework */; };
 		01ADB9EC25F15B720015EEA0 /* DiffableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01ADB9EB25F15B720015EEA0 /* DiffableItem.swift */; };
+		01D48EFB25F8AEA800202F11 /* AnyEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D48EFA25F8AEA800202F11 /* AnyEquatable.swift */; };
 		0234089D03B6F2B9CEC22CEB /* TableSwipeActionsConfigurationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3778B2B7B14BCCDE42D3C57E /* TableSwipeActionsConfigurationPlugin.swift */; };
 		02CEA251A7F688DD140F919A /* CalculatableSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00E1D85A29896C854CC272 /* CalculatableSize.swift */; };
 		036963D49CD38AF78249C55B /* TableEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3106D9B099FE853FD1488E /* TableEvent.swift */; };
@@ -168,6 +169,7 @@
 		01734A6625F22D7800F1A208 /* TableBuilderConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilderConfigurable.swift; sourceTree = "<group>"; };
 		01734A6925F22E4000F1A208 /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
 		01ADB9EB25F15B720015EEA0 /* DiffableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableItem.swift; sourceTree = "<group>"; };
+		01D48EFA25F8AEA800202F11 /* AnyEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEquatable.swift; sourceTree = "<group>"; };
 		029CF758073A428168D45A5E /* TableBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		02E8001091BE7A1E8E249055 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		045709853C939F02AD98AA73 /* CollectionFoldableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFoldableItem.swift; sourceTree = "<group>"; };
@@ -735,6 +737,7 @@
 				9373CF21992ACAF75BED6839 /* Event.swift */,
 				F1A91FB41BF3B0B8A2979694 /* Extensions.swift */,
 				10414AD3BB6CC073ACF45D67 /* FatalErrorUtil.swift */,
+				01D48EFA25F8AEA800202F11 /* AnyEquatable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -992,6 +995,7 @@
 				CE9462518D740416E4A7749D /* EmptyCollectionHeaderGenerator.swift in Sources */,
 				C5622745A012FEDDC4DE3D84 /* EmptyGravityTableHeaderGenerator.swift in Sources */,
 				46ADAF226F8D519BD4AF8AE6 /* EmptyHeaderGenerator.swift in Sources */,
+				01D48EFB25F8AEA800202F11 /* AnyEquatable.swift in Sources */,
 				5AA184E6F716FFAC05B0672E /* Event.swift in Sources */,
 				C221944D496100E067823CD4 /* ExtendableBaseTableDataDisplayManager.swift in Sources */,
 				8C8034F35955722C45A5A306 /* Extensions.swift in Sources */,

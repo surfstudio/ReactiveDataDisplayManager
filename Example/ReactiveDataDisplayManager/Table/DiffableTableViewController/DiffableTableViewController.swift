@@ -17,6 +17,7 @@ final class DiffableTableViewController: UIViewController {
     private enum Constants {
         static let titleForSection = "Section"
         static let models = ["Afghanistan",
+                             "Afghanistan",
                              "Albania",
                              "Algeria",
                              "Andorra",
@@ -44,6 +45,8 @@ final class DiffableTableViewController: UIViewController {
         .set(dataSource: { DiffableTableDataSource(provider: $0) })
         .build()
 
+    private var generators: [DiffableCellGenerator] = []
+
     // MARK: - UIViewController
 
     override func viewDidLoad() {
@@ -69,31 +72,29 @@ private extension DiffableTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        // Add generator to adapter
-//        adapter.addCellGenerator(DiffableCellGenerator(with: Constants.models[0]))
 
-        // Add header generator
-//        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
+        generators = makeCellGenerators()
 
-        // Add generator to adapter
-        adapter.addCellGenerators(makeCellGenerators())
+        // add generators
+        adapter.addCellGenerators(generators)
 
-        // Tell adapter that we've changed generators and need updates the UI to reflect the state of the data
+        // apply snapshot
         adapter.forceRefill()
     }
 
     // Create cells generators
-    func makeCellGenerators(with filter: String? = nil) -> [DiffableCellGenerator] {
-        guard let filter = filter, !filter.isEmpty else {
-            return Constants.models.map { title in
-                DiffableCellGenerator(with: title)
-            }
-        }
-        return Constants.models.filter { $0.starts(with: filter) }
-            .map { title in
-                DiffableCellGenerator(with: title)
-            }
+    func makeCellGenerators() -> [DiffableCellGenerator] {
+         Constants.models.map { title in
+            DiffableCellGenerator(with: title)
+         }
+    }
 
+    // filter generators
+    func filterGenerators(with filter: String) -> [DiffableCellGenerator] {
+        guard !filter.isEmpty, !generators.isEmpty else {
+            return generators
+        }
+        return generators.filter { $0.model.starts(with: filter) }
     }
 
 }
@@ -105,11 +106,16 @@ extension DiffableTableViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
+        // clear existing generators
         adapter.clearCellGenerators()
 
-        adapter.addCellGenerators(makeCellGenerators(with: searchText))
+        // add filtered  generators
+        adapter.addCellGenerators(filterGenerators(with: searchText))
 
+        // apply snapshot
         adapter.forceRefill()
+
+        // all insert, remove, reload animations will be selected automatically
 
     }
 
