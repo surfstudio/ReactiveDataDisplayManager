@@ -22,6 +22,11 @@ public protocol PaginatableInput: class {
     ///
     /// - parameter canIterate: `true` if want to show `progressView` in footer
     func endLoading(canIterate: Bool)
+
+    /// Call it to control enabled/disabled pagination
+    ///
+    /// - parameter paginationEnabled: `true` if want to enable pagination
+    func set(paginationEnabled: Bool)
 }
 
 /// Output signals for loading next page of content
