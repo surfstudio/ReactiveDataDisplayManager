@@ -125,6 +125,10 @@ extension TablePaginatablePlugin: PaginatableInput {
     public func set(paginationEnabled: Bool) {
         self.enabled = paginationEnabled
         self.canIterate = paginationEnabled
+        guard !paginationEnabled else {
+            progressView.showProgress(false)
+            return
+        }
     }
 
 }
