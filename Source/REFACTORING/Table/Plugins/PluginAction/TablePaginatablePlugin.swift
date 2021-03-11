@@ -95,7 +95,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
         switch event {
         case .willDisplayCell(let indexPath):
-            guard let generators = manager?.generators, !enabled else {
+            guard let generators = manager?.generators, enabled else {
                 return
             }
             let lastSectionIndex = generators.count - 1
