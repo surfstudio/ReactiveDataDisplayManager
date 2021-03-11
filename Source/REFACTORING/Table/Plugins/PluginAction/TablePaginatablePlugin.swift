@@ -27,10 +27,20 @@ public protocol PaginatableInput: class {
 /// Output signals for loading next page of content
 public protocol PaginatableOutput: class {
 
+    /// Called when setup
+    ///
+    /// - parameter input: input signals to hide  `progressView` from footer
+    func setup(input: PaginatableInput)
+
     /// Called when collection scrolled to last cell
     ///
     /// - parameter input: input signals to hide  `progressView` from footer
     func loadNextPage(with input: PaginatableInput)
+}
+
+public extension PaginatableOutput {
+
+    func setup(input: PaginatableInput) { }
 }
 
 /// Plugin to display `progressView` while next page is loading
@@ -73,6 +83,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
     public override func setup(with manager: BaseTableManager?) {
         self.tableView = manager?.view
         self.canIterate = true
+        self.output?.setup(input: self)
     }
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
