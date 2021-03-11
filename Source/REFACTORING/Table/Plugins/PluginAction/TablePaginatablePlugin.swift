@@ -54,8 +54,8 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
     // MARK: - Private Properties
 
     private let progressView: ProgressView
+    private var enabled: Bool = true
     private weak var output: PaginatableOutput?
-
     private weak var tableView: UITableView?
 
     /// Property which indicating availability of pages
@@ -90,7 +90,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
         switch event {
         case .willDisplayCell(let indexPath):
-            guard let generators = manager?.generators else {
+            guard let generators = manager?.generators, !enabled else {
                 return
             }
             let lastSectionIndex = generators.count - 1
@@ -115,6 +115,11 @@ extension TablePaginatablePlugin: PaginatableInput {
     public func endLoading(canIterate: Bool) {
         progressView.showProgress(false)
         self.canIterate = canIterate
+    }
+
+    public func set(paginationEnabled: Bool) {
+        self.enabled = paginationEnabled
+        self.canIterate = paginationEnabled
     }
 
 }
