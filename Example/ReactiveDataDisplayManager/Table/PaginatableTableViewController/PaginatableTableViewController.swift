@@ -52,15 +52,24 @@ private extension PaginatableTableViewController {
 
     func loadFirstPage() {
 
+        // show loader
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
 
+        // hide footer
         paginatableInput?.updatePagination(canIterate: false)
 
+        // imitation of loading first page
         delay(.now() + .seconds(3)) { [weak self] in
+
+            // fill table
             self?.fillAdapter()
+
+            // hide loader
             self?.activityIndicator?.stopAnimating()
             self?.activityIndicator?.isHidden = true
+
+            // show footer
             self?.paginatableInput?.updatePagination(canIterate: true)
         }
     }
