@@ -23,6 +23,10 @@ public protocol PaginatableInput: class {
     /// - parameter canIterate: `true` if want to show `progressView` in footer
     func updatePagination(canIterate: Bool)
 
+    /// Call it to hide indicator
+    ///
+    func hideIndicator()
+
 }
 
 /// Output signals for loading next page of content
@@ -115,6 +119,11 @@ extension TablePaginatablePlugin: PaginatableInput {
     public func updatePagination(canIterate: Bool) {
         progressView.showProgress(false)
         self.canIterate = canIterate
+    }
+
+    public func hideIndicator() {
+        progressView.showProgress(false)
+        tableView?.tableFooterView = nil
     }
 
 }
