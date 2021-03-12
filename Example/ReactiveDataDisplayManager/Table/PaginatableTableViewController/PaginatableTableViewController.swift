@@ -21,7 +21,8 @@ final class PaginatableTableViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet private weak var tableView: UITableView!
-
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    
     // MARK: - Private Properties
 
     private lazy var progressView = PaginatorView(frame: .init(x: 0, y: 0, width: tableView.frame.width, height: 80))
@@ -31,6 +32,8 @@ final class PaginatableTableViewController: UIViewController {
                                   output: self))
         .build()
 
+    private weak var paginatableInput: PaginatableInput?
+
     private var currentPage = 0
 
     // MARK: - UIViewController
@@ -38,7 +41,7 @@ final class PaginatableTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Table with pagination"
-        fillAdapter()
+        loadFirstPage()
     }
 
 }
@@ -46,6 +49,21 @@ final class PaginatableTableViewController: UIViewController {
 // MARK: - Private Methods
 
 private extension PaginatableTableViewController {
+
+    func loadFirstPage() {
+
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+
+        paginatableInput?.updatePagination(canIterate: false)
+
+        delay(.now() + .seconds(3)) { [weak self] in
+            self?.fillAdapter()
+            self?.activityIndicator?.stopAnimating()
+            self?.activityIndicator?.isHidden = true
+            self?.paginatableInput?.updatePagination(canIterate: true)
+        }
+    }
 
     /// This method is used to fill adapter
     func fillAdapter() {
@@ -55,8 +73,6 @@ private extension PaginatableTableViewController {
         }
 
         adapter.forceRefill()
-
-
     }
 
     func delay(_ deadline: DispatchTime, completion: @escaping () -> Void) {
@@ -90,11 +106,15 @@ private extension PaginatableTableViewController {
 
 extension PaginatableTableViewController: PaginatableOutput {
 
+    func onPaginationInitialized(with input: PaginatableInput) {
+        paginatableInput = input
+    }
+
     func loadNextPage(with input: PaginatableInput) {
         delay(.now() + .seconds(3)) { [weak self, weak input] in
             let canIterate = self?.fillNext() ?? false
 
-            input?.endLoading(canIterate: canIterate)
+            input?.updatePagination(canIterate: canIterate)
         }
     }
 
