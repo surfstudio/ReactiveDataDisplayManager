@@ -1,15 +1,16 @@
 //
-//  TitleHeaderGenerator.swift
+//  SectionTitleHeaderGenerator.swift
 //  ReactiveDataDisplayManagerExample
 //
-//  Created by Anton Eysner on 02.02.2021.
+//  Created by Anton Eysner on 08.02.2021.
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
+import Foundation
 import ReactiveDataDisplayManager
 import UIKit
 
-final class TitleHeaderGenerator: TableHeaderGenerator {
+final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplaybleItem {
 
     // MARK: - Constants
 
@@ -17,15 +18,28 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
         static let defaultHeight: CGFloat = 30
     }
 
+    // MARK: - Events
+
+    var willDisplayEvent = BaseEvent<Void>()
+    var didEndDisplayEvent = BaseEvent<Void>()
+    var didEndDisplayCellEvent: BaseEvent<UITableViewCell>?
+
+    // MARK: - Properties
+
+    var title: String
+    var needIndexTitle: Bool
+
     // MARK: - Private Property
 
     private let model: String
-    private lazy var view = HeaderView().fromNib()
+    private lazy var view = HeaderView().spmNib(bundle: Bundle.module)
 
     // MARK: - Initialization
 
-    init(model: String) {
+    init(model: String, needSectionIndexTitle: Bool) {
         self.model = model
+        self.title = model
+        self.needIndexTitle = needSectionIndexTitle
     }
 
     // MARK: - TableHeaderGenerator

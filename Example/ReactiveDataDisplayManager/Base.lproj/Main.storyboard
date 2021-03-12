@@ -224,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="et8-Ms-zZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5021" y="-1855"/>
+            <point key="canvasLocation" x="5057" y="-1845"/>
         </scene>
         <!--Paginatable Table View Controller-->
         <scene sceneID="NEQ-Pc-8HZ">
@@ -255,7 +255,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qbx-zW-vbU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5779" y="-1831"/>
+            <point key="canvasLocation" x="5806" y="-1844"/>
         </scene>
         <!--Table-->
         <scene sceneID="tne-QT-ifu">
@@ -295,11 +295,12 @@
                         <segue destination="gFr-UQ-9p9" kind="show" identifier="allPluginsTable" id="QY8-TZ-bpF"/>
                         <segue destination="KPe-5j-jTE" kind="show" identifier="refreshableTable" id="lcW-uo-QUW"/>
                         <segue destination="xQn-4x-xEX" kind="show" identifier="paginatableTable" id="2Xm-b9-jRj"/>
+                        <segue destination="9MS-rq-iSU" kind="show" identifier="spmSupportTable" id="xHm-GH-h5i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652" y="-1010"/>
+            <point key="canvasLocation" x="708" y="-1012"/>
         </scene>
         <!--Image Table View Controller-->
         <scene sceneID="1kH-t8-h7Q">
@@ -817,6 +818,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpV-hx-0sU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-163.19999999999999" y="132.23388305847078"/>
+        </scene>
+        <!--MainSPM Table View Controller-->
+        <scene sceneID="FIh-gC-RQP">
+            <objects>
+                <viewController id="9MS-rq-iSU" customClass="MainSPMTableViewController" customModule="SPMSupportExample" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6N6-AH-oAc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aef-Zu-bQb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="r9M-Uh-wt5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aef-Zu-bQb" firstAttribute="leading" secondItem="r9M-Uh-wt5" secondAttribute="leading" id="CrX-rf-zzt"/>
+                            <constraint firstItem="aef-Zu-bQb" firstAttribute="top" secondItem="r9M-Uh-wt5" secondAttribute="top" id="Jhh-KB-8wv"/>
+                            <constraint firstItem="r9M-Uh-wt5" firstAttribute="trailing" secondItem="aef-Zu-bQb" secondAttribute="trailing" id="OK4-Yx-ljk"/>
+                            <constraint firstItem="r9M-Uh-wt5" firstAttribute="bottom" secondItem="aef-Zu-bQb" secondAttribute="bottom" id="fL9-8i-o0b"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="S4h-UW-y23"/>
+                    <connections>
+                        <outlet property="tableView" destination="aef-Zu-bQb" id="zgZ-5j-V2k"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Yv-gD-EYa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1578" y="-946"/>
         </scene>
     </scenes>
     <resources>

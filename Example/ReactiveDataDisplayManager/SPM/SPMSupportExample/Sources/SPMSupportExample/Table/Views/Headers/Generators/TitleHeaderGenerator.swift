@@ -20,7 +20,7 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
     // MARK: - Private Property
 
     private let model: String
-    private lazy var view = HeaderView().fromNib()
+    private lazy var view = HeaderView().spmNib(bundle: Bundle.module)
 
     // MARK: - Initialization
 

@@ -21,21 +21,17 @@ public protocol PaginatableInput: class {
     /// Call it to control visibility of progressView in footer
     ///
     /// - parameter canIterate: `true` if want to show `progressView` in footer
-    func endLoading(canIterate: Bool)
+    func updatePagination(canIterate: Bool)
 
-    /// Call it to control enabled/disabled pagination
-    ///
-    /// - parameter paginationEnabled: `true` if want to enable pagination
-    func set(paginationEnabled: Bool)
 }
 
 /// Output signals for loading next page of content
 public protocol PaginatableOutput: class {
 
-    /// Called when setup
+    /// Called when collection has setup `TablePaginatablePlugin`
     ///
     /// - parameter input: input signals to hide  `progressView` from footer
-    func setup(input: PaginatableInput)
+    func onPaginationInitialized(with input: PaginatableInput)
 
     /// Called when collection scrolled to last cell
     ///
@@ -59,12 +55,11 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
     // MARK: - Private Properties
 
     private let progressView: ProgressView
-    private var enabled: Bool = true
     private weak var output: PaginatableOutput?
     private weak var tableView: UITableView?
 
     /// Property which indicating availability of pages
-    public private(set) var canIterate = true {
+    public private(set) var canIterate = false {
         didSet {
             if canIterate {
                 tableView?.tableFooterView = progressView
@@ -87,15 +82,15 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
     public override func setup(with manager: BaseTableManager?) {
         self.tableView = manager?.view
-        self.canIterate = true
-        self.output?.setup(input: self)
+        self.canIterate = false
+        self.output?.onPaginationInitialized(with: self)
     }
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
 
         switch event {
         case .willDisplayCell(let indexPath):
-            guard let generators = manager?.generators, enabled else {
+            guard let generators = manager?.generators else {
                 return
             }
             let lastSectionIndex = generators.count - 1
@@ -117,18 +112,9 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
 extension TablePaginatablePlugin: PaginatableInput {
 
-    public func endLoading(canIterate: Bool) {
+    public func updatePagination(canIterate: Bool) {
         progressView.showProgress(false)
         self.canIterate = canIterate
-    }
-
-    public func set(paginationEnabled: Bool) {
-        self.enabled = paginationEnabled
-        self.canIterate = paginationEnabled
-        guard !paginationEnabled else {
-            progressView.showProgress(false)
-            return
-        }
     }
 
 }
