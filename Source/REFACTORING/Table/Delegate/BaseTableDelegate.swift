@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Base implementation for `UITableViewDelegate` protocol
+/// Base implementation for `UITableViewDelegate` protocol.
 open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Properties

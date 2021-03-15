@@ -193,7 +193,7 @@ private extension BaseCollectionManager {
                          needScrollAt scrollPosition: UICollectionView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 
-        animator?.perform(in: view, animated: true, animation: { [weak self] in
+        animator?.perform(in: view, animated: true, operation: { [weak self] in
             self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
             let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
             view.deleteItems(at: [indexPath])

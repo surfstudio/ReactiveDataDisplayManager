@@ -7,6 +7,10 @@
 
 import UIKit
 
+/// Helper class to modify `UITableView` cells
+///
+/// - Note: Based on `UITableViewDiffableDataSource` and `NSDiffableDataSourceSnapshot` updating.
+/// Animations selected automatically or ignored.
 @available(iOS 13, *)
 class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
@@ -20,6 +24,9 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     // MARK: - Init
 
+    /// - parameter view: parent view
+    /// - parameter provider: wrapped collection of sections and generators
+    /// - parameter dataSource: `UITableViewDiffableDataSource` to apply new snapshots
     init(view: UITableView, provider: TableGeneratorsProvider, dataSource: DiffableTableDataSource) {
         super.init(view: view)
         self.provider = provider
@@ -36,7 +43,9 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// Reload rows with animation
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
-    /// - parameter updateAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
+    /// - parameter updateAnimation:
+    ///     - **allowed** none to disable animation
+    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: UITableView.RowAnimation) {
         apply(animated: updateAnimation != .none)
     }
@@ -44,7 +53,9 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// Reload rows with animation
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
-    /// - parameter updateAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
+    /// - parameter updateAnimation:
+    ///     - **allowed** none to disable animation
+    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func reloadScetions(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
         apply(animated: updateAnimation != .none)
     }
@@ -52,8 +63,10 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// Update snapshot after rows replaced
     ///
     /// - parameter indexPath: **ignored**, automatically calculated using `DiffableSnapshot`
-    /// - parameter removeAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
-    /// - parameter insertAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
+    /// - parameter removeAnimation: **ignored**,  see insertAnimation
+    /// - parameter insertAnimation:
+    ///     - **allowed** none to disable animation
+    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func replace(at indexPath: IndexPath, with removeAnimation: UITableView.RowAnimation, and insertAnimation: UITableView.RowAnimation) {
         apply(animated: insertAnimation != .none)
     }
@@ -61,7 +74,9 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// Update snapshot after sections inserted
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
-    /// - parameter insertAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
+    /// - parameter insertAnimation:
+    ///     - **allowed** none to disable animation
+    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func insertSections(at indexPaths: IndexSet, with insertAnimation: UITableView.RowAnimation) {
         apply(animated: insertAnimation != .none)
     }
@@ -69,7 +84,9 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// Update snapshot after rows inserted
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
-    /// - parameter insertAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
+    /// - parameter insertAnimation:
+    ///     - **allowed** none to disable animation
+    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func insertRows(at indexPaths: [IndexPath], with insertAnimation: UITableView.RowAnimation) {
         apply(animated: insertAnimation != .none)
     }
@@ -78,7 +95,9 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter section: **ignored**, automatically calculated using `DiffableSnapshot`
-    /// - parameter removeAnimation: **ignored**, automatically selected by `UITableDiffableDataSource`
+    /// - parameter removeAnimation:
+    ///     - **allowed** none to disable animation
+    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: UITableView.RowAnimation) {
         apply(animated: removeAnimation != .none)
     }

@@ -11,11 +11,11 @@ import UIKit
 /// UICollectionView Animator based on performBatchUpdates
 public class CollectionBatchUpdatesAnimator: Animator<UICollectionView> {
 
-    public override func perform(in collection: UICollectionView, animated: Bool, animation: () -> Void) {
+    public override func perform(in collection: UICollectionView, animated: Bool, operation: () -> Void) {
         if animated {
-            collection.performBatchUpdates(animation)
+            collection.performBatchUpdates(operation)
         } else {
-            animation()
+            operation()
         }
     }
 
