@@ -22,7 +22,7 @@ final class PaginatableTableViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
-    
+
     // MARK: - Private Properties
 
     private lazy var progressView = PaginatorView(frame: .init(x: 0, y: 0, width: tableView.frame.width, height: 80))
@@ -120,9 +120,13 @@ extension PaginatableTableViewController: PaginatableOutput {
     }
 
     func loadNextPage(with input: PaginatableInput) {
+
+        input.updateProgress(isLoading: true)
+
         delay(.now() + .seconds(3)) { [weak self, weak input] in
             let canIterate = self?.fillNext() ?? false
 
+            input?.updateProgress(isLoading: false)
             input?.updatePagination(canIterate: canIterate)
         }
     }

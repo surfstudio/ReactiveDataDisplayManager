@@ -18,10 +18,15 @@ public protocol ProgressDisplayableItem {
 /// Input signals to control visibility of progressView in footer
 public protocol PaginatableInput: class {
 
-    /// Call it to control visibility of progressView in footer
+    /// Call this method to control availability of **loadNextPage** action
     ///
-    /// - parameter canIterate: `true` if want to show `progressView` in footer
+    /// - parameter canIterate: `true` if want to use last cell will display event to execute **loadNextPage** action
     func updatePagination(canIterate: Bool)
+
+    /// Call this method to control visibility of progressView in footer
+    ///
+    /// - parameter isLoading: `true` if want to show `progressView` in footer
+    func updateProgress(isLoading: Bool)
 }
 
 /// Output signals for loading next page of content
@@ -93,7 +98,6 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
             let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
             if indexPath == lastCellIndexPath && canIterate {
-                progressView.showProgress(true)
                 output?.loadNextPage(with: self)
             }
         default:
@@ -107,8 +111,11 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
 extension TablePaginatablePlugin: PaginatableInput {
 
+    public func updateProgress(isLoading: Bool) {
+        progressView.showProgress(isLoading)
+    }
+
     public func updatePagination(canIterate: Bool) {
-        progressView.showProgress(false)
         self.canIterate = canIterate
     }
 
