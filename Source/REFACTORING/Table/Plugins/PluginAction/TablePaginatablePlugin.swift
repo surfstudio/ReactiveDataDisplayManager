@@ -21,31 +21,16 @@ public protocol PaginatableInput: class {
     /// Call it to control visibility of progressView in footer
     ///
     /// - parameter canIterate: `true` if want to show `progressView` in footer
-    func updatePagination(canIterate: Bool)
-
-    /// Call it to hide indicator
-    ///
-    func hideIndicator()
-
+    func endLoading(canIterate: Bool)
 }
 
 /// Output signals for loading next page of content
 public protocol PaginatableOutput: class {
 
-    /// Called when collection has setup `TablePaginatablePlugin`
-    ///
-    /// - parameter input: input signals to hide  `progressView` from footer
-    func onPaginationInitialized(with input: PaginatableInput)
-
     /// Called when collection scrolled to last cell
     ///
     /// - parameter input: input signals to hide  `progressView` from footer
     func loadNextPage(with input: PaginatableInput)
-}
-
-public extension PaginatableOutput {
-
-    func setup(input: PaginatableInput) { }
 }
 
 /// Plugin to display `progressView` while next page is loading
@@ -60,10 +45,11 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
     private let progressView: ProgressView
     private weak var output: PaginatableOutput?
+
     private weak var tableView: UITableView?
 
     /// Property which indicating availability of pages
-    public private(set) var canIterate = false {
+    public private(set) var canIterate = true {
         didSet {
             if canIterate {
                 tableView?.tableFooterView = progressView
@@ -86,8 +72,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
     public override func setup(with manager: BaseTableManager?) {
         self.tableView = manager?.view
-        self.canIterate = false
-        self.output?.onPaginationInitialized(with: self)
+        self.canIterate = true
     }
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
@@ -116,14 +101,9 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
 extension TablePaginatablePlugin: PaginatableInput {
 
-    public func updatePagination(canIterate: Bool) {
+    public func endLoading(canIterate: Bool) {
         progressView.showProgress(false)
         self.canIterate = canIterate
-    }
-
-    public func hideIndicator() {
-        progressView.showProgress(false)
-        tableView?.tableFooterView = nil
     }
 
 }
