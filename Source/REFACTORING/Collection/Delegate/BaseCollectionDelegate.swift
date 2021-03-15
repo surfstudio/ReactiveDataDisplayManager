@@ -25,7 +25,7 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
 }
 
-// MARK: - COllectionBuilderConfigurable
+// MARK: - CollectionBuilderConfigurable
 
 extension BaseCollectionDelegate {
 
