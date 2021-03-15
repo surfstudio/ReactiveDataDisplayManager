@@ -12,13 +12,9 @@ extension UICollectionView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UICollectionView {
 
+    /// Builder of `BaseCollectionManager`
     var baseBuilder: CollectionBuilder<BaseCollectionManager> {
         CollectionBuilder(view: base, manager: BaseCollectionManager())
-    }
-
-    var flowBuilder: CollectionBuilder<BaseCollectionManager> {
-        CollectionBuilder(view: base, manager: BaseCollectionManager())
-            .set(delegate: FlowCollectionDelegate())
     }
 
 }
