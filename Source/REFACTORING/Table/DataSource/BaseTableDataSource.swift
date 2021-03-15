@@ -9,17 +9,12 @@
 import UIKit
 import Foundation
 
-/// Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
+/// Base implementation for `UITableViewDataSource` protocol.
 open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    public weak var provider: TableGeneratorsProvider? {
-        didSet {
-            let manager = provider as? BaseTableManager
-
-        }
-    }
+    public weak var provider: TableGeneratorsProvider?
 
     public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
 
