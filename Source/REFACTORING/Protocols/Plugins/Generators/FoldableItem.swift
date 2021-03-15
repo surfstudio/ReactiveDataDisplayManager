@@ -8,8 +8,15 @@
 
 import UIKit
 
+/// Protocol for `TableCellGenerator` to manage expand/collapse state
 public protocol FoldableItem: class {
+
+    /// Invokes when cell `didSelect`
     var didFoldEvent: BaseEvent<Bool> { get }
+
+    /// `true` if cell where expanded, `false` if cell where collapsed
     var isExpanded: Bool { get set }
+
+    /// Generators describing cells to be inserted in expanded state
     var childGenerators: [TableCellGenerator] { get set }
 }

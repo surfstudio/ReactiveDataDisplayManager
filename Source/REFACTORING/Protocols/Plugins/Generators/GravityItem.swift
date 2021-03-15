@@ -8,7 +8,13 @@
 
 import UIKit
 
+/// Protocol for `Generator` to describe order position of generated cell
 public protocol GravityItem: AnyObject {
+
+    /// Order in list.
+    /// - Note: Less is higher.
     var heaviness: Int { get set }
+
+    /// Geter of heaviness
     func getHeaviness() -> Int
 }
