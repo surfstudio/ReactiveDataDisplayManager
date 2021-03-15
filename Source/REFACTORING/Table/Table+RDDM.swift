@@ -12,14 +12,17 @@ extension UITableView: DataDisplayCompatible {}
 
 public extension DataDisplayWrapper where Base: UITableView {
 
+    /// Builder of `BaseTableManager`
     var baseBuilder: TableBuilder<BaseTableManager> {
         TableBuilder(view: base, manager: BaseTableManager())
     }
 
+    /// Builder of `ManualTableManager`
     var manualBuilder: TableBuilder<ManualTableManager> {
         TableBuilder(view: base, manager: ManualTableManager())
     }
 
+    /// Builder of `GravityTableManager`
     var gravityBuilder: TableBuilder<GravityTableManager> {
         TableBuilder(view: base, manager: GravityTableManager())
     }

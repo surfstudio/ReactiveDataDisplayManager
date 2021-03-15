@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Use this class to extend collection functionality
 public protocol FeaturePlugin {
     associatedtype CollectionType
 }
