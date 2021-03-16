@@ -1,71 +1,37 @@
 //
-//  TablePaginatablePlugin.swift
+//  CollectionPaginatablePlugin.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Никита Коробейников on 03.03.2021.
+//  Created by Никита Коробейников on 16.03.2021.
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
 import UIKit
 
-public protocol ProgressDisplayableItem {
-
-    /// - parameter isLoading: `true` if want to animate loading progress in `progressView`
-    func showProgress(_ isLoading: Bool)
-
-}
-
-/// Input signals to control visibility of progressView in footer
-public protocol PaginatableInput: class {
-
-    /// Call this method to control availability of **loadNextPage** action
-    ///
-    /// - parameter canIterate: `true` if want to use last cell will display event to execute **loadNextPage** action
-    func updatePagination(canIterate: Bool)
-
-    /// Call this method to control visibility of progressView in footer
-    ///
-    /// - parameter isLoading: `true` if want to show `progressView` in footer
-    func updateProgress(isLoading: Bool)
-}
-
-/// Output signals for loading next page of content
-public protocol PaginatableOutput: class {
-
-    /// Called when collection has setup `TablePaginatablePlugin`
-    ///
-    /// - parameter input: input signals to hide  `progressView` from footer
-    func onPaginationInitialized(with input: PaginatableInput)
-
-    /// Called when collection scrolled to last cell
-    ///
-    /// - parameter input: input signals to hide  `progressView` from footer
-    func loadNextPage(with input: PaginatableInput)
-}
-
 /// Plugin to display `progressView` while next page is loading
 ///
 /// Show `progressView` on `willDisplay` last cell.
 /// Hide `progressView` when finish loading request
-public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
+public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent>  {
 
-    public typealias ProgressView = UIView & ProgressDisplayableItem
+    public typealias ProgressView = CollectionHeaderGenerator & ProgressDisplayableItem
 
     // MARK: - Private Properties
 
     private let progressView: ProgressView
     private weak var output: PaginatableOutput?
 
-    private weak var tableView: UITableView?
+    private weak var collectionView: UICollectionView?
 
     /// Property which indicating availability of pages
     public private(set) var canIterate = false {
         didSet {
-            if canIterate {
-                tableView?.tableFooterView = progressView
-            } else {
-                tableView?.tableFooterView = nil
-            }
+            // TODO: - придумать способ вставки вью в глобальный футер
+//            if canIterate {
+//                collectionView?.tableFooterView = progressView
+//            } else {
+//                collectionView?.tableFooterView = nil
+//            }
         }
     }
 
@@ -80,13 +46,13 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
     // MARK: - BaseTablePlugin
 
-    public override func setup(with manager: BaseTableManager?) {
-        self.tableView = manager?.view
+    public override func setup(with manager: BaseCollectionManager?) {
+        self.collectionView = manager?.view
         self.canIterate = false
         self.output?.onPaginationInitialized(with: self)
     }
 
-    public override func process(event: TableEvent, with manager: BaseTableManager?) {
+    public override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
 
         switch event {
         case .willDisplayCell(let indexPath):
@@ -109,7 +75,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
 // MARK: - PaginatableInput
 
-extension TablePaginatablePlugin: PaginatableInput {
+extension CollectionPaginatablePlugin: PaginatableInput {
 
     public func updateProgress(isLoading: Bool) {
         progressView.showProgress(isLoading)
@@ -123,7 +89,7 @@ extension TablePaginatablePlugin: PaginatableInput {
 
 // MARK: - Public init
 
-public extension BaseTablePlugin {
+public extension BaseCollectionPlugin {
 
     /// Plugin to display `progressView` while next page is loading
     ///
@@ -132,8 +98,8 @@ public extension BaseTablePlugin {
     ///
     /// - parameter progressView: indicator view to add inside footer. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from footer
-    static func paginatable(progressView: TablePaginatablePlugin.ProgressView,
-                            output: PaginatableOutput) -> TablePaginatablePlugin {
+    static func paginatable(progressView: CollectionPaginatablePlugin.ProgressView,
+                            output: PaginatableOutput) -> CollectionPaginatablePlugin {
         .init(progressView: progressView, with: output)
     }
 

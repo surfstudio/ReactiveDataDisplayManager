@@ -10,6 +10,7 @@
 		01157AFA25D51D2D00BFD55B /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157AF925D51D2D00BFD55B /* Animator.swift */; };
 		01157AFF25D5212100BFD55B /* TableUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */; };
 		01157B0325D5228C00BFD55B /* TableBatchUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */; };
+		016402692600C4F200E0DE22 /* CollectionPaginatablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016402682600C4F200E0DE22 /* CollectionPaginatablePlugin.swift */; };
 		0183560C25BEE60B00141448 /* ManualTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183560B25BEE60B00141448 /* ManualTableManager.swift */; };
 		018630D625EF67E4005E9F0E /* Gravity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018630CA25EF67E3005E9F0E /* Gravity.swift */; };
 		018630D725EF67E4005E9F0E /* SelectableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018630CB25EF67E3005E9F0E /* SelectableItem.swift */; };
@@ -143,6 +144,7 @@
 		01157AF925D51D2D00BFD55B /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		01157AFE25D5212100BFD55B /* TableUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableUpdatesAnimator.swift; sourceTree = "<group>"; };
 		01157B0225D5228C00BFD55B /* TableBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
+		016402682600C4F200E0DE22 /* CollectionPaginatablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPaginatablePlugin.swift; sourceTree = "<group>"; };
 		0183560B25BEE60B00141448 /* ManualTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableManager.swift; sourceTree = "<group>"; };
 		018630CA25EF67E3005E9F0E /* Gravity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gravity.swift; sourceTree = "<group>"; };
 		018630CB25EF67E3005E9F0E /* SelectableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 				6DF4321025D9CC450093A1EB /* CollectionPrefetchProxyPlugin.swift */,
 				6DF4321425D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift */,
 				018630F725EF95FA005E9F0E /* CollectionRefreshablePlugin.swift */,
+				016402682600C4F200E0DE22 /* CollectionPaginatablePlugin.swift */,
 			);
 			path = PluginAction;
 			sourceTree = "<group>";
@@ -999,6 +1002,7 @@
 				8BAB778D20BB45B90005C4E9 /* EmptyHeaderGenerator.swift in Sources */,
 				6DF4321525D9CCB20093A1EB /* CollectionPrefetcherablePlugin.swift in Sources */,
 				01A7585225E10BE800925C3F /* TableCell+RDDM.swift in Sources */,
+				016402692600C4F200E0DE22 /* CollectionPaginatablePlugin.swift in Sources */,
 				6D3B9A1725D51BE100F6E05C /* FeaturePlugin.swift in Sources */,
 				897CFCC32379A5A800E98BB8 /* FoldingTableDataDisplayManager.swift in Sources */,
 				6D3B99F625D51AA400F6E05C /* TableSelectablePlugin.swift in Sources */,
