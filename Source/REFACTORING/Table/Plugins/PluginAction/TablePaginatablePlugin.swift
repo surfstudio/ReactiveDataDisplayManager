@@ -117,7 +117,6 @@ extension TablePaginatablePlugin: PaginatableInput {
 
     public func updatePagination(canIterate: Bool) {
         self.canIterate = canIterate
-        progressView.showProgress(false)
     }
 
 }
