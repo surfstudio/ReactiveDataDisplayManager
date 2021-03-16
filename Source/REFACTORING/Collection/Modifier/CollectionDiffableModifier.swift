@@ -40,7 +40,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
         apply(animated: true)
     }
 
-    /// Reload rows with animation
+    /// Reload items with animation
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter updateAnimation:
@@ -50,7 +50,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
         apply(animated: updateAnimation != .none)
     }
 
-    /// Reload rows with animation
+    /// Reload items with animation
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter updateAnimation:
@@ -60,7 +60,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
         apply(animated: updateAnimation != .none)
     }
 
-    /// Update snapshot after rows replaced
+    /// Update snapshot after items replaced
     ///
     /// - parameter indexPath: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter removeAnimation: **ignored**,  see insertAnimation
@@ -81,7 +81,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
         apply(animated: insertAnimation != .none)
     }
 
-    /// Update snapshot after rows inserted
+    /// Update snapshot after items inserted
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter insertAnimation:
@@ -91,7 +91,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
         apply(animated: insertAnimation != .none)
     }
 
-    /// Remove rows and section with animation
+    /// Remove items and section with animation
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter section: **ignored**, automatically calculated using `DiffableSnapshot`
@@ -119,10 +119,10 @@ private extension CollectionDiffableModifier {
         guard let provider = provider else { return nil }
 
         assert(provider.generators is [[CellGeneratorType]], "This strategy support only \(CellGeneratorType.Type.self)")
-        assert(provider.sections is [HeaderGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
+
+        let sections = provider.sections
 
         guard
-            let sections = provider.sections as? [HeaderGeneratorType],
             let generators = provider.generators as? [[CellGeneratorType]]
         else { return nil }
 

@@ -32,10 +32,10 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
         view?.reloadData()
     }
 
-    /// Reload rows with animation
+    /// Reload items with animation
     ///
-    /// - parameter indexPaths: indexes of reloaded rows
-    /// - parameter updateAnimation: animation of reloaded rows
+    /// - parameter indexPaths: indexes of reloaded items
+    /// - parameter updateAnimation: animation of reloaded items
     override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: CollectionItemAnimation) {
         guard let view = view else { return }
         animator?.perform(in: view, animated: updateAnimation != .none) { [weak view] in
@@ -79,10 +79,10 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
         }
     }
 
-    /// Insert rows with animation
+    /// Insert items with animation
     ///
-    /// - parameter indexPaths: indexes of inserted rows
-    /// - parameter insertAnimation: animation of inserted rows
+    /// - parameter indexPaths: indexes of inserted items
+    /// - parameter insertAnimation: animation of inserted items
     override func insertRows(at indexPaths: [IndexPath], with insertAnimation: CollectionItemAnimation) {
         guard let view = view else { return }
         animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
@@ -90,9 +90,9 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
         }
     }
 
-    /// Remove rows and section with animation
+    /// Remove items and section with animation
     ///
-    /// - parameter indexPaths: index of removed rows
+    /// - parameter indexPaths: index of removed items
     /// - parameter section: index of removed sections
     /// - parameter removeAnimation: animation of removing old row
     override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: CollectionItemAnimation) {
