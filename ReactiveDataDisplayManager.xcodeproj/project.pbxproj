@@ -12,6 +12,8 @@
 		012253A8DDEEE2299F9E8126 /* TableMovablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99A1471D14614A728E99B3D3 /* TableMovablePlugin.swift */; };
 		01307B6321971A668981A9C5 /* BaseCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49B92C478A6EF8B56799CD5 /* BaseCollectionDataSource.swift */; };
 		01928B904277BA3B44EEFAF2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E8001091BE7A1E8E249055 /* UIKit.framework */; };
+		01C49D0C26006BC800EB9D65 /* CollectionCommonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C49D0B26006BC800EB9D65 /* CollectionCommonModifier.swift */; };
+		01C49D0F26006D5F00EB9D65 /* CollectionDiffableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C49D0E26006D5F00EB9D65 /* CollectionDiffableModifier.swift */; };
 		01FD675025FF886900906B81 /* DiffableCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD674F25FF886900906B81 /* DiffableCollectionDataSource.swift */; };
 		0234089D03B6F2B9CEC22CEB /* TableSwipeActionsConfigurationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3778B2B7B14BCCDE42D3C57E /* TableSwipeActionsConfigurationPlugin.swift */; };
 		02CEA251A7F688DD140F919A /* CalculatableSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00E1D85A29896C854CC272 /* CalculatableSize.swift */; };
@@ -170,6 +172,8 @@
 
 /* Begin PBXFileReference section */
 		003E00E8A83A4FDA31C8652C /* AnyEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEquatable.swift; sourceTree = "<group>"; };
+		01C49D0B26006BC800EB9D65 /* CollectionCommonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCommonModifier.swift; sourceTree = "<group>"; };
+		01C49D0E26006D5F00EB9D65 /* CollectionDiffableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDiffableModifier.swift; sourceTree = "<group>"; };
 		01FD674F25FF886900906B81 /* DiffableCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableCollectionDataSource.swift; sourceTree = "<group>"; };
 		029CF758073A428168D45A5E /* TableBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		02E8001091BE7A1E8E249055 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -327,6 +331,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01C49D0A26006BA200EB9D65 /* Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				01C49D0B26006BC800EB9D65 /* CollectionCommonModifier.swift */,
+				01C49D0E26006D5F00EB9D65 /* CollectionDiffableModifier.swift */,
+			);
+			path = Modifier;
+			sourceTree = "<group>";
+		};
 		032CFE2A4BAA81D77BD0B945 /* REFACTORING */ = {
 			isa = PBXGroup;
 			children = (
@@ -792,6 +805,7 @@
 		C301ACA52DA1D8580739ABB5 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				01C49D0A26006BA200EB9D65 /* Modifier */,
 				22138621769A615921FBA427 /* Collection+RDDM.swift */,
 				621AAEED282026E7051CA169 /* CollectionBuilder.swift */,
 				0DB5ECD3256F56BAE2C6BFFD /* CollectionBuilderConfigurable.swift */,
@@ -981,6 +995,7 @@
 				1B42147EFFB21624326E0F12 /* CollectionDelegate.swift in Sources */,
 				D24AE21D44FA5EDAD65B1267 /* CollectionEvent.swift in Sources */,
 				8BC661FD876364449922F162 /* CollectionFeaturePlugin.swift in Sources */,
+				01C49D0F26006D5F00EB9D65 /* CollectionDiffableModifier.swift in Sources */,
 				893CCD5BD2094DC682547AED /* CollectionFoldableItem.swift in Sources */,
 				2E9F6A98F9F4001C991275F8 /* CollectionFoldablePlugin.swift in Sources */,
 				4E7B41390B217A5CEC67C67C /* CollectionGeneratorsProvider.swift in Sources */,
@@ -1007,6 +1022,7 @@
 				CE9462518D740416E4A7749D /* EmptyCollectionHeaderGenerator.swift in Sources */,
 				C5622745A012FEDDC4DE3D84 /* EmptyGravityTableHeaderGenerator.swift in Sources */,
 				46ADAF226F8D519BD4AF8AE6 /* EmptyHeaderGenerator.swift in Sources */,
+				01C49D0C26006BC800EB9D65 /* CollectionCommonModifier.swift in Sources */,
 				5AA184E6F716FFAC05B0672E /* Event.swift in Sources */,
 				C221944D496100E067823CD4 /* ExtendableBaseTableDataDisplayManager.swift in Sources */,
 				8C8034F35955722C45A5A306 /* Extensions.swift in Sources */,
