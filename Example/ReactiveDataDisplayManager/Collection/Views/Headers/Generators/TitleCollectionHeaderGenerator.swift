@@ -10,8 +10,6 @@ import ReactiveDataDisplayManager
 
 final class TitleCollectionHeaderGenerator {
 
-    public let uuid = UUID().uuidString
-
     // MARK: - Private Properties
 
     private let title: String
@@ -26,10 +24,6 @@ final class TitleCollectionHeaderGenerator {
 // MARK: - CollectionHeaderGenerator
 
 extension TitleCollectionHeaderGenerator: CollectionHeaderGenerator {
-
-    var item: DiffableItem {
-        DiffableItem(id: uuid, state: .init(title))
-    }
 
     var identifier: UICollectionReusableView.Type {
         return TitleCollectionReusableView.self

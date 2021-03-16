@@ -15,7 +15,7 @@ import UIKit
 class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnimation> {
 
     typealias CellGeneratorType = CollectionCellGenerator & DiffableItemSource
-    typealias HeaderGeneratorType = CollectionHeaderGenerator
+    typealias HeaderGeneratorType = CollectionHeaderGenerator & DiffableItemSource
 
     // MARK: - Properties
 
@@ -119,10 +119,12 @@ private extension CollectionDiffableModifier {
         guard let provider = provider else { return nil }
 
         assert(provider.generators is [[CellGeneratorType]], "This strategy support only \(CellGeneratorType.Type.self)")
+        assert(provider.sections is [HeaderGeneratorType], "This strategy support only \(HeaderGeneratorType.Type.self)")
 
-        let sections = provider.sections
+
 
         guard
+            let sections = provider.sections as? [HeaderGeneratorType],
             let generators = provider.generators as? [[CellGeneratorType]]
         else { return nil }
 

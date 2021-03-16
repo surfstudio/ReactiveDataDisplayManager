@@ -52,7 +52,7 @@ public protocol TableCellGenerator: class {
 }
 
 
-public protocol CollectionHeaderGenerator: class, DiffableItemSource {
+public protocol CollectionHeaderGenerator: class {
 
     var identifier: UICollectionReusableView.Type { get }
 

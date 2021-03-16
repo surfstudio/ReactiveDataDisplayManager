@@ -32,7 +32,7 @@ public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
 
 // MARK: - Diffable
 
-extension EmptyCollectionHeaderGenerator {
+extension EmptyCollectionHeaderGenerator: DiffableItemSource {
 
     public var item: DiffableItem {
         DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection"))
