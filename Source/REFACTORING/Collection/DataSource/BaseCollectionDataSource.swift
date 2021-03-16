@@ -15,6 +15,8 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
     weak public var provider: CollectionGeneratorsProvider?
 
+    public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
+
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
@@ -26,6 +28,8 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 extension BaseCollectionDataSource {
 
     public func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
+
+        modifier = CollectionCommonModifier(view: builder.view, animator: builder.animator)
 
         collectionPlugins = builder.collectionPlugins
         itemTitleDisplayablePlugin = builder.itemTitleDisplayablePlugin

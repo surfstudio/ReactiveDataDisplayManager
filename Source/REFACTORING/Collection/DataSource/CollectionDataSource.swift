@@ -10,6 +10,7 @@ import UIKit
 
 public protocol CollectionDataSource: CollectionBuilderConfigurable, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     var provider: CollectionGeneratorsProvider? { get set }
+    var modifier: Modifier<UICollectionView, CollectionItemAnimation>? { get }
     var prefetchPlugins: PluginCollection< BaseCollectionPlugin <PrefetchEvent>> { get set }
     var collectionPlugins: PluginCollection< BaseCollectionPlugin <CollectionEvent>> { get set }
     var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable? { get set }

@@ -102,7 +102,6 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
         manager.delegate = delegate
         manager.dataSource = dataSource
-        manager.animator = animator
         return manager
     }
 

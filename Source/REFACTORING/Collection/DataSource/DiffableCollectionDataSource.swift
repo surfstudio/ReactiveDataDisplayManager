@@ -17,6 +17,8 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
 
     weak public var provider: CollectionGeneratorsProvider?
 
+    public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
+
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
@@ -38,6 +40,8 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
     // MARK: - CollectionBuilderConfigurable
 
     public func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
+
+        modifier = CollectionDiffableModifier(view: builder.view, provider: builder.manager, dataSource: self)
 
         collectionPlugins = builder.collectionPlugins
         itemTitleDisplayablePlugin = builder.itemTitleDisplayablePlugin
