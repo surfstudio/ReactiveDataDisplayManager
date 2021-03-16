@@ -14,7 +14,7 @@ import UIKit
 /// Hide `progressView` when finish loading request
 public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent>  {
 
-    public typealias ProgressView = CollectionHeaderGenerator & ProgressDisplayableItem
+    public typealias ProgressView = UIView & ProgressDisplayableItem
 
     // MARK: - Private Properties
 
