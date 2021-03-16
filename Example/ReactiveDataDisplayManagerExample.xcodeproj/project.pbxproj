@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		016402752600D5BE00E0DE22 /* PaginatableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016402742600D5BE00E0DE22 /* PaginatableCollectionViewController.swift */; };
 		018630FD25EF9730005E9F0E /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018630FC25EF9730005E9F0E /* RefreshableTableViewController.swift */; };
 		0186312525EFA2D2005E9F0E /* PaginatableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186312425EFA2D2005E9F0E /* PaginatableTableViewController.swift */; };
 		0186313025EFAB31005E9F0E /* PaginatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186312F25EFAB31005E9F0E /* PaginatorView.swift */; };
@@ -90,6 +91,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016402742600D5BE00E0DE22 /* PaginatableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatableCollectionViewController.swift; sourceTree = "<group>"; };
 		018630FC25EF9730005E9F0E /* RefreshableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableTableViewController.swift; sourceTree = "<group>"; };
 		0186312425EFA2D2005E9F0E /* PaginatableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatableTableViewController.swift; sourceTree = "<group>"; };
 		0186312F25EFAB31005E9F0E /* PaginatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		016402732600D5A500E0DE22 /* PaginatableCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				016402742600D5BE00E0DE22 /* PaginatableCollectionViewController.swift */,
+			);
+			path = PaginatableCollectionViewController;
+			sourceTree = "<group>";
+		};
 		018630FB25EF96F0005E9F0E /* RefreshableTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,6 +540,7 @@
 		8B1D7908201C8BE100F184BD /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				016402732600D5A500E0DE22 /* PaginatableCollectionViewController */,
 				6D841A6225E6BF64001E9849 /* Appearance */,
 				6DA4BFBB25DA5E3000C23D85 /* Views */,
 				DD6AEE0225D2882B0059E312 /* CollectionViewController */,
@@ -917,6 +928,7 @@
 				8B1D790B201C957700F184BD /* TitleCollectionViewCell.swift in Sources */,
 				896B59742354970700E8E2AB /* TitleStackCellGenerator.swift in Sources */,
 				6DF3AF3525E136A900BBC621 /* TitleCollectionGenerator.swift in Sources */,
+				016402752600D5BE00E0DE22 /* PaginatableCollectionViewController.swift in Sources */,
 				DD31B12E25DCEB8900A266A7 /* FoldableCollectionViewCell.swift in Sources */,
 				DDB8CC6925D2A69500439FB9 /* HeaderCollectionListView.swift in Sources */,
 				DDE16B5525D3B829005B988A /* ImageCollectionViewController.swift in Sources */,
