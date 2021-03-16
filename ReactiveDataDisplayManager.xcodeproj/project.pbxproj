@@ -14,6 +14,7 @@
 		01928B904277BA3B44EEFAF2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E8001091BE7A1E8E249055 /* UIKit.framework */; };
 		01C49D0C26006BC800EB9D65 /* CollectionCommonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C49D0B26006BC800EB9D65 /* CollectionCommonModifier.swift */; };
 		01C49D0F26006D5F00EB9D65 /* CollectionDiffableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C49D0E26006D5F00EB9D65 /* CollectionDiffableModifier.swift */; };
+		01C49D1626007E0700EB9D65 /* CollectionItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C49D1526007E0700EB9D65 /* CollectionItemAnimation.swift */; };
 		01FD675025FF886900906B81 /* DiffableCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FD674F25FF886900906B81 /* DiffableCollectionDataSource.swift */; };
 		0234089D03B6F2B9CEC22CEB /* TableSwipeActionsConfigurationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3778B2B7B14BCCDE42D3C57E /* TableSwipeActionsConfigurationPlugin.swift */; };
 		02CEA251A7F688DD140F919A /* CalculatableSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA00E1D85A29896C854CC272 /* CalculatableSize.swift */; };
@@ -174,6 +175,7 @@
 		003E00E8A83A4FDA31C8652C /* AnyEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEquatable.swift; sourceTree = "<group>"; };
 		01C49D0B26006BC800EB9D65 /* CollectionCommonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCommonModifier.swift; sourceTree = "<group>"; };
 		01C49D0E26006D5F00EB9D65 /* CollectionDiffableModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDiffableModifier.swift; sourceTree = "<group>"; };
+		01C49D1526007E0700EB9D65 /* CollectionItemAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionItemAnimation.swift; sourceTree = "<group>"; };
 		01FD674F25FF886900906B81 /* DiffableCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableCollectionDataSource.swift; sourceTree = "<group>"; };
 		029CF758073A428168D45A5E /* TableBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		02E8001091BE7A1E8E249055 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -336,6 +338,7 @@
 			children = (
 				01C49D0B26006BC800EB9D65 /* CollectionCommonModifier.swift */,
 				01C49D0E26006D5F00EB9D65 /* CollectionDiffableModifier.swift */,
+				01C49D1526007E0700EB9D65 /* CollectionItemAnimation.swift */,
 			);
 			path = Modifier;
 			sourceTree = "<group>";
@@ -987,6 +990,7 @@
 				BBF53EB83CE9712149D5E281 /* CalculatableWidthCollectionCellGenerator.swift in Sources */,
 				4E63F095068C49860EB8055B /* CellRegisterType.swift in Sources */,
 				2BFB33B8D9BC083288721DC5 /* Collection+RDDM.swift in Sources */,
+				01C49D1626007E0700EB9D65 /* CollectionItemAnimation.swift in Sources */,
 				E7F501C863BAEE6CE127E4F6 /* CollectionBatchUpdatesAnimator.swift in Sources */,
 				2680CEB5BA15CFF3C871FA75 /* CollectionBuilder.swift in Sources */,
 				A9864C944CC8E914DD50A417 /* CollectionBuilderConfigurable.swift in Sources */,

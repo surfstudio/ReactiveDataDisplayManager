@@ -49,8 +49,8 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     }
 
     /// Change dataSource
-    public func set(dataSource: CollectionDataSource) -> CollectionBuilder<T> {
-        self.dataSource = dataSource
+    public func set(dataSource: (BaseCollectionManager) -> CollectionDataSource) -> CollectionBuilder<T> {
+        self.dataSource = dataSource(manager)
         return self
     }
 

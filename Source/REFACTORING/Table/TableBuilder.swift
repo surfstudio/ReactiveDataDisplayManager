@@ -18,7 +18,6 @@ public class TableBuilder<T: BaseTableManager> {
     public typealias CollectionType = BaseTableManager.CollectionType
 
     public typealias TableAnimator = Animator<CollectionType>
-    public typealias TableModifier = Modifier<CollectionType, CollectionType.RowAnimation>
 
     // MARK: - Properties
 
