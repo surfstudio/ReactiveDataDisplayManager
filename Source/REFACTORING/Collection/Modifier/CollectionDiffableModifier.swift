@@ -45,7 +45,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter updateAnimation:
     ///     - **allowed** none to disable animation
-    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
+    ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: CollectionItemAnimation) {
         apply(animated: updateAnimation != .none)
     }
@@ -55,7 +55,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter updateAnimation:
     ///     - **allowed** none to disable animation
-    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
+    ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func reloadScetions(at indexPaths: IndexSet, with updateAnimation: CollectionItemAnimation) {
         apply(animated: updateAnimation != .none)
     }
@@ -66,7 +66,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter removeAnimation: **ignored**,  see insertAnimation
     /// - parameter insertAnimation:
     ///     - **allowed** none to disable animation
-    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
+    ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func replace(at indexPath: IndexPath, with removeAnimation: CollectionItemAnimation, and insertAnimation: CollectionItemAnimation) {
         apply(animated: insertAnimation != .none)
     }
@@ -76,7 +76,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter insertAnimation:
     ///     - **allowed** none to disable animation
-    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
+    ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func insertSections(at indexPaths: IndexSet, with insertAnimation: CollectionItemAnimation) {
         apply(animated: insertAnimation != .none)
     }
@@ -86,7 +86,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter insertAnimation:
     ///     - **allowed** none to disable animation
-    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
+    ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func insertRows(at indexPaths: [IndexPath], with insertAnimation: CollectionItemAnimation) {
         apply(animated: insertAnimation != .none)
     }
@@ -97,7 +97,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter section: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter removeAnimation:
     ///     - **allowed** none to disable animation
-    ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
+    ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: CollectionItemAnimation) {
         apply(animated: removeAnimation != .none)
     }

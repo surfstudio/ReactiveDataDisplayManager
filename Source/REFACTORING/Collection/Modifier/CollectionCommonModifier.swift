@@ -27,7 +27,7 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
 
     // MARK: - Methods
 
-    /// Reload all table content
+    /// Reload all collection content
     override func reload() {
         view?.reloadData()
     }
