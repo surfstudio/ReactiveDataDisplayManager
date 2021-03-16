@@ -15,7 +15,7 @@ import UIKit
 class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnimation> {
 
     typealias CellGeneratorType = CollectionCellGenerator & DiffableItemSource
-    typealias HeaderGeneratorType = CollectionCellGenerator & DiffableItemSource
+    typealias HeaderGeneratorType = CollectionHeaderGenerator
 
     // MARK: - Properties
 

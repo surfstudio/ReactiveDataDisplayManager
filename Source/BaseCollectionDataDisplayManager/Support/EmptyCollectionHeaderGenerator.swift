@@ -9,6 +9,9 @@
 import UIKit
 
 public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
+
+    public let uuid = UUID().uuidString
+
     public func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
         return .zero
     }
@@ -25,4 +28,14 @@ public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
     public var identifier: UICollectionReusableView.Type {
         return UICollectionReusableView.self
     }
+}
+
+// MARK: - Diffable
+
+extension EmptyCollectionHeaderGenerator {
+
+    public var item: DiffableItem {
+        DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection"))
+    }
+
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01C49D21260082C800EB9D65 /* DiffableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C49D20260082C800EB9D65 /* DiffableCollectionViewController.swift */; };
+		01C49D252600835900EB9D65 /* DiffableCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C49D242600835900EB9D65 /* DiffableCollectionCellGenerator.swift */; };
 		07D0AD412D14907C869DA420 /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F86F1D270E55D920BF087 /* RefreshableTableViewController.swift */; };
 		0BDB03589517E266B2ED8498 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07617869BCD0A70D87527FC /* TitleCollectionViewCell.swift */; };
 		1201643DFD9410A7C42BA293 /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325E432007B2C402A407032F /* TitleTableViewCell.xib */; };
@@ -96,6 +98,8 @@
 /* Begin PBXFileReference section */
 		001BB16BE2E141F75B940D27 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		0165D86C242386A8EEA77F48 /* FoldableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableCollectionViewCell.swift; sourceTree = "<group>"; };
+		01C49D20260082C800EB9D65 /* DiffableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableCollectionViewController.swift; sourceTree = "<group>"; };
+		01C49D242600835900EB9D65 /* DiffableCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		0348FD4DE0836C117DC8251E /* Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExampleTests/Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		0371CFDF2AE2933334F5FEF1 /* ImageTableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableGenerator.swift; sourceTree = "<group>"; };
 		045B0F8AC6ADF005B8B9C517 /* ReactiveDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveDataDisplayManagerTests.swift; sourceTree = "<group>"; };
@@ -199,6 +203,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01C49D1F2600827600EB9D65 /* DiffableCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				01C49D20260082C800EB9D65 /* DiffableCollectionViewController.swift */,
+			);
+			path = DiffableCollectionViewController;
+			sourceTree = "<group>";
+		};
 		06478A4F456832221FCBA599 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +288,7 @@
 				5EA8DD2FF5F7ABC2416F3C2C /* ImageCollectionCellGenerator.swift */,
 				795E2E2FB1DCC1DE73457FB9 /* TitleCollectionGenerator.swift */,
 				9AAF4EC7F8199FE77561B93C /* VerticalSizableTextGenerator.swift */,
+				01C49D242600835900EB9D65 /* DiffableCollectionCellGenerator.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -433,6 +446,7 @@
 		7A67422E6DA0F317DC19BFC0 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				01C49D1F2600827600EB9D65 /* DiffableCollectionViewController */,
 				F825DD05D142484A7CAEBB19 /* Appearance */,
 				3D8E41C88AE5572B5D6C958D /* CollectionListViewController */,
 				31D7C89A081550B096AF2868 /* CollectionViewController */,
@@ -456,7 +470,6 @@
 				C6CBBB591B5D1AAD77512E8C /* Pods-ReactiveDataDisplayManagerExampleTests.debug.xcconfig */,
 				0348FD4DE0836C117DC8251E /* Pods-ReactiveDataDisplayManagerExampleTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -935,7 +948,9 @@
 				986B6FB99A755332E0AE8DF6 /* SectionTitleTableViewController.swift in Sources */,
 				36572A8920CC1DA4258360B9 /* SizableCollectionViewCell.swift in Sources */,
 				D7A53EA49970F581CC3B6C51 /* SizableCollectionViewController.swift in Sources */,
+				01C49D21260082C800EB9D65 /* DiffableCollectionViewController.swift in Sources */,
 				A03BD4921874F3CFBBE5F98F /* StackViewController.swift in Sources */,
+				01C49D252600835900EB9D65 /* DiffableCollectionCellGenerator.swift in Sources */,
 				50167A3419F084EB4848BCDE /* SwipeActionProvider.swift in Sources */,
 				A1C2DEACFC29CF05D12FDD0D /* SwipeableTableGenerator.swift in Sources */,
 				EA6E5A76A5FDA6F7117E1967 /* SwipeableTableViewController.swift in Sources */,

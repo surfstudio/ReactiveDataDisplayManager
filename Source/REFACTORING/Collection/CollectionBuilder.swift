@@ -35,6 +35,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     init(view: UICollectionView, manager: T) {
         self.view = view
         self.manager = manager
+        self.manager.view = view
         delegate = BaseCollectionDelegate()
         dataSource = BaseCollectionDataSource()
         animator = CollectionBatchUpdatesAnimator()
