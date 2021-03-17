@@ -26,12 +26,17 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
     /// Property which indicating availability of pages
     public private(set) var canIterate = false {
         didSet {
-            // TODO: - придумать способ вставки вью в глобальный футер
-//            if canIterate {
-//                collectionView?.tableFooterView = progressView
-//            } else {
-//                collectionView?.tableFooterView = nil
-//            }
+            if canIterate {
+                if progressView.superview == nil {
+                    collectionView?.addSubview(progressView)
+                    collectionView?.contentInset.bottom += progressView.frame.height
+                }
+            } else {
+                if progressView.superview != nil {
+                    progressView.removeFromSuperview()
+                    collectionView?.contentInset.bottom -= progressView.frame.height
+                }
+            }
         }
     }
 
@@ -66,6 +71,11 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
             if indexPath == lastCellIndexPath && canIterate {
                 output?.loadNextPage(with: self)
             }
+
+            // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
+            progressView.frame = .init(origin: .init(x: progressView.frame.origin.x,
+                                                     y: collectionView?.contentSize.height ?? 0),
+                                       size: progressView.frame.size)
         default:
             break
         }
