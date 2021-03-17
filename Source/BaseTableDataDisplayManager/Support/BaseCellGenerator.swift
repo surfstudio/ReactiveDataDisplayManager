@@ -58,3 +58,13 @@ open class BaseCellGenerator<Cell: ConfigurableItem>: TableCellGenerator, Select
     }
 
 }
+
+// MARK: - CalculatableHeightItem
+
+public extension BaseCellGenerator where Cell: CalculatableHeightItem {
+
+    var estimatedCellHeight: CGFloat? {
+        Cell.getHeight(forWidth: UIScreen.main.bounds.width, with: model)
+    }
+
+}

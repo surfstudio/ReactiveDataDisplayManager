@@ -54,23 +54,25 @@ private extension PaginatableCollectionViewController {
 
         // show loader
         activityIndicator.isHidden = false
+        activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
 
         // hide footer
         paginatableInput?.updatePagination(canIterate: false)
+        paginatableInput?.updateProgress(isLoading: false)
 
         // imitation of loading first page
         delay(.now() + .seconds(3)) { [weak self] in
-
+            
             // fill table
             self?.fillAdapter()
 
             // hide loader
             self?.activityIndicator?.stopAnimating()
-            self?.activityIndicator?.isHidden = true
 
             // show footer
             self?.paginatableInput?.updatePagination(canIterate: true)
+
         }
     }
 

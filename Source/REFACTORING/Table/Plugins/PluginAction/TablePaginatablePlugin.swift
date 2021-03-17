@@ -47,6 +47,8 @@ public protocol PaginatableOutput: class {
 ///
 /// Show `progressView` on `willDisplay` last cell.
 /// Hide `progressView` when finish loading request
+///
+/// - Warning: Specify estimatedRowHeight of your layout to proper `willDisplay` calls and correct `contentSize`
 public class TablePaginatablePlugin: BaseTablePlugin<TableEvent>  {
 
     public typealias ProgressView = UIView & ProgressDisplayableItem

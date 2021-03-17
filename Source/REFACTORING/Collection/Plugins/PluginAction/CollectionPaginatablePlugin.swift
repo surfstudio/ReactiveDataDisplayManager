@@ -10,8 +10,10 @@ import UIKit
 
 /// Plugin to display `progressView` while next page is loading
 ///
-/// Show `progressView` on `willDisplay` last cell.
-/// Hide `progressView` when finish loading request
+/// - Show `progressView` on `willDisplay` last cell.
+/// - Hide `progressView` when finish loading request
+///
+/// - Warning: Specify itemSize of your layout to proper `willDisplay` calls and correct `contentSize`
 public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent>  {
 
     public typealias ProgressView = UIView & ProgressDisplayableItem
@@ -69,13 +71,13 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
 
             let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
             if indexPath == lastCellIndexPath && canIterate {
+                // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
+                progressView.frame = .init(origin: .init(x: progressView.frame.origin.x,
+                                                         y: collectionView?.contentSize.height ?? 0),
+                                           size: progressView.frame.size)
+
                 output?.loadNextPage(with: self)
             }
-
-            // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
-            progressView.frame = .init(origin: .init(x: progressView.frame.origin.x,
-                                                     y: collectionView?.contentSize.height ?? 0),
-                                       size: progressView.frame.size)
         default:
             break
         }
