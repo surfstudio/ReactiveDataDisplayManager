@@ -15,7 +15,7 @@ targets:
         - sdk: UIKit.framework
       type: application
       platform: iOS
-      deploymentTarget: 10.0
+      deploymentTarget: 11.0
       scheme:
         configVariants: all
       sources:
