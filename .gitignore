@@ -67,3 +67,5 @@ fastlane/screenshots
 fastlane/test_output
 Example/Pods
 Podfile.lock
+.DS_Store
+.bundle/

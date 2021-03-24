@@ -6,7 +6,7 @@
 //  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import UIKit
 
 extension NSObject {
@@ -59,6 +59,25 @@ extension Array {
     /// Index outside array
     subscript (safe index: Int) -> Element? {
         return indices ~= index ? self[index] : nil
+    }
+
+}
+
+@available(iOS 10.0, *)
+extension UIImage {
+
+    /// This method creates an image of a view
+    public convenience init?(view: UIView) {
+        let renderer = UIGraphicsImageRenderer(bounds: view.bounds)
+        let image = renderer.image { rendererContext in
+            view.layer.render(in: rendererContext.cgContext)
+        }
+
+        if let cgImage = image.cgImage {
+            self.init(cgImage: cgImage, scale: UIScreen.main.scale, orientation: .up)
+        } else {
+            return nil
+        }
     }
 
 }
