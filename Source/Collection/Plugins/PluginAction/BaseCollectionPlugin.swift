@@ -8,6 +8,8 @@
 
 open class BaseCollectionPlugin<Event>: PluginAction {
 
+    public init() {}
+
     open func setup(with manager: BaseCollectionManager?) {
         /// Most of plugins do not need any setup
     }
