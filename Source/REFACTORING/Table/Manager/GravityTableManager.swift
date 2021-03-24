@@ -131,7 +131,7 @@ open class GravityTableManager: BaseTableManager {
 
     public func removeAllgenerators(from header: HeaderGeneratorType) {
         guard
-            let index = self.sections.index(where: { $0 === header }),
+            let index = self.sections.firstIndex(where: { $0 === header }),
             self.generators.count > index
         else {
             return

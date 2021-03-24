@@ -104,14 +104,14 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
             self.generators.append([CollectionCellGenerator]())
         }
 
-        if let index = self.sections.index(where: { $0 === header }) {
+        if let index = self.sections.firstIndex(where: { $0 === header }) {
             self.generators[index].append(contentsOf: generators)
         }
     }
 
     public func removeAllGenerators(from header: CollectionHeaderGenerator) {
         guard
-            let index = self.sections.index(where: { $0 === header }),
+            let index = self.sections.firstIndex(where: { $0 === header }),
             self.generators.count > index
         else {
             return
