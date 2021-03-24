@@ -7,7 +7,7 @@
 //
 
 open class BaseTablePlugin<Event>: PluginAction {
-
+    
     open func setup(with manager: BaseTableManager?) {
         /// Most of plugins do not need any setup
     }

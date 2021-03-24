@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 /// Plugin to scroll to selected item on `didSelect`
 public class CollectionSelectedItemScrollablePlugin: BaseCollectionPlugin<CollectionEvent> {
 

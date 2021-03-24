@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 extension UICollectionViewCell: DataDisplayConstructable {}
 
 public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & ConfigurableItem {

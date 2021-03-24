@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 public typealias TableMovable = TableFeaturePlugin & TableMovableDataSource & TableMovableDelegate
 
 public protocol TableMovableDataSource {

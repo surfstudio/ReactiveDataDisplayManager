@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 @available(iOS 11.0, *)
 public protocol TableSwipeActionsProvider {
     var isEnableSwipeActions: Bool { get set }
