@@ -9,6 +9,13 @@
 import UIKit
 import ReactiveDataDisplayManager
 
+/// This class is for displaying data only
+/// The examples of `Swift Package Manager` support located in:
+/// - headers: `SPMHeaderCollectionGenerator.swift`
+/// - cells: `SPMCollectionViewCell.swift`
+/// For correct work, you must specify your SPM module for all `.xib` files and `.storyboard`
+/// In all descendants of an `ConfigurableItem`, you must use the static method `bundle()` and return `Bundle.module`
+/// In all views related to `.xib`, you also need to specify `Bundle.module`
 @available(iOS 14.0, *)
 class MainSPMCollectionViewController: UIViewController {
 
@@ -43,11 +50,11 @@ class MainSPMCollectionViewController: UIViewController {
 private extension MainSPMCollectionViewController {
 
     func fillAdapter() {
-        let header = HeaderCollectionListGenerator(title: "Section header")
+        let header = SPMHeaderCollectionGenerator(title: "Section header")
         adapter.addSectionHeaderGenerator(header)
 
         for title in titles {
-            let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
+            let generator = SPMCollectionViewCell.rddm.baseGenerator(with: title)
             generator.didSelectEvent += { debugPrint("\(title) selected") }
             adapter.addCellGenerator(generator)
         }
@@ -94,6 +101,8 @@ private extension UICollectionLayoutListConfiguration.Appearance {
             return "Grouped"
         case .insetGrouped:
             return "Inset Grouped"
+        @unknown default:
+            return ""
         }
     }
 
@@ -108,6 +117,8 @@ private extension UICollectionLayoutListConfiguration.Appearance {
         case .grouped:
             return .insetGrouped
         case .insetGrouped:
+            return .plain
+        @unknown default:
             return .plain
         }
     }

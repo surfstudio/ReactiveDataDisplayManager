@@ -14,6 +14,7 @@ public protocol ConfigurableItem where Self: UIView {
     associatedtype Model
 
     /// Method for SPM support
+    ///
     /// If you use SPM return Bundle.module
     static func bundle() -> Bundle?
 

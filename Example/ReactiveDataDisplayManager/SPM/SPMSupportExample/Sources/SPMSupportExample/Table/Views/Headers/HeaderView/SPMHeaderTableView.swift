@@ -19,7 +19,7 @@ extension UIView {
 
 }
 
-final class HeaderView: UIView {
+final class SPMHeaderTableView: UIView {
 
     // MARK: - IBOutlet
     

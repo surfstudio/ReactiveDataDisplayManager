@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HeaderCollectionListView: UICollectionReusableView {
+final class SPMHeaderCollectionView: UICollectionReusableView {
 
     // MARK: - IBOutlets
 

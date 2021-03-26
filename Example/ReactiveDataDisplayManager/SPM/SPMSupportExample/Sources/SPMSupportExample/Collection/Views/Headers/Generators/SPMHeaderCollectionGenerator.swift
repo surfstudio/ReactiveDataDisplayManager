@@ -1,5 +1,5 @@
 //
-//  HeaderCollectionListGenerator.swift
+//  SPMHeaderCollectionGenerator.swift
 //  ReactiveDataDisplayManagerExample
 //
 //  Created by Vadim Tikhonov on 09.02.2021.
@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class HeaderCollectionListGenerator {
+final class SPMHeaderCollectionGenerator {
 
     // MARK: - Constants
 
@@ -25,10 +25,10 @@ final class HeaderCollectionListGenerator {
 
 // MARK: - CollectionHeaderGenerator
 
-extension HeaderCollectionListGenerator: CollectionHeaderGenerator {
+extension SPMHeaderCollectionGenerator: CollectionHeaderGenerator {
 
     var identifier: UICollectionReusableView.Type {
-        return HeaderCollectionListView.self
+        return SPMHeaderCollectionView.self
     }
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
@@ -45,9 +45,9 @@ extension HeaderCollectionListGenerator: CollectionHeaderGenerator {
 
 // MARK: - ViewBuilder
 
-extension HeaderCollectionListGenerator: ViewBuilder {
+extension SPMHeaderCollectionGenerator: ViewBuilder {
 
-    func build(view: HeaderCollectionListView) {
+    func build(view: SPMHeaderCollectionView) {
         view.fill(title: title)
     }
 

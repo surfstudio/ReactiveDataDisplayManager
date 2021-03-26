@@ -49,6 +49,7 @@ public protocol TableCellGenerator: class {
     var estimatedCellHeight: CGFloat? { get }
 
     /// Method for SPM support
+    ///
     /// If you use SPM return Bundle.module
     static func bundle() -> Bundle?
 }
@@ -73,6 +74,7 @@ public protocol CollectionHeaderGenerator: class {
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
 
     /// Method for SPM support
+    ///
     /// If you use SPM return Bundle.module
     static func bundle() -> Bundle?
 }
@@ -103,6 +105,7 @@ public protocol CollectionCellGenerator: class {
     func registerCell(in collectionView: UICollectionView)
 
     /// Method for SPM support
+    /// 
     /// If you use SPM return Bundle.module
     static func bundle() -> Bundle?
 }

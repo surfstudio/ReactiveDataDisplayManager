@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectionViewCell>, IndexTitleDisplaybleItem {
+final class SPMCollectionGenerator: BaseCollectionCellGenerator<SPMCollectionViewCell>, IndexTitleDisplaybleItem {
 
     // MARK: - IndexTitleDisplayble
 

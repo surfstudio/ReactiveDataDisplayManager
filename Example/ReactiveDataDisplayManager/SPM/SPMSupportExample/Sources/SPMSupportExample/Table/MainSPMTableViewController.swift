@@ -9,18 +9,24 @@
 import UIKit
 import ReactiveDataDisplayManager
 
+/// This class is for displaying data only
+/// The examples of Spm support located in:
+/// - headers: `SPMHeaderTableView.swift`, `SPMHeaderTableGenerator.swift`
+/// - cells: `SPMTableViewCell.swift`
+/// For correct work, you must specify your SPM module for all `.xib` files and `.storyboard`
+/// In all descendants of an `ConfigurableItem`, you must use the static method `bundle()` and return `Bundle.module`
+/// In all views related to `.xib`, you also need to specify `Bundle.module`
 final class MainSPMTableViewController: UIViewController {
 
     // MARK: - Constants
 
     private enum Constants {
         static let models: [TableCellGenerator] = [
-            BaseCellGenerator<SPMExampleTableViewCell>(with: "BaseCellGenerator"),
-            SPMCustomTableGenerator(with: "Swipable")
+            BaseCellGenerator<SPMTableViewCell>(with: "BaseCellGenerator"),
+            SPMTableGenerator(with: "Swipable")
         ]
         static let headers: [TableHeaderGenerator] = [
-            TitleHeaderGenerator(model: "SectionHeader"),
-            SectionTitleHeaderGenerator(model: "SectionTitleHeader", needSectionIndexTitle: true)
+            SPMHeaderTableGenerator(model: "SectionHeader"),
         ]
     }
 
@@ -49,7 +55,7 @@ private extension MainSPMTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        let generator = BaseNonReusableCellGenerator<SPMExampleTableViewCell>(with: "BaseNonReusableCellGenerator")
+        let generator = BaseNonReusableCellGenerator<SPMTableViewCell>(with: "BaseNonReusableCellGenerator")
         generator.update(model: "BaseNonReusableCellGenerator")
 
         ddm.addCellGenerator(generator)

@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-public class SPMExampleTableViewCell: UITableViewCell {
+public class SPMTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var titleLabel: UILabel!
 
@@ -19,7 +19,7 @@ public class SPMExampleTableViewCell: UITableViewCell {
     
 }
 
-extension SPMExampleTableViewCell: ConfigurableItem {
+extension SPMTableViewCell: ConfigurableItem {
 
     /// For support SPM
     public static func bundle() -> Bundle? {
