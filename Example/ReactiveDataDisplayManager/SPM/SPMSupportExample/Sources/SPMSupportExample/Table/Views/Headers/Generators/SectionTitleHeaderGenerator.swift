@@ -32,7 +32,8 @@ final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplay
     // MARK: - Private Property
 
     private let model: String
-    private lazy var view = HeaderView().spmNib(bundle: Bundle.module)
+    /// For support SPM
+    private lazy var view = HeaderView().fromSpmNib(bundle: Bundle.module)
 
     // MARK: - Initialization
 

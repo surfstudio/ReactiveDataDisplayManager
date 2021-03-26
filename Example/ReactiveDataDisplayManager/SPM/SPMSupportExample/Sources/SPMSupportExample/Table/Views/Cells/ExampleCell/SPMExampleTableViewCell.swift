@@ -21,8 +21,9 @@ public class SPMExampleTableViewCell: UITableViewCell {
 
 extension SPMExampleTableViewCell: ConfigurableItem {
 
+    /// For support SPM
     public static func bundle() -> Bundle? {
-        Bundle.module
+        return Bundle.module
     }
 
     public func configure(with model: String) {

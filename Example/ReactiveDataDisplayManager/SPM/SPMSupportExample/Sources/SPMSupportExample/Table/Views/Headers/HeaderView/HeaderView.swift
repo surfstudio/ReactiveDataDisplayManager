@@ -10,14 +10,8 @@ import UIKit
 
 extension UIView {
 
-    func fromNib() -> Self? {
-        let bundleName = Bundle(for: type(of: self))
-        let nibName = String(describing: type(of: self))
-        let nib = UINib(nibName: nibName, bundle: bundleName)
-        return nib.instantiate(withOwner: nil, options: nil).first as? Self
-    }
-
-    func spmNib(bundle: Bundle) -> Self? {
+    /// For support SPM
+    func fromSpmNib(bundle: Bundle) -> Self? {
         let nibName = String(describing: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundle)
         return nib.instantiate(withOwner: nil, options: nil).first as? Self

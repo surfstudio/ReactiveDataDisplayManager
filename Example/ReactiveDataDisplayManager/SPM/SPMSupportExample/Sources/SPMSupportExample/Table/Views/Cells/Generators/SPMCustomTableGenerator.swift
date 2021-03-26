@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-class SwipeableTableGenerator: BaseCellGenerator<SPMExampleTableViewCell>, SwipeableItem {
+class SPMCustomTableGenerator: BaseCellGenerator<SPMExampleTableViewCell>, SwipeableItem {
 
     // MARK: - SwipeableItem
 

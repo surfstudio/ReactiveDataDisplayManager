@@ -32,9 +32,7 @@ final class MainSPMTableViewController: UIViewController {
     private enum Constants {
         static let models: [TableCellGenerator] = [
             BaseCellGenerator<SPMExampleTableViewCell>(with: "BaseCellGenerator"),
-            BaseNonReusableCellGenerator<SPMExampleTableViewCell>(with: "BaseNonReusableCellGenerator"),
-            SwipeableTableGenerator(with: "Swipable"),
-
+            SPMCustomTableGenerator(with: "Swipable")
         ]
         static let headers: [TableHeaderGenerator] = [
             TitleHeaderGenerator(model: "SectionHeader"),
@@ -67,7 +65,10 @@ private extension MainSPMTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+        let generator = BaseNonReusableCellGenerator<SPMExampleTableViewCell>(with: "BaseNonReusableCellGenerator")
+        generator.update(model: "BaseNonReusableCellGenerator")
 
+        ddm.addCellGenerator(generator)
         Constants.models.forEach { (generator) in
             ddm.addCellGenerator(generator)
         }

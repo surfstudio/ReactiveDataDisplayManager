@@ -18,9 +18,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xkT-7n-fWd">
-                        <rect key="frame" x="16" y="12" width="288" height="21"/>
+                        <rect key="frame" x="16" y="12" width="288" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="qEe-lG-lSN"/>
+                            <constraint firstAttribute="height" constant="20" id="VNH-0T-Xnj"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -28,9 +28,9 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="xkT-7n-fWd" secondAttribute="bottom" constant="11" id="aCO-zt-eaL"/>
                     <constraint firstAttribute="trailing" secondItem="xkT-7n-fWd" secondAttribute="trailing" constant="16" id="gdb-jc-2Av"/>
-                    <constraint firstItem="xkT-7n-fWd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="hwq-S3-ZUu"/>
+                    <constraint firstAttribute="bottom" secondItem="xkT-7n-fWd" secondAttribute="bottom" constant="12" id="n8S-Pk-ihw"/>
+                    <constraint firstItem="xkT-7n-fWd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="wuz-WV-Vmp"/>
                     <constraint firstItem="xkT-7n-fWd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="x50-2F-xiY"/>
                 </constraints>
             </tableViewCellContentView>
