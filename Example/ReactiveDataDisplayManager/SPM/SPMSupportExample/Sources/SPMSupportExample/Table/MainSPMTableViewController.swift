@@ -11,22 +11,6 @@ import ReactiveDataDisplayManager
 
 final class MainSPMTableViewController: UIViewController {
 
-    // MARK: - SegueIdentifiers
-
-    fileprivate enum SegueIdentifier: String {
-        case baseCell
-        case imageTable
-        case foldableCellTable
-        case gravityTable
-        case movableTable
-        case alphabetizeSectionsTable
-        case sectionTitlesTable
-        case swipeableTable
-        case refreshableTable
-        case paginatableTable
-        case allPluginsTable
-    }
-
     // MARK: - Constants
 
     private enum Constants {
