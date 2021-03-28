@@ -42,8 +42,7 @@ final class MainTableViewController: UIViewController {
             ("table with swipeable cells", .swipeableTable),
             ("table with refresh control", .refreshableTable),
             ("table with pagination", .paginatableTable),
-            ("table with all plugins", .allPluginsTable),
-            ("spm support", .spmSupportTable)
+            ("table with all plugins", .allPluginsTable)
         ]
     }
 

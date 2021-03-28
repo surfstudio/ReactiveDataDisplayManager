@@ -36,8 +36,7 @@ final class MainCollectionViewController: UIViewController {
             ("Horizontal image collection", .imageHorizontalCollection),
             ("Sizable collection", .sizableCollection),
             ("Foldable collection", .foldableCollection),
-            ("Collection with item index titles", .itemTitleCollection),
-            ("SPM Support", .spmSupportCollection)
+            ("Collection with item index titles", .itemTitleCollection)
         ]
     }
 

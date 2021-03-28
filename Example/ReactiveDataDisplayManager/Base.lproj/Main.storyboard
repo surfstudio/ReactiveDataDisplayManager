@@ -301,7 +301,6 @@
                         <segue destination="gFr-UQ-9p9" kind="show" identifier="allPluginsTable" id="QY8-TZ-bpF"/>
                         <segue destination="KPe-5j-jTE" kind="show" identifier="refreshableTable" id="lcW-uo-QUW"/>
                         <segue destination="xQn-4x-xEX" kind="show" identifier="paginatableTable" id="2Xm-b9-jRj"/>
-                        <segue destination="9MS-rq-iSU" kind="show" identifier="spmSupportTable" id="xHm-GH-h5i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -434,7 +433,6 @@
                         <segue destination="GZX-q5-5fd" kind="show" identifier="sizableCollection" id="kbc-gq-BdS"/>
                         <segue destination="pGI-i3-EWf" kind="show" identifier="foldableCollection" id="xiU-it-Uz9"/>
                         <segue destination="cOD-zS-jLq" kind="show" identifier="itemTitleCollection" id="Tuv-8l-eFa"/>
-                        <segue destination="Hoa-TM-0ah" kind="show" identifier="spmSupportCollection" id="82P-UR-hBw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -600,44 +598,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WVc-R0-LPb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="652" y="2248"/>
-        </scene>
-        <!--MainSPM Collection View Controller-->
-        <scene sceneID="Qap-2u-94Y">
-            <objects>
-                <viewController id="Hoa-TM-0ah" customClass="MainSPMCollectionViewController" customModule="SPMSupportExample" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fVD-RL-Gxg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Y3x-BV-Xfr">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yYD-Eg-QpO">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Fci-GS-z5f"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Y3x-BV-Xfr" firstAttribute="top" secondItem="Fci-GS-z5f" secondAttribute="top" id="25s-eC-ajT"/>
-                            <constraint firstItem="Y3x-BV-Xfr" firstAttribute="leading" secondItem="Fci-GS-z5f" secondAttribute="leading" id="7mP-is-s3g"/>
-                            <constraint firstItem="Fci-GS-z5f" firstAttribute="bottom" secondItem="Y3x-BV-Xfr" secondAttribute="bottom" id="9iI-hx-6dl"/>
-                            <constraint firstItem="Fci-GS-z5f" firstAttribute="trailing" secondItem="Y3x-BV-Xfr" secondAttribute="trailing" id="pj9-gS-pgb"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="1jD-Zp-mMj"/>
-                    <connections>
-                        <outlet property="collectionView" destination="Y3x-BV-Xfr" id="scp-Z7-B4L"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VZj-21-HFU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4087" y="2239"/>
         </scene>
         <!--Image Collection View Controller-->
         <scene sceneID="BHb-jD-yM3">
@@ -863,37 +823,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpV-hx-0sU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-163.19999999999999" y="132.23388305847078"/>
-        </scene>
-        <!--MainSPM Table View Controller-->
-        <scene sceneID="FIh-gC-RQP">
-            <objects>
-                <viewController id="9MS-rq-iSU" customClass="MainSPMTableViewController" customModule="SPMSupportExample" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6N6-AH-oAc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aef-Zu-bQb">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="r9M-Uh-wt5"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="aef-Zu-bQb" firstAttribute="leading" secondItem="r9M-Uh-wt5" secondAttribute="leading" id="CrX-rf-zzt"/>
-                            <constraint firstItem="aef-Zu-bQb" firstAttribute="top" secondItem="r9M-Uh-wt5" secondAttribute="top" id="Jhh-KB-8wv"/>
-                            <constraint firstItem="r9M-Uh-wt5" firstAttribute="trailing" secondItem="aef-Zu-bQb" secondAttribute="trailing" id="OK4-Yx-ljk"/>
-                            <constraint firstItem="r9M-Uh-wt5" firstAttribute="bottom" secondItem="aef-Zu-bQb" secondAttribute="bottom" id="fL9-8i-o0b"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="S4h-UW-y23"/>
-                    <connections>
-                        <outlet property="tableView" destination="aef-Zu-bQb" id="zgZ-5j-V2k"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0Yv-gD-EYa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6574" y="-1845"/>
         </scene>
     </scenes>
     <resources>

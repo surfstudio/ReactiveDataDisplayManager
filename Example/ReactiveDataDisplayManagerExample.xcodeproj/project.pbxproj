@@ -3,13 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		018630FD25EF9730005E9F0E /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018630FC25EF9730005E9F0E /* RefreshableTableViewController.swift */; };
 		0186312525EFA2D2005E9F0E /* PaginatableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186312425EFA2D2005E9F0E /* PaginatableTableViewController.swift */; };
-		41252D4525F8DFAA00736D27 /* SPMSupportExample in Frameworks */ = {isa = PBXBuildFile; productRef = 41252D4425F8DFAA00736D27 /* SPMSupportExample */; };
 		41252D6425F8E3B000736D27 /* FoldableTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41252D4D25F8E3B000736D27 /* FoldableTableViewCell.xib */; };
 		41252D6525F8E3B000736D27 /* FoldableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41252D4E25F8E3B000736D27 /* FoldableTableViewCell.swift */; };
 		41252D6625F8E3B000736D27 /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41252D5025F8E3B000736D27 /* TitleTableViewCell.xib */; };
@@ -94,7 +93,6 @@
 		018630FC25EF9730005E9F0E /* RefreshableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableTableViewController.swift; sourceTree = "<group>"; };
 		0186312425EFA2D2005E9F0E /* PaginatableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatableTableViewController.swift; sourceTree = "<group>"; };
 		330C919AD1E3E5E58F5DEFF0 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; sourceTree = "<group>"; };
-		41252D3F25F8D57400736D27 /* SPMSupportExample */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SPMSupportExample; sourceTree = "<group>"; };
 		41252D4D25F8E3B000736D27 /* FoldableTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoldableTableViewCell.xib; sourceTree = "<group>"; };
 		41252D4E25F8E3B000736D27 /* FoldableTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoldableTableViewCell.swift; sourceTree = "<group>"; };
 		41252D5025F8E3B000736D27 /* TitleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41252D4525F8DFAA00736D27 /* SPMSupportExample in Frameworks */,
 				F6FD540A5EAE2B1D7DACD20A /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,14 +226,6 @@
 				48D07F1D6BA77902525C1315 /* Pods_ReactiveDataDisplayManagerExampleTests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		41252D3E25F8D53000736D27 /* SPM */ = {
-			isa = PBXGroup;
-			children = (
-				41252D3F25F8D57400736D27 /* SPMSupportExample */,
-			);
-			path = SPM;
 			sourceTree = "<group>";
 		};
 		41252D4A25F8E3B000736D27 /* Views */ = {
@@ -649,7 +638,6 @@
 				8B1D7905201C8BCC00F184BD /* Table */,
 				896B59722354963900E8E2AB /* Stack */,
 				6DA4BF4225D9DEFE00C23D85 /* Utils */,
-				41252D3E25F8D53000736D27 /* SPM */,
 				8B85E2E11FE84F540080984A /* Main.storyboard */,
 			);
 			path = ReactiveDataDisplayManager;
@@ -731,7 +719,6 @@
 			);
 			name = ReactiveDataDisplayManagerExample;
 			packageProductDependencies = (
-				41252D4425F8DFAA00736D27 /* SPMSupportExample */,
 			);
 			productName = ReactiveDataDisplayManager;
 			productReference = 8B85E2DA1FE84F540080984A /* ReactiveDataDisplayManagerExample.app */;
@@ -1093,8 +1080,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1108,10 +1094,7 @@
 				DEVELOPMENT_TEAM = A4NNFV669G;
 				INFOPLIST_FILE = "$(SRCROOT)/ReactiveDataDisplayManager/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Example.ReactiveDataDisplayManager;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1129,10 +1112,7 @@
 				DEVELOPMENT_TEAM = A4NNFV669G;
 				INFOPLIST_FILE = "$(SRCROOT)/ReactiveDataDisplayManager/Application/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Example.ReactiveDataDisplayManager;
 				PRODUCT_MODULE_NAME = "$(PRODUCT_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1149,11 +1129,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ReactiveDataDisplayManagerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Example.ReactiveDataDisplayManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1170,11 +1146,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ReactiveDataDisplayManagerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = AK.Example.ReactiveDataDisplayManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1214,13 +1186,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		41252D4425F8DFAA00736D27 /* SPMSupportExample */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SPMSupportExample;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8B85E2D21FE84F540080984A /* Project object */;
 }
