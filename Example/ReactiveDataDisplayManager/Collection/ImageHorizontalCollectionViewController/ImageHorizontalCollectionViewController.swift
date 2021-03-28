@@ -56,7 +56,7 @@ final class ImageHorizontalCollectionViewController: UIViewController {
 private extension ImageHorizontalCollectionViewController {
 
     func configureCollectionView() {
-        collectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         collectionView.showsHorizontalScrollIndicator = false
 
         let layout = UICollectionViewFlowLayout()
