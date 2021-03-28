@@ -30,8 +30,9 @@ extension LabelCell: ConfigurableItem {
         titleLabel.text = model
     }
     
-    func bundle() -> Bundle {
-        return Bundle.module 
+    // For support SPM
+    static func bundle() -> Bundle? {
+        return Bundle.module
     }
 }
 ```
