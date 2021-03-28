@@ -25,7 +25,6 @@ final class MainTableViewController: UIViewController {
         case refreshableTable
         case paginatableTable
         case allPluginsTable
-        case spmSupportTable
     }
 
     // MARK: - Constants

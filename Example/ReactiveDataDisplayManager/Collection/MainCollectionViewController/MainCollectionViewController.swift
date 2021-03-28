@@ -22,7 +22,6 @@ final class MainCollectionViewController: UIViewController {
         case sizableCollection
         case foldableCollection
         case itemTitleCollection
-        case spmSupportCollection
     }
 
     // MARK: - Constants
