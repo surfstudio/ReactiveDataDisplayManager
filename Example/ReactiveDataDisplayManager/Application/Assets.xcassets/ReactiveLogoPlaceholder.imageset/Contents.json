@@ -1,16 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "ReactiveLogoPlaceholder@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "image-not-found.png",
+      "filename" : "ReactiveLogoPlaceholder@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "image-not-found-1.png",
+      "filename" : "ReactiveLogoPlaceholder@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

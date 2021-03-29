@@ -27,7 +27,7 @@ final class NukeImagePrefetcher: ContentPrefetcher {
         }
 
         ImagePipeline.shared = pipeline
-        ImageLoadingOptions.shared.failureImage = #imageLiteral(resourceName: "imageNotFound")
+        ImageLoadingOptions.shared.failureImage = #imageLiteral(resourceName: "ReactiveLogoPlaceholder")
         imagePreheater = Nuke.ImagePreheater(maxConcurrentRequestCount: 15)
     }
 

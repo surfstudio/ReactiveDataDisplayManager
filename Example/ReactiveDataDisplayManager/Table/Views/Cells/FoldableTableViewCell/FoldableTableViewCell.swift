@@ -26,6 +26,7 @@ final class FoldableTableViewCell: UITableViewCell {
     // MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var arrowImageView: UIImageView!
 
     // MARK: - UITableViewCell
@@ -63,6 +64,7 @@ private extension FoldableTableViewCell {
     func setupInitialState() {
         selectionStyle = .none
         arrowImageView.image = #imageLiteral(resourceName: "upArrow")
+        iconImageView.image = #imageLiteral(resourceName: "ReactiveIconHorizontal")
     }
 
 }
