@@ -17,25 +17,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVQ-2g-PEb">
-                        <rect key="frame" x="16" y="11" width="288" height="21.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KVQ-2g-PEb">
+                        <rect key="frame" x="16" y="11" width="224" height="21.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="KVQ-2g-PEb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="8C3-IU-OEU"/>
                     <constraint firstItem="KVQ-2g-PEb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="ITH-4s-iVg"/>
-                    <constraint firstAttribute="trailing" secondItem="KVQ-2g-PEb" secondAttribute="trailing" constant="16" id="q68-1T-8Kn"/>
+                    <constraint firstItem="KVQ-2g-PEb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="dPS-4j-cvx"/>
                     <constraint firstAttribute="bottom" secondItem="KVQ-2g-PEb" secondAttribute="bottom" constant="11.5" id="uUe-ai-Z0j"/>
+                    <constraint firstAttribute="trailing" secondItem="KVQ-2g-PEb" secondAttribute="trailing" constant="80" id="wL9-Tw-vg7"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="titleLabel" destination="KVQ-2g-PEb" id="p84-xX-nQ0"/>
             </connections>
-            <point key="canvasLocation" x="-38.399999999999999" y="94.452773613193415"/>
+            <point key="canvasLocation" x="-38" y="95"/>
         </tableViewCell>
     </objects>
 </document>
