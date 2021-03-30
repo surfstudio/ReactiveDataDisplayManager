@@ -46,6 +46,8 @@ final class ImageTableViewCell: UITableViewCell {
 
 }
 
+// MARK: - ConfigurableItem
+
 extension ImageTableViewCell: ConfigurableItem {
 
     func configure(with viewModel: ViewModel) {

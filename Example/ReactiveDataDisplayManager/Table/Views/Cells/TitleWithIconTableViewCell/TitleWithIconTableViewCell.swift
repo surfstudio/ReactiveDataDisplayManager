@@ -20,11 +20,15 @@ class TitleWithIconTableViewCell: UITableViewCell, CalculatableHeightItem {
         titleLabel.text = title
     }
 
+    // MARK: - CalculatableHeightItem
+
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
         return 44
     }
-    
+
 }
+
+// MARK: - ConfigurableItem
 
 extension TitleWithIconTableViewCell: ConfigurableItem {
 
@@ -35,4 +39,3 @@ extension TitleWithIconTableViewCell: ConfigurableItem {
     }
 
 }
-
