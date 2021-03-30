@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ReactiveLogoPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="e2k-58-bry">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ReactiveLogo" translatesAutoresizingMaskIntoConstraints="NO" id="e2k-58-bry">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </imageView>
                         </subviews>
@@ -36,6 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ReactiveLogoPlaceholder" width="242.5" height="121.5"/>
+        <image name="ReactiveLogo" width="242.5" height="121.5"/>
     </resources>
 </document>

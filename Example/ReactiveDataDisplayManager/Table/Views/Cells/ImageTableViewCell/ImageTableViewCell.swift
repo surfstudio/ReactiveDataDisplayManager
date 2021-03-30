@@ -66,7 +66,7 @@ private extension ImageTableViewCell {
         titleLabel.font = Constants.titleFont
 
         // configure iconView
-        iconView.backgroundColor = .white
+        iconView.backgroundColor = .lightGray
         iconView.contentMode = .scaleAspectFill
         iconView.layer.cornerRadius = Constants.cornerRadius
         iconView.layer.masksToBounds = true

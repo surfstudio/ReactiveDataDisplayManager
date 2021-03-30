@@ -17,7 +17,7 @@ final class NukeImagePrefetcher: ContentPrefetcher {
 
     // MARK: - Initialization
 
-    init() {
+    init(placeholder: UIImage) {
         DataLoader.sharedUrlCache.diskCapacity = 0
 
         let pipeline = ImagePipeline {
@@ -27,7 +27,11 @@ final class NukeImagePrefetcher: ContentPrefetcher {
         }
 
         ImagePipeline.shared = pipeline
-        ImageLoadingOptions.shared.failureImage = #imageLiteral(resourceName: "ReactiveLogoPlaceholder")
+        ImageLoadingOptions.shared.placeholder = placeholder
+        ImageLoadingOptions.shared.failureImage = placeholder.withRenderingMode(.alwaysTemplate)
+        ImageLoadingOptions.shared.tintColors = .init(success: .none,
+                                                      failure: UIColor.gray.withAlphaComponent(0.2),
+                                                      placeholder: .none)
         imagePreheater = Nuke.ImagePreheater(maxConcurrentRequestCount: 15)
     }
 

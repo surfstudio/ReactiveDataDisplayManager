@@ -15,9 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        UIBarButtonItem.appearance().tintColor = UIColor.RDDMMainColor
-        UITabBar.appearance().tintColor = UIColor.RDDMMainColor
-        UITableView.appearance().sectionIndexColor = UIColor.RDDMMainColor
+        let rddmColor = UIColor(named: "RDDMMainColor")
+        UIBarButtonItem.appearance().tintColor = rddmColor
+        UITabBar.appearance().tintColor = rddmColor
+        UITableView.appearance().sectionIndexColor = rddmColor
+        UICollectionView.appearance().tintColor = rddmColor
         return true
     }
 
