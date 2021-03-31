@@ -13,11 +13,15 @@ final class NukeImagePrefetcher: ContentPrefetcher {
 
     // MARK: - Private Properties
 
-    private let imagePreheater: ImagePreheater
+    private let imagePrefetcher: ImagePrefetcher
+
+    // MARK: - Internal Properties
+
+    let imageLoadingOptions: ImageLoadingOptions
 
     // MARK: - Initialization
 
-    init() {
+    init(placeholder: UIImage) {
         DataLoader.sharedUrlCache.diskCapacity = 0
 
         let pipeline = ImagePipeline {
@@ -26,19 +30,24 @@ final class NukeImagePrefetcher: ContentPrefetcher {
             $0.dataCache = dataCache
         }
 
-        ImagePipeline.shared = pipeline
-        ImageLoadingOptions.shared.failureImage = #imageLiteral(resourceName: "imageNotFound")
-        imagePreheater = Nuke.ImagePreheater(maxConcurrentRequestCount: 15)
+        let tintOptions = ImageLoadingOptions.TintColors(success: .none,
+                                failure: UIColor.gray.withAlphaComponent(0.2),
+                                placeholder: .none)
+
+        imagePrefetcher = ImagePrefetcher(pipeline: pipeline, destination: .diskCache, maxConcurrentRequestCount: 15)
+        imageLoadingOptions = ImageLoadingOptions(placeholder: placeholder,
+                                failureImage: placeholder.withRenderingMode(.alwaysTemplate),
+                                tintColors: tintOptions)
     }
 
     // MARK: - ContentPrefetcher
 
     func startPrefetching(for urls: [URL]) {
-        imagePreheater.startPreheating(with: urls)
+        imagePrefetcher.startPrefetching(with: urls)
     }
 
     func cancelPrefetching(for urls: [URL]) {
-        imagePreheater.stopPreheating(with: urls)
+        imagePrefetcher.stopPrefetching(with: urls)
     }
 
 }

@@ -30,6 +30,8 @@
 		521664AB51B22B082B3F5B1B /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F0E44799CDA482519CFA76 /* ImageCollectionViewController.swift */; };
 		54D3F6E34F0CF393B5DDDB29 /* GravityCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43827BAA20A9EF3B05A721E /* GravityCellGenerator.swift */; };
 		56B1C46FD1AE1716CA06C8F8 /* ImageCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA8DD2FF5F7ABC2416F3C2C /* ImageCollectionCellGenerator.swift */; };
+		57D889262613253100B842AE /* TitleWithIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D889242613253100B842AE /* TitleWithIconTableViewCell.swift */; };
+		57D889272613253100B842AE /* TitleWithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57D889252613253100B842AE /* TitleWithIconTableViewCell.xib */; };
 		597FC7A322B1CD4C6954E479 /* ItemTitleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6FC596110A83223FA25408 /* ItemTitleCollectionViewController.swift */; };
 		5B055EC8EF8ECB8EC6013F70 /* NukeImagePrefetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D500BAC18C0DAEB7B74F /* NukeImagePrefetcher.swift */; };
 		5DB3376CD2365331F74C1CAC /* AllPluginsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC404CEF6562D557FE9F0FCC /* AllPluginsTableViewController.swift */; };
@@ -101,6 +103,8 @@
 		518BA0A92F553FCCEE920B99 /* FoldableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableTableViewCell.swift; sourceTree = "<group>"; };
 		5583F1D31C99C462944503CB /* MovableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableViewController.swift; sourceTree = "<group>"; };
 		57CCE75E305EDAEF36B2F98C /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		57D889242613253100B842AE /* TitleWithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithIconTableViewCell.swift; sourceTree = "<group>"; };
+		57D889252613253100B842AE /* TitleWithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleWithIconTableViewCell.xib; sourceTree = "<group>"; };
 		5DA165FA4831CE4BD0A3FBA0 /* SectionTitleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleTableViewController.swift; sourceTree = "<group>"; };
 		5EA8DD2FF5F7ABC2416F3C2C /* ImageCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		62A4301962285C9AF16819EE /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 		06478A4F456832221FCBA599 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				57D88923261324F200B842AE /* TitleWithIconTableViewCell */,
 				4638FEDDAE48DE2D1F139083 /* FoldableTableViewCell */,
 				FACE84FE4FFDFDBA53A3C434 /* Generators */,
 				A41BE40756E14A0F3107D2AC /* ImageTableViewCell */,
@@ -359,6 +364,15 @@
 			path = MovableTableViewController;
 			sourceTree = "<group>";
 		};
+		57D88923261324F200B842AE /* TitleWithIconTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				57D889242613253100B842AE /* TitleWithIconTableViewCell.swift */,
+				57D889252613253100B842AE /* TitleWithIconTableViewCell.xib */,
+			);
+			path = TitleWithIconTableViewCell;
+			sourceTree = "<group>";
+		};
 		5D579E40B6702ECD909F3C1F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,7 +400,6 @@
 				3A4926C6B70F2A9AB2D52576 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */,
 				BF4C157BD621A94056D762D9 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -722,6 +735,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57D889272613253100B842AE /* TitleWithIconTableViewCell.xib in Resources */,
 				FE5F37F2E95948E59CF6B6B2 /* Assets.xcassets in Resources */,
 				EE3D9929C26935A7EFC1D696 /* FoldableCollectionViewCell.xib in Resources */,
 				19BDA87C50E311730CDC4067 /* FoldableTableViewCell.xib in Resources */,
@@ -799,6 +813,7 @@
 				9829D5F95089D7312B073E84 /* FoldableCollectionViewCell.swift in Sources */,
 				7469CA91227C39BBA579BD0E /* FoldableCollectionViewController.swift in Sources */,
 				94DC16AA9156A833CC00BDBE /* FoldableTableViewCell.swift in Sources */,
+				57D889262613253100B842AE /* TitleWithIconTableViewCell.swift in Sources */,
 				7771ECE25476BD25F1024E9B /* FoldableTableViewController.swift in Sources */,
 				54D3F6E34F0CF393B5DDDB29 /* GravityCellGenerator.swift in Sources */,
 				D93E1B3BCAF404204B2E804C /* GravityFoldableCellGenerator.swift in Sources */,
