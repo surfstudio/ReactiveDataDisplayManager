@@ -20,6 +20,9 @@ class CollectionListViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .selectable())
+        .add(plugin: .foldable())
+        .add(featurePlugin: .sectionTitleDisplayable())
+//        .add(featurePlugin: .sectionTitleDisplayable())
         .build()
     private var titles = ["Item 1", "Item 2", "Item 3", "Item 4"]
 
@@ -29,10 +32,23 @@ class CollectionListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.setCollectionViewLayout(createCompositionalLayout(), animated: false) 
         fillAdapter()
+    }
+    
+    
+    func sectionOne() {
+        addHeaderGenerator(with: "sectionOne")
+        for _ in 0...30 {
+            // Create viewModels for cell
+            guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
 
-        configureLayoutFlow(with: appearance)
-        updateBarButtonItem(with: appearance.title)
+            // Create generator
+            let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
+
+            // Add generator to adapter
+            adapter.addCellGenerator(generator)
+        }
     }
 
 }
@@ -51,70 +67,88 @@ private extension CollectionListViewController {
             generator.didSelectEvent += { debugPrint("\(title) selected") }
             adapter.addCellGenerator(generator)
         }
-
+        sectionOne()
         adapter.forceRefill()
     }
 
-    func configureLayoutFlow(with appearance: UICollectionLayoutListConfiguration.Appearance) {
-        var configuration = UICollectionLayoutListConfiguration(appearance: appearance)
-        configuration.headerMode = .supplementary
-        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
-        collectionView.setCollectionViewLayout(layout, animated: false)
-    }
-
-    func updateBarButtonItem(with title: String) {
-        let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeListAppearance))
-        navigationItem.rightBarButtonItem = button
-    }
-
-    @objc
-    func changeListAppearance() {
-        appearance = appearance.next
-
-        configureLayoutFlow(with: appearance)
-        updateBarButtonItem(with: appearance.title)
-    }
 
 }
 
-// MARK: - Appearance
-
+//MARK: - Helper Method
 @available(iOS 14.0, *)
-private extension UICollectionLayoutListConfiguration.Appearance {
+private extension CollectionListViewController {
 
-    var title: String {
-        switch self {
-        case .plain:
-            return "Plain"
-        case .sidebarPlain:
-            return "Sidebar Plain"
-        case .sidebar:
-            return "Sidebar"
-        case .grouped:
-            return "Grouped"
-        case .insetGrouped:
-            return "Inset Grouped"
-        default:
-            return "Unknown"
-        }
+    func addHeaderGenerator(with title: String) {
+        // Make header generator
+        let headerGenerator = TitleCollectionHeaderGenerator(title: title)
+
+        // Add header generator into adapter
+        adapter.addSectionHeaderGenerator(headerGenerator)
     }
 
-    var next: UICollectionLayoutListConfiguration.Appearance {
-        switch self {
-        case .plain:
-            return .sidebarPlain
-        case .sidebarPlain:
-            return .sidebar
-        case .sidebar:
-            return .grouped
-        case .grouped:
-            return .insetGrouped
-        case .insetGrouped:
-            return .plain
-        default:
-            return .plain
+    private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
+        return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
+            switch sectionNumber {
+            case 0: return self.firstLayoutSection()
+            case 1: return self.secondLayoutSection()
+            default: return self.thirdLayoutSection()
+            }
         }
     }
+    
+    private func firstLayoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets.bottom = 15
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalWidth(0.5))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = .init(top: 0, leading: 15, bottom: 0, trailing: 2)
+       
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.orthogonalScrollingBehavior = .groupPaging
+        
+        return section
+    }
+    
+    private func secondLayoutSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33), heightDimension: .absolute(100))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 0, bottom: 15, trailing: 15)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(500))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+       
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets.leading = 15
 
+        
+        return section
+    }
+    
+    private func thirdLayoutSection() -> NSCollectionLayoutSection {
+        
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets.bottom = 15
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8), heightDimension: .fractionalWidth(0.35))
+        
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = .init(top: 0, leading: 15, bottom: 0, trailing: 2)
+       
+        let section = NSCollectionLayoutSection(group: group)
+        
+        section.orthogonalScrollingBehavior = .continuous
+        
+        return section
+    }
 }
+
 
