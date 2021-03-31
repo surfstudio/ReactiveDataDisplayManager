@@ -1,9 +1,11 @@
+//
 //  CollectionListViewController.swift
 //  ReactiveDataDisplayManagerExample
 //
 //  Created by Vadim Tikhonov on 09.02.2021.
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
+
 import UIKit
 import ReactiveDataDisplayManager
 
@@ -11,9 +13,11 @@ import ReactiveDataDisplayManager
 class CollectionListViewController: UIViewController {
 
     // MARK: - IBOutlets
+
     @IBOutlet private weak var collectionView: UICollectionView!
 
     // MARK: - Private Properties
+
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .selectable())
         .build()
@@ -22,6 +26,7 @@ class CollectionListViewController: UIViewController {
     private var appearance = UICollectionLayoutListConfiguration.Appearance.plain
 
     // MARK: - UIViewController
+
     override func viewDidLoad() {
         super.viewDidLoad()
         fillAdapter()
@@ -33,6 +38,7 @@ class CollectionListViewController: UIViewController {
 }
 
 // MARK: - Private Methods
+
 @available(iOS 14.0, *)
 private extension CollectionListViewController {
 
@@ -72,6 +78,7 @@ private extension CollectionListViewController {
 }
 
 // MARK: - Appearance
+
 @available(iOS 14.0, *)
 private extension UICollectionLayoutListConfiguration.Appearance {
 
