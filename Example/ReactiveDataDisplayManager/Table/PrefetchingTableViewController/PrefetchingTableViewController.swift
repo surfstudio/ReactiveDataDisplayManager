@@ -51,8 +51,8 @@ private extension PrefetchingTableViewController {
     func fillAdapter() {
         for _ in 0...300 {
             // Create viewModels for cell
-            guard let viewModel = ImageTableViewCell.ViewModel.make() else { continue }
-
+            guard let viewModel = ImageTableViewCell.ViewModel.make(with: loadImage) else { continue }
+            
             // Create generator
             let generator = ImageTableGenerator(with: viewModel)
 
@@ -62,6 +62,11 @@ private extension PrefetchingTableViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+    }
+
+    /// This method load image and set to UIImageView
+    func loadImage(url: URL, imageView: UIImageView) {
+        Nuke.loadImage(with: url, options: prefetcher.imageLoadingOptions, into: imageView)
     }
 
 }
