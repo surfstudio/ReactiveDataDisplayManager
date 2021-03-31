@@ -16,7 +16,7 @@ class CollectionCompositionalViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let edgeInstert = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+        static let edgeInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
     }
 
     // MARK: - IBOutlets
@@ -49,13 +49,13 @@ private extension CollectionCompositionalViewController {
 
     func fillAdapter() {
         collectionView.setCollectionViewLayout(makeCompositionalLayout(), animated: false)
-        sectionOne()
-        sectionTwo()
-        sectionThird()
+        addAnimationSection()
+        addGridSection()
+        addCompositeGroupSection()
         adapter.forceRefill()
     }
     
-    func sectionOne() {
+    func addAnimationSection() {
         addHeaderGenerator(with: "Animate section")
         for _ in 0...29 {
             // Create viewModels for cell
@@ -69,7 +69,7 @@ private extension CollectionCompositionalViewController {
         }
     }
     
-    func sectionTwo() {
+    func addGridSection() {
         addHeaderGenerator(with: "Grid section")
         for index in 0...11 {
             // Create generator
@@ -80,7 +80,7 @@ private extension CollectionCompositionalViewController {
         }
     }
     
-    func sectionThird() {
+    func addCompositeGroupSection() {
         addHeaderGenerator(with: "Composite group section")
         for _ in 0...31 {
             // Create viewModels for cell
@@ -191,7 +191,7 @@ private extension CollectionCompositionalViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33),
                                               heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = Constants.edgeInstert
+        item.contentInsets = Constants.edgeInsets
 
         // Group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -213,13 +213,13 @@ private extension CollectionCompositionalViewController {
         let leadingItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7),
                                                heightDimension: .fractionalHeight(1.0)))
-        leadingItem.contentInsets = Constants.edgeInstert
+        leadingItem.contentInsets = Constants.edgeInsets
 
         // Item small image
         let trailingItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .fractionalHeight(0.3)))
-        trailingItem.contentInsets = Constants.edgeInstert
+        trailingItem.contentInsets = Constants.edgeInsets
         
         // Group combine 2 small image
         let trailingGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3),
@@ -238,7 +238,7 @@ private extension CollectionCompositionalViewController {
         let topItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .fractionalHeight(0.3)))
-        topItem.contentInsets = Constants.edgeInstert
+        topItem.contentInsets = Constants.edgeInsets
 
         // Main Group long image / medium image | 2 small image
         let nestedGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
