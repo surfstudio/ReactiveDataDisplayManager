@@ -31,7 +31,8 @@
 		54D3F6E34F0CF393B5DDDB29 /* GravityCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43827BAA20A9EF3B05A721E /* GravityCellGenerator.swift */; };
 		56B1C46FD1AE1716CA06C8F8 /* ImageCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA8DD2FF5F7ABC2416F3C2C /* ImageCollectionCellGenerator.swift */; };
 		576A24342614DA050066A8E1 /* CollectionCompositionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576A24332614DA050066A8E1 /* CollectionCompositionalViewController.swift */; };
-
+		578CCA4C2615C6F500735D6F /* MainStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578CCA4B2615C6F500735D6F /* MainStackViewController.swift */; };
+		578CCA572615CE2A00735D6F /* UnrollStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578CCA562615CE2A00735D6F /* UnrollStackViewController.swift */; };
 		57D889262613253100B842AE /* TitleWithIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D889242613253100B842AE /* TitleWithIconTableViewCell.swift */; };
 		57D889272613253100B842AE /* TitleWithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57D889252613253100B842AE /* TitleWithIconTableViewCell.xib */; };
 		597FC7A322B1CD4C6954E479 /* ItemTitleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6FC596110A83223FA25408 /* ItemTitleCollectionViewController.swift */; };
@@ -105,6 +106,8 @@
 		518BA0A92F553FCCEE920B99 /* FoldableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableTableViewCell.swift; sourceTree = "<group>"; };
 		5583F1D31C99C462944503CB /* MovableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableViewController.swift; sourceTree = "<group>"; };
 		576A24332614DA050066A8E1 /* CollectionCompositionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCompositionalViewController.swift; sourceTree = "<group>"; };
+		578CCA4B2615C6F500735D6F /* MainStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStackViewController.swift; sourceTree = "<group>"; };
+		578CCA562615CE2A00735D6F /* UnrollStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrollStackViewController.swift; sourceTree = "<group>"; };
 		57CCE75E305EDAEF36B2F98C /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		57D889242613253100B842AE /* TitleWithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithIconTableViewCell.swift; sourceTree = "<group>"; };
 		57D889252613253100B842AE /* TitleWithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleWithIconTableViewCell.xib; sourceTree = "<group>"; };
@@ -367,7 +370,6 @@
 			path = MovableTableViewController;
 			sourceTree = "<group>";
 		};
-
 		576A24322614D9B30066A8E1 /* CollectionCompositionalViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,7 +378,31 @@
 			path = CollectionCompositionalViewController;
 			sourceTree = "<group>";
 		};
-
+		578CCA4A2615C6C400735D6F /* MainStackViewController */ = {
+			isa = PBXGroup;
+			children = (
+				578CCA4B2615C6F500735D6F /* MainStackViewController.swift */,
+			);
+			path = MainStackViewController;
+			sourceTree = "<group>";
+		};
+		578CCA4E2615CAEB00735D6F /* Simple */ = {
+			isa = PBXGroup;
+			children = (
+				BB96FC58AF36480A2BA5E8F6 /* StackViewController.swift */,
+				4637734934FC10C9AC17599B /* TitleStackCellGenerator.swift */,
+			);
+			name = Simple;
+			sourceTree = "<group>";
+		};
+		578CCA552615CE0C00735D6F /* Unroll */ = {
+			isa = PBXGroup;
+			children = (
+				578CCA562615CE2A00735D6F /* UnrollStackViewController.swift */,
+			);
+			path = Unroll;
+			sourceTree = "<group>";
+		};
 		57D88923261324F200B842AE /* TitleWithIconTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,8 +506,9 @@
 		A2F38C685323B8D626753C9A /* Stack */ = {
 			isa = PBXGroup;
 			children = (
-				BB96FC58AF36480A2BA5E8F6 /* StackViewController.swift */,
-				4637734934FC10C9AC17599B /* TitleStackCellGenerator.swift */,
+				578CCA4A2615C6C400735D6F /* MainStackViewController */,
+				578CCA4E2615CAEB00735D6F /* Simple */,
+				578CCA552615CE0C00735D6F /* Unroll */,
 			);
 			path = Stack;
 			sourceTree = "<group>";
@@ -857,7 +884,9 @@
 				986B6FB99A755332E0AE8DF6 /* SectionTitleTableViewController.swift in Sources */,
 				36572A8920CC1DA4258360B9 /* SizableCollectionViewCell.swift in Sources */,
 				D7A53EA49970F581CC3B6C51 /* SizableCollectionViewController.swift in Sources */,
+				578CCA572615CE2A00735D6F /* UnrollStackViewController.swift in Sources */,
 				A03BD4921874F3CFBBE5F98F /* StackViewController.swift in Sources */,
+				578CCA4C2615C6F500735D6F /* MainStackViewController.swift in Sources */,
 				50167A3419F084EB4848BCDE /* SwipeActionProvider.swift in Sources */,
 				A1C2DEACFC29CF05D12FDD0D /* SwipeableTableGenerator.swift in Sources */,
 				EA6E5A76A5FDA6F7117E1967 /* SwipeableTableViewController.swift in Sources */,

@@ -554,13 +554,93 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Stack" id="sQ3-dv-Atc"/>
+                    <navigationItem key="navigationItem" id="Tuq-FZ-ZiS"/>
                     <connections>
                         <outlet property="stackView" destination="ZRW-ml-hj3" id="PQb-7Q-BGW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S5Q-xA-vpU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1978" y="1249"/>
+            <point key="canvasLocation" x="-3556" y="2248"/>
+        </scene>
+        <!--Unroll Stack View Controller-->
+        <scene sceneID="be6-MU-szc">
+            <objects>
+                <viewController id="c0h-fu-q1p" customClass="UnrollStackViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3iW-Tg-XLm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JiU-g2-ruI">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MJJ-Pa-jH1">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MJJ-Pa-jH1" secondAttribute="trailing" id="6Jp-UA-gil"/>
+                                    <constraint firstAttribute="bottom" secondItem="MJJ-Pa-jH1" secondAttribute="bottom" id="985-Kj-nS7"/>
+                                    <constraint firstItem="MJJ-Pa-jH1" firstAttribute="centerX" secondItem="JiU-g2-ruI" secondAttribute="centerX" id="ewa-Fm-KXh"/>
+                                    <constraint firstItem="MJJ-Pa-jH1" firstAttribute="top" secondItem="JiU-g2-ruI" secondAttribute="top" id="plL-In-Z6r"/>
+                                    <constraint firstItem="MJJ-Pa-jH1" firstAttribute="leading" secondItem="JiU-g2-ruI" secondAttribute="leading" id="t6w-pF-zK8"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="MK6-pI-HAk"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="mqu-Xa-zS4"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gsj-Jz-nxY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Gsj-Jz-nxY" firstAttribute="bottom" secondItem="JiU-g2-ruI" secondAttribute="bottom" id="FSK-vv-XcM"/>
+                            <constraint firstItem="Gsj-Jz-nxY" firstAttribute="trailing" secondItem="JiU-g2-ruI" secondAttribute="trailing" id="L6z-R4-ISi"/>
+                            <constraint firstItem="JiU-g2-ruI" firstAttribute="top" secondItem="Gsj-Jz-nxY" secondAttribute="top" id="aBC-5W-5U5"/>
+                            <constraint firstItem="JiU-g2-ruI" firstAttribute="leading" secondItem="Gsj-Jz-nxY" secondAttribute="leading" id="rtm-kf-rqt"/>
+                            <constraint firstItem="MJJ-Pa-jH1" firstAttribute="height" secondItem="3iW-Tg-XLm" secondAttribute="height" priority="250" id="zfh-Jr-nB2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="PYl-OY-yrC"/>
+                    <connections>
+                        <outlet property="stackView" destination="MJJ-Pa-jH1" id="b06-pz-18e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BmH-oU-bmL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2868" y="2248"/>
+        </scene>
+        <!--Stack-->
+        <scene sceneID="OwT-fx-04J">
+            <objects>
+                <viewController id="5wX-xl-Wfw" customClass="MainStackViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="183-c4-TdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7RS-NA-8uv">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qRC-47-3ce"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7RS-NA-8uv" firstAttribute="top" secondItem="qRC-47-3ce" secondAttribute="top" id="H39-xk-bhA"/>
+                            <constraint firstItem="7RS-NA-8uv" firstAttribute="leading" secondItem="qRC-47-3ce" secondAttribute="leading" id="j2n-d4-1l5"/>
+                            <constraint firstItem="qRC-47-3ce" firstAttribute="trailing" secondItem="7RS-NA-8uv" secondAttribute="trailing" id="mRA-LD-Rah"/>
+                            <constraint firstItem="qRC-47-3ce" firstAttribute="bottom" secondItem="7RS-NA-8uv" secondAttribute="bottom" id="zXl-Wd-BhU"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Stack" id="7f8-ab-rMI"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="7RS-NA-8uv" id="tR6-qX-GFt"/>
+                        <segue destination="8Ik-5X-Xp5" kind="show" identifier="simple" id="hnN-rm-rUH"/>
+                        <segue destination="c0h-fu-q1p" kind="show" identifier="unroll" id="bEC-Kr-o0X"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vlX-t0-eVR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-930" y="1290"/>
         </scene>
         <!--Collection List View Controller-->
         <scene sceneID="lQt-OD-lNV">
@@ -856,7 +936,7 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="SQ6-H1-hzY"/>
                         <segue destination="lyU-aU-2OK" kind="relationship" relationship="viewControllers" id="iDS-4H-Ya4"/>
-                        <segue destination="8Ik-5X-Xp5" kind="relationship" relationship="viewControllers" id="hDO-ft-fWe"/>
+                        <segue destination="5wX-xl-Wfw" kind="relationship" relationship="viewControllers" id="f1g-uT-2sn"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpV-hx-0sU" userLabel="First Responder" sceneMemberID="firstResponder"/>
