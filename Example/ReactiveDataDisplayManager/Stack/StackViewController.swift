@@ -35,7 +35,7 @@ private extension StackViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         // Create generators
-        let generators = titles.map { TitleStackCellGenerator(title: $0) }
+        let generators = titles.map(TitleStackCellGenerator.init)
 
         // Add generators to adapter
         adapter.addCellGenerators(generators)

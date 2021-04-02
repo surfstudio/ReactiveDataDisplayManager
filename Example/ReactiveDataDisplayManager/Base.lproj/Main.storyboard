@@ -606,7 +606,52 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BmH-oU-bmL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2868" y="2248"/>
+            <point key="canvasLocation" x="-2878" y="2248"/>
+        </scene>
+        <!--Landing Stack View-->
+        <scene sceneID="96B-jB-Ya2">
+            <objects>
+                <viewController id="sI2-Ql-C4R" customClass="LandingStackView" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O2z-nS-oE4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzd-jT-URf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FTU-Fe-re7">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="FTU-Fe-re7" firstAttribute="leading" secondItem="Zzd-jT-URf" secondAttribute="leading" id="8p7-9u-Utc"/>
+                                    <constraint firstAttribute="trailing" secondItem="FTU-Fe-re7" secondAttribute="trailing" id="9o2-F0-pRd"/>
+                                    <constraint firstItem="FTU-Fe-re7" firstAttribute="top" secondItem="Zzd-jT-URf" secondAttribute="top" id="IAS-oa-Xub"/>
+                                    <constraint firstItem="FTU-Fe-re7" firstAttribute="centerX" secondItem="Zzd-jT-URf" secondAttribute="centerX" id="ed6-9A-8OF"/>
+                                    <constraint firstAttribute="bottom" secondItem="FTU-Fe-re7" secondAttribute="bottom" id="hMR-nV-9bi"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="0W1-fz-5bY"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="x0L-X3-pdk"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3iq-5u-Lva"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3iq-5u-Lva" firstAttribute="bottom" secondItem="Zzd-jT-URf" secondAttribute="bottom" id="ECX-Lo-4vy"/>
+                            <constraint firstItem="Zzd-jT-URf" firstAttribute="leading" secondItem="3iq-5u-Lva" secondAttribute="leading" id="H4d-AU-nad"/>
+                            <constraint firstItem="3iq-5u-Lva" firstAttribute="trailing" secondItem="Zzd-jT-URf" secondAttribute="trailing" id="Mou-DZ-0BV"/>
+                            <constraint firstItem="FTU-Fe-re7" firstAttribute="height" secondItem="O2z-nS-oE4" secondAttribute="height" priority="250" id="Q6I-Hl-Phi"/>
+                            <constraint firstItem="Zzd-jT-URf" firstAttribute="top" secondItem="3iq-5u-Lva" secondAttribute="top" id="dgG-Rh-qnA"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="sIR-dD-un5"/>
+                    <connections>
+                        <outlet property="stackView" destination="FTU-Fe-re7" id="A2g-RG-ryj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2w0-uG-hwU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2202" y="2248"/>
         </scene>
         <!--Stack-->
         <scene sceneID="OwT-fx-04J">
@@ -634,8 +679,9 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="7RS-NA-8uv" id="tR6-qX-GFt"/>
-                        <segue destination="8Ik-5X-Xp5" kind="show" identifier="simple" id="hnN-rm-rUH"/>
-                        <segue destination="c0h-fu-q1p" kind="show" identifier="unroll" id="bEC-Kr-o0X"/>
+                        <segue destination="8Ik-5X-Xp5" kind="show" identifier="simpleStack" id="hnN-rm-rUH"/>
+                        <segue destination="c0h-fu-q1p" kind="show" identifier="unrollStack" id="bEC-Kr-o0X"/>
+                        <segue destination="sI2-Ql-C4R" kind="show" identifier="landingStack" id="gFW-hP-cgU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vlX-t0-eVR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

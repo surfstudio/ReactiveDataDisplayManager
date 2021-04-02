@@ -13,8 +13,9 @@ final class MainStackViewController: UIViewController {
     // MARK: - SegueIdentifiers
 
     fileprivate enum SegueIdentifier: String {
-        case simple
-        case unroll
+        case simpleStack
+        case unrollStack
+        case landingStack
         
     }
 
@@ -22,8 +23,9 @@ final class MainStackViewController: UIViewController {
 
     private enum Constants {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
-            ("Simple stack view", .simple),
-            ("Unroll example", .unroll)
+            ("Simple stack view", .simpleStack),
+            ("Unroll example", .unrollStack),
+            ("Landing example", .landingStack)
         ]
     }
 

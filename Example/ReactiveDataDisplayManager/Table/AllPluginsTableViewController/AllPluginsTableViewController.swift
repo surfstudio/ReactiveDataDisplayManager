@@ -105,12 +105,11 @@ private extension AllPluginsTableViewController {
     func addSelectableSection() {
         addHeaderGenerator(with: "Selectable")
 
-        Constants.titles.forEach {
+        for titleStr in Constants.titles {
             // Create generator
-            let generator = TitleTableViewCell.rddm.baseGenerator(with: $0)
-
+            let generator = TitleTableViewCell.rddm.baseGenerator(with: titleStr)
             generator.didSelectEvent += {
-                debugPrint("\($0) selected")
+                debugPrint("\(titleStr) selected")
             }
 
             // Add generator to adapter
