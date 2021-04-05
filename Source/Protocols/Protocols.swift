@@ -234,8 +234,8 @@ public extension CollectionFooterGenerator where Self: ViewBuilder {
         return footer as? UICollectionReusableView ?? UICollectionReusableView()
     }
 
-    func registerHeader(in collectionView: UICollectionView) {
-        collectionView.registerNib(self.identifier, kind: UICollectionView.elementKindSectionHeader)
+    func registerFooter(in collectionView: UICollectionView) {
+        collectionView.registerNib(self.identifier, kind: UICollectionView.elementKindSectionFooter)
     }
 }
 

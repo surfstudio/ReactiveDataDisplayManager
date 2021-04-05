@@ -56,7 +56,7 @@ private extension CollectionCompositionalViewController {
     }
     
     func addAnimationSection() {
-        addHeaderGenerator(with: "Animate section")
+        addHeaderFooterGenerator(header: "Animate section begin", footer: "Animate section end")
         for _ in 0...29 {
             // Create viewModels for cell
             guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
@@ -70,7 +70,7 @@ private extension CollectionCompositionalViewController {
     }
     
     func addGridSection() {
-        addHeaderGenerator(with: "Grid section")
+        addHeaderFooterGenerator(header: "Grid section begin", footer: "Grid section end")
         for index in 0...11 {
             // Create generator
             let generator = TitleCollectionGenerator(model: "Item \(index)", needIndexTitle: index % 2 == 0 ? true : false)
@@ -81,7 +81,7 @@ private extension CollectionCompositionalViewController {
     }
     
     func addCompositeGroupSection() {
-        addHeaderGenerator(with: "Composite group section")
+        addHeaderFooterGenerator(header: "Composite group section begin", footer: "Composite group section end")
         for _ in 0...31 {
             // Create viewModels for cell
             guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
@@ -99,11 +99,14 @@ private extension CollectionCompositionalViewController {
         Nuke.loadImage(with: url, options: prefetcher.imageLoadingOptions, into: imageView)
     }
 
-    func addHeaderGenerator(with title: String) {
+    func addHeaderFooterGenerator(header: String, footer: String) {
         // Make header generator
-        let headerGenerator = TitleCollectionHeaderGenerator(title: title)
+        let headerGenerator = TitleCollectionHeaderGenerator(title: header)
+        let footerGenerator = TitleIconCollectionFooterGenerator(title: footer)
+
         // Add header generator into adapter
         adapter.addSectionHeaderGenerator(headerGenerator)
+        adapter.addSectionFooterGenerator(footerGenerator)
     }
 
 }
@@ -135,6 +138,16 @@ private extension CollectionCompositionalViewController {
                                                                  alignment: .top)
         return header
     }
+    
+    private func makeSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                heightDimension: .absolute(50.0))
+
+        let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize,
+                                                                 elementKind: UICollectionView.elementKindSectionFooter,
+                                                                 alignment: .bottom)
+        return footer
+    }
 
     // Animation section
     private func animationLayout() -> NSCollectionLayoutSection {
@@ -142,6 +155,9 @@ private extension CollectionCompositionalViewController {
 
         // Header
         let header = makeSectionHeader()
+        
+        // Footer
+        let footer = makeSectionFooter()
 
         // Item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
@@ -157,7 +173,7 @@ private extension CollectionCompositionalViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0)
         section.orthogonalScrollingBehavior = .groupPaging
-        section.boundarySupplementaryItems = [header] // add custom element (footer, header, ....)
+        section.boundarySupplementaryItems = [header, footer] // add custom element (footer, header, ....)
         section.visibleItemsInvalidationHandler = { items, offset, environment in
             
             // Remove header from cells
@@ -187,6 +203,9 @@ private extension CollectionCompositionalViewController {
         // Header
         let header = makeSectionHeader()
 
+        // Footer
+        let footer = makeSectionFooter()
+
         // Item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33),
                                               heightDimension: .fractionalHeight(1.0))
@@ -200,7 +219,7 @@ private extension CollectionCompositionalViewController {
 
         // Section
         let section = NSCollectionLayoutSection(group: group)
-        section.boundarySupplementaryItems = [header] // add custom element (footer, header, ....)
+        section.boundarySupplementaryItems = [header, footer] // add custom element (footer, header, ....)
         return section
     }
 
@@ -208,6 +227,9 @@ private extension CollectionCompositionalViewController {
     private func compositeGroupLayout() -> NSCollectionLayoutSection {
         // Header
         let header = makeSectionHeader()
+
+        // Footer
+        let footer = makeSectionFooter()
 
         // Item medium image
         let leadingItem = NSCollectionLayoutItem(
@@ -249,7 +271,7 @@ private extension CollectionCompositionalViewController {
         // Section
         let section = NSCollectionLayoutSection(group: nestedGroup)
         section.orthogonalScrollingBehavior = .groupPaging
-        section.boundarySupplementaryItems = [header] // add custom element (footer, header, ....)
+        section.boundarySupplementaryItems = [header, footer] // add custom element (footer, header, ....)
         return section
     }
 }

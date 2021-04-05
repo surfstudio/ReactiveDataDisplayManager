@@ -55,9 +55,19 @@ extension BaseCollectionDataSource {
         guard let provider = provider else {
             return UICollectionReusableView()
         }
-        return provider
-            .sections[indexPath.section]
-            .generate(collectionView: collectionView, for: indexPath)
+
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            return provider
+                .sections[indexPath.section]
+                .generate(collectionView: collectionView, for: indexPath)
+        case UICollectionView.elementKindSectionFooter:
+            return provider
+                .footers[indexPath.section]
+                .generate(collectionView: collectionView, for: indexPath)
+        default:
+            return UICollectionReusableView()
+        }
     }
 
     open func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
