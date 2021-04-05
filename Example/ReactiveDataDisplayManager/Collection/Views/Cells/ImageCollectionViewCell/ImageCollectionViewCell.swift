@@ -16,11 +16,12 @@ final class ImageCollectionViewCell: UICollectionViewCell {
 
     struct ViewModel {
         let imageUrl: URL
+        let loadImage: (URL, UIImageView) -> Void
 
-        static func make() -> Self? {
+        static func make(with loadImage: @escaping (URL, UIImageView) -> Void) -> Self? {
             let stringImageUrl = "https://picsum.photos/id/\(Int.random(in: 0...1000))/640/480"
             guard let imageUrl = URL(string: stringImageUrl) else { return nil }
-            return .init(imageUrl: imageUrl)
+            return .init(imageUrl: imageUrl, loadImage: loadImage)
         }
     }
 
@@ -48,7 +49,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
 extension ImageCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: ViewModel) {
-        Nuke.loadImage(with: viewModel.imageUrl, into: iconView)
+        viewModel.loadImage(viewModel.imageUrl, iconView)
     }
 
 }

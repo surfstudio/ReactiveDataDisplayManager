@@ -1,18 +1,18 @@
 //
-//  TitleTableViewCell.swift
-//  ReactiveDataDisplayManager
+//  TitleWithIconTableViewCell.swift
+//  ReactiveDataDisplayManagerExample
 //
-//  Created by Ivan Smetanin on 19/12/2017.
-//  Copyright © 2017 Alexander Kravchenkov. All rights reserved.
+//  Created by Dmitry Korolev on 30.03.2021.
 //
 
-import ReactiveDataDisplayManager
 import UIKit
+import ReactiveDataDisplayManager
 
-class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
+class TitleWithIconTableViewCell: UITableViewCell, CalculatableHeightItem {
 
     // MARK: - IBOutlets
 
+    @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
 
     // MARK: - Internal methods
@@ -31,10 +31,12 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
 
 // MARK: - ConfigurableItem
 
-extension TitleTableViewCell: ConfigurableItem {
+extension TitleWithIconTableViewCell: ConfigurableItem {
 
     func configure(with model: String) {
+        accessoryType = .disclosureIndicator
         titleLabel.text = model
+        iconImageView.image = #imageLiteral(resourceName: "ReactiveIconHorizontal")
     }
 
 }

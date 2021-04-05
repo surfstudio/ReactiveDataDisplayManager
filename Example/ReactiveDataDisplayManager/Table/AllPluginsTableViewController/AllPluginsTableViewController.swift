@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveDataDisplayManager
+import Nuke
 
 final class AllPluginsTableViewController: UIViewController {
 
@@ -26,7 +27,7 @@ final class AllPluginsTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private let prefetcher = NukeImagePrefetcher()
+    private let prefetcher = NukeImagePrefetcher(placeholder: #imageLiteral(resourceName: "ReactiveLogo"))
     private let swipeActionProvider = SwipeActionProvider()
     private lazy var prefetcherablePlugin: TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator> = .prefetch(prefetcher: prefetcher)
 
@@ -167,7 +168,7 @@ private extension AllPluginsTableViewController {
 
         for _ in 0...20 {
             // Create viewModels for cell
-            guard let viewModel = ImageTableViewCell.ViewModel.make() else { continue }
+            guard let viewModel = ImageTableViewCell.ViewModel.make(with: loadImage) else { continue }
 
             // Create generator
             let generator = ImageTableGenerator(with: viewModel)
@@ -175,6 +176,11 @@ private extension AllPluginsTableViewController {
             // Add generator to adapter
             adapter.addCellGenerator(generator)
         }
+    }
+
+    /// This method load image and set to UIImageView
+    func loadImage(url: URL, imageView: UIImageView) {
+        Nuke.loadImage(with: url, options: prefetcher.imageLoadingOptions, into: imageView)
     }
 
     func addHeaderGenerator(with title: String) {

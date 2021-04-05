@@ -22,6 +22,7 @@ final class MainCollectionViewController: UIViewController {
         case sizableCollection
         case foldableCollection
         case itemTitleCollection
+        case compositionalCollection
     }
 
     // MARK: - Constants
@@ -35,7 +36,8 @@ final class MainCollectionViewController: UIViewController {
             ("Horizontal image collection", .imageHorizontalCollection),
             ("Sizable collection", .sizableCollection),
             ("Foldable collection", .foldableCollection),
-            ("Collection with item index titles", .itemTitleCollection)
+            ("Collection with item index titles", .itemTitleCollection),
+            ("Collection with compositional layout", .compositionalCollection)
         ]
     }
 
@@ -66,8 +68,8 @@ private extension MainCollectionViewController {
     func fillAdapter() {
         for model in Constants.models {
             // Create generator
-            let generator = TitleTableViewCell.rddm.baseGenerator(with: model.title)
-
+            let generator = TitleWithIconTableViewCell.rddm.baseGenerator(with: model.title)
+            
             generator.didSelectEvent += { [weak self] in
                 self?.openScreen(by: model.segueId)
             }
