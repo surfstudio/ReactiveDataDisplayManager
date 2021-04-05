@@ -407,6 +407,7 @@
 			path = CollectionCompositionalViewController;
 			sourceTree = "<group>";
 		};
+
 		578CCA4A2615C6C400735D6F /* MainStackViewController */ = {
 			isa = PBXGroup;
 			children = (
