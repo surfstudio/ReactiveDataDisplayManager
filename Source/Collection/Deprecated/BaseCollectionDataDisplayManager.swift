@@ -19,6 +19,7 @@ open class BaseCollectionDataDisplayManager: NSObject {
     public typealias CollectionType = UICollectionView
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
+    public typealias FooterGeneratorType = CollectionFooterGenerator
 
     // MARK: - Events
 
@@ -31,12 +32,14 @@ open class BaseCollectionDataDisplayManager: NSObject {
     public private(set) weak var view: UICollectionView!
     public private(set) var cellGenerators: [[CollectionCellGenerator]]
     public private(set) var sectionHeaderGenerators: [CollectionHeaderGenerator]
+    public private(set) var sectionFooterGenerators: [CollectionFooterGenerator]
 
     // MARK: - Initialization and deinitialization
 
     required public init(collection: UICollectionView) {
         self.cellGenerators = [[CollectionCellGenerator]]()
         self.sectionHeaderGenerators = [CollectionHeaderGenerator]()
+        self.sectionFooterGenerators = [CollectionFooterGenerator]()
         super.init()
         self.view = collection
         self.view?.delegate = self
@@ -54,6 +57,9 @@ extension BaseCollectionDataDisplayManager: DataDisplayManager {
         }
         if sectionHeaderGenerators.count <= 0 {
             sectionHeaderGenerators.append(EmptyCollectionHeaderGenerator())
+        }
+        if sectionFooterGenerators.count <= 0 {
+            sectionFooterGenerators.append(EmptyCollectionFooterGenerator())
         }
         // Add to last section
         let index = sectionHeaderGenerators.count - 1
@@ -120,10 +126,10 @@ extension BaseCollectionDataDisplayManager: HeaderDataDisplayManager {
     public func removeAllGenerators(from header: CollectionHeaderGenerator) {
         guard
             let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }),
-           self.cellGenerators.count > index
-       else {
-           return
-       }
+            self.cellGenerators.count > index
+        else {
+            return
+        }
 
         self.cellGenerators[index].removeAll()
     }
@@ -131,6 +137,47 @@ extension BaseCollectionDataDisplayManager: HeaderDataDisplayManager {
     public func clearHeaderGenerators() {
         self.sectionHeaderGenerators.removeAll()
     }
+}
+
+// MARK: - FooterDataDisplayManager
+
+extension BaseCollectionDataDisplayManager: FooterDataDisplayManager {
+    public func addSectionFooterGenerator(_ generator: CollectionFooterGenerator) {
+        generator.registerFooter(in: view)
+        self.sectionFooterGenerators.append(generator)
+    }
+
+    public func addCellGenerator(_ generator: CollectionCellGenerator, toFooter footer: CollectionFooterGenerator) {
+        addCellGenerators([generator], toFooter: footer)
+    }
+
+    public func addCellGenerators(_ generators: [CollectionCellGenerator], toFooter footer: CollectionFooterGenerator) {
+        generators.forEach { $0.registerCell(in: view) }
+
+        if self.cellGenerators.count != self.sectionFooterGenerators.count || self.sectionFooterGenerators.isEmpty {
+            self.cellGenerators.append([CollectionCellGenerator]())
+        }
+
+        if let index = self.sectionFooterGenerators.firstIndex(where: { $0 === footer }) {
+            self.cellGenerators[index].append(contentsOf: generators)
+        }
+    }
+
+    public func removeAllGenerators(from footer: CollectionFooterGenerator) {
+        guard
+            let index = self.sectionFooterGenerators.firstIndex(where: { $0 === footer }),
+            self.cellGenerators.count > index
+        else {
+            return
+        }
+
+        self.cellGenerators[index].removeAll()
+    }
+
+    public func clearFooterGenerators() {
+        self.sectionFooterGenerators.removeAll()
+    }
+
 }
 
 // MARK: - Private Methods

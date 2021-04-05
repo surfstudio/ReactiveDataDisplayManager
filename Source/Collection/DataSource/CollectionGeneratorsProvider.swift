@@ -9,4 +9,5 @@
 public protocol CollectionGeneratorsProvider: AnyObject {
     var generators: [[CollectionCellGenerator]] { get set }
     var sections: [CollectionHeaderGenerator] { get set }
+    var footers: [CollectionFooterGenerator] { get set }
 }

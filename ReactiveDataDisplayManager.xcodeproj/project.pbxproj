@@ -51,6 +51,8 @@
 		54F4AFFF1EEFD0E2FDECAFB7 /* CollectionPrefetcherablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00397F6B4902B37843C8C0CF /* CollectionPrefetcherablePlugin.swift */; };
 		57409FB4C0BE160196B90F55 /* BaseCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027B8496C59C5A73D990C54 /* BaseCollectionManager.swift */; };
 		5788B141230FE3165D18E375 /* FoldingTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486F67AEE82355D88833995D /* FoldingTableDataDisplayManager.swift */; };
+		57A711B5261B375600928A09 /* FooterDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A711B4261B375600928A09 /* FooterDataDisplayManager.swift */; };
+		57C211C2261B13F200EA1DA1 /* EmptyCollectionFooterGenarator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C211C1261B13F200EA1DA1 /* EmptyCollectionFooterGenarator.swift */; };
 		57C6EB206300AE1288A1C5EB /* ExtendableBaseTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B76826CF24995B55F8FB4D7 /* ExtendableBaseTableDataDisplayManager.swift */; };
 		5801441139C90CD4830EAD87 /* DataDisplayCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEF2D4A316627A53C0450D5 /* DataDisplayCompatible.swift */; };
 		5AA184E6F716FFAC05B0672E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9373CF21992ACAF75BED6839 /* Event.swift */; };
@@ -196,6 +198,8 @@
 		4C362D121AAFB2B2261B67F6 /* CollectionScrollProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionScrollProvider.swift; sourceTree = "<group>"; };
 		517FE317E96300002EBB05AD /* SizableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableItem.swift; sourceTree = "<group>"; };
 		562A6BEF4D914F5C22954D8C /* FoldingTableDataDisplayManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldingTableDataDisplayManagerTests.swift; sourceTree = "<group>"; };
+		57A711B4261B375600928A09 /* FooterDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterDataDisplayManager.swift; sourceTree = "<group>"; };
+		57C211C1261B13F200EA1DA1 /* EmptyCollectionFooterGenarator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCollectionFooterGenarator.swift; sourceTree = "<group>"; };
 		59615B0AE9A9444EDFEF8BF3 /* GravityTableDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTableDataDisplayManager.swift; sourceTree = "<group>"; };
 		5D412694D2BF33F0DE836632 /* MovableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableItem.swift; sourceTree = "<group>"; };
 		5E2450325AF42511749AE2BB /* SelectableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableItem.swift; sourceTree = "<group>"; };
@@ -437,6 +441,7 @@
 			children = (
 				BF985C28885BA3186E11CCF6 /* DataDisplayManager.swift */,
 				ACA5F6205128979985986C33 /* HeaderDataDisplayManager.swift */,
+				57A711B4261B375600928A09 /* FooterDataDisplayManager.swift */,
 				308A9901D886B665BFCDF5EC /* Operations.swift */,
 				0590563F4A37FBA747785B1F /* Protocols.swift */,
 				B5A5194AB0570CA2DDE9509A /* Animator */,
@@ -762,6 +767,7 @@
 				DFAA3AC3EADDFDDDEE0D460A /* CalculatableHeightCollectionCellGenerator.swift */,
 				C5B2F13AB2F69D46CA6018C6 /* CalculatableWidthCollectionCellGenerator.swift */,
 				2D47D3A7F186E835B7A29DF9 /* EmptyCollectionHeaderGenerator.swift */,
+				57C211C1261B13F200EA1DA1 /* EmptyCollectionFooterGenarator.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -927,6 +933,7 @@
 				CFF2ED08FC149974277511E9 /* ScrollDirection.swift in Sources */,
 				FE194393C1799F24D6BAD00B /* ScrollEvent.swift in Sources */,
 				FFB5101428B219232BF9214D /* SelectableItem.swift in Sources */,
+				57C211C2261B13F200EA1DA1 /* EmptyCollectionFooterGenarator.swift in Sources */,
 				94E00AC09C4EC04662571184 /* SizableCollectionCellGenerator.swift in Sources */,
 				B2D04A0AE3C10B8D940FA6D5 /* SizableCollectionDataDisplayManager.swift in Sources */,
 				3D16BCC4DCD30927F8C22645 /* SizableItem.swift in Sources */,
@@ -946,6 +953,7 @@
 				F041C54AA40B0C2BDAD68228 /* TableHeaderVisiblePlugin.swift in Sources */,
 				C0A7AA0F05C3FCA4AF66B7A7 /* TableLastCellIsVisiblePlugin.swift in Sources */,
 				51E90E8E5003B40A5D63D306 /* TableMovable.swift in Sources */,
+				57A711B5261B375600928A09 /* FooterDataDisplayManager.swift in Sources */,
 				FD8FF91F3E1C4743AD36A870 /* TableMovablePlugin.swift in Sources */,
 				D7DB42F0D7D5B0F97662EFE7 /* TablePaginatablePlugin.swift in Sources */,
 				0F3B6C759BE4F325E868E153 /* TablePrefetchProxyPlugin.swift in Sources */,
@@ -1089,7 +1097,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				SDKROOT = iphoneos;
@@ -1113,7 +1125,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				SDKROOT = iphoneos;

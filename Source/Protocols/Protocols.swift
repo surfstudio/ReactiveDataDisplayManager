@@ -49,7 +49,7 @@ public protocol TableCellGenerator: class {
     var estimatedCellHeight: CGFloat? { get }
 }
 
-
+/// Protocol that incapsulated type of Header
 public protocol CollectionHeaderGenerator: class {
 
     var identifier: UICollectionReusableView.Type { get }
@@ -57,6 +57,18 @@ public protocol CollectionHeaderGenerator: class {
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView
 
     func registerHeader(in collectionView: UICollectionView)
+
+    func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
+}
+
+/// Protocol that incapsulated type of Footer
+public protocol CollectionFooterGenerator: class {
+
+    var identifier: UICollectionReusableView.Type { get }
+
+    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView
+
+    func registerFooter(in collectionView: UICollectionView)
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
 }
@@ -193,6 +205,7 @@ public extension CollectionCellGenerator where Self: ViewBuilder {
 
 }
 
+/// Protocol that incapsulated type of Header cell
 public extension CollectionHeaderGenerator where Self: ViewBuilder {
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
@@ -202,6 +215,23 @@ public extension CollectionHeaderGenerator where Self: ViewBuilder {
         self.build(view: header)
 
         return header as? UICollectionReusableView ?? UICollectionReusableView()
+    }
+
+    func registerHeader(in collectionView: UICollectionView) {
+        collectionView.registerNib(self.identifier, kind: UICollectionView.elementKindSectionHeader)
+    }
+}
+
+/// Protocol that incapsulated type of Footer cell
+public extension CollectionFooterGenerator where Self: ViewBuilder {
+    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
+        guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
+            return UICollectionReusableView()
+        }
+
+        self.build(view: footer)
+
+        return footer as? UICollectionReusableView ?? UICollectionReusableView()
     }
 
     func registerHeader(in collectionView: UICollectionView) {
