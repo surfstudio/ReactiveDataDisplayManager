@@ -56,7 +56,7 @@ public class CalculatableHeightCellGenerator<Cell: CalculatableHeightItem>: Tabl
     public func registerCell(in tableView: UITableView) {
         switch registerType {
         case .nib:
-            tableView.registerNib(identifier)
+            tableView.registerNib(identifier, bundle: Cell.bundle())
         case .class:
             tableView.register(Cell.self, forCellReuseIdentifier: identifier)
         }

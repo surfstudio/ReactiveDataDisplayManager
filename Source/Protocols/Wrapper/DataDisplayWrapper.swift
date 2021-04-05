@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+
+
 // Wrap Base instance for easy access
 public struct DataDisplayWrapper<Base> {
     public let base: Base

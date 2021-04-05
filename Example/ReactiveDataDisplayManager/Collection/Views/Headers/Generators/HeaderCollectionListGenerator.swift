@@ -6,6 +6,7 @@
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
+import UIKit
 import ReactiveDataDisplayManager
 
 final class HeaderCollectionListGenerator {

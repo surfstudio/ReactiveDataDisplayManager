@@ -16,41 +16,63 @@ extension NSObject {
 }
 
 extension UIViewController {
-    class func controller() -> Self {
+    class func controller(bundle: Bundle? = nil) -> Self {
         let classReference = self.self
-        return classReference.init(nibName: self.nameOfClass, bundle: Bundle(for: self))
+        return classReference.init(nibName: self.nameOfClass,
+                                   bundle: bundle == nil ? Bundle(for: self) : bundle)
     }
 }
 
 extension UITableView {
-    func registerNib(_ cellType: UITableViewCell.Type) {
-        self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellReuseIdentifier: cellType.nameOfClass)
+    func registerNib(_ cellType: UITableViewCell.Type,
+                     bundle: Bundle? = nil) {
+        self.register(UINib(nibName: cellType.nameOfClass,
+                            bundle: bundle == nil ? Bundle(for: cellType.self) : bundle),
+                      forCellReuseIdentifier: cellType.nameOfClass)
     }
 
-    func registerNib(_ cellType: String) {
-        self.register(UINib(nibName: cellType, bundle: Bundle(path: cellType) ), forCellReuseIdentifier: cellType)
+    func registerNib(_ cellType: String,
+                     bundle: Bundle? = nil) {
+        self.register(UINib(nibName: cellType,
+                            bundle: bundle == nil ? Bundle(path: cellType) : bundle),
+                      forCellReuseIdentifier: cellType)
     }
 }
 
 extension UICollectionView {
-    func registerNib(_ cellType: UICollectionViewCell.Type) {
-        self.register(UINib(nibName: cellType.nameOfClass, bundle: Bundle(for: cellType.self)), forCellWithReuseIdentifier: cellType.nameOfClass)
+    func registerNib(_ cellType: UICollectionViewCell.Type,
+                     bundle: Bundle? = nil) {
+        self.register(UINib(nibName: cellType.nameOfClass,
+                            bundle: bundle == nil ? Bundle(for: cellType.self) : bundle),
+                      forCellWithReuseIdentifier: cellType.nameOfClass)
     }
 
-    func registerNib(_ cellType: String) {
-        self.register(UINib(nibName: cellType, bundle: Bundle(path: cellType)), forCellWithReuseIdentifier: cellType)
+    func registerNib(_ cellType: String,
+                     bundle: Bundle? = nil) {
+        self.register(UINib(nibName: cellType,
+                            bundle: bundle == nil ? Bundle(path: cellType) : bundle),
+                      forCellWithReuseIdentifier: cellType)
     }
 
-    func registerNib(_ viewType: UICollectionReusableView.Type, kind: String) {
-        self.register(UINib(nibName: viewType.nameOfClass, bundle: Bundle(for: viewType.self)), forSupplementaryViewOfKind: kind, withReuseIdentifier: viewType.nameOfClass)
+    func registerNib(_ viewType: UICollectionReusableView.Type,
+                     kind: String,
+                     bundle: Bundle? = nil) {
+        self.register(UINib(nibName: viewType.nameOfClass,
+                            bundle: bundle == nil ? Bundle(for: viewType.self) : bundle),
+                      forSupplementaryViewOfKind: kind,
+                      withReuseIdentifier: viewType.nameOfClass)
     }
 }
 
 extension UIView {
     /// Loads view from its .xib file
-    static func fromXib() -> Self? {
-        let view = Bundle(for: self).loadNibNamed(nameOfClass, owner: nil, options: nil)?.last
-        return view as? Self
+    /// If you use SPM fill bundle property
+    static func fromXib(bundle: Bundle? = nil) -> Self? {
+        guard let bundle = bundle else {
+            let view = Bundle(for: self).loadNibNamed(nameOfClass, owner: nil, options: nil)?.last
+            return view as? Self
+        }
+        return bundle.loadNibNamed(nameOfClass, owner: nil, options: nil)?.last as? Self
     }
 }
 
