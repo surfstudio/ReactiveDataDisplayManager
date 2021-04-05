@@ -37,6 +37,7 @@ final class NukeImagePrefetcher: ContentPrefetcher {
         imagePrefetcher = ImagePrefetcher(pipeline: pipeline, destination: .diskCache, maxConcurrentRequestCount: 15)
         imageLoadingOptions = ImageLoadingOptions(placeholder: placeholder,
                                 failureImage: placeholder.withRenderingMode(.alwaysTemplate),
+                                contentModes: .init(success: .scaleAspectFill, failure: .scaleAspectFit, placeholder: .scaleAspectFit),
                                 tintColors: tintOptions)
     }
 
