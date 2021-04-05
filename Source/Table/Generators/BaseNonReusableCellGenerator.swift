@@ -16,7 +16,7 @@ open class BaseNonReusableCellGenerator<Cell: ConfigurableItem>: TableCellGenera
     public var didSelectEvent = BaseEvent<Void>()
     private(set) public var model: Cell.Model
     private(set) public lazy var cell: Cell? = {
-        return Cell.fromXib()
+        return Cell.fromXib(bundle: Cell.bundle())
     }()
 
     // MARK: - Private Properties
@@ -52,7 +52,7 @@ open class BaseNonReusableCellGenerator<Cell: ConfigurableItem>: TableCellGenera
     public func registerCell(in tableView: UITableView) {
         switch registerType {
         case .nib:
-            tableView.registerNib(identifier)
+            tableView.registerNib(identifier, bundle: Cell.bundle())
         case .class:
             tableView.register(Cell.self, forCellReuseIdentifier: identifier)
         }

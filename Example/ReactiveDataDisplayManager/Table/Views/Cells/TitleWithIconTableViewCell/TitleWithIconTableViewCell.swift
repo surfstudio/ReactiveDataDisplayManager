@@ -5,6 +5,7 @@
 //  Created by Dmitry Korolev on 30.03.2021.
 //
 
+import UIKit
 import ReactiveDataDisplayManager
 
 class TitleWithIconTableViewCell: UITableViewCell, CalculatableHeightItem {

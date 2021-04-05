@@ -224,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="et8-Ms-zZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5021" y="-1855"/>
+            <point key="canvasLocation" x="5057" y="-1845"/>
         </scene>
         <!--Paginatable Table View Controller-->
         <scene sceneID="NEQ-Pc-8HZ">
@@ -261,7 +261,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qbx-zW-vbU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5779" y="-1831"/>
+            <point key="canvasLocation" x="5806" y="-1844"/>
         </scene>
         <!--Table-->
         <scene sceneID="tne-QT-ifu">
@@ -305,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652" y="-1010"/>
+            <point key="canvasLocation" x="708" y="-1012"/>
         </scene>
         <!--Image Table View Controller-->
         <scene sceneID="1kH-t8-h7Q">

@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public protocol CollectionItemTitleDisplayable: CollectionFeaturePlugin {
     func indexTitles(with provider: CollectionGeneratorsProvider?) -> [String]?
