@@ -18,7 +18,7 @@ class TitleIconCollectionFooterView: UICollectionReusableView {
 
     func fill(title: String) {
         self.titleLabel.text = title
-        iconImageView.image = #imageLiteral(resourceName: "ReactiveIconHorizontal")
+        self.iconImageView.image = #imageLiteral(resourceName: "ReactiveIconHorizontal")
     }
 
 }

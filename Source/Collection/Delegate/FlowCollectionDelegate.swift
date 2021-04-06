@@ -74,7 +74,7 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
         }
 
         if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-            return flowLayout.headerReferenceSize
+            return flowLayout.footerReferenceSize
         }
 
         return .zero
