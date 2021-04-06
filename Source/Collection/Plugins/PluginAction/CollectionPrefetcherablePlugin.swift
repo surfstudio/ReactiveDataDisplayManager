@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 /// Plugin to support `PrefetcherableItem` with prefetcher
 ///
