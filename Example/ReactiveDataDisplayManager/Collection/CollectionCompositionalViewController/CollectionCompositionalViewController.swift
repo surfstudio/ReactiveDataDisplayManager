@@ -116,7 +116,7 @@ private extension CollectionCompositionalViewController {
 @available(iOS 13.0, *)
 private extension CollectionCompositionalViewController {
 
-    private func makeCompositionalLayout() -> UICollectionViewCompositionalLayout {
+    func makeCompositionalLayout() -> UICollectionViewCompositionalLayout {
         return UICollectionViewCompositionalLayout { (sectionNumber, env) -> NSCollectionLayoutSection? in
             switch sectionNumber {
             case 0:
@@ -129,7 +129,7 @@ private extension CollectionCompositionalViewController {
         }
     }
 
-    private func makeSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+    func makeSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                 heightDimension: .absolute(50.0))
 
@@ -139,7 +139,7 @@ private extension CollectionCompositionalViewController {
         return header
     }
     
-    private func makeSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
+    func makeSectionFooter() -> NSCollectionLayoutBoundarySupplementaryItem {
         let footerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                 heightDimension: .absolute(50.0))
 
@@ -150,7 +150,7 @@ private extension CollectionCompositionalViewController {
     }
 
     // Animation section
-    private func animationLayout() -> NSCollectionLayoutSection {
+    func animationLayout() -> NSCollectionLayoutSection {
         let fraction: CGFloat = 1.0 / 3.0
 
         // Header
@@ -199,7 +199,7 @@ private extension CollectionCompositionalViewController {
     }
 
     // Grid section
-    private func gridLayout() -> NSCollectionLayoutSection {
+    func gridLayout() -> NSCollectionLayoutSection {
         // Header
         let header = makeSectionHeader()
 
@@ -224,7 +224,7 @@ private extension CollectionCompositionalViewController {
     }
 
     // Composite group section
-    private func compositeGroupLayout() -> NSCollectionLayoutSection {
+    func compositeGroupLayout() -> NSCollectionLayoutSection {
         // Header
         let header = makeSectionHeader()
 
@@ -274,6 +274,5 @@ private extension CollectionCompositionalViewController {
         section.boundarySupplementaryItems = [header, footer] // add custom element (footer, header, ....)
         return section
     }
+
 }
-
-
