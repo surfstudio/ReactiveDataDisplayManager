@@ -31,14 +31,14 @@ final class NukeImagePrefetcher: ContentPrefetcher {
         }
 
         let tintOptions = ImageLoadingOptions.TintColors(success: .none,
-                                failure: UIColor.gray.withAlphaComponent(0.2),
-                                placeholder: .none)
+                                                         failure: UIColor.gray.withAlphaComponent(0.2),
+                                                         placeholder: .none)
 
         imagePrefetcher = ImagePrefetcher(pipeline: pipeline, destination: .diskCache, maxConcurrentRequestCount: 15)
         imageLoadingOptions = ImageLoadingOptions(placeholder: placeholder,
-                                failureImage: placeholder.withRenderingMode(.alwaysTemplate),
-                                contentModes: .init(success: .scaleAspectFill, failure: .scaleAspectFit, placeholder: .scaleAspectFit),
-                                tintColors: tintOptions)
+                                                  failureImage: placeholder.withRenderingMode(.alwaysTemplate),
+                                                  contentModes: .init(success: .scaleAspectFill, failure: .scaleAspectFit, placeholder: .scaleAspectFit),
+                                                  tintColors: tintOptions)
     }
 
     // MARK: - ContentPrefetcher
