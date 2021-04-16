@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		019E20542629561F004CE531 /* UIViewController+Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019E20532629561F004CE531 /* UIViewController+Delay.swift */; };
 		07D0AD412D14907C869DA420 /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F86F1D270E55D920BF087 /* RefreshableTableViewController.swift */; };
 		0BDB03589517E266B2ED8498 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07617869BCD0A70D87527FC /* TitleCollectionViewCell.swift */; };
 		1201643DFD9410A7C42BA293 /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325E432007B2C402A407032F /* TitleTableViewCell.xib */; };
@@ -87,6 +88,7 @@
 
 /* Begin PBXFileReference section */
 		0165D86C242386A8EEA77F48 /* FoldableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableCollectionViewCell.swift; sourceTree = "<group>"; };
+		019E20532629561F004CE531 /* UIViewController+Delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Delay.swift"; sourceTree = "<group>"; };
 		0371CFDF2AE2933334F5FEF1 /* ImageTableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableGenerator.swift; sourceTree = "<group>"; };
 		0F829DBA2D8FE8670C208FA2 /* FoldableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableTableViewController.swift; sourceTree = "<group>"; };
 		116EB3A20F5DCF2E6FDE2CA3 /* FoldableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoldableTableViewCell.xib; sourceTree = "<group>"; };
@@ -417,7 +419,6 @@
 				A8AD6278A2376CE870C91DA3 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */,
 				1E90E8348E612EFB414D7162 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -622,6 +623,7 @@
 			children = (
 				CC31D500BAC18C0DAEB7B74F /* NukeImagePrefetcher.swift */,
 				2E34FCC6064184A97314D0ED /* SwipeActionProvider.swift */,
+				019E20532629561F004CE531 /* UIViewController+Delay.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -883,6 +885,7 @@
 				07D0AD412D14907C869DA420 /* RefreshableTableViewController.swift in Sources */,
 				EB839B0559BFD349B5134E9E /* SectionTitleHeaderGenerator.swift in Sources */,
 				986B6FB99A755332E0AE8DF6 /* SectionTitleTableViewController.swift in Sources */,
+				019E20542629561F004CE531 /* UIViewController+Delay.swift in Sources */,
 				36572A8920CC1DA4258360B9 /* SizableCollectionViewCell.swift in Sources */,
 				D7A53EA49970F581CC3B6C51 /* SizableCollectionViewController.swift in Sources */,
 				A03BD4921874F3CFBBE5F98F /* StackViewController.swift in Sources */,

@@ -16,6 +16,8 @@ import UIKit
 /// - Warning: Specify itemSize of your layout to proper `willDisplay` calls and correct `contentSize`
 public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent>  {
 
+    // MARK: - Typealias
+
     public typealias ProgressView = UIView & ProgressDisplayableItem
 
     // MARK: - Private Properties
@@ -29,15 +31,19 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
     public private(set) var canIterate = false {
         didSet {
             if canIterate {
-                if progressView.superview == nil {
-                    collectionView?.addSubview(progressView)
-                    collectionView?.contentInset.bottom += progressView.frame.height
+                guard progressView.superview == nil else {
+                    return
                 }
+
+                collectionView?.addSubview(progressView)
+                collectionView?.contentInset.bottom += progressView.frame.height
             } else {
-                if progressView.superview != nil {
-                    progressView.removeFromSuperview()
-                    collectionView?.contentInset.bottom -= progressView.frame.height
+                guard progressView.superview != nil else {
+                    return
                 }
+
+                progressView.removeFromSuperview()
+                collectionView?.contentInset.bottom -= progressView.frame.height
             }
         }
     }
@@ -54,9 +60,9 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
     // MARK: - BaseTablePlugin
 
     public override func setup(with manager: BaseCollectionManager?) {
-        self.collectionView = manager?.view
-        self.canIterate = false
-        self.output?.onPaginationInitialized(with: self)
+        collectionView = manager?.view
+        canIterate = false
+        output?.onPaginationInitialized(with: self)
     }
 
     public override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
@@ -70,14 +76,16 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
             let lastCellInLastSectionIndex = generators[lastSectionIndex].count - 1
 
             let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
-            if indexPath == lastCellIndexPath && canIterate {
-                // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
-                progressView.frame = .init(origin: .init(x: progressView.frame.origin.x,
-                                                         y: collectionView?.contentSize.height ?? 0),
-                                           size: progressView.frame.size)
-
-                output?.loadNextPage(with: self)
+            guard indexPath == lastCellIndexPath, canIterate else {
+                return
             }
+
+            // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
+            progressView.frame = .init(origin: .init(x: progressView.frame.origin.x,
+                                                     y: collectionView?.contentSize.height ?? 0),
+                                       size: progressView.frame.size)
+
+            output?.loadNextPage(with: self)
         default:
             break
         }

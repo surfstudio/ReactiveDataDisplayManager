@@ -64,14 +64,6 @@ private extension GravityTableViewController {
 
     }
 
-    func delay(_ deadline: DispatchTime, completion: @escaping () -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: deadline) {
-            DispatchQueue.main.async {
-                completion()
-            }
-        }
-    }
-
     func makeGravityCellGenerator(with heaviness: Int) -> GravityCellGenerator {
         let title = String(format: "Regular cell with heaviness: %d", heaviness)
         return GravityCellGenerator(model: title, heaviness: heaviness)

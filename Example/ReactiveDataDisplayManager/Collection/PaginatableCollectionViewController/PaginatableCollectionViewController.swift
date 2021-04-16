@@ -28,8 +28,7 @@ final class PaginatableCollectionViewController: UIViewController {
     private lazy var progressView = PaginatorView(frame: .init(x: 0, y: 0, width: collectionView.frame.width, height: 80))
 
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(plugin: .paginatable(progressView: progressView,
-                                  output: self))
+        .add(plugin: .paginatable(progressView: progressView, output: self))
         .build()
 
     private weak var paginatableInput: PaginatableInput?
@@ -84,14 +83,6 @@ private extension PaginatableCollectionViewController {
         }
 
         adapter.forceRefill()
-    }
-
-    func delay(_ deadline: DispatchTime, completion: @escaping () -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: deadline) {
-            DispatchQueue.main.async {
-                completion()
-            }
-        }
     }
 
     func makeGenerator() -> CollectionCellGenerator {
