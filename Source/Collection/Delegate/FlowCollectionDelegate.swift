@@ -69,8 +69,12 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
 
     open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
 
+        if let size = manager?.footers[section].size(collectionView, forSection: section) {
+            return size
+        }
+
         if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-            return flowLayout.headerReferenceSize
+            return flowLayout.footerReferenceSize
         }
 
         return .zero
