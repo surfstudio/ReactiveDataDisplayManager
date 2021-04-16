@@ -22,6 +22,7 @@ final class MainCollectionViewController: UIViewController {
         case sizableCollection
         case foldableCollection
         case itemTitleCollection
+        case paginatableCollection
         case compositionalCollection
     }
 
@@ -37,6 +38,7 @@ final class MainCollectionViewController: UIViewController {
             ("Sizable collection", .sizableCollection),
             ("Foldable collection", .foldableCollection),
             ("Collection with item index titles", .itemTitleCollection),
+            ("Collection with pagination", .paginatableCollection),
             ("Collection with compositional layout", .compositionalCollection)
         ]
     }

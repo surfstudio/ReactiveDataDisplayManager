@@ -1,15 +1,15 @@
 //
-//  PaginatableTableViewController.swift
+//  PaginatableCollectionViewController.swift
 //  ReactiveDataDisplayManagerExample
 //
-//  Created by Никита Коробейников on 03.03.2021.
+//  Created by Никита Коробейников on 16.03.2021.
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
 import UIKit
 import ReactiveDataDisplayManager
 
-final class PaginatableTableViewController: UIViewController {
+final class PaginatableCollectionViewController: UIViewController {
 
     // MARK: - Constants
 
@@ -20,16 +20,15 @@ final class PaginatableTableViewController: UIViewController {
 
     // MARK: - IBOutlet
 
-    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     // MARK: - Private Properties
 
-    private lazy var progressView = PaginatorView(frame: .init(x: 0, y: 0, width: tableView.frame.width, height: 80))
+    private lazy var progressView = PaginatorView(frame: .init(x: 0, y: 0, width: collectionView.frame.width, height: 80))
 
-    private lazy var adapter = tableView.rddm.baseBuilder
-        .add(plugin: .paginatable(progressView: progressView,
-                                  output: self))
+    private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: .paginatable(progressView: progressView, output: self))
         .build()
 
     private weak var paginatableInput: PaginatableInput?
@@ -40,51 +39,39 @@ final class PaginatableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with pagination"
-
-        configureActivityIndicatorIfNeeded()
+        title = "Collection with pagination"
         loadFirstPage()
-    }
-
-}
-
-// MARK: - Configuration
-
-private extension PaginatableTableViewController {
-
-    func configureActivityIndicatorIfNeeded() {
-        if #available(iOS 13.0, *) {
-            activityIndicator.style = .medium
-        }
     }
 
 }
 
 // MARK: - Private Methods
 
-private extension PaginatableTableViewController {
+private extension PaginatableCollectionViewController {
 
     func loadFirstPage() {
 
         // show loader
         activityIndicator.isHidden = false
+        activityIndicator.hidesWhenStopped = true
         activityIndicator.startAnimating()
 
         // hide footer
         paginatableInput?.updatePagination(canIterate: false)
+        paginatableInput?.updateProgress(isLoading: false)
 
         // imitation of loading first page
         delay(.now() + .seconds(3)) { [weak self] in
-
+            
             // fill table
             self?.fillAdapter()
 
             // hide loader
             self?.activityIndicator?.stopAnimating()
-            self?.activityIndicator?.isHidden = true
 
             // show footer
             self?.paginatableInput?.updatePagination(canIterate: true)
+
         }
     }
 
@@ -98,18 +85,25 @@ private extension PaginatableTableViewController {
         adapter.forceRefill()
     }
 
-    func makeGenerator() -> TableCellGenerator {
-        TitleTableViewCell.rddm.baseGenerator(with: "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)" )
+    func makeGenerator() -> CollectionCellGenerator {
+        TitleCollectionViewCell.rddm.baseGenerator(with: "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)" )
     }
 
     func fillNext() -> Bool {
         currentPage += 1
 
+        var newGenerators = [CollectionCellGenerator]()
+
         for _ in 0...Constants.pageSize {
-            adapter.addCellGenerator(makeGenerator())
+            newGenerators.append(makeGenerator())
         }
 
-        adapter.forceRefill()
+        if let lastGenerator = adapter.generators.last?.last {
+            adapter.insert(after: lastGenerator, new: newGenerators)
+        } else {
+            adapter.addCellGenerators(newGenerators)
+            adapter.forceRefill()
+        }
 
         return currentPage < Constants.pagesCount
     }
@@ -119,7 +113,7 @@ private extension PaginatableTableViewController {
 
 // MARK: - RefreshableOutput
 
-extension PaginatableTableViewController: PaginatableOutput {
+extension PaginatableCollectionViewController: PaginatableOutput {
 
     func onPaginationInitialized(with input: PaginatableInput) {
         paginatableInput = input
