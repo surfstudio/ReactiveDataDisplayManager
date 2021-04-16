@@ -92,11 +92,18 @@ private extension PaginatableCollectionViewController {
     func fillNext() -> Bool {
         currentPage += 1
 
+        var newGenerators = [CollectionCellGenerator]()
+
         for _ in 0...Constants.pageSize {
-            adapter.addCellGenerator(makeGenerator())
+            newGenerators.append(makeGenerator())
         }
 
-        adapter.forceRefill()
+        if let lastGenerator = adapter.generators.last?.last {
+            adapter.insert(after: lastGenerator, new: newGenerators)
+        } else {
+            adapter.addCellGenerators(newGenerators)
+            adapter.forceRefill()
+        }
 
         return currentPage < Constants.pagesCount
     }
