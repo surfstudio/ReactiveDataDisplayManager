@@ -2,7 +2,7 @@
 name: ReactiveDataDisplayManager
 options:
   # Версия Xcode
-  xcodeVersion: 11.3.1
+  xcodeVersion: 12.4
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
@@ -20,7 +20,7 @@ targets:
       sources:
         - path: Source
       info:
-        path: Tricolor/Application/Info/Debug/Info.plist
+        path: Info.plist
         properties:
           CFBundleName: ReactiveDataDisplayManager
           CFBundleShortVersionString: $(MARKETING_VERSION)
@@ -39,7 +39,7 @@ targets:
     ReactiveDataDisplayManagerTests:
       type: bundle.unit-test
       platform: iOS
-      deploymentTarget: 11.0
+      deploymentTarget: 10.0
       scheme:
         configVariants: all
       sources: [ReactiveDataDisplayManagerTests]

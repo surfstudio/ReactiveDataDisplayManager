@@ -47,14 +47,6 @@ private extension RefreshableTableViewController {
 
     }
 
-    func delay(_ deadline: DispatchTime, completion: @escaping () -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: deadline) {
-            DispatchQueue.main.async {
-                completion()
-            }
-        }
-    }
-
     func makeGenerator() -> TableCellGenerator {
         TitleTableViewCell.rddm.baseGenerator(with: "Random cell \(Int.random(in: 0...1000))" )
     }

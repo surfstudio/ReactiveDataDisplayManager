@@ -6,7 +6,7 @@
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import ReactiveDataDisplayManager
 
 final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplaybleItem {

@@ -116,12 +116,17 @@ private extension FoldableCollectionViewController {
         var generators = [CollectionCellGenerator]()
 
         for _ in 0...endIndex {
-            guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
+            guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
             let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
             generators.append(generator)
         }
 
         return generators
+    }
+
+    /// This method load image and set to UIImageView
+    func loadImage(url: URL, imageView: UIImageView) {
+        Nuke.loadImage(with: url, into: imageView)
     }
 
     func getVisibleGenerators(for generator: CollectionCellGenerator) -> [CollectionCellGenerator] {

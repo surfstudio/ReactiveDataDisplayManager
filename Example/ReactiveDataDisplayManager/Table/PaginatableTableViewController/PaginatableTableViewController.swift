@@ -21,6 +21,7 @@ final class PaginatableTableViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
     // MARK: - Private Properties
 
@@ -31,6 +32,8 @@ final class PaginatableTableViewController: UIViewController {
                                   output: self))
         .build()
 
+    private weak var paginatableInput: PaginatableInput?
+
     private var currentPage = 0
 
     // MARK: - UIViewController
@@ -38,7 +41,21 @@ final class PaginatableTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Table with pagination"
-        fillAdapter()
+
+        configureActivityIndicatorIfNeeded()
+        loadFirstPage()
+    }
+
+}
+
+// MARK: - Configuration
+
+private extension PaginatableTableViewController {
+
+    func configureActivityIndicatorIfNeeded() {
+        if #available(iOS 13.0, *) {
+            activityIndicator.style = .medium
+        }
     }
 
 }
@@ -46,6 +63,30 @@ final class PaginatableTableViewController: UIViewController {
 // MARK: - Private Methods
 
 private extension PaginatableTableViewController {
+
+    func loadFirstPage() {
+
+        // show loader
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+
+        // hide footer
+        paginatableInput?.updatePagination(canIterate: false)
+
+        // imitation of loading first page
+        delay(.now() + .seconds(3)) { [weak self] in
+
+            // fill table
+            self?.fillAdapter()
+
+            // hide loader
+            self?.activityIndicator?.stopAnimating()
+            self?.activityIndicator?.isHidden = true
+
+            // show footer
+            self?.paginatableInput?.updatePagination(canIterate: true)
+        }
+    }
 
     /// This method is used to fill adapter
     func fillAdapter() {
@@ -55,16 +96,6 @@ private extension PaginatableTableViewController {
         }
 
         adapter.forceRefill()
-
-
-    }
-
-    func delay(_ deadline: DispatchTime, completion: @escaping () -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: deadline) {
-            DispatchQueue.main.async {
-                completion()
-            }
-        }
     }
 
     func makeGenerator() -> TableCellGenerator {
@@ -90,11 +121,19 @@ private extension PaginatableTableViewController {
 
 extension PaginatableTableViewController: PaginatableOutput {
 
+    func onPaginationInitialized(with input: PaginatableInput) {
+        paginatableInput = input
+    }
+
     func loadNextPage(with input: PaginatableInput) {
+
+        input.updateProgress(isLoading: true)
+
         delay(.now() + .seconds(3)) { [weak self, weak input] in
             let canIterate = self?.fillNext() ?? false
 
-            input?.endLoading(canIterate: canIterate)
+            input?.updateProgress(isLoading: false)
+            input?.updatePagination(canIterate: canIterate)
         }
     }
 

@@ -3,11 +3,5 @@ use_frameworks!
 target 'ReactiveDataDisplayManagerExample' do
   pod 'ReactiveDataDisplayManager', :path => '../'
   pod 'SurfUtils/ItemsScrollManager', :git => "https://github.com/surfstudio/iOS-Utils.git", :tag => '11.0.0'
-  pod 'Nuke'
-
-  target 'ReactiveDataDisplayManagerExampleTests' do
-    inherit! :search_paths
-
-    
-  end
+  pod 'Nuke', '9.4.1'
 end

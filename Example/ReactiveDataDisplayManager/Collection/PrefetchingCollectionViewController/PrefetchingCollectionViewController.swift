@@ -27,7 +27,7 @@ final class PrefetchingCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private let prefetcher = NukeImagePrefetcher()
+    private let prefetcher = NukeImagePrefetcher(placeholder: #imageLiteral(resourceName: "ReactiveIconHorizontal"))
     private lazy var prefetcherablePlugin: CollectionPrefetcherablePlugin<NukeImagePrefetcher, ImageCollectionCellGenerator> = .prefetch(prefetcher: prefetcher)
 
     private lazy var adapter = collectionView.rddm.baseBuilder
@@ -73,7 +73,7 @@ private extension PrefetchingCollectionViewController {
     func fillAdapter() {
         for _ in 0...300 {
             // Create viewModels for cell
-            guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
+            guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
 
             // Create generator
             let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
@@ -84,6 +84,11 @@ private extension PrefetchingCollectionViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+    }
+
+    /// This method load image and set to UIImageView
+    func loadImage(url: URL, imageView: UIImageView) {
+        Nuke.loadImage(with: url, options: prefetcher.imageLoadingOptions, into: imageView)
     }
 
 }

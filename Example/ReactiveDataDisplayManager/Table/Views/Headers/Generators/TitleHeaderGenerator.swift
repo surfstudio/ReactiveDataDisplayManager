@@ -7,6 +7,7 @@
 //
 
 import ReactiveDataDisplayManager
+import UIKit
 
 final class TitleHeaderGenerator: TableHeaderGenerator {
 

@@ -7,12 +7,13 @@
 //
 
 import ReactiveDataDisplayManager
+import UIKit
 
 class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
 
     // MARK: - IBOutlets
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
 
     // MARK: - Internal methods
 
@@ -20,11 +21,15 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
         titleLabel.text = title
     }
 
+    // MARK: - CalculatableHeightItem
+
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
         return 44
     }
-    
+
 }
+
+// MARK: - ConfigurableItem
 
 extension TitleTableViewCell: ConfigurableItem {
 

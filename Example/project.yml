@@ -2,11 +2,13 @@
 name: ReactiveDataDisplayManagerExample
 options:
   # Версия Xcode
-  xcodeVersion: 11.3.1
+  xcodeVersion: 12.4
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
   createIntermediateGroups: true
+settings:
+  DEVELOPMENT_TEAM: EFAAG9GXN4
 targets:
     ReactiveDataDisplayManagerExample:
       dependencies:
@@ -16,11 +18,10 @@ targets:
       deploymentTarget: 11.0
       scheme:
         configVariants: all
-        testTargets: [ReactiveDataDisplayManagerExampleTests]
       sources:
         - path: ReactiveDataDisplayManager
       info:
-        path: Tricolor/Application/Info/Debug/Info.plist
+        path: ReactiveDataDisplayManager/Application/Info.plist
         properties:
           UILaunchStoryboardName: LaunchScreen
           UIMainStoryboardFile: Main
@@ -37,20 +38,3 @@ targets:
           LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
           CODE_SIGN_IDENTITY: "iPhone Developer"
           CODE_SIGN_STYLE: Automatic
-
-    ReactiveDataDisplayManagerExampleTests:
-      type: bundle.unit-test
-      platform: iOS
-      deploymentTarget: 11.0
-      scheme:
-        configVariants: all
-      sources: [ReactiveDataDisplayManagerTests]
-      info:
-        path: ReactiveDataDisplayManagerTests/Info.plist
-        properties: []
-      dependencies:
-        - target: ReactiveDataDisplayManagerExample
-      settings:
-        configs:
-          Debug:
-            EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
