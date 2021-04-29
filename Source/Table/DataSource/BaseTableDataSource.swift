@@ -18,8 +18,6 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
     public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
 
-    public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
-
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
