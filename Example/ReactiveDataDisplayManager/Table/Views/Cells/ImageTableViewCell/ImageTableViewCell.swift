@@ -17,11 +17,12 @@ final class ImageTableViewCell: UITableViewCell {
     struct ViewModel {
         let imageUrl: URL
         let title: String
+        let loadImage: (URL, UIImageView) -> Void
 
-        static func make() -> Self? {
+        static func make(with loadImage: @escaping (URL, UIImageView) -> Void) -> Self? {
             let stringImageUrl = "https://picsum.photos/id/\(Int.random(in: 0...1000))/1280/720"
             guard let imageUrl = URL(string: stringImageUrl) else { return nil }
-            return .init(imageUrl: imageUrl, title: stringImageUrl)
+            return .init(imageUrl: imageUrl, title: stringImageUrl, loadImage: loadImage)
         }
     }
 
@@ -46,11 +47,13 @@ final class ImageTableViewCell: UITableViewCell {
 
 }
 
+// MARK: - ConfigurableItem
+
 extension ImageTableViewCell: ConfigurableItem {
 
     func configure(with viewModel: ViewModel) {
         titleLabel.text = String(format: "URL: %@", viewModel.title)
-        Nuke.loadImage(with: viewModel.imageUrl, into: iconView)
+        viewModel.loadImage(viewModel.imageUrl, iconView)
     }
 
 }

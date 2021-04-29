@@ -53,7 +53,7 @@ extension BaseCollectionCellGenerator: CollectionCellGenerator {
     public func registerCell(in collectionView: UICollectionView) {
         switch registerType {
         case .nib:
-            collectionView.registerNib(identifier)
+            collectionView.registerNib(identifier, bundle: Cell.bundle())
         case .class:
             collectionView.register(Cell.self, forCellWithReuseIdentifier: identifier)
         }

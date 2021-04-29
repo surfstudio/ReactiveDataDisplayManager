@@ -15,6 +15,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     public typealias CollectionType = UICollectionView
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
+    public typealias FooterGeneratorType = CollectionFooterGenerator
 
     public typealias CollectionAnimator = Animator<CollectionType>
 
@@ -24,6 +25,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
 
     public var generators: [[CollectionCellGenerator]] = []
     public var sections: [CollectionHeaderGenerator] = []
+    public var footers: [CollectionFooterGenerator] = []
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
@@ -44,6 +46,10 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
 
         if sections.count <= 0 {
             sections.append(EmptyCollectionHeaderGenerator())
+        }
+        
+        if footers.count <= 0 {
+            footers.append(EmptyCollectionFooterGenerator())
         }
 
         // Add to last section
@@ -121,6 +127,48 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
 
     public func clearHeaderGenerators() {
         self.sections.removeAll()
+    }
+
+}
+
+// MARK: - FooterDataDisplayManager
+
+extension BaseCollectionManager: FooterDataDisplayManager {
+
+    public func addSectionFooterGenerator(_ generator: CollectionFooterGenerator) {
+        generator.registerFooter(in: view)
+        self.footers.append(generator)
+    }
+
+    public func addCellGenerator(_ generator: CollectionCellGenerator, toFooter footer: CollectionFooterGenerator) {
+        addCellGenerators([generator], toFooter: footer)
+    }
+
+    public func addCellGenerators(_ generators: [CollectionCellGenerator], toFooter footer: CollectionFooterGenerator) {
+        generators.forEach { $0.registerCell(in: view) }
+
+        if self.generators.count != self.footers.count || footers.isEmpty {
+            self.generators.append([CollectionCellGenerator]())
+        }
+
+        if let index = self.footers.firstIndex(where: { $0 === footer }) {
+            self.generators[index].append(contentsOf: generators)
+        }
+    }
+
+    public func removeAllGenerators(from footer: CollectionFooterGenerator) {
+        guard
+            let index = self.footers.firstIndex(where: { $0 === footer }),
+            self.generators.count > index
+        else {
+            return
+        }
+
+        self.generators[index].removeAll()
+    }
+
+    public func clearFooterGenerators() {
+        self.footers.removeAll()
     }
 
 }

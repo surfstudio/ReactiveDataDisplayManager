@@ -41,7 +41,21 @@ final class PaginatableTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Table with pagination"
+
+        configureActivityIndicatorIfNeeded()
         loadFirstPage()
+    }
+
+}
+
+// MARK: - Configuration
+
+private extension PaginatableTableViewController {
+
+    func configureActivityIndicatorIfNeeded() {
+        if #available(iOS 13.0, *) {
+            activityIndicator.style = .medium
+        }
     }
 
 }
@@ -82,14 +96,6 @@ private extension PaginatableTableViewController {
         }
 
         adapter.forceRefill()
-    }
-
-    func delay(_ deadline: DispatchTime, completion: @escaping () -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: deadline) {
-            DispatchQueue.main.async {
-                completion()
-            }
-        }
     }
 
     func makeGenerator() -> TableCellGenerator {
