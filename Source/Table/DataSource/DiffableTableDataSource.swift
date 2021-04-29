@@ -38,7 +38,6 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
     /// - parameter provider: provider of `UITableView` and `UITableViewCells`
     public init(provider: BaseTableManager) {
-
         super.init(tableView: provider.view) { (table, indexPath, item) -> UITableViewCell? in
             return provider
                 .generators[indexPath.section][indexPath.row]

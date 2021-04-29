@@ -51,6 +51,7 @@ extension BaseTableDataSource {
         prefetchPlugins.setup(with: builder.manager)
         tablePlugins.setup(with: builder.manager)
     }
+
 }
 
 // MARK: - UITableViewDataSource
