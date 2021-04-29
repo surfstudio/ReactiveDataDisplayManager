@@ -7,6 +7,9 @@
 
 import UIKit
 
+/// Helper class to modify `UITableView` cells
+///
+/// - Note: Based on standard `UITableView` methods wrapped in `Animator`
 class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     // MARK: - Properties
@@ -15,6 +18,8 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     // MARK: - Init
 
+    /// - parameter view: parent view
+    /// - parameter animator: wrapper of animated operation blocks
     init(view: UITableView, animator: Animator<UITableView>) {
         super.init(view: view)
         self.animator = animator

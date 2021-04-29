@@ -8,17 +8,12 @@
 
 import UIKit
 
-// Base implementation for UITableViewDelegate protocol. Use it if NO special logic required.
+/// Base implementation for `UITableViewDelegate` protocol.
 open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Properties
 
-    weak public var manager: BaseTableManager? {
-        didSet {
-            tablePlugins.setup(with: manager)
-            scrollPlugins.setup(with: manager)
-        }
-    }
+    public  weak var manager: BaseTableManager?
 
     public var estimatedHeight: CGFloat = 40
 

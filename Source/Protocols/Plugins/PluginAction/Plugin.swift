@@ -8,11 +8,19 @@
 
 /// Use this class to extend collection functionality.
 ///
-/// For example: add support of SelectableItem without overriding whole adapter
+/// **For example**: add support of SelectableItem without overriding whole adapter
 public protocol PluginAction {
     associatedtype Event
-    associatedtype Manager
+    associatedtype Manager: DataDisplayManager
 
+    /// Setup optional references to manager properties
+    ///
+    /// - parameter manager: instance of `DataDisplayManager`
     func setup(with manager: Manager?)
+
+    /// Add reaction on some event to manager
+    ///
+    /// - parameter event: event of  view, delegate or dataSource
+    /// - parameter manager: instance of `DataDisplayManager`
     func process(event: Event, with manager: Manager?)
 }

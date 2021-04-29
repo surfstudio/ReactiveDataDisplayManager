@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Protocol for UIView (basically for UICollectionViewCell&UITableViewCell) which is supposed to be used in CellGenerators
+/// Protocol for `UIView` (basically for `UICollectionViewCell` or `UITableViewCell`) which is supposed to be used in CellGenerators
 public protocol ConfigurableItem where Self: UIView {
 
     associatedtype Model
@@ -18,6 +18,14 @@ public protocol ConfigurableItem where Self: UIView {
     /// If you use SPM return Bundle.module
     static func bundle() -> Bundle?
 
+    /// Configure `UView` and subviews with content model
+    ///
+    /// - parameter model: instance of content model, which can contains:
+    ///     - texts
+    ///     - images
+    ///     - colors
+    ///     - delegate or event closure
+    ///
     func configure(with model: Model)
     
 }

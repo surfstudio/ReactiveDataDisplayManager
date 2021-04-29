@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Base implementation for UICollectionViewDelegate protocol. Use it if NO special logic required.
+/// Base implementation for `UICollectionViewDelegate` protocol.
 open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
     // MARK: - Properties
@@ -24,6 +24,25 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
 
 }
+
+// MARK: - CollectionBuilderConfigurable
+
+extension BaseCollectionDelegate {
+
+    public func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
+
+        collectionPlugins = builder.collectionPlugins
+        scrollPlugins = builder.scrollPlugins
+
+        manager = builder.manager
+
+        collectionPlugins.setup(with: manager)
+        scrollPlugins.setup(with: manager)
+
+    }
+
+}
+
 
 // MARK: - UICollectionViewDelegate
 

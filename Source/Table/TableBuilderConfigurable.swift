@@ -12,6 +12,6 @@ public protocol TableBuilderConfigurable {
 
     /// Configuration method
     ///
-    /// - parameter builder: Use builder properties to initialise
+    /// - parameter builder: Use builder properties to initialise entity
     func configure<T: BaseTableManager>(with builder: TableBuilder<T>)
 }

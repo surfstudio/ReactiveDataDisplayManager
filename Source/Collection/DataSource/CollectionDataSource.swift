@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol CollectionDataSource: UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
+public protocol CollectionDataSource: CollectionBuilderConfigurable, UICollectionViewDataSource, UICollectionViewDataSourcePrefetching {
     var provider: CollectionGeneratorsProvider? { get set }
     var prefetchPlugins: PluginCollection< BaseCollectionPlugin <PrefetchEvent>> { get set }
     var collectionPlugins: PluginCollection< BaseCollectionPlugin <CollectionEvent>> { get set }

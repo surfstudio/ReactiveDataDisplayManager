@@ -8,8 +8,13 @@
 
 import UIKit
 
+/// Protocol for `Generator` to describe moving strategy for cells
 public protocol MovableItem {
+
+    /// Return **true** to enable moving of generated cell in edit mode
     func canMove() -> Bool
+
+    /// Return  **true** to enable moving of generated cell betwen sections
     func canMoveInOtherSection() -> Bool
 }
 

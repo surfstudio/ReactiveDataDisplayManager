@@ -8,22 +8,38 @@
 
 import UIKit
 
-// Base implementation for UICollectionViewDataSource protocol. Use it if NO special logic required.
+/// Base implementation for `UICollectionViewDataSource` protocol.
 open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
     // MARK: - Properties
 
-    weak public var provider: CollectionGeneratorsProvider? {
-        didSet {
-            let manager = provider as? BaseCollectionManager
-            prefetchPlugins.setup(with: manager)
-            collectionPlugins.setup(with: manager)
-        }
-    }
+    public  weak var provider: CollectionGeneratorsProvider?
 
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
+
+}
+
+// MARK: - CollectionBuilderConfigurable
+
+extension BaseCollectionDataSource {
+
+    public func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
+
+        collectionPlugins = builder.collectionPlugins
+        itemTitleDisplayablePlugin = builder.itemTitleDisplayablePlugin
+
+        if #available(iOS 10.0, *) {
+            prefetchPlugins = builder.prefetchPlugins
+        }
+
+        provider = builder.manager
+
+        prefetchPlugins.setup(with: builder.manager)
+        collectionPlugins.setup(with: builder.manager)
+
+    }
 
 }
 
