@@ -14,6 +14,8 @@ open class BaseTablePlugin<Event>: PluginAction {
         /// Most of plugins do not need any setup
     }
 
-    open func process(event: Event, with manager: BaseTableManager?) {}
+    open func process(event: Event, with manager: BaseTableManager?) {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
 
 }

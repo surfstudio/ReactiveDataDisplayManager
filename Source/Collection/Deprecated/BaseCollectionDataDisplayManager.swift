@@ -125,8 +125,8 @@ extension BaseCollectionDataDisplayManager: HeaderDataDisplayManager {
 
     public func removeAllGenerators(from header: CollectionHeaderGenerator) {
         guard
-            let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }),
-            self.cellGenerators.count > index
+           let index = self.sectionHeaderGenerators.firstIndex(where: { $0 === header }),
+           self.cellGenerators.count > index
         else {
             return
         }
@@ -229,8 +229,7 @@ extension BaseCollectionDataDisplayManager: UICollectionViewDelegateFlowLayout {
 
 extension BaseCollectionDataDisplayManager: UICollectionViewDelegate {
     open func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let collection = self.view else { return }
-        self.scrollEvent.invoke(with: collection)
+        self.scrollEvent.invoke(with: view)
     }
 
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

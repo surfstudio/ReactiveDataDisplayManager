@@ -12,8 +12,12 @@ import UIKit
 @available(iOS 11, *)
 public class TableBatchUpdatesAnimator: Animator<UITableView> {
 
-    public override func perform(in collection: UITableView, animation: () -> Void) {
-        collection.performBatchUpdates(animation)
+    public override func perform(in collection: UITableView, animated: Bool, animation: () -> Void) {
+        if animated {
+            collection.performBatchUpdates(animation)
+        } else {
+            animation()
+        }
     }
 
 }

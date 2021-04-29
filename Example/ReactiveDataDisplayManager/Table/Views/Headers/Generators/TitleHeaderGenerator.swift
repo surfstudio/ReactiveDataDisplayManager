@@ -41,3 +41,13 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
     }
 
 }
+
+// MARK: - Diffable
+
+extension TitleHeaderGenerator: DiffableItemSource {
+
+    var item: DiffableItem {
+        DiffableItem(id: uuid, state: .init(model))
+    }
+
+}

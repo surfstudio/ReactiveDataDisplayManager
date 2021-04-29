@@ -14,6 +14,8 @@ open class BaseCollectionPlugin<Event>: PluginAction {
         /// Most of plugins do not need any setup
     }
 
-    open func process(event: Event, with manager: BaseCollectionManager?) {}
+    open func process(event: Event, with manager: BaseCollectionManager?) {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
 
 }

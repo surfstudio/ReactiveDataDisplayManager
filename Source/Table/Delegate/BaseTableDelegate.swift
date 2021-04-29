@@ -38,6 +38,28 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
 }
 
+// MARK: - TableBuilderConfigurable
+
+extension BaseTableDelegate {
+
+    open func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+
+        movablePlugin = builder.movablePlugin
+        tablePlugins = builder.tablePlugins
+        scrollPlugins = builder.scrollPlugins
+
+        if #available(iOS 11.0, *) {
+            swipeActionsPlugin = builder.swipeActionsPlugin as? TableSwipeActionsConfigurable
+        }
+
+        manager = builder.manager
+
+        tablePlugins.setup(with: builder.manager)
+        scrollPlugins.setup(with: builder.manager)
+    }
+
+}
+
 // MARK: - UITableViewDelegate
 
 extension BaseTableDelegate {

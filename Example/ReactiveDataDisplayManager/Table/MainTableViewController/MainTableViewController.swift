@@ -22,6 +22,7 @@ final class MainTableViewController: UIViewController {
         case alphabetizeSectionsTable
         case sectionTitlesTable
         case swipeableTable
+        case diffableTable
         case refreshableTable
         case paginatableTable
         case allPluginsTable
@@ -38,6 +39,7 @@ final class MainTableViewController: UIViewController {
             ("table with movable cell", .movableTable),
             ("table with alphabetize sections", .alphabetizeSectionsTable),
             ("table with sections titles", .sectionTitlesTable),
+            ("table with diffableDataSource", .diffableTable),
             ("table with swipeable cells", .swipeableTable),
             ("table with refresh control", .refreshableTable),
             ("table with pagination", .paginatableTable),
@@ -76,8 +78,7 @@ private extension MainTableViewController {
             let generator = TitleWithIconTableViewCell.rddm.baseGenerator(with: model.title)
 
             generator.didSelectEvent += { [weak self] in
-                guard let self = self else { return }
-                self.performSegue(withIdentifier: model.segueId.rawValue, sender: self.tableView)
+                self?.openScreen(by: model.segueId)
             }
 
             // Add generator to adapter
@@ -85,6 +86,19 @@ private extension MainTableViewController {
         }
 
         ddm.forceRefill()
+    }
+
+    func openScreen(by segueId: SegueIdentifier) {
+        switch segueId {
+        case .diffableTable:
+            if #available(iOS 13.0, *) {
+                performSegue(withIdentifier: segueId.rawValue, sender: tableView)
+            } else {
+                showAlert("Available from iOS 13")
+            }
+        default:
+            performSegue(withIdentifier: segueId.rawValue, sender: tableView)
+        }
     }
 
 }
