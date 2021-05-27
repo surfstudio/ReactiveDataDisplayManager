@@ -11,7 +11,7 @@ final class UnrollStackCellGenerator: StackCellGenerator {
 
     // MARK: - Properties
 
-    var bigText: String
+    private let bigText: String
 
     // MARK: - Initialization
 

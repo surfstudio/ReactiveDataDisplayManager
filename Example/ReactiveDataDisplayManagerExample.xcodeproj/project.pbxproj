@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01EB6C26265F96D70052D839 /* ButtonStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB6C25265F96D70052D839 /* ButtonStackCellGenerator.swift */; };
+		01EB6C28265F99F20052D839 /* Pallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EB6C27265F99F20052D839 /* Pallete.swift */; };
 		07D0AD412D14907C869DA420 /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F86F1D270E55D920BF087 /* RefreshableTableViewController.swift */; };
 		093AD8947B4718E3A7AC378B /* TitleStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F93E77221299A239B51BF7F /* TitleStackCellGenerator.swift */; };
 		0BDB03589517E266B2ED8498 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07617869BCD0A70D87527FC /* TitleCollectionViewCell.swift */; };
@@ -50,7 +52,7 @@
 		6BA6BB85E02F5B43A00DB3B3 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BCF3694F34717804DCF88 /* Appearance.swift */; };
 		7469CA91227C39BBA579BD0E /* FoldableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9375407E9E04CB2B8492F /* FoldableCollectionViewController.swift */; };
 		7771ECE25476BD25F1024E9B /* FoldableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F829DBA2D8FE8670C208FA2 /* FoldableTableViewController.swift */; };
-		84F09AAA4041273D15ACF740 /* ButtonsCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE8A56FD42BEF52F148BE72 /* ButtonsCellGenerator.swift */; };
+		84F09AAA4041273D15ACF740 /* InnerStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE8A56FD42BEF52F148BE72 /* InnerStackCellGenerator.swift */; };
 		85757DB60447DEF381C110CA /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2183568FF89543B6F82113 /* ImageTableViewController.swift */; };
 		8B37F42D943016069BF860DA /* UnrollCellStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01825DE6F3160BA0ACD25D8 /* UnrollCellStackView.swift */; };
 		8D731B279BD6DBE4D19ADF8C /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EAE885A84F4E137180086B1 /* ImageTableViewCell.xib */; };
@@ -101,6 +103,8 @@
 /* Begin PBXFileReference section */
 		001BB16BE2E141F75B940D27 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		0165D86C242386A8EEA77F48 /* FoldableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableCollectionViewCell.swift; sourceTree = "<group>"; };
+		01EB6C25265F96D70052D839 /* ButtonStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackCellGenerator.swift; sourceTree = "<group>"; };
+		01EB6C27265F99F20052D839 /* Pallete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pallete.swift; sourceTree = "<group>"; };
 		0371CFDF2AE2933334F5FEF1 /* ImageTableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableGenerator.swift; sourceTree = "<group>"; };
 		0F829DBA2D8FE8670C208FA2 /* FoldableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableTableViewController.swift; sourceTree = "<group>"; };
 		116EB3A20F5DCF2E6FDE2CA3 /* FoldableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoldableTableViewCell.xib; sourceTree = "<group>"; };
@@ -148,7 +152,7 @@
 		822BCF3694F34717804DCF88 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		83356740D148F762F89EBC9D /* PrefetchingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchingCollectionViewController.swift; sourceTree = "<group>"; };
 		8EFB49700A08E9D7CB895637 /* TitleWithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleWithIconTableViewCell.xib; sourceTree = "<group>"; };
-		8FE8A56FD42BEF52F148BE72 /* ButtonsCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsCellGenerator.swift; sourceTree = "<group>"; };
+		8FE8A56FD42BEF52F148BE72 /* InnerStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerStackCellGenerator.swift; sourceTree = "<group>"; };
 		9392223ADE0DD07181CF5C7B /* TitleCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionReusableView.swift; sourceTree = "<group>"; };
 		96946BCC833AEBED71BDA634 /* HeaderCollectionListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionListView.xib; sourceTree = "<group>"; };
 		9AAF4EC7F8199FE77561B93C /* VerticalSizableTextGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSizableTextGenerator.swift; sourceTree = "<group>"; };
@@ -432,7 +436,6 @@
 				CDDA39952407605058DD128A /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */,
 				C18556A2A23760FCD02C83AA /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -585,10 +588,11 @@
 		ADC08BE013C6C4FA07AB23A3 /* Generators */ = {
 			isa = PBXGroup;
 			children = (
-				8FE8A56FD42BEF52F148BE72 /* ButtonsCellGenerator.swift */,
+				8FE8A56FD42BEF52F148BE72 /* InnerStackCellGenerator.swift */,
 				B9FF511355AF2D02BFC43848 /* TextStackCellGenerator.swift */,
 				6F93E77221299A239B51BF7F /* TitleStackCellGenerator.swift */,
 				4A21E7394478C19F84249F12 /* UnrollStackCellGenerator.swift */,
+				01EB6C25265F96D70052D839 /* ButtonStackCellGenerator.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -707,6 +711,7 @@
 				CC31D500BAC18C0DAEB7B74F /* NukeImagePrefetcher.swift */,
 				2E34FCC6064184A97314D0ED /* SwipeActionProvider.swift */,
 				FF080E64B9D36E8CE75064A7 /* UIViewController+Delay.swift */,
+				01EB6C27265F99F20052D839 /* Pallete.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -958,7 +963,7 @@
 				1D3EA47C5F808BC343F11A6D /* AlphabeticalTableViewController.swift in Sources */,
 				CEE407B9C4068DFCCCB2BED9 /* AppDelegate.swift in Sources */,
 				6BA6BB85E02F5B43A00DB3B3 /* Appearance.swift in Sources */,
-				84F09AAA4041273D15ACF740 /* ButtonsCellGenerator.swift in Sources */,
+				84F09AAA4041273D15ACF740 /* InnerStackCellGenerator.swift in Sources */,
 				98D5F2B0BE18B88E2D8151BB /* CollectionCompositionalViewController.swift in Sources */,
 				16C2E29BB9A74E215BF5BB2F /* CollectionListViewController.swift in Sources */,
 				C891A20BE50F25D0A89D06D7 /* CollectionViewController.swift in Sources */,
@@ -966,12 +971,14 @@
 				B3D3698A2600498C9826B677 /* DiffableCollectionCellGenerator.swift in Sources */,
 				1C290C9E8E4A8610BF5B2ABB /* DiffableCollectionViewController.swift in Sources */,
 				48619FD70A82495CD709327B /* DiffableTableViewController.swift in Sources */,
+				01EB6C28265F99F20052D839 /* Pallete.swift in Sources */,
 				62621E4541B159B797CA089D /* FoldableCellGenerator.swift in Sources */,
 				3FDFDC235374851B1532FCDD /* FoldableCollectionCellGenerator.swift in Sources */,
 				9829D5F95089D7312B073E84 /* FoldableCollectionViewCell.swift in Sources */,
 				7469CA91227C39BBA579BD0E /* FoldableCollectionViewController.swift in Sources */,
 				94DC16AA9156A833CC00BDBE /* FoldableTableViewCell.swift in Sources */,
 				7771ECE25476BD25F1024E9B /* FoldableTableViewController.swift in Sources */,
+				01EB6C26265F96D70052D839 /* ButtonStackCellGenerator.swift in Sources */,
 				54D3F6E34F0CF393B5DDDB29 /* GravityCellGenerator.swift in Sources */,
 				D93E1B3BCAF404204B2E804C /* GravityFoldableCellGenerator.swift in Sources */,
 				D6223DDF75EF08096F89F0DA /* GravityTableViewController.swift in Sources */,

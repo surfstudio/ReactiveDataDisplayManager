@@ -52,7 +52,24 @@ private extension LandingStackView {
         let description = TextStackCellGenerator(model: .init(title: sampleText,
                                                               alignment: .left,
                                                               font: .systemFont(ofSize: 30)))
-        let buttons = ButtonsCellGenerator(buttonOneTapped: buttonOneTapper, buttonTwoTapped: buttonTwoTapper)
+
+        let mainButton = ButtonStackCellGenerator(model: .init(title: "Main",
+                                                               titleColor: .black,
+                                                               backgroundColor: .rddm)) {
+            print("Main button tapped")
+        }
+
+        let secondaryButton = ButtonStackCellGenerator(model: .init(title: "Secondary",
+                                                               titleColor: .white,
+                                                               backgroundColor: .gray)) {
+            print("Secondary button tapped")
+        }
+
+        let buttons = InnerStackCellGenerator(model: .init(axis: .horizontal,
+                                                           alignment: .center,
+                                                           distribution: .fillEqually,
+                                                           spacing: 32),
+                                              childGenerators: [mainButton, secondaryButton])
 
         // Add generators to adapter
         adapter.addCellGenerator(title)
@@ -61,15 +78,6 @@ private extension LandingStackView {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
-    }
-
-    /// Buttons Actions
-    func buttonOneTapper() {
-        print("button one tapped")
-    }
-
-    func buttonTwoTapper() {
-        print("button two tapped")
     }
 
 }
