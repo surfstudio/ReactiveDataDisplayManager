@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for `Generator` to provide prefetching content
-public protocol PrefetcherableItem: class {
+public protocol PrefetcherableItem: AnyObject {
     associatedtype IdType: Hashable
 
     /// Unique (in list) request for prefetching.

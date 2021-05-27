@@ -24,7 +24,7 @@ open class TableHeaderGenerator: ViewGenerator {
 }
 
 /// Protocol that incapsulated type of current cell
-public protocol TableCellGenerator: class {
+public protocol TableCellGenerator: AnyObject {
 
     /// Nib type, which create this generator
     var identifier: String { get }
@@ -65,7 +65,7 @@ public extension TableCellGenerator {
 }
 
 /// Protocol that incapsulated type of Header
-public protocol CollectionHeaderGenerator: class {
+public protocol CollectionHeaderGenerator: AnyObject {
 
     var identifier: UICollectionReusableView.Type { get }
 
@@ -90,7 +90,7 @@ public extension CollectionHeaderGenerator {
 }
 
 /// Protocol that incapsulated type of Footer
-public protocol CollectionFooterGenerator: class {
+public protocol CollectionFooterGenerator: AnyObject {
 
     var identifier: UICollectionReusableView.Type { get }
 
@@ -102,7 +102,7 @@ public protocol CollectionFooterGenerator: class {
 }
 
 /// Protocol that incapsulated type of current cell
-public protocol CollectionCellGenerator: class {
+public protocol CollectionCellGenerator: AnyObject {
 
     /// Nib type, which create this generator
     var identifier: String { get }
@@ -133,7 +133,7 @@ public extension CollectionCellGenerator {
 }
 
 /// Protocol that incapsulated build logics for current View
-public protocol ViewGenerator: class {
+public protocol ViewGenerator: AnyObject {
 
     associatedtype ViewType
 
@@ -152,14 +152,14 @@ public protocol ViewBuilder {
 }
 
 @available(*, deprecated, message: "Use FoldableItem")
-public protocol GravityFoldableItem: class {
+public protocol GravityFoldableItem: AnyObject {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
     var childGenerators: [GravityTableCellGenerator] { get set }
 }
 
 @available(*, deprecated, message: "Use DisplayableItem")
-public protocol DisplayableFlow: class {
+public protocol DisplayableFlow: AnyObject {
 
     /// Invokes when cell will displaying.
     var willDisplayEvent: BaseEvent<Void> { get }
@@ -283,7 +283,7 @@ public extension CollectionFooterGenerator where Self: ViewBuilder {
 }
 
 /// Protocol that incapsulated type of current cell
-public protocol StackCellGenerator: class {
+public protocol StackCellGenerator: AnyObject {
     func generate(stackView: UIStackView, index: Int) -> UIView
 }
 

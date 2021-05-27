@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for `Generator` to handle didSelect event
-public protocol SelectableItem: class {
+public protocol SelectableItem: AnyObject {
 
     /// Invokes when user taps on the item.
     var didSelectEvent: BaseEvent<Void> { get }
