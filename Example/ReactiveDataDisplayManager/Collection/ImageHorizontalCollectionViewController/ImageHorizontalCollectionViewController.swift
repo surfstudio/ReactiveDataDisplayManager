@@ -72,7 +72,7 @@ private extension ImageHorizontalCollectionViewController {
     func fillAdapter() {
         for _ in 0...300 {
             // Create viewModels for cell
-            guard let viewModel = ImageCollectionViewCell.ViewModel.make() else { continue }
+            guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
 
             // Create generator
             let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
@@ -83,6 +83,11 @@ private extension ImageHorizontalCollectionViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+    }
+
+    /// This method load image and set to UIImageView
+    func loadImage(url: URL, imageView: UIImageView) {
+        Nuke.loadImage(with: url, into: imageView)
     }
 
 }

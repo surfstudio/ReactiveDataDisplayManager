@@ -60,6 +60,27 @@ final class DiffableTableViewController: UIViewController {
 
 }
 
+// MARK: - SearchDelegate
+
+@available(iOS 13.0, *)
+extension DiffableTableViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        // clear existing generators
+        adapter.clearCellGenerators()
+
+        // add filtered  generators
+        adapter.addCellGenerators(filterGenerators(with: searchText))
+
+        // apply snapshot
+        adapter.forceRefill()
+
+        // all insert, remove, reload animations will be selected automatically
+    }
+
+}
+
 // MARK: - Private methods
 
 @available(iOS 13.0, *)
@@ -106,6 +127,8 @@ private extension DiffableTableViewController {
     @objc
     func removeFirst() {
 
+        guard !generators.isEmpty else { return }
+
         generators.removeFirst()
 
         // clear existing generators
@@ -118,28 +141,6 @@ private extension DiffableTableViewController {
         adapter.forceRefill()
 
         // expected remove animation
-    }
-
-}
-
-// MARK: - SearchDelegate
-
-@available(iOS 13.0, *)
-extension DiffableTableViewController: UISearchBarDelegate {
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        // clear existing generators
-        adapter.clearCellGenerators()
-
-        // add filtered  generators
-        adapter.addCellGenerators(filterGenerators(with: searchText))
-
-        // apply snapshot
-        adapter.forceRefill()
-
-        // all insert, remove, reload animations will be selected automatically
-
     }
 
 }

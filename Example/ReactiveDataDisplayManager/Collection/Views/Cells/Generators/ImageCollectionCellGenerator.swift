@@ -6,6 +6,7 @@
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
 
+import Foundation
 import ReactiveDataDisplayManager
 
 final class ImageCollectionCellGenerator: BaseCollectionCellGenerator<ImageCollectionViewCell>, PrefetcherableItem {

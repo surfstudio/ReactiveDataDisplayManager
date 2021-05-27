@@ -10,7 +10,7 @@ import ReactiveDataDisplayManager
 
 final class DiffableCellGenerator: BaseCellGenerator<TitleTableViewCell>, DiffableItemSource {
 
-    let uuid = UUID().uuidString
+    private let uuid = UUID().uuidString
 
     var item: DiffableItem {
         DiffableItem(id: uuid, state: .init(model))

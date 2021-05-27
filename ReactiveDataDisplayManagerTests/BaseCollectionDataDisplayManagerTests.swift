@@ -32,6 +32,26 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
             return .zero
         }
     }
+    
+    final class FooterGenerator: CollectionFooterGenerator {
+        var identifier: UICollectionReusableView.Type {
+            return UICollectionReusableView.self
+        }
+
+        func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
+            return UICollectionReusableView()
+        }
+
+        func registerFooter(in collectionView: UICollectionView) {
+            DispatchQueue.main.async {
+                collectionView.registerNib(self.identifier, kind: UICollectionView.elementKindSectionFooter)
+            }
+        }
+
+        func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
+            return .zero
+        }
+    }
 
     final class CellGenerator: CollectionCellGenerator {
         var identifier: String {

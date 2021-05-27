@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ReactiveDataDisplayManager",
+        "repositoryURL": "https://github.com/surfstudio/ReactiveDataDisplayManager",
+        "state": {
+          "branch": "feature/spm-support",
+          "revision": "e1468d513702ad39871bebf5cac26da08f1df344",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
