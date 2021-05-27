@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for `Generator` to handle cells display events
-public protocol DisplayableItem: class {
+public protocol DisplayableItem: AnyObject {
 
     /// Invokes when cell will displaying.
     var willDisplayEvent: BaseEvent<Void> { get }

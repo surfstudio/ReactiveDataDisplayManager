@@ -9,14 +9,14 @@
 import UIKit
 
 /// Input signals to hide `UIRefreshControl`
-public protocol RefreshableInput: class {
+public protocol RefreshableInput: AnyObject {
 
     /// Call it to hide `UIRefreshControl`
     func endRefreshing()
 }
 
 /// Output signals to refresh content
-public protocol RefreshableOutput: class {
+public protocol RefreshableOutput: AnyObject {
 
     /// Called when  `UIRefreshControl` is activated
     ///

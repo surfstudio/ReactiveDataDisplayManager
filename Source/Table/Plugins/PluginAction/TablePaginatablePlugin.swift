@@ -16,7 +16,7 @@ public protocol ProgressDisplayableItem {
 }
 
 /// Input signals to control visibility of progressView in footer
-public protocol PaginatableInput: class {
+public protocol PaginatableInput: AnyObject {
 
     /// Call this method to control availability of **loadNextPage** action
     ///
@@ -30,7 +30,7 @@ public protocol PaginatableInput: class {
 }
 
 /// Output signals for loading next page of content
-public protocol PaginatableOutput: class {
+public protocol PaginatableOutput: AnyObject {
 
     /// Called when collection has setup `TablePaginatablePlugin`
     ///

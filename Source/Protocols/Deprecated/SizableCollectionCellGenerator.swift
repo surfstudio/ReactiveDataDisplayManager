@@ -10,6 +10,6 @@ import UIKit
 
 /// Generator that describes collection cell generator that can returns size
 @available(*, deprecated, renamed: "SizableItem")
-public protocol SizableCollectionCellGenerator: class {
+public protocol SizableCollectionCellGenerator: AnyObject {
     func getSize() -> CGSize
 }
