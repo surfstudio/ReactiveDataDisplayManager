@@ -7,14 +7,6 @@
 
 import UIKit
 
-extension UICollectionView: DataDisplayCompatible {}
-
-public extension DataDisplayWrapper where Base: UICollectionView {
-
-    /// Builder of `BaseCollectionManager`
-    var baseBuilder: CollectionBuilder<BaseCollectionManager> {
-        CollectionBuilder(view: base, manager: BaseCollectionManager())
-
 public class CollectionBuilder<T: BaseCollectionManager> {
 
     // MARK: - Aliases
@@ -61,6 +53,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     /// Change dataSource
     public func set(dataSource: (BaseCollectionManager) -> CollectionDataSource) -> CollectionBuilder<T> {
         self.dataSource = dataSource(manager)
+        return self
     }
 
     /// Change animator

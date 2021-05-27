@@ -13,7 +13,6 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
     // MARK: - Properties
 
-
     public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
     public weak var provider: CollectionGeneratorsProvider?
 
