@@ -270,7 +270,6 @@
 				CCBA7028BADC2F698414A7A2 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */,
 				62B7F1FB480045CAA6DBA67C /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -786,7 +785,7 @@
 		95802BBD4CBDEE505B38C3DC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					C824926DDEB1E628F218E48D = {
 						DevelopmentTeam = EFAAG9GXN4;
