@@ -15,7 +15,7 @@ final class UnrollCellStackView: UIView {
     private let bigTextLabel = UILabel()
     private var isUnroll = false
 
-    // MARK: - UITableViewCell
+    // MARK: - Initialisation
 
     override init(frame: CGRect) {
         super.init(frame: frame)
