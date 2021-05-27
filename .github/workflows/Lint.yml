@@ -1,0 +1,16 @@
+name: Lint
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Danger
+        uses: docker://ghcr.io/danger/danger-swift-with-swiftlint:3.7.2
+        with:
+            args: --failOnErrors --no-publish-check
+        env:
+          # add token to secrets
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
