@@ -44,7 +44,7 @@
 		5B055EC8EF8ECB8EC6013F70 /* NukeImagePrefetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D500BAC18C0DAEB7B74F /* NukeImagePrefetcher.swift */; };
 		5DB3376CD2365331F74C1CAC /* AllPluginsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC404CEF6562D557FE9F0FCC /* AllPluginsTableViewController.swift */; };
 		5F24946AAA8C47182AEE83E5 /* PaginatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474CD5F4A339F735088298E7 /* PaginatorView.swift */; };
-		61316A1DFCB46EAE9C2D83F5 /* LandingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489AAFA114071EF54AF1AA81 /* LandingStackView.swift */; };
+		61316A1DFCB46EAE9C2D83F5 /* LandingStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489AAFA114071EF54AF1AA81 /* LandingStackViewController.swift */; };
 		62621E4541B159B797CA089D /* FoldableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2389D989A88AC6B03E6799AB /* FoldableCellGenerator.swift */; };
 		677C564A4240DE620EEF81F7 /* TitleCollectionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42A5C5CF1A1BEF2B9B85E8 /* TitleCollectionListCell.swift */; };
 		6916D2128A02D5D69DA36143 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001BB16BE2E141F75B940D27 /* UIViewController.swift */; };
@@ -123,7 +123,7 @@
 		3DC4D0ADA4924AA2C98DC6EC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		3EAE885A84F4E137180086B1 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		474CD5F4A339F735088298E7 /* PaginatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorView.swift; sourceTree = "<group>"; };
-		489AAFA114071EF54AF1AA81 /* LandingStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingStackView.swift; sourceTree = "<group>"; };
+		489AAFA114071EF54AF1AA81 /* LandingStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingStackViewController.swift; sourceTree = "<group>"; };
 		4952412163E0934C7BB059F1 /* SizableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SizableCollectionViewCell.xib; sourceTree = "<group>"; };
 		4A21E7394478C19F84249F12 /* UnrollStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrollStackCellGenerator.swift; sourceTree = "<group>"; };
 		518BA0A92F553FCCEE920B99 /* FoldableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableTableViewCell.swift; sourceTree = "<group>"; };
@@ -744,7 +744,7 @@
 		EB9BA73E186ACFF09CB39A46 /* Landing */ = {
 			isa = PBXGroup;
 			children = (
-				489AAFA114071EF54AF1AA81 /* LandingStackView.swift */,
+				489AAFA114071EF54AF1AA81 /* LandingStackViewController.swift */,
 			);
 			path = Landing;
 			sourceTree = "<group>";
@@ -993,7 +993,7 @@
 				9310490FAAD27FA8579EC5C5 /* ImageTableViewCell.swift in Sources */,
 				85757DB60447DEF381C110CA /* ImageTableViewController.swift in Sources */,
 				597FC7A322B1CD4C6954E479 /* ItemTitleCollectionViewController.swift in Sources */,
-				61316A1DFCB46EAE9C2D83F5 /* LandingStackView.swift in Sources */,
+				61316A1DFCB46EAE9C2D83F5 /* LandingStackViewController.swift in Sources */,
 				D4BC7E16FA1E51B45F2F3F1F /* MainCollectionViewController.swift in Sources */,
 				F1DB573906E76E39D99A0595 /* MainStackViewController.swift in Sources */,
 				BED551D20D5D5CC1E6C32FE7 /* MainTableViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  LandingStackView.swift
+//  LandingStackViewController.swift
 //  ReactiveDataDisplayManagerExample
 //
 //  Created by Dmitry Korolev on 02.04.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LandingStackView: UIViewController {
+final class LandingStackViewController: UIViewController {
 
     // MARK: - Constants
 
@@ -39,7 +39,7 @@ final class LandingStackView: UIViewController {
 
 // MARK: - Private Methods
 
-private extension LandingStackView {
+private extension LandingStackViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
@@ -84,7 +84,7 @@ private extension LandingStackView {
 
 // MARK: - Configuration
 
-private extension LandingStackView {
+private extension LandingStackViewController {
 
     /// Appearance SrackView
     func setupInitialState() {
