@@ -8,17 +8,12 @@
 
 import UIKit
 
-// Base implementation for UITableViewDelegate protocol. Use it if NO special logic required.
+/// Base implementation for `UITableViewDelegate` protocol.
 open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Properties
 
-    weak public var manager: BaseTableManager? {
-        didSet {
-            tablePlugins.setup(with: manager)
-            scrollPlugins.setup(with: manager)
-        }
-    }
+    public weak var manager: BaseTableManager?
 
     public var estimatedHeight: CGFloat = 40
 
@@ -35,6 +30,28 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     // MARK: - Private Properties
 
     private var _swipeActionsPlugin: TableFeaturePlugin?
+
+}
+
+// MARK: - TableBuilderConfigurable
+
+extension BaseTableDelegate {
+
+    open func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+
+        movablePlugin = builder.movablePlugin
+        tablePlugins = builder.tablePlugins
+        scrollPlugins = builder.scrollPlugins
+
+        if #available(iOS 11.0, *) {
+            swipeActionsPlugin = builder.swipeActionsPlugin as? TableSwipeActionsConfigurable
+        }
+
+        manager = builder.manager
+
+        tablePlugins.setup(with: builder.manager)
+        scrollPlugins.setup(with: builder.manager)
+    }
 
 }
 

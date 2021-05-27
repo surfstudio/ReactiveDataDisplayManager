@@ -9,7 +9,7 @@
 import UIKit
 
 public class EmptyTableHeaderGenerator: TableHeaderGenerator {
-
+    
     open override func generate() -> UIView {
         let view = UIView()
         view.backgroundColor = UIColor.clear
@@ -18,6 +18,16 @@ public class EmptyTableHeaderGenerator: TableHeaderGenerator {
 
     open override func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
         return 0.01
+    }
+
+}
+
+// MARK: - DiffableItemSource
+
+extension EmptyTableHeaderGenerator: DiffableItemSource {
+
+    public var item: DiffableItem {
+        DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection"))
     }
 
 }

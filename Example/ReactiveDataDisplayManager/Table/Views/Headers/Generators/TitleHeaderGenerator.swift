@@ -7,6 +7,7 @@
 //
 
 import ReactiveDataDisplayManager
+import UIKit
 
 final class TitleHeaderGenerator: TableHeaderGenerator {
 
@@ -37,6 +38,16 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
 
     override func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
         view?.frame.height ?? Constants.defaultHeight
+    }
+
+}
+
+// MARK: - Diffable
+
+extension TitleHeaderGenerator: DiffableItemSource {
+
+    var item: DiffableItem {
+        DiffableItem(id: uuid, state: .init(model))
     }
 
 }

@@ -8,12 +8,12 @@
 
 import UIKit
 
+/// Protocol for `Generator` to handle cells display events
 public protocol DisplayableItem: class {
 
     /// Invokes when cell will displaying.
     var willDisplayEvent: BaseEvent<Void> { get }
 
-    /// SORTA DEPRECATED
     /// Invokes when cell did end displaying.
     var didEndDisplayEvent: BaseEvent<Void> { get }
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Protocol for selectable item.
+/// Protocol for `Generator` to handle didSelect event
 public protocol SelectableItem: class {
 
     /// Invokes when user taps on the item.

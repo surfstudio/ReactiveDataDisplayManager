@@ -22,6 +22,8 @@ final class MainCollectionViewController: UIViewController {
         case sizableCollection
         case foldableCollection
         case itemTitleCollection
+        case diffableCollection
+        case paginatableCollection
         case compositionalCollection
     }
 
@@ -37,6 +39,8 @@ final class MainCollectionViewController: UIViewController {
             ("Sizable collection", .sizableCollection),
             ("Foldable collection", .foldableCollection),
             ("Collection with item index titles", .itemTitleCollection),
+            ("Collection with diffableDataSource", .diffableCollection),
+            ("Collection with pagination", .paginatableCollection),
             ("Collection with compositional layout", .compositionalCollection)
         ]
     }
@@ -93,14 +97,6 @@ private extension MainCollectionViewController {
         default:
             performSegue(withIdentifier: segueId.rawValue, sender: tableView)
         }
-    }
-
-    func showAlert(_ message: String) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(cancelAction)
-
-        present(alert, animated: true, completion: nil)
     }
 
 }

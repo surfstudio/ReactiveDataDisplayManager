@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 /// Plugin to move cells
 ///

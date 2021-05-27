@@ -8,7 +8,9 @@
 
 import UIKit
 
-/// Generator that describes collection cell generator that can returns size
+/// Protocol for `Generator` to describe cell size
 public protocol SizableItem: class {
+
+    /// Prefered size of cell
     func getSize() -> CGSize
 }

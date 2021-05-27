@@ -8,8 +8,12 @@
 
 import UIKit
 
+/// Protocol for `Generator` to provide prefetching content
 public protocol PrefetcherableItem: class {
     associatedtype IdType: Hashable
 
+    /// Unique (in list) request for prefetching.
+    ///
+    /// For example: `URL` of image.
     var requestId: IdType? { get }
 }

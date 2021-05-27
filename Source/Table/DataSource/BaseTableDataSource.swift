@@ -9,24 +9,43 @@
 import UIKit
 import Foundation
 
-/// Base implementation for UITableViewDataSource protocol. Use it if NO special logic required.
+/// Base implementation for `UITableViewDataSource` protocol.
 open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    weak public var provider: TableGeneratorsProvider? {
-        didSet {
-            let manager = provider as? BaseTableManager
-            prefetchPlugins.setup(with: manager)
-            tablePlugins.setup(with: manager)
-        }
-    }
+    public weak var provider: TableGeneratorsProvider?
+
+    public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     public var movablePlugin: TableMovableDataSource?
 
+}
+
+// MARK: - TableBuilderConfigurable
+
+extension BaseTableDataSource {
+
+    open func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+
+        modifier = TableCommonModifier(view: builder.view, animator: builder.animator)
+
+        movablePlugin = builder.movablePlugin
+        sectionTitleDisplayablePlugin = builder.sectionTitleDisplayablePlugin
+        tablePlugins = builder.tablePlugins
+
+        if #available(iOS 10.0, *) {
+            prefetchPlugins = builder.prefetchPlugins
+        }
+
+        provider = builder.manager
+
+        prefetchPlugins.setup(with: builder.manager)
+        tablePlugins.setup(with: builder.manager)
+    }
 }
 
 // MARK: - UITableViewDataSource

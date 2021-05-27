@@ -15,6 +15,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     public typealias CollectionType = UICollectionView
     public typealias CellGeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
+    public typealias FooterGeneratorType = CollectionFooterGenerator
 
     public typealias CollectionAnimator = Animator<CollectionType>
 
@@ -24,20 +25,19 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
 
     public var generators: [[CollectionCellGenerator]] = []
     public var sections: [CollectionHeaderGenerator] = []
+    public var footers: [CollectionFooterGenerator] = []
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
-    var animator: CollectionAnimator?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        self.view?.reloadData()
+        dataSource?.modifier?.reload()
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
-        guard let collection = self.view else { return }
-        generator.registerCell(in: collection)
+        generator.registerCell(in: view)
 
         if self.generators.count != self.sections.count || sections.isEmpty {
             self.generators.append([CollectionCellGenerator]())
@@ -45,6 +45,10 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
 
         if sections.count <= 0 {
             sections.append(EmptyCollectionHeaderGenerator())
+        }
+        
+        if footers.count <= 0 {
+            footers.append(EmptyCollectionFooterGenerator())
         }
 
         // Add to last section
@@ -75,7 +79,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     public func update(generators: [CollectionCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        self.view?.reloadItems(at: indexPaths)
+        dataSource?.modifier?.reloadRows(at: indexPaths, with: .animated)
     }
 
     public func clearCellGenerators() {
@@ -122,6 +126,48 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
 
     public func clearHeaderGenerators() {
         self.sections.removeAll()
+    }
+
+}
+
+// MARK: - FooterDataDisplayManager
+
+extension BaseCollectionManager: FooterDataDisplayManager {
+
+    public func addSectionFooterGenerator(_ generator: CollectionFooterGenerator) {
+        generator.registerFooter(in: view)
+        self.footers.append(generator)
+    }
+
+    public func addCellGenerator(_ generator: CollectionCellGenerator, toFooter footer: CollectionFooterGenerator) {
+        addCellGenerators([generator], toFooter: footer)
+    }
+
+    public func addCellGenerators(_ generators: [CollectionCellGenerator], toFooter footer: CollectionFooterGenerator) {
+        generators.forEach { $0.registerCell(in: view) }
+
+        if self.generators.count != self.footers.count || footers.isEmpty {
+            self.generators.append([CollectionCellGenerator]())
+        }
+
+        if let index = self.footers.firstIndex(where: { $0 === footer }) {
+            self.generators[index].append(contentsOf: generators)
+        }
+    }
+
+    public func removeAllGenerators(from footer: CollectionFooterGenerator) {
+        guard
+            let index = self.footers.firstIndex(where: { $0 === footer }),
+            self.generators.count > index
+        else {
+            return
+        }
+
+        self.generators[index].removeAll()
+    }
+
+    public func clearFooterGenerators() {
+        self.footers.removeAll()
     }
 
 }
@@ -177,7 +223,7 @@ private extension BaseCollectionManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
-        view.insertItems(at: indexPaths)
+        dataSource?.modifier?.insertRows(at: indexPaths, with: .animated)
     }
 
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
@@ -194,24 +240,25 @@ private extension BaseCollectionManager {
                          needScrollAt scrollPosition: UICollectionView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 
-        animator?.perform(in: view, animation: { [weak self] in
-            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
-            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-            view.deleteItems(at: [indexPath])
+        generators[index.sectionIndex].remove(at: index.generatorIndex)
+        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
-            // remove empty section if needed
-            let sectionIsEmpty = self?.generators[index.sectionIndex].isEmpty ?? true
-            if needRemoveEmptySection && sectionIsEmpty {
-                self?.generators.remove(at: index.sectionIndex)
-                self?.sections.remove(at: index.sectionIndex)
-                view.deleteSections(IndexSet(integer: index.sectionIndex))
-            }
+        // remove empty section if needed
+        var sectionIndexPath: IndexSet? = nil
+        let sectionIsEmpty = generators[index.sectionIndex].isEmpty
+        if needRemoveEmptySection && sectionIsEmpty {
+            generators.remove(at: index.sectionIndex)
+            sections.remove(at: index.sectionIndex)
+            sectionIndexPath = IndexSet(integer: index.sectionIndex)
+        }
 
-            // scroll if needed
-            if let scrollPosition = scrollPosition {
-                view.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
-            }
-        })
+        // apply changes in table
+        dataSource?.modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: .animated)
+
+        // scroll if needed
+        if let scrollPosition = scrollPosition {
+            view.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
+        }
     }
 
 }

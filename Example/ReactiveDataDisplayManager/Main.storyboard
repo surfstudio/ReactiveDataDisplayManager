@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="haM-wg-zn2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="haM-wg-zn2">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Diffable Table View Controller-->
+        <scene sceneID="F4X-k0-NMY">
+            <objects>
+                <viewController id="16i-RQ-fbT" customClass="DiffableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eXV-VK-YbN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iG8-pi-esT">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eza-kD-Shk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eza-kD-Shk" firstAttribute="bottom" secondItem="iG8-pi-esT" secondAttribute="bottom" id="Jdx-zx-A6p"/>
+                            <constraint firstItem="iG8-pi-esT" firstAttribute="leading" secondItem="eza-kD-Shk" secondAttribute="leading" id="LTl-fQ-riO"/>
+                            <constraint firstItem="eza-kD-Shk" firstAttribute="trailing" secondItem="iG8-pi-esT" secondAttribute="trailing" id="m7S-BG-kQC"/>
+                            <constraint firstItem="iG8-pi-esT" firstAttribute="top" secondItem="eza-kD-Shk" secondAttribute="top" id="u4Z-ci-LZB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="96V-cD-ciu"/>
+                    <connections>
+                        <outlet property="tableView" destination="iG8-pi-esT" id="rsB-1G-EwL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-ez-GUy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="447" y="-2586"/>
+        </scene>
         <!--Movable Table View Controller-->
         <scene sceneID="rqj-Fd-t0M">
             <objects>
@@ -38,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aVf-WT-lXI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2375" y="-1855"/>
+            <point key="canvasLocation" x="1601" y="-2585"/>
         </scene>
         <!--Gravity Table View Controller-->
         <scene sceneID="l5W-wb-yvE">
@@ -224,7 +255,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="et8-Ms-zZR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5021" y="-1855"/>
+            <point key="canvasLocation" x="5057" y="-1845"/>
         </scene>
         <!--Paginatable Table View Controller-->
         <scene sceneID="NEQ-Pc-8HZ">
@@ -234,11 +265,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Mp-mm-nX6">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Mp-mm-nX6">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="ede-WP-XvI">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ede-WP-XvI">
                                 <rect key="frame" x="177.5" y="299" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
@@ -261,7 +292,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qbx-zW-vbU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5779" y="-1831"/>
+            <point key="canvasLocation" x="5806" y="-1844"/>
         </scene>
         <!--Table-->
         <scene sceneID="tne-QT-ifu">
@@ -298,6 +329,7 @@
                         <segue destination="3d6-cJ-r4V" kind="show" identifier="alphabetizeSectionsTable" id="4ij-Od-GU8"/>
                         <segue destination="5Ed-1O-hbB" kind="show" identifier="sectionTitlesTable" id="I64-ri-eG8"/>
                         <segue destination="bkM-th-DfT" kind="show" identifier="swipeableTable" id="M3i-W7-3jk"/>
+                        <segue destination="16i-RQ-fbT" kind="show" identifier="diffableTable" id="jVz-x7-sBa"/>
                         <segue destination="gFr-UQ-9p9" kind="show" identifier="allPluginsTable" id="QY8-TZ-bpF"/>
                         <segue destination="KPe-5j-jTE" kind="show" identifier="refreshableTable" id="lcW-uo-QUW"/>
                         <segue destination="xQn-4x-xEX" kind="show" identifier="paginatableTable" id="2Xm-b9-jRj"/>
@@ -305,7 +337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="652" y="-1010"/>
+            <point key="canvasLocation" x="708" y="-1012"/>
         </scene>
         <!--Image Table View Controller-->
         <scene sceneID="1kH-t8-h7Q">
@@ -433,7 +465,9 @@
                         <segue destination="GZX-q5-5fd" kind="show" identifier="sizableCollection" id="kbc-gq-BdS"/>
                         <segue destination="pGI-i3-EWf" kind="show" identifier="foldableCollection" id="xiU-it-Uz9"/>
                         <segue destination="cOD-zS-jLq" kind="show" identifier="itemTitleCollection" id="Tuv-8l-eFa"/>
+                        <segue destination="xKf-89-asG" kind="show" identifier="paginatableCollection" id="MAO-OH-Lsa"/>
                         <segue destination="NJ8-lG-GQz" kind="show" identifier="compositionalCollection" id="F32-3a-8Fb"/>
+                        <segue destination="fW0-Sk-lmX" kind="show" identifier="diffableCollection" id="vpJ-Q1-CFl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -795,7 +829,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PkU-fn-UZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1320.8" y="2927.5862068965521"/>
+            <point key="canvasLocation" x="988" y="2991"/>
         </scene>
         <!--Sizable Collection View Controller-->
         <scene sceneID="tFY-fl-bt3">
@@ -912,6 +946,89 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRY-Cy-okp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3394" y="2240"/>
+        </scene>
+        <!--Diffable Collection View Controller-->
+        <scene sceneID="cNY-qf-9sC">
+            <objects>
+                <viewController id="fW0-Sk-lmX" customClass="DiffableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6r4-zw-A2e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IB4-Mk-BQ5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vOf-ea-gxy">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDF-nK-VBA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDF-nK-VBA" firstAttribute="trailing" secondItem="IB4-Mk-BQ5" secondAttribute="trailing" id="9P9-FK-Lac"/>
+                            <constraint firstItem="IB4-Mk-BQ5" firstAttribute="top" secondItem="vDF-nK-VBA" secondAttribute="top" id="Y2a-JV-U5d"/>
+                            <constraint firstItem="vDF-nK-VBA" firstAttribute="bottom" secondItem="IB4-Mk-BQ5" secondAttribute="bottom" id="geK-e1-El3"/>
+                            <constraint firstItem="IB4-Mk-BQ5" firstAttribute="leading" secondItem="vDF-nK-VBA" secondAttribute="leading" id="kxz-89-Lqy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tZW-Tc-6sc"/>
+                    <connections>
+                        <outlet property="collectionView" destination="IB4-Mk-BQ5" id="rhe-CO-521"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oMe-IR-Xya" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4889" y="850"/>
+        </scene>
+        <!--Paginatable Collection View Controller-->
+        <scene sceneID="4Zv-0g-Mgs">
+            <objects>
+                <viewController id="xKf-89-asG" customClass="PaginatableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N1N-u6-Myp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5Pa-hO-hzI">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="q05-k4-B4q">
+                                    <size key="itemSize" width="200" height="44"/>
+                                    <size key="estimatedItemSize" width="200" height="44"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="iWc-xi-lyS">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jEk-RI-6YF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jEk-RI-6YF" firstAttribute="bottom" secondItem="5Pa-hO-hzI" secondAttribute="bottom" id="Cre-eA-lT0"/>
+                            <constraint firstItem="5Pa-hO-hzI" firstAttribute="leading" secondItem="jEk-RI-6YF" secondAttribute="leading" id="Crh-2F-mao"/>
+                            <constraint firstItem="jEk-RI-6YF" firstAttribute="trailing" secondItem="5Pa-hO-hzI" secondAttribute="trailing" id="Kiv-G4-SeS"/>
+                            <constraint firstItem="iWc-xi-lyS" firstAttribute="centerY" secondItem="jEk-RI-6YF" secondAttribute="centerY" id="SaK-Bu-dor"/>
+                            <constraint firstItem="iWc-xi-lyS" firstAttribute="centerX" secondItem="jEk-RI-6YF" secondAttribute="centerX" id="ns9-cd-3pv"/>
+                            <constraint firstItem="5Pa-hO-hzI" firstAttribute="top" secondItem="jEk-RI-6YF" secondAttribute="top" id="v7Y-84-c8F"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="nuH-kl-aKL"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="iWc-xi-lyS" id="oFw-Tj-aZ5"/>
+                        <outlet property="collectionView" destination="5Pa-hO-hzI" id="tum-vP-HU9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HI1-Qv-5Ty" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4934" y="1619"/>
         </scene>
         <!--Collection Compositional View Controller-->
         <scene sceneID="LhE-pz-dzt">

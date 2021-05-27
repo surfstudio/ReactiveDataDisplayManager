@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol TableDelegate: UITableViewDelegate {
+public protocol TableDelegate: TableBuilderConfigurable, UITableViewDelegate {
 
     var manager: BaseTableManager? { get set }
 
