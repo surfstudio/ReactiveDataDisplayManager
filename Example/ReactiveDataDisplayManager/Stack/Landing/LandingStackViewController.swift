@@ -41,6 +41,14 @@ final class LandingStackViewController: UIViewController {
 
 private extension LandingStackViewController {
 
+    /// Appearance SrackView
+    func setupInitialState() {
+        stackView.layoutMargins = Constants.margins
+
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.spacing = Constants.padding
+    }
+
     /// This method is used to fill adapter
     func fillAdapter() {
         let sampleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -78,20 +86,6 @@ private extension LandingStackViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
-    }
-
-}
-
-// MARK: - Configuration
-
-private extension LandingStackViewController {
-
-    /// Appearance SrackView
-    func setupInitialState() {
-        stackView.layoutMargins = Constants.margins
-
-        stackView.isLayoutMarginsRelativeArrangement = true
-        stackView.spacing = Constants.padding
     }
 
 }
