@@ -1,0 +1,139 @@
+whitelist_rules:
+    - attributes
+    - class_delegate_protocol
+    - closing_brace
+    - closure_end_indentation
+    - closure_parameter_position
+    - closure_spacing
+    - collection_alignment
+    - colon
+    - comma
+    - conditional_returns_on_newline
+    - control_statement
+    - convenience_type
+    - custom_rules
+    - cyclomatic_complexity
+    - discouraged_optional_boolean
+    - duplicate_imports
+    - empty_count
+    - empty_parameters
+    - empty_parentheses_with_trailing_closure
+    - empty_string
+    - explicit_init
+    - file_length
+    - first_where
+    - force_cast
+    - force_try
+    - force_unwrapping
+    - function_parameter_count
+    - implicit_getter
+    - implicitly_unwrapped_optional
+    - inert_defer
+    - large_tuple
+    - last_where
+    - leading_whitespace
+    - legacy_cggeometry_functions
+    - legacy_constant
+    - legacy_constructor
+    - legacy_hashing
+    - legacy_nsgeometry_functions
+    - line_length
+    - literal_expression_end_indentation
+    - mark
+    - multiline_arguments
+    - multiline_literal_brackets
+    - opening_brace
+    - operator_usage_whitespace
+    - redundant_discardable_let
+    - redundant_optional_initialization
+    - redundant_nil_coalescing
+    - redundant_void_return
+    - return_arrow_whitespace
+    - shorthand_operator
+    - statement_position
+    - syntactic_sugar
+    - todo
+    - toggle_bool
+    - trailing_comma
+    - trailing_newline
+    - trailing_semicolon
+    - trailing_whitespace
+    - unused_import
+    - unused_optional_binding
+    - unused_setter_value
+    - vertical_whitespace
+    - void_return
+
+disabled_rules: # rule identifiers to exclude from running
+
+opt_in_rules: # some rules are only opt-in
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+    - fastlane
+    - Pods
+    - .bundle
+
+custom_rules:
+    image_name_initialization: # Disable UIImage init from name
+        included: ".*.swift"
+        name: "Image initialization"
+        regex: 'UIImage\(named:[^)]+\)'
+        message: "Use UIImage(assetName: ) instead"
+        severity: error
+
+    realm_in_ui:
+        included: "Screens/.*.swift|User Stories/.*.swift"
+        name: "Realm can be used only in services"
+        regex: "Realm"
+        message: "Realm can be used only in serivces"
+        severity: error
+
+    disclosure_of_view_details:
+        included: ".*ViewOutput.swift|.*ViewInput.swift"
+        name: "Details opening in View protocols"
+        regex: "cell|Cell|button|Button|Table|tableView"
+        message: "The disclosure of details the implementation should be avoided"
+        severity: error
+
+    view_protocol_error:
+        included: ".*ViewOutput.swift|.*ViewInput.swift"
+        name: "Property in view protocol"
+        regex: " var "
+        message: "View protocol should contains only methods"
+        severity: error
+
+    router_protocol_error:
+        included: ".*RouterInput.swift"
+        name: "View in Router protocol"
+        regex: "view|View"
+        message: "Router protocol methods should contains `Module` instead `View`"
+        severity: error
+
+    open_iboutlets:
+        included: ".*.swift"
+        name: "IBOutlet opening"
+        regex: "@IBOutlet ?(weak){0,1} var"
+        message: "IBOutlet should be private or fileprivate"
+        severity: error
+
+    open_ibaction:
+        included: ".*.swift"
+        name: "IBAction opening"
+        regex: "@IBAction func"
+        message: "IBAction should be private or fileprivate"
+        severity: error
+
+    mark_newlines:
+        included: ".*.swift"
+        name: "MARK newlines surrounding"
+        regex: '(([}{)\w \t]+\n{1}[ \t]*)(\/\/ MARK: - [\w ]*))|((\/\/ MARK: - [\w ]*)(\n{1}[ \t]*\w+))'
+        message: "Every MARK should be surrounded with 1 newline before and 1 after it"
+        severity: warning
+
+line_length: 145
+
+file_length:
+    warning: 600
+    error: 1200
+
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit)
