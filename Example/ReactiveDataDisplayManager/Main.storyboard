@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="haM-wg-zn2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="haM-wg-zn2">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -38,7 +38,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdz-ez-GUy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="246" y="-1846"/>
+            <point key="canvasLocation" x="447" y="-2586"/>
         </scene>
         <!--Movable Table View Controller-->
         <scene sceneID="rqj-Fd-t0M">
@@ -69,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aVf-WT-lXI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1074" y="-2127"/>
+            <point key="canvasLocation" x="1601" y="-2585"/>
         </scene>
         <!--Gravity Table View Controller-->
         <scene sceneID="l5W-wb-yvE">
@@ -467,6 +467,7 @@
                         <segue destination="cOD-zS-jLq" kind="show" identifier="itemTitleCollection" id="Tuv-8l-eFa"/>
                         <segue destination="xKf-89-asG" kind="show" identifier="paginatableCollection" id="MAO-OH-Lsa"/>
                         <segue destination="NJ8-lG-GQz" kind="show" identifier="compositionalCollection" id="F32-3a-8Fb"/>
+                        <segue destination="fW0-Sk-lmX" kind="show" identifier="diffableCollection" id="vpJ-Q1-CFl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -702,7 +703,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PkU-fn-UZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1320.8" y="2927.5862068965521"/>
+            <point key="canvasLocation" x="988" y="2991"/>
         </scene>
         <!--Sizable Collection View Controller-->
         <scene sceneID="tFY-fl-bt3">
@@ -820,6 +821,44 @@
             </objects>
             <point key="canvasLocation" x="3394" y="2240"/>
         </scene>
+        <!--Diffable Collection View Controller-->
+        <scene sceneID="cNY-qf-9sC">
+            <objects>
+                <viewController id="fW0-Sk-lmX" customClass="DiffableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6r4-zw-A2e">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IB4-Mk-BQ5">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vOf-ea-gxy">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDF-nK-VBA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDF-nK-VBA" firstAttribute="trailing" secondItem="IB4-Mk-BQ5" secondAttribute="trailing" id="9P9-FK-Lac"/>
+                            <constraint firstItem="IB4-Mk-BQ5" firstAttribute="top" secondItem="vDF-nK-VBA" secondAttribute="top" id="Y2a-JV-U5d"/>
+                            <constraint firstItem="vDF-nK-VBA" firstAttribute="bottom" secondItem="IB4-Mk-BQ5" secondAttribute="bottom" id="geK-e1-El3"/>
+                            <constraint firstItem="IB4-Mk-BQ5" firstAttribute="leading" secondItem="vDF-nK-VBA" secondAttribute="leading" id="kxz-89-Lqy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tZW-Tc-6sc"/>
+                    <connections>
+                        <outlet property="collectionView" destination="IB4-Mk-BQ5" id="rhe-CO-521"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oMe-IR-Xya" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4889" y="850"/>
+        </scene>
         <!--Paginatable Collection View Controller-->
         <scene sceneID="4Zv-0g-Mgs">
             <objects>
@@ -863,7 +902,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HI1-Qv-5Ty" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4927" y="1942"/>
+            <point key="canvasLocation" x="4934" y="1619"/>
         </scene>
         <!--Collection Compositional View Controller-->
         <scene sceneID="LhE-pz-dzt">

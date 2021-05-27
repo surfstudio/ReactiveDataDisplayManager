@@ -35,6 +35,8 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     init(view: UICollectionView, manager: T) {
         self.view = view
         self.manager = manager
+        self.manager.view = view
+
         delegate = BaseCollectionDelegate()
         dataSource = BaseCollectionDataSource()
         animator = CollectionBatchUpdatesAnimator()
@@ -49,8 +51,8 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     }
 
     /// Change dataSource
-    public func set(dataSource: CollectionDataSource) -> CollectionBuilder<T> {
-        self.dataSource = dataSource
+    public func set(dataSource: (BaseCollectionManager) -> CollectionDataSource) -> CollectionBuilder<T> {
+        self.dataSource = dataSource(manager)
         return self
     }
 
@@ -102,7 +104,6 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
         manager.delegate = delegate
         manager.dataSource = dataSource
-        manager.animator = animator
         return manager
     }
 

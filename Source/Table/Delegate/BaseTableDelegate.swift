@@ -13,7 +13,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Properties
 
-    public  weak var manager: BaseTableManager?
+    public weak var manager: BaseTableManager?
 
     public var estimatedHeight: CGFloat = 40
 

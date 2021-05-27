@@ -29,12 +29,11 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
-    var animator: CollectionAnimator?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        self.view?.reloadData()
+        dataSource?.modifier?.reload()
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
@@ -80,7 +79,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     public func update(generators: [CollectionCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        self.view?.reloadItems(at: indexPaths)
+        dataSource?.modifier?.reloadRows(at: indexPaths, with: .animated)
     }
 
     public func clearCellGenerators() {
@@ -224,7 +223,7 @@ private extension BaseCollectionManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
-        view.insertItems(at: indexPaths)
+        dataSource?.modifier?.insertRows(at: indexPaths, with: .animated)
     }
 
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
@@ -241,24 +240,25 @@ private extension BaseCollectionManager {
                          needScrollAt scrollPosition: UICollectionView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 
-        animator?.perform(in: view, animated: true, operation: { [weak self] in
-            self?.generators[index.sectionIndex].remove(at: index.generatorIndex)
-            let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-            view.deleteItems(at: [indexPath])
+        generators[index.sectionIndex].remove(at: index.generatorIndex)
+        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
-            // remove empty section if needed
-            let sectionIsEmpty = self?.generators[index.sectionIndex].isEmpty ?? true
-            if needRemoveEmptySection && sectionIsEmpty {
-                self?.generators.remove(at: index.sectionIndex)
-                self?.sections.remove(at: index.sectionIndex)
-                view.deleteSections(IndexSet(integer: index.sectionIndex))
-            }
+        // remove empty section if needed
+        var sectionIndexPath: IndexSet? = nil
+        let sectionIsEmpty = generators[index.sectionIndex].isEmpty
+        if needRemoveEmptySection && sectionIsEmpty {
+            generators.remove(at: index.sectionIndex)
+            sections.remove(at: index.sectionIndex)
+            sectionIndexPath = IndexSet(integer: index.sectionIndex)
+        }
 
-            // scroll if needed
-            if let scrollPosition = scrollPosition {
-                view.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
-            }
-        })
+        // apply changes in table
+        dataSource?.modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: .animated)
+
+        // scroll if needed
+        if let scrollPosition = scrollPosition {
+            view.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
+        }
     }
 
 }
