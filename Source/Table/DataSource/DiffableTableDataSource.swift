@@ -48,7 +48,23 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
         self.provider = provider
     }
 
-    // MARK: - TableBuilderConfigurable
+    // MARK: - UITableViewDiffableDataSource
+
+    open override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider as? BaseTableManager)
+    }
+
+    open override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return movablePlugin?.canMoveRow(at: indexPath, with: provider as? BaseTableManager) ?? false
+    }
+
+}
+
+// MARK: - TableBuilderConfigurable
+
+@available(iOS 13.0, *)
+extension DiffableTableDataSource {
 
     open func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
 
@@ -63,17 +79,6 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
         prefetchPlugins.setup(with: builder.manager)
         tablePlugins.setup(with: builder.manager)
-    }
-
-    // MARK: - UITableViewDiffableDataSource
-
-    open override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
-        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider as? BaseTableManager)
-    }
-
-    open override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return movablePlugin?.canMoveRow(at: indexPath, with: provider as? BaseTableManager) ?? false
     }
 
 }

@@ -15,7 +15,7 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
 
     // MARK: - Properties
 
-    weak public var provider: CollectionGeneratorsProvider?
+    public weak var provider: CollectionGeneratorsProvider?
 
     public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
 
@@ -27,7 +27,6 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
 
     /// - parameter provider: provider of `UICollectionView` and `UICollectionViewCells`
     public init(provider: BaseCollectionManager) {
-
         super.init(collectionView: provider.view) { (collection, indexPath, item) -> UICollectionViewCell? in
             provider
                 .generators[indexPath.section][indexPath.row]
@@ -37,9 +36,14 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
         self.provider = provider
     }
 
-    // MARK: - CollectionBuilderConfigurable
+}
 
-    public func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
+// MARK: - CollectionBuilderConfigurable
+
+@available(iOS 13.0, *)
+public extension DiffableCollectionDataSource {
+
+    func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
 
         modifier = CollectionDiffableModifier(view: builder.view, provider: builder.manager, dataSource: self)
 
@@ -54,10 +58,9 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
         collectionPlugins.setup(with: builder.manager)
 
     }
-
 }
 
-// MARK: - UITableViewDataSourcePrefetching
+// MARK: - UICollectionViewDataSourcePrefetching
 
 @available(iOS 13.0, *)
 extension DiffableCollectionDataSource {

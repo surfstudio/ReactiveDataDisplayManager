@@ -9,7 +9,7 @@ import ReactiveDataDisplayManager
 
 final class DiffableCollectionCellGenerator: BaseCollectionCellGenerator<TitleCollectionListCell>, DiffableItemSource {
 
-    let uuid = UUID().uuidString
+    private let uuid = UUID().uuidString
 
     var item: DiffableItem {
         DiffableItem(id: uuid, state: .init(model))

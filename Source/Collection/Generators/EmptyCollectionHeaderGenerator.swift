@@ -30,7 +30,7 @@ public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
     }
 }
 
-// MARK: - Diffable
+// MARK: - DiffableItemSource
 
 extension EmptyCollectionHeaderGenerator: DiffableItemSource {
 

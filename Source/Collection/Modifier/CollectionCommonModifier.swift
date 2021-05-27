@@ -54,7 +54,6 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
         }
     }
 
-
     /// Replace row at specified indexPath
     ///
     /// - parameter indexPath: index of replaced row

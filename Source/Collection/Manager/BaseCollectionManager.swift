@@ -33,7 +33,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        self.dataSource?.modifier?.reload()
+        dataSource?.modifier?.reload()
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {

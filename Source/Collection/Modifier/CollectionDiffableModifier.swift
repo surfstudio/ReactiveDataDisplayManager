@@ -121,8 +121,6 @@ private extension CollectionDiffableModifier {
         assert(provider.generators is [[CellGeneratorType]], "This strategy support only \(CellGeneratorType.Type.self)")
         assert(provider.sections is [HeaderGeneratorType], "This strategy support only \(HeaderGeneratorType.Type.self)")
 
-
-
         guard
             let sections = provider.sections as? [HeaderGeneratorType],
             let generators = provider.generators as? [[CellGeneratorType]]
@@ -143,7 +141,6 @@ private extension CollectionDiffableModifier {
     }
 
     func safeApplySnapshot(_ snapshot: DiffableSnapshot, animated: Bool = false, completion: (() -> Void)? = nil) {
-
         DispatchQueue.main.async { [weak dataSource] in
             dataSource?.apply(snapshot, animatingDifferences: animated, completion: completion)
         }
