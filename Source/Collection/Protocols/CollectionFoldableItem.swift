@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public protocol CollectionFoldableItem: class {
+public protocol CollectionFoldableItem: AnyObject {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
     var childGenerators: [CollectionCellGenerator] { get set }

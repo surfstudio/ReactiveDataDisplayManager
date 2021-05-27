@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for `Generator` to describe cell size
-public protocol SizableItem: class {
+public protocol SizableItem: AnyObject {
 
     /// Prefered size of cell
     func getSize() -> CGSize

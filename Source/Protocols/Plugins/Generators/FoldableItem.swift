@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for `TableCellGenerator` to manage expand/collapse state
-public protocol FoldableItem: class {
+public protocol FoldableItem: AnyObject {
 
     /// Invokes when cell `didSelect`
     var didFoldEvent: BaseEvent<Bool> { get }
