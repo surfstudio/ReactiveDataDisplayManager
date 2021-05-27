@@ -9,20 +9,22 @@ import ReactiveDataDisplayManager
 
 final class TextStackCellGenerator: StackCellGenerator {
 
+    // MARK: - Model
+
+    struct Model {
+        let title: String
+        let alignment: NSTextAlignment
+        let font: UIFont
+    }
+
     // MARK: - Properties
 
-    var title: String
-    var aligned: NSTextAlignment
-    var fontSize: CGFloat
-    var weight: UIFont.Weight
+    private let model: Model
 
     // MARK: - Initialization
 
-    init(title: String, fontSize: CGFloat, aligned: NSTextAlignment = .left, weight: UIFont.Weight = .regular) {
-        self.title = title
-        self.aligned = aligned
-        self.fontSize = fontSize
-        self.weight = weight
+    init(model: Model) {
+        self.model = model
     }
 
 }
@@ -33,9 +35,9 @@ extension TextStackCellGenerator: ViewBuilder {
 
     func build(view: UILabel) {
         view.numberOfLines = 0
-        view.text = title
-        view.textAlignment = aligned
-        view.font = UIFont.systemFont(ofSize: fontSize, weight: weight)
+        view.text = model.title
+        view.textAlignment = model.alignment
+        view.font = model.font
     }
 
 }

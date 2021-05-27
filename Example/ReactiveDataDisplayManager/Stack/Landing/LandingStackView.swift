@@ -12,7 +12,11 @@ final class LandingStackView: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let padding: CGFloat = 15
+        static let padding: CGFloat = 16
+        static let margins = UIEdgeInsets(top: padding,
+                                          left: padding,
+                                          bottom: padding,
+                                          right: padding)
     }
 
     // MARK: - IBOutlets
@@ -42,12 +46,16 @@ private extension LandingStackView {
         let sampleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
         // Create generators
-        let tite = TextStackCellGenerator.init(title: "Title text", fontSize: 43, weight: .bold)
-        let description = TextStackCellGenerator.init(title: sampleText, fontSize: 30)
+        let title = TextStackCellGenerator(model: .init(title: "Title text",
+                                                       alignment: .left,
+                                                       font: .systemFont(ofSize: 43, weight: .bold)))
+        let description = TextStackCellGenerator(model: .init(title: sampleText,
+                                                              alignment: .left,
+                                                              font: .systemFont(ofSize: 30)))
         let buttons = ButtonsCellGenerator(buttonOneTapped: buttonOneTapper, buttonTwoTapped: buttonTwoTapper)
 
         // Add generators to adapter
-        adapter.addCellGenerator(tite)
+        adapter.addCellGenerator(title)
         adapter.addCellGenerator(description)
         adapter.addCellGenerator(buttons)
 
@@ -72,10 +80,7 @@ private extension LandingStackView {
 
     /// Appearance SrackView
     func setupInitialState() {
-        stackView.layoutMargins = UIEdgeInsets(top: Constants.padding,
-                                               left: Constants.padding,
-                                               bottom: Constants.padding,
-                                               right: Constants.padding)
+        stackView.layoutMargins = Constants.margins
 
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.spacing = Constants.padding
