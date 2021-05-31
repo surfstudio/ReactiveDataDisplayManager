@@ -33,7 +33,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     public var movablePlugin: TableMovableDataSource?
-    
+
     // MARK: - Initialization
 
     /// - parameter provider: provider of `UITableView` and `UITableViewCells`
@@ -66,7 +66,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 @available(iOS 13.0, *)
 extension DiffableTableDataSource {
 
-    open func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+    open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
 
         modifier = TableDiffableModifier(view: builder.view, provider: builder.manager, dataSource: self)
 

@@ -6,8 +6,6 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-
-
 // Wrap Base instance for easy access
 public struct DataDisplayWrapper<Base> {
     public let base: Base
@@ -17,4 +15,4 @@ public struct DataDisplayWrapper<Base> {
 }
 
 // Wrap Base type for easy access
-public struct StaticDataDisplayWrapper<Base> {}
+public struct StaticDataDisplayWrapper<Base> { }

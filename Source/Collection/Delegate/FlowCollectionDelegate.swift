@@ -14,7 +14,9 @@ open class FlowCollectionDelegate: BaseCollectionDelegate { }
 
 extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         if let sizableCell = manager?.generators[indexPath.section][indexPath.row] as? SizableItem {
             return sizableCell.getSize()
@@ -27,7 +29,9 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
         return .zero
     }
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    open func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             insetForSectionAt section: Int) -> UIEdgeInsets {
 
         if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
             return flowLayout.sectionInset
@@ -36,7 +40,9 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
         return .zero
     }
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    open func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 
         if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
             return flowLayout.minimumLineSpacing
@@ -45,7 +51,9 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
         return .zero
     }
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    open func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 
         if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
             return flowLayout.minimumInteritemSpacing
@@ -54,7 +62,9 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
         return .zero
     }
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             referenceSizeForHeaderInSection section: Int) -> CGSize {
 
         if let size = manager?.sections[section].size(collectionView, forSection: section) {
             return size
@@ -67,7 +77,9 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
         return .zero
     }
 
-    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+    open func collectionView(_ collectionView: UICollectionView,
+                             layout collectionViewLayout: UICollectionViewLayout,
+                             referenceSizeForFooterInSection section: Int) -> CGSize {
 
         if let size = manager?.footers[section].size(collectionView, forSection: section) {
             return size

@@ -249,7 +249,9 @@ public extension CollectionCellGenerator where Self: ViewBuilder {
 /// Protocol that incapsulated type of Header cell
 public extension CollectionHeaderGenerator where Self: ViewBuilder {
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                                           withReuseIdentifier: self.identifier.nameOfClass,
+                                                                           for: indexPath) as? Self.ViewType else {
             return UICollectionReusableView()
         }
 
@@ -268,7 +270,9 @@ public extension CollectionHeaderGenerator where Self: ViewBuilder {
 /// Protocol that incapsulated type of Footer cell
 public extension CollectionFooterGenerator where Self: ViewBuilder {
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
-        guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.identifier.nameOfClass, for: indexPath) as? Self.ViewType else {
+        guard let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter,
+                                                                           withReuseIdentifier: self.identifier.nameOfClass,
+                                                                           for: indexPath) as? Self.ViewType else {
             return UICollectionReusableView()
         }
 
@@ -304,7 +308,7 @@ public protocol Gravity: AnyObject {
 public typealias GravityTableCellGenerator = TableCellGenerator & GravityItem
 
 open class GravityTableHeaderGenerator: TableHeaderGenerator, GravityItem {
-    open var heaviness: Int = .zero
+    open var heaviness = 0
 
     open func getHeaviness() -> Int {
         preconditionFailure("\(#function) must be overriden in child")

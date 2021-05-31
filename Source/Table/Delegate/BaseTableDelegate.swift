@@ -37,7 +37,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
 extension BaseTableDelegate {
 
-    open func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+    open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
 
         movablePlugin = builder.movablePlugin
         tablePlugins = builder.tablePlugins
@@ -153,17 +153,21 @@ extension BaseTableDelegate {
         tablePlugins.process(event: .didEndEditing(indexPath), with: manager)
     }
 
-    open func tableView(_ tableView: UITableView, didUpdateFocusIn context: UITableViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+    open func tableView(_ tableView: UITableView,
+                        didUpdateFocusIn context: UITableViewFocusUpdateContext,
+                        with coordinator: UIFocusAnimationCoordinator) {
         tablePlugins.process(event: .didUpdateFocus(context: context, coordinator: coordinator), with: manager)
     }
 
     @available(iOS 11.0, *)
-    open func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    open func tableView(_ tableView: UITableView,
+                        leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return swipeActionsPlugin?.leadingSwipeActionsConfigurationForRow(at: indexPath, with: manager)
     }
 
     @available(iOS 11.0, *)
-    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    public func tableView(_ tableView: UITableView,
+                          trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return swipeActionsPlugin?.trailingSwipeActionsConfigurationForRow(at: indexPath, with: manager)
     }
 
@@ -185,7 +189,9 @@ extension BaseTableDelegate {
         scrollPlugins.process(event: .willBeginDragging, with: manager)
     }
 
-    open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    open func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                        withVelocity velocity: CGPoint,
+                                        targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         scrollPlugins.process(event: .willEndDragging(velocity: velocity,
                                                       targetContentOffset: targetContentOffset), with: manager)
     }

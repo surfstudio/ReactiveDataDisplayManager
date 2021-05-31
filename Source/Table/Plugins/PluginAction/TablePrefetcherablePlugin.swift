@@ -74,9 +74,11 @@ public extension BaseTablePlugin {
     /// Plugin to support `PrefetcherableItem` with prefetcher
     ///
     /// - parameter prefetcher: Prefetches and caches data to eliminate delays when requesting the same data later.
+    // swiftlint:disable operator_usage_whitespace
     static func prefetch<Prefetcher: ContentPrefetcher,
-                         Generator: PrefetcherableItem>(prefetcher: Prefetcher) -> TablePrefetcherablePlugin<Prefetcher, Generator>{
+                         Generator: PrefetcherableItem>(prefetcher: Prefetcher) -> TablePrefetcherablePlugin<Prefetcher, Generator> {
         .init(prefetcher: prefetcher)
     }
+    // swiftlint:enable operator_usage_whitespace
 
 }

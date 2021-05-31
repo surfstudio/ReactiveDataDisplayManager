@@ -25,9 +25,8 @@ public protocol ConfigurableItem where Self: UIView {
     ///     - images
     ///     - colors
     ///     - delegate or event closure
-    ///
     func configure(with model: Model)
-    
+
 }
 
 public extension ConfigurableItem {

@@ -19,7 +19,9 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     // MARK: - Public properties
 
+    // swiftlint:disable implicitly_unwrapped_optional
     public weak var view: UITableView!
+    // swiftlint:enable implicitly_unwrapped_optional
 
     public var generators: [[TableCellGenerator]] = []
     public var sections: [TableHeaderGenerator] = []
@@ -83,7 +85,10 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     /// A constant that identifies a relative position in the table view (top, middle, bottom)
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
-    open func remove(_ generator: TableCellGenerator, with animation: UITableView.RowAnimation, needScrollAt scrollPosition: UITableView.ScrollPosition?, needRemoveEmptySection: Bool) {
+    open func remove(_ generator: TableCellGenerator,
+                     with animation: UITableView.RowAnimation,
+                     needScrollAt scrollPosition: UITableView.ScrollPosition?,
+                     needRemoveEmptySection: Bool) {
         guard let index = findGenerator(generator) else { return }
         self.removeGenerator(with: index,
                              with: animation,
@@ -115,7 +120,7 @@ extension BaseTableManager {
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
         // remove empty section if needed
-        var sectionIndexPath: IndexSet? = nil
+        var sectionIndexPath: IndexSet?
         let sectionIsEmpty = generators[index.sectionIndex].isEmpty
         if needRemoveEmptySection && sectionIsEmpty {
             generators.remove(at: index.sectionIndex)

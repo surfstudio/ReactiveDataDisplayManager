@@ -43,7 +43,7 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
 @available(iOS 13.0, *)
 public extension DiffableCollectionDataSource {
 
-    func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
+    func configure<T>(with builder: CollectionBuilder<T>) where T: BaseCollectionManager {
 
         modifier = CollectionDiffableModifier(view: builder.view, provider: builder.manager, dataSource: self)
 

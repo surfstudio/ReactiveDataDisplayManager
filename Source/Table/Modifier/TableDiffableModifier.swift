@@ -67,7 +67,9 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter insertAnimation:
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
-    override func replace(at indexPath: IndexPath, with removeAnimation: UITableView.RowAnimation, and insertAnimation: UITableView.RowAnimation) {
+    override func replace(at indexPath: IndexPath,
+                          with removeAnimation: UITableView.RowAnimation,
+                          and insertAnimation: UITableView.RowAnimation) {
         apply(animated: insertAnimation != .none)
     }
 

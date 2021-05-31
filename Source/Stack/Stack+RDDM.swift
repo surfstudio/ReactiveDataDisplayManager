@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIStackView: DataDisplayCompatible {}
+extension UIStackView: DataDisplayCompatible { }
 
 public extension DataDisplayWrapper where Base: UIStackView {
 

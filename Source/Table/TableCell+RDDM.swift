@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UITableViewCell: DataDisplayConstructable {}
+extension UITableViewCell: DataDisplayConstructable { }
 
 public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem {
 

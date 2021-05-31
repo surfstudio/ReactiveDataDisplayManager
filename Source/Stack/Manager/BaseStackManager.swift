@@ -18,8 +18,10 @@ open class BaseStackManager: DataDisplayManager {
 
     // MARK: - Properties
 
+    // swiftlint:disable implicitly_unwrapped_optional
     public weak var view: UIStackView!
     public var cellGenerators: [StackCellGenerator] = []
+    // swiftlint:enable implicitly_unwrapped_optional
 
     // MARK: - DataDisplayManager
 

@@ -54,13 +54,14 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
         }
     }
 
-
     /// Replace row at specified indexPath
     ///
     /// - parameter indexPath: index of replaced row
     /// - parameter removeAnimation: animation of removing old row
     /// - parameter insertAnimation: animation of inserting new row
-    override func replace(at indexPath: IndexPath, with removeAnimation: UITableView.RowAnimation, and insertAnimation: UITableView.RowAnimation) {
+    override func replace(at indexPath: IndexPath,
+                          with removeAnimation: UITableView.RowAnimation,
+                          and insertAnimation: UITableView.RowAnimation) {
         guard let view = view else { return }
         animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
             view?.deleteRows(at: [indexPath], with: removeAnimation)

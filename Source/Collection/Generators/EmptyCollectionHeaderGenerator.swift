@@ -17,7 +17,9 @@ public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
     }
 
     public func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.identifier.nameOfClass, for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+                                                                     withReuseIdentifier: self.identifier.nameOfClass,
+                                                                     for: indexPath)
         return header
     }
 
