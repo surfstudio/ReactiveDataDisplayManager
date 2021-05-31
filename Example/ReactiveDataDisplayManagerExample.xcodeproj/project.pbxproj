@@ -45,6 +45,8 @@
 		6BA6BB85E02F5B43A00DB3B3 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BCF3694F34717804DCF88 /* Appearance.swift */; };
 		6D91F5252664D5550007439C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D91F5242664D5550007439C /* Localizable.strings */; };
 		6D91F5272664D6F20007439C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D91F5262664D6F20007439C /* String.swift */; };
+		6D182A7A265ABF7B0099255C /* ManualTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D182A76265ABF7B0099255C /* ManualTableManager.swift */; };
+		6D182A7D265ABF7B0099255C /* DifferenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D182A79265ABF7B0099255C /* DifferenceTableViewController.swift */; };
 		7469CA91227C39BBA579BD0E /* FoldableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9375407E9E04CB2B8492F /* FoldableCollectionViewController.swift */; };
 		7771ECE25476BD25F1024E9B /* FoldableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F829DBA2D8FE8670C208FA2 /* FoldableTableViewController.swift */; };
 		85757DB60447DEF381C110CA /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2183568FF89543B6F82113 /* ImageTableViewController.swift */; };
@@ -130,6 +132,8 @@
 		6C6FC596110A83223FA25408 /* ItemTitleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTitleCollectionViewController.swift; sourceTree = "<group>"; };
 		6D91F5242664D5550007439C /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		6D91F5262664D6F20007439C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		6D182A76265ABF7B0099255C /* ManualTableManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualTableManager.swift; sourceTree = "<group>"; };
+		6D182A79265ABF7B0099255C /* DifferenceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifferenceTableViewController.swift; sourceTree = "<group>"; };
 		6DCA52FFA92CFC3829BB8E54 /* TitleWithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithIconTableViewCell.swift; sourceTree = "<group>"; };
 		6EF4B6D7D72C85C6E32BA669 /* SwipeableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableTableViewController.swift; sourceTree = "<group>"; };
 		70E5E6E84D4D2008BD5A5ABA /* MovableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCellGenerator.swift; sourceTree = "<group>"; };
@@ -453,6 +457,23 @@
 				6D91F5242664D5550007439C /* Localizable.strings */,
 			);
 			path = Resources;
+            sourceTree = "<group>";
+        };
+		6D182A74265ABF7B0099255C /* DifferenceTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D182A75265ABF7B0099255C /* RDDM + DifferenceKit */,
+				6D182A79265ABF7B0099255C /* DifferenceTableViewController.swift */,
+			);
+			path = DifferenceTableViewController;
+			sourceTree = "<group>";
+		};
+		6D182A75265ABF7B0099255C /* RDDM + DifferenceKit */ = {
+			isa = PBXGroup;
+			children = (
+				6D182A76265ABF7B0099255C /* ManualTableManager.swift */,
+			);
+			path = "RDDM + DifferenceKit";
 			sourceTree = "<group>";
 		};
 		79C9820EB81CA256106E92F5 /* Extensions */ = {
@@ -622,6 +643,7 @@
 			children = (
 				DE90CF3F6D0553FB3B285702 /* AllPluginsTableViewController */,
 				E7C00F9A8314A54A17B1B7A0 /* AlphabeticalTableViewController */,
+				6D182A74265ABF7B0099255C /* DifferenceTableViewController */,
 				4FB318E5EF065B88B52E4704 /* DiffableTableViewController */,
 				83C3A689C303DDF5EDE34078 /* FoldableTableViewController */,
 				4E7938C55B19F0BEF781DE91 /* GravityTableViewController */,
@@ -935,6 +957,7 @@
 				BED551D20D5D5CC1E6C32FE7 /* MainTableViewController.swift in Sources */,
 				CDE4BACB86963D84A151BCB9 /* MovableCellGenerator.swift in Sources */,
 				ED53AB6D9B51607C1ECD1974 /* MovableTableViewController.swift in Sources */,
+				6D182A7D265ABF7B0099255C /* DifferenceTableViewController.swift in Sources */,
 				5B055EC8EF8ECB8EC6013F70 /* NukeImagePrefetcher.swift in Sources */,
 				B649C392F246B6276BC6D601 /* PaginatableCollectionViewController.swift in Sources */,
 				CFB5AB11988C5D4E0FC5B3DA /* PaginatableTableViewController.swift in Sources */,
@@ -944,6 +967,7 @@
 				07D0AD412D14907C869DA420 /* RefreshableTableViewController.swift in Sources */,
 				EB839B0559BFD349B5134E9E /* SectionTitleHeaderGenerator.swift in Sources */,
 				986B6FB99A755332E0AE8DF6 /* SectionTitleTableViewController.swift in Sources */,
+				6D182A7A265ABF7B0099255C /* ManualTableManager.swift in Sources */,
 				36572A8920CC1DA4258360B9 /* SizableCollectionViewCell.swift in Sources */,
 				D7A53EA49970F581CC3B6C51 /* SizableCollectionViewController.swift in Sources */,
 				A03BD4921874F3CFBBE5F98F /* StackViewController.swift in Sources */,

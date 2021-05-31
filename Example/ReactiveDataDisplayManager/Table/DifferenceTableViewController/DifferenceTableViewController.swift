@@ -41,31 +41,32 @@ final class DifferenceTableViewController: UIViewController {
 private extension DifferenceTableViewController {
 
     func fillAdapter() {
-        let headerGenerator = TitleHeaderGenerator(model: "Section 1")
-        let generators = Constants.models.map { DifferenceTableGenerator(with: $0) }
-        adapter.addSection(TableHeaderGenerator: headerGenerator, cells: generators)
-        adapter.reload(with: nil, animation: .bottom)
+        adapter.reload(animation: .bottom) { adapter in
+            let headerGenerator = TitleHeaderGenerator(model: "Section 1")
+            let generators = Constants.models.map { DiffableCellGenerator(with: $0) }
+            adapter.addSection(TableHeaderGenerator: headerGenerator, cells: generators)
+        }
 
         delay(.now() + .seconds(3)) { [weak self] in
-            let differentiableSections = self?.adapter.makeDifferentiableSections()
-            let generators = Constants.models.map { DifferenceTableGenerator(with: $0) }
-            self?.adapter.addCellGenerators(generators)
-            self?.adapter.reload(with: differentiableSections, insertRowsAnimation: .left)
+            self?.adapter.reload(insertRowsAnimation: .left) { adapter in
+                let generators = Constants.models.map { DiffableCellGenerator(with: $0) }
+                adapter.addCellGenerators(generators)
+            }
         }
 
         delay(.now() + .seconds(2)) { [weak self] in
-            let differentiableSections = self?.adapter.makeDifferentiableSections()
-            let headerGenerator = TitleHeaderGenerator(model: "Section 2")
-            let generators = Constants.models.map { DifferenceTableGenerator(with: $0) }
-            self?.adapter.addSection(TableHeaderGenerator: headerGenerator, cells: generators)
-            self?.adapter.reload(with: differentiableSections, insertSectionsAnimation: .right)
+            self?.adapter.reload(insertSectionsAnimation: .right) { adapter in
+                let headerGenerator = TitleHeaderGenerator(model: "Section 2")
+                let generators = Constants.models.map { DiffableCellGenerator(with: $0) }
+                adapter.addSection(TableHeaderGenerator: headerGenerator, cells: generators)
+            }
         }
-        
+
         delay(.now() + .seconds(4)) { [weak self] in
-            let differentiableSections = self?.adapter.makeDifferentiableSections()
-            let generator = DifferenceTableGenerator(with: "Last cell")
-            self?.adapter.addCellGenerator(generator)
-            self?.adapter.reload(with: differentiableSections, insertRowsAnimation: .top)
+            self?.adapter.reload(insertRowsAnimation: .top) { adapter in
+                let generator = DiffableCellGenerator(with: "Last cell")
+                adapter.addCellGenerator(generator)
+            }
         }
     }
 
