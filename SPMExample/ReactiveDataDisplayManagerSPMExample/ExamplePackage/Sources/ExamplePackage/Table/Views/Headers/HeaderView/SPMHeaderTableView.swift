@@ -22,7 +22,7 @@ extension UIView {
 final class SPMHeaderTableView: UIView {
 
     // MARK: - IBOutlet
-    
+
     @IBOutlet private weak var titleLabel: UILabel!
 
     // MARK: - Internal Methods

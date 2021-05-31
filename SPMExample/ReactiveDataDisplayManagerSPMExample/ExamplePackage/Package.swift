@@ -10,7 +10,7 @@ let package = Package(
     products: [
         .library(
             name: "ExamplePackage",
-            targets: ["ExamplePackage"]),
+            targets: ["ExamplePackage"])
     ],
     dependencies: [
         // TODO: Заменить на основную после мержа
