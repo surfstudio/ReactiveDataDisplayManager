@@ -32,7 +32,7 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
             return .zero
         }
     }
-    
+
     final class FooterGenerator: CollectionFooterGenerator {
         var identifier: UICollectionReusableView.Type {
             return UICollectionReusableView.self
@@ -71,8 +71,10 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
 
     // MARK: - Properties
 
+    // swiftlint:disable implicitly_unwrapped_optional
     private var ddm: BaseCollectionDataDisplayManager!
     private var collection: UICollectionView!
+    // swiftlint:enable implicitly_unwrapped_optional
 
     // MARK: - XCTestCase
 

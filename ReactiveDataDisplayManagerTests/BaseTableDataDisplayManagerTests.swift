@@ -1,4 +1,4 @@
- //
+//
 //  BaseTableDataDisplayManagerTests.swift
 //  ReactiveDataDisplayManager
 //
@@ -11,15 +11,17 @@ import XCTest
 
 final class BaseTableDataDisplayManagerTests: XCTestCase {
 
+    // swiftlint:disable implicitly_unwrapped_optional
     private var ddm: BaseTableDataDisplayManager!
     private var table: UITableViewSpy!
+    // swiftlint:enable implicitly_unwrapped_optional
 
     override func setUp() {
         super.setUp()
         table = UITableViewSpy()
         ddm = BaseTableDataDisplayManager(collection: table)
     }
-    
+
     override func tearDown() {
         super.tearDown()
         table = nil
@@ -492,7 +494,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
     class CellGenerator: TableCellGenerator {
 
         var identifier: String {
-            return String(describing: UITableViewCell.self) 
+            return String(describing: UITableViewCell.self)
         }
 
         func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
@@ -505,8 +507,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
     }
 
-    final class MovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
-    }
+    final class MovableToAnotherSectionGenerator: CellGenerator, MovableGenerator { }
 
     final class NotMovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
         func canMoveInOtherSection() -> Bool {
@@ -516,11 +517,11 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
     final class UITableViewSpy: UITableView {
 
-        var reloadDataWasCalled: Bool = false
-        var registerNibWasCalled: Bool = false
-        var scrollToRowWasCalled: Bool = false
+        var reloadDataWasCalled = false
+        var registerNibWasCalled = false
+        var scrollToRowWasCalled = false
         var lastReloadedRows: [IndexPath] = []
-        var sectionWasReloaded: Bool = false
+        var sectionWasReloaded = false
 
         override func reloadData() {
             super.reloadData()

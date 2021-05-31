@@ -65,8 +65,10 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
 
     // MARK: - Properties
 
+    // swiftlint:disable implicitly_unwrapped_optional
     private var tableView: UITableView!
     private var ddm: GravityFoldingTableDataDisplayManager!
+    // swiftlint:enable implicitly_unwrapped_optional
 
     // MARK: - XCTestCase
 

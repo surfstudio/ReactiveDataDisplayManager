@@ -53,8 +53,10 @@ final class FoldingTableDataDisplayManagerTests: XCTestCase {
 
     // MARK: - Properties
 
+    // swiftlint:disable implicitly_unwrapped_optional
     private var tableView: UITableView!
     private var ddm: FoldingTableDataDisplayManager!
+    // swiftlint:enable implicitly_unwrapped_optional
 
     // MARK: - XCTestCase
 

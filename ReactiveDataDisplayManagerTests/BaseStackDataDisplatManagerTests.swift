@@ -32,8 +32,10 @@ extension TitleStackCellGenerator: ViewBuilder {
 
 final class BaseStackDataDisplayManagerTests: XCTestCase {
 
+    // swiftlint:disable implicitly_unwrapped_optional
     private var ddm: BaseStackDataDisplayManager!
     private var stackView: UIStackView!
+    // swiftlint:enable implicitly_unwrapped_optional
 
     override func setUp() {
         super.setUp()
@@ -77,7 +79,7 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-        
+
         XCTAssert(stackView.arrangedSubviews.count == generators.count)
     }
 
@@ -152,8 +154,8 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
         // then
 
         XCTAssert(stackView.arrangedSubviews.count == generators.count)
-        XCTAssert((stackView.arrangedSubviews[1] as! UILabel).text == "Updated Two")
-        XCTAssert((stackView.arrangedSubviews[3] as! UILabel).text == "Updated Four")
+        XCTAssert((stackView.arrangedSubviews[1] as? UILabel)?.text == "Updated Two")
+        XCTAssert((stackView.arrangedSubviews[3] as? UILabel)?.text == "Updated Four")
     }
 
     func testForceRefill() {
@@ -194,6 +196,6 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(stackView.arrangedSubviews.count == 0)
+        XCTAssert(stackView.arrangedSubviews.isEmpty)
     }
 }
