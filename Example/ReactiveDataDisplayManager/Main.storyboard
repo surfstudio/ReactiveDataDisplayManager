@@ -500,6 +500,7 @@
                         <segue destination="xKf-89-asG" kind="show" identifier="paginatableCollection" id="MAO-OH-Lsa"/>
                         <segue destination="NJ8-lG-GQz" kind="show" identifier="compositionalCollection" id="F32-3a-8Fb"/>
                         <segue destination="fW0-Sk-lmX" kind="show" identifier="diffableCollection" id="vpJ-Q1-CFl"/>
+                        <segue destination="wYl-2p-b07" kind="show" identifier="differenceCollection" id="FUy-ae-GwC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -736,6 +737,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PkU-fn-UZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="988" y="2991"/>
+        </scene>
+        <!--Difference Collection View Controller-->
+        <scene sceneID="P1K-uH-TB7">
+            <objects>
+                <viewController id="wYl-2p-b07" customClass="DifferenceCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w9T-3l-frF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CLN-hh-Yvd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2zF-Nf-hCk">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="D0R-xc-N4j"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CLN-hh-Yvd" firstAttribute="top" secondItem="D0R-xc-N4j" secondAttribute="top" id="HBm-Aa-M1I"/>
+                            <constraint firstItem="CLN-hh-Yvd" firstAttribute="leading" secondItem="D0R-xc-N4j" secondAttribute="leading" id="P6W-pu-L3R"/>
+                            <constraint firstItem="D0R-xc-N4j" firstAttribute="trailing" secondItem="CLN-hh-Yvd" secondAttribute="trailing" id="RoC-Ai-eKJ"/>
+                            <constraint firstItem="D0R-xc-N4j" firstAttribute="bottom" secondItem="CLN-hh-Yvd" secondAttribute="bottom" id="g1P-Bz-KyM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="n8Q-mV-ojW"/>
+                    <connections>
+                        <outlet property="collectionView" destination="CLN-hh-Yvd" id="EFI-7A-BE9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d9V-u8-wto" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1784.8" y="2999.5502248875564"/>
         </scene>
         <!--Sizable Collection View Controller-->
         <scene sceneID="tFY-fl-bt3">
