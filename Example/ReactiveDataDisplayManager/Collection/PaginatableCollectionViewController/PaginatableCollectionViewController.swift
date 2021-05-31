@@ -40,7 +40,21 @@ final class PaginatableCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Collection with pagination"
+
+        configureActivityIndicatorIfNeeded()
         loadFirstPage()
+    }
+
+}
+
+// MARK: - Configuration
+
+private extension PaginatableCollectionViewController {
+
+    func configureActivityIndicatorIfNeeded() {
+        if #available(iOS 13.0, *) {
+            activityIndicator.style = .medium
+        }
     }
 
 }

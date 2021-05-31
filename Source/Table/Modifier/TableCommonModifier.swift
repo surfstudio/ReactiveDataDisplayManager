@@ -47,7 +47,7 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
     ///
     /// - parameter indexPaths: indexes of reloaded sections
     /// - parameter updateAnimation: animation of reloaded sections
-    override func reloadScetions(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
+    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
         guard let view = view else { return }
         animator?.perform(in: view, animated: updateAnimation != .none) { [weak view] in
             view?.reloadSections(indexPaths, with: updateAnimation)

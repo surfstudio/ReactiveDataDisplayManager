@@ -294,6 +294,37 @@
             </objects>
             <point key="canvasLocation" x="5806" y="-1844"/>
         </scene>
+        <!--Difference Table View Controller-->
+        <scene sceneID="Awb-OV-uws">
+            <objects>
+                <viewController id="CGn-gl-AyL" customClass="DifferenceTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0vv-Sv-vuv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pjQ-49-tDf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="emi-s7-ou8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="emi-s7-ou8" firstAttribute="trailing" secondItem="pjQ-49-tDf" secondAttribute="trailing" id="8d3-g4-qKi"/>
+                            <constraint firstItem="pjQ-49-tDf" firstAttribute="leading" secondItem="emi-s7-ou8" secondAttribute="leading" id="I0D-dL-cPO"/>
+                            <constraint firstItem="emi-s7-ou8" firstAttribute="bottom" secondItem="pjQ-49-tDf" secondAttribute="bottom" id="kb2-X9-Js5"/>
+                            <constraint firstItem="pjQ-49-tDf" firstAttribute="top" secondItem="emi-s7-ou8" secondAttribute="top" id="zXu-wJ-CQ7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="LXe-k3-DDe"/>
+                    <connections>
+                        <outlet property="tableView" destination="pjQ-49-tDf" id="cGl-BJ-fYo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pDY-UI-GDR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6482.3999999999996" y="-1844.5277361319343"/>
+        </scene>
         <!--Table-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -333,6 +364,7 @@
                         <segue destination="gFr-UQ-9p9" kind="show" identifier="allPluginsTable" id="QY8-TZ-bpF"/>
                         <segue destination="KPe-5j-jTE" kind="show" identifier="refreshableTable" id="lcW-uo-QUW"/>
                         <segue destination="xQn-4x-xEX" kind="show" identifier="paginatableTable" id="2Xm-b9-jRj"/>
+                        <segue destination="CGn-gl-AyL" kind="show" identifier="differenceTable" id="F6X-Et-5hD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -468,6 +500,7 @@
                         <segue destination="xKf-89-asG" kind="show" identifier="paginatableCollection" id="MAO-OH-Lsa"/>
                         <segue destination="NJ8-lG-GQz" kind="show" identifier="compositionalCollection" id="F32-3a-8Fb"/>
                         <segue destination="fW0-Sk-lmX" kind="show" identifier="diffableCollection" id="vpJ-Q1-CFl"/>
+                        <segue destination="wYl-2p-b07" kind="show" identifier="differenceCollection" id="FUy-ae-GwC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -704,6 +737,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PkU-fn-UZ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="988" y="2991"/>
+        </scene>
+        <!--Difference Collection View Controller-->
+        <scene sceneID="P1K-uH-TB7">
+            <objects>
+                <viewController id="wYl-2p-b07" customClass="DifferenceCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="w9T-3l-frF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CLN-hh-Yvd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2zF-Nf-hCk">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="D0R-xc-N4j"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="CLN-hh-Yvd" firstAttribute="top" secondItem="D0R-xc-N4j" secondAttribute="top" id="HBm-Aa-M1I"/>
+                            <constraint firstItem="CLN-hh-Yvd" firstAttribute="leading" secondItem="D0R-xc-N4j" secondAttribute="leading" id="P6W-pu-L3R"/>
+                            <constraint firstItem="D0R-xc-N4j" firstAttribute="trailing" secondItem="CLN-hh-Yvd" secondAttribute="trailing" id="RoC-Ai-eKJ"/>
+                            <constraint firstItem="D0R-xc-N4j" firstAttribute="bottom" secondItem="CLN-hh-Yvd" secondAttribute="bottom" id="g1P-Bz-KyM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="n8Q-mV-ojW"/>
+                    <connections>
+                        <outlet property="collectionView" destination="CLN-hh-Yvd" id="EFI-7A-BE9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d9V-u8-wto" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1784.8" y="2999.5502248875564"/>
         </scene>
         <!--Sizable Collection View Controller-->
         <scene sceneID="tFY-fl-bt3">
