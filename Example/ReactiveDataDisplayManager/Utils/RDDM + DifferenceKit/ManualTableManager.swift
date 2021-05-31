@@ -23,7 +23,7 @@ extension TableHeaderGenerator: Differentiable {
 
 }
 
-extension DiffableItem: Differentiable {}
+extension DiffableItem: Differentiable { }
 
 extension ManualTableManager {
 
