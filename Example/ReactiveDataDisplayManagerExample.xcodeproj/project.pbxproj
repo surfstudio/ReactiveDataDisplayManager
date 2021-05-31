@@ -43,6 +43,8 @@
 		677C564A4240DE620EEF81F7 /* TitleCollectionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42A5C5CF1A1BEF2B9B85E8 /* TitleCollectionListCell.swift */; };
 		6916D2128A02D5D69DA36143 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001BB16BE2E141F75B940D27 /* UIViewController.swift */; };
 		6BA6BB85E02F5B43A00DB3B3 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BCF3694F34717804DCF88 /* Appearance.swift */; };
+		6D91F5252664D5550007439C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D91F5242664D5550007439C /* Localizable.strings */; };
+		6D91F5272664D6F20007439C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D91F5262664D6F20007439C /* String.swift */; };
 		7469CA91227C39BBA579BD0E /* FoldableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9375407E9E04CB2B8492F /* FoldableCollectionViewController.swift */; };
 		7771ECE25476BD25F1024E9B /* FoldableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F829DBA2D8FE8670C208FA2 /* FoldableTableViewController.swift */; };
 		85757DB60447DEF381C110CA /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2183568FF89543B6F82113 /* ImageTableViewController.swift */; };
@@ -126,6 +128,8 @@
 		6928D9C9E9C04C109084889F /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BFBDB227714F3A62FDD9B78 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		6C6FC596110A83223FA25408 /* ItemTitleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTitleCollectionViewController.swift; sourceTree = "<group>"; };
+		6D91F5242664D5550007439C /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		6D91F5262664D6F20007439C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		6DCA52FFA92CFC3829BB8E54 /* TitleWithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithIconTableViewCell.swift; sourceTree = "<group>"; };
 		6EF4B6D7D72C85C6E32BA669 /* SwipeableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableTableViewController.swift; sourceTree = "<group>"; };
 		70E5E6E84D4D2008BD5A5ABA /* MovableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCellGenerator.swift; sourceTree = "<group>"; };
@@ -260,6 +264,7 @@
 				A2F38C685323B8D626753C9A /* Stack */,
 				CA5EFC03A282708A1E9A8CDE /* Table */,
 				E439701CC22794F94CA09FC0 /* Utils */,
+				6D91F51F2664D4880007439C /* Resources */,
 			);
 			path = ReactiveDataDisplayManager;
 			sourceTree = "<group>";
@@ -442,10 +447,19 @@
 			path = PaginatableTableViewController;
 			sourceTree = "<group>";
 		};
+		6D91F51F2664D4880007439C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D91F5242664D5550007439C /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		79C9820EB81CA256106E92F5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				001BB16BE2E141F75B940D27 /* UIViewController.swift */,
+				6D91F5262664D6F20007439C /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -816,6 +830,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D91F5252664D5550007439C /* Localizable.strings in Resources */,
 				FE5F37F2E95948E59CF6B6B2 /* Assets.xcassets in Resources */,
 				EE3D9929C26935A7EFC1D696 /* FoldableCollectionViewCell.xib in Resources */,
 				19BDA87C50E311730CDC4067 /* FoldableTableViewCell.xib in Resources */,
@@ -911,6 +926,7 @@
 				346EC374E728C1018B6DE96E /* ImageCollectionViewCell.swift in Sources */,
 				521664AB51B22B082B3F5B1B /* ImageCollectionViewController.swift in Sources */,
 				F51956BA55512B3E443B0865 /* ImageHorizontalCollectionViewController.swift in Sources */,
+				6D91F5272664D6F20007439C /* String.swift in Sources */,
 				46CD9827184C6692752C0059 /* ImageTableGenerator.swift in Sources */,
 				9310490FAAD27FA8579EC5C5 /* ImageTableViewCell.swift in Sources */,
 				85757DB60447DEF381C110CA /* ImageTableViewController.swift in Sources */,
