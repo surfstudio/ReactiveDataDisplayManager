@@ -6,6 +6,12 @@ if danger.github.pullRequest.title.starts(with: "[WIP]") {
     danger.fail("WIP means work in progress. In other words author wants merge freeze ❄️")
 }
 
+let editedFiles = danger.git.createdFiles + danger.git.modifiedFiles
+
+if editedFiles.contains(where: { $0 == ".yml" }) {
+    warn("The .yml file has been modified. Dependency changes must be consistent.")
+}
+
 var violations = [SwiftLintViolation]()
 
 violations.append(contentsOf: SwiftLint.lint(configFile: ".swiftlint.yml"))
