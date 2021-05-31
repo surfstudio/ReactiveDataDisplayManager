@@ -47,4 +47,3 @@ extension HeaderCollectionListGenerator: ViewBuilder {
     }
 
 }
-

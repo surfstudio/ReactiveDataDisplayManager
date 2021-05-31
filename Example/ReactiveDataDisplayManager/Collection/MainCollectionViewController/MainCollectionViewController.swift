@@ -73,7 +73,7 @@ private extension MainCollectionViewController {
         for model in Constants.models {
             // Create generator
             let generator = TitleWithIconTableViewCell.rddm.baseGenerator(with: model.title)
-            
+
             generator.didSelectEvent += { [weak self] in
                 self?.openScreen(by: model.segueId)
             }

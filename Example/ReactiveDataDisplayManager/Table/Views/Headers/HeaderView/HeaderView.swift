@@ -22,7 +22,7 @@ extension UIView {
 final class HeaderView: UIView {
 
     // MARK: - IBOutlet
-    
+
     @IBOutlet private weak var titleLabel: UILabel!
 
     // MARK: - Internal Methods

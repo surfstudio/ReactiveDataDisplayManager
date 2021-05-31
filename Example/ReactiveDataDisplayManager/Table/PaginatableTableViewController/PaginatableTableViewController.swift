@@ -116,7 +116,6 @@ private extension PaginatableTableViewController {
 
 }
 
-
 // MARK: - RefreshableOutput
 
 extension PaginatableTableViewController: PaginatableOutput {

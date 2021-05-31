@@ -11,7 +11,7 @@ import SurfUtils
 import ReactiveDataDisplayManager
 import Nuke
 
-extension ItemsScrollManager: CollectionScrollProvider {}
+extension ItemsScrollManager: CollectionScrollProvider { }
 
 final class ImageHorizontalCollectionViewController: UIViewController {
 

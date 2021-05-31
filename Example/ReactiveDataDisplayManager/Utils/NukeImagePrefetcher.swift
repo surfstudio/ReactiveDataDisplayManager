@@ -9,6 +9,9 @@
 import Nuke
 import ReactiveDataDisplayManager
 
+typealias CollectionImagePrefetcherablePlugin = CollectionPrefetcherablePlugin<NukeImagePrefetcher, ImageCollectionCellGenerator>
+typealias TableImagePrefetcherablePlugin = TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator>
+
 final class NukeImagePrefetcher: ContentPrefetcher {
 
     // MARK: - Private Properties
@@ -35,9 +38,10 @@ final class NukeImagePrefetcher: ContentPrefetcher {
                                                          placeholder: .none)
 
         imagePrefetcher = ImagePrefetcher(pipeline: pipeline, destination: .diskCache, maxConcurrentRequestCount: 15)
+        let contentModes = ImageLoadingOptions.ContentModes(success: .scaleAspectFill, failure: .scaleAspectFit, placeholder: .scaleAspectFit)
         imageLoadingOptions = ImageLoadingOptions(placeholder: placeholder,
                                                   failureImage: placeholder.withRenderingMode(.alwaysTemplate),
-                                                  contentModes: .init(success: .scaleAspectFill, failure: .scaleAspectFit, placeholder: .scaleAspectFit),
+                                                  contentModes: contentModes,
                                                   tintColors: tintOptions)
     }
 
