@@ -5,6 +5,7 @@
 //  Created by Anton Dryakhlykh on 14.10.2019.
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast
 
 import XCTest
 @testable import ReactiveDataDisplayManager
@@ -32,10 +33,8 @@ extension TitleStackCellGenerator: ViewBuilder {
 
 final class BaseStackDataDisplayManagerTests: XCTestCase {
 
-    // swiftlint:disable implicitly_unwrapped_optional
     private var ddm: BaseStackDataDisplayManager!
     private var stackView: UIStackView!
-    // swiftlint:enable implicitly_unwrapped_optional
 
     override func setUp() {
         super.setUp()
@@ -154,8 +153,8 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
         // then
 
         XCTAssert(stackView.arrangedSubviews.count == generators.count)
-        XCTAssert((stackView.arrangedSubviews[1] as? UILabel)?.text == "Updated Two")
-        XCTAssert((stackView.arrangedSubviews[3] as? UILabel)?.text == "Updated Four")
+        XCTAssert((stackView.arrangedSubviews[1] as! UILabel).text == "Updated Two")
+        XCTAssert((stackView.arrangedSubviews[3] as! UILabel).text == "Updated Four")
     }
 
     func testForceRefill() {

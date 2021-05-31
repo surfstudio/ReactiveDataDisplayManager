@@ -5,6 +5,7 @@
 //  Created by Anton Dryakhlykh on 25.11.2019.
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast
 
 import XCTest
 @testable import ReactiveDataDisplayManager
@@ -71,10 +72,8 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
 
     // MARK: - Properties
 
-    // swiftlint:disable implicitly_unwrapped_optional
     private var ddm: BaseCollectionDataDisplayManager!
     private var collection: UICollectionView!
-    // swiftlint:enable implicitly_unwrapped_optional
 
     // MARK: - XCTestCase
 

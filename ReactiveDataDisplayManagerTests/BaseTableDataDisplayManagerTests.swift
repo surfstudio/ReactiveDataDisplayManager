@@ -5,16 +5,15 @@
 //  Created by Ivan Smetanin on 22/05/2018.
 //  Copyright © 2018 Александр Кравченков. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast
 
 import XCTest
 @testable import ReactiveDataDisplayManager
 
 final class BaseTableDataDisplayManagerTests: XCTestCase {
 
-    // swiftlint:disable implicitly_unwrapped_optional
     private var ddm: BaseTableDataDisplayManager!
     private var table: UITableViewSpy!
-    // swiftlint:enable implicitly_unwrapped_optional
 
     override func setUp() {
         super.setUp()
