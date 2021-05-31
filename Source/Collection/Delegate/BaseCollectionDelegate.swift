@@ -29,7 +29,7 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
 extension BaseCollectionDelegate {
 
-    public func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
+    public func configure<T>(with builder: CollectionBuilder<T>) where T: BaseCollectionManager {
 
         collectionPlugins = builder.collectionPlugins
         scrollPlugins = builder.scrollPlugins
@@ -42,7 +42,6 @@ extension BaseCollectionDelegate {
     }
 
 }
-
 
 // MARK: - UICollectionViewDelegate
 
@@ -72,11 +71,15 @@ extension BaseCollectionDelegate {
         collectionPlugins.process(event: .didEndDisplayCell(indexPath), with: manager)
     }
 
-    open func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+    open func collectionView(_ collectionView: UICollectionView,
+                             willDisplaySupplementaryView view: UICollectionReusableView,
+                             forElementKind elementKind: String, at indexPath: IndexPath) {
         collectionPlugins.process(event: .willDisplaySupplementaryView(indexPath), with: manager)
     }
 
-    open func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+    open func collectionView(_ collectionView: UICollectionView,
+                             didEndDisplayingSupplementaryView view: UICollectionReusableView,
+                             forElementOfKind elementKind: String, at indexPath: IndexPath) {
         collectionPlugins.process(event: .didEndDisplayingSupplementaryView(indexPath), with: manager)
     }
 
@@ -98,7 +101,9 @@ extension BaseCollectionDelegate {
         scrollPlugins.process(event: .willBeginDragging, with: manager)
     }
 
-    open func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    open func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                        withVelocity velocity: CGPoint,
+                                        targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         scrollPlugins.process(event: .willEndDragging(velocity: velocity,
                                                       targetContentOffset: targetContentOffset), with: manager)
     }

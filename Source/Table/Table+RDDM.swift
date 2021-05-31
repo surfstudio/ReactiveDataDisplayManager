@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UITableView: DataDisplayCompatible {}
+extension UITableView: DataDisplayCompatible { }
 
 public extension DataDisplayWrapper where Base: UITableView {
 

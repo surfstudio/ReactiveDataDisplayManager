@@ -19,7 +19,7 @@ final class PrefetchingTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private let prefetcher = NukeImagePrefetcher(placeholder: #imageLiteral(resourceName: "ReactiveLogo"))
-    private lazy var prefetcherablePlugin: TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator> = .prefetch(prefetcher: prefetcher)
+    private lazy var prefetcherablePlugin: TableImagePrefetcherablePlugin = .prefetch(prefetcher: prefetcher)
 
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)
@@ -52,7 +52,7 @@ private extension PrefetchingTableViewController {
         for _ in 0...300 {
             // Create viewModels for cell
             guard let viewModel = ImageTableViewCell.ViewModel.make(with: loadImage) else { continue }
-            
+
             // Create generator
             let generator = ImageTableGenerator(with: viewModel)
 

@@ -13,7 +13,9 @@ public class EmptyCollectionFooterGenerator: CollectionFooterGenerator {
     }
 
     public func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: self.identifier.nameOfClass, for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter,
+                                                                     withReuseIdentifier: self.identifier.nameOfClass,
+                                                                     for: indexPath)
         return header
     }
 

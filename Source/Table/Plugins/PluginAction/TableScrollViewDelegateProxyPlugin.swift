@@ -37,9 +37,9 @@ public class TableScrollViewDelegateProxyPlugin: BaseTablePlugin<ScrollEvent> {
         case .willBeginDragging:
             willBeginDragging.invoke(with: view)
         case .willEndDragging(let velocity, let targetContentOffset):
-            willEndDragging.invoke(with:(view, velocity, targetContentOffset.pointee))
+            willEndDragging.invoke(with: (view, velocity, targetContentOffset.pointee))
         case .didEndDragging(let decelerate):
-            didEndDragging.invoke(with:(view, decelerate))
+            didEndDragging.invoke(with: (view, decelerate))
         case .didScrollToTop:
             didScrollToTop.invoke(with: view)
         case .willBeginDecelerating:
@@ -47,9 +47,9 @@ public class TableScrollViewDelegateProxyPlugin: BaseTablePlugin<ScrollEvent> {
         case .didEndDecelerating:
             didEndDecelerating.invoke(with: view)
         case .willBeginZooming(let zoomedView):
-            willBeginZooming.invoke(with:(view, zoomedView))
+            willBeginZooming.invoke(with: (view, zoomedView))
         case .didEndZooming(let zoomedView, let scale):
-            didEndZooming.invoke(with:(view, zoomedView, scale))
+            didEndZooming.invoke(with: (view, zoomedView, scale))
         case .didZoom:
             didZoom.invoke(with: view)
         case .didEndScrollingAnimation:

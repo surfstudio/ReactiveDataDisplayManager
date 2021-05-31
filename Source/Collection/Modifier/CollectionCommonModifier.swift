@@ -105,4 +105,3 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     }
 
 }
-

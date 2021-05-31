@@ -26,13 +26,13 @@ final class MainSPMTableViewController: UIViewController {
             SPMTableGenerator(with: "Swipable")
         ]
         static let headers: [TableHeaderGenerator] = [
-            SPMHeaderTableGenerator(model: "SectionHeader"),
+            SPMHeaderTableGenerator(model: "SectionHeader")
         ]
     }
 
     // MARK: - IBOutlets
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
 
     // MARK: - Private Properties
 

@@ -43,8 +43,6 @@ private extension RefreshableTableViewController {
         }
 
         adapter.forceRefill()
-
-
     }
 
     func makeGenerator() -> TableCellGenerator {
@@ -52,7 +50,6 @@ private extension RefreshableTableViewController {
     }
 
 }
-
 
 // MARK: - RefreshableOutput
 

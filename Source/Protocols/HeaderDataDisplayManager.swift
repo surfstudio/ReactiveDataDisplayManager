@@ -12,7 +12,7 @@ import UIKit
 /// It can hide implementation of UITableView or UICollection view or your custom control with any data source.
 public protocol HeaderDataDisplayManager: AnyObject {
 
-    // MARK:- Associatedtypes
+    // MARK: - Associatedtypes
 
     associatedtype CellGeneratorType
     associatedtype HeaderGeneratorType

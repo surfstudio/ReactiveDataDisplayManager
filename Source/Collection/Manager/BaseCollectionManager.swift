@@ -21,7 +21,9 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
 
     // MARK: - Public properties
 
+    // swiftlint:disable implicitly_unwrapped_optional
     public weak var view: UICollectionView!
+    // swiftlint:enable implicitly_unwrapped_optional
 
     public var generators: [[CollectionCellGenerator]] = []
     public var sections: [CollectionHeaderGenerator] = []
@@ -46,7 +48,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
         if sections.count <= 0 {
             sections.append(EmptyCollectionHeaderGenerator())
         }
-        
+
         if footers.count <= 0 {
             footers.append(EmptyCollectionFooterGenerator())
         }
@@ -199,7 +201,9 @@ extension BaseCollectionManager {
     /// A constant that identifies a relative position in the collection view (top, middle, bottom)
     /// for item when scrolling concludes. See UICollectionViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
-    open func remove(_ generator: CollectionCellGenerator, needScrollAt scrollPosition: UICollectionView.ScrollPosition?, needRemoveEmptySection: Bool) {
+    open func remove(_ generator: CollectionCellGenerator,
+                     needScrollAt scrollPosition: UICollectionView.ScrollPosition?,
+                     needRemoveEmptySection: Bool) {
         guard let index = findGenerator(generator) else { return }
         self.removeGenerator(with: index,
                              needScrollAt: scrollPosition,
@@ -244,7 +248,7 @@ private extension BaseCollectionManager {
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
         // remove empty section if needed
-        var sectionIndexPath: IndexSet? = nil
+        var sectionIndexPath: IndexSet?
         let sectionIsEmpty = generators[index.sectionIndex].isEmpty
         if needRemoveEmptySection && sectionIsEmpty {
             generators.remove(at: index.sectionIndex)

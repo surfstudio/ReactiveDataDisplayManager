@@ -86,29 +86,29 @@ public class ManualTableManager: BaseTableManager {
     /// - Parameters:
     ///   - generators: Generators to insert
     ///   - TableHeaderGenerator: TableHeaderGenerator generator in which you want to insert.
-    open func addCellGenerators(_ generators: [TableCellGenerator], toHeader TableHeaderGenerator: TableHeaderGenerator) {
+    open func addCellGenerators(_ generators: [TableCellGenerator], toHeader headerGenerator: TableHeaderGenerator) {
         generators.forEach { $0.registerCell(in: view) }
 
         if self.generators.count != self.sections.count || sections.isEmpty {
             self.generators.append([TableCellGenerator]())
         }
 
-        if let index = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }) {
+        if let index = self.sections.firstIndex(where: { $0 === headerGenerator }) {
             self.generators[index].append(contentsOf: generators)
         }
     }
 
     /// Removes all TableCellGenerator generators from a given section
-    open func removeAllGenerators(from TableHeaderGenerator: TableHeaderGenerator) {
-        guard let index = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }), self.generators.count > index else {
+    open func removeAllGenerators(from headerGenerator: TableHeaderGenerator) {
+        guard let index = self.sections.firstIndex(where: { $0 === headerGenerator }), self.generators.count > index else {
             return
         }
 
         self.generators[index].removeAll()
     }
 
-    open func addCellGenerator(_ generator: TableCellGenerator, toHeader TableHeaderGenerator: TableHeaderGenerator) {
-        addCellGenerators([generator], toHeader: TableHeaderGenerator)
+    open func addCellGenerator(_ generator: TableCellGenerator, toHeader headerGenerator: TableHeaderGenerator) {
+        addCellGenerators([generator], toHeader: headerGenerator)
     }
 
     /// Inserts new head generator.
@@ -141,11 +141,11 @@ public class ManualTableManager: BaseTableManager {
     ///   - new: TableHeaderGenerator which you want to insert before current TableHeaderGenerator.
     ///   - generators: Generators which you want to insert.
     ///   - with: Animation for row action.
-    open func insertSection(before TableHeaderGenerator: TableHeaderGenerator,
+    open func insertSection(before headerGenerator: TableHeaderGenerator,
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: UITableView.RowAnimation = .automatic) {
-        self.insert(headGenerator: sectionHeader, before: TableHeaderGenerator)
+        self.insert(headGenerator: sectionHeader, before: headerGenerator)
 
         guard let headerIndex = self.sections.firstIndex(where: {
             $0 === sectionHeader
@@ -167,11 +167,11 @@ public class ManualTableManager: BaseTableManager {
     ///   - new: TableHeaderGenerator which you want to insert after current TableHeaderGenerator.
     ///   - generators: Generators which you want to insert.
     ///   - with: Animation for row action.
-    open func insertSection(after TableHeaderGenerator: TableHeaderGenerator,
+    open func insertSection(after headerGenerator: TableHeaderGenerator,
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: UITableView.RowAnimation = .automatic) {
-        self.insert(headGenerator: sectionHeader, after: TableHeaderGenerator)
+        self.insert(headGenerator: sectionHeader, after: headerGenerator)
 
         guard let headerIndex = self.sections.firstIndex(where: {
             $0 === sectionHeader
@@ -251,10 +251,10 @@ public class ManualTableManager: BaseTableManager {
     ///   - to: TableHeaderGenerator before which new generator will be added. Must be in the DDM.
     ///   - new: Generator which you want to insert after current generator.
     ///   - with: Animation for row action.
-    open func insert(to TableHeaderGenerator: TableHeaderGenerator,
+    open func insert(to headerGenerator: TableHeaderGenerator,
                      new generator: TableCellGenerator,
                      with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }) else {
+        guard let headerIndex = self.sections.firstIndex(where: { $0 === headerGenerator }) else {
             return
         }
         self.insert(elements: [(generator, headerIndex, 0)], with: animation)
@@ -266,10 +266,10 @@ public class ManualTableManager: BaseTableManager {
     ///   - to: TableHeaderGenerator before which new generator will be added. Must be in the DDM.
     ///   - new: Generators which you want to insert before current generator.
     ///   - with: Animation for row action.
-    open func insertAtBeginning(to TableHeaderGenerator: TableHeaderGenerator,
+    open func insertAtBeginning(to headerGenerator: TableHeaderGenerator,
                                 new generators: [TableCellGenerator],
                                 with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }) else {
+        guard let headerIndex = self.sections.firstIndex(where: { $0 === headerGenerator }) else {
             return
         }
         let elements = generators.enumerated().map { item in
@@ -284,10 +284,10 @@ public class ManualTableManager: BaseTableManager {
     ///   - to: TableHeaderGenerator before which new generator will be added. Must be in the DDM.
     ///   - new: Generators which you want to insert after current generator.
     ///   - with: Animation for row action.
-    open func insertAtEnd(to TableHeaderGenerator: TableHeaderGenerator,
+    open func insertAtEnd(to headerGenerator: TableHeaderGenerator,
                           new generators: [TableCellGenerator],
                           with animation: UITableView.RowAnimation = .automatic) {
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === TableHeaderGenerator }) else {
+        guard let headerIndex = self.sections.firstIndex(where: { $0 === headerGenerator }) else {
             return
         }
         let base = self.generators[headerIndex].count

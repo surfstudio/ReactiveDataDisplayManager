@@ -12,12 +12,14 @@ import UIKit
 /// It can hide implementation of UITableView or UICollection view or your custom control with any data source.
 public protocol DataDisplayManager: AnyObject {
 
-    // MARK:- Associatedtypes
+    // MARK: - Associatedtypes
 
     associatedtype CollectionType
     associatedtype CellGeneratorType
 
+    // swiftlint:disable implicitly_unwrapped_optional
     var view: CollectionType! { get }
+    // swiftlint:enable implicitly_unwrapped_optional
 
     /// Reloads collection.
     func forceRefill()

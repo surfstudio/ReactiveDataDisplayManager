@@ -12,12 +12,12 @@ final class HeaderCollectionListView: UICollectionReusableView {
 
     // MARK: - IBOutlets
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
 
     // MARK: - Internal Methods
 
     func fill(title: String) {
         self.titleLabel.text = title
     }
-    
+
 }

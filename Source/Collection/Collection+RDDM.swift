@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UICollectionView: DataDisplayCompatible {}
+extension UICollectionView: DataDisplayCompatible { }
 
 public extension DataDisplayWrapper where Base: UICollectionView {
 

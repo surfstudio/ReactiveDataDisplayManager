@@ -10,7 +10,7 @@ import UIKit
 import ReactiveDataDisplayManager
 
 final class FoldableTableViewController: UIViewController {
-    
+
     // MARK: - Constants
 
     private enum Constants {

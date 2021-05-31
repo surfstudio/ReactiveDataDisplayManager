@@ -16,7 +16,7 @@ public class SPMTableViewCell: UITableViewCell {
     public override func awakeFromNib() {
         super.awakeFromNib()
     }
-    
+
 }
 
 extension SPMTableViewCell: ConfigurableItem {

@@ -21,7 +21,7 @@ open class TableMovablePlugin: TableFeaturePlugin {
 // MARK: - TableMovableDelegate
 
 extension TableMovablePlugin: TableMovableDelegate {
-    
+
     open func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
         if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
             return generator.canMove()

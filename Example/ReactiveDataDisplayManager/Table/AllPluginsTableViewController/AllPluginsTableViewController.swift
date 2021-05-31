@@ -29,7 +29,7 @@ final class AllPluginsTableViewController: UIViewController {
 
     private let prefetcher = NukeImagePrefetcher(placeholder: #imageLiteral(resourceName: "ReactiveLogo"))
     private let swipeActionProvider = SwipeActionProvider()
-    private lazy var prefetcherablePlugin: TablePrefetcherablePlugin<NukeImagePrefetcher, ImageTableGenerator> = .prefetch(prefetcher: prefetcher)
+    private lazy var prefetcherablePlugin: TableImagePrefetcherablePlugin = .prefetch(prefetcher: prefetcher)
 
     private lazy var scrollDirectionEvent: (ScrollDirection) -> Void = { [weak self] direction in
         switch direction {
@@ -197,6 +197,7 @@ private extension AllPluginsTableViewController {
 
 }
 
+// MARK: - RefreshableOutput
 
 extension AllPluginsTableViewController: RefreshableOutput {
 

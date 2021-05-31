@@ -1,10 +1,11 @@
- //
+//
 //  BaseTableDataDisplayManagerTests.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Ivan Smetanin on 22/05/2018.
 //  Copyright © 2018 Александр Кравченков. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast
 
 import XCTest
 @testable import ReactiveDataDisplayManager
@@ -19,7 +20,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         table = UITableViewSpy()
         ddm = BaseTableDataDisplayManager(collection: table)
     }
-    
+
     override func tearDown() {
         super.tearDown()
         table = nil
@@ -492,7 +493,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
     class CellGenerator: TableCellGenerator {
 
         var identifier: String {
-            return String(describing: UITableViewCell.self) 
+            return String(describing: UITableViewCell.self)
         }
 
         func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
@@ -505,8 +506,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
     }
 
-    final class MovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
-    }
+    final class MovableToAnotherSectionGenerator: CellGenerator, MovableGenerator { }
 
     final class NotMovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
         func canMoveInOtherSection() -> Bool {
@@ -516,11 +516,11 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
     final class UITableViewSpy: UITableView {
 
-        var reloadDataWasCalled: Bool = false
-        var registerNibWasCalled: Bool = false
-        var scrollToRowWasCalled: Bool = false
+        var reloadDataWasCalled = false
+        var registerNibWasCalled = false
+        var scrollToRowWasCalled = false
         var lastReloadedRows: [IndexPath] = []
-        var sectionWasReloaded: Bool = false
+        var sectionWasReloaded = false
 
         override func reloadData() {
             super.reloadData()

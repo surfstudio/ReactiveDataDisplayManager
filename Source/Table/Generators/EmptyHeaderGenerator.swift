@@ -9,7 +9,7 @@
 import UIKit
 
 public class EmptyTableHeaderGenerator: TableHeaderGenerator {
-    
+
     open override func generate() -> UIView {
         let view = UIView()
         view.backgroundColor = UIColor.clear

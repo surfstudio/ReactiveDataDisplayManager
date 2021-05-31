@@ -7,12 +7,13 @@
 //
 
 import UIKit
-import UIKit
 
 extension NSObject {
+    // swiftlint:disable force_unwrapping
     class var nameOfClass: String {
         return NSStringFromClass(self).components(separatedBy: ".").last!
     }
+    // swiftlint:enable force_unwrapping
 }
 
 extension UIViewController {

@@ -15,23 +15,25 @@ final class DiffableCollectionViewController: UIViewController {
 
     private enum Constants {
         static let titleForSection = "Section"
-        static let models = ["Afghanistan",
-                             "Afghanistan",
-                             "Albania",
-                             "Algeria",
-                             "Andorra",
-                             "Angola",
-                             "Antigua and Barbuda",
-                             "Argentina",
-                             "Armenia",
-                             "Australia",
-                             "Austria",
-                             "Azerbaijan",
-                             "Bahamas",
-                             "Bahrain",
-                             "Bangladesh",
-                             "Barbados",
-                             "Belarus"]
+        static let models = [
+            "Afghanistan",
+            "Afghanistan",
+            "Albania",
+            "Algeria",
+            "Andorra",
+            "Angola",
+            "Antigua and Barbuda",
+            "Argentina",
+            "Armenia",
+            "Australia",
+            "Austria",
+            "Azerbaijan",
+            "Bahamas",
+            "Bahrain",
+            "Bangladesh",
+            "Barbados",
+            "Belarus"
+        ]
     }
 
     // MARK: - IBOutlets
@@ -57,7 +59,6 @@ final class DiffableCollectionViewController: UIViewController {
     }
 
 }
-
 
 // MARK: - SearchDelegate
 
@@ -126,7 +127,6 @@ private extension DiffableCollectionViewController {
 
     @objc
     func removeFirst() {
-
         guard !generators.isEmpty else { return }
 
         generators.removeFirst()
