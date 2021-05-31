@@ -26,6 +26,7 @@ final class MainTableViewController: UIViewController {
         case refreshableTable
         case paginatableTable
         case allPluginsTable
+        case differenceTable
     }
 
     // MARK: - Constants
@@ -43,7 +44,8 @@ final class MainTableViewController: UIViewController {
             ("table with swipeable cells", .swipeableTable),
             ("table with refresh control", .refreshableTable),
             ("table with pagination", .paginatableTable),
-            ("table with all plugins", .allPluginsTable)
+            ("table with all plugins", .allPluginsTable),
+            ("table with DifferenceKit", .differenceTable)
         ]
     }
 

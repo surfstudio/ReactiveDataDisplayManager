@@ -294,6 +294,37 @@
             </objects>
             <point key="canvasLocation" x="5806" y="-1844"/>
         </scene>
+        <!--Difference Table View Controller-->
+        <scene sceneID="Awb-OV-uws">
+            <objects>
+                <viewController id="CGn-gl-AyL" customClass="DifferenceTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0vv-Sv-vuv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pjQ-49-tDf">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="emi-s7-ou8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="emi-s7-ou8" firstAttribute="trailing" secondItem="pjQ-49-tDf" secondAttribute="trailing" id="8d3-g4-qKi"/>
+                            <constraint firstItem="pjQ-49-tDf" firstAttribute="leading" secondItem="emi-s7-ou8" secondAttribute="leading" id="I0D-dL-cPO"/>
+                            <constraint firstItem="emi-s7-ou8" firstAttribute="bottom" secondItem="pjQ-49-tDf" secondAttribute="bottom" id="kb2-X9-Js5"/>
+                            <constraint firstItem="pjQ-49-tDf" firstAttribute="top" secondItem="emi-s7-ou8" secondAttribute="top" id="zXu-wJ-CQ7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="LXe-k3-DDe"/>
+                    <connections>
+                        <outlet property="tableView" destination="pjQ-49-tDf" id="cGl-BJ-fYo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pDY-UI-GDR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6482.3999999999996" y="-1844.5277361319343"/>
+        </scene>
         <!--Table-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -333,6 +364,7 @@
                         <segue destination="gFr-UQ-9p9" kind="show" identifier="allPluginsTable" id="QY8-TZ-bpF"/>
                         <segue destination="KPe-5j-jTE" kind="show" identifier="refreshableTable" id="lcW-uo-QUW"/>
                         <segue destination="xQn-4x-xEX" kind="show" identifier="paginatableTable" id="2Xm-b9-jRj"/>
+                        <segue destination="CGn-gl-AyL" kind="show" identifier="differenceTable" id="F6X-Et-5hD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
