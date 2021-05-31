@@ -161,7 +161,7 @@ open class GravityTableManager: BaseTableManager {
         }
 
         self.sections[indexOfHeader] = header
-        dataSource?.modifier?.reloadScetions(at: [indexOfHeader], with: animation)
+        dataSource?.modifier?.reloadSections(at: [indexOfHeader], with: animation)
     }
 
     open func remove(_ generator: CellGeneratorType,

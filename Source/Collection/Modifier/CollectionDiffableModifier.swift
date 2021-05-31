@@ -56,7 +56,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter updateAnimation:
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
-    override func reloadScetions(at indexPaths: IndexSet, with updateAnimation: CollectionItemAnimation) {
+    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: CollectionItemAnimation) {
         apply(animated: updateAnimation != .none)
     }
 

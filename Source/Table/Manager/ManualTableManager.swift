@@ -78,7 +78,7 @@ public class ManualTableManager: BaseTableManager {
         guard let index = sections.firstIndex(where: { (headerGenerator) -> Bool in
             return headerGenerator === sectionHeaderGenerator
         }) else { return }
-        dataSource?.modifier?.reloadScetions(at: [index], with: animation)
+        dataSource?.modifier?.reloadSections(at: [index], with: animation)
     }
 
     /// Inserts new generators to provided TableHeaderGenerator generator.

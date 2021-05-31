@@ -34,7 +34,7 @@ open class Modifier<View: UIView, Animation> {
     ///
     /// - parameter indexPaths: location of sections to update
     /// - parameter updateAnimation: animation of update  operation
-    open func reloadScetions(at indexPaths: IndexSet, with updateAnimation: Animation) {
+    open func reloadSections(at indexPaths: IndexSet, with updateAnimation: Animation) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 

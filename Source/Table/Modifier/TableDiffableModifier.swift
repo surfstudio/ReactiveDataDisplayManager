@@ -56,7 +56,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter updateAnimation:
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
-    override func reloadScetions(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
+    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
         apply(animated: updateAnimation != .none)
     }
 
