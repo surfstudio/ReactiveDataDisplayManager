@@ -26,7 +26,7 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
 extension BaseCollectionDataSource {
 
-    public func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
+    public func configure<T>(with builder: CollectionBuilder<T>) where T: BaseCollectionManager {
 
         modifier = CollectionCommonModifier(view: builder.view, animator: builder.animator)
 
@@ -70,7 +70,9 @@ extension BaseCollectionDataSource {
             .generate(collectionView: collectionView, for: indexPath)
     }
 
-    open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    open func collectionView(_ collectionView: UICollectionView,
+                             viewForSupplementaryElementOfKind kind: String,
+                             at indexPath: IndexPath) -> UICollectionReusableView {
         guard let provider = provider else {
             return UICollectionReusableView()
         }

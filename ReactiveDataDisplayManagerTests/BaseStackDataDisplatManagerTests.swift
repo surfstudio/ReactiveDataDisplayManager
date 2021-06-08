@@ -5,6 +5,7 @@
 //  Created by Anton Dryakhlykh on 14.10.2019.
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast
 
 import XCTest
 @testable import ReactiveDataDisplayManager
@@ -77,7 +78,7 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-        
+
         XCTAssert(stackView.arrangedSubviews.count == generators.count)
     }
 
@@ -194,6 +195,6 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(stackView.arrangedSubviews.count == 0)
+        XCTAssert(stackView.arrangedSubviews.isEmpty)
     }
 }

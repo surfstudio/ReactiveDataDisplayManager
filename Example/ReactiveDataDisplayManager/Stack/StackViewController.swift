@@ -14,7 +14,7 @@ final class StackViewController: UIViewController {
     // MARK: - IBOutlets
 
     @IBOutlet private weak var stackView: UIStackView!
-    
+
     // MARK: - Private Properties
 
     private lazy var adapter = stackView.rddm.baseBuilder.build()

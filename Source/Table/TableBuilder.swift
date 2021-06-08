@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 public class TableBuilder<T: BaseTableManager> {
 
     // MARK: - Aliases

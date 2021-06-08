@@ -5,6 +5,7 @@
 //  Created by Anton Dryakhlykh on 11.11.2019.
 //  Copyright © 2019 Александр Кравченков. All rights reserved.
 //
+// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast
 
 import XCTest
 @testable import ReactiveDataDisplayManager

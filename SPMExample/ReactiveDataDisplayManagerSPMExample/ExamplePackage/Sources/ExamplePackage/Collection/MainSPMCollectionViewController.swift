@@ -21,7 +21,7 @@ class MainSPMCollectionViewController: UIViewController {
 
     // MARK: - IBOutlets
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
 
     // MARK: - Private Properties
 
@@ -124,4 +124,3 @@ private extension UICollectionLayoutListConfiguration.Appearance {
     }
 
 }
-

@@ -26,24 +26,26 @@ final class MainTableViewController: UIViewController {
         case refreshableTable
         case paginatableTable
         case allPluginsTable
+        case differenceTable
     }
 
     // MARK: - Constants
 
     private enum Constants {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
-            ("gallery without prefetching", .imageTable),
-            ("gallery with prefetching", .prefetchingTable),
-            ("table with foldable cell", .foldableCellTable),
-            ("gravity table with foldable cell", .gravityTable),
-            ("table with movable cell", .movableTable),
-            ("table with alphabetize sections", .alphabetizeSectionsTable),
-            ("table with sections titles", .sectionTitlesTable),
-            ("table with diffableDataSource", .diffableTable),
-            ("table with swipeable cells", .swipeableTable),
-            ("table with refresh control", .refreshableTable),
-            ("table with pagination", .paginatableTable),
-            ("table with all plugins", .allPluginsTable)
+            ("Gallery without prefetching", .imageTable),
+            ("Gallery with prefetching", .prefetchingTable),
+            ("Table with foldable cell", .foldableCellTable),
+            ("Gravity table with foldable cell", .gravityTable),
+            ("Table with movable cell", .movableTable),
+            ("Table with alphabetize sections", .alphabetizeSectionsTable),
+            ("Table with sections titles", .sectionTitlesTable),
+            ("Table with diffableDataSource", .diffableTable),
+            ("Table with swipeable cells", .swipeableTable),
+            ("Table with refresh control", .refreshableTable),
+            ("Table with pagination", .paginatableTable),
+            ("Table with all plugins", .allPluginsTable),
+            ("Table with DifferenceKit", .differenceTable)
         ]
     }
 

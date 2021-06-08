@@ -40,7 +40,21 @@ final class PaginatableCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Collection with pagination"
+
+        configureActivityIndicatorIfNeeded()
         loadFirstPage()
+    }
+
+}
+
+// MARK: - Configuration
+
+private extension PaginatableCollectionViewController {
+
+    func configureActivityIndicatorIfNeeded() {
+        if #available(iOS 13.0, *) {
+            activityIndicator.style = .medium
+        }
     }
 
 }
@@ -62,7 +76,6 @@ private extension PaginatableCollectionViewController {
 
         // imitation of loading first page
         delay(.now() + .seconds(3)) { [weak self] in
-            
             // fill table
             self?.fillAdapter()
 
@@ -71,7 +84,6 @@ private extension PaginatableCollectionViewController {
 
             // show footer
             self?.paginatableInput?.updatePagination(canIterate: true)
-
         }
     }
 
@@ -86,7 +98,8 @@ private extension PaginatableCollectionViewController {
     }
 
     func makeGenerator() -> CollectionCellGenerator {
-        TitleCollectionViewCell.rddm.baseGenerator(with: "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)" )
+        let title = "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)"
+        return TitleCollectionViewCell.rddm.baseGenerator(with: title)
     }
 
     func fillNext() -> Bool {
@@ -109,7 +122,6 @@ private extension PaginatableCollectionViewController {
     }
 
 }
-
 
 // MARK: - RefreshableOutput
 

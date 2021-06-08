@@ -14,7 +14,7 @@ import UIKit
 /// - Hide `progressView` when finish loading request
 ///
 /// - Warning: Specify itemSize of your layout to proper `willDisplay` calls and correct `contentSize`
-public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent>  {
+public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> {
 
     // MARK: - Typealias
 

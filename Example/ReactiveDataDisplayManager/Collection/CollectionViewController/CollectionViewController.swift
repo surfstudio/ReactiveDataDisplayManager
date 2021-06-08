@@ -1,4 +1,3 @@
-
 //
 //  CollectionViewController.swift
 //  ReactiveDataDisplayManagerExample

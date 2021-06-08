@@ -11,7 +11,7 @@ import UIKit
 /// It can hide implementation of UITableView or UICollection view or your custom control with any data source.
 public protocol FooterDataDisplayManager: AnyObject {
 
-    // MARK:- Associatedtypes
+    // MARK: - Associatedtypes
 
     associatedtype CellGeneratorType
     associatedtype FooterGeneratorType

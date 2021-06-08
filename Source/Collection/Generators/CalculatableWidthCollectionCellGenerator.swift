@@ -8,7 +8,9 @@
 
 import UIKit
 
+// swiftlint:disable line_length
 public class CalculatableWidthCollectionCellGenerator<Cell: ConfigurableItem & CalculatableWidthItem>: BaseCollectionCellGenerator<Cell> & SizableItem where Cell: UICollectionViewCell {
+// swiftlint:enable line_length
 
     // MARK: - Private Properties
 

@@ -5,7 +5,6 @@
 //  Created by Dmitry Korolev on 31.03.2021.
 //
 
-
 import UIKit
 import ReactiveDataDisplayManager
 import Nuke
@@ -15,7 +14,7 @@ final class CollectionCompositionalViewController: UIViewController {
 
     // MARK: - Typealias
 
-    typealias VisibleItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
+    typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
 
     // MARK: - Constants
 
@@ -34,7 +33,7 @@ final class CollectionCompositionalViewController: UIViewController {
     // MARK: - Private Properties
 
     private let prefetcher = NukeImagePrefetcher(placeholder: #imageLiteral(resourceName: "ReactiveLogo"))
-    private lazy var prefetcherablePlugin: CollectionPrefetcherablePlugin<NukeImagePrefetcher, ImageCollectionCellGenerator> = .prefetch(prefetcher: prefetcher)
+    private lazy var prefetcherablePlugin: CollectionImagePrefetcherablePlugin = .prefetch(prefetcher: prefetcher)
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)
@@ -62,7 +61,7 @@ private extension CollectionCompositionalViewController {
         addCompositeGroupSection()
         adapter.forceRefill()
     }
-    
+
     func addAnimationSection() {
         addHeaderFooterGenerator(header: "Animate section begin", footer: "Animate section end")
         for _ in 0...29 {
@@ -76,18 +75,19 @@ private extension CollectionCompositionalViewController {
             adapter.addCellGenerator(generator)
         }
     }
-    
+
     func addGridSection() {
         addHeaderFooterGenerator(header: "Grid section begin", footer: "Grid section end")
         for index in 0...11 {
             // Create generator
-            let generator = TitleCollectionGenerator(model: "Item \(index)", needIndexTitle: index % 2 == 0 ? true : false)
+            let needIndexTitle = index % 2 == 0 ? true : false
+            let generator = TitleCollectionGenerator(model: "Item \(index)", needIndexTitle: needIndexTitle)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)
         }
     }
-    
+
     func addCompositeGroupSection() {
         addHeaderFooterGenerator(header: "Composite group section begin", footer: "Composite group section end")
         for _ in 0...31 {
@@ -141,7 +141,7 @@ private extension CollectionCompositionalViewController {
     func animationLayout() -> NSCollectionLayoutSection {
         // Header
         let header = makeSectionHeader()
-        
+
         // Footer
         let footer = makeSectionFooter()
 
@@ -161,7 +161,7 @@ private extension CollectionCompositionalViewController {
         return section
     }
 
-    func handleVisibleItemsInvalidation(_ result: VisibleItemsInvalidationResult) {
+    func handleVisibleItemsInvalidation(_ result: ItemsInvalidationResult) {
         // Remove header from cells
         let cellWithoutHeaderOrFooter = result.items.filter { $0.representedElementKind == .none }
 

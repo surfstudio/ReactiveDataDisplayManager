@@ -13,14 +13,12 @@ extension EmptyTableHeaderGenerator: GravityItem {
         .zero
     }
 
+    // swiftlint:disable unused_setter_value
     public var heaviness: Int {
-        get {
-            return self.getHeaviness()
-        }
-        set {
-            fatalError()
-        }
+        get { return self.getHeaviness() }
+        set { fatalError() }
     }
+    // swiftlint:enable unused_setter_value
 }
 
 /// DataDisplayManager for UITableView
@@ -139,7 +137,6 @@ open class GravityTableManager: BaseTableManager {
         self.generators[index].removeAll()
     }
 
-
     public func clearHeaderGenerators() {
         sections.removeAll()
     }
@@ -164,7 +161,7 @@ open class GravityTableManager: BaseTableManager {
         }
 
         self.sections[indexOfHeader] = header
-        dataSource?.modifier?.reloadScetions(at: [indexOfHeader], with: animation)
+        dataSource?.modifier?.reloadSections(at: [indexOfHeader], with: animation)
     }
 
     open func remove(_ generator: CellGeneratorType,

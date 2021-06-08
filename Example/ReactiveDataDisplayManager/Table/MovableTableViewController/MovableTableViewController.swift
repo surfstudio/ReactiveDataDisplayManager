@@ -49,7 +49,7 @@ private extension MovableTableViewController {
         adapter.addCellGenerators(makeMovableCellGenerators())
         adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
         adapter.addCellGenerators(makeMovableCellGenerators())
-        
+
         // Tell adapter that we've changed generators
         adapter.forceRefill()
         tableView.setEditing(true, animated: true)

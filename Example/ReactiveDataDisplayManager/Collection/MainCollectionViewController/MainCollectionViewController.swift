@@ -25,6 +25,7 @@ final class MainCollectionViewController: UIViewController {
         case diffableCollection
         case paginatableCollection
         case compositionalCollection
+        case differenceCollection
     }
 
     // MARK: - Constants
@@ -41,7 +42,8 @@ final class MainCollectionViewController: UIViewController {
             ("Collection with item index titles", .itemTitleCollection),
             ("Collection with diffableDataSource", .diffableCollection),
             ("Collection with pagination", .paginatableCollection),
-            ("Collection with compositional layout", .compositionalCollection)
+            ("Collection with compositional layout", .compositionalCollection),
+            ("Collection with DifferenceKit", .differenceCollection)
         ]
     }
 
@@ -73,7 +75,7 @@ private extension MainCollectionViewController {
         for model in Constants.models {
             // Create generator
             let generator = TitleWithIconTableViewCell.rddm.baseGenerator(with: model.title)
-            
+
             generator.didSelectEvent += { [weak self] in
                 self?.openScreen(by: model.segueId)
             }
