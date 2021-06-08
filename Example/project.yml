@@ -2,7 +2,7 @@
 name: ReactiveDataDisplayManagerExample
 options:
   # Версия Xcode
-  xcodeVersion: 12.4
+  xcodeVersion: 12.5
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
@@ -14,8 +14,10 @@ targets:
       dependencies:
         - sdk: UIKit.framework
       type: application
-      platform: iOS
-      deploymentTarget: 11.0
+      platform: [iOS, tvOS]
+      deploymentTarget:
+        iOS: 11.0
+        tvOS: 11.0
       scheme:
         configVariants: all
       sources:
