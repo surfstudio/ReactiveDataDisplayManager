@@ -23,6 +23,7 @@ targets:
       info:
         path: ReactiveDataDisplayManager/Application/Info.plist
         properties:
+          UIUserInterfaceStyle: light
           UILaunchStoryboardName: LaunchScreen
           UIMainStoryboardFile: Main
           CFBundleName: ReactiveDataDisplayManagerExample
@@ -52,6 +53,7 @@ targets:
       info:
         path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
         properties:
+          UIUserInterfaceStyle: light
           UILaunchStoryboardName: LaunchScreen
           UIMainStoryboardFile: Main
           CFBundleName: ReactiveDataDisplayManagerExampleTv
