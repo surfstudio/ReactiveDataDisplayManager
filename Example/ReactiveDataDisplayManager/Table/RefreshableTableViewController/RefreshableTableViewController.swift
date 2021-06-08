@@ -5,7 +5,7 @@
 //  Created by Никита Коробейников on 03.03.2021.
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
-#if os(iOS)
+
 import UIKit
 import ReactiveDataDisplayManager
 
@@ -72,4 +72,3 @@ extension RefreshableTableViewController: RefreshableOutput {
     }
 
 }
-#endif

@@ -5,7 +5,7 @@
 //  Created by Anton Eysner on 15.02.2021.
 //  Copyright © 2021 Alexander Kravchenkov. All rights reserved.
 //
-#if os(iOS)
+
 import UIKit
 import ReactiveDataDisplayManager
 import Nuke
@@ -213,4 +213,3 @@ extension AllPluginsTableViewController: RefreshableOutput {
     }
 
 }
-#endif

@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-@available(iOS 14.0, tvOS 14.0, *)
+@available(iOS 14.0, *)
 class CollectionListViewController: UIViewController {
 
     // MARK: - IBOutlets
@@ -39,7 +39,7 @@ class CollectionListViewController: UIViewController {
 
 // MARK: - Private Methods
 
-@available(iOS 14.0, tvOS 14.0, *)
+@available(iOS 14.0, *)
 private extension CollectionListViewController {
 
     func fillAdapter() {
@@ -79,11 +79,10 @@ private extension CollectionListViewController {
 
 // MARK: - Appearance
 
-@available(iOS 14.0, tvOS 14.0, *)
+@available(iOS 14.0, *)
 private extension UICollectionLayoutListConfiguration.Appearance {
 
     var title: String {
-        #if os(iOS)
         switch self {
         case .plain:
             return "Plain"
@@ -98,20 +97,9 @@ private extension UICollectionLayoutListConfiguration.Appearance {
         @unknown default:
             fatalError()
         }
-        #elseif os(tvOS)
-        switch self {
-        case .plain:
-            return "Plain"
-        case .grouped:
-            return "Grouped"
-        @unknown default:
-            fatalError()
-        }
-        #endif
     }
 
     var next: UICollectionLayoutListConfiguration.Appearance {
-        #if os(iOS)
         switch self {
         case .plain:
             return .sidebarPlain
@@ -126,16 +114,6 @@ private extension UICollectionLayoutListConfiguration.Appearance {
         @unknown default:
             fatalError()
         }
-        #elseif os(tvOS)
-        switch self {
-        case .plain:
-            return .grouped
-        case .grouped:
-            return .plain
-        @unknown default:
-            fatalError()
-        }
-        #endif
     }
 
 }
