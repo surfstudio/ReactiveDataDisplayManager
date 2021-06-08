@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CABBB6428FEC2BC26FA2E2B7"
-               BuildableName = "ReactiveDataDisplayManagerExample.app"
+               BuildableName = "ReactiveDataDisplayManagerExample_iOS.app"
                BlueprintName = "ReactiveDataDisplayManagerExample_iOS"
                ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
             </BuildableReference>
@@ -34,7 +34,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CABBB6428FEC2BC26FA2E2B7"
-            BuildableName = "ReactiveDataDisplayManagerExample.app"
+            BuildableName = "ReactiveDataDisplayManagerExample_iOS.app"
             BlueprintName = "ReactiveDataDisplayManagerExample_iOS"
             ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
          </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CABBB6428FEC2BC26FA2E2B7"
-            BuildableName = "ReactiveDataDisplayManagerExample.app"
+            BuildableName = "ReactiveDataDisplayManagerExample_iOS.app"
             BlueprintName = "ReactiveDataDisplayManagerExample_iOS"
             ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CABBB6428FEC2BC26FA2E2B7"
-            BuildableName = "ReactiveDataDisplayManagerExample.app"
+            BuildableName = "ReactiveDataDisplayManagerExample_iOS.app"
             BlueprintName = "ReactiveDataDisplayManagerExample_iOS"
             ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
          </BuildableReference>

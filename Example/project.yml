@@ -10,14 +10,12 @@ options:
 settings:
   DEVELOPMENT_TEAM: EFAAG9GXN4
 targets:
-    ReactiveDataDisplayManagerExample:
+    ReactiveDataDisplayManagerExample_iOS:
       dependencies:
         - sdk: UIKit.framework
       type: application
-      platform: [iOS, tvOS]
-      deploymentTarget:
-        iOS: 11.0
-        tvOS: 11.0
+      platform: iOS
+      deploymentTarget: 11.0
       scheme:
         configVariants: all
       sources:
@@ -28,6 +26,35 @@ targets:
           UILaunchStoryboardName: LaunchScreen
           UIMainStoryboardFile: Main
           CFBundleName: ReactiveDataDisplayManagerExample
+          CFBundleShortVersionString: $(MARKETING_VERSION)
+          CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+      settings:
+        base:
+          PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm.example
+          MARKETING_VERSION: "7.0.0"
+          CURRENT_PROJECT_VERSION: 0
+          VERSIONING_SYSTEM: "apple-generic"
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+          LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
+          CODE_SIGN_IDENTITY: "iPhone Developer"
+          CODE_SIGN_STYLE: Automatic
+
+    ReactiveDataDisplayManagerExample_tvOS:
+      dependencies:
+        - sdk: UIKit.framework
+      type: application
+      platform: tvOS
+      deploymentTarget: 11.0
+      scheme:
+        configVariants: all
+      sources:
+        - path: ReactiveDataDisplayManagerExampleTv
+      info:
+        path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
+        properties:
+          UILaunchStoryboardName: LaunchScreen
+          UIMainStoryboardFile: Main
+          CFBundleName: ReactiveDataDisplayManagerExampleTv
           CFBundleShortVersionString: $(MARKETING_VERSION)
           CFBundleVersion: $(CURRENT_PROJECT_VERSION)
       settings:
