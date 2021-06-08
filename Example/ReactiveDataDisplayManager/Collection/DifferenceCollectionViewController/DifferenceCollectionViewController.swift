@@ -4,7 +4,7 @@
 //
 //  Created by Anton Eysner on 14.04.2021.
 //
-
+#if os(iOS)
 import UIKit
 import ReactiveDataDisplayManager
 
@@ -136,3 +136,4 @@ private extension DifferenceCollectionViewController {
     }
 
 }
+#endif

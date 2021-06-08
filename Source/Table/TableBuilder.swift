@@ -44,7 +44,7 @@ public class TableBuilder<T: BaseTableManager> {
         delegate = BaseTableDelegate()
         dataSource = BaseTableDataSource()
         animator = {
-            if #available(iOS 11, *) {
+            if #available(iOS 11.0, tvOS 11.0, *) {
                 return TableBatchUpdatesAnimator()
             } else {
                 return TableUpdatesAnimator()
@@ -68,7 +68,9 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(featurePlugin: TableFeaturePlugin) -> TableBuilder<T> {
+        #if os(iOS)
         checkSwipeActionsPlugin(with: featurePlugin)
+        #endif
 
         switch featurePlugin {
         case let plugin as TableMovable:
@@ -100,7 +102,7 @@ public class TableBuilder<T: BaseTableManager> {
     }
 
     /// Add plugin functionality based on UITableViewDataSourcePrefetching events
-    @available(iOS 10.0, *)
+    @available(iOS 10.0, tvOS 10.0, *)
     public func add(plugin: BaseTablePlugin<PrefetchEvent>) -> TableBuilder<T> {
         prefetchPlugins.add(plugin)
         return self
@@ -114,7 +116,7 @@ public class TableBuilder<T: BaseTableManager> {
 
         dataSource.configure(with: self)
         view.dataSource = dataSource
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, tvOS 10.0, *) {
             view.prefetchDataSource = dataSource
         }
 
@@ -128,13 +130,13 @@ public class TableBuilder<T: BaseTableManager> {
 // MARK: - Private Methods
 
 private extension TableBuilder {
-
+    #if os(iOS)
     func checkSwipeActionsPlugin(with plugin: TableFeaturePlugin) {
-        guard #available(iOS 11.0, *),
+        guard #available(iOS 11.0, tvOS 11.0, *),
               let plugin = plugin as? TableSwipeActionsConfigurable
         else { return }
 
         swipeActionsPlugin = plugin
     }
-
+    #endif
 }

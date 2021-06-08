@@ -8,13 +8,13 @@
 
 import UIKit
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 public typealias DiffableSnapshot = NSDiffableDataSourceSnapshot<DiffableItem, DiffableItem>
 
 /// DataSource based on `UITableViewDiffableDataSource` with automatic cells managing
 ///
 /// - Warning: Required to conform all generators to `DiffableItemSource`
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, DiffableItem>, TableDataSource {
 
     // MARK: - Properties
@@ -63,7 +63,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
 // MARK: - TableBuilderConfigurable
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 extension DiffableTableDataSource {
 
     open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
@@ -85,7 +85,7 @@ extension DiffableTableDataSource {
 
 // MARK: - UITableViewDataSourcePrefetching
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 extension DiffableTableDataSource {
 
     open func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {

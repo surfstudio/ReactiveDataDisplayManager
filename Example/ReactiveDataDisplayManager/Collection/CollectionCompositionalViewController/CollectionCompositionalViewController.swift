@@ -9,7 +9,7 @@ import UIKit
 import ReactiveDataDisplayManager
 import Nuke
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 final class CollectionCompositionalViewController: UIViewController {
 
     // MARK: - Typealias
@@ -51,7 +51,7 @@ final class CollectionCompositionalViewController: UIViewController {
 
 // MARK: - Private Methods
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 private extension CollectionCompositionalViewController {
 
     func fillAdapter() {
@@ -121,7 +121,7 @@ private extension CollectionCompositionalViewController {
 
 // MARK: - UICollectionViewCompositionalLayout Helper Methods
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 private extension CollectionCompositionalViewController {
 
     func makeCompositionalLayout() -> UICollectionViewCompositionalLayout {

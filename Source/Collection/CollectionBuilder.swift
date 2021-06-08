@@ -82,7 +82,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     }
 
     /// Add plugin functionality based on UICollectionViewDataSourcePrefetching events
-    @available(iOS 10.0, *)
+    @available(iOS 10.0, tvOS 10.0, *)
     public func add(plugin: BaseCollectionPlugin<PrefetchEvent>) -> CollectionBuilder<T> {
         prefetchPlugins.add(plugin)
         return self
@@ -98,7 +98,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         dataSource.configure(with: self)
         view.dataSource = dataSource
 
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, tvOS 10.0, *) {
             view.prefetchDataSource = dataSource
         }
 

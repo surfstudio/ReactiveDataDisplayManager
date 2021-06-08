@@ -10,7 +10,7 @@ import UIKit
 /// DataSource based on `UICollectionViewDiffableDataSource` with automatic cells managing
 ///
 /// - Warning: Required to conform all generators to `DiffableItemSource`
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<DiffableItem, DiffableItem>, CollectionDataSource {
 
     // MARK: - Properties
@@ -40,7 +40,7 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
 
 // MARK: - CollectionBuilderConfigurable
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 public extension DiffableCollectionDataSource {
 
     func configure<T>(with builder: CollectionBuilder<T>) where T: BaseCollectionManager {
@@ -62,7 +62,7 @@ public extension DiffableCollectionDataSource {
 
 // MARK: - UICollectionViewDataSourcePrefetching
 
-@available(iOS 13.0, *)
+@available(iOS 13.0, tvOS 13.0, *)
 extension DiffableCollectionDataSource {
 
     open func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {

@@ -4,7 +4,7 @@
 //
 //  Created by Никита Коробейников on 16.03.2021.
 //
-
+#if os(iOS)
 import UIKit
 import ReactiveDataDisplayManager
 
@@ -144,3 +144,4 @@ private extension DiffableCollectionViewController {
     }
 
 }
+#endif

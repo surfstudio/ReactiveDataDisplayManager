@@ -53,7 +53,7 @@ final class PaginatableTableViewController: UIViewController {
 private extension PaginatableTableViewController {
 
     func configureActivityIndicatorIfNeeded() {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, tvOS 13.0, *) {
             activityIndicator.style = .medium
         }
     }

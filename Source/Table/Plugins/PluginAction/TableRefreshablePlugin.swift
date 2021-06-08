@@ -5,7 +5,7 @@
 //  Created by Никита Коробейников on 03.03.2021.
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
-
+#if os(iOS)
 import UIKit
 
 /// Input signals to hide `UIRefreshControl`
@@ -95,3 +95,4 @@ public extension BaseTablePlugin {
     }
 
 }
+#endif

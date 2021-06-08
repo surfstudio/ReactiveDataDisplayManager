@@ -4,7 +4,7 @@
 //
 //  Created by Anton Eysner on 14.04.2021.
 //
-
+#if os(iOS)
 import ReactiveDataDisplayManager
 import DifferenceKit
 
@@ -55,3 +55,4 @@ private extension BaseCollectionManager {
     }
 
 }
+#endif

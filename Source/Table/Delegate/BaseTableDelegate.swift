@@ -21,6 +21,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
     public var movablePlugin: TableMovableDelegate?
 
+    #if os(iOS)
     @available(iOS 11.0, *)
     public var swipeActionsPlugin: TableSwipeActionsConfigurable? {
         set { _swipeActionsPlugin = newValue }
@@ -30,6 +31,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     // MARK: - Private Properties
 
     private var _swipeActionsPlugin: TableFeaturePlugin?
+    #endif
 
 }
 
@@ -43,9 +45,11 @@ extension BaseTableDelegate {
         tablePlugins = builder.tablePlugins
         scrollPlugins = builder.scrollPlugins
 
+        #if os(iOS)
         if #available(iOS 11.0, *) {
             swipeActionsPlugin = builder.swipeActionsPlugin as? TableSwipeActionsConfigurable
         }
+        #endif
 
         manager = builder.manager
 
@@ -159,6 +163,7 @@ extension BaseTableDelegate {
         tablePlugins.process(event: .didUpdateFocus(context: context, coordinator: coordinator), with: manager)
     }
 
+    #if os(iOS)
     @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView,
                         leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -170,7 +175,7 @@ extension BaseTableDelegate {
                           trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return swipeActionsPlugin?.trailingSwipeActionsConfigurationForRow(at: indexPath, with: manager)
     }
-
+    #endif
 }
 
 // MARK: UIScrollViewDelegate

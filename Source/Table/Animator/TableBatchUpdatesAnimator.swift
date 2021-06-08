@@ -9,7 +9,7 @@
 import UIKit
 
 /// UITableView Animator based on performBatchUpdates
-@available(iOS 11, *)
+@available(iOS 11.0, tvOS 11.0, *)
 public class TableBatchUpdatesAnimator: Animator<UITableView> {
 
     public override func perform(in collection: UITableView, animated: Bool, operation: () -> Void) {

@@ -93,7 +93,7 @@ private extension MainTableViewController {
     func openScreen(by segueId: SegueIdentifier) {
         switch segueId {
         case .diffableTable:
-            if #available(iOS 13.0, *) {
+            if #available(iOS 13.0, tvOS 13.0, *) {
                 performSegue(withIdentifier: segueId.rawValue, sender: tableView)
             } else {
                 showAlert("Available from iOS 13")

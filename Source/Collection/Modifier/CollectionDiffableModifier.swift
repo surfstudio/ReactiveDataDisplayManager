@@ -11,7 +11,7 @@ import UIKit
 ///
 /// - Note: Based on `UICollectionViewDiffableDataSource` and `NSDiffableDataSourceSnapshot` updating.
 /// Animations selected automatically or ignored.
-@available(iOS 13, *)
+@available(iOS 13.0, tvOS 13.0, *)
 class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnimation> {
 
     typealias CellGeneratorType = CollectionCellGenerator & DiffableItemSource
@@ -106,7 +106,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
 
 // MARK: - Private
 
-@available(iOS 13, *)
+@available(iOS 13.0, tvOS 13.0, *)
 private extension CollectionDiffableModifier {
 
     func apply(animated: Bool = false, completion: (() -> Void)? = nil) {

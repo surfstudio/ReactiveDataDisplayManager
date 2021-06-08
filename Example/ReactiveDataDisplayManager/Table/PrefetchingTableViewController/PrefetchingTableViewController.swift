@@ -35,7 +35,10 @@ final class PrefetchingTableViewController: UIViewController {
             dataCache.removeAll()
         }
 
+        #if os(iOS)
         tableView.separatorStyle = .none
+        #endif
+
         title = "Gallery with prefetching"
 
         fillAdapter()
