@@ -54,6 +54,8 @@ targets:
         path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
         properties:
           UIUserInterfaceStyle: light
+          UILaunchStoryboardName: LaunchScreen
+          UIMainStoryboardFile: Main
           CFBundleName: ReactiveDataDisplayManagerExampleTv
           CFBundleShortVersionString: $(MARKETING_VERSION)
           CFBundleVersion: $(CURRENT_PROJECT_VERSION)
