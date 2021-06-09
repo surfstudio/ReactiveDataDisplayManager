@@ -16,7 +16,6 @@ final class MainStackViewController: UIViewController {
         case simpleStack
         case unrollStack
         case landingStack
-        
     }
 
     // MARK: - Constants

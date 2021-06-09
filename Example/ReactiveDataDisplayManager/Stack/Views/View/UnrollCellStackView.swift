@@ -63,7 +63,7 @@ private extension UnrollCellStackView {
         addSubview(mainStack)
         addConstraints([top, bottom, leading, trailing])
     }
-    
+
     func updateBigTextLabel() {
         bigTextLabel.numberOfLines = isUnroll ? 0 : 3
     }
