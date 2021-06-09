@@ -11,12 +11,16 @@ import ReactiveDataDisplayManager
 
 final class MainGalleryController: UIViewController {
 
+    // MARK: - Typealias
+
+    typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
+
     // MARK: - Constants
 
     private enum Constants {
-        static let cellSize = CGSize(width: 120, height: 120)
-        static let sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
-        static let horizontalItemSpace: CGFloat = 20
+        static let boundaryItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                             heightDimension: .absolute(100))
+        static let edgeInsets = NSDirectionalEdgeInsets(top: 0, leading: 40, bottom: 40, trailing: 40)
     }
 
     // MARK: - IBOutlet
@@ -49,26 +53,25 @@ private extension MainGalleryController {
         collectionView.decelerationRate = .fast
         collectionView.showsHorizontalScrollIndicator = false
 
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = Constants.cellSize
-        layout.sectionInset = Constants.sectionInset
-        layout.minimumLineSpacing = Constants.horizontalItemSpace
-        layout.minimumInteritemSpacing = 0
-        collectionView.setCollectionViewLayout(layout, animated: false)
+        collectionView.setCollectionViewLayout(makeCompositionalLayout(), animated: false)
     }
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        for _ in 0...300 {
-            // Create viewModels for cell
-            guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
+        for i in 0...10 {
+            let headerGenerator = TitleCollectionHeaderGenerator(title: "Recommendations \(i)")
 
-            // Create generator
-            let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
+            adapter.addSectionHeaderGenerator(headerGenerator)
+            for _ in 0...31 {
+                // Create viewModels for cell
+                guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
 
-            // Add generator to adapter
-            adapter.addCellGenerator(generator)
+                // Create generator
+                let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
+
+                // Add generator to adapter
+                adapter.addCellGenerator(generator)
+            }
         }
 
         // Tell adapter that we've changed generators
@@ -78,6 +81,49 @@ private extension MainGalleryController {
     /// This method load image and set to UIImageView
     func loadImage(url: URL, imageView: UIImageView) {
         Nuke.loadImage(with: url, into: imageView)
+    }
+
+    func makeCompositionalLayout() -> UICollectionViewCompositionalLayout {
+        UICollectionViewCompositionalLayout { [weak self] (sectionNumber, _) -> NSCollectionLayoutSection? in
+            self?.gridLayout()
+        }
+    }
+
+    // Grid section
+    func gridLayout() -> NSCollectionLayoutSection {
+        // Header
+        let header = makeSectionHeader()
+
+        // Item
+        let item = makeItem(with: .init(width: 0.2, height: 1.0))
+
+        // Group
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: makeLayoutSize(for: .init(width: 1.0, height: 0.2)),
+                                                       subitems: [item])
+
+        // Section
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
+        section.boundarySupplementaryItems = [header] // add custom element (header, ....)
+        return section
+    }
+
+    func makeSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        return NSCollectionLayoutBoundarySupplementaryItem(layoutSize: Constants.boundaryItemSize,
+                                                           elementKind: UICollectionView.elementKindSectionHeader,
+                                                           alignment: .top)
+    }
+
+    func makeItem(with size: CGSize, contentInsets: NSDirectionalEdgeInsets = Constants.edgeInsets) -> NSCollectionLayoutItem {
+        let layoutSize = makeLayoutSize(for: size)
+        let item = NSCollectionLayoutItem(layoutSize: layoutSize)
+        item.contentInsets = contentInsets
+        return item
+    }
+
+    func makeLayoutSize(for size: CGSize) -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(size.width),
+                                      heightDimension: .fractionalHeight(size.height))
     }
 
 }

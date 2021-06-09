@@ -45,7 +45,7 @@ targets:
         - sdk: UIKit.framework
       type: application
       platform: tvOS
-      deploymentTarget: 11.0
+      deploymentTarget: 13.0
       scheme:
         configVariants: all
       sources:
