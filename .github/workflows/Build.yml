@@ -8,13 +8,20 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build_iOS:
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
     - name: Build
-      run: xcodebuild -target ReactiveDataDisplayManager
+      run: xcodebuild -target ReactiveDataDisplayManager_iOS
     - name: Run tests
-      run: xcodebuild test -scheme ReactiveDataDisplayManager -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
+      run: xcodebuild test -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
     - name: Upload Coverage
       run: bash <(curl -s https://codecov.io/bash) -J 'ReactiveDataDisplayManager'
+
+  build_tvOS:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: xcodebuild -target ReactiveDataDisplayManager_tvOS
