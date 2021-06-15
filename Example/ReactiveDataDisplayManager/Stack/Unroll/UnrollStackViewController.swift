@@ -1,15 +1,13 @@
 //
-//  StackViewController.swift
+//  UnrollStackViewController.swift
 //  ReactiveDataDisplayManagerExample
 //
-//  Created by Anton Dryakhlykh on 14.10.2019.
-//  Copyright © 2019 Alexander Kravchenkov. All rights reserved.
+//  Created by Dmitry Korolev on 01.04.2021.
 //
 
-import ReactiveDataDisplayManager
 import UIKit
 
-final class StackViewController: UIViewController {
+final class UnrollStackViewController: UIViewController {
 
     // MARK: - IBOutlets
 
@@ -18,7 +16,6 @@ final class StackViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = stackView.rddm.baseBuilder.build()
-    private let titles = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController
 
@@ -31,15 +28,16 @@ final class StackViewController: UIViewController {
 
 // MARK: - Private Methods
 
-private extension StackViewController {
+private extension UnrollStackViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+        let sampleText = "LongText".localized
         // Create generators
-        let generators = titles.map(TitleStackCellGenerator.init)
+        let generator = UnrollStackCellGenerator(with: sampleText)
 
         // Add generators to adapter
-        adapter.addCellGenerators(generators)
+        adapter.addCellGenerator(generator)
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
