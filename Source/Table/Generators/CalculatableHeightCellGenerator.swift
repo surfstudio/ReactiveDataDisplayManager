@@ -9,7 +9,7 @@
 import UIKit
 
 /// Class for generating reusable Configurable UITableViewCell with calculated height
-open class CalculatableHeightCellGenerator<Cell: CalculatableHeightItem>: BaseCellGenerator<Cell> where Cell : UITableViewCell {
+open class CalculatableHeightCellGenerator<Cell: CalculatableHeightItem>: BaseCellGenerator<Cell> where Cell: UITableViewCell {
 
     // MARK: - Private Properties
 
