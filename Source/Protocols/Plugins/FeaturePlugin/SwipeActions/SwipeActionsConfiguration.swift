@@ -1,24 +1,25 @@
 //
-//  TableSwipeActionsConfiguration.swift
+//  SwipeActionsConfiguration.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Anton Eysner on 12.02.2021.
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 @available(iOS 11.0, *)
-public struct TableSwipeActionsConfiguration {
+public struct SwipeActionsConfiguration {
 
     // MARK: - Properties
 
-    public let actions: [TableSwipeAction]
+    public let actions: [SwipeAction]
     public let performsFirstActionWithFullSwipe: Bool
 
     // MARK: - Initialization
 
-    public init(actions: [TableSwipeAction],
+    public init(actions: [SwipeAction],
                 performsFirstActionWithFullSwipe: Bool = true) {
         self.actions = actions
         self.performsFirstActionWithFullSwipe = performsFirstActionWithFullSwipe
@@ -27,7 +28,7 @@ public struct TableSwipeActionsConfiguration {
 }
 
 @available(iOS 11.0, *)
-public struct TableSwipeAction {
+public struct SwipeAction {
 
     // MARK: - Properties
 
