@@ -8,7 +8,7 @@
 import UIKit
 
 /// Protocol that incapsulated type of Header
-public protocol CollectionHeaderGenerator: AnyObject, ViewRegistableItem {
+public protocol CollectionHeaderGenerator: ViewRegistableItem {
 
     var identifier: UICollectionReusableView.Type { get }
 

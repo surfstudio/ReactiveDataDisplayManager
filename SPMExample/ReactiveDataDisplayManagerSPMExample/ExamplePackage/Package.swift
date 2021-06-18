@@ -13,10 +13,7 @@ let package = Package(
             targets: ["ExamplePackage"])
     ],
     dependencies: [
-        .package(name: "ReactiveDataDisplayManager",
-                 url: "https://github.com/surfstudio/ReactiveDataDisplayManager",
-                 .branch("feature/spm-support")
-        )
+        .package(path: "../../../")
     ],
     targets: [
         .target(

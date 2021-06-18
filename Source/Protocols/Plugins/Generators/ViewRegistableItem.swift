@@ -8,7 +8,7 @@
 import UIKit
 
 /// Protocol to specify bundle where we can register generated view.
-public protocol ViewRegistableItem {
+public protocol ViewRegistableItem: AnyObject {
 
     /// Method for SPM support
     ///

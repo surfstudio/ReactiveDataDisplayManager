@@ -8,7 +8,7 @@
 import UIKit
 
 /// Protocol that incapsulated type of Footer
-public protocol CollectionFooterGenerator: AnyObject, ViewRegistableItem {
+public protocol CollectionFooterGenerator: ViewRegistableItem {
 
     var identifier: UICollectionReusableView.Type { get }
 

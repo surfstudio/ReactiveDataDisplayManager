@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol that incapsulated type of current cell
-public protocol TableCellGenerator: AnyObject, ViewRegistableItem {
+public protocol TableCellGenerator: ViewRegistableItem {
 
     /// Nib type, which create this generator
     var identifier: String { get }
@@ -37,7 +37,7 @@ public protocol TableCellGenerator: AnyObject, ViewRegistableItem {
 }
 
 /// Protocol that incapsulated type of current cell
-public protocol CollectionCellGenerator: AnyObject, ViewRegistableItem {
+public protocol CollectionCellGenerator: ViewRegistableItem {
 
     /// Nib type, which create this generator
     var identifier: String { get }
