@@ -21,6 +21,12 @@ public protocol SectionedDataDisplayManager: AnyObject {
     /// - Parameter section: New section with headers and footers generators.
     func addSection(_ section: SectionType)
 
+    /// Adds a new cells at the end of section
+    ///
+    /// - parameters:
+    ///     - generators: Array of new generator to insert
+    ///     - section: Section of collection
+    func addCellGenerators(_ generators: [CollectionCellGenerator], toSection section: CollectionSection)
 
     /// Removes section including cell generators.
     ///
@@ -29,4 +35,19 @@ public protocol SectionedDataDisplayManager: AnyObject {
 
     /// Removes all sections including generators.
     func clearAllSections()
+}
+
+// MARK: - Defaults
+
+public extension SectionedDataDisplayManager {
+
+    /// Adds a new cells at the end of section
+    ///
+    /// - parameters:
+    ///     - generator: New generator to insert
+    ///     - section: Section of collection
+    func addCellGenerator(_ generator: CollectionCellGenerator, toSection section: CollectionSection) {
+        addCellGenerators([generator], toSection: section)
+    }
+
 }

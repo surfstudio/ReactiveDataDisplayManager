@@ -17,6 +17,23 @@ extension BaseCollectionManager: SectionedDataDisplayManager {
         sections.append(section)
     }
 
+    public func addCellGenerators(_ generators: [CollectionCellGenerator], toSection section: CollectionSection) {
+        generators.forEach { $0.registerCell(in: view) }
+
+        if self.generators.count != self.sections.count || sections.isEmpty {
+            self.generators.append([CollectionCellGenerator]())
+        }
+
+        let sectionIndex = sections
+            .firstIndex(where: {
+                            $0.header === section.header && $0.footer === section.footer
+            })
+
+        if let index = sectionIndex {
+            self.generators[index].append(contentsOf: generators)
+        }
+    }
+
     public func removeSection(_ section: CollectionSection) {
 
         let sectionIndex = sections
@@ -37,22 +54,5 @@ extension BaseCollectionManager: SectionedDataDisplayManager {
         sections.removeAll()
         clearCellGenerators()
     }
-
-    // TODO: add methods to add generators to section
-//    public func addCellGenerator(_ generator: CollectionCellGenerator, toHeader header: CollectionHeaderGenerator) {
-//        addCellGenerators([generator], toHeader: header)
-//    }
-//
-//    public func addCellGenerators(_ generators: [CollectionCellGenerator], toHeader header: CollectionHeaderGenerator) {
-//        generators.forEach { $0.registerCell(in: view) }
-//
-//        if self.generators.count != self.sections.count || sections.isEmpty {
-//            self.generators.append([CollectionCellGenerator]())
-//        }
-//
-//        if let index = self.sections.firstIndex(where: { $0 === header }) {
-//            self.generators[index].append(contentsOf: generators)
-//        }
-//    }
 
 }
