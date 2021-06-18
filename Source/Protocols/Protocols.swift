@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol that incapsulated type of current cell
-public protocol TableCellGenerator: AnyObject {
+public protocol TableCellGenerator: AnyObject, ViewRegistableItem {
 
     /// Nib type, which create this generator
     var identifier: String { get }
@@ -34,23 +34,10 @@ public protocol TableCellGenerator: AnyObject {
     ///
     /// Default implementation returns nil
     var estimatedCellHeight: CGFloat? { get }
-
-    /// Method for SPM support
-    ///
-    /// If you use SPM return Bundle.module
-    static func bundle() -> Bundle?
-}
-
-public extension TableCellGenerator {
-
-    static func bundle() -> Bundle? {
-        return nil
-    }
-
 }
 
 /// Protocol that incapsulated type of current cell
-public protocol CollectionCellGenerator: AnyObject {
+public protocol CollectionCellGenerator: AnyObject, ViewRegistableItem {
 
     /// Nib type, which create this generator
     var identifier: String { get }
@@ -65,19 +52,6 @@ public protocol CollectionCellGenerator: AnyObject {
     ///
     /// - Parameter in: CollectionView, in which cell will be registered
     func registerCell(in collectionView: UICollectionView)
-
-    /// Method for SPM support
-    /// 
-    /// If you use SPM return Bundle.module
-    static func bundle() -> Bundle?
-}
-
-public extension CollectionCellGenerator {
-
-    static func bundle() -> Bundle? {
-        return nil
-    }
-
 }
 
 /// Protocol that incapsulated build logics for current View

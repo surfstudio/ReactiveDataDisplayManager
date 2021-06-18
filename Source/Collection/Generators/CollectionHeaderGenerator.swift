@@ -8,7 +8,7 @@
 import UIKit
 
 /// Protocol that incapsulated type of Header
-public protocol CollectionHeaderGenerator: AnyObject {
+public protocol CollectionHeaderGenerator: AnyObject, ViewRegistableItem {
 
     var identifier: UICollectionReusableView.Type { get }
 
@@ -17,21 +17,6 @@ public protocol CollectionHeaderGenerator: AnyObject {
     func registerHeader(in collectionView: UICollectionView)
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
-
-    /// Method for SPM support
-    ///
-    /// If you use SPM return Bundle.module
-    static func bundle() -> Bundle?
-}
-
-// MARK: - Defaults
-
-public extension CollectionHeaderGenerator {
-
-    static func bundle() -> Bundle? {
-        return nil
-    }
-
 }
 
 // MARK: - ViewBuilder

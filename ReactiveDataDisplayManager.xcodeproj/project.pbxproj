@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E3557767330928BE22C5A3 /* CollectionSelectablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABBD4B4A55A90262F26FF77 /* CollectionSelectablePlugin.swift */; };
+		018E281F267CCD2F0001FC8C /* ViewRegistableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018E281E267CCD2F0001FC8C /* ViewRegistableItem.swift */; };
 		01928B904277BA3B44EEFAF2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02E8001091BE7A1E8E249055 /* UIKit.framework */; };
 		07CC3F8BD002B1FE2BBB6B08 /* BaseCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F6F9A2A56B3F28D0783100 /* BaseCollectionDelegate.swift */; };
 		08657F3120DDD8624F1C8DCB /* TableSwipeActionsConfigurationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DA738CB021B7A0E8C2509F /* TableSwipeActionsConfigurationPlugin.swift */; };
@@ -184,6 +185,7 @@
 /* Begin PBXFileReference section */
 		00397F6B4902B37843C8C0CF /* CollectionPrefetcherablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPrefetcherablePlugin.swift; sourceTree = "<group>"; };
 		003E00E8A83A4FDA31C8652C /* AnyEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyEquatable.swift; sourceTree = "<group>"; };
+		018E281E267CCD2F0001FC8C /* ViewRegistableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRegistableItem.swift; sourceTree = "<group>"; };
 		02E8001091BE7A1E8E249055 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		034FA2CCDBA7927D252ADF98 /* CollectionEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionEvent.swift; sourceTree = "<group>"; };
 		03A6EA1E2F89BE306DE9B66E /* BaseCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellGenerator.swift; sourceTree = "<group>"; };
@@ -508,7 +510,6 @@
 				0590563F4A37FBA747785B1F /* Protocols.swift */,
 				B5A5194AB0570CA2DDE9509A /* Animator */,
 				90241BC31E382BC50CECD3D3 /* Deprecated */,
-				A95C014CCED59645B31B2855 /* Headers */,
 				E8C70E1F6CBB928D608CE118 /* Modifier */,
 				0C534FD066B96A87859EB0FD /* Plugins */,
 				0B6DBEB7BD9EEDC02C031BC9 /* Wrapper */,
@@ -737,13 +738,6 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
-		A95C014CCED59645B31B2855 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Headers;
-			sourceTree = "<group>";
-		};
 		A9CCFE74D85E93281C7B0A86 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -881,6 +875,7 @@
 				5E2450325AF42511749AE2BB /* SelectableItem.swift */,
 				517FE317E96300002EBB05AD /* SizableItem.swift */,
 				F2B8C75E9350423CACD842F7 /* SwipeableItem.swift */,
+				018E281E267CCD2F0001FC8C /* ViewRegistableItem.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -1028,6 +1023,7 @@
 				D65B99A6E8E51241C5CED9EB /* Collection+RDDM.swift in Sources */,
 				3C228962FABC9D81F511EED9 /* CollectionBatchUpdatesAnimator.swift in Sources */,
 				C0879F90C481793009874D20 /* CollectionBuilder.swift in Sources */,
+				018E281F267CCD2F0001FC8C /* ViewRegistableItem.swift in Sources */,
 				950E951703C28A7BFB3CA318 /* CollectionBuilderConfigurable.swift in Sources */,
 				A97EAA39DB85ACD732EED524 /* CollectionCell+RDDM.swift in Sources */,
 				890A5C7790D7291E8AFD3733 /* CollectionCommonModifier.swift in Sources */,
@@ -1265,7 +1261,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				SDKROOT = iphoneos;
@@ -1289,7 +1289,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				SDKROOT = iphoneos;

@@ -13,7 +13,6 @@ let package = Package(
             targets: ["ExamplePackage"])
     ],
     dependencies: [
-        // TODO: Заменить на основную после мержа
         .package(name: "ReactiveDataDisplayManager",
                  url: "https://github.com/surfstudio/ReactiveDataDisplayManager",
                  .branch("feature/spm-support")
