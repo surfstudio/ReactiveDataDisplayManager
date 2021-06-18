@@ -18,7 +18,7 @@ protocol CollectionSwipeActionsConfigurable: CollectionFeaturePlugin, SwipeActio
     var manager: BaseCollectionManager? { get set }
 }
 
-public protocol SwipeActionsConfigurable {}
+public protocol SwipeActionsConfigurable { }
 
 @available(iOS 11.0, *)
 extension SwipeActionsConfigurable {
