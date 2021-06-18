@@ -29,6 +29,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
     var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
+    var swipeActionsPlugin: CollectionFeaturePlugin?
 
     // MARK: - Initialization
 
@@ -64,6 +65,10 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     /// Add feature plugin functionality based on UICollectionViewDelegate/UICollectionViewDataSource events
     public func add(featurePlugin: CollectionFeaturePlugin) -> CollectionBuilder<T> {
+        guard !trySetSwipeActions(plugin: featurePlugin) else {
+            return self
+        }
+
         guard let plugin = featurePlugin as? CollectionItemTitleDisplayable else { return self }
         itemTitleDisplayablePlugin = plugin
         return self
@@ -105,6 +110,22 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         manager.delegate = delegate
         manager.dataSource = dataSource
         return manager
+    }
+
+}
+
+// MARK: - Private Methods
+
+private extension CollectionBuilder {
+
+    func trySetSwipeActions(plugin: CollectionFeaturePlugin) -> Bool {
+        guard #available(iOS 14.0, *),
+              let plugin = plugin as? CollectionSwipeActionsConfigurable
+        else { return false }
+
+        plugin.manager = manager
+        swipeActionsPlugin = plugin
+        return true
     }
 
 }
