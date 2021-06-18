@@ -117,6 +117,20 @@ extension BaseTableDelegate {
         return manager.sections[section].height(tableView, forSection: section)
     }
 
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let manager = manager, section <= manager.footers.count - 1 else {
+            return nil
+        }
+        return manager.footers[section].generate()
+    }
+
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let manager = manager, section <= manager.footers.count - 1 else {
+            return 0.1
+        }
+        return manager.footers[section].height(tableView, forSection: section)
+    }
+
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tablePlugins.process(event: .didSelect(indexPath), with: manager)
     }
