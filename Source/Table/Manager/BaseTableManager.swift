@@ -16,6 +16,7 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     public typealias CollectionType = UITableView
     public typealias CellGeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
+    public typealias FooterGeneratorType = TableFooterGenerator
 
     // MARK: - Public properties
 
@@ -25,6 +26,7 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
 
     public var generators: [[TableCellGenerator]] = []
     public var sections: [TableHeaderGenerator] = []
+    public var footers: [FooterGeneratorType] = []
 
     var delegate: TableDelegate?
     var dataSource: TableDataSource?
