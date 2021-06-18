@@ -8,20 +8,15 @@
 import UIKit
 
 /// Protocol that incapsulated type of Header
-public protocol CollectionHeaderGenerator: ViewRegistableItem {
-
-    var identifier: UICollectionReusableView.Type { get }
-
-    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView
+public protocol CollectionHeaderGenerator: CollectionReusableGenerator {
 
     func registerHeader(in collectionView: UICollectionView)
-
-    func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
 }
 
 // MARK: - ViewBuilder
 
 public extension CollectionHeaderGenerator where Self: ViewBuilder {
+
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                                                            withReuseIdentifier: self.identifier.nameOfClass,

@@ -14,6 +14,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
 
     public typealias CollectionType = UICollectionView
     public typealias CellGeneratorType = CollectionCellGenerator
+    public typealias SectionType = CollectionSection
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
     public typealias FooterGeneratorType = CollectionFooterGenerator
 
@@ -26,8 +27,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     // swiftlint:enable implicitly_unwrapped_optional
 
     public var generators: [[CollectionCellGenerator]] = []
-    public var sections: [CollectionHeaderGenerator] = []
-    public var footers: [CollectionFooterGenerator] = []
+    public var sections: [CollectionSection] = []
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
@@ -46,11 +46,7 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
         }
 
         if sections.count <= 0 {
-            sections.append(EmptyCollectionHeaderGenerator())
-        }
-
-        if footers.count <= 0 {
-            footers.append(EmptyCollectionFooterGenerator())
+            sections.append(.empty())
         }
 
         // Add to last section
