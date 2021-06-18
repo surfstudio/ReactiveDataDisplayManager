@@ -12,6 +12,7 @@ public protocol SectionedDataDisplayManager: AnyObject {
 
     // MARK: - Associatedtypes
 
+    associatedtype CellGeneratorType
     associatedtype SectionType
 
     // MARK: - Data source methods
@@ -26,7 +27,7 @@ public protocol SectionedDataDisplayManager: AnyObject {
     /// - parameters:
     ///     - generators: Array of new generator to insert
     ///     - section: Section of collection
-    func addCellGenerators(_ generators: [CollectionCellGenerator], toSection section: CollectionSection)
+    func addCellGenerators(_ generators: [CellGeneratorType], toSection section: SectionType)
 
     /// Removes section including cell generators.
     ///
@@ -46,7 +47,7 @@ public extension SectionedDataDisplayManager {
     /// - parameters:
     ///     - generator: New generator to insert
     ///     - section: Section of collection
-    func addCellGenerator(_ generator: CollectionCellGenerator, toSection section: CollectionSection) {
+    func addCellGenerator(_ generator: CellGeneratorType, toSection section: SectionType) {
         addCellGenerators([generator], toSection: section)
     }
 
