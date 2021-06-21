@@ -13,8 +13,13 @@ final class MovableCollectionViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
+        enum CollectionLayout {
+            static let cellSize = CGSize(width: 120, height: 120)
+            static let sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
+        }
+
         static let titleForSection = "Section"
-        static let models = [String](repeating: "movable cell", count: 5)
+        static let models = [String](repeating: "Cell", count: 5)
     }
 
     // MARK: - IBOutlets
@@ -48,6 +53,12 @@ private extension MovableCollectionViewController {
     }
 
     func configureCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.itemSize = Constants.CollectionLayout.cellSize
+        layout.sectionInset = Constants.CollectionLayout.sectionInset
+        collectionView.setCollectionViewLayout(layout, animated: false)
+
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture(gesture:)))
         collectionView.addGestureRecognizer(longPressGesture)
     }
@@ -84,10 +95,8 @@ private extension MovableCollectionViewController {
             collectionView.updateInteractiveMovementTargetPosition(location)
         case .ended:
             collectionView.endInteractiveMovement()
-            collectionView.collectionViewLayout.invalidateLayout()
         default:
             collectionView.cancelInteractiveMovement()
-            collectionView.collectionViewLayout.invalidateLayout()
         }
     }
 
