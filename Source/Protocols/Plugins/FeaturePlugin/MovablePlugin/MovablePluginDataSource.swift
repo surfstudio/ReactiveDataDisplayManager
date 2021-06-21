@@ -27,10 +27,12 @@ extension MovablePluginDataSource: MovableDataSource {
     ///     - to: index path locating the item that is the destination of the move
     ///     - with: current provider with generators
     ///     - and: view object requesting this action.
-    open func moveRow(at sourceIndexPath: IndexPath,
-                      to destinationIndexPath: IndexPath,
-                      with provider: Provider?,
-                      and view: UIView) {
+    ///     - animator: an animator object for animating movement
+    open func moveRow<Collection: UIView>(at sourceIndexPath: IndexPath,
+                                          to destinationIndexPath: IndexPath,
+                                          with provider: Provider?,
+                                          and view: Collection,
+                                          animator: Animator<Collection>?) {
         let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
         guard
             let provider = provider,
@@ -46,7 +48,7 @@ extension MovablePluginDataSource: MovableDataSource {
         // findNewSection and add items to this array
         provider.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
 
-        softUpdateIfNeeded(view: view)
+        animator?.perform(in: view, animated: true, operation: { })
     }
 
     /// Asks whether a given item can be moved to another location
@@ -58,22 +60,6 @@ extension MovablePluginDataSource: MovableDataSource {
             return generator.canMove()
         }
         return false
-    }
-
-}
-
-// MARK: - Private Methods
-
-private extension MovablePluginDataSource {
-
-    func softUpdateIfNeeded(view: UIView) {
-        guard let view = view as? UITableView else { return }
-
-        // need to prevent crash with internal inconsistency of UITableView
-        DispatchQueue.main.async {
-            view.beginUpdates()
-            view.endUpdates()
-        }
     }
 
 }

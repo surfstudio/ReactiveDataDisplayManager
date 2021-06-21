@@ -11,8 +11,13 @@ import UIKit
 /// Base implementation for `UICollectionViewDataSource` protocol.
 open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
+    // MARK: - Typealias
+
+    public typealias CollectionAnimator = Animator<BaseCollectionManager.CollectionType>
+
     // MARK: - Properties
 
+    public var animator: CollectionAnimator?
     public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
     public weak var provider: CollectionGeneratorsProvider?
 
@@ -31,6 +36,7 @@ extension BaseCollectionDataSource {
 
         modifier = CollectionCommonModifier(view: builder.view, animator: builder.animator)
 
+        animator = builder.animator
         movablePlugin = builder.movablePlugin?.dataSource
         collectionPlugins = builder.collectionPlugins
         itemTitleDisplayablePlugin = builder.itemTitleDisplayablePlugin
@@ -94,7 +100,7 @@ extension BaseCollectionDataSource {
     }
 
     open func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider, and: collectionView)
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider, and: collectionView, animator: animator)
         collectionPlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseCollectionManager)
     }
 

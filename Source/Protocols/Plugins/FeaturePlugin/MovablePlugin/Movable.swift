@@ -31,7 +31,8 @@ public protocol MovableDataSource {
     ///     - to: index path locating the item that is the destination of the move
     ///     - with: current provider with generators
     ///     - and: view object requesting this action.
-    func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, with provider: Provider?, and view: UIView)
+    ///     - animator: an animator object for animating movement
+    func moveRow<Collection: UIView>(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, with provider: Provider?, and view: Collection, animator: Animator<Collection>?)
 }
 
 public protocol MovableDelegate {

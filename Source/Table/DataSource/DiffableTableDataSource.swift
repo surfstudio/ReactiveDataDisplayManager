@@ -52,7 +52,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
     open override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
-        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider, and: tableView)
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider, and: tableView, animator: nil)
     }
 
     open override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
