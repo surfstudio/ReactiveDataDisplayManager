@@ -24,6 +24,10 @@ versionUpdate:
 	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' project.yml
 	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' Example/project.yml
 
-# Lint lib
+# Lint lib for cocoapods
 lintLib:
 	pod lib lint --allow-warnings
+
+# Publish Lib in cocoapods
+publishLib:
+	pod trunk push --allow-warnings
