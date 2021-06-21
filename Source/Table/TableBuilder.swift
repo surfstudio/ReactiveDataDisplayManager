@@ -31,7 +31,7 @@ public class TableBuilder<T: BaseTableManager> {
     var tablePlugins = TablePluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
-    var movablePlugin: TableMovable?
+    var movablePlugin: TableMovableItemPlugin?
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     var swipeActionsPlugin: TableFeaturePlugin?
 
@@ -73,7 +73,7 @@ public class TableBuilder<T: BaseTableManager> {
         }
 
         switch featurePlugin {
-        case let plugin as TableMovable:
+        case let plugin as TableMovableItemPlugin:
             movablePlugin = plugin
         case let plugin as TableSectionTitleDisplayable:
             sectionTitleDisplayablePlugin = plugin

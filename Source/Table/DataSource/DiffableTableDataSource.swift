@@ -32,7 +32,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
-    public var movablePlugin: TableMovableDataSource?
+    public var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>?
 
     // MARK: - Initialization
 
@@ -52,11 +52,11 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
     open override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
-        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider as? BaseTableManager)
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider, and: tableView)
     }
 
     open override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return movablePlugin?.canMoveRow(at: indexPath, with: provider as? BaseTableManager) ?? false
+        return movablePlugin?.canMoveRow(at: indexPath, with: provider) ?? false
     }
 
 }
@@ -70,7 +70,7 @@ extension DiffableTableDataSource {
 
         modifier = TableDiffableModifier(view: builder.view, provider: builder.manager, dataSource: self)
 
-        movablePlugin = builder.movablePlugin
+        movablePlugin = builder.movablePlugin?.dataSource
         sectionTitleDisplayablePlugin = builder.sectionTitleDisplayablePlugin
         tablePlugins = builder.tablePlugins
         prefetchPlugins = builder.prefetchPlugins

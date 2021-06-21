@@ -21,7 +21,7 @@ open class BaseTableDataSource: NSObject, TableDataSource {
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
-    public var movablePlugin: TableMovableDataSource?
+    public var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>?
 
 }
 
@@ -33,7 +33,7 @@ extension BaseTableDataSource {
 
         modifier = TableCommonModifier(view: builder.view, animator: builder.animator)
 
-        movablePlugin = builder.movablePlugin
+        movablePlugin = builder.movablePlugin?.dataSource
         sectionTitleDisplayablePlugin = builder.sectionTitleDisplayablePlugin
         tablePlugins = builder.tablePlugins
 
@@ -73,7 +73,7 @@ extension BaseTableDataSource {
     }
 
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider)
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider, and: tableView)
         tablePlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseTableManager)
     }
 
