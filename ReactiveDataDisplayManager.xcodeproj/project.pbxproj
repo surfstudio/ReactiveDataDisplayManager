@@ -63,6 +63,11 @@
 		6260E859BC341AA7959EFAEC /* ConfigurableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8419F5D33C0C4FDEF350F /* ConfigurableItem.swift */; };
 		67347735ABC58AF98CE6EB27 /* EmptyGravityTableHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7A3AF9B24D4A46012EC1E /* EmptyGravityTableHeaderGenerator.swift */; };
 		6C0AAA7CC5E8A0E6DAC3B487 /* SwipeActionsConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A037D620404F94F7C983D428 /* SwipeActionsConfigurable.swift */; };
+		6D1B4976267F9142004B19E0 /* MovablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B4975267F9142004B19E0 /* MovablePlugin.swift */; };
+		6D1B497E267FA171004B19E0 /* Movable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B497D267FA171004B19E0 /* Movable.swift */; };
+		6D1B4981267FA2FE004B19E0 /* GeneratorsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B4980267FA2FE004B19E0 /* GeneratorsProvider.swift */; };
+		6D1B498A267FB17A004B19E0 /* MovablePluginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B4989267FB17A004B19E0 /* MovablePluginDelegate.swift */; };
+		6D1B498D267FB198004B19E0 /* MovablePluginDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B498C267FB198004B19E0 /* MovablePluginDataSource.swift */; };
 		6D784BE528EB1DBD666B0241 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF23615CB6E69028036B0B88 /* Modifier.swift */; };
 		6EF53F33C987456049F79C67 /* MovableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D412694D2BF33F0DE836632 /* MovableItem.swift */; };
 		712015D728FC66BDD5281431 /* TableSectionTitleWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2307435F0DC60B24C27FB487 /* TableSectionTitleWrapper.swift */; };
@@ -231,6 +236,11 @@
 		5F8E91046B823176DF3F3349 /* CollectionSwipeActionsConfigurationPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSwipeActionsConfigurationPlugin.swift; sourceTree = "<group>"; };
 		60EE49AED3D5DED8A60F7B2A /* ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C3A6E775D0C43FBA9270912 /* CollectionFoldableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFoldableItem.swift; sourceTree = "<group>"; };
+		6D1B4975267F9142004B19E0 /* MovablePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovablePlugin.swift; sourceTree = "<group>"; };
+		6D1B497D267FA171004B19E0 /* Movable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movable.swift; sourceTree = "<group>"; };
+		6D1B4980267FA2FE004B19E0 /* GeneratorsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorsProvider.swift; sourceTree = "<group>"; };
+		6D1B4989267FB17A004B19E0 /* MovablePluginDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovablePluginDelegate.swift; sourceTree = "<group>"; };
+		6D1B498C267FB198004B19E0 /* MovablePluginDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovablePluginDataSource.swift; sourceTree = "<group>"; };
 		6E37550AE29A4D304F333F31 /* CollectionBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		6ED2FBE3C9A43D8D378B429E /* TableBatchUpdatesAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBatchUpdatesAnimator.swift; sourceTree = "<group>"; };
 		77013DC1BBAE41AF27D29BE5 /* CalculatableHeightCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatableHeightCellGenerator.swift; sourceTree = "<group>"; };
@@ -482,6 +492,7 @@
 				ACA5F6205128979985986C33 /* HeaderDataDisplayManager.swift */,
 				308A9901D886B665BFCDF5EC /* Operations.swift */,
 				0590563F4A37FBA747785B1F /* Protocols.swift */,
+				6D1B4980267FA2FE004B19E0 /* GeneratorsProvider.swift */,
 				B5A5194AB0570CA2DDE9509A /* Animator */,
 				90241BC31E382BC50CECD3D3 /* Deprecated */,
 				E8C70E1F6CBB928D608CE118 /* Modifier */,
@@ -552,6 +563,17 @@
 				ACF544735AD1BCA8A52F8FED /* BaseStackDataDisplayManager.swift */,
 			);
 			path = Deprecated;
+			sourceTree = "<group>";
+		};
+		6D1B4978267F9148004B19E0 /* MovablePlugin */ = {
+			isa = PBXGroup;
+			children = (
+				6D1B497D267FA171004B19E0 /* Movable.swift */,
+				6D1B4975267F9142004B19E0 /* MovablePlugin.swift */,
+				6D1B4989267FB17A004B19E0 /* MovablePluginDelegate.swift */,
+				6D1B498C267FB198004B19E0 /* MovablePluginDataSource.swift */,
+			);
+			path = MovablePlugin;
 			sourceTree = "<group>";
 		};
 		7616A27DE810DC62FC128E38 /* Protocols */ = {
@@ -625,6 +647,7 @@
 		90241BC31E382BC50CECD3D3 /* Deprecated */ = {
 			isa = PBXGroup;
 			children = (
+				81A3039B0AEA3B69AE6AD5EF /* TableMovable.swift */,
 				E88EAF1AAEC0FAEFC123AC9F /* CalculatableSize.swift */,
 				AE452F1BC75AD3E975C5C935 /* Configurable.swift */,
 				AC8C175D2A03DC50EEBA23F9 /* SizableCollectionCellGenerator.swift */,
@@ -713,6 +736,7 @@
 			children = (
 				23FDB877F58BA9108A95703B /* FeaturePlugin.swift */,
 				50043BA9F904659B3FBEE5F1 /* SwipeActions */,
+				6D1B4978267F9148004B19E0 /* MovablePlugin */,
 				B4C7F0B54924C779B5BF358B /* TableFeaturePlugin */,
 			);
 			path = FeaturePlugin;
@@ -721,7 +745,6 @@
 		B4C7F0B54924C779B5BF358B /* TableFeaturePlugin */ = {
 			isa = PBXGroup;
 			children = (
-				81A3039B0AEA3B69AE6AD5EF /* TableMovable.swift */,
 				0C48810544E83BFE430D8C0D /* TableSectionTitleDisplayable.swift */,
 			);
 			path = TableFeaturePlugin;
@@ -945,6 +968,7 @@
 				8E440B53FAB2693EA0203B97 /* BaseStackManager.swift in Sources */,
 				0C98FF2CC066D038AB89C682 /* BaseTableDataDisplayManager.swift in Sources */,
 				A5F996E56F2C979974C94AE6 /* BaseTableDataSource.swift in Sources */,
+				6D1B498A267FB17A004B19E0 /* MovablePluginDelegate.swift in Sources */,
 				D874A2861FFF5A5415A35776 /* BaseTableDelegate.swift in Sources */,
 				7D43B750656874B7DEFECDAF /* BaseTableManager.swift in Sources */,
 				9D5A8DFA46F07D8527311781 /* BaseTablePlugin.swift in Sources */,
@@ -984,12 +1008,14 @@
 				C39A2F38E3956EEF171DA731 /* CollectionSwipeActionsConfigurationPlugin.swift in Sources */,
 				FCC8B5541B19E533534E724A /* Configurable.swift in Sources */,
 				6260E859BC341AA7959EFAEC /* ConfigurableItem.swift in Sources */,
+				6D1B4976267F9142004B19E0 /* MovablePlugin.swift in Sources */,
 				5801441139C90CD4830EAD87 /* DataDisplayCompatible.swift in Sources */,
 				473F240A8561A992773D4E4F /* DataDisplayConstructable.swift in Sources */,
 				7C6D1AE1BD6E0BD8E9F55711 /* DataDisplayManager.swift in Sources */,
 				E2EBFC06CD3B3C99D1777407 /* DataDisplayWrapper.swift in Sources */,
 				DB3D7847CFF3AED602A98C59 /* DeletableItem.swift in Sources */,
 				A4E9D1896D2880A3284D1544 /* DiffableCollectionDataSource.swift in Sources */,
+				6D1B4981267FA2FE004B19E0 /* GeneratorsProvider.swift in Sources */,
 				84223B54CD7CC5D1B29F413A /* DiffableItem.swift in Sources */,
 				89FEC7EB675B5713A8704BBC /* DiffableTableDataSource.swift in Sources */,
 				93CD06A08811ED18ACF5FCDE /* DisplayableItem.swift in Sources */,
@@ -1032,11 +1058,13 @@
 				6C0AAA7CC5E8A0E6DAC3B487 /* SwipeActionsConfigurable.swift in Sources */,
 				A2BE88F105E7F6E3E5872F52 /* SwipeActionsConfiguration.swift in Sources */,
 				441E73A4777768BF71BE9BD3 /* SwipeActionsProvider.swift in Sources */,
+				6D1B497E267FA171004B19E0 /* Movable.swift in Sources */,
 				DD5AB62C237C40A433ED9FEA /* SwipeableItem.swift in Sources */,
 				7E49C8EE7810D8994607C8EF /* Table+RDDM.swift in Sources */,
 				39F6E30106CFA904CE8A79B4 /* TableBatchUpdatesAnimator.swift in Sources */,
 				230D9910EF445C8A578F25B6 /* TableBuilder.swift in Sources */,
 				88BAA72174F8D47DE92D6723 /* TableBuilderConfigurable.swift in Sources */,
+				6D1B498D267FB198004B19E0 /* MovablePluginDataSource.swift in Sources */,
 				D993F72350D5FBCF35CDDC29 /* TableCell+RDDM.swift in Sources */,
 				D793FB1EF9DC6F4017A735C4 /* TableCommonModifier.swift in Sources */,
 				479A106D31C854760CB42270 /* TableDataSource.swift in Sources */,
@@ -1193,7 +1221,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				SDKROOT = iphoneos;
@@ -1217,7 +1249,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				SDKROOT = iphoneos;

@@ -12,6 +12,7 @@ import Foundation
 /// Plugin to move cells
 ///
 /// Allow moving cells builded with `MovableItem` generators
+@available(iOS, deprecated, renamed: "MovablePlugin")
 open class TableMovablePlugin: TableFeaturePlugin {
 
     public typealias GeneratorType = MovableItem
@@ -20,6 +21,7 @@ open class TableMovablePlugin: TableFeaturePlugin {
 
 // MARK: - TableMovableDelegate
 
+@available(iOS, deprecated, renamed: "MovablePlugin")
 extension TableMovablePlugin: TableMovableDelegate {
 
     open func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
@@ -33,6 +35,7 @@ extension TableMovablePlugin: TableMovableDelegate {
 
 // MARK: - TableMovableDataSource
 
+@available(iOS, deprecated, renamed: "MovablePlugin")
 extension TableMovablePlugin: TableMovableDataSource {
 
     open func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, with provider: TableGeneratorsProvider?) {
@@ -66,19 +69,6 @@ extension TableMovablePlugin: TableMovableDataSource {
             return generator.canMove()
         }
         return false
-    }
-
-}
-
-// MARK: - Public init
-
-public extension TableFeaturePlugin {
-
-    /// Plugin to move cells
-    ///
-    /// Allow moving cells builded with `MovableItem` generators
-    static func movable() -> TableMovablePlugin {
-        .init()
     }
 
 }
