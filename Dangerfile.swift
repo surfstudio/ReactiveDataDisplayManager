@@ -1,4 +1,5 @@
 import Danger
+import Foundation
 
 let danger = Danger()
 
@@ -8,7 +9,10 @@ if danger.github.pullRequest.title.starts(with: "[WIP]") {
 
 let editedFiles = danger.git.createdFiles + danger.git.modifiedFiles
 
-if editedFiles.contains(where: { $0 == ".yml" }) {
+if editedFiles.contains(where: { fileName in
+    let fileExtension = URL(fileURLWithPath: fileName).pathExtension
+    return fileExtension == "yml"
+}) {
     warn("The .yml file has been modified. Dependency changes must be consistent.")
 }
 
