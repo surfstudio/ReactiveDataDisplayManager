@@ -9,57 +9,29 @@
 import UIKit
 
 /// Class for generating reusable Configurable UITableViewCell with calculated height
-public class CalculatableHeightCellGenerator<Cell: CalculatableHeightItem>: SelectableTableCellGenerator where Cell: UITableViewCell {
-
-    // MARK: - Public properties
-
-    public var didSelectEvent = BaseEvent<Void>()
-    public let model: Cell.Model
+open class CalculatableHeightCellGenerator<Cell: CalculatableHeightItem>: BaseCellGenerator<Cell> where Cell: UITableViewCell {
 
     // MARK: - Private Properties
 
     private let cellWidth: CGFloat
-    private let registerType: CellRegisterType
 
     // MARK: - Initialization
 
     public init(with model: Cell.Model,
                 cellWidth: CGFloat = UIScreen.main.bounds.width,
                 registerType: CellRegisterType = .nib) {
-        self.model = model
         self.cellWidth = cellWidth
-        self.registerType = registerType
+        super.init(with: model, registerType: registerType)
     }
 
     // MARK: - TableCellGenerator
 
-    public var identifier: String {
-        return String(describing: Cell.self)
-    }
-
-    public var cellHeight: CGFloat {
+    open override var cellHeight: CGFloat {
         return Cell.getHeight(forWidth: cellWidth, with: model)
     }
 
-    public var estimatedCellHeight: CGFloat? {
+    open override var estimatedCellHeight: CGFloat? {
         return Cell.getHeight(forWidth: cellWidth, with: model)
-    }
-
-    public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? Cell else {
-            return UITableViewCell()
-        }
-        cell.configure(with: model)
-        return cell
-    }
-
-    public func registerCell(in tableView: UITableView) {
-        switch registerType {
-        case .nib:
-            tableView.registerNib(identifier, bundle: Cell.bundle())
-        case .class:
-            tableView.register(Cell.self, forCellReuseIdentifier: identifier)
-        }
     }
 
 }
