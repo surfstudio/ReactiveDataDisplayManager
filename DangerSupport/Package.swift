@@ -25,6 +25,8 @@ let package = Package(
                 .product(name: "Danger", package: "danger-swift")
             ],
             path: ".",
-            sources: ["DangerRDDM.swift"])
+            exclude: ["Readme.md"],
+            sources: ["DangerRDDM.swift"]
+        )
     ]
 )

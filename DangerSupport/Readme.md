@@ -5,7 +5,7 @@ If you want to edit some danger rules - please read this overview.
 
 - [x] Run `cd DangerSupport`
 - [x] Run `swift build`
-- [x] Run `swift danger-swfit edit`
+- [x] Run `swift run danger-swfit edit`
 
 After all yo will get xcode opened.
 
