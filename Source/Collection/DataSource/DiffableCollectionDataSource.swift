@@ -39,7 +39,9 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
 
     // MARK: - UICollectionViewDiffableDataSource
 
-    open override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    open override func collectionView(_ collectionView: UICollectionView,
+                                      moveItemAt sourceIndexPath: IndexPath,
+                                      to destinationIndexPath: IndexPath) {
         movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider, and: collectionView)
         collectionPlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseCollectionManager)
     }
