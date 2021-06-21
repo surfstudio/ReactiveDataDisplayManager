@@ -4,7 +4,7 @@
 
 ### Item protocols
 
-`SelectableItem`, `DisplayableFlow`, `MovableGenerator` had a similar idea but not unified format. Thats why we introduced pattern `{ability}ableItem` and renamed all old protocols. We will remove old protocols in version *7.1.0*.
+`SelectableItem`, `DisplayableFlow`, `MovableGenerator` had a similar idea but not unified format. Thats why we introduced pattern `{ability}ableItem` and renamed all old protocols. We will remove old protocols in version *8.0.0*.
 
 | Old                 | New                 |
 | ------------------- | ------------------- |
@@ -17,7 +17,7 @@
 ### Managers
 
 Long-named managers like `BaseTableDataDisplayManager` or `PaginableBaseTableDataDisplayManager` marked as deprecated.
-Make attention to this deprecation warnings, because we will remove this managers in version *7.1.0*.
+Make attention to this deprecation warnings, because we will remove this managers in version *8.0.0*.
 
 If you have inherite from `BaseTableDataDisplayManager` or other deprecated managers
 

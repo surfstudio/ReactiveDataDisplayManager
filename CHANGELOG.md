@@ -15,11 +15,11 @@
 ### Deprecated
 
 - `BaseTableDataDisplayManager` class replaced with `ManualTableManager`
-- `PaginableBaseTableDataDisplayManager` class will be removed at **7.1.**. Use `TableLastCellIsVisiblePlugin` instead.
-- `ExtendableBaseTableDataDisplayManager` class will be removed at **7.1**. Part of `BaseTableManager` now.
+- `PaginableBaseTableDataDisplayManager` class will be removed at **8.0.**. Use `TableLastCellIsVisiblePlugin` instead.
+- `ExtendableBaseTableDataDisplayManager` class will be removed at **8.0**. Part of `BaseTableManager` now.
 - `GravityTableDataDisplayManager` class replaced with `GravityTableManager`
-- `FoldingTableDataDisplayManager` class will be removed at **7.1.**. Use `TableFoldablePlugin` instead.
-- `GravityFoldingTableDataDisplayManager` class will be removed at **7.1.**. Use composition of `GravityTableManager` and `TableFoldablePlugin`
-- `SizableCollectionDataDisplayManager` class will be removed at **7.1.**. Part of `BaseCollectionManager`
+- `FoldingTableDataDisplayManager` class will be removed at **8.0.**. Use `TableFoldablePlugin` instead.
+- `GravityFoldingTableDataDisplayManager` class will be removed at **8.0.**. Use composition of `GravityTableManager` and `TableFoldablePlugin`
+- `SizableCollectionDataDisplayManager` class will be removed at **8.0.**. Part of `BaseCollectionManager`
 - `BaseCollectionDataDisplayManager` replaced with `BaseCollectionManager`
-- `SelectableItem`, `DisplayableFlow`, `MovableGenerator` and other item protocols will be removed at **7.1.**. Replaced with `{ability}ableItem` for example `SelectableItem`
+- `SelectableItem`, `DisplayableFlow`, `MovableGenerator` and other item protocols will be removed at **8.0.**. Replaced with `{ability}ableItem` for example `SelectableItem`
