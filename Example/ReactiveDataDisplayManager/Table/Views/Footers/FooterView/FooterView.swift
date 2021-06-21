@@ -12,7 +12,7 @@ final class FooterView: UIView {
     // MARK: - IBOutlet
 
     @IBOutlet private weak var titleLabel: UILabel!
-    
+
     // MARK: - Internal Methods
 
     func configure(with title: String) {
