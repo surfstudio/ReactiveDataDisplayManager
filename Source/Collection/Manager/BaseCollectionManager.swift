@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvider {
+open class BaseCollectionManager: CollectionGeneratorsProvider, DataDisplayManager {
 
     // MARK: - Typealias
 
@@ -24,10 +24,6 @@ open class BaseCollectionManager: DataDisplayManager, CollectionGeneratorsProvid
     // swiftlint:disable implicitly_unwrapped_optional
     public weak var view: UICollectionView!
     // swiftlint:enable implicitly_unwrapped_optional
-
-    public var generators: [[CollectionCellGenerator]] = []
-    public var sections: [CollectionHeaderGenerator] = []
-    public var footers: [CollectionFooterGenerator] = []
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?

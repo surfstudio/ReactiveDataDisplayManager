@@ -14,4 +14,5 @@ public protocol CollectionDataSource: CollectionBuilderConfigurable, UICollectio
     var prefetchPlugins: PluginCollection< BaseCollectionPlugin <PrefetchEvent>> { get set }
     var collectionPlugins: PluginCollection< BaseCollectionPlugin <CollectionEvent>> { get set }
     var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable? { get set }
+    var movablePlugin: MovablePluginDataSource<CollectionGeneratorsProvider>? { get set }
 }
