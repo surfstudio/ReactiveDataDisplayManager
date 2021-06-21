@@ -1,4 +1,4 @@
-# 7.0.0 MigrationGuide
+# 7.x.x MigrationGuide
 
 ## Deprecations
 
