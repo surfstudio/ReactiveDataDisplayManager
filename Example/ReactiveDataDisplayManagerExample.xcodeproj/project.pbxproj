@@ -52,7 +52,10 @@
 		6916D2128A02D5D69DA36143 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001BB16BE2E141F75B940D27 /* UIViewController.swift */; };
 		6B50EB3C1C9A84F139F01A9E /* TextStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FF511355AF2D02BFC43848 /* TextStackCellGenerator.swift */; };
 		6BA6BB85E02F5B43A00DB3B3 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BCF3694F34717804DCF88 /* Appearance.swift */; };
+		6D1B4967267F8162004B19E0 /* MovableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B4966267F8162004B19E0 /* MovableCollectionViewController.swift */; };
+		6D1B496C267F81E3004B19E0 /* MovableCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B496B267F81E3004B19E0 /* MovableCollectionCellGenerator.swift */; };
 		7469CA91227C39BBA579BD0E /* FoldableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9375407E9E04CB2B8492F /* FoldableCollectionViewController.swift */; };
+		74A52235EBC2324EB82832E1 /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AD1F386E3AFBCFF5020E0 /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 		7771ECE25476BD25F1024E9B /* FoldableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F829DBA2D8FE8670C208FA2 /* FoldableTableViewController.swift */; };
 		7B4682355520CCAEE4437C8A /* DifferenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DCA90700277195993FA2B8 /* DifferenceTableViewController.swift */; };
 		85757DB60447DEF381C110CA /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2183568FF89543B6F82113 /* ImageTableViewController.swift */; };
@@ -98,7 +101,6 @@
 		EA6E5A76A5FDA6F7117E1967 /* SwipeableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4B6D7D72C85C6E32BA669 /* SwipeableTableViewController.swift */; };
 		EB839B0559BFD349B5134E9E /* SectionTitleHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D380CEFE1B42A3046D14FF71 /* SectionTitleHeaderGenerator.swift */; };
 		ED53AB6D9B51607C1ECD1974 /* MovableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5583F1D31C99C462944503CB /* MovableTableViewController.swift */; };
-		EDC1255A11D0E975EBC0B9FF /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B78EA09C490FEC1CA677C1 /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 		EE3D9929C26935A7EFC1D696 /* FoldableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8F609E00D3661A8BC98556C /* FoldableCollectionViewCell.xib */; };
 		F16FC0915181F93750EF4FDD /* TitleIconCollectionFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2615E5EE70FF79179C5984B9 /* TitleIconCollectionFooterView.swift */; };
 		F1DB573906E76E39D99A0595 /* MainStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA49F3F029942BDDBC999DB /* MainStackViewController.swift */; };
@@ -114,7 +116,6 @@
 		01118988EE30FADBF3525B0A /* ManualTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableManager.swift; sourceTree = "<group>"; };
 		0165D86C242386A8EEA77F48 /* FoldableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableCollectionViewCell.swift; sourceTree = "<group>"; };
 		0371CFDF2AE2933334F5FEF1 /* ImageTableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableGenerator.swift; sourceTree = "<group>"; };
-		04B78EA09C490FEC1CA677C1 /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F829DBA2D8FE8670C208FA2 /* FoldableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableTableViewController.swift; sourceTree = "<group>"; };
 		116EB3A20F5DCF2E6FDE2CA3 /* FoldableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoldableTableViewCell.xib; sourceTree = "<group>"; };
 		173FB7F8FE0015D07813CC53 /* CollectionCompositionalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCompositionalViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +141,7 @@
 		578291B4307978AAFAC20143 /* Pallete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pallete.swift; sourceTree = "<group>"; };
 		57CCE75E305EDAEF36B2F98C /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		5DA165FA4831CE4BD0A3FBA0 /* SectionTitleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleTableViewController.swift; sourceTree = "<group>"; };
+		5E7AD1F386E3AFBCFF5020E0 /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EA8DD2FF5F7ABC2416F3C2C /* ImageCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		62A4301962285C9AF16819EE /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		666F86F1D270E55D920BF087 /* RefreshableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshableTableViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,8 @@
 		68C2DAA3014EDA0B36024CF4 /* HeaderCollectionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionListView.swift; sourceTree = "<group>"; };
 		6BFBDB227714F3A62FDD9B78 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		6C6FC596110A83223FA25408 /* ItemTitleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTitleCollectionViewController.swift; sourceTree = "<group>"; };
+		6D1B4966267F8162004B19E0 /* MovableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCollectionViewController.swift; sourceTree = "<group>"; };
+		6D1B496B267F81E3004B19E0 /* MovableCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		6DCA52FFA92CFC3829BB8E54 /* TitleWithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithIconTableViewCell.swift; sourceTree = "<group>"; };
 		6EF4B6D7D72C85C6E32BA669 /* SwipeableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableTableViewController.swift; sourceTree = "<group>"; };
 		6F93E77221299A239B51BF7F /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 		CCC1B8D46C325064DFF23E2A /* PrefetchingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchingTableViewController.swift; sourceTree = "<group>"; };
 		CD2532EB477E25CF0CE3CA25 /* SizableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE42A5C5CF1A1BEF2B9B85E8 /* TitleCollectionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionListCell.swift; sourceTree = "<group>"; };
+		D020EB35B367768BCA6B7602 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
 		D07617869BCD0A70D87527FC /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		D1B1E23C6F4D0E9EB48262F3 /* LandingStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingStackViewController.swift; sourceTree = "<group>"; };
 		D29DE51C2AF8DE10CA9F92E7 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -204,10 +209,9 @@
 		EB55AC990A0263A58065C894 /* ImageHorizontalCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHorizontalCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7EA468A9F7AD67BFDB2AC8 /* DiffableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableCollectionViewController.swift; sourceTree = "<group>"; };
 		ED57831CE3449F7CAC1874B4 /* DiffableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableTableViewController.swift; sourceTree = "<group>"; };
-		EEE1CFFC5CE28F442BDC172A /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; sourceTree = "<group>"; };
 		EF76029E1252056740F057DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F02C95B39900516686BCCC66 /* SizableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionViewController.swift; sourceTree = "<group>"; };
-		F108F4A74D4FC4A3BC89D5CB /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
+		F0BDED784B546C31C9FF449F /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; sourceTree = "<group>"; };
 		F7FE3580B88F51C6534804F7 /* TitleCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
 		F821EBA643EAE40EC777CC79 /* GravityFoldableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityFoldableCellGenerator.swift; sourceTree = "<group>"; };
 		F8F609E00D3661A8BC98556C /* FoldableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoldableCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -222,13 +226,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFCC61C58A00EDF046E2A7E9 /* UIKit.framework in Frameworks */,
-				EDC1255A11D0E975EBC0B9FF /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */,
+				74A52235EBC2324EB82832E1 /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		050318E26F4C72C27AB1C6F8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F0BDED784B546C31C9FF449F /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */,
+				D020EB35B367768BCA6B7602 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		0604D4FBBE2647BF1815EFDE /* Unroll */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,16 +287,6 @@
 				173FB7F8FE0015D07813CC53 /* CollectionCompositionalViewController.swift */,
 			);
 			path = CollectionCompositionalViewController;
-			sourceTree = "<group>";
-		};
-		1455C4D2137A1BA99BDCA842 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				EEE1CFFC5CE28F442BDC172A /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */,
-				F108F4A74D4FC4A3BC89D5CB /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		1743798090B809CFD75571AA /* MainTableViewController */ = {
@@ -336,6 +339,7 @@
 				E3A6D928A3FAE74B39C5EE36 /* SwipeableCollectionGenerator.swift */,
 				795E2E2FB1DCC1DE73457FB9 /* TitleCollectionGenerator.swift */,
 				9AAF4EC7F8199FE77561B93C /* VerticalSizableTextGenerator.swift */,
+				6D1B496B267F81E3004B19E0 /* MovableCollectionCellGenerator.swift */,
 			);
 			path = Generators;
 			sourceTree = "<group>";
@@ -352,7 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				BC63B8F3540DB313A90623C7 /* UIKit.framework */,
-				04B78EA09C490FEC1CA677C1 /* Pods_ReactiveDataDisplayManagerExample.framework */,
+				5E7AD1F386E3AFBCFF5020E0 /* Pods_ReactiveDataDisplayManagerExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -505,6 +509,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6D1B4969267F816B004B19E0 /* MovableCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D1B4966267F8162004B19E0 /* MovableCollectionViewController.swift */,
+			);
+			path = MovableCollectionViewController;
+			sourceTree = "<group>";
+		};
 		72C29A9AADC6A9F7D2E0E57D /* MainStackViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,6 +552,7 @@
 				F2BD4C75D66574ED05145094 /* PrefetchingCollectionViewController */,
 				DC4DD0517F4309514028C360 /* SizableCollectionViewController */,
 				C28B440C2A05EE898E8C268E /* SwipeableCollectionListViewController */,
+				6D1B4969267F816B004B19E0 /* MovableCollectionViewController */,
 				B216711AFF2A551FD427173C /* Views */,
 			);
 			path = Collection;
@@ -661,7 +674,7 @@
 				1BBA63A398D9C0DFEEFFB6E2 /* ReactiveDataDisplayManager */,
 				299303BB717880B5A2E66198 /* Frameworks */,
 				BF88590C60E62AD28FD1806F /* Products */,
-				1455C4D2137A1BA99BDCA842 /* Pods */,
+				050318E26F4C72C27AB1C6F8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -907,11 +920,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49105C36A7AEC17731F9FD2B /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerExample" */;
 			buildPhases = (
-				A514F466686DD3C9AAB3B958 /* [CP] Check Pods Manifest.lock */,
+				07CCD92A52B5C25BACCB5634 /* [CP] Check Pods Manifest.lock */,
 				04937DD7CB0B4777969B5676 /* Sources */,
 				6CF57DBC44D8337F41879358 /* Resources */,
 				8F967E0CE76CB3B3DCA425D2 /* Frameworks */,
-				453A3154CFF07FECBB51E0D6 /* [CP] Embed Pods Frameworks */,
+				D15F31ACD7D21DC7045BEB0F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -982,24 +995,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		453A3154CFF07FECBB51E0D6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A514F466686DD3C9AAB3B958 /* [CP] Check Pods Manifest.lock */ = {
+		07CCD92A52B5C25BACCB5634 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1019,6 +1015,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D15F31ACD7D21DC7045BEB0F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1043,6 +1056,7 @@
 				1C290C9E8E4A8610BF5B2ABB /* DiffableCollectionViewController.swift in Sources */,
 				48619FD70A82495CD709327B /* DiffableTableViewController.swift in Sources */,
 				C34A57FE8D23F1E89A6D8761 /* DifferenceCollectionViewController.swift in Sources */,
+				6D1B4967267F8162004B19E0 /* MovableCollectionViewController.swift in Sources */,
 				7B4682355520CCAEE4437C8A /* DifferenceTableViewController.swift in Sources */,
 				62621E4541B159B797CA089D /* FoldableCellGenerator.swift in Sources */,
 				3FDFDC235374851B1532FCDD /* FoldableCollectionCellGenerator.swift in Sources */,
@@ -1060,6 +1074,7 @@
 				346EC374E728C1018B6DE96E /* ImageCollectionViewCell.swift in Sources */,
 				521664AB51B22B082B3F5B1B /* ImageCollectionViewController.swift in Sources */,
 				F51956BA55512B3E443B0865 /* ImageHorizontalCollectionViewController.swift in Sources */,
+				6D1B496C267F81E3004B19E0 /* MovableCollectionCellGenerator.swift in Sources */,
 				46CD9827184C6692752C0059 /* ImageTableGenerator.swift in Sources */,
 				9310490FAAD27FA8579EC5C5 /* ImageTableViewCell.swift in Sources */,
 				85757DB60447DEF381C110CA /* ImageTableViewController.swift in Sources */,
@@ -1247,7 +1262,7 @@
 		};
 		8A640DE577B73F907CBF9820 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F108F4A74D4FC4A3BC89D5CB /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */;
+			baseConfigurationReference = D020EB35B367768BCA6B7602 /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1271,7 +1286,7 @@
 		};
 		AAA78025AC984BA514A8F87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EEE1CFFC5CE28F442BDC172A /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */;
+			baseConfigurationReference = F0BDED784B546C31C9FF449F /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
