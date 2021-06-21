@@ -10,7 +10,7 @@ let package = Package(
         .library(
             name: "DangerDepsRDDM",
             type: .dynamic,
-            targets: ["DangerDependencies"]),
+            targets: ["DangerDependencies"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
