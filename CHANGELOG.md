@@ -1,16 +1,17 @@
-## 7.0.0 Refactoring
+## 7.1.0 SPM support and new plagins
 ### Added
-- `Animator` protocol to isolate deprecated `begin/end updates`
-- `PluginAction` protocol to handle simple actions with collection events
-- `FeaturePlugin` protocol to extend collection manager with features quickly
-- `CollectionBuilder` struct to build `CollectionManager`
-- `TableBuilder` struct to build `TableManager`
-- `rddm` namespace to quick access to manager builders
+- Swift Package Manager support with example
+- example of usage `CompositionalLayout`
+- example of usage `DifferenceKit`
+- `DiffableTableDataSource` implementing `UICollectionTableDataSource`
+- `DiffableCollectionDataSource` implementing `UICollectionDiffableDataSource`
+- `CollectionSwipeActionsConfigurationPlugin` to support `UISwipeActionsConfiguration` in collection with list appearance
+-
 
 ### Updated
 
-- required `var view: CollectionType!` of `DataDisplayManager` protocol instead of required constructor
-- abstract `Delegate` and `DataSource` is properties of `DataDisplayManager`
+- code style and linter issues fixes 
+- documentation and typos
 
 ### Deprecated
 
