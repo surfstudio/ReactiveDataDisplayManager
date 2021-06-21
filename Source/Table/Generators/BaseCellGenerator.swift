@@ -59,4 +59,12 @@ open class BaseCellGenerator<Cell: ConfigurableItem>: SelectableTableCellGenerat
         }
     }
 
+    open var cellHeight: CGFloat {
+        UITableView.automaticDimension
+    }
+
+    open var estimatedCellHeight: CGFloat? {
+        nil
+    }
+
 }
