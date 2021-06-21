@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public protocol TableGeneratorsProvider: AnyObject {
-    var generators: [[TableCellGenerator]] { get set }
-    var sections: [TableHeaderGenerator] { get set }
+open class TableGeneratorsProvider: GeneratorsProvider {
+    open var generators = [[TableCellGenerator]]()
+    open var sections = [TableHeaderGenerator]()
 }

@@ -11,14 +11,20 @@ import UIKit
 /// Base implementation for `UICollectionViewDataSource` protocol.
 open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
+    // MARK: - Typealias
+
+    public typealias CollectionAnimator = Animator<BaseCollectionManager.CollectionType>
+
     // MARK: - Properties
 
+    public var animator: CollectionAnimator?
     public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
     public weak var provider: CollectionGeneratorsProvider?
 
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
+    public var movablePlugin: MovablePluginDataSource<CollectionGeneratorsProvider>?
 
 }
 
@@ -30,6 +36,8 @@ extension BaseCollectionDataSource {
 
         modifier = CollectionCommonModifier(view: builder.view, animator: builder.animator)
 
+        animator = builder.animator
+        movablePlugin = builder.movablePlugin?.dataSource
         collectionPlugins = builder.collectionPlugins
         itemTitleDisplayablePlugin = builder.itemTitleDisplayablePlugin
 
@@ -92,11 +100,12 @@ extension BaseCollectionDataSource {
     }
 
     open func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider, and: collectionView, animator: animator)
         collectionPlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseCollectionManager)
     }
 
     open func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-        return false
+        return movablePlugin?.canMoveRow(at: indexPath, with: provider) ?? false
     }
 
     open func indexTitles(for collectionView: UICollectionView) -> [String]? {

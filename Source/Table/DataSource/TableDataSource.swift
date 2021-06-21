@@ -14,5 +14,5 @@ public protocol TableDataSource: TableBuilderConfigurable, UITableViewDataSource
     var prefetchPlugins: PluginCollection<BaseTablePlugin<PrefetchEvent>> { get set }
     var tablePlugins: PluginCollection<BaseTablePlugin<TableEvent>> { get set }
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable? { get set }
-    var movablePlugin: TableMovableDataSource? { get set }
+    var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>? { get set }
 }

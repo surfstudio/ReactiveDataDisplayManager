@@ -19,7 +19,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
-    public var movablePlugin: TableMovableDelegate?
+    public var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>?
 
     @available(iOS 11.0, *)
     public var swipeActionsPlugin: TableSwipeActionsConfigurable? {
@@ -39,7 +39,7 @@ extension BaseTableDelegate {
 
     open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
 
-        movablePlugin = builder.movablePlugin
+        movablePlugin = builder.movablePlugin?.delegate
         tablePlugins = builder.tablePlugins
         scrollPlugins = builder.scrollPlugins
 

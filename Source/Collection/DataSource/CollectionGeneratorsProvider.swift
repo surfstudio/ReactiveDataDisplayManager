@@ -6,8 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-public protocol CollectionGeneratorsProvider: AnyObject {
-    var generators: [[CollectionCellGenerator]] { get set }
-    var sections: [CollectionHeaderGenerator] { get set }
-    var footers: [CollectionFooterGenerator] { get set }
+open class CollectionGeneratorsProvider: GeneratorsProvider {
+    open var generators = [[CollectionCellGenerator]]()
+    open var sections = [CollectionHeaderGenerator]()
+    open var footers = [CollectionFooterGenerator]()
 }

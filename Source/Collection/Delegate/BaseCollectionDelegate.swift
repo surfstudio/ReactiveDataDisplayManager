@@ -22,6 +22,7 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
+    public var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>?
 
 }
 
@@ -31,6 +32,7 @@ extension BaseCollectionDelegate {
 
     public func configure<T>(with builder: CollectionBuilder<T>) where T: BaseCollectionManager {
 
+        movablePlugin = builder.movablePlugin?.delegate
         collectionPlugins = builder.collectionPlugins
         scrollPlugins = builder.scrollPlugins
 
@@ -69,6 +71,10 @@ extension BaseCollectionDelegate {
 
     open func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         collectionPlugins.process(event: .didEndDisplayCell(indexPath), with: manager)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return movablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
     }
 
     open func collectionView(_ collectionView: UICollectionView,

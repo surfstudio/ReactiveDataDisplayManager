@@ -30,6 +30,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     var prefetchPlugins = PrefetchPluginsCollection()
     var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
     var swipeActionsPlugin: CollectionFeaturePlugin?
+    var movablePlugin: CollectionMovableItemPlugin?
 
     // MARK: - Initialization
 
@@ -69,8 +70,15 @@ public class CollectionBuilder<T: BaseCollectionManager> {
             return self
         }
 
-        guard let plugin = featurePlugin as? CollectionItemTitleDisplayable else { return self }
-        itemTitleDisplayablePlugin = plugin
+        switch featurePlugin {
+        case let plugin as CollectionMovableItemPlugin:
+            movablePlugin = plugin
+        case let plugin as CollectionItemTitleDisplayable:
+            itemTitleDisplayablePlugin = plugin
+        default:
+            break
+        }
+
         return self
     }
 
