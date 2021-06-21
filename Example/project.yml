@@ -2,7 +2,7 @@
 name: ReactiveDataDisplayManagerExample
 options:
   # Версия Xcode
-  xcodeVersion: 12.4
+  xcodeVersion: 12.5
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
