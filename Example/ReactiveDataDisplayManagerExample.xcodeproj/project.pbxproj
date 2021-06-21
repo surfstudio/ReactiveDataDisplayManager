@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		019B9FAA267D23C500DAAF49 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B9FA9267D23C500DAAF49 /* FooterView.swift */; };
-		019B9FAC267D23EE00DAAF49 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019B9FAB267D23EE00DAAF49 /* FooterView.xib */; };
-		019B9FB0267D250D00DAAF49 /* TitleFooterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019B9FAF267D250D00DAAF49 /* TitleFooterGenerator.swift */; };
+		01B87C792987FE3978CC301B /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E497742AA3CE6CA86EC364AB /* FooterView.swift */; };
 		07D0AD412D14907C869DA420 /* RefreshableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666F86F1D270E55D920BF087 /* RefreshableTableViewController.swift */; };
 		093AD8947B4718E3A7AC378B /* TitleStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F93E77221299A239B51BF7F /* TitleStackCellGenerator.swift */; };
 		0BDB03589517E266B2ED8498 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07617869BCD0A70D87527FC /* TitleCollectionViewCell.swift */; };
@@ -26,6 +24,7 @@
 		2B74D8CCB2271194B8BB972C /* UIViewController+Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF080E64B9D36E8CE75064A7 /* UIViewController+Delay.swift */; };
 		2C6E364B88ED2CF5663586EE /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFFDDAD2FBE692DD04B2F3B9 /* ImageCollectionViewCell.xib */; };
 		3017D1EBD4780D35239A2AAA /* SizableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4952412163E0934C7BB059F1 /* SizableCollectionViewCell.xib */; };
+		32844A1F30FC0D58138371A1 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B4DA92D58D6A00EA8B5139B /* FooterView.xib */; };
 		32DA09AD51A40FF6905D7A94 /* VerticalSizableTextGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAF4EC7F8199FE77561B93C /* VerticalSizableTextGenerator.swift */; };
 		33FEBE3AA54C5A743CA355E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 670C26C912223C5DDEFCC613 /* Main.storyboard */; };
 		346EC374E728C1018B6DE96E /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC4D0ADA4924AA2C98DC6EC /* ImageCollectionViewCell.swift */; };
@@ -38,6 +37,7 @@
 		46CD9827184C6692752C0059 /* ImageTableGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0371CFDF2AE2933334F5FEF1 /* ImageTableGenerator.swift */; };
 		48619FD70A82495CD709327B /* DiffableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED57831CE3449F7CAC1874B4 /* DiffableTableViewController.swift */; };
 		4C24E8220503B176492E91D0 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B89F2E62537ECB80F91F812A /* HeaderView.xib */; };
+		4DD7B1A718AB32DE1054718F /* SwipeableCollectionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E284CEC0582666D927EC02D /* SwipeableCollectionListViewController.swift */; };
 		50167A3419F084EB4848BCDE /* SwipeActionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E34FCC6064184A97314D0ED /* SwipeActionProvider.swift */; };
 		521664AB51B22B082B3F5B1B /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F0E44799CDA482519CFA76 /* ImageCollectionViewController.swift */; };
 		53E23E848C368F3E8BDE0988 /* LandingStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B1E23C6F4D0E9EB48262F3 /* LandingStackViewController.swift */; };
@@ -60,10 +60,10 @@
 		85757DB60447DEF381C110CA /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2183568FF89543B6F82113 /* ImageTableViewController.swift */; };
 		88C90EA9146887D817FEBB5D /* ButtonStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768EADE1BBCA4E1E3CD2B9A7 /* ButtonStackCellGenerator.swift */; };
 		8B37F42D943016069BF860DA /* UnrollCellStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01825DE6F3160BA0ACD25D8 /* UnrollCellStackView.swift */; };
-		8C7CDFB5DA8BAD5FB17DB060 /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 482F036E44E4BBA41CEED689 /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 		8D731B279BD6DBE4D19ADF8C /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EAE885A84F4E137180086B1 /* ImageTableViewCell.xib */; };
 		9310490FAAD27FA8579EC5C5 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365608CC30687A9F524A4A55 /* ImageTableViewCell.swift */; };
 		94DC16AA9156A833CC00BDBE /* FoldableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518BA0A92F553FCCEE920B99 /* FoldableTableViewCell.swift */; };
+		94E4D2DF2E30CD7862B805AE /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996295351A5AA596D287300 /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 		9829D5F95089D7312B073E84 /* FoldableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0165D86C242386A8EEA77F48 /* FoldableCollectionViewCell.swift */; };
 		986B6FB99A755332E0AE8DF6 /* SectionTitleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DA165FA4831CE4BD0A3FBA0 /* SectionTitleTableViewController.swift */; };
 		98D5F2B0BE18B88E2D8151BB /* CollectionCompositionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173FB7F8FE0015D07813CC53 /* CollectionCompositionalViewController.swift */; };
@@ -97,6 +97,8 @@
 		D93E1B3BCAF404204B2E804C /* GravityFoldableCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F821EBA643EAE40EC777CC79 /* GravityFoldableCellGenerator.swift */; };
 		DA057A2663526522126062CF /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CCE75E305EDAEF36B2F98C /* TitleTableViewCell.swift */; };
 		DD8728FA7AE195C3DD10DFA7 /* TitleWithIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8EFB49700A08E9D7CB895637 /* TitleWithIconTableViewCell.xib */; };
+		E8A3340BF98FBE0573FC1EEE /* TitleFooterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A32C9B5E7563989A37E4BE /* TitleFooterGenerator.swift */; };
+		E9C173665EE3CB35EB46F925 /* SwipeableCollectionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A6D928A3FAE74B39C5EE36 /* SwipeableCollectionGenerator.swift */; };
 		EA6E5A76A5FDA6F7117E1967 /* SwipeableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF4B6D7D72C85C6E32BA669 /* SwipeableTableViewController.swift */; };
 		EB839B0559BFD349B5134E9E /* SectionTitleHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D380CEFE1B42A3046D14FF71 /* SectionTitleHeaderGenerator.swift */; };
 		ED53AB6D9B51607C1ECD1974 /* MovableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5583F1D31C99C462944503CB /* MovableTableViewController.swift */; };
@@ -114,9 +116,6 @@
 		001BB16BE2E141F75B940D27 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		01118988EE30FADBF3525B0A /* ManualTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableManager.swift; sourceTree = "<group>"; };
 		0165D86C242386A8EEA77F48 /* FoldableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableCollectionViewCell.swift; sourceTree = "<group>"; };
-		019B9FA9267D23C500DAAF49 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
-		019B9FAB267D23EE00DAAF49 /* FooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
-		019B9FAF267D250D00DAAF49 /* TitleFooterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFooterGenerator.swift; sourceTree = "<group>"; };
 		0371CFDF2AE2933334F5FEF1 /* ImageTableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableGenerator.swift; sourceTree = "<group>"; };
 		0F829DBA2D8FE8670C208FA2 /* FoldableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableTableViewController.swift; sourceTree = "<group>"; };
 		116EB3A20F5DCF2E6FDE2CA3 /* FoldableTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoldableTableViewCell.xib; sourceTree = "<group>"; };
@@ -129,20 +128,20 @@
 		2294D133985C0F29795C24B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2389D989A88AC6B03E6799AB /* FoldableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableCellGenerator.swift; sourceTree = "<group>"; };
 		2615E5EE70FF79179C5984B9 /* TitleIconCollectionFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleIconCollectionFooterView.swift; sourceTree = "<group>"; };
+		2B4DA92D58D6A00EA8B5139B /* FooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
 		2E34FCC6064184A97314D0ED /* SwipeActionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionProvider.swift; sourceTree = "<group>"; };
 		325E432007B2C402A407032F /* TitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
 		365608CC30687A9F524A4A55 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		3996295351A5AA596D287300 /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA49F3F029942BDDBC999DB /* MainStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainStackViewController.swift; sourceTree = "<group>"; };
 		3DC4D0ADA4924AA2C98DC6EC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		3EAE885A84F4E137180086B1 /* ImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		474CD5F4A339F735088298E7 /* PaginatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorView.swift; sourceTree = "<group>"; };
-		482F036E44E4BBA41CEED689 /* Pods_ReactiveDataDisplayManagerExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReactiveDataDisplayManagerExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4952412163E0934C7BB059F1 /* SizableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SizableCollectionViewCell.xib; sourceTree = "<group>"; };
 		4A21E7394478C19F84249F12 /* UnrollStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrollStackCellGenerator.swift; sourceTree = "<group>"; };
 		518BA0A92F553FCCEE920B99 /* FoldableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableTableViewCell.swift; sourceTree = "<group>"; };
 		5583F1D31C99C462944503CB /* MovableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableTableViewController.swift; sourceTree = "<group>"; };
 		578291B4307978AAFAC20143 /* Pallete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pallete.swift; sourceTree = "<group>"; };
-		57C7472406826764801C9E51 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; sourceTree = "<group>"; };
 		57CCE75E305EDAEF36B2F98C /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		5DA165FA4831CE4BD0A3FBA0 /* SectionTitleTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleTableViewController.swift; sourceTree = "<group>"; };
 		5EA8DD2FF5F7ABC2416F3C2C /* ImageCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionCellGenerator.swift; sourceTree = "<group>"; };
@@ -157,18 +156,19 @@
 		6F93E77221299A239B51BF7F /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
 		70DCA90700277195993FA2B8 /* DifferenceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceTableViewController.swift; sourceTree = "<group>"; };
 		70E5E6E84D4D2008BD5A5ABA /* MovableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCellGenerator.swift; sourceTree = "<group>"; };
+		744F97C70487CF4BB1C0BCB9 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.debug.xcconfig"; sourceTree = "<group>"; };
 		76885C024A91AD957EA0FA06 /* UnrollStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrollStackViewController.swift; sourceTree = "<group>"; };
 		768EADE1BBCA4E1E3CD2B9A7 /* ButtonStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStackCellGenerator.swift; sourceTree = "<group>"; };
 		774C4640E8E12659BD51F9FC /* PaginatableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatableTableViewController.swift; sourceTree = "<group>"; };
 		77C78218980F8D0B6626C66A /* GravityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityTableViewController.swift; sourceTree = "<group>"; };
 		793F94A30619B298E5BA9BAC /* TitleIconCollectionFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleIconCollectionFooterView.xib; sourceTree = "<group>"; };
 		795E2E2FB1DCC1DE73457FB9 /* TitleCollectionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionGenerator.swift; sourceTree = "<group>"; };
-		7C8DFD3BDB3F732327A44E6F /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
 		7D60C8E546419F4FC01118FB /* ReactiveDataDisplayManagerExample.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ReactiveDataDisplayManagerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DBF2D41C98F0703D6DD1426 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FDB067EB8AFDC23E5013FD6 /* AlphabeticalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabeticalTableViewController.swift; sourceTree = "<group>"; };
 		822BCF3694F34717804DCF88 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		83356740D148F762F89EBC9D /* PrefetchingCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchingCollectionViewController.swift; sourceTree = "<group>"; };
+		8E284CEC0582666D927EC02D /* SwipeableCollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCollectionListViewController.swift; sourceTree = "<group>"; };
 		8EFB49700A08E9D7CB895637 /* TitleWithIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleWithIconTableViewCell.xib; sourceTree = "<group>"; };
 		91ADF925ADE9443E1E2BAFB6 /* DifferenceCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceCollectionViewController.swift; sourceTree = "<group>"; };
 		9392223ADE0DD07181CF5C7B /* TitleCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -205,6 +205,9 @@
 		DEC665C492465DE0ACA510D0 /* TitleCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCollectionReusableView.xib; sourceTree = "<group>"; };
 		DF9DFCE12A61DE93236E881E /* TitleHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderGenerator.swift; sourceTree = "<group>"; };
 		DFFDDAD2FBE692DD04B2F3B9 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		E3A6D928A3FAE74B39C5EE36 /* SwipeableCollectionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableCollectionGenerator.swift; sourceTree = "<group>"; };
+		E497742AA3CE6CA86EC364AB /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		E4A32C9B5E7563989A37E4BE /* TitleFooterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleFooterGenerator.swift; sourceTree = "<group>"; };
 		EB55AC990A0263A58065C894 /* ImageHorizontalCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHorizontalCollectionViewController.swift; sourceTree = "<group>"; };
 		EC7EA468A9F7AD67BFDB2AC8 /* DiffableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableCollectionViewController.swift; sourceTree = "<group>"; };
 		ED57831CE3449F7CAC1874B4 /* DiffableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableTableViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +217,7 @@
 		F821EBA643EAE40EC777CC79 /* GravityFoldableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityFoldableCellGenerator.swift; sourceTree = "<group>"; };
 		F8F609E00D3661A8BC98556C /* FoldableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoldableCollectionViewCell.xib; sourceTree = "<group>"; };
 		F958FD39ACAA9A0CC09BC7D0 /* CollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListViewController.swift; sourceTree = "<group>"; };
+		F97877D5CE782174FAF4D53D /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExample/Pods-ReactiveDataDisplayManagerExample.release.xcconfig"; sourceTree = "<group>"; };
 		FC1DAD5AD994C42F50E514EE /* TitleIconCollectionFooterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleIconCollectionFooterGenerator.swift; sourceTree = "<group>"; };
 		FF080E64B9D36E8CE75064A7 /* UIViewController+Delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Delay.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -224,39 +228,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFCC61C58A00EDF046E2A7E9 /* UIKit.framework in Frameworks */,
-				8C7CDFB5DA8BAD5FB17DB060 /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */,
+				94E4D2DF2E30CD7862B805AE /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		019B9FA6267D235E00DAAF49 /* Footers */ = {
-			isa = PBXGroup;
-			children = (
-				019B9FA8267D23A800DAAF49 /* FooterView */,
-				019B9FA7267D239900DAAF49 /* Generators */,
-			);
-			path = Footers;
-			sourceTree = "<group>";
-		};
-		019B9FA7267D239900DAAF49 /* Generators */ = {
-			isa = PBXGroup;
-			children = (
-				019B9FAF267D250D00DAAF49 /* TitleFooterGenerator.swift */,
-			);
-			path = Generators;
-			sourceTree = "<group>";
-		};
-		019B9FA8267D23A800DAAF49 /* FooterView */ = {
-			isa = PBXGroup;
-			children = (
-				019B9FA9267D23C500DAAF49 /* FooterView.swift */,
-				019B9FAB267D23EE00DAAF49 /* FooterView.xib */,
-			);
-			path = FooterView;
-			sourceTree = "<group>";
-		};
 		0604D4FBBE2647BF1815EFDE /* Unroll */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,9 +293,9 @@
 		18F00C37DABC4AD408CA7C30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				019B9FA6267D235E00DAAF49 /* Footers */,
 				474CD5F4A339F735088298E7 /* PaginatorView.swift */,
 				06478A4F456832221FCBA599 /* Cells */,
+				9D42D372F4924957EADE40D4 /* Footers */,
 				C8307350AB86EFC037FEFEEA /* Headers */,
 			);
 			path = Views;
@@ -352,6 +330,7 @@
 				AF1A84D42128FD0ACCDBA186 /* DiffableCollectionCellGenerator.swift */,
 				B48466610D1C8EBA481BA850 /* FoldableCollectionCellGenerator.swift */,
 				5EA8DD2FF5F7ABC2416F3C2C /* ImageCollectionCellGenerator.swift */,
+				E3A6D928A3FAE74B39C5EE36 /* SwipeableCollectionGenerator.swift */,
 				795E2E2FB1DCC1DE73457FB9 /* TitleCollectionGenerator.swift */,
 				9AAF4EC7F8199FE77561B93C /* VerticalSizableTextGenerator.swift */,
 			);
@@ -370,7 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				BC63B8F3540DB313A90623C7 /* UIKit.framework */,
-				482F036E44E4BBA41CEED689 /* Pods_ReactiveDataDisplayManagerExample.framework */,
+				3996295351A5AA596D287300 /* Pods_ReactiveDataDisplayManagerExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -557,9 +536,18 @@
 				40B9169A16A5A7477151DEAD /* PaginatableCollectionViewController */,
 				F2BD4C75D66574ED05145094 /* PrefetchingCollectionViewController */,
 				DC4DD0517F4309514028C360 /* SizableCollectionViewController */,
+				C28B440C2A05EE898E8C268E /* SwipeableCollectionListViewController */,
 				B216711AFF2A551FD427173C /* Views */,
 			);
 			path = Collection;
+			sourceTree = "<group>";
+		};
+		7B23E93ABC4F31BF407F50A5 /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+				E4A32C9B5E7563989A37E4BE /* TitleFooterGenerator.swift */,
+			);
+			path = Generators;
 			sourceTree = "<group>";
 		};
 		83C3A689C303DDF5EDE34078 /* FoldableTableViewController */ = {
@@ -621,6 +609,15 @@
 			path = MainCollectionViewController;
 			sourceTree = "<group>";
 		};
+		9D42D372F4924957EADE40D4 /* Footers */ = {
+			isa = PBXGroup;
+			children = (
+				CDB0AEAB171D5913E8174D62 /* FooterView */,
+				7B23E93ABC4F31BF407F50A5 /* Generators */,
+			);
+			path = Footers;
+			sourceTree = "<group>";
+		};
 		A2F38C685323B8D626753C9A /* Stack */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,15 +659,6 @@
 			path = DifferenceTableViewController;
 			sourceTree = "<group>";
 		};
-		B00A7A222773B55351A27581 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				57C7472406826764801C9E51 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */,
-				7C8DFD3BDB3F732327A44E6F /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		B216711AFF2A551FD427173C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -687,7 +675,7 @@
 				1BBA63A398D9C0DFEEFFB6E2 /* ReactiveDataDisplayManager */,
 				299303BB717880B5A2E66198 /* Frameworks */,
 				BF88590C60E62AD28FD1806F /* Products */,
-				B00A7A222773B55351A27581 /* Pods */,
+				C43074A3B51BD509C51EDA39 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -715,6 +703,24 @@
 				18F0E44799CDA482519CFA76 /* ImageCollectionViewController.swift */,
 			);
 			path = ImageCollectionViewController;
+			sourceTree = "<group>";
+		};
+		C28B440C2A05EE898E8C268E /* SwipeableCollectionListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8E284CEC0582666D927EC02D /* SwipeableCollectionListViewController.swift */,
+			);
+			path = SwipeableCollectionListViewController;
+			sourceTree = "<group>";
+		};
+		C43074A3B51BD509C51EDA39 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				744F97C70487CF4BB1C0BCB9 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */,
+				F97877D5CE782174FAF4D53D /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		C617B3F1D8EB0A5708689DDA /* Footer */ = {
@@ -764,6 +770,15 @@
 				18F00C37DABC4AD408CA7C30 /* Views */,
 			);
 			path = Table;
+			sourceTree = "<group>";
+		};
+		CDB0AEAB171D5913E8174D62 /* FooterView */ = {
+			isa = PBXGroup;
+			children = (
+				E497742AA3CE6CA86EC364AB /* FooterView.swift */,
+				2B4DA92D58D6A00EA8B5139B /* FooterView.xib */,
+			);
+			path = FooterView;
 			sourceTree = "<group>";
 		};
 		CFB870514EC3A7A1D1375304 /* RefreshableTableViewController */ = {
@@ -925,11 +940,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49105C36A7AEC17731F9FD2B /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerExample" */;
 			buildPhases = (
-				27A05685106AEE27E48BEF64 /* [CP] Check Pods Manifest.lock */,
+				37537393428541F97601D7F1 /* [CP] Check Pods Manifest.lock */,
 				04937DD7CB0B4777969B5676 /* Sources */,
 				6CF57DBC44D8337F41879358 /* Resources */,
 				8F967E0CE76CB3B3DCA425D2 /* Frameworks */,
-				BDA53538808447A520886929 /* [CP] Embed Pods Frameworks */,
+				44FCBA68553D5703B99B0A53 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -980,6 +995,7 @@
 				FE5F37F2E95948E59CF6B6B2 /* Assets.xcassets in Resources */,
 				EE3D9929C26935A7EFC1D696 /* FoldableCollectionViewCell.xib in Resources */,
 				19BDA87C50E311730CDC4067 /* FoldableTableViewCell.xib in Resources */,
+				32844A1F30FC0D58138371A1 /* FooterView.xib in Resources */,
 				BF8451EBC2E058BA0F8D6A80 /* HeaderCollectionListView.xib in Resources */,
 				4C24E8220503B176492E91D0 /* HeaderView.xib in Resources */,
 				2C6E364B88ED2CF5663586EE /* ImageCollectionViewCell.xib in Resources */,
@@ -990,7 +1006,6 @@
 				3017D1EBD4780D35239A2AAA /* SizableCollectionViewCell.xib in Resources */,
 				CBB28C963078BADD2154624F /* TitleCollectionListCell.xib in Resources */,
 				F7406C7C8FDDE6C4CC84BA42 /* TitleCollectionReusableView.xib in Resources */,
-				019B9FAC267D23EE00DAAF49 /* FooterView.xib in Resources */,
 				B9EB0762965A2E089EE417BE /* TitleCollectionViewCell.xib in Resources */,
 				C759317B3E13B00A76E1E4D2 /* TitleIconCollectionFooterView.xib in Resources */,
 				1201643DFD9410A7C42BA293 /* TitleTableViewCell.xib in Resources */,
@@ -1001,7 +1016,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		27A05685106AEE27E48BEF64 /* [CP] Check Pods Manifest.lock */ = {
+		37537393428541F97601D7F1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1023,7 +1038,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BDA53538808447A520886929 /* [CP] Embed Pods Frameworks */ = {
+		44FCBA68553D5703B99B0A53 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1069,6 +1084,7 @@
 				7469CA91227C39BBA579BD0E /* FoldableCollectionViewController.swift in Sources */,
 				94DC16AA9156A833CC00BDBE /* FoldableTableViewCell.swift in Sources */,
 				7771ECE25476BD25F1024E9B /* FoldableTableViewController.swift in Sources */,
+				01B87C792987FE3978CC301B /* FooterView.swift in Sources */,
 				54D3F6E34F0CF393B5DDDB29 /* GravityCellGenerator.swift in Sources */,
 				D93E1B3BCAF404204B2E804C /* GravityFoldableCellGenerator.swift in Sources */,
 				D6223DDF75EF08096F89F0DA /* GravityTableViewController.swift in Sources */,
@@ -1100,13 +1116,14 @@
 				BB4339CAA8B064FBDD471859 /* PrefetchingTableViewController.swift in Sources */,
 				07D0AD412D14907C869DA420 /* RefreshableTableViewController.swift in Sources */,
 				EB839B0559BFD349B5134E9E /* SectionTitleHeaderGenerator.swift in Sources */,
-				019B9FAA267D23C500DAAF49 /* FooterView.swift in Sources */,
 				986B6FB99A755332E0AE8DF6 /* SectionTitleTableViewController.swift in Sources */,
 				36572A8920CC1DA4258360B9 /* SizableCollectionViewCell.swift in Sources */,
 				D7A53EA49970F581CC3B6C51 /* SizableCollectionViewController.swift in Sources */,
 				A03BD4921874F3CFBBE5F98F /* StackViewController.swift in Sources */,
 				5D06E88B0D8C9BEA8BE25D7F /* String.swift in Sources */,
 				50167A3419F084EB4848BCDE /* SwipeActionProvider.swift in Sources */,
+				E9C173665EE3CB35EB46F925 /* SwipeableCollectionGenerator.swift in Sources */,
+				4DD7B1A718AB32DE1054718F /* SwipeableCollectionListViewController.swift in Sources */,
 				A1C2DEACFC29CF05D12FDD0D /* SwipeableTableGenerator.swift in Sources */,
 				EA6E5A76A5FDA6F7117E1967 /* SwipeableTableViewController.swift in Sources */,
 				6B50EB3C1C9A84F139F01A9E /* TextStackCellGenerator.swift in Sources */,
@@ -1115,6 +1132,7 @@
 				677C564A4240DE620EEF81F7 /* TitleCollectionListCell.swift in Sources */,
 				46BC9AFFC1D4325107070C4C /* TitleCollectionReusableView.swift in Sources */,
 				0BDB03589517E266B2ED8498 /* TitleCollectionViewCell.swift in Sources */,
+				E8A3340BF98FBE0573FC1EEE /* TitleFooterGenerator.swift in Sources */,
 				2B69CE9B910E266840E921E9 /* TitleHeaderGenerator.swift in Sources */,
 				C108C529558AD2A12FD494BB /* TitleIconCollectionFooterGenerator.swift in Sources */,
 				F16FC0915181F93750EF4FDD /* TitleIconCollectionFooterView.swift in Sources */,
@@ -1122,7 +1140,6 @@
 				DA057A2663526522126062CF /* TitleTableViewCell.swift in Sources */,
 				368507A8B9EFEE30C4104DB8 /* TitleWithIconTableViewCell.swift in Sources */,
 				2B74D8CCB2271194B8BB972C /* UIViewController+Delay.swift in Sources */,
-				019B9FB0267D250D00DAAF49 /* TitleFooterGenerator.swift in Sources */,
 				6916D2128A02D5D69DA36143 /* UIViewController.swift in Sources */,
 				8B37F42D943016069BF860DA /* UnrollCellStackView.swift in Sources */,
 				2ABD2A4C803543C23135E2A9 /* UnrollStackCellGenerator.swift in Sources */,
@@ -1266,7 +1283,7 @@
 		};
 		8A640DE577B73F907CBF9820 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C8DFD3BDB3F732327A44E6F /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */;
+			baseConfigurationReference = F97877D5CE782174FAF4D53D /* Pods-ReactiveDataDisplayManagerExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1290,7 +1307,7 @@
 		};
 		AAA78025AC984BA514A8F87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57C7472406826764801C9E51 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */;
+			baseConfigurationReference = 744F97C70487CF4BB1C0BCB9 /* Pods-ReactiveDataDisplayManagerExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

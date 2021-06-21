@@ -26,6 +26,7 @@ final class MainCollectionViewController: UIViewController {
         case paginatableCollection
         case compositionalCollection
         case differenceCollection
+        case swipeableListAppearances
     }
 
     // MARK: - Constants
@@ -43,7 +44,8 @@ final class MainCollectionViewController: UIViewController {
             ("Collection with diffableDataSource", .diffableCollection),
             ("Collection with pagination", .paginatableCollection),
             ("Collection with compositional layout", .compositionalCollection),
-            ("Collection with DifferenceKit", .differenceCollection)
+            ("Collection with DifferenceKit", .differenceCollection),
+            ("List Appearances with swipeable items", .swipeableListAppearances)
         ]
     }
 
@@ -90,7 +92,7 @@ private extension MainCollectionViewController {
 
     func openScreen(by segueId: SegueIdentifier) {
         switch segueId {
-        case .listAppearances:
+        case .listAppearances, .swipeableListAppearances:
             if #available(iOS 14.0, *) {
                 performSegue(withIdentifier: segueId.rawValue, sender: tableView)
             } else {

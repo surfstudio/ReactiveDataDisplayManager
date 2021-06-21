@@ -68,7 +68,9 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(featurePlugin: TableFeaturePlugin) -> TableBuilder<T> {
-        checkSwipeActionsPlugin(with: featurePlugin)
+        guard !trySetSwipeActions(plugin: featurePlugin) else {
+            return self
+        }
 
         switch featurePlugin {
         case let plugin as TableMovable:
@@ -129,12 +131,13 @@ public class TableBuilder<T: BaseTableManager> {
 
 private extension TableBuilder {
 
-    func checkSwipeActionsPlugin(with plugin: TableFeaturePlugin) {
+    func trySetSwipeActions(plugin: TableFeaturePlugin) -> Bool {
         guard #available(iOS 11.0, *),
               let plugin = plugin as? TableSwipeActionsConfigurable
-        else { return }
+        else { return false }
 
         swipeActionsPlugin = plugin
+        return true
     }
 
 }
