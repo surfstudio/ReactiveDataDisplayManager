@@ -14,8 +14,9 @@ import UIKit
 public protocol DragAndDroppableItemSource {
     var item: DragAndDroppableItem { get }
 
-    /// Associated generators to drag and drop multiple items
-    var associatedGenerators: [DragAndDroppableItem] { get set }
+    // TODO: - Add support for multiple items
+    //    /// Associated generators to drag and drop multiple items
+    //    var associatedGenerators: [DragAndDroppableItem] { get set }
 }
 
 /// Wrapping identifier for the dragged cell

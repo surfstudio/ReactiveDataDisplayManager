@@ -28,11 +28,15 @@ extension DraggablePluginDelegate: DraggableDelegate {
     ///     - indexPath: index path of the item to drag.
     ///     - provider: wrapped collection of sections and generators
     /// - returns: items to drag or an empty array if dragging the selected item is not possible
+    /// - warning: Currently supports single item drag
     public func makeDragItems(at indexPath: IndexPath, with provider: Provider?) -> [UIDragItem] {
         guard let generator = provider?.generators[safe: indexPath.section]?[safe: indexPath.row] as? GeneratorType else { return [] }
         let mainDragItem = makeDragItem(for: generator.item)
-        let items = [mainDragItem] + generator.associatedGenerators.compactMap(makeDragItem(for:))
-        return items
+
+        // TODO: - Add support for multiple items
+        //        let items = [mainDragItem] + generator.associatedGenerators.compactMap(makeDragItem(for:))
+        //        return items
+        return [mainDragItem]
     }
 
 }
