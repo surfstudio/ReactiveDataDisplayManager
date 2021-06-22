@@ -47,6 +47,10 @@ open class Modifier<View: UIView, Animation> {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
+    open func replace(at indexPaths: [IndexPath], on insertIndexPaths: [IndexPath], with removeAnimation: Animation, and insertAnimation: Animation) {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+
     /// Insert new sections at specific position with animation
     ///
     /// - parameter indexPaths: location of sections to insert

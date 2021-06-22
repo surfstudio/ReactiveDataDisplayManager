@@ -14,14 +14,15 @@ public protocol TableSwipeActionsConfigurable: TableFeaturePlugin, SwipeActionsC
     func trailingSwipeActionsConfigurationForRow(at indexPath: IndexPath, with manager: BaseTableManager?) -> UISwipeActionsConfiguration?
 }
 
-protocol CollectionSwipeActionsConfigurable: CollectionFeaturePlugin, SwipeActionsConfigurable {
+@available(iOS 14.0, *)
+public protocol CollectionSwipeActionsConfigurable: CollectionFeaturePlugin, SwipeActionsConfigurable {
     var manager: BaseCollectionManager? { get set }
 }
 
 public protocol SwipeActionsConfigurable { }
 
 @available(iOS 11.0, *)
-extension SwipeActionsConfigurable {
+public extension SwipeActionsConfigurable {
 
     func makeSwipeActionsConfiguration(for generator: SwipeableItem,
                                        with swipeConfiguration: SwipeActionsConfiguration) -> UISwipeActionsConfiguration? {
