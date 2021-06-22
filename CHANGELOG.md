@@ -6,11 +6,11 @@
 - `DiffableTableDataSource` implementing `UICollectionTableDataSource`
 - `DiffableCollectionDataSource` implementing `UICollectionDiffableDataSource`
 - `CollectionSwipeActionsConfigurationPlugin` to support `UISwipeActionsConfiguration` in collection with list appearance
--
+- `DragAndDroppable` to support drag'n'drop from iOS 11 in table and collection
 
 ### Updated
 
-- code style and linter issues fixes 
+- code style and linter issues fixes
 - documentation and typos
 
 ### Deprecated
