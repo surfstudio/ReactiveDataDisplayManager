@@ -11,6 +11,10 @@ import UIKit
 /// Base implementation for `UITableViewDelegate` protocol.
 open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate {
 
+    // MARK: - Typealias
+
+    typealias TableAnimator = Animator<BaseTableManager.CollectionType>
+
     // MARK: - Properties
 
     public weak var manager: BaseTableManager?
@@ -42,6 +46,8 @@ open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate 
 
     // MARK: - Private Properties
 
+    private var animator: TableAnimator?
+
     private var _swipeActionsPlugin: TableFeaturePlugin?
     private var _draggableDelegate: AnyObject?
     private var _droppableDelegate: AnyObject?
@@ -53,6 +59,7 @@ open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate 
 extension BaseTableDelegate {
 
     open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
+        animator = builder.animator
 
         movablePlugin = builder.movablePlugin?.delegate
         tablePlugins = builder.tablePlugins
@@ -188,17 +195,32 @@ extension BaseTableDelegate {
         return swipeActionsPlugin?.trailingSwipeActionsConfigurationForRow(at: indexPath, with: manager)
     }
 
-    @available(iOS 11.0, *)
+}
+
+// MARK: - UITableViewDragDelegate
+
+@available(iOS 11.0, *)
+extension BaseTableDelegate {
+
     open func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         return draggableDelegate?.makeDragItems(at: indexPath, with: manager) ?? []
     }
 
-    @available(iOS 11.0, *)
+}
+
+// MARK: - UITableViewDropDelegate
+
+@available(iOS 11.0, *)
+extension BaseTableDelegate {
+
     open func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        droppableDelegate?.performDrop(with: TableDropCoordinatorWrapper(coordinator: coordinator), and: manager, modifier: manager?.dataSource?.modifier)
+        droppableDelegate?.performDrop(with: TableDropCoordinatorWrapper(coordinator: coordinator),
+                                       and: manager,
+                                       view: tableView,
+                                       animator: animator,
+                                       modifier: manager?.dataSource?.modifier)
     }
 
-    @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         guard let operation = droppableDelegate?.didUpdateItem(with: destinationIndexPath, in: tableView) else {
             return UITableViewDropProposal(operation: .forbidden)
@@ -207,24 +229,6 @@ extension BaseTableDelegate {
     }
 
 }
-
-//// MARK: - UITableViewDragDelegate
-//
-//
-//extension BaseTableDelegate {
-//
-//
-//
-//}
-//
-//// MARK: - UITableViewDropDelegate
-//
-//
-//extension BaseTableDelegate {
-//
-//
-//
-//}
 
 // MARK: UIScrollViewDelegate
 

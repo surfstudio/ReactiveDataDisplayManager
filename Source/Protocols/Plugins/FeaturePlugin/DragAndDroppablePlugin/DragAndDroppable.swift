@@ -31,7 +31,9 @@ public protocol DroppableDelegate: AnyObject {
     associatedtype CoordinatorType: NSObjectProtocol
 
     func didUpdateItem(with destinationIndexPath: IndexPath?, in view: DragAndDroppableView) -> UIDropOperation
-    func performDrop<View: UIView, Animation: RawRepresentable>(with coordinator: DropCoordinatorWrapper<CoordinatorType>,
-                                                                and provider: Provider?,
-                                                                modifier: Modifier<View, Animation>?)
+    func performDrop<Collection: UIView, Animation: RawRepresentable>(with coordinator: DropCoordinatorWrapper<CoordinatorType>,
+                                                                      and provider: Provider?,
+                                                                      view: Collection,
+                                                                      animator: Animator<Collection>?,
+                                                                      modifier: Modifier<Collection, Animation>?)
 }

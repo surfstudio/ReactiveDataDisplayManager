@@ -11,6 +11,10 @@ import UIKit
 /// Base implementation for `UICollectionViewDelegate` protocol.
 open class BaseCollectionDelegate: NSObject, CollectionDelegate, CollectionDragAndDropDelegate {
 
+    // MARK: - Typealias
+
+    typealias CollectionAnimator = Animator<BaseCollectionManager.CollectionType>
+
     // MARK: - Properties
 
     weak public var manager: BaseCollectionManager? {
@@ -38,6 +42,8 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate, CollectionDragA
 
     // MARK: - Private Properties
 
+    private var animator: CollectionAnimator?
+
     private var _draggableDelegate: AnyObject?
     private var _droppableDelegate: AnyObject?
 
@@ -48,6 +54,7 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate, CollectionDragA
 extension BaseCollectionDelegate {
 
     public func configure<T>(with builder: CollectionBuilder<T>) where T: BaseCollectionManager {
+        animator = builder.animator
 
         movablePlugin = builder.movablePlugin?.delegate
         collectionPlugins = builder.collectionPlugins
@@ -130,7 +137,11 @@ extension BaseCollectionDelegate {
 extension BaseCollectionDelegate {
 
     open func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        droppableDelegate?.performDrop(with: CollectionDropCoordinatorWrapper(coordinator: coordinator), and: manager, modifier: manager?.dataSource?.modifier)
+        droppableDelegate?.performDrop(with: CollectionDropCoordinatorWrapper(coordinator: coordinator),
+                                       and: manager,
+                                       view: collectionView,
+                                       animator: animator,
+                                       modifier: manager?.dataSource?.modifier)
     }
 
     open func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
