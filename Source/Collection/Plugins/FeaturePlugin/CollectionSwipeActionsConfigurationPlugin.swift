@@ -16,7 +16,7 @@ public class CollectionSwipeActionsConfigurationPlugin: CollectionFeaturePlugin,
     // MARK: - Properties
 
     public var swipeProvider: SwipeActionsProvider
-    weak var manager: BaseCollectionManager?
+    public weak var manager: BaseCollectionManager?
 
     // MARK: - Initialization
 

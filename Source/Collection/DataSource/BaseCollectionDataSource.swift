@@ -13,11 +13,10 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
 
     // MARK: - Typealias
 
-    public typealias CollectionAnimator = Animator<BaseCollectionManager.CollectionType>
+    typealias CollectionAnimator = Animator<BaseCollectionManager.CollectionType>
 
     // MARK: - Properties
 
-    public var animator: CollectionAnimator?
     public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
     public weak var provider: CollectionGeneratorsProvider?
 
@@ -25,6 +24,10 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
     public var movablePlugin: MovablePluginDataSource<CollectionGeneratorsProvider>?
+
+    // MARK: - Private Properties
+
+    private var animator: CollectionAnimator?
 
 }
 

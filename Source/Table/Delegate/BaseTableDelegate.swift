@@ -9,13 +9,18 @@
 import UIKit
 
 /// Base implementation for `UITableViewDelegate` protocol.
-open class BaseTableDelegate: NSObject, TableDelegate {
+open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate {
+
+    // MARK: - Typealias
+
+    typealias TableAnimator = Animator<BaseTableManager.CollectionType>
 
     // MARK: - Properties
 
     public weak var manager: BaseTableManager?
 
     public var estimatedHeight: CGFloat = 40
+    public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
 
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
@@ -27,9 +32,25 @@ open class BaseTableDelegate: NSObject, TableDelegate {
         get { _swipeActionsPlugin as? TableSwipeActionsConfigurable }
     }
 
+    @available(iOS 11.0, *)
+    public var draggableDelegate: DraggablePluginDelegate<TableGeneratorsProvider>? {
+        set { _draggableDelegate = newValue }
+        get { _draggableDelegate as? DraggablePluginDelegate<TableGeneratorsProvider> }
+    }
+
+    @available(iOS 11.0, *)
+    public var droppableDelegate: DroppablePluginDelegate<TableGeneratorsProvider, UITableViewDropCoordinator>? {
+        set { _droppableDelegate = newValue }
+        get { _droppableDelegate as? DroppablePluginDelegate<TableGeneratorsProvider, UITableViewDropCoordinator> }
+    }
+
     // MARK: - Private Properties
 
+    private var animator: TableAnimator?
+
     private var _swipeActionsPlugin: TableFeaturePlugin?
+    private var _draggableDelegate: AnyObject?
+    private var _droppableDelegate: AnyObject?
 
 }
 
@@ -38,6 +59,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 extension BaseTableDelegate {
 
     open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
+        animator = builder.animator
 
         movablePlugin = builder.movablePlugin?.delegate
         tablePlugins = builder.tablePlugins
@@ -45,6 +67,8 @@ extension BaseTableDelegate {
 
         if #available(iOS 11.0, *) {
             swipeActionsPlugin = builder.swipeActionsPlugin as? TableSwipeActionsConfigurable
+            draggableDelegate = builder.dragAndDroppablePlugin?.draggableDelegate
+            droppableDelegate = builder.dragAndDroppablePlugin?.droppableDelegate
         }
 
         manager = builder.manager
@@ -169,6 +193,41 @@ extension BaseTableDelegate {
     public func tableView(_ tableView: UITableView,
                           trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return swipeActionsPlugin?.trailingSwipeActionsConfigurationForRow(at: indexPath, with: manager)
+    }
+
+}
+
+// MARK: - UITableViewDragDelegate
+
+@available(iOS 11.0, *)
+extension BaseTableDelegate {
+
+    open func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return draggableDelegate?.makeDragItems(at: indexPath, with: manager) ?? []
+    }
+
+}
+
+// MARK: - UITableViewDropDelegate
+
+@available(iOS 11.0, *)
+extension BaseTableDelegate {
+
+    open func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        droppableDelegate?.performDrop(with: TableDropCoordinatorWrapper(coordinator: coordinator),
+                                       and: manager,
+                                       view: tableView,
+                                       animator: animator,
+                                       modifier: manager?.dataSource?.modifier)
+    }
+
+    open func tableView(_ tableView: UITableView,
+                        dropSessionDidUpdate session: UIDropSession,
+                        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        guard let operation = droppableDelegate?.didUpdateItem(with: destinationIndexPath, in: tableView) else {
+            return UITableViewDropProposal(operation: .forbidden)
+        }
+        return UITableViewDropProposal(operation: operation)
     }
 
 }

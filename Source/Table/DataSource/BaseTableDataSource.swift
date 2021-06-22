@@ -14,19 +14,22 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Typealias
 
-    public typealias TableAnimator = Animator<BaseTableManager.CollectionType>
+    typealias TableAnimator = Animator<BaseTableManager.CollectionType>
 
     // MARK: - Properties
 
     public weak var provider: TableGeneratorsProvider?
 
     public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
-    private var animator: TableAnimator?
 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     public var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>?
+
+    // MARK: - Private Properties
+
+    private var animator: TableAnimator?
 
 }
 
