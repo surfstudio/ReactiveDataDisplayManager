@@ -21,6 +21,7 @@ open class DropItemWrapper {
 
 }
 
+/// Wrapper for UITableViewDropCoordinator or UICollectionViewDropCoordinator
 @available(iOS 11.0, *)
 open class DropCoordinatorWrapper<Coordinator: NSObjectProtocol> {
 

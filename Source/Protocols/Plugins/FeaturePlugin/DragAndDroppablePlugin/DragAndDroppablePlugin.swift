@@ -9,9 +9,9 @@
 import UIKit
 import Foundation
 
-/// Plugin to move cells
+/// Plugin to drag and drop cells
 ///
-/// Allow moving cells builded with `MovableItem` generators
+/// Allow dragging and dropping cells builded with `DragAndDroppableItemSource` generators
 @available(iOS 11.0, *)
 open class TableDragAndDroppablePlugin: TableFeaturePlugin, DragAndDroppable {
 
@@ -30,9 +30,9 @@ open class TableDragAndDroppablePlugin: TableFeaturePlugin, DragAndDroppable {
 
 public extension TableFeaturePlugin {
 
-    /// Plugin to move cells
+    /// Plugin to drag and drop cells
     ///
-    /// Allow moving cells builded with `MovableItem` generators
+    /// Allow dragging and dropping cells builded with `DragAndDroppableItemSource` generators
     @available(iOS 11.0, *)
     static func dragAndDroppable() -> TableDragAndDroppablePlugin {
         .init()
@@ -40,9 +40,9 @@ public extension TableFeaturePlugin {
 
 }
 
-/// Plugin to move cells
+/// Plugin to drag and drop cells
 ///
-/// Allow moving cells builded with `MovableItem` generators
+/// Allow dragging and dropping cells builded with `DragAndDroppableItemSource` generators
 @available(iOS 11.0, *)
 open class CollectionDragAndDroppablePlugin: CollectionFeaturePlugin, DragAndDroppable {
 
@@ -59,9 +59,9 @@ open class CollectionDragAndDroppablePlugin: CollectionFeaturePlugin, DragAndDro
 
 public extension CollectionFeaturePlugin {
 
-    /// Plugin to move cells
+    /// Plugin to drag and drop cells
     ///
-    /// Allow moving cells builded with `MovableItem` generators
+    /// Allow dragging and dropping cells builded with `DragAndDroppableItemSource` generators
     @available(iOS 11.0, *)
     static func dragAndDroppable() -> CollectionDragAndDroppablePlugin {
         .init()

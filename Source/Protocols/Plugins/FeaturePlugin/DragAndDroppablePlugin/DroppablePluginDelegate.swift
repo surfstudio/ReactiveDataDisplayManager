@@ -28,6 +28,13 @@ open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType
 @available(iOS 11.0, *)
 extension DroppablePluginDelegate: DroppableDelegate {
 
+    /// Method allows you to include drag and drop data in the collection.
+    /// - parameters:
+    ///     - coordinator: wrapper for UITableViewDropCoordinator or UICollectionViewDropCoordinator
+    ///     - provider: wrapped collection of sections and generators
+    ///     - view: the collection that received the drop
+    ///     - animator: an animator object for animating the dropping of elements into the view
+    ///     - modifier: object to modify view after the dropping of elements into the view
     open func performDrop<Collection: UIView, Animation: RawRepresentable>(with coordinator: Coordinator,
                                                                            and provider: Provider?,
                                                                            view: Collection,
@@ -41,6 +48,11 @@ extension DroppablePluginDelegate: DroppableDelegate {
         reorderItems(with: destinationIndexPath, coordinator: coordinator, provider: provider, view: view, animator: animator, modifier: modifier)
     }
 
+    /// Method allow to determine a type of operation when the user dropping items
+    /// - parameters:
+    ///     - destinationIndexPath: index path at which the items would be dropped.
+    ///     - view: the collection that’s tracking the dragged content.
+    /// - returns: Operation types that determine how a drag and drop activity resolves when the user drops a drag item.
     open func didUpdateItem(with destinationIndexPath: IndexPath?, in view: DragAndDroppableView) -> UIDropOperation {
         guard view.hasActiveDrag else {
             return .forbidden

@@ -22,6 +22,11 @@ public protocol DragAndDroppable {
 public protocol DraggableDelegate: AnyObject {
     associatedtype Provider: GeneratorsProvider
 
+    /// Method provides the initial set of items (if any) to drag.
+    /// - parameters:
+    ///     - indexPath: index path of the item to drag.
+    ///     - provider: wrapped collection of sections and generators
+    /// - returns: items to drag or an empty array if dragging the selected item is not possible
     func makeDragItems(at indexPath: IndexPath, with provider: Provider?) -> [UIDragItem]
 }
 
@@ -30,7 +35,20 @@ public protocol DroppableDelegate: AnyObject {
     associatedtype Provider: GeneratorsProvider
     associatedtype CoordinatorType: NSObjectProtocol
 
+    /// Method allow to determine a type of operation when the user dropping items
+    /// - parameters:
+    ///     - destinationIndexPath: index path at which the items would be dropped.
+    ///     - view: the collection that’s tracking the dragged content.
+    /// - returns: Operation types that determine how a drag and drop activity resolves when the user drops a drag item.
     func didUpdateItem(with destinationIndexPath: IndexPath?, in view: DragAndDroppableView) -> UIDropOperation
+
+    /// Method allows you to include drag and drop data in the collection.
+    /// - parameters:
+    ///     - coordinator: wrapper for UITableViewDropCoordinator or UICollectionViewDropCoordinator
+    ///     - provider: wrapped collection of sections and generators
+    ///     - view: the collection that received the drop
+    ///     - animator: an animator object for animating the dropping of elements into the view
+    ///     - modifier: object to modify view after the dropping of elements into the view
     func performDrop<Collection: UIView, Animation: RawRepresentable>(with coordinator: DropCoordinatorWrapper<CoordinatorType>,
                                                                       and provider: Provider?,
                                                                       view: Collection,
