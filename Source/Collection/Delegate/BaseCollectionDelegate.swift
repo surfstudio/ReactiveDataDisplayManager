@@ -9,7 +9,7 @@
 import UIKit
 
 /// Base implementation for `UICollectionViewDelegate` protocol.
-open class BaseCollectionDelegate: NSObject, CollectionDelegate {
+open class BaseCollectionDelegate: NSObject, CollectionDelegate, CollectionDragAndDropDelegate {
 
     // MARK: - Properties
 

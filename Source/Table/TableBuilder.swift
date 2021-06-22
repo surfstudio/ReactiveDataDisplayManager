@@ -78,12 +78,12 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(featurePlugin: TableFeaturePlugin) -> TableBuilder<T> {
-        let isInstalledPlugin = [
+        let needTrySetPlugin = [
             !trySetSwipeActions(plugin: featurePlugin),
             !trySetDragAndDroppable(plugin: featurePlugin)
         ].allSatisfy { $0 }
 
-        guard !isInstalledPlugin else { return self }
+        guard needTrySetPlugin else { return self }
 
         switch featurePlugin {
         case let plugin as TableMovableItemPlugin:
@@ -127,8 +127,14 @@ public class TableBuilder<T: BaseTableManager> {
         delegate.configure(with: self)
         view.delegate = delegate
 
+        if #available(iOS 11.0, *) {
+            view.dragDelegate = delegate as? TableDragAndDropDelegate
+            view.dropDelegate = delegate as? TableDragAndDropDelegate
+        }
+
         dataSource.configure(with: self)
         view.dataSource = dataSource
+
         if #available(iOS 10.0, *) {
             view.prefetchDataSource = dataSource
         }

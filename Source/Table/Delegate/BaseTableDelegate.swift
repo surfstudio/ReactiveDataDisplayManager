@@ -9,7 +9,7 @@
 import UIKit
 
 /// Base implementation for `UITableViewDelegate` protocol.
-open class BaseTableDelegate: NSObject, TableDelegate {
+open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate {
 
     // MARK: - Properties
 

@@ -121,6 +121,11 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         delegate.configure(with: self)
         view.delegate = delegate
 
+        if #available(iOS 11.0, *) {
+            view.dragDelegate = delegate as? CollectionDragAndDropDelegate
+            view.dropDelegate = delegate as? CollectionDragAndDropDelegate
+        }
+
         dataSource.configure(with: self)
         view.dataSource = dataSource
 
