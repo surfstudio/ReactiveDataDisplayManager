@@ -28,6 +28,7 @@ final class MainCollectionViewController: UIViewController {
         case differenceCollection
         case swipeableListAppearances
         case movableCollection
+        case dragAndDroppableCollection
     }
 
     // MARK: - Constants
@@ -47,7 +48,8 @@ final class MainCollectionViewController: UIViewController {
             ("Collection with compositional layout", .compositionalCollection),
             ("Collection with DifferenceKit", .differenceCollection),
             ("List Appearances with swipeable items", .swipeableListAppearances),
-            ("Collection with movable items", .movableCollection)
+            ("Collection with movable items", .movableCollection),
+            ("Collection with drag and drop item", .dragAndDroppableCollection)
         ]
     }
 

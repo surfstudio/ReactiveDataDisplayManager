@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="haM-wg-zn2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="haM-wg-zn2">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -503,6 +503,7 @@
                         <segue destination="wYl-2p-b07" kind="show" identifier="differenceCollection" id="FUy-ae-GwC"/>
                         <segue destination="JRO-Jc-LJy" kind="show" identifier="swipeableListAppearances" id="VbB-BP-etm"/>
                         <segue destination="U7p-pz-PrX" kind="show" identifier="movableCollection" id="k3y-7B-Uu4"/>
+                        <segue destination="Czp-U6-ipo" kind="show" identifier="dragAndDroppableCollection" id="W98-yt-KrB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1254,6 +1255,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpV-hx-0sU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-163.19999999999999" y="132.23388305847078"/>
+        </scene>
+        <!--Drag And Droppable Collection View Controller-->
+        <scene sceneID="uw2-Ff-JwT">
+            <objects>
+                <viewController id="Czp-U6-ipo" customClass="DragAndDroppableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5SB-wA-QIa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="76g-uB-X8V">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IOI-GD-ZC6">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="RVm-0i-glE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="76g-uB-X8V" firstAttribute="leading" secondItem="RVm-0i-glE" secondAttribute="leading" id="4AW-WF-R5c"/>
+                            <constraint firstItem="RVm-0i-glE" firstAttribute="trailing" secondItem="76g-uB-X8V" secondAttribute="trailing" id="BEL-FG-3Is"/>
+                            <constraint firstItem="76g-uB-X8V" firstAttribute="top" secondItem="RVm-0i-glE" secondAttribute="top" id="Q10-kz-jAU"/>
+                            <constraint firstItem="RVm-0i-glE" firstAttribute="bottom" secondItem="76g-uB-X8V" secondAttribute="bottom" id="f0f-Z3-bjW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="YVm-3V-QWx"/>
+                    <connections>
+                        <outlet property="collectionView" destination="76g-uB-X8V" id="hJ4-aP-0Rh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gQh-hf-Uqp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4203" y="3005"/>
         </scene>
     </scenes>
     <resources>

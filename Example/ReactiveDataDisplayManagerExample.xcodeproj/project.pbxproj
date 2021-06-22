@@ -54,6 +54,7 @@
 		6BA6BB85E02F5B43A00DB3B3 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822BCF3694F34717804DCF88 /* Appearance.swift */; };
 		6D1B4967267F8162004B19E0 /* MovableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B4966267F8162004B19E0 /* MovableCollectionViewController.swift */; };
 		6D1B496C267F81E3004B19E0 /* MovableCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1B496B267F81E3004B19E0 /* MovableCollectionCellGenerator.swift */; };
+		6DE8734726812CBF008D2769 /* DragAndDroppableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE8734626812CBF008D2769 /* DragAndDroppableCollectionViewController.swift */; };
 		7469CA91227C39BBA579BD0E /* FoldableCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED9375407E9E04CB2B8492F /* FoldableCollectionViewController.swift */; };
 		74A52235EBC2324EB82832E1 /* Pods_ReactiveDataDisplayManagerExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7AD1F386E3AFBCFF5020E0 /* Pods_ReactiveDataDisplayManagerExample.framework */; };
 		7771ECE25476BD25F1024E9B /* FoldableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F829DBA2D8FE8670C208FA2 /* FoldableTableViewController.swift */; };
@@ -152,6 +153,7 @@
 		6D1B4966267F8162004B19E0 /* MovableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCollectionViewController.swift; sourceTree = "<group>"; };
 		6D1B496B267F81E3004B19E0 /* MovableCollectionCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovableCollectionCellGenerator.swift; sourceTree = "<group>"; };
 		6DCA52FFA92CFC3829BB8E54 /* TitleWithIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithIconTableViewCell.swift; sourceTree = "<group>"; };
+		6DE8734626812CBF008D2769 /* DragAndDroppableCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDroppableCollectionViewController.swift; sourceTree = "<group>"; };
 		6EF4B6D7D72C85C6E32BA669 /* SwipeableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableTableViewController.swift; sourceTree = "<group>"; };
 		6F93E77221299A239B51BF7F /* TitleStackCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleStackCellGenerator.swift; sourceTree = "<group>"; };
 		70DCA90700277195993FA2B8 /* DifferenceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenceTableViewController.swift; sourceTree = "<group>"; };
@@ -517,6 +519,14 @@
 			path = MovableCollectionViewController;
 			sourceTree = "<group>";
 		};
+		6DE8734826812CC5008D2769 /* DragAndDroppableCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6DE8734626812CBF008D2769 /* DragAndDroppableCollectionViewController.swift */,
+			);
+			path = DragAndDroppableCollectionViewController;
+			sourceTree = "<group>";
+		};
 		72C29A9AADC6A9F7D2E0E57D /* MainStackViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -553,6 +563,7 @@
 				DC4DD0517F4309514028C360 /* SizableCollectionViewController */,
 				C28B440C2A05EE898E8C268E /* SwipeableCollectionListViewController */,
 				6D1B4969267F816B004B19E0 /* MovableCollectionViewController */,
+				6DE8734826812CC5008D2769 /* DragAndDroppableCollectionViewController */,
 				B216711AFF2A551FD427173C /* Views */,
 			);
 			path = Collection;
@@ -1047,6 +1058,7 @@
 				6BA6BB85E02F5B43A00DB3B3 /* Appearance.swift in Sources */,
 				2639BCFE1E67FF29F0335707 /* Array.swift in Sources */,
 				C5BEEBCF634F97F020F2647A /* BaseCollectionManager.swift in Sources */,
+				6DE8734726812CBF008D2769 /* DragAndDroppableCollectionViewController.swift in Sources */,
 				88C90EA9146887D817FEBB5D /* ButtonStackCellGenerator.swift in Sources */,
 				98D5F2B0BE18B88E2D8151BB /* CollectionCompositionalViewController.swift in Sources */,
 				16C2E29BB9A74E215BF5BB2F /* CollectionListViewController.swift in Sources */,

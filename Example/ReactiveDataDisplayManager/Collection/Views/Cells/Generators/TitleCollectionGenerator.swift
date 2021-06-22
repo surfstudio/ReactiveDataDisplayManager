@@ -8,18 +8,23 @@
 
 import ReactiveDataDisplayManager
 
-final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectionViewCell>, IndexTitleDisplaybleItem {
+final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectionViewCell>, IndexTitleDisplaybleItem, DragAndDroppableItemSource {
 
     // MARK: - IndexTitleDisplayble
 
     var title: String
     var needIndexTitle: Bool
+    var item: DragAndDroppableItem
 
     // MARK: - Initialization
 
     public init(model: String, needIndexTitle: Bool = false) {
         self.title = model
         self.needIndexTitle = needIndexTitle
+
+        let id = model as NSString
+        item = DragAndDroppableItem(identifier: id)
+
         super.init(with: model)
     }
 
