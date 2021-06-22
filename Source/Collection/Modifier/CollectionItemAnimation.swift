@@ -7,7 +7,7 @@
 
 import UIKit
 
-public enum CollectionItemAnimation {
-    case animated
-    case none
+public enum CollectionItemAnimation: Int {
+    case animated = 100
+    case none = 5
 }

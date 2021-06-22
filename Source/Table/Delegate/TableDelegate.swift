@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol TableDelegate: TableBuilderConfigurable, UITableViewDelegate {
+public protocol TableDelegate: TableBuilderConfigurable, UITableViewDelegate, UITableViewDropDelegate, UITableViewDragDelegate {
     var manager: BaseTableManager? { get set }
 
     var tablePlugins: PluginCollection<BaseTablePlugin<TableEvent>> { get set }
@@ -16,4 +16,8 @@ public protocol TableDelegate: TableBuilderConfigurable, UITableViewDelegate {
     var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>? { get set }
     @available(iOS 11.0, *)
     var swipeActionsPlugin: TableSwipeActionsConfigurable? { get set }
+    @available(iOS 11.0, *)
+    var droppableDelegate: DroppablePluginDelegate<TableGeneratorsProvider, UITableViewDropCoordinator>? { get set }
+    @available(iOS 11.0, *)
+    var draggableDelegate: DraggablePluginDelegate<TableGeneratorsProvider>? { get set }
 }

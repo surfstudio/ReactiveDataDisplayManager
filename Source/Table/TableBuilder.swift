@@ -35,6 +35,16 @@ public class TableBuilder<T: BaseTableManager> {
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     var swipeActionsPlugin: TableFeaturePlugin?
 
+    @available(iOS 11.0, *)
+    var dragAndDroppablePlugin: TableDragAndDroppablePlugin? {
+        set { _dragAndDroppablePlugin = newValue }
+        get { _dragAndDroppablePlugin as? TableDragAndDroppablePlugin }
+    }
+
+    // MARK: - Private Properties
+
+    private var _dragAndDroppablePlugin: TableFeaturePlugin?
+
     // MARK: - Initialization
 
     init(view: UITableView, manager: T) {
@@ -68,9 +78,12 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(featurePlugin: TableFeaturePlugin) -> TableBuilder<T> {
-        guard !trySetSwipeActions(plugin: featurePlugin) else {
-            return self
-        }
+        let isInstalledPlugin = [
+            !trySetSwipeActions(plugin: featurePlugin),
+            !trySetDragAndDroppable(plugin: featurePlugin)
+        ].allSatisfy { $0 }
+
+        guard !isInstalledPlugin else { return self }
 
         switch featurePlugin {
         case let plugin as TableMovableItemPlugin:
@@ -137,6 +150,15 @@ private extension TableBuilder {
         else { return false }
 
         swipeActionsPlugin = plugin
+        return true
+    }
+
+    func trySetDragAndDroppable(plugin: TableFeaturePlugin) -> Bool {
+        guard #available(iOS 11.0, *),
+              let plugin = plugin as? TableDragAndDroppablePlugin
+        else { return false }
+
+        dragAndDroppablePlugin = plugin
         return true
     }
 
