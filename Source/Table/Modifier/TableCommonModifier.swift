@@ -69,6 +69,24 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
         }
     }
 
+    /// Replace row at specified indexPath
+    ///
+    /// - parameters:
+    ///     - indexPaths: array with index of removed row
+    ///     - insertIndexPaths: array with index of inserted row
+    ///     - removeAnimation: animation of removing old row
+    ///     - insertAnimation: animation of inserting new row
+    open override func replace(at indexPaths: [IndexPath],
+                               on insertIndexPaths: [IndexPath],
+                               with removeAnimation: UITableView.RowAnimation,
+                               and insertAnimation: UITableView.RowAnimation) {
+        guard let view = view else { return }
+        animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
+            view?.deleteRows(at: indexPaths, with: removeAnimation)
+            view?.insertRows(at: insertIndexPaths, with: insertAnimation)
+        }
+    }
+
     /// Insert sections with animation
     ///
     /// - parameter indexPaths: indexes of inserted sections

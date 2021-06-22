@@ -35,6 +35,16 @@ public class TableBuilder<T: BaseTableManager> {
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     var swipeActionsPlugin: TableFeaturePlugin?
 
+    @available(iOS 11.0, *)
+    var dragAndDroppablePlugin: TableDragAndDroppablePlugin? {
+        set { _dragAndDroppablePlugin = newValue }
+        get { _dragAndDroppablePlugin as? TableDragAndDroppablePlugin }
+    }
+
+    // MARK: - Private Properties
+
+    private var _dragAndDroppablePlugin: TableFeaturePlugin?
+
     // MARK: - Initialization
 
     init(view: UITableView, manager: T) {
@@ -68,9 +78,12 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(featurePlugin: TableFeaturePlugin) -> TableBuilder<T> {
-        guard !trySetSwipeActions(plugin: featurePlugin) else {
-            return self
-        }
+        let needTrySetPlugin = [
+            !trySetSwipeActions(plugin: featurePlugin),
+            !trySetDragAndDroppable(plugin: featurePlugin)
+        ].allSatisfy { $0 }
+
+        guard needTrySetPlugin else { return self }
 
         switch featurePlugin {
         case let plugin as TableMovableItemPlugin:
@@ -114,8 +127,14 @@ public class TableBuilder<T: BaseTableManager> {
         delegate.configure(with: self)
         view.delegate = delegate
 
+        if #available(iOS 11.0, *) {
+            view.dragDelegate = delegate as? TableDragAndDropDelegate
+            view.dropDelegate = delegate as? TableDragAndDropDelegate
+        }
+
         dataSource.configure(with: self)
         view.dataSource = dataSource
+
         if #available(iOS 10.0, *) {
             view.prefetchDataSource = dataSource
         }
@@ -137,6 +156,15 @@ private extension TableBuilder {
         else { return false }
 
         swipeActionsPlugin = plugin
+        return true
+    }
+
+    func trySetDragAndDroppable(plugin: TableFeaturePlugin) -> Bool {
+        guard #available(iOS 11.0, *),
+              let plugin = plugin as? TableDragAndDroppablePlugin
+        else { return false }
+
+        dragAndDroppablePlugin = plugin
         return true
     }
 

@@ -32,6 +32,16 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     var swipeActionsPlugin: CollectionFeaturePlugin?
     var movablePlugin: CollectionMovableItemPlugin?
 
+    @available(iOS 11.0, *)
+    var dragAndDroppablePlugin: CollectionDragAndDroppablePlugin? {
+        set { _dragAndDroppablePlugin = newValue }
+        get { _dragAndDroppablePlugin as? CollectionDragAndDroppablePlugin }
+    }
+
+    // MARK: - Private Properties
+
+    private var _dragAndDroppablePlugin: CollectionFeaturePlugin?
+
     // MARK: - Initialization
 
     init(view: UICollectionView, manager: T) {
@@ -66,9 +76,12 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     /// Add feature plugin functionality based on UICollectionViewDelegate/UICollectionViewDataSource events
     public func add(featurePlugin: CollectionFeaturePlugin) -> CollectionBuilder<T> {
-        guard !trySetSwipeActions(plugin: featurePlugin) else {
-            return self
-        }
+        let needTrySetPlugin = [
+            !trySetSwipeActions(plugin: featurePlugin),
+            !trySetDragAndDroppable(plugin: featurePlugin)
+        ].allSatisfy { $0 }
+
+        guard needTrySetPlugin else { return self }
 
         switch featurePlugin {
         case let plugin as CollectionMovableItemPlugin:
@@ -108,6 +121,11 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         delegate.configure(with: self)
         view.delegate = delegate
 
+        if #available(iOS 11.0, *) {
+            view.dragDelegate = delegate as? CollectionDragAndDropDelegate
+            view.dropDelegate = delegate as? CollectionDragAndDropDelegate
+        }
+
         dataSource.configure(with: self)
         view.dataSource = dataSource
 
@@ -133,6 +151,15 @@ private extension CollectionBuilder {
 
         plugin.manager = manager
         swipeActionsPlugin = plugin
+        return true
+    }
+
+    func trySetDragAndDroppable(plugin: CollectionFeaturePlugin) -> Bool {
+        guard #available(iOS 11.0, *),
+              let plugin = plugin as? CollectionDragAndDroppablePlugin
+        else { return false }
+
+        dragAndDroppablePlugin = plugin
         return true
     }
 

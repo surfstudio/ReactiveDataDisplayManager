@@ -15,12 +15,30 @@ final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectio
     var title: String
     var needIndexTitle: Bool
 
+    // MARK: - Private Properties
+
+    private let dragAndDroppableItem: DragAndDroppableItem
+
     // MARK: - Initialization
 
     public init(model: String, needIndexTitle: Bool = false) {
         self.title = model
         self.needIndexTitle = needIndexTitle
+
+        let id = model as NSString
+        dragAndDroppableItem = DragAndDroppableItem(identifier: id)
+
         super.init(with: model)
+    }
+
+}
+
+// MARK: - DragAndDroppableItemSource
+
+extension TitleCollectionGenerator: DragAndDroppableItemSource {
+
+    var item: DragAndDroppableItem {
+        return dragAndDroppableItem
     }
 
 }

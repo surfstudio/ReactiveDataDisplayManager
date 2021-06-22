@@ -9,7 +9,11 @@
 import UIKit
 
 /// Base implementation for `UICollectionViewDelegate` protocol.
-open class BaseCollectionDelegate: NSObject, CollectionDelegate {
+open class BaseCollectionDelegate: NSObject, CollectionDelegate, CollectionDragAndDropDelegate {
+
+    // MARK: - Typealias
+
+    typealias CollectionAnimator = Animator<BaseCollectionManager.CollectionType>
 
     // MARK: - Properties
 
@@ -24,6 +28,25 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
     public var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>?
 
+    @available(iOS 11.0, *)
+    public var draggableDelegate: DraggablePluginDelegate<CollectionGeneratorsProvider>? {
+        set { _draggableDelegate = newValue }
+        get { _draggableDelegate as? DraggablePluginDelegate<CollectionGeneratorsProvider> }
+    }
+
+    @available(iOS 11.0, *)
+    public var droppableDelegate: DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator>? {
+        set { _droppableDelegate = newValue }
+        get { _droppableDelegate as? DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator> }
+    }
+
+    // MARK: - Private Properties
+
+    private var animator: CollectionAnimator?
+
+    private var _draggableDelegate: AnyObject?
+    private var _droppableDelegate: AnyObject?
+
 }
 
 // MARK: - CollectionBuilderConfigurable
@@ -31,10 +54,16 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 extension BaseCollectionDelegate {
 
     public func configure<T>(with builder: CollectionBuilder<T>) where T: BaseCollectionManager {
+        animator = builder.animator
 
         movablePlugin = builder.movablePlugin?.delegate
         collectionPlugins = builder.collectionPlugins
         scrollPlugins = builder.scrollPlugins
+
+        if #available(iOS 11.0, *) {
+            draggableDelegate = builder.dragAndDroppablePlugin?.draggableDelegate
+            droppableDelegate = builder.dragAndDroppablePlugin?.droppableDelegate
+        }
 
         manager = builder.manager
 
@@ -87,6 +116,43 @@ extension BaseCollectionDelegate {
                              didEndDisplayingSupplementaryView view: UICollectionReusableView,
                              forElementOfKind elementKind: String, at indexPath: IndexPath) {
         collectionPlugins.process(event: .didEndDisplayingSupplementaryView(indexPath), with: manager)
+    }
+
+}
+
+// MARK: - UICollectionViewDragDelegate
+
+@available(iOS 11.0, *)
+extension BaseCollectionDelegate {
+
+    open func collectionView(_ collectionView: UICollectionView,
+                             itemsForBeginning session: UIDragSession,
+                             at indexPath: IndexPath) -> [UIDragItem] {
+        return draggableDelegate?.makeDragItems(at: indexPath, with: manager) ?? []
+    }
+
+}
+
+// MARK: - UICollectionViewDropDelegate
+
+@available(iOS 11.0, *)
+extension BaseCollectionDelegate {
+
+    open func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        droppableDelegate?.performDrop(with: CollectionDropCoordinatorWrapper(coordinator: coordinator),
+                                       and: manager,
+                                       view: collectionView,
+                                       animator: animator,
+                                       modifier: manager?.dataSource?.modifier)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView,
+                             dropSessionDidUpdate session: UIDropSession,
+                             withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        guard let operation = droppableDelegate?.didUpdateItem(with: destinationIndexPath, in: collectionView) else {
+            return UICollectionViewDropProposal(operation: .forbidden)
+        }
+        return UICollectionViewDropProposal(operation: operation)
     }
 
 }
