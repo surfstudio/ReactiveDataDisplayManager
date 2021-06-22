@@ -71,6 +71,22 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
         apply(animated: insertAnimation != .none)
     }
 
+    /// Replace row at specified indexPath
+    ///
+    /// - parameters:
+    ///     - indexPaths: indexPath: **ignored**, automatically calculated using `DiffableSnapshot`
+    ///     - insertIndexPaths: indexPath: **ignored**, automatically calculated using `DiffableSnapshot`
+    ///     - removeAnimation: **ignored**,  see insertAnimation
+    ///     - insertAnimation:
+    ///     - **allowed** none to disable animation
+    ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
+    open override func replace(at indexPaths: [IndexPath],
+                               on insertIndexPaths: [IndexPath],
+                               with removeAnimation: CollectionItemAnimation,
+                               and insertAnimation: CollectionItemAnimation) {
+        apply(animated: insertAnimation != .none)
+    }
+
     /// Update snapshot after sections inserted
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
