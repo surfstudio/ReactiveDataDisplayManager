@@ -7,7 +7,6 @@
 
 import UIKit
 import ReactiveDataDisplayManager
-import Nuke
 
 final class DragAndDroppableCollectionViewController: UIViewController {
 
@@ -79,11 +78,6 @@ private extension DragAndDroppableCollectionViewController {
         }
 
         return generators
-    }
-
-    /// This method load image and set to UIImageView
-    func loadImage(url: URL, imageView: UIImageView) {
-        Nuke.loadImage(with: url, into: imageView)
     }
 
 }
