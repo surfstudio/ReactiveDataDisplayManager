@@ -221,7 +221,9 @@ extension BaseTableDelegate {
                                        modifier: manager?.dataSource?.modifier)
     }
 
-    open func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+    open func tableView(_ tableView: UITableView,
+                        dropSessionDidUpdate session: UIDropSession,
+                        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         guard let operation = droppableDelegate?.didUpdateItem(with: destinationIndexPath, in: tableView) else {
             return UITableViewDropProposal(operation: .forbidden)
         }

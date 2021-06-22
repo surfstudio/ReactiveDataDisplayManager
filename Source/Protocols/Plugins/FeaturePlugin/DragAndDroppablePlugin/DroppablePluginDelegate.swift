@@ -35,6 +35,7 @@ extension DroppablePluginDelegate: DroppableDelegate {
     ///     - view: the collection that received the drop
     ///     - animator: an animator object for animating the dropping of elements into the view
     ///     - modifier: object to modify view after the dropping of elements into the view
+    // swiftlint:disable:next function_parameter_count
     open func performDrop<Collection: UIView, Animation: RawRepresentable>(with coordinator: Coordinator,
                                                                            and provider: Provider?,
                                                                            view: Collection,
@@ -45,7 +46,12 @@ extension DroppablePluginDelegate: DroppableDelegate {
             let destinationIndexPath = coordinator.destinationIndexPath
         else { return }
 
-        reorderItems(with: destinationIndexPath, coordinator: coordinator, provider: provider, view: view, animator: animator, modifier: modifier)
+        reorderItems(with: destinationIndexPath,
+                     coordinator: coordinator,
+                     provider: provider,
+                     view: view,
+                     animator: animator,
+                     modifier: modifier)
     }
 
     /// Method allow to determine a type of operation when the user dropping items
@@ -68,6 +74,7 @@ extension DroppablePluginDelegate: DroppableDelegate {
 @available(iOS 11.0, *)
 private extension DroppablePluginDelegate {
 
+    // swiftlint:disable:next function_parameter_count
     func reorderItems<Collection: UIView, Animation: RawRepresentable>(with destinationIndexPath: IndexPath,
                                                                        coordinator: Coordinator,
                                                                        provider: Provider?,

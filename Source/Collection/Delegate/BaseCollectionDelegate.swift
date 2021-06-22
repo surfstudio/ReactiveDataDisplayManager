@@ -125,7 +125,9 @@ extension BaseCollectionDelegate {
 @available(iOS 11.0, *)
 extension BaseCollectionDelegate {
 
-    open func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+    open func collectionView(_ collectionView: UICollectionView,
+                             itemsForBeginning session: UIDragSession,
+                             at indexPath: IndexPath) -> [UIDragItem] {
         return draggableDelegate?.makeDragItems(at: indexPath, with: manager) ?? []
     }
 
@@ -144,7 +146,9 @@ extension BaseCollectionDelegate {
                                        modifier: manager?.dataSource?.modifier)
     }
 
-    open func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+    open func collectionView(_ collectionView: UICollectionView,
+                             dropSessionDidUpdate session: UIDropSession,
+                             withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         guard let operation = droppableDelegate?.didUpdateItem(with: destinationIndexPath, in: collectionView) else {
             return UICollectionViewDropProposal(operation: .forbidden)
         }
