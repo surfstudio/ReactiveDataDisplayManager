@@ -32,6 +32,7 @@ final class ImageTableViewController: UIViewController {
         }
 
         tableView.separatorStyle = .none
+
         title = "Gallery without prefetching"
 
         fillAdapter()

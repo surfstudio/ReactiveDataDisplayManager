@@ -9,7 +9,7 @@
 import UIKit
 
 /// Base implementation for `UITableViewDelegate` protocol.
-open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate {
+open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Typealias
 
@@ -26,6 +26,7 @@ open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate 
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
     public var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>?
 
+    #if os(iOS)
     @available(iOS 11.0, *)
     public var swipeActionsPlugin: TableSwipeActionsConfigurable? {
         set { _swipeActionsPlugin = newValue }
@@ -46,12 +47,13 @@ open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate 
 
     // MARK: - Private Properties
 
-    private var animator: TableAnimator?
-
     private var _swipeActionsPlugin: TableFeaturePlugin?
+
     private var _draggableDelegate: AnyObject?
     private var _droppableDelegate: AnyObject?
+    #endif
 
+    private var animator: TableAnimator?
 }
 
 // MARK: - TableBuilderConfigurable
@@ -65,11 +67,13 @@ extension BaseTableDelegate {
         tablePlugins = builder.tablePlugins
         scrollPlugins = builder.scrollPlugins
 
+        #if os(iOS)
         if #available(iOS 11.0, *) {
             swipeActionsPlugin = builder.swipeActionsPlugin as? TableSwipeActionsConfigurable
             draggableDelegate = builder.dragAndDroppablePlugin?.draggableDelegate
             droppableDelegate = builder.dragAndDroppablePlugin?.droppableDelegate
         }
+        #endif
 
         manager = builder.manager
 
@@ -183,6 +187,7 @@ extension BaseTableDelegate {
         tablePlugins.process(event: .didUpdateFocus(context: context, coordinator: coordinator), with: manager)
     }
 
+    #if os(iOS)
     @available(iOS 11.0, *)
     open func tableView(_ tableView: UITableView,
                         leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -194,8 +199,14 @@ extension BaseTableDelegate {
                           trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         return swipeActionsPlugin?.trailingSwipeActionsConfigurationForRow(at: indexPath, with: manager)
     }
-
+    #endif
 }
+
+#if os(iOS)
+
+// MARK: - TableDragAndDropDelegate
+
+extension BaseTableDelegate: TableDragAndDropDelegate {}
 
 // MARK: - UITableViewDragDelegate
 
@@ -231,6 +242,7 @@ extension BaseTableDelegate {
     }
 
 }
+#endif
 
 // MARK: UIScrollViewDelegate
 

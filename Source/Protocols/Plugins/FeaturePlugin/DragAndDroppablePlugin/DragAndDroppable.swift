@@ -5,7 +5,7 @@
 //  Created by Anton Eysner on 18.02.2021.
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
-
+#if os(iOS)
 import Foundation
 import UIKit
 
@@ -55,3 +55,4 @@ public protocol DroppableDelegate: AnyObject {
                                                                       animator: Animator<Collection>?,
                                                                       modifier: Modifier<Collection, Animation>?)
 }
+#endif

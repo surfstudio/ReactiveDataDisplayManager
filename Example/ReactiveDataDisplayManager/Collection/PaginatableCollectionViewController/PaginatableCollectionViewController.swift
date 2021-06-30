@@ -52,7 +52,7 @@ final class PaginatableCollectionViewController: UIViewController {
 private extension PaginatableCollectionViewController {
 
     func configureActivityIndicatorIfNeeded() {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, tvOS 13.0, *) {
             activityIndicator.style = .medium
         }
     }

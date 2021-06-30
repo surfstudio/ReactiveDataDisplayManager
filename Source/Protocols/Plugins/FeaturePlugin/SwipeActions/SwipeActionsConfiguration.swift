@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+#if os(iOS)
+
 import Foundation
 import UIKit
 
@@ -56,3 +58,4 @@ public struct SwipeAction {
     }
 
 }
+#endif

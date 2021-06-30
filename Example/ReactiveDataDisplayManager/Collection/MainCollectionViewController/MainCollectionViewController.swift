@@ -97,7 +97,7 @@ private extension MainCollectionViewController {
     func openScreen(by segueId: SegueIdentifier) {
         switch segueId {
         case .listAppearances, .swipeableListAppearances:
-            if #available(iOS 14.0, *) {
+            if #available(iOS 14.0, tvOS 14.0, *) {
                 performSegue(withIdentifier: segueId.rawValue, sender: tableView)
             } else {
                 showAlert("Available from 14 IOS")

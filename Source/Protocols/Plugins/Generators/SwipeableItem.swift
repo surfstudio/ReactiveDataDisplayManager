@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for `Generator` to manage `UISwipeActionsConfiguration` of generated cell
-@available(iOS 11.0, *)
+@available(iOS 11.0, tvOS 11.0, *)
 public protocol SwipeableItem {
 
     /// Array of supported action identifiers

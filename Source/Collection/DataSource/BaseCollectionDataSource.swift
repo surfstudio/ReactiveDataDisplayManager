@@ -44,7 +44,7 @@ extension BaseCollectionDataSource {
         collectionPlugins = builder.collectionPlugins
         itemTitleDisplayablePlugin = builder.itemTitleDisplayablePlugin
 
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, tvOS 10.0, *) {
             prefetchPlugins = builder.prefetchPlugins
         }
 

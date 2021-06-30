@@ -32,11 +32,13 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     var swipeActionsPlugin: CollectionFeaturePlugin?
     var movablePlugin: CollectionMovableItemPlugin?
 
+    #if os(iOS)
     @available(iOS 11.0, *)
     var dragAndDroppablePlugin: CollectionDragAndDroppablePlugin? {
         set { _dragAndDroppablePlugin = newValue }
         get { _dragAndDroppablePlugin as? CollectionDragAndDroppablePlugin }
     }
+    #endif
 
     // MARK: - Private Properties
 
@@ -76,12 +78,14 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     /// Add feature plugin functionality based on UICollectionViewDelegate/UICollectionViewDataSource events
     public func add(featurePlugin: CollectionFeaturePlugin) -> CollectionBuilder<T> {
+        #if os(iOS)
         let needTrySetPlugin = [
             !trySetSwipeActions(plugin: featurePlugin),
             !trySetDragAndDroppable(plugin: featurePlugin)
         ].allSatisfy { $0 }
 
         guard needTrySetPlugin else { return self }
+        #endif
 
         switch featurePlugin {
         case let plugin as CollectionMovableItemPlugin:
@@ -108,7 +112,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     }
 
     /// Add plugin functionality based on UICollectionViewDataSourcePrefetching events
-    @available(iOS 10.0, *)
+    @available(iOS 10.0, tvOS 10.0, *)
     public func add(plugin: BaseCollectionPlugin<PrefetchEvent>) -> CollectionBuilder<T> {
         prefetchPlugins.add(plugin)
         return self
@@ -121,15 +125,17 @@ public class CollectionBuilder<T: BaseCollectionManager> {
         delegate.configure(with: self)
         view.delegate = delegate
 
+        #if os(iOS)
         if #available(iOS 11.0, *) {
             view.dragDelegate = delegate as? CollectionDragAndDropDelegate
             view.dropDelegate = delegate as? CollectionDragAndDropDelegate
         }
+        #endif
 
         dataSource.configure(with: self)
         view.dataSource = dataSource
 
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, tvOS 10.0, *) {
             view.prefetchDataSource = dataSource
         }
 
@@ -143,7 +149,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 // MARK: - Private Methods
 
 private extension CollectionBuilder {
-
+    #if os(iOS)
     func trySetSwipeActions(plugin: CollectionFeaturePlugin) -> Bool {
         guard #available(iOS 14.0, *),
               let plugin = plugin as? CollectionSwipeActionsConfigurable
@@ -162,5 +168,5 @@ private extension CollectionBuilder {
         dragAndDroppablePlugin = plugin
         return true
     }
-
+    #endif
 }

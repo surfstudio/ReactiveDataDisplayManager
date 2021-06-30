@@ -10,7 +10,7 @@ options:
 settings:
   DEVELOPMENT_TEAM: EFAAG9GXN4
 targets:
-    ReactiveDataDisplayManagerExample:
+    ReactiveDataDisplayManagerExample_iOS:
       dependencies:
         - sdk: UIKit.framework
       type: application
@@ -23,6 +23,7 @@ targets:
       info:
         path: ReactiveDataDisplayManager/Application/Info.plist
         properties:
+          UIUserInterfaceStyle: light
           UILaunchStoryboardName: LaunchScreen
           UIMainStoryboardFile: Main
           CFBundleName: ReactiveDataDisplayManagerExample
@@ -32,6 +33,36 @@ targets:
         base:
           PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm.example
           MARKETING_VERSION: "7.1.0"
+          CURRENT_PROJECT_VERSION: 0
+          VERSIONING_SYSTEM: "apple-generic"
+          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
+          LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
+          CODE_SIGN_IDENTITY: "iPhone Developer"
+          CODE_SIGN_STYLE: Automatic
+
+    ReactiveDataDisplayManagerExample_tvOS:
+      dependencies:
+        - sdk: UIKit.framework
+      type: application
+      platform: tvOS
+      deploymentTarget: 13.0
+      scheme:
+        configVariants: all
+      sources:
+        - path: ReactiveDataDisplayManagerExampleTv
+      info:
+        path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
+        properties:
+          UIUserInterfaceStyle: light
+          UILaunchStoryboardName: LaunchScreen
+          UIMainStoryboardFile: Main
+          CFBundleName: ReactiveDataDisplayManagerExampleTv
+          CFBundleShortVersionString: $(MARKETING_VERSION)
+          CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+      settings:
+        base:
+          PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm.example
+          MARKETING_VERSION: "7.0.0"
           CURRENT_PROJECT_VERSION: 0
           VERSIONING_SYSTEM: "apple-generic"
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym

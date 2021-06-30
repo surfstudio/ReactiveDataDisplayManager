@@ -11,7 +11,7 @@ import UIKit
 ///
 /// - Note: Based on `UITableViewDiffableDataSource` and `NSDiffableDataSourceSnapshot` updating.
 /// Animations selected automatically or ignored.
-@available(iOS 13, *)
+@available(iOS 13.0, tvOS 13.0, *)
 class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     typealias CellGeneratorType = TableCellGenerator & DiffableItemSource
@@ -123,7 +123,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
 // MARK: - Private
 
-@available(iOS 13, *)
+@available(iOS 13.0, tvOS 13.0, *)
 private extension TableDiffableModifier {
 
     func apply(animated: Bool = false, completion: (() -> Void)? = nil) {

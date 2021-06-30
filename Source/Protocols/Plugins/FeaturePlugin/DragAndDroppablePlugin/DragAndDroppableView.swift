@@ -4,7 +4,7 @@
 //
 //  Created by Anton Eysner on 18.02.2021.
 //
-
+#if os(iOS)
 import Foundation
 import UIKit
 
@@ -16,3 +16,4 @@ public protocol DragAndDroppableView {
 extension UITableView: DragAndDroppableView { }
 
 extension UICollectionView: DragAndDroppableView { }
+#endif

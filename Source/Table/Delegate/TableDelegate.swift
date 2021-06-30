@@ -14,6 +14,8 @@ public protocol TableDelegate: TableBuilderConfigurable, UITableViewDelegate {
     var tablePlugins: PluginCollection<BaseTablePlugin<TableEvent>> { get set }
     var scrollPlugins: PluginCollection<BaseTablePlugin<ScrollEvent>> { get set }
     var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>? { get set }
+    #if os(iOS)
     @available(iOS 11.0, *)
     var swipeActionsPlugin: TableSwipeActionsConfigurable? { get set }
+    #endif
 }

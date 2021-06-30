@@ -11,7 +11,7 @@ import ReactiveDataDisplayManager
 
 final class PaginatorView: UIView {
 
-    private lazy var indicator = UIActivityIndicatorView(style: .gray)
+    private lazy var indicator = UIActivityIndicatorView(style: .white)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

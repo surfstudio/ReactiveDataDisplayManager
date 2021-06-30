@@ -36,6 +36,7 @@ final class PrefetchingTableViewController: UIViewController {
         }
 
         tableView.separatorStyle = .none
+
         title = "Gallery with prefetching"
 
         fillAdapter()

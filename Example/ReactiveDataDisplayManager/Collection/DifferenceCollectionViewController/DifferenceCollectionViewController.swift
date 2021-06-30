@@ -4,7 +4,6 @@
 //
 //  Created by Anton Eysner on 14.04.2021.
 //
-
 import UIKit
 import ReactiveDataDisplayManager
 

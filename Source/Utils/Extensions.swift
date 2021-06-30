@@ -86,7 +86,7 @@ extension Array {
 
 }
 
-@available(iOS 10.0, *)
+@available(iOS 10.0, tvOS 10.0, *)
 extension UIImage {
 
     /// This method creates an image of a view

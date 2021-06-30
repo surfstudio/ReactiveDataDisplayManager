@@ -12,11 +12,13 @@ targets:
       dependencies:
         - sdk: UIKit.framework
       type: framework
-      platform: iOS
-      deploymentTarget: 10.0
+      platform: [iOS, tvOS]
+      deploymentTarget:
+        iOS: 10.0
+        tvOS: 10.0
       scheme:
         configVariants: all
-        testTargets: [ReactiveDataDisplayManagerTests]
+        testTargets: ReactiveDataDisplayManagerTests_${platform}
       sources:
         - path: Source
       info:
@@ -38,8 +40,10 @@ targets:
 
     ReactiveDataDisplayManagerTests:
       type: bundle.unit-test
-      platform: iOS
-      deploymentTarget: 10.0
+      platform: [iOS, tvOS]
+      deploymentTarget:
+        iOS: 10.0
+        tvOS: 10.0
       scheme:
         configVariants: all
       sources: [ReactiveDataDisplayManagerTests]
@@ -47,7 +51,7 @@ targets:
         path: ReactiveDataDisplayManagerTests/Info.plist
         properties: []
       dependencies:
-        - target: ReactiveDataDisplayManager
+        - target: ReactiveDataDisplayManager_${platform}
       settings:
         configs:
           Debug:
