@@ -22,6 +22,7 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
+    public var movablePlugin: MovablePluginDataSource<CollectionGeneratorsProvider>?
 
     // MARK: - Initialization
 
@@ -36,6 +37,19 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
         self.provider = provider
     }
 
+    // MARK: - UICollectionViewDiffableDataSource
+
+    open override func collectionView(_ collectionView: UICollectionView,
+                                      moveItemAt sourceIndexPath: IndexPath,
+                                      to destinationIndexPath: IndexPath) {
+        movablePlugin?.moveRow(at: sourceIndexPath, to: destinationIndexPath, with: provider, and: collectionView, animator: nil)
+        collectionPlugins.process(event: .move(from: sourceIndexPath, to: destinationIndexPath), with: provider as? BaseCollectionManager)
+    }
+
+    open override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return movablePlugin?.canMoveRow(at: indexPath, with: provider) ?? false
+    }
+
 }
 
 // MARK: - CollectionBuilderConfigurable
@@ -47,6 +61,7 @@ public extension DiffableCollectionDataSource {
 
         modifier = CollectionDiffableModifier(view: builder.view, provider: builder.manager, dataSource: self)
 
+        movablePlugin = builder.movablePlugin?.dataSource
         collectionPlugins = builder.collectionPlugins
         itemTitleDisplayablePlugin = builder.itemTitleDisplayablePlugin
 
@@ -58,6 +73,7 @@ public extension DiffableCollectionDataSource {
         collectionPlugins.setup(with: builder.manager)
 
     }
+
 }
 
 // MARK: - UICollectionViewDataSourcePrefetching

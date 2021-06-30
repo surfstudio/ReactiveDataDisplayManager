@@ -1,25 +1,26 @@
-## 7.0.0 Refactoring
+## 7.1.0 SPM support and new plagins
 ### Added
-- `Animator` protocol to isolate deprecated `begin/end updates`
-- `PluginAction` protocol to handle simple actions with collection events
-- `FeaturePlugin` protocol to extend collection manager with features quickly
-- `CollectionBuilder` struct to build `CollectionManager`
-- `TableBuilder` struct to build `TableManager`
-- `rddm` namespace to quick access to manager builders
+- Swift Package Manager support with example
+- example of usage `CompositionalLayout`
+- example of usage `DifferenceKit`
+- `DiffableTableDataSource` implementing `UICollectionTableDataSource`
+- `DiffableCollectionDataSource` implementing `UICollectionDiffableDataSource`
+- `CollectionSwipeActionsConfigurationPlugin` to support `UISwipeActionsConfiguration` in collection with list appearance
+- `DragAndDroppable` to support drag'n'drop from iOS 11 in table and collection
 
 ### Updated
 
-- required `var view: CollectionType!` of `DataDisplayManager` protocol instead of required constructor
-- abstract `Delegate` and `DataSource` is properties of `DataDisplayManager`
+- code style and linter issues fixes
+- documentation and typos
 
 ### Deprecated
 
 - `BaseTableDataDisplayManager` class replaced with `ManualTableManager`
-- `PaginableBaseTableDataDisplayManager` class will be removed at **7.1.**. Use `TableLastCellIsVisiblePlugin` instead.
-- `ExtendableBaseTableDataDisplayManager` class will be removed at **7.1**. Part of `BaseTableManager` now.
+- `PaginableBaseTableDataDisplayManager` class will be removed at **8.0.**. Use `TableLastCellIsVisiblePlugin` instead.
+- `ExtendableBaseTableDataDisplayManager` class will be removed at **8.0**. Part of `BaseTableManager` now.
 - `GravityTableDataDisplayManager` class replaced with `GravityTableManager`
-- `FoldingTableDataDisplayManager` class will be removed at **7.1.**. Use `TableFoldablePlugin` instead.
-- `GravityFoldingTableDataDisplayManager` class will be removed at **7.1.**. Use composition of `GravityTableManager` and `TableFoldablePlugin`
-- `SizableCollectionDataDisplayManager` class will be removed at **7.1.**. Part of `BaseCollectionManager`
+- `FoldingTableDataDisplayManager` class will be removed at **8.0.**. Use `TableFoldablePlugin` instead.
+- `GravityFoldingTableDataDisplayManager` class will be removed at **8.0.**. Use composition of `GravityTableManager` and `TableFoldablePlugin`
+- `SizableCollectionDataDisplayManager` class will be removed at **8.0.**. Part of `BaseCollectionManager`
 - `BaseCollectionDataDisplayManager` replaced with `BaseCollectionManager`
-- `SelectableItem`, `DisplayableFlow`, `MovableGenerator` and other item protocols will be removed at **7.1.**. Replaced with `{ability}ableItem` for example `SelectableItem`
+- `SelectableItem`, `DisplayableFlow`, `MovableGenerator` and other item protocols will be removed at **8.0.**. Replaced with `{ability}ableItem` for example `SelectableItem`

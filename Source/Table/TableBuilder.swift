@@ -31,9 +31,19 @@ public class TableBuilder<T: BaseTableManager> {
     var tablePlugins = TablePluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
-    var movablePlugin: TableMovable?
+    var movablePlugin: TableMovableItemPlugin?
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     var swipeActionsPlugin: TableFeaturePlugin?
+
+    @available(iOS 11.0, *)
+    var dragAndDroppablePlugin: TableDragAndDroppablePlugin? {
+        set { _dragAndDroppablePlugin = newValue }
+        get { _dragAndDroppablePlugin as? TableDragAndDroppablePlugin }
+    }
+
+    // MARK: - Private Properties
+
+    private var _dragAndDroppablePlugin: TableFeaturePlugin?
 
     // MARK: - Initialization
 
@@ -69,11 +79,16 @@ public class TableBuilder<T: BaseTableManager> {
     /// Add feature plugin functionality based on UITableViewDelegate/UITableViewDataSource events
     public func add(featurePlugin: TableFeaturePlugin) -> TableBuilder<T> {
         #if os(iOS)
-        checkSwipeActionsPlugin(with: featurePlugin)
+        let needTrySetPlugin = [
+            !trySetSwipeActions(plugin: featurePlugin),
+            !trySetDragAndDroppable(plugin: featurePlugin)
+        ].allSatisfy { $0 }
+
+        guard needTrySetPlugin else { return self }
         #endif
 
         switch featurePlugin {
-        case let plugin as TableMovable:
+        case let plugin as TableMovableItemPlugin:
             movablePlugin = plugin
         case let plugin as TableSectionTitleDisplayable:
             sectionTitleDisplayablePlugin = plugin
@@ -114,8 +129,14 @@ public class TableBuilder<T: BaseTableManager> {
         delegate.configure(with: self)
         view.delegate = delegate
 
+        if #available(iOS 11.0, *) {
+            view.dragDelegate = delegate as? TableDragAndDropDelegate
+            view.dropDelegate = delegate as? TableDragAndDropDelegate
+        }
+
         dataSource.configure(with: self)
         view.dataSource = dataSource
+
         if #available(iOS 10.0, tvOS 10.0, *) {
             view.prefetchDataSource = dataSource
         }
@@ -131,12 +152,22 @@ public class TableBuilder<T: BaseTableManager> {
 
 private extension TableBuilder {
     #if os(iOS)
-    func checkSwipeActionsPlugin(with plugin: TableFeaturePlugin) {
-        guard #available(iOS 11.0, tvOS 11.0, *),
+    func trySetSwipeActions(plugin: TableFeaturePlugin) -> Bool {
+        guard #available(iOS 11.0, *),
               let plugin = plugin as? TableSwipeActionsConfigurable
-        else { return }
+        else { return false }
 
         swipeActionsPlugin = plugin
+        return true
+    }
+
+    func trySetDragAndDroppable(plugin: TableFeaturePlugin) -> Bool {
+        guard #available(iOS 11.0, *),
+              let plugin = plugin as? TableDragAndDroppablePlugin
+        else { return false }
+
+        dragAndDroppablePlugin = plugin
+        return true
     }
     #endif
 }

@@ -69,3 +69,4 @@ Example/Pods
 Podfile.lock
 .DS_Store
 .bundle/
+*.back

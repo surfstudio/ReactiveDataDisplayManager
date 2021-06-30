@@ -27,6 +27,7 @@ final class MainTableViewController: UIViewController {
         case paginatableTable
         case allPluginsTable
         case differenceTable
+        case dragAndDroppableTable
     }
 
     // MARK: - Constants
@@ -45,7 +46,8 @@ final class MainTableViewController: UIViewController {
             ("Table with refresh control", .refreshableTable),
             ("Table with pagination", .paginatableTable),
             ("Table with all plugins", .allPluginsTable),
-            ("Table with DifferenceKit", .differenceTable)
+            ("Table with DifferenceKit", .differenceTable),
+            ("Table with drag and drop cells", .dragAndDroppableTable)
         ]
     }
 
@@ -77,7 +79,7 @@ private extension MainTableViewController {
 
         for model in Constants.models {
             // Create generator
-            let generator = TitleWithIconTableViewCell.rddm.baseGenerator(with: model.title)
+            let generator = TitleWithIconTableViewCell.rddm.calculatableHeightGenerator(with: model.title)
 
             generator.didSelectEvent += { [weak self] in
                 self?.openScreen(by: model.segueId)

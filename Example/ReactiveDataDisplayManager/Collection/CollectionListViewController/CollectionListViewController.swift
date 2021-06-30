@@ -21,6 +21,7 @@ class CollectionListViewController: UIViewController {
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .selectable())
         .build()
+
     private var titles = ["Item 1", "Item 2", "Item 3", "Item 4"]
 
     private var appearance = UICollectionLayoutListConfiguration.Appearance.plain
@@ -73,47 +74,6 @@ private extension CollectionListViewController {
 
         configureLayoutFlow(with: appearance)
         updateBarButtonItem(with: appearance.title)
-    }
-
-}
-
-// MARK: - Appearance
-
-@available(iOS 14.0, *)
-private extension UICollectionLayoutListConfiguration.Appearance {
-
-    var title: String {
-        switch self {
-        case .plain:
-            return "Plain"
-        case .sidebarPlain:
-            return "Sidebar Plain"
-        case .sidebar:
-            return "Sidebar"
-        case .grouped:
-            return "Grouped"
-        case .insetGrouped:
-            return "Inset Grouped"
-        @unknown default:
-            fatalError()
-        }
-    }
-
-    var next: UICollectionLayoutListConfiguration.Appearance {
-        switch self {
-        case .plain:
-            return .sidebarPlain
-        case .sidebarPlain:
-            return .sidebar
-        case .sidebar:
-            return .grouped
-        case .grouped:
-            return .insetGrouped
-        case .insetGrouped:
-            return .plain
-        @unknown default:
-            fatalError()
-        }
     }
 
 }

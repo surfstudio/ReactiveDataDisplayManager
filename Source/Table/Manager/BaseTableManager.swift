@@ -9,7 +9,7 @@
 import UIKit
 
 /// Base implementation of DataDisplayManager for UITableView that contains minimal interface
-open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
+open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
 
     // MARK: - Typealias
 
@@ -22,9 +22,6 @@ open class BaseTableManager: DataDisplayManager, TableGeneratorsProvider {
     // swiftlint:disable implicitly_unwrapped_optional
     public weak var view: UITableView!
     // swiftlint:enable implicitly_unwrapped_optional
-
-    public var generators: [[TableCellGenerator]] = []
-    public var sections: [TableHeaderGenerator] = []
 
     var delegate: TableDelegate?
     var dataSource: TableDataSource?

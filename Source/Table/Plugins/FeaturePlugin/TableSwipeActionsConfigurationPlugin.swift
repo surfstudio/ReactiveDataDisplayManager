@@ -16,12 +16,12 @@ open class TableSwipeActionsConfigurationPlugin: TableFeaturePlugin, TableSwipeA
 
     // MARK: - Private Properties
 
-    private let swipeProvider: TableSwipeActionsProvider
+    private let swipeProvider: SwipeActionsProvider
 
     // MARK: - Public Methods
 
     /// - parameter swipeProvider: provider is responsible for configuring the `TableSwipeActionsConfiguration`
-    init(swipeProvider: TableSwipeActionsProvider) {
+    init(swipeProvider: SwipeActionsProvider) {
         self.swipeProvider = swipeProvider
     }
 
@@ -51,7 +51,7 @@ open class TableSwipeActionsConfigurationPlugin: TableFeaturePlugin, TableSwipeA
 private extension TableSwipeActionsConfigurationPlugin {
 
     func makeSwipeActionsConfiguration(for generator: SwipeableItem,
-                                       with swipeConfiguration: TableSwipeActionsConfiguration) -> UISwipeActionsConfiguration? {
+                                       with swipeConfiguration: SwipeActionsConfiguration) -> UISwipeActionsConfiguration? {
         var generator = generator
         var actionTypes = [String]()
 
@@ -91,9 +91,9 @@ public extension TableFeaturePlugin {
 
     /// Plugin to configure `UISwipeActionsConfiguration`
     ///
-    /// - parameter swipeProvider: provider is responsible for configuring the `TableSwipeActionsConfiguration`
+    /// - parameter swipeProvider: provider is responsible for configuring the `SwipeActionsConfiguration`
     @available(iOS 11.0, *)
-    static func swipeActions(swipeProvider: TableSwipeActionsProvider) -> TableSwipeActionsConfigurationPlugin {
+    static func swipeActions(swipeProvider: SwipeActionsProvider) -> TableSwipeActionsConfigurationPlugin {
         .init(swipeProvider: swipeProvider)
     }
 
