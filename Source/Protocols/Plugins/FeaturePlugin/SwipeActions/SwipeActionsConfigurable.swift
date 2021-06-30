@@ -6,6 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+#if os(iOS)
 import UIKit
 
 @available(iOS 11.0, *)
@@ -58,3 +59,4 @@ public extension SwipeActionsConfigurable {
     }
 
 }
+#endif

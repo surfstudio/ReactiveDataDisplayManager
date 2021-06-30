@@ -9,7 +9,7 @@
 import UIKit
 
 /// Base implementation for `UICollectionViewDelegate` protocol.
-open class BaseCollectionDelegate: NSObject, CollectionDelegate, CollectionDragAndDropDelegate {
+open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
     // MARK: - Typealias
 
@@ -27,18 +27,6 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate, CollectionDragA
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
     public var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>?
-
-    @available(iOS 11.0, *)
-    public var draggableDelegate: DraggablePluginDelegate<CollectionGeneratorsProvider>? {
-        set { _draggableDelegate = newValue }
-        get { _draggableDelegate as? DraggablePluginDelegate<CollectionGeneratorsProvider> }
-    }
-
-    @available(iOS 11.0, *)
-    public var droppableDelegate: DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator>? {
-        set { _droppableDelegate = newValue }
-        get { _droppableDelegate as? DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator> }
-    }
 
     // MARK: - Private Properties
 
@@ -60,10 +48,12 @@ extension BaseCollectionDelegate {
         collectionPlugins = builder.collectionPlugins
         scrollPlugins = builder.scrollPlugins
 
+        #if os(iOS)
         if #available(iOS 11.0, *) {
             draggableDelegate = builder.dragAndDroppablePlugin?.draggableDelegate
             droppableDelegate = builder.dragAndDroppablePlugin?.droppableDelegate
         }
+        #endif
 
         manager = builder.manager
 
@@ -120,6 +110,26 @@ extension BaseCollectionDelegate {
 
 }
 
+#if os(iOS)
+
+// MARK: - CollectionDragAndDropableDelegate
+
+extension BaseCollectionDelegate: CollectionDragAndDropDelegate {
+
+    @available(iOS 11.0, *)
+    public var draggableDelegate: DraggablePluginDelegate<CollectionGeneratorsProvider>? {
+        set { _draggableDelegate = newValue }
+        get { _draggableDelegate as? DraggablePluginDelegate<CollectionGeneratorsProvider> }
+    }
+
+    @available(iOS 11.0, *)
+    public var droppableDelegate: DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator>? {
+        set { _droppableDelegate = newValue }
+        get { _droppableDelegate as? DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator> }
+    }
+
+}
+
 // MARK: - UICollectionViewDragDelegate
 
 @available(iOS 11.0, *)
@@ -156,6 +166,7 @@ extension BaseCollectionDelegate {
     }
 
 }
+#endif
 
 // MARK: UIScrollViewDelegate
 

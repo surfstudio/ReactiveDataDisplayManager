@@ -4,7 +4,7 @@
 //
 //  Created by Anton Eysner on 18.02.2021.
 //
-
+#if os(iOS)
 import Foundation
 import UIKit
 
@@ -113,3 +113,4 @@ open class CollectionDropCoordinatorWrapper: DropCoordinatorWrapper<UICollection
     }
 
 }
+#endif

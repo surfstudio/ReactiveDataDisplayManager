@@ -35,11 +35,13 @@ public class TableBuilder<T: BaseTableManager> {
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     var swipeActionsPlugin: TableFeaturePlugin?
 
+    #if os(iOS)
     @available(iOS 11.0, *)
     var dragAndDroppablePlugin: TableDragAndDroppablePlugin? {
         set { _dragAndDroppablePlugin = newValue }
         get { _dragAndDroppablePlugin as? TableDragAndDroppablePlugin }
     }
+    #endif
 
     // MARK: - Private Properties
 
@@ -129,10 +131,12 @@ public class TableBuilder<T: BaseTableManager> {
         delegate.configure(with: self)
         view.delegate = delegate
 
+        #if os(iOS)
         if #available(iOS 11.0, *) {
             view.dragDelegate = delegate as? TableDragAndDropDelegate
             view.dropDelegate = delegate as? TableDragAndDropDelegate
         }
+        #endif
 
         dataSource.configure(with: self)
         view.dataSource = dataSource

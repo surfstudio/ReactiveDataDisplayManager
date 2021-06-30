@@ -4,7 +4,7 @@
 //
 //  Created by Anton Eysner on 18.02.2021.
 //
-
+#if os(iOS)
 import Foundation
 import UIKit
 
@@ -54,3 +54,4 @@ private extension DraggablePluginDelegate {
     }
 
 }
+#endif

@@ -9,7 +9,7 @@
 import UIKit
 
 /// Base implementation for `UITableViewDelegate` protocol.
-open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate {
+open class BaseTableDelegate: NSObject, TableDelegate {
 
     // MARK: - Typealias
 
@@ -47,14 +47,13 @@ open class BaseTableDelegate: NSObject, TableDelegate, TableDragAndDropDelegate 
 
     // MARK: - Private Properties
 
-    private var animator: TableAnimator?
-
     private var _swipeActionsPlugin: TableFeaturePlugin?
-    #endif
 
     private var _draggableDelegate: AnyObject?
     private var _droppableDelegate: AnyObject?
+    #endif
 
+    private var animator: TableAnimator?
 }
 
 // MARK: - TableBuilderConfigurable
@@ -203,6 +202,12 @@ extension BaseTableDelegate {
     #endif
 }
 
+#if os(iOS)
+
+// MARK: - TableDragAndDropDelegate
+
+extension BaseTableDelegate: TableDragAndDropDelegate {}
+
 // MARK: - UITableViewDragDelegate
 
 @available(iOS 11.0, *)
@@ -237,6 +242,7 @@ extension BaseTableDelegate {
     }
 
 }
+#endif
 
 // MARK: UIScrollViewDelegate
 

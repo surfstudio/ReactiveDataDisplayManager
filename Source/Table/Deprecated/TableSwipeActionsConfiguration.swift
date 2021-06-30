@@ -5,7 +5,7 @@
 //  Created by Anton Eysner on 12.02.2021.
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
-
+#if os(iOS)
 import UIKit
 
 @available(iOS, introduced: 11.0, deprecated, renamed: "SwipeActionsProvider")
@@ -63,3 +63,4 @@ public struct TableSwipeAction {
     }
 
 }
+#endif
