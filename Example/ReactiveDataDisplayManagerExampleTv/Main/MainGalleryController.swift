@@ -31,6 +31,7 @@ final class MainGalleryController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
+        .add(featurePlugin: .focusable())
         .build()
 
     // MARK: - UIViewController
@@ -67,7 +68,7 @@ private extension MainGalleryController {
                 guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
 
                 // Create generator
-                let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
+                let generator = ImageCollectionViewGenerator(with: viewModel)
 
                 // Add generator to adapter
                 adapter.addCellGenerator(generator)

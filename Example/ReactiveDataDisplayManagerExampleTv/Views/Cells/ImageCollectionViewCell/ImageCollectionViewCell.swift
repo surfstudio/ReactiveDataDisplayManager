@@ -41,6 +41,20 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         setupInitialState()
     }
 
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if context.nextFocusedItem === self {
+            coordinator.addCoordinatedFocusingAnimations { context in
+                self.contentView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }
+        }
+
+        if context.previouslyFocusedItem === self {
+            coordinator.addCoordinatedUnfocusingAnimations { context in
+                self.contentView.transform = .identity
+            }
+        }
+
+    }
 }
 
 // MARK: - Configurable
@@ -66,3 +80,5 @@ private extension ImageCollectionViewCell {
     }
 
 }
+
+
