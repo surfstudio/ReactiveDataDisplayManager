@@ -6,8 +6,6 @@
 //  
 //
 
-#if os(tvOS)
-
 import Foundation
 import UIKit
 
@@ -26,5 +24,3 @@ public protocol FocusableDelegate {
     ///     - with: current provider with generators
     func canFocusRow(at indexPath: IndexPath, with provider: Provider?) -> Bool
 }
-
-#endif

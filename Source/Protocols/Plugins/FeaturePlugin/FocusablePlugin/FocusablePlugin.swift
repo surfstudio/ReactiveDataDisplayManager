@@ -6,7 +6,6 @@
 //  
 //
 
-#if os(tvOS)
 import UIKit
 import Foundation
 
@@ -29,4 +28,3 @@ public extension CollectionFeaturePlugin {
     }
 
 }
-#endif

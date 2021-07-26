@@ -5,7 +5,6 @@
 //  Created by Olesya Tranina on 06.07.2021.
 //  
 
-#if os(tvOS)
 import Foundation
 import UIKit
 
@@ -29,5 +28,3 @@ extension FocusablePluginDelegate: FocusableDelegate {
     }
 
 }
-
-#endif

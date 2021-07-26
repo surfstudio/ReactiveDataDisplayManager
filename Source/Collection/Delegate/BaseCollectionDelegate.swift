@@ -48,7 +48,9 @@ extension BaseCollectionDelegate {
         movablePlugin = builder.movablePlugin?.delegate
         collectionPlugins = builder.collectionPlugins
         scrollPlugins = builder.scrollPlugins
+        #if os(tvOS)
         focusablePlugin = builder.focusablePlugin?.delegate
+        #endif
 
         #if os(iOS)
         if #available(iOS 11.0, *) {
