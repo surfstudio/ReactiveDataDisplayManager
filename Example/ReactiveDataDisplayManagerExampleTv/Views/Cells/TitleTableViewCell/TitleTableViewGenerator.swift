@@ -9,4 +9,7 @@
 import ReactiveDataDisplayManager
 
 final class TitleTableViewGenerator: BaseCellGenerator<TitleTableViewCell>, FocusableItem {
+    func canBeFocused() -> Bool {
+        return model.canBeFocused
+    }
 }

@@ -26,7 +26,7 @@ final class GalleryController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = collectionView.rddm.baseBuilder
-//        .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
+        .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
         .add(featurePlugin: .focusable())
         .add(plugin: .selectable())
         .build()

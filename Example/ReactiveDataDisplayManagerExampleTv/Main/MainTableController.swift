@@ -16,6 +16,7 @@ final class MainTableController: UIViewController {
     fileprivate enum SegueIdentifier: String {
         case gallery
         case collectionDefaultBehavoir
+        case table
     }
 
     // MARK: - Constants
@@ -23,7 +24,8 @@ final class MainTableController: UIViewController {
     private enum Constants {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
             ("GalleryController", .gallery),
-            ("CollectionDefaultBehavoirController", .collectionDefaultBehavoir)
+            ("CollectionDefaultBehavoirController", .collectionDefaultBehavoir),
+            ("TableController", .table)
         ]
     }
 
@@ -56,7 +58,7 @@ private extension MainTableController {
 
         for model in Constants.models {
             // Create generator
-            let generator = TitleTableViewGenerator(with: model.title)
+            let generator = TitleTableViewGenerator(with: .init(title: model.title))
 
             generator.didSelectEvent += { [weak self] in
                 self?.openScreen(by: model.segueId)

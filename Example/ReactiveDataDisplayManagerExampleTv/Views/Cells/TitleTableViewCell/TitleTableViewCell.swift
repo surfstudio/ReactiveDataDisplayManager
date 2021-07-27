@@ -19,6 +19,7 @@ final class TitleTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         titleLabel.numberOfLines = 0
+        contentView.layer.cornerRadius = 10
     }
 
 }
@@ -27,8 +28,9 @@ final class TitleTableViewCell: UITableViewCell {
 
 extension TitleTableViewCell: ConfigurableItem {
 
-    func configure(with model: String) {
-        titleLabel.text = model
+    func configure(with model: TitleTableViewCellModel) {
+        titleLabel.text = model.title
+        contentView.backgroundColor = model.canBeFocused ? .white : .lightGray
     }
 
 }
