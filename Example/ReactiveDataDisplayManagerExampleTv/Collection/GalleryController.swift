@@ -11,10 +11,6 @@ import ReactiveDataDisplayManager
 
 final class GalleryController: UIViewController {
 
-    // MARK: - Typealias
-
-    typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
-
     // MARK: - Constants
 
     private enum Constants {
@@ -67,7 +63,7 @@ private extension GalleryController {
             adapter.addSectionHeaderGenerator(headerGenerator)
             for _ in 0...31 {
                 // Create viewModels for cell
-                guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
+                guard let viewModel = ImageViewModel.make(with: loadImage) else { continue }
 
                 // Create generator
                 let generator = ImageCollectionViewGenerator(with: viewModel)

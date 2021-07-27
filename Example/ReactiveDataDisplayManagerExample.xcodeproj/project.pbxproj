@@ -97,6 +97,12 @@
 		BB67A0D63EF126FE80214945 /* UnrollStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76885C024A91AD957EA0FA06 /* UnrollStackViewController.swift */; };
 		BC048C4D26AEE3A600F9CC27 /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC048C4B26AEE3A600F9CC27 /* TitleTableViewCell.swift */; };
 		BC048C4E26AEE3A600F9CC27 /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC048C4C26AEE3A600F9CC27 /* TitleTableViewCell.xib */; };
+		BC0B6B2626AFF5B800299A78 /* CollectionDefaultBehavoirController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0B6B2526AFF5B800299A78 /* CollectionDefaultBehavoirController.swift */; };
+		BC0B6B2A26B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0B6B2826B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.swift */; };
+		BC0B6B2B26B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC0B6B2926B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.xib */; };
+		BC0B6B2D26B0130A00299A78 /* ImageDefaultBehavoirCollectionViewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0B6B2C26B0130A00299A78 /* ImageDefaultBehavoirCollectionViewGenerator.swift */; };
+		BC0B6B3126B01C3B00299A78 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0B6B2F26B01A2300299A78 /* UIImage.swift */; };
+		BC0B6B3426B01D0500299A78 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0B6B3226B01CB400299A78 /* ImageViewModel.swift */; };
 		BCA6B02A2694936100CCE70D /* ImageCollectionViewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA6B0292694936100CCE70D /* ImageCollectionViewGenerator.swift */; };
 		BCA9DB2626AED629008E0C9C /* MainTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9DB2526AED629008E0C9C /* MainTableController.swift */; };
 		BCA9DB2F26AEE1EE008E0C9C /* TitleTableViewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9DB2E26AEE1EE008E0C9C /* TitleTableViewGenerator.swift */; };
@@ -223,6 +229,12 @@
 		BB96FC58AF36480A2BA5E8F6 /* StackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewController.swift; sourceTree = "<group>"; };
 		BC048C4B26AEE3A600F9CC27 /* TitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
 		BC048C4C26AEE3A600F9CC27 /* TitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
+		BC0B6B2526AFF5B800299A78 /* CollectionDefaultBehavoirController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDefaultBehavoirController.swift; sourceTree = "<group>"; };
+		BC0B6B2826B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDefaultBehavoirCollectionViewCell.swift; sourceTree = "<group>"; };
+		BC0B6B2926B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageDefaultBehavoirCollectionViewCell.xib; sourceTree = "<group>"; };
+		BC0B6B2C26B0130A00299A78 /* ImageDefaultBehavoirCollectionViewGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDefaultBehavoirCollectionViewGenerator.swift; sourceTree = "<group>"; };
+		BC0B6B2F26B01A2300299A78 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		BC0B6B3226B01CB400299A78 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
 		BC2183568FF89543B6F82113 /* ImageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewController.swift; sourceTree = "<group>"; };
 		BC404CEF6562D557FE9F0FCC /* AllPluginsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPluginsTableViewController.swift; sourceTree = "<group>"; };
 		BC63B8F3540DB313A90623C7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -291,6 +303,7 @@
 				3CFDA70B6CB57E9D98725831 /* Main.storyboard */,
 				7BFFD21860FD28570A357542 /* Application */,
 				BC0B6B2426AFF4FB00299A78 /* Collection */,
+				BC0B6B2E26B01A0F00299A78 /* Extensions */,
 				2DB6E2ADB3A55272328A3C21 /* Main */,
 				66D32F238C1BF9EABF82C8D4 /* Views */,
 			);
@@ -728,6 +741,8 @@
 		A03A637FC577A5F274785429 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				BC0B6B3226B01CB400299A78 /* ImageViewModel.swift */,
+				BC0B6B2726B00F0900299A78 /* ImageDefaultBehavoirCell */,
 				81303560D3CAB41CB6B009C7 /* ImageCollectionViewCell */,
 				BCA9DB2926AEDD48008E0C9C /* TitleTableViewCell */,
 			);
@@ -818,8 +833,27 @@
 			isa = PBXGroup;
 			children = (
 				95A57F0E5014AAE731E5E509 /* GalleryController.swift */,
+				BC0B6B2526AFF5B800299A78 /* CollectionDefaultBehavoirController.swift */,
 			);
 			path = Collection;
+			sourceTree = "<group>";
+		};
+		BC0B6B2726B00F0900299A78 /* ImageDefaultBehavoirCell */ = {
+			isa = PBXGroup;
+			children = (
+				BC0B6B2826B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.swift */,
+				BC0B6B2926B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.xib */,
+				BC0B6B2C26B0130A00299A78 /* ImageDefaultBehavoirCollectionViewGenerator.swift */,
+			);
+			path = ImageDefaultBehavoirCell;
+			sourceTree = "<group>";
+		};
+		BC0B6B2E26B01A0F00299A78 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BC0B6B2F26B01A2300299A78 /* UIImage.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		BCA9DB2926AEDD48008E0C9C /* TitleTableViewCell */ = {
@@ -1163,6 +1197,7 @@
 				0027FB56FAA243FBE708FB25 /* Assets.xcassets in Resources */,
 				C0B28DF3926934F5488ABCDF /* ImageCollectionViewCell.xib in Resources */,
 				ED3D1EF25C3789B6212F4371 /* LaunchScreen.storyboard in Resources */,
+				BC0B6B2B26B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.xib in Resources */,
 				0AE8BF7899D83E3D00CFAE60 /* Main.storyboard in Resources */,
 				64DB060802B4FD897E3503A2 /* TitleCollectionReusableView.xib in Resources */,
 			);
@@ -1280,14 +1315,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC0B6B3426B01D0500299A78 /* ImageViewModel.swift in Sources */,
 				BCA9DB2F26AEE1EE008E0C9C /* TitleTableViewGenerator.swift in Sources */,
 				BA79CEEBF143939C522CA74D /* AppDelegate.swift in Sources */,
 				12E1CF0B4D16347A0EA11C4B /* ImageCollectionViewCell.swift in Sources */,
+				BC0B6B2626AFF5B800299A78 /* CollectionDefaultBehavoirController.swift in Sources */,
 				011E5183F3A19BEB8B61827A /* GalleryController.swift in Sources */,
 				80B42BD65787ACAA0B92E0AF /* TitleCollectionHeaderGenerator.swift in Sources */,
+				BC0B6B2D26B0130A00299A78 /* ImageDefaultBehavoirCollectionViewGenerator.swift in Sources */,
 				BCA9DB2626AED629008E0C9C /* MainTableController.swift in Sources */,
 				BCA6B02A2694936100CCE70D /* ImageCollectionViewGenerator.swift in Sources */,
 				BC048C4D26AEE3A600F9CC27 /* TitleTableViewCell.swift in Sources */,
+				BC0B6B2A26B00F2300299A78 /* ImageDefaultBehavoirCollectionViewCell.swift in Sources */,
+				BC0B6B3126B01C3B00299A78 /* UIImage.swift in Sources */,
 				A3C19E75C2904BB0882C49D8 /* TitleCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,7 +15,7 @@ final class MainTableController: UIViewController {
 
     fileprivate enum SegueIdentifier: String {
         case gallery
-        case collectionAdjustsImageWhenAncestorFocused
+        case collectionDefaultBehavoir
     }
 
     // MARK: - Constants
@@ -23,7 +23,7 @@ final class MainTableController: UIViewController {
     private enum Constants {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
             ("GalleryController", .gallery),
-            ("CollectionView with adjustsImageWhenAncestorFocused", .collectionAdjustsImageWhenAncestorFocused)
+            ("CollectionDefaultBehavoirController", .collectionDefaultBehavoir)
         ]
     }
 
