@@ -1,5 +1,5 @@
 //
-//  MainGalleryController.swift
+//  GalleryController.swift
 //  ReactiveDataDisplayManagerExample_iOS
 //
 //  Created by Никита Коробейников on 09.06.2021.
@@ -9,7 +9,7 @@ import UIKit
 import Nuke
 import ReactiveDataDisplayManager
 
-final class MainGalleryController: UIViewController {
+final class GalleryController: UIViewController {
 
     // MARK: - Typealias
 
@@ -39,6 +39,7 @@ final class MainGalleryController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "GalleryController"
 
         configureCollectionView()
 
@@ -49,7 +50,7 @@ final class MainGalleryController: UIViewController {
 
 // MARK: - Private Methods
 
-private extension MainGalleryController {
+private extension GalleryController {
 
     func configureCollectionView() {
         collectionView.decelerationRate = .fast

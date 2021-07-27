@@ -28,3 +28,23 @@ public extension CollectionFeaturePlugin {
     }
 
 }
+
+open class TableFocusablePlugin: TableFeaturePlugin, Focusable {
+
+    // MARK: - Typealias
+
+    public typealias Provider = TableGeneratorsProvider
+
+    // MARK: - Properties
+
+    open var delegate = FocusablePluginDelegate<Provider>()
+
+}
+
+public extension TableFeaturePlugin {
+
+    static func focusable() -> TableFocusablePlugin {
+        .init()
+    }
+
+}

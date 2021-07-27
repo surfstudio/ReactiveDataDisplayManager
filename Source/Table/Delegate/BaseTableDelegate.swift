@@ -25,6 +25,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
     public var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>?
+    public var focusablePlugin: FocusablePluginDelegate<TableGeneratorsProvider>?
 
     #if os(iOS)
     @available(iOS 11.0, *)
@@ -66,6 +67,7 @@ extension BaseTableDelegate {
         movablePlugin = builder.movablePlugin?.delegate
         tablePlugins = builder.tablePlugins
         scrollPlugins = builder.scrollPlugins
+        focusablePlugin = builder.focusablePlugin?.delegate
 
         #if os(iOS)
         if #available(iOS 11.0, *) {
@@ -112,7 +114,12 @@ extension BaseTableDelegate {
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
+        #if os(iOS)
         return movablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
+        #endif
+        #if os(tvOS)
+        return focusablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
+        #endif
     }
 
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
