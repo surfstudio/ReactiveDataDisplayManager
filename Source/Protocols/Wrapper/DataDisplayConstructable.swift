@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 // Provide rddm property to simplify construction of generic generators
 public protocol DataDisplayConstructable: AnyObject { }
 
@@ -15,3 +17,5 @@ extension DataDisplayConstructable {
         StaticDataDisplayWrapper()
     }
 }
+
+extension UIView: DataDisplayConstructable { }
