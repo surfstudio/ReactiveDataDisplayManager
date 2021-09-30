@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "ReactiveDataDisplayManager"
-  s.version = "8.0.1-beta"
+  s.version = "8.0.2-beta"
   s.summary = "Library with custom events and reusable adapter for scrollable UI Collections"
   s.homepage = "https://github.com/surfstudio/ReactiveDataDisplayManager"
   s.license = "MIT"
