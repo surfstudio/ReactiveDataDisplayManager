@@ -12,7 +12,7 @@ final class DiffableCellGenerator: BaseCellGenerator<TitleTableViewCell>, Diffab
 
     private let uuid = UUID().uuidString
 
-    var item: DiffableItem {
+    var diffableItem: DiffableItem {
         DiffableItem(id: uuid, state: .init(model))
     }
 

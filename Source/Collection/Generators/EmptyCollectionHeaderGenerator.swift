@@ -36,7 +36,7 @@ public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
 
 extension EmptyCollectionHeaderGenerator: DiffableItemSource {
 
-    public var item: DiffableItem {
+    public var diffableItem: DiffableItem {
         DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection"))
     }
 

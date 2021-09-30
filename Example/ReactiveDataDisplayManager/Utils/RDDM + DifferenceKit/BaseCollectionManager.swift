@@ -50,7 +50,7 @@ private extension BaseCollectionManager {
 
         return sections.asDiffableItemSources.enumerated().compactMap { index, section -> Section? in
             let elements = generators.asDiffableItems[safe: index] ?? []
-            return Section(model: section.item, elements: elements)
+            return Section(model: section.diffableItem, elements: elements)
         }
     }
 
