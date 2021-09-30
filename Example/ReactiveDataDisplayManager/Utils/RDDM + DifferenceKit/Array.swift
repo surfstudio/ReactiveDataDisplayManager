@@ -14,3 +14,21 @@ extension Array {
     }
 
 }
+
+extension Array where Element == CollectionHeaderGenerator {
+
+    var asDiffableItemSources: [DiffableItemSource] {
+        return compactMap { $0 as? DiffableItemSource }
+    }
+
+}
+
+extension Array where Element == [DiffableItemSource] {
+
+    var asDiffableItems: [[DiffableItem]] {
+        return map {
+            $0.compactMap { $0.diffableItem }
+        }
+    }
+
+}
