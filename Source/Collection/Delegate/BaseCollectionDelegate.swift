@@ -152,7 +152,6 @@ extension BaseCollectionDelegate {
         droppableDelegate?.performDrop(with: CollectionDropCoordinatorWrapper(coordinator: coordinator),
                                        and: manager,
                                        view: collectionView,
-                                       animator: animator,
                                        modifier: manager?.dataSource?.modifier)
     }
 
