@@ -59,6 +59,10 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
         return movablePlugin?.canMoveRow(at: indexPath, with: provider) ?? false
     }
 
+    open override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+
 }
 
 // MARK: - TableBuilderConfigurable
