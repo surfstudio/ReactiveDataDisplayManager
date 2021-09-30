@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 fileprivate enum Constants {
-    static let noneAnimation = 5
+    static let animation = CollectionItemAnimation.animated.rawValue
 }
 
 /// Delegate based on `DroppableDelegate` protocol.
@@ -79,7 +79,7 @@ private extension DroppablePluginDelegate {
                                                                        view: Collection,
                                                                        modifier: Modifier<Collection, Animation>?) {
         guard
-            let value = Constants.noneAnimation as? Animation.RawValue,
+            let value = Constants.animation as? Animation.RawValue,
             let animation = Animation(rawValue: value)
         else { return }
 
