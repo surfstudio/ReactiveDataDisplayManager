@@ -1537,7 +1537,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 8.0.3;
+				MARKETING_VERSION = 8.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				PRODUCT_NAME = ReactiveDataDisplayManager;
 				SDKROOT = appletvos;
@@ -1635,7 +1635,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 8.0.3;
+				MARKETING_VERSION = 8.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				PRODUCT_NAME = ReactiveDataDisplayManager;
 				SDKROOT = iphoneos;
@@ -1677,7 +1677,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 8.0.3;
+				MARKETING_VERSION = 8.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				PRODUCT_NAME = ReactiveDataDisplayManager;
 				SDKROOT = iphoneos;
@@ -1780,7 +1780,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 8.0.3;
+				MARKETING_VERSION = 8.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				PRODUCT_NAME = ReactiveDataDisplayManager;
 				SDKROOT = appletvos;
