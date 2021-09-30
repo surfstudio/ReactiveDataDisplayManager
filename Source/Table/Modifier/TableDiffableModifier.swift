@@ -159,10 +159,7 @@ private extension TableDiffableModifier {
     }
 
     func safeApplySnapshot(_ snapshot: DiffableSnapshot, animated: Bool = false, completion: (() -> Void)? = nil) {
-
-        DispatchQueue.main.async { [weak dataSource] in
-            dataSource?.apply(snapshot, animatingDifferences: animated, completion: completion)
-        }
+        dataSource?.apply(snapshot, animatingDifferences: animated, completion: completion)
     }
 
 }
