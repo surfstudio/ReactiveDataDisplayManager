@@ -158,7 +158,10 @@ private extension CollectionDiffableModifier {
     }
 
     func safeApplySnapshot(_ snapshot: DiffableSnapshot, animated: Bool = false, completion: (() -> Void)? = nil) {
-        dataSource?.apply(snapshot, animatingDifferences: animated, completion: completion)
+        guard let dataSource = dataSource else {
+            return
+        }
+        dataSource.apply(snapshot, animatingDifferences: animated, completion: completion)
     }
 
 }
