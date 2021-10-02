@@ -37,7 +37,8 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
 
     /// Update snapshot
     override func reload() {
-        let cellsIsEmpty = view?.visibleCells.isEmpty ?? true
+
+        let cellsIsEmpty: Bool = view?.visibleCells.isEmpty ?? true
         apply(animated: !cellsIsEmpty)
     }
 
