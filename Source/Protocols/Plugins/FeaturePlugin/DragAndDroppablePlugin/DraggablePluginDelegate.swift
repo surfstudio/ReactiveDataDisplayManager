@@ -16,6 +16,8 @@ open class DraggablePluginDelegate<Provider: GeneratorsProvider> {
 
     public typealias GeneratorType = DragAndDroppableItemSource
 
+    public init() { }
+
 }
 
 // MARK: - DraggableDelegate
