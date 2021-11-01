@@ -10,4 +10,6 @@ import UIKit
 
 open class TableFeaturePlugin: FeaturePlugin {
     public typealias CollectionType = UITableView
+
+    public init() { }
 }
