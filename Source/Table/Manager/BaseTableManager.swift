@@ -135,3 +135,28 @@ extension BaseTableManager {
     }
 
 }
+
+// MARK: - Scrolling
+
+public extension BaseTableManager {
+
+    func scrollTo(headGenerator: TableHeaderGenerator, scrollPosition: UITableView.ScrollPosition, animated: Bool) {
+        guard let index = sections.firstIndex(where: { $0 === headGenerator }) else {
+            return
+        }
+        view?.scrollToRow(at: IndexPath(row: 0, section: index), at: scrollPosition, animated: animated)
+    }
+
+    func scrollTo(generator: TableCellGenerator, scrollPosition: UITableView.ScrollPosition, animated: Bool) {
+        for sectionElement in generators.enumerated() {
+            for rowElement in sectionElement.element.enumerated() {
+                if rowElement.element === generator {
+                    let indexPath = IndexPath(row: rowElement.offset, section: sectionElement.offset)
+                    view?.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
+                    return
+                }
+            }
+        }
+    }
+
+}
