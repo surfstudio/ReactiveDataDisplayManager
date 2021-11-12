@@ -25,9 +25,7 @@ public enum DropStrategy: StrategyDropable {
     case current
 
     /// The method defines the strategy for the drag and drop behavior.
-    /// Returns true if:
-    ///     - case all
-    ///     - case current and source.section equal destination.section
+    /// - Returns: true if - case all;  - case current and source.section equal destination.section
     func canDrop(from source: IndexPath, to destination: IndexPath) -> Bool {
         switch self {
         case .all: return true
