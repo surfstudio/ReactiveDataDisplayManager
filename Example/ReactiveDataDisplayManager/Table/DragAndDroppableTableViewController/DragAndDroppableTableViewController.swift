@@ -13,7 +13,8 @@ final class DragAndDroppableTableViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let titleForSection = "Section"
+        static let titleForSectionFirst = "SectionFirst"
+        static let titleForSectionLast = "SectionLast"
     }
 
     // MARK: - IBOutlets
@@ -23,7 +24,7 @@ final class DragAndDroppableTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(featurePlugin: .dragAndDroppable())
+        .add(featurePlugin: .dragAndDroppable(by: .all))
         .build()
 
     // MARK: - UIViewController
@@ -45,19 +46,21 @@ private extension DragAndDroppableTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        // Add generator to adapter
-        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
-        adapter.addCellGenerators(makeCellGenerators())
+        // Add generators to adapter
+        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSectionFirst))
+        adapter.addCellGenerators(makeCellGenerators(for: Array(1...10)))
+        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSectionLast))
+        adapter.addCellGenerators(makeCellGenerators(for: Array(11...20)))
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
     }
 
-    // Create cells generators
-    func makeCellGenerators() -> [TableCellGenerator] {
+    /// Create cells generators for range
+    func makeCellGenerators(for range: [Int]) -> [TableCellGenerator] {
         var generators = [TableCellGenerator]()
 
-        for index in 0...10 {
+        for index in range {
             let generator = DragAndDroppableCellGenerator(with: "Cell: \(index)")
             generators.append(generator)
         }

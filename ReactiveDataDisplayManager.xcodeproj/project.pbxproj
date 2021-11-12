@@ -199,6 +199,8 @@
 		A0D6BA1CBC31E3DB487AF822 /* TableMovable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BD3E3C00425163B8A3DDC0 /* TableMovable.swift */; };
 		A1A62C49AB2E26DF31EBFA66 /* SizableCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C175D2A03DC50EEBA23F9 /* SizableCollectionCellGenerator.swift */; };
 		A36E96F430B818303587616B /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE452F1BC75AD3E975C5C935 /* Configurable.swift */; };
+		A4D7DB2A273E382900F8DBBD /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D7DB29273E382900F8DBBD /* Sections.swift */; };
+		A4D7DB2B273E382900F8DBBD /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D7DB29273E382900F8DBBD /* Sections.swift */; };
 		A61561F1A321DF80212AB923 /* BaseStackDataDisplatManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A823B265B4A6141BCD38940 /* BaseStackDataDisplatManagerTests.swift */; };
 		A7DE5D5EBE41F318FE41FA78 /* ConfigurableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8419F5D33C0C4FDEF350F /* ConfigurableItem.swift */; };
 		A8609534FD8C1C56EB288857 /* EmptyGravityTableHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7A3AF9B24D4A46012EC1E /* EmptyGravityTableHeaderGenerator.swift */; };
@@ -463,6 +465,7 @@
 		A037D620404F94F7C983D428 /* SwipeActionsConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionsConfigurable.swift; sourceTree = "<group>"; };
 		A2792DD250BD0AD76291D0DE /* BaseCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataSource.swift; sourceTree = "<group>"; };
 		A3C6EACAA6CEAC3E52EF7D28 /* ManualTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableManager.swift; sourceTree = "<group>"; };
+		A4D7DB29273E382900F8DBBD /* Sections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
 		A6240F096FE4C04570FA9FDC /* PrefetchEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchEvent.swift; sourceTree = "<group>"; };
 		A6A1C839D6624A199C3EFD36 /* TableSwipeActionsConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSwipeActionsConfiguration.swift; sourceTree = "<group>"; };
 		A955504B2B31B7C47938B703 /* SizableCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
@@ -578,14 +581,6 @@
 				407757CF950AF07BCA983885 /* FlowCollectionDelegate.swift */,
 			);
 			path = Delegate;
-			sourceTree = "<group>";
-		};
-		032CFE2A4BAA81D77BD0B945 /* REFACTORING */ = {
-			isa = PBXGroup;
-			children = (
-				A9CCFE74D85E93281C7B0A86 /* Protocols */,
-			);
-			path = REFACTORING;
 			sourceTree = "<group>";
 		};
 		061609D764C2E840E7C6D3AD /* Manager */ = {
@@ -752,22 +747,6 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
-		5E4DED0C836B95D4A2AA71EC /* PluginAction */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PluginAction;
-			sourceTree = "<group>";
-		};
-		5E5EEDC3878570795A67EE56 /* Plugins */ = {
-			isa = PBXGroup;
-			children = (
-				6651920D5F1134A32A74F1AB /* Generators */,
-				5E4DED0C836B95D4A2AA71EC /* PluginAction */,
-			);
-			path = Plugins;
-			sourceTree = "<group>";
-		};
 		5FC8B05F432A1CBF451577AD /* Modifier */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,13 +769,6 @@
 				BC4327BAC235A817BDDB8C2D /* XCTestCase+FatalError.swift */,
 			);
 			path = ReactiveDataDisplayManagerTests;
-			sourceTree = "<group>";
-		};
-		6651920D5F1134A32A74F1AB /* Generators */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Generators;
 			sourceTree = "<group>";
 		};
 		693D5446F63554917C2E99C7 /* Deprecated */ = {
@@ -839,7 +811,6 @@
 				541729A882381B290F04154F /* Collection */,
 				836365E89537F3A370FF42BC /* Models */,
 				4F976C89B581915E384D0A8E /* Protocols */,
-				032CFE2A4BAA81D77BD0B945 /* REFACTORING */,
 				CE78A64118953BB0F6A0CCFF /* Stack */,
 				AAC1F935B1C67CFABBE7753E /* Table */,
 				B53C25BB527110DC62F44CDF /* Utils */,
@@ -946,14 +917,6 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
-		A9CCFE74D85E93281C7B0A86 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				5E5EEDC3878570795A67EE56 /* Plugins */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		AAC1F935B1C67CFABBE7753E /* Table */ = {
 			isa = PBXGroup;
 			children = (
@@ -995,6 +958,7 @@
 				43D5BCBCD54DA859D79F464A /* DraggablePluginDelegate.swift */,
 				490A89B02B42F053C9D38B34 /* DropCoordinatorWrapper.swift */,
 				92BBA76DBFD19AC79B518BD4 /* DroppablePluginDelegate.swift */,
+				A4D7DB29273E382900F8DBBD /* Sections.swift */,
 			);
 			path = DragAndDroppablePlugin;
 			sourceTree = "<group>";
@@ -1414,6 +1378,7 @@
 				F0C1C837FBAACD6A1F2554C8 /* TablePrefetchProxyPlugin.swift in Sources */,
 				EB4D3C58A8F37CA2C77113B0 /* TablePrefetcherablePlugin.swift in Sources */,
 				F6E6DBB7309B6A422BCA959D /* TableRefreshablePlugin.swift in Sources */,
+				A4D7DB2A273E382900F8DBBD /* Sections.swift in Sources */,
 				23542D02DE6B28732BDBECCE /* TableScrollViewDelegateProxyPlugin.swift in Sources */,
 				C409F574B60FF889FF140640 /* TableSectionTitleDisplayable.swift in Sources */,
 				5729E7136DBDB4CF1F9217B3 /* TableSectionTitleDisplayablePlugin.swift in Sources */,
@@ -1581,6 +1546,7 @@
 				14286A4E4D9D7F891CB643D7 /* TablePrefetchProxyPlugin.swift in Sources */,
 				365F70790BE03F83AD7C8B30 /* TablePrefetcherablePlugin.swift in Sources */,
 				699F357E031DC52CFC3753F8 /* TableRefreshablePlugin.swift in Sources */,
+				A4D7DB2B273E382900F8DBBD /* Sections.swift in Sources */,
 				395FC4E484548A4F1D416814 /* TableScrollViewDelegateProxyPlugin.swift in Sources */,
 				6BBCB1E4DBB476FB2C427DFD /* TableSectionTitleDisplayable.swift in Sources */,
 				AC463FD260D5303138D0483E /* TableSectionTitleDisplayablePlugin.swift in Sources */,
@@ -1638,7 +1604,11 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				PRODUCT_NAME = ReactiveDataDisplayManager;
@@ -1736,7 +1706,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				PRODUCT_NAME = ReactiveDataDisplayManager;
@@ -1778,7 +1752,11 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				PRODUCT_NAME = ReactiveDataDisplayManager;
@@ -1881,7 +1859,11 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 7.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.surfstudio.rddm;
 				PRODUCT_NAME = ReactiveDataDisplayManager;

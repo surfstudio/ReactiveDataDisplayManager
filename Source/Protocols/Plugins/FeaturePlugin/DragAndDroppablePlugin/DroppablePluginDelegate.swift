@@ -21,6 +21,10 @@ open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType
     public typealias Coordinator = DropCoordinatorWrapper<CoordinatorType>
     public typealias GeneratorType = DragAndDroppableItemSource
 
+    // MARK: - Internal Properties
+
+    var dropStrategy: StrategyDropable?
+
 }
 
 // MARK: - DroppableDelegate
@@ -90,7 +94,8 @@ private extension DroppablePluginDelegate {
             guard
                 let sourceIndexPath = $0.sourceIndexPath,
                 destinationIndexPath != sourceIndexPath,
-                let itemToMove = provider?.generators[safe: sourceIndexPath.section]?[safe: sourceIndexPath.row]
+                let itemToMove = provider?.generators[safe: sourceIndexPath.section]?[safe: sourceIndexPath.row],
+                dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true
             else { return }
 
             animator?.perform(in: view, animated: true, operation: { [weak provider, modifier] in
