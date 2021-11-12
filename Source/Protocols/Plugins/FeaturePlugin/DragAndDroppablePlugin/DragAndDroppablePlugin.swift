@@ -26,8 +26,8 @@ open class TableDragAndDroppablePlugin: TableFeaturePlugin, DragAndDroppable {
 
     // MARK: - Initializations
 
-    init(dropInSections: Sections) {
-        droppableDelegate.dropInSections = dropInSections
+    init(dropStrategy: StrategyDropable) {
+        droppableDelegate.dropStrategy = dropStrategy
     }
 
 }
@@ -42,8 +42,8 @@ public extension TableFeaturePlugin {
     /// - parameters:
     ///     - sections: allow dropping across sections (all or current)
     @available(iOS 11.0, *)
-    static func dragAndDroppable(by sections: Sections = .all) -> TableDragAndDroppablePlugin {
-        .init(dropInSections: sections)
+    static func dragAndDroppable(by sections: DropStrategy = .all) -> TableDragAndDroppablePlugin {
+        .init(dropStrategy: sections)
     }
 
 }
@@ -65,8 +65,8 @@ open class CollectionDragAndDroppablePlugin: CollectionFeaturePlugin, DragAndDro
 
     // MARK: - Initializations
 
-    init(dropInSections: Sections) {
-        droppableDelegate.dropInSections = dropInSections
+    init(dropStrategy: StrategyDropable) {
+        droppableDelegate.dropStrategy = dropStrategy
     }
 
 }
@@ -79,8 +79,8 @@ public extension CollectionFeaturePlugin {
     /// - parameters:
     ///     - sections: allow dropping across sections (all or current)
     @available(iOS 11.0, *)
-    static func dragAndDroppable(by sections: Sections = .all) -> CollectionDragAndDroppablePlugin {
-        .init(dropInSections: sections)
+    static func dragAndDroppable(by sections: DropStrategy = .all) -> CollectionDragAndDroppablePlugin {
+        .init(dropStrategy: sections)
     }
 
 }
