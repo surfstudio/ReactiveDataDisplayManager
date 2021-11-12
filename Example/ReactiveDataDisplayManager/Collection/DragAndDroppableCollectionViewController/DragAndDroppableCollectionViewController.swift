@@ -61,36 +61,18 @@ private extension DragAndDroppableCollectionViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        // Add section header to adapter "SectionFirst"
+        // Add generators to adapter
         adapter.addSectionHeaderGenerator(TitleCollectionHeaderGenerator(title: Constants.titleForSectionFirst))
-
-        // Add cell generators to adapter
-        adapter.addCellGenerators(makeCellGeneratorsForFirstSection())
-
-        // Add section header to adapter "SectionLast"
+        adapter.addCellGenerators(makeCellGenerators(for: Array(1...10)))
         adapter.addSectionHeaderGenerator(TitleCollectionHeaderGenerator(title: Constants.titleForSectionLast))
-
-        // Add cell generators to adapter
-        adapter.addCellGenerators(makeCellGeneratorsForLastSection())
+        adapter.addCellGenerators(makeCellGenerators(for: Array(11...20)))
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
     }
 
-    /// Create cell generators for first section
-    func makeCellGeneratorsForFirstSection() -> [CollectionCellGenerator] {
-        var generators = [CollectionCellGenerator]()
-
-        for index in 0...10 {
-            let generator = TitleCollectionGenerator(model: "Cell: \(index)")
-            generators.append(generator)
-        }
-
-        return generators
-    }
-
-    /// Create cell generators for last section
-    func makeCellGeneratorsForLastSection() -> [CollectionCellGenerator] {
+    /// Create cells generators for range
+    func makeCellGenerators(for range: [Int]) -> [CollectionCellGenerator] {
         var generators = [CollectionCellGenerator]()
 
         for index in 11...20 {
