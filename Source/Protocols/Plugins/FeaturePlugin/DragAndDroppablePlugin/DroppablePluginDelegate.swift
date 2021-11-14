@@ -21,6 +21,8 @@ open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType
     public typealias Coordinator = DropCoordinatorWrapper<CoordinatorType>
     public typealias GeneratorType = DragAndDroppableItemSource
 
+    public init() { }
+
 }
 
 // MARK: - DroppableDelegate
