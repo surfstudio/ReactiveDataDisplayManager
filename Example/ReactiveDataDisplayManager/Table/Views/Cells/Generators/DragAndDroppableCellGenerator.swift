@@ -12,13 +12,13 @@ final class DragAndDroppableCellGenerator: BaseCellGenerator<TitleTableViewCell>
 
     // MARK: - Properties
 
-    var item: DragAndDroppableItem
+    var dropableItem: DragAndDroppableItem
 
     // MARK: - Initialization
 
     public init(with model: String) {
         let id = model as NSString
-        item = DragAndDroppableItem(identifier: id)
+        dropableItem = DragAndDroppableItem(identifier: id)
 
         super.init(with: model)
     }

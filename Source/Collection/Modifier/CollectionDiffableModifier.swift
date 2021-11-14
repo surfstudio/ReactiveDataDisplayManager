@@ -145,12 +145,12 @@ private extension CollectionDiffableModifier {
         var snapshot = DiffableSnapshot()
 
         for (index, section) in sections.enumerated() {
-            snapshot.appendSections([section.item])
+            snapshot.appendSections([section.diffableItem])
 
             guard let generators = generators[safe: index] else { continue }
 
-            let items = generators.map { $0.item }
-            snapshot.appendItems(items, toSection: section.item)
+            let items = generators.map { $0.diffableItem }
+            snapshot.appendItems(items, toSection: section.diffableItem)
         }
 
         return snapshot
