@@ -52,7 +52,6 @@ public protocol DroppableDelegate: AnyObject {
     func performDrop<Collection: UIView, Animation: RawRepresentable>(with coordinator: DropCoordinatorWrapper<CoordinatorType>,
                                                                       and provider: Provider?,
                                                                       view: Collection,
-                                                                      animator: Animator<Collection>?,
                                                                       modifier: Modifier<Collection, Animation>?)
 }
 #endif

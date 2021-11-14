@@ -228,7 +228,6 @@ extension BaseTableDelegate {
         droppableDelegate?.performDrop(with: TableDropCoordinatorWrapper(coordinator: coordinator),
                                        and: manager,
                                        view: tableView,
-                                       animator: animator,
                                        modifier: manager?.dataSource?.modifier)
     }
 
