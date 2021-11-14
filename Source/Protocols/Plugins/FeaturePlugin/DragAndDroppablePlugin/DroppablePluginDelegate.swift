@@ -14,7 +14,7 @@ fileprivate enum Constants {
 
 /// Delegate based on `DroppableDelegate` protocol.
 @available(iOS 11.0, *)
-open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType: NSObjectProtocol> {
+open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType: NSObjectProtocol>: DroppableDelegate {
 
     // MARK: - Typealias
 
@@ -23,12 +23,7 @@ open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType
 
     public init() { }
 
-}
-
-// MARK: - DroppableDelegate
-
-@available(iOS 11.0, *)
-extension DroppablePluginDelegate: DroppableDelegate {
+    // MARK: - DroppableDelegate
 
     /// Method allows you to include drag and drop data in the collection.
     /// - parameters:
