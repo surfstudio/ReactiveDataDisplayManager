@@ -37,8 +37,8 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     /// Update snapshot
     override func reload() {
-        let hasCells = !(view?.visibleCells.isEmpty ?? true)
-        apply(animated: hasCells)
+        let cellsIsEmpty: Bool = view?.visibleCells.isEmpty ?? true
+        apply(animated: !cellsIsEmpty)
     }
 
     /// Reload rows with animation
