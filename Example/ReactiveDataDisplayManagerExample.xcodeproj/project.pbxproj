@@ -82,13 +82,14 @@
 		A468A432274241A600B55058 /* DifferentHeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A431274241A600B55058 /* DifferentHeightViewController.swift */; };
 		A468A4352742453300B55058 /* CarouselCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A4342742453300B55058 /* CarouselCollectionViewLayout.swift */; };
 		A468A4372742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A4362742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift */; };
-		A468A439274245C800B55058 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A438274245C800B55058 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		A468A439274245C800B55058 /* AlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A438274245C800B55058 /* AlignedCollectionViewFlowLayout.swift */; };
 		A468A43B2742460100B55058 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A43A2742460100B55058 /* DynamicHeightCollectionView.swift */; };
 		A468A43E274247D600B55058 /* CarouselCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A43D274247D600B55058 /* CarouselCollectionViewController.swift */; };
 		A468A4412742507400B55058 /* FittingCompressedSizeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A4402742507400B55058 /* FittingCompressedSizeCollectionViewController.swift */; };
 		A468A4452742549F00B55058 /* FittingCompressedSizeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A4432742549F00B55058 /* FittingCompressedSizeCollectionViewCell.swift */; };
 		A468A4462742549F00B55058 /* FittingCompressedSizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A468A4442742549F00B55058 /* FittingCompressedSizeCollectionViewCell.xib */; };
 		A468A448274258FB00B55058 /* DifferentSizeCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A447274258FB00B55058 /* DifferentSizeCollectionViewCellModel.swift */; };
+		A468A44E2742865100B55058 /* AlignedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A44D2742865100B55058 /* AlignedCollectionViewController.swift */; };
 		A4F6E2BE4831BDC28F197BE6 /* ButtonStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768EADE1BBCA4E1E3CD2B9A7 /* ButtonStackCellGenerator.swift */; };
 		A63DE9C658B2CB3C192DFEBD /* PaginatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474CD5F4A339F735088298E7 /* PaginatorView.swift */; };
 		A64DE6EFABFFB2F74A12E624 /* TitleHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9DFCE12A61DE93236E881E /* TitleHeaderGenerator.swift */; };
@@ -215,13 +216,14 @@
 		A468A431274241A600B55058 /* DifferentHeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentHeightViewController.swift; sourceTree = "<group>"; };
 		A468A4342742453300B55058 /* CarouselCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewLayout.swift; sourceTree = "<group>"; };
 		A468A4362742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FittingCompressedSizeCollectionViewLayout.swift; sourceTree = "<group>"; };
-		A468A438274245C800B55058 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		A468A438274245C800B55058 /* AlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		A468A43A2742460100B55058 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
 		A468A43D274247D600B55058 /* CarouselCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewController.swift; sourceTree = "<group>"; };
 		A468A4402742507400B55058 /* FittingCompressedSizeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FittingCompressedSizeCollectionViewController.swift; sourceTree = "<group>"; };
 		A468A4432742549F00B55058 /* FittingCompressedSizeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FittingCompressedSizeCollectionViewCell.swift; sourceTree = "<group>"; };
 		A468A4442742549F00B55058 /* FittingCompressedSizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FittingCompressedSizeCollectionViewCell.xib; sourceTree = "<group>"; };
 		A468A447274258FB00B55058 /* DifferentSizeCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentSizeCollectionViewCellModel.swift; sourceTree = "<group>"; };
+		A468A44D2742865100B55058 /* AlignedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignedCollectionViewController.swift; sourceTree = "<group>"; };
 		A8C18F63930316A8468B041C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB41F1ECB404261C7782A518 /* SwipeableTableGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableTableGenerator.swift; sourceTree = "<group>"; };
 		AB612B69266A834C73906EB6 /* Pods-ReactiveDataDisplayManagerExample_tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveDataDisplayManagerExample_tvOS.release.xcconfig"; path = "Target Support Files/Pods-ReactiveDataDisplayManagerExample_tvOS/Pods-ReactiveDataDisplayManagerExample_tvOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 		7A67422E6DA0F317DC19BFC0 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				A468A44C2742861500B55058 /* AlignedCollectionViewController */,
 				A468A43F2742503F00B55058 /* CustomLayoutCollectionViewController */,
 				A468A43C274247AA00B55058 /* CarouselCollectionViewLayout */,
 				A468A4332742450F00B55058 /* Layouts */,
@@ -780,7 +783,7 @@
 			children = (
 				A468A4342742453300B55058 /* CarouselCollectionViewLayout.swift */,
 				A468A4362742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift */,
-				A468A438274245C800B55058 /* LeftAlignedCollectionViewFlowLayout.swift */,
+				A468A438274245C800B55058 /* AlignedCollectionViewFlowLayout.swift */,
 				A468A43A2742460100B55058 /* DynamicHeightCollectionView.swift */,
 			);
 			path = Layouts;
@@ -810,6 +813,14 @@
 				A468A447274258FB00B55058 /* DifferentSizeCollectionViewCellModel.swift */,
 			);
 			path = FittingCompressedSizeCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		A468A44C2742861500B55058 /* AlignedCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A468A44D2742865100B55058 /* AlignedCollectionViewController.swift */,
+			);
+			path = AlignedCollectionViewController;
 			sourceTree = "<group>";
 		};
 		A7F84BE04A7A29B9D607BD1A /* DragAndDroppableCollectionViewController */ = {
@@ -1357,7 +1368,7 @@
 				A468A4452742549F00B55058 /* FittingCompressedSizeCollectionViewCell.swift in Sources */,
 				0CEAA74E9BD782904D83A591 /* FoldableCollectionViewCell.swift in Sources */,
 				EC259BB308642B05BD3D13E1 /* FoldableCollectionViewController.swift in Sources */,
-				A468A439274245C800B55058 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
+				A468A439274245C800B55058 /* AlignedCollectionViewFlowLayout.swift in Sources */,
 				865201DDA6A92820FBBCDF30 /* FoldableTableViewCell.swift in Sources */,
 				813A6E6F0B7BE9844D67D869 /* FoldableTableViewController.swift in Sources */,
 				F9308201312641349E160206 /* GravityCellGenerator.swift in Sources */,
@@ -1426,6 +1437,7 @@
 				A468A448274258FB00B55058 /* DifferentSizeCollectionViewCellModel.swift in Sources */,
 				BB67A0D63EF126FE80214945 /* UnrollStackViewController.swift in Sources */,
 				957A8CDFF2783336640C3A6F /* VerticalSizableTextGenerator.swift in Sources */,
+				A468A44E2742865100B55058 /* AlignedCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

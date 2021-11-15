@@ -31,6 +31,7 @@ final class MainCollectionViewController: UIViewController {
         case dragAndDroppableCollection
         case carouselCollection
         case fittingCompressedSizeCollection
+        case alignedCollection
     }
 
     // MARK: - Constants
@@ -53,7 +54,8 @@ final class MainCollectionViewController: UIViewController {
             ("Collection with movable items", .movableCollection),
             ("Collection with drag and drop item", .dragAndDroppableCollection),
             ("Carousel collection", .carouselCollection),
-            ("Fitting compressed size collection", .fittingCompressedSizeCollection)
+            ("Fitting compressed size collection", .fittingCompressedSizeCollection),
+            ("Aligned collection", .alignedCollection)
         ]
     }
 
