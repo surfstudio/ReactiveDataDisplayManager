@@ -10,4 +10,6 @@ import UIKit
 
 open class CollectionFeaturePlugin: FeaturePlugin {
     public typealias CollectionType = UICollectionView
+
+    public init() { }
 }

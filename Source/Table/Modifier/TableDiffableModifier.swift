@@ -37,7 +37,8 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     /// Update snapshot
     override func reload() {
-        apply(animated: true)
+        let cellsIsEmpty = view?.visibleCells.isEmpty ?? true
+        apply(animated: !cellsIsEmpty)
     }
 
     /// Reload rows with animation
@@ -146,22 +147,22 @@ private extension TableDiffableModifier {
         var snapshot = DiffableSnapshot()
 
         for (index, section) in sections.enumerated() {
-            snapshot.appendSections([section.item])
+            snapshot.appendSections([section.diffableItem])
 
             guard let generators = generators[safe: index] else { continue }
 
-            let items = generators.map { $0.item }
-            snapshot.appendItems(items, toSection: section.item)
+            let items = generators.map { $0.diffableItem }
+            snapshot.appendItems(items, toSection: section.diffableItem)
         }
 
         return snapshot
     }
 
     func safeApplySnapshot(_ snapshot: DiffableSnapshot, animated: Bool = false, completion: (() -> Void)? = nil) {
-
-        DispatchQueue.main.async { [weak dataSource] in
-            dataSource?.apply(snapshot, animatingDifferences: animated, completion: completion)
+        guard let dataSource = dataSource else {
+            return
         }
+        dataSource.apply(snapshot, animatingDifferences: animated, completion: completion)
     }
 
 }

@@ -11,7 +11,7 @@ final class DiffableCollectionCellGenerator: BaseCollectionCellGenerator<TitleCo
 
     private let uuid = UUID().uuidString
 
-    var item: DiffableItem {
+    var diffableItem: DiffableItem {
         DiffableItem(id: uuid, state: .init(model))
     }
 

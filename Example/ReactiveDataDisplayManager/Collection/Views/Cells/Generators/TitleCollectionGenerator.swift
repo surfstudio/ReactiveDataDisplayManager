@@ -37,7 +37,7 @@ final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectio
 
 extension TitleCollectionGenerator: DragAndDroppableItemSource {
 
-    var item: DragAndDroppableItem {
+    var dropableItem: DragAndDroppableItem {
         return dragAndDroppableItem
     }
 

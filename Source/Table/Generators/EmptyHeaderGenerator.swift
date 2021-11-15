@@ -26,7 +26,7 @@ public class EmptyTableHeaderGenerator: TableHeaderGenerator {
 
 extension EmptyTableHeaderGenerator: DiffableItemSource {
 
-    public var item: DiffableItem {
+    public var diffableItem: DiffableItem {
         DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection"))
     }
 

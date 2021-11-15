@@ -16,6 +16,8 @@ open class DraggablePluginDelegate<Provider: GeneratorsProvider> {
 
     public typealias GeneratorType = DragAndDroppableItemSource
 
+    public init() { }
+
 }
 
 // MARK: - DraggableDelegate
@@ -31,7 +33,7 @@ extension DraggablePluginDelegate: DraggableDelegate {
     /// - warning: Currently supports single item drag
     public func makeDragItems(at indexPath: IndexPath, with provider: Provider?) -> [UIDragItem] {
         guard let generator = provider?.generators[safe: indexPath.section]?[safe: indexPath.row] as? GeneratorType else { return [] }
-        let mainDragItem = makeDragItem(for: generator.item)
+        let mainDragItem = makeDragItem(for: generator.dropableItem)
 
         // TODO: - Add support for multiple items
         //        let items = [mainDragItem] + generator.associatedGenerators.compactMap(makeDragItem(for:))
