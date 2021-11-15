@@ -81,7 +81,7 @@
 		A3CBF3A30D66A30C8DB2DB07 /* DragAndDroppableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73953DF3D544D69F0943CE /* DragAndDroppableTableViewController.swift */; };
 		A468A432274241A600B55058 /* DifferentHeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A431274241A600B55058 /* DifferentHeightViewController.swift */; };
 		A468A4352742453300B55058 /* CarouselCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A4342742453300B55058 /* CarouselCollectionViewLayout.swift */; };
-		A468A4372742459B00B55058 /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A4362742459B00B55058 /* CustomCollectionViewLayout.swift */; };
+		A468A4372742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A4362742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift */; };
 		A468A439274245C800B55058 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A438274245C800B55058 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		A468A43B2742460100B55058 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A43A2742460100B55058 /* DynamicHeightCollectionView.swift */; };
 		A468A43E274247D600B55058 /* CarouselCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A43D274247D600B55058 /* CarouselCollectionViewController.swift */; };
@@ -214,7 +214,7 @@
 		A43827BAA20A9EF3B05A721E /* GravityCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityCellGenerator.swift; sourceTree = "<group>"; };
 		A468A431274241A600B55058 /* DifferentHeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentHeightViewController.swift; sourceTree = "<group>"; };
 		A468A4342742453300B55058 /* CarouselCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewLayout.swift; sourceTree = "<group>"; };
-		A468A4362742459B00B55058 /* CustomCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayout.swift; sourceTree = "<group>"; };
+		A468A4362742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FittingCompressedSizeCollectionViewLayout.swift; sourceTree = "<group>"; };
 		A468A438274245C800B55058 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		A468A43A2742460100B55058 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
 		A468A43D274247D600B55058 /* CarouselCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewController.swift; sourceTree = "<group>"; };
@@ -779,7 +779,7 @@
 			isa = PBXGroup;
 			children = (
 				A468A4342742453300B55058 /* CarouselCollectionViewLayout.swift */,
-				A468A4362742459B00B55058 /* CustomCollectionViewLayout.swift */,
+				A468A4362742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift */,
 				A468A438274245C800B55058 /* LeftAlignedCollectionViewFlowLayout.swift */,
 				A468A43A2742460100B55058 /* DynamicHeightCollectionView.swift */,
 			);
@@ -1352,7 +1352,7 @@
 				360755A83A8C726A00C3515F /* DragAndDroppableCollectionViewController.swift in Sources */,
 				A3CBF3A30D66A30C8DB2DB07 /* DragAndDroppableTableViewController.swift in Sources */,
 				B4BAC994667B1C2BC62CDDA0 /* FoldableCellGenerator.swift in Sources */,
-				A468A4372742459B00B55058 /* CustomCollectionViewLayout.swift in Sources */,
+				A468A4372742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift in Sources */,
 				0CF4CFA5487787803C6F4B74 /* FoldableCollectionCellGenerator.swift in Sources */,
 				A468A4452742549F00B55058 /* FittingCompressedSizeCollectionViewCell.swift in Sources */,
 				0CEAA74E9BD782904D83A591 /* FoldableCollectionViewCell.swift in Sources */,
