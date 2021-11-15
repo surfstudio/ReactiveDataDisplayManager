@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="haM-wg-zn2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="haM-wg-zn2">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +12,7 @@
         <!--Diffable Table View Controller-->
         <scene sceneID="F4X-k0-NMY">
             <objects>
-                <viewController id="16i-RQ-fbT" customClass="DiffableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="16i-RQ-fbT" customClass="DiffableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eXV-VK-YbN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,7 +43,7 @@
         <!--Movable Table View Controller-->
         <scene sceneID="rqj-Fd-t0M">
             <objects>
-                <viewController id="Uy9-MG-PUc" customClass="MovableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Uy9-MG-PUc" customClass="MovableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mhf-Ir-fN5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,7 +74,7 @@
         <!--Gravity Table View Controller-->
         <scene sceneID="l5W-wb-yvE">
             <objects>
-                <viewController id="Zf5-Tg-tyH" customClass="GravityTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zf5-Tg-tyH" customClass="GravityTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NHs-mw-sHw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,7 +105,7 @@
         <!--Alphabetical Table View Controller-->
         <scene sceneID="uWQ-1a-Ks1">
             <objects>
-                <viewController id="3d6-cJ-r4V" customClass="AlphabeticalTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3d6-cJ-r4V" customClass="AlphabeticalTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IYu-oI-vUJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,7 +136,7 @@
         <!--Section Title Table View Controller-->
         <scene sceneID="opt-uG-SZ6">
             <objects>
-                <viewController id="5Ed-1O-hbB" customClass="SectionTitleTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5Ed-1O-hbB" customClass="SectionTitleTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FWx-a8-dDj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -167,7 +167,7 @@
         <!--Swipeable Table View Controller-->
         <scene sceneID="PVT-Dd-fCQ">
             <objects>
-                <viewController id="bkM-th-DfT" customClass="SwipeableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bkM-th-DfT" customClass="SwipeableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gss-VR-pce">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -198,7 +198,7 @@
         <!--All Plugins Table View Controller-->
         <scene sceneID="zx7-Wb-F22">
             <objects>
-                <viewController id="gFr-UQ-9p9" customClass="AllPluginsTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gFr-UQ-9p9" customClass="AllPluginsTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jc6-9v-aGB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,7 +229,7 @@
         <!--Refreshable Table View Controller-->
         <scene sceneID="ft0-rH-4Ad">
             <objects>
-                <viewController id="KPe-5j-jTE" customClass="RefreshableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KPe-5j-jTE" customClass="RefreshableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j1c-mc-ZzJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -260,7 +260,7 @@
         <!--Paginatable Table View Controller-->
         <scene sceneID="NEQ-Pc-8HZ">
             <objects>
-                <viewController id="xQn-4x-xEX" customClass="PaginatableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xQn-4x-xEX" customClass="PaginatableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3TZ-w0-vNn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -297,7 +297,7 @@
         <!--Difference Table View Controller-->
         <scene sceneID="Awb-OV-uws">
             <objects>
-                <viewController id="CGn-gl-AyL" customClass="DifferenceTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="CGn-gl-AyL" customClass="DifferenceTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0vv-Sv-vuv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,7 +328,7 @@
         <!--Drag And Droppable Table View Controller-->
         <scene sceneID="gUO-zI-Hzr">
             <objects>
-                <viewController id="NoD-cq-hQv" customClass="DragAndDroppableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NoD-cq-hQv" customClass="DragAndDroppableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mq2-MO-xba">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -359,7 +359,7 @@
         <!--Table-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -406,7 +406,7 @@
         <!--Image Table View Controller-->
         <scene sceneID="1kH-t8-h7Q">
             <objects>
-                <viewController id="x5K-kL-ew7" customClass="ImageTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="x5K-kL-ew7" customClass="ImageTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sbp-gz-5sq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -437,7 +437,7 @@
         <!--Foldable Table View Controller-->
         <scene sceneID="ueU-dX-sdt">
             <objects>
-                <viewController id="1D9-rJ-NEt" customClass="FoldableTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1D9-rJ-NEt" customClass="FoldableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cxv-BG-ZTw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -468,7 +468,7 @@
         <!--Prefetching Table View Controller-->
         <scene sceneID="jcz-27-XRy">
             <objects>
-                <viewController id="HbH-nQ-nM8" customClass="PrefetchingTableViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HbH-nQ-nM8" customClass="PrefetchingTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qnl-DA-OiO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -499,7 +499,7 @@
         <!--Collection-->
         <scene sceneID="cQP-3e-Boa">
             <objects>
-                <viewController id="lyU-aU-2OK" customClass="MainCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lyU-aU-2OK" customClass="MainCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C5u-Ma-r1Q">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -536,6 +536,8 @@
                         <segue destination="JRO-Jc-LJy" kind="show" identifier="swipeableListAppearances" id="VbB-BP-etm"/>
                         <segue destination="U7p-pz-PrX" kind="show" identifier="movableCollection" id="k3y-7B-Uu4"/>
                         <segue destination="Czp-U6-ipo" kind="show" identifier="dragAndDroppableCollection" id="W98-yt-KrB"/>
+                        <segue destination="iMM-9c-z6r" kind="show" identifier="carouselCollection" id="Ice-jU-qEe"/>
+                        <segue destination="mV7-Hk-z4i" kind="show" identifier="customLayoutCollection" id="9Wr-JC-G2r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -545,7 +547,7 @@
         <!--Prefetching Collection View Controller-->
         <scene sceneID="x1p-JX-VvJ">
             <objects>
-                <viewController id="gbO-EY-csx" customClass="PrefetchingCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gbO-EY-csx" customClass="PrefetchingCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1bG-Ir-xKU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -580,10 +582,48 @@
             </objects>
             <point key="canvasLocation" x="-468" y="2938"/>
         </scene>
+        <!--Carousel Collection View Controller-->
+        <scene sceneID="Kjm-ux-prw">
+            <objects>
+                <viewController id="iMM-9c-z6r" customClass="CarouselCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yYJ-mX-DTk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HgR-fC-a60">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DBo-70-Ocw">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pew-q6-WYt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pew-q6-WYt" firstAttribute="trailing" secondItem="HgR-fC-a60" secondAttribute="trailing" id="90d-wR-o5B"/>
+                            <constraint firstItem="HgR-fC-a60" firstAttribute="top" secondItem="pew-q6-WYt" secondAttribute="top" id="9BE-zv-wQh"/>
+                            <constraint firstItem="pew-q6-WYt" firstAttribute="bottom" secondItem="HgR-fC-a60" secondAttribute="bottom" id="9eQ-Od-Ebe"/>
+                            <constraint firstItem="HgR-fC-a60" firstAttribute="leading" secondItem="pew-q6-WYt" secondAttribute="leading" id="L7S-4k-uoJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Yvy-YQ-3xm"/>
+                    <connections>
+                        <outlet property="collectionView" destination="HgR-fC-a60" id="Ea5-lN-jQj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bUK-Ac-bgQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1309" y="2938"/>
+        </scene>
         <!--Collection View Controller-->
         <scene sceneID="syt-Nb-mT5">
             <objects>
-                <viewController id="hhz-eY-DAz" customClass="CollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hhz-eY-DAz" customClass="CollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pm9-Wc-XGI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -621,7 +661,7 @@
         <!--Stack-->
         <scene sceneID="UXt-z6-X2a">
             <objects>
-                <viewController id="8Ik-5X-Xp5" customClass="StackViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8Ik-5X-Xp5" customClass="StackViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7pz-v1-kya">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -668,7 +708,7 @@
         <!--Unroll Stack View Controller-->
         <scene sceneID="be6-MU-szc">
             <objects>
-                <viewController id="c0h-fu-q1p" customClass="UnrollStackViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="c0h-fu-q1p" customClass="UnrollStackViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3iW-Tg-XLm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -713,7 +753,7 @@
         <!--Landing Stack View Controller-->
         <scene sceneID="96B-jB-Ya2">
             <objects>
-                <viewController id="sI2-Ql-C4R" customClass="LandingStackViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sI2-Ql-C4R" customClass="LandingStackViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O2z-nS-oE4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -758,7 +798,7 @@
         <!--Stack-->
         <scene sceneID="OwT-fx-04J">
             <objects>
-                <viewController id="5wX-xl-Wfw" customClass="MainStackViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5wX-xl-Wfw" customClass="MainStackViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="183-c4-TdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -793,7 +833,7 @@
         <!--Collection List View Controller-->
         <scene sceneID="lQt-OD-lNV">
             <objects>
-                <viewController id="YeS-TG-zUj" customClass="CollectionListViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YeS-TG-zUj" customClass="CollectionListViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X9a-8N-Qty">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -831,7 +871,7 @@
         <!--Image Collection View Controller-->
         <scene sceneID="BHb-jD-yM3">
             <objects>
-                <viewController id="bcg-8S-Zba" customClass="ImageCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bcg-8S-Zba" customClass="ImageCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PB1-CP-Gxz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -861,10 +901,48 @@
             </objects>
             <point key="canvasLocation" x="1305" y="2248"/>
         </scene>
+        <!--Custom Layout Collection View Controller-->
+        <scene sceneID="QZ0-td-HNx">
+            <objects>
+                <viewController id="mV7-Hk-z4i" customClass="CustomLayoutCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Zy6-oH-IP1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5XA-km-rOp">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2FN-H6-Q7X">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="oAS-1H-WOi"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5XA-km-rOp" firstAttribute="leading" secondItem="oAS-1H-WOi" secondAttribute="leading" id="BpC-Ul-rUg"/>
+                            <constraint firstItem="5XA-km-rOp" firstAttribute="top" secondItem="oAS-1H-WOi" secondAttribute="top" id="HmH-jN-yTW"/>
+                            <constraint firstItem="5XA-km-rOp" firstAttribute="trailing" secondItem="oAS-1H-WOi" secondAttribute="trailing" id="aLV-q8-KzP"/>
+                            <constraint firstItem="oAS-1H-WOi" firstAttribute="bottom" secondItem="5XA-km-rOp" secondAttribute="bottom" id="oAK-LD-dyB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qkv-rl-Lww"/>
+                    <connections>
+                        <outlet property="collectionView" destination="5XA-km-rOp" id="106-rI-f3z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P2w-kE-Mcc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2049" y="2938"/>
+        </scene>
         <!--Item Title Collection View Controller-->
         <scene sceneID="BKF-72-lAj">
             <objects>
-                <viewController id="cOD-zS-jLq" customClass="ItemTitleCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cOD-zS-jLq" customClass="ItemTitleCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x8Z-9O-fAX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -902,7 +980,7 @@
         <!--Difference Collection View Controller-->
         <scene sceneID="P1K-uH-TB7">
             <objects>
-                <viewController id="wYl-2p-b07" customClass="DifferenceCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wYl-2p-b07" customClass="DifferenceCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w9T-3l-frF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -940,7 +1018,7 @@
         <!--Swipeable Collection List View Controller-->
         <scene sceneID="eMS-9U-fDW">
             <objects>
-                <viewController id="JRO-Jc-LJy" customClass="SwipeableCollectionListViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JRO-Jc-LJy" customClass="SwipeableCollectionListViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qez-zx-Xqw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -978,7 +1056,7 @@
         <!--Movable Collection View Controller-->
         <scene sceneID="a0R-Q2-yM2">
             <objects>
-                <viewController id="U7p-pz-PrX" customClass="MovableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="U7p-pz-PrX" customClass="MovableCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9fV-6z-urU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1016,7 +1094,7 @@
         <!--Sizable Collection View Controller-->
         <scene sceneID="tFY-fl-bt3">
             <objects>
-                <viewController id="GZX-q5-5fd" customClass="SizableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="GZX-q5-5fd" customClass="SizableCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LSj-I7-YLe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1054,7 +1132,7 @@
         <!--Image Horizontal Collection View Controller-->
         <scene sceneID="hxP-5A-BDl">
             <objects>
-                <viewController id="rjR-b9-Cch" customClass="ImageHorizontalCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rjR-b9-Cch" customClass="ImageHorizontalCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="28Z-8w-MYT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1094,7 +1172,7 @@
         <!--Foldable Collection View Controller-->
         <scene sceneID="iBh-3t-ChM">
             <objects>
-                <viewController id="pGI-i3-EWf" customClass="FoldableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pGI-i3-EWf" customClass="FoldableCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gee-CA-GLt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1132,7 +1210,7 @@
         <!--Diffable Collection View Controller-->
         <scene sceneID="cNY-qf-9sC">
             <objects>
-                <viewController id="fW0-Sk-lmX" customClass="DiffableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fW0-Sk-lmX" customClass="DiffableCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6r4-zw-A2e">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1170,7 +1248,7 @@
         <!--Paginatable Collection View Controller-->
         <scene sceneID="4Zv-0g-Mgs">
             <objects>
-                <viewController id="xKf-89-asG" customClass="PaginatableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="xKf-89-asG" customClass="PaginatableCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N1N-u6-Myp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1215,7 +1293,7 @@
         <!--Collection Compositional View Controller-->
         <scene sceneID="LhE-pz-dzt">
             <objects>
-                <viewController id="NJ8-lG-GQz" customClass="CollectionCompositionalViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NJ8-lG-GQz" customClass="CollectionCompositionalViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wVo-RW-qbI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1291,7 +1369,7 @@
         <!--Drag And Droppable Collection View Controller-->
         <scene sceneID="uw2-Ff-JwT">
             <objects>
-                <viewController id="Czp-U6-ipo" customClass="DragAndDroppableCollectionViewController" customModule="ReactiveDataDisplayManagerExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Czp-U6-ipo" customClass="DragAndDroppableCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5SB-wA-QIa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
