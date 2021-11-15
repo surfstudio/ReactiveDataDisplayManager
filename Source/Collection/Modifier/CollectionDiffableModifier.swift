@@ -37,8 +37,8 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
 
     /// Update snapshot
     override func reload() {
-        let cellsIsEmpty: Bool = view?.visibleCells.isEmpty ?? true
-        collectionApply(animated: !cellsIsEmpty)
+        let cellsIsEmpty = view?.visibleCells.isEmpty ?? true
+        apply(animated: !cellsIsEmpty)
     }
 
     /// Reload items with animation
@@ -48,7 +48,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: CollectionItemAnimation) {
-        collectionApply(animated: updateAnimation != .none)
+        apply(animated: updateAnimation != .none)
     }
 
     /// Reload items with animation
@@ -58,7 +58,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func reloadSections(at indexPaths: IndexSet, with updateAnimation: CollectionItemAnimation) {
-        collectionApply(animated: updateAnimation != .none)
+        apply(animated: updateAnimation != .none)
     }
 
     /// Update snapshot after items replaced
@@ -69,7 +69,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func replace(at indexPath: IndexPath, with removeAnimation: CollectionItemAnimation, and insertAnimation: CollectionItemAnimation) {
-        collectionApply(animated: insertAnimation != .none)
+        apply(animated: insertAnimation != .none)
     }
 
     /// Replace row at specified indexPath
@@ -85,7 +85,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
                                on insertIndexPaths: [IndexPath],
                                with removeAnimation: CollectionItemAnimation,
                                and insertAnimation: CollectionItemAnimation) {
-        collectionApply(animated: insertAnimation != .none)
+        apply(animated: insertAnimation != .none)
     }
 
     /// Update snapshot after sections inserted
@@ -95,7 +95,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func insertSections(at indexPaths: IndexSet, with insertAnimation: CollectionItemAnimation) {
-        collectionApply(animated: insertAnimation != .none)
+        apply(animated: insertAnimation != .none)
     }
 
     /// Update snapshot after items inserted
@@ -105,7 +105,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func insertRows(at indexPaths: [IndexPath], with insertAnimation: CollectionItemAnimation) {
-        collectionApply(animated: insertAnimation != .none)
+        apply(animated: insertAnimation != .none)
     }
 
     /// Remove items and section with animation
@@ -116,7 +116,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
     override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: CollectionItemAnimation) {
-        collectionApply(animated: removeAnimation != .none)
+        apply(animated: removeAnimation != .none)
     }
 
 }
@@ -126,7 +126,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
 @available(iOS 13.0, tvOS 13.0, *)
 private extension CollectionDiffableModifier {
 
-    func collectionApply(animated: Bool = false, completion: (() -> Void)? = nil) {
+    func apply(animated: Bool = false, completion: (() -> Void)? = nil) {
         guard let snapshot = makeSnapshot() else { return }
 
         safeApplySnapshot(snapshot, animated: animated, completion: completion)

@@ -37,8 +37,8 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     /// Update snapshot
     override func reload() {
-        let cellsIsEmpty: Bool = view?.visibleCells.isEmpty ?? true
-        tableApply(animated: !cellsIsEmpty)
+        let cellsIsEmpty = view?.visibleCells.isEmpty ?? true
+        apply(animated: !cellsIsEmpty)
     }
 
     /// Reload rows with animation
@@ -48,7 +48,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: UITableView.RowAnimation) {
-        tableApply(animated: updateAnimation != .none)
+        apply(animated: updateAnimation != .none)
     }
 
     /// Reload rows with animation
@@ -58,7 +58,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func reloadSections(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
-        tableApply(animated: updateAnimation != .none)
+        apply(animated: updateAnimation != .none)
     }
 
     /// Update snapshot after rows replaced
@@ -71,7 +71,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     override func replace(at indexPath: IndexPath,
                           with removeAnimation: UITableView.RowAnimation,
                           and insertAnimation: UITableView.RowAnimation) {
-        tableApply(animated: insertAnimation != .none)
+        apply(animated: insertAnimation != .none)
     }
 
     /// Update snapshot after rows replaced
@@ -86,7 +86,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
                                on insertIndexPaths: [IndexPath],
                                with removeAnimation: UITableView.RowAnimation,
                                and insertAnimation: UITableView.RowAnimation) {
-        tableApply(animated: insertAnimation != .none)
+        apply(animated: insertAnimation != .none)
     }
 
     /// Update snapshot after sections inserted
@@ -96,7 +96,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func insertSections(at indexPaths: IndexSet, with insertAnimation: UITableView.RowAnimation) {
-        tableApply(animated: insertAnimation != .none)
+        apply(animated: insertAnimation != .none)
     }
 
     /// Update snapshot after rows inserted
@@ -106,7 +106,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func insertRows(at indexPaths: [IndexPath], with insertAnimation: UITableView.RowAnimation) {
-        tableApply(animated: insertAnimation != .none)
+        apply(animated: insertAnimation != .none)
     }
 
     /// Remove rows and section with animation
@@ -117,7 +117,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     ///     - **allowed** none to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: UITableView.RowAnimation) {
-        tableApply(animated: removeAnimation != .none)
+        apply(animated: removeAnimation != .none)
     }
 
 }
@@ -127,7 +127,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 @available(iOS 13.0, tvOS 13.0, *)
 private extension TableDiffableModifier {
 
-    func tableApply(animated: Bool = false, completion: (() -> Void)? = nil) {
+    func apply(animated: Bool = false, completion: (() -> Void)? = nil) {
         guard let snapshot = makeSnapshot() else { return }
 
         safeApplySnapshot(snapshot, animated: animated, completion: completion)
