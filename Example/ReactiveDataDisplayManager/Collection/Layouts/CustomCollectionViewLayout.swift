@@ -7,9 +7,9 @@
 
 import UIKit
 
-/// **ВАЖНО** Используются **preferredAttributes**
-/// Чтобы все работало верно необходимо в каждой ячейке UICollectionViewCell сделать расчет высоты в методе **preferredLayoutAttributesFitting**
-final class CustomCollectionViewLayout: UICollectionViewLayout {
+/// ** IMPORTANT ** Used by ** preferredAttributes **
+/// For everything to work correctly, it is necessary in each cell of the UICollectionViewCell to calculate the height in the ** preferredLayoutAttributesFitting ** method
+final class FittingCompressedSizeCollectionViewLayout: UICollectionViewLayout {
 
     // MARK: - Private Properties
 
@@ -53,16 +53,18 @@ final class CustomCollectionViewLayout: UICollectionViewLayout {
             return contentWidth
         }
     }
+
 }
 
 // MARK: - UICollectionViewLayout
-extension CustomCollectionViewLayout {
+
+extension FittingCompressedSizeCollectionViewLayout {
 
     override var collectionViewContentSize: CGSize {
         return .init(width: contentWidth, height: contentHeight)
     }
 
-    /// Готовит первоначальный лэйаут с хардкодной высотой
+    /// Prepares initial layout with hardcode height
     override func prepare() {
         super.prepare()
         guard cachedAttributes.isEmpty else { return }
@@ -88,7 +90,7 @@ extension CustomCollectionViewLayout {
         }
     }
 
-    /// Проверяет изменения лэйаута, если изменился обнуляет значения
+    /// Checks for changes to the layout, if changed, resets the values
     override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
         super.invalidateLayout(with: context)
         guard context.invalidateEverything else { return }
@@ -96,7 +98,7 @@ extension CustomCollectionViewLayout {
         contentHeight = .zero
     }
 
-    /// Проверяем изменились ли размеры ячейки по сравнению с предыдущими значениями, если да – вычисляем новые размеры
+    /// We check if the cell size has changed compared to the previous values, if so, we calculate the new size
     override func shouldInvalidateLayout(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes,
                                          withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> Bool {
 
@@ -107,7 +109,7 @@ extension CustomCollectionViewLayout {
         return true
     }
 
-    /// Обновляем лэйаут, на основе вычисленной высоты внутри ячейки с помощью autolayout
+    /// Updating the layout based on the calculated height inside the cell using autolayout
     override func invalidationContext(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes,
                                       withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes)
         -> UICollectionViewLayoutInvalidationContext {
@@ -130,9 +132,10 @@ extension CustomCollectionViewLayout {
 }
 
 // MARK: - Private Methods
-private extension CustomCollectionViewLayout {
 
-    /// Лэйаут для телефонов с хардкодной высотой
+private extension FittingCompressedSizeCollectionViewLayout {
+
+    /// Layout for phones with hardcode height
     func phoneInitialLayout() {
         guard let collectionView = collectionView else { return }
 
@@ -156,7 +159,7 @@ private extension CustomCollectionViewLayout {
         }
     }
 
-    /// Лэйаут для телефонов с высотой вычисленной из autolayout
+    /// Layout for phones with height calculated from autolayout
     func phoneFinishLayout(with context: UICollectionViewLayoutInvalidationContext,
                            preferredAttributes: UICollectionViewLayoutAttributes,
                            originalAttributes: UICollectionViewLayoutAttributes) {
@@ -186,7 +189,7 @@ private extension CustomCollectionViewLayout {
         contentHeight = (cachedAttributes.last?.frame.maxY ?? contentHeight) + contentInsets.bottom
     }
 
-    /// Лэйаут для планшетов с хардкодной высотой
+    /// Layout for tablets with hardcode height
     func tabletInitialLayout() {
         guard let collectionView = collectionView else { return }
 
@@ -217,7 +220,7 @@ private extension CustomCollectionViewLayout {
         }
     }
 
-    /// Лэйаут для планшетов с высотой вычисленной из autolayout
+    /// Layout for tablets with height calculated from auto decomposition
     func tabletFinishLayout(with context: UICollectionViewLayoutInvalidationContext,
                             preferredAttributes: UICollectionViewLayoutAttributes,
                             originalAttributes: UICollectionViewLayoutAttributes) {

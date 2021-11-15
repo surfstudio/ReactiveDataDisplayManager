@@ -11,6 +11,5 @@ struct DifferentSizeCollectionViewCellModel {
 
     let title: String
     let backgroundColor: UIColor
-    let height: CGFloat
 
 }
