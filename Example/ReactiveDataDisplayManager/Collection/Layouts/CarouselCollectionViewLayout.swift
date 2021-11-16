@@ -7,6 +7,8 @@
 
 import UIKit
 
+/// Layout for the carousel.
+///  Configure - setCells() method
 final class CarouselCollectionViewLayout: UICollectionViewLayout {
 
     // MARK: - Private Properties
@@ -19,7 +21,12 @@ final class CarouselCollectionViewLayout: UICollectionViewLayout {
 
     // MARK: - Public Methods
 
-    func setCells(size: CGSize, padding: CGFloat, insets: UIEdgeInsets) {
+    /// Configure cells
+    /// - Parameters:
+    ///     - size: size cell
+    ///     - padding: padding cell
+    ///     - insets: insets cell
+    public func setCells(size: CGSize, padding: CGFloat, insets: UIEdgeInsets) {
         self.cellSize = size
         self.padding = padding
         self.horizontalInsets = insets

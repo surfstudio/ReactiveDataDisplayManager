@@ -8,7 +8,9 @@
 import UIKit
 
 /// ** IMPORTANT ** Used by ** .scrollDirection = .vertical **
-class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+/// This layout allows you to nail content to one of the sides (left / right) by specifying the side in the initializer.
+/// Default left
+final class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
     public enum Aligment {
         case left, right
@@ -21,11 +23,12 @@ class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
     // MARK: - Initialization
 
-    init(aligment: Aligment) {
+    public init(aligment: Aligment) {
         super.init()
         self.aligment = aligment
     }
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

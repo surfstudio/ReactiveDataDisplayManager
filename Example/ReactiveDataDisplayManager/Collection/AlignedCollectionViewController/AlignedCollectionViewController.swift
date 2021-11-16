@@ -8,7 +8,7 @@
 import UIKit
 import Nuke
 
-class AlignedCollectionViewController: UIViewController {
+final class AlignedCollectionViewController: UIViewController {
 
     private enum Constants {
         static let sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)

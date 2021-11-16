@@ -22,7 +22,17 @@ final class FittingCompressedSizeCollectionViewLayout: UICollectionViewLayout {
         return UIScreen.main.bounds.width - contentInsets.left - contentInsets.right
     }
 
-    private var contentInsets: UIEdgeInsets {
+    private var itemWidth: CGFloat {
+        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
+            return (contentWidth - interitemSpacing) / 2.0
+        } else {
+            return contentWidth
+        }
+    }
+
+    // MARK: - Public Properties
+
+    public var contentInsets: UIEdgeInsets {
         if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
             return .init(top: 12.0, left: 40.0, bottom: 20.0, right: 40.0)
         } else {
@@ -30,7 +40,7 @@ final class FittingCompressedSizeCollectionViewLayout: UICollectionViewLayout {
         }
     }
 
-    private var interitemSpacing: CGFloat {
+    public var interitemSpacing: CGFloat {
         if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
             return 16.0
         } else {
@@ -38,19 +48,11 @@ final class FittingCompressedSizeCollectionViewLayout: UICollectionViewLayout {
         }
     }
 
-    private var lineSpacing: CGFloat {
+    public var lineSpacing: CGFloat {
         if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
             return 8.0
         } else {
             return 16.0
-        }
-    }
-
-    private var itemWidth: CGFloat {
-        if UIScreen.main.traitCollection.horizontalSizeClass == .regular {
-            return (contentWidth - interitemSpacing) / 2.0
-        } else {
-            return contentWidth
         }
     }
 

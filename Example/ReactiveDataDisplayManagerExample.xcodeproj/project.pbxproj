@@ -80,7 +80,6 @@
 		9FFA5FE951565EA086C09F4D /* CollectionCompositionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173FB7F8FE0015D07813CC53 /* CollectionCompositionalViewController.swift */; };
 		A3C19E75C2904BB0882C49D8 /* TitleCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD08177388A637B66A066E9 /* TitleCollectionReusableView.swift */; };
 		A3CBF3A30D66A30C8DB2DB07 /* DragAndDroppableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73953DF3D544D69F0943CE /* DragAndDroppableTableViewController.swift */; };
-		A468A432274241A600B55058 /* DifferentHeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A431274241A600B55058 /* DifferentHeightViewController.swift */; };
 		A468A4352742453300B55058 /* CarouselCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A4342742453300B55058 /* CarouselCollectionViewLayout.swift */; };
 		A468A4372742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A4362742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift */; };
 		A468A439274245C800B55058 /* AlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A468A438274245C800B55058 /* AlignedCollectionViewFlowLayout.swift */; };
@@ -219,7 +218,6 @@
 		9FE54BA279EBA492D3F36FD3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A01825DE6F3160BA0ACD25D8 /* UnrollCellStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrollCellStackView.swift; sourceTree = "<group>"; };
 		A43827BAA20A9EF3B05A721E /* GravityCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityCellGenerator.swift; sourceTree = "<group>"; };
-		A468A431274241A600B55058 /* DifferentHeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferentHeightViewController.swift; sourceTree = "<group>"; };
 		A468A4342742453300B55058 /* CarouselCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionViewLayout.swift; sourceTree = "<group>"; };
 		A468A4362742459B00B55058 /* FittingCompressedSizeCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FittingCompressedSizeCollectionViewLayout.swift; sourceTree = "<group>"; };
 		A468A438274245C800B55058 /* AlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -651,7 +649,6 @@
 				A468A43F2742503F00B55058 /* CustomLayoutCollectionViewController */,
 				A468A43C274247AA00B55058 /* CarouselCollectionViewLayout */,
 				A468A4332742450F00B55058 /* Layouts */,
-				A468A4302742402800B55058 /* DifferentHeightViewController */,
 				F825DD05D142484A7CAEBB19 /* Appearance */,
 				0CB17039FCB301F5A135E2BB /* CollectionCompositionalViewController */,
 				3D8E41C88AE5572B5D6C958D /* CollectionListViewController */,
@@ -780,14 +777,6 @@
 				3EAE885A84F4E137180086B1 /* ImageTableViewCell.xib */,
 			);
 			path = ImageTableViewCell;
-			sourceTree = "<group>";
-		};
-		A468A4302742402800B55058 /* DifferentHeightViewController */ = {
-			isa = PBXGroup;
-			children = (
-				A468A431274241A600B55058 /* DifferentHeightViewController.swift */,
-			);
-			path = DifferentHeightViewController;
 			sourceTree = "<group>";
 		};
 		A468A4332742450F00B55058 /* Layouts */ = {
@@ -1419,7 +1408,6 @@
 				8BC2C527C80F51818BF1C07E /* GravityTableViewController.swift in Sources */,
 				B0EE337D8F630A7CA39479E0 /* HeaderCollectionListGenerator.swift in Sources */,
 				61814123B1022B43BAED3E83 /* HeaderCollectionListView.swift in Sources */,
-				A468A432274241A600B55058 /* DifferentHeightViewController.swift in Sources */,
 				D686EE3C97F60170746F0A28 /* HeaderView.swift in Sources */,
 				A468A45A2742F08400B55058 /* RectangleColorCollectionViewCell.swift in Sources */,
 				5C275994C6E9A080C3E0DACE /* ImageCollectionCellGenerator.swift in Sources */,

@@ -57,7 +57,8 @@ private extension DynamicHeightTableViewCell {
     }
 
     func makeModels() -> [UIColor] {
-        return [.gray, .blue, .red, .yellow, .green]
+        let count = Int.random(in: 3...8)
+        return Array(0...count).map { _ in UIColor.random }
     }
 
     func configureLayoutFlow() {
@@ -68,6 +69,16 @@ private extension DynamicHeightTableViewCell {
         layout.minimumLineSpacing = Constants.horizontalItemSpace
         layout.minimumInteritemSpacing = .zero
         collectionView.setCollectionViewLayout(layout, animated: false)
+    }
+
+}
+
+// MARK: - Support
+
+extension UIColor {
+
+    static var random: UIColor {
+        return UIColor(red: .random(in: 0...2), green: .random(in: 0...2), blue: .random(in: 0...2), alpha: 1.0)
     }
 
 }

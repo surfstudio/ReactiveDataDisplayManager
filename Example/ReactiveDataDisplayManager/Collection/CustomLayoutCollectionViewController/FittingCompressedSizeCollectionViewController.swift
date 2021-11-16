@@ -13,9 +13,6 @@ final class FittingCompressedSizeCollectionViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let size = CGSize(width: 150, height: 150)
-        static let padding: CGFloat = 5
-        static let insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         static let sizesAndColors: [(text: String, color: UIColor)] = [
             // swiftlint:disable line_length
             (text: "Lorem ipsum dolor sit amet,", color: .yellow),
@@ -75,7 +72,7 @@ private extension FittingCompressedSizeCollectionViewController {
         var generators = [CollectionCellGenerator]()
 
         for model in makeModels() {
-            let generator = BaseCollectionCellGenerator<FittingCompressedSizeCollectionViewCell>(with: model)
+            let generator = FittingCompressedSizeCollectionViewCell.rddm.baseGenerator(with: model)
             generators.append(generator)
         }
 
