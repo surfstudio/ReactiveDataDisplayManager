@@ -27,7 +27,7 @@ extension Array where Element == [DiffableItemSource] {
 
     var asDiffableItems: [[DiffableItem]] {
         return map {
-            $0.compactMap { $0.item }
+            $0.compactMap { $0.diffableItem }
         }
     }
 

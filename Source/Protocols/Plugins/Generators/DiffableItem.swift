@@ -10,7 +10,7 @@ import Foundation
 
 /// Protocol to wrap `DiffableItem`
 public protocol DiffableItemSource {
-    var item: DiffableItem { get }
+    var diffableItem: DiffableItem { get }
 }
 
 /// Wrapper of id and equatable state of model

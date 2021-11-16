@@ -9,24 +9,25 @@ import Foundation
 import UIKit
 
 fileprivate enum Constants {
-    static let noneAnimation = 5
+    static let animation = CollectionItemAnimation.animated.rawValue
 }
 
 /// Delegate based on `DroppableDelegate` protocol.
 @available(iOS 11.0, *)
-open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType: NSObjectProtocol> {
+open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType: NSObjectProtocol>: DroppableDelegate {
 
     // MARK: - Typealias
 
     public typealias Coordinator = DropCoordinatorWrapper<CoordinatorType>
     public typealias GeneratorType = DragAndDroppableItemSource
 
-}
+    public init() { }
 
-// MARK: - DroppableDelegate
+    // MARK: - Internal Properties
 
-@available(iOS 11.0, *)
-extension DroppablePluginDelegate: DroppableDelegate {
+    var dropStrategy: StrategyDropable?
+
+    // MARK: - DroppableDelegate
 
     /// Method allows you to include drag and drop data in the collection.
     /// - parameters:
@@ -39,7 +40,6 @@ extension DroppablePluginDelegate: DroppableDelegate {
     open func performDrop<Collection: UIView, Animation: RawRepresentable>(with coordinator: Coordinator,
                                                                            and provider: Provider?,
                                                                            view: Collection,
-                                                                           animator: Animator<Collection>?,
                                                                            modifier: Modifier<Collection, Animation>?) {
         guard
             coordinator.proposal.operation == .move,
@@ -50,7 +50,6 @@ extension DroppablePluginDelegate: DroppableDelegate {
                      coordinator: coordinator,
                      provider: provider,
                      view: view,
-                     animator: animator,
                      modifier: modifier)
     }
 
@@ -79,10 +78,9 @@ private extension DroppablePluginDelegate {
                                                                        coordinator: Coordinator,
                                                                        provider: Provider?,
                                                                        view: Collection,
-                                                                       animator: Animator<Collection>?,
                                                                        modifier: Modifier<Collection, Animation>?) {
         guard
-            let value = Constants.noneAnimation as? Animation.RawValue,
+            let value = Constants.animation as? Animation.RawValue,
             let animation = Animation(rawValue: value)
         else { return }
 
@@ -90,14 +88,12 @@ private extension DroppablePluginDelegate {
             guard
                 let sourceIndexPath = $0.sourceIndexPath,
                 destinationIndexPath != sourceIndexPath,
-                let itemToMove = provider?.generators[safe: sourceIndexPath.section]?[safe: sourceIndexPath.row]
+                let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row),
+                dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true
             else { return }
 
-            animator?.perform(in: view, animated: true, operation: { [weak provider, modifier] in
-                provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-                provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
-                modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: animation, and: animation)
-            })
+            provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
+            modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: animation, and: animation)
 
             coordinator.drop($0.dragItem, toItemAt: destinationIndexPath)
         }
