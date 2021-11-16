@@ -539,6 +539,7 @@
                         <segue destination="iMM-9c-z6r" kind="show" identifier="carouselCollection" id="Ice-jU-qEe"/>
                         <segue destination="mV7-Hk-z4i" kind="show" identifier="fittingCompressedSizeCollection" id="9Wr-JC-G2r"/>
                         <segue destination="IKz-Xg-MOJ" kind="show" identifier="alignedCollection" id="gln-xD-gUK"/>
+                        <segue destination="XZh-ee-9YT" kind="show" identifier="dynamicHeightViewController" id="Ajs-3I-RdI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMd-8n-CXM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -939,6 +940,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kL7-PY-GEr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1305" y="2248"/>
+        </scene>
+        <!--Dynamic Height View Controller-->
+        <scene sceneID="x3M-9v-YiI">
+            <objects>
+                <viewController id="XZh-ee-9YT" customClass="DynamicHeightViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wMh-ds-IKm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JEy-iw-cdB">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="VWL-Et-jHV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JEy-iw-cdB" firstAttribute="top" secondItem="VWL-Et-jHV" secondAttribute="top" id="AOg-es-Hpq"/>
+                            <constraint firstItem="JEy-iw-cdB" firstAttribute="leading" secondItem="VWL-Et-jHV" secondAttribute="leading" id="Any-uA-VPf"/>
+                            <constraint firstItem="VWL-Et-jHV" firstAttribute="trailing" secondItem="JEy-iw-cdB" secondAttribute="trailing" id="Co6-nr-fSj"/>
+                            <constraint firstItem="VWL-Et-jHV" firstAttribute="bottom" secondItem="JEy-iw-cdB" secondAttribute="bottom" id="SG4-kq-2NP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GTp-Jk-9Rc"/>
+                    <connections>
+                        <outlet property="tableView" destination="JEy-iw-cdB" id="9zj-EE-vwn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yw0-r7-kGh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2981" y="3593"/>
         </scene>
         <!--Fitting Compressed Size Collection View Controller-->
         <scene sceneID="QZ0-td-HNx">
