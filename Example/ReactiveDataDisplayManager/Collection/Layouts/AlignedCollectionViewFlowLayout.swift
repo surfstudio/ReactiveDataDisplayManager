@@ -58,9 +58,11 @@ class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
 private extension AlignedCollectionViewFlowLayout {
 
-    func align(to rect: CGRect,
-               nextXPosition: CGFloat? = nil,
-               layoutAttribute:  UICollectionViewLayoutAttributes? = nil) -> CGFloat {
+    func align(
+        to rect: CGRect,
+        nextXPosition: CGFloat? = nil,
+        layoutAttribute:  UICollectionViewLayoutAttributes? = nil
+    ) -> CGFloat {
         switch aligment {
         case .left:
             let defaultXPosition = sectionInset.left

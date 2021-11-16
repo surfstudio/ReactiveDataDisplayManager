@@ -36,8 +36,7 @@ final class DynamicHeightTableViewCell: UITableViewCell, ConfigurableItem {
 
     // MARK: - ConfigurableItem
 
-    func configure(with model: ()) {
-    }
+    func configure(with model: ()) { }
 
 }
 
