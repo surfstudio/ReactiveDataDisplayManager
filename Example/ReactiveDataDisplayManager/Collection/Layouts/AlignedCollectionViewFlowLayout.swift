@@ -61,7 +61,7 @@ private extension AlignedCollectionViewFlowLayout {
     func align(
         to rect: CGRect,
         nextXPosition: CGFloat? = nil,
-        layoutAttribute:  UICollectionViewLayoutAttributes? = nil
+        layoutAttribute: UICollectionViewLayoutAttributes? = nil
     ) -> CGFloat {
         switch aligment {
         case .left:
