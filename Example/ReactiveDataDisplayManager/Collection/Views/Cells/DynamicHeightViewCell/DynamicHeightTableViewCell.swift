@@ -20,7 +20,7 @@ final class DynamicHeightTableViewCell: UITableViewCell, ConfigurableItem {
 
     // MARK: - @IBOutlet
 
-    @IBOutlet weak var collectionView: DynamicHeightCollectionView!
+    @IBOutlet private weak var collectionView: DynamicHeightCollectionView!
 
     // MARK: - Private Properties
 
@@ -36,7 +36,8 @@ final class DynamicHeightTableViewCell: UITableViewCell, ConfigurableItem {
 
     // MARK: - ConfigurableItem
 
-    func configure(with model: ()) {}
+    func configure(with model: ()) {
+    }
 
 }
 
@@ -47,7 +48,7 @@ private extension DynamicHeightTableViewCell {
     func fillAdapter() {
         adapter.addCellGenerators(makeDynamicHeightCellGenerators())
         adapter.forceRefill()
-        
+
         // needed to update the height
         layoutIfNeeded()
     }

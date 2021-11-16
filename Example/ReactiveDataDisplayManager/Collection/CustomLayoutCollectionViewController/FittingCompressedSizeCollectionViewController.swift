@@ -17,23 +17,24 @@ final class FittingCompressedSizeCollectionViewController: UIViewController {
         static let padding: CGFloat = 5
         static let insets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         static let sizesAndColors: [(text: String, color: UIColor)] = [
-            (text: "Lorem ipsum dolor sit amet,",
-             color: .yellow),
+            // swiftlint:disable line_length
+            (text: "Lorem ipsum dolor sit amet,", color: .yellow),
 
-            (text: "consectetur adipiscing elit. consectetur adipiscing elit. Nunc magna libero, imperdiet a risus eget, ornare sodales leo.",color: .blue),
+            (text: "consectetur adipiscing elit. consectetur adipiscing elit. Nunc magna libero, imperdiet a risus eget, ornare sodales leo.", color: .blue),
 
             (text: "Nunc a mauris dui. Integer consectetur hendrerit feugiat. Phasellus id quam ligula.", color: .green),
 
             (text: "Integer consectetur hendrerit feugiat. Phasellus id quam ligula. Integer consectetur hendrerit feugiat. Phasellus id quam ligula. Maecenas diam erat, interdum fermentum auctor eu, mattis id libero.", color: .red),
 
             (text: "Duis commodo facilisis ligula eget vestibulum. Praesent vel nisl non sapien scelerisque auctor.", color: .gray)
+            // swiftlint:enable line_length
         ]
     }
 
     // MARK: - IBOutlets
 
-    @IBOutlet weak var collectionView: UICollectionView!
-    
+    @IBOutlet private weak var collectionView: UICollectionView!
+
     // MARK: - Private Properties
 
     private lazy var adapter = collectionView.rddm.baseBuilder

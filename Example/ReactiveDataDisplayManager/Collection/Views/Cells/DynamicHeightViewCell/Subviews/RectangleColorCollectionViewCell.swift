@@ -12,7 +12,7 @@ final class RectangleColorCollectionViewCell: UICollectionViewCell, Configurable
 
     // MARK: - @IBOutlets
 
-    @IBOutlet weak var colorView: UIView!
+    @IBOutlet private weak var colorView: UIView!
 
     // MARK: - ConfigurableItem
 

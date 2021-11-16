@@ -25,7 +25,7 @@ class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
         super.init()
         self.aligment = aligment
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -58,7 +58,9 @@ class AlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
 private extension AlignedCollectionViewFlowLayout {
 
-    func align(to rect: CGRect, nextXPosition: CGFloat? = nil, layoutAttribute:  UICollectionViewLayoutAttributes? = nil) -> CGFloat {
+    func align(to rect: CGRect,
+               nextXPosition: CGFloat? = nil,
+               layoutAttribute:  UICollectionViewLayoutAttributes? = nil) -> CGFloat {
         switch aligment {
         case .left:
             let defaultXPosition = sectionInset.left

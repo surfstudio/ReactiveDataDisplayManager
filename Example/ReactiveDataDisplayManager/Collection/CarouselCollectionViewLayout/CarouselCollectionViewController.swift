@@ -58,7 +58,6 @@ private extension CarouselCollectionViewController {
         adapter.forceRefill()
     }
 
-    
     func configureLayoutFlow() {
         let layout = CarouselCollectionViewLayout()
         layout.setCells(
