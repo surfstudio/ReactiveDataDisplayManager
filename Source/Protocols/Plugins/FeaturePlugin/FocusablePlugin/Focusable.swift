@@ -23,4 +23,15 @@ public protocol FocusableDelegate {
     ///     - at: index path of the focused item
     ///     - with: current provider with generators
     func canFocusRow(at indexPath: IndexPath, with provider: Provider?) -> Bool
+
+    ///  Customization of the selected cell
+    ///  - Parameters:
+    ///     - previusView: previus view
+    ///     - nextView: next view
+    ///     - collectionView: default value nil, needed to center the selected cell
+    ///     - tableView: default value nil, needed to center the selected cell
+    func didFocusedCell(previusView: UIView?, nextView: UIView?,
+                        indexPath: IndexPath?,
+                        collectionView: UICollectionView?,
+                        tableView: UITableView?)
 }

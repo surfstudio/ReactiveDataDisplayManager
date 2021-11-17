@@ -9,6 +9,9 @@
 import UIKit
 import Foundation
 
+/// Plugin to focus cells
+///
+/// Allow focusing cells builded with `FocusableItem` generators
 open class CollectionFocusablePlugin: CollectionFeaturePlugin, Focusable {
 
     // MARK: - Typealias
@@ -29,12 +32,18 @@ open class CollectionFocusablePlugin: CollectionFeaturePlugin, Focusable {
 
 public extension CollectionFeaturePlugin {
 
+    /// Plugin to focus cells
+    ///
+    /// Allow focusing cells builded with `FocusableItem` generators
     static func focusable(model: FocusedPlaginModel? = nil) -> CollectionFocusablePlugin {
         .init(model: model)
     }
 
 }
 
+/// Plugin to focus cells
+///
+/// Allow focusing cells builded with `FocusableItem` generators
 open class TableFocusablePlugin: TableFeaturePlugin, Focusable {
 
     // MARK: - Typealias
@@ -55,6 +64,9 @@ open class TableFocusablePlugin: TableFeaturePlugin, Focusable {
 
 public extension TableFeaturePlugin {
 
+    /// Plugin to focus cells
+    ///
+    /// Allow focusing cells builded with `FocusableItem` generators
     static func focusable(model: FocusedPlaginModel? = nil) -> TableFocusablePlugin {
         .init(model: model)
     }

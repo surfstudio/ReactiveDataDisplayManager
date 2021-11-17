@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+/// Delegate based on `FocusableDelegate` protocol.
 open class FocusablePluginDelegate<Provider: GeneratorsProvider>: FocusableDelegate {
 
     // MARK: - Typealias
