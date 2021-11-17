@@ -207,6 +207,8 @@
 		A494161D2744D36700DDCB31 /* FocusablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494160C2744D05000DDCB31 /* FocusablePlugin.swift */; };
 		A494161E2744D36A00DDCB31 /* FocusablePluginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494160B2744D05000DDCB31 /* FocusablePluginDelegate.swift */; };
 		A494161F2744D36C00DDCB31 /* FocusableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49416142744D1E900DDCB31 /* FocusableItem.swift */; };
+		A4941637274524F600DDCB31 /* FocusedPlaginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4941636274524F600DDCB31 /* FocusedPlaginModel.swift */; };
+		A4941638274524F600DDCB31 /* FocusedPlaginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4941636274524F600DDCB31 /* FocusedPlaginModel.swift */; };
 		A61561F1A321DF80212AB923 /* BaseStackDataDisplatManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A823B265B4A6141BCD38940 /* BaseStackDataDisplatManagerTests.swift */; };
 		A7DE5D5EBE41F318FE41FA78 /* ConfigurableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8419F5D33C0C4FDEF350F /* ConfigurableItem.swift */; };
 		A8609534FD8C1C56EB288857 /* EmptyGravityTableHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7A3AF9B24D4A46012EC1E /* EmptyGravityTableHeaderGenerator.swift */; };
@@ -475,6 +477,7 @@
 		A494160C2744D05000DDCB31 /* FocusablePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusablePlugin.swift; sourceTree = "<group>"; };
 		A494160D2744D05000DDCB31 /* Focusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Focusable.swift; sourceTree = "<group>"; };
 		A49416142744D1E900DDCB31 /* FocusableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusableItem.swift; sourceTree = "<group>"; };
+		A4941636274524F600DDCB31 /* FocusedPlaginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusedPlaginModel.swift; sourceTree = "<group>"; };
 		A6240F096FE4C04570FA9FDC /* PrefetchEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchEvent.swift; sourceTree = "<group>"; };
 		A6A1C839D6624A199C3EFD36 /* TableSwipeActionsConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSwipeActionsConfiguration.swift; sourceTree = "<group>"; };
 		A955504B2B31B7C47938B703 /* SizableCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
@@ -862,6 +865,7 @@
 		836365E89537F3A370FF42BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A4941636274524F600DDCB31 /* FocusedPlaginModel.swift */,
 				0CBF24B34CD888E8A96CCD4A /* CellRegisterType.swift */,
 				A6240F096FE4C04570FA9FDC /* PrefetchEvent.swift */,
 				8EB5399A085AABE654E8B23C /* ScrollDirection.swift */,
@@ -1435,6 +1439,7 @@
 				6B36878954E0E6B23BFA8776 /* TableFoldablePlugin.swift in Sources */,
 				2CFE877A63C116B7626C5DE6 /* TableGeneratorsProvider.swift in Sources */,
 				21D55AE547BF5A8915F14B71 /* TableHeaderVisiblePlugin.swift in Sources */,
+				A4941637274524F600DDCB31 /* FocusedPlaginModel.swift in Sources */,
 				91EE2CB2A9616C462E8E0EE0 /* TableLastCellIsVisiblePlugin.swift in Sources */,
 				598542136B7004FC234D1FFB /* TableMovable.swift in Sources */,
 				C9D9CAB4BFFA56446AAE303C /* TableMovablePlugin.swift in Sources */,
@@ -1606,6 +1611,7 @@
 				EE7A71CF08B4E93660F77485 /* TableGeneratorsProvider.swift in Sources */,
 				CFFEE9D2A117557A3C42BC63 /* TableHeaderVisiblePlugin.swift in Sources */,
 				D5DD43AABBC9AFE54A7F18A7 /* TableLastCellIsVisiblePlugin.swift in Sources */,
+				A4941638274524F600DDCB31 /* FocusedPlaginModel.swift in Sources */,
 				A0D6BA1CBC31E3DB487AF822 /* TableMovable.swift in Sources */,
 				8E5022CE7EE7B20D6785FE49 /* TableMovablePlugin.swift in Sources */,
 				AE8695618E22ACBD69B0078F /* TablePaginatablePlugin.swift in Sources */,

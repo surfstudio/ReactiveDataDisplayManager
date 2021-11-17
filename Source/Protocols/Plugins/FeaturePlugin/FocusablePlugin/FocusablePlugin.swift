@@ -19,12 +19,18 @@ open class CollectionFocusablePlugin: CollectionFeaturePlugin, Focusable {
 
     open var delegate = FocusablePluginDelegate<Provider>()
 
+    // MARK: - Initialization
+
+    init(model: FocusedPlaginModel?) {
+        delegate.model = model
+    }
+
 }
 
 public extension CollectionFeaturePlugin {
 
-    static func focusable() -> CollectionFocusablePlugin {
-        .init()
+    static func focusable(model: FocusedPlaginModel? = nil) -> CollectionFocusablePlugin {
+        .init(model: model)
     }
 
 }
@@ -39,12 +45,18 @@ open class TableFocusablePlugin: TableFeaturePlugin, Focusable {
 
     open var delegate = FocusablePluginDelegate<Provider>()
 
+    // MARK: - Initialization
+
+    init(model: FocusedPlaginModel?) {
+        delegate.model = model
+    }
+
 }
 
 public extension TableFeaturePlugin {
 
-    static func focusable() -> TableFocusablePlugin {
-        .init()
+    static func focusable(model: FocusedPlaginModel? = nil) -> TableFocusablePlugin {
+        .init(model: model)
     }
 
 }
