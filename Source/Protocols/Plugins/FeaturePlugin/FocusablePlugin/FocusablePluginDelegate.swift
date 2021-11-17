@@ -35,7 +35,7 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider>: FocusableDeleg
     ///     - nextView: next view
     ///     - collectionView: default value nil, needed to center the selected cell
     ///     - tableView: default value nil, needed to center the selected cell
-    func didFocusedCell(previusView: UIView?, nextView: UIView?,
+    public func didFocusedCell(previusView: UIView?, nextView: UIView?,
                         indexPath: IndexPath?,
                         collectionView: UICollectionView? = nil,
                         tableView: UITableView? = nil) {
@@ -47,7 +47,7 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider>: FocusableDeleg
         nextView?.layer.shadowRadius = model?.shadow?.radius ?? .zero
         nextView?.layer.shadowOpacity = model?.shadow?.opacity ?? .zero
         nextView?.layer.shadowOffset = model?.shadow?.offset ?? .zero
-        guard let indexPath = indexPath else {
+        guard let indexPath = indexPath, model?.center ?? false else {
             return
         }
         tableView?.scrollToRow(at: indexPath, at: .middle, animated: true)

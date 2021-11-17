@@ -10,21 +10,24 @@ import UIKit
 /// Model for FocusablePlugin
 public struct FocusedPlaginModel {
     let transform: CGAffineTransform?
-    let transformDuration: CGFloat?
+    let transformDuration: CGFloat
     let shadow: FocusedPlaginShadowModel?
-
+    let center: Bool
 
     /// Takes parameters
     /// - Parameters:
     ///     - transform:  defaul value nil
     ///     - transformDuration:  defaul value CGSize(width: 0, height: 0)
     ///     - shadow:  defaul value nil
+    ///     - center: centers the selected cell, defaults to false
     public init(transform: CGAffineTransform? = nil,
-                transformDuration: CGFloat? = 0.5,
-                shadow: FocusedPlaginShadowModel? = nil) {
+                transformDuration: CGFloat = 0.5,
+                shadow: FocusedPlaginShadowModel? = nil,
+                center: Bool = false) {
         self.transform = transform
         self.shadow = shadow
         self.transformDuration = transformDuration
+        self.center = center
     }
 }
 
