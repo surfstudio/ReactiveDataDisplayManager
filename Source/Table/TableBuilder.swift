@@ -97,8 +97,10 @@ public class TableBuilder<T: BaseTableManager> {
             movablePlugin = plugin
         case let plugin as TableSectionTitleDisplayable:
             sectionTitleDisplayablePlugin = plugin
+        #if os(tvOS)
         case let plugin as TableFocusablePlugin:
             focusablePlugin = plugin
+        #endif
         default:
             break
         }
