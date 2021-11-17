@@ -17,6 +17,10 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider>: FocusableDeleg
 
     // MARK: - FocusableDelegate
 
+    ///  Returns a boolean value whether to start focus or not
+    ///  - Parameters:
+    ///     - indexPath: IndexPath table or collection
+    ///     - provider: Takes a collection or table manager
     public func canFocusRow(at indexPath: IndexPath, with provider: Provider?) -> Bool {
         if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
             return generator.canBeFocused()
@@ -24,6 +28,12 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider>: FocusableDeleg
         return false
     }
 
+    ///  Customization of the selected cell
+    ///  - Parameters:
+    ///     - previusView: previus view
+    ///     - nextView: next view
+    ///     - collectionView: default value nil, needed to center the selected cell
+    ///     - tableView: default value nil, needed to center the selected cell
     func didFocusedCell(previusView: UIView?, nextView: UIView?,
                         indexPath: IndexPath?,
                         collectionView: UICollectionView? = nil,
@@ -49,6 +59,7 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider>: FocusableDeleg
 
 private extension FocusablePluginDelegate {
 
+    // Animating the selected view
     func animate(previusView: UIView?, nextView: UIView?, duration: CGFloat?) {
         let zeroTransform: CGAffineTransform = .init(a: .zero, b: .zero, c: .zero, d: .zero, tx: .zero, ty: .zero)
         guard let transform = model?.transform, transform != zeroTransform else {
