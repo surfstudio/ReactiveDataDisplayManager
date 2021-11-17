@@ -537,7 +537,6 @@
                         <segue destination="U7p-pz-PrX" kind="show" identifier="movableCollection" id="k3y-7B-Uu4"/>
                         <segue destination="Czp-U6-ipo" kind="show" identifier="dragAndDroppableCollection" id="W98-yt-KrB"/>
                         <segue destination="iMM-9c-z6r" kind="show" identifier="carouselCollection" id="Ice-jU-qEe"/>
-                        <segue destination="mV7-Hk-z4i" kind="show" identifier="fittingCompressedSizeCollection" id="9Wr-JC-G2r"/>
                         <segue destination="IKz-Xg-MOJ" kind="show" identifier="alignedCollection" id="gln-xD-gUK"/>
                         <segue destination="XZh-ee-9YT" kind="show" identifier="dynamicHeightViewController" id="Ajs-3I-RdI"/>
                     </connections>
@@ -970,45 +969,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yw0-r7-kGh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2981" y="3593"/>
-        </scene>
-        <!--Fitting Compressed Size Collection View Controller-->
-        <scene sceneID="QZ0-td-HNx">
-            <objects>
-                <viewController id="mV7-Hk-z4i" customClass="FittingCompressedSizeCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Zy6-oH-IP1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5XA-km-rOp">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="2FN-H6-Q7X">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="oAS-1H-WOi"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="5XA-km-rOp" firstAttribute="leading" secondItem="oAS-1H-WOi" secondAttribute="leading" id="BpC-Ul-rUg"/>
-                            <constraint firstItem="5XA-km-rOp" firstAttribute="top" secondItem="oAS-1H-WOi" secondAttribute="top" id="HmH-jN-yTW"/>
-                            <constraint firstItem="5XA-km-rOp" firstAttribute="trailing" secondItem="oAS-1H-WOi" secondAttribute="trailing" id="aLV-q8-KzP"/>
-                            <constraint firstItem="oAS-1H-WOi" firstAttribute="bottom" secondItem="5XA-km-rOp" secondAttribute="bottom" id="oAK-LD-dyB"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="qkv-rl-Lww"/>
-                    <connections>
-                        <outlet property="collectionView" destination="5XA-km-rOp" id="106-rI-f3z"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="P2w-kE-Mcc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2203" y="3593"/>
+            <point key="canvasLocation" x="-2229" y="3593"/>
         </scene>
         <!--Item Title Collection View Controller-->
         <scene sceneID="BKF-72-lAj">

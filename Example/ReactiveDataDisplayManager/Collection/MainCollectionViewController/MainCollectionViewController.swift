@@ -30,7 +30,6 @@ final class MainCollectionViewController: UIViewController {
         case movableCollection
         case dragAndDroppableCollection
         case carouselCollection
-        case fittingCompressedSizeCollection
         case alignedCollection
         case dynamicHeightViewController
     }
@@ -55,7 +54,6 @@ final class MainCollectionViewController: UIViewController {
             ("Collection with movable items", .movableCollection),
             ("Collection with drag and drop item", .dragAndDroppableCollection),
             ("Carousel collection view layout", .carouselCollection),
-            ("Fitting compressed size collection", .fittingCompressedSizeCollection),
             ("Aligned collection layout", .alignedCollection),
             ("Dynamic height ViewController", .dynamicHeightViewController)
         ]
