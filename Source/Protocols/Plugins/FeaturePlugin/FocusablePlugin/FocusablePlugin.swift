@@ -24,8 +24,8 @@ open class CollectionFocusablePlugin: CollectionFeaturePlugin, Focusable {
 
     // MARK: - Initialization
 
-    init(model: FocusedPlaginModel?) {
-        delegate.model = model
+    init(strategyFocusable: StrategyFocusable?) {
+        delegate.strategyFocusable = strategyFocusable
     }
 
 }
@@ -35,8 +35,8 @@ public extension CollectionFeaturePlugin {
     /// Plugin to focus cells
     ///
     /// Allow focusing cells builded with `FocusableItem` generators
-    static func focusable(model: FocusedPlaginModel? = nil) -> CollectionFocusablePlugin {
-        .init(model: model)
+    static func focusable(by: FocusStrategy? = nil) -> CollectionFocusablePlugin {
+        .init(strategyFocusable: by)
     }
 
 }
@@ -56,8 +56,8 @@ open class TableFocusablePlugin: TableFeaturePlugin, Focusable {
 
     // MARK: - Initialization
 
-    init(model: FocusedPlaginModel?) {
-        delegate.model = model
+    init(strategyFocusable: StrategyFocusable?) {
+        delegate.strategyFocusable = strategyFocusable
     }
 
 }
@@ -67,8 +67,8 @@ public extension TableFeaturePlugin {
     /// Plugin to focus cells
     ///
     /// Allow focusing cells builded with `FocusableItem` generators
-    static func focusable(model: FocusedPlaginModel? = nil) -> TableFocusablePlugin {
-        .init(model: model)
+    static func focusable(by: FocusStrategy? = nil) -> TableFocusablePlugin {
+        .init(strategyFocusable: by)
     }
 
 }

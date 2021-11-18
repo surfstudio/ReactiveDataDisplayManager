@@ -12,28 +12,28 @@ public struct FocusedPlaginModel {
     let transform: CGAffineTransform?
     let transformDuration: CGFloat
     let shadow: FocusedPlaginShadowModel?
-    let center: Bool
+    let align: FocusableAlign?
 
     /// Takes parameters
     /// - Parameters:
     ///     - transform:  defaul value nil
     ///     - transformDuration:  defaul value CGSize(width: 0, height: 0)
     ///     - shadow:  defaul value nil
-    ///     - center: centers the selected cell, defaults to false
+    ///     - align: defaults to nil
     public init(transform: CGAffineTransform? = nil,
                 transformDuration: CGFloat = 0.5,
                 shadow: FocusedPlaginShadowModel? = nil,
-                center: Bool = false) {
+                align: FocusableAlign? = nil) {
         self.transform = transform
         self.shadow = shadow
         self.transformDuration = transformDuration
-        self.center = center
+        self.align = align
     }
 }
 
 /// Model for configure UIView shadow
 public struct FocusedPlaginShadowModel {
-    let color: CGColor
+    let color: UIColor
     let offset: CGSize
     let opacity: Float
     let radius: CGFloat
@@ -50,10 +50,14 @@ public struct FocusedPlaginShadowModel {
         opacity: Float = 0.9,
         radius: CGFloat = 10.0
     ) {
-        self.color = color.cgColor
+        self.color = color
         self.offset = offset
         self.opacity = opacity
         self.radius = radius
     }
-    
+
+}
+
+public enum FocusableAlign {
+    case left, right, center
 }
