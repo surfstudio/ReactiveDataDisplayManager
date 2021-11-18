@@ -77,7 +77,7 @@ private extension FocusStrategy {
 
     // Configure transform
     func setTransform(transform: CGAffineTransform, previusView: UIView?, nextView: UIView?) {
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: FocusStrategy.model?.transformDuration ?? 0.5, animations: {
             previusView?.transform = .identity
             nextView?.transform = transform
         })

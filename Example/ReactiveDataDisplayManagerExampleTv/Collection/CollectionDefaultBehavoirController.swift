@@ -27,9 +27,15 @@ final class CollectionDefaultBehavoirController: UIViewController {
 
     // MARK: - Private Properties
 
+    private var focusableModel: FocusedPlaginModel {
+        let transform = CGAffineTransform(translationX: .zero, y: 20)
+        return .init(transform: transform,
+                     shadow: .init(color: .blue),
+                     align: .center)
+    }
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
-        .add(featurePlugin: .focusable())
+        .add(featurePlugin: .focusable(by: .byModel(model: focusableModel)))
         .add(plugin: .selectable())
         .build()
 
