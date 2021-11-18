@@ -155,6 +155,7 @@
 		87E353AD05BAD28515602F67 /* BaseTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E67308D9FF3FE20C4B2B3320 /* BaseTableManager.swift */; };
 		883BBFD0D964A5BB312CF84E /* ManualTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C6EACAA6CEAC3E52EF7D28 /* ManualTableManager.swift */; };
 		88D33D2E47CB409754754428 /* Stack+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB15049C3CF350EB527C810 /* Stack+RDDM.swift */; };
+		890D7E291E6DA18967057FB6 /* DropStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E32992FD90ADE4CDC2058 /* DropStrategy.swift */; };
 		8B9A15A102CF3835B946FAB4 /* Table+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA661F128A63651DD962E517 /* Table+RDDM.swift */; };
 		8C6A0F32ABC4BB7027652562 /* GravityFoldingHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FD4F42BE91DAA4186A2949 /* GravityFoldingHeaderGenerator.swift */; };
 		8CFB6D25CE2CDBC1AD909D72 /* CollectionDiffableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5ACFF0D5CEF2B02395769A /* CollectionDiffableModifier.swift */; };
@@ -254,6 +255,7 @@
 		DEBA9E95C5C6749DE79CADF1 /* BaseCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6EA1E2F89BE306DE9B66E /* BaseCellGenerator.swift */; };
 		DF0786CF3DB6F615FA8AC94B /* SwipeableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B8C75E9350423CACD842F7 /* SwipeableItem.swift */; };
 		DF98BCEFFE5DD46B74BA8961 /* BaseTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD883BF885218E2B74454DA /* BaseTableDataSource.swift */; };
+		E12BD2B983EBC7DC4666E919 /* DropStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0E32992FD90ADE4CDC2058 /* DropStrategy.swift */; };
 		E16113E9F7C63CD318785392 /* TableBuilderConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3C0B95F9ED90D6C20A1E8E /* TableBuilderConfigurable.swift */; };
 		E2F39C88B5EF348AE5B2521D /* Collection+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115F07B5ECCE540AFFEE5356 /* Collection+RDDM.swift */; };
 		E5144DBF9690C9D1355CC192 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF23615CB6E69028036B0B88 /* Modifier.swift */; };
@@ -476,6 +478,7 @@
 		EC629FD45C669EA77E7008E2 /* DataDisplayWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDisplayWrapper.swift; sourceTree = "<group>"; };
 		EDD883BF885218E2B74454DA /* BaseTableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableDataSource.swift; sourceTree = "<group>"; };
 		EED2851D46C8C2DE1BCC0AE9 /* FooterDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterDataDisplayManager.swift; sourceTree = "<group>"; };
+		EF0E32992FD90ADE4CDC2058 /* DropStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropStrategy.swift; sourceTree = "<group>"; };
 		F1A91FB41BF3B0B8A2979694 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F2B8C75E9350423CACD842F7 /* SwipeableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableItem.swift; sourceTree = "<group>"; };
 		F3115B84BF86897DBA5F43A9 /* CalculatableHeightNonReusableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatableHeightNonReusableCellGenerator.swift; sourceTree = "<group>"; };
@@ -919,6 +922,7 @@
 				43D5BCBCD54DA859D79F464A /* DraggablePluginDelegate.swift */,
 				490A89B02B42F053C9D38B34 /* DropCoordinatorWrapper.swift */,
 				92BBA76DBFD19AC79B518BD4 /* DroppablePluginDelegate.swift */,
+				EF0E32992FD90ADE4CDC2058 /* DropStrategy.swift */,
 			);
 			path = DragAndDroppablePlugin;
 			sourceTree = "<group>";
@@ -1264,6 +1268,7 @@
 				F3AD4EAA8415CE0199A742AC /* DragAndDroppableView.swift in Sources */,
 				F9EC8BD9ABC18C967CB9AA4F /* DraggablePluginDelegate.swift in Sources */,
 				F684DE7D30DB1B63B72F761E /* DropCoordinatorWrapper.swift in Sources */,
+				890D7E291E6DA18967057FB6 /* DropStrategy.swift in Sources */,
 				9FBDF3DB25466371EC978F58 /* DroppablePluginDelegate.swift in Sources */,
 				6D905AAADB479789781DAD6A /* EmptyCollectionFooterGenarator.swift in Sources */,
 				B2FDD70842A445FD472E58B8 /* EmptyCollectionHeaderGenerator.swift in Sources */,
@@ -1418,6 +1423,7 @@
 				22BDC597526B74155DE3BE31 /* DragAndDroppableView.swift in Sources */,
 				41CD2E5A93D0765340B1169A /* DraggablePluginDelegate.swift in Sources */,
 				78321C4B287A79B05800902E /* DropCoordinatorWrapper.swift in Sources */,
+				E12BD2B983EBC7DC4666E919 /* DropStrategy.swift in Sources */,
 				277620D067313BC8387E63EF /* DroppablePluginDelegate.swift in Sources */,
 				DD2E0881D6A0CD5155360300 /* EmptyCollectionFooterGenarator.swift in Sources */,
 				F0A8F5C57DAD81E4D9AF0B06 /* EmptyCollectionHeaderGenerator.swift in Sources */,

@@ -29,6 +29,9 @@ final class MainCollectionViewController: UIViewController {
         case swipeableListAppearances
         case movableCollection
         case dragAndDroppableCollection
+        case carouselCollection
+        case alignedCollection
+        case dynamicHeightViewController
     }
 
     // MARK: - Constants
@@ -49,7 +52,10 @@ final class MainCollectionViewController: UIViewController {
             ("Collection with DifferenceKit", .differenceCollection),
             ("List Appearances with swipeable items", .swipeableListAppearances),
             ("Collection with movable items", .movableCollection),
-            ("Collection with drag and drop item", .dragAndDroppableCollection)
+            ("Collection with drag and drop item", .dragAndDroppableCollection),
+            ("Carousel collection view layout", .carouselCollection),
+            ("Aligned collection layout", .alignedCollection),
+            ("Dynamic height ViewController", .dynamicHeightViewController)
         ]
     }
 
@@ -59,7 +65,7 @@ final class MainCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = tableView.rddm.baseBuilder
+    private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .selectable())
         .build()
 
@@ -79,6 +85,11 @@ private extension MainCollectionViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         for model in Constants.models {
+
+            if model.segueId == .carouselCollection {
+                adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: "Layout exapmple"))
+            }
+
             // Create generator
             let generator = TitleWithIconTableViewCell.rddm.baseGenerator(with: model.title)
 

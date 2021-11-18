@@ -206,23 +206,16 @@ extension BaseTableDelegate {
 
 // MARK: - TableDragAndDropDelegate
 
-extension BaseTableDelegate: TableDragAndDropDelegate {}
-
-// MARK: - UITableViewDragDelegate
-
 @available(iOS 11.0, *)
-extension BaseTableDelegate {
+extension BaseTableDelegate: TableDragAndDropDelegate {
+
+    // MARK: - UITableViewDragDelegate
 
     open func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         return draggableDelegate?.makeDragItems(at: indexPath, with: manager) ?? []
     }
 
-}
-
-// MARK: - UITableViewDropDelegate
-
-@available(iOS 11.0, *)
-extension BaseTableDelegate {
+    // MARK: - UITableViewDropDelegate
 
     open func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         droppableDelegate?.performDrop(with: TableDropCoordinatorWrapper(coordinator: coordinator),

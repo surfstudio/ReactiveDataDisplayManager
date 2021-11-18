@@ -23,6 +23,10 @@ open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType
 
     public init() { }
 
+    // MARK: - Internal Properties
+
+    var dropStrategy: StrategyDropable?
+
     // MARK: - DroppableDelegate
 
     /// Method allows you to include drag and drop data in the collection.
@@ -84,7 +88,9 @@ private extension DroppablePluginDelegate {
             guard
                 let sourceIndexPath = $0.sourceIndexPath,
                 destinationIndexPath != sourceIndexPath,
-                let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+
+                let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row),
+                dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true
             else { return }
 
             provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
