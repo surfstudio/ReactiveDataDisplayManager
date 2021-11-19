@@ -1,26 +1,14 @@
-## 7.1.0 SPM support and new plagins
+## 7.2.0 Fix DiffableDataSource and plugins
 ### Added
-- Swift Package Manager support with example
-- example of usage `CompositionalLayout`
-- example of usage `DifferenceKit`
-- `DiffableTableDataSource` implementing `UICollectionTableDataSource`
-- `DiffableCollectionDataSource` implementing `UICollectionDiffableDataSource`
-- `CollectionSwipeActionsConfigurationPlugin` to support `UISwipeActionsConfiguration` in collection with list appearance
-- `DragAndDroppable` to support drag'n'drop from iOS 11 in table and collection
+- tvOS example with collection #132
+- missed suplementary provider which may cause crash #141
+- method `scrollTo` concrete generator #142
+- strategies for `DragAndDroppable` #144
+- examples of some custom `UICollectionViewLayout` #146
 
 ### Updated
 
-- code style and linter issues fixes
-- documentation and typos
-
-### Deprecated
-
-- `BaseTableDataDisplayManager` class replaced with `ManualTableManager`
-- `PaginableBaseTableDataDisplayManager` class will be removed at **8.0.**. Use `TableLastCellIsVisiblePlugin` instead.
-- `ExtendableBaseTableDataDisplayManager` class will be removed at **8.0**. Part of `BaseTableManager` now.
-- `GravityTableDataDisplayManager` class replaced with `GravityTableManager`
-- `FoldingTableDataDisplayManager` class will be removed at **8.0.**. Use `TableFoldablePlugin` instead.
-- `GravityFoldingTableDataDisplayManager` class will be removed at **8.0.**. Use composition of `GravityTableManager` and `TableFoldablePlugin`
-- `SizableCollectionDataDisplayManager` class will be removed at **8.0.**. Part of `BaseCollectionManager`
-- `BaseCollectionDataDisplayManager` replaced with `BaseCollectionManager`
-- `SelectableItem`, `DisplayableFlow`, `MovableGenerator` and other item protocols will be removed at **8.0.**. Replaced with `{ability}ableItem` for example `SelectableItem`
+- `DiffableItemSource` and `DragAndDropableItemSource` to avoid naming conflict #145
+- access modifiers of parts in `DragAndDroppable` #145
+- `TableDiffableModifier` and `CollectionDiffableModifier` to fix dataSource conflicts
+- color of paginator in example
