@@ -10,4 +10,5 @@ end
 target 'ReactiveDataDisplayManagerExample_tvOS' do
   pod 'ReactiveDataDisplayManager', :path => '../'
   pod 'Nuke', :git => "https://github.com/kean/Nuke.git", :tag => '9.5.1'
+  pod 'SurfUtils/UIImageExtensions', :git => "https://github.com/surfstudio/iOS-Utils.git", :tag => '11.0.0'
 end

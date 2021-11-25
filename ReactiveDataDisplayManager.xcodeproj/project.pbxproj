@@ -200,6 +200,19 @@
 		A0D6BA1CBC31E3DB487AF822 /* TableMovable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BD3E3C00425163B8A3DDC0 /* TableMovable.swift */; };
 		A1A62C49AB2E26DF31EBFA66 /* SizableCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C175D2A03DC50EEBA23F9 /* SizableCollectionCellGenerator.swift */; };
 		A36E96F430B818303587616B /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE452F1BC75AD3E975C5C935 /* Configurable.swift */; };
+		A41CB7B2274632F300560745 /* FocusableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41CB7B1274632F300560745 /* FocusableStrategy.swift */; };
+		A41CB7B3274632F300560745 /* FocusableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41CB7B1274632F300560745 /* FocusableStrategy.swift */; };
+		A494160F2744D05000DDCB31 /* FocusablePluginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494160B2744D05000DDCB31 /* FocusablePluginDelegate.swift */; };
+		A49416112744D05000DDCB31 /* FocusablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494160C2744D05000DDCB31 /* FocusablePlugin.swift */; };
+		A49416132744D05000DDCB31 /* Focusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494160D2744D05000DDCB31 /* Focusable.swift */; };
+		A49416162744D1E900DDCB31 /* FocusableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49416142744D1E900DDCB31 /* FocusableItem.swift */; };
+		A494161B2744D33100DDCB31 /* BaseTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99B746E73F4495B4C98E04A /* BaseTableDelegate.swift */; };
+		A494161C2744D36500DDCB31 /* Focusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494160D2744D05000DDCB31 /* Focusable.swift */; };
+		A494161D2744D36700DDCB31 /* FocusablePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494160C2744D05000DDCB31 /* FocusablePlugin.swift */; };
+		A494161E2744D36A00DDCB31 /* FocusablePluginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A494160B2744D05000DDCB31 /* FocusablePluginDelegate.swift */; };
+		A494161F2744D36C00DDCB31 /* FocusableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49416142744D1E900DDCB31 /* FocusableItem.swift */; };
+		A4941637274524F600DDCB31 /* FocusedPlaginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4941636274524F600DDCB31 /* FocusedPlaginModel.swift */; };
+		A4941638274524F600DDCB31 /* FocusedPlaginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4941636274524F600DDCB31 /* FocusedPlaginModel.swift */; };
 		A61561F1A321DF80212AB923 /* BaseStackDataDisplatManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A823B265B4A6141BCD38940 /* BaseStackDataDisplatManagerTests.swift */; };
 		A7DE5D5EBE41F318FE41FA78 /* ConfigurableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC8419F5D33C0C4FDEF350F /* ConfigurableItem.swift */; };
 		A8609534FD8C1C56EB288857 /* EmptyGravityTableHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E7A3AF9B24D4A46012EC1E /* EmptyGravityTableHeaderGenerator.swift */; };
@@ -465,6 +478,12 @@
 		A037D620404F94F7C983D428 /* SwipeActionsConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeActionsConfigurable.swift; sourceTree = "<group>"; };
 		A2792DD250BD0AD76291D0DE /* BaseCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionDataSource.swift; sourceTree = "<group>"; };
 		A3C6EACAA6CEAC3E52EF7D28 /* ManualTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTableManager.swift; sourceTree = "<group>"; };
+		A41CB7B1274632F300560745 /* FocusableStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusableStrategy.swift; sourceTree = "<group>"; };
+		A494160B2744D05000DDCB31 /* FocusablePluginDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusablePluginDelegate.swift; sourceTree = "<group>"; };
+		A494160C2744D05000DDCB31 /* FocusablePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusablePlugin.swift; sourceTree = "<group>"; };
+		A494160D2744D05000DDCB31 /* Focusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Focusable.swift; sourceTree = "<group>"; };
+		A49416142744D1E900DDCB31 /* FocusableItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusableItem.swift; sourceTree = "<group>"; };
+		A4941636274524F600DDCB31 /* FocusedPlaginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusedPlaginModel.swift; sourceTree = "<group>"; };
 		A6240F096FE4C04570FA9FDC /* PrefetchEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefetchEvent.swift; sourceTree = "<group>"; };
 		A6A1C839D6624A199C3EFD36 /* TableSwipeActionsConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSwipeActionsConfiguration.swift; sourceTree = "<group>"; };
 		A955504B2B31B7C47938B703 /* SizableCollectionDataDisplayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizableCollectionDataDisplayManager.swift; sourceTree = "<group>"; };
@@ -853,6 +872,7 @@
 		836365E89537F3A370FF42BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A4941636274524F600DDCB31 /* FocusedPlaginModel.swift */,
 				0CBF24B34CD888E8A96CCD4A /* CellRegisterType.swift */,
 				A6240F096FE4C04570FA9FDC /* PrefetchEvent.swift */,
 				8EB5399A085AABE654E8B23C /* ScrollDirection.swift */,
@@ -949,6 +969,17 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
+		A494160A2744D05000DDCB31 /* FocusablePlugin */ = {
+			isa = PBXGroup;
+			children = (
+				A494160B2744D05000DDCB31 /* FocusablePluginDelegate.swift */,
+				A494160C2744D05000DDCB31 /* FocusablePlugin.swift */,
+				A494160D2744D05000DDCB31 /* Focusable.swift */,
+				A41CB7B1274632F300560745 /* FocusableStrategy.swift */,
+			);
+			path = FocusablePlugin;
+			sourceTree = "<group>";
+		};
 		A9CCFE74D85E93281C7B0A86 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -981,6 +1012,7 @@
 			isa = PBXGroup;
 			children = (
 				23FDB877F58BA9108A95703B /* FeaturePlugin.swift */,
+				A494160A2744D05000DDCB31 /* FocusablePlugin */,
 				B01FF6E83608AE85A0CF7F49 /* DragAndDroppablePlugin */,
 				BB5B2A244A6A3167F6C00F39 /* MovablePlugin */,
 				50043BA9F904659B3FBEE5F1 /* SwipeActions */,
@@ -1099,6 +1131,7 @@
 		E864FB22A4AAC7D20E65E21A /* Generators */ = {
 			isa = PBXGroup;
 			children = (
+				A49416142744D1E900DDCB31 /* FocusableItem.swift */,
 				22EEE38A919848A7A3E80DAA /* CalculatableSizeItem.swift */,
 				9BC8419F5D33C0C4FDEF350F /* ConfigurableItem.swift */,
 				9DEFF95D7ADF882F5D7ABAD8 /* DeletableItem.swift */,
@@ -1294,6 +1327,8 @@
 				FC310C5F08CC5D9587130193 /* BaseTableDataDisplayManager.swift in Sources */,
 				DF98BCEFFE5DD46B74BA8961 /* BaseTableDataSource.swift in Sources */,
 				52E07A3C925A24BD8D901450 /* BaseTableDelegate.swift in Sources */,
+				A494161E2744D36A00DDCB31 /* FocusablePluginDelegate.swift in Sources */,
+				A494161C2744D36500DDCB31 /* Focusable.swift in Sources */,
 				38B2BE34E259FA471DB311EA /* BaseTableManager.swift in Sources */,
 				EAEBEE394DD1108AFB2AF8FA /* BaseTablePlugin.swift in Sources */,
 				BD2B7444F714BCD24F36A2B0 /* CalculatableHeightCellGenerator.swift in Sources */,
@@ -1305,6 +1340,7 @@
 				6ED816DF72524560B416404E /* CellRegisterType.swift in Sources */,
 				B51DDB0A7587B58505167211 /* Collection+RDDM.swift in Sources */,
 				5611F5842DAC858D6F458B3A /* CollectionBatchUpdatesAnimator.swift in Sources */,
+				A494161D2744D36700DDCB31 /* FocusablePlugin.swift in Sources */,
 				E8651B318B128B672DCB7C26 /* CollectionBuilder.swift in Sources */,
 				1ABCE3A8CB172B8DEAAAC0B3 /* CollectionBuilderConfigurable.swift in Sources */,
 				DCEDA90918A4C107148A3737 /* CollectionCell+RDDM.swift in Sources */,
@@ -1392,6 +1428,8 @@
 				75F7BDE38C3F353AD69D157B /* SizableItem.swift in Sources */,
 				7D52DF422FD55418C439F7A3 /* Stack+RDDM.swift in Sources */,
 				CA2AC47509C9BE6078A34A87 /* SwipeActionsConfigurable.swift in Sources */,
+				A494161F2744D36C00DDCB31 /* FocusableItem.swift in Sources */,
+				A494161B2744D33100DDCB31 /* BaseTableDelegate.swift in Sources */,
 				6EBCD14948334CACE6834E0B /* SwipeActionsConfiguration.swift in Sources */,
 				B8DA996A12CB4D35CC0D5624 /* SwipeActionsProvider.swift in Sources */,
 				CA62261F2469A0ABCB2411F4 /* SwipeableItem.swift in Sources */,
@@ -1412,6 +1450,7 @@
 				6B36878954E0E6B23BFA8776 /* TableFoldablePlugin.swift in Sources */,
 				2CFE877A63C116B7626C5DE6 /* TableGeneratorsProvider.swift in Sources */,
 				21D55AE547BF5A8915F14B71 /* TableHeaderVisiblePlugin.swift in Sources */,
+				A4941637274524F600DDCB31 /* FocusedPlaginModel.swift in Sources */,
 				91EE2CB2A9616C462E8E0EE0 /* TableLastCellIsVisiblePlugin.swift in Sources */,
 				598542136B7004FC234D1FFB /* TableMovable.swift in Sources */,
 				C9D9CAB4BFFA56446AAE303C /* TableMovablePlugin.swift in Sources */,
@@ -1424,6 +1463,7 @@
 				5729E7136DBDB4CF1F9217B3 /* TableSectionTitleDisplayablePlugin.swift in Sources */,
 				7088AC8E3991F96D84DE3316 /* TableSectionTitleWrapper.swift in Sources */,
 				3E33B66E2044D85293BA37D6 /* TableSelectablePlugin.swift in Sources */,
+				A41CB7B2274632F300560745 /* FocusableStrategy.swift in Sources */,
 				32B714C78835505D71295C9F /* TableSwipeActionsConfiguration.swift in Sources */,
 				22BF2B3897A6A2565CD4D9C6 /* TableSwipeActionsConfigurationPlugin.swift in Sources */,
 				01BEC595F564B4E0CDC6D54C /* TableUpdatesAnimator.swift in Sources */,
@@ -1457,6 +1497,7 @@
 				01CB40723CF386321A695645 /* BaseCollectionManager.swift in Sources */,
 				1C9B4BD00ED80F600F26E3FB /* BaseCollectionPlugin.swift in Sources */,
 				B8FC62E2C632209045D7CA1D /* BaseNonReusableCellGenerator.swift in Sources */,
+				A494160F2744D05000DDCB31 /* FocusablePluginDelegate.swift in Sources */,
 				FD01D5F9F2E0C13DE34E81ED /* BaseStackDataDisplayManager.swift in Sources */,
 				2BC9F60ADB3A6250F61EB389 /* BaseStackManager.swift in Sources */,
 				770B8953188FB38DB97F48F1 /* BaseTableDataDisplayManager.swift in Sources */,
@@ -1472,6 +1513,7 @@
 				58DEB4EE17EA1016F2DEC38F /* CalculatableWidthCollectionCellGenerator.swift in Sources */,
 				3D79B7A7C2AF3EB7262DD98F /* CellRegisterType.swift in Sources */,
 				E2F39C88B5EF348AE5B2521D /* Collection+RDDM.swift in Sources */,
+				A49416112744D05000DDCB31 /* FocusablePlugin.swift in Sources */,
 				05A35B1358F3E7E2CBFD6F49 /* CollectionBatchUpdatesAnimator.swift in Sources */,
 				43B51D78FF39D87459F5345B /* CollectionBuilder.swift in Sources */,
 				0617816BCFC151E0AB8ABA91 /* CollectionBuilderConfigurable.swift in Sources */,
@@ -1560,6 +1602,7 @@
 				8D31D1C11111FA3FD09AE71A /* SizableItem.swift in Sources */,
 				88D33D2E47CB409754754428 /* Stack+RDDM.swift in Sources */,
 				48770D280DC7E1D25789C89E /* SwipeActionsConfigurable.swift in Sources */,
+				A49416162744D1E900DDCB31 /* FocusableItem.swift in Sources */,
 				53ACC05DE07FB1C0A8E6249A /* SwipeActionsConfiguration.swift in Sources */,
 				FD0ACE3A644CA0E7895C1E72 /* SwipeActionsProvider.swift in Sources */,
 				DF0786CF3DB6F615FA8AC94B /* SwipeableItem.swift in Sources */,
@@ -1581,9 +1624,11 @@
 				EE7A71CF08B4E93660F77485 /* TableGeneratorsProvider.swift in Sources */,
 				CFFEE9D2A117557A3C42BC63 /* TableHeaderVisiblePlugin.swift in Sources */,
 				D5DD43AABBC9AFE54A7F18A7 /* TableLastCellIsVisiblePlugin.swift in Sources */,
+				A4941638274524F600DDCB31 /* FocusedPlaginModel.swift in Sources */,
 				A0D6BA1CBC31E3DB487AF822 /* TableMovable.swift in Sources */,
 				8E5022CE7EE7B20D6785FE49 /* TableMovablePlugin.swift in Sources */,
 				AE8695618E22ACBD69B0078F /* TablePaginatablePlugin.swift in Sources */,
+				A49416132744D05000DDCB31 /* Focusable.swift in Sources */,
 				14286A4E4D9D7F891CB643D7 /* TablePrefetchProxyPlugin.swift in Sources */,
 				365F70790BE03F83AD7C8B30 /* TablePrefetcherablePlugin.swift in Sources */,
 				699F357E031DC52CFC3753F8 /* TableRefreshablePlugin.swift in Sources */,
@@ -1592,6 +1637,7 @@
 				AC463FD260D5303138D0483E /* TableSectionTitleDisplayablePlugin.swift in Sources */,
 				8D114643B0FF5C98742E0E68 /* TableSectionTitleWrapper.swift in Sources */,
 				00E3116A950942E8F81AE6F3 /* TableSelectablePlugin.swift in Sources */,
+				A41CB7B3274632F300560745 /* FocusableStrategy.swift in Sources */,
 				F68FE525F9C54B3077FA5B66 /* TableSwipeActionsConfiguration.swift in Sources */,
 				CDE265749C7582DA9E1586C7 /* TableSwipeActionsConfigurationPlugin.swift in Sources */,
 				E5A35181F9027EC2C06B58FA /* TableUpdatesAnimator.swift in Sources */,
