@@ -13,6 +13,7 @@ public struct FocusedPlaginModel {
     let transformDuration: CGFloat
     let shadow: FocusedPlaginShadowModel?
     let align: FocusableAlign?
+    let border: FocusablePlaginBorderModel?
 
     /// Takes parameters
     /// - Parameters:
@@ -20,14 +21,18 @@ public struct FocusedPlaginModel {
     ///     - transformDuration:  defaul value CGSize(width: 0, height: 0)
     ///     - shadow:  defaul value nil
     ///     - align: defaults to nil
-    public init(transform: CGAffineTransform? = nil,
-                transformDuration: CGFloat = 0.5,
-                shadow: FocusedPlaginShadowModel? = nil,
-                align: FocusableAlign? = nil) {
+    public init(
+        transform: CGAffineTransform? = nil,
+        transformDuration: CGFloat = 0.5,
+        shadow: FocusedPlaginShadowModel? = nil,
+        align: FocusableAlign? = nil,
+        border: FocusablePlaginBorderModel? = nil
+    ) {
         self.transform = transform
         self.shadow = shadow
         self.transformDuration = transformDuration
         self.align = align
+        self.border = border
     }
 }
 
@@ -55,9 +60,35 @@ public struct FocusedPlaginShadowModel {
         self.opacity = opacity
         self.radius = radius
     }
-
 }
 
+/// Model for configure UIView border
+public struct FocusablePlaginBorderModel {
+    let color: UIColor
+    let width: CGFloat
+    let radius: CGFloat
+    let clipsToBounds: Bool
+
+    /// Takes parameters
+    /// - Parameters:
+    ///     - color: UIColor
+    ///     - width:  defaul value 3
+    ///     - radius:  defaul value 10
+    ///     - clipsToBounds:  default value false
+    public init(
+        color: UIColor,
+        width: CGFloat = 3,
+        radius: CGFloat = 10,
+        clipsToBounds: Bool = false
+    ) {
+        self.color = color
+        self.width = width
+        self.radius = radius
+        self.clipsToBounds = clipsToBounds
+    }
+}
+
+/// Configure focusable align
 public enum FocusableAlign {
     case left, right, center
 }

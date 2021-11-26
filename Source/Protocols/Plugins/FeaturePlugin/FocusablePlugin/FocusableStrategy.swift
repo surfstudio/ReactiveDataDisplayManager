@@ -34,6 +34,10 @@ public enum FocusStrategy: StrategyFocusable {
     /// Customize Focus Model
     case byModel(model: FocusedPlaginModel)
 
+    /// Apply borber on focus
+    /// Only works in tableview
+    case border(color: UIColor, width: CGFloat)
+
     private static var model: FocusedPlaginModel?
 
     ///  Customization of the selected cell
@@ -48,13 +52,32 @@ public enum FocusStrategy: StrategyFocusable {
                     tableView: UITableView? = nil) {
         switch self {
         case .transform(let transform):
-            setTransform(transform: transform, previusView: previusView, nextView: nextView)
+            setTransform(transform: transform,
+                         previusView: previusView,
+                         nextView: nextView)
         case .shadow(color: let color):
-            setShadow(color: color, previusView: previusView, nextView: nextView)
+            setShadow(color: color,
+                      previusView: previusView,
+                      nextView: nextView)
         case .scrollTo(let align):
-            setScroll(align: align, index: indexPath, collection: collectionView, table: tableView)
+            setScroll(align: align,
+                      index: indexPath,
+                      collection: collectionView,
+                      table: tableView)
         case .byModel(model: let model):
-            setByModel(model: model, previusView: previusView, nextView: nextView, index: indexPath, collection: collectionView, table: tableView)
+            setByModel(model: model,
+                       previusView: previusView,
+                       nextView: nextView,
+                       index: indexPath,
+                       collection: collectionView,
+                       table: tableView)
+        case .border(color: let color, width: let width):
+            setBorder(color: color,
+                      width: width,
+                      table: tableView,
+                      indexPath: indexPath,
+                      previusView: previusView,
+                      nextView: nextView)
         }
     }
 
@@ -108,8 +131,41 @@ private extension FocusStrategy {
                     collection: UICollectionView?,
                     table: UITableView?) {
         FocusStrategy.model = model
-        setShadow(color: model.shadow?.color ?? .clear, previusView: previusView, nextView: nextView)
-        setTransform(transform: model.transform ?? .identity, previusView: previusView, nextView: nextView)
-        setScroll(align: model.align, index: index, collection: collection, table: table)
+        setShadow(color: model.shadow?.color ?? .clear,
+                  previusView: previusView,
+                  nextView: nextView)
+        setTransform(transform: model.transform ?? .identity,
+                     previusView: previusView,
+                     nextView: nextView)
+        setScroll(align: model.align,
+                  index: index,
+                  collection: collection,
+                  table: table)
+        setBorder(color: model.border?.color ?? .clear,
+                  width: model.border?.width ?? .zero,
+                  table: table, indexPath: index,
+                  previusView: previusView,
+                  nextView: nextView)
     }
+
+    // Configure border for table
+    func setBorder(color: UIColor,
+                   width: CGFloat,
+                   table: UITableView? = nil,
+                   indexPath: IndexPath?,
+                   previusView: UIView?,
+                   nextView: UIView?) {
+        guard let indexPath = indexPath, let table = table else {
+            return
+        }
+        let borderModel = FocusStrategy.model?.border
+        let cell = table.cellForRow(at: indexPath)
+        cell?.focusStyle = .custom
+        previusView?.layer.borderWidth = .zero
+        nextView?.layer.borderWidth = width
+        nextView?.layer.borderColor = color.cgColor
+        nextView?.layer.cornerRadius = borderModel?.radius ?? 10
+        nextView?.clipsToBounds = borderModel?.clipsToBounds ?? false
+    }
+
 }

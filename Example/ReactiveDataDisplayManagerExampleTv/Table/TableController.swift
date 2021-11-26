@@ -17,7 +17,7 @@ final class TableController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var ddm = tableView.rddm.baseBuilder
-        .add(featurePlugin: .focusable())
+        .add(featurePlugin: .focusable(by: .border(color: .lightGray, width: .pi)))
         .add(plugin: .selectable())
         .build()
 
