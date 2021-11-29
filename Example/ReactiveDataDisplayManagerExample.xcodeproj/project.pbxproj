@@ -89,6 +89,9 @@
 		9FFA5FE951565EA086C09F4D /* CollectionCompositionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173FB7F8FE0015D07813CC53 /* CollectionCompositionalViewController.swift */; };
 		A3C19E75C2904BB0882C49D8 /* TitleCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD08177388A637B66A066E9 /* TitleCollectionReusableView.swift */; };
 		A3CBF3A30D66A30C8DB2DB07 /* DragAndDroppableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73953DF3D544D69F0943CE /* DragAndDroppableTableViewController.swift */; };
+		A40A18EC2755055C00B1F0EB /* Table.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A40A18EB2755055C00B1F0EB /* Table.storyboard */; };
+		A40A18F0275515DB00B1F0EB /* Collection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A40A18EF275515DB00B1F0EB /* Collection.storyboard */; };
+		A40A18F2275515EB00B1F0EB /* Stack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A40A18F1275515EB00B1F0EB /* Stack.storyboard */; };
 		A4F6E2BE4831BDC28F197BE6 /* ButtonStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768EADE1BBCA4E1E3CD2B9A7 /* ButtonStackCellGenerator.swift */; };
 		A63DE9C658B2CB3C192DFEBD /* PaginatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474CD5F4A339F735088298E7 /* PaginatorView.swift */; };
 		A64DE6EFABFFB2F74A12E624 /* TitleHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9DFCE12A61DE93236E881E /* TitleHeaderGenerator.swift */; };
@@ -221,6 +224,9 @@
 		9D008A179E1617E897753632 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
 		9FE54BA279EBA492D3F36FD3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A01825DE6F3160BA0ACD25D8 /* UnrollCellStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrollCellStackView.swift; sourceTree = "<group>"; };
+		A40A18EB2755055C00B1F0EB /* Table.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Table.storyboard; sourceTree = "<group>"; };
+		A40A18EF275515DB00B1F0EB /* Collection.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Collection.storyboard; sourceTree = "<group>"; };
+		A40A18F1275515EB00B1F0EB /* Stack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Stack.storyboard; sourceTree = "<group>"; };
 		A43827BAA20A9EF3B05A721E /* GravityCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityCellGenerator.swift; sourceTree = "<group>"; };
 		A6EF9B831E7364F7DDCD7F61 /* FittingCompressedSizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FittingCompressedSizeCollectionViewCell.xib; sourceTree = "<group>"; };
 		A8C18F63930316A8468B041C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -389,6 +395,9 @@
 			isa = PBXGroup;
 			children = (
 				670C26C912223C5DDEFCC613 /* Main.storyboard */,
+				A40A18EB2755055C00B1F0EB /* Table.storyboard */,
+				A40A18EF275515DB00B1F0EB /* Collection.storyboard */,
+				A40A18F1275515EB00B1F0EB /* Stack.storyboard */,
 				F16590DE4A196BB8E92D28AA /* Application */,
 				7A67422E6DA0F317DC19BFC0 /* Collection */,
 				79C9820EB81CA256106E92F5 /* Extensions */,
@@ -743,7 +752,6 @@
 				13155E9EB1679F76DAA07B28 /* Pods-ReactiveDataDisplayManagerExample_tvOS.debug.xcconfig */,
 				7FE30601BEB6DD48AD08D906 /* Pods-ReactiveDataDisplayManagerExample_tvOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -1236,9 +1244,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A40A18EC2755055C00B1F0EB /* Table.storyboard in Resources */,
 				4E9A3C4F7C1635C1786A0746 /* Assets.xcassets in Resources */,
 				9CC79D47413C891E56CD6585 /* DynamicHeightTableViewCell.xib in Resources */,
 				3DF9DA856B29B474C3C10D0B /* FittingCompressedSizeCollectionViewCell.xib in Resources */,
+				A40A18F0275515DB00B1F0EB /* Collection.storyboard in Resources */,
 				625803F5E3B508074802BE2C /* FoldableCollectionViewCell.xib in Resources */,
 				AD9EB7C8E5ED98C16D5FDFAB /* FoldableTableViewCell.xib in Resources */,
 				998534F4DE3B195655AF43EB /* HeaderCollectionListView.xib in Resources */,
@@ -1251,6 +1261,7 @@
 				38716AC171E6746BB729385A /* RectangleColorCollectionViewCell.xib in Resources */,
 				D89A9E350B2221027F65561B /* SizableCollectionViewCell.xib in Resources */,
 				36F42E14EBE2AAA01CF245E0 /* TitleCollectionListCell.xib in Resources */,
+				A40A18F2275515EB00B1F0EB /* Stack.storyboard in Resources */,
 				6F1E226D13D389E3A8780746 /* TitleCollectionReusableView.xib in Resources */,
 				041CD9D9274D8649779B9E16 /* TitleCollectionViewCell.xib in Resources */,
 				4A5B829E7FC4C8F1BD802EC6 /* TitleIconCollectionFooterView.xib in Resources */,
