@@ -27,7 +27,7 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
     public var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>?
-    public var focusablePlugin: FocusablePluginDelegate<CollectionGeneratorsProvider>?
+    public var focusablePlugin: FocusablePluginDelegate<CollectionGeneratorsProvider, UICollectionView>?
 
     // MARK: - Private Properties
 
@@ -110,7 +110,7 @@ extension BaseCollectionDelegate {
         focusablePlugin?.didFocusedCell(previusView: context.previouslyFocusedView,
                                         nextView: context.nextFocusedView,
                                         indexPath: context.nextFocusedIndexPath,
-                                        collectionView: collectionView)
+                                        collection: collectionView)
         #endif
     }
 

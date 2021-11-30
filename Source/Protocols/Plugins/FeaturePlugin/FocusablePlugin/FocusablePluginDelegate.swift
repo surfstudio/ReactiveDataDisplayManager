@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 /// Delegate based on `FocusableDelegate` protocol.
-open class FocusablePluginDelegate<Provider: GeneratorsProvider>: FocusableDelegate {
+open class FocusablePluginDelegate<Provider: GeneratorsProvider, CollectionType>: FocusableDelegate {
 
     // MARK: - Typealias
 
     public typealias GeneratorType = FocusableItem
-    var strategyFocusable: StrategyFocusable?
+    var strategyFocusable: FocusStrategy<CollectionType>?
 
     // MARK: - FocusableDelegate
 
@@ -35,15 +35,14 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider>: FocusableDeleg
     ///     - nextView: next view
     ///     - collectionView: default value nil, needed to center the selected cell
     ///     - tableView: default value nil, needed to center the selected cell
-    public func didFocusedCell(previusView: UIView?, nextView: UIView?,
-                        indexPath: IndexPath?,
-                        collectionView: UICollectionView? = nil,
-                        tableView: UITableView? = nil) {
+    public func didFocusedCell(previusView: UIView?,
+                               nextView: UIView?,
+                               indexPath: IndexPath?,
+                               collection: CollectionType) {
         strategyFocusable?.didFocused(previusView: previusView,
                                       nextView: nextView,
                                       indexPath: indexPath,
-                                      collectionView: collectionView,
-                                      tableView: tableView)
+                                      collection: collection)
     }
 
 }

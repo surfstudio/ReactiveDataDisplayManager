@@ -17,6 +17,7 @@ public protocol Focusable {
 
 public protocol FocusableDelegate {
     associatedtype Provider: GeneratorsProvider
+    associatedtype CollectionType
 
     /// Asks whether the item at the specified index path can be focused
     /// - parameters:
@@ -32,6 +33,5 @@ public protocol FocusableDelegate {
     ///     - tableView: default value nil, needed to center the selected cell
     func didFocusedCell(previusView: UIView?, nextView: UIView?,
                         indexPath: IndexPath?,
-                        collectionView: UICollectionView?,
-                        tableView: UITableView?)
+                        collection: CollectionType)
 }

@@ -26,7 +26,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
     public var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>?
     #if os(tvOS)
-    public var focusablePlugin: FocusablePluginDelegate<TableGeneratorsProvider>?
+    public var focusablePlugin: FocusablePluginDelegate<TableGeneratorsProvider, UITableView>?
     #endif
     #if os(iOS)
     @available(iOS 11.0, *)
@@ -198,7 +198,7 @@ extension BaseTableDelegate {
         focusablePlugin?.didFocusedCell(previusView: context.previouslyFocusedView,
                         nextView: context.nextFocusedView,
                         indexPath: context.nextFocusedIndexPath,
-                        tableView: tableView)
+                        collection: tableView)
         #endif
     }
 

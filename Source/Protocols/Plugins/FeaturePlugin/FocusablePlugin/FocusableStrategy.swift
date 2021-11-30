@@ -7,20 +7,7 @@
 
 import UIKit
 
-/// Allow dragging cells according to strategy
-protocol StrategyFocusable {
-    /// The method defines the strategy for the drag and drop behavior.
-    /// - parameters:
-    ///     - source:  Source IndexPath
-    ///     - destination: Destination IndexPath
-    /// - returns: Returns a Bool value
-    func didFocused(previusView: UIView?, nextView: UIView?,
-                    indexPath: IndexPath?,
-                    collectionView: UICollectionView?,
-                    tableView: UITableView?)
-}
-
-public enum FocusStrategy: StrategyFocusable {
+public enum FocusStrategy<CollectionType> {
 
     /// Allow transformation on focus
     case transform(transform: CGAffineTransform, durtation: CGFloat)
@@ -38,7 +25,6 @@ public enum FocusStrategy: StrategyFocusable {
     /// Only works in tableview
     case border(model: FocusablePlaginBorderModel)
 
-    private static var model: FocusedPlaginModel?
 
     ///  Customization of the selected cell
     ///  - Parameters:
@@ -46,10 +32,10 @@ public enum FocusStrategy: StrategyFocusable {
     ///     - nextView: next view
     ///     - collectionView: default value nil, needed to center the selected cell
     ///     - tableView: default value nil, needed to center the selected cell
-    func didFocused(previusView: UIView?, nextView: UIView?,
+    func didFocused(previusView: UIView?,
+                    nextView: UIView?,
                     indexPath: IndexPath?,
-                    collectionView: UICollectionView? = nil,
-                    tableView: UITableView? = nil) {
+                    collection: CollectionType) {
         switch self {
         case .transform(let transform, let duration):
             setTransform(transform: transform,
@@ -63,18 +49,16 @@ public enum FocusStrategy: StrategyFocusable {
         case .scrollTo(let align):
             setScroll(align: align,
                       index: indexPath,
-                      collection: collectionView,
-                      table: tableView)
+                      collection: collection)
         case .byModel(model: let model):
             setByModel(model: model,
                        previusView: previusView,
                        nextView: nextView,
                        index: indexPath,
-                       collection: collectionView,
-                       table: tableView)
+                       collection: collection)
         case .border(model: let borderModel):
             setBorder(model: borderModel,
-                      table: tableView,
+                      table: collection,
                       indexPath: indexPath,
                       previusView: previusView,
                       nextView: nextView)
@@ -110,18 +94,18 @@ private extension FocusStrategy {
     }
 
     // Configure scroll
-    func setScroll(align: FocusableAlign?, index: IndexPath?, collection: UICollectionView? = nil, table: UITableView? = nil) {
+    func setScroll(align: FocusableAlign?, index: IndexPath?, collection: CollectionType) {
         guard let index = index, let align = align else {
             return
         }
         switch align {
         case .left:
-            collection?.scrollToItem(at: index, at: [.left], animated: true)
+            (collection as? UICollectionView)?.scrollToItem(at: index, at: [.left], animated: true)
         case .right:
-            collection?.scrollToItem(at: index, at: [.right], animated: true)
+            (collection as? UICollectionView)?.scrollToItem(at: index, at: [.right], animated: true)
         case .center:
-            table?.scrollToRow(at: index, at: .middle, animated: true)
-            collection?.scrollToItem(at: index, at: [.centeredHorizontally, .centeredVertically], animated: true)
+            (collection as? UITableView)?.scrollToRow(at: index, at: .middle, animated: true)
+            (collection as? UICollectionView)?.scrollToItem(at: index, at: [.centeredHorizontally, .centeredVertically], animated: true)
         }
     }
 
@@ -130,9 +114,7 @@ private extension FocusStrategy {
                     previusView: UIView?,
                     nextView: UIView?,
                     index: IndexPath?,
-                    collection: UICollectionView?,
-                    table: UITableView?) {
-        FocusStrategy.model = model
+                    collection: CollectionType) {
         setShadow(model: model.shadow,
                   previusView: previusView,
                   nextView: nextView)
@@ -142,22 +124,21 @@ private extension FocusStrategy {
                      nextView: nextView)
         setScroll(align: model.align,
                   index: index,
-                  collection: collection,
-                  table: table)
+                  collection: collection)
         setBorder(model: model.border,
-                  table: table, indexPath: index,
+                  table: collection, indexPath: index,
                   previusView: previusView,
                   nextView: nextView)
     }
 
     // Configure border for table
     func setBorder(model: FocusablePlaginBorderModel?,
-                   table: UITableView? = nil,
+                   table: CollectionType,
                    indexPath: IndexPath?,
                    previusView: UIView?,
                    nextView: UIView?) {
         guard let indexPath = indexPath,
-              let table = table,
+              let table = table as? UITableView,
               let model = model else {
             return
         }
