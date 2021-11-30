@@ -92,11 +92,11 @@ public struct FocusablePlaginBorderModel {
 public enum FocusableAlign {
 
     /// Align left.
-    /// Suppored UICollectionView only
+    /// Supported UICollectionView only
     case left
 
     /// Align right
-    /// Suppored UICollectionView only
+    /// Supported UICollectionView only
     case right
 
     /// Align top
