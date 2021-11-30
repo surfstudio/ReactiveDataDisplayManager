@@ -14,6 +14,9 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider, CollectionType>
     // MARK: - Typealias
 
     public typealias GeneratorType = FocusableItem
+
+    // MARK: - Internal Properties
+
     var strategyFocusable: FocusStrategy<CollectionType>?
 
     // MARK: - FocusableDelegate
@@ -33,8 +36,7 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider, CollectionType>
     ///  - Parameters:
     ///     - previusView: previus view
     ///     - nextView: next view
-    ///     - collectionView: default value nil, needed to center the selected cell
-    ///     - tableView: default value nil, needed to center the selected cell
+    ///     - collection: needed to center the selected cell, customize border for UITableView
     public func didFocusedCell(previusView: UIView?,
                                nextView: UIView?,
                                indexPath: IndexPath?,

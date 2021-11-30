@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Adjust focus of cells according to strategy
 public enum FocusStrategy<CollectionType> {
 
     /// Allow transformation on focus
@@ -29,8 +30,7 @@ public enum FocusStrategy<CollectionType> {
     ///  - Parameters:
     ///     - previusView: previus view
     ///     - nextView: next view
-    ///     - collectionView: default value nil, needed to center the selected cell
-    ///     - tableView: default value nil, needed to center the selected cell
+    ///     - collection: needed to center the selected cell, customize border for UITableView
     func didFocused(previusView: UIView?,
                     nextView: UIView?,
                     indexPath: IndexPath?,
@@ -125,7 +125,8 @@ private extension FocusStrategy {
                   index: index,
                   collection: collection)
         setBorder(model: model.border,
-                  table: collection, indexPath: index,
+                  table: collection,
+                  indexPath: index,
                   previusView: previusView,
                   nextView: nextView)
     }

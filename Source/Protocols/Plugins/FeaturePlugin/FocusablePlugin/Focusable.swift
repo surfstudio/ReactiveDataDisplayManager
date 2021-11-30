@@ -29,8 +29,7 @@ public protocol FocusableDelegate {
     ///  - Parameters:
     ///     - previusView: previus view
     ///     - nextView: next view
-    ///     - collectionView: default value nil, needed to center the selected cell
-    ///     - tableView: default value nil, needed to center the selected cell
+    ///     - collection: needed to center the selected cell, customize border for UITableView
     func didFocusedCell(previusView: UIView?, nextView: UIView?,
                         indexPath: IndexPath?,
                         collection: CollectionType)
