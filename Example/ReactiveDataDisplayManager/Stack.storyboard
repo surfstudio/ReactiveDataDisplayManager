@@ -18,16 +18,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKD-0f-5c9">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="16" y="88" width="382" height="725"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BU5-EK-TCc">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
+                                        <rect key="frame" x="0.0" y="16" width="382" height="725"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="BU5-EK-TCc" secondAttribute="trailing" id="0c8-Rv-QE7"/>
                                     <constraint firstItem="BU5-EK-TCc" firstAttribute="centerX" secondItem="EKD-0f-5c9" secondAttribute="centerX" id="HUv-1k-bV7"/>
-                                    <constraint firstItem="BU5-EK-TCc" firstAttribute="top" secondItem="EKD-0f-5c9" secondAttribute="top" id="PbF-H5-xWe"/>
+                                    <constraint firstItem="BU5-EK-TCc" firstAttribute="top" secondItem="EKD-0f-5c9" secondAttribute="top" constant="16" id="PbF-H5-xWe"/>
                                     <constraint firstItem="BU5-EK-TCc" firstAttribute="width" secondItem="EKD-0f-5c9" secondAttribute="width" id="SHa-ks-rAH"/>
                                     <constraint firstItem="BU5-EK-TCc" firstAttribute="height" secondItem="EKD-0f-5c9" secondAttribute="height" priority="250" id="cuG-nJ-oAp"/>
                                     <constraint firstItem="BU5-EK-TCc" firstAttribute="leading" secondItem="EKD-0f-5c9" secondAttribute="leading" id="s3x-0B-eSn"/>
@@ -40,10 +40,10 @@
                         <viewLayoutGuide key="safeArea" id="8ux-vC-ao4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="EKD-0f-5c9" firstAttribute="leading" secondItem="8ux-vC-ao4" secondAttribute="leading" id="2uS-Y3-mfG"/>
+                            <constraint firstItem="EKD-0f-5c9" firstAttribute="leading" secondItem="8ux-vC-ao4" secondAttribute="leading" constant="16" id="2uS-Y3-mfG"/>
                             <constraint firstItem="8ux-vC-ao4" firstAttribute="bottom" secondItem="EKD-0f-5c9" secondAttribute="bottom" id="gJC-ea-4tB"/>
                             <constraint firstItem="EKD-0f-5c9" firstAttribute="top" secondItem="8ux-vC-ao4" secondAttribute="top" id="iya-mY-8q0"/>
-                            <constraint firstItem="8ux-vC-ao4" firstAttribute="trailing" secondItem="EKD-0f-5c9" secondAttribute="trailing" id="oNt-MB-ymm"/>
+                            <constraint firstItem="8ux-vC-ao4" firstAttribute="trailing" secondItem="EKD-0f-5c9" secondAttribute="trailing" constant="16" id="oNt-MB-ymm"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Stack" id="Zm5-pS-JTV"/>
@@ -65,14 +65,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Udv-d7-k4v">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="16" y="88" width="382" height="725"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2pX-dI-bEf">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <rect key="frame" x="0.0" y="16" width="382" height="896"/>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="2pX-dI-bEf" firstAttribute="top" secondItem="Udv-d7-k4v" secondAttribute="top" id="3Uu-Y5-fzf"/>
+                                    <constraint firstItem="2pX-dI-bEf" firstAttribute="top" secondItem="Udv-d7-k4v" secondAttribute="top" constant="16" id="3Uu-Y5-fzf"/>
                                     <constraint firstItem="2pX-dI-bEf" firstAttribute="leading" secondItem="Udv-d7-k4v" secondAttribute="leading" id="BbW-8E-W8r"/>
                                     <constraint firstAttribute="bottom" secondItem="2pX-dI-bEf" secondAttribute="bottom" id="ZaX-3i-fDn"/>
                                     <constraint firstItem="2pX-dI-bEf" firstAttribute="centerX" secondItem="Udv-d7-k4v" secondAttribute="centerX" id="kS5-gv-6Gp"/>
@@ -87,9 +87,9 @@
                         <constraints>
                             <constraint firstItem="uhI-et-kXV" firstAttribute="bottom" secondItem="Udv-d7-k4v" secondAttribute="bottom" id="0TW-ZO-5Zl"/>
                             <constraint firstItem="2pX-dI-bEf" firstAttribute="height" secondItem="xR7-oz-KJD" secondAttribute="height" priority="250" id="0Y4-f3-R8o"/>
-                            <constraint firstItem="Udv-d7-k4v" firstAttribute="leading" secondItem="uhI-et-kXV" secondAttribute="leading" id="4Eb-A7-fNr"/>
+                            <constraint firstItem="Udv-d7-k4v" firstAttribute="leading" secondItem="uhI-et-kXV" secondAttribute="leading" constant="16" id="4Eb-A7-fNr"/>
                             <constraint firstItem="Udv-d7-k4v" firstAttribute="top" secondItem="uhI-et-kXV" secondAttribute="top" id="OaB-jG-9nL"/>
-                            <constraint firstItem="uhI-et-kXV" firstAttribute="trailing" secondItem="Udv-d7-k4v" secondAttribute="trailing" id="WJl-y1-Yhf"/>
+                            <constraint firstItem="uhI-et-kXV" firstAttribute="trailing" secondItem="Udv-d7-k4v" secondAttribute="trailing" constant="16" id="WJl-y1-Yhf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lmE-QZ-73W"/>
