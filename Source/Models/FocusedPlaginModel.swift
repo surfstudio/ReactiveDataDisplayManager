@@ -90,5 +90,23 @@ public struct FocusablePlaginBorderModel {
 
 /// Configure focusable align
 public enum FocusableAlign {
-    case left, right, center
+
+    /// Align left.
+    /// Suppored UICollectionView only
+    case left
+
+    /// Align right
+    /// Suppored UICollectionView only
+    case right
+
+    /// Align top
+    case top
+
+    /// Align bottom
+    case bottom
+
+    /// Align center
+    /// Default [.centeredHorizontally, .centeredVertically] for UICollectionView
+    case center(UICollectionView.ScrollPosition? = nil)
+
 }

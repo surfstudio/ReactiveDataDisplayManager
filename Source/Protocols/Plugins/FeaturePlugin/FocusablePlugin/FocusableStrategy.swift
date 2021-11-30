@@ -102,9 +102,16 @@ private extension FocusStrategy {
             (collection as? UICollectionView)?.scrollToItem(at: index, at: [.left], animated: true)
         case .right:
             (collection as? UICollectionView)?.scrollToItem(at: index, at: [.right], animated: true)
-        case .center:
+        case .top:
+            (collection as? UITableView)?.scrollToRow(at: index, at: .top, animated: true)
+            (collection as? UICollectionView)?.scrollToItem(at: index, at: [.top], animated: true)
+        case .bottom:
+            (collection as? UITableView)?.scrollToRow(at: index, at: .bottom, animated: true)
+            (collection as? UICollectionView)?.scrollToItem(at: index, at: [.bottom], animated: true)
+        case .center(let collectionAlign):
+            let centerXY: UICollectionView.ScrollPosition = [.centeredHorizontally, .centeredVertically]
             (collection as? UITableView)?.scrollToRow(at: index, at: .middle, animated: true)
-            (collection as? UICollectionView)?.scrollToItem(at: index, at: [.centeredHorizontally, .centeredVertically], animated: true)
+            (collection as? UICollectionView)?.scrollToItem(at: index,at: collectionAlign ?? centerXY, animated: true)
         }
     }
 
