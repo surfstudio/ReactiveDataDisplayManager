@@ -99,8 +99,7 @@ extension BaseCollectionDelegate {
     open func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         #if os(iOS)
         return movablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
-        #endif
-        #if os(tvOS)
+        #elseif os(tvOS)
         return focusablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
         #endif
     }

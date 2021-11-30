@@ -8,7 +8,7 @@
 import UIKit
 
 /// Allow dragging cells according to strategy
-protocol StrategyFocusable{
+protocol StrategyFocusable {
     /// The method defines the strategy for the drag and drop behavior.
     /// - parameters:
     ///     - source:  Source IndexPath
@@ -23,10 +23,10 @@ protocol StrategyFocusable{
 public enum FocusStrategy: StrategyFocusable {
 
     /// Allow transformation on focus
-    case transform(CGAffineTransform)
+    case transform(transform: CGAffineTransform, durtation: CGFloat)
 
     /// Apply shadows on focus
-    case shadow(color: UIColor)
+    case shadow(model: FocusedPlaginShadowModel)
 
     /// Scroll to when focusing
     case scrollTo(align: FocusableAlign)
@@ -36,7 +36,7 @@ public enum FocusStrategy: StrategyFocusable {
 
     /// Apply borber on focus
     /// Only works in tableview
-    case border(color: UIColor, width: CGFloat)
+    case border(model: FocusablePlaginBorderModel)
 
     private static var model: FocusedPlaginModel?
 
@@ -51,12 +51,13 @@ public enum FocusStrategy: StrategyFocusable {
                     collectionView: UICollectionView? = nil,
                     tableView: UITableView? = nil) {
         switch self {
-        case .transform(let transform):
+        case .transform(let transform, let duration):
             setTransform(transform: transform,
+                         transformDuration: duration,
                          previusView: previusView,
                          nextView: nextView)
-        case .shadow(color: let color):
-            setShadow(color: color,
+        case .shadow(model: let model):
+            setShadow(model: model,
                       previusView: previusView,
                       nextView: nextView)
         case .scrollTo(let align):
@@ -71,9 +72,8 @@ public enum FocusStrategy: StrategyFocusable {
                        index: indexPath,
                        collection: collectionView,
                        table: tableView)
-        case .border(color: let color, width: let width):
-            setBorder(color: color,
-                      width: width,
+        case .border(model: let borderModel):
+            setBorder(model: borderModel,
                       table: tableView,
                       indexPath: indexPath,
                       previusView: previusView,
@@ -88,20 +88,22 @@ public enum FocusStrategy: StrategyFocusable {
 private extension FocusStrategy {
 
     // Configure shadow
-    func setShadow(color: UIColor, previusView: UIView?, nextView: UIView?) {
-        let shadowModel = FocusStrategy.model?.shadow
+    func setShadow(model: FocusedPlaginShadowModel?, previusView: UIView?, nextView: UIView?) {
+        guard let model = model else { return }
         previusView?.layer.shadowRadius = .zero
         previusView?.layer.shadowOpacity = .zero
-        nextView?.layer.shadowColor = color.cgColor
-        nextView?.layer.shadowRadius = shadowModel?.radius ?? 10.0
-        nextView?.layer.shadowOpacity = shadowModel?.opacity ?? 0.9
-        nextView?.layer.shadowOffset = shadowModel?.offset ?? CGSize(width: 0, height: 0)
+        nextView?.layer.shadowColor = model.color.cgColor
+        nextView?.layer.shadowRadius = model.radius
+        nextView?.layer.shadowOpacity = model.opacity
+        nextView?.layer.shadowOffset = model.offset
     }
 
     // Configure transform
-    func setTransform(transform: CGAffineTransform, previusView: UIView?, nextView: UIView?) {
-        let duration = FocusStrategy.model?.transformDuration ?? 0.5
-        UIView.animate(withDuration: duration, animations: {
+    func setTransform(transform: CGAffineTransform,
+                      transformDuration: CGFloat,
+                      previusView: UIView?,
+                      nextView: UIView?) {
+        UIView.animate(withDuration: transformDuration, animations: {
             previusView?.transform = .identity
             nextView?.transform = transform
         })
@@ -131,41 +133,41 @@ private extension FocusStrategy {
                     collection: UICollectionView?,
                     table: UITableView?) {
         FocusStrategy.model = model
-        setShadow(color: model.shadow?.color ?? .clear,
+        setShadow(model: model.shadow,
                   previusView: previusView,
                   nextView: nextView)
         setTransform(transform: model.transform ?? .identity,
+                     transformDuration: model.transformDuration,
                      previusView: previusView,
                      nextView: nextView)
         setScroll(align: model.align,
                   index: index,
                   collection: collection,
                   table: table)
-        setBorder(color: model.border?.color ?? .clear,
-                  width: model.border?.width ?? .zero,
+        setBorder(model: model.border,
                   table: table, indexPath: index,
                   previusView: previusView,
                   nextView: nextView)
     }
 
     // Configure border for table
-    func setBorder(color: UIColor,
-                   width: CGFloat,
+    func setBorder(model: FocusablePlaginBorderModel?,
                    table: UITableView? = nil,
                    indexPath: IndexPath?,
                    previusView: UIView?,
                    nextView: UIView?) {
-        guard let indexPath = indexPath, let table = table else {
+        guard let indexPath = indexPath,
+              let table = table,
+              let model = model else {
             return
         }
-        let borderModel = FocusStrategy.model?.border
         let cell = table.cellForRow(at: indexPath)
         cell?.focusStyle = .custom
         previusView?.layer.borderWidth = .zero
-        nextView?.layer.borderWidth = width
-        nextView?.layer.borderColor = color.cgColor
-        nextView?.layer.cornerRadius = borderModel?.radius ?? 10
-        nextView?.clipsToBounds = borderModel?.clipsToBounds ?? false
+        nextView?.layer.borderWidth = model.width
+        nextView?.layer.borderColor = model.color.cgColor
+        nextView?.layer.cornerRadius = model.radius
+        nextView?.clipsToBounds = model.clipsToBounds
     }
 
 }
