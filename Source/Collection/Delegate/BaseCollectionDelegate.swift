@@ -104,8 +104,9 @@ extension BaseCollectionDelegate {
         #endif
     }
 
-    open func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-
+    open func collectionView(_ collectionView: UICollectionView,
+                             didUpdateFocusIn context: UICollectionViewFocusUpdateContext,
+                             with coordinator: UIFocusAnimationCoordinator) {
         #if os(tvOS)
         focusablePlugin?.didFocusedCell(previusView: context.previouslyFocusedView,
                                         nextView: context.nextFocusedView,

@@ -7,5 +7,4 @@
 
 import ReactiveDataDisplayManager
 
-final class ImageCollectionViewGenerator: BaseCollectionCellGenerator<ImageCollectionViewCell>, FocusableItem {
-}
+final class ImageCollectionViewGenerator: BaseCollectionCellGenerator<ImageCollectionViewCell>, FocusableItem { }

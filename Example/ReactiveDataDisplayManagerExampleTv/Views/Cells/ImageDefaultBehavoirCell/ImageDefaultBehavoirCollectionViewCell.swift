@@ -26,7 +26,7 @@ final class ImageDefaultBehavoirCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         setupInitialState()
     }
-    
+
 }
 
 // MARK: - Configurable
@@ -52,5 +52,3 @@ private extension ImageDefaultBehavoirCollectionViewCell {
     }
 
 }
-
-

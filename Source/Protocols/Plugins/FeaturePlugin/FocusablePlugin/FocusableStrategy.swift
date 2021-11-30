@@ -25,7 +25,6 @@ public enum FocusStrategy<CollectionType> {
     /// Only works in tableview
     case border(model: FocusablePlaginBorderModel)
 
-
     ///  Customization of the selected cell
     ///  - Parameters:
     ///     - previusView: previus view
