@@ -27,7 +27,7 @@ public final class TransformFocusableStrategy<CollectionType>: FocusableStrategy
                                  nextView: UIView?,
                                  indexPath: IndexPath?,
                                  collection: CollectionType? = nil) {
-        UIView.animate(withDuration: model.transformDuration, animations: {
+        UIView.animate(withDuration: model.duration, delay: model.delay, animations: {
             previusView?.transform = .identity
             nextView?.transform = self.model.transform
         })

@@ -59,7 +59,7 @@ private extension CollectionDefaultBehavoirController {
             TransformFocusableStrategy(model: .init(transform: transform)),
             ShadowFocusableStrategy(model: .init(color: .blue)),
             ScrollFocusableCollectionItem(position: .center(.centeredHorizontally)),
-            TransformFocusableStrategy(model: .init(transform: transform2, transformDuration: 1))
+            TransformFocusableStrategy(model: .init(transform: transform2, duration: 1, delay: 0.5))
         ]
     }
 
