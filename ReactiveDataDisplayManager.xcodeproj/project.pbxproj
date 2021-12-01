@@ -212,8 +212,6 @@
 		A41C68572757673C00AC73F0 /* ScrollFocusableTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C68552757673C00AC73F0 /* ScrollFocusableTableCell.swift */; };
 		A41C685A2757697300AC73F0 /* CompositFocusableTableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C68592757697300AC73F0 /* CompositFocusableTableStrategy.swift */; };
 		A41C685B2757697300AC73F0 /* CompositFocusableTableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C68592757697300AC73F0 /* CompositFocusableTableStrategy.swift */; };
-		A41C685D27576CBE00AC73F0 /* FocusableStrategyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C685C27576CBE00AC73F0 /* FocusableStrategyModel.swift */; };
-		A41C685E27576CBE00AC73F0 /* FocusableStrategyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C685C27576CBE00AC73F0 /* FocusableStrategyModel.swift */; };
 		A41C6892275794EE00AC73F0 /* FocusablePluginBorderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C688E275794EE00AC73F0 /* FocusablePluginBorderModel.swift */; };
 		A41C6893275794EE00AC73F0 /* FocusablePluginBorderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C688E275794EE00AC73F0 /* FocusablePluginBorderModel.swift */; };
 		A41C6894275794EE00AC73F0 /* FocusedPluginShadowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41C688F275794EE00AC73F0 /* FocusedPluginShadowModel.swift */; };
@@ -504,7 +502,6 @@
 		A41C6852275752AA00AC73F0 /* TransformFocusableStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformFocusableStrategy.swift; sourceTree = "<group>"; };
 		A41C68552757673C00AC73F0 /* ScrollFocusableTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollFocusableTableCell.swift; sourceTree = "<group>"; };
 		A41C68592757697300AC73F0 /* CompositFocusableTableStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositFocusableTableStrategy.swift; sourceTree = "<group>"; };
-		A41C685C27576CBE00AC73F0 /* FocusableStrategyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableStrategyModel.swift; sourceTree = "<group>"; };
 		A41C688E275794EE00AC73F0 /* FocusablePluginBorderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusablePluginBorderModel.swift; sourceTree = "<group>"; };
 		A41C688F275794EE00AC73F0 /* FocusedPluginShadowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusedPluginShadowModel.swift; sourceTree = "<group>"; };
 		A41C6890275794EE00AC73F0 /* FocusableAlign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocusableAlign.swift; sourceTree = "<group>"; };
@@ -1003,7 +1000,6 @@
 			isa = PBXGroup;
 			children = (
 				A41CB7B1274632F300560745 /* FocusableStrategy.swift */,
-				A41C685C27576CBE00AC73F0 /* FocusableStrategyModel.swift */,
 				A41C68582757691100AC73F0 /* Strategy */,
 			);
 			path = FocusableStrategy;
@@ -1509,7 +1505,6 @@
 				8B9A15A102CF3835B946FAB4 /* Table+RDDM.swift in Sources */,
 				62C2EFC258A72691E780DC06 /* TableBatchUpdatesAnimator.swift in Sources */,
 				472763ECA9671C0704EC4199 /* TableBuilder.swift in Sources */,
-				A41C685D27576CBE00AC73F0 /* FocusableStrategyModel.swift in Sources */,
 				E16113E9F7C63CD318785392 /* TableBuilderConfigurable.swift in Sources */,
 				2830BEAC1A10CC08E1BF6E9F /* TableCell+RDDM.swift in Sources */,
 				132C69A48079A94C94691E14 /* TableCommonModifier.swift in Sources */,
@@ -1668,7 +1663,6 @@
 				09EFD38A88BE395B8A711650 /* MovablePluginDataSource.swift in Sources */,
 				4EB309019656E2D0AA102005 /* MovablePluginDelegate.swift in Sources */,
 				28E7727BB64EC6F23132B519 /* Operations.swift in Sources */,
-				A41C685E27576CBE00AC73F0 /* FocusableStrategyModel.swift in Sources */,
 				F99793DA6856BBEFE998FB62 /* PaginableBaseTableDataDisplayManager.swift in Sources */,
 				A41C6895275794EE00AC73F0 /* FocusedPluginShadowModel.swift in Sources */,
 				852C73211739031CF93F5A8B /* Plugin.swift in Sources */,

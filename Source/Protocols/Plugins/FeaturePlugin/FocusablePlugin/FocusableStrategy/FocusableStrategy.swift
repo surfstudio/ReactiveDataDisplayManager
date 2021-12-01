@@ -18,7 +18,7 @@ open class FocusableStrategy<CollectionType> {
                         nextView: UIView?,
                         indexPath: IndexPath?,
                         collection: CollectionType? = nil) {
-        preconditionFailure("")
+        preconditionFailure("Strategy method does nothing")
     }
 
 }
