@@ -17,7 +17,7 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider, CollectionType>
 
     // MARK: - Internal Properties
 
-    var strategyFocusable: FocusStrategy<CollectionType>?
+    var strategyFocusable: FocusableStrategy<CollectionType>?
 
     // MARK: - FocusableDelegate
 
@@ -34,17 +34,18 @@ open class FocusablePluginDelegate<Provider: GeneratorsProvider, CollectionType>
 
     ///  Customization of the selected cell
     ///  - Parameters:
-    ///     - previusView: previus view
-    ///     - nextView: next view
+    ///     - previusView: previus view optional value
+    ///     - nextView: next view optional value
+    ///     - indexPath: IndexPath optional value
     ///     - collection: needed to center the selected cell, customize border for UITableView
-    public func didFocusedCell(previusView: UIView?,
+    public func didUpdateFocus(previusView: UIView?,
                                nextView: UIView?,
                                indexPath: IndexPath?,
                                collection: CollectionType) {
-        strategyFocusable?.didFocused(previusView: previusView,
-                                      nextView: nextView,
-                                      indexPath: indexPath,
-                                      collection: collection)
+        strategyFocusable?.didUpdateFocus(previusView: previusView,
+                                          nextView: nextView,
+                                          indexPath: indexPath,
+                                          collection: collection)
     }
 
 }

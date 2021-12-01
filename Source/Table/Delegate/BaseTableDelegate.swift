@@ -195,10 +195,10 @@ extension BaseTableDelegate {
                         with coordinator: UIFocusAnimationCoordinator) {
         tablePlugins.process(event: .didUpdateFocus(context: context, coordinator: coordinator), with: manager)
         #if os(tvOS)
-        focusablePlugin?.didFocusedCell(previusView: context.previouslyFocusedView,
-                        nextView: context.nextFocusedView,
-                        indexPath: context.nextFocusedIndexPath,
-                        collection: tableView)
+        focusablePlugin?.didUpdateFocus(previusView: context.previouslyFocusedView,
+                                        nextView: context.nextFocusedView,
+                                        indexPath: context.nextFocusedIndexPath,
+                                        collection: tableView)
         #endif
     }
 

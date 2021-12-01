@@ -27,15 +27,11 @@ final class CollectionDefaultBehavoirController: UIViewController {
 
     // MARK: - Private Properties
 
-    private var focusableModel: FocusedPlaginModel {
-        let transform = CGAffineTransform(translationX: .zero, y: 20)
-        return .init(transform: transform,
-                     shadow: .init(color: .blue),
-                     align: .center())
-    }
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
-        .add(featurePlugin: .focusable(by: .byModel(model: focusableModel)))
+        .add(featurePlugin: .focusable(
+            by: CompositFocusableStrategy(strategys: makeFocusableStrategy())
+        ))
         .add(plugin: .selectable())
         .build()
 
@@ -55,6 +51,17 @@ final class CollectionDefaultBehavoirController: UIViewController {
 // MARK: - Private Methods
 
 private extension CollectionDefaultBehavoirController {
+
+    func makeFocusableStrategy() -> [FocusableStrategy<UICollectionView>] {
+        let transform = CGAffineTransform(translationX: .zero, y: 20)
+        let transform2 = CGAffineTransform(rotationAngle: .pi / 20)
+        return [
+            TransformFocusableStrategy(model: .init(transform: transform)),
+            ShadowFocusableStrategy(model: .init(color: .blue)),
+            ScrollFocusableCollectionItem(position: .center(.centeredHorizontally)),
+            TransformFocusableStrategy(model: .init(transform: transform2, transformDuration: 1))
+        ]
+    }
 
     func configureCollectionView() {
         collectionView.decelerationRate = .fast

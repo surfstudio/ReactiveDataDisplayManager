@@ -27,7 +27,9 @@ final class GalleryController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
-        .add(featurePlugin: .focusable(by: .shadow(model: .init(color: .red))))
+        .add(featurePlugin: .focusable(
+            by: ShadowFocusableStrategy(model: .init(color: .red))
+        ))
         .add(plugin: .selectable())
         .build()
 

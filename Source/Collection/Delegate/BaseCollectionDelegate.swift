@@ -108,7 +108,7 @@ extension BaseCollectionDelegate {
                              didUpdateFocusIn context: UICollectionViewFocusUpdateContext,
                              with coordinator: UIFocusAnimationCoordinator) {
         #if os(tvOS)
-        focusablePlugin?.didFocusedCell(previusView: context.previouslyFocusedView,
+        focusablePlugin?.didUpdateFocus(previusView: context.previouslyFocusedView,
                                         nextView: context.nextFocusedView,
                                         indexPath: context.nextFocusedIndexPath,
                                         collection: collectionView)
