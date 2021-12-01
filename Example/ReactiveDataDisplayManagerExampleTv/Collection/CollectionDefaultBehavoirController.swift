@@ -31,7 +31,7 @@ final class CollectionDefaultBehavoirController: UIViewController {
         let transform = CGAffineTransform(translationX: .zero, y: 20)
         return .init(transform: transform,
                      shadow: .init(color: .blue),
-                     align: .center)
+                     align: .center())
     }
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
