@@ -9,7 +9,6 @@ import UIKit
 
 public final class CompositFocusableStrategy<CollectionType>: FocusableStrategy<CollectionType> {
 
-
     // MARK: - Private Properties
 
     private var strategys: [FocusableStrategy<CollectionType>]

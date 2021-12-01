@@ -9,7 +9,7 @@ import UIKit
 
 /// Scroll to when focusing
 public final class ScrollFocusableCollectionItem: FocusableStrategy<UICollectionView> {
-    
+
     // MARK: - Private Properties
 
     private var position: UICollectionView.ScrollPosition
