@@ -16,7 +16,8 @@ public struct FocusedPluginTransformModel {
     /// Takes parameters
     /// - Parameters:
     ///     - transform:  defaul value nil
-    ///     - transformDuration:  defaul value CGSize(width: 0, height: 0)
+    ///     - transform:  defaul value CGSize(width: 0, height: 0)
+    ///     - delay: default value .zero
     public init(
         transform: CGAffineTransform,
         duration: CGFloat = 0.5,
