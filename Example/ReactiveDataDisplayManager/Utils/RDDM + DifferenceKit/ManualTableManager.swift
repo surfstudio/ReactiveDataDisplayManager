@@ -116,7 +116,7 @@ private extension ManualTableManager {
 
     func makeSnapshot() -> [Section]? {
         guard let generators = generators as? [[DiffableItemSource]] else { return nil }
-        return sections.enumerated().map {
+        return headers.enumerated().map {
             let elements = generators.asDiffableItems[safe: $0] ?? []
             return Section(model: $1, elements: elements)
         }

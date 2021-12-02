@@ -29,11 +29,11 @@ open class TableSectionTitleDisplayablePlugin: TableFeaturePlugin, TableSectionT
     // MARK: - TableSectionTitleDisplayable
 
     open func numberOfSections(with provider: TableGeneratorsProvider?) -> Int {
-        titleWrapper?.titles?.count ?? provider?.sections.count ?? 0
+        titleWrapper?.titles?.count ?? provider?.headers.count ?? 0
     }
 
     open func sectionIndexTitles(with provider: TableGeneratorsProvider?) -> [String]? {
-        let sectionTitles = provider?.sections.compactMap { generator -> String? in
+        let sectionTitles = provider?.headers.compactMap { generator -> String? in
             guard let generator = generator as? GeneratorType else {
                 return nil
             }
@@ -53,7 +53,7 @@ open class TableSectionTitleDisplayablePlugin: TableFeaturePlugin, TableSectionT
 private extension TableSectionTitleDisplayablePlugin {
 
     func getIndexForTitleFromHeaderGenerators(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int {
-        return provider?.sections.firstIndex(where: { ($0 as? IndexTitleDisplaybleItem)?.title == title }) ?? -1
+        return provider?.headers.firstIndex(where: { ($0 as? IndexTitleDisplaybleItem)?.title == title }) ?? -1
     }
 
 }

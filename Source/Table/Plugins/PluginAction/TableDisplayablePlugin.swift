@@ -45,7 +45,7 @@ private extension TableDisplayablePlugin {
     }
 
     func getDisplayableFlowHeader(from manager: BaseTableManager?, at section: Int) -> DisplayableItem? {
-        manager?.sections[safe: section] as? DisplayableItem
+        manager?.headers[safe: section] as? DisplayableItem
     }
 
 }

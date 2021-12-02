@@ -138,10 +138,10 @@ private extension TableDiffableModifier {
         guard let provider = provider else { return nil }
 
         assert(provider.generators is [[CellGeneratorType]], "This strategy support only \(CellGeneratorType.Type.self)")
-        assert(provider.sections is [HeaderGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
+        assert(provider.headers is [HeaderGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
 
         guard
-            let sections = provider.sections as? [HeaderGeneratorType],
+            let sections = provider.headers as? [HeaderGeneratorType],
             let generators = provider.generators as? [[CellGeneratorType]]
         else { return nil }
 

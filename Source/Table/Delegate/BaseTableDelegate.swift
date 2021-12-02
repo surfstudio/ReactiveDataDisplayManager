@@ -132,17 +132,17 @@ extension BaseTableDelegate {
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let manager = manager, section <= manager.sections.count - 1 else {
+        guard let manager = manager, section <= manager.headers.count - 1 else {
             return nil
         }
-        return manager.sections[section].generate()
+        return manager.headers[section].generate()
     }
 
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard let manager = manager, section <= manager.sections.count - 1 else {
+        guard let manager = manager, section <= manager.headers.count - 1 else {
             return 0.1
         }
-        return manager.sections[section].height(tableView, forSection: section)
+        return manager.headers[section].height(tableView, forSection: section)
     }
 
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -38,7 +38,7 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
         self.supplementaryViewProvider = { (collection, kind, indexPath) -> UICollectionReusableView? in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
-                return provider.sections[indexPath.section]
+                return provider.headers[indexPath.section]
                     .generate(collectionView: collection, for: indexPath)
             case UICollectionView.elementKindSectionFooter:
                 return provider.footers[indexPath.section]
