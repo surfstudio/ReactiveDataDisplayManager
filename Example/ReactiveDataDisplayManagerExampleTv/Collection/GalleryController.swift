@@ -1,5 +1,5 @@
 //
-//  MainGalleryController.swift
+//  GalleryController.swift
 //  ReactiveDataDisplayManagerExample_iOS
 //
 //  Created by Никита Коробейников on 09.06.2021.
@@ -9,11 +9,7 @@ import UIKit
 import Nuke
 import ReactiveDataDisplayManager
 
-final class MainGalleryController: UIViewController {
-
-    // MARK: - Typealias
-
-    typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
+final class GalleryController: UIViewController {
 
     // MARK: - Constants
 
@@ -31,12 +27,17 @@ final class MainGalleryController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
+        .add(featurePlugin: .focusable(
+            by: ShadowFocusableStrategy(model: .init(color: .red))
+        ))
+        .add(plugin: .selectable())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "GalleryController"
 
         configureCollectionView()
 
@@ -47,7 +48,7 @@ final class MainGalleryController: UIViewController {
 
 // MARK: - Private Methods
 
-private extension MainGalleryController {
+private extension GalleryController {
 
     func configureCollectionView() {
         collectionView.decelerationRate = .fast
@@ -64,10 +65,14 @@ private extension MainGalleryController {
             adapter.addSectionHeaderGenerator(headerGenerator)
             for _ in 0...31 {
                 // Create viewModels for cell
-                guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
+                guard let viewModel = ImageViewModel.make(with: loadImage) else { continue }
 
                 // Create generator
-                let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
+                let generator = ImageCollectionViewGenerator(with: viewModel)
+
+                generator.didSelectEvent += {
+                    print(viewModel.imageUrl)
+                }
 
                 // Add generator to adapter
                 adapter.addCellGenerator(generator)

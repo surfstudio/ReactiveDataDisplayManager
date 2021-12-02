@@ -31,6 +31,9 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
     var swipeActionsPlugin: CollectionFeaturePlugin?
     var movablePlugin: CollectionMovableItemPlugin?
+    #if os(tvOS)
+    var focusablePlugin: CollectionFocusablePlugin?
+    #endif
 
     #if os(iOS)
     @available(iOS 11.0, *)
@@ -92,6 +95,10 @@ public class CollectionBuilder<T: BaseCollectionManager> {
             movablePlugin = plugin
         case let plugin as CollectionItemTitleDisplayable:
             itemTitleDisplayablePlugin = plugin
+        #if os(tvOS)
+        case let plugin as CollectionFocusablePlugin:
+            focusablePlugin = plugin
+        #endif
         default:
             break
         }
