@@ -95,10 +95,10 @@ public class CollectionBuilder<T: BaseCollectionManager> {
             movablePlugin = plugin
         case let plugin as CollectionItemTitleDisplayable:
             itemTitleDisplayablePlugin = plugin
+        #if os(tvOS)
         case let plugin as CollectionFocusablePlugin:
-            #if os(tvOS)
             focusablePlugin = plugin
-            #endif
+        #endif
         default:
             break
         }

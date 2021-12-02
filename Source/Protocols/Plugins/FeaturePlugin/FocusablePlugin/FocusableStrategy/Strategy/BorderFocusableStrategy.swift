@@ -18,6 +18,7 @@ public final class BorderFocusableStrategy: FocusableStrategy<UITableView> {
 
     // MARK: - Initialization
 
+    /// Takes a FocusablePluginBorderModel
     public init(model: FocusablePluginBorderModel) {
         self.model = model
     }
@@ -25,10 +26,10 @@ public final class BorderFocusableStrategy: FocusableStrategy<UITableView> {
     // MARK: - FocusableStrategy
 
     // Configure border
-    override func didUpdateFocus(previusView: UIView?,
-                                 nextView: UIView?,
-                                 indexPath: IndexPath?,
-                                 collection: UITableView?) {
+    override public func didUpdateFocus(previusView: UIView?,
+                                        nextView: UIView?,
+                                        indexPath: IndexPath?,
+                                        collection: UITableView?) {
         guard let indexPath = indexPath else {
             return
         }

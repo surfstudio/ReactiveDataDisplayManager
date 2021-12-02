@@ -7,7 +7,8 @@
 
 import UIKit
 
-public final class CompositFocusableStrategy<CollectionType>: FocusableStrategy<CollectionType> {
+/// Many strategies can be combined in this strategy
+public final class CompositeFocusableStrategy<CollectionType>: FocusableStrategy<CollectionType> {
 
     // MARK: - Private Properties
 
@@ -15,16 +16,18 @@ public final class CompositFocusableStrategy<CollectionType>: FocusableStrategy<
 
     // MARK: - Initialization
 
+    /// Takes an array of type FocusableStrategy <CollectionType>
     public init(strategys: [FocusableStrategy<CollectionType>]) {
         self.strategys = strategys
     }
 
     // MARK: - FocusableStrategy
 
-    override func didUpdateFocus(previusView: UIView?,
-                                 nextView: UIView?,
-                                 indexPath: IndexPath?,
-                                 collection: CollectionType?) {
+    // Configure strategys
+    override public func didUpdateFocus(previusView: UIView?,
+                                        nextView: UIView?,
+                                        indexPath: IndexPath?,
+                                        collection: CollectionType?) {
         strategys.forEach {
             $0.didUpdateFocus(previusView: previusView,
                               nextView: nextView,

@@ -16,6 +16,7 @@ public final class TransformFocusableStrategy<CollectionType>: FocusableStrategy
 
     // MARK: - Initialization
 
+    /// Takes a FocusedPluginTransformModel
     public init(model: FocusedPluginTransformModel) {
         self.model = model
     }
@@ -23,10 +24,10 @@ public final class TransformFocusableStrategy<CollectionType>: FocusableStrategy
     // MARK: - FocusableStrategy
 
     // Configure transform
-    override func didUpdateFocus(previusView: UIView?,
-                                 nextView: UIView?,
-                                 indexPath: IndexPath?,
-                                 collection: CollectionType? = nil) {
+    override public func didUpdateFocus(previusView: UIView?,
+                                        nextView: UIView?,
+                                        indexPath: IndexPath?,
+                                        collection: CollectionType? = nil) {
         UIView.animate(withDuration: model.duration, delay: model.delay, animations: {
             previusView?.transform = .identity
             nextView?.transform = self.model.transform

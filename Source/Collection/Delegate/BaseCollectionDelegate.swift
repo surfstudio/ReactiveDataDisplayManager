@@ -27,7 +27,9 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
     public var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>?
+    #if os(tvOS)
     public var focusablePlugin: FocusablePluginDelegate<CollectionGeneratorsProvider, UICollectionView>?
+    #endif
 
     // MARK: - Private Properties
 

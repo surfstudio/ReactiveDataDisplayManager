@@ -16,17 +16,19 @@ public final class ScrollFocusableTableCell: FocusableStrategy<UITableView> {
 
     // MARK: - Initialization
 
-    public init(position: FocusableAlign<UITableView>) {
-        self.position = position.getPosition()
+    /// Takes a position UITableView.ScrollPosition
+    /// Configure focusable align
+    public init(position: UITableView.ScrollPosition) {
+        self.position = position
     }
 
     // MARK: - FocusableStrategy
 
     // Configure scroll
-    override func didUpdateFocus(previusView: UIView?,
-                                 nextView: UIView?,
-                                 indexPath: IndexPath?,
-                                 collection: UITableView?) {
+    override public func didUpdateFocus(previusView: UIView?,
+                                        nextView: UIView?,
+                                        indexPath: IndexPath?,
+                                        collection: UITableView?) {
         guard let index = indexPath else {
             return
         }

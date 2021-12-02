@@ -10,8 +10,8 @@ import UIKit
 /// Model for configure UIView transform
 public struct FocusedPluginTransformModel {
     let transform: CGAffineTransform
-    let duration: CGFloat
-    let delay: CGFloat
+    let duration: TimeInterval
+    let delay: TimeInterval
 
     /// Takes parameters
     /// - Parameters:
@@ -20,7 +20,7 @@ public struct FocusedPluginTransformModel {
     ///     - delay: default value .zero
     public init(
         transform: CGAffineTransform,
-        duration: CGFloat = 0.5,
+        duration: TimeInterval = 0.5,
         delay: TimeInterval = .zero
     ) {
         self.transform = transform

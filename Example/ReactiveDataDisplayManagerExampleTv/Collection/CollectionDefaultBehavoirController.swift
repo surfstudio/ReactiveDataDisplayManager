@@ -30,7 +30,7 @@ final class CollectionDefaultBehavoirController: UIViewController {
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
         .add(featurePlugin: .focusable(
-            by: CompositFocusableStrategy(strategys: makeFocusableStrategy())
+            by: CompositeFocusableStrategy(strategys: makeFocusableStrategy())
         ))
         .add(plugin: .selectable())
         .build()
@@ -58,7 +58,7 @@ private extension CollectionDefaultBehavoirController {
         return [
             TransformFocusableStrategy(model: .init(transform: transform)),
             ShadowFocusableStrategy(model: .init(color: .blue)),
-            ScrollFocusableCollectionItem(position: .center(.centeredHorizontally)),
+            ScrollFocusableCollectionItem(position: .centeredHorizontally),
             TransformFocusableStrategy(model: .init(transform: transform2, duration: 1, delay: 0.5))
         ]
     }

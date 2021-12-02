@@ -118,8 +118,7 @@ extension BaseTableDelegate {
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         #if os(iOS)
         return movablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
-        #endif
-        #if os(tvOS)
+        #elseif os(tvOS)
         return focusablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
         #endif
     }

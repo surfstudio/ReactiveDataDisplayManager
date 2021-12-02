@@ -16,17 +16,18 @@ public final class ScrollFocusableCollectionItem: FocusableStrategy<UICollection
 
     // MARK: - Initialization
 
-    public init(position: FocusableAlign<UICollectionView>) {
-        self.position = position.getPosition()
+    /// Takes a position UICollectionView.ScrollPosition
+    public init(position: UICollectionView.ScrollPosition) {
+        self.position = position
     }
 
     // MARK: - FocusableStrategy
 
     // Configure scroll item
-    override func didUpdateFocus(previusView: UIView?,
-                                 nextView: UIView?,
-                                 indexPath: IndexPath?,
-                                 collection: UICollectionView?) {
+    override public func didUpdateFocus(previusView: UIView?,
+                                        nextView: UIView?,
+                                        indexPath: IndexPath?,
+                                        collection: UICollectionView?) {
         guard let index = indexPath else {
             return
         }

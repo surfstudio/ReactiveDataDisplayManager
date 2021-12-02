@@ -16,6 +16,7 @@ public final class ShadowFocusableStrategy<CollectionType>: FocusableStrategy<Co
 
     // MARK: - Initialization
 
+    /// Takes a FocusedPluginShadowModel
     public init(model: FocusedPluginShadowModel) {
         self.model = model
     }
@@ -23,10 +24,10 @@ public final class ShadowFocusableStrategy<CollectionType>: FocusableStrategy<Co
     // MARK: - FocusableStrategy
 
     // Configure shadow
-    override func didUpdateFocus(previusView: UIView?,
-                                 nextView: UIView?,
-                                 indexPath: IndexPath?,
-                                 collection: CollectionType? = nil) {
+    override public func didUpdateFocus(previusView: UIView?,
+                                        nextView: UIView?,
+                                        indexPath: IndexPath?,
+                                        collection: CollectionType? = nil) {
         previusView?.layer.shadowRadius = .zero
         previusView?.layer.shadowOpacity = .zero
         nextView?.layer.shadowColor = model.color.cgColor
