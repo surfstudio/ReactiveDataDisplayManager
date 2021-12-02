@@ -236,10 +236,6 @@ private extension BaseCollectionManager {
         }
     }
 
-}
-
-extension BaseCollectionManager {
-
     func addCollectionGenerators(with generators: [CollectionCellGenerator], choice section: СhoiceCollectionSection) {
         switch section {
         case .newSection(let section):
@@ -253,7 +249,7 @@ extension BaseCollectionManager {
         }
     }
 
-    func addNewSection(section: LegoSection?, generators: [CollectionCellGenerator]) {
+    func addNewSection(section: CollectionSection?, generators: [CollectionCellGenerator]) {
         let header = section?.header ?? EmptyCollectionHeaderGenerator()
         let footer = section?.footer ?? EmptyCollectionFooterGenerator()
         self.headers.append(header)
@@ -264,15 +260,10 @@ extension BaseCollectionManager {
         self.generators[index].append(contentsOf: generators)
     }
 
-    // MARK: - Support
-
     func checkEmptySection(for objects: [AnyObject]){
         if self.generators.count != objects.count || objects.isEmpty {
             self.generators.append([])
         }
     }
 
-    func getIndex(for object: AnyObject, in objects: [AnyObject]) -> Int? {
-        return objects.firstIndex(where: { $0 === object })
-    }
 }

@@ -74,4 +74,9 @@ public extension DataDisplayManager {
         CATransaction.commit()
     }
 
+    /// Support method. Searches for the index of an element.
+    func getIndex(for object: AnyObject, in objects: [AnyObject]) -> Int? {
+        return objects.firstIndex(where: { $0 === object })
+    }
+
 }
