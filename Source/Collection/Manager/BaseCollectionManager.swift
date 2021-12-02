@@ -236,34 +236,4 @@ private extension BaseCollectionManager {
         }
     }
 
-    func addCollectionGenerators(with generators: [CollectionCellGenerator], choice section: СhoiceCollectionSection) {
-        switch section {
-        case .newSection(let section):
-            self.addNewSection(section: section, generators: generators)
-        case .byIndex(let sectionIndex):
-            self.generators[sectionIndex <= 0 ? 0 : sectionIndex].append(contentsOf: generators)
-        case .lastSection:
-            self.headers.isEmpty || headers.count <= 0 ?
-            self.addCollectionGenerators(with: generators, choice: .newSection()) :
-            self.addCollectionGenerators(with: generators, choice: .byIndex(headers.count - 1))
-        }
-    }
-
-    func addNewSection(section: CollectionSection?, generators: [CollectionCellGenerator]) {
-        let header = section?.header ?? EmptyCollectionHeaderGenerator()
-        let footer = section?.footer ?? EmptyCollectionFooterGenerator()
-        self.headers.append(header)
-        self.footers.append(footer)
-        self.generators.append([])
-
-        guard let index = getIndex(for: header, in: headers) else { return }
-        self.generators[index].append(contentsOf: generators)
-    }
-
-    func checkEmptySection(for objects: [AnyObject]){
-        if self.generators.count != objects.count || objects.isEmpty {
-            self.generators.append([])
-        }
-    }
-
 }
