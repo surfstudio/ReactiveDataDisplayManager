@@ -33,31 +33,14 @@ open class BaseCollectionManager: CollectionGeneratorsProvider, DataDisplayManag
     public func forceRefill() {
         dataSource?.modifier?.reload()
     }
-
+    
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
-        generator.registerCell(in: view)
-
-        if self.generators.count != self.sections.count || sections.isEmpty {
-            self.generators.append([CollectionCellGenerator]())
-        }
-
-        if sections.count <= 0 {
-            sections.append(EmptyCollectionHeaderGenerator())
-        }
-
-        if footers.count <= 0 {
-            footers.append(EmptyCollectionFooterGenerator())
-        }
-
-        // Add to last section
-        let index = sections.count - 1
-        self.generators[index < 0 ? 0 : index].append(generator)
+        addCellGenerators([generator])
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator]) {
-        for generator in generators {
-            self.addCellGenerator(generator)
-        }
+        generators.forEach { $0.registerCell(in: view) }
+        addCollectionGenerators(with: generators, choice: .lastSection)
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
@@ -92,7 +75,8 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
 
     public func addSectionHeaderGenerator(_ generator: CollectionHeaderGenerator) {
         generator.registerHeader(in: view)
-        self.sections.append(generator)
+        self.headers.append(generator)
+        checkEmptySection(for: headers)
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator, toHeader header: CollectionHeaderGenerator) {
@@ -102,18 +86,13 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toHeader header: CollectionHeaderGenerator) {
         generators.forEach { $0.registerCell(in: view) }
 
-        if self.generators.count != self.sections.count || sections.isEmpty {
-            self.generators.append([CollectionCellGenerator]())
-        }
-
-        if let index = self.sections.firstIndex(where: { $0 === header }) {
-            self.generators[index].append(contentsOf: generators)
-        }
+        guard let index = getIndex(for: header, in: headers) else { return }
+        addCollectionGenerators(with: generators, choice: .byIndex(index))
     }
 
     public func removeAllGenerators(from header: CollectionHeaderGenerator) {
         guard
-            let index = self.sections.firstIndex(where: { $0 === header }),
+            let index = self.headers.firstIndex(where: { $0 === header }),
             self.generators.count > index
         else {
             return
@@ -123,7 +102,7 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
     }
 
     public func clearHeaderGenerators() {
-        self.sections.removeAll()
+        self.headers.removeAll()
     }
 
 }
@@ -135,6 +114,7 @@ extension BaseCollectionManager: FooterDataDisplayManager {
     public func addSectionFooterGenerator(_ generator: CollectionFooterGenerator) {
         generator.registerFooter(in: view)
         self.footers.append(generator)
+        checkEmptySection(for: footers)
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator, toFooter footer: CollectionFooterGenerator) {
@@ -144,13 +124,8 @@ extension BaseCollectionManager: FooterDataDisplayManager {
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toFooter footer: CollectionFooterGenerator) {
         generators.forEach { $0.registerCell(in: view) }
 
-        if self.generators.count != self.footers.count || footers.isEmpty {
-            self.generators.append([CollectionCellGenerator]())
-        }
-
-        if let index = self.footers.firstIndex(where: { $0 === footer }) {
-            self.generators[index].append(contentsOf: generators)
-        }
+        guard let index = getIndex(for: footer, in: footers) else { return }
+        addCollectionGenerators(with: generators, choice: .byIndex(index))
     }
 
     public func removeAllGenerators(from footer: CollectionFooterGenerator) {
@@ -248,7 +223,7 @@ private extension BaseCollectionManager {
         let sectionIsEmpty = generators[index.sectionIndex].isEmpty
         if needRemoveEmptySection && sectionIsEmpty {
             generators.remove(at: index.sectionIndex)
-            sections.remove(at: index.sectionIndex)
+            headers.remove(at: index.sectionIndex)
             sectionIndexPath = IndexSet(integer: index.sectionIndex)
         }
 
@@ -261,4 +236,43 @@ private extension BaseCollectionManager {
         }
     }
 
+}
+
+extension BaseCollectionManager {
+
+    func addCollectionGenerators(with generators: [CollectionCellGenerator], choice section: СhoiceCollectionSection) {
+        switch section {
+        case .newSection(let section):
+            self.addNewSection(section: section, generators: generators)
+        case .byIndex(let sectionIndex):
+            self.generators[sectionIndex <= 0 ? 0 : sectionIndex].append(contentsOf: generators)
+        case .lastSection:
+            self.headers.isEmpty || headers.count <= 0 ?
+            self.addCollectionGenerators(with: generators, choice: .newSection()) :
+            self.addCollectionGenerators(with: generators, choice: .byIndex(headers.count - 1))
+        }
+    }
+
+    func addNewSection(section: LegoSection?, generators: [CollectionCellGenerator]) {
+        let header = section?.header ?? EmptyCollectionHeaderGenerator()
+        let footer = section?.footer ?? EmptyCollectionFooterGenerator()
+        self.headers.append(header)
+        self.footers.append(footer)
+        self.generators.append([])
+
+        guard let index = getIndex(for: header, in: headers) else { return }
+        self.generators[index].append(contentsOf: generators)
+    }
+
+    // MARK: - Support
+
+    func checkEmptySection(for objects: [AnyObject]){
+        if self.generators.count != objects.count || objects.isEmpty {
+            self.generators.append([])
+        }
+    }
+
+    func getIndex(for object: AnyObject, in objects: [AnyObject]) -> Int? {
+        return objects.firstIndex(where: { $0 === object })
+    }
 }

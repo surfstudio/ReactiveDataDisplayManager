@@ -8,5 +8,6 @@
 
 open class TableGeneratorsProvider: GeneratorsProvider {
     open var generators = [[TableCellGenerator]]()
-    open var sections = [TableHeaderGenerator]()
+    open var headers = [TableHeaderGenerator]()
+    open var footers = [TableFooterGenerator]()
 }

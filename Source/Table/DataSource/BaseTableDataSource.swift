@@ -62,7 +62,7 @@ extension BaseTableDataSource {
 extension BaseTableDataSource {
 
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionTitleDisplayablePlugin?.numberOfSections(with: provider) ?? provider?.sections.count ?? 0
+        return sectionTitleDisplayablePlugin?.numberOfSections(with: provider) ?? provider?.headers.count ?? 0
     }
 
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

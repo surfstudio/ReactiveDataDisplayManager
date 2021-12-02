@@ -8,6 +8,6 @@
 
 open class CollectionGeneratorsProvider: GeneratorsProvider {
     open var generators = [[CollectionCellGenerator]]()
-    open var sections = [CollectionHeaderGenerator]()
+    open var headers = [CollectionHeaderGenerator]()
     open var footers = [CollectionFooterGenerator]()
 }

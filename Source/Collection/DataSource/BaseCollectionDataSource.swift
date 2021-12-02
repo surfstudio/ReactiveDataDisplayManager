@@ -62,7 +62,7 @@ extension BaseCollectionDataSource {
 extension BaseCollectionDataSource {
 
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return provider?.sections.count ?? 0
+        return provider?.headers.count ?? 0
     }
 
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -94,7 +94,7 @@ extension BaseCollectionDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             return provider
-                .sections[indexPath.section]
+                .headers[indexPath.section]
                 .generate(collectionView: collectionView, for: indexPath)
         case UICollectionView.elementKindSectionFooter:
             return provider

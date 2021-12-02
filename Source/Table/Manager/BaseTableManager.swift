@@ -34,14 +34,14 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
         generator.registerCell(in: view)
-        if self.generators.count != self.sections.count || sections.isEmpty {
+        if self.generators.count != self.headers.count || headers.isEmpty {
             self.generators.append([TableCellGenerator]())
         }
-        if sections.count <= 0 {
-            sections.append(EmptyTableHeaderGenerator())
+        if headers.count <= 0 {
+            headers.append(EmptyTableHeaderGenerator())
         }
         // Add to last section
-        let index = sections.count - 1
+        let index = headers.count - 1
         self.generators[index < 0 ? 0 : index].append(generator)
     }
 
@@ -121,7 +121,7 @@ extension BaseTableManager {
         let sectionIsEmpty = generators[index.sectionIndex].isEmpty
         if needRemoveEmptySection && sectionIsEmpty {
             generators.remove(at: index.sectionIndex)
-            sections.remove(at: index.sectionIndex)
+            headers.remove(at: index.sectionIndex)
             sectionIndexPath = IndexSet(integer: index.sectionIndex)
         }
 
@@ -141,7 +141,7 @@ extension BaseTableManager {
 public extension BaseTableManager {
 
     func scrollTo(headGenerator: TableHeaderGenerator, scrollPosition: UITableView.ScrollPosition, animated: Bool) {
-        guard let index = sections.firstIndex(where: { $0 === headGenerator }) else {
+        guard let index = headers.firstIndex(where: { $0 === headGenerator }) else {
             return
         }
         view?.scrollToRow(at: IndexPath(row: 0, section: index), at: scrollPosition, animated: animated)
