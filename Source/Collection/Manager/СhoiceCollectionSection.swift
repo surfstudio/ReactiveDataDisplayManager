@@ -8,12 +8,12 @@
 import Foundation
 
 public enum СhoiceCollectionSection {
-    case newSection(LegoSection? = nil)
+    case newSection(CollectionSection? = nil)
     case byIndex(Int)
     case lastSection
 }
 
-public struct LegoSection {
+public struct CollectionSection {
     let header: CollectionHeaderGenerator?
     let footer: CollectionFooterGenerator?
 }
