@@ -16,11 +16,14 @@ public class ManualTableManager: BaseTableManager {
     /// Adds section TableHeaderGenerator generator and its section's generators to the end of collection
     ///
     /// - Parameters:
-    ///   - generator: Generator for new section TableHeaderGenerator.
+    ///   - generator: Generator for new section TableHeaderGenerator, TableFooterGenerator (default value EmptyTableFooterGenerator).
     ///   - cells: Generators for this section.
-    open func addSection(TableHeaderGenerator generator: TableHeaderGenerator, cells: [TableCellGenerator]) {
+    open func addSection(TableHeaderGenerator generator: TableHeaderGenerator,
+                         footerGenerator: TableFooterGenerator = EmptyTableFooterGenerator(),
+                         cells: [TableCellGenerator]) {
         cells.forEach { $0.registerCell(in: view) }
         self.headers.append(generator)
+        self.footers.append(footerGenerator)
         self.generators.append(cells)
     }
 
@@ -30,6 +33,16 @@ public class ManualTableManager: BaseTableManager {
     ///   - generator: Generator for new section TableHeaderGenerator.
     open func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.headers.append(generator)
+        checkEmptySection(for: headers)
+    }
+
+    /// Adds section TableFooterGenerator generator  to the end of collection
+    ///
+    /// - Parameters:
+    ///   - generator: Generator for new section TableFooterGenerator.
+    open func addSectionFooterGenerator(_ generator: TableFooterGenerator) {
+        self.footers.append(generator)
+        checkEmptySection(for: footers)
     }
 
     /// Inserts new TableHeaderGenerator generator after another.
@@ -69,6 +82,11 @@ public class ManualTableManager: BaseTableManager {
         self.headers.removeAll()
     }
 
+    /// Removes all footer generators
+    open func clearFooterGenerators() {
+        self.footers.removeAll()
+    }
+
     /// Reloads only one section with specified animation
     ///
     /// - Parameters:
@@ -89,12 +107,8 @@ public class ManualTableManager: BaseTableManager {
     open func addCellGenerators(_ generators: [TableCellGenerator], toHeader headerGenerator: TableHeaderGenerator) {
         generators.forEach { $0.registerCell(in: view) }
 
-        if self.generators.count != self.headers.count || headers.isEmpty {
-            self.generators.append([TableCellGenerator]())
-        }
-
-        if let index = self.headers.firstIndex(where: { $0 === headerGenerator }) {
-            self.generators[index].append(contentsOf: generators)
+        if let index = getIndex(for: headerGenerator, in: headers) {
+            addTableGenerators(with: generators, choice: .byIndex(index))
         }
     }
 

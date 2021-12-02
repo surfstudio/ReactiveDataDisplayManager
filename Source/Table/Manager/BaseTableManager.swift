@@ -33,16 +33,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
-        generator.registerCell(in: view)
-        if self.generators.count != self.headers.count || headers.isEmpty {
-            self.generators.append([TableCellGenerator]())
-        }
-        if headers.count <= 0 {
-            headers.append(EmptyTableHeaderGenerator())
-        }
-        // Add to last section
-        let index = headers.count - 1
-        self.generators[index < 0 ? 0 : index].append(generator)
+        addCellGenerators([generator])
     }
 
     open func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
@@ -58,9 +49,8 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     }
 
     open func addCellGenerators(_ generators: [TableCellGenerator]) {
-        for generator in generators {
-            self.addCellGenerator(generator)
-        }
+        generators.forEach { $0.registerCell(in: view) }
+        addTableGenerators(with: generators, choice: .lastSection)
     }
 
     open func update(generators: [TableCellGenerator]) {
