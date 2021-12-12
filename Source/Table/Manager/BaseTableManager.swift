@@ -41,7 +41,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
         }
-        self.generators[sectionIndex].insert(contentsOf: generators, at: generatorIndex + 1)
+        self.sections[sectionIndex].generators.insert(contentsOf: generators, at: generatorIndex + 1)
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator) {
@@ -60,7 +60,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     }
 
     open func clearCellGenerators() {
-        generators.removeAll()
+        sections.removeAll()
     }
 
     /// Removes generator from data display manager. Generators compares by references.
@@ -90,8 +90,8 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
 extension BaseTableManager {
 
     func findGenerator(_ generator: TableCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
-        for (sectionIndex, section) in generators.enumerated() {
-            if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
+        for (sectionIndex, section) in sections.enumerated() {
+            if let generatorIndex = section.generators.firstIndex(where: { $0 === generator }) {
                 return (sectionIndex, generatorIndex)
             }
         }
@@ -103,15 +103,14 @@ extension BaseTableManager {
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 
-        generators[index.sectionIndex].remove(at: index.generatorIndex)
+        sections[index.sectionIndex].generators.remove(at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
         // remove empty section if needed
         var sectionIndexPath: IndexSet?
-        let sectionIsEmpty = generators[index.sectionIndex].isEmpty
+        let sectionIsEmpty = sections[index.sectionIndex].generators.isEmpty
         if needRemoveEmptySection && sectionIsEmpty {
-            generators.remove(at: index.sectionIndex)
-            headers.remove(at: index.sectionIndex)
+            sections.remove(at: index.sectionIndex)
             sectionIndexPath = IndexSet(integer: index.sectionIndex)
         }
 
@@ -131,14 +130,14 @@ extension BaseTableManager {
 public extension BaseTableManager {
 
     func scrollTo(headGenerator: TableHeaderGenerator, scrollPosition: UITableView.ScrollPosition, animated: Bool) {
-        guard let index = headers.firstIndex(where: { $0 === headGenerator }) else {
+        guard let index = sections.firstIndex(where: { $0.header === headGenerator }) else {
             return
         }
         view?.scrollToRow(at: IndexPath(row: 0, section: index), at: scrollPosition, animated: animated)
     }
 
     func scrollTo(generator: TableCellGenerator, scrollPosition: UITableView.ScrollPosition, animated: Bool) {
-        for sectionElement in generators.enumerated() {
+        for sectionElement in getOldSections().generators.enumerated() {
             for rowElement in sectionElement.element.enumerated() {
                 if rowElement.element === generator {
                     let indexPath = IndexPath(row: rowElement.offset, section: sectionElement.offset)

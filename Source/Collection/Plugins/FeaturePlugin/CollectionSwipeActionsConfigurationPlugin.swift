@@ -32,7 +32,7 @@ public class CollectionSwipeActionsConfigurationPlugin: CollectionFeaturePlugin,
     public func configureSwipeActions(for listConfiguration: inout UICollectionLayoutListConfiguration) {
         listConfiguration.leadingSwipeActionsConfigurationProvider = { [weak self] indexPath in
             guard
-                let generator = self?.manager?.generators[indexPath.section][indexPath.row] as? SwipeableItem,
+                let generator = self?.manager?.sections[indexPath.section].generators[indexPath.row] as? SwipeableItem,
                 let actions = self?.swipeProvider.getLeadingSwipeActionsForGenerator(generator)
             else { return nil }
 
@@ -41,7 +41,7 @@ public class CollectionSwipeActionsConfigurationPlugin: CollectionFeaturePlugin,
 
         listConfiguration.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
             guard
-                let generator = self?.manager?.generators[indexPath.section][indexPath.row] as? SwipeableItem,
+                let generator = self?.manager?.sections[indexPath.section].generators[indexPath.row] as? SwipeableItem,
                 let actions = self?.swipeProvider.getTrailingSwipeActionsForGenerator(generator)
             else { return nil }
 

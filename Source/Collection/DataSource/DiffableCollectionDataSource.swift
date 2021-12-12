@@ -30,7 +30,8 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
     public init(provider: BaseCollectionManager) {
         super.init(collectionView: provider.view) { (collection, indexPath, item) -> UICollectionViewCell? in
             provider
-                .generators[indexPath.section][indexPath.row]
+                .sections[indexPath.section]
+                .generators[indexPath.row]
                 .generate(collectionView: collection, for: indexPath)
         }
 
@@ -38,10 +39,10 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
         self.supplementaryViewProvider = { (collection, kind, indexPath) -> UICollectionReusableView? in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
-                return provider.headers[indexPath.section]
+                return provider.sections[indexPath.section].header
                     .generate(collectionView: collection, for: indexPath)
             case UICollectionView.elementKindSectionFooter:
-                return provider.footers[indexPath.section]
+                return provider.sections[indexPath.section].footer
                     .generate(collectionView: collection, for: indexPath)
             default:
                 return nil

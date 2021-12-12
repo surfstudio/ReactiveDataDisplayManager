@@ -92,11 +92,11 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
 
         switch event {
         case .willDisplayCell(let indexPath):
-            guard let generators = manager?.generators else {
+            guard let sections = manager?.sections else {
                 return
             }
-            let lastSectionIndex = generators.count - 1
-            let lastCellInLastSectionIndex = generators[lastSectionIndex].count - 1
+            let lastSectionIndex = sections.count - 1
+            let lastCellInLastSectionIndex = sections[lastSectionIndex].generators.count - 1
 
             let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
             if indexPath == lastCellIndexPath && canIterate {

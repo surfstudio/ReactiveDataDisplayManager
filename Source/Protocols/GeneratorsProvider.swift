@@ -8,11 +8,27 @@
 import Foundation
 
 public protocol GeneratorsProvider: AnyObject {
-    associatedtype CellGeneratorType
+    associatedtype GeneratorType
     associatedtype HeaderGeneratorType
     associatedtype FooterGeneratorType
 
-    var generators: [[CellGeneratorType]] { get set }
-    var headers: [HeaderGeneratorType] { get set }
-    var footers: [FooterGeneratorType] { get set }
+    var sections: [SectionType<GeneratorType, HeaderGeneratorType, FooterGeneratorType>] { get set }
+}
+
+public extension GeneratorsProvider {
+
+    func getOldSections() -> OldSection<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
+        var generators = [[GeneratorType]]()
+        var headers = [HeaderGeneratorType]()
+        var footers = [FooterGeneratorType]()
+        for section in sections {
+            headers.append(section.header)
+            footers.append(section.footer)
+            generators.append(section.generators)
+        }
+        return .init(generators: generators,
+                     headers: headers,
+                     footers: footers)
+    }
+
 }

@@ -90,12 +90,13 @@ private extension DroppablePluginDelegate {
             guard
                 let sourceIndexPath = $0.sourceIndexPath,
                 destinationIndexPath != sourceIndexPath,
+                let itemToMove = provider?.sections[sourceIndexPath.section].generators.remove(at: sourceIndexPath.row),
                 dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true
             else { return }
             guard let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
             else { return }
 
-            provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
+            provider?.sections[destinationIndexPath.section].generators.insert(itemToMove, at: destinationIndexPath.row)
             modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: animation, and: animation)
 
             coordinator.drop($0.dragItem, toItemAt: destinationIndexPath)

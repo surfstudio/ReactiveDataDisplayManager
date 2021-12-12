@@ -8,12 +8,7 @@
 import Foundation
 
 public enum СhoiceTableSection {
-    case newSection(TableSection? = nil)
+    case newSection(header: TableHeaderGenerator? = nil, footer: TableFooterGenerator? = nil)
     case byIndex(Int)
     case lastSection
-}
-
-public struct TableSection {
-    let header: TableHeaderGenerator?
-    let footer: TableFooterGenerator?
 }
