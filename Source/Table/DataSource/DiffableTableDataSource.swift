@@ -41,7 +41,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
         super.init(tableView: provider.view) { (table, indexPath, item) -> UITableViewCell? in
             return provider
-                .generators[indexPath.section][indexPath.row]
+                .sections[indexPath.section].generators[indexPath.row]
                 .generate(tableView: table, for: indexPath)
         }
 

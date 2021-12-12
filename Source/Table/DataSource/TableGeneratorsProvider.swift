@@ -8,43 +8,53 @@
 
 open class TableGeneratorsProvider: GeneratorsProvider {
 
-    open var generators = [[TableCellGenerator]]()
-    open var headers = [TableHeaderGenerator]()
-    open var footers = [TableFooterGenerator]()
+    public typealias GeneratorType = TableCellGenerator
+    public typealias HeaderGeneratorType = TableHeaderGenerator
+    public typealias FooterGeneratorType = TableFooterGenerator
+
+    open var sections: [SectionType<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>] = []
 
     func addTableGenerators(with generators: [TableCellGenerator], choice section: СhoiceTableSection) {
         switch section {
-        case .newSection(let section):
-            self.addNewSection(section: section, generators: generators)
+        case .newSection(let header, let footer):
+            self.addGeneratorsInNewSection(generators: generators, for: header, footer: footer)
         case .byIndex(let sectionIndex):
-            self.generators[sectionIndex <= 0 ? 0 : sectionIndex].append(contentsOf: generators)
+            self.addGeneratorsInSection(by: sectionIndex, generators: generators)
         case .lastSection:
-            self.headers.isEmpty || headers.count <= 0 ?
+            self.sections.isEmpty || sections.count <= 0 ?
             self.addTableGenerators(with: generators, choice: .newSection()) :
-            self.addTableGenerators(with: generators, choice: .byIndex(headers.count - 1))
+            self.addGeneratorsInLastSection(generators: generators)
         }
     }
 
-    func addNewSection(section: TableSection?, generators: [TableCellGenerator]) {
-        let header = section?.header ?? EmptyTableHeaderGenerator()
-        let footer = section?.footer ?? EmptyTableFooterGenerator()
-        self.headers.append(header)
-        self.footers.append(footer)
-        self.generators.append([])
-
-        guard let index = getIndex(for: header, in: headers) else { return }
-        self.generators[index].append(contentsOf: generators)
+    func addNewSection(section: SectionType<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>) {
+        sections.append(section)
     }
 
-    func checkEmptySection(for objects: [AnyObject]){
-        if self.generators.count != objects.count || objects.isEmpty {
-            self.generators.append([])
-        }
+    func addGeneratorsInLastSection(generators: [TableCellGenerator]) {
+        let index = sections.count - 1
+        sections[index].generators.append(contentsOf: generators)
     }
 
-    /// Support method. Searches for the index of an element.
-    func getIndex(for object: AnyObject, in objects: [AnyObject]) -> Int? {
-        return objects.firstIndex(where: { $0 === object })
+    func addGeneratorsInNewSection(generators: [TableCellGenerator],
+                                   for header: TableHeaderGenerator? = nil,
+                                   footer: TableFooterGenerator? = nil) {
+        sections.append(.init(generators: generators,
+                              header: header ?? EmptyTableHeaderGenerator(),
+                              footer: footer ?? EmptyTableFooterGenerator()))
+    }
+
+    func addGeneratorsInSection(by index: Int, generators: [TableCellGenerator]) {
+        sections[index <= 0 ? 0 : index].generators.append(contentsOf: generators)
+    }
+
+    func addHeader(header: TableHeaderGenerator) {
+        addTableGenerators(with: [], choice: .newSection(header: header, footer: nil))
+    }
+
+    func addFooter(footer: TableFooterGenerator) {
+        let index = sections.count - 1
+        sections[index <= 0 ? 0 : index].footer = footer
     }
 
 }

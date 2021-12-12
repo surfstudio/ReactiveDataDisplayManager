@@ -62,14 +62,14 @@ extension BaseCollectionDataSource {
 extension BaseCollectionDataSource {
 
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return provider?.headers.count ?? 0
+        return provider?.sections.count ?? 0
     }
 
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let provider = provider, provider.generators.indices.contains(section) else {
+        guard let provider = provider, provider.getOldSections().generators.indices.contains(section) else {
             return 0
         }
-        return provider.generators[section].count
+        return provider.sections[section].generators.count
     }
 
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,7 +77,8 @@ extension BaseCollectionDataSource {
             return UICollectionViewCell()
         }
         return provider
-            .generators[indexPath.section][indexPath.row]
+            .sections[indexPath.section]
+            .generators[indexPath.row]
             .generate(collectionView: collectionView, for: indexPath)
     }
 
@@ -91,11 +92,13 @@ extension BaseCollectionDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             return provider
-                .headers[indexPath.section]
+                .sections[indexPath.section]
+                .header
                 .generate(collectionView: collectionView, for: indexPath)
         case UICollectionView.elementKindSectionFooter:
             return provider
-                .footers[indexPath.section]
+                .sections[indexPath.section]
+                .footer
                 .generate(collectionView: collectionView, for: indexPath)
         default:
             return UICollectionReusableView()

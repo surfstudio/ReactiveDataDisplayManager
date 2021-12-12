@@ -26,7 +26,7 @@ extension MovablePluginDelegate: MovableDelegate {
     ///     - at: index path of the focused item
     ///     - with: current provider with generators
     open func canFocusRow(at indexPath: IndexPath, with provider: Provider?) -> Bool {
-        if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
+        if let generator = provider?.sections[indexPath.section].generators[indexPath.row] as? GeneratorType {
             return generator.canMove()
         }
         return false

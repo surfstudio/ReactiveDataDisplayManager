@@ -62,7 +62,7 @@ private extension TablePrefetcherablePlugin {
     }
 
     func getPrefetcherableFlowCell(from manager: BaseTableManager?, at indexPath: IndexPath) -> Generator? {
-        return manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? Generator
+        return manager?.sections[safe: indexPath.section]?.generators[safe: indexPath.row] as? Generator
     }
 
 }

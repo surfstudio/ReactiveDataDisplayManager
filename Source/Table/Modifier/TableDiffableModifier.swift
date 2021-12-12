@@ -137,12 +137,12 @@ private extension TableDiffableModifier {
     func makeSnapshot() -> DiffableSnapshot? {
         guard let provider = provider else { return nil }
 
-        assert(provider.generators is [[CellGeneratorType]], "This strategy support only \(CellGeneratorType.Type.self)")
-        assert(provider.headers is [HeaderGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
+        assert(provider.getOldSections().generators is [[CellGeneratorType]], "This strategy support only \(CellGeneratorType.Type.self)")
+        assert(provider.getOldSections().headers is [HeaderGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
 
         guard
-            let sections = provider.headers as? [HeaderGeneratorType],
-            let generators = provider.generators as? [[CellGeneratorType]]
+            let sections = provider.getOldSections().headers as? [HeaderGeneratorType],
+            let generators = provider.getOldSections().generators as? [[CellGeneratorType]]
         else { return nil }
 
         var snapshot = DiffableSnapshot()

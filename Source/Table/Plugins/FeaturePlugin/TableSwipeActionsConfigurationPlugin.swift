@@ -29,7 +29,7 @@ open class TableSwipeActionsConfigurationPlugin: TableFeaturePlugin, TableSwipeA
 
     open func leadingSwipeActionsConfigurationForRow(at indexPath: IndexPath, with manager: BaseTableManager?) -> UISwipeActionsConfiguration? {
         guard
-            let generator = manager?.generators[indexPath.section][indexPath.row] as? GeneratorType,
+            let generator = manager?.sections[indexPath.section].generators[indexPath.row] as? GeneratorType,
             let actions = swipeProvider.getLeadingSwipeActionsForGenerator(generator)
         else { return nil }
 
@@ -38,7 +38,7 @@ open class TableSwipeActionsConfigurationPlugin: TableFeaturePlugin, TableSwipeA
 
     open func trailingSwipeActionsConfigurationForRow(at indexPath: IndexPath, with manager: BaseTableManager?) -> UISwipeActionsConfiguration? {
         guard
-            let generator = manager?.generators[indexPath.section][indexPath.row] as? GeneratorType,
+            let generator = manager?.sections[indexPath.section].generators[indexPath.row] as? GeneratorType,
             let actions = swipeProvider.getTrailingSwipeActionsForGenerator(generator)
         else { return nil }
 

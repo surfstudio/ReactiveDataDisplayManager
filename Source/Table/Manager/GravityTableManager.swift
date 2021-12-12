@@ -42,19 +42,10 @@ open class GravityTableManager: BaseTableManager {
         }
 
         generator.registerCell(in: tableView)
+        addTableGenerators(with: [generator], choice: .lastSection)
 
-        if generators.count != headers.count || headers.isEmpty {
-            generators.append([CellGeneratorType]())
-        }
-
-        if headers.isEmpty {
-            headers.append(EmptyTableHeaderGenerator())
-        }
-
-        let index = headers.count - 1
+        let index = sections.count - 1
         let currentIndex = index < 0 ? 0 : index
-        generators[currentIndex].append(generator)
-
         insert(generators: [gravityGenerator], to: currentIndex)
     }
 
@@ -77,10 +68,10 @@ open class GravityTableManager: BaseTableManager {
             return
         }
 
-        generators[path.section].insert(generator, at: path.row + 1)
+        sections[path.section].generators.insert(generator, at: path.row + 1)
 
         gravityGenerator.heaviness = gravityGeneratorAfter.heaviness + 1
-        generators.asGravityCellCompatible[path.section].forEach { gen in
+        getOldSections().generators.asGravityCellCompatible[path.section].forEach { gen in
             guard gen.heaviness > gravityGenerator.heaviness else { return }
             gen.heaviness += 1
         }
@@ -92,18 +83,14 @@ open class GravityTableManager: BaseTableManager {
 
     public func addSectionHeaderGenerator(_ generator: HeaderGeneratorType) {
         checkDuplicate(header: generator)
-        headers.append(generator)
+        addHeader(header: generator)
 
-        if generators.count != headers.count || headers.isEmpty {
-            generators.append([CellGeneratorType]())
-        }
-
-        let combined = zip(headers.asGravityHeaderCompatible, generators).sorted { lhs, rhs in
+        let combined = zip(getOldSections().headers.asGravityHeaderCompatible, sections).sorted { lhs, rhs in
             lhs.0.getHeaviness() < rhs.0.getHeaviness()
         }
 
-        headers = combined.map { $0.0 }
-        generators = combined.map { $0.1 }
+//        headers = combined.map { $0.0 }
+//        generators = combined.map { $0.1 }
     }
 
     public func addCellGenerator(_ generator: CellGeneratorType, toHeader header: HeaderGeneratorType) {
@@ -116,29 +103,27 @@ open class GravityTableManager: BaseTableManager {
 
         generators.forEach { $0.registerCell(in: tableView) }
 
-        if self.generators.count != headers.count || headers.isEmpty {
-            self.generators.append([CellGeneratorType]())
-        }
-
-        if let index = headers.firstIndex(where: { $0 === header }) {
-            self.generators[index].append(contentsOf: generators)
+        if let index = sections.firstIndex(where: { $0.header === header }) {
+            self.sections[index].generators.append(contentsOf: generators)
             insert(generators: generators, to: index)
         }
     }
 
     public func removeAllgenerators(from header: HeaderGeneratorType) {
         guard
-            let index = self.headers.firstIndex(where: { $0 === header }),
-            self.generators.count > index
+            let index = self.sections.firstIndex(where: { $0.header === header }),
+            self.sections.count > index
         else {
             return
         }
 
-        self.generators[index].removeAll()
+        self.sections[index].generators.removeAll()
     }
 
     public func clearHeaderGenerators() {
-        headers.removeAll()
+        for (index, _) in sections.enumerated() {
+            sections[index].header = EmptyTableHeaderGenerator()
+        }
     }
 
     open func replace(oldGenerator: CellGeneratorType,
@@ -147,20 +132,20 @@ open class GravityTableManager: BaseTableManager {
                       insertAnimation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(oldGenerator) else { return }
 
-        generators[index.sectionIndex].remove(at: index.generatorIndex)
-        generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
+        sections[index.sectionIndex].generators.remove(at: index.generatorIndex)
+        sections[index.sectionIndex].generators.insert(newGenerator, at: index.generatorIndex)
 
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
         dataSource?.modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
     open func replace(header: HeaderGeneratorType, with animation: UITableView.RowAnimation = .fade) {
-        guard let indexOfHeader = self.headers.firstIndex(where: { $0 === header }) else {
+        guard let indexOfHeader = self.sections.firstIndex(where: { $0.header === header }) else {
             self.addSectionHeaderGenerator(header)
             return
         }
 
-        self.headers[indexOfHeader] = header
+        self.sections[indexOfHeader].header = header
         dataSource?.modifier?.reloadSections(at: [indexOfHeader], with: animation)
     }
 
@@ -183,7 +168,7 @@ private extension GravityTableManager {
 
     func checkDuplicate(header: HeaderGeneratorType) {
         guard
-            !headers.asGravityHeaderCompatible.contains(where: { $0.getHeaviness() == header.getHeaviness() })
+            !getOldSections().headers.asGravityHeaderCompatible.contains(where: { $0.getHeaviness() == header.getHeaviness() })
         else {
             assertionFailure("Unique heaviness expected for \(header)")
             return
@@ -191,7 +176,7 @@ private extension GravityTableManager {
     }
 
     func checkDuplicate(generator: CellGeneratorType) -> Bool {
-        return !generators.asGravityCellCompatible.contains(where: { section in
+        return !getOldSections().generators.asGravityCellCompatible.contains(where: { section in
             section.contains { $0.heaviness == generator.heaviness }
         })
     }
@@ -199,7 +184,7 @@ private extension GravityTableManager {
     func insert(generators: [CellGeneratorType], to section: Int) {
         guard !generators.isEmpty else { return }
 
-        self.generators[section] = self.generators.asGravityCellCompatible[section].sorted { $0.heaviness < $1.heaviness }
+        self.sections[section].generators = self.getOldSections().generators.asGravityCellCompatible[section].sorted { $0.heaviness < $1.heaviness }
 
         let indexPaths = generators.compactMap { generator -> IndexPath? in
             guard
@@ -214,7 +199,7 @@ private extension GravityTableManager {
     }
 
     func nearestIndex(for generator: CellGeneratorType, in section: Int) -> Int? {
-        let nearestIndex = generators.asGravityCellCompatible[section].enumerated().min { lhs, rhs in
+        let nearestIndex = getOldSections().generators.asGravityCellCompatible[section].enumerated().min { lhs, rhs in
             let lhsValue = abs(lhs.element.heaviness - generator.heaviness)
             let rhsValue = abs(rhs.element.heaviness - generator.heaviness)
             return lhsValue < rhsValue
@@ -224,8 +209,8 @@ private extension GravityTableManager {
     }
 
     func indexPath(for generator: CellGeneratorType) -> IndexPath? {
-        for (sectionIndex, section) in generators.enumerated() {
-            if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
+        for (sectionIndex, section) in sections.enumerated() {
+            if let generatorIndex = section.generators.firstIndex(where: { $0 === generator }) {
                 return IndexPath(row: generatorIndex, section: sectionIndex)
             }
         }

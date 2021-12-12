@@ -50,7 +50,7 @@ open class BaseCollectionManager: CollectionGeneratorsProvider, DataDisplayManag
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
         }
 
-        self.generators[sectionIndex].insert(contentsOf: generators, at: generatorIndex + 1)
+        self.sections[sectionIndex].generators.insert(contentsOf: generators, at: generatorIndex + 1)
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator, after: CollectionCellGenerator) {
@@ -64,7 +64,9 @@ open class BaseCollectionManager: CollectionGeneratorsProvider, DataDisplayManag
     }
 
     public func clearCellGenerators() {
-        self.generators.removeAll()
+        for (index, _) in sections.enumerated() {
+            sections[index].generators.removeAll()
+        }
     }
 
 }
@@ -75,8 +77,7 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
 
     public func addSectionHeaderGenerator(_ generator: CollectionHeaderGenerator) {
         generator.registerHeader(in: view)
-        self.headers.append(generator)
-        checkEmptySection(for: headers)
+        addHeader(header: generator)
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator, toHeader header: CollectionHeaderGenerator) {
@@ -86,23 +87,25 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toHeader header: CollectionHeaderGenerator) {
         generators.forEach { $0.registerCell(in: view) }
 
-        guard let index = getIndex(for: header, in: headers) else { return }
+        guard let index = sections.firstIndex(where: { $0.header === header }) else { return }
         addCollectionGenerators(with: generators, choice: .byIndex(index))
     }
 
     public func removeAllGenerators(from header: CollectionHeaderGenerator) {
         guard
-            let index = self.headers.firstIndex(where: { $0 === header }),
-            self.generators.count > index
+            let index = self.sections.firstIndex(where: { $0.header === header }),
+            self.sections.count > index
         else {
             return
         }
 
-        self.generators[index].removeAll()
+        self.sections[index].generators.removeAll()
     }
 
     public func clearHeaderGenerators() {
-        self.headers.removeAll()
+        for (index, _) in sections.enumerated() {
+            sections[index].header = EmptyCollectionHeaderGenerator()
+        }
     }
 
 }
@@ -113,8 +116,7 @@ extension BaseCollectionManager: FooterDataDisplayManager {
 
     public func addSectionFooterGenerator(_ generator: CollectionFooterGenerator) {
         generator.registerFooter(in: view)
-        self.footers.append(generator)
-        checkEmptySection(for: footers)
+        addFooter(footer: generator)
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator, toFooter footer: CollectionFooterGenerator) {
@@ -124,23 +126,25 @@ extension BaseCollectionManager: FooterDataDisplayManager {
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toFooter footer: CollectionFooterGenerator) {
         generators.forEach { $0.registerCell(in: view) }
 
-        guard let index = getIndex(for: footer, in: footers) else { return }
+        guard let index = sections.firstIndex(where: { $0.footer === footer }) else { return }
         addCollectionGenerators(with: generators, choice: .byIndex(index))
     }
 
     public func removeAllGenerators(from footer: CollectionFooterGenerator) {
         guard
-            let index = self.footers.firstIndex(where: { $0 === footer }),
-            self.generators.count > index
+            let index = sections.firstIndex(where: { $0.footer === footer }),
+            self.sections.count > index
         else {
             return
         }
 
-        self.generators[index].removeAll()
+        self.sections[index].generators.removeAll()
     }
 
     public func clearFooterGenerators() {
-        self.footers.removeAll()
+        for (index, _) in sections.enumerated() {
+            sections[index].footer = EmptyCollectionFooterGenerator()
+        }
     }
 
 }
@@ -191,7 +195,7 @@ private extension BaseCollectionManager {
 
         elements.forEach { [weak self] element in
             element.generator.registerCell(in: view)
-            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            self?.sections[element.sectionIndex].generators.insert(element.generator, at: element.generatorIndex)
         }
 
         let indexPaths = elements.map {
@@ -202,8 +206,8 @@ private extension BaseCollectionManager {
     }
 
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
-        for (sectionIndex, section) in generators.enumerated() {
-            if let generatorIndex = section.firstIndex(where: { $0 === generator }) {
+        for (sectionIndex, section) in sections.enumerated() {
+            if let generatorIndex = section.generators.firstIndex(where: { $0 === generator }) {
                 return (sectionIndex, generatorIndex)
             }
         }
@@ -215,15 +219,14 @@ private extension BaseCollectionManager {
                          needScrollAt scrollPosition: UICollectionView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 
-        generators[index.sectionIndex].remove(at: index.generatorIndex)
+        sections[index.sectionIndex].generators.remove(at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
         // remove empty section if needed
         var sectionIndexPath: IndexSet?
-        let sectionIsEmpty = generators[index.sectionIndex].isEmpty
+        let sectionIsEmpty = sections[index.sectionIndex].generators.isEmpty
         if needRemoveEmptySection && sectionIsEmpty {
-            generators.remove(at: index.sectionIndex)
-            headers.remove(at: index.sectionIndex)
+            sections.remove(at: index.sectionIndex)
             sectionIndexPath = IndexSet(integer: index.sectionIndex)
         }
 

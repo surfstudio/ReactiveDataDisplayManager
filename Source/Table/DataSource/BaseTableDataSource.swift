@@ -62,14 +62,14 @@ extension BaseTableDataSource {
 extension BaseTableDataSource {
 
     open func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionTitleDisplayablePlugin?.numberOfSections(with: provider) ?? provider?.headers.count ?? 0
+        return sectionTitleDisplayablePlugin?.numberOfSections(with: provider) ?? provider?.sections.count ?? 0
     }
 
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let provider = provider, provider.generators.indices.contains(section) else {
+        guard let provider = provider, provider.getOldSections().generators.indices.contains(section) else {
             return 0
         }
-        return provider.generators[section].count
+        return provider.sections[section].generators.count
     }
 
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,7 +77,7 @@ extension BaseTableDataSource {
             return UITableViewCell()
         }
         return provider
-            .generators[indexPath.section][indexPath.row]
+            .sections[indexPath.section].generators[indexPath.row]
             .generate(tableView: tableView, for: indexPath)
     }
 

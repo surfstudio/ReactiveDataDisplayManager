@@ -16,7 +16,7 @@ open class CollectionItemTitleDisplayablePlugin: CollectionFeaturePlugin, Collec
     // MARK: - SectionTitleDisplayable
 
     open func indexTitles(with provider: CollectionGeneratorsProvider?) -> [String]? {
-        let generators = provider?.generators.reduce([], +)
+        let generators = provider?.getOldSections().generators.reduce([], +)
 
         let itemTitles = generators?.compactMap { generator -> String? in
             guard let generator = generator as? GeneratorType else {
@@ -39,7 +39,7 @@ open class CollectionItemTitleDisplayablePlugin: CollectionFeaturePlugin, Collec
 private extension CollectionItemTitleDisplayablePlugin {
 
     func getGeneratorIndexPath(with title: String, for provider: CollectionGeneratorsProvider?) -> IndexPath {
-        guard let generators = provider?.generators else { return IndexPath() }
+        guard let generators = provider?.getOldSections().generators else { return IndexPath() }
         for (sectionIndex, section) in generators.enumerated() {
             let generatorIndex = section.firstIndex(where: { ($0 as? GeneratorType)?.title == title })
 

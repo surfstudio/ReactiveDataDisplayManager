@@ -8,12 +8,13 @@
 import Foundation
 
 public enum СhoiceCollectionSection {
-    case newSection(CollectionSection? = nil)
+    case newSection(header: CollectionHeaderGenerator? = nil, footer: CollectionFooterGenerator? = nil)
     case byIndex(Int)
     case lastSection
 }
 
-public struct CollectionSection {
-    let header: CollectionHeaderGenerator?
-    let footer: CollectionFooterGenerator?
-}
+//public struct CollectionSection {
+//    public var generators: [CollectionCellGenerator]
+//    public var header: CollectionHeaderGenerator
+//    public var footer: CollectionFooterGenerator
+//}
