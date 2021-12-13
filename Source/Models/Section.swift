@@ -37,7 +37,11 @@ public extension Section {
 
     /// Returns DiffableSection
     ///
-    /// The returned components can be used in Diffable Data Source
+    /// The returned **DiffableSection** components can be used in Diffable Data Source
+    ///  - header: DiffableItemSource?
+    ///  - footer: DiffableItemSource?
+    ///  - generators: [DiffableItem]
+    ///
     func asDiffableItemSource() -> DiffableSection? {
         let header = header as? DiffableItemSource
         let generators = (generators as? [DiffableItemSource] ?? []).compactMap { $0.diffableItem }
@@ -55,8 +59,15 @@ public extension Section {
 ///     header: DiffableItemSource?
 ///     footer: DiffableItemSource?
 ///     generators: [DiffableItem]
+///
 public struct DiffableSection {
-    let header: DiffableItemSource?
-    let footer: DiffableItemSource?
-    let generators: [DiffableItem]
+    public let header: DiffableItemSource?
+    public let footer: DiffableItemSource?
+    public let generators: [DiffableItem]
+
+    public init(header: DiffableItemSource?, footer: DiffableItemSource?, generators: [DiffableItem]) {
+        self.header = header
+        self.footer = footer
+        self.generators = generators
+    }
 }
