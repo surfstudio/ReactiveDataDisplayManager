@@ -81,16 +81,19 @@ private extension DroppablePluginDelegate {
                                                                        modifier: Modifier<Collection, Animation>?) {
         guard
             let value = Constants.animation as? Animation.RawValue,
-            let animation = Animation(rawValue: value)
+            let animation = Animation(rawValue: value),
+            let generatorsCount = provider?.sections[destinationIndexPath.section].generators.count,
+            destinationIndexPath.row < generatorsCount
         else { return }
 
         coordinator.items.forEach {
             guard
                 let sourceIndexPath = $0.sourceIndexPath,
                 destinationIndexPath != sourceIndexPath,
-
-                    let itemToMove = provider?.sections[sourceIndexPath.section].generators.remove(at: sourceIndexPath.row),
                 dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true
+            else { return }
+            guard
+                let itemToMove = provider?.sections[sourceIndexPath.section].generators.remove(at: sourceIndexPath.row)
             else { return }
 
             provider?.sections[destinationIndexPath.section].generators.insert(itemToMove, at: destinationIndexPath.row)
