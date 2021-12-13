@@ -19,7 +19,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     // MARK: - Properties
 
-    private weak var provider: TableGeneratorsProvider?
+    private weak var provider: TableSectionsProvider?
     private weak var dataSource: DiffableTableDataSource?
 
     // MARK: - Init
@@ -27,7 +27,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter view: parent view
     /// - parameter provider: wrapped collection of sections and generators
     /// - parameter dataSource: `UITableViewDiffableDataSource` to apply new snapshots
-    init(view: UITableView, provider: TableGeneratorsProvider, dataSource: DiffableTableDataSource) {
+    init(view: UITableView, provider: TableSectionsProvider, dataSource: DiffableTableDataSource) {
         super.init(view: view)
         self.provider = provider
         self.dataSource = dataSource

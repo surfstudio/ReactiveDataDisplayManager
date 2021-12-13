@@ -18,12 +18,12 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
     // MARK: - Properties
 
     public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
-    public weak var provider: CollectionGeneratorsProvider?
+    public weak var provider: CollectionSectionsProvider?
 
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
-    public var movablePlugin: MovablePluginDataSource<CollectionGeneratorsProvider>?
+    public var movablePlugin: MovablePluginDataSource<CollectionSectionsProvider>?
 
     // MARK: - Private Properties
 

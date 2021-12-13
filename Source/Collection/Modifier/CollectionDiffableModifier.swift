@@ -19,7 +19,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
 
     // MARK: - Properties
 
-    private weak var provider: CollectionGeneratorsProvider?
+    private weak var provider: CollectionSectionsProvider?
     private weak var dataSource: DiffableCollectionDataSource?
 
     // MARK: - Init
@@ -27,7 +27,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter view: parent view
     /// - parameter provider: wrapped collection of sections and generators
     /// - parameter dataSource: `UICollectionViewDiffableDataSource` to apply new snapshots
-    init(view: UICollectionView, provider: CollectionGeneratorsProvider, dataSource: DiffableCollectionDataSource) {
+    init(view: UICollectionView, provider: CollectionSectionsProvider, dataSource: DiffableCollectionDataSource) {
         super.init(view: view)
         self.provider = provider
         self.dataSource = dataSource

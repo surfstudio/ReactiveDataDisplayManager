@@ -20,7 +20,7 @@ public protocol DragAndDroppable {
 
 @available(iOS 11.0, *)
 public protocol DraggableDelegate: AnyObject {
-    associatedtype Provider: GeneratorsProvider
+    associatedtype Provider: SectionsProvider
 
     /// Method provides the initial set of items (if any) to drag.
     /// - parameters:
@@ -32,7 +32,7 @@ public protocol DraggableDelegate: AnyObject {
 
 @available(iOS 11.0, *)
 public protocol DroppableDelegate: AnyObject {
-    associatedtype Provider: GeneratorsProvider
+    associatedtype Provider: SectionsProvider
     associatedtype CoordinatorType: NSObjectProtocol
 
     /// Method allow to determine a type of operation when the user dropping items

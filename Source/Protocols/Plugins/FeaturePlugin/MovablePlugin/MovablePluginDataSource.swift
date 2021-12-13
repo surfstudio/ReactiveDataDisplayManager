@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 /// Data source based on `MovableDataSource` protocol.
-open class MovablePluginDataSource<Provider: GeneratorsProvider> {
+open class MovablePluginDataSource<Provider: SectionsProvider> {
 
     // MARK: - Typealias
 

@@ -9,10 +9,10 @@
 import UIKit
 
 public protocol TableDataSource: TableBuilderConfigurable, UITableViewDataSource, UITableViewDataSourcePrefetching {
-    var provider: TableGeneratorsProvider? { get set }
+    var provider: TableSectionsProvider? { get set }
     var modifier: Modifier<UITableView, UITableView.RowAnimation>? { get }
     var prefetchPlugins: PluginCollection<BaseTablePlugin<PrefetchEvent>> { get set }
     var tablePlugins: PluginCollection<BaseTablePlugin<TableEvent>> { get set }
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable? { get set }
-    var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>? { get set }
+    var movablePlugin: MovablePluginDataSource<TableSectionsProvider>? { get set }
 }

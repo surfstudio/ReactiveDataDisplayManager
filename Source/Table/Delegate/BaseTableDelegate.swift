@@ -24,10 +24,11 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
-    public var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>?
     #if os(tvOS)
     public var focusablePlugin: FocusablePluginDelegate<TableGeneratorsProvider, UITableView>?
     #endif
+    public var movablePlugin: MovablePluginDelegate<TableSectionsProvider>?
+
     #if os(iOS)
     @available(iOS 11.0, *)
     public var swipeActionsPlugin: TableSwipeActionsConfigurable? {
@@ -36,15 +37,15 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     }
 
     @available(iOS 11.0, *)
-    public var draggableDelegate: DraggablePluginDelegate<TableGeneratorsProvider>? {
+    public var draggableDelegate: DraggablePluginDelegate<TableSectionsProvider>? {
         set { _draggableDelegate = newValue }
-        get { _draggableDelegate as? DraggablePluginDelegate<TableGeneratorsProvider> }
+        get { _draggableDelegate as? DraggablePluginDelegate<TableSectionsProvider> }
     }
 
     @available(iOS 11.0, *)
-    public var droppableDelegate: DroppablePluginDelegate<TableGeneratorsProvider, UITableViewDropCoordinator>? {
+    public var droppableDelegate: DroppablePluginDelegate<TableSectionsProvider, UITableViewDropCoordinator>? {
         set { _droppableDelegate = newValue }
-        get { _droppableDelegate as? DroppablePluginDelegate<TableGeneratorsProvider, UITableViewDropCoordinator> }
+        get { _droppableDelegate as? DroppablePluginDelegate<TableSectionsProvider, UITableViewDropCoordinator> }
     }
 
     // MARK: - Private Properties

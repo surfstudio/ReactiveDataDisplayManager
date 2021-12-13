@@ -6,13 +6,13 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-open class TableGeneratorsProvider: GeneratorsProvider {
+open class TableSectionsProvider: SectionsProvider {
 
     public typealias GeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
     public typealias FooterGeneratorType = TableFooterGenerator
 
-    open var sections: [SectionType<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>] = []
+    open var sections: [Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>] = []
 
     func addTableGenerators(with generators: [TableCellGenerator], choice section: СhoiceTableSection) {
         switch section {
@@ -27,7 +27,7 @@ open class TableGeneratorsProvider: GeneratorsProvider {
         }
     }
 
-    func addNewSection(section: SectionType<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>) {
+    func addNewSection(section: Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>) {
         sections.append(section)
     }
 

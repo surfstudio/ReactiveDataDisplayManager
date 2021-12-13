@@ -7,16 +7,25 @@
 
 import Foundation
 
-public protocol GeneratorsProvider: AnyObject {
+/// Universal section provider
+public protocol SectionsProvider: AnyObject {
     associatedtype GeneratorType
     associatedtype HeaderGeneratorType
     associatedtype FooterGeneratorType
 
-    var sections: [SectionType<GeneratorType, HeaderGeneratorType, FooterGeneratorType>] { get set }
+    /// Represents a section.
+    ///
+    /// Each section has one header, one footer and an array of cells (generators)
+    var sections: [Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType>] { get set }
 }
 
-public extension GeneratorsProvider {
+public extension SectionsProvider {
 
+    /// Returns the model of the old section view
+    ///
+    /// generators: [[GeneratorType]],
+    /// header: [HeaderGeneratorType],
+    /// footer: [FooterGeneratorType]
     func getOldSections() -> OldSection<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
         var generators = [[GeneratorType]]()
         var headers = [HeaderGeneratorType]()
@@ -26,9 +35,7 @@ public extension GeneratorsProvider {
             footers.append(section.footer)
             generators.append(section.generators)
         }
-        return .init(generators: generators,
-                     headers: headers,
-                     footers: footers)
+        return .init(generators: generators, headers: headers, footers: footers)
     }
 
 }

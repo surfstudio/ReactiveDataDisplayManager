@@ -9,7 +9,7 @@
 import UIKit
 
 /// Base implementation of DataDisplayManager for UITableView that contains minimal interface
-open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
+open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
 
     // MARK: - Typealias
 

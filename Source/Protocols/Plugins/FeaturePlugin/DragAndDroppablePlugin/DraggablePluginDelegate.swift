@@ -10,7 +10,7 @@ import UIKit
 
 /// Delegate based on `DraggableDelegate` protocol.
 @available(iOS 11.0, *)
-open class DraggablePluginDelegate<Provider: GeneratorsProvider> {
+open class DraggablePluginDelegate<Provider: SectionsProvider> {
 
     // MARK: - Typealias
 
