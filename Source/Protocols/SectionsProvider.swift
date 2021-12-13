@@ -19,6 +19,8 @@ public protocol SectionsProvider: AnyObject {
     var sections: [Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType>] { get set }
 }
 
+// MARK: - Deprecated
+
 @available(*, deprecated, message: "Please use `sections` instead.")
 public extension SectionsProvider {
 
@@ -46,6 +48,8 @@ public extension SectionsProvider {
     }
 
 }
+
+// MARK: - Private
 
 private extension SectionsProvider {
 
