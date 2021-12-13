@@ -93,8 +93,6 @@ private extension DroppablePluginDelegate {
                 let itemToMove = provider?.sections[sourceIndexPath.section].generators.remove(at: sourceIndexPath.row),
                 dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true
             else { return }
-            guard let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-            else { return }
 
             provider?.sections[destinationIndexPath.section].generators.insert(itemToMove, at: destinationIndexPath.row)
             modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: animation, and: animation)
