@@ -93,7 +93,7 @@ public class ManualTableManager: BaseTableManager {
     ///   - sectionHeaderGenerator: TableHeaderGenerator of section which you want to reload.
     ///   - animation: Type of reload animation
     open func reloadSection(by sectionHeaderGenerator: TableHeaderGenerator, with animation: UITableView.RowAnimation = .none) {
-        if let index = sections.firstIndex(where: { $0.header === sectionHeaderGenerator}) {
+        if let index = sections.firstIndex(where: { $0.header === sectionHeaderGenerator }) {
             dataSource?.modifier?.reloadSections(at: [index], with: animation)
         }
     }
