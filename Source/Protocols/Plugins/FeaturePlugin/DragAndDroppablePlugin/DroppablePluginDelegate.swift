@@ -14,7 +14,7 @@ fileprivate enum Constants {
 
 /// Delegate based on `DroppableDelegate` protocol.
 @available(iOS 11.0, *)
-open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType: NSObjectProtocol>: DroppableDelegate {
+open class DroppablePluginDelegate<Provider: SectionsProvider, CoordinatorType: NSObjectProtocol>: DroppableDelegate {
 
     // MARK: - Typealias
 

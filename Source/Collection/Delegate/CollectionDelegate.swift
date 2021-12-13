@@ -12,5 +12,5 @@ public protocol CollectionDelegate: CollectionBuilderConfigurable, UICollectionV
     var manager: BaseCollectionManager? { get set }
     var collectionPlugins: PluginCollection<BaseCollectionPlugin<CollectionEvent>> { get set }
     var scrollPlugins: PluginCollection<BaseCollectionPlugin<ScrollEvent>> { get set }
-    var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>? { get set }
+    var movablePlugin: MovablePluginDelegate<CollectionSectionsProvider>? { get set }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 @available(iOS 11.0, *)
 public protocol CollectionDragAndDropDelegate: UICollectionViewDragDelegate, UICollectionViewDropDelegate {
-    var draggableDelegate: DraggablePluginDelegate<CollectionGeneratorsProvider>? { get set }
-    var droppableDelegate: DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator>? { get set }
+    var draggableDelegate: DraggablePluginDelegate<CollectionSectionsProvider>? { get set }
+    var droppableDelegate: DroppablePluginDelegate<CollectionSectionsProvider, UICollectionViewDropCoordinator>? { get set }
 }
 #endif

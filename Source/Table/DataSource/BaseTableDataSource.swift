@@ -18,14 +18,14 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    public weak var provider: TableGeneratorsProvider?
+    public weak var provider: TableSectionsProvider?
 
     public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
-    public var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>?
+    public var movablePlugin: MovablePluginDataSource<TableSectionsProvider>?
 
     // MARK: - Private Properties
 

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 /// Delegate based on `MovableDelegate` protocol.
-open class MovablePluginDelegate<Provider: GeneratorsProvider> {
+open class MovablePluginDelegate<Provider: SectionsProvider> {
 
     // MARK: - Typealias
 

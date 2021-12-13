@@ -7,7 +7,7 @@
 //
 
 public protocol TableSectionTitleDisplayable: TableFeaturePlugin {
-    func numberOfSections(with provider: TableGeneratorsProvider?) -> Int
-    func sectionIndexTitles(with provider: TableGeneratorsProvider?) -> [String]?
-    func sectionForSectionIndexTitle(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int
+    func numberOfSections(with provider: TableSectionsProvider?) -> Int
+    func sectionIndexTitles(with provider: TableSectionsProvider?) -> [String]?
+    func sectionForSectionIndexTitle(_ title: String, at index: Int, with provider: TableSectionsProvider?) -> Int
 }

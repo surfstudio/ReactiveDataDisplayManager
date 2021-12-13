@@ -17,7 +17,7 @@ public protocol Movable {
 }
 
 public protocol MovableDataSource {
-    associatedtype Provider: GeneratorsProvider
+    associatedtype Provider: SectionsProvider
 
     /// Asks whether a given item can be moved to another location
     /// - parameters:
@@ -40,7 +40,7 @@ public protocol MovableDataSource {
 }
 
 public protocol MovableDelegate {
-    associatedtype Provider: GeneratorsProvider
+    associatedtype Provider: SectionsProvider
 
     /// Asks whether the item at the specified index path can be focused
     /// - parameters:

@@ -15,7 +15,7 @@ open class TableMovableItemPlugin: TableFeaturePlugin, Movable {
 
     // MARK: - Typealias
 
-    public typealias Provider = TableGeneratorsProvider
+    public typealias Provider = TableSectionsProvider
 
     // MARK: - Properties
 
@@ -44,7 +44,7 @@ open class CollectionMovableItemPlugin: CollectionFeaturePlugin, Movable {
 
     // MARK: - Typealias
 
-    public typealias Provider = CollectionGeneratorsProvider
+    public typealias Provider = CollectionSectionsProvider
 
     // MARK: - Properties
 
