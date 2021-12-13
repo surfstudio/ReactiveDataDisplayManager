@@ -137,8 +137,8 @@ public extension BaseTableManager {
     }
 
     func scrollTo(generator: TableCellGenerator, scrollPosition: UITableView.ScrollPosition, animated: Bool) {
-        for sectionElement in getOldSections().generators.enumerated() {
-            for rowElement in sectionElement.element.enumerated() {
+        for sectionElement in sections.enumerated() {
+            for rowElement in sectionElement.element.generators.enumerated() {
                 if rowElement.element === generator {
                     let indexPath = IndexPath(row: rowElement.offset, section: sectionElement.offset)
                     view?.scrollToRow(at: indexPath, at: scrollPosition, animated: animated)

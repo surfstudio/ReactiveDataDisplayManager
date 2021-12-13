@@ -71,7 +71,8 @@ open class GravityTableManager: BaseTableManager {
         sections[path.section].generators.insert(generator, at: path.row + 1)
 
         gravityGenerator.heaviness = gravityGeneratorAfter.heaviness + 1
-        getOldSections().generators.asGravityCellCompatible[path.section].forEach { gen in
+        let generators = sections[path.section].generators.asGravityCellCompatible
+        generators.forEach { gen in
             guard gen.heaviness > gravityGenerator.heaviness else { return }
             gen.heaviness += 1
         }
@@ -85,7 +86,7 @@ open class GravityTableManager: BaseTableManager {
         checkDuplicate(header: generator)
         addHeader(header: generator)
 
-        let combined = zip(getOldSections().headers.asGravityHeaderCompatible, sections).sorted { lhs, rhs in
+        let combined = zip(sections.asGravityHeaderCompatible, sections).sorted { lhs, rhs in
             lhs.0.getHeaviness() < rhs.0.getHeaviness()
         }
 
@@ -168,7 +169,7 @@ private extension GravityTableManager {
 
     func checkDuplicate(header: HeaderGeneratorType) {
         guard
-            !getOldSections().headers.asGravityHeaderCompatible.contains(where: { $0.getHeaviness() == header.getHeaviness() })
+            !sections.asGravityHeaderCompatible.contains(where: { $0.getHeaviness() == header.getHeaviness() })
         else {
             assertionFailure("Unique heaviness expected for \(header)")
             return
@@ -176,7 +177,7 @@ private extension GravityTableManager {
     }
 
     func checkDuplicate(generator: CellGeneratorType) -> Bool {
-        return !getOldSections().generators.asGravityCellCompatible.contains(where: { section in
+        return !sections.asGravityCellCompatible.contains(where: { section in
             section.contains { $0.heaviness == generator.heaviness }
         })
     }
@@ -184,7 +185,7 @@ private extension GravityTableManager {
     func insert(generators: [CellGeneratorType], to section: Int) {
         guard !generators.isEmpty else { return }
 
-        self.sections[section].generators = self.getOldSections().generators.asGravityCellCompatible[section].sorted { $0.heaviness < $1.heaviness }
+        self.sections[section].generators = self.sections[section].generators.asGravityCellCompatible.sorted { $0.heaviness < $1.heaviness }
 
         let indexPaths = generators.compactMap { generator -> IndexPath? in
             guard
@@ -199,7 +200,8 @@ private extension GravityTableManager {
     }
 
     func nearestIndex(for generator: CellGeneratorType, in section: Int) -> Int? {
-        let nearestIndex = getOldSections().generators.asGravityCellCompatible[section].enumerated().min { lhs, rhs in
+        let generators = sections[section].generators.asGravityCellCompatible
+        let nearestIndex = generators.enumerated().min { lhs, rhs in
             let lhsValue = abs(lhs.element.heaviness - generator.heaviness)
             let rhsValue = abs(rhs.element.heaviness - generator.heaviness)
             return lhsValue < rhsValue
@@ -222,11 +224,15 @@ private extension GravityTableManager {
 
 // MARK: - Adapter
 
-fileprivate extension Array where Element == [TableCellGenerator] {
+fileprivate extension Array where Element == Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator> {
+
+    var asGravityHeaderCompatible: [GravityTableManager.HeaderGeneratorType] {
+        compactMap { $0.header as? GravityTableManager.HeaderGeneratorType }
+    }
 
     var asGravityCellCompatible: [[GravityTableManager.CellGeneratorType]] {
-        map { cells in
-            cells.compactMap {
+        map { section in
+            section.generators.compactMap {
                 $0 as? GravityTableManager.CellGeneratorType
             }
         }
@@ -234,21 +240,11 @@ fileprivate extension Array where Element == [TableCellGenerator] {
 
 }
 
-fileprivate extension Array where Element: TableCellGenerator {
+fileprivate extension Array where Element == TableCellGenerator {
 
     var asGravityCellCompatible: [GravityTableManager.CellGeneratorType] {
         compactMap {
             $0 as? GravityTableManager.CellGeneratorType
-        }
-    }
-
-}
-
-fileprivate extension Array where Element: TableHeaderGenerator {
-
-    var asGravityHeaderCompatible: [GravityTableManager.HeaderGeneratorType] {
-        compactMap {
-            $0 as? GravityTableManager.HeaderGeneratorType
         }
     }
 

@@ -1,5 +1,5 @@
 //
-//  SectionType.swift
+//  Section.swift
 //  Pods
 //
 //  Created by porohov on 12.12.2021.

@@ -66,7 +66,7 @@ extension BaseCollectionDataSource {
     }
 
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let provider = provider, provider.getOldSections().generators.indices.contains(section) else {
+        guard let provider = provider, provider.sections.indices.contains(section) else {
             return 0
         }
         return provider.sections[section].generators.count

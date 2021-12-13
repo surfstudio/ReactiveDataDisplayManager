@@ -304,7 +304,7 @@ public class ManualTableManager: BaseTableManager {
         guard let headerIndex = self.sections.firstIndex(where: { $0.header === headerGenerator }) else {
             return
         }
-        let base = self.getOldSections().generators[headerIndex].count
+        let base = self.sections[headerIndex].generators.count
         let elements = generators.enumerated().map { item in
             (item.element, headerIndex, base + item.offset)
         }

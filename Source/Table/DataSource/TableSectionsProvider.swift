@@ -1,5 +1,5 @@
 //
-//  TableGeneratorsProvider.swift
+//  TableSectionsProvider.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Никита Коробейников on 12.02.2021.
