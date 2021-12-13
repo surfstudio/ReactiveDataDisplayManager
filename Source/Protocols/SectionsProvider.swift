@@ -58,7 +58,7 @@ private extension SectionsProvider {
 
     func addGenerator(generators: [[GeneratorType]]) {
         generators.enumerated().forEach { index, generators in
-            sections[index].generators.append(contentsOf: generators)
+            sections[index].generators = generators
         }
     }
 
