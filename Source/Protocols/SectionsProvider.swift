@@ -2,7 +2,7 @@
 //  GeneratorsProvider.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Anton Eysner on 15.04.2021.
+//  Created by Konstantin Porokhov on 15.04.2021.
 //
 
 import Foundation
@@ -19,7 +19,14 @@ public protocol SectionsProvider: AnyObject {
     var sections: [Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType>] { get set }
 }
 
+@available(*, deprecated, message: "Please use `sections` instead.")
 public extension SectionsProvider {
+
+    /// Deprecated, use **sections**
+    var generators: [[GeneratorType]] {
+        get { getOldSections().generators }
+        set { addGenerator(generators: newValue) }
+    }
 
     /// Returns the model of the old section view
     ///
@@ -36,6 +43,16 @@ public extension SectionsProvider {
             generators.append(section.generators)
         }
         return .init(generators: generators, headers: headers, footers: footers)
+    }
+
+}
+
+private extension SectionsProvider {
+
+    func addGenerator(generators: [[GeneratorType]]) {
+        generators.enumerated().forEach { index, generator in
+            sections[index].generators = generator
+        }
     }
 
 }

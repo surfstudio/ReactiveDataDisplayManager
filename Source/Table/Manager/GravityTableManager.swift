@@ -90,8 +90,7 @@ open class GravityTableManager: BaseTableManager {
             lhs.0.getHeaviness() < rhs.0.getHeaviness()
         }
 
-//        headers = combined.map { $0.0 }
-//        generators = combined.map { $0.1 }
+        sections = combined.map { $0.1 }
     }
 
     public func addCellGenerator(_ generator: CellGeneratorType, toHeader header: HeaderGeneratorType) {
