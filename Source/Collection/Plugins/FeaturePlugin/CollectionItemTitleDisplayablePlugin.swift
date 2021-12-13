@@ -16,7 +16,7 @@ open class CollectionItemTitleDisplayablePlugin: CollectionFeaturePlugin, Collec
     // MARK: - SectionTitleDisplayable
 
     open func indexTitles(with provider: CollectionSectionsProvider?) -> [String]? {
-        let generators = provider?.generators.reduce([], +)
+        let generators = provider?.sections.compactMap { $0.generators }.reduce([], +)
 
         let itemTitles = generators?.compactMap { generator -> String? in
             guard let generator = generator as? GeneratorType else {
