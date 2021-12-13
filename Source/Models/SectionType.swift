@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Generic old section for tables and collections
 public struct OldSection<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
     public var generators: [[GeneratorType]]
     public var headers: [HeaderGeneratorType]
@@ -19,7 +20,8 @@ public struct OldSection<GeneratorType, HeaderGeneratorType, FooterGeneratorType
     }
 }
 
-public struct SectionType<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
+/// Generic section for tables and collections
+public struct Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
     public var generators: [GeneratorType]
     public var header: HeaderGeneratorType
     public var footer: FooterGeneratorType

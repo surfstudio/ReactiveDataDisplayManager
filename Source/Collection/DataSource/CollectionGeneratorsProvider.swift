@@ -6,16 +6,13 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-open class CollectionGeneratorsProvider: GeneratorsProvider {
-    
-    public typealias GeneratorType = CollectionCellGenerator
-    
-    public typealias HeaderGeneratorType = CollectionHeaderGenerator
-    
-    public typealias FooterGeneratorType = CollectionFooterGenerator
-    
+open class CollectionSectionsProvider: SectionsProvider {
 
-    open var sections: [SectionType<CollectionCellGenerator, CollectionHeaderGenerator, CollectionFooterGenerator>] = []
+    public typealias GeneratorType = CollectionCellGenerator
+    public typealias HeaderGeneratorType = CollectionHeaderGenerator
+    public typealias FooterGeneratorType = CollectionFooterGenerator
+
+    open var sections: [Section<CollectionCellGenerator, CollectionHeaderGenerator, CollectionFooterGenerator>] = []
 
     func addCollectionGenerators(with generators: [CollectionCellGenerator], choice section: СhoiceCollectionSection) {
         switch section {
@@ -30,7 +27,7 @@ open class CollectionGeneratorsProvider: GeneratorsProvider {
         }
     }
 
-    func addNewSection(section: SectionType<CollectionCellGenerator, CollectionHeaderGenerator, CollectionFooterGenerator>) {
+    func addNewSection(section: Section<CollectionCellGenerator, CollectionHeaderGenerator, CollectionFooterGenerator>) {
         sections.append(section)
     }
 
