@@ -32,9 +32,12 @@ public extension SectionsProvider {
 
     /// Returns the model of the old section view
     ///
-    /// generators: [[GeneratorType]],
-    /// header: [HeaderGeneratorType],
-    /// footer: [FooterGeneratorType]
+    /// **Return old components:**
+    ///
+    ///     generators: [[GeneratorType]]
+    ///     header: [HeaderGeneratorType]
+    ///     footer: [FooterGeneratorType]
+    ///
     func getOldSections() -> OldSection<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
         var generators = [[GeneratorType]]()
         var headers = [HeaderGeneratorType]()
@@ -54,8 +57,8 @@ public extension SectionsProvider {
 private extension SectionsProvider {
 
     func addGenerator(generators: [[GeneratorType]]) {
-        generators.enumerated().forEach { index, generator in
-            sections[index].generators = generator
+        generators.enumerated().forEach { index, generators in
+            sections[index].generators.append(contentsOf: generators)
         }
     }
 
