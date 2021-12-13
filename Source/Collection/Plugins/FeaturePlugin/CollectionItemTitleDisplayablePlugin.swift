@@ -39,9 +39,9 @@ open class CollectionItemTitleDisplayablePlugin: CollectionFeaturePlugin, Collec
 private extension CollectionItemTitleDisplayablePlugin {
 
     func getGeneratorIndexPath(with title: String, for provider: CollectionSectionsProvider?) -> IndexPath {
-        guard let generators = provider?.getOldSections().generators else { return IndexPath() }
-        for (sectionIndex, section) in generators.enumerated() {
-            let generatorIndex = section.firstIndex(where: { ($0 as? GeneratorType)?.title == title })
+        guard let sections = provider?.sections else { return IndexPath() }
+        for (sectionIndex, section) in sections.enumerated() {
+            let generatorIndex = section.generators.firstIndex(where: { ($0 as? GeneratorType)?.title == title })
 
             if let generatorIndex = generatorIndex {
                 return IndexPath(item: generatorIndex, section: sectionIndex)
