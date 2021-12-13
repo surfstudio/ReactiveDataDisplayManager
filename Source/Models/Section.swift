@@ -32,3 +32,31 @@ public struct Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
         self.footer = footer
     }
 }
+
+public extension Section {
+
+    /// Returns DiffableSection
+    ///
+    /// The returned components can be used in Diffable Data Source
+    func asDiffableItemSource() -> DiffableSection? {
+        let header = header as? DiffableItemSource
+        let generators = (generators as? [DiffableItemSource] ?? []).compactMap { $0.diffableItem }
+        let footer = self.footer as? DiffableItemSource
+
+        return .init(header: header, footer: footer, generators: generators)
+    }
+
+}
+
+/// DiffableSection - Used for Diffable data source
+///
+/// Consists of:
+///
+///     header: DiffableItemSource?
+///     footer: DiffableItemSource?
+///     generators: [DiffableItem]
+public struct DiffableSection {
+    let header: DiffableItemSource?
+    let footer: DiffableItemSource?
+    let generators: [DiffableItem]
+}

@@ -115,10 +115,9 @@ private extension ManualTableManager {
     }
 
     func makeSnapshot() -> [Section]? {
-        return sections.compactMap { section in
-            let elements = section.generators as? [DiffableItemSource] ?? []
-            let items = [elements].asDiffableItems.first ?? []
-            return Section(model: section.header, elements: items)
+        return sections.compactMap { section -> Section? in
+            guard let diffableSection = section.asDiffableItemSource() else { return nil }
+            return Section(model: section.header, elements: diffableSection.generators)
         }
     }
 
