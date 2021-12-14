@@ -84,4 +84,15 @@ open class Modifier<View: UIView, Animation> {
     open func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: Animation) {
         preconditionFailure("\(#function) must be overriden in child")
     }
+
+    /// Updates the collection with animation
+    /// Does not work with diffable data source
+    ///
+    /// - Parameters:
+    ///   - animated: Animates the frame of the cell
+    ///   - completionBlock: standart calback
+    open func animateUpdate(animated: Bool, completionBlock: (() -> Void)? = nil) {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+
 }

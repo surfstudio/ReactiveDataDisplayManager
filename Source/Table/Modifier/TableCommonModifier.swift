@@ -124,4 +124,10 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
         }
     }
 
+    /// Updates the collection with animation
+    override func animateUpdate(animated: Bool, completionBlock: (() -> Void)? = nil) {
+        guard let view = view else { return }
+        animator?.perform(in: view, animated: animated) { completionBlock?() }
+    }
+
 }

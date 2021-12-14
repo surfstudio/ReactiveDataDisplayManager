@@ -84,6 +84,18 @@ open class BaseCollectionManager: CollectionGeneratorsProvider, DataDisplayManag
         self.generators.removeAll()
     }
 
+    /// Updates the collection with animation.
+    /// Does not work with diffable data source
+    ///
+    /// - Parameters:
+    ///   - animated: Animates the frame of the cell
+    ///   - completionBlock: standart calback, default value nil
+    public func updateFrame(with animated: Bool, completionBlock: (() -> Void)? = nil) {
+        if !(dataSource is DiffableCollectionDataSource) {
+            dataSource?.modifier?.animateUpdate(animated: animated, completionBlock: completionBlock)
+        }
+    }
+
 }
 
 // MARK: - HeaderDataDisplayManager

@@ -27,6 +27,11 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
 
     // MARK: - Methods
 
+    override func animateUpdate(animated: Bool, completionBlock: (() -> Void)? = nil) {
+        guard let view = view else { return }
+        animator?.perform(in: view, animated: animated) { completionBlock?() }
+    }
+
     /// Reload all collection content
     override func reload() {
         view?.reloadData()
