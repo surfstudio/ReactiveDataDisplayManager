@@ -28,6 +28,7 @@ final class MainTableViewController: UIViewController {
         case allPluginsTable
         case differenceTable
         case dragAndDroppableTable
+        case selectableTable
     }
 
     // MARK: - Constants
@@ -47,7 +48,8 @@ final class MainTableViewController: UIViewController {
             ("Table with pagination", .paginatableTable),
             ("Table with all plugins", .allPluginsTable),
             ("Table with DifferenceKit", .differenceTable),
-            ("Table with drag and drop cells", .dragAndDroppableTable)
+            ("Table with drag and drop cells", .dragAndDroppableTable),
+            ("Table with selectable cells", .selectableTable)
         ]
     }
 
