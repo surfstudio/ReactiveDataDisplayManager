@@ -21,7 +21,7 @@ final class SelectableTableViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet private weak var tableView: UITableView!
-    
+
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.manualBuilder
@@ -55,7 +55,6 @@ private extension SelectableTableViewController {
             generator.didDeselectEvent += {
                 print("Deselect")
             }
-            
 
             return generator
         }
@@ -74,7 +73,7 @@ private extension SelectableTableViewController {
 
     @objc
     func changeAllowsMultiple() {
-        adapter.generators.forEach { $0.forEach { ($0 as? SelectableItem)?.isNeedDeselect.toggle() }}
+        adapter.generators.forEach { $0.forEach { ($0 as? SelectableItem)?.isNeedDeselect.toggle() } }
         adapter.view.allowsMultipleSelection.toggle()
         updateBarButtonItem(with: tableView.allowsMultipleSelection ? Constants.standart : Constants.multiple)
     }
