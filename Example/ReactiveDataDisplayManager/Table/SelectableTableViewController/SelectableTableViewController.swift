@@ -13,9 +13,9 @@ final class SelectableTableViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let models = [String](repeating: "Cell", count: 10)
-        static let multiple = "Multiple"
-        static let standart = "Standart"
+        static let cellCount = Array(1...10)
+        static let multiple = "Multiple mode"
+        static let standart = "Single mode"
     }
 
     // MARK: - IBOutlet
@@ -34,7 +34,7 @@ final class SelectableTableViewController: UIViewController {
         super.viewDidLoad()
         title = "Table with selectable cells"
         fillAdapter()
-        updateBarButtonItem(with: Constants.multiple)
+        updateBarButtonItem(with: Constants.standart)
     }
 
 }
@@ -46,14 +46,15 @@ private extension SelectableTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         // Create cell generators
-        let generators = Constants.models.map { model -> SwipeableTableGenerator in
-            let generator = SwipeableTableGenerator(with: model)
+        let generators = Constants.cellCount.map { cellCount -> TableCellGenerator in
+            let titleCell = "Cell \(cellCount)"
+            let generator = BaseCellGenerator<TitleTableViewCell>(with: titleCell)
             generator.didSelectEvent += {
-                print("Select")
+                print("Select \(titleCell)")
             }
 
             generator.didDeselectEvent += {
-                print("Deselect")
+                print("Deselect \(titleCell)")
             }
 
             return generator
@@ -67,15 +68,15 @@ private extension SelectableTableViewController {
     }
 
     func updateBarButtonItem(with title: String) {
-        let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeAllowsMultiple))
+        let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(toggleAllowsMultiple))
         navigationItem.rightBarButtonItem = button
     }
 
     @objc
-    func changeAllowsMultiple() {
+    func toggleAllowsMultiple() {
         adapter.generators.forEach { $0.forEach { ($0 as? SelectableItem)?.isNeedDeselect.toggle() } }
         adapter.view.allowsMultipleSelection.toggle()
-        updateBarButtonItem(with: tableView.allowsMultipleSelection ? Constants.standart : Constants.multiple)
+        updateBarButtonItem(with: tableView.allowsMultipleSelection ? Constants.multiple : Constants.standart)
     }
 
 }

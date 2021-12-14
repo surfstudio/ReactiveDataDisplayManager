@@ -13,7 +13,7 @@ open class BaseNonReusableCellGenerator<Cell: ConfigurableItem>: SelectableTable
 
     // MARK: - Public properties
 
-    open var isNeedDeselect = true
+    public var isNeedDeselect = true
     public var didSelectEvent = BaseEvent<Void>()
     public var didDeselectEvent = BaseEvent<Void>()
     private(set) public var model: Cell.Model
