@@ -12,7 +12,9 @@ open class BaseCollectionCellGenerator<Cell: ConfigurableItem>: SelectableItem w
 
     // MARK: - Public Properties
 
+    public var isNeedDeselect = true
     public var didSelectEvent = BaseEvent<Void>()
+    public var didDeselectEvent = BaseEvent<Void>()
     public let model: Cell.Model
 
     // MARK: - Private Properties
