@@ -107,9 +107,12 @@ private extension AllPluginsTableViewController {
 
         for titleStr in Constants.titles {
             // Create generator
-            let generator = TitleTableViewCell.rddm.baseGenerator(with: titleStr)
-            generator.didSelectEvent += {
+            let generator = BaseNonReusableCellGenerator<TitleTableViewCell>(with: titleStr)
+            
+            generator.didSelectEvent += { [weak self] in
                 debugPrint("\(titleStr) selected")
+                generator.cell?.setOffset(top: 50)
+                self?.adapter.updateFrame(with: true)
             }
 
             // Add generator to adapter

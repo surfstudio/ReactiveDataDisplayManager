@@ -9,22 +9,17 @@
 import ReactiveDataDisplayManager
 import UIKit
 
-class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
+class TitleTableViewCell: UITableViewCell {
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
-
+    @IBOutlet private weak var titleLabelTopOffset: NSLayoutConstraint!
+    
     // MARK: - Internal methods
 
     func fill(with title: String) {
         titleLabel.text = title
-    }
-
-    // MARK: - CalculatableHeightItem
-
-    static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
-        return 44
     }
 
 }
@@ -35,6 +30,10 @@ extension TitleTableViewCell: ConfigurableItem {
 
     func configure(with model: String) {
         titleLabel.text = model
+    }
+
+    func setOffset(top: CGFloat) {
+        titleLabelTopOffset.constant = top
     }
 
 }
