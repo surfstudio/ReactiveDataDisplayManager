@@ -15,6 +15,7 @@
 		01CB40723CF386321A695645 /* BaseCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027B8496C59C5A73D990C54 /* BaseCollectionManager.swift */; };
 		033314DA6A78D812FB34371B /* ShadowFocusableStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD58AA843EB348B40EBE4AD6 /* ShadowFocusableStrategy.swift */; };
 		04E4554EC64A06F3C19711BA /* BaseCollectionDataDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F452071C5A1D68B45B83404 /* BaseCollectionDataDisplayManagerTests.swift */; };
+		04EAC3C1BE9661C5B1EE57A4 /* ConstructableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615F1654181746F2E85F5E1D /* ConstructableItem.swift */; };
 		05A35B1358F3E7E2CBFD6F49 /* CollectionBatchUpdatesAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E37550AE29A4D304F333F31 /* CollectionBatchUpdatesAnimator.swift */; };
 		0617816BCFC151E0AB8ABA91 /* CollectionBuilderConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57391D869FE128EAC31DD0A3 /* CollectionBuilderConfigurable.swift */; };
 		09564579E9DA7D22AE7D4E02 /* TableBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EDFDD2FB657C4EDBC52375C /* TableBuilder.swift */; };
@@ -37,6 +38,7 @@
 		148109863ED462D5DEFF2D4F /* BaseCollectionCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7868DD732F641D23BDE034B5 /* BaseCollectionCellGenerator.swift */; };
 		14C41AF203E8D30AC832A188 /* GravityTableDataDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59615B0AE9A9444EDFEF8BF3 /* GravityTableDataDisplayManager.swift */; };
 		170FA66E4797E0D77EFD809D /* DataDisplayWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC629FD45C669EA77E7008E2 /* DataDisplayWrapper.swift */; };
+		179E332E32EE1271A4D0A4AF /* ConstructableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615F1654181746F2E85F5E1D /* ConstructableItem.swift */; };
 		17F26692ACFAD4B548F90783 /* Configurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE452F1BC75AD3E975C5C935 /* Configurable.swift */; };
 		17F6FDEEDC069AE241C64889 /* DeletableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEFF95D7ADF882F5D7ABAD8 /* DeletableItem.swift */; };
 		18CBD1C814CC8FE3766D9C89 /* FoldableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89101ED16FEE7833A0BA045 /* FoldableItem.swift */; };
@@ -298,6 +300,7 @@
 		DCCE79CDF85CBB386FE1A229 /* CalculatableHeightCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77013DC1BBAE41AF27D29BE5 /* CalculatableHeightCellGenerator.swift */; };
 		DCEDA90918A4C107148A3737 /* CollectionCell+RDDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410949C3D4F4209B9D2EE842 /* CollectionCell+RDDM.swift */; };
 		DD2E0881D6A0CD5155360300 /* EmptyCollectionFooterGenarator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F708DAB36776815E30AA345 /* EmptyCollectionFooterGenarator.swift */; };
+		DDFAA10AA6C9DAAD9701E729 /* ConstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EEA78E7A135E1C154DC3EB /* ConstructionType.swift */; };
 		DEBA9E95C5C6749DE79CADF1 /* BaseCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6EA1E2F89BE306DE9B66E /* BaseCellGenerator.swift */; };
 		DF03A9073C553D09DBA77AE4 /* FocusablePluginBorderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38138C99E9003A9DA36EBA1E /* FocusablePluginBorderModel.swift */; };
 		DF0786CF3DB6F615FA8AC94B /* SwipeableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B8C75E9350423CACD842F7 /* SwipeableItem.swift */; };
@@ -326,6 +329,7 @@
 		F0C1C837FBAACD6A1F2554C8 /* TablePrefetchProxyPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CD1CACD13CDEB698783D70 /* TablePrefetchProxyPlugin.swift */; };
 		F22044DC5C7F9340A1E4D0ED /* Focusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3940D105908418B96F5D12 /* Focusable.swift */; };
 		F3AD4EAA8415CE0199A742AC /* DragAndDroppableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FB5FA5D67A4F00460A375B6 /* DragAndDroppableView.swift */; };
+		F5F804181B3F5EA4BD3772E0 /* ConstructionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EEA78E7A135E1C154DC3EB /* ConstructionType.swift */; };
 		F61D332D0E1BE4BC92FB6B54 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A91FB41BF3B0B8A2979694 /* Extensions.swift */; };
 		F684DE7D30DB1B63B72F761E /* DropCoordinatorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490A89B02B42F053C9D38B34 /* DropCoordinatorWrapper.swift */; };
 		F68FE525F9C54B3077FA5B66 /* TableSwipeActionsConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A1C839D6624A199C3EFD36 /* TableSwipeActionsConfiguration.swift */; };
@@ -423,6 +427,7 @@
 		1EDFDD2FB657C4EDBC52375C /* TableBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBuilder.swift; sourceTree = "<group>"; };
 		1F708DAB36776815E30AA345 /* EmptyCollectionFooterGenarator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCollectionFooterGenarator.swift; sourceTree = "<group>"; };
 		213AB51621FA947C024D1FCB /* CollectionGeneratorsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionGeneratorsProvider.swift; sourceTree = "<group>"; };
+		22EEA78E7A135E1C154DC3EB /* ConstructionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructionType.swift; sourceTree = "<group>"; };
 		22EEE38A919848A7A3E80DAA /* CalculatableSizeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatableSizeItem.swift; sourceTree = "<group>"; };
 		2307435F0DC60B24C27FB487 /* TableSectionTitleWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableSectionTitleWrapper.swift; sourceTree = "<group>"; };
 		23FDB877F58BA9108A95703B /* FeaturePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturePlugin.swift; sourceTree = "<group>"; };
@@ -464,6 +469,7 @@
 		5F8E91046B823176DF3F3349 /* CollectionSwipeActionsConfigurationPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSwipeActionsConfigurationPlugin.swift; sourceTree = "<group>"; };
 		5FB5FA5D67A4F00460A375B6 /* DragAndDroppableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragAndDroppableView.swift; sourceTree = "<group>"; };
 		60E4C8D2A92C236944A73405 /* TransformFocusableStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformFocusableStrategy.swift; sourceTree = "<group>"; };
+		615F1654181746F2E85F5E1D /* ConstructableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructableItem.swift; sourceTree = "<group>"; };
 		6187CB57A2160D6BFFC99EE6 /* ReactiveDataDisplayManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveDataDisplayManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63F60CF1F38B85FAA2C87AEC /* FocusedPluginShadowModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedPluginShadowModel.swift; sourceTree = "<group>"; };
 		6C3A6E775D0C43FBA9270912 /* CollectionFoldableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFoldableItem.swift; sourceTree = "<group>"; };
@@ -943,6 +949,7 @@
 			isa = PBXGroup;
 			children = (
 				0CBF24B34CD888E8A96CCD4A /* CellRegisterType.swift */,
+				22EEA78E7A135E1C154DC3EB /* ConstructionType.swift */,
 				A6240F096FE4C04570FA9FDC /* PrefetchEvent.swift */,
 				8EB5399A085AABE654E8B23C /* ScrollDirection.swift */,
 				FD1D809AC0EC51463E4A93D8 /* ScrollEvent.swift */,
@@ -1192,6 +1199,7 @@
 			children = (
 				22EEE38A919848A7A3E80DAA /* CalculatableSizeItem.swift */,
 				9BC8419F5D33C0C4FDEF350F /* ConfigurableItem.swift */,
+				615F1654181746F2E85F5E1D /* ConstructableItem.swift */,
 				9DEFF95D7ADF882F5D7ABAD8 /* DeletableItem.swift */,
 				287915DA92C5B26DBFF39F8C /* DiffableItem.swift */,
 				DED8CF6540B9EC7F1C1A3C00 /* DisplayableItem.swift */,
@@ -1427,6 +1435,8 @@
 				52222FB8F701E1372F4CAF26 /* CompositFocusableTableStrategy.swift in Sources */,
 				A36E96F430B818303587616B /* Configurable.swift in Sources */,
 				A7DE5D5EBE41F318FE41FA78 /* ConfigurableItem.swift in Sources */,
+				04EAC3C1BE9661C5B1EE57A4 /* ConstructableItem.swift in Sources */,
+				DDFAA10AA6C9DAAD9701E729 /* ConstructionType.swift in Sources */,
 				0F94B27D4EACF2BFF38272F2 /* DataDisplayCompatible.swift in Sources */,
 				1F5825C6F3CD51661BEF6589 /* DataDisplayConstructable.swift in Sources */,
 				32F9AF897CDFB9977EA8FE8E /* DataDisplayManager.swift in Sources */,
@@ -1610,6 +1620,8 @@
 				B240CDBAD41B879A7AB93956 /* CompositFocusableTableStrategy.swift in Sources */,
 				17F26692ACFAD4B548F90783 /* Configurable.swift in Sources */,
 				959C5E04EEB78868986FACE7 /* ConfigurableItem.swift in Sources */,
+				179E332E32EE1271A4D0A4AF /* ConstructableItem.swift in Sources */,
+				F5F804181B3F5EA4BD3772E0 /* ConstructionType.swift in Sources */,
 				9CFD68F39F617F18D5A69203 /* DataDisplayCompatible.swift in Sources */,
 				7C5B4B1007D1208ED934CB5C /* DataDisplayConstructable.swift in Sources */,
 				11347697A9B961452F312D10 /* DataDisplayManager.swift in Sources */,
