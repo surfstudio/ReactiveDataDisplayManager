@@ -25,7 +25,9 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
     public var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>?
-
+    #if os(tvOS)
+    public var focusablePlugin: FocusablePluginDelegate<TableGeneratorsProvider, UITableView>?
+    #endif
     #if os(iOS)
     @available(iOS 11.0, *)
     public var swipeActionsPlugin: TableSwipeActionsConfigurable? {
@@ -66,7 +68,9 @@ extension BaseTableDelegate {
         movablePlugin = builder.movablePlugin?.delegate
         tablePlugins = builder.tablePlugins
         scrollPlugins = builder.scrollPlugins
-
+        #if os(tvOS)
+        focusablePlugin = builder.focusablePlugin?.delegate
+        #endif
         #if os(iOS)
         if #available(iOS 11.0, *) {
             swipeActionsPlugin = builder.swipeActionsPlugin as? TableSwipeActionsConfigurable
@@ -112,7 +116,11 @@ extension BaseTableDelegate {
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
+        #if os(iOS)
         return movablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
+        #elseif os(tvOS)
+        return focusablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
+        #endif
     }
 
     open func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
@@ -185,6 +193,12 @@ extension BaseTableDelegate {
                         didUpdateFocusIn context: UITableViewFocusUpdateContext,
                         with coordinator: UIFocusAnimationCoordinator) {
         tablePlugins.process(event: .didUpdateFocus(context: context, coordinator: coordinator), with: manager)
+        #if os(tvOS)
+        focusablePlugin?.didUpdateFocus(previusView: context.previouslyFocusedView,
+                                        nextView: context.nextFocusedView,
+                                        indexPath: context.nextFocusedIndexPath,
+                                        collection: tableView)
+        #endif
     }
 
     #if os(iOS)

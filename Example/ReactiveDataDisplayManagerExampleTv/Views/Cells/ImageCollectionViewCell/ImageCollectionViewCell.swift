@@ -11,19 +11,6 @@ import Nuke
 
 final class ImageCollectionViewCell: UICollectionViewCell {
 
-    // MARK: - ViewModel
-
-    struct ViewModel {
-        let imageUrl: URL
-        let loadImage: (URL, UIImageView) -> Void
-
-        static func make(with loadImage: @escaping (URL, UIImageView) -> Void) -> Self? {
-            let stringImageUrl = "https://picsum.photos/id/\(Int.random(in: 0...1000))/640/480"
-            guard let imageUrl = URL(string: stringImageUrl) else { return nil }
-            return .init(imageUrl: imageUrl, loadImage: loadImage)
-        }
-    }
-
     // MARK: - Constants
 
     private enum Constants {
@@ -41,13 +28,27 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         setupInitialState()
     }
 
+    override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if context.nextFocusedItem === self {
+            coordinator.addCoordinatedFocusingAnimations { context in
+                self.contentView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            }
+        }
+
+        if context.previouslyFocusedItem === self {
+            coordinator.addCoordinatedUnfocusingAnimations { context in
+                self.contentView.transform = .identity
+            }
+        }
+
+    }
 }
 
 // MARK: - Configurable
 
 extension ImageCollectionViewCell: ConfigurableItem {
 
-    func configure(with viewModel: ViewModel) {
+    func configure(with viewModel: ImageViewModel) {
         viewModel.loadImage(viewModel.imageUrl, iconView)
     }
 

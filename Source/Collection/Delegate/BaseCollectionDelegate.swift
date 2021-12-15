@@ -27,6 +27,9 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
     public var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>?
+    #if os(tvOS)
+    public var focusablePlugin: FocusablePluginDelegate<CollectionGeneratorsProvider, UICollectionView>?
+    #endif
 
     // MARK: - Private Properties
 
@@ -47,6 +50,9 @@ extension BaseCollectionDelegate {
         movablePlugin = builder.movablePlugin?.delegate
         collectionPlugins = builder.collectionPlugins
         scrollPlugins = builder.scrollPlugins
+        #if os(tvOS)
+        focusablePlugin = builder.focusablePlugin?.delegate
+        #endif
 
         #if os(iOS)
         if #available(iOS 11.0, *) {
@@ -93,7 +99,22 @@ extension BaseCollectionDelegate {
     }
 
     open func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        #if os(iOS)
         return movablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
+        #elseif os(tvOS)
+        return focusablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
+        #endif
+    }
+
+    open func collectionView(_ collectionView: UICollectionView,
+                             didUpdateFocusIn context: UICollectionViewFocusUpdateContext,
+                             with coordinator: UIFocusAnimationCoordinator) {
+        #if os(tvOS)
+        focusablePlugin?.didUpdateFocus(previusView: context.previouslyFocusedView,
+                                        nextView: context.nextFocusedView,
+                                        indexPath: context.nextFocusedIndexPath,
+                                        collection: collectionView)
+        #endif
     }
 
     open func collectionView(_ collectionView: UICollectionView,
