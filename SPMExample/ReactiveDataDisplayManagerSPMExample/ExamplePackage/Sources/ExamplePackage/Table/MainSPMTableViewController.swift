@@ -55,8 +55,7 @@ private extension MainSPMTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        let generator = BaseNonReusableCellGenerator<SPMTableViewCell>(with: "BaseNonReusableCellGenerator")
-        generator.update(model: "BaseNonReusableCellGenerator")
+        let generator = SPMTableViewCell.rddm.nonReusableGenerator(with: "BaseNonReusableCellGenerator")
 
         ddm.addCellGenerator(generator)
         Constants.models.forEach { (generator) in
