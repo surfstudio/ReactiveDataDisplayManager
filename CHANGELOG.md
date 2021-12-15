@@ -1,14 +1,14 @@
-## 7.2.0 Fix DiffableDataSource and plugins
+## 7.2.1 SelectableItem fixes and minor improvements
 ### Added
-- tvOS example with collection #132
-- missed suplementary provider which may cause crash #141
-- method `scrollTo` concrete generator #142
-- strategies for `DragAndDroppable` #144
-- examples of some custom `UICollectionViewLayout` #146
+- `didDeselectEvent` to `SelectableItem`
+- new plugin `Focusable` for `UITableView` and `UICollectionView` to customise cells selection at **tvOS**
 
 ### Updated
 
-- `DiffableItemSource` and `DragAndDropableItemSource` to avoid naming conflict #145
-- access modifiers of parts in `DragAndDroppable` #145
-- `TableDiffableModifier` and `CollectionDiffableModifier` to fix dataSource conflicts
-- color of paginator in example
+- UI of Example project
+
+### Fixed
+
+- navigation bug in Example project
+- property `isNeedDeselect` in `SelectableItem` is always **true**
+- failing at *index out of bounds* exception at `DragnDropablePlugin`
