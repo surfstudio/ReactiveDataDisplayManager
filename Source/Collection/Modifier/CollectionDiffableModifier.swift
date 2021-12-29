@@ -16,6 +16,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
 
     typealias CellGeneratorType = CollectionCellGenerator & DiffableItemSource
     typealias HeaderGeneratorType = CollectionHeaderGenerator & DiffableItemSource
+    typealias FooterGeneratorType = CollectionFooterGenerator & DiffableItemSource
 
     // MARK: - Properties
 
@@ -136,6 +137,12 @@ private extension CollectionDiffableModifier {
     func makeSnapshot() -> DiffableSnapshot? {
         guard let provider = provider else { return nil }
 
+        provider.sections.forEach { section in
+            assert(section.generators is [CellGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
+            assert(section.header is HeaderGeneratorType, "This strategy support only \(HeaderGeneratorType.Type.self)")
+            assert(section.footer is FooterGeneratorType, "This strategy support only \(FooterGeneratorType.Type.self)")
+        }
+
         var snapshot = DiffableSnapshot()
 
         for section in provider.sections {
@@ -145,7 +152,7 @@ private extension CollectionDiffableModifier {
             else { continue }
 
             snapshot.appendSections([header])
-            snapshot.appendItems(diffableSection.generators, toSection: header)
+            snapshot.appendItems(diffableSection.generators.compactMap { $0.diffableItem }, toSection: header)
         }
 
         return snapshot

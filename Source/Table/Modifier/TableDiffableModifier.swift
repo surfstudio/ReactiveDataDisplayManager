@@ -16,6 +16,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     typealias CellGeneratorType = TableCellGenerator & DiffableItemSource
     typealias HeaderGeneratorType = TableHeaderGenerator & DiffableItemSource
+    typealias FooterGeneratorType = TableFooterGenerator & DiffableItemSource
 
     // MARK: - Properties
 
@@ -137,6 +138,12 @@ private extension TableDiffableModifier {
     func makeSnapshot() -> DiffableSnapshot? {
         guard let provider = provider else { return nil }
 
+        provider.sections.forEach { section in
+            assert(section.generators is [CellGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
+            assert(section.header is HeaderGeneratorType, "This strategy support only \(HeaderGeneratorType.Type.self)")
+            assert(section.footer is FooterGeneratorType, "This strategy support only \(FooterGeneratorType.Type.self)")
+        }
+
         var snapshot = DiffableSnapshot()
 
         for section in provider.sections {
@@ -146,7 +153,7 @@ private extension TableDiffableModifier {
             else { continue }
 
             snapshot.appendSections([header])
-            snapshot.appendItems(diffableSection.generators, toSection: header)
+            snapshot.appendItems(diffableSection.generators.compactMap { $0.diffableItem }, toSection: header)
         }
 
         return snapshot
