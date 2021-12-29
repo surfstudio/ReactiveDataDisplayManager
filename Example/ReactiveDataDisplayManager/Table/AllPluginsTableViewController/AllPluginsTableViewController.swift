@@ -89,6 +89,7 @@ private extension AllPluginsTableViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+        adapter.generators = [[]]
     }
 
     func updateBarButtonItem(with title: String) {
