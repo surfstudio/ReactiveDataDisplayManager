@@ -24,6 +24,11 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
             if selectable.isNeedDeselect {
                 manager?.view?.deselectRow(at: indexPath, animated: true)
             }
+        case .didDeselect(let indexPath):
+            guard let selectable = manager?.generators[indexPath.section][indexPath.row] as? SelectableItem else {
+                return
+            }
+            selectable.didDeselectEvent.invoke(with: ())
         default:
             break
         }
