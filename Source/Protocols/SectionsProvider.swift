@@ -24,7 +24,9 @@ public protocol SectionsProvider: AnyObject {
 @available(*, deprecated, message: "Please use `sections` instead.")
 public extension SectionsProvider {
 
-    /// Deprecated, use **sections**
+    /// Deprecated, use **sections**.
+    ///
+    /// The setter does not have full functionality
     var generators: [[GeneratorType]] {
         get { getOldSections().generators }
         set { addGenerator(generators: newValue) }
@@ -57,7 +59,8 @@ private extension SectionsProvider {
 
     func addGenerator(generators: [[GeneratorType]]) {
         generators.enumerated().forEach { index, generators in
-            sections[index].generators = generators
+            var section = sections[safe: index]
+            section?.generators = generators
         }
     }
 
