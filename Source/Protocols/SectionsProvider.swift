@@ -33,10 +33,9 @@ public extension SectionsProvider {
     /// Returns the model of the old section view
     ///
     /// **Return old components:**
-    ///
-    ///     generators: [[GeneratorType]]
-    ///     header: [HeaderGeneratorType]
-    ///     footer: [FooterGeneratorType]
+    ///  - generators: [[GeneratorType]]
+    ///  - header: [HeaderGeneratorType]
+    ///  - footer: [FooterGeneratorType]
     ///
     func getOldSections() -> OldSection<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
         var generators = [[GeneratorType]]()

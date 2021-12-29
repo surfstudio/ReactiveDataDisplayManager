@@ -12,7 +12,6 @@ open class CollectionSectionsProvider: SectionsProvider {
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
     public typealias FooterGeneratorType = CollectionFooterGenerator
 
-    /// An array of sections. Within each section One header, One footer, and an array of generators
     open var sections: [Section<CollectionCellGenerator, CollectionHeaderGenerator, CollectionFooterGenerator>] = []
 
     /// Adds generators
