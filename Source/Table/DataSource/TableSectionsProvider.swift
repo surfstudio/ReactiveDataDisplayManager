@@ -12,8 +12,14 @@ open class TableSectionsProvider: SectionsProvider {
     public typealias HeaderGeneratorType = TableHeaderGenerator
     public typealias FooterGeneratorType = TableFooterGenerator
 
+    /// An array of sections. Within each section One header, One footer, and an array of generators
     open var sections: [Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>] = []
 
+    /// Adds generators
+    ///
+    /// - Parameters:
+    ///  - generators: - generators array
+    ///  - section: - enum CollectionSectionСhoice (allows you to choose which section to add generators to)
     func addTableGenerators(with generators: [TableCellGenerator], choice section: TableSectionСhoice) {
         switch section {
         case .newSection(let header, let footer):
@@ -27,9 +33,22 @@ open class TableSectionsProvider: SectionsProvider {
         }
     }
 
-    func addNewSection(section: Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>) {
-        sections.append(section)
+    /// Adds a new section with empty generator array and empty footer
+    func addHeader(header: TableHeaderGenerator) {
+        addTableGenerators(with: [], choice: .newSection(header: header, footer: nil))
     }
+
+    /// Replaces the empty footer of the last section
+    func addFooter(footer: TableFooterGenerator) {
+        let index = sections.count - 1
+        sections[index <= 0 ? 0 : index].footer = footer
+    }
+
+}
+
+// MARK: - Private Methods
+
+private extension TableSectionsProvider {
 
     func addGeneratorsInLastSection(generators: [TableCellGenerator]) {
         let index = sections.count - 1
@@ -46,15 +65,6 @@ open class TableSectionsProvider: SectionsProvider {
 
     func addGeneratorsInSection(by index: Int, generators: [TableCellGenerator]) {
         sections[index <= 0 ? 0 : index].generators.append(contentsOf: generators)
-    }
-
-    func addHeader(header: TableHeaderGenerator) {
-        addTableGenerators(with: [], choice: .newSection(header: header, footer: nil))
-    }
-
-    func addFooter(footer: TableFooterGenerator) {
-        let index = sections.count - 1
-        sections[index <= 0 ? 0 : index].footer = footer
     }
 
 }
