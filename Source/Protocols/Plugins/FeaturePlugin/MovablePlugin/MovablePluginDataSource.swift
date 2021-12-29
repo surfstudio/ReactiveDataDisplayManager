@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 /// Data source based on `MovableDataSource` protocol.
-open class MovablePluginDataSource<Provider: GeneratorsProvider> {
+open class MovablePluginDataSource<Provider: SectionsProvider> {
 
     // MARK: - Typealias
 
@@ -36,17 +36,17 @@ extension MovablePluginDataSource: MovableDataSource {
         let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
         guard
             let provider = provider,
-            let generator = provider.generators[sourceIndexPath.section][sourceIndexPath.row] as? GeneratorType,
+            let generator = provider.sections[sourceIndexPath.section].generators[sourceIndexPath.row] as? GeneratorType,
             moveToTheSameSection || generator.canMoveInOtherSection()
         else { return }
 
-        let itemToMove = provider.generators[sourceIndexPath.section][sourceIndexPath.row]
+        let itemToMove = provider.sections[sourceIndexPath.section].generators[sourceIndexPath.row]
 
         // find oldSection and remove item from this array
-        provider.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+        provider.sections[sourceIndexPath.section].generators.remove(at: sourceIndexPath.row)
 
         // findNewSection and add items to this array
-        provider.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
+        provider.sections[destinationIndexPath.section].generators.insert(itemToMove, at: destinationIndexPath.row)
 
         animator?.perform(in: view, animated: true, operation: { })
     }
@@ -56,7 +56,7 @@ extension MovablePluginDataSource: MovableDataSource {
     ///     - at: index path of a given item
     ///     - with: current provider with generators
     open func canMoveRow(at indexPath: IndexPath, with provider: Provider?) -> Bool {
-        if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
+        if let generator = provider?.sections[indexPath.section].generators[indexPath.row] as? GeneratorType {
             return generator.canMove()
         }
         return false

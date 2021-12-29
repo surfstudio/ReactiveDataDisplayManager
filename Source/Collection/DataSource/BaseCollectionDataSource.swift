@@ -18,12 +18,12 @@ open class BaseCollectionDataSource: NSObject, CollectionDataSource {
     // MARK: - Properties
 
     public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
-    public weak var provider: CollectionGeneratorsProvider?
+    public weak var provider: CollectionSectionsProvider?
 
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
-    public var movablePlugin: MovablePluginDataSource<CollectionGeneratorsProvider>?
+    public var movablePlugin: MovablePluginDataSource<CollectionSectionsProvider>?
 
     // MARK: - Private Properties
 
@@ -66,10 +66,10 @@ extension BaseCollectionDataSource {
     }
 
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let provider = provider, provider.generators.indices.contains(section) else {
+        guard let provider = provider, provider.sections.indices.contains(section) else {
             return 0
         }
-        return provider.generators[section].count
+        return provider.sections[section].generators.count
     }
 
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,7 +77,8 @@ extension BaseCollectionDataSource {
             return UICollectionViewCell()
         }
         return provider
-            .generators[indexPath.section][indexPath.row]
+            .sections[indexPath.section]
+            .generators[indexPath.row]
             .generate(collectionView: collectionView, for: indexPath)
     }
 
@@ -92,10 +93,12 @@ extension BaseCollectionDataSource {
         case UICollectionView.elementKindSectionHeader:
             return provider
                 .sections[indexPath.section]
+                .header
                 .generate(collectionView: collectionView, for: indexPath)
         case UICollectionView.elementKindSectionFooter:
             return provider
-                .footers[indexPath.section]
+                .sections[indexPath.section]
+                .footer
                 .generate(collectionView: collectionView, for: indexPath)
         default:
             return UICollectionReusableView()

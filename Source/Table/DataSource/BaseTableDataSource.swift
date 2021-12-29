@@ -18,14 +18,14 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    public weak var provider: TableGeneratorsProvider?
+    public weak var provider: TableSectionsProvider?
 
     public var modifier: Modifier<UITableView, UITableView.RowAnimation>?
 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
-    public var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>?
+    public var movablePlugin: MovablePluginDataSource<TableSectionsProvider>?
 
     // MARK: - Private Properties
 
@@ -66,10 +66,10 @@ extension BaseTableDataSource {
     }
 
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let provider = provider, provider.generators.indices.contains(section) else {
+        guard let provider = provider, provider.sections.indices.contains(section) else {
             return 0
         }
-        return provider.generators[section].count
+        return provider.sections[section].generators.count
     }
 
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,7 +77,7 @@ extension BaseTableDataSource {
             return UITableViewCell()
         }
         return provider
-            .generators[indexPath.section][indexPath.row]
+            .sections[indexPath.section].generators[indexPath.row]
             .generate(tableView: tableView, for: indexPath)
     }
 

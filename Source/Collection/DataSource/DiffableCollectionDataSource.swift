@@ -15,14 +15,14 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
 
     // MARK: - Properties
 
-    public weak var provider: CollectionGeneratorsProvider?
+    public weak var provider: CollectionSectionsProvider?
 
     public var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
 
     public var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
-    public var movablePlugin: MovablePluginDataSource<CollectionGeneratorsProvider>?
+    public var movablePlugin: MovablePluginDataSource<CollectionSectionsProvider>?
 
     // MARK: - Initialization
 
@@ -30,7 +30,8 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
     public init(provider: BaseCollectionManager) {
         super.init(collectionView: provider.view) { (collection, indexPath, item) -> UICollectionViewCell? in
             provider
-                .generators[indexPath.section][indexPath.row]
+                .sections[indexPath.section]
+                .generators[indexPath.row]
                 .generate(collectionView: collection, for: indexPath)
         }
 
@@ -38,10 +39,10 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
         self.supplementaryViewProvider = { (collection, kind, indexPath) -> UICollectionReusableView? in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
-                return provider.sections[indexPath.section]
+                return provider.sections[indexPath.section].header
                     .generate(collectionView: collection, for: indexPath)
             case UICollectionView.elementKindSectionFooter:
-                return provider.footers[indexPath.section]
+                return provider.sections[indexPath.section].footer
                     .generate(collectionView: collection, for: indexPath)
             default:
                 return nil

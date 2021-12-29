@@ -10,6 +10,6 @@ import UIKit
 import Foundation
 
 public protocol CollectionItemTitleDisplayable: CollectionFeaturePlugin {
-    func indexTitles(with provider: CollectionGeneratorsProvider?) -> [String]?
-    func indexPathForIndexTitle(_ title: String, at index: Int, with provider: CollectionGeneratorsProvider?) -> IndexPath
+    func indexTitles(with provider: CollectionSectionsProvider?) -> [String]?
+    func indexPathForIndexTitle(_ title: String, at index: Int, with provider: CollectionSectionsProvider?) -> IndexPath
 }

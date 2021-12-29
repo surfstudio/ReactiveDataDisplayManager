@@ -17,7 +17,7 @@ open class TableDragAndDroppablePlugin: TableFeaturePlugin, DragAndDroppable {
 
     // MARK: - Typealias
 
-    public typealias Provider = TableGeneratorsProvider
+    public typealias Provider = TableSectionsProvider
 
     // MARK: - Properties
 
@@ -56,7 +56,7 @@ open class CollectionDragAndDroppablePlugin: CollectionFeaturePlugin, DragAndDro
 
     // MARK: - Typealias
 
-    public typealias Provider = CollectionGeneratorsProvider
+    public typealias Provider = CollectionSectionsProvider
 
     // MARK: - Properties
 

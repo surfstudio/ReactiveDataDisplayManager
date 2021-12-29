@@ -1,5 +1,5 @@
 //
-//  GalleryController.swift
+//  MainGalleryController.swift
 //  ReactiveDataDisplayManagerExample_iOS
 //
 //  Created by Никита Коробейников on 09.06.2021.
@@ -9,7 +9,11 @@ import UIKit
 import Nuke
 import ReactiveDataDisplayManager
 
-final class GalleryController: UIViewController {
+final class MainGalleryController: UIViewController {
+
+    // MARK: - Typealias
+
+    typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
 
     // MARK: - Constants
 
@@ -27,17 +31,12 @@ final class GalleryController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
-        .add(featurePlugin: .focusable(
-            by: ShadowFocusableStrategy(model: .init(color: .red))
-        ))
-        .add(plugin: .selectable())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "GalleryController"
 
         configureCollectionView()
 
@@ -48,7 +47,7 @@ final class GalleryController: UIViewController {
 
 // MARK: - Private Methods
 
-private extension GalleryController {
+private extension MainGalleryController {
 
     func configureCollectionView() {
         collectionView.decelerationRate = .fast
@@ -65,14 +64,10 @@ private extension GalleryController {
             adapter.addSectionHeaderGenerator(headerGenerator)
             for _ in 0...31 {
                 // Create viewModels for cell
-                guard let viewModel = ImageViewModel.make(with: loadImage) else { continue }
+                guard let viewModel = ImageCollectionViewCell.ViewModel.make(with: loadImage) else { continue }
 
                 // Create generator
-                let generator = ImageCollectionViewGenerator(with: viewModel)
-
-                generator.didSelectEvent += {
-                    print(viewModel.imageUrl)
-                }
+                let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
 
                 // Add generator to adapter
                 adapter.addCellGenerator(generator)

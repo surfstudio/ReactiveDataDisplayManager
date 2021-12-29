@@ -18,7 +18,7 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
                              layout collectionViewLayout: UICollectionViewLayout,
                              sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        if let sizableCell = manager?.generators[indexPath.section][indexPath.row] as? SizableItem {
+        if let sizableCell = manager?.sections[indexPath.section].generators[indexPath.row] as? SizableItem {
             return sizableCell.getSize()
         }
 
@@ -66,7 +66,7 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
                              layout collectionViewLayout: UICollectionViewLayout,
                              referenceSizeForHeaderInSection section: Int) -> CGSize {
 
-        if let size = manager?.sections[safe: section]?.size(collectionView, forSection: section) {
+        if let size = manager?.sections[safe: section]?.header.size(collectionView, forSection: section) {
             return size
         }
 
@@ -81,7 +81,7 @@ extension FlowCollectionDelegate: UICollectionViewDelegateFlowLayout {
                              layout collectionViewLayout: UICollectionViewLayout,
                              referenceSizeForFooterInSection section: Int) -> CGSize {
 
-        if let size = manager?.footers[safe: section]?.size(collectionView, forSection: section) {
+        if let size = manager?.sections[safe: section]?.footer.size(collectionView, forSection: section) {
             return size
         }
 

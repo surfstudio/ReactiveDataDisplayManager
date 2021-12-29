@@ -34,9 +34,6 @@ public class TableBuilder<T: BaseTableManager> {
     var movablePlugin: TableMovableItemPlugin?
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     var swipeActionsPlugin: TableFeaturePlugin?
-    #if os(tvOS)
-    var focusablePlugin: TableFocusablePlugin?
-    #endif
 
     #if os(iOS)
     @available(iOS 11.0, *)
@@ -97,10 +94,6 @@ public class TableBuilder<T: BaseTableManager> {
             movablePlugin = plugin
         case let plugin as TableSectionTitleDisplayable:
             sectionTitleDisplayablePlugin = plugin
-        #if os(tvOS)
-        case let plugin as TableFocusablePlugin:
-            focusablePlugin = plugin
-        #endif
         default:
             break
         }

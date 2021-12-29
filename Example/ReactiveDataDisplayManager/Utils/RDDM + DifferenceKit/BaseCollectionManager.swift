@@ -43,14 +43,12 @@ extension BaseCollectionManager {
 private extension BaseCollectionManager {
 
     func makeSnapshot() -> [Section]? {
-        guard
-            !sections.asDiffableItemSources.isEmpty,
-            let generators = generators as? [[DiffableItemSource]]
-        else { return nil }
-
-        return sections.asDiffableItemSources.enumerated().compactMap { index, section -> Section? in
-            let elements = generators.asDiffableItems[safe: index] ?? []
-            return Section(model: section.diffableItem, elements: elements)
+        return sections.compactMap { section -> Section? in
+            guard
+                let diffableSection = section.asDiffableItemSource(),
+                let header = diffableSection.header?.diffableItem
+            else { return nil }
+            return Section(model: header, elements: diffableSection.generators.compactMap { $0.diffableItem })
         }
     }
 

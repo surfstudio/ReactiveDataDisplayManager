@@ -26,10 +26,7 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
-    public var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>?
-    #if os(tvOS)
-    public var focusablePlugin: FocusablePluginDelegate<CollectionGeneratorsProvider, UICollectionView>?
-    #endif
+    public var movablePlugin: MovablePluginDelegate<CollectionSectionsProvider>?
 
     // MARK: - Private Properties
 
@@ -50,9 +47,6 @@ extension BaseCollectionDelegate {
         movablePlugin = builder.movablePlugin?.delegate
         collectionPlugins = builder.collectionPlugins
         scrollPlugins = builder.scrollPlugins
-        #if os(tvOS)
-        focusablePlugin = builder.focusablePlugin?.delegate
-        #endif
 
         #if os(iOS)
         if #available(iOS 11.0, *) {
@@ -99,22 +93,7 @@ extension BaseCollectionDelegate {
     }
 
     open func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
-        #if os(iOS)
         return movablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
-        #elseif os(tvOS)
-        return focusablePlugin?.canFocusRow(at: indexPath, with: manager) ?? false
-        #endif
-    }
-
-    open func collectionView(_ collectionView: UICollectionView,
-                             didUpdateFocusIn context: UICollectionViewFocusUpdateContext,
-                             with coordinator: UIFocusAnimationCoordinator) {
-        #if os(tvOS)
-        focusablePlugin?.didUpdateFocus(previusView: context.previouslyFocusedView,
-                                        nextView: context.nextFocusedView,
-                                        indexPath: context.nextFocusedIndexPath,
-                                        collection: collectionView)
-        #endif
     }
 
     open func collectionView(_ collectionView: UICollectionView,
@@ -138,15 +117,15 @@ extension BaseCollectionDelegate {
 extension BaseCollectionDelegate: CollectionDragAndDropDelegate {
 
     @available(iOS 11.0, *)
-    public var draggableDelegate: DraggablePluginDelegate<CollectionGeneratorsProvider>? {
+    public var draggableDelegate: DraggablePluginDelegate<CollectionSectionsProvider>? {
         set { _draggableDelegate = newValue }
-        get { _draggableDelegate as? DraggablePluginDelegate<CollectionGeneratorsProvider> }
+        get { _draggableDelegate as? DraggablePluginDelegate<CollectionSectionsProvider> }
     }
 
     @available(iOS 11.0, *)
-    public var droppableDelegate: DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator>? {
+    public var droppableDelegate: DroppablePluginDelegate<CollectionSectionsProvider, UICollectionViewDropCoordinator>? {
         set { _droppableDelegate = newValue }
-        get { _droppableDelegate as? DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator> }
+        get { _droppableDelegate as? DroppablePluginDelegate<CollectionSectionsProvider, UICollectionViewDropCoordinator> }
     }
 
 }
