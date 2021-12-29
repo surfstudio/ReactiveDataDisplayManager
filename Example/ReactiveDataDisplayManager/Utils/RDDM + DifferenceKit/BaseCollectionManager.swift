@@ -48,7 +48,7 @@ private extension BaseCollectionManager {
                 let diffableSection = section.asDiffableItemSource(),
                 let header = diffableSection.header?.diffableItem
             else { return nil }
-            return Section(model: header, elements: diffableSection.generators)
+            return Section(model: header, elements: diffableSection.generators.compactMap { $0.diffableItem })
         }
     }
 

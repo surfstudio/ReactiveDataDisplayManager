@@ -44,7 +44,7 @@ public extension Section {
     ///
     func asDiffableItemSource() -> DiffableSection? {
         let header = header as? DiffableItemSource
-        let generators = (generators as? [DiffableItemSource] ?? []).compactMap { $0.diffableItem }
+        let generators = generators as? [DiffableItemSource] ?? []
         let footer = self.footer as? DiffableItemSource
 
         return .init(header: header, footer: footer, generators: generators)
@@ -62,9 +62,9 @@ public extension Section {
 public struct DiffableSection {
     public let header: DiffableItemSource?
     public let footer: DiffableItemSource?
-    public let generators: [DiffableItem]
+    public let generators: [DiffableItemSource]
 
-    public init(header: DiffableItemSource?, footer: DiffableItemSource?, generators: [DiffableItem]) {
+    public init(header: DiffableItemSource?, footer: DiffableItemSource?, generators: [DiffableItemSource]) {
         self.header = header
         self.footer = footer
         self.generators = generators
