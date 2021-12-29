@@ -25,11 +25,8 @@ public protocol SectionsProvider: AnyObject {
 public extension SectionsProvider {
 
     /// Deprecated, use **sections**.
-    ///
-    /// The setter does not have full functionality
     var generators: [[GeneratorType]] {
-        get { getOldSections().generators }
-        set { addGenerator(generators: newValue) }
+        getOldSections().generators
     }
 
     /// Returns the model of the old section view
@@ -49,23 +46,6 @@ public extension SectionsProvider {
             generators.append(section.generators)
         }
         return .init(generators: generators, headers: headers, footers: footers)
-    }
-
-}
-
-// MARK: - Private
-
-private extension SectionsProvider {
-
-    func addGenerator(generators: [[GeneratorType]]) {
-        generators.enumerated().forEach { index, generators in
-            var section = sections[safe: index]
-            section?.generators = generators
-
-            if generators.isEmpty, sections.count > index {
-                sections.remove(at: index)
-            }
-        }
     }
 
 }
