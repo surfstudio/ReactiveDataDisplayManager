@@ -118,7 +118,7 @@ public class ManualTableManager: BaseTableManager {
             return
         }
 
-        self.sections[index].generators = []
+        self.sections[index].generators.removeAll()
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator, toHeader headerGenerator: TableHeaderGenerator) {
