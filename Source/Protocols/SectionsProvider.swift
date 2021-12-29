@@ -61,6 +61,10 @@ private extension SectionsProvider {
         generators.enumerated().forEach { index, generators in
             var section = sections[safe: index]
             section?.generators = generators
+
+            if generators.isEmpty, sections.count > index {
+                sections.remove(at: index)
+            }
         }
     }
 
