@@ -14,7 +14,7 @@ open class CollectionSectionsProvider: SectionsProvider {
 
     open var sections: [Section<CollectionCellGenerator, CollectionHeaderGenerator, CollectionFooterGenerator>] = []
 
-    func addCollectionGenerators(with generators: [CollectionCellGenerator], choice section: СhoiceCollectionSection) {
+    func addCollectionGenerators(with generators: [CollectionCellGenerator], choice section: CollectionSectionСhoice) {
         switch section {
         case .newSection(let header, let footer):
             self.addGeneratorsInNewSection(generators: generators, for: header, footer: footer)

@@ -14,7 +14,7 @@ open class TableSectionsProvider: SectionsProvider {
 
     open var sections: [Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>] = []
 
-    func addTableGenerators(with generators: [TableCellGenerator], choice section: СhoiceTableSection) {
+    func addTableGenerators(with generators: [TableCellGenerator], choice section: TableSectionСhoice) {
         switch section {
         case .newSection(let header, let footer):
             self.addGeneratorsInNewSection(generators: generators, for: header, footer: footer)
