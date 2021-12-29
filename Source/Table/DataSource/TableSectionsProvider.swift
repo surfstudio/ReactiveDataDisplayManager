@@ -12,7 +12,6 @@ open class TableSectionsProvider: SectionsProvider {
     public typealias HeaderGeneratorType = TableHeaderGenerator
     public typealias FooterGeneratorType = TableFooterGenerator
 
-    /// An array of sections. Within each section One header, One footer, and an array of generators
     open var sections: [Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>] = []
 
     /// Adds generators

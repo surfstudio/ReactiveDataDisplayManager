@@ -55,10 +55,9 @@ public extension Section {
 /// DiffableSection - Used for Diffable data source
 ///
 /// Consists of:
-///
-///     header: DiffableItemSource?
-///     footer: DiffableItemSource?
-///     generators: [DiffableItem]
+///    - header: DiffableItemSource?
+///    - footer: DiffableItemSource?
+///    - generators: [DiffableItem]
 ///
 public struct DiffableSection {
     public let header: DiffableItemSource?

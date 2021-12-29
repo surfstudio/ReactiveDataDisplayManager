@@ -378,7 +378,8 @@ private extension ManualTableManager {
         elements.forEach { [weak self] element in
             element.generator.registerCell(in: view)
             self?.sections[element.sectionIndex]
-                .generators.insert(element.generator, at: element.generatorIndex)
+                .generators
+                .insert(element.generator, at: element.generatorIndex)
         }
 
         let indexPaths = elements.map {
