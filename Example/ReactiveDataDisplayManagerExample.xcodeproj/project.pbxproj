@@ -95,6 +95,8 @@
 		9FFA5FE951565EA086C09F4D /* CollectionCompositionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173FB7F8FE0015D07813CC53 /* CollectionCompositionalViewController.swift */; };
 		A3C19E75C2904BB0882C49D8 /* TitleCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD08177388A637B66A066E9 /* TitleCollectionReusableView.swift */; };
 		A3CBF3A30D66A30C8DB2DB07 /* DragAndDroppableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73953DF3D544D69F0943CE /* DragAndDroppableTableViewController.swift */; };
+		A42AC95B277DF09E0015225E /* ExpandableTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42AC959277DF09E0015225E /* ExpandableTableCell.swift */; };
+		A42AC95C277DF09E0015225E /* ExpandableTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42AC95A277DF09E0015225E /* ExpandableTableCell.xib */; };
 		A4F6E2BE4831BDC28F197BE6 /* ButtonStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768EADE1BBCA4E1E3CD2B9A7 /* ButtonStackCellGenerator.swift */; };
 		A63DE9C658B2CB3C192DFEBD /* PaginatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474CD5F4A339F735088298E7 /* PaginatorView.swift */; };
 		A64DE6EFABFFB2F74A12E624 /* TitleHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9DFCE12A61DE93236E881E /* TitleHeaderGenerator.swift */; };
@@ -249,6 +251,8 @@
 		9FE54BA279EBA492D3F36FD3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A01825DE6F3160BA0ACD25D8 /* UnrollCellStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrollCellStackView.swift; sourceTree = "<group>"; };
 		A13CAC97C25B9838A25722E4 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		A42AC959277DF09E0015225E /* ExpandableTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableCell.swift; sourceTree = "<group>"; };
+		A42AC95A277DF09E0015225E /* ExpandableTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpandableTableCell.xib; sourceTree = "<group>"; };
 		A43827BAA20A9EF3B05A721E /* GravityCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityCellGenerator.swift; sourceTree = "<group>"; };
 		A6EF9B831E7364F7DDCD7F61 /* FittingCompressedSizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FittingCompressedSizeCollectionViewCell.xib; sourceTree = "<group>"; };
 		A8C18F63930316A8468B041C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -360,6 +364,7 @@
 		06478A4F456832221FCBA599 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A42AC958277DF0750015225E /* ExpandableTableCell */,
 				4638FEDDAE48DE2D1F139083 /* FoldableTableViewCell */,
 				FACE84FE4FFDFDBA53A3C434 /* Generators */,
 				A41BE40756E14A0F3107D2AC /* ImageTableViewCell */,
@@ -875,6 +880,15 @@
 			path = ImageTableViewCell;
 			sourceTree = "<group>";
 		};
+		A42AC958277DF0750015225E /* ExpandableTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				A42AC959277DF09E0015225E /* ExpandableTableCell.swift */,
+				A42AC95A277DF09E0015225E /* ExpandableTableCell.xib */,
+			);
+			path = ExpandableTableCell;
+			sourceTree = "<group>";
+		};
 		A48D73527798F1CAB802FB8C /* TitleTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -980,7 +994,6 @@
 				F08D2012DDBAFDE2A37DCB37 /* Pods-ReactiveDataDisplayManagerExample_tvOS.debug.xcconfig */,
 				D723B9ADEBA96CD2890D7BE9 /* Pods-ReactiveDataDisplayManagerExample_tvOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -1349,6 +1362,7 @@
 				EDD36CB907B6AE952558701A /* ImageTableViewCell.xib in Resources */,
 				B3E7D3F85B599D1D768AC9C2 /* LaunchScreen.storyboard in Resources */,
 				89FE0F5CC73AA07FA0A494E4 /* Localizable.strings in Resources */,
+				A42AC95C277DF09E0015225E /* ExpandableTableCell.xib in Resources */,
 				71540E2C780B25E73B1903F3 /* Main.storyboard in Resources */,
 				38716AC171E6746BB729385A /* RectangleColorCollectionViewCell.xib in Resources */,
 				D89A9E350B2221027F65561B /* SizableCollectionViewCell.xib in Resources */,
@@ -1482,6 +1496,7 @@
 				AC388BC69A388328FAA6C6B3 /* Appearance.swift in Sources */,
 				24EC35DBCDEAD4C28FBE231B /* Array.swift in Sources */,
 				7B8949F3C72C312055CF74A2 /* BaseCollectionManager.swift in Sources */,
+				A42AC95B277DF09E0015225E /* ExpandableTableCell.swift in Sources */,
 				A4F6E2BE4831BDC28F197BE6 /* ButtonStackCellGenerator.swift in Sources */,
 				68DFFC741F84504541E950EE /* CarouselCollectionViewController.swift in Sources */,
 				F885C1568B55A1288536E67F /* CarouselCollectionViewLayout.swift in Sources */,
