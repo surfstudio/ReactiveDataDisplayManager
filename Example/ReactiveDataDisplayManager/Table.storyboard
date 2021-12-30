@@ -356,6 +356,37 @@
             </objects>
             <point key="canvasLocation" x="7286" y="-1842"/>
         </scene>
+        <!--Selectable Table View Controller-->
+        <scene sceneID="mp8-kQ-Dep">
+            <objects>
+                <viewController id="Vhr-xd-Kz0" customClass="SelectableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VTt-dP-FiV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="oDc-r9-v6m">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jUZ-6J-1VY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jUZ-6J-1VY" firstAttribute="bottom" secondItem="oDc-r9-v6m" secondAttribute="bottom" id="6rE-IV-qac"/>
+                            <constraint firstItem="oDc-r9-v6m" firstAttribute="leading" secondItem="jUZ-6J-1VY" secondAttribute="leading" id="GFf-EZ-8Ie"/>
+                            <constraint firstItem="oDc-r9-v6m" firstAttribute="top" secondItem="jUZ-6J-1VY" secondAttribute="top" id="jeu-rB-CNd"/>
+                            <constraint firstItem="jUZ-6J-1VY" firstAttribute="trailing" secondItem="oDc-r9-v6m" secondAttribute="trailing" id="z1T-4j-cyV"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="U9p-tk-wiP"/>
+                    <connections>
+                        <outlet property="tableView" destination="oDc-r9-v6m" id="het-Jf-D9f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EUf-Hs-ZgF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8136" y="-1842"/>
+        </scene>
         <!--Tables-->
         <scene sceneID="vBA-E8-0GD">
             <objects>
@@ -395,6 +426,7 @@
                         <segue destination="LhN-Qj-T72" kind="show" identifier="paginatableTable" id="lsC-Lm-3z9"/>
                         <segue destination="2CJ-Yf-yLR" kind="show" identifier="differenceTable" id="ZLw-LG-i1S"/>
                         <segue destination="d7e-TN-VWx" kind="show" identifier="dragAndDroppableTable" id="E9M-n5-zrb"/>
+                        <segue destination="Vhr-xd-Kz0" kind="show" identifier="selectableTable" id="71J-yg-dJ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kEa-HS-aMh" sceneMemberID="firstResponder"/>
