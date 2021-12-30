@@ -76,9 +76,12 @@ extension BaseCollectionDataSource {
         guard let provider = provider else {
             return UICollectionViewCell()
         }
-        return provider
+        let cell = provider
             .generators[indexPath.section][indexPath.row]
             .generate(collectionView: collectionView, for: indexPath)
+
+        configureExpandableItem(for: cell, collectionView: collectionView)
+        return cell
     }
 
     open func collectionView(_ collectionView: UICollectionView,
@@ -131,6 +134,21 @@ extension BaseCollectionDataSource {
 
     open func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? BaseCollectionManager)
+    }
+
+}
+
+// MARK: - ExpandableItem
+
+private extension BaseCollectionDataSource {
+
+    func configureExpandableItem(for cell: UICollectionViewCell, collectionView: UICollectionView) {
+        guard let expandable = cell as? ExpandableItem else {
+            return
+        }
+        expandable.onHeightChanged += { [weak self] _ in
+            self?.animator?.perform(in: collectionView, animated: true) { }
+        }
     }
 
 }

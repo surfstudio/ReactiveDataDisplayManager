@@ -80,6 +80,7 @@ private extension AllPluginsTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+        addExpandableSection()
         addSelectableSection()
         addFoldableSection()
         addMovableSection()
@@ -99,6 +100,12 @@ private extension AllPluginsTableViewController {
     func changeTableEditing() {
         tableView.isEditing.toggle()
         updateBarButtonItem(with: tableView.isEditing ? Constants.endEditing : Constants.startEditing)
+    }
+
+    func addExpandableSection() {
+        addHeaderGenerator(with: "Expandable")
+        let generator = ExpandableTableCell.rddm.baseGenerator(with: ())
+        adapter.addCellGenerator(generator)
     }
 
     /// Method allow add header and selectable cells into adapter
