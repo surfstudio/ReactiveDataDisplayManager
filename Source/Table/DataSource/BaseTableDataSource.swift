@@ -76,7 +76,7 @@ extension BaseTableDataSource {
         guard let provider = provider else {
             return UITableViewCell()
         }
-        let cell =  provider
+        let cell = provider
             .generators[indexPath.section][indexPath.row]
             .generate(tableView: tableView, for: indexPath)
 

@@ -23,7 +23,6 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
 
     public var onHeightChanged: BaseEvent<CGFloat?> = .init()
 
-
     // MARK: - @IBActions
 
     @IBAction private func buttonTap(_ sender: UIButton) {
