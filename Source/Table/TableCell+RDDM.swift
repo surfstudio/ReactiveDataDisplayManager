@@ -18,6 +18,14 @@ public extension StaticDataDisplayWrapper where Base: UITableViewCell & Configur
 
 }
 
+public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & ConstractableItem {
+
+    func nonReusableGenerator(with model: Base.Model) -> BaseNonReusableCellGenerator<Base> {
+        .init(with: model)
+    }
+
+}
+
 public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & CalculatableHeightItem {
 
     func calculatableHeightGenerator(with model: Base.Model,

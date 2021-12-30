@@ -9,7 +9,11 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-public class SPMTableViewCell: UITableViewCell {
+public class SPMTableViewCell: UITableViewCell, ConstractableItem {
+
+    public static var constructionType: ConstructionType {
+        .xib
+    }
 
     @IBOutlet private weak var titleLabel: UILabel!
 

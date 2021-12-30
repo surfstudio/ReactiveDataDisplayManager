@@ -8,36 +8,52 @@
 
 import UIKit
 
-/// Class for generating non-reusable Configurable UITableViewCell
-open class BaseNonReusableCellGenerator<Cell: ConfigurableItem>: SelectableTableCellGenerator where Cell: UITableViewCell {
+/// Class for generating *non-reusable* configurable **UITableViewCell**
+///
+/// Term *non-reusable* means that we are creating cell manually with constructor type defined in **ConstractableItem**.
+/// In other words this generator will not use `tableView.deqeueReusableCell`.
+///  - Warning: Do not use this generators in tables with many cells of same type. Because you may catch perfomance issues.
+open class BaseNonReusableCellGenerator<Cell: ConfigurableItem & ConstractableItem>: SelectableTableCellGenerator where Cell: UITableViewCell {
 
-    // MARK: - Public properties
+    // MARK: - Public Properties
 
     public var isNeedDeselect = true
     public var didSelectEvent = BaseEvent<Void>()
     public var didDeselectEvent = BaseEvent<Void>()
+
+    // MARK: - Properties
+
     private(set) public var model: Cell.Model
+
     private(set) public lazy var cell: Cell? = {
-        return Cell.fromXib(bundle: Cell.bundle())
+        switch Cell.constructionType {
+        case .xib:
+            return Cell.fromXib(bundle: Cell.bundle())
+        case .manual:
+            return Cell(frame: .zero)
+        }
     }()
-
-    // MARK: - Private Properties
-
-    private let registerType: CellRegisterType
 
     // MARK: - Initialization
 
-    public init(with model: Cell.Model,
-                registerType: CellRegisterType = .nib) {
+    public init(with model: Cell.Model) {
         self.model = model
-        self.registerType = registerType
+    }
+
+    // MARK: - Open Methods
+
+    open func configure(cell: Cell, with model: Cell.Model) {
+        cell.configure(with: model)
     }
 
     // MARK: - Public Methods
 
     public func update(model: Cell.Model) {
         self.model = model
-        cell?.configure(with: model)
+        guard let cell = cell else {
+            return
+        }
+        configure(cell: cell, with: model)
     }
 
     // MARK: - TableCellGenerator
@@ -47,17 +63,15 @@ open class BaseNonReusableCellGenerator<Cell: ConfigurableItem>: SelectableTable
     }
 
     public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        cell?.configure(with: model)
-        return cell ?? UITableViewCell()
+        guard let cell = cell else {
+            return UITableViewCell()
+        }
+        configure(cell: cell, with: model)
+        return cell
     }
 
     public func registerCell(in tableView: UITableView) {
-        switch registerType {
-        case .nib:
-            tableView.registerNib(identifier, bundle: Cell.bundle())
-        case .class:
-            tableView.register(Cell.self, forCellReuseIdentifier: identifier)
-        }
+        // We can leave this empty because we are not using reuse in this generator type
     }
 
 }

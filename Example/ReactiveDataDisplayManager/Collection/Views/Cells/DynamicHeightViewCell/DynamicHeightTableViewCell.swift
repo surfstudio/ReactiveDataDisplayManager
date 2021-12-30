@@ -8,7 +8,11 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class DynamicHeightTableViewCell: UITableViewCell, ConfigurableItem {
+final class DynamicHeightTableViewCell: UITableViewCell, ConfigurableItem, ConstractableItem {
+
+    static var constructionType: ConstructionType {
+        .xib
+    }
 
     // MARK: - Constants
 
