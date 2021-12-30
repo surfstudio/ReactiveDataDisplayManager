@@ -5,7 +5,7 @@
 //  Created by porohov on 30.12.2021.
 //
 
-import Foundation
+import UIKit
 
 /// Protocol for `TableCellGenerator` for Height Change Control
 public protocol ExpandableItem: AnyObject {
