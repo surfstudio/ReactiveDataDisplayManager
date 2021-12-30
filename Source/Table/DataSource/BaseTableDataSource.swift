@@ -76,9 +76,12 @@ extension BaseTableDataSource {
         guard let provider = provider else {
             return UITableViewCell()
         }
-        return provider
+        let cell =  provider
             .generators[indexPath.section][indexPath.row]
             .generate(tableView: tableView, for: indexPath)
+
+        configureExpandableItem(for: cell, tableView: tableView)
+        return cell
     }
 
     open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -110,6 +113,21 @@ extension BaseTableDataSource {
 
     open func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
         prefetchPlugins.process(event: .cancelPrefetching(indexPaths), with: provider as? BaseTableManager)
+    }
+
+}
+
+// MARK: - ExpandableItem
+
+private extension BaseTableDataSource {
+
+    func configureExpandableItem(for cell: UITableViewCell, tableView: UITableView) {
+        guard let expandable = cell as? ExpandableItem else {
+            return
+        }
+        expandable.onHeightChanged += { [weak self] _ in
+            self?.animator?.perform(in: tableView, animated: true) { }
+        }
     }
 
 }
