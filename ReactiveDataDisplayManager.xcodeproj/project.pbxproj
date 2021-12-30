@@ -637,6 +637,14 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
+		032CFE2A4BAA81D77BD0B945 /* REFACTORING */ = {
+			isa = PBXGroup;
+			children = (
+				A9CCFE74D85E93281C7B0A86 /* Protocols */,
+			);
+			path = REFACTORING;
+			sourceTree = "<group>";
+		};
 		061609D764C2E840E7C6D3AD /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -836,6 +844,22 @@
 			path = FocusablePlugin;
 			sourceTree = "<group>";
 		};
+		5E4DED0C836B95D4A2AA71EC /* PluginAction */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PluginAction;
+			sourceTree = "<group>";
+		};
+		5E5EEDC3878570795A67EE56 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				6651920D5F1134A32A74F1AB /* Generators */,
+				5E4DED0C836B95D4A2AA71EC /* PluginAction */,
+			);
+			path = Plugins;
+			sourceTree = "<group>";
+		};
 		5FC8B05F432A1CBF451577AD /* Modifier */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,6 +882,13 @@
 				BC4327BAC235A817BDDB8C2D /* XCTestCase+FatalError.swift */,
 			);
 			path = ReactiveDataDisplayManagerTests;
+			sourceTree = "<group>";
+		};
+		6651920D5F1134A32A74F1AB /* Generators */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Generators;
 			sourceTree = "<group>";
 		};
 		693D5446F63554917C2E99C7 /* Deprecated */ = {
@@ -909,6 +940,7 @@
 				541729A882381B290F04154F /* Collection */,
 				836365E89537F3A370FF42BC /* Models */,
 				4F976C89B581915E384D0A8E /* Protocols */,
+				032CFE2A4BAA81D77BD0B945 /* REFACTORING */,
 				CE78A64118953BB0F6A0CCFF /* Stack */,
 				AAC1F935B1C67CFABBE7753E /* Table */,
 				B53C25BB527110DC62F44CDF /* Utils */,
@@ -1015,6 +1047,14 @@
 				12795E284D4856290FBE0BC3 /* TableDragAndDropDelegate.swift */,
 			);
 			path = Delegate;
+			sourceTree = "<group>";
+		};
+		A9CCFE74D85E93281C7B0A86 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5E5EEDC3878570795A67EE56 /* Plugins */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		AAC1F935B1C67CFABBE7753E /* Table */ = {
