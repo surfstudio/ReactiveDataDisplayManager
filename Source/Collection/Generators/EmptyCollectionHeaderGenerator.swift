@@ -11,20 +11,25 @@ import UIKit
 public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
 
     public let uuid = UUID().uuidString
+    public let elementKind = UICollectionView.elementKindSectionHeader
+
+    public init() { }
 
     public func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
         return .zero
     }
 
     public func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind,
                                                                      withReuseIdentifier: self.identifier.nameOfClass,
                                                                      for: indexPath)
         return header
     }
 
     public func registerHeader(in collectionView: UICollectionView) {
-        collectionView.register(identifier, forCellWithReuseIdentifier: identifier.nameOfClass)
+        collectionView.register(identifier,
+                                forSupplementaryViewOfKind: elementKind,
+                                withReuseIdentifier: identifier.nameOfClass)
     }
 
     public var identifier: UICollectionReusableView.Type {
