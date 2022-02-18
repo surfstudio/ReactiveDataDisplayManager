@@ -32,7 +32,7 @@ targets:
       settings:
         base:
           PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm.example
-          MARKETING_VERSION: "8.0.0"
+          MARKETING_VERSION: "8.0.9"
           CURRENT_PROJECT_VERSION: 8
           VERSIONING_SYSTEM: "apple-generic"
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
@@ -62,7 +62,7 @@ targets:
       settings:
         base:
           PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm.example
-          MARKETING_VERSION: "8.0.0"
+          MARKETING_VERSION: "8.0.9"
           CURRENT_PROJECT_VERSION: 8
           VERSIONING_SYSTEM: "apple-generic"
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
