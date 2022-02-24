@@ -30,6 +30,6 @@ public protocol HeaderDataDisplayManager: AnyObject {
 
     func removeAllGenerators(from header: HeaderGeneratorType)
 
-    /// Removes all header generators.
+    /// Replaces all header generators with`EmptyCollectionHeaderGenerator`
     func clearHeaderGenerators()
 }

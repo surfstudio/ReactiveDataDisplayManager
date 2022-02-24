@@ -57,7 +57,7 @@ public protocol DataDisplayManager: AnyObject {
     /// - Parameter generators: generators to update
     func update(generators: [CellGeneratorType])
 
-    /// Removes all cell generators.
+    /// Removes all cells generators and sections.
     func clearCellGenerators()
 
 }

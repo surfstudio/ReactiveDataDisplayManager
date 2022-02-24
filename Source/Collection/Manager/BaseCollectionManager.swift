@@ -64,9 +64,7 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     }
 
     public func clearCellGenerators() {
-        for (index, _) in sections.enumerated() {
-            sections[index].generators.removeAll()
-        }
+        sections.removeAll()
     }
 
 }
