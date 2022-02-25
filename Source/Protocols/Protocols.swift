@@ -8,15 +8,15 @@
 
 import UIKit
 
-open class TableHeaderGenerator: ViewGenerator {
+open class TableHeaderGenerator: ViewGenerator, IdOwner {
 
-    public let id: String
+    public let id: AnyHashable
 
     public init() {
         self.id = UUID().uuidString
     }
 
-    public init(uniqueId: String) {
+    public init(uniqueId: AnyHashable) {
         self.id = uniqueId
     }
 
@@ -31,13 +31,13 @@ open class TableHeaderGenerator: ViewGenerator {
 
 open class TableFooterGenerator: ViewGenerator {
 
-    public let id: String
+    public let id: AnyHashable
 
     public init() {
         self.id = UUID().uuidString
     }
 
-    public init(uniqueId: String) {
+    public init(uniqueId: AnyHashable) {
         self.id = uniqueId
     }
 

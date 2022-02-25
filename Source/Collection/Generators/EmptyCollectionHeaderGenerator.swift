@@ -8,16 +8,16 @@
 
 import UIKit
 
-public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
+public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator, IdOwner {
 
-    public let id: String
+    public let id: AnyHashable
     public let elementKind = UICollectionView.elementKindSectionHeader
 
     public init() {
         self.id = UUID().uuidString
     }
 
-    public init(uniqueId: String) {
+    public init(uniqueId: AnyHashable) {
         self.id = uniqueId
     }
 
