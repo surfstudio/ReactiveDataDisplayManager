@@ -26,6 +26,7 @@ final class SPMHeaderTableGenerator: TableHeaderGenerator {
 
     init(model: String) {
         self.model = model
+        super.init()
     }
 
     // MARK: - TableHeaderGenerator

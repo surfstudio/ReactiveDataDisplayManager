@@ -13,7 +13,7 @@ extension TableHeaderGenerator: Differentiable {
 
     // MARK: - Differentiable
 
-    public var differenceIdentifier: String {
+    public var differenceIdentifier: AnyHashable {
         return id
     }
 
