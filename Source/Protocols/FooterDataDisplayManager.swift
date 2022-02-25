@@ -29,6 +29,4 @@ public protocol FooterDataDisplayManager: AnyObject {
 
     func removeAllGenerators(from header: FooterGeneratorType)
 
-    /// Replaces all footer generators with `EmptyCollectionFooterGenerator`
-    func clearFooterGenerators()
 }

@@ -73,20 +73,6 @@ public class ManualTableManager: BaseTableManager {
         self.insert(headGenerator: headGenerator, by: newIndex)
     }
 
-    /// Removes all headers generators
-    open func clearHeaderGenerators() {
-        for (index, _) in sections.enumerated() {
-            sections[index].header = EmptyTableHeaderGenerator()
-        }
-    }
-
-    /// Removes all footer generators
-    open func clearFooterGenerators() {
-        for (index, _) in sections.enumerated() {
-            sections[index].footer = EmptyTableFooterGenerator()
-        }
-    }
-
     /// Reloads only one section with specified animation
     ///
     /// - Parameters:
