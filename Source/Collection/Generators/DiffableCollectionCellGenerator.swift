@@ -7,7 +7,8 @@
 
 import UIKit
 
-public class DiffableCollectionCellGenerator<Cell: ConfigurableItem>: BaseCollectionCellGenerator<Cell>, DiffableItemSource where Cell: UICollectionViewCell, Cell.Model: Equatable {
+public class DiffableCollectionCellGenerator<Cell: ConfigurableItem & UICollectionViewCell>: BaseCollectionCellGenerator<Cell>,
+                                                                                             DiffableItemSource where Cell.Model: Equatable {
 
     private let id: String
 
@@ -49,6 +50,3 @@ extension StaticDataDisplayWrapper where Base: UICollectionViewCell & Configurab
     }
 
 }
-
-
-
