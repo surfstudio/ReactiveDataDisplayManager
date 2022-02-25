@@ -26,7 +26,7 @@ public class EmptyTableFooterGenerator: TableFooterGenerator {
 extension EmptyTableFooterGenerator: DiffableItemSource {
 
     public var diffableItem: DiffableItem {
-        DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection"))
+        DiffableItem(id: id, state: .init("RDDM.Diffable.EmptySection"))
     }
 
 }

@@ -10,9 +10,15 @@ import UIKit
 
 open class TableHeaderGenerator: ViewGenerator {
 
-    public let uuid = UUID().uuidString
+    public let id: String
 
-    public init() { }
+    public init() {
+        self.id = UUID().uuidString
+    }
+
+    public init(uniqueId: String) {
+        self.id = uniqueId
+    }
 
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
@@ -25,9 +31,15 @@ open class TableHeaderGenerator: ViewGenerator {
 
 open class TableFooterGenerator: ViewGenerator {
 
-    public let uuid = UUID().uuidString
+    public let id: String
 
-    public init() { }
+    public init() {
+        self.id = UUID().uuidString
+    }
+
+    public init(uniqueId: String) {
+        self.id = uniqueId
+    }
 
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
