@@ -120,12 +120,6 @@ open class GravityTableManager: BaseTableManager {
         self.sections[index].generators.removeAll()
     }
 
-    public func clearHeaderGenerators() {
-        for (index, _) in sections.enumerated() {
-            sections[index].header = EmptyTableHeaderGenerator()
-        }
-    }
-
     open func replace(oldGenerator: CellGeneratorType,
                       on newGenerator: CellGeneratorType,
                       removeAnimation: UITableView.RowAnimation = .automatic,
