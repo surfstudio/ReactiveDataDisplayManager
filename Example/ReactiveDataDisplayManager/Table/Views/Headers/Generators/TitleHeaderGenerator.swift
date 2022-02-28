@@ -26,6 +26,12 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
 
     init(model: String) {
         self.model = model
+        super.init()
+    }
+
+    init(id: AnyHashable, model: String) {
+        self.model = model
+        super.init(uniqueId: id)
     }
 
     // MARK: - TableHeaderGenerator
@@ -47,7 +53,7 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
 extension TitleHeaderGenerator: DiffableItemSource {
 
     var diffableItem: DiffableItem {
-        DiffableItem(id: uuid, state: .init(model))
+        DiffableItem(id: id, state: .init(model))
     }
 
 }

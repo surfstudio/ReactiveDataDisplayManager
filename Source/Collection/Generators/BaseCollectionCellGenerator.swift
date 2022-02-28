@@ -40,6 +40,7 @@ open class BaseCollectionCellGenerator<Cell: ConfigurableItem>: SelectableItem w
 // MARK: - CollectionCellGenerator
 
 extension BaseCollectionCellGenerator: CollectionCellGenerator {
+
     public var identifier: String {
         return String(describing: Cell.self)
     }
@@ -60,4 +61,5 @@ extension BaseCollectionCellGenerator: CollectionCellGenerator {
             collectionView.register(Cell.self, forCellWithReuseIdentifier: identifier)
         }
     }
+
 }
