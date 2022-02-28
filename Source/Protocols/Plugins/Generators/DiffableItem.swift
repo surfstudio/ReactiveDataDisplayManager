@@ -19,7 +19,7 @@ public class DiffableItem: NSObject {
     // MARK: - Properties
 
     /// `Unique `identifier to hashKey
-    public var id: String
+    public var id: AnyHashable
 
     /// `Equatable` state of model,
     public var state: AnyEquatable
@@ -28,7 +28,7 @@ public class DiffableItem: NSObject {
 
     /// - parameter id: `Unique `identifier to hashKey
     /// - parameter state: `Equatable` state of model,
-    public init(id: String, state: AnyEquatable) {
+    public init(id: AnyHashable, state: AnyEquatable) {
         self.id = id
         self.state = state
     }
@@ -36,9 +36,7 @@ public class DiffableItem: NSObject {
     // MARK: - Hashable
 
     public override var hash: Int {
-        var hasher = Hasher()
-        hasher.combine(id)
-        return hasher.finalize()
+        return id.hashValue
     }
 
     // MARK: - Equatable

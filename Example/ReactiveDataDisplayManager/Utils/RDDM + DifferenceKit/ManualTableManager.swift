@@ -13,12 +13,12 @@ extension TableHeaderGenerator: Differentiable {
 
     // MARK: - Differentiable
 
-    public var differenceIdentifier: String {
-        return uuid
+    public var differenceIdentifier: AnyHashable {
+        return id
     }
 
     public func isContentEqual(to source: TableHeaderGenerator) -> Bool {
-        return uuid == source.uuid
+        return id == source.id
     }
 
 }
