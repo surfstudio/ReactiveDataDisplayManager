@@ -204,7 +204,6 @@ extension AllPluginsTableViewController: RefreshableOutput {
         DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(3)) { [weak self, weak input] in
             DispatchQueue.main.async { [weak self, weak input] in
                 self?.adapter.clearCellGenerators()
-                self?.adapter.clearHeaderGenerators()
                 self?.fillAdapter()
                 input?.endRefreshing()
             }

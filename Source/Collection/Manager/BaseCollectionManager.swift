@@ -64,9 +64,7 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     }
 
     public func clearCellGenerators() {
-        for (index, _) in sections.enumerated() {
-            sections[index].generators.removeAll()
-        }
+        sections.removeAll()
     }
 
 }
@@ -102,12 +100,6 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
         self.sections[index].generators.removeAll()
     }
 
-    public func clearHeaderGenerators() {
-        for (index, _) in sections.enumerated() {
-            sections[index].header = EmptyCollectionHeaderGenerator()
-        }
-    }
-
 }
 
 // MARK: - FooterDataDisplayManager
@@ -139,12 +131,6 @@ extension BaseCollectionManager: FooterDataDisplayManager {
         }
 
         self.sections[index].generators.removeAll()
-    }
-
-    public func clearFooterGenerators() {
-        for (index, _) in sections.enumerated() {
-            sections[index].footer = EmptyCollectionFooterGenerator()
-        }
     }
 
 }

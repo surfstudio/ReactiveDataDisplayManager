@@ -204,21 +204,6 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
         XCTAssert(ddm.cellGenerators.isEmpty)
     }
 
-    func testThatClearHeaderGeneratorsWorksCorrectly() {
-        // given
-        let headerGen1 = HeaderGenerator()
-        let gen1 = CellGenerator()
-        let gen2 = CellGenerator()
-        ddm.addSectionHeaderGenerator(headerGen1)
-        ddm.addCellGenerators([gen1, gen1, gen2, gen2])
-        ddm.addSectionHeaderGenerator(headerGen1)
-        ddm.addCellGenerators([gen1, gen1, gen2, gen2])
-        // when
-        ddm.clearHeaderGenerators()
-        // then
-        XCTAssert(ddm.sectionHeaderGenerators.isEmpty)
-    }
-
     func testThatAddCellGeneratorToHeaderAddsGeneratorsToCorrectHeader() {
         // given
         let headerGen1 = HeaderGenerator()
