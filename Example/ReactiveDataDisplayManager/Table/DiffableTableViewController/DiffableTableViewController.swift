@@ -123,7 +123,7 @@ private extension DiffableTableViewController {
     func makeCellGenerators() -> [DiffableGenerator] {
         Constants.models.enumerated().map { item in
             TitleTableViewCell.rddm.diffableGenerator(uniqueId: item.offset, with: item.element)
-         }
+        }
     }
 
     // filter generators
