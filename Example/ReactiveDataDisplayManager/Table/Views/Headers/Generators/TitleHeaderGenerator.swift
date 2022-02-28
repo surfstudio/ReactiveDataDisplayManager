@@ -29,6 +29,11 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
         super.init()
     }
 
+    init(id: AnyHashable, model: String) {
+        self.model = model
+        super.init(uniqueId: id)
+    }
+
     // MARK: - TableHeaderGenerator
 
     override func generate() -> UIView {

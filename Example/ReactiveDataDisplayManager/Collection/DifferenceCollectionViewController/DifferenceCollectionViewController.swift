@@ -9,10 +9,12 @@ import ReactiveDataDisplayManager
 
 final class DifferenceCollectionViewController: UIViewController {
 
+    typealias DiffableGenerator = DiffableCollectionCellGenerator<TitleCollectionListCell>
+
     // MARK: - Constants
 
     private enum Constants {
-        static let titleForSection = "Section"
+        static let sectionId = "Section"
         static let models = [
             "Afghanistan",
             "Afghanistan",
@@ -42,7 +44,7 @@ final class DifferenceCollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder.build()
 
-    private var generators: [DiffableCollectionCellGenerator] = []
+    private var generators: [DiffableGenerator] = []
 
     // MARK: - UIViewController
 
@@ -64,6 +66,9 @@ extension DifferenceCollectionViewController: UISearchBarDelegate {
         adapter.reload { adapter in
             // clear existing generators
             adapter.clearCellGenerators()
+
+            // add header with static id
+            adapter.addSectionHeaderGenerator(EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId))
 
             // add filtered  generators
             adapter.addCellGenerators(filterGenerators(with: searchText))
@@ -96,20 +101,23 @@ private extension DifferenceCollectionViewController {
         adapter.reload(with: { adapter in
             generators = makeCellGenerators()
 
+            // add header with static id
+            adapter.addSectionHeaderGenerator(EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId))
+
             // add generators
             adapter.addCellGenerators(generators)
         })
     }
 
     // Create cells generators
-    func makeCellGenerators() -> [DiffableCollectionCellGenerator] {
-         Constants.models.map { title in
-            DiffableCollectionCellGenerator(with: title)
-         }
+    func makeCellGenerators() -> [DiffableGenerator] {
+        Constants.models.enumerated().map { item in
+            TitleCollectionListCell.rddm.diffableGenerator(uniqueId: item.offset, with: item.element)
+        }
     }
 
     // filter generators
-    func filterGenerators(with filter: String) -> [DiffableCollectionCellGenerator] {
+    func filterGenerators(with filter: String) -> [DiffableGenerator] {
         guard !filter.isEmpty, !generators.isEmpty else {
             return generators
         }
@@ -126,6 +134,9 @@ private extension DifferenceCollectionViewController {
         adapter.reload { adapter in
             // clear existing generators
             adapter.clearCellGenerators()
+
+            // add header with static id
+            adapter.addSectionHeaderGenerator(EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId))
 
             // add generators
             adapter.addCellGenerators(generators)
