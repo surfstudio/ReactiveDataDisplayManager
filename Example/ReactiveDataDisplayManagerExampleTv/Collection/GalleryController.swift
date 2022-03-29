@@ -62,7 +62,7 @@ private extension GalleryController {
         for i in 0...10 {
             let headerGenerator = TitleCollectionHeaderGenerator(title: "Recommendations \(i)")
 
-            adapter += headerGenerator)
+            adapter += headerGenerator
             for _ in 0...31 {
                 // Create viewModels for cell
                 guard let viewModel = ImageViewModel.make(with: loadImage) else { continue }
