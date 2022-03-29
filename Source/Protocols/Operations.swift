@@ -16,4 +16,21 @@ extension DataDisplayManager {
     static func += (left: Self, right: [GeneratorType]) {
         left.addCellGenerators(right)
     }
+
+}
+
+public extension HeaderDataDisplayManager {
+
+    static func += (left: Self, right: HeaderGeneratorType) {
+        left.addSectionHeaderGenerator(right)
+    }
+
+}
+
+public extension FooterDataDisplayManager {
+
+    static func += (left: Self, right: FooterGeneratorType) {
+        left.addSectionFooterGenerator(right)
+    }
+
 }
