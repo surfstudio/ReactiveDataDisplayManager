@@ -34,3 +34,15 @@ public extension FooterDataDisplayManager {
     }
 
 }
+
+public extension ManualTableManager {
+
+    static func += (left: ManualTableManager, right: HeaderGeneratorType) {
+        left.addSectionHeaderGenerator(right)
+    }
+
+    static func += (left: ManualTableManager, right: FooterGeneratorType) {
+        left.addSectionFooterGenerator(right)
+    }
+
+}

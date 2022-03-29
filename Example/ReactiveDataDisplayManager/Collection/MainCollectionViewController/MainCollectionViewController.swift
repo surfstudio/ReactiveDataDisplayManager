@@ -89,7 +89,7 @@ private extension MainCollectionViewController {
         for model in Constants.models {
 
             if model.segueId == .carouselCollection {
-                adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: "Layout exapmple"))
+                adapter += TitleHeaderGenerator(model: "Layout exapmple")
             }
 
             // Create generator
@@ -100,7 +100,7 @@ private extension MainCollectionViewController {
             }
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
 
         // Tell adapter that we've changed generators

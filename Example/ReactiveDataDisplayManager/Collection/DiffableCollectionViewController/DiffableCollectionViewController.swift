@@ -72,10 +72,10 @@ extension DiffableCollectionViewController: UISearchBarDelegate {
         adapter.clearCellGenerators()
 
         // add header with static id
-        adapter.addSectionHeaderGenerator(EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId))
+        adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
 
         // add filtered  generators
-        adapter.addCellGenerators(filterGenerators(with: searchText))
+        adapter += filterGenerators(with: searchText)
 
         // apply snapshot
         adapter.forceRefill()
@@ -108,10 +108,10 @@ private extension DiffableCollectionViewController {
         generators = makeCellGenerators()
 
         // add header with static id
-        adapter.addSectionHeaderGenerator(EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId))
+        adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
 
         // add generators
-        adapter.addCellGenerators(generators)
+        adapter += generators
 
         // apply snapshot
         adapter.forceRefill()
@@ -142,10 +142,10 @@ private extension DiffableCollectionViewController {
         adapter.clearCellGenerators()
 
         // add header with static id
-        adapter.addSectionHeaderGenerator(EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId))
+        adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
 
         // add generators
-        adapter.addCellGenerators(generators)
+        adapter += generators
 
         // apply snapshot
         adapter.forceRefill()

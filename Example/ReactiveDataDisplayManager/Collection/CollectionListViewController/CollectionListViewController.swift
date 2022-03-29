@@ -45,12 +45,12 @@ private extension CollectionListViewController {
 
     func fillAdapter() {
         let header = HeaderCollectionListGenerator(title: "Section header")
-        adapter.addSectionHeaderGenerator(header)
+        adapter += header
 
         for title in titles {
             let generator = TitleCollectionListCell.rddm.baseGenerator(with: title)
             generator.didSelectEvent += { debugPrint("\(title) selected") }
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
 
         adapter.forceRefill()

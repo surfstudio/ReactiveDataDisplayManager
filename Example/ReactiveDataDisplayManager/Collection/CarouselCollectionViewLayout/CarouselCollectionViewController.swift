@@ -51,7 +51,7 @@ private extension CarouselCollectionViewController {
             let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
 
         // Tell adapter that we've changed generators

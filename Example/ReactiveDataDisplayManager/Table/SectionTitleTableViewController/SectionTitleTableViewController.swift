@@ -59,12 +59,10 @@ private extension SectionTitleTableViewController {
     func fillAdapter() {
 
         Constants.headerModels.forEach {
-            // Create header generator
-            let headerGenerator = SectionTitleHeaderGenerator(model: $0.title, needSectionIndexTitle: $0.needDisplaySectionTitle)
             // Add header generator into adapter
-            adapter.addSectionHeaderGenerator(headerGenerator)
+            adapter += SectionTitleHeaderGenerator(model: $0.title, needSectionIndexTitle: $0.needDisplaySectionTitle)
             // Add cell generators into adapter
-            adapter.addCellGenerators(makeCellGenerators())
+            adapter += makeCellGenerators()
         }
 
         // Tell adapter that we've changed generators

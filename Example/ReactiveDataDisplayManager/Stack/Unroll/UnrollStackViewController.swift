@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
 final class UnrollStackViewController: UIViewController {
 
@@ -37,7 +38,7 @@ private extension UnrollStackViewController {
         let generator = UnrollStackCellGenerator(with: sampleText)
 
         // Add generators to adapter
-        adapter.addCellGenerator(generator)
+        adapter += generator
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()

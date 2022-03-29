@@ -120,7 +120,7 @@ private extension AllPluginsTableViewController {
             }
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -136,7 +136,7 @@ private extension AllPluginsTableViewController {
             generator.childGenerators = Constants.titles.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -146,7 +146,7 @@ private extension AllPluginsTableViewController {
 
         Constants.movableTitles.forEach {
             let generator = MovableCellGenerator(with: $0)
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -164,7 +164,7 @@ private extension AllPluginsTableViewController {
             }
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -180,7 +180,7 @@ private extension AllPluginsTableViewController {
             let generator = ImageTableGenerator(with: viewModel)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -198,7 +198,7 @@ private extension AllPluginsTableViewController {
         }
 
         // Add header generator into adapter
-        adapter.addSectionHeaderGenerator(headerGenerator)
+        adapter += headerGenerator
     }
 
 }

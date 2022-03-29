@@ -39,7 +39,7 @@ private extension StackViewController {
         let generators = titles.map(TitleStackCellGenerator.init)
 
         // Add generators to adapter
-        adapter.addCellGenerators(generators)
+        adapter += generators
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()

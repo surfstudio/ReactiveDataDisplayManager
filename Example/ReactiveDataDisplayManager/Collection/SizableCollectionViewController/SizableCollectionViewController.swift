@@ -71,7 +71,7 @@ private extension SizableCollectionViewController {
             let generator = VerticalSizableTextGenerator(with: viewModel, maxWight: collectionWight)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
 
         // Tell adapter that we've changed generators

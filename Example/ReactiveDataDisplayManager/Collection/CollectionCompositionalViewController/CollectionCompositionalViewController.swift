@@ -72,7 +72,7 @@ private extension CollectionCompositionalViewController {
             let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -84,7 +84,7 @@ private extension CollectionCompositionalViewController {
             let generator = TitleCollectionGenerator(model: "Item \(index)", needIndexTitle: needIndexTitle)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -98,7 +98,7 @@ private extension CollectionCompositionalViewController {
             let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -113,8 +113,8 @@ private extension CollectionCompositionalViewController {
         let footerGenerator = TitleIconCollectionFooterGenerator(title: footer)
 
         // Add header generator into adapter
-        adapter.addSectionHeaderGenerator(headerGenerator)
-        adapter.addSectionFooterGenerator(footerGenerator)
+        adapter += headerGenerator
+        adapter += footerGenerator
     }
 
 }

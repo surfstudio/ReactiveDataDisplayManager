@@ -49,7 +49,7 @@ final class DynamicHeightTableViewCell: UITableViewCell, ConfigurableItem, Const
 private extension DynamicHeightTableViewCell {
 
     func fillAdapter() {
-        adapter.addCellGenerators(makeDynamicHeightCellGenerators())
+        adapter += makeDynamicHeightCellGenerators()
         adapter.forceRefill()
 
         // needed to update the height
