@@ -25,7 +25,7 @@ class DetailViewController: UIViewController {
         configureFocus()
     }
 
-    @IBAction func backButtonTap(_ sender: UIButton) {
+    @IBAction private func backButtonTap(_ sender: UIButton) {
         dismiss(animated: true)
     }
 
