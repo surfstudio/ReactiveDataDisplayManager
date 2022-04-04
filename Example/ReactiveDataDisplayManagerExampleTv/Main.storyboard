@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="18122" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yby-91-8GW">
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="19529" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yby-91-8GW">
     <device id="appleTV" appearance="light"/>
     <dependencies>
         <deployment identifier="tvOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -148,6 +148,109 @@
             </objects>
             <point key="canvasLocation" x="2394" y="1216"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="jGj-sS-yWY">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" id="ovU-Id-kGa" customClass="DetailViewController" customModule="ReactiveDataDisplayManagerExample_tvOS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rwT-bE-daI"/>
+                        <viewControllerLayoutGuide type="bottom" id="SDJ-ff-2X8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UYY-dA-rx5">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="47" translatesAutoresizingMaskIntoConstraints="NO" id="on1-Mu-tXt">
+                                <rect key="frame" x="96" y="60" width="516" height="700"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpq-Zh-f3U">
+                                        <rect key="frame" x="0.0" y="0.0" width="516" height="202"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="ReactiveLogo" title="One" cornerStyle="medium">
+                                            <backgroundConfiguration key="background">
+                                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </backgroundConfiguration>
+                                            <color key="baseForegroundColor" name="RDDMMainColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dV3-Md-QhN">
+                                        <rect key="frame" x="0.0" y="249" width="516" height="202"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="ReactiveLogo" title="Two" cornerStyle="medium">
+                                            <backgroundConfiguration key="background">
+                                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </backgroundConfiguration>
+                                            <color key="baseForegroundColor" name="RDDMMainColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxr-eT-HRb">
+                                        <rect key="frame" x="0.0" y="498" width="516" height="202"/>
+                                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="ReactiveLogo" title="Three" cornerStyle="medium">
+                                            <backgroundConfiguration key="background">
+                                                <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </backgroundConfiguration>
+                                            <color key="baseForegroundColor" name="RDDMMainColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="700" id="FCa-yR-Dno"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ay-ae-FK2">
+                                <rect key="frame" x="96" y="926" width="164" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Back">
+                                    <color key="baseForegroundColor" name="RDDMMainColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="backButtonTap:" destination="ovU-Id-kGa" eventType="primaryActionTriggered" id="emE-02-JH9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANP-kU-hU5">
+                                <rect key="frame" x="1665" y="926" width="159" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Next">
+                                    <color key="baseForegroundColor" name="RDDMMainColor"/>
+                                </buttonConfiguration>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zFW-J6-OyI">
+                                <rect key="frame" x="684" y="68" width="1140" height="692"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="VS0-MI-1IM"/>
+                        <constraints>
+                            <constraint firstItem="VS0-MI-1IM" firstAttribute="bottom" secondItem="6Ay-ae-FK2" secondAttribute="bottom" constant="8" id="9qD-hr-mpo"/>
+                            <constraint firstItem="6Ay-ae-FK2" firstAttribute="leading" secondItem="VS0-MI-1IM" secondAttribute="leading" constant="16" id="Lz1-3h-q1S"/>
+                            <constraint firstItem="VS0-MI-1IM" firstAttribute="trailing" secondItem="ANP-kU-hU5" secondAttribute="trailing" constant="16" id="Qwv-Ez-JUx"/>
+                            <constraint firstItem="on1-Mu-tXt" firstAttribute="top" secondItem="VS0-MI-1IM" secondAttribute="top" id="Rfo-0C-Y34"/>
+                            <constraint firstItem="zFW-J6-OyI" firstAttribute="top" secondItem="VS0-MI-1IM" secondAttribute="top" constant="8" id="XcS-s3-Pea"/>
+                            <constraint firstItem="VS0-MI-1IM" firstAttribute="bottom" secondItem="ANP-kU-hU5" secondAttribute="bottom" constant="8" id="jVo-y0-X1c"/>
+                            <constraint firstItem="zFW-J6-OyI" firstAttribute="height" secondItem="on1-Mu-tXt" secondAttribute="height" multiplier="0.988571" id="o9S-af-5oD"/>
+                            <constraint firstItem="on1-Mu-tXt" firstAttribute="leading" secondItem="VS0-MI-1IM" secondAttribute="leading" constant="16" id="qtk-eh-MAu"/>
+                            <constraint firstItem="zFW-J6-OyI" firstAttribute="leading" secondItem="on1-Mu-tXt" secondAttribute="trailing" constant="72" id="uEx-QD-3EI"/>
+                            <constraint firstItem="VS0-MI-1IM" firstAttribute="trailing" secondItem="zFW-J6-OyI" secondAttribute="trailing" constant="16" id="vLW-FC-fK7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="6Ay-ae-FK2" id="4LW-kE-RsW"/>
+                        <outlet property="containerStackView" destination="on1-Mu-tXt" id="Zh3-mV-wvo"/>
+                        <outlet property="imageView" destination="zFW-J6-OyI" id="khK-p5-A1o"/>
+                        <outlet property="nextButton" destination="ANP-kU-hU5" id="DXm-KY-IEh"/>
+                        <outlet property="oneButton" destination="hpq-Zh-f3U" id="wXF-uI-rdd"/>
+                        <outlet property="threeButton" destination="dxr-eT-HRb" id="t3H-wA-0As"/>
+                        <outlet property="twoButton" destination="dV3-Md-QhN" id="2kw-3P-xbe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sTH-Nt-mEl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4660" y="1216"/>
+        </scene>
         <!--Table Controller-->
         <scene sceneID="uNF-wP-UJp">
             <objects>
@@ -201,4 +304,10 @@
             <point key="canvasLocation" x="-2693" y="202"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ReactiveLogo" width="323" height="162"/>
+        <namedColor name="RDDMMainColor">
+            <color red="0.90588235294117647" green="0.29411764705882354" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
