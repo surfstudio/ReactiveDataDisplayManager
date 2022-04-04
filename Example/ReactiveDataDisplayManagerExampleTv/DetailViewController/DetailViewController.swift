@@ -23,6 +23,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureFocus()
+        configureButtons()
     }
 
     @IBAction private func backButtonTap(_ sender: UIButton) {
@@ -38,6 +39,20 @@ class DetailViewController: UIViewController {
 // MARK: - Private
 
 private extension DetailViewController {
+
+    func configureButtons() {
+        createParallaxButton(button: oneButton, imageNamed: "RDDMParalax.rls")
+        createParallaxButton(button: twoButton, imageNamed: "RDDMParalax.rls")
+        createParallaxButton(button: threeButton, imageNamed: "RDDMParalax.rls")
+    }
+
+    func createParallaxButton(button: UIButton, imageNamed: String) {
+        button.adjustsImageWhenHighlighted = true
+        let buttonBg = UIImageView(image: UIImage(named: imageNamed))
+        buttonBg.adjustsImageWhenAncestorFocused = true
+        buttonBg.frame = button.bounds
+        button.addSubview(buttonBg)
+    }
 
     func configureFocus() {
         addFocusGuide(from: containerStackView, to: nextButton, direction: .right)

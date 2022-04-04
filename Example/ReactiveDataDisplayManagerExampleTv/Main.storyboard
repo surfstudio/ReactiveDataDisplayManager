@@ -160,13 +160,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="47" translatesAutoresizingMaskIntoConstraints="NO" id="on1-Mu-tXt">
-                                <rect key="frame" x="96" y="60" width="516" height="700"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="47" translatesAutoresizingMaskIntoConstraints="NO" id="on1-Mu-tXt">
+                                <rect key="frame" x="96" y="60" width="500" height="700"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpq-Zh-f3U">
-                                        <rect key="frame" x="0.0" y="0.0" width="516" height="202"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="500" height="202"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="ReactiveLogo" title="One" cornerStyle="medium">
+                                        <buttonConfiguration key="configuration" style="plain" image="RDDMParalax" title=" " cornerStyle="medium">
                                             <backgroundConfiguration key="background">
                                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </backgroundConfiguration>
@@ -174,10 +174,10 @@
                                         </buttonConfiguration>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dV3-Md-QhN">
-                                        <rect key="frame" x="0.0" y="249" width="516" height="202"/>
+                                        <rect key="frame" x="0.0" y="249" width="500" height="202"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="ReactiveLogo" title="Two" cornerStyle="medium">
+                                        <buttonConfiguration key="configuration" style="plain" image="RDDMParalax" title="  " cornerStyle="medium">
                                             <backgroundConfiguration key="background">
                                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </backgroundConfiguration>
@@ -185,18 +185,18 @@
                                         </buttonConfiguration>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxr-eT-HRb">
-                                        <rect key="frame" x="0.0" y="498" width="516" height="202"/>
+                                        <rect key="frame" x="0.0" y="498" width="500" height="202"/>
                                         <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="ReactiveLogo" title="Three" cornerStyle="medium">
+                                        <buttonConfiguration key="configuration" style="plain" image="RDDMParalax" title="   " cornerStyle="medium">
                                             <backgroundConfiguration key="background">
                                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </backgroundConfiguration>
-                                            <color key="baseForegroundColor" name="RDDMMainColor"/>
                                         </buttonConfiguration>
                                     </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="500" id="D0O-BV-gm0"/>
                                     <constraint firstAttribute="height" constant="700" id="FCa-yR-Dno"/>
                                 </constraints>
                             </stackView>
@@ -220,7 +220,7 @@
                                 </buttonConfiguration>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zFW-J6-OyI">
-                                <rect key="frame" x="684" y="68" width="1140" height="692"/>
+                                <rect key="frame" x="668" y="68" width="1156" height="692"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VS0-MI-1IM"/>
@@ -305,7 +305,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ReactiveLogo" width="323" height="162"/>
+        <image name="RDDMParalax" width="493" height="255"/>
         <namedColor name="RDDMMainColor">
             <color red="0.90588235294117647" green="0.29411764705882354" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
