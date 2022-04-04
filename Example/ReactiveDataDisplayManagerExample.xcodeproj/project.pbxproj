@@ -97,6 +97,7 @@
 		9FFA5FE951565EA086C09F4D /* CollectionCompositionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173FB7F8FE0015D07813CC53 /* CollectionCompositionalViewController.swift */; };
 		A3C19E75C2904BB0882C49D8 /* TitleCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD08177388A637B66A066E9 /* TitleCollectionReusableView.swift */; };
 		A3CBF3A30D66A30C8DB2DB07 /* DragAndDroppableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E73953DF3D544D69F0943CE /* DragAndDroppableTableViewController.swift */; };
+		A42CC6C027FB175000857E65 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42CC6BF27FB175000857E65 /* DetailViewController.swift */; };
 		A4F6E2BE4831BDC28F197BE6 /* ButtonStackCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768EADE1BBCA4E1E3CD2B9A7 /* ButtonStackCellGenerator.swift */; };
 		A63DE9C658B2CB3C192DFEBD /* PaginatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474CD5F4A339F735088298E7 /* PaginatorView.swift */; };
 		A64DE6EFABFFB2F74A12E624 /* TitleHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9DFCE12A61DE93236E881E /* TitleHeaderGenerator.swift */; };
@@ -254,6 +255,7 @@
 		9FE54BA279EBA492D3F36FD3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		A01825DE6F3160BA0ACD25D8 /* UnrollCellStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrollCellStackView.swift; sourceTree = "<group>"; };
 		A13CAC97C25B9838A25722E4 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		A42CC6BF27FB175000857E65 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		A43827BAA20A9EF3B05A721E /* GravityCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityCellGenerator.swift; sourceTree = "<group>"; };
 		A6EF9B831E7364F7DDCD7F61 /* FittingCompressedSizeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FittingCompressedSizeCollectionViewCell.xib; sourceTree = "<group>"; };
 		A8C18F63930316A8468B041C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				3CFDA70B6CB57E9D98725831 /* Main.storyboard */,
+				A42CC6BE27FB175000857E65 /* DetailViewController */,
 				7BFFD21860FD28570A357542 /* Application */,
 				B499895B15C8FEFAC7C2509E /* Collection */,
 				9EBDAFEC31DE2003E7C1E0B7 /* Extensions */,
@@ -889,6 +892,14 @@
 			path = ImageTableViewCell;
 			sourceTree = "<group>";
 		};
+		A42CC6BE27FB175000857E65 /* DetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A42CC6BF27FB175000857E65 /* DetailViewController.swift */,
+			);
+			path = DetailViewController;
+			sourceTree = "<group>";
+		};
 		A48D73527798F1CAB802FB8C /* TitleTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1250,7 +1261,6 @@
 				4DA0E6BF188A4A494E533938 /* Pods-ReactiveDataDisplayManagerExample_tvOS.debug.xcconfig */,
 				1093435A1BF9A6060ABC4AFC /* Pods-ReactiveDataDisplayManagerExample_tvOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -1467,6 +1477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA79CEEBF143939C522CA74D /* AppDelegate.swift in Sources */,
+				A42CC6C027FB175000857E65 /* DetailViewController.swift in Sources */,
 				E1D6341DB96E338E53148A34 /* CollectionDefaultBehavoirController.swift in Sources */,
 				8DD20BD748C871B61AB0873A /* GalleryController.swift in Sources */,
 				12E1CF0B4D16347A0EA11C4B /* ImageCollectionViewCell.swift in Sources */,
