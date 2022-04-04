@@ -89,9 +89,9 @@ private extension CollectionDefaultBehavoirController {
             let generator = ImageDefaultBehavoirCollectionViewGenerator(with: viewModel)
 
             generator.didSelectEvent += { [weak self] in
-                guard let detail = self?.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
-                    return
-                }
+                guard
+                    let detail = self?.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController
+                else { return }
                 self?.showDetailViewController(detail, sender: nil)
                 detail.configure(with: viewModel)
             }

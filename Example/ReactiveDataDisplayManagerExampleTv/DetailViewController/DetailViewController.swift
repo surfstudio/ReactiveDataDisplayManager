@@ -12,14 +12,14 @@ class DetailViewController: UIViewController {
 
     // MARK: - @IBOutlets
 
-    @IBOutlet weak var containerStackView: UIStackView!
-    @IBOutlet weak var oneButton: UIButton!
-    @IBOutlet weak var twoButton: UIButton!
-    @IBOutlet weak var threeButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var imageView: UIImageView!
-    
+    @IBOutlet private weak var containerStackView: UIStackView!
+    @IBOutlet private weak var oneButton: UIButton!
+    @IBOutlet private weak var twoButton: UIButton!
+    @IBOutlet private weak var threeButton: UIButton!
+    @IBOutlet private weak var backButton: UIButton!
+    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var imageView: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureFocus()
