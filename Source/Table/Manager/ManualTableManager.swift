@@ -21,7 +21,6 @@ public class ManualTableManager: BaseTableManager {
     open func addSection(TableHeaderGenerator generator: TableHeaderGenerator,
                          footerGenerator: TableFooterGenerator = EmptyTableFooterGenerator(),
                          cells: [TableCellGenerator]) {
-        cells.forEach { $0.registerCell(in: view) }
         addTableGenerators(with: cells, choice: .newSection(header: generator, footer: footerGenerator))
     }
 
@@ -90,7 +89,6 @@ public class ManualTableManager: BaseTableManager {
     ///   - generators: Generators to insert
     ///   - TableHeaderGenerator: TableHeaderGenerator generator in which you want to insert.
     open func addCellGenerators(_ generators: [TableCellGenerator], toHeader headerGenerator: TableHeaderGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
 
         if let index = sections.firstIndex(where: { $0.header === headerGenerator }) {
             addTableGenerators(with: generators, choice: .byIndex(index))
@@ -372,7 +370,6 @@ private extension ManualTableManager {
                 with animation: UITableView.RowAnimation = .automatic) {
 
         elements.forEach { [weak self] element in
-            element.generator.registerCell(in: view)
             self?.sections[element.sectionIndex]
                 .generators
                 .insert(element.generator, at: element.generatorIndex)
@@ -382,6 +379,7 @@ private extension ManualTableManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.insertRows(at: indexPaths, with: animation)
     }
 

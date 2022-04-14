@@ -5,6 +5,8 @@
 //  Created by Никита Коробейников on 14.04.2022.
 //
 
+import UIKit
+
 public protocol CollectionCellRegisterableItem: RegisterableItem {
 
     /// Register cell in collectionView

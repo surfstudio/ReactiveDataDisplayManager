@@ -1,5 +1,5 @@
 //
-//  CollectionCellRegistrator.swift
+//  CollectionRegistrator.swift
 //  Pods
 //
 //  Created by Никита Коробейников on 14.04.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class CollectionCellRegistrator: Registrator<UICollectionView> {
+public class CollectionRegistrator: Registrator<UICollectionView> {
 
     public override func register(item: RegisterableItem, with view: UICollectionView) {
         switch item {

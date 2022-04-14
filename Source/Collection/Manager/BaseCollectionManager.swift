@@ -25,7 +25,7 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     public weak var view: UICollectionView!
     // swiftlint:enable implicitly_unwrapped_optional
 
-    private lazy var registrator: CollectionCellRegistrator = .init(view: view)
+    private(set) lazy var registrator: CollectionRegistrator = .init(view: view)
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?

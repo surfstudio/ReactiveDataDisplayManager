@@ -45,10 +45,6 @@ extension BaseCollectionCellGenerator: CollectionCellGenerator {
         return String(describing: Cell.self)
     }
 
-    public var descriptor: String {
-        identifier
-    }
-
     public func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? Cell else {
             return UICollectionViewCell()
