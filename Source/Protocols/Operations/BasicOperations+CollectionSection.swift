@@ -39,8 +39,8 @@ public extension CollectionSectionsProvider {
 
     static func += (left: CollectionSectionsProvider, right: Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType>) {
         left.addCollectionGenerators(with: right.generators,
-                                choice: .newSection(header: right.header,
-                                                    footer: right.footer))
+                                     choice: .newSection(header: right.header,
+                                                         footer: right.footer))
     }
 
     static func += (left: CollectionSectionsProvider, right: GeneratorsLinkedWithHeader) {
@@ -54,7 +54,7 @@ public extension CollectionSectionsProvider {
         }()
 
         left.addCollectionGenerators(with: right.generators,
-                                choice: collectionSectionChoice)
+                                     choice: collectionSectionChoice)
     }
 
     static func += (left: CollectionSectionsProvider, right: GeneratorsLinkedWithFooter) {
@@ -66,9 +66,9 @@ public extension CollectionSectionsProvider {
                 return .lastSection
             }
         }()
-
+        
         left.addCollectionGenerators(with: right.generators,
-                                choice: collectionSectionChoice)
+                                     choice: collectionSectionChoice)
     }
 
 }

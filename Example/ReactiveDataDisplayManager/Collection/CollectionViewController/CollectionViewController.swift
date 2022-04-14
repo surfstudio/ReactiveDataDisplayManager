@@ -59,7 +59,7 @@ private extension CollectionViewController {
                 debugPrint("\(title) deselected")
             }
             // Add generator to adapter
-            adapter += generator
+            adapter += generator * header
         }
 
         // Tell adapter that we've changed generators
