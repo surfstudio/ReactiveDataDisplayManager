@@ -8,7 +8,10 @@
 
 import UIKit
 
-extension DataDisplayManager {
+// MARK: - Universal
+
+public extension DataDisplayManager {
+
     static func += (left: Self, right: GeneratorType) {
         left.addCellGenerator(right)
     }
@@ -34,6 +37,8 @@ public extension FooterDataDisplayManager {
     }
 
 }
+
+// MARK: - Concrete
 
 public extension ManualTableManager {
 

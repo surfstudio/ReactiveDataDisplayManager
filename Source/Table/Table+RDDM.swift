@@ -13,7 +13,7 @@ extension UITableView: DataDisplayCompatible { }
 public extension DataDisplayWrapper where Base: UITableView {
 
     var baseBuilder: TableBuilder<BaseTableManager> {
-        TableBuilder(view: base, manager: BaseTableManager())
+        TableBuilder(view: base, manager: BaseTableManager()).add(plugin: .selectable())
     }
 
     var manualBuilder: TableBuilder<ManualTableManager> {
