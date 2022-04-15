@@ -66,7 +66,7 @@ public extension CollectionSectionsProvider {
                 return .lastSection
             }
         }()
-        
+
         left.addCollectionGenerators(with: right.generators,
                                      choice: collectionSectionChoice)
     }

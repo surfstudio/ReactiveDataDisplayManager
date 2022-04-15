@@ -10,7 +10,9 @@ import UIKit
 /// Helper class to register cells/headers/footers
 open class Registrator<View: UIView> {
 
+    // swiftlint:disable implicitly_unwrapped_optional
     public private(set) weak var view: View!
+    // swiftlint:enable implicitly_unwrapped_optional
 
     private var cache: Set<String> = Set<String>()
 
