@@ -78,6 +78,7 @@ public class ManualTableManager: BaseTableManager {
     ///   - sectionHeaderGenerator: TableHeaderGenerator of section which you want to reload.
     ///   - animation: Type of reload animation
     open func reloadSection(by sectionHeaderGenerator: TableHeaderGenerator, with animation: UITableView.RowAnimation = .none) {
+        sections.registerAllIfNeeded(with: view, using: registrator)
         if let index = sections.firstIndex(where: { $0.header === sectionHeaderGenerator }) {
             dataSource?.modifier?.reloadSections(at: [index], with: animation)
         }
@@ -322,6 +323,7 @@ public class ManualTableManager: BaseTableManager {
         sections[index.sectionIndex].generators.insert(newGenerator, at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
@@ -344,6 +346,7 @@ public class ManualTableManager: BaseTableManager {
         sections[secondIndex.sectionIndex].generators.insert(firstGenerator, at: secondIndex.generatorIndex)
         sections[firstIndex.sectionIndex].generators.insert(secondGenerator, at: firstIndex.generatorIndex)
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.reload()
     }
 
@@ -363,6 +366,7 @@ private extension ManualTableManager {
                                    header: headGenerator,
                                    footer: EmptyTableFooterGenerator()), at: index)
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.insertSections(at: [index], with: animation)
     }
 

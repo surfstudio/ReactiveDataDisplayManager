@@ -123,6 +123,7 @@ open class GravityTableManager: BaseTableManager {
         sections[index.sectionIndex].generators.insert(newGenerator, at: index.generatorIndex)
 
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
@@ -133,6 +134,7 @@ open class GravityTableManager: BaseTableManager {
         }
 
         self.sections[indexOfHeader].header = header
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.reloadSections(at: [indexOfHeader], with: animation)
     }
 
@@ -182,6 +184,7 @@ private extension GravityTableManager {
             return IndexPath(row: index, section: section)
         }
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.insertRows(at: indexPaths, with: .none)
     }
 
