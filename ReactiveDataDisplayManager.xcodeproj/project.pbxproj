@@ -565,14 +565,6 @@
 			path = Delegate;
 			sourceTree = "<group>";
 		};
-		032CFE2A4BAA81D77BD0B945 /* REFACTORING */ = {
-			isa = PBXGroup;
-			children = (
-				A9CCFE74D85E93281C7B0A86 /* Protocols */,
-			);
-			path = REFACTORING;
-			sourceTree = "<group>";
-		};
 		061609D764C2E840E7C6D3AD /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,8 +643,8 @@
 			children = (
 				A2792DD250BD0AD76291D0DE /* BaseCollectionDataSource.swift */,
 				959B54D69AC809B56939827F /* CollectionDataSource.swift */,
-				C092066CB84B808C820789C5 /* CollectionSectionСhoice.swift */,
 				C03AFC0B40AF7A278A7D1A65 /* CollectionSectionsProvider.swift */,
+				C092066CB84B808C820789C5 /* CollectionSectionСhoice.swift */,
 				DFF7CB093C597734B2489B48 /* DiffableCollectionDataSource.swift */,
 			);
 			path = DataSource;
@@ -724,22 +716,6 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
-		5E4DED0C836B95D4A2AA71EC /* PluginAction */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PluginAction;
-			sourceTree = "<group>";
-		};
-		5E5EEDC3878570795A67EE56 /* Plugins */ = {
-			isa = PBXGroup;
-			children = (
-				6651920D5F1134A32A74F1AB /* Generators */,
-				5E4DED0C836B95D4A2AA71EC /* PluginAction */,
-			);
-			path = Plugins;
-			sourceTree = "<group>";
-		};
 		5FC8B05F432A1CBF451577AD /* Modifier */ = {
 			isa = PBXGroup;
 			children = (
@@ -762,13 +738,6 @@
 				BC4327BAC235A817BDDB8C2D /* XCTestCase+FatalError.swift */,
 			);
 			path = ReactiveDataDisplayManagerTests;
-			sourceTree = "<group>";
-		};
-		6651920D5F1134A32A74F1AB /* Generators */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Generators;
 			sourceTree = "<group>";
 		};
 		7616A27DE810DC62FC128E38 /* Protocols */ = {
@@ -803,7 +772,6 @@
 				541729A882381B290F04154F /* Collection */,
 				836365E89537F3A370FF42BC /* Models */,
 				4F976C89B581915E384D0A8E /* Protocols */,
-				032CFE2A4BAA81D77BD0B945 /* REFACTORING */,
 				CE78A64118953BB0F6A0CCFF /* Stack */,
 				AAC1F935B1C67CFABBE7753E /* Table */,
 				B53C25BB527110DC62F44CDF /* Utils */,
@@ -875,8 +843,8 @@
 				EDD883BF885218E2B74454DA /* BaseTableDataSource.swift */,
 				932DD434F00FDECA59E41491 /* DiffableTableDataSource.swift */,
 				895FDF47F9A685CB797DA179 /* TableDataSource.swift */,
-				FC10F32251D075882DCAE95D /* TableSectionСhoice.swift */,
 				786CCA4CE16F31441A7A6120 /* TableSectionsProvider.swift */,
+				FC10F32251D075882DCAE95D /* TableSectionСhoice.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -899,14 +867,6 @@
 				12795E284D4856290FBE0BC3 /* TableDragAndDropDelegate.swift */,
 			);
 			path = Delegate;
-			sourceTree = "<group>";
-		};
-		A9CCFE74D85E93281C7B0A86 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				5E5EEDC3878570795A67EE56 /* Plugins */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		AAC1F935B1C67CFABBE7753E /* Table */ = {
