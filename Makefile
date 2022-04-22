@@ -1,5 +1,7 @@
 # Init Framework and Example projects
 init:
+	brew bundle --no-upgrade
+
 	xcodegen generate
 
 	cd Example; make init
