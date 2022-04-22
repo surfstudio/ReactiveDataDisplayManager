@@ -16,6 +16,9 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
+*.pbxproj
+*.xcworkspacedata
+*.xcodeproj/*
 
 ## Other
 *.moved-aside
