@@ -8,10 +8,13 @@ on:
   pull_request:
 
 jobs:
+      
   build_iOS:
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Generate projects
+      run: make init
     - name: Build
       run: xcodebuild -target ReactiveDataDisplayManager_iOS
     - name: Run tests
@@ -23,5 +26,7 @@ jobs:
     runs-on: macOS-latest
     steps:
     - uses: actions/checkout@v1
+    - name: Generate projects
+      run: make init
     - name: Build
       run: xcodebuild -target ReactiveDataDisplayManager_tvOS
