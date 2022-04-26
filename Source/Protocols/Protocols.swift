@@ -25,7 +25,7 @@ open class TableHeaderGenerator: ViewGenerator, IdOwner, TableHeaderRegisterable
         preconditionFailure("\(#function) must be overriden in child")
     }
 
-    /// Implement If you use `UITableViewHeaderFooterView`
+    /// Registeration needed only for `UITableViewHeaderFooterView` descendant classes
     open func registerHeader(in tableView: UITableView) { }
 
     open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
@@ -49,7 +49,7 @@ open class TableFooterGenerator: ViewGenerator, TableFooterRegisterableItem {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
-    /// Implement If you use `UITableViewHeaderFooterView`
+    /// Registeration needed only for `UITableViewHeaderFooterView` descendant classes
     open func registerFooter(in tableView: UITableView) { }
 
     open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
