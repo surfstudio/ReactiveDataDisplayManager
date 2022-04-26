@@ -78,7 +78,7 @@ private extension DragAndDroppableCollectionViewController {
         adapter += makeCellGenerators(for: Array(11...20))
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     /// Create cells generators for range

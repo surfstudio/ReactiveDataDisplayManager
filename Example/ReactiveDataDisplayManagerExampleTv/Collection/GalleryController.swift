@@ -80,7 +80,7 @@ private extension GalleryController {
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     /// This method load image and set to UIImageView

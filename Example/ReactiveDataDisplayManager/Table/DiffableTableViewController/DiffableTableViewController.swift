@@ -72,7 +72,7 @@ extension DiffableTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         // clear existing generators
-        adapter.clearCellGenerators()
+        adapter -= .all
 
         // add header with static id
         adapter += EmptyTableHeaderGenerator(uniqueId: Constants.sectionId)
@@ -81,7 +81,7 @@ extension DiffableTableViewController: UISearchBarDelegate {
         adapter += filterGenerators(with: searchText)
 
         // apply snapshot
-        adapter.forceRefill()
+        adapter => .reload
 
         // all insert, remove, reload animations will be selected automatically
     }
@@ -116,7 +116,7 @@ private extension DiffableTableViewController {
         adapter += generators
 
         // apply snapshot
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     // Create cells generators
@@ -141,7 +141,7 @@ private extension DiffableTableViewController {
         generators.removeFirst()
 
         // clear existing generators
-        adapter.clearCellGenerators()
+        adapter -= .all
 
         // add header with static id
         adapter += EmptyTableHeaderGenerator(uniqueId: Constants.sectionId)
@@ -150,7 +150,7 @@ private extension DiffableTableViewController {
         adapter += generators
 
         // apply snapshot
-        adapter.forceRefill()
+        adapter => .reload
 
         // expected remove animation
     }

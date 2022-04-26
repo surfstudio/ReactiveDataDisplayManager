@@ -70,7 +70,7 @@ public extension DataDisplayManager {
         CATransaction.setCompletionBlock {
             completion()
         }
-        self.forceRefill()
+        self => .reload
         CATransaction.commit()
     }
 

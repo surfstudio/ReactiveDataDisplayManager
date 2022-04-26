@@ -93,7 +93,7 @@ private extension MainTableViewController {
             ddm += generator
         }
 
-        ddm.forceRefill()
+        ddm => .reload
     }
 
     func openScreen(by segueId: SegueIdentifier) {

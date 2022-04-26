@@ -75,7 +75,7 @@ private extension SizableCollectionViewController {
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
 }

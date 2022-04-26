@@ -88,7 +88,7 @@ private extension AllPluginsTableViewController {
         addPrefetcherableSection()
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func updateBarButtonItem(with title: String) {
@@ -210,7 +210,7 @@ extension AllPluginsTableViewController: RefreshableOutput {
     func refreshContent(with input: RefreshableInput) {
         DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(3)) { [weak self, weak input] in
             DispatchQueue.main.async { [weak self, weak input] in
-                self?.adapter.clearCellGenerators()
+                self?.adapter -= .all
                 self?.fillAdapter()
                 input?.endRefreshing()
             }

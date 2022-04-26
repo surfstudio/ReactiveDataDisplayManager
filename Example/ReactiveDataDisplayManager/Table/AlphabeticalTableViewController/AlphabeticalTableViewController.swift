@@ -60,7 +60,7 @@ private extension AlphabeticalTableViewController {
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     // Make cells generators

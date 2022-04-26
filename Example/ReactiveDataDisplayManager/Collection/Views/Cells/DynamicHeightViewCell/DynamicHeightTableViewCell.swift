@@ -50,7 +50,7 @@ private extension DynamicHeightTableViewCell {
 
     func fillAdapter() {
         adapter += makeDynamicHeightCellGenerators()
-        adapter.forceRefill()
+        adapter => .reload
 
         // needed to update the height
         layoutIfNeeded()

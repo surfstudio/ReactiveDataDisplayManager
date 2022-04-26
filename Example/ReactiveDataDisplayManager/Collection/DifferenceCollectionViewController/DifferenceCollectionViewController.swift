@@ -65,7 +65,7 @@ extension DifferenceCollectionViewController: UISearchBarDelegate {
         // apply snapshot
         adapter.reload { adapter in
             // clear existing generators
-            adapter.clearCellGenerators()
+            adapter -= .all
 
             // add header with static id
             adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
@@ -133,7 +133,7 @@ private extension DifferenceCollectionViewController {
         // apply snapshot
         adapter.reload { adapter in
             // clear existing generators
-            adapter.clearCellGenerators()
+            adapter -= .all
 
             // add header with static id
             adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)

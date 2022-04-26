@@ -86,7 +86,7 @@ private extension LandingStackViewController {
         adapter += buttons
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
 }

@@ -92,7 +92,7 @@ private extension FoldableCollectionViewController {
         adapter += visibleGenerators
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func makeFoldableCellGenerator(color: UIColor, expanded: Bool) -> FoldableCollectionCellGenerator {

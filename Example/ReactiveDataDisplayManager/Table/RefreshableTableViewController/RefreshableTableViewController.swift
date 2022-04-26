@@ -46,11 +46,13 @@ private extension RefreshableTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
 
+        adapter -= .all
+
         for id in 1...4 {
             adapter += makeGenerator(name: "Cell", id: id)
-        }
+		}
 
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func makeGenerator(name: String, id: Int) -> TableCellGenerator {
@@ -65,15 +67,15 @@ extension RefreshableTableViewController: RefreshableOutput {
 
     func refreshContent(with input: RefreshableInput) {
         delay(.now() + .seconds(3)) { [weak self, weak input] in
-            self?.adapter.clearCellGenerators()
+            self?.adapter -= .all
 
-            for id in 1...4 {
-                if let generator = self?.makeGenerator(name: "Refreshing", id: id) {
+	        for id in 1...4 {
+				if let generator = self?.makeGenerator(name: "Refreshing", id: id) {
                     self?.adapter += generator
                 }
-            }
+			}
 
-            self?.adapter.forceRefill()
+        	self?.adapter => .reload
 
             input?.endRefreshing()
         }

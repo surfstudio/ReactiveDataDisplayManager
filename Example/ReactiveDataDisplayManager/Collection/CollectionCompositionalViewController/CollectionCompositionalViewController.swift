@@ -59,7 +59,7 @@ private extension CollectionCompositionalViewController {
         addAnimationSection()
         addGridSection()
         addCompositeGroupSection()
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func addAnimationSection() {

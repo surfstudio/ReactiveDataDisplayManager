@@ -55,7 +55,7 @@ private extension CarouselCollectionViewController {
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func configureLayoutFlow() {

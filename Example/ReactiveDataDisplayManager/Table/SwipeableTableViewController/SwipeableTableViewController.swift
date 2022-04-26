@@ -59,7 +59,7 @@ private extension SwipeableTableViewController {
         adapter += generators
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
 }

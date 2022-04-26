@@ -77,7 +77,7 @@ private extension ItemTitleCollectionViewController {
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     @objc

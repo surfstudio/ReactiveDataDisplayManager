@@ -65,7 +65,7 @@ private extension SelectableTableViewController {
         adapter += generators
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func updateBarButtonItem(with title: String) {

@@ -53,7 +53,7 @@ private extension CollectionListViewController {
             adapter += generator
         }
 
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func configureLayoutFlow(with appearance: UICollectionLayoutListConfiguration.Appearance) {

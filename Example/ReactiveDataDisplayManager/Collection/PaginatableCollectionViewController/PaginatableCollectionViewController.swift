@@ -94,7 +94,7 @@ private extension PaginatableCollectionViewController {
             adapter += makeGenerator()
         }
 
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func makeGenerator() -> CollectionCellGenerator {
@@ -115,7 +115,7 @@ private extension PaginatableCollectionViewController {
             adapter.insert(after: lastGenerator, new: newGenerators)
         } else {
             adapter += newGenerators
-            adapter.forceRefill()
+            adapter => .reload
         }
 
         return currentPage < Constants.pagesCount

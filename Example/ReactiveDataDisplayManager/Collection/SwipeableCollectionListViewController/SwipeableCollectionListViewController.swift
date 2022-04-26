@@ -72,7 +72,7 @@ private extension SwipeableCollectionListViewController {
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func configureLayoutFlow(with appearance: UICollectionLayoutListConfiguration.Appearance) {

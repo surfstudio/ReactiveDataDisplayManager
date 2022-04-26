@@ -88,7 +88,7 @@ final class ExampleTableController: UIViewController {
 
 ### Fill collection
 
-Convert models to generators and call `ddm.forceRefill()`
+Convert models to generators and call `ddm => .reload`
 
 ```swift
 private extension MainTableViewController {
@@ -110,7 +110,7 @@ private extension MainTableViewController {
             ddm += generator
         }
 
-        ddm.forceRefill()
+        ddm => .reload
     }
 
 }

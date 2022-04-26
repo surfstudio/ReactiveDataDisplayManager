@@ -38,13 +38,13 @@ private extension GravityTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         adapter += makeGravityCellGenerator(with: 3)
-        adapter.forceRefill()
+        adapter => .reload
 
         // Add generators with heaviness = 5 after delay equal 1 second
         delay(.now() + .seconds(1)) { [weak self] in
             guard let self = self else { return }
             self.adapter += self.makeGravityCellGenerator(with: 5)
-            self.adapter.forceRefill()
+            self.adapter => .reload
         }
 
         // Add generators with heaviness = 2 and 1 after delay equal 3 second
@@ -52,14 +52,14 @@ private extension GravityTableViewController {
             guard let self = self else { return }
             self.adapter += self.makeGravityCellGenerator(with: 2)
             self.adapter += self.makeGravityCellGenerator(with: 1)
-            self.adapter.forceRefill()
+            self.adapter => .reload
         }
 
         // Add generators with heaviness = 4 (with children's generators have heaviness equal 1 and 2) after delay equal 2 second
         delay(.now() + .seconds(2)) { [weak self] in
             guard let self = self else { return }
             self.adapter += self.makeGravityFoldableCellGenerator(with: 4)
-            self.adapter.forceRefill()
+            self.adapter => .reload
         }
 
     }

@@ -67,7 +67,7 @@ private extension MainStackViewController {
             ddm += generator
         }
 
-        ddm.forceRefill()
+        ddm => .reload
     }
 
 }

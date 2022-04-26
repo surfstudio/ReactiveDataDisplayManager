@@ -48,6 +48,6 @@ extension InnerStackCellGenerator: ViewBuilder {
 
         adapter += childGenerators
 
-        adapter.forceRefill()
+        adapter => .reload
     }
 }
