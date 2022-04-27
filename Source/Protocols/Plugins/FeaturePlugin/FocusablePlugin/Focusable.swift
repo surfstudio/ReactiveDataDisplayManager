@@ -16,7 +16,7 @@ public protocol Focusable {
 }
 
 public protocol FocusableDelegate {
-    associatedtype Provider: GeneratorsProvider
+    associatedtype Provider: SectionsProvider
     associatedtype CollectionType
 
     /// Asks whether the item at the specified index path can be focused

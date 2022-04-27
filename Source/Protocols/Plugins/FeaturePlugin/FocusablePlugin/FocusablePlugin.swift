@@ -16,7 +16,7 @@ open class CollectionFocusablePlugin: CollectionFeaturePlugin, Focusable {
 
     // MARK: - Typealias
 
-    public typealias Provider = CollectionGeneratorsProvider
+    public typealias Provider = CollectionSectionsProvider
     public typealias CollectionType = UICollectionView
 
     // MARK: - Properties
@@ -49,7 +49,7 @@ open class TableFocusablePlugin: TableFeaturePlugin, Focusable {
 
     // MARK: - Typealias
 
-    public typealias Provider = TableGeneratorsProvider
+    public typealias Provider = TableSectionsProvider
 
     // MARK: - Properties
 

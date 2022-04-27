@@ -1,5 +1,5 @@
 //
-//  GeneratorsProvider.swift
+//  SectionsProvider.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Konstantin Porokhov on 15.04.2021.

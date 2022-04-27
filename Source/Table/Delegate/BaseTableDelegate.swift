@@ -25,7 +25,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
     #if os(tvOS)
-    public var focusablePlugin: FocusablePluginDelegate<TableGeneratorsProvider, UITableView>?
+    public var focusablePlugin: FocusablePluginDelegate<TableSectionsProvider, UITableView>?
     #endif
     public var movablePlugin: MovablePluginDelegate<TableSectionsProvider>?
 
