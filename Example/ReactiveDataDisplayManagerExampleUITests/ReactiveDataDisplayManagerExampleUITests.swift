@@ -19,33 +19,24 @@ class ReactiveDataDisplayManagerExampleUITests: XCTestCase {
     }
 
     func testCollectionScreen() throws {
-
-        app.tabBars.buttons["Collection"].tap()
-
-        let tablesQuery = app.tables
-        for i in 0...tablesQuery.cells.count - 1 {
-            print("===== cell number: \(i) =====")
-            tablesQuery.cells.element(boundBy: i).tap()
-            app.navigationBars.firstMatch.buttons["Back"].tap()
-        }
+        testTable("Collection")
     }
 
     func testTableScreen() throws {
-
-        app.tabBars.buttons["Table"].tap()
-
-        let tablesQuery = app.tables
-        for i in 0...tablesQuery.cells.count - 1 {
-            print("===== cell number: \(i) =====")
-            tablesQuery.cells.element(boundBy: i).tap()
-            app.navigationBars.firstMatch.buttons["Back"].tap()
-        }
+        testTable("Table")
     }
 
     func testStackScreen() throws {
+        testTable("Stack")
+    }
+}
 
-        app.tabBars.buttons["Stack"].tap()
+// MARK: - Private methods
 
+private extension ReactiveDataDisplayManagerExampleUITests {
+
+    func testTable(_ screenName: String) {
+        app.tabBars.buttons[screenName].tap()
         let tablesQuery = app.tables
         for i in 0...tablesQuery.cells.count - 1 {
             print("===== cell number: \(i) =====")

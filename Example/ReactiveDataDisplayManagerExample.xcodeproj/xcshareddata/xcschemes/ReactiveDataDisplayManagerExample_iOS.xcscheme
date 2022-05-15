@@ -46,6 +46,11 @@
                BlueprintName = "ReactiveDataDisplayManagerExampleUITests"
                ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "ReactiveDataDisplayManagerExampleUITests/testTable()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
