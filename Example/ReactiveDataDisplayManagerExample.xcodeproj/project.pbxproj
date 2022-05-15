@@ -134,10 +134,22 @@
 		F1679D6879E3F1B16047438B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC63B8F3540DB313A90623C7 /* UIKit.framework */; };
 		F5CB3BF685604C9C92DDE19D /* SectionTitleHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D380CEFE1B42A3046D14FF71 /* SectionTitleHeaderGenerator.swift */; };
 		F885C1568B55A1288536E67F /* CarouselCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD39D4746C85AD0C55D140B /* CarouselCollectionViewLayout.swift */; };
+		F92CD42E282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92CD42D282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests.swift */; };
+		F92CD430282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92CD42F282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITestsLaunchTests.swift */; };
 		F9308201312641349E160206 /* GravityCellGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43827BAA20A9EF3B05A721E /* GravityCellGenerator.swift */; };
 		FBACB6A64D5E8363F12A523D /* NukeImagePrefetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC31D500BAC18C0DAEB7B74F /* NukeImagePrefetcher.swift */; };
 		FFDFBCDB3968D85C536DF9DF /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 325E432007B2C402A407032F /* TitleTableViewCell.xib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F92CD431282BCE4A0055DC68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95802BBD4CBDEE505B38C3DC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CABBB6428FEC2BC26FA2E2B7;
+			remoteInfo = ReactiveDataDisplayManagerExample_iOS;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		001BB16BE2E141F75B940D27 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -274,6 +286,9 @@
 		F7FE3580B88F51C6534804F7 /* TitleCollectionHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionHeaderGenerator.swift; sourceTree = "<group>"; };
 		F821EBA643EAE40EC777CC79 /* GravityFoldableCellGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityFoldableCellGenerator.swift; sourceTree = "<group>"; };
 		F8F609E00D3661A8BC98556C /* FoldableCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoldableCollectionViewCell.xib; sourceTree = "<group>"; };
+		F92CD42B282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveDataDisplayManagerExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F92CD42D282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveDataDisplayManagerExampleUITests.swift; sourceTree = "<group>"; };
+		F92CD42F282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveDataDisplayManagerExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F958FD39ACAA9A0CC09BC7D0 /* CollectionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListViewController.swift; sourceTree = "<group>"; };
 		FC1DAD5AD994C42F50E514EE /* TitleIconCollectionFooterGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleIconCollectionFooterGenerator.swift; sourceTree = "<group>"; };
 		FF080E64B9D36E8CE75064A7 /* UIViewController+Delay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Delay.swift"; sourceTree = "<group>"; };
@@ -295,6 +310,13 @@
 			files = (
 				0043FC0C2FFB75867BE031CC /* UIKit.framework in Frameworks */,
 				B26EB9395E6F23144606DBB5 /* Pods_ReactiveDataDisplayManagerExample_tvOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F92CD428282BCE4A0055DC68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,7 +646,6 @@
 				594A1981E2CA467B93100E8D /* Pods-ReactiveDataDisplayManagerExample_tvOS.debug.xcconfig */,
 				AC1C305E702D137E6E7D99D4 /* Pods-ReactiveDataDisplayManagerExample_tvOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -860,6 +881,7 @@
 			children = (
 				1BBA63A398D9C0DFEEFFB6E2 /* ReactiveDataDisplayManager */,
 				02BF68695BF245EEE6443FE1 /* ReactiveDataDisplayManagerExampleTv */,
+				F92CD42C282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests */,
 				299303BB717880B5A2E66198 /* Frameworks */,
 				BF88590C60E62AD28FD1806F /* Products */,
 				617DF48359342915E8D8F8B5 /* Pods */,
@@ -890,6 +912,7 @@
 			children = (
 				C6731A71DBE23B724996ACD5 /* ReactiveDataDisplayManagerExample_iOS.app */,
 				EFE5A62F8CEC6911352403B3 /* ReactiveDataDisplayManagerExample_tvOS.app */,
+				F92CD42B282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1115,6 +1138,15 @@
 			path = Appearance;
 			sourceTree = "<group>";
 		};
+		F92CD42C282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F92CD42D282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests.swift */,
+				F92CD42F282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITestsLaunchTests.swift */,
+			);
+			path = ReactiveDataDisplayManagerExampleUITests;
+			sourceTree = "<group>";
+		};
 		FACE84FE4FFDFDBA53A3C434 /* Generators */ = {
 			isa = PBXGroup;
 			children = (
@@ -1190,12 +1222,31 @@
 			productReference = EFE5A62F8CEC6911352403B3 /* ReactiveDataDisplayManagerExample_tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F92CD42A282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F92CD435282BCE4A0055DC68 /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerExampleUITests" */;
+			buildPhases = (
+				F92CD427282BCE4A0055DC68 /* Sources */,
+				F92CD428282BCE4A0055DC68 /* Frameworks */,
+				F92CD429282BCE4A0055DC68 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F92CD432282BCE4A0055DC68 /* PBXTargetDependency */,
+			);
+			name = ReactiveDataDisplayManagerExampleUITests;
+			productName = ReactiveDataDisplayManagerExampleUITests;
+			productReference = F92CD42B282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		95802BBD4CBDEE505B38C3DC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					CABBB6428FEC2BC26FA2E2B7 = {
@@ -1205,6 +1256,10 @@
 					F900FEF2F009CBEBC52CCB30 = {
 						DevelopmentTeam = EFAAG9GXN4;
 						ProvisioningStyle = Automatic;
+					};
+					F92CD42A282BCE4A0055DC68 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = CABBB6428FEC2BC26FA2E2B7;
 					};
 				};
 			};
@@ -1223,6 +1278,7 @@
 			targets = (
 				CABBB6428FEC2BC26FA2E2B7 /* ReactiveDataDisplayManagerExample_iOS */,
 				F900FEF2F009CBEBC52CCB30 /* ReactiveDataDisplayManagerExample_tvOS */,
+				F92CD42A282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1265,6 +1321,13 @@
 				4A5B829E7FC4C8F1BD802EC6 /* TitleIconCollectionFooterView.xib in Resources */,
 				FFDFBCDB3968D85C536DF9DF /* TitleTableViewCell.xib in Resources */,
 				B8F500BF4506DFD3A5E3F18A /* TitleWithIconTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F92CD429282BCE4A0055DC68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1466,7 +1529,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F92CD427282BCE4A0055DC68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F92CD42E282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITests.swift in Sources */,
+				F92CD430282BCE4A0055DC68 /* ReactiveDataDisplayManagerExampleUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F92CD432282BCE4A0055DC68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CABBB6428FEC2BC26FA2E2B7 /* ReactiveDataDisplayManagerExample_iOS */;
+			targetProxy = F92CD431282BCE4A0055DC68 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		156F40D6CD3DB68AFAA13CAB /* LaunchScreen.storyboard */ = {
@@ -1670,6 +1750,51 @@
 			};
 			name = Debug;
 		};
+		F92CD433282BCE4A0055DC68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N58RDF6FU9;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kmv.ReactiveDataDisplayManagerExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ReactiveDataDisplayManagerExample_iOS;
+			};
+			name = Debug;
+		};
+		F92CD434282BCE4A0055DC68 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N58RDF6FU9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kmv.ReactiveDataDisplayManagerExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ReactiveDataDisplayManagerExample_iOS;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		FC5EC75D69FD9FC6C2940499 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 594A1981E2CA467B93100E8D /* Pods-ReactiveDataDisplayManagerExample_tvOS.debug.xcconfig */;
@@ -1721,6 +1846,15 @@
 			buildConfigurations = (
 				DD4B9461B99B0EF96DBB4346 /* Debug */,
 				91648FFF59AB6577C8088B89 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F92CD435282BCE4A0055DC68 /* Build configuration list for PBXNativeTarget "ReactiveDataDisplayManagerExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F92CD433282BCE4A0055DC68 /* Debug */,
+				F92CD434282BCE4A0055DC68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
