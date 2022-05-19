@@ -53,6 +53,9 @@ targets:
         properties: []
       dependencies:
         - target: ReactiveDataDisplayManager_${platform}
+      preBuildScripts:
+        - script: sourcery
+          name: Sourcery
       settings:
         configs:
           Debug:
