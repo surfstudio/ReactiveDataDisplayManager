@@ -1,35 +1,71 @@
-# Init Framework and Example projects
+## Init Framework and Example projects
 init:
 	brew bundle --no-upgrade
+
+	mkdir -p .git/hooks
+	$(MAKE) install_hooks
 
 	xcodegen generate
 
 	cd Example; make init
 
-# Init Framework and Example projects
+## Regenerate Framework and Example projects
 projects:
 	xcodegen generate
 
 	cd Example; make project
 
-# Install git hooks
-hooks:
+## Build lib sources for {platform}
+build_lib:
+	xcodebuild -target ReactiveDataDisplayManager_${platform}
 
-	chmod +x post-checkout
-	ln -s -f ../../post-checkout .git/hooks/post-checkout
+## Run tests for **iOS** platform
+test_lib_iOS:
+	xcodebuild test -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -parallel-testing-enabled YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
 
-	chmod +x post-merge
-	ln -s -f ../../post-merge .git/hooks/post-merge
+## Install concrete hook with {name}
+install_hook:
+	chmod +x hooks/$(name)
+	ln -s -f ../../hooks/$(name) .git/hooks/$(name)
 
-# Update version
-versionUpdate:
+## Install all git hooks
+install_hooks:
+	$(MAKE) install_hook name=post-checkout
+	$(MAKE) install_hook name=post-merge
+
+## Update version to {value}
+updte_version:
 	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' project.yml
 	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' Example/project.yml
 
-# Lint lib for cocoapods
-lintLib:
+## Lint lib for cocoapods
+lint_lib:
 	pod lib lint --allow-warnings
 
-# Publish Lib in cocoapods
-publishLib:
+## Publish Lib in cocoapods
+publish_lib:
 	pod trunk push --allow-warnings
+
+## Colors
+GREEN  := $(shell tput -Txterm setaf 2)
+YELLOW := $(shell tput -Txterm setaf 3)
+WHITE  := $(shell tput -Txterm setaf 7)
+RESET  := $(shell tput -Txterm sgr0)
+
+TARGET_MAX_CHAR_NUM=20
+## Show help
+help:
+	@echo ''
+	@echo 'Usage:'
+	@echo '  ${YELLOW}make${RESET} ${GREEN}<target>${RESET}'
+	@echo ''
+	@echo 'Targets:'
+	@awk '/^[a-zA-Z\-\_0-9]+:/ { \
+		helpMessage = match(lastLine, /^## (.*)/); \
+		if (helpMessage) { \
+			helpCommand = substr($$1, 0, index($$1, ":")-1); \
+			helpMessage = substr(lastLine, RSTART + 3, RLENGTH); \
+			printf "  ${YELLOW}%-$(TARGET_MAX_CHAR_NUM)s${RESET} ${GREEN}%s${RESET}\n", helpCommand, helpMessage; \
+		} \
+	} \
+	{ lastLine = $$0 }' $(MAKEFILE_LIST)

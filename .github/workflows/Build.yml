@@ -3,12 +3,12 @@ name: Build
 on:
   push:
     branches:
-      - master
       - develop
+      - preview/version-8
   pull_request:
 
 jobs:
-      
+
   build_iOS:
     runs-on: macOS-latest
     steps:
@@ -16,9 +16,9 @@ jobs:
     - name: Generate projects
       run: make init
     - name: Build
-      run: xcodebuild -target ReactiveDataDisplayManager_iOS
+      run: make build_lib platform=iOS
     - name: Run tests
-      run: xcodebuild test -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
+      run: make test_lib_iOS
     - name: Upload Coverage
       run: bash <(curl -s https://codecov.io/bash) -J 'ReactiveDataDisplayManager'
 
@@ -29,4 +29,4 @@ jobs:
     - name: Generate projects
       run: make init
     - name: Build
-      run: xcodebuild -target ReactiveDataDisplayManager_tvOS
+      run: make build_lib platform=tvOS
