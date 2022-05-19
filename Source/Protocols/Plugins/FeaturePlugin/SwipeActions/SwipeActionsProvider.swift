@@ -8,6 +8,7 @@
 #if os(iOS)
 import UIKit
 
+// sourcery: AutoMockable
 @available(iOS 11.0, *)
 public protocol SwipeActionsProvider {
     var isEnableSwipeActions: Bool { get set }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// sourcery: AutoMockable
 /// Allow dragging cells according to strategy
 protocol StrategyDropable {
     /// The method defines the strategy for the drag and drop behavior.

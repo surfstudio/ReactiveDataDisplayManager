@@ -6,6 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+// sourcery: AutoMockable
 public protocol CollectionFoldableItem: AnyObject {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
