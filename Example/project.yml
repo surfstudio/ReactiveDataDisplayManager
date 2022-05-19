@@ -69,3 +69,22 @@ targets:
           LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
           CODE_SIGN_IDENTITY: "iPhone Developer"
           CODE_SIGN_STYLE: Automatic
+
+    ReactiveDataDisplayManagerExampleUITests:
+        type: bundle.ui-testing
+        platform: iOS
+        deploymentTarget:
+          iOS: 10.0
+          tvOS: 10.0
+        scheme:
+          configVariants: all
+        sources: [ReactiveDataDisplayManagerExampleUITests]
+        info:
+          path: ReactiveDataDisplayManagerExampleUITests/Info.plist
+          properties: []
+        dependencies:
+          - target: ReactiveDataDisplayManagerExample_iOS
+        settings:
+          configs:
+            Debug:
+              EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
