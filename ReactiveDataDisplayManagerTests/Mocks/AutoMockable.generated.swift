@@ -1,7 +1,6 @@
 // Generated using Sourcery 1.8.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
-// swiftlint:disable line_length
-// swiftlint:disable variable_name
+// swiftlint:disable all
 
 import Foundation
 #if os(iOS) || os(tvOS) || os(watchOS)
