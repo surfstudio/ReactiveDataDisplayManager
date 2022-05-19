@@ -18,7 +18,8 @@ targets:
         tvOS: 10.0
       scheme:
         configVariants: all
-        testTargets: ReactiveDataDisplayManagerTests_${platform}
+        testTargets:
+          - ReactiveDataDisplayManagerTests_${platform}
       sources:
         - path: Source
       info:
