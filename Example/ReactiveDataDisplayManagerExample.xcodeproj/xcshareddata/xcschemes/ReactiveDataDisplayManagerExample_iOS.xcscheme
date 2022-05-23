@@ -30,6 +30,16 @@
       onlyGenerateCoverageForSpecifiedTargets = "NO"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8EBB82F6CB3DB48FAD1FBE84"
+               BuildableName = "ReactiveDataDisplayManagerExampleUITests.xctest"
+               BlueprintName = "ReactiveDataDisplayManagerExampleUITests"
+               ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

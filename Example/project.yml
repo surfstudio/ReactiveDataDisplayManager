@@ -18,6 +18,7 @@ targets:
       deploymentTarget: 11.0
       scheme:
         configVariants: all
+        testTargets: [ReactiveDataDisplayManagerExampleUITests]
       sources:
         - path: ReactiveDataDisplayManager
       info:
@@ -88,3 +89,4 @@ targets:
           configs:
             Debug:
               EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
+              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS
