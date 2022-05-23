@@ -9,6 +9,7 @@ import XCTest
 
 class ReactiveDataDisplayManagerExampleUITests: XCTestCase {
 
+    //swiftlint:disable:next implicitly_unwrapped_optional
     var app: XCUIApplication!
 
     override func setUpWithError() throws {

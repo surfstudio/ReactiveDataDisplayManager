@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         #endif
 
-
         return true
     }
 
