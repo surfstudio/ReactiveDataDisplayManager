@@ -28,8 +28,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Generate projects
       run: make init
-    - name: Generate projects
-      run: cd Example
     - name: Run tests
       run: make test_example_iOS
 

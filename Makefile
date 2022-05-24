@@ -23,6 +23,10 @@ build_lib:
 test_lib_iOS:
 	xcodebuild test -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -parallel-testing-enabled YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
 
+## Run tests of example
+test_example_iOS:
+	cd Example; make test_example_iOS
+
 ## Install concrete hook with {name}
 install_hook:
 	chmod +x hooks/$(name)
