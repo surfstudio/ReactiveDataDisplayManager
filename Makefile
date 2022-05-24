@@ -19,7 +19,7 @@ projects:
 build_lib:
 	xcodebuild -target ReactiveDataDisplayManager_${platform}
 
-## Run tests for **iOS** platform
+## Run tests of lib for **iOS** platform
 test_lib_iOS:
 	xcodebuild test -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -parallel-testing-enabled YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
 
