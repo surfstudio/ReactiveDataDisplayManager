@@ -22,6 +22,17 @@ jobs:
     - name: Upload Coverage
       run: bash <(curl -s https://codecov.io/bash) -J 'ReactiveDataDisplayManager'
 
+  build_Example:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Generate projects
+      run: make init
+    - name: Generate projects
+      run: cd Example
+    - name: Run tests
+      run: make test_example_iOS
+
   build_tvOS:
     runs-on: macOS-latest
     steps:
