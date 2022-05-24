@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CABBB6428FEC2BC26FA2E2B7"
-               BuildableName = "ReactiveDataDisplayManagerExample_iOS.app"
-               BlueprintName = "ReactiveDataDisplayManagerExample_iOS"
+               BlueprintIdentifier = "8EBB82F6CB3DB48FAD1FBE84"
+               BuildableName = "ReactiveDataDisplayManagerExampleUITests.xctest"
+               BlueprintName = "ReactiveDataDisplayManagerExampleUITests"
                ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,23 +30,13 @@
       onlyGenerateCoverageForSpecifiedTargets = "NO"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8EBB82F6CB3DB48FAD1FBE84"
-               BuildableName = "ReactiveDataDisplayManagerExampleUITests.xctest"
-               BlueprintName = "ReactiveDataDisplayManagerExampleUITests"
-               ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CABBB6428FEC2BC26FA2E2B7"
-            BuildableName = "ReactiveDataDisplayManagerExample_iOS.app"
-            BlueprintName = "ReactiveDataDisplayManagerExample_iOS"
+            BlueprintIdentifier = "8EBB82F6CB3DB48FAD1FBE84"
+            BuildableName = "ReactiveDataDisplayManagerExampleUITests.xctest"
+            BlueprintName = "ReactiveDataDisplayManagerExampleUITests"
             ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,16 +53,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CABBB6428FEC2BC26FA2E2B7"
-            BuildableName = "ReactiveDataDisplayManagerExample_iOS.app"
-            BlueprintName = "ReactiveDataDisplayManagerExample_iOS"
+            BlueprintIdentifier = "8EBB82F6CB3DB48FAD1FBE84"
+            BuildableName = "ReactiveDataDisplayManagerExampleUITests.xctest"
+            BlueprintName = "ReactiveDataDisplayManagerExampleUITests"
             ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <CommandLineArguments>
       </CommandLineArguments>
    </LaunchAction>
@@ -86,9 +75,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CABBB6428FEC2BC26FA2E2B7"
-            BuildableName = "ReactiveDataDisplayManagerExample_iOS.app"
-            BlueprintName = "ReactiveDataDisplayManagerExample_iOS"
+            BlueprintIdentifier = "8EBB82F6CB3DB48FAD1FBE84"
+            BuildableName = "ReactiveDataDisplayManagerExampleUITests.xctest"
+            BlueprintName = "ReactiveDataDisplayManagerExampleUITests"
             ReferencedContainer = "container:ReactiveDataDisplayManagerExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

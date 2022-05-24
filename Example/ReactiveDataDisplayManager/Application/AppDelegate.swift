@@ -19,6 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = .rddm
         UITableView.appearance().sectionIndexColor = .rddm
         UICollectionView.appearance().tintColor = .rddm
+
+        #if DEBUG
+        if CommandLine.arguments.contains("-disableAnimations") {
+            UIView.setAnimationsEnabled(false)
+        }
+        #endif
+
         return true
     }
 
