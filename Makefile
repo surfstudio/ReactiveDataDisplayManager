@@ -34,7 +34,7 @@ install_hooks:
 	$(MAKE) install_hook name=post-merge
 
 ## Update version to {value}
-updte_version:
+update_version:
 	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' project.yml
 	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' Example/project.yml
 
