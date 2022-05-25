@@ -1,0 +1,9 @@
+sources:
+  - Source
+templates:
+  - Templates
+output:
+  ReactiveDataDisplayManagerTests/Mocks
+args:
+  autoMockableImports: []
+  autoMockableTestableImports: [ReactiveDataDisplayManager]

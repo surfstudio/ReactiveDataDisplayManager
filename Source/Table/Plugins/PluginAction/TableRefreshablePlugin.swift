@@ -8,6 +8,7 @@
 #if os(iOS)
 import UIKit
 
+// sourcery: AutoMockable
 /// Input signals to hide `UIRefreshControl`
 public protocol RefreshableInput: AnyObject {
 
@@ -15,6 +16,7 @@ public protocol RefreshableInput: AnyObject {
     func endRefreshing()
 }
 
+// sourcery: AutoMockable
 /// Output signals to refresh content
 public protocol RefreshableOutput: AnyObject {
 

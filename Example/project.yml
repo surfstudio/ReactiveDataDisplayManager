@@ -2,7 +2,7 @@
 name: ReactiveDataDisplayManagerExample
 options:
   # Версия Xcode
-  xcodeVersion: 12.5
+  xcodeVersion: 13.3
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
@@ -18,7 +18,8 @@ targets:
       deploymentTarget: 11.0
       scheme:
         configVariants: all
-        testTargets: [ReactiveDataDisplayManagerExampleUITests]
+        testTargets:
+          - ReactiveDataDisplayManagerExampleUITests
       sources:
         - path: ReactiveDataDisplayManager
       info:
@@ -70,6 +71,9 @@ targets:
           LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
           CODE_SIGN_IDENTITY: "iPhone Developer"
           CODE_SIGN_STYLE: Automatic
+        configs:
+          Debug:
+            EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
 
     ReactiveDataDisplayManagerExampleUITests:
         type: bundle.ui-testing

@@ -8,6 +8,7 @@
 
 import UIKit
 
+// sourcery: AutoMockable
 open class TableHeaderGenerator: ViewGenerator {
 
     public let uuid = UUID().uuidString
@@ -23,6 +24,7 @@ open class TableHeaderGenerator: ViewGenerator {
     }
 }
 
+// sourcery: AutoMockable
 /// Protocol that incapsulated type of current cell
 public protocol TableCellGenerator: AnyObject {
 
@@ -64,6 +66,7 @@ public extension TableCellGenerator {
 
 }
 
+// sourcery: AutoMockable
 /// Protocol that incapsulated type of Header
 public protocol CollectionHeaderGenerator: AnyObject {
 
@@ -89,6 +92,7 @@ public extension CollectionHeaderGenerator {
 
 }
 
+// sourcery: AutoMockable
 /// Protocol that incapsulated type of Footer
 public protocol CollectionFooterGenerator: AnyObject {
 
@@ -101,6 +105,7 @@ public protocol CollectionFooterGenerator: AnyObject {
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
 }
 
+// sourcery: AutoMockable
 /// Protocol that incapsulated type of current cell
 public protocol CollectionCellGenerator: AnyObject {
 
