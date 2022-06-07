@@ -35,6 +35,7 @@ open class BaseCollectionManager: CollectionGeneratorsProvider, DataDisplayManag
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
+        checkSelectablePlugin(for: generator)
         generator.registerCell(in: view)
 
         if self.generators.count != self.sections.count || sections.isEmpty {
@@ -61,7 +62,10 @@ open class BaseCollectionManager: CollectionGeneratorsProvider, DataDisplayManag
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
+        generators.forEach {
+            checkSelectablePlugin(for: $0)
+            $0.registerCell(in: view)
+        }
 
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
@@ -100,7 +104,10 @@ extension BaseCollectionManager: HeaderDataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toHeader header: CollectionHeaderGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
+        generators.forEach {
+            checkSelectablePlugin(for: $0)
+            $0.registerCell(in: view)
+        }
 
         if self.generators.count != self.sections.count || sections.isEmpty {
             self.generators.append([CollectionCellGenerator]())
@@ -142,7 +149,10 @@ extension BaseCollectionManager: FooterDataDisplayManager {
     }
 
     public func addCellGenerators(_ generators: [CollectionCellGenerator], toFooter footer: CollectionFooterGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
+        generators.forEach {
+            checkSelectablePlugin(for: $0)
+            $0.registerCell(in: view)
+        }
 
         if self.generators.count != self.footers.count || footers.isEmpty {
             self.generators.append([CollectionCellGenerator]())
@@ -215,6 +225,7 @@ private extension BaseCollectionManager {
     func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)]) {
 
         elements.forEach { [weak self] element in
+            checkSelectablePlugin(for: element.generator)
             element.generator.registerCell(in: view)
             self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
@@ -259,6 +270,17 @@ private extension BaseCollectionManager {
         if let scrollPosition = scrollPosition {
             view.scrollToItem(at: indexPath, at: scrollPosition, animated: true)
         }
+    }
+
+    func checkSelectablePlugin(for generator: CollectionCellGenerator) {
+        let selectablePlugin = delegate?.collectionPlugins.plugins.first(where: { $0 is CollectionSelectablePlugin })
+        guard
+            let selectableGenerator = generator as? SelectableItem,
+            (!selectableGenerator.didSelectEvent.isEmpty || !selectableGenerator.didDeselectEvent.isEmpty) &&
+            selectablePlugin == nil
+        else { return }
+
+        assertionFailure("The generator uses didSelectEvent or didDeselectEvent. Include the .selectable() plugin.")
     }
 
 }

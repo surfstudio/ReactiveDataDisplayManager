@@ -19,7 +19,10 @@ public class ManualTableManager: BaseTableManager {
     ///   - generator: Generator for new section TableHeaderGenerator.
     ///   - cells: Generators for this section.
     open func addSection(TableHeaderGenerator generator: TableHeaderGenerator, cells: [TableCellGenerator]) {
-        cells.forEach { $0.registerCell(in: view) }
+        cells.forEach {
+            checkSelectablePlugin(for: $0)
+            $0.registerCell(in: view)
+        }
         self.sections.append(generator)
         self.generators.append(cells)
     }
@@ -87,7 +90,10 @@ public class ManualTableManager: BaseTableManager {
     ///   - generators: Generators to insert
     ///   - TableHeaderGenerator: TableHeaderGenerator generator in which you want to insert.
     open func addCellGenerators(_ generators: [TableCellGenerator], toHeader headerGenerator: TableHeaderGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
+        generators.forEach {
+            checkSelectablePlugin(for: $0)
+            $0.registerCell(in: view)
+        }
 
         if self.generators.count != self.sections.count || sections.isEmpty {
             self.generators.append([TableCellGenerator]())
@@ -329,6 +335,8 @@ public class ManualTableManager: BaseTableManager {
         guard let firstIndex = findGenerator(firstGenerator), let secondIndex = findGenerator(secondGenerator) else {
             return
         }
+        checkSelectablePlugin(for: firstGenerator)
+        checkSelectablePlugin(for: secondGenerator)
 
         generators[firstIndex.sectionIndex].remove(at: firstIndex.generatorIndex)
         generators[secondIndex.sectionIndex].remove(at: secondIndex.generatorIndex)
@@ -361,6 +369,7 @@ private extension ManualTableManager {
                 with animation: UITableView.RowAnimation = .automatic) {
 
         elements.forEach { [weak self] element in
+            checkSelectablePlugin(for: element.generator)
             element.generator.registerCell(in: view)
             self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
@@ -370,6 +379,17 @@ private extension ManualTableManager {
         }
 
         dataSource?.modifier?.insertRows(at: indexPaths, with: animation)
+    }
+
+    func checkSelectablePlugin(for generator: TableCellGenerator) {
+        let selectablePlugin = delegate?.tablePlugins.plugins.first(where: { $0 is TableSelectablePlugin })
+        guard
+            let selectableGenerator = generator as? SelectableItem,
+            (!selectableGenerator.didSelectEvent.isEmpty || !selectableGenerator.didDeselectEvent.isEmpty) &&
+            selectablePlugin == nil
+        else { return }
+
+        assertionFailure("The generator uses didSelectEvent or didDeselectEvent. Include the .selectable() plugin.")
     }
 
 }
