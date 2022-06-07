@@ -11,4 +11,7 @@ import UIKit
 /// Use this class to extend collection functionality
 public protocol FeaturePlugin {
     associatedtype CollectionType
+
+    /// Plugin name, must match child class name
+    var pluginName: String { get }
 }

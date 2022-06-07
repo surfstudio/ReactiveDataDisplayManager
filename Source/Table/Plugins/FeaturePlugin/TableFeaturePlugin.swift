@@ -12,4 +12,8 @@ open class TableFeaturePlugin: FeaturePlugin {
     public typealias CollectionType = UITableView
 
     public init() { }
+
+    public var pluginName: String {
+        String(describing: Self.self)
+    }
 }
