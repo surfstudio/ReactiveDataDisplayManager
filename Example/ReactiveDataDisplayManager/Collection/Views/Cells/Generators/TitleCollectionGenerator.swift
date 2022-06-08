@@ -14,6 +14,7 @@ final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectio
 
     var title: String
     var needIndexTitle: Bool
+    var cell: TitleCollectionViewCell?
 
     // MARK: - Private Properties
 
@@ -29,6 +30,11 @@ final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectio
         dragAndDroppableItem = DragAndDroppableItem(identifier: id)
 
         super.init(with: model)
+    }
+
+    override func configure(cell: TitleCollectionViewCell, with model: String) {
+        self.cell = cell
+        super.configure(cell: cell, with: model)
     }
 
 }

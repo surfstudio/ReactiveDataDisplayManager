@@ -28,6 +28,7 @@ class CollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fillAdapter()
+        collectionView.allowsMultipleSelection = true
     }
 
     // MARK: - Private methods
@@ -38,9 +39,14 @@ class CollectionViewController: UIViewController {
         adapter.addSectionHeaderGenerator(header)
         for title in titles {
             // Create generator
-            let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
-            generator.didSelectEvent += {
-                debugPrint("\(title) selected")
+            let generator = TitleCollectionGenerator(model: title)
+            generator.isNeedDeselect = false
+
+            generator.didSelectEvent += { [weak generator] in
+                generator?.cell?.configure(with: "selected")
+            }
+            generator.didDeselectEvent += { [weak generator] in
+                generator?.cell?.configure(with: title)
             }
             // Add generator to adapter
             adapter.addCellGenerator(generator)
