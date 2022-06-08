@@ -13,6 +13,9 @@ public protocol PluginAction {
     associatedtype Event
     associatedtype Manager: DataDisplayManager
 
+    /// Plugin name, must match child class name
+    var pluginName: String { get }
+
     /// Setup optional references to manager properties
     ///
     /// - parameter manager: instance of `DataDisplayManager`

@@ -15,6 +15,9 @@ public struct PluginCollection<Plugin: PluginAction> {
     ///
     /// - parameter plugin: instance of `PluginAction`
     mutating func add(_ plugin: Plugin) {
+        if plugins.contains(where: { $0.pluginName == plugin.pluginName }) {
+            debugPrint("❗️ Plugin \(plugin.pluginName) added multiple times")
+        }
         plugins.append(plugin)
     }
 
