@@ -8,6 +8,10 @@
 
 open class BaseTablePlugin<Event>: PluginAction {
 
+    public var pluginName: String {
+        String(describing: Self.self)
+    }
+
     public init() { }
 
     open func setup(with manager: BaseTableManager?) {
