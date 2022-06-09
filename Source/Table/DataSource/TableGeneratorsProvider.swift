@@ -15,7 +15,6 @@ open class TableGeneratorsProvider: GeneratorsProvider {
     }
 }
 
-
 // MARK: - Private
 
 private extension TableGeneratorsProvider {

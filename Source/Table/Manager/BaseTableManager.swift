@@ -33,7 +33,6 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
         generator.registerCell(in: view)
-
         if self.generators.count != self.sections.count || sections.isEmpty {
             self.generators.append([TableCellGenerator]())
         }
