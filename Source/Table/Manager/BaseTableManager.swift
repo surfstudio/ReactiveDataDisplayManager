@@ -23,7 +23,6 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     public weak var view: UITableView!
     // swiftlint:enable implicitly_unwrapped_optional
 
-    var delegate: TableDelegate?
     var dataSource: TableDataSource?
 
     // MARK: - DataDisplayManager
@@ -33,7 +32,6 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
-        checkSelectablePlugin(for: generator)
         generator.registerCell(in: view)
 
         if self.generators.count != self.sections.count || sections.isEmpty {
@@ -48,10 +46,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     }
 
     open func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
-        generators.forEach {
-            checkSelectablePlugin(for: $0)
-            $0.registerCell(in: view)
-        }
+        generators.forEach { $0.registerCell(in: view) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
         }
@@ -162,23 +157,6 @@ public extension BaseTableManager {
                 }
             }
         }
-    }
-
-}
-
-// MARK: - Private
-
-private extension BaseTableManager {
-
-    func checkSelectablePlugin(for generator: TableCellGenerator) {
-        let selectablePlugin = delegate?.tablePlugins.plugins.first(where: { $0 is TableSelectablePlugin })
-        guard
-            let selectableGenerator = generator as? SelectableItem,
-            (!selectableGenerator.didSelectEvent.isEmpty || !selectableGenerator.didDeselectEvent.isEmpty) &&
-            selectablePlugin == nil
-        else { return }
-
-        assertionFailure("The generator uses didSelectEvent or didDeselectEvent. Include the .selectable() plugin.")
     }
 
 }

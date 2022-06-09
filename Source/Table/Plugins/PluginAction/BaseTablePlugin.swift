@@ -9,7 +9,7 @@
 open class BaseTablePlugin<Event>: PluginAction {
 
     public var pluginName: String {
-        String(describing: Self.self)
+        Self.pluginName
     }
 
     public init() { }

@@ -27,3 +27,7 @@ public protocol PluginAction {
     /// - parameter manager: instance of `DataDisplayManager`
     func process(event: Event, with manager: Manager?)
 }
+
+extension PluginAction {
+    public static var pluginName: String { String(describing: Self.self) }
+}

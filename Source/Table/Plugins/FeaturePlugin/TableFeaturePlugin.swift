@@ -14,6 +14,6 @@ open class TableFeaturePlugin: FeaturePlugin {
     public init() { }
 
     public var pluginName: String {
-        String(describing: Self.self)
+        Self.pluginName
     }
 }

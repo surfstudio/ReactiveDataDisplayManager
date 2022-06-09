@@ -40,7 +40,6 @@ open class GravityTableManager: BaseTableManager {
         else {
             return
         }
-        checkSelectablePlugin(for: generator)
 
         generator.registerCell(in: tableView)
 
@@ -77,7 +76,6 @@ open class GravityTableManager: BaseTableManager {
             assertionFailure("Generator doesn't exist")
             return
         }
-        checkSelectablePlugin(for: generator)
 
         generators[path.section].insert(generator, at: path.row + 1)
 
@@ -116,10 +114,7 @@ open class GravityTableManager: BaseTableManager {
     public func addCellGenerators(_ generators: [CellGeneratorType], toHeader header: HeaderGeneratorType) {
         guard let tableView = self.view else { return }
 
-        generators.forEach {
-            checkSelectablePlugin(for: $0)
-            $0.registerCell(in: tableView)
-        }
+        generators.forEach { $0.registerCell(in: tableView) }
 
         if self.generators.count != sections.count || sections.isEmpty {
             self.generators.append([CellGeneratorType]())
@@ -185,17 +180,6 @@ open class GravityTableManager: BaseTableManager {
 // MARK: - Private
 
 private extension GravityTableManager {
-
-    func checkSelectablePlugin(for generator: TableCellGenerator) {
-        let selectablePlugin = delegate?.tablePlugins.plugins.first(where: { $0 is TableSelectablePlugin })
-        guard
-            let selectableGenerator = generator as? SelectableItem,
-            (!selectableGenerator.didSelectEvent.isEmpty || !selectableGenerator.didDeselectEvent.isEmpty) &&
-            selectablePlugin == nil
-        else { return }
-
-        assertionFailure("The generator uses didSelectEvent or didDeselectEvent. Include the .selectable() plugin.")
-    }
 
     func checkDuplicate(header: HeaderGeneratorType) {
         guard
