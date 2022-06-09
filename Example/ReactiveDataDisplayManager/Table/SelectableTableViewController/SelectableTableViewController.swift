@@ -49,13 +49,13 @@ private extension SelectableTableViewController {
         // Create cell generators
         let generators = Constants.cellCount.map { cellCount -> TableCellGenerator in
             let titleCell = "Cell \(cellCount)"
-            let generator = TitleTableCellGenerator(string: titleCell)
-
+            let generator = BaseCellGenerator<TitleTableViewCell>(with: titleCell)
             generator.didSelectEvent += {
-                print("Selected \(titleCell)")
+                print("Select \(titleCell)")
             }
+
             generator.didDeselectEvent += {
-                print("Deselected \(titleCell)")
+                print("Deselect \(titleCell)")
             }
 
             return generator

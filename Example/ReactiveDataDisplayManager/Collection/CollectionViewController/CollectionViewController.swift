@@ -50,13 +50,12 @@ private extension CollectionViewController {
         adapter.addSectionHeaderGenerator(header)
         for title in titles {
             // Create generator
-            let generator = TitleCollectionGenerator(model: title)
-
+            let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
             generator.didSelectEvent += {
-                print("Selected \(title)")
+                debugPrint("\(title) selected")
             }
             generator.didDeselectEvent += {
-                print("Deselected \(title)")
+                debugPrint("\(title) deselected")
             }
             // Add generator to adapter
             adapter.addCellGenerator(generator)
