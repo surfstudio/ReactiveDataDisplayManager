@@ -11,6 +11,11 @@ import ReactiveDataDisplayManager
 
 class CollectionViewController: UIViewController {
 
+    private enum Constants {
+        static let multiple = "Multiple mode"
+        static let standart = "Single mode"
+    }
+
     // MARK: - IBOutlets
 
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -27,26 +32,31 @@ class CollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.accessibilityIdentifier = "Collection_with_selectable_cells"
         fillAdapter()
-        collectionView.allowsMultipleSelection = true
+        updateBarButtonItem(with: Constants.standart)
     }
 
     // MARK: - Private methods
+}
+
+// MARK: - Private Methods
+
+private extension CollectionViewController {
 
     /// This method is used to fill adapter
-    private func fillAdapter() {
+    func fillAdapter() {
         let header = TitleCollectionHeaderGenerator(title: "Header")
         adapter.addSectionHeaderGenerator(header)
         for title in titles {
             // Create generator
             let generator = TitleCollectionGenerator(model: title)
-            generator.isNeedDeselect = false
 
-            generator.didSelectEvent += { [weak generator] in
-                generator?.cell?.configure(with: "selected")
+            generator.didSelectEvent += {
+                print("Selected \(title)")
             }
-            generator.didDeselectEvent += { [weak generator] in
-                generator?.cell?.configure(with: title)
+            generator.didDeselectEvent += {
+                print("Deselected \(title)")
             }
             // Add generator to adapter
             adapter.addCellGenerator(generator)
@@ -54,6 +64,18 @@ class CollectionViewController: UIViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+    }
+
+    func updateBarButtonItem(with title: String) {
+        let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(toggleAllowsMultiple))
+        navigationItem.rightBarButtonItem = button
+    }
+
+    @objc
+    func toggleAllowsMultiple() {
+        adapter.generators.forEach { $0.forEach { ($0 as? SelectableItem)?.isNeedDeselect.toggle() } }
+        adapter.view.allowsMultipleSelection.toggle()
+        updateBarButtonItem(with: collectionView.allowsMultipleSelection ? Constants.multiple : Constants.standart)
     }
 
 }

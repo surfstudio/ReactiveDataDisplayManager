@@ -33,6 +33,7 @@ final class SelectableTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Table with selectable cells"
+        tableView.accessibilityIdentifier = "Table_with_selectable_cells"
         fillAdapter()
         updateBarButtonItem(with: Constants.standart)
     }
@@ -50,11 +51,11 @@ private extension SelectableTableViewController {
             let titleCell = "Cell \(cellCount)"
             let generator = TitleTableCellGenerator(string: titleCell)
 
-            generator.didSelectEvent += { [weak generator] in
-                generator?.cell?.fill(with: "selected cell")
+            generator.didSelectEvent += {
+                print("Selected \(titleCell)")
             }
-            generator.didDeselectEvent += { [weak generator] in
-                generator?.cell?.fill(with: titleCell)
+            generator.didDeselectEvent += {
+                print("Deselected \(titleCell)")
             }
 
             return generator

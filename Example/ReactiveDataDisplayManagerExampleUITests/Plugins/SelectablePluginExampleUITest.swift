@@ -20,63 +20,82 @@ final class SelectablePluginExampleUITest: XCTestCase {
         app.launch()
     }
 
-    func testSelectablePluginNonAutoDeselected() throws {
-        // Given
-        let tab = app.tabBars.buttons["Table"]
-        let table = app.tables.staticTexts["Table with selectable cells"]
-        let switchButton = app.navigationBars["Table with selectable cells"].buttons["Single mode"]
-        let deselectedCell = app.tables.staticTexts["Cell 1"]
-        let selectedCell = app.tables.staticTexts["selected cell"]
+    func testTableMultipleTap_whenCellTaped_thenCellSelected_thenCellDeselected() throws {
+        setTab("Table")
+        tapTableElement("Table with selectable cells")
+        tapButton("Single mode")
 
-        // When
-        tab.tap()
-        table.tap()
-        switchButton.tap()
+        let cell = getFirstCell(for: .table, id: "Table_with_selectable_cells")
 
-        // Then
-        deselectedCell.tap()
-        XCTAssertTrue(selectedCell.exists)
+        cell.tap()
+        XCTAssertTrue(cell.isSelected)
 
-        selectedCell.tap()
-        XCTAssertTrue(deselectedCell.exists)
+        cell.tap()
+        XCTAssertFalse(cell.isSelected)
     }
 
-    func testSelectablePluginAutoDeselected() throws {
-        // Given
-        let tab = app.tabBars.buttons["Table"]
-        let table = app.tables.staticTexts["Table with selectable cells"]
-        let deselectedCell = app.tables.staticTexts["Cell 1"]
-        let selectedCell = app.tables.staticTexts["selected cell"]
+    func testTableSingleTap_whenCellTaped_thenCellNotSelected() throws {
+        setTab("Table")
+        tapTableElement("Table with selectable cells")
 
-        // When
-        tab.tap()
-        table.tap()
+        let cell = getFirstCell(for: .table, id: "Table_with_selectable_cells")
 
-        // Then
-        deselectedCell.tap()
-        XCTAssertTrue(selectedCell.exists)
-
-        selectedCell.tap()
-        XCTAssertFalse(deselectedCell.exists)
+        for _ in 0...3 {
+            cell.tap()
+            XCTAssertFalse(cell.isSelected)
+        }
     }
 
-    func testSelectablePluginNonAutoDeselectedCollection() throws {
-        // Given
-        let tab = app.tabBars.buttons["Collection"]
-        let collection = app.tables.cells.staticTexts["Base collection view"]
-        let deselectedCell = app.collectionViews.staticTexts["One"]
-        let selectedCell = app.collectionViews.staticTexts["selected"]
+    func testCollectionMultipleTap_whenCellTapped_thenCellSelected_thenCellDeselected() throws {
+        setTab("Collection")
+        tapTableElement("Base collection view")
+        tapButton("Single mode")
 
-        // When
-        tab.tap()
-        collection.tap()
+        let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
 
-        // Than
-        deselectedCell.tap()
-        XCTAssertTrue(selectedCell.exists)
+        cell.tap()
+        XCTAssertTrue(cell.isSelected)
 
-        selectedCell.tap()
-        XCTAssertTrue(deselectedCell.exists)
+        cell.tap()
+        XCTAssertFalse(cell.isSelected)
+    }
+
+    func testCollectionSingleTap_whenCellTapped_thenCellNotSelected() throws {
+        setTab("Collection")
+        tapTableElement("Base collection view")
+
+        let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
+
+        for _ in 0...3 {
+            cell.tap()
+            XCTAssertFalse(cell.isSelected)
+        }
+    }
+
+}
+
+private extension SelectablePluginExampleUITest {
+
+    enum CollectionType {
+        case table, collection
+    }
+
+    func setTab(_ screenName: String) {
+        app.tabBars.buttons[screenName].tap()
+    }
+
+    func tapTableElement(_ screenName: String) {
+        app.tables.staticTexts[screenName].tap()
+    }
+
+    func tapButton(_ screenName: String) {
+        app.buttons[screenName].tap()
+    }
+
+    func getFirstCell(for collection: CollectionType, id: String) -> XCUIElement {
+        let collection = (collection == .collection ? app.collectionViews : app.tables)
+            .matching(identifier: id)
+        return collection.cells.firstMatch
     }
 
 }
