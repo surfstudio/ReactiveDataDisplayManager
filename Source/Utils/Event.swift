@@ -72,7 +72,7 @@ public class BaseEvent<Input>: Event {
     private var listners: [Lambda]
 
     public var isEmpty: Bool {
-        return  listners.isEmpty
+        return listners.isEmpty
     }
 
     public init() {
