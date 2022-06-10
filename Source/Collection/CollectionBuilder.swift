@@ -92,12 +92,12 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
         switch featurePlugin {
         case let plugin as CollectionMovableItemPlugin:
-            movablePlugin = plugin
+            movablePlugin == nil ? movablePlugin = plugin : printDebugMessage(plugin)
         case let plugin as CollectionItemTitleDisplayable:
-            itemTitleDisplayablePlugin = plugin
+            itemTitleDisplayablePlugin == nil ? itemTitleDisplayablePlugin = plugin : printDebugMessage(plugin)
         #if os(tvOS)
         case let plugin as CollectionFocusablePlugin:
-            focusablePlugin = plugin
+            focusablePlugin == nil ? focusablePlugin = plugin : printDebugMessage(plugin)
         #endif
         default:
             break
@@ -176,4 +176,8 @@ private extension CollectionBuilder {
         return true
     }
     #endif
+
+    func printDebugMessage(_ featurePlugin: CollectionFeaturePlugin) {
+        debugPrint("❗️ Plugin \(featurePlugin.pluginName) added multiple times")
+    }
 }
