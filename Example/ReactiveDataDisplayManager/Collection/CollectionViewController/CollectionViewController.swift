@@ -24,6 +24,7 @@ class CollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .selectable())
+        .add(plugin: .highlightable())
         .build()
 
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]
