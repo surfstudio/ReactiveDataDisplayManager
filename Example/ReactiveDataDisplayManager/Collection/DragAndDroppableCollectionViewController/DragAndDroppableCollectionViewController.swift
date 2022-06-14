@@ -37,6 +37,7 @@ final class DragAndDroppableCollectionViewController: UIViewController {
         title = "Collection with drag'n'drop items"
 
         configureLayoutFlow()
+        collectionView.accessibilityIdentifier = "Collection_with_drag_n_drop_items"
         collectionView.dragInteractionEnabled = true
 
         fillAdapter()

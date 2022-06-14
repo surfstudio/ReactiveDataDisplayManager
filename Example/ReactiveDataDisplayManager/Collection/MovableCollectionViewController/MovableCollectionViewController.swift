@@ -61,6 +61,9 @@ private extension MovableCollectionViewController {
 
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongGesture(gesture:)))
         collectionView.addGestureRecognizer(longPressGesture)
+
+        collectionView.dragInteractionEnabled = false
+        collectionView.accessibilityIdentifier = "Collection_with_movable_cell"
     }
 
     /// This method is used to fill adapter

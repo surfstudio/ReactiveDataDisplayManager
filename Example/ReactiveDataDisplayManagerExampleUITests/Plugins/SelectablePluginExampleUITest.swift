@@ -7,18 +7,7 @@
 
 import XCTest
 
-final class SelectablePluginExampleUITest: XCTestCase {
-
-    //swiftlint:disable:next implicitly_unwrapped_optional
-    var app: XCUIApplication!
-
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        continueAfterFailure = false
-        app = XCUIApplication()
-        app.launchArguments.append("-disableAnimations")
-        app.launch()
-    }
+final class SelectablePluginExampleUITest: BaseUITestCase {
 
     func testTableMultipleTap_whenCellTaped_thenCellSelected_thenCellDeselected() throws {
         setTab("Table")
@@ -70,32 +59,6 @@ final class SelectablePluginExampleUITest: XCTestCase {
             cell.tap()
             XCTAssertFalse(cell.isSelected)
         }
-    }
-
-}
-
-private extension SelectablePluginExampleUITest {
-
-    enum CollectionType {
-        case table, collection
-    }
-
-    func setTab(_ screenName: String) {
-        app.tabBars.buttons[screenName].tap()
-    }
-
-    func tapTableElement(_ screenName: String) {
-        app.tables.staticTexts[screenName].tap()
-    }
-
-    func tapButton(_ screenName: String) {
-        app.buttons[screenName].tap()
-    }
-
-    func getFirstCell(for collection: CollectionType, id: String) -> XCUIElement {
-        let collection = (collection == .collection ? app.collectionViews : app.tables)
-            .matching(identifier: id)
-        return collection.cells.firstMatch
     }
 
 }
