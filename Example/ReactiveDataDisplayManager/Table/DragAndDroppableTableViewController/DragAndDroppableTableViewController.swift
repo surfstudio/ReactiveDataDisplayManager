@@ -33,6 +33,7 @@ final class DragAndDroppableTableViewController: UIViewController {
         super.viewDidLoad()
         title = "table with drag'n'drop cell"
 
+        tableView.accessibilityIdentifier = "Table_with_drag_n_drop_cell"
         tableView.dragInteractionEnabled = true
 
         fillAdapter()

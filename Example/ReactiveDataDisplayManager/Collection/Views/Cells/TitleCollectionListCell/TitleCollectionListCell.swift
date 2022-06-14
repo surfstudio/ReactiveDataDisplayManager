@@ -20,6 +20,7 @@ class TitleCollectionListCell: UICollectionViewCell, ConfigurableItem {
     func configure(with title: String) {
         titleLabel.text = title
         backgroundColor = .lightGray
+        accessibilityLabel = title
     }
 
 }
