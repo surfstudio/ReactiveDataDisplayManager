@@ -9,16 +9,51 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-class TitleCollectionViewCell: UICollectionViewCell, ConfigurableItem {
+final class TitleCollectionViewCell: UICollectionViewCell {
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
 
-    // MARK: - Configurable
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        configureAppearance()
+    }
+
+}
+
+// MARK: - ConfigurableItem
+
+extension TitleCollectionViewCell: ConfigurableItem {
 
     func configure(with title: String) {
         titleLabel.text = title
+    }
+
+}
+
+// MARK: - HighlightableItem
+
+extension TitleCollectionViewCell: HighlightableItem {
+
+    var normalColor: UIColor {
+        .gray
+    }
+
+    var highlightedColor: UIColor {
+        .white.withAlphaComponent(0.5)
+    }
+
+}
+
+// MARK: - Private
+
+private extension TitleCollectionViewCell {
+
+    func configureAppearance() {
+        contentView.backgroundColor = .gray
+        contentView.layer.cornerRadius = 20
+        contentView.clipsToBounds = true
     }
 
 }
