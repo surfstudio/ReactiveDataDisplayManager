@@ -5,7 +5,6 @@
 //  Created by porohov on 14.06.2022.
 //
 
-
 import XCTest
 
 final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
