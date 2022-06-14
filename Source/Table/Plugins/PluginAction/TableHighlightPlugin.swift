@@ -18,14 +18,14 @@ final class TableHighlightPlugin: BaseTablePlugin<TableEvent> {
                       return
                   }
 
-            cell.contentView.backgroundColor = highlightable.highlightedColor
+            highlightable.applyHighlightedStyle()
         case .didUnhighlight(let indexPath):
             guard let cell = manager?.view.cellForRow(at: indexPath),
                   let highlightable = cell as? HighlightableItem else {
                       return
                   }
 
-            cell.contentView.backgroundColor = highlightable.normalColor
+            highlightable.applyNormalStyle()
         default:
             break
         }

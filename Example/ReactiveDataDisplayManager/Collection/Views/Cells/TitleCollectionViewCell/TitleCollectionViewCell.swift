@@ -36,12 +36,12 @@ extension TitleCollectionViewCell: ConfigurableItem {
 
 extension TitleCollectionViewCell: HighlightableItem {
 
-    var normalColor: UIColor {
-        .gray
+    func applyNormalStyle() {
+        contentView.backgroundColor = .gray
     }
 
-    var highlightedColor: UIColor {
-        .white.withAlphaComponent(0.5)
+    func applyHighlightedStyle() {
+        contentView.backgroundColor = .white.withAlphaComponent(0.5)
     }
 
 }

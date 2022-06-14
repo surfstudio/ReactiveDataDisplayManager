@@ -41,12 +41,12 @@ extension HighlightableTableCell: ConfigurableItem {
 
 extension HighlightableTableCell: HighlightableItem {
 
-    var normalColor: UIColor {
-        .white
+    func applyNormalStyle() {
+        contentView.backgroundColor = .white
     }
 
-    var highlightedColor: UIColor {
-        .red.withAlphaComponent(0.3)
+    func applyHighlightedStyle() {
+        contentView.backgroundColor = .red.withAlphaComponent(0.3)
     }
 
 }
