@@ -7,18 +7,7 @@
 
 import XCTest
 
-class ReactiveDataDisplayManagerExampleUITests: XCTestCase {
-
-    //swiftlint:disable:next implicitly_unwrapped_optional
-    var app: XCUIApplication!
-
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        continueAfterFailure = false
-        app = XCUIApplication()
-        app.launchArguments.append("-disableAnimations")
-        app.launch()
-    }
+class ReactiveDataDisplayManagerExampleUITests: BaseUITestCase {
 
     func testCollectionScreen() throws {
         setTab("Collection")
@@ -39,10 +28,6 @@ class ReactiveDataDisplayManagerExampleUITests: XCTestCase {
 // MARK: - Private methods
 
 private extension ReactiveDataDisplayManagerExampleUITests {
-
-    func setTab(_ screenName: String) {
-        app.tabBars.buttons[screenName].tap()
-    }
 
     func assertAllScreensOpeningWithoutCrashes() {
         let tablesQuery = app.tables
