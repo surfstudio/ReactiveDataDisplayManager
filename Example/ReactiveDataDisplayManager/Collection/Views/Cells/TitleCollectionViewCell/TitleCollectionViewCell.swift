@@ -28,6 +28,7 @@ extension TitleCollectionViewCell: ConfigurableItem {
 
     func configure(with title: String) {
         titleLabel.text = title
+        accessibilityLabel = title
     }
 
 }
