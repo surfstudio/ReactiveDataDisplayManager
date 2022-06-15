@@ -5,7 +5,6 @@
 //  Created by porohov on 14.06.2022.
 //
 
-
 import XCTest
 
 final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
@@ -17,8 +16,8 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
     func testСollection_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
         let collectionId = "Collection_with_drag_n_drop_items"
-        let sourceDraggable = "Cell: 11"
-        let destinationDraggable = "Cell: 12"
+        let sourceDraggable = "Cell: 1"
+        let destinationDraggable = "Cell: 2"
         let duration = Constants.dragDuration
 
         setTab("Collection")
