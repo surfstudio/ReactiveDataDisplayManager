@@ -44,7 +44,7 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
     }
 
     func testTable_whenSwipeUp_thenHittableActivityIndicator() {
-        let activityIndicator = app.activityIndicators.firstMatch
+        let activityIndicator = app.activityIndicators["PaginatorView"]
 
         setTab("Table")
         tapTableElement("Table with pagination")
@@ -60,7 +60,7 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
     }
 
     func testCollection_whenSwipeUp_thenHittableActivityIndicator() {
-        let activityIndicator = app.activityIndicators.firstMatch
+        let activityIndicator = app.activityIndicators["PaginatorView"]
 
         setTab("Collection")
         tapTableElement("Collection with pagination")

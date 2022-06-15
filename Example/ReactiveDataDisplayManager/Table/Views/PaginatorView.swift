@@ -30,6 +30,7 @@ final class PaginatorView: UIView {
 
     private func addActvityIndicator() {
         addSubview(indicator)
+        indicator.accessibilityIdentifier = String(describing: Self.self)
         indicator.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
