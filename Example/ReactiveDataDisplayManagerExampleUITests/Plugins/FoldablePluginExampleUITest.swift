@@ -36,7 +36,7 @@ final class FoldablePluginExampleUITest: BaseUITestCase {
         XCTAssertTrue(collection.cells.count > 1)
 
         tapFirstCell(by: .collection)
-        XCTAssertFalse(collection.cells.count > 1)
+        XCTAssertTrue(collection.cells.count == 1)
     }
 
 }
