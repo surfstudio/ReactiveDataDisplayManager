@@ -16,7 +16,7 @@ jobs:
     - name: Generate projects
       run: make init
     - name: Build
-      run: make build_lib platform=iOS
+      run: make build_lib_iOS
     - name: Run tests
       run: make test_lib_iOS
     - name: Upload Coverage
@@ -38,4 +38,4 @@ jobs:
     - name: Generate projects
       run: make init
     - name: Build
-      run: make build_lib platform=tvOS
+      run: make build_lib_tvOS

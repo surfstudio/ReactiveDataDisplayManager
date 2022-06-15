@@ -15,13 +15,20 @@ projects:
 
 	cd Example; make project
 
-## Build lib sources for {platform}
-build_lib:
-	xcodebuild -target ReactiveDataDisplayManager_${platform}
+## Build Configuration
+destination='platform=iOS Simulator,name=iPhone 8'
+
+## Build lib sources for **tvOS** platform
+build_lib_tvOS:
+	xcodebuild -target ReactiveDataDisplayManager_tvOS
+
+## Build lib sources for **iOS** platform (produce xctestrun)
+build_lib_iOS:
+	xcodebuild -scheme ReactiveDataDisplayManager_iOS -sdk iphonesimulator -destination ${destination} build-for-testing
 
 ## Run tests of lib for **iOS** platform
 test_lib_iOS:
-	xcodebuild test -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -parallel-testing-enabled YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
+	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -parallel-testing-enabled YES -destination ${destination} | xcpretty -c
 
 ## Run tests of example
 test_example_iOS:
