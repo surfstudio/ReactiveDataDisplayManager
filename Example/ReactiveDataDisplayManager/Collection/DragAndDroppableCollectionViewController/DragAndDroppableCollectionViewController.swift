@@ -76,7 +76,7 @@ private extension DragAndDroppableCollectionViewController {
     func makeCellGenerators(for range: [Int]) -> [CollectionCellGenerator] {
         var generators = [CollectionCellGenerator]()
 
-        for index in 11...20 {
+        for index in range {
             let generator = TitleCollectionGenerator(model: "Cell: \(index)")
             generators.append(generator)
         }
