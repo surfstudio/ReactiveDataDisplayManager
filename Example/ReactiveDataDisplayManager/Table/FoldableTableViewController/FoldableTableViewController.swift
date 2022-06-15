@@ -32,6 +32,7 @@ final class FoldableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.accessibilityIdentifier = "FoldableTableViewController"
         fillAdapter()
     }
 
@@ -47,13 +48,13 @@ private extension FoldableTableViewController {
         adapter.addCellGenerators(makeRegularCellWithTitlesGenerators())
 
         // Add foldable cell generator to adapter
-        adapter.addCellGenerator(makeFoldableCellGenerator())
+        adapter.addCellGenerator(makeFoldableCellGenerator(id: "1"))
 
         // Add regular cell generators with titles
         adapter.addCellGenerators(makeRegularCellWithTitlesGenerators())
 
         // Add foldable cell generator to adapter
-        adapter.addCellGenerator(makeFoldableCellGenerator())
+        adapter.addCellGenerator(makeFoldableCellGenerator(id: "2"))
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
@@ -67,9 +68,9 @@ private extension FoldableTableViewController {
         return generators
     }
 
-    func makeFoldableCellGenerator() -> FoldableCellGenerator {
+    func makeFoldableCellGenerator(id: String) -> FoldableCellGenerator {
         // Create foldable generator
-        let generator = FoldableCellGenerator(with: .init(title: "", isExpanded: false))
+        let generator = FoldableCellGenerator(with: .init(title: id, isExpanded: false))
 
         // Create and add child generators
         generator.childGenerators = Constants.titleForSubcells.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
