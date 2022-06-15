@@ -13,11 +13,11 @@ final class SwipeActionsPluginExampleUITest: BaseUITestCase {
         setTab("Collection")
         tapTableElement("List Appearances with swipeable items")
 
-        let cell = app.collectionViews.firstMatch.cells.firstMatch
+        let collectionView = app.collectionViews.firstMatch
+        let cell = collectionView.firstMatch.cells.firstMatch
         cell.swipeLeft()
 
-        sleep(1)
-        XCTAssertTrue(cell.buttons.count == 3)
+        XCTAssertTrue(collectionView.buttons.count == 3)
     }
 
     func testTable_whenSwipeLeftFirstCell_thenCellHaveThreeButtons() throws {
@@ -27,7 +27,6 @@ final class SwipeActionsPluginExampleUITest: BaseUITestCase {
         let cell = app.tables.firstMatch.cells.firstMatch
         cell.swipeLeft()
 
-        sleep(1)
         XCTAssertTrue(cell.buttons.count == 3)
     }
 
