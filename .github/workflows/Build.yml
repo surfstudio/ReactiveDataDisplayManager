@@ -20,7 +20,7 @@ jobs:
     - name: Run tests
       run: make test_lib_iOS
     - name: Upload Coverage
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v3.1.0
       with:
         flags: unittests
         name: codecov-unit
@@ -40,7 +40,7 @@ jobs:
     - name: Run tests
       run: make test_example_iOS
     - name: Upload Coverage
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v3.1.0
       with:
         flags: unittests
         name: codecov-ui
