@@ -31,12 +31,11 @@ final class FoldablePluginExampleUITest: BaseUITestCase {
         tapTableElement("Foldable collection")
 
         let collection = app.collectionViews.firstMatch
-        let foldable = collection.cells.firstMatch
-        foldable.tap()
 
+        tapFirstCell(by: .collection)
         XCTAssertTrue(collection.cells.count > 1)
 
-        foldable.tap()
+        tapFirstCell(by: .collection)
         XCTAssertFalse(collection.cells.count > 1)
     }
 
