@@ -34,7 +34,7 @@ build_example_iOS:
 
 ## Run tests of Example for **iOS** platform
 test_example_iOS:
-	xcodebuild test-without-building -workspace ReactiveDataDisplayManagerExample.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -parallel-testing-enabled YES -destination ${destination} | xcpretty -c
+	xcodebuild test-without-building -workspace ReactiveDataDisplayManagerExample.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -parallel-testing-enabled YES -destination ${destination} | xcpretty -c
 
 ## Colors
 GREEN  := $(shell tput -Txterm setaf 2)
