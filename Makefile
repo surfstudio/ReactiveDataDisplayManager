@@ -30,6 +30,10 @@ build_lib_iOS:
 test_lib_iOS:
 	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -parallel-testing-enabled YES -destination ${destination} | xcpretty -c
 
+## Build example sources
+build_example_iOS:
+	cd Example; make build_example_iOS
+
 ## Run tests of example
 test_example_iOS:
 	cd Example; make test_example_iOS

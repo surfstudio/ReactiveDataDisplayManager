@@ -25,9 +25,16 @@ project:
 
 	-bundle exec pod install
 
+## Build Configuration
+destination='platform=iOS Simulator,name=iPhone 8'
+
+## Build Example sources for **iOS** platform (produce xctestrun)
+build_example_iOS:
+	xcodebuild -workspace ReactiveDataDisplayManagerExample.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -sdk iphonesimulator -destination ${destination} build-for-testing
+
 ## Run tests of Example for **iOS** platform
 test_example_iOS:
-	xcodebuild test -workspace ReactiveDataDisplayManagerExample.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -parallel-testing-enabled YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
+	xcodebuild test-without-building -workspace ReactiveDataDisplayManagerExample.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -parallel-testing-enabled YES -destination ${destination} | xcpretty -c
 
 ## Colors
 GREEN  := $(shell tput -Txterm setaf 2)
