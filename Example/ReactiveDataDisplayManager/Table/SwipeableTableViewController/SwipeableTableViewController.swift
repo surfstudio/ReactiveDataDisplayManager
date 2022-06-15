@@ -33,7 +33,6 @@ final class SwipeableTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Table with swipeable cells"
-        tableView.dragInteractionEnabled = false
         fillAdapter()
     }
 
