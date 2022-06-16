@@ -42,7 +42,7 @@ jobs:
     - name: Upload Coverage
       uses: codecov/codecov-action@v3.1.0
       with:
-        flags: unittests
+        flags: uitests
         name: codecov-ui
         xcode: true
         fail_ci_if_error: true

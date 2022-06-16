@@ -20,6 +20,7 @@ targets:
         configVariants: all
         testTargets:
           - ReactiveDataDisplayManagerTests_${platform}
+        gatherCoverageData: true
       sources:
         - path: Source
       info:

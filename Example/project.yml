@@ -20,6 +20,9 @@ targets:
         configVariants: all
         testTargets:
           - ReactiveDataDisplayManagerExampleUITests
+        gatherCoverageData: true
+        coverageTargets:
+          - ReactiveDataDisplayManager-iOS
       sources:
         - path: ReactiveDataDisplayManager
       info:
@@ -83,6 +86,9 @@ targets:
           tvOS: 10.0
         scheme:
           configVariants: all
+          gatherCoverageData: true
+          coverageTargets:
+            - ReactiveDataDisplayManager-iOS
         sources: [ReactiveDataDisplayManagerExampleUITests]
         info:
           path: ReactiveDataDisplayManagerExampleUITests/Info.plist
