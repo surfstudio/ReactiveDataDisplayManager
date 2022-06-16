@@ -25,9 +25,11 @@ final class DragAndDroppableCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
+    private var generators = [TitleCollectionGenerator]()
+    private let dragAndDroppablePlugin: CollectionDragAndDroppablePlugin = .dragAndDroppable(by: .current)
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(delegate: FlowCollectionDelegate())
-        .add(featurePlugin: .dragAndDroppable(by: .current))
+        .add(featurePlugin: dragAndDroppablePlugin)
         .build()
 
     // MARK: - UIViewController
@@ -41,6 +43,10 @@ final class DragAndDroppableCollectionViewController: UIViewController {
         collectionView.dragInteractionEnabled = true
 
         fillAdapter()
+
+        dragAndDroppablePlugin.droppableDelegate.cellDidChangePosition = { [weak self] result in
+            let generator = self?.generators.first(where: { $0.title == result.id })
+        }
     }
 
 }
@@ -74,8 +80,6 @@ private extension DragAndDroppableCollectionViewController {
 
     /// Create cells generators for range
     func makeCellGenerators(for range: [Int]) -> [CollectionCellGenerator] {
-        var generators = [CollectionCellGenerator]()
-
         for index in range {
             let generator = TitleCollectionGenerator(model: "Cell: \(index)")
             generators.append(generator)

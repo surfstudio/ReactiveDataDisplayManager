@@ -8,4 +8,17 @@
 import Foundation
 import ReactiveDataDisplayManager
 
-final class MovableCollectionCellGenerator: BaseCollectionCellGenerator<TitleCollectionListCell>, MovableItem { }
+final class MovableCollectionCellGenerator: BaseCollectionCellGenerator<TitleCollectionListCell>, MovableItem {
+
+    // MARK: - Properties
+
+    var id: Int
+
+    // MARK: - Initialization
+
+    init(id: Int, model: String) {
+        self.id = id
+        super.init(with: model)
+    }
+
+}

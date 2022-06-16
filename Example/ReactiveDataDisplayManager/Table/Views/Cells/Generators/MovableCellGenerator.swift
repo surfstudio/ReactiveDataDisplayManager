@@ -9,4 +9,17 @@
 import Foundation
 import ReactiveDataDisplayManager
 
-class MovableCellGenerator: BaseCellGenerator<TitleTableViewCell>, MovableItem { }
+class MovableCellGenerator: BaseCellGenerator<TitleTableViewCell>, MovableItem {
+
+    // MARK: - Properties
+
+    var id: Int
+
+    // MARK: - Initialization
+
+    init(id: Int, model: String) {
+        self.id = id
+        super.init(with: model)
+    }
+
+}

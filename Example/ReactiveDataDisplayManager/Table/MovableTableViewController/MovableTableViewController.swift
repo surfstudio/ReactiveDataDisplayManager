@@ -62,7 +62,7 @@ private extension MovableTableViewController {
         var generators = [MovableCellGenerator]()
 
         for index in range {
-            let generator = MovableCellGenerator(with: "Cell: \(index)")
+            let generator = MovableCellGenerator(id: index, model: "Cell: \(index)")
             generators.append(generator)
         }
 

@@ -11,6 +11,9 @@ import UIKit
 /// Protocol for `Generator` to describe moving strategy for cells
 public protocol MovableItem {
 
+    /// item ID
+    var id: Int { get }
+
     /// Return **true** to enable moving of generated cell in edit mode
     func canMove() -> Bool
 
