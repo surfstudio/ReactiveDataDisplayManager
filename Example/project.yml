@@ -77,7 +77,7 @@ targets:
         settings:
           configs:
             Debug:
-              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS
+              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS_M1
 
 
 # Шаблон для тестовых таргетов
