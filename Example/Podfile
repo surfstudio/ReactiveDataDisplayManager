@@ -5,6 +5,8 @@ target 'ReactiveDataDisplayManagerExample_iOS' do
   pod 'SurfUtils/ItemsScrollManager', :git => "https://github.com/surfstudio/iOS-Utils.git", :tag => '11.0.0'
   pod 'Nuke', :git => "https://github.com/kean/Nuke.git", :tag => '9.5.1'
   pod 'DifferenceKit', '1.1.5'
+  target 'ReactiveDataDisplayManagerExample_iOS_M1' do
+  end
   target 'ReactiveDataDisplayManagerExampleUITests' do
   end
 end
@@ -12,18 +14,6 @@ end
 target 'ReactiveDataDisplayManagerExample_tvOS' do
   pod 'ReactiveDataDisplayManager', :path => '../'
   pod 'Nuke', :git => "https://github.com/kean/Nuke.git", :tag => '9.5.1'
-end
-
-target 'ReactiveDataDisplayManagerExample_iOS_M1' do
-  pod 'ReactiveDataDisplayManager', :path => '../'
-  pod 'SurfUtils/ItemsScrollManager', :git => "https://github.com/surfstudio/iOS-Utils.git", :tag => '11.0.0'
-  pod 'Nuke', :git => "https://github.com/kean/Nuke.git", :tag => '9.5.1'
-  pod 'DifferenceKit', '1.1.5'
-  target 'ReactiveDataDisplayManagerExampleUITests_M1' do
+  target 'ReactiveDataDisplayManagerExample_tvOS_M1' do
   end
-end
-
-target 'ReactiveDataDisplayManagerExample_tvOS_M1' do
-  pod 'ReactiveDataDisplayManager', :path => '../'
-  pod 'Nuke', :git => "https://github.com/kean/Nuke.git", :tag => '9.5.1'
 end
