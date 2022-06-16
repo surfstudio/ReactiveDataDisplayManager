@@ -28,8 +28,9 @@ final class MovableCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
+    private let movablePlugin: CollectionMovableItemPlugin = .movable()
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(featurePlugin: .movable())
+        .add(featurePlugin: movablePlugin)
         .build()
 
     // MARK: - UIViewController
@@ -50,6 +51,10 @@ private extension MovableCollectionViewController {
 
         configureCollectionView()
         fillAdapter()
+
+        movablePlugin.dataSource.cellDidChangePosition = { result in
+            print(result.id)
+        }
     }
 
     func configureCollectionView() {
