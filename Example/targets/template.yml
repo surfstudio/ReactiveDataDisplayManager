@@ -10,6 +10,7 @@ targetTemplates:
         configVariants: all
         testTargets:
             - ${ui_test}
+        gatherCoverageData: true
       info:
         properties:
           UIUserInterfaceStyle: light
