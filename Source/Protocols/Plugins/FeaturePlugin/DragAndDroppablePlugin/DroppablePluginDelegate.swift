@@ -20,17 +20,13 @@ open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType
 
     public typealias Coordinator = DropCoordinatorWrapper<CoordinatorType>
     public typealias GeneratorType = DragAndDroppableItemSource
-    public typealias ChangePositionResult = (id: DragAndDroppableItem.Identifier, oldIndex: IndexPath, newIndex: IndexPath)
 
     public init() { }
 
     // MARK: - Internal Properties
 
     var dropStrategy: StrategyDropable?
-
-    // MARK: - Public Properties
-
-    public var cellDidChangePosition: ((ChangePositionResult) -> Void)?
+    var cellDidChangePosition: ((ResultChangeCellPosition) -> Void)?
 
     // MARK: - DroppableDelegate
 
@@ -99,7 +95,7 @@ private extension DroppablePluginDelegate {
             else { return }
             guard
                 let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row),
-                let identifier = (itemToMove as? GeneratorType)?.dropableItem.identifier
+                let generator = itemToMove as? GeneratorType
             else { return }
 
             provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
@@ -107,7 +103,7 @@ private extension DroppablePluginDelegate {
 
             coordinator.drop($0.dragItem, toItemAt: destinationIndexPath)
 
-            cellDidChangePosition?((identifier, sourceIndexPath, destinationIndexPath))
+            cellDidChangePosition?(.init(id: generator.id, oldIndex: sourceIndexPath, newIndex: destinationIndexPath))
         }
     }
 

@@ -25,10 +25,9 @@ final class DragAndDroppableCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private let dragAndDroppablePlugin: CollectionDragAndDroppablePlugin = .dragAndDroppable(by: .current)
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(delegate: FlowCollectionDelegate())
-        .add(featurePlugin: dragAndDroppablePlugin)
+        .add(featurePlugin: .dragAndDroppable(by: .current, positionChanged: { print($0.id ?? "") }))
         .build()
 
     // MARK: - UIViewController
@@ -42,10 +41,6 @@ final class DragAndDroppableCollectionViewController: UIViewController {
         collectionView.dragInteractionEnabled = true
 
         fillAdapter()
-
-        dragAndDroppablePlugin.droppableDelegate.cellDidChangePosition = { result in
-            print(result.id)
-        }
     }
 
 }
