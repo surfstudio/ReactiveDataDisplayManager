@@ -12,7 +12,7 @@ final class MovableCollectionCellGenerator: BaseCollectionCellGenerator<TitleCol
 
     // MARK: - Properties
 
-    var id: Int
+    var id: AnyHashable?
 
     // MARK: - Initialization
 

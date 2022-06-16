@@ -9,10 +9,7 @@
 import UIKit
 
 /// Protocol for `Generator` to describe moving strategy for cells
-public protocol MovableItem {
-
-    /// item ID
-    var id: Int { get }
+public protocol MovableItem: IdentifiableItem {
 
     /// Return **true** to enable moving of generated cell in edit mode
     func canMove() -> Bool
@@ -22,6 +19,10 @@ public protocol MovableItem {
 }
 
 public extension MovableItem {
+
+    var id: AnyHashable? {
+        nil
+    }
 
     func canMove() -> Bool {
         return true

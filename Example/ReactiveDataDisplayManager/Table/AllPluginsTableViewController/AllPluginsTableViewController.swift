@@ -144,8 +144,8 @@ private extension AllPluginsTableViewController {
     func addMovableSection() {
         addHeaderGenerator(with: "Movable")
 
-        Constants.movableTitles.enumerated().forEach {
-            let generator = MovableCellGenerator(id: $0.offset, model: $0.element)
+        Constants.movableTitles.forEach {
+            let generator = MovableCellGenerator(with: $0)
             adapter.addCellGenerator(generator)
         }
     }
