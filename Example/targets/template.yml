@@ -1,22 +1,21 @@
-name: ReactiveDataDisplayManagerExample_tvOSTemplate
+name: BaseSetting
 targetTemplates:
-    ReactiveDataDisplayManagerExample_tvOSTemplate:
+
+#  Базовый шаблон с настройками
+    BaseSetting:
       dependencies:
         - sdk: UIKit.framework
       type: application
-      platform: tvOS
-      deploymentTarget: 13.0
       scheme:
         configVariants: all
-      sources:
-        - path: ReactiveDataDisplayManagerExampleTv
+        testTargets:
+            - ${ui_test}
       info:
-        path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
         properties:
           UIUserInterfaceStyle: light
           UILaunchStoryboardName: LaunchScreen
           UIMainStoryboardFile: Main
-          CFBundleName: ReactiveDataDisplayManagerExampleTv
+          CFBundleName: ${bundle_name}
           CFBundleShortVersionString: $(MARKETING_VERSION)
           CFBundleVersion: $(CURRENT_PROJECT_VERSION)
       settings:

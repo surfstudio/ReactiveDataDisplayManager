@@ -40,8 +40,7 @@ install_hooks:
 ## Update version to {value}
 update_version:
 	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' project.yml
-	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' Example/targets/example_tvOS_Template.yml
-	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' Example/targets/example_iOS_Template.yml
+	sed -E -i .back 's/MARKETING_VERSION: \"(.*)\"/MARKETING_VERSION: \"$(value)\"/' Example/targets/template.yml
 
 
 ## Lint lib for cocoapods
