@@ -1,6 +1,6 @@
-name: ReactiveDataDisplayManagerExampleUITests_M1
-targets:
-    ReactiveDataDisplayManagerExampleUITests_M1:
+name: ReactiveDataDisplayManagerExampleUITestsTemplate
+targetTemplates:
+    ReactiveDataDisplayManagerExampleUITestsTemplate:
         type: bundle.ui-testing
         platform: iOS
         deploymentTarget:
@@ -12,9 +12,3 @@ targets:
         info:
           path: ReactiveDataDisplayManagerExampleUITests/Info.plist
           properties: []
-        dependencies:
-          - target: ReactiveDataDisplayManagerExample_iOS_M1
-        settings:
-          configs:
-            Debug:
-              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS_M1

@@ -1,24 +1,22 @@
-name: ReactiveDataDisplayManagerExample_iOS_M1
-targets:
-    ReactiveDataDisplayManagerExample_iOS_M1:
+name: ReactiveDataDisplayManagerExample_tvOSTemplate
+targetTemplates:
+    ReactiveDataDisplayManagerExample_tvOSTemplate:
       dependencies:
         - sdk: UIKit.framework
       type: application
-      platform: iOS
-      deploymentTarget: 11.0
+      platform: tvOS
+      deploymentTarget: 13.0
       scheme:
         configVariants: all
-        testTargets:
-          - ReactiveDataDisplayManagerExampleUITests_M1
       sources:
-        - path: ReactiveDataDisplayManager
+        - path: ReactiveDataDisplayManagerExampleTv
       info:
-        path: ReactiveDataDisplayManager/Application/Info.plist
+        path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
         properties:
           UIUserInterfaceStyle: light
           UILaunchStoryboardName: LaunchScreen
           UIMainStoryboardFile: Main
-          CFBundleName: ReactiveDataDisplayManagerExample
+          CFBundleName: ReactiveDataDisplayManagerExampleTv
           CFBundleShortVersionString: $(MARKETING_VERSION)
           CFBundleVersion: $(CURRENT_PROJECT_VERSION)
       settings:
