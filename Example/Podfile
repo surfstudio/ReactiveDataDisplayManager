@@ -1,15 +1,31 @@
 use_frameworks!
 
-target 'ReactiveDataDisplayManagerExample_iOS' do
-  pod 'ReactiveDataDisplayManager', :path => '../'
+$NukeRepository = "https://github.com/kean/Nuke.git"
+$NukeTag = "9.5.1"
+
+def utils
   pod 'SurfUtils/ItemsScrollManager', :git => "https://github.com/surfstudio/iOS-Utils.git", :tag => '11.0.0'
-  pod 'Nuke', :git => "https://github.com/kean/Nuke.git", :tag => '9.5.1'
   pod 'DifferenceKit', '1.1.5'
-  target 'ReactiveDataDisplayManagerExampleUITests' do
+  pod 'Nuke', :git => $NukeRepository, :tag => $NukeTag
+end
+
+abstract_target 'Targets' do
+  platform :ios, '11.0'
+  utils
+
+  target 'ReactiveDataDisplayManagerExample_iOS' do
+    pod 'ReactiveDataDisplayManager', :path => '../'
+    target 'ReactiveDataDisplayManagerExampleUITests'
+  end
+
+  target 'ReactiveDataDisplayManagerExample_iOS_M1' do
+    pod 'ReactiveDataDisplayManager', :path => '../'
+    target 'ReactiveDataDisplayManagerExampleUITests_M1'
   end
 end
 
 target 'ReactiveDataDisplayManagerExample_tvOS' do
+  platform :ios, '13.0'
   pod 'ReactiveDataDisplayManager', :path => '../'
-  pod 'Nuke', :git => "https://github.com/kean/Nuke.git", :tag => '9.5.1'
+  pod 'Nuke', :git => $NukeRepository, :tag => $NukeTag
 end

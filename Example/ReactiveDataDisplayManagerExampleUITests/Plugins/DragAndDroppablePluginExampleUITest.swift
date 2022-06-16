@@ -5,20 +5,19 @@
 //  Created by porohov on 14.06.2022.
 //
 
-
 import XCTest
 
 final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
     private enum Constants {
         static let dragDuration = 0.3
-        static let waitTime: UInt32 = 1
+        static let waitTime: UInt32 = 2
     }
 
     func testСollection_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
         let collectionId = "Collection_with_drag_n_drop_items"
-        let sourceDraggable = "Cell: 11"
-        let destinationDraggable = "Cell: 12"
+        let sourceDraggable = "Cell: 1"
+        let destinationDraggable = "Cell: 2"
         let duration = Constants.dragDuration
 
         setTab("Collection")
