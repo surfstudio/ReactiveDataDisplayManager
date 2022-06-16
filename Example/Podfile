@@ -10,6 +10,7 @@ def utils
 end
 
 abstract_target 'Targets' do
+  platform :ios, '11.0'
   utils
 
   target 'ReactiveDataDisplayManagerExample_iOS' do
@@ -24,6 +25,7 @@ abstract_target 'Targets' do
 end
 
 target 'ReactiveDataDisplayManagerExample_tvOS' do
+  platform :ios, '13.0'
   pod 'ReactiveDataDisplayManager', :path => '../'
   pod 'Nuke', :git => $NukeRepository, :tag => $NukeTag
 end
