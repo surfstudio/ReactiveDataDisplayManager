@@ -3,14 +3,15 @@ targetTemplates:
 
 #  Базовый шаблон с настройками
     BaseSetting:
-      dependencies:
-        - sdk: UIKit.framework
       type: application
       scheme:
         configVariants: all
         testTargets:
             - ${ui_test}
         gatherCoverageData: true
+      dependencies:
+        - sdk: UIKit.framework
+        - target: ReactiveDataDisplayManager_iOS
       info:
         properties:
           UIUserInterfaceStyle: light

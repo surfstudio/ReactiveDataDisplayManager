@@ -3,6 +3,7 @@ include:
   - path: targets/template.yml
     relativePaths: false
 
+
 # Название проекта
 name: ReactiveDataDisplayManagerExample
 options:

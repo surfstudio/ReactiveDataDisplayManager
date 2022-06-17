@@ -14,18 +14,15 @@ abstract_target 'Targets' do
   utils
 
   target 'ReactiveDataDisplayManagerExample_iOS' do
-    pod 'ReactiveDataDisplayManager', :path => '../'
     target 'ReactiveDataDisplayManagerExampleUITests'
   end
 
   target 'ReactiveDataDisplayManagerExample_iOS_M1' do
-    pod 'ReactiveDataDisplayManager', :path => '../'
     target 'ReactiveDataDisplayManagerExampleUITests_M1'
   end
 end
 
 target 'ReactiveDataDisplayManagerExample_tvOS' do
   platform :ios, '13.0'
-  pod 'ReactiveDataDisplayManager', :path => '../'
   pod 'Nuke', :git => $NukeRepository, :tag => $NukeTag
 end

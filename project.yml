@@ -1,3 +1,7 @@
+include:
+  - path: Example/project.yml
+    relativePaths: true
+
 # Название проекта
 name: ReactiveDataDisplayManager
 options:

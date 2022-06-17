@@ -15,13 +15,10 @@ init:
 
 	xcodegen generate
 
-	cd Example; make init
-
 ## Regenerate Framework and Example projects
 projects:
 	xcodegen generate
-
-	cd Example; make project
+	-bundle exec pod install
 
 ## Build Configuration
 destination='platform=iOS Simulator,name=iPhone 8'
@@ -43,13 +40,17 @@ test_lib_iOS:
 prepare_report:
 	-bundle exec slather
 
-## Build example sources
+## Build Example sources for **iOS** platform (produce xctestrun)
 build_example_iOS:
-	cd Example; make build_example_iOS
+	xcodebuild -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -sdk iphonesimulator -destination ${destination} build-for-testing
 
-## Run tests of example
+## Run tests of Example for **iOS** platform
 test_example_iOS:
-	cd Example; make test_example_iOS
+	xcodebuild test-without-building -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | xcpretty -c
+
+## Preparing report contains test-coverage results
+prepare_example_report:
+	-bundle exec slather coverage --workspace ReactiveDataDisplayManager.xcworkspace --scheme ReactiveDataDisplayManagerExample_iOS --binary-basename ReactiveDataDisplayManager --arch x86_64 --output-directory build/reports --cobertura-xml Example/ReactiveDataDisplayManagerExample.xcodeproj
 
 ## Install concrete hook with {name}
 install_hook:

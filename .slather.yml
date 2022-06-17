@@ -1,4 +1,5 @@
 coverage_service: cobertura_xml
+workspace: ReactiveDataDisplayManager.xcworkspace
 xcodeproj: ReactiveDataDisplayManager.xcodeproj
 scheme: ReactiveDataDisplayManager_iOS
 source_directory: Source
