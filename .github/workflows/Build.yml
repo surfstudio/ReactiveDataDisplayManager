@@ -47,7 +47,7 @@ jobs:
     - name: Upload Coverage
       uses: codecov/codecov-action@v3.1.0
       with:
-        files: build/reports/cobertura.xml
+        files: Example/build/reports/cobertura.xml
         flags: uitests
         name: codecov-ui
         xcode: true
