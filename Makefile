@@ -13,7 +13,7 @@ init:
 	mkdir -p .git/hooks
 	$(MAKE) install_hooks
 
-	xcodegen generate
+	$(MAKE) projects
 
 ## Regenerate Framework and Example projects
 projects:

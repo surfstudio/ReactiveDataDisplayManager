@@ -22,6 +22,8 @@ targets:
       deploymentTarget: 11.0
       sources:
         - path: ReactiveDataDisplayManager
+      dependencies:
+        - target: ReactiveDataDisplayManager_iOS
       info:
         path: ReactiveDataDisplayManager/Application/Info.plist
       templates:
@@ -35,6 +37,8 @@ targets:
       deploymentTarget: 11.0
       sources:
         - path: ReactiveDataDisplayManager
+      dependencies:
+        - target: ReactiveDataDisplayManager_iOS
       info:
         path: ReactiveDataDisplayManager/Application/Info.plist
       templates:
@@ -48,6 +52,8 @@ targets:
       deploymentTarget: 13.0
       sources:
         - path: ReactiveDataDisplayManagerExampleTv
+      dependencies:
+        - target: ReactiveDataDisplayManager_tvOS
       info:
         path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
       templates:

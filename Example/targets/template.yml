@@ -11,7 +11,6 @@ targetTemplates:
         gatherCoverageData: true
       dependencies:
         - sdk: UIKit.framework
-        - target: ReactiveDataDisplayManager_iOS
       info:
         properties:
           UIUserInterfaceStyle: light

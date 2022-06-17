@@ -43,11 +43,11 @@ jobs:
     - name: Run tests
       run: make test_example_iOS
     - name: Prepare Report
-      run: cd Example; make prepare_report
+      run: make prepare_example_report
     - name: Upload Coverage
       uses: codecov/codecov-action@v3.1.0
       with:
-        files: Example/build/reports/cobertura.xml
+        files: build/reports/cobertura.xml
         flags: uitests
         name: codecov-ui
         xcode: true
