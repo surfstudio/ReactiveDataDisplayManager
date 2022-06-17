@@ -30,7 +30,7 @@ test_example_iOS:
 
 ## Preparing report contains test-coverage results
 prepare_report:
-	-bundle exec slather
+	-bundle exec slather coverage --workspace ReactiveDataDisplayManagerExample.xcworkspace --scheme ReactiveDataDisplayManagerExample_iOS --source-directory ReactiveDataDisplayManager --output-directory build/reports ReactiveDataDisplayManagerExample.xcodeproj
 
 ## Colors
 GREEN  := $(shell tput -Txterm setaf 2)
