@@ -86,9 +86,9 @@
   "system": {
     "macos": {
       "monterey": {
-        "HOMEBREW_VERSION": "3.5.2-95-gee93d7e",
+        "HOMEBREW_VERSION": "3.5.2-102-g65e077a",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "da19fe5c3be362e7c94c5a7da451514a77b5c053",
+        "Homebrew/homebrew-core": "51a1782f54463f2e6a071bc7dccab4757d0cf7ef",
         "CLT": "13.0.0.0.1.1627064638",
         "Xcode": "13.4.1",
         "macOS": "12.4"
