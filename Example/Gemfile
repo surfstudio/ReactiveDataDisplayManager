@@ -8,3 +8,4 @@ git_source(:github) do |repo_name|
 end if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('2')
 
 gem 'cocoapods', "~> 1.11.3"
+gem 'slather', "~> 2.7.2"

@@ -1,5 +1,13 @@
 ## Init Framework and Example projects
 init:
+	if ! gem spec bundler > /dev/null 2>&1; then\
+  		echo "bundler gem is not installed!";\
+  		sudo gem install bundler;\
+	fi
+
+	-bundle update
+	-bundle install --path .bundle
+
 	brew bundle --no-upgrade
 
 	mkdir -p .git/hooks
@@ -28,7 +36,12 @@ build_lib_iOS:
 
 ## Run tests of lib for **iOS** platform
 test_lib_iOS:
-	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | xcpretty -c -r html
+	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | xcpretty -c
+	-bundle exec slather
+
+## Preparing report contains test-coverage results
+prepare_report:
+	-bundle exec slather
 
 ## Build example sources
 build_example_iOS:

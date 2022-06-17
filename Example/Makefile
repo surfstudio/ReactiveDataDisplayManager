@@ -6,18 +6,10 @@ init:
   		sudo gem install bundler;\
 	fi
 
-	if ! xcodegen help > /dev/null 2>&1; then\
-		echo "Needs to install Xcodegen";\
-		sh scripts/add_xcodegen.sh;\
-	fi
-
 	-bundle update
 	-bundle install --path .bundle
-	-bundle exec pod repo update
 
-	xcodegen generate
-
-	-bundle exec pod install
+	$(MAKE) project
 
 ## Update pbxproj and workspace
 project:
@@ -34,7 +26,11 @@ build_example_iOS:
 
 ## Run tests of Example for **iOS** platform
 test_example_iOS:
-	xcodebuild test-without-building -workspace ReactiveDataDisplayManagerExample.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | xcpretty -c -r html
+	xcodebuild test-without-building -workspace ReactiveDataDisplayManagerExample.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | xcpretty -c
+
+## Preparing report contains test-coverage results
+prepare_report:
+	-bundle exec slather
 
 ## Colors
 GREEN  := $(shell tput -Txterm setaf 2)

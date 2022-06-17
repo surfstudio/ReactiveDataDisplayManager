@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "c34e580cae7b6514219c99807fe5efee220bc801"
+        "revision": "f62ff3a5b4dbd5b4293acb990a328b113e9eca04"
       },
       "yonaskolb/xcodegen": {
         "revision": "f65dad76252a876eae19ce72ea3649f95401e084",
@@ -11,7 +11,7 @@
         }
       },
       "krzysztofzablocki/sourcery": {
-        "revision": "d64c263e0b112d1a3a21fbd3cf8128507e1382d4",
+        "revision": "071a7b552de7abde56095667db7e9bda1d189444",
         "options": {
           "clone_target": "https://github.com/krzysztofzablocki/Sourcery.git"
         }
@@ -19,7 +19,7 @@
     },
     "brew": {
       "xcodegen": {
-        "version": "2.25.0",
+        "version": "2.29.0",
         "bottle": {
           "rebuild": 0,
           "root_url": "https://ghcr.io/v2/homebrew/core",
@@ -86,12 +86,12 @@
   "system": {
     "macos": {
       "monterey": {
-        "HOMEBREW_VERSION": "3.4.11-102-gef0d5fc",
+        "HOMEBREW_VERSION": "3.5.2-69-g082a993",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "703ab164573ff9da5637fbf810b5a1b873832c4c",
+        "Homebrew/homebrew-core": "f214e06f3e0ba5087ee028a632c57a29e6d4dc23",
         "CLT": "",
-        "Xcode": "13.3.1",
-        "macOS": "12.3.1"
+        "Xcode": "13.4.1",
+        "macOS": "12.4"
       },
       "big_sur": {
         "HOMEBREW_VERSION": "3.5.2",

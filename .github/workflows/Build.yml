@@ -19,10 +19,12 @@ jobs:
       run: make build_lib_iOS
     - name: Run tests
       run: make test_lib_iOS
+    - name: Prepare Report
+      run: make prepare_report
     - name: Upload Coverage
       uses: codecov/codecov-action@v3.1.0
       with:
-        files: build/reports/tests.html
+        files: build/reports/cobertura.xml
         flags: unittests
         name: codecov-unit
         xcode: true
@@ -40,10 +42,12 @@ jobs:
       run: make build_example_iOS
     - name: Run tests
       run: make test_example_iOS
+    - name: Prepare Report
+      run: cd Example; make prepare_report
     - name: Upload Coverage
       uses: codecov/codecov-action@v3.1.0
       with:
-        files: Example/build/reports/tests.html
+        files: Example/build/reports/cobertura.xml
         flags: uitests
         name: codecov-ui
         xcode: true
