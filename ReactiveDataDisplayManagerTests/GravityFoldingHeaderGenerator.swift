@@ -88,7 +88,6 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
     func testFolding() {
 
         // given
-
         let childGenerator1 = GravityCellGenerator()
         let childGenerator2 = GravityCellGenerator()
         let childGenerator3 = GravityCellGenerator()
@@ -100,19 +99,18 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
         ddm.addCellGenerators([header, childGenerator1, childGenerator2, childGenerator3])
 
         // when
-
         (header as? SelectableItem)?.didSelectEvent.invoke(with: ())
+        (header as? SelectableItem)?.didSelectEvent += { [unowned self] in
 
-        // then
-
-        XCTAssert(ddm.generators[0][0] === header)
-        XCTAssert(ddm.generators[0].count == 1)
+            // then
+            XCTAssert(ddm?.generators[0][0] === header)
+            XCTAssert(ddm?.generators[0].count == 1)
+        }
     }
 
     func testUnfolding() {
 
         // given
-
         let childGenerator1 = GravityCellGenerator()
         let childGenerator2 = GravityCellGenerator()
         let childGenerator3 = GravityCellGenerator()
@@ -124,12 +122,13 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
         ddm.addCellGenerator(header)
 
         // when
-
         (header as? SelectableItem)?.didSelectEvent.invoke(with: ())
 
-        // then
+        (header as? SelectableItem)?.didSelectEvent += { [unowned self] in
 
-        XCTAssert(ddm.generators[0][0] === header)
-        XCTAssert(ddm.generators[0].count == 4)
+            // then
+            XCTAssert(ddm?.generators[0][0] === header)
+            XCTAssert(ddm?.generators[0].count == 4)
+        }
     }
 }
