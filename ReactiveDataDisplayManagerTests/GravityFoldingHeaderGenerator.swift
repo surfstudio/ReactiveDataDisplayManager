@@ -10,13 +10,13 @@
 import XCTest
 @testable import ReactiveDataDisplayManager
 
-final class GravityFoldingHeaderGenerator: GravityTableCellGenerator, GravityFoldableItem {
+final class GravityFoldingHeaderGenerator: GravityTableCellGenerator, FoldableItem {
 
     // MARK: - FoldableItem
 
     var didFoldEvent = BaseEvent<Bool>()
     var isExpanded = true
-    var childGenerators = [GravityTableCellGenerator]()
+    var childGenerators = [TableCellGenerator]()
 
     // MARK: - GravityTableCellGenerator
 
@@ -67,14 +67,14 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
     // MARK: - Properties
 
     private var tableView: UITableView!
-    private var ddm: GravityFoldingTableDataDisplayManager!
+    private var ddm: GravityTableManager!
 
     // MARK: - XCTestCase
 
     override func setUp() {
         super.setUp()
         tableView = UITableView()
-        ddm = GravityFoldingTableDataDisplayManager(collection: tableView)
+        ddm = tableView.rddm.gravityBuilder.build()
     }
 
     override func tearDown() {
@@ -101,12 +101,12 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
 
         // when
 
-        ddm.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        (header as? SelectableItem)?.didSelectEvent.invoke(with: ())
 
         // then
 
-        XCTAssert(ddm.cellGenerators[0][0] === header)
-        XCTAssert(ddm.cellGenerators[0].count == 1)
+        XCTAssert(ddm.generators[0][0] === header)
+        XCTAssert(ddm.generators[0].count == 1)
     }
 
     func testUnfolding() {
@@ -125,11 +125,11 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
 
         // when
 
-        ddm.tableView(tableView, didSelectRowAt: IndexPath(row: 0, section: 0))
+        (header as? SelectableItem)?.didSelectEvent.invoke(with: ())
 
         // then
 
-        XCTAssert(ddm.cellGenerators[0][0] === header)
-        XCTAssert(ddm.cellGenerators[0].count == 4)
+        XCTAssert(ddm.generators[0][0] === header)
+        XCTAssert(ddm.generators[0].count == 4)
     }
 }
