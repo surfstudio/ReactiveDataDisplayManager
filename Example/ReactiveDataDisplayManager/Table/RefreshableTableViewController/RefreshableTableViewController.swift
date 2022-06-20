@@ -17,8 +17,9 @@ final class RefreshableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    var refreshControl: UIRefreshControl {
+    private var refreshControl: UIRefreshControl {
         let refreshControl = UIRefreshControl()
+        refreshControl.isAccessibilityElement = true
         refreshControl.accessibilityIdentifier = "RefreshableTableViewController_RefreshControl"
         return refreshControl
     }
@@ -45,15 +46,15 @@ private extension RefreshableTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
 
-        for _ in 0...3 {
-            adapter.addCellGenerator(makeGenerator())
+        for id in 1...4 {
+            adapter.addCellGenerator(makeGenerator(name: "Cell", id: id))
         }
 
         adapter.forceRefill()
     }
 
-    func makeGenerator() -> TableCellGenerator {
-        TitleTableViewCell.rddm.baseGenerator(with: "Random cell \(Int.random(in: 0...1000))" )
+    func makeGenerator(name: String, id: Int) -> TableCellGenerator {
+        TitleTableViewCell.rddm.baseGenerator(with: name + " \(id)")
     }
 
 }
@@ -66,8 +67,8 @@ extension RefreshableTableViewController: RefreshableOutput {
         delay(.now() + .seconds(3)) { [weak self, weak input] in
             self?.adapter.clearCellGenerators()
 
-            for _ in 0...3 {
-                if let generator = self?.makeGenerator() {
+            for id in 1...4 {
+                if let generator = self?.makeGenerator(name: "Refreshing", id: id) {
                     self?.adapter.addCellGenerator(generator)
                 }
             }
