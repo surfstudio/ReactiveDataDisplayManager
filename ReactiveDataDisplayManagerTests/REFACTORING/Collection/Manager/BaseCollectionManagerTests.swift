@@ -30,8 +30,8 @@ final class BaseCollectionManagerTests: XCTestCase {
         let ddm = BaseCollectionManager()
 
         // then
-        XCTAssert(ddm.generators.isEmpty)
-        XCTAssert(ddm.sections.isEmpty)
+        XCTAssertTrue(ddm.generators.isEmpty)
+        XCTAssertTrue(ddm.sections.isEmpty)
         XCTAssertNil(ddm.delegate)
         XCTAssertNil(ddm.dataSource)
         XCTAssertNil(ddm.view)
@@ -50,7 +50,7 @@ final class BaseCollectionManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(gen2)
 
         // then
-        XCTAssert(ddm.sections.count == 3)
+        XCTAssertEqual(ddm.sections.count, 3)
     }
 
     func testThatAddCellGeneratorAppendsNewSectionToCellGeneratorsCorrectly() {
@@ -149,7 +149,7 @@ final class BaseCollectionManagerTests: XCTestCase {
         ddm.clearCellGenerators()
 
         // then
-        XCTAssert(ddm.generators.isEmpty)
+        XCTAssertTrue(ddm.generators.isEmpty)
     }
 
     func testThatClearHeaderGeneratorsWorksCorrectly() {
@@ -166,7 +166,7 @@ final class BaseCollectionManagerTests: XCTestCase {
         ddm.clearHeaderGenerators()
 
         // then
-        XCTAssert(ddm.sections.isEmpty)
+        XCTAssertTrue(ddm.sections.isEmpty)
     }
 
     func testThatAddCellGeneratorToHeaderAddsGeneratorsToCorrectHeader() {
@@ -185,8 +185,8 @@ final class BaseCollectionManagerTests: XCTestCase {
         ddm.addCellGenerator(gen2, toHeader: headerGen2)
 
         // then
-        XCTAssert(ddm.generators.first?.count == 3)
-        XCTAssert(ddm.generators.last?.count == 1)
+        XCTAssertEqual(ddm.generators.first?.count, 3)
+        XCTAssertEqual(ddm.generators.last?.count, 1)
     }
 
     func testThatRemoveGeneratorRemovesEmptySections() {
@@ -198,68 +198,24 @@ final class BaseCollectionManagerTests: XCTestCase {
         let gen3 = MockCollectionCellGenerator()
         let gen4 = MockCollectionCellGenerator()
 
+        ddm.clearHeaderGenerators()
+        ddm.clearCellGenerators()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
         ddm.addCellGenerators([gen3, gen4], toHeader: headerGen2)
 
-        let group = DispatchGroup()
-        group.enter()
-
         // when
-        ddm.remove(gen3, needScrollAt: nil, needRemoveEmptySection: true)
-        ddm.remove(gen4, needScrollAt: nil, needRemoveEmptySection: true)
-//        ddm.remove(gen3, needRemoveEmptySection: true) { group.leave() }
-//        ddm.remove(gen4, needRemoveEmptySection: true) { group.leave() }
-
-        // then
-//        group.notify(queue: .main) { [weak self] in
-//            XCTAssert(self?.ddm.sections.count == 1)
-//            XCTAssert(self?.ddm.generators.count == 1)
-//        }
-        XCTAssert(ddm.sections.count == 1)
-        XCTAssert(ddm.generators.count == 1)
-    }
-    
-}
-
-// MARK: - Mocks
-
-fileprivate final class MockCollectionHeaderGenerator: CollectionHeaderGenerator {
-
-    var identifier: UICollectionReusableView.Type {
-        return UICollectionReusableView.self
-    }
-
-    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView {
-        return UICollectionReusableView()
-    }
-
-    func registerHeader(in collectionView: UICollectionView) {
-        DispatchQueue.main.async {
-            collectionView.registerNib(self.identifier, kind: UICollectionView.elementKindSectionHeader)
+        ddm.forceRefill { [unowned self] in
+            ddm?.remove(gen3, needScrollAt: .top, needRemoveEmptySection: true)
+            ddm?.remove(gen4, needScrollAt: .top, needRemoveEmptySection: true)
         }
-    }
 
-    func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
-        return .zero
-    }
+        ddm.forceRefill { [unowned self] in
 
-}
-
-fileprivate final class MockCollectionCellGenerator: CollectionCellGenerator {
-
-    var identifier: String {
-        return String(describing: UICollectionViewCell.self)
-    }
-
-    func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
-    }
-
-    func registerCell(in collectionView: UICollectionView) {
-        DispatchQueue.main.async {
-            collectionView.registerNib(self.identifier)
+            // then
+            XCTAssertEqual(ddm?.sections.count, 1)
+            XCTAssertEqual(ddm?.generators.count, 1)
         }
     }
 

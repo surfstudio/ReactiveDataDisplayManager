@@ -25,8 +25,8 @@ final class BaseTableManagerTests: XCTestCase {
         // when
         let ddm = BaseTableManager()
         // then
-        XCTAssert(ddm.generators.isEmpty)
-        XCTAssert(ddm.sections.isEmpty)
+        XCTAssertTrue(ddm.generators.isEmpty)
+        XCTAssertTrue(ddm.sections.isEmpty)
         XCTAssertNil(ddm.delegate)
         XCTAssertNil(ddm.dataSource)
         XCTAssertNil(ddm.view)

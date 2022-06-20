@@ -36,8 +36,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(gen2)
 
         // then
-        XCTAssert(ddm.sections[0] === gen2)
-        XCTAssert(ddm.sections[1] === gen1)
+        XCTAssertTrue(ddm.sections[0] === gen2)
+        XCTAssertTrue(ddm.sections[1] === gen1)
     }
 
     func testThatAddCellGeneratorAppendsNewSectionToCellGeneratorsCorrectly() {
@@ -51,7 +51,7 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen)
 
         // then
-        XCTAssert(initialNumberOfSections != ddm.generators.count)
+        XCTAssertNotEqual(initialNumberOfSections, ddm.generators.count)
     }
 
     func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
@@ -65,9 +65,9 @@ final class GravityTableManagerTests: XCTestCase {
         ddm += [gen2, gen1]
 
         // Assert
-        XCTAssert(table.registerNibWasCalled)
-        XCTAssert(ddm.generators[0][0] === gen2 && ddm.generators[0][1] === gen1)
-        XCTAssert(ddm.generators[0].count == 2)
+        XCTAssertTrue(table.registerNibWasCalled)
+        XCTAssertTrue(ddm.generators[0][0] === gen2 && ddm.generators[0][1] === gen1)
+        XCTAssertEqual(ddm.generators[0].count, 2)
     }
 
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
@@ -78,7 +78,7 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen)
 
         // then
-        XCTAssert(ddm.sections.count == 1)
+        XCTAssertEqual(ddm.sections.count, 1)
     }
 
     func testThatAddCellGeneratorAddsGeneratorCorrectly() {
@@ -99,8 +99,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen3)
 
         // then
-        XCTAssert(ddm.generators[1][0] === gen3 && ddm.generators[0][0] === gen1)
-        XCTAssert(ddm.generators.first?.count == 2)
+        XCTAssertTrue(ddm.generators[1][0] === gen3 && ddm.generators[0][0] === gen1)
+        XCTAssertEqual(ddm.generators.first?.count, 2)
     }
 
     func testThatAddCellGeneratorAfterGeneratorWorksCorrectly() {
@@ -122,8 +122,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen4, after: gen3)
 
         // then
-        XCTAssert(ddm.generators[0][0] === gen1 && ddm.generators[0][1] === gen2)
-        XCTAssert(ddm.generators[1][0] === gen3 && ddm.generators[1][1] === gen4 && ddm.generators[1][2] === gen5)
+        XCTAssertTrue(ddm.generators[0][0] === gen1 && ddm.generators[0][1] === gen2)
+        XCTAssertTrue(ddm.generators[1][0] === gen3 && ddm.generators[1][1] === gen4 && ddm.generators[1][2] === gen5)
     }
 
     func testThatClearCellGeneratorsWorksCorrectly() {
@@ -141,7 +141,7 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.clearCellGenerators()
 
         // then
-        XCTAssert(ddm.generators.isEmpty)
+        XCTAssertTrue(ddm.generators.isEmpty)
     }
 
     func testThatClearHeaderGeneratorsWorksCorrectly() {
@@ -159,7 +159,7 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.clearHeaderGenerators()
 
         // then
-        XCTAssert(ddm.sections.isEmpty)
+        XCTAssertTrue(ddm.sections.isEmpty)
     }
 
     func testThatAddCellGeneratorToHeaderAddsGeneratorsToCorrectHeader() {
@@ -180,8 +180,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen2, toHeader: headerGen2)
 
         // then
-        XCTAssert(ddm.generators.first?.count == 3)
-        XCTAssert(ddm.generators.last?.count == 1)
+        XCTAssertEqual(ddm.generators.first?.count, 3)
+        XCTAssertEqual(ddm.generators.last?.count, 1)
     }
 
     // MARK: - Table actions tests
@@ -252,8 +252,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-        XCTAssert(ddm.generators.first?.first === gen2)
-        XCTAssert(ddm.generators.first?.count == 1)
+        XCTAssertTrue(ddm.generators.first?.first === gen2)
+        XCTAssertEqual(ddm.generators.first?.count, 1)
     }
 
     func testThatReplaceOldGeneratorOnNewReplacesGeneratorCorrectly() {
@@ -287,9 +287,9 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.removeAllgenerators(from: headerGen2)
 
         // Assert
-        XCTAssert(table.numberOfSections == 2)
-        XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
-        XCTAssert(table.numberOfRows(inSection: 1) == 0, "Expected 0, got \(table.numberOfRows(inSection: 1))")
+        XCTAssertEqual(table.numberOfSections, 2)
+        XCTAssertEqual(table.numberOfRows(inSection: 0), 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
+        XCTAssertEqual(table.numberOfRows(inSection: 1), 0, "Expected 0, got \(table.numberOfRows(inSection: 1))")
     }
 
     func testThatRemoveAllGeneratorsDoesntClearInvalidSection() {
@@ -307,49 +307,6 @@ final class GravityTableManagerTests: XCTestCase {
         XCTAssertEqual(table.numberOfSections, 1)
         XCTAssertEqual(table.numberOfRows(inSection: 0), 1)
         XCTAssertEqual(table.numberOfRows(inSection: 0), 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
-    }
-
-}
-
-// MARK: - Mocks
-
-fileprivate final class MockGravityTableHeaderGenerator: GravityTableHeaderGenerator {
-
-    override var heaviness: Int {
-        set { _heaviness = newValue }
-        get { return _heaviness }
-    }
-
-    private var _heaviness: Int
-
-    init(heaviness: Int = .zero) {
-        _heaviness = heaviness
-    }
-
-    override func getHeaviness() -> Int {
-        heaviness
-    }
-
-    override func generate() -> UIView {
-        return UIView()
-    }
-
-    override func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
-        return 1
-    }
-
-}
-
-fileprivate class MockGravityTableCellGenerator: MockTableCellGenerator, GravityItem {
-
-    var heaviness: Int
-
-    init(heaviness: Int = .zero) {
-        self.heaviness = heaviness
-    }
-
-    func getHeaviness() -> Int {
-        heaviness
     }
 
 }
