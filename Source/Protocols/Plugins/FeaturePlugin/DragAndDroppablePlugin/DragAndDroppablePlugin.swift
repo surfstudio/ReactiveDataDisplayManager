@@ -46,6 +46,8 @@ public extension TableFeaturePlugin {
     /// Allow dragging and dropping cells builded with `DragAndDroppableItemSource` generators by section
     /// - parameters:
     ///     - sections: allow dropping across sections (all or current)
+    ///     - draggableParameters: setting view display when dragging
+    ///     - setting view display when dropping
     @available(iOS 11.0, *)
     static func dragAndDroppable(by sections: DropStrategy = .all,
                                  draggableParameters: DragablePreviewParameters? = nil,
@@ -85,6 +87,8 @@ public extension CollectionFeaturePlugin {
     /// Allow dragging and dropping cells builded with `DragAndDroppableItemSource` generators by section
     /// - parameters:
     ///     - sections: allow dropping across sections (all or current)
+    ///     - draggableParameters: setting view display when dragging
+    ///     - setting view display when dropping
     @available(iOS 11.0, *)
     static func dragAndDroppable(by sections: DropStrategy = .all) -> CollectionDragAndDroppablePlugin {
         .init(dropStrategy: sections)
