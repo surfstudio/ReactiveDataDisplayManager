@@ -115,11 +115,13 @@ extension SwipeableCollectionListViewController: RefreshableOutput {
 
         delay(.now() + .seconds(3)) { [weak self, weak input] in
             self?.adapter.clearCellGenerators()
-    
+
             for index in 1...4 {
                 let generator = SwipeableCollectionGenerator(with: "Refreshing \(index)")
                 generator.didSwipeEvent += { [weak generator] actionType in
-                    debugPrint("The action with type \(actionType) was selected from all available generator events \(generator?.actionTypes ?? [])")
+                    debugPrint("""
+                    The action with type \(actionType) was selected from all available generator events \(generator?.actionTypes ?? [])
+                    """)
                 }
                 self?.adapter.addCellGenerator(generator)
             }
