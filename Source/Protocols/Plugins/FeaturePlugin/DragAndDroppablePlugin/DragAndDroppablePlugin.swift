@@ -26,8 +26,13 @@ open class TableDragAndDroppablePlugin: TableFeaturePlugin, DragAndDroppable {
 
     // MARK: - Initializations
 
-    init(dropStrategy: StrategyDropable) {
+    init(dropStrategy: StrategyDropable,
+         draggableParameters: DragablePreviewParameters?,
+         droppableParameters: UIDragPreviewParameters?) {
+
         droppableDelegate.dropStrategy = dropStrategy
+        droppableDelegate.droppableParameters = droppableParameters
+        draggableDelegate.draggableParameters = draggableParameters
     }
 
 }
@@ -42,8 +47,10 @@ public extension TableFeaturePlugin {
     /// - parameters:
     ///     - sections: allow dropping across sections (all or current)
     @available(iOS 11.0, *)
-    static func dragAndDroppable(by sections: DropStrategy = .all) -> TableDragAndDroppablePlugin {
-        .init(dropStrategy: sections)
+    static func dragAndDroppable(by sections: DropStrategy = .all,
+                                 draggableParameters: DragablePreviewParameters? = nil,
+                                 droppableParameters: UIDragPreviewParameters? = nil) -> TableDragAndDroppablePlugin {
+        .init(dropStrategy: sections, draggableParameters: draggableParameters, droppableParameters: droppableParameters)
     }
 
 }

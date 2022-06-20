@@ -11,7 +11,7 @@ import UIKit
 
 /// Protocol to wrap `DragAndDroppableItem`
 @available(iOS 11.0, *)
-public protocol DragAndDroppableItemSource {
+public protocol DragAndDroppableItemSource: AnyObject {
     var dropableItem: DragAndDroppableItem { get }
 
     // TODO: - Add support for multiple items

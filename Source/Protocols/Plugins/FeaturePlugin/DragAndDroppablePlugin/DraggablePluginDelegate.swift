@@ -8,6 +8,17 @@
 import Foundation
 import UIKit
 
+@available(iOS 11.0, *)
+public struct DragablePreviewParameters {
+    var parameters: UIDragPreviewParameters?
+    var preview: UIView?
+
+    public init(parameters: UIDragPreviewParameters? = nil, preview: UIView? = nil) {
+        self.parameters = parameters
+        self.preview = preview
+    }
+}
+
 /// Delegate based on `DraggableDelegate` protocol.
 @available(iOS 11.0, *)
 open class DraggablePluginDelegate<Provider: GeneratorsProvider> {
@@ -17,6 +28,10 @@ open class DraggablePluginDelegate<Provider: GeneratorsProvider> {
     public typealias GeneratorType = DragAndDroppableItemSource
 
     public init() { }
+
+    // MARK: - Internal Properties
+
+    var draggableParameters: DragablePreviewParameters?
 
 }
 
@@ -34,6 +49,10 @@ extension DraggablePluginDelegate: DraggableDelegate {
     public func makeDragItems(at indexPath: IndexPath, with provider: Provider?) -> [UIDragItem] {
         guard let generator = provider?.generators[safe: indexPath.section]?[safe: indexPath.row] as? GeneratorType else { return [] }
         let mainDragItem = makeDragItem(for: generator.dropableItem)
+
+//        if let preview = draggableParameters?.preview {
+//            mainDragItem.previewProvider = { .init(view: preview) }
+//        }
 
         // TODO: - Add support for multiple items
         //        let items = [mainDragItem] + generator.associatedGenerators.compactMap(makeDragItem(for:))
