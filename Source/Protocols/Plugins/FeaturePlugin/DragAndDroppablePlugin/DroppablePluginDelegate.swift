@@ -106,7 +106,7 @@ private extension DroppablePluginDelegate {
                 let sourceIndexPath = getIndexPath(for: $0.element, provider: provider),
                 let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
             else { return }
-    
+
             provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
             modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: animation, and: animation)
             coordinator.drop(coordinator.items[$0.offset].dragItem, toItemAt: destinationIndexPath)
