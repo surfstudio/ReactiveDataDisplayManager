@@ -17,8 +17,14 @@ final class RefreshableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
+    var refreshControl: UIRefreshControl {
+        let refreshControl = UIRefreshControl()
+        refreshControl.accessibilityIdentifier = "RefreshableTableViewController_RefreshControl"
+        return refreshControl
+    }
+
     private lazy var adapter = tableView.rddm.baseBuilder
-        .add(plugin: .refreshable(refreshControl: UIRefreshControl(), output: self))
+        .add(plugin: .refreshable(refreshControl: refreshControl, output: self))
         .build()
 
     // MARK: - UIViewController
@@ -26,6 +32,7 @@ final class RefreshableTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Table with refresh control"
+        tableView.accessibilityIdentifier = "Table_with_refresh_control"
         fillAdapter()
     }
 
