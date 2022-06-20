@@ -1,10 +1,3 @@
-//
-//  BaseTableManagerTests.swift
-//  ReactiveDataDisplayManagerTests
-//
-//  Created by Anton Eysner on 08.02.2021.
-//  Copyright © 2021 Александр Кравченков. All rights reserved.
-//
 
 import XCTest
 @testable import ReactiveDataDisplayManager
@@ -17,8 +10,7 @@ final class BaseTableManagerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         table = UITableViewSpy()
-        ddm = BaseTableManager()
-        ddm.view = table
+        ddm = table.rddm.baseBuilder.build()
     }
 
     override func tearDown() {
@@ -47,7 +39,7 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-        XCTAssert(table.reloadDataWasCalled)
+        XCTAssertTrue(table.reloadDataWasCalled)
     }
 
     func testThatAddCellGeneratorCallsRegisterNib() {
@@ -58,8 +50,8 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen)
 
         // then
-        XCTAssert(table.registerNibWasCalled)
-        XCTAssert(ddm.generators.first?.count == 1)
+        XCTAssertTrue(table.registerNibWasCalled)
+        XCTAssertEqual(ddm.generators.first?.count, 1)
     }
 
     func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
@@ -71,9 +63,9 @@ final class BaseTableManagerTests: XCTestCase {
         ddm += [gen1, gen2]
 
         // Assert
-        XCTAssert(table.registerNibWasCalled)
-        XCTAssert(ddm.sections.count == 1)
-        XCTAssert(ddm.generators.first?.count == 2)
+        XCTAssertTrue(table.registerNibWasCalled)
+        XCTAssertEqual(ddm.sections.count, 1)
+        XCTAssertEqual(ddm.generators.first?.count, 2)
     }
 
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
@@ -84,8 +76,8 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen)
 
         // then
-        XCTAssert(ddm.sections.count == 1)
-        XCTAssert(ddm.generators.first?.count == 1)
+        XCTAssertEqual(ddm.sections.count, 1)
+        XCTAssertEqual(ddm.generators.first?.count, 1)
     }
 
     func testThatAddCellGeneratorAfterGenerator() {
@@ -97,7 +89,7 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen2, after: gen1)
 
         // when
-        XCTAssert(ddm.generators.first?.count == 2)
+        XCTAssertEqual(ddm.generators.first?.count, 2)
     }
 
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
@@ -108,6 +100,9 @@ final class BaseTableManagerTests: XCTestCase {
         // when
         expectFatalError(expectedMessage: "Error adding TableCellGenerator generator. You tried to add generators after unexisted generator") {
             self.ddm.addCellGenerator(gen2, after: gen1)
+
+            // then
+            XCTAssertTrue(self.ddm.generators[0][1] === gen2)
         }
     }
 
@@ -126,7 +121,7 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.update(generators: [gen1, gen4])
 
         // then
-        XCTAssert(table.lastReloadedRows == [IndexPath(row: 0, section: 0), IndexPath(row: 3, section: 0)])
+        XCTAssertEqual(table.lastReloadedRows, [IndexPath(row: 0, section: 0), IndexPath(row: 3, section: 0)])
     }
 
     func testThatClearCellGeneratorsWorksCorrectly() {
@@ -143,7 +138,7 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.clearCellGenerators()
 
         // then
-        XCTAssert(ddm.generators.isEmpty)
+        XCTAssertTrue(ddm.generators.isEmpty)
     }
 
     // MARK: - Table actions tests
@@ -152,14 +147,14 @@ final class BaseTableManagerTests: XCTestCase {
         // given
         let gen1 = MockTableCellGenerator()
         ddm.addCellGenerator(gen1)
+        ddm.forceRefill()
 
         // when
-        ddm.remove(gen1, with: .automatic, needScrollAt: nil, needRemoveEmptySection: true)// { [weak self] in
-            // then
-//            XCTAssert(self?.ddm.sections.count == 0)
-//        }
+        ddm.remove(gen1, with: .automatic, needScrollAt: nil, needRemoveEmptySection: true)
+        ddm.forceRefill()
+
         // then
-        XCTAssert(ddm.sections.count == 0)
+        XCTAssertEqual(ddm.sections.count, 0)
     }
 
     func testThatRemoveGeneratorCallsScrolling() {
@@ -171,14 +166,14 @@ final class BaseTableManagerTests: XCTestCase {
 
         ddm.addCellGenerators([gen1, gen2])
         ddm.addCellGenerators([gen3, gen4])
+        ddm.forceRefill()
 
         // when
-        ddm.remove(gen3, with: .automatic, needScrollAt: .top, needRemoveEmptySection: false)// { [weak self] in
-            // then
-//            XCTAssert(self?.table.scrollToRowWasCalled == true)
-//        }
+        ddm.remove(gen3, with: .automatic, needScrollAt: .top, needRemoveEmptySection: false)
+        ddm.forceRefill()
+
         // then
-        XCTAssert(table.scrollToRowWasCalled == true)
+        XCTAssertTrue(table.scrollToRowWasCalled)
     }
 
     func testThatRemoveGeneratorRemovesGenerators() {
@@ -190,16 +185,15 @@ final class BaseTableManagerTests: XCTestCase {
 
         ddm.addCellGenerators([gen1, gen2])
         ddm.addCellGenerators([gen3, gen4])
+        ddm.forceRefill()
 
         // when
-        ddm.remove(gen1, with: .automatic, needScrollAt: nil, needRemoveEmptySection: false)// { [weak self] in
-            // then
-//            XCTAssert(self?.ddm.generators.first?.first === gen2)
-//            XCTAssert(self?.ddm.generators.first?.count == 3)
-//        }
+        ddm.remove(gen1, with: .automatic, needScrollAt: nil, needRemoveEmptySection: false)
+        ddm.forceRefill()
+
         // then
-        XCTAssert(ddm.generators.first?.first === gen2)
-        XCTAssert(ddm.generators.first?.count == 3)
+        XCTAssertTrue(ddm.generators.first?.first === gen2)
+        XCTAssertEqual(ddm.generators.first?.count, 3)
     }
 
 }

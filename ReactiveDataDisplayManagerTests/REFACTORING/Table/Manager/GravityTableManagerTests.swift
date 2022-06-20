@@ -1,10 +1,3 @@
-//
-//  GravityTableManagerTests.swift
-//  ReactiveDataDisplayManagerTests
-//
-//  Created by Anton Eysner on 08.02.2021.
-//  Copyright © 2021 Александр Кравченков. All rights reserved.
-//
 
 import XCTest
 @testable import ReactiveDataDisplayManager
@@ -17,13 +10,12 @@ final class GravityTableManagerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        table = UITableViewSpy()
-        ddm = GravityTableManager()
         dataSource = MockTableDataSource()
+        table = UITableViewSpy()
+        ddm = table.rddm.gravityBuilder.build()
 
         dataSource.provider = ddm
         table.dataSource = dataSource
-        ddm.view = table
     }
 
     override func tearDown() {
@@ -207,19 +199,14 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
         ddm.addCellGenerators([gen3, gen4], toHeader: headerGen2)
-
-//        let group = DispatchGroup()
-//        group.enter()
+        ddm.forceRefill()
 
         // when
         ddm.remove(gen3, needRemoveEmptySection: true) //{ group.leave() }
         ddm.remove(gen4, needRemoveEmptySection: true) //{ group.leave() }
+        ddm.forceRefill()
 
         // then
-//        group.notify(queue: .main) { [weak self] in
-//            XCTAssertEqual(self?.ddm.sections.count, 1)
-//            XCTAssertEqual(self?.ddm.generators.count, 1)
-//        }
         XCTAssertEqual(ddm.sections.count, 1)
         XCTAssertEqual(ddm.generators.count, 1)
     }
@@ -236,9 +223,11 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
         ddm.addCellGenerators([gen3, gen4], toHeader: headerGen2)
+        ddm.forceRefill()
 
         // when
         ddm.remove(gen3, needScrollAt: .top)
+        ddm.forceRefill()
 
         // then
         XCTAssertTrue(table.scrollToRowWasCalled)
@@ -256,13 +245,11 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
         ddm.addCellGenerators([gen3, gen4], toHeader: headerGen2)
+        ddm.forceRefill()
 
         // when
-        ddm.remove(gen1) //{ [weak self] in
-            // then
-//            XCTAssert(self?.ddm.generators.first?.first === gen2)
-//            XCTAssert(self?.ddm.generators.first?.count == 1)
-//        }
+        ddm.remove(gen1)
+        ddm.forceRefill()
 
         // then
         XCTAssert(ddm.generators.first?.first === gen2)
@@ -279,10 +266,9 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
 
         // when
-        ddm.replace(oldGenerator: gen1, on: gen3)//{ [weak self] in
-            // then
-//            XCTAssert(self?.ddm.generators[0][0] === gen3 && self?.ddm.generators[0][1] === gen2)
-//        }
+        ddm.replace(oldGenerator: gen1, on: gen3)
+
+        // then
         XCTAssertTrue(ddm.generators[0][0] === gen3 && ddm.generators[0][1] === gen2)
     }
 
@@ -318,9 +304,9 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.removeAllgenerators(from: headerGen2)
 
         // Assert
-        XCTAssert(table.numberOfSections == 1)
-        XCTAssert(table.numberOfRows(inSection: 0) == 1)
-        XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
+        XCTAssertEqual(table.numberOfSections, 1)
+        XCTAssertEqual(table.numberOfRows(inSection: 0), 1)
+        XCTAssertEqual(table.numberOfRows(inSection: 0), 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
     }
 
 }
