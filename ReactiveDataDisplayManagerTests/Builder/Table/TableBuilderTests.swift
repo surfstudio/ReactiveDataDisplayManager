@@ -1,5 +1,5 @@
 //
-//  CollectionBuilderTests.swift
+//  TableBuilderTests.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by porohov on 21.06.2022.
@@ -8,36 +8,37 @@
 import XCTest
 @testable import ReactiveDataDisplayManager
 
-class CollectionBuilderTests: XCTestCase {
+class TableBuilderTests: XCTestCase {
 
-    private var collection: UICollectionView!
+    private var table: UITableView!
 
     override func setUp() {
         super.setUp()
-        collection = UICollectionView(frame: .zero, collectionViewLayout: .init())
+        table = UITableView()
     }
 
     override func tearDown() {
         super.tearDown()
-        collection = nil
+        table = nil
     }
 
     // MARK: - Initial Test
 
-    func testThatBuilderReturningManagerAndContainsCollection() {
+    func testThatBuilderReturningManagerAndContainsTable() {
         // given
-        let builder = collection.rddm.baseBuilder
+        let builder = table.rddm.baseBuilder
 
         // when
         let ddm = builder.build()
 
         // then
         XCTAssertTrue(builder.scrollPlugins.plugins.isEmpty)
-        XCTAssertTrue(builder.collectionPlugins.plugins.isEmpty)
+        XCTAssertTrue(builder.tablePlugins.plugins.isEmpty)
         XCTAssertTrue(builder.prefetchPlugins.plugins.isEmpty)
+        XCTAssertNil(builder.swipeActionsPlugin)
         XCTAssertNil(builder.movablePlugin)
 
-        XCTAssertTrue(ddm.view === collection)
+        XCTAssertTrue(ddm.view === table)
         XCTAssertTrue(builder.manager === ddm)
     }
 
@@ -45,8 +46,8 @@ class CollectionBuilderTests: XCTestCase {
 
     func testThatBuilderAddedMovablePlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: CollectionMovableItemPlugin = .movable()
+        let builder = table.rddm.baseBuilder
+        let plugin: TableMovableItemPlugin = .movable()
 
         // when
         let ddm = builder.add(featurePlugin: plugin).build()
@@ -61,8 +62,8 @@ class CollectionBuilderTests: XCTestCase {
     @available(iOS 11.0, *)
     func testThatBuilderAddedDragAndDroppablePlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: CollectionDragAndDroppablePlugin = .dragAndDroppable()
+        let builder = table.rddm.baseBuilder
+        let plugin: TableDragAndDroppablePlugin = .dragAndDroppable()
 
         // when
         let ddm = builder.add(featurePlugin: plugin).build()
@@ -74,71 +75,57 @@ class CollectionBuilderTests: XCTestCase {
     }
     #endif
 
-    func testThatBuilderAddedTitleDisplayablePlugin() {
-        // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: CollectionItemTitleDisplayablePlugin = .sectionTitleDisplayable()
-
-        // when
-        let ddm = builder.add(featurePlugin: plugin).build()
-
-        // then
-        XCTAssertNotNil(builder.itemTitleDisplayablePlugin)
-        XCTAssertTrue(builder.itemTitleDisplayablePlugin === plugin)
-        XCTAssertTrue(builder.manager === ddm)
-    }
-
     // MARK: - Add Collection Plugins Tests
 
-    func testThatBuilderAddedFoldablePlugin() {
+    func testThatBuilderAddedTitleDisplayablePlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: BaseCollectionPlugin = .foldable()
+        let builder = table.rddm.baseBuilder
+        let plugin: TableDisplayablePlugin = .displayable()
 
         // when
         let ddm = builder.add(plugin: plugin).build()
 
         // then
-        XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
+        XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
+        XCTAssertTrue(builder.manager === ddm)
+    }
+
+    func testThatBuilderAddedFoldablePlugin() {
+        // given
+        let builder = table.rddm.baseBuilder
+        let plugin: BaseTablePlugin = .foldable()
+
+        // when
+        let ddm = builder.add(plugin: plugin).build()
+
+        // then
+        XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
         XCTAssertTrue(builder.manager === ddm)
     }
 
     func testThatBuilderAddedHighlightablePlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: BaseCollectionPlugin = .highlightable()
+        let builder = table.rddm.baseBuilder
+        let plugin: BaseTablePlugin = .highlightable()
 
         // when
         let ddm = builder.add(plugin: plugin).build()
 
         // then
-        XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
+        XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
         XCTAssertTrue(builder.manager === ddm)
     }
 
     func testThatBuilderAddedSelectablePlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: BaseCollectionPlugin = .selectable()
+        let builder = table.rddm.baseBuilder
+        let plugin: BaseTablePlugin = .selectable()
 
         // when
         let ddm = builder.add(plugin: plugin).build()
 
         // then
-        XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
-    }
-
-    func testThatBuilderAddedSelectedItemScrollablePlugin() {
-        // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: BaseCollectionPlugin = .scrollOnSelect(to: .top)
-
-        // when
-        let ddm = builder.add(plugin: plugin).build()
-
-        // then
-        XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
+        XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
         XCTAssertTrue(builder.manager === ddm)
     }
 
@@ -147,8 +134,8 @@ class CollectionBuilderTests: XCTestCase {
     #if os(iOS)
     func testThatBuilderAddedRefreshablePlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: BaseCollectionPlugin = .refreshable(refreshControl: UIRefreshControl(), output: RefreshableOutputMock())
+        let builder = table.rddm.baseBuilder
+        let plugin: BaseTablePlugin = .refreshable(refreshControl: UIRefreshControl(), output: RefreshableOutputMock())
 
         // when
         let ddm = builder.add(plugin: plugin).build()
@@ -161,21 +148,8 @@ class CollectionBuilderTests: XCTestCase {
 
     func testThatBuilderAddedScrollViewDelegateProxyPlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: BaseCollectionPlugin = .proxyScroll()
-
-        // when
-        let ddm = builder.add(plugin: plugin).build()
-
-        // then
-        XCTAssertTrue(builder.scrollPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
-    }
-
-    func testThatBuilderAddedScrollablePlugin() {
-        // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: BaseCollectionPlugin = .scrollableBehaviour(scrollProvider: CollectionScrollProviderMock())
+        let builder = table.rddm.baseBuilder
+        let plugin: BaseTablePlugin = .proxyScroll()
 
         // when
         let ddm = builder.add(plugin: plugin).build()
@@ -187,14 +161,14 @@ class CollectionBuilderTests: XCTestCase {
 
     func testThatBuilderAddedPaginatablePlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: BaseCollectionPlugin = .paginatable(progressView: ProgressViewMock(), output: PaginatableOutputMock())
+        let builder = table.rddm.baseBuilder
+        let plugin: BaseTablePlugin = .paginatable(progressView: ProgressViewMock(), output: PaginatableOutputMock())
 
         // when
         let ddm = builder.add(plugin: plugin).build()
 
         // then
-        XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
+        XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
         XCTAssertTrue(builder.manager === ddm)
     }
 
@@ -202,8 +176,8 @@ class CollectionBuilderTests: XCTestCase {
 
     func testThatBuilderAddedPrefetchProxyPlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let plugin: BaseCollectionPlugin = .proxyPrefetch(to: .top)
+        let builder = table.rddm.baseBuilder
+        let plugin: BaseTablePlugin = .proxyPrefetch()
 
         // when
         let ddm = builder.add(plugin: plugin).build()
@@ -215,9 +189,9 @@ class CollectionBuilderTests: XCTestCase {
 
     func testThatBuilderAddedPrefetcherablePlugin() {
         // given
-        let builder = collection.rddm.baseBuilder
+        let builder = table.rddm.baseBuilder
         let prefetcher = PrefetcherStub()
-        let plugin: CollectionPrefetcherablePlugin<PrefetcherStub, PrefetchableCollectionCellGeneratorMock> = .prefetch(prefetcher: prefetcher)
+        let plugin: TablePrefetcherablePlugin<PrefetcherStub, PrefetchableTableCellGeneratorMock> = .prefetch(prefetcher: prefetcher)
 
         // when
         let ddm = builder.add(plugin: plugin).build()
@@ -229,10 +203,11 @@ class CollectionBuilderTests: XCTestCase {
 
     // MARK: - Set Delegate Test
 
+    @available(iOS 11.0, *)
     func testThatBuilderSetCustomDelegate() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let delegate = CollectionDelegateStub()
+        let builder = table.rddm.baseBuilder
+        let delegate = TableDelegateStub()
 
         // when
         let ddm = builder
@@ -240,18 +215,22 @@ class CollectionBuilderTests: XCTestCase {
             .build()
 
         // then
+        #if os(iOS)
+        XCTAssertNil(delegate.swipeActionsPlugin)
+        #endif
         XCTAssertNil(delegate.movablePlugin)
         XCTAssertTrue(delegate.scrollPlugins.plugins.isEmpty)
-        XCTAssertTrue(delegate.collectionPlugins.plugins.isEmpty)
+        XCTAssertTrue(delegate.tablePlugins.plugins.isEmpty)
+
         XCTAssertTrue(delegate.builderConfigured)
         XCTAssertTrue(ddm.delegate === delegate)
     }
 
     func testThatBuilderSetCustomDataSource() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let dataSource = CollectionDataSourceStub()
-        let generator = CollectionCellGeneratorMock()
+        let builder = table.rddm.baseBuilder
+        let dataSource = TableDataSourceStub()
+        let generator = TableCellGeneratorMock()
 
         // when
         let ddm = builder.set(dataSource: { manager in
@@ -271,9 +250,9 @@ class CollectionBuilderTests: XCTestCase {
 
     func testThatBuilderSetCustomAnimator() {
         // given
-        let builder = collection.rddm.baseBuilder
-        let animator = CollectionAnimatorStub()
-        let generator = CollectionCellGeneratorMock()
+        let builder = table.rddm.baseBuilder
+        let animator = TableAnimatorStub()
+        let generator = TableCellGeneratorMock()
 
         // when
         let ddm = builder.set(animator: animator).build()
@@ -286,23 +265,3 @@ class CollectionBuilderTests: XCTestCase {
     }
 
 }
-
-#if os(tvOS)
-extension CollectionBuilderTests {
-
-    func testThatBuilderAddedFocusablePlugin() {
-        // given
-        let builder = collection.rddm.baseBuilder
-        let focusablePlugin: CollectionFocusablePlugin = .focusable(by: .init())
-
-        // when
-        _ = builder.add(featurePlugin: focusablePlugin)
-            .build()
-
-        // then
-        XCTAssertNotNil(builder.focusablePlugin)
-        XCTAssertTrue(builder.focusablePlugin === focusablePlugin)
-    }
-
-}
-#endif
