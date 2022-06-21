@@ -11,8 +11,12 @@ import UIKit
 
 final class MockTableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
+    // MARK: - Properties
+
     var lastReloadedRows: [IndexPath] = []
-    var sectionWasReloaded: Bool = false
+    var sectionWasReloaded = false
+
+    // MARK: - Modifier
 
     override func reloadSections(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
         sectionWasReloaded = true

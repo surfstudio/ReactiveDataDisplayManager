@@ -10,11 +10,11 @@ import UIKit
 
 final class UITableViewSpy: UITableView {
 
-    var reloadDataWasCalled: Bool = false
-    var registerNibWasCalled: Bool = false
-    var scrollToRowWasCalled: Bool = false
+    var reloadDataWasCalled = false
+    var registerNibWasCalled = false
+    var scrollToRowWasCalled = false
     var lastReloadedRows: [IndexPath] = []
-    var sectionWasReloaded: Bool = false
+    var sectionWasReloaded = false
 
     override func reloadData() {
         super.reloadData()

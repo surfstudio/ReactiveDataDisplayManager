@@ -46,9 +46,9 @@ class MockTableDataSource: NSObject, TableDataSource {
         return UITableViewCell()
     }
 
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {}
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) { }
 
-    func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {}
+    func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager { }
 
 }
 

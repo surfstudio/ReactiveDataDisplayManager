@@ -1,3 +1,4 @@
+// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast file_length
 
 import XCTest
 @testable import ReactiveDataDisplayManager
@@ -114,7 +115,7 @@ final class ManualTableManagerTests: XCTestCase {
             XCTAssertTrue(self.ddm?.sections[5] === headerGen3)
         }
     }
-    
+
     func testThatInsertSectionHeaderWithGeneratorsAfterSectionHeaderCorrectly() {
         // given
         let headerGen1 = MockTableHeaderGenerator()
@@ -153,7 +154,7 @@ final class ManualTableManagerTests: XCTestCase {
             XCTAssertEqual(self.ddm?.generators[4].count, 2)
         }
     }
-    
+
     func testThatInsertSectionHeaderWithGeneratorsBeforeSectionHeaderCorrectly() {
         // given
         let headerGen1 = MockTableHeaderGenerator()
@@ -569,13 +570,13 @@ final class ManualTableManagerTests: XCTestCase {
         }
 
         ddm.forceRefill { [unowned self] in
-    
+
             // then
             XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
             XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
         }
     }
-    
+
     func testThatInsertAtBeginningGeneratorsToHeaderInsertsGeneratorOnCorrectPosition() {
         // given
         let headerGen1 = MockTableHeaderGenerator()

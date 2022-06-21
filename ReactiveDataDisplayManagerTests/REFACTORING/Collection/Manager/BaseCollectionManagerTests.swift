@@ -1,3 +1,4 @@
+// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast
 
 import XCTest
 @testable import ReactiveDataDisplayManager
