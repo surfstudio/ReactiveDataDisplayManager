@@ -99,10 +99,7 @@ final class BaseTableManagerTests: XCTestCase {
 
         // when
         expectFatalError(expectedMessage: "Error adding TableCellGenerator generator. You tried to add generators after unexisted generator") {
-            self.ddm.addCellGenerator(gen2, after: gen1)
-
-            // then
-            XCTAssertTrue(self.ddm.generators[0][1] === gen2)
+            self.ddm.addCellGenerator(gen2, after: gen1) // Then
         }
     }
 

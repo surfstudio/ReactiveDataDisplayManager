@@ -10,12 +10,10 @@ final class ManualTableManagerTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        dataSource = MockTableDataSource()
         table = UITableViewSpy()
-        ddm = table.rddm.manualBuilder.build()
-
-        dataSource.provider = ddm
-        table.dataSource = dataSource
+        ddm = table.rddm.manualBuilder
+            .set(dataSource: { MockTableDataSource(manager: $0) })
+            .build()
     }
 
     override func tearDown() {
@@ -377,27 +375,6 @@ final class ManualTableManagerTests: XCTestCase {
         }
     }
 
-    func testThatUpdateGeneratorsUpdatesNeededGenerators() {
-        // given
-        let headerGen1 = MockTableHeaderGenerator()
-        let gen1 = MockTableCellGenerator()
-        let gen2 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
-        let gen3 = MockTableCellGenerator()
-        let gen4 = MockTableCellGenerator()
-        let gen5 = MockTableCellGenerator()
-        ddm.addSectionHeaderGenerator(headerGen1)
-        ddm.addCellGenerators([gen1, gen2])
-        ddm.addSectionHeaderGenerator(headerGen2)
-        ddm.addCellGenerators([gen3, gen4, gen5])
-
-        // when
-        ddm.update(generators: [gen1, gen4])
-
-        // then
-        XCTAssertEqual(table.lastReloadedRows, [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 1)])
-    }
-
     func testThatClearCellGeneratorsWorksCorrectly() {
         // given
         let headerGen1 = MockTableHeaderGenerator()
@@ -693,31 +670,6 @@ final class ManualTableManagerTests: XCTestCase {
         XCTAssertTrue(ddm.generators[0][0] === gen2 && ddm.generators[1][0] === gen1)
     }
 
-    func testThatReloadSectionCallTableViewMethod() {
-        // Arrange
-        let headerGenerator = MockTableHeaderGenerator()
-        ddm.addSectionHeaderGenerator(headerGenerator)
-
-        // Act
-        ddm.reloadSection(by: headerGenerator)
-
-        // Assert
-        XCTAssertTrue(table.sectionWasReloaded)
-    }
-
-    func testThatReloadSectionWithInvalidHeaderGeneratorNotCallTableViewMethod() {
-        // Arrange
-        let headerGenerator = MockTableHeaderGenerator()
-        let wrongHeaderGenerator = MockTableHeaderGenerator()
-        ddm.addSectionHeaderGenerator(headerGenerator)
-
-        // Act
-        ddm.reloadSection(by: wrongHeaderGenerator)
-
-        // Assert
-        XCTAssertFalse(table.sectionWasReloaded)
-    }
-
     func testThatRemoveAllGeneratorsClearsSection() {
         // Arrange
         let headerGen1 = MockTableHeaderGenerator()
@@ -748,7 +700,6 @@ final class ManualTableManagerTests: XCTestCase {
 
         // Act
         ddm.removeAllGenerators(from: headerGen2)
-        ddm.forceRefill()
 
         // Assert
         XCTAssertEqual(table.numberOfSections, 1)

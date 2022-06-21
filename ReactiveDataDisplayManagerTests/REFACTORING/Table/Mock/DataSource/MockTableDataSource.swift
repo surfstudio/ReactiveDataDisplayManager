@@ -9,7 +9,9 @@ import UIKit
 
 @testable import ReactiveDataDisplayManager
 
-final class MockTableDataSource: NSObject, TableDataSource {
+class MockTableDataSource: NSObject, TableDataSource {
+
+    // MARK: - Properties
 
     weak var provider: TableGeneratorsProvider?
     var modifier: Modifier<UITableView, UITableView.RowAnimation>?
@@ -17,6 +19,14 @@ final class MockTableDataSource: NSObject, TableDataSource {
     var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
     var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>?
+
+    // MARK: - Initialization
+
+    init(manager: BaseTableManager) {
+        self.provider = manager
+    }
+
+    // MARK: - UITableViewDataSource
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return provider?.sections.count ?? 0
@@ -39,5 +49,14 @@ final class MockTableDataSource: NSObject, TableDataSource {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {}
 
     func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {}
+
+}
+
+final class MockTableDataSourceWithModifier: MockTableDataSource {
+
+    convenience init(manager: BaseTableManager, modifier: MockTableModifier) {
+        self.init(manager: manager)
+        self.modifier = modifier
+    }
 
 }
