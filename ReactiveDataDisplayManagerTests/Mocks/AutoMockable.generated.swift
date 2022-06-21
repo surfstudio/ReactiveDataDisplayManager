@@ -256,8 +256,6 @@ class CollectionHeaderGeneratorMock: CollectionHeaderGenerator {
     }
 
 }
-
-#if os(iOS)
 class RefreshableInputMock: RefreshableInput {
 
     //MARK: - endRefreshing
@@ -294,8 +292,6 @@ class RefreshableOutputMock: RefreshableOutput {
     }
 
 }
-#endif
-
 class StrategyDropableMock: StrategyDropable {
 
     //MARK: - canDrop
