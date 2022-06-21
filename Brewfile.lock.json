@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "c34e580cae7b6514219c99807fe5efee220bc801"
+        "revision": "a2a2a325904f1d5b5cf35c9b6c3cf098f42b9d59"
       },
       "yonaskolb/xcodegen": {
         "revision": "f65dad76252a876eae19ce72ea3649f95401e084",
@@ -11,7 +11,7 @@
         }
       },
       "krzysztofzablocki/sourcery": {
-        "revision": "d64c263e0b112d1a3a21fbd3cf8128507e1382d4",
+        "revision": "071a7b552de7abde56095667db7e9bda1d189444",
         "options": {
           "clone_target": "https://github.com/krzysztofzablocki/Sourcery.git"
         }
@@ -96,7 +96,7 @@
       "big_sur": {
         "HOMEBREW_VERSION": "3.5.2",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "f5658635b0d0de02c8c07940e5145de016813423",
+        "Homebrew/homebrew-core": "b665bbee48abe6b86f88c6a1d1a8a7199c9b1a5b",
         "CLT": "12.5.1.0.1.1623191612",
         "Xcode": "13.2.1",
         "macOS": "11.5.1"
