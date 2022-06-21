@@ -27,7 +27,7 @@ final class TableDataSourceStub: NSObject, TableDataSource {
 
     // MARK: - CollectionDataSource Methods
 
-    func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+    func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
         builderConfigured = true
     }
 

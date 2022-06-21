@@ -31,7 +31,7 @@ final class TableViewCellMock: UITableViewCell, ConfigurableItem {
     var isLoaded = false
 
     // MARK: - ConfigurableItem
-    
+
     func configure(with model: Bool) {
         isLoaded = model
     }

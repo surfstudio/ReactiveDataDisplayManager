@@ -24,7 +24,7 @@ final class CollectionDelegateStub: NSObject, CollectionDelegate {
 
     // MARK: - CollectionDelegate Methods
 
-    func configure<T>(with builder: CollectionBuilder<T>) where T : BaseCollectionManager {
+    func configure<T>(with builder: CollectionBuilder<T>) where T: BaseCollectionManager {
         builderConfigured = true
     }
 
