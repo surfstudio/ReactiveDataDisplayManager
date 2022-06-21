@@ -21,7 +21,7 @@ final class BaseStackManagerTests: XCTestCase {
     }
 
     // MARK: - Initialization tests
-    
+
     func testThatObjectPropertiesInitializeCorrectly() {
         // when
         let ddm = BaseStackManager()
