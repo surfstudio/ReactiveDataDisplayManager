@@ -28,7 +28,7 @@ final class TableDelegateStub: NSObject, TableDelegate {
 
     // MARK: - CollectionDelegate Methods
 
-    func configure<T>(with builder: TableBuilder<T>) where T : BaseTableManager {
+    func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
         builderConfigured = true
     }
 
