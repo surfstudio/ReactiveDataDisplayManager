@@ -25,3 +25,9 @@ final class MockCollectionCellGenerator: CollectionCellGenerator {
     }
 
 }
+
+final class MockCollectionCellGenerator2: BaseCollectionCellGenerator<CollectionCellMock> { }
+
+final class CollectionCellMock: UICollectionViewCell, ConfigurableItem {
+    func configure(with model: String) { }
+}

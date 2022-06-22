@@ -63,6 +63,8 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatInsertSectionHeaderAfterSectionHeaderCorrectly() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let headerGen2 = MockTableHeaderGenerator()
         let headerGen3 = MockTableHeaderGenerator()
@@ -75,49 +77,46 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(headerGen2)
         ddm.addSectionHeaderGenerator(headerGen3)
 
-        ddm.forceRefill { [unowned self] in
-            self.ddm?.insert(headGenerator: headerGen4, after: headerGen1)
-            self.ddm?.insert(headGenerator: headerGen5, after: headerGen2)
-            self.ddm?.insert(headGenerator: headerGen6, after: headerGen5)
-        }
+        ddm.insert(headGenerator: headerGen4, after: headerGen1)
+        ddm.insert(headGenerator: headerGen5, after: headerGen2)
+        ddm.insert(headGenerator: headerGen6, after: headerGen5)
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
-            // then
-            XCTAssertTrue(self.ddm?.sections[1] === headerGen4)
-            XCTAssertTrue(self.ddm?.sections[3] === headerGen5)
-            XCTAssertTrue(self.ddm?.sections[5] === headerGen3)
-        }
+        wait(for: [expect], timeout: 3)
+
+        // then
+        XCTAssertTrue(ddm.sections[1] === headerGen4)
+        XCTAssertTrue(ddm.sections[3] === headerGen5)
+        XCTAssertTrue(ddm.sections[5] === headerGen3)
     }
 
     func testThatInsertSectionHeaderBeforeSectionHeaderCorrectly() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let headerGen2 = MockTableHeaderGenerator()
         let headerGen3 = MockTableHeaderGenerator()
         let headerGen4 = MockTableHeaderGenerator()
-        let headerGen5 = MockTableHeaderGenerator()
-        let headerGen6 = MockTableHeaderGenerator()
 
         // when
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
         ddm.addSectionHeaderGenerator(headerGen3)
+
         ddm.insert(headGenerator: headerGen4, before: headerGen1)
-        ddm.insert(headGenerator: headerGen5, before: headerGen2)
-        ddm.insert(headGenerator: headerGen6, before: headerGen5)
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
+        wait(for: [expect], timeout: 3)
 
-            // then
-            XCTAssertTrue(self.ddm?.sections[0] === headerGen4)
-            XCTAssertTrue(self.ddm?.sections[1] === headerGen1)
-            XCTAssertFalse(self.ddm?.sections[3] === headerGen3)
-            XCTAssertTrue(self.ddm?.sections[5] === headerGen3)
-        }
+        // then
+        XCTAssertTrue(ddm.sections[0] === headerGen4)
+        XCTAssertTrue(ddm.sections[1] === headerGen1)
     }
 
     func testThatInsertSectionHeaderWithGeneratorsAfterSectionHeaderCorrectly() {
         // given
+        let expect = expectation(description: "reloading")
         let headerGen1 = MockTableHeaderGenerator()
         let headerGen2 = MockTableHeaderGenerator()
         let headerGen3 = MockTableHeaderGenerator()
@@ -137,66 +136,53 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(headerGen2)
         ddm.addSectionHeaderGenerator(headerGen3)
 
-        ddm.forceRefill { [unowned self] in
-            self.ddm?.insertSection(after: headerGen1, new: headerGen4, generators: [gen1])
-            self.ddm?.insertSection(after: headerGen2, new: headerGen5, generators: [gen2, gen3, gen4])
-            self.ddm?.insertSection(after: headerGen5, new: headerGen6, generators: [gen5, gen6])
-        }
+        ddm.insertSection(after: headerGen1, new: headerGen4, generators: [gen1])
+        ddm.insertSection(after: headerGen2, new: headerGen5, generators: [gen2, gen3, gen4])
+        ddm.insertSection(after: headerGen5, new: headerGen6, generators: [gen5, gen6])
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
+        wait(for: [expect], timeout: 3)
 
-            // then
-            XCTAssertTrue(self.ddm?.sections[0] === headerGen1)
-            XCTAssertTrue(self.ddm?.sections[3] === headerGen5)
-            XCTAssertTrue(self.ddm?.sections[1] === headerGen4)
-            XCTAssertEqual(self.ddm?.generators[1].count, 1)
-            XCTAssertEqual(self.ddm?.generators[3].count, 3)
-            XCTAssertEqual(self.ddm?.generators[4].count, 2)
-        }
+        // then
+        XCTAssertTrue(self.ddm?.sections[0] === headerGen1)
+        XCTAssertTrue(self.ddm?.sections[3] === headerGen5)
+        XCTAssertTrue(self.ddm?.sections[1] === headerGen4)
+        XCTAssertEqual(self.ddm?.generators[1].count, 1)
+        XCTAssertEqual(self.ddm?.generators[3].count, 3)
+        XCTAssertEqual(self.ddm?.generators[4].count, 2)
     }
 
     func testThatInsertSectionHeaderWithGeneratorsBeforeSectionHeaderCorrectly() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let headerGen2 = MockTableHeaderGenerator()
         let headerGen3 = MockTableHeaderGenerator()
-        let headerGen4 = MockTableHeaderGenerator()
-        let headerGen5 = MockTableHeaderGenerator()
-        let headerGen6 = MockTableHeaderGenerator()
 
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         let gen3 = MockTableCellGenerator()
-        let gen4 = MockTableCellGenerator()
-        let gen5 = MockTableCellGenerator()
-        let gen6 = MockTableCellGenerator()
 
         // when
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
-        ddm.addSectionHeaderGenerator(headerGen3)
+        ddm.insertSection(before: headerGen1, new: headerGen3, generators: [gen1, gen2, gen3])
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
-            self.ddm?.insertSection(before: headerGen1, new: headerGen4, generators: [gen1])
-            self.ddm?.insertSection(before: headerGen2, new: headerGen5, generators: [gen2, gen3, gen4])
-            self.ddm?.insertSection(before: headerGen5, new: headerGen6, generators: [gen5, gen6])
-        }
+        wait(for: [expect], timeout: 3)
 
-        ddm.forceRefill { [unowned self] in
-
-            // then
-            XCTAssertTrue(self.ddm?.sections[0] === headerGen4)
-            XCTAssertTrue(self.ddm?.sections[1] === headerGen1)
-            XCTAssertFalse(self.ddm?.sections[3] === headerGen3)
-            XCTAssertTrue(self.ddm?.sections[2] === headerGen6)
-            XCTAssertEqual(self.ddm?.generators[0].count, 1)
-            XCTAssertEqual(self.ddm?.generators[3].count, 3)
-            XCTAssertEqual(self.ddm?.generators[2].count, 2)
-        }
+        // then
+        XCTAssertTrue(ddm.sections[0] === headerGen3)
+        XCTAssertTrue(ddm.sections[1] === headerGen1)
+        XCTAssertEqual(ddm.generators[0].count, 3)
+        XCTAssertEqual(ddm.generators[1].count, 0)
     }
 
     func testThatInsertSectionHeaderWithGeneratorsByIndexCorrectly() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let headerGen2 = MockTableHeaderGenerator()
         let headerGen3 = MockTableHeaderGenerator()
@@ -213,19 +199,17 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(headerGen2)
         ddm.addSectionHeaderGenerator(headerGen3)
 
-        ddm.forceRefill { [unowned self] in
-            self.ddm?.insert(headGenerator: headerGen4, by: 1, generators: [gen1])
-            self.ddm?.insert(headGenerator: headerGen5, by: 0, generators: [gen2, gen3, gen4])
-        }
+        ddm.insert(headGenerator: headerGen4, by: 1, generators: [gen1])
+        ddm.insert(headGenerator: headerGen5, by: 0, generators: [gen2, gen3, gen4])
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
+        wait(for: [expect], timeout: 3)
 
-            // then
-            XCTAssertTrue(self.ddm?.sections[2] === headerGen4)
-            XCTAssertTrue(self.ddm?.sections[0] === headerGen5)
-            XCTAssertEqual(self.ddm?.generators[2].count, 1)
-            XCTAssertEqual(self.ddm?.generators[0].count, 3)
-        }
+        // then
+        XCTAssertTrue(self.ddm?.sections[2] === headerGen4)
+        XCTAssertTrue(self.ddm?.sections[0] === headerGen5)
+        XCTAssertEqual(self.ddm?.generators[2].count, 1)
+        XCTAssertEqual(self.ddm?.generators[0].count, 3)
     }
 
     func testThatAddCellGeneratorAppendsNewSectionToCellGeneratorsCorrectly() {
@@ -434,6 +418,8 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatInsertGeneratorAfterGeneratorInsertsGeneratorOnCorrectPosition() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -448,21 +434,21 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen4, gen6], toHeader: headerGen2)
 
         // when
-        ddm.forceRefill { [unowned self] in
-            ddm?.insert(after: gen1, new: gen2)
-            ddm?.insert(after: gen4, new: gen5)
-        }
+        ddm?.insert(after: gen1, new: gen2)
+        ddm?.insert(after: gen4, new: gen5)
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
+        wait(for: [expect], timeout: 3)
 
-            // then
-            XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
-            XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
-        }
+        // then
+        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
+        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
     }
 
     func testThatInsertGeneratorsAfterGeneratorInsertsGeneratorOnCorrectPosition() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -477,21 +463,21 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen4, gen6], toHeader: headerGen2)
 
         // when
-        ddm.forceRefill { [unowned self] in
-            self.ddm?.insert(after: gen1, new: [gen2, gen1, gen3])
-            self.ddm?.insert(after: gen4, new: [gen5, gen4, gen6])
-        }
+        ddm.insert(after: gen1, new: [gen2, gen1, gen3])
+        ddm.insert(after: gen4, new: [gen5, gen4, gen6])
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
+        wait(for: [expect], timeout: 3)
 
-            // then
-            XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen1)
-            XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen4)
-        }
+        // then
+        XCTAssertTrue(ddm.generators[0][0] === gen1 && ddm.generators[0][1] === gen2 && ddm.generators[0][2] === gen1)
+        XCTAssertTrue(ddm.generators[1][0] === gen4 && ddm.generators[1][1] === gen5 && ddm.generators[1][2] === gen4)
     }
 
     func testThatInsertGeneratorBeforeGeneratorInsertsGeneratorOnCorrectPosition() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -506,21 +492,21 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen5, gen6], toHeader: headerGen2)
 
         // when
-        ddm.forceRefill { [unowned self] in
-            ddm?.insert(before: gen2, new: gen1)
-            ddm?.insert(before: gen5, new: gen4)
-        }
+        ddm.insert(before: gen2, new: gen1)
+        ddm.insert(before: gen5, new: gen4)
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
+        wait(for: [expect], timeout: 3)
 
-            // then
-            XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
-            XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
-        }
+        // then
+        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
+        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
     }
 
     func testThatInsertGeneratorsBeforeGeneratorInsertsGeneratorOnCorrectPosition() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -535,20 +521,21 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen5, gen6], toHeader: headerGen2)
 
         // when
-        ddm.forceRefill { [unowned self] in
-            ddm?.insert(before: gen2, new: [gen1, gen2, gen3])
-            ddm?.insert(before: gen5, new: [gen4, gen5, gen6])
-        }
+        ddm.insert(before: gen2, new: [gen1, gen2, gen3])
+        ddm.insert(before: gen5, new: [gen4, gen5, gen6])
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
-            // then
-            XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
-            XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
-        }
+        wait(for: [expect], timeout: 3)
+
+        // then
+        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
+        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
     }
 
     func testThatInsertGeneratorToHeaderInsertsGeneratorOnCorrectPosition() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -564,21 +551,21 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen5, gen6], toHeader: headerGen2)
 
         // when
-        ddm.forceRefill { [unowned self] in
-            ddm?.insert(to: headerGen1, new: gen1)
-            ddm?.insert(to: headerGen2, new: gen4)
-        }
+        ddm.insert(to: headerGen1, new: gen1)
+        ddm.insert(to: headerGen2, new: gen4)
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
+        wait(for: [expect], timeout: 3)
 
-            // then
-            XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
-            XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
-        }
+        // then
+        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
+        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
     }
 
     func testThatInsertAtBeginningGeneratorsToHeaderInsertsGeneratorOnCorrectPosition() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -594,21 +581,21 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen5, gen6], toHeader: headerGen2)
 
         // when
-        ddm.forceRefill { [unowned self] in
-            ddm?.insertAtBeginning(to: headerGen1, new: [gen1, gen5, gen6])
-            ddm?.insertAtBeginning(to: headerGen2, new: [gen4, gen2, gen3])
-        }
+        ddm.insertAtBeginning(to: headerGen1, new: [gen1, gen5, gen6])
+        ddm.insertAtBeginning(to: headerGen2, new: [gen4, gen2, gen3])
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
+        wait(for: [expect], timeout: 3)
 
-            // then
-            XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen5 && ddm?.generators[0][2] === gen6)
-            XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen2 && ddm?.generators[1][2] === gen3)
-        }
+        // then
+        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen5 && ddm?.generators[0][2] === gen6)
+        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen2 && ddm?.generators[1][2] === gen3)
     }
 
     func testThatInsertAtEndGeneratorsToHeaderInsertsGeneratorOnCorrectPosition() {
         // given
+        let expect = expectation(description: "reloading")
+
         let headerGen1 = MockTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -624,17 +611,15 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen5, gen6], toHeader: headerGen2)
 
         // when
-        ddm.forceRefill { [unowned self] in
-            ddm?.insertAtEnd(to: headerGen1, new: [gen1, gen5, gen6])
-            ddm?.insertAtEnd(to: headerGen2, new: [gen4, gen2, gen3])
-        }
+        ddm.insertAtEnd(to: headerGen1, new: [gen1, gen5, gen6])
+        ddm.insertAtEnd(to: headerGen2, new: [gen4, gen2, gen3])
+        ddm.forceRefill { expect.fulfill() }
 
-        ddm.forceRefill { [unowned self] in
+        wait(for: [expect], timeout: 3)
 
-            // then
-            XCTAssertTrue(ddm?.generators[0][2] === gen1 && ddm?.generators[0][3] === gen5 && ddm?.generators[0][4] === gen6)
-            XCTAssertTrue(ddm?.generators[1][2] === gen4 && ddm?.generators[1][3] === gen2 && ddm?.generators[1][4] === gen3)
-        }
+        // then
+        XCTAssertTrue(ddm?.generators[0][2] === gen1 && ddm?.generators[0][3] === gen5 && ddm?.generators[0][4] === gen6)
+        XCTAssertTrue(ddm?.generators[1][2] === gen4 && ddm?.generators[1][3] === gen2 && ddm?.generators[1][4] === gen3)
     }
 
     func testThatReplaceOldGeneratorOnNewReplacesGeneratorCorrectly() {

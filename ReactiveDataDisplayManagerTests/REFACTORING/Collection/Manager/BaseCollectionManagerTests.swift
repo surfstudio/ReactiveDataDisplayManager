@@ -190,34 +190,55 @@ final class BaseCollectionManagerTests: XCTestCase {
         XCTAssertEqual(ddm.generators.last?.count, 1)
     }
 
+    func testThatInsertGeneratorInsertionSuccess() {
+        // given
+        let expect = expectation(description: "reloading")
+
+        let gen0 = CollectionCellGeneratorMock()
+        let gen1 = CollectionCellGeneratorMock()
+        let gen2 = CollectionCellGeneratorMock()
+        let gen3 = CollectionCellGeneratorMock()
+        let gen4 = CollectionCellGeneratorMock()
+
+        ddm.clearCellGenerators()
+        ddm.addCellGenerators([gen0, gen1, gen2])
+
+        // when
+        ddm.insert(after: gen1, new: [gen3, gen4])
+        ddm.forceRefill { expect.fulfill() }
+
+        wait(for: [expect], timeout: 3)
+
+        // then
+        XCTAssertIdentical(ddm?.generators[0][2], gen3)
+        XCTAssertIdentical(ddm?.generators[0][3], gen4)
+        XCTAssertEqual(ddm.generators.first?.count, 5)
+    }
+
     func testThatRemoveGeneratorRemovesEmptySections() {
         // given
-        let headerGen1 = MockCollectionHeaderGenerator()
+        let headerGen1 = CollectionHeaderGeneratorMock()
+        let headerGen2 = CollectionHeaderGeneratorMock()
         let gen1 = MockCollectionCellGenerator()
         let gen2 = MockCollectionCellGenerator()
-        let headerGen2 = MockCollectionHeaderGenerator()
         let gen3 = MockCollectionCellGenerator()
         let gen4 = MockCollectionCellGenerator()
 
         ddm.clearHeaderGenerators()
         ddm.clearCellGenerators()
         ddm.addSectionHeaderGenerator(headerGen1)
-        ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
+        ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
         ddm.addCellGenerators([gen3, gen4], toHeader: headerGen2)
+        collection.layoutSubviews()
 
         // when
-        ddm.forceRefill { [unowned self] in
-            ddm?.remove(gen3, needScrollAt: .top, needRemoveEmptySection: true)
-            ddm?.remove(gen4, needScrollAt: .top, needRemoveEmptySection: true)
-        }
+        ddm.remove(gen2, needScrollAt: .top, needRemoveEmptySection: true)
+        ddm.remove(gen1, needScrollAt: .top, needRemoveEmptySection: true)
 
-        ddm.forceRefill { [unowned self] in
-
-            // then
-            XCTAssertEqual(ddm?.sections.count, 1)
-            XCTAssertEqual(ddm?.generators.count, 1)
-        }
+        // then
+        XCTAssertEqual(ddm?.sections.count, 1)
+        XCTAssertEqual(ddm?.generators.count, 1)
     }
 
 }

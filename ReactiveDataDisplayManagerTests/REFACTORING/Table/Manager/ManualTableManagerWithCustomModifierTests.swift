@@ -42,7 +42,6 @@ final class ManualTableManagerWithCustomModifierTests: XCTestCase {
         ddm.update(generators: [gen1, gen4])
 
         // then
-        print(modifier.lastReloadedRows)
         XCTAssertEqual(modifier.lastReloadedRows, [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 1)])
     }
 

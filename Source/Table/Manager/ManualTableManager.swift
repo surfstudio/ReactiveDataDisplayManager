@@ -30,6 +30,9 @@ public class ManualTableManager: BaseTableManager {
     ///   - generator: Generator for new section TableHeaderGenerator.
     open func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
         self.sections.append(generator)
+        if sections.count > generators.count {
+            self.generators.append([])
+        }
     }
 
     /// Inserts new TableHeaderGenerator generator after another.
