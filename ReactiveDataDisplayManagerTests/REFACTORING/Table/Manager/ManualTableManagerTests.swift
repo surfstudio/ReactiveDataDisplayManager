@@ -173,8 +173,8 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm.sections[0] === headerGen3)
-        XCTAssertTrue(ddm.sections[1] === headerGen1)
+        XCTAssertIdentical(ddm.sections[0], headerGen3)
+        XCTAssertIdentical(ddm.sections[1], headerGen1)
         XCTAssertEqual(ddm.generators[0].count, 3)
         XCTAssertEqual(ddm.generators[1].count, 0)
     }
@@ -206,8 +206,8 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(self.ddm?.sections[2] === headerGen4)
-        XCTAssertTrue(self.ddm?.sections[0] === headerGen5)
+        XCTAssertIdentical(self.ddm?.sections[2], headerGen4)
+        XCTAssertIdentical(self.ddm?.sections[0], headerGen5)
         XCTAssertEqual(self.ddm?.generators[2].count, 1)
         XCTAssertEqual(self.ddm?.generators[0].count, 3)
     }
@@ -321,7 +321,7 @@ final class ManualTableManagerTests: XCTestCase {
         // then
         XCTAssertEqual(ddm.generators.first?.count, 5)
         XCTAssertEqual(ddm.generators.last?.count, 3)
-        XCTAssertTrue(ddm.generators.first?[3] === gen2)
+        XCTAssertIdentical(ddm.generators.first?[3], gen2)
     }
 
     func testThatAddCellGeneratorAfterGeneratorWorksCorrectly() {
@@ -759,7 +759,7 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-        XCTAssertTrue(ddm.generators.first?.first === gen2)
+        XCTAssertIdentical(ddm.generators.first?.first, gen2)
         XCTAssertEqual(ddm.generators.first?.count, 1)
     }
 

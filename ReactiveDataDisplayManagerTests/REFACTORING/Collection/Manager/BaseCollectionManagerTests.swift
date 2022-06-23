@@ -239,4 +239,25 @@ final class BaseCollectionManagerTests: XCTestCase {
         XCTAssertEqual(ddm?.generators.count, 1)
     }
 
+    func testThatCustomOperationAddCellGenerator() {
+        // given
+        let gen1 = CollectionCellGeneratorMock()
+        let gen2 = CollectionCellGeneratorMock()
+        let gen3 = CollectionCellGeneratorMock()
+        let gen4 = CollectionCellGeneratorMock()
+
+        ddm.clearHeaderGenerators()
+        ddm.clearCellGenerators()
+
+        // when
+        ddm += gen1
+        ddm += [gen2, gen3, gen4]
+
+        // then
+        XCTAssertIdentical(ddm.generators.first?.first, gen1)
+        XCTAssertIdentical(ddm.generators.first?.last, gen4)
+        XCTAssertEqual(ddm?.generators.first?.count, 4)
+    }
+
+
 }

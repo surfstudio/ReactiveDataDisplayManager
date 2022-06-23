@@ -190,7 +190,7 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-        XCTAssertTrue(ddm.generators.first?.first === gen2)
+        XCTAssertIdentical(ddm.generators.first?.first, gen2)
         XCTAssertEqual(ddm.generators.first?.count, 3)
     }
 
