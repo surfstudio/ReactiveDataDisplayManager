@@ -82,4 +82,3 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
     }
 
 }
-
