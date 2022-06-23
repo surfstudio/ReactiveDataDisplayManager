@@ -19,7 +19,7 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         let cell = getFirstCell(for: .table, id: "Higlighted_cells")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertTrue(cell.label == highlightedStyle)
+            XCTAssertEqual(cell.label, highlightedStyle)
         }
         cell.press(forDuration: 2)
 
@@ -55,11 +55,11 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertTrue(cell.label == highlightedStyle)
+            XCTAssertEqual(cell.label, highlightedStyle)
         }
         cell.press(forDuration: 2)
 
-        XCTAssertTrue(cell.label == normalStyle)
+        XCTAssertEqual(cell.label, normalStyle)
     }
 
     func testCollection_whenCellTaped_thenTurnedSelectStyleAndDeselectStyle() throws {
