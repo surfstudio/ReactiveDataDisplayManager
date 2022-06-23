@@ -43,19 +43,23 @@ extension HighlightableTableCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .white
+        accessibilityLabel = "Normal"
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .red.withAlphaComponent(0.3)
+        accessibilityLabel = "Highlighted"
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
+        accessibilityLabel = "Selected"
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
+        accessibilityLabel = "Normal"
     }
 
 }

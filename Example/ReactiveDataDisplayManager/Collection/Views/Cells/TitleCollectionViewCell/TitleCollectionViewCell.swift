@@ -39,19 +39,23 @@ extension TitleCollectionViewCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .gray
+        accessibilityLabel = "Normal"
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .white.withAlphaComponent(0.5)
+        accessibilityLabel = "Highlighted"
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
+        accessibilityLabel = "Selected"
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
+        accessibilityLabel = "Normal"
     }
 
 }

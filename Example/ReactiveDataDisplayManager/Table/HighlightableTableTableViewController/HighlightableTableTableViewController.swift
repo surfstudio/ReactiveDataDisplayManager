@@ -32,6 +32,7 @@ final class HighlightableTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Higlighted cells"
+        tableView.accessibilityIdentifier = "Higlighted_cells"
         fillAdapter()
         updateBarButtonItem(with: Constants.standart)
     }
