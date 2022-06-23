@@ -37,12 +37,21 @@ extension TitleCollectionViewCell: ConfigurableItem {
 
 extension TitleCollectionViewCell: HighlightableItem {
 
-    func applyNormalStyle() {
+    func applyUnhighlightedStyle() {
         contentView.backgroundColor = .gray
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .white.withAlphaComponent(0.5)
+    }
+
+    func applySelectedStyle() {
+        contentView.layer.borderColor = UIColor.blue.cgColor
+        contentView.layer.borderWidth = 1
+    }
+
+    func applyDeselectedStyle() {
+        contentView.layer.borderWidth = .zero
     }
 
 }
