@@ -32,11 +32,11 @@ final class RefreshablePluginExampleUITest: BaseUITestCase {
 
     func testCollection_whenScrollDown_thenShowRefreshControl() throws {
         setTab("Collection")
-        tapTableElement("List Appearances with swipeable items")
+        tapTableElement("Collection list with refreshing")
 
-        let collection = app.collectionViews["List_Appearances_with_swipeable_items"]
-        let cell = getFirstCell(for: .collection, id: "List_Appearances_with_swipeable_items")
-        let refreshControl = app.otherElements["SwipeableCollectionListViewController_RefreshControl"]
+        let collection = app.collectionViews["Refrashable_collection_list"]
+        let cell = getFirstCell(for: .collection, id: "Refrashable_collection_list")
+        let refreshControl = app.otherElements["RefreshableCollectionViewController_RefreshControl"]
 
         let dragBegin = collection.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0))
         let dragEnd = collection.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))

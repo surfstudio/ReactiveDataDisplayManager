@@ -24,17 +24,9 @@ final class SwipeableCollectionListViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private var refreshControl: UIRefreshControl {
-        let refreshControl = UIRefreshControl()
-        refreshControl.isAccessibilityElement = true
-        refreshControl.accessibilityIdentifier = "SwipeableCollectionListViewController_RefreshControl"
-        return refreshControl
-    }
-
     private let swipeProvider = SwipeActionProvider()
     private lazy var plugin = CollectionSwipeActionsConfigurationPlugin(swipeProvider: swipeProvider)
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(plugin: .refreshable(refreshControl: refreshControl, output: self))
         .add(featurePlugin: plugin)
         .build()
 
@@ -45,7 +37,6 @@ final class SwipeableCollectionListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "List Appearances with swipeable items"
-        collectionView.accessibilityIdentifier = "List_Appearances_with_swipeable_items"
         fillAdapter()
 
         configureLayoutFlow(with: appearance)
@@ -72,8 +63,8 @@ private extension SwipeableCollectionListViewController {
             let generator = SwipeableCollectionGenerator(with: title)
 
             // Handling the swipe event
-            generator.didSwipeEvent += { [weak self, weak generator] actionType in
-                self?.printDebugMessage(for: generator, and: actionType)
+            generator.didSwipeEvent += { [weak generator] actionType in
+                debugPrint("The action with type \(actionType) was selected from all available generator events \(generator?.actionTypes ?? [])")
             }
 
             // Add cell generator into adapter
@@ -104,34 +95,6 @@ private extension SwipeableCollectionListViewController {
 
         configureLayoutFlow(with: appearance)
         updateBarButtonItem(with: appearance.title)
-    }
-
-    func printDebugMessage(for generator: SwipeableCollectionGenerator?, and actionType: String) {
-        debugPrint("The action with type \(actionType) was selected from all available generator events \(generator?.actionTypes ?? [])")
-    }
-
-}
-
-@available(iOS 14.0, *)
-extension SwipeableCollectionListViewController: RefreshableOutput {
-
-    func refreshContent(with input: RefreshableInput) {
-
-        delay(.now() + .seconds(3)) { [weak self, weak input] in
-            self?.adapter.clearCellGenerators()
-
-            for index in 1...4 {
-                let generator = SwipeableCollectionGenerator(with: "Refreshing \(index)")
-                generator.didSwipeEvent += { [weak self, weak generator] actionType in
-                    self?.printDebugMessage(for: generator, and: actionType)
-                }
-                self?.adapter.addCellGenerator(generator)
-            }
-
-            self?.adapter.forceRefill()
-
-            input?.endRefreshing()
-        }
     }
 
 }
