@@ -26,6 +26,7 @@ open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType
     // MARK: - Internal Properties
 
     var dropStrategy: StrategyDropable?
+    var cellDidChangePosition: ((ResultChangeCellPosition) -> Void)?
 
     // MARK: - DroppableDelegate
 
@@ -93,13 +94,16 @@ private extension DroppablePluginDelegate {
                 dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true
             else { return }
             guard
-                let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+                let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row),
+                let generator = itemToMove as? GeneratorType
             else { return }
 
             provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
             modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: animation, and: animation)
 
             coordinator.drop($0.dragItem, toItemAt: destinationIndexPath)
+
+            cellDidChangePosition?(.init(id: generator.id, oldIndex: sourceIndexPath, newIndex: destinationIndexPath))
         }
     }
 
