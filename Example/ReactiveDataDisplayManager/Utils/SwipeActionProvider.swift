@@ -21,10 +21,15 @@ final class SwipeActionProvider: SwipeActionsProvider {
     // MARK: - Constants
 
     private enum Constants {
-        static let models: [SwipeAction] = [
+        static let trailingModels: [SwipeAction] = [
             .init(backgroundColor: .gray, image: #imageLiteral(resourceName: "edit"), type: SwipeActionType.edit.rawValue, style: .normal),
             .init(title: "More", backgroundColor: .blue, type: SwipeActionType.more.rawValue, style: .normal),
             .init(title: "Flag", backgroundColor: .systemRed, type: SwipeActionType.flag.rawValue, style: .normal)
+        ]
+        static let leadingModels: [SwipeAction] = [
+            .init(title: "Delete", backgroundColor: .systemRed, type: SwipeActionType.edit.rawValue, style: .normal),
+            .init(title: "Info", backgroundColor: .gray, type: SwipeActionType.more.rawValue, style: .normal),
+            .init(title: "Apply", backgroundColor: .green, type: SwipeActionType.flag.rawValue, style: .normal)
         ]
     }
 
@@ -35,12 +40,13 @@ final class SwipeActionProvider: SwipeActionsProvider {
     // MARK: - TableSwipeActionsProvider
 
     func getLeadingSwipeActionsForGenerator(_ generator: SwipeableItem) -> SwipeActionsConfiguration? {
-        return nil
+        guard isEnableSwipeActions else { return nil }
+        return SwipeActionsConfiguration(actions: Constants.leadingModels, performsFirstActionWithFullSwipe: false)
     }
 
     func getTrailingSwipeActionsForGenerator(_ generator: SwipeableItem) -> SwipeActionsConfiguration? {
         guard isEnableSwipeActions else { return nil }
-        return SwipeActionsConfiguration(actions: Constants.models, performsFirstActionWithFullSwipe: false)
+        return SwipeActionsConfiguration(actions: Constants.trailingModels, performsFirstActionWithFullSwipe: false)
     }
 
 }
