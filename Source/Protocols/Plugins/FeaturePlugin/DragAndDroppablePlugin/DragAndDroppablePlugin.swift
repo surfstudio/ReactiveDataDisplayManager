@@ -28,7 +28,7 @@ open class TableDragAndDroppablePlugin: TableFeaturePlugin, DragAndDroppable {
 
     init(dropStrategy: StrategyDropable,
          draggableParameters: DragablePreviewParameters?,
-         droppableParameters: UIDragPreviewParameters?, 
+         droppableParameters: UIDragPreviewParameters?,
          cellDidChangePosition: ((ResultChangeCellPosition) -> Void)? = nil) {
 
         droppableDelegate.dropStrategy = dropStrategy
