@@ -32,6 +32,11 @@ open class BaseUITestCase: XCTestCase {
         app.tables.staticTexts[screenName].tap()
     }
 
+    func tapFirstCell(by collection: CollectionType) {
+        let collection = (collection == .collection ? app.collectionViews : app.tables).firstMatch
+        collection.cells.firstMatch.tap()
+    }
+
     func tapButton(_ screenName: String) {
         app.buttons[screenName].tap()
     }
