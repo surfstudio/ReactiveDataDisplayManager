@@ -28,9 +28,9 @@ public class CollectionRefreshablePlugin: BaseCollectionPlugin<ScrollEvent> {
         self.output = output
     }
 
-    // MARK: - BaseTablePlugin
+    // MARK: - BaseCollectionPlugin
 
-    public func setup(with manager: BaseTableManager?) {
+    public override func setup(with manager: BaseCollectionManager?) {
         manager?.view.refreshControl = refreshControl
     }
 
