@@ -27,7 +27,7 @@ final class DragAndDroppableCollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(delegate: FlowCollectionDelegate())
-        .add(featurePlugin: .dragAndDroppable(by: .current))
+        .add(featurePlugin: .dragAndDroppable(by: .current, positionChanged: { print($0.id ?? "") }))
         .build()
 
     // MARK: - UIViewController
@@ -74,7 +74,7 @@ private extension DragAndDroppableCollectionViewController {
 
     /// Create cells generators for range
     func makeCellGenerators(for range: [Int]) -> [CollectionCellGenerator] {
-        var generators = [CollectionCellGenerator]()
+        var generators = [TitleCollectionGenerator]()
 
         for index in range {
             let generator = TitleCollectionGenerator(model: "Cell: \(index)")
