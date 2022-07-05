@@ -25,7 +25,11 @@ final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectio
     public init(model: String, needIndexTitle: Bool = false) {
         self.title = model
         self.needIndexTitle = needIndexTitle
+<<<<<<< HEAD
+        self.id = title
+=======
         self.id = model
+>>>>>>> 66ed5af2ff8e3df984caab84bac3097c58359028
 
         let id = model as NSString
         dragAndDroppableItem = DragAndDroppableItem(identifier: id)

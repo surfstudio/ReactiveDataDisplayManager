@@ -26,8 +26,11 @@ open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType
     // MARK: - Internal Properties
 
     var dropStrategy: StrategyDropable?
+<<<<<<< HEAD
     var droppableParameters: UIDragPreviewParameters?
+=======
     var cellDidChangePosition: ((ResultChangeCellPosition) -> Void)?
+>>>>>>> 66ed5af2ff8e3df984caab84bac3097c58359028
 
     // MARK: - DroppableDelegate
 
@@ -104,16 +107,25 @@ private extension DroppablePluginDelegate {
 
         removed.enumerated().forEach {
             guard
+<<<<<<< HEAD
                 let sourceIndexPath = getIndexPath(for: $0.element, provider: provider),
+                let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+=======
                 let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row),
                 let generator = itemToMove as? GeneratorType
+>>>>>>> 66ed5af2ff8e3df984caab84bac3097c58359028
             else { return }
 
             provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
             modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: animation, and: animation)
+<<<<<<< HEAD
             coordinator.drop(coordinator.items[$0.offset].dragItem, toItemAt: destinationIndexPath)
+=======
+
+            coordinator.drop($0.dragItem, toItemAt: destinationIndexPath)
 
             cellDidChangePosition?(.init(id: generator.id, oldIndex: sourceIndexPath, newIndex: destinationIndexPath))
+>>>>>>> 66ed5af2ff8e3df984caab84bac3097c58359028
         }
     }
 

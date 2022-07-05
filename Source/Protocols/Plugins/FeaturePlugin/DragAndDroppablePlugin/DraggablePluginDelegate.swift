@@ -50,13 +50,10 @@ extension DraggablePluginDelegate: DraggableDelegate {
         guard let generator = provider?.generators[safe: indexPath.section]?[safe: indexPath.row] as? GeneratorType else { return [] }
         let mainDragItem = makeDragItem(for: generator.dropableItem)
 
-//        if let preview = draggableParameters?.preview {
-//            mainDragItem.previewProvider = { .init(view: preview) }
-//        }
+        if let preview = draggableParameters?.preview {
+            mainDragItem.previewProvider = { .init(view: preview) }
+        }
 
-        // TODO: - Add support for multiple items
-        //        let items = [mainDragItem] + generator.associatedGenerators.compactMap(makeDragItem(for:))
-        //        return items
         return [mainDragItem]
     }
 
