@@ -8,11 +8,15 @@
 import Foundation
 import UIKit
 
+/// There is no way to customize system badges with the number of items taken.
 @available(iOS 11.0, *)
 public struct DragablePreviewParameters {
     var parameters: UIDragPreviewParameters?
     var preview: UIView?
 
+    /// - Parameters:
+    ///     - 'parameters': draggable items parameters
+    ///     - preview: custom UIView when item dragging
     public init(parameters: UIDragPreviewParameters? = nil, preview: UIView? = nil) {
         self.parameters = parameters
         self.preview = preview
