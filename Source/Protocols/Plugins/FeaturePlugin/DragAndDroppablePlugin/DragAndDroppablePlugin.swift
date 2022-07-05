@@ -26,8 +26,9 @@ open class TableDragAndDroppablePlugin: TableFeaturePlugin, DragAndDroppable {
 
     // MARK: - Initializations
 
-    init(dropStrategy: StrategyDropable) {
+    init(dropStrategy: StrategyDropable, cellDidChangePosition: ((ResultChangeCellPosition) -> Void)? = nil) {
         droppableDelegate.dropStrategy = dropStrategy
+        droppableDelegate.cellDidChangePosition = cellDidChangePosition
     }
 
 }
@@ -42,8 +43,10 @@ public extension TableFeaturePlugin {
     /// - parameters:
     ///     - sections: allow dropping across sections (all or current)
     @available(iOS 11.0, *)
-    static func dragAndDroppable(by sections: DropStrategy = .all) -> TableDragAndDroppablePlugin {
-        .init(dropStrategy: sections)
+    static func dragAndDroppable(by sections: DropStrategy = .all,
+                                 positionChanged: ((ResultChangeCellPosition) -> Void)? = nil) -> TableDragAndDroppablePlugin {
+
+        return .init(dropStrategy: sections, cellDidChangePosition: positionChanged)
     }
 
 }
@@ -65,8 +68,9 @@ open class CollectionDragAndDroppablePlugin: CollectionFeaturePlugin, DragAndDro
 
     // MARK: - Initializations
 
-    init(dropStrategy: StrategyDropable) {
+    init(dropStrategy: StrategyDropable, cellDidChangePosition: ((ResultChangeCellPosition) -> Void)? = nil) {
         droppableDelegate.dropStrategy = dropStrategy
+        droppableDelegate.cellDidChangePosition = cellDidChangePosition
     }
 
 }
@@ -78,9 +82,12 @@ public extension CollectionFeaturePlugin {
     /// Allow dragging and dropping cells builded with `DragAndDroppableItemSource` generators by section
     /// - parameters:
     ///     - sections: allow dropping across sections (all or current)
+    ///     - cellDidChangePosition: signal that the cell has been moved
     @available(iOS 11.0, *)
-    static func dragAndDroppable(by sections: DropStrategy = .all) -> CollectionDragAndDroppablePlugin {
-        .init(dropStrategy: sections)
+    static func dragAndDroppable(by sections: DropStrategy = .all,
+                                 positionChanged: ((ResultChangeCellPosition) -> Void)? = nil) -> CollectionDragAndDroppablePlugin {
+
+        return .init(dropStrategy: sections, cellDidChangePosition: positionChanged)
     }
 
 }

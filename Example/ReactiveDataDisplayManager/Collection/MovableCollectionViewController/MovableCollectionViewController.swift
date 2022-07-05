@@ -28,8 +28,9 @@ final class MovableCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
+    private let movablePlugin: CollectionMovableItemPlugin = .movable()
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(featurePlugin: .movable())
+        .add(featurePlugin: .movable(cellDidChangePosition: { print($0.id ?? "") }))
         .build()
 
     // MARK: - UIViewController
@@ -77,7 +78,7 @@ private extension MovableCollectionViewController {
 
     // Create cells generators
     func makeMovableCellGenerators() -> [MovableCollectionCellGenerator] {
-        return Constants.models.enumerated().map { MovableCollectionCellGenerator(with: "\($0.element) \($0.offset)") }
+        return Constants.models.enumerated().map { MovableCollectionCellGenerator(id: $0.offset, model: "\($0.element) \($0.offset)") }
     }
 
 }
