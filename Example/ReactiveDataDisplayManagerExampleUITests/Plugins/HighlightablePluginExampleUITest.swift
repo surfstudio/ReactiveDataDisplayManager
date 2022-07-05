@@ -12,17 +12,23 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
     func testTable_whenCellTaped_thenCellhighlighted() throws {
         let normalStyle = "Normal"
         let highlightedStyle = "Highlighted"
+        let expectation = XCTestExpectation(description: "Cell Pressed")
+        let timeout: TimeInterval = 1
+        var wasPresed = false
 
         setTab("Table")
         tapTableElement("Table with highlightable cells")
 
         let cell = getFirstCell(for: .table, id: "Higlighted_cells")
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertEqual(cell.label, highlightedStyle)
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
+            wasPresed = cell.label == highlightedStyle
+            expectation.fulfill()
         }
         cell.press(forDuration: 2)
 
+        wait(for: [expectation], timeout: timeout)
+        XCTAssertTrue(wasPresed)
         XCTAssertEqual(cell.label, normalStyle)
     }
 
@@ -48,17 +54,23 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
     func testCollection_whenCellTaped_thenCellhighlighted() throws {
         let normalStyle = "Normal"
         let highlightedStyle = "Highlighted"
+        let expectation = XCTestExpectation(description: "Cell Pressed")
+        let timeout: TimeInterval = 1
+        var wasPresed = false
 
         setTab("Collection")
         tapTableElement("Base collection view")
 
         let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            XCTAssertEqual(cell.label, highlightedStyle)
+        DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
+            wasPresed = cell.label == highlightedStyle
+            expectation.fulfill()
         }
         cell.press(forDuration: 2)
 
+        wait(for: [expectation], timeout: timeout)
+        XCTAssertTrue(wasPresed)
         XCTAssertEqual(cell.label, normalStyle)
     }
 
