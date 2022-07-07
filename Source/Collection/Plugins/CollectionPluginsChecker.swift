@@ -4,6 +4,7 @@
 //
 //  Created by porohov on 07.07.2022.
 //
+import UIKit
 
 final class CollectionPluginsChecker {
 
