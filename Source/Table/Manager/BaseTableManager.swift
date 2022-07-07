@@ -24,10 +24,12 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     // swiftlint:enable implicitly_unwrapped_optional
 
     var dataSource: TableDataSource?
+    var delegate: TableDelegate?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
+        TablePluginsChecker(delegate: delegate, generators: generators).asyncCheckPlugins()
         dataSource?.modifier?.reload()
     }
 
