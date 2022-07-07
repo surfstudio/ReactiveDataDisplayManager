@@ -15,3 +15,7 @@ public protocol FeaturePlugin {
     /// Plugin name, must match child class name
     var pluginName: String { get }
 }
+
+extension FeaturePlugin {
+    static var pluginName: String { String(describing: Self.self) }
+}
