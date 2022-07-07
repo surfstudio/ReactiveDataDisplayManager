@@ -15,7 +15,7 @@ final class MovableTableViewController: UIViewController {
 
     private enum Constants {
         static let titleForSection = "Section"
-        static let models = [String](repeating: "movable cell", count: 5)
+        static let models = Array(repeating: "movable cell", count: 5)
     }
 
     // MARK: - IBOutlets
@@ -33,6 +33,8 @@ final class MovableTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "table with movable cell"
+        tableView.accessibilityIdentifier = "Table_with_movable_cell"
+        tableView.dragInteractionEnabled = false
         fillAdapter()
     }
 
@@ -45,10 +47,10 @@ private extension MovableTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         // Add generator to adapter
-        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
-        adapter.addCellGenerators(makeMovableCellGenerators())
-        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection))
-        adapter.addCellGenerators(makeMovableCellGenerators())
+        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection + " 1"))
+        adapter.addCellGenerators(makeMovableCellGenerators(for: Array(1...5)))
+        adapter.addSectionHeaderGenerator(TitleHeaderGenerator(model: Constants.titleForSection + " 2"))
+        adapter.addCellGenerators(makeMovableCellGenerators(for: Array(1...5)))
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
@@ -56,8 +58,15 @@ private extension MovableTableViewController {
     }
 
     // Create cells generators
-    func makeMovableCellGenerators() -> [MovableCellGenerator] {
-        return Constants.models.map { MovableCellGenerator(with: $0) }
+    func makeMovableCellGenerators(for range: [Int]) -> [MovableCellGenerator] {
+        var generators = [MovableCellGenerator]()
+
+        for index in range {
+            let generator = MovableCellGenerator(with: "Cell: \(index)")
+            generators.append(generator)
+        }
+
+        return generators
     }
 
 }

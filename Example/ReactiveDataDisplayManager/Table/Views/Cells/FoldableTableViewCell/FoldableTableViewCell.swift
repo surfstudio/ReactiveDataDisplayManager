@@ -51,6 +51,7 @@ extension FoldableTableViewCell: ConfigurableItem {
 
     func configure(with model: Model) {
         titleLabel.text = String(format: "Foldable cell %@", model.title)
+        accessibilityLabel = Constants.titleLabelText + model.title
         arrowImageView.transform = model.isExpanded ? .identity : CGAffineTransform(rotationAngle: .pi)
     }
 

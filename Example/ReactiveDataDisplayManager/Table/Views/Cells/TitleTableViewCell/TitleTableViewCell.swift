@@ -35,6 +35,8 @@ extension TitleTableViewCell: ConfigurableItem {
 
     func configure(with model: String) {
         titleLabel.text = model
+        accessibilityLabel = model
+        backgroundColor = .clear
     }
 
 }
