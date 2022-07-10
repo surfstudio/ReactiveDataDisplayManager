@@ -12,7 +12,7 @@ open class CollectionFeaturePlugin: FeaturePlugin {
     public typealias CollectionType = UICollectionView
 
     public var pluginName: String {
-        String(describing: Self.self)
+        Self.pluginName
     }
 
     public init() { }

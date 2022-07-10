@@ -11,9 +11,9 @@ import UIKit
 /// Protocol for `Generator` to handle didSelect event
 public protocol SelectableItem: AnyObject {
 
-    /// Invokes when user taps on the item.
+    /// Invokes when user taps on the item. Requires .selectable plugin!!!
     var didSelectEvent: BaseEvent<Void> { get }
-    /// Called when the user takes their finger off the element.
+    /// Called when the user takes their finger off the element. Requires .selectable plugin!!!
     var didDeselectEvent: BaseEvent<Void> { get }
 
     /// A Boolean value that determines whether to perform a cell deselect.

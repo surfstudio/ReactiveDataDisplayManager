@@ -13,6 +13,8 @@ final class HighlightableTableViewController: UIViewController {
 
     private enum Constants {
         static let models = [String](repeating: "Cell", count: 10)
+        static let standart = "Single mode"
+        static let multiple = "Multiple mode"
     }
 
     // MARK: - IBOutlet
@@ -29,8 +31,10 @@ final class HighlightableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with swipeable cells"
+        title = "Higlighted cells"
+        tableView.accessibilityIdentifier = "Higlighted_cells"
         fillAdapter()
+        updateBarButtonItem(with: Constants.standart)
     }
 
 }
@@ -51,6 +55,18 @@ private extension HighlightableTableViewController {
 
         // Tell adapter that we've changed generators
         adapter.forceRefill()
+    }
+
+    func updateBarButtonItem(with title: String) {
+        let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(toggleAllowsMultiple))
+        navigationItem.rightBarButtonItem = button
+    }
+
+    @objc
+    func toggleAllowsMultiple() {
+        adapter.generators.forEach { $0.forEach { ($0 as? SelectableItem)?.isNeedDeselect.toggle() } }
+        adapter.view.allowsMultipleSelection.toggle()
+        updateBarButtonItem(with: tableView.allowsMultipleSelection ? Constants.multiple : Constants.standart)
     }
 
 }

@@ -15,6 +15,7 @@ final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectio
 
     var title: String
     var needIndexTitle: Bool
+    var id: AnyHashable?
 
     // MARK: - Private Properties
 
@@ -25,6 +26,7 @@ final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectio
     public init(model: String, needIndexTitle: Bool = false) {
         self.title = model
         self.needIndexTitle = needIndexTitle
+        self.id = model
 
         let id = model as NSString
         dragAndDroppableItem = DragAndDroppableItem(identifier: id)
