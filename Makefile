@@ -25,7 +25,7 @@ destination='platform=iOS Simulator,name=iPhone 8'
 
 ## Build lib sources for **tvOS** platform
 build_lib_tvOS:
-	xcodebuild -target ReactiveDataDisplayManager_tvOS
+	xcodebuild -scheme ReactiveDataDisplayManager_tvOS -sdk iphonesimulator -destination 'platform=tvOS Simulator,name=Apple TV'
 
 ## Build lib sources for **iOS** platform (produce xctestrun)
 build_lib_iOS:
