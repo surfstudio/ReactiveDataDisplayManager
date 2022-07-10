@@ -11,7 +11,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
     private enum Constants {
         static let dragDuration = 0.3
-        static let waitTime: UInt32 = 2
+        static let waitTime: UInt32 = 4
     }
 
     func testСollection_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {

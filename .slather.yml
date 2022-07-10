@@ -1,0 +1,5 @@
+coverage_service: cobertura_xml
+xcodeproj: ReactiveDataDisplayManager.xcodeproj
+scheme: ReactiveDataDisplayManager_iOS
+source_directory: Source
+output_directory: build/reports
