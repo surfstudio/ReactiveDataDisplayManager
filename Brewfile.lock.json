@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "a2a2a325904f1d5b5cf35c9b6c3cf098f42b9d59"
+        "revision": "176a5a8926f71940385fb1ee0532e29e2b805760"
       },
       "yonaskolb/xcodegen": {
         "revision": "f65dad76252a876eae19ce72ea3649f95401e084",
@@ -19,7 +19,7 @@
     },
     "brew": {
       "xcodegen": {
-        "version": "2.25.0",
+        "version": "2.29.0",
         "bottle": {
           "rebuild": 0,
           "root_url": "https://ghcr.io/v2/homebrew/core",
@@ -86,12 +86,12 @@
   "system": {
     "macos": {
       "monterey": {
-        "HOMEBREW_VERSION": "3.4.11-102-gef0d5fc",
+        "HOMEBREW_VERSION": "3.5.4-32-g8dd96ae",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "703ab164573ff9da5637fbf810b5a1b873832c4c",
-        "CLT": "",
-        "Xcode": "13.3.1",
-        "macOS": "12.3.1"
+        "Homebrew/homebrew-core": "ffef759c267ea84897d1e291698e8615653528ee",
+        "CLT": "13.0.0.0.1.1627064638",
+        "Xcode": "13.4.1",
+        "macOS": "12.4"
       },
       "big_sur": {
         "HOMEBREW_VERSION": "3.5.2",
