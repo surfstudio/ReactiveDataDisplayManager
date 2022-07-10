@@ -33,7 +33,7 @@ build_lib_iOS:
 
 ## Run tests of lib for **iOS** platform
 test_lib_iOS:
-	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | xcpretty -c
+	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | bundle exec xcpretty -c
 	-bundle exec slather
 
 ## Preparing report contains test-coverage results
@@ -46,7 +46,7 @@ build_example_iOS:
 
 ## Run tests of Example for **iOS** platform
 test_example_iOS:
-	xcodebuild test-without-building -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | xcpretty -c
+	xcodebuild test-without-building -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | bundle exec xcpretty -c
 
 ## Preparing report contains test-coverage results
 prepare_example_report:
