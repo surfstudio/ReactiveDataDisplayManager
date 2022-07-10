@@ -50,7 +50,7 @@ test_example_iOS:
 
 ## Preparing report contains test-coverage results
 prepare_example_report:
-	bundle exec slather coverage --workspace ReactiveDataDisplayManager.xcworkspace --scheme ReactiveDataDisplayManagerExample_iOS --binary-basename ReactiveDataDisplayManager --arch x86_64 --output-directory build/reports --cobertura-xml Example/ReactiveDataDisplayManagerExample.xcodeproj
+	bundle exec slather coverage --workspace ReactiveDataDisplayManager.xcworkspace --scheme ReactiveDataDisplayManagerExample_iOS --binary-basename ReactiveDataDisplayManager --arch x86_64 --output-directory build/reports --cobertura-xml
 
 ## Install concrete hook with {name}
 install_hook:
