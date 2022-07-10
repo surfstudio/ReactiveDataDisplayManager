@@ -16,10 +16,7 @@ abstract_target 'Targets' do
   target 'ReactiveDataDisplayManagerExample_iOS' do
     target 'ReactiveDataDisplayManagerExampleUITests'
   end
-
-  target 'ReactiveDataDisplayManagerExample_iOS_M1' do
-    target 'ReactiveDataDisplayManagerExampleUITests_M1'
-  end
+  
 end
 
 target 'ReactiveDataDisplayManagerExample_tvOS' do

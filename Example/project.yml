@@ -32,21 +32,6 @@ targets:
         bundle_name: ReactiveDataDisplayManagerExample
         ui_test: ReactiveDataDisplayManagerExampleUITests
 
-    ReactiveDataDisplayManagerExample_iOS_M1:
-      platform: iOS
-      deploymentTarget: 11.0
-      sources:
-        - path: ReactiveDataDisplayManager
-      dependencies:
-        - target: ReactiveDataDisplayManager_iOS
-      info:
-        path: ReactiveDataDisplayManager/Application/Info.plist
-      templates:
-        - BaseSetting
-      templateAttributes:
-        bundle_name: ReactiveDataDisplayManagerExample
-        ui_test: ReactiveDataDisplayManagerExampleUITests_M1
-
     ReactiveDataDisplayManagerExample_tvOS:
       platform: tvOS
       deploymentTarget: 13.0
@@ -63,7 +48,7 @@ targets:
         ui_test: ReactiveDataDisplayManagerExampleUITests
       configs:
         Debug:
-          EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
+
 
     ReactiveDataDisplayManagerExampleUITests:
         templates:
@@ -73,18 +58,8 @@ targets:
         settings:
           configs:
             Debug:
-              EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
-              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS
 
-    ReactiveDataDisplayManagerExampleUITests_M1:
-        templates:
-          - ReactiveDataDisplayManagerExampleUITestsTemplate
-        dependencies:
-          - target: ReactiveDataDisplayManagerExample_iOS_M1
-        settings:
-          configs:
-            Debug:
-              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS_M1
+              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS
 
 
 # Шаблон для тестовых таргетов

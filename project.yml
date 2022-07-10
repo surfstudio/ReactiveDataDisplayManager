@@ -43,9 +43,7 @@ targets:
           LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
           CODE_SIGN_IDENTITY: "iPhone Developer"
           CODE_SIGN_STYLE: Automatic
-        configs:
-          Debug:
-            EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
+
 
     ReactiveDataDisplayManagerTests:
       type: bundle.unit-test
@@ -67,4 +65,3 @@ targets:
       settings:
         configs:
           Debug:
-            EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
