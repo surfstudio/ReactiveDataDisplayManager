@@ -41,8 +41,8 @@ targets:
           VERSIONING_SYSTEM: "apple-generic"
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
           LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
-          CODE_SIGN_IDENTITY: "iPhone Developer"
-          CODE_SIGN_STYLE: Automatic
+          CODE_SIGN_IDENTITY: None
+          CODE_SIGN_STYLE: Manual
 
 
     ReactiveDataDisplayManagerTests:
@@ -63,5 +63,6 @@ targets:
         - script: sourcery
           name: Sourcery
       settings:
-        configs:
-          Debug:
+        base:
+          CODE_SIGN_IDENTITY: None
+          CODE_SIGN_STYLE: Manual

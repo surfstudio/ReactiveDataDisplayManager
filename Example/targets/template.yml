@@ -2,7 +2,7 @@ name: BaseSetting
 targetTemplates:
 
 #  Базовый шаблон с настройками
-    BaseSetting:
+    BaseApp:
       type: application
       scheme:
         configVariants: all
@@ -19,13 +19,25 @@ targetTemplates:
           CFBundleName: ${bundle_name}
           CFBundleShortVersionString: $(MARKETING_VERSION)
           CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+
+    BaseUITest:
+        type: bundle.ui-testing
+        platform: iOS
+        deploymentTarget:
+          iOS: 10.0
+          tvOS: 10.0
+        scheme:
+          configVariants: all
+          gatherCoverageData: true
+
+    BaseSettings:
       settings:
         base:
-          PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm.example
+          PRODUCT_BUNDLE_IDENTIFIER: ${bundle_id}
           MARKETING_VERSION: "7.2.1"
           CURRENT_PROJECT_VERSION: 0
           VERSIONING_SYSTEM: "apple-generic"
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
           LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
-          CODE_SIGN_IDENTITY: "iPhone Developer"
-          CODE_SIGN_STYLE: Automatic
+          CODE_SIGN_IDENTITY: None
+          CODE_SIGN_STYLE: Manual

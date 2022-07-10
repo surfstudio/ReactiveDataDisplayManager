@@ -8,7 +8,7 @@ include:
 name: ReactiveDataDisplayManagerExample
 options:
   # Версия Xcode
-  xcodeVersion: 13.3
+  xcodeVersion: 13.4.1
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
@@ -27,8 +27,10 @@ targets:
       info:
         path: ReactiveDataDisplayManager/Application/Info.plist
       templates:
-        - BaseSetting
+        - BaseApp
+        - BaseSettings
       templateAttributes:
+        bundle_id: ru.surfstudio.rddm.example
         bundle_name: ReactiveDataDisplayManagerExample
         ui_test: ReactiveDataDisplayManagerExampleUITests
 
@@ -42,38 +44,26 @@ targets:
       info:
         path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
       templates:
-        - BaseSetting
+        - BaseApp
+        - BaseSettings
       templateAttributes:
+        bundle_id: ru.surfstudio.rddm.tv_example
         bundle_name: ReactiveDataDisplayManagerExampleTv
         ui_test: ReactiveDataDisplayManagerExampleUITests
-      configs:
-        Debug:
-
 
     ReactiveDataDisplayManagerExampleUITests:
         templates:
-          - ReactiveDataDisplayManagerExampleUITestsTemplate
+          - BaseUITest
+          - BaseSettings
+        templateAttributes:
+          bundle_id: ru.surfstudio.rddm.tv_example.tests
         dependencies:
           - target: ReactiveDataDisplayManagerExample_iOS
-        settings:
-          configs:
-            Debug:
-
-              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS
-
-
-# Шаблон для тестовых таргетов
-targetTemplates:
-    ReactiveDataDisplayManagerExampleUITestsTemplate:
-        type: bundle.ui-testing
-        platform: iOS
-        deploymentTarget:
-          iOS: 10.0
-          tvOS: 10.0
-        scheme:
-          configVariants: all
-          gatherCoverageData: true
         sources: [ReactiveDataDisplayManagerExampleUITests]
         info:
           path: ReactiveDataDisplayManagerExampleUITests/Info.plist
           properties: []
+        settings:
+          configs:
+            Debug:
+              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS
