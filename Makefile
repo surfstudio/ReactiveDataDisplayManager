@@ -34,7 +34,6 @@ build_lib_iOS:
 ## Run tests of lib for **iOS** platform
 test_lib_iOS:
 	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | bundle exec xcpretty -c
-	-bundle exec slather
 
 ## Preparing report contains test-coverage results
 prepare_report:
