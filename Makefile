@@ -1,31 +1,55 @@
 ## Init Framework and Example projects
 init:
+	if ! gem spec bundler > /dev/null 2>&1; then\
+  		echo "bundler gem is not installed!";\
+  		sudo gem install bundler;\
+	fi
+
+	-bundle update
+	-bundle install --path .bundle
+
 	brew bundle --no-upgrade
 
 	mkdir -p .git/hooks
 	$(MAKE) install_hooks
 
-	xcodegen generate
-
-	cd Example; make init
+	$(MAKE) projects
 
 ## Regenerate Framework and Example projects
 projects:
 	xcodegen generate
+	-bundle exec pod install
 
-	cd Example; make project
+## Build Configuration
+destination='platform=iOS Simulator,name=iPhone 8'
 
-## Build lib sources for {platform}
-build_lib:
-	xcodebuild -target ReactiveDataDisplayManager_${platform}
+## Build lib sources for **tvOS** platform
+build_lib_tvOS:
+	xcodebuild -scheme ReactiveDataDisplayManager_tvOS -sdk iphonesimulator -destination 'platform=tvOS Simulator,name=Apple TV'
+
+## Build lib sources for **iOS** platform (produce xctestrun)
+build_lib_iOS:
+	xcodebuild -scheme ReactiveDataDisplayManager_iOS -sdk iphonesimulator -destination ${destination} build-for-testing
 
 ## Run tests of lib for **iOS** platform
 test_lib_iOS:
-	xcodebuild test -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -parallel-testing-enabled YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
+	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | bundle exec xcpretty -c
 
-## Run tests of example
+## Preparing report contains test-coverage results
+prepare_report:
+	bundle exec slather
+
+## Build Example sources for **iOS** platform (produce xctestrun)
+build_example_iOS:
+	xcodebuild -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -sdk iphonesimulator -destination ${destination} build-for-testing
+
+## Run tests of Example for **iOS** platform
 test_example_iOS:
-	cd Example; make test_example_iOS
+	xcodebuild test-without-building -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | bundle exec xcpretty -c
+
+## Preparing report contains test-coverage results
+prepare_example_report:
+	bundle exec slather coverage --workspace ReactiveDataDisplayManager.xcworkspace --scheme ReactiveDataDisplayManagerExample_iOS --binary-basename ReactiveDataDisplayManager --arch x86_64 --output-directory build/reports --cobertura-xml
 
 ## Install concrete hook with {name}
 install_hook:

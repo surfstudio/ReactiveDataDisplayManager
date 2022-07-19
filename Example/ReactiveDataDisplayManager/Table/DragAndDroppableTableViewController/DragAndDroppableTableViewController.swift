@@ -23,8 +23,15 @@ final class DragAndDroppableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
+    private var draggableParameters: DragablePreviewParameters {
+        let params = UIDragPreviewParameters()
+        params.visiblePath = UIBezierPath(ovalIn: .init(x: 10, y: 0, width: 80, height: 40))
+        return .init(parameters: params)
+    }
+
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(featurePlugin: .dragAndDroppable(by: .all))
+        .add(featurePlugin: .dragAndDroppable(draggableParameters: draggableParameters))
+        .add(plugin: .selectable())
         .build()
 
     // MARK: - UIViewController
@@ -35,6 +42,7 @@ final class DragAndDroppableTableViewController: UIViewController {
 
         tableView.accessibilityIdentifier = "Table_with_drag_n_drop_cell"
         tableView.dragInteractionEnabled = true
+        tableView.allowsMultipleSelection = true
 
         fillAdapter()
     }
@@ -63,6 +71,7 @@ private extension DragAndDroppableTableViewController {
 
         for index in range {
             let generator = DragAndDroppableCellGenerator(with: "Cell: \(index)")
+            generator.isNeedDeselect = false
             generators.append(generator)
         }
 
