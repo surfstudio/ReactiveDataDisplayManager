@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 # Ensure github repositories are fetched using HTTPS
@@ -7,4 +9,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end if Gem::Version.new(Bundler::VERSION) < Gem::Version.new('2')
 
-gem 'cocoapods', "~> 1.10.1"
+gem 'cocoapods', "~> 1.11.3"
+gem 'slather', "~> 2.7.2"
+gem 'xcpretty', "~> 0.3.0"

@@ -25,12 +25,13 @@ open class BaseCollectionManager: CollectionGeneratorsProvider, DataDisplayManag
     public weak var view: UICollectionView!
     // swiftlint:enable implicitly_unwrapped_optional
 
-    var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
+    var delegate: CollectionDelegate?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
+        CollectionPluginsChecker(delegate: delegate, generators: generators).asyncCheckPlugins()
         dataSource?.modifier?.reload()
     }
 

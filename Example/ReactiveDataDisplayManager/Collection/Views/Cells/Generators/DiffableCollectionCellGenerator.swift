@@ -5,6 +5,7 @@
 //  Created by Никита Коробейников on 16.03.2021.
 //
 
+import Foundation
 import ReactiveDataDisplayManager
 
 final class DiffableCollectionCellGenerator: BaseCollectionCellGenerator<TitleCollectionListCell>, DiffableItemSource {

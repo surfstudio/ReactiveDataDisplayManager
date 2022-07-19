@@ -8,6 +8,21 @@
 import Foundation
 import UIKit
 
+/// There is no way to customize system badges with the number of items taken.
+@available(iOS 11.0, *)
+public struct DragablePreviewParameters {
+    var parameters: UIDragPreviewParameters?
+    var preview: UIView?
+
+    /// - Parameters:
+    ///     - 'parameters': draggable items parameters
+    ///     - preview: custom UIView when item dragging
+    public init(parameters: UIDragPreviewParameters? = nil, preview: UIView? = nil) {
+        self.parameters = parameters
+        self.preview = preview
+    }
+}
+
 /// Delegate based on `DraggableDelegate` protocol.
 @available(iOS 11.0, *)
 open class DraggablePluginDelegate<Provider: GeneratorsProvider> {
@@ -17,6 +32,10 @@ open class DraggablePluginDelegate<Provider: GeneratorsProvider> {
     public typealias GeneratorType = DragAndDroppableItemSource
 
     public init() { }
+
+    // MARK: - Internal Properties
+
+    var draggableParameters: DragablePreviewParameters?
 
 }
 
@@ -35,9 +54,10 @@ extension DraggablePluginDelegate: DraggableDelegate {
         guard let generator = provider?.generators[safe: indexPath.section]?[safe: indexPath.row] as? GeneratorType else { return [] }
         let mainDragItem = makeDragItem(for: generator.dropableItem)
 
-        // TODO: - Add support for multiple items
-        //        let items = [mainDragItem] + generator.associatedGenerators.compactMap(makeDragItem(for:))
-        //        return items
+        if let preview = draggableParameters?.preview {
+            mainDragItem.previewProvider = { .init(view: preview) }
+        }
+
         return [mainDragItem]
     }
 

@@ -9,7 +9,7 @@
 open class BaseCollectionPlugin<Event>: PluginAction {
 
     public var pluginName: String {
-        String(describing: Self.self)
+        Self.pluginName
     }
 
     public init() { }

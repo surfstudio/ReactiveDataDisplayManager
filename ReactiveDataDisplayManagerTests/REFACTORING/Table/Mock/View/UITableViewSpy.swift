@@ -30,7 +30,7 @@ final class UITableViewSpy: UITableView {
         scrollToRowWasCalled = true
     }
 
-    // this method not work with custom dataSource, use MockModifier
+    // this method not work with base dataSource, use MockDataSource
     override func reloadRows(at indexPaths: [IndexPath], with animation: UITableView.RowAnimation) {
         lastReloadedRows = indexPaths
     }
