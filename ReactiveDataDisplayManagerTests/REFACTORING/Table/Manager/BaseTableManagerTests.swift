@@ -144,12 +144,20 @@ final class BaseTableManagerTests: XCTestCase {
     func testThatRemoveGeneratorRemovesEmptySections() {
         // given
         let gen1 = StubTableCellGenerator()
-        ddm.addCellGenerator(gen1)
-        ddm.forceRefill()
+        let refillOne = XCTestExpectation(description: "refillOne")
+        let refillTwo = XCTestExpectation(description: "refillTwo")
 
-        // when
+        // Act 1
+        ddm.addCellGenerator(gen1)
+        ddm.forceRefill { refillOne.fulfill() }
+
+        wait(for: [refillOne], timeout: 1)
+
+        // Act 2
         ddm.remove(gen1, with: .automatic, needScrollAt: nil, needRemoveEmptySection: true)
-        ddm.forceRefill()
+        ddm.forceRefill { refillTwo.fulfill() }
+
+        wait(for: [refillTwo], timeout: 1)
 
         // then
         XCTAssertEqual(ddm.sections.count, 0)
