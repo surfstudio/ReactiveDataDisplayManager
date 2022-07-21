@@ -9,7 +9,7 @@ import UIKit
 
 @testable import ReactiveDataDisplayManager
 
-class MockTableCellGenerator: TableCellGenerator {
+class StubTableCellGenerator: TableCellGenerator {
 
     var identifier: String {
         return String(describing: UITableViewCell.self)
