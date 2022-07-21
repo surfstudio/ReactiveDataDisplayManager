@@ -259,5 +259,4 @@ final class BaseCollectionManagerTests: XCTestCase {
         XCTAssertEqual(ddm?.generators.first?.count, 4)
     }
 
-
 }
