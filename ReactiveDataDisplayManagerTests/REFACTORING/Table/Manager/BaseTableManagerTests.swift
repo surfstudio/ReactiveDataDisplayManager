@@ -45,7 +45,7 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorCallsRegisterNib() {
         // given
-        let gen = MockTableCellGenerator()
+        let gen = StubTableCellGenerator()
 
         // when
         ddm.addCellGenerator(gen)
@@ -57,8 +57,8 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
         // Arrange
-        let gen1 = MockTableCellGenerator()
-        let gen2 = MockTableCellGenerator()
+        let gen1 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator()
 
         // Act
         ddm += [gen1, gen2]
@@ -71,7 +71,7 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
         // given
-        let gen = MockTableCellGenerator()
+        let gen = StubTableCellGenerator()
 
         // when
         ddm.addCellGenerator(gen)
@@ -83,8 +83,8 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAfterGenerator() {
         // given
-        let gen1 = MockTableCellGenerator()
-        let gen2 = MockTableCellGenerator()
+        let gen1 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator()
 
         ddm.addCellGenerator(gen1)
         ddm.addCellGenerator(gen2, after: gen1)
@@ -95,8 +95,8 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
         // given
-        let gen1 = MockTableCellGenerator()
-        let gen2 = MockTableCellGenerator()
+        let gen1 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator()
 
         // when
         expectFatalError(expectedMessage: "Error adding TableCellGenerator generator. You tried to add generators after unexisted generator") {
@@ -106,11 +106,11 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatUpdateGeneratorsUpdatesNeededGenerators() {
         // given
-        let gen1 = MockTableCellGenerator()
-        let gen2 = MockTableCellGenerator()
-        let gen3 = MockTableCellGenerator()
-        let gen4 = MockTableCellGenerator()
-        let gen5 = MockTableCellGenerator()
+        let gen1 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator()
+        let gen3 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator()
+        let gen5 = StubTableCellGenerator()
 
         ddm.addCellGenerators([gen1, gen2])
         ddm.addCellGenerators([gen3, gen4, gen5])
@@ -124,8 +124,8 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatClearCellGeneratorsWorksCorrectly() {
         // given
-        let gen1 = MockTableCellGenerator()
-        let gen2 = MockTableCellGenerator()
+        let gen1 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator()
 
         ddm.addCellGenerator(gen1)
         ddm.addCellGenerators([gen1, gen1, gen2, gen2])
@@ -143,7 +143,7 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatRemoveGeneratorRemovesEmptySections() {
         // given
-        let gen1 = MockTableCellGenerator()
+        let gen1 = StubTableCellGenerator()
         ddm.addCellGenerator(gen1)
         ddm.forceRefill()
 
@@ -157,10 +157,10 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatRemoveGeneratorCallsScrolling() {
         // given
-        let gen1 = MockTableCellGenerator()
-        let gen2 = MockTableCellGenerator()
-        let gen3 = MockTableCellGenerator()
-        let gen4 = MockTableCellGenerator()
+        let gen1 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator()
+        let gen3 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator()
 
         ddm.addCellGenerators([gen1, gen2])
         ddm.addCellGenerators([gen3, gen4])
@@ -176,10 +176,10 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatRemoveGeneratorRemovesGenerators() {
         // given
-        let gen1 = MockTableCellGenerator()
-        let gen2 = MockTableCellGenerator()
-        let gen3 = MockTableCellGenerator()
-        let gen4 = MockTableCellGenerator()
+        let gen1 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator()
+        let gen3 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator()
 
         ddm.addCellGenerators([gen1, gen2])
         ddm.addCellGenerators([gen3, gen4])

@@ -27,12 +27,12 @@ final class ManualTableManagerWithCustomModifierTests: XCTestCase {
     func testThatUpdateGeneratorsUpdatesNeededGenerators() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = MockTableCellGenerator()
-        let gen2 = MockTableCellGenerator()
+        let gen1 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator()
         let headerGen2 = StubTableHeaderGenerator()
-        let gen3 = MockTableCellGenerator()
-        let gen4 = MockTableCellGenerator()
-        let gen5 = MockTableCellGenerator()
+        let gen3 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator()
+        let gen5 = StubTableCellGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen2])
         ddm.addSectionHeaderGenerator(headerGen2)

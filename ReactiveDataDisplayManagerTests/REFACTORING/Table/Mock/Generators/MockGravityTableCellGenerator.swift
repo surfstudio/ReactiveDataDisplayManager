@@ -7,7 +7,7 @@
 
 @testable import ReactiveDataDisplayManager
 
-class MockGravityTableCellGenerator: MockTableCellGenerator, GravityItem {
+class MockGravityTableCellGenerator: StubTableCellGenerator, GravityItem {
 
     var heaviness: Int
 
