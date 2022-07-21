@@ -6,11 +6,11 @@ import XCTest
 final class BaseTableManagerTests: XCTestCase {
 
     private var ddm: BaseTableManager!
-    private var table: UITableViewSpy!
+    private var table: SpyUITableView!
 
     override func setUp() {
         super.setUp()
-        table = UITableViewSpy()
+        table = SpyUITableView()
         ddm = table.rddm.baseBuilder.build()
     }
 

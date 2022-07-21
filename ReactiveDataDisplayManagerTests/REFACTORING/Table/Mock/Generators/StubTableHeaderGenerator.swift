@@ -9,7 +9,7 @@ import UIKit
 
 @testable import ReactiveDataDisplayManager
 
-class MockTableHeaderGenerator: TableHeaderGenerator {
+class StubTableHeaderGenerator: TableHeaderGenerator {
 
     override func generate() -> UIView {
         return UIView()

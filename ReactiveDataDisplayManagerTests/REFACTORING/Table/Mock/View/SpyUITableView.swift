@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class UITableViewSpy: UITableView {
+final class SpyUITableView: UITableView {
 
     var reloadDataWasCalled = false
     var registerNibWasCalled = false

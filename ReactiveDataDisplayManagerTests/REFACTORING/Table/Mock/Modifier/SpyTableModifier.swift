@@ -9,7 +9,7 @@ import UIKit
 
 @testable import ReactiveDataDisplayManager
 
-final class MockTableModifier: Modifier<UITableView, UITableView.RowAnimation> {
+final class SpyTableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     // MARK: - Properties
 

@@ -6,14 +6,17 @@ import XCTest
 final class ManualTableManagerTests: XCTestCase {
 
     private var ddm: ManualTableManager!
-    private var table: UITableViewSpy!
+    private var table: SpyUITableView!
     private var dataSource: MockTableDataSource!
 
     override func setUp() {
         super.setUp()
-        table = UITableViewSpy()
+        table = SpyUITableView()
         ddm = table.rddm.manualBuilder
-            .set(dataSource: { MockTableDataSource(manager: $0) })
+            .set(dataSource: {
+                dataSource = MockTableDataSource(manager: $0)
+                return dataSource
+            })
             .build()
     }
 
@@ -21,30 +24,36 @@ final class ManualTableManagerTests: XCTestCase {
         super.tearDown()
         table = nil
         ddm = nil
+        dataSource = nil
     }
 
     // MARK: - Generator actions tests
 
     func testThatAddSectionGeneratorWorksCorrectly() {
         // given
-        let gen1 = MockTableHeaderGenerator()
-        let gen2 = MockTableHeaderGenerator()
+        let gen1 = StubTableHeaderGenerator()
+        let gen2 = StubTableHeaderGenerator()
+        let expectation = XCTestExpectation(description: "forceRefill")
 
         // when
         ddm.addSectionHeaderGenerator(gen1)
         ddm.addSectionHeaderGenerator(gen1)
         ddm.addSectionHeaderGenerator(gen2)
+        ddm.forceRefill { expectation.fulfill() }
+
+        wait(for: [expectation], timeout: 3)
 
         // then
         XCTAssertEqual(ddm.sections.count, 3)
+        XCTAssertEqual(dataSource.numberOfSections(in: table), 3)
     }
 
     func testThatAddSectionWithGenerators() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen3 = MockTableCellGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
@@ -65,12 +74,12 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
-        let headerGen3 = MockTableHeaderGenerator()
-        let headerGen4 = MockTableHeaderGenerator()
-        let headerGen5 = MockTableHeaderGenerator()
-        let headerGen6 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
+        let headerGen3 = StubTableHeaderGenerator()
+        let headerGen4 = StubTableHeaderGenerator()
+        let headerGen5 = StubTableHeaderGenerator()
+        let headerGen6 = StubTableHeaderGenerator()
 
         // when
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -94,10 +103,10 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
-        let headerGen3 = MockTableHeaderGenerator()
-        let headerGen4 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
+        let headerGen3 = StubTableHeaderGenerator()
+        let headerGen4 = StubTableHeaderGenerator()
 
         // when
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -117,12 +126,12 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatInsertSectionHeaderWithGeneratorsAfterSectionHeaderCorrectly() {
         // given
         let expect = expectation(description: "reloading")
-        let headerGen1 = MockTableHeaderGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
-        let headerGen3 = MockTableHeaderGenerator()
-        let headerGen4 = MockTableHeaderGenerator()
-        let headerGen5 = MockTableHeaderGenerator()
-        let headerGen6 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
+        let headerGen3 = StubTableHeaderGenerator()
+        let headerGen4 = StubTableHeaderGenerator()
+        let headerGen5 = StubTableHeaderGenerator()
+        let headerGen6 = StubTableHeaderGenerator()
 
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -156,9 +165,9 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
-        let headerGen3 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
+        let headerGen3 = StubTableHeaderGenerator()
 
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -183,11 +192,11 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
-        let headerGen3 = MockTableHeaderGenerator()
-        let headerGen4 = MockTableHeaderGenerator()
-        let headerGen5 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
+        let headerGen3 = StubTableHeaderGenerator()
+        let headerGen4 = StubTableHeaderGenerator()
+        let headerGen5 = StubTableHeaderGenerator()
 
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
@@ -214,7 +223,7 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAppendsNewSectionToCellGeneratorsCorrectly() {
         // given
-        let headerGen = MockTableHeaderGenerator()
+        let headerGen = StubTableHeaderGenerator()
         let gen = MockTableCellGenerator()
         let initialNumberOfSections = ddm.generators.count
 
@@ -228,7 +237,7 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorCallsRegisterNib() {
         // given
-        let headerGen = MockTableHeaderGenerator()
+        let headerGen = StubTableHeaderGenerator()
         let gen = MockTableCellGenerator()
 
         // when
@@ -241,7 +250,7 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatCustomOperationAddCellGeneratorCallsRegisterNib() {
         // Arrange
-        let headerGen = MockTableHeaderGenerator()
+        let headerGen = StubTableHeaderGenerator()
         let gen = MockTableCellGenerator()
 
         // Act
@@ -254,7 +263,7 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
         // Arrange
-        let headerGen = MockTableHeaderGenerator()
+        let headerGen = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
 
@@ -280,7 +289,7 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAddsGeneratorCorrectly() {
         // given
-        let headerGen = MockTableHeaderGenerator()
+        let headerGen = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
 
@@ -301,8 +310,8 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorToHeaderCorrectly() {
         // given
-        let headerGen = MockTableHeaderGenerator()
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen = StubTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
 
@@ -326,10 +335,10 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAfterGeneratorWorksCorrectly() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen3 = MockTableCellGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
@@ -349,7 +358,7 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         self.ddm.addSectionHeaderGenerator(headerGen1)
@@ -362,7 +371,7 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatClearCellGeneratorsWorksCorrectly() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -379,7 +388,7 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatClearHeaderGeneratorsWorksCorrectly() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -396,10 +405,10 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorToHeaderAddsGeneratorsToCorrectHeader() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
 
@@ -420,11 +429,11 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         let gen3 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
         let gen6 = MockTableCellGenerator()
@@ -449,11 +458,11 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         let gen3 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
         let gen6 = MockTableCellGenerator()
@@ -478,11 +487,11 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         let gen3 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
         let gen6 = MockTableCellGenerator()
@@ -507,11 +516,11 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         let gen3 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
         let gen6 = MockTableCellGenerator()
@@ -536,11 +545,11 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         let gen3 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
         let gen6 = MockTableCellGenerator()
@@ -566,11 +575,11 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         let gen3 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
         let gen6 = MockTableCellGenerator()
@@ -596,11 +605,11 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         let gen3 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
         let gen6 = MockTableCellGenerator()
@@ -624,7 +633,7 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatReplaceOldGeneratorOnNewReplacesGeneratorCorrectly() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
         let gen3 = MockTableCellGenerator()
@@ -640,9 +649,9 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatSwapGeneratorWithGeneratorSwapsCorrectly() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen2 = MockTableCellGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1], toHeader: headerGen1)
@@ -658,9 +667,9 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatRemoveAllGeneratorsClearsSection() {
         // Arrange
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen2 = MockTableCellGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1], toHeader: headerGen1)
@@ -678,9 +687,9 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatRemoveAllGeneratorsDoesntClearInvalidSection() {
         // Arrange
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1], toHeader: headerGen1)
 
@@ -695,10 +704,10 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatRemoveGeneratorRemovesEmptySections() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen3 = MockTableCellGenerator()
         let gen4 = MockTableCellGenerator()
 
@@ -719,10 +728,10 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatRemoveGeneratorCallsScrolling() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen3 = MockTableCellGenerator()
         let gen4 = MockTableCellGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -741,10 +750,10 @@ final class ManualTableManagerTests: XCTestCase {
 
     func testThatRemoveGeneratorRemovesGenerators() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen3 = MockTableCellGenerator()
         let gen4 = MockTableCellGenerator()
 

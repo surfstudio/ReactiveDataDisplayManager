@@ -54,7 +54,7 @@ class MockTableDataSource: NSObject, TableDataSource {
 
 final class MockTableDataSourceWithModifier: MockTableDataSource {
 
-    convenience init(manager: BaseTableManager, modifier: MockTableModifier) {
+    convenience init(manager: BaseTableManager, modifier: SpyTableModifier) {
         self.init(manager: manager)
         self.modifier = modifier
     }

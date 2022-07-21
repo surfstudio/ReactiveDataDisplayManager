@@ -6,11 +6,11 @@ import XCTest
 final class GravityTableManagerTests: XCTestCase {
 
     private var ddm: GravityTableManager!
-    private var table: UITableViewSpy!
+    private var table: SpyUITableView!
 
     override func setUp() {
         super.setUp()
-        table = UITableViewSpy()
+        table = SpyUITableView()
         ddm = table.rddm.gravityBuilder
             .set(dataSource: { MockTableDataSource(manager: $0) })
             .build()

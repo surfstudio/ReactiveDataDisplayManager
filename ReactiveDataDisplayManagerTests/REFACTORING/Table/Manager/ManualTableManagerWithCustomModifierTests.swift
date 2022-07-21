@@ -6,13 +6,13 @@ import XCTest
 final class ManualTableManagerWithCustomModifierTests: XCTestCase {
 
     private var ddm: ManualTableManager!
-    private var table: UITableViewSpy!
-    private var modifier: MockTableModifier!
+    private var table: SpyUITableView!
+    private var modifier: SpyTableModifier!
 
     override func setUp() {
         super.setUp()
-        table = UITableViewSpy()
-        modifier = MockTableModifier(view: table)
+        table = SpyUITableView()
+        modifier = SpyTableModifier(view: table)
         ddm = table.rddm.manualBuilder
             .set(dataSource: { [unowned self] in MockTableDataSourceWithModifier(manager: $0, modifier: modifier) })
             .build()
@@ -26,10 +26,10 @@ final class ManualTableManagerWithCustomModifierTests: XCTestCase {
 
     func testThatUpdateGeneratorsUpdatesNeededGenerators() {
         // given
-        let headerGen1 = MockTableHeaderGenerator()
+        let headerGen1 = StubTableHeaderGenerator()
         let gen1 = MockTableCellGenerator()
         let gen2 = MockTableCellGenerator()
-        let headerGen2 = MockTableHeaderGenerator()
+        let headerGen2 = StubTableHeaderGenerator()
         let gen3 = MockTableCellGenerator()
         let gen4 = MockTableCellGenerator()
         let gen5 = MockTableCellGenerator()
@@ -47,7 +47,7 @@ final class ManualTableManagerWithCustomModifierTests: XCTestCase {
 
     func testThatReloadSectionCallTableViewMethod() {
         // Arrange
-        let headerGenerator = MockTableHeaderGenerator()
+        let headerGenerator = StubTableHeaderGenerator()
         ddm.addSectionHeaderGenerator(headerGenerator)
 
         // Act
@@ -59,8 +59,8 @@ final class ManualTableManagerWithCustomModifierTests: XCTestCase {
 
     func testThatReloadSectionWithInvalidHeaderGeneratorNotCallTableViewMethod() {
         // Arrange
-        let headerGenerator = MockTableHeaderGenerator()
-        let wrongHeaderGenerator = MockTableHeaderGenerator()
+        let headerGenerator = StubTableHeaderGenerator()
+        let wrongHeaderGenerator = StubTableHeaderGenerator()
         ddm.addSectionHeaderGenerator(headerGenerator)
 
         // Act
