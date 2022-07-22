@@ -151,13 +151,13 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen1)
         ddm.forceRefill { refillOne.fulfill() }
 
-        wait(for: [refillOne], timeout: 3)
+        wait(for: [refillOne], timeout: 1)
 
         // Act 2
-        ddm.remove(gen1, with: .automatic, needScrollAt: nil, needRemoveEmptySection: true)
+        ddm.remove(gen1, with: .fade, needScrollAt: nil, needRemoveEmptySection: true)
         ddm.forceRefill { refillTwo.fulfill() }
 
-        wait(for: [refillTwo], timeout: 3)
+        wait(for: [refillTwo], timeout: 1)
 
         // then
         XCTAssertEqual(ddm.sections.count, 0)
@@ -175,7 +175,7 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // when
-        ddm.remove(gen3, with: .automatic, needScrollAt: .top, needRemoveEmptySection: false)
+        ddm.remove(gen3, with: .fade, needScrollAt: .top, needRemoveEmptySection: false)
         ddm.forceRefill()
 
         // then
