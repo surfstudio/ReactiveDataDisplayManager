@@ -154,7 +154,7 @@ final class BaseTableManagerTests: XCTestCase {
         wait(for: [refillOne], timeout: 1)
 
         // Act 2
-        ddm.remove(gen1, with: .fade, needScrollAt: nil, needRemoveEmptySection: true)
+        ddm.remove(gen1, with: .fade, needScrollAt: .top, needRemoveEmptySection: true)
         ddm.forceRefill { refillTwo.fulfill() }
 
         wait(for: [refillTwo], timeout: 1)
