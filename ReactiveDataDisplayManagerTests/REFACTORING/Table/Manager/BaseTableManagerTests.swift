@@ -145,19 +145,15 @@ final class BaseTableManagerTests: XCTestCase {
         // given
         let gen1 = StubTableCellGenerator()
         let refillOne = XCTestExpectation(description: "refillOne")
-        let refillTwo = XCTestExpectation(description: "refillTwo")
 
         // Act 1
         ddm.addCellGenerator(gen1)
-        ddm.forceRefill { refillOne.fulfill() }
+        ddm.forceRefill { [unowned self] in
+            ddm.remove(gen1, with: .fade, needScrollAt: .top, needRemoveEmptySection: true)
+            refillOne.fulfill()
+        }
 
         wait(for: [refillOne], timeout: 1)
-
-        // Act 2
-        ddm.remove(gen1, with: .fade, needScrollAt: .top, needRemoveEmptySection: true)
-        ddm.forceRefill { refillTwo.fulfill() }
-
-        wait(for: [refillTwo], timeout: 1)
 
         // then
         XCTAssertEqual(ddm.sections.count, 0)
