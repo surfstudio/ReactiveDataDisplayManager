@@ -5,6 +5,7 @@
 //  Created by Dmitry Korolev on 05.04.2021.
 //
 
+import UIKit
 import ReactiveDataDisplayManager
 
 final class TitleIconCollectionFooterGenerator {

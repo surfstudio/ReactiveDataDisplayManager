@@ -112,7 +112,7 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(gen1)
         ddm.addSectionHeaderGenerator(gen2)
         // then
-        XCTAssert(ddm.sectionHeaderGenerators.count == 3)
+        XCTAssertEqual(ddm.sectionHeaderGenerators.count, 3)
     }
 
     func testThatAddCellGeneratorAppendsNewSectionToCellGeneratorsCorrectly() {
@@ -133,7 +133,7 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
         // when
         ddm.addCellGenerator(gen)
         // then
-        XCTAssert(ddm.sectionHeaderGenerators.count == 1)
+        XCTAssertEqual(ddm.sectionHeaderGenerators.count, 1)
     }
 
     func testThatAddCellGeneratorAddsGeneratorCorrectly() {
@@ -150,9 +150,9 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
         ddm.addCellGenerator(gen2)
         ddm.addCellGenerator(gen2)
         // then
-        XCTAssert(ddm.cellGenerators.count == 2)
-        XCTAssert(ddm.cellGenerators.first?.count == 3)
-        XCTAssert(ddm.cellGenerators.last?.count == 2)
+        XCTAssertEqual(ddm.cellGenerators.count, 2)
+        XCTAssertEqual(ddm.cellGenerators.first?.count, 3)
+        XCTAssertEqual(ddm.cellGenerators.last?.count, 2)
     }
 
     func testThatAddCellGeneratorAfterGeneratorWorksCorrectly() {
@@ -173,8 +173,11 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
         ddm.addCellGenerators([gen3, gen5])
         ddm.addCellGenerator(gen4, after: gen3)
         // then
-        XCTAssert(ddm.cellGenerators[0][0] === gen1 && ddm.cellGenerators[0][1] === gen2)
-        XCTAssert(ddm.cellGenerators[1][0] === gen3 && ddm.cellGenerators[1][1] === gen4 && ddm.cellGenerators[1][2] === gen5)
+        XCTAssertIdentical(ddm.cellGenerators[0][0], gen1)
+        XCTAssertIdentical(ddm.cellGenerators[0][1], gen2)
+        XCTAssertIdentical(ddm.cellGenerators[1][0], gen3)
+        XCTAssertIdentical(ddm.cellGenerators[1][1], gen4)
+        XCTAssertIdentical(ddm.cellGenerators[1][2], gen5)
     }
 
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
@@ -233,7 +236,7 @@ final class BaseCollectionDataDisplayManagerTests: XCTestCase {
         ddm.addCellGenerator(gen1, toHeader: headerGen1)
         ddm.addCellGenerator(gen2, toHeader: headerGen2)
         // then
-        XCTAssert(ddm.cellGenerators.first?.count == 3)
-        XCTAssert(ddm.cellGenerators.last?.count == 1)
+        XCTAssertEqual(ddm.cellGenerators.first?.count, 3)
+        XCTAssertEqual(ddm.cellGenerators.last?.count, 1)
     }
 }

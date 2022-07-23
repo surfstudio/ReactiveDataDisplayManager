@@ -25,9 +25,18 @@ final class DragAndDroppableCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
+    private var draggableParameters: DragablePreviewParameters {
+        let preview = UIImageView(image: UIImage(named: "target"))
+        preview.backgroundColor = .green
+        preview.layer.cornerRadius = 20
+        return .init(preview: preview)
+    }
+
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(delegate: FlowCollectionDelegate())
-        .add(featurePlugin: .dragAndDroppable(by: .current))
+        .add(featurePlugin: .dragAndDroppable(by: .current, draggableParameters: draggableParameters, positionChanged: {
+            print($0.id ?? "")
+        }))
         .build()
 
     // MARK: - UIViewController
@@ -74,7 +83,7 @@ private extension DragAndDroppableCollectionViewController {
 
     /// Create cells generators for range
     func makeCellGenerators(for range: [Int]) -> [CollectionCellGenerator] {
-        var generators = [CollectionCellGenerator]()
+        var generators = [TitleCollectionGenerator]()
 
         for index in range {
             let generator = TitleCollectionGenerator(model: "Cell: \(index)")

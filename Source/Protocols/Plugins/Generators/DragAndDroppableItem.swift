@@ -11,12 +11,21 @@ import UIKit
 
 /// Protocol to wrap `DragAndDroppableItem`
 @available(iOS 11.0, *)
-public protocol DragAndDroppableItemSource {
+public protocol DragAndDroppableItemSource: AnyObject, IdentifiableItem {
     var dropableItem: DragAndDroppableItem { get }
 
     // TODO: - Add support for multiple items
     //    /// Associated generators to drag and drop multiple items
     //    var associatedGenerators: [DragAndDroppableItem] { get set }
+}
+
+@available(iOS 11.0, *)
+extension DragAndDroppableItemSource {
+
+    public var id: AnyHashable? {
+        nil
+    }
+
 }
 
 /// Wrapping identifier for the dragged cell

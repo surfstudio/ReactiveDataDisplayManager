@@ -19,6 +19,7 @@ final class MainCollectionViewController: UIViewController {
         case imageCollection
         case imageHorizontalCollection
         case prefetchingCollection
+        case refreshingCollection
         case sizableCollection
         case foldableCollection
         case itemTitleCollection
@@ -42,6 +43,7 @@ final class MainCollectionViewController: UIViewController {
             ("List Appearances", .listAppearances),
             ("Gallery without prefetching", .imageCollection),
             ("Gallery with prefetching", .prefetchingCollection),
+            ("Collection list with refreshing", .refreshingCollection),
             ("Horizontal image collection", .imageHorizontalCollection),
             ("Sizable collection", .sizableCollection),
             ("Foldable collection", .foldableCollection),

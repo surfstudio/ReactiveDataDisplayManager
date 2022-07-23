@@ -60,7 +60,7 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(stackView.arrangedSubviews.count == 1)
+        XCTAssertEqual(stackView.arrangedSubviews.count, 1)
     }
 
     func testAddingMultipleGenerators() {
@@ -79,7 +79,7 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(stackView.arrangedSubviews.count == generators.count)
+        XCTAssertEqual(stackView.arrangedSubviews.count, generators.count)
     }
 
     func testAddingOneGeneratorAfterAnotherGenerators() {
@@ -100,7 +100,7 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(stackView.arrangedSubviews[2] == generator5.view)
+        XCTAssertEqual(stackView.arrangedSubviews[2], generator5.view)
     }
 
     func testAddingMultipleGeneratorAfterAnotherGenerators() {
@@ -125,10 +125,10 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(stackView.arrangedSubviews[2] == generator5.view)
-        XCTAssert(stackView.arrangedSubviews[3] == generator6.view)
-        XCTAssert(stackView.arrangedSubviews[4] == generator7.view)
-        XCTAssert(stackView.arrangedSubviews[5] == generator8.view)
+        XCTAssertEqual(stackView.arrangedSubviews[2], generator5.view)
+        XCTAssertEqual(stackView.arrangedSubviews[3], generator6.view)
+        XCTAssertEqual(stackView.arrangedSubviews[4], generator7.view)
+        XCTAssertEqual(stackView.arrangedSubviews[5], generator8.view)
     }
 
     func testUpdatingGenerators() {
@@ -152,9 +152,9 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(stackView.arrangedSubviews.count == generators.count)
-        XCTAssert((stackView.arrangedSubviews[1] as! UILabel).text == "Updated Two")
-        XCTAssert((stackView.arrangedSubviews[3] as! UILabel).text == "Updated Four")
+        XCTAssertEqual(stackView.arrangedSubviews.count, generators.count)
+        XCTAssertEqual((stackView.arrangedSubviews[1] as! UILabel).text, "Updated Two")
+        XCTAssertEqual((stackView.arrangedSubviews[3] as! UILabel).text, "Updated Four")
     }
 
     func testForceRefill() {
@@ -173,7 +173,7 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(stackView.arrangedSubviews.count == generators.count)
+        XCTAssertEqual(stackView.arrangedSubviews.count, generators.count)
     }
 
     func testClearing() {
