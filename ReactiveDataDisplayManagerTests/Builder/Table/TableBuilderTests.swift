@@ -33,8 +33,8 @@ class TableBuilderTests: XCTestCase {
         XCTAssertNil(builder.swipeActionsPlugin)
         XCTAssertNil(builder.movablePlugin)
 
-        XCTAssertTrue(ddm.view === table)
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(ddm.view, table)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     // MARK: - Add Feature Plugin Test
@@ -49,8 +49,8 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertNotNil(builder.movablePlugin)
-        XCTAssertTrue(builder.movablePlugin === plugin)
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.movablePlugin, plugin)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     #if os(iOS)
@@ -65,8 +65,8 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertNotNil(builder.dragAndDroppablePlugin)
-        XCTAssertTrue(builder.dragAndDroppablePlugin === plugin)
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.dragAndDroppablePlugin, plugin)
+        XCTAssertIdentical(builder.manager, ddm)
     }
     #endif
 
@@ -82,7 +82,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedFoldablePlugin() {
@@ -95,7 +95,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedHighlightablePlugin() {
@@ -108,7 +108,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedSelectablePlugin() {
@@ -121,7 +121,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     // MARK: - Add Scroll Plugins Tests
@@ -137,7 +137,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.scrollPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
     #endif
 
@@ -151,7 +151,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.scrollPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedPaginatablePlugin() {
@@ -164,7 +164,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.tablePlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     // MARK: - Add Prefetch Plugins Test
@@ -179,7 +179,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.prefetchPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedPrefetcherablePlugin() {
@@ -193,7 +193,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.prefetchPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     // MARK: - Set Delegate Test
@@ -218,7 +218,7 @@ class TableBuilderTests: XCTestCase {
         XCTAssertTrue(delegate.tablePlugins.plugins.isEmpty)
 
         XCTAssertTrue(delegate.builderConfigured)
-        XCTAssertTrue(ddm.delegate === delegate)
+        XCTAssertIdentical(ddm.delegate, delegate)
     }
 
     func testThatBuilderSetCustomDataSource() {
@@ -238,7 +238,8 @@ class TableBuilderTests: XCTestCase {
         }
 
         // then
-        XCTAssertTrue(dataSource === ddm.dataSource && dataSource === builder.dataSource)
+        XCTAssertIdentical(dataSource, ddm.dataSource)
+        XCTAssertIdentical(dataSource, builder.dataSource)
         XCTAssertEqual(dataSource.provider?.generators[0].count, 3)
         XCTAssertTrue(dataSource.builderConfigured)
     }
@@ -255,7 +256,7 @@ class TableBuilderTests: XCTestCase {
         ddm.update(generators: [generator])
 
         // then
-        XCTAssertTrue(animator === builder.animator)
+        XCTAssertIdentical(animator, builder.animator)
         XCTAssertTrue(animator.generatorsUpdated)
     }
 

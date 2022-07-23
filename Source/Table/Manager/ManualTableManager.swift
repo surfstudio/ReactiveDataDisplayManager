@@ -107,7 +107,17 @@ public class ManualTableManager: BaseTableManager {
             return
         }
 
+        let generatorsCount = generators[index].count
+
         self.generators[index].removeAll()
+
+        let indexes = (0...generatorsCount).map { IndexPath(row: $0, section: index) }
+
+        guard !indexes.isEmpty else {
+            return
+        }
+
+        dataSource?.modifier?.removeRows(at: indexes, and: nil, with: .automatic)
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator, toHeader headerGenerator: TableHeaderGenerator) {

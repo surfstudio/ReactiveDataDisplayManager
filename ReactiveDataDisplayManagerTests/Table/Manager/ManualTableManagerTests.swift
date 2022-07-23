@@ -66,7 +66,7 @@ final class ManualTableManagerTests: XCTestCase {
 
         // then
         XCTAssertNotEqual(initialNumberOfSections, ddm.sections.count)
-        XCTAssertTrue(ddm.sections[1] === headerGen2)
+        XCTAssertIdentical(ddm.sections[1], headerGen2)
         XCTAssertEqual(ddm.generators[1].count, 3)
     }
 
@@ -94,9 +94,9 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm.sections[1] === headerGen4)
-        XCTAssertTrue(ddm.sections[3] === headerGen5)
-        XCTAssertTrue(ddm.sections[5] === headerGen3)
+        XCTAssertIdentical(ddm.sections[1], headerGen4)
+        XCTAssertIdentical(ddm.sections[3], headerGen5)
+        XCTAssertIdentical(ddm.sections[5], headerGen3)
     }
 
     func testThatInsertSectionHeaderBeforeSectionHeaderCorrectly() {
@@ -119,8 +119,8 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm.sections[0] === headerGen4)
-        XCTAssertTrue(ddm.sections[1] === headerGen1)
+        XCTAssertIdentical(ddm.sections[0], headerGen4)
+        XCTAssertIdentical(ddm.sections[1], headerGen1)
     }
 
     func testThatInsertSectionHeaderWithGeneratorsAfterSectionHeaderCorrectly() {
@@ -153,9 +153,9 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(self.ddm?.sections[0] === headerGen1)
-        XCTAssertTrue(self.ddm?.sections[3] === headerGen5)
-        XCTAssertTrue(self.ddm?.sections[1] === headerGen4)
+        XCTAssertIdentical(self.ddm?.sections[0], headerGen1)
+        XCTAssertIdentical(self.ddm?.sections[3], headerGen5)
+        XCTAssertIdentical(self.ddm?.sections[1], headerGen4)
         XCTAssertEqual(self.ddm?.generators[1].count, 1)
         XCTAssertEqual(self.ddm?.generators[3].count, 3)
         XCTAssertEqual(self.ddm?.generators[4].count, 2)
@@ -352,8 +352,11 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen4, after: gen3)
 
         // then
-        XCTAssertTrue(ddm.generators[0][0] === gen1 && ddm.generators[0][1] === gen2)
-        XCTAssertTrue(ddm.generators[1][0] === gen3 && ddm.generators[1][1] === gen4 && ddm.generators[1][2] === gen5)
+        XCTAssertIdentical(ddm.generators[0][0], gen1)
+        XCTAssertIdentical(ddm.generators[0][1], gen2)
+        XCTAssertIdentical(ddm.generators[1][0], gen3)
+        XCTAssertIdentical(ddm.generators[1][1], gen4)
+        XCTAssertIdentical(ddm.generators[1][2], gen5)
     }
 
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
@@ -450,8 +453,12 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
-        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
+        XCTAssertIdentical(ddm?.generators[0][0], gen1)
+        XCTAssertIdentical(ddm?.generators[0][1], gen2)
+        XCTAssertIdentical(ddm?.generators[0][2], gen3)
+        XCTAssertIdentical(ddm?.generators[1][0], gen4)
+        XCTAssertIdentical(ddm?.generators[1][1], gen5)
+        XCTAssertIdentical(ddm?.generators[1][2], gen6)
     }
 
     func testThatInsertGeneratorsAfterGeneratorInsertsGeneratorOnCorrectPosition() {
@@ -479,8 +486,12 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm.generators[0][0] === gen1 && ddm.generators[0][1] === gen2 && ddm.generators[0][2] === gen1)
-        XCTAssertTrue(ddm.generators[1][0] === gen4 && ddm.generators[1][1] === gen5 && ddm.generators[1][2] === gen4)
+        XCTAssertIdentical(ddm.generators[0][0], gen1)
+        XCTAssertIdentical(ddm.generators[0][1], gen2)
+        XCTAssertIdentical(ddm.generators[0][2], gen1)
+        XCTAssertIdentical(ddm.generators[1][0], gen4)
+        XCTAssertIdentical(ddm.generators[1][1], gen5)
+        XCTAssertIdentical(ddm.generators[1][2], gen4)
     }
 
     func testThatInsertGeneratorBeforeGeneratorInsertsGeneratorOnCorrectPosition() {
@@ -508,8 +519,12 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
-        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
+        XCTAssertIdentical(ddm?.generators[0][0], gen1)
+        XCTAssertIdentical(ddm?.generators[0][1], gen2)
+        XCTAssertIdentical(ddm?.generators[0][2], gen3)
+        XCTAssertIdentical(ddm?.generators[1][0], gen4)
+        XCTAssertIdentical(ddm?.generators[1][1], gen5)
+        XCTAssertIdentical(ddm?.generators[1][2], gen6)
     }
 
     func testThatInsertGeneratorsBeforeGeneratorInsertsGeneratorOnCorrectPosition() {
@@ -537,8 +552,12 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
-        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
+        XCTAssertIdentical(ddm?.generators[0][0], gen1)
+        XCTAssertIdentical(ddm?.generators[0][1], gen2)
+        XCTAssertIdentical(ddm?.generators[0][2], gen3)
+        XCTAssertIdentical(ddm?.generators[1][0], gen4)
+        XCTAssertIdentical(ddm?.generators[1][1], gen5)
+        XCTAssertIdentical(ddm?.generators[1][2], gen6)
     }
 
     func testThatInsertGeneratorToHeaderInsertsGeneratorOnCorrectPosition() {
@@ -567,8 +586,12 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen2 && ddm?.generators[0][2] === gen3)
-        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen5 && ddm?.generators[1][2] === gen6)
+        XCTAssertIdentical(ddm?.generators[0][0], gen1)
+        XCTAssertIdentical(ddm?.generators[0][1], gen2)
+        XCTAssertIdentical(ddm?.generators[0][2], gen3)
+        XCTAssertIdentical(ddm?.generators[1][0], gen4)
+        XCTAssertIdentical(ddm?.generators[1][1], gen5)
+        XCTAssertIdentical(ddm?.generators[1][2], gen6)
     }
 
     func testThatInsertAtBeginningGeneratorsToHeaderInsertsGeneratorOnCorrectPosition() {
@@ -597,8 +620,12 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm?.generators[0][0] === gen1 && ddm?.generators[0][1] === gen5 && ddm?.generators[0][2] === gen6)
-        XCTAssertTrue(ddm?.generators[1][0] === gen4 && ddm?.generators[1][1] === gen2 && ddm?.generators[1][2] === gen3)
+        XCTAssertIdentical(ddm?.generators[0][0], gen1)
+        XCTAssertIdentical(ddm?.generators[0][1], gen5)
+        XCTAssertIdentical(ddm?.generators[0][2], gen6)
+        XCTAssertIdentical(ddm?.generators[1][0], gen4)
+        XCTAssertIdentical(ddm?.generators[1][1], gen2)
+        XCTAssertIdentical(ddm?.generators[1][2], gen3)
     }
 
     func testThatInsertAtEndGeneratorsToHeaderInsertsGeneratorOnCorrectPosition() {
@@ -627,8 +654,12 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertTrue(ddm?.generators[0][2] === gen1 && ddm?.generators[0][3] === gen5 && ddm?.generators[0][4] === gen6)
-        XCTAssertTrue(ddm?.generators[1][2] === gen4 && ddm?.generators[1][3] === gen2 && ddm?.generators[1][4] === gen3)
+        XCTAssertIdentical(ddm?.generators[0][2], gen1)
+        XCTAssertIdentical(ddm?.generators[0][3], gen5)
+        XCTAssertIdentical(ddm?.generators[0][4], gen6)
+        XCTAssertIdentical(ddm?.generators[1][2], gen4)
+        XCTAssertIdentical(ddm?.generators[1][3], gen2)
+        XCTAssertIdentical(ddm?.generators[1][4], gen3)
     }
 
     func testThatReplaceOldGeneratorOnNewReplacesGeneratorCorrectly() {
@@ -644,7 +675,8 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.replace(oldGenerator: gen1, on: gen3)
 
         // then
-        XCTAssertTrue(ddm.generators[0][0] === gen3 && ddm.generators[0][1] === gen2)
+        XCTAssertIdentical(ddm.generators[0][0], gen3)
+        XCTAssertIdentical(ddm.generators[0][1], gen2)
     }
 
     func testThatSwapGeneratorWithGeneratorSwapsCorrectly() {
@@ -662,7 +694,8 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.swap(generator: gen1, with: gen2)
 
         // then
-        XCTAssertTrue(ddm.generators[0][0] === gen2 && ddm.generators[1][0] === gen1)
+        XCTAssertIdentical(ddm.generators[0][0], gen2)
+        XCTAssertIdentical(ddm.generators[1][0], gen1)
     }
 
     func testThatRemoveAllGeneratorsClearsSection() {

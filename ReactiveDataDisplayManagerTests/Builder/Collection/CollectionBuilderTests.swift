@@ -32,8 +32,8 @@ class CollectionBuilderTests: XCTestCase {
         XCTAssertTrue(builder.prefetchPlugins.plugins.isEmpty)
         XCTAssertNil(builder.movablePlugin)
 
-        XCTAssertTrue(ddm.view === collection)
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(ddm.view, collection)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     // MARK: - Add Feature Plugin Test
@@ -48,8 +48,8 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertNotNil(builder.movablePlugin)
-        XCTAssertTrue(builder.movablePlugin === plugin)
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.movablePlugin, plugin)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     #if os(iOS)
@@ -64,8 +64,8 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertNotNil(builder.dragAndDroppablePlugin)
-        XCTAssertTrue(builder.dragAndDroppablePlugin === plugin)
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.dragAndDroppablePlugin, plugin)
+        XCTAssertIdentical(builder.manager, ddm)
     }
     #endif
 
@@ -79,8 +79,8 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertNotNil(builder.itemTitleDisplayablePlugin)
-        XCTAssertTrue(builder.itemTitleDisplayablePlugin === plugin)
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.itemTitleDisplayablePlugin, plugin)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     // MARK: - Add Collection Plugins Tests
@@ -95,7 +95,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedHighlightablePlugin() {
@@ -108,7 +108,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedSelectablePlugin() {
@@ -121,7 +121,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedSelectedItemScrollablePlugin() {
@@ -134,7 +134,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     // MARK: - Add Scroll Plugins Tests
@@ -150,7 +150,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.scrollPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
     #endif
 
@@ -164,7 +164,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.scrollPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedScrollablePlugin() {
@@ -177,7 +177,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.scrollPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedPaginatablePlugin() {
@@ -190,7 +190,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.collectionPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     // MARK: - Add Prefetch Plugins Test
@@ -205,7 +205,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.prefetchPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     func testThatBuilderAddedPrefetcherablePlugin() {
@@ -219,7 +219,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.prefetchPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
     // MARK: - Set Delegate Test
@@ -239,7 +239,7 @@ class CollectionBuilderTests: XCTestCase {
         XCTAssertTrue(delegate.scrollPlugins.plugins.isEmpty)
         XCTAssertTrue(delegate.collectionPlugins.plugins.isEmpty)
         XCTAssertTrue(delegate.builderConfigured)
-        XCTAssertTrue(ddm.delegate === delegate)
+        XCTAssertIdentical(ddm.delegate, delegate)
     }
 
     func testThatBuilderSetCustomDataSource() {
@@ -259,7 +259,8 @@ class CollectionBuilderTests: XCTestCase {
         }
 
         // then
-        XCTAssertTrue(dataSource === ddm.dataSource && dataSource === builder.dataSource)
+        XCTAssertIdentical(dataSource, ddm.dataSource)
+        XCTAssertIdentical(dataSource, builder.dataSource)
         XCTAssertEqual(dataSource.provider?.generators[0].count, 3)
         XCTAssertTrue(dataSource.builderConfigured)
     }
@@ -276,7 +277,7 @@ class CollectionBuilderTests: XCTestCase {
         ddm.update(generators: [generator])
 
         // then
-        XCTAssertTrue(animator === builder.animator)
+        XCTAssertIdentical(animator, builder.animator)
         XCTAssertTrue(animator.generatorsUpdated)
     }
 
@@ -296,7 +297,7 @@ extension CollectionBuilderTests {
 
         // then
         XCTAssertNotNil(builder.focusablePlugin)
-        XCTAssertTrue(builder.focusablePlugin === focusablePlugin)
+        XCTAssertIdentical(builder.focusablePlugin, focusablePlugin)
     }
 
 }

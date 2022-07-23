@@ -64,7 +64,8 @@ final class GravityTableManagerTests: XCTestCase {
 
         // Assert
         XCTAssertTrue(table.registerNibWasCalled)
-        XCTAssertTrue(ddm.generators[0][0] === gen2 && ddm.generators[0][1] === gen1)
+        XCTAssertIdentical(ddm.generators[0][0], gen2)
+        XCTAssertIdentical(ddm.generators[0][1], gen1)
         XCTAssertEqual(ddm.generators[0].count, 2)
     }
 
@@ -97,7 +98,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen3)
 
         // then
-        XCTAssertTrue(ddm.generators[1][0] === gen3 && ddm.generators[0][0] === gen1)
+        XCTAssertIdentical(ddm.generators[1][0], gen3)
+        XCTAssertIdentical(ddm.generators[0][0], gen1)
         XCTAssertEqual(ddm.generators.first?.count, 2)
     }
 
@@ -120,8 +122,11 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen4, after: gen3)
 
         // then
-        XCTAssertTrue(ddm.generators[0][0] === gen1 && ddm.generators[0][1] === gen2)
-        XCTAssertTrue(ddm.generators[1][0] === gen3 && ddm.generators[1][1] === gen4 && ddm.generators[1][2] === gen5)
+        XCTAssertIdentical(ddm.generators[0][0], gen1)
+        XCTAssertIdentical(ddm.generators[0][1], gen2)
+        XCTAssertIdentical(ddm.generators[1][0], gen3)
+        XCTAssertIdentical(ddm.generators[1][1], gen4)
+        XCTAssertIdentical(ddm.generators[1][2], gen5)
     }
 
     func testThatClearCellGeneratorsWorksCorrectly() {
@@ -267,7 +272,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.replace(oldGenerator: gen1, on: gen3)
 
         // then
-        XCTAssertTrue(ddm.generators[0][0] === gen3 && ddm.generators[0][1] === gen2)
+        XCTAssertIdentical(ddm.generators[0][0], gen3)
+        XCTAssertIdentical(ddm.generators[0][1], gen2)
     }
 
     func testThatRemoveAllGeneratorsClearsSection() {

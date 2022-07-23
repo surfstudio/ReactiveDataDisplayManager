@@ -93,8 +93,8 @@ final class FoldingTableDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(ddm.cellGenerators[0][0] === header)
-        XCTAssert(ddm.cellGenerators[0].count == 1)
+        XCTAssertIdentical(ddm.cellGenerators[0][0], header)
+        XCTAssertEqual(ddm.cellGenerators[0].count, 1)
     }
 
     func testUnfolding() {
@@ -117,7 +117,7 @@ final class FoldingTableDataDisplayManagerTests: XCTestCase {
 
         // then
 
-        XCTAssert(ddm.cellGenerators[0][0] === header)
-        XCTAssert(ddm.cellGenerators[0].count == 4)
+        XCTAssertIdentical(ddm.cellGenerators[0][0], header)
+        XCTAssertEqual(ddm.cellGenerators[0].count, 4)
     }
 }

@@ -141,20 +141,6 @@ final class BaseTableManagerTests: XCTestCase {
 
     // MARK: - Table actions tests
 
-    func testThatRemoveGeneratorRemovesEmptySections() {
-        // given
-        let gen1 = StubTableCellGenerator()
-
-        ddm.addCellGenerator(gen1)
-        ddm.forceRefill()
-
-        // when
-        ddm.remove(gen1, with: .automatic, needScrollAt: nil, needRemoveEmptySection: true)
-
-        // then
-        XCTAssertEqual(ddm.sections.count, 0)
-    }
-
     func testThatRemoveGeneratorCallsScrolling() {
         // given
         let gen1 = StubTableCellGenerator()
