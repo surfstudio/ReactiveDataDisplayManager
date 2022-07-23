@@ -50,7 +50,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(gen1)
         ddm.addSectionHeaderGenerator(gen2)
         // then
-        XCTAssert(ddm.sectionHeaderGenerators.count == 3)
+        XCTAssertEqual(ddm.sectionHeaderGenerators.count, 3)
     }
 
     func testThatAddCellGeneratorAppendsNewSectionToCellGeneratorsCorrectly() {
@@ -62,7 +62,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(headerGen)
         ddm.addCellGenerator(gen)
         // then
-        XCTAssert(initialNumberOfSections != ddm.cellGenerators.count)
+        XCTAssertNotEqual(initialNumberOfSections, ddm.cellGenerators.count)
     }
 
     func testThatAddCellGeneratorCallsRegisterNib() {
@@ -73,7 +73,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(headerGen)
         ddm.addCellGenerator(gen)
         // then
-        XCTAssert(table.registerNibWasCalled)
+        XCTAssert(table.registerClassWasCalled)
     }
 
     func testThatCustomOperationAddCellGeneratorCallsRegisterNib() {
@@ -84,7 +84,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(headerGen)
         ddm += gen
         // Assert
-        XCTAssert(table.registerNibWasCalled)
+        XCTAssert(table.registerClassWasCalled)
     }
 
     func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
@@ -96,8 +96,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(headerGen)
         ddm += [gen1, gen2]
         // Assert
-        XCTAssert(table.registerNibWasCalled)
-        XCTAssert(ddm.cellGenerators[0].count == 2)
+        XCTAssert(table.registerClassWasCalled)
+        XCTAssertEqual(ddm.cellGenerators[0].count, 2)
     }
 
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
@@ -106,7 +106,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // when
         ddm.addCellGenerator(gen)
         // then
-        XCTAssert(ddm.sectionHeaderGenerators.count == 1)
+        XCTAssertEqual(ddm.sectionHeaderGenerators.count, 1)
     }
 
     func testThatAddCellGeneratorAddsGeneratorCorrectly() {
@@ -123,9 +123,9 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addCellGenerator(gen2)
         ddm.addCellGenerator(gen2)
         // then
-        XCTAssert(ddm.cellGenerators.count == 2)
-        XCTAssert(ddm.cellGenerators.first?.count == 3)
-        XCTAssert(ddm.cellGenerators.last?.count == 2)
+        XCTAssertEqual(ddm.cellGenerators.count, 2)
+        XCTAssertEqual(ddm.cellGenerators.first?.count, 3)
+        XCTAssertEqual(ddm.cellGenerators.last?.count, 2)
     }
 
     func testThatAddCellGeneratorAfterGeneratorWorksCorrectly() {
@@ -146,8 +146,11 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addCellGenerators([gen3, gen5])
         ddm.addCellGenerator(gen4, after: gen3)
         // then
-        XCTAssert(ddm.cellGenerators[0][0] === gen1 && ddm.cellGenerators[0][1] === gen2)
-        XCTAssert(ddm.cellGenerators[1][0] === gen3 && ddm.cellGenerators[1][1] === gen4 && ddm.cellGenerators[1][2] === gen5)
+        XCTAssertIdentical(ddm.cellGenerators[0][0], gen1)
+        XCTAssertIdentical(ddm.cellGenerators[0][1], gen2)
+        XCTAssertIdentical(ddm.cellGenerators[1][0], gen3)
+        XCTAssertIdentical(ddm.cellGenerators[1][1], gen4)
+        XCTAssertIdentical(ddm.cellGenerators[1][2], gen5)
     }
 
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
@@ -178,7 +181,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // when
         ddm.update(generators: [gen1, gen4])
         // then
-        XCTAssert(table.lastReloadedRows == [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 1)])
+        XCTAssertEqual(table.lastReloadedRows, [IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 1)])
     }
 
     func testThatClearCellGeneratorsWorksCorrectly() {
@@ -234,8 +237,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.addCellGenerator(gen1, toHeader: headerGen1)
         ddm.addCellGenerator(gen2, toHeader: headerGen2)
         // then
-        XCTAssert(ddm.cellGenerators.first?.count == 3)
-        XCTAssert(ddm.cellGenerators.last?.count == 1)
+        XCTAssertEqual(ddm.cellGenerators.first?.count, 3)
+        XCTAssertEqual(ddm.cellGenerators.last?.count, 1)
     }
 
     // MARK: - Table actions tests
@@ -256,8 +259,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.remove(gen3, needRemoveEmptySection: true)
         ddm.remove(gen4, needRemoveEmptySection: true)
         // then
-        XCTAssert(ddm.sectionHeaderGenerators.count == 1)
-        XCTAssert(ddm.cellGenerators.count == 1)
+        XCTAssertEqual(ddm.sectionHeaderGenerators.count, 1)
+        XCTAssertEqual(ddm.cellGenerators.count, 1)
     }
 
     func testThatRemoveGeneratorCallsScrolling() {
@@ -275,7 +278,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // when
         ddm.remove(gen3, needScrollAt: .top)
         // then
-        XCTAssert(table.scrollToRowWasCalled == true)
+        XCTAssertTrue(table.scrollToRowWasCalled)
     }
 
     func testThatRemoveGeneratorRemovesGenerators() {
@@ -293,8 +296,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // when
         ddm.remove(gen1)
         // then
-        XCTAssert(ddm.cellGenerators.first?.first === gen2)
-        XCTAssert(ddm.cellGenerators.first?.count == 1)
+        XCTAssertIdentical(ddm.cellGenerators.first?.first, gen2)
+        XCTAssertEqual(ddm.cellGenerators.first?.count, 1)
     }
 
     func testThatInsertGeneratorAfterGeneratorInsertsGeneratorOnCorrectPosition() {
@@ -315,8 +318,12 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.insert(after: gen1, new: gen2)
         ddm.insert(after: gen4, new: gen5)
         // then
-        XCTAssert(ddm.cellGenerators[0][0] === gen1 && ddm.cellGenerators[0][1] === gen2 && ddm.cellGenerators[0][2] === gen3)
-        XCTAssert(ddm.cellGenerators[1][0] === gen4 && ddm.cellGenerators[1][1] === gen5 && ddm.cellGenerators[1][2] === gen6)
+        XCTAssertIdentical(ddm.cellGenerators[0][0], gen1)
+        XCTAssertIdentical(ddm.cellGenerators[0][1], gen2)
+        XCTAssertIdentical(ddm.cellGenerators[0][2], gen3)
+        XCTAssertIdentical(ddm.cellGenerators[1][0], gen4)
+        XCTAssertIdentical(ddm.cellGenerators[1][1], gen5)
+        XCTAssertIdentical(ddm.cellGenerators[1][2], gen6)
     }
 
     func testThatInsertGeneratorBeforeGeneratorInsertsGeneratorOnCorrectPosition() {
@@ -337,8 +344,12 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.insert(before: gen2, new: gen1)
         ddm.insert(before: gen5, new: gen4)
         // then
-        XCTAssert(ddm.cellGenerators[0][0] === gen1 && ddm.cellGenerators[0][1] === gen2 && ddm.cellGenerators[0][2] === gen3)
-        XCTAssert(ddm.cellGenerators[1][0] === gen4 && ddm.cellGenerators[1][1] === gen5 && ddm.cellGenerators[1][2] === gen6)
+        XCTAssertIdentical(ddm.cellGenerators[0][0], gen1)
+        XCTAssertIdentical(ddm.cellGenerators[0][1], gen2)
+        XCTAssertIdentical(ddm.cellGenerators[0][2], gen3)
+        XCTAssertIdentical(ddm.cellGenerators[1][0], gen4)
+        XCTAssertIdentical(ddm.cellGenerators[1][1], gen5)
+        XCTAssertIdentical(ddm.cellGenerators[1][2], gen6)
     }
 
     func testThatInsertGeneratorToHeaderInsertsGeneratorOnCorrectPosition() {
@@ -359,8 +370,12 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         ddm.insert(to: headerGen1, new: gen1)
         ddm.insert(to: headerGen2, new: gen4)
         // then
-        XCTAssert(ddm.cellGenerators[0][0] === gen1 && ddm.cellGenerators[0][1] === gen2 && ddm.cellGenerators[0][2] === gen3)
-        XCTAssert(ddm.cellGenerators[1][0] === gen4 && ddm.cellGenerators[1][1] === gen5 && ddm.cellGenerators[1][2] === gen6)
+        XCTAssertIdentical(ddm.cellGenerators[0][0], gen1)
+        XCTAssertIdentical(ddm.cellGenerators[0][1], gen2)
+        XCTAssertIdentical(ddm.cellGenerators[0][2], gen3)
+        XCTAssertIdentical(ddm.cellGenerators[1][0], gen4)
+        XCTAssertIdentical(ddm.cellGenerators[1][1], gen5)
+        XCTAssertIdentical(ddm.cellGenerators[1][2], gen6)
     }
 
     func testThatReplaceOldGeneratorOnNewReplacesGeneratorCorrectly() {
@@ -374,7 +389,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // when
         ddm.replace(oldGenerator: gen1, on: gen3)
         // then
-        XCTAssert(ddm.cellGenerators[0][0] === gen3 && ddm.cellGenerators[0][1] === gen2)
+        XCTAssertIdentical(ddm.cellGenerators[0][0], gen3)
+        XCTAssertIdentical(ddm.cellGenerators[0][1], gen2)
     }
 
     func testThatSwapGeneratorWithGeneratorSwapsCorrectly() {
@@ -390,7 +406,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // when
         ddm.swap(generator: gen1, with: gen2)
         // then
-        XCTAssert(ddm.cellGenerators[0][0] === gen2 && ddm.cellGenerators[1][0] === gen1)
+        XCTAssertIdentical(ddm.cellGenerators[0][0], gen2)
+        XCTAssertIdentical(ddm.cellGenerators[1][0], gen1)
     }
 
     func testThatReloadSectionCallTableViewMethod() {
@@ -427,9 +444,9 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // Act
         ddm.removeAllGenerators(from: headerGen2)
         // Assert
-        XCTAssert(table.numberOfSections == 2)
-        XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
-        XCTAssert(table.numberOfRows(inSection: 1) == 0, "Expected 0, got \(table.numberOfRows(inSection: 1))")
+        XCTAssertEqual(table.numberOfSections, 2)
+        XCTAssertEqual(table.numberOfRows(inSection: 0), 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
+        XCTAssertEqual(table.numberOfRows(inSection: 1), 0, "Expected 0, got \(table.numberOfRows(inSection: 1))")
     }
 
     func testThatRemoveAllGeneratorsDoesntClearInvalidSection() {
@@ -442,8 +459,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // Act
         ddm.removeAllGenerators(from: headerGen2)
         // Assert
-        XCTAssert(table.numberOfSections == 1)
-        XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
+        XCTAssertEqual(table.numberOfSections, 1)
+        XCTAssertEqual(table.numberOfRows(inSection: 0), 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
     }
 
     func testThatMovableGeneratorIsntMoveToAnotherSection() {
@@ -457,8 +474,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // Act
         ddm.tableView(table, moveRowAt: IndexPath(row: 0, section: 0), to: IndexPath(row: 0, section: 1))
         // Assert
-        XCTAssert(table.numberOfRows(inSection: 0) == 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
-        XCTAssert(table.numberOfRows(inSection: 1) == 1, "Expected 1, got \(table.numberOfRows(inSection: 1))")
+        XCTAssertEqual(table.numberOfRows(inSection: 0), 1, "Expected 1, got \(table.numberOfRows(inSection: 0))")
+        XCTAssertEqual(table.numberOfRows(inSection: 1), 1, "Expected 1, got \(table.numberOfRows(inSection: 1))")
     }
 
     func testThatMovableGeneratorMoveToAnotherSection() {
@@ -472,8 +489,8 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         // Act
         ddm.tableView(table, moveRowAt: IndexPath(row: 0, section: 0), to: IndexPath(row: 0, section: 1))
         // Assert
-        XCTAssert(table.numberOfRows(inSection: 0) == 0, "Expected 0, got \(table.numberOfRows(inSection: 0))")
-        XCTAssert(table.numberOfRows(inSection: 1) == 2, "Expected 2, got \(table.numberOfRows(inSection: 1))")
+        XCTAssertEqual(table.numberOfRows(inSection: 0), 0, "Expected 0, got \(table.numberOfRows(inSection: 0))")
+        XCTAssertEqual(table.numberOfRows(inSection: 1), 2, "Expected 2, got \(table.numberOfRows(inSection: 1))")
     }
 
     // MARK: - Mocks
@@ -517,7 +534,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
     final class UITableViewSpy: UITableView {
 
         var reloadDataWasCalled = false
-        var registerNibWasCalled = false
+        var registerClassWasCalled = false
         var scrollToRowWasCalled = false
         var lastReloadedRows: [IndexPath] = []
         var sectionWasReloaded = false
@@ -528,7 +545,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
         }
 
         override func register(_ nib: UINib?, forCellReuseIdentifier identifier: String) {
-            registerNibWasCalled = true
+            registerClassWasCalled = true
             // don't call super to avoid UI API call
         }
 

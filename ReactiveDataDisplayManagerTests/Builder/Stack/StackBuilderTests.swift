@@ -25,8 +25,8 @@ class StackBuilderTests: XCTestCase {
         let ddm = builder.build()
 
         // then
-        XCTAssertTrue(ddm.view === stack)
-        XCTAssertTrue(builder.manager === ddm)
+        XCTAssertIdentical(ddm.view, stack)
+        XCTAssertIdentical(builder.manager, ddm)
     }
 
 }

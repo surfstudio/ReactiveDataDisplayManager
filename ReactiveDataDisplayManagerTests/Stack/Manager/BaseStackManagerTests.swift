@@ -1,45 +1,17 @@
-//
-//  BaseStackDataDisplatManagerTests.swift
-//  ReactiveDataDisplayManagerTests
-//
-//  Created by Anton Dryakhlykh on 14.10.2019.
-//  Copyright © 2019 Александр Кравченков. All rights reserved.
-//
 // swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast
 
 import XCTest
 @testable import ReactiveDataDisplayManager
 
-final class TitleStackCellGenerator: StackCellGenerator {
+final class BaseStackManagerTests: XCTestCase {
 
-    var title: String
-
-    var view: UIView?
-
-    init(title: String) {
-        self.title = title
-    }
-}
-
-// MARK: - StackCellGenerator
-
-extension TitleStackCellGenerator: ViewBuilder {
-    func build(view: UILabel) {
-        self.view = view
-        view.text = title
-        view.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
-    }
-}
-
-final class BaseStackDataDisplayManagerTests: XCTestCase {
-
-    private var ddm: BaseStackDataDisplayManager!
+    private var ddm: BaseStackManager!
     private var stackView: UIStackView!
 
     override func setUp() {
         super.setUp()
         stackView = UIStackView()
-        ddm = BaseStackDataDisplayManager(collection: stackView)
+        ddm = stackView.rddm.baseBuilder.build()
     }
 
     override func tearDown() {
@@ -48,83 +20,82 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
         ddm = nil
     }
 
+    // MARK: - Initialization tests
+
+    func testThatObjectPropertiesInitializeCorrectly() {
+        // when
+        let ddm = BaseStackManager()
+        // then
+        XCTAssertTrue(ddm.cellGenerators.isEmpty)
+    }
+
+    // MARK: - Generator actions tests
+
     func testAddingOneGenerator() {
         // given
-
-        let generator1 = TitleStackCellGenerator(title: "One")
+        let generator1 = MockStackCellGenerator(title: "One")
 
         // when
-
         ddm.addCellGenerator(generator1)
         ddm.forceRefill()
 
         // then
-
         XCTAssertEqual(stackView.arrangedSubviews.count, 1)
     }
 
     func testAddingMultipleGenerators() {
         // given
-
-        let generator1 = TitleStackCellGenerator(title: "One")
-        let generator2 = TitleStackCellGenerator(title: "Two")
-        let generator3 = TitleStackCellGenerator(title: "Three")
-        let generator4 = TitleStackCellGenerator(title: "Four")
+        let generator1 = MockStackCellGenerator(title: "One")
+        let generator2 = MockStackCellGenerator(title: "Two")
+        let generator3 = MockStackCellGenerator(title: "Three")
+        let generator4 = MockStackCellGenerator(title: "Four")
         let generators = [generator1, generator2, generator3, generator4]
 
         // when
-
         ddm.addCellGenerators(generators)
         ddm.forceRefill()
 
         // then
-
         XCTAssertEqual(stackView.arrangedSubviews.count, generators.count)
     }
 
     func testAddingOneGeneratorAfterAnotherGenerators() {
         // given
-
-        let generator1 = TitleStackCellGenerator(title: "One")
-        let generator2 = TitleStackCellGenerator(title: "Two")
-        let generator3 = TitleStackCellGenerator(title: "Three")
-        let generator4 = TitleStackCellGenerator(title: "Four")
+        let generator1 = MockStackCellGenerator(title: "One")
+        let generator2 = MockStackCellGenerator(title: "Two")
+        let generator3 = MockStackCellGenerator(title: "Three")
+        let generator4 = MockStackCellGenerator(title: "Four")
         let generators = [generator1, generator2, generator3, generator4]
-        let generator5 = TitleStackCellGenerator(title: "After Two")
+        let generator5 = MockStackCellGenerator(title: "After Two")
 
         // when
-
         ddm.addCellGenerators(generators)
         ddm.addCellGenerator(generator5, after: generator2)
         ddm.forceRefill()
 
         // then
-
         XCTAssertEqual(stackView.arrangedSubviews[2], generator5.view)
     }
 
     func testAddingMultipleGeneratorAfterAnotherGenerators() {
         // given
-
-        let generator1 = TitleStackCellGenerator(title: "One")
-        let generator2 = TitleStackCellGenerator(title: "Two")
-        let generator3 = TitleStackCellGenerator(title: "Three")
-        let generator4 = TitleStackCellGenerator(title: "Four")
+        let generator1 = MockStackCellGenerator(title: "One")
+        let generator2 = MockStackCellGenerator(title: "Two")
+        let generator3 = MockStackCellGenerator(title: "Three")
+        let generator4 = MockStackCellGenerator(title: "Four")
         let generators = [generator1, generator2, generator3, generator4]
-        let generator5 = TitleStackCellGenerator(title: "After Two")
-        let generator6 = TitleStackCellGenerator(title: "After Two")
-        let generator7 = TitleStackCellGenerator(title: "After Two")
-        let generator8 = TitleStackCellGenerator(title: "After Two")
+        let generator5 = MockStackCellGenerator(title: "After Two")
+        let generator6 = MockStackCellGenerator(title: "After Two")
+        let generator7 = MockStackCellGenerator(title: "After Two")
+        let generator8 = MockStackCellGenerator(title: "After Two")
         let generatorsAfterTwo = [generator5, generator6, generator7, generator8]
 
         // when
-
         ddm.addCellGenerators(generators)
         ddm.addCellGenerators(generatorsAfterTwo, after: generator2)
         ddm.forceRefill()
 
         // then
-
         XCTAssertEqual(stackView.arrangedSubviews[2], generator5.view)
         XCTAssertEqual(stackView.arrangedSubviews[3], generator6.view)
         XCTAssertEqual(stackView.arrangedSubviews[4], generator7.view)
@@ -133,15 +104,13 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
     func testUpdatingGenerators() {
         // given
-
-        let generator1 = TitleStackCellGenerator(title: "One")
-        let generator2 = TitleStackCellGenerator(title: "Two")
-        let generator3 = TitleStackCellGenerator(title: "Three")
-        let generator4 = TitleStackCellGenerator(title: "Four")
+        let generator1 = MockStackCellGenerator(title: "One")
+        let generator2 = MockStackCellGenerator(title: "Two")
+        let generator3 = MockStackCellGenerator(title: "Three")
+        let generator4 = MockStackCellGenerator(title: "Four")
         let generators = [generator1, generator2, generator3, generator4]
 
         // when
-
         ddm.addCellGenerators(generators)
         ddm.forceRefill()
 
@@ -151,7 +120,6 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-
         XCTAssertEqual(stackView.arrangedSubviews.count, generators.count)
         XCTAssertEqual((stackView.arrangedSubviews[1] as! UILabel).text, "Updated Two")
         XCTAssertEqual((stackView.arrangedSubviews[3] as! UILabel).text, "Updated Four")
@@ -159,34 +127,29 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
 
     func testForceRefill() {
         // given
-
-        let generator1 = TitleStackCellGenerator(title: "One")
-        let generator2 = TitleStackCellGenerator(title: "Two")
-        let generator3 = TitleStackCellGenerator(title: "Three")
-        let generator4 = TitleStackCellGenerator(title: "Four")
+        let generator1 = MockStackCellGenerator(title: "One")
+        let generator2 = MockStackCellGenerator(title: "Two")
+        let generator3 = MockStackCellGenerator(title: "Three")
+        let generator4 = MockStackCellGenerator(title: "Four")
         let generators = [generator1, generator2, generator3, generator4]
 
         // when
-
         ddm.addCellGenerators(generators)
         ddm.forceRefill()
 
         // then
-
         XCTAssertEqual(stackView.arrangedSubviews.count, generators.count)
     }
 
     func testClearing() {
         // given
-
-        let generator1 = TitleStackCellGenerator(title: "One")
-        let generator2 = TitleStackCellGenerator(title: "Two")
-        let generator3 = TitleStackCellGenerator(title: "Three")
-        let generator4 = TitleStackCellGenerator(title: "Four")
+        let generator1 = MockStackCellGenerator(title: "One")
+        let generator2 = MockStackCellGenerator(title: "Two")
+        let generator3 = MockStackCellGenerator(title: "Three")
+        let generator4 = MockStackCellGenerator(title: "Four")
         let generators = [generator1, generator2, generator3, generator4]
 
         // when
-
         ddm.addCellGenerators(generators)
         ddm.forceRefill()
 
@@ -194,7 +157,32 @@ final class BaseStackDataDisplayManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-
-        XCTAssert(stackView.arrangedSubviews.isEmpty)
+        XCTAssertEqual(stackView.arrangedSubviews.count, 0)
     }
+
+}
+
+// MARK: - Mocks
+
+fileprivate final class MockStackCellGenerator: StackCellGenerator {
+
+    var title: String
+    var view: UIView?
+
+    init(title: String) {
+        self.title = title
+    }
+
+}
+
+// MARK: - StackCellGenerator
+
+extension MockStackCellGenerator: ViewBuilder {
+
+    func build(view: UILabel) {
+        self.view = view
+        view.text = title
+        view.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
+    }
+
 }
