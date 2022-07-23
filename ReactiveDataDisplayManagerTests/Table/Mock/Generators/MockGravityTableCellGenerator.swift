@@ -13,6 +13,7 @@ class MockGravityTableCellGenerator: StubTableCellGenerator, GravityItem {
 
     init(heaviness: Int = .zero) {
         self.heaviness = heaviness
+        super.init(model: "\(heaviness)")
     }
 
     func getHeaviness() -> Int {

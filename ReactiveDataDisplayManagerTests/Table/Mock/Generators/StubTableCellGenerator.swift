@@ -9,18 +9,18 @@ import UIKit
 
 @testable import ReactiveDataDisplayManager
 
-class StubTableCellGenerator: TableCellGenerator {
+class StubTableCellGenerator: BaseCellGenerator<StubTableCell> {
 
-    var identifier: String {
-        return String(describing: UITableViewCell.self)
+    init(model: String) {
+        super.init(with: model, registerType: .class)
     }
 
-    func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
+}
 
-    func registerCell(in tableView: UITableView) {
-        tableView.registerNib(identifier)
+final class StubTableCell: UITableViewCell, ConfigurableItem {
+
+    func configure(with model: String) {
+        accessibilityIdentifier = model
     }
 
 }

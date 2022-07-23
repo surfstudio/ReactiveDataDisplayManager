@@ -51,12 +51,12 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatAddSectionWithGenerators() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
+        let gen3 = StubTableCellGenerator(model: "11")
+        let gen4 = StubTableCellGenerator(model: "12")
+        let gen5 = StubTableCellGenerator(model: "13")
         let initialNumberOfSections = ddm.sections.count
 
         // when
@@ -133,12 +133,12 @@ final class ManualTableManagerTests: XCTestCase {
         let headerGen5 = StubTableHeaderGenerator()
         let headerGen6 = StubTableHeaderGenerator()
 
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
-        let gen6 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
+        let gen4 = StubTableCellGenerator(model: "4")
+        let gen5 = StubTableCellGenerator(model: "5")
+        let gen6 = StubTableCellGenerator(model: "6")
 
         // when
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -169,9 +169,9 @@ final class ManualTableManagerTests: XCTestCase {
         let headerGen2 = StubTableHeaderGenerator()
         let headerGen3 = StubTableHeaderGenerator()
 
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
 
         // when
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -198,10 +198,10 @@ final class ManualTableManagerTests: XCTestCase {
         let headerGen4 = StubTableHeaderGenerator()
         let headerGen5 = StubTableHeaderGenerator()
 
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
+        let gen4 = StubTableCellGenerator(model: "4")
 
         // when
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -224,7 +224,7 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatAddCellGeneratorAppendsNewSectionToCellGeneratorsCorrectly() {
         // given
         let headerGen = StubTableHeaderGenerator()
-        let gen = StubTableCellGenerator()
+        let gen = StubTableCellGenerator(model: "1")
         let initialNumberOfSections = ddm.generators.count
 
         // when
@@ -238,47 +238,47 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatAddCellGeneratorCallsRegisterNib() {
         // given
         let headerGen = StubTableHeaderGenerator()
-        let gen = StubTableCellGenerator()
+        let gen = StubTableCellGenerator(model: "1")
 
         // when
         ddm.addSectionHeaderGenerator(headerGen)
         ddm.addCellGenerator(gen)
 
         // then
-        XCTAssertTrue(table.registerNibWasCalled)
+        XCTAssertTrue(table.registerWasCalled)
     }
 
     func testThatCustomOperationAddCellGeneratorCallsRegisterNib() {
         // Arrange
         let headerGen = StubTableHeaderGenerator()
-        let gen = StubTableCellGenerator()
+        let gen = StubTableCellGenerator(model: "1")
 
         // Act
         ddm.addSectionHeaderGenerator(headerGen)
         ddm += gen
 
         // Assert
-        XCTAssertTrue(table.registerNibWasCalled)
+        XCTAssertTrue(table.registerWasCalled)
     }
 
     func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
         // Arrange
         let headerGen = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
 
         // Act
         ddm.addSectionHeaderGenerator(headerGen)
         ddm += [gen1, gen2]
 
         // Assert
-        XCTAssertTrue(table.registerNibWasCalled)
+        XCTAssertTrue(table.registerWasCalled)
         XCTAssertEqual(ddm.generators[0].count, 2)
     }
 
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
         // given
-        let gen = StubTableCellGenerator()
+        let gen = StubTableCellGenerator(model: "1")
 
         // when
         ddm.addCellGenerator(gen)
@@ -290,8 +290,8 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatAddCellGeneratorAddsGeneratorCorrectly() {
         // given
         let headerGen = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
 
         // when
         ddm.addSectionHeaderGenerator(headerGen)
@@ -312,8 +312,8 @@ final class ManualTableManagerTests: XCTestCase {
         // given
         let headerGen = StubTableHeaderGenerator()
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
 
         // when
         ddm.addSectionHeaderGenerator(headerGen)
@@ -336,12 +336,12 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatAddCellGeneratorAfterGeneratorWorksCorrectly() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
+        let gen3 = StubTableCellGenerator(model: "11")
+        let gen4 = StubTableCellGenerator(model: "12")
+        let gen5 = StubTableCellGenerator(model: "13")
 
         // when
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -362,8 +362,8 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
         self.ddm.addSectionHeaderGenerator(headerGen1)
 
         // when
@@ -375,8 +375,8 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatClearCellGeneratorsWorksCorrectly() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen1, gen2, gen2])
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -392,8 +392,8 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatClearHeaderGeneratorsWorksCorrectly() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen1, gen2, gen2])
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -409,8 +409,8 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatAddCellGeneratorToHeaderAddsGeneratorsToCorrectHeader() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
         let headerGen2 = StubTableHeaderGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -433,13 +433,13 @@ final class ManualTableManagerTests: XCTestCase {
         let expect = expectation(description: "reloading")
 
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
-        let gen6 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator(model: "11")
+        let gen5 = StubTableCellGenerator(model: "12")
+        let gen6 = StubTableCellGenerator(model: "13")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen3], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -466,13 +466,13 @@ final class ManualTableManagerTests: XCTestCase {
         let expect = expectation(description: "reloading")
 
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
-        let gen6 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator(model: "11")
+        let gen5 = StubTableCellGenerator(model: "12")
+        let gen6 = StubTableCellGenerator(model: "13")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen3], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -499,13 +499,13 @@ final class ManualTableManagerTests: XCTestCase {
         let expect = expectation(description: "reloading")
 
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
-        let gen6 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator(model: "11")
+        let gen5 = StubTableCellGenerator(model: "12")
+        let gen6 = StubTableCellGenerator(model: "13")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen2, gen3], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -532,13 +532,13 @@ final class ManualTableManagerTests: XCTestCase {
         let expect = expectation(description: "reloading")
 
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
-        let gen6 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator(model: "11")
+        let gen5 = StubTableCellGenerator(model: "12")
+        let gen6 = StubTableCellGenerator(model: "13")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen2, gen3], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -565,13 +565,13 @@ final class ManualTableManagerTests: XCTestCase {
         let expect = expectation(description: "reloading")
 
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
-        let gen6 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator(model: "11")
+        let gen5 = StubTableCellGenerator(model: "12")
+        let gen6 = StubTableCellGenerator(model: "13")
 
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen2, gen3], toHeader: headerGen1)
@@ -599,13 +599,13 @@ final class ManualTableManagerTests: XCTestCase {
         let expect = expectation(description: "reloading")
 
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
-        let gen6 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator(model: "11")
+        let gen5 = StubTableCellGenerator(model: "12")
+        let gen6 = StubTableCellGenerator(model: "13")
 
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen2, gen3], toHeader: headerGen1)
@@ -633,13 +633,13 @@ final class ManualTableManagerTests: XCTestCase {
         let expect = expectation(description: "reloading")
 
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
-        let gen6 = StubTableCellGenerator()
+        let gen4 = StubTableCellGenerator(model: "11")
+        let gen5 = StubTableCellGenerator(model: "12")
+        let gen6 = StubTableCellGenerator(model: "13")
 
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen2, gen3], toHeader: headerGen1)
@@ -665,9 +665,9 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatReplaceOldGeneratorOnNewReplacesGeneratorCorrectly() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
 
@@ -682,9 +682,9 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatSwapGeneratorWithGeneratorSwapsCorrectly() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator(model: "11")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -701,9 +701,9 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatRemoveAllGeneratorsClearsSection() {
         // Arrange
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen2 = StubTableCellGenerator(model: "11")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -721,7 +721,7 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatRemoveAllGeneratorsDoesntClearInvalidSection() {
         // Arrange
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "11")
         let headerGen2 = StubTableHeaderGenerator()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1], toHeader: headerGen1)
@@ -738,11 +738,11 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatRemoveGeneratorRemovesEmptySections() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
+        let gen3 = StubTableCellGenerator(model: "11")
+        let gen4 = StubTableCellGenerator(model: "12")
 
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
@@ -762,11 +762,11 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatRemoveGeneratorCallsScrolling() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
+        let gen3 = StubTableCellGenerator(model: "11")
+        let gen4 = StubTableCellGenerator(model: "12")
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -784,11 +784,11 @@ final class ManualTableManagerTests: XCTestCase {
     func testThatRemoveGeneratorRemovesGenerators() {
         // given
         let headerGen1 = StubTableHeaderGenerator()
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
         let headerGen2 = StubTableHeaderGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
+        let gen3 = StubTableCellGenerator(model: "11")
+        let gen4 = StubTableCellGenerator(model: "12")
 
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen2], toHeader: headerGen1)

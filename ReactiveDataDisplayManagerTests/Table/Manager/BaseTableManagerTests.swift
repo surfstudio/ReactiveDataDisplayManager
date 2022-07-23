@@ -45,33 +45,33 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorCallsRegisterNib() {
         // given
-        let gen = StubTableCellGenerator()
+        let gen = StubTableCellGenerator(model: "1")
 
         // when
         ddm.addCellGenerator(gen)
 
         // then
-        XCTAssertTrue(table.registerNibWasCalled)
+        XCTAssertTrue(table.registerWasCalled)
         XCTAssertEqual(ddm.generators.first?.count, 1)
     }
 
     func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
         // Arrange
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
 
         // Act
         ddm += [gen1, gen2]
 
         // Assert
-        XCTAssertTrue(table.registerNibWasCalled)
+        XCTAssertTrue(table.registerWasCalled)
         XCTAssertEqual(ddm.sections.count, 1)
         XCTAssertEqual(ddm.generators.first?.count, 2)
     }
 
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
         // given
-        let gen = StubTableCellGenerator()
+        let gen = StubTableCellGenerator(model: "1")
 
         // when
         ddm.addCellGenerator(gen)
@@ -83,8 +83,8 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAfterGenerator() {
         // given
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
 
         ddm.addCellGenerator(gen1)
         ddm.addCellGenerator(gen2, after: gen1)
@@ -95,8 +95,8 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
         // given
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
 
         // when
         expectFatalError(expectedMessage: "Error adding TableCellGenerator generator. You tried to add generators after unexisted generator") {
@@ -106,11 +106,11 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatUpdateGeneratorsUpdatesNeededGenerators() {
         // given
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
-        let gen5 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "3")
+        let gen4 = StubTableCellGenerator(model: "4")
+        let gen5 = StubTableCellGenerator(model: "5")
 
         ddm.addCellGenerators([gen1, gen2])
         ddm.addCellGenerators([gen3, gen4, gen5])
@@ -124,8 +124,8 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatClearCellGeneratorsWorksCorrectly() {
         // given
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
 
         ddm.addCellGenerator(gen1)
         ddm.addCellGenerators([gen1, gen1, gen2, gen2])
@@ -143,10 +143,10 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatRemoveGeneratorCallsScrolling() {
         // given
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "11")
+        let gen4 = StubTableCellGenerator(model: "12")
 
         ddm.addCellGenerators([gen1, gen2])
         ddm.addCellGenerators([gen3, gen4])
@@ -162,10 +162,10 @@ final class BaseTableManagerTests: XCTestCase {
 
     func testThatRemoveGeneratorRemovesGenerators() {
         // given
-        let gen1 = StubTableCellGenerator()
-        let gen2 = StubTableCellGenerator()
-        let gen3 = StubTableCellGenerator()
-        let gen4 = StubTableCellGenerator()
+        let gen1 = StubTableCellGenerator(model: "1")
+        let gen2 = StubTableCellGenerator(model: "2")
+        let gen3 = StubTableCellGenerator(model: "11")
+        let gen4 = StubTableCellGenerator(model: "12")
 
         ddm.addCellGenerators([gen1, gen2])
         ddm.addCellGenerators([gen3, gen4])

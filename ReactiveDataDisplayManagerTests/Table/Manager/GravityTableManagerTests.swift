@@ -63,7 +63,7 @@ final class GravityTableManagerTests: XCTestCase {
         ddm += [gen2, gen1]
 
         // Assert
-        XCTAssertTrue(table.registerNibWasCalled)
+        XCTAssertTrue(table.registerWasCalled)
         XCTAssertIdentical(ddm.generators[0][0], gen2)
         XCTAssertIdentical(ddm.generators[0][1], gen1)
         XCTAssertEqual(ddm.generators[0].count, 2)
