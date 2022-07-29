@@ -9,7 +9,7 @@
 import XCTest
 @testable import ReactiveDataDisplayManager
 
-class CollectionPrefetchProxyPluginTests: XCTestCase {
+final class CollectionPrefetchProxyPluginTests: XCTestCase {
 
     // MARK: - Properties
 
