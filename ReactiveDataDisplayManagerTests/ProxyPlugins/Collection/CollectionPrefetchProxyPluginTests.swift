@@ -1,5 +1,5 @@
 //
-//  CollectionPrefetchProxyPluginUnitTests.swift
+//  CollectionPrefetchProxyPluginTests.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by porohov on 22.06.2022.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import ReactiveDataDisplayManager
 
-class CollectionPrefetchProxyPluginUnitTests: XCTestCase {
+class CollectionPrefetchProxyPluginTests: XCTestCase {
 
     // MARK: - Properties
 

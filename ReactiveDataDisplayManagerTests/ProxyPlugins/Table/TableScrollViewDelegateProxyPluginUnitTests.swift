@@ -1,5 +1,5 @@
 //
-//  TableScrollViewDelegateProxyPluginUnitTests.swift
+//  TableScrollViewDelegateProxyPluginTests.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by porohov on 22.06.2022.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import ReactiveDataDisplayManager
 
-class TableScrollViewDelegateProxyPluginUnitTests: XCTestCase {
+class TableScrollViewDelegateProxyPluginTests: XCTestCase {
 
     // MARK: - Properties
 
