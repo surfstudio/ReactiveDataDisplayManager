@@ -50,10 +50,11 @@ class CollectionScrollViewDelegateProxyPluginTests: XCTestCase {
 
         // when
 
-        collection.scrollToItem(at: IndexPath(item: 3, section: 0), at: .top, animated: true)
+        collection.scrollToItem(at: IndexPath(item: 3, section: 0), at: .top, animated: false)
 
         // then
         XCTAssertTrue(scrollPlugin.didScrollWasCalled)
+        XCTAssertFalse(scrollPlugin.didEndScrollingAnimationWasCalled)
     }
 
     func testThatAnimationScrollCalledDidScrollAndDidEndScrollingAnimationEvents() {

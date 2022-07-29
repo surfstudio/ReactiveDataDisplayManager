@@ -45,10 +45,11 @@ class TableScrollViewDelegateProxyPluginTests: XCTestCase {
         ddm.forceRefill()
 
         // when
-        table.scrollToRow(at: .init(row: 3, section: 0), at: .top, animated: true)
+        table.scrollToRow(at: .init(row: 3, section: 0), at: .top, animated: false)
 
         // then
         XCTAssertTrue(scrollPlugin.didScrollWasCalled)
+        XCTAssertTrue(scrollPlugin.didEndScrollingAnimationWasCalled)
     }
 
     func testThatAnimationScrollCalledDidScrollAndDidEndScrollingAnimationEvents() {
