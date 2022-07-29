@@ -201,7 +201,7 @@ final class TableScrollViewDelegateProxyPluginTests: XCTestCase {
         XCTAssertTrue(proxyPlugin.didEndScrollingAnimationWasCalled)
     }
 
-    @available(iOS 11.0, *)
+    @available(iOS 11.0, tvOS 11.0, *)
     func testProxy_whenScrollViewDidChangeAdjustedContentInset_thenPluginEventCalled() {
 
         // when
