@@ -4,7 +4,7 @@
 //
 //  Created by porohov on 22.06.2022.
 //
-// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast
+// swiftlint:disable implicitly_unwrapped_optional force_unwrapping force_cast discouraged_optional_boolean
 
 import XCTest
 @testable import ReactiveDataDisplayManager
