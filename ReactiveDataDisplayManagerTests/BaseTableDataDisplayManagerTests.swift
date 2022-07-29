@@ -523,9 +523,9 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
     }
 
-    final private class MovableToAnotherSectionGenerator: CellGenerator, MovableGenerator { }
+    private final class MovableToAnotherSectionGenerator: CellGenerator, MovableGenerator { }
 
-    final private class NotMovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
+    private final class NotMovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
         func canMoveInOtherSection() -> Bool {
             return false
         }
