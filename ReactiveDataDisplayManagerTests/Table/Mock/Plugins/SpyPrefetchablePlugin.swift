@@ -7,7 +7,7 @@
 
 @testable import ReactiveDataDisplayManager
 
-final class SpyPrefetchPlugin: TablePrefetchProxyPlugin {
+final class SpyTablePrefetchPlugin: TablePrefetchProxyPlugin {
 
     var prefetchEventWasCalled = false
     var cancelPrefetchingEventWasCalled = false

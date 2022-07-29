@@ -14,56 +14,201 @@ class TableScrollViewDelegateProxyPluginTests: XCTestCase {
     // MARK: - Properties
 
     private var table: UITableView!
-    private var scrollPlugin: SpyProxyTableScrollPlugin!
+    private var proxyPlugin: SpyProxyTableScrollPlugin!
     private var ddm: BaseTableManager!
 
     // MARK: - XCTestCase
 
     override func setUp() {
         super.setUp()
-        // it's important to set size for tableView
-        table = UITableView(frame: .init(x: .zero, y: .zero, width: 100, height: 500))
 
-        scrollPlugin = .init()
-        ddm = table.rddm.baseBuilder.add(plugin: scrollPlugin).build()
+        table = UITableView()
+        proxyPlugin = .init()
+        ddm = table.rddm.baseBuilder.add(plugin: proxyPlugin).build()
     }
 
     override func tearDown() {
         super.tearDown()
         table = nil
-        scrollPlugin = nil
+        proxyPlugin = nil
         ddm = nil
     }
 
     // MARK: - Tests
 
-    func testThatScrollCalledDidScrollEvent() {
-
-        // given
-        let generators = Array(0...10).map { StubTableCellGenerator(model: "\($0)") }
-        ddm.addCellGenerators(generators)
-        ddm.forceRefill()
-
-        // when
-        table.scrollToRow(at: .init(row: 3, section: 0), at: .top, animated: false)
+    func testProxy_whenInitialState_thenEmptySpyState() {
 
         // then
-        XCTAssertTrue(scrollPlugin.didScrollWasCalled)
-        XCTAssertTrue(scrollPlugin.didEndScrollingAnimationWasCalled)
+        XCTAssertFalse(proxyPlugin.didScrollWasCalled)
+        XCTAssertFalse(proxyPlugin.willBeginDraggingWasCalled)
+        XCTAssertFalse(proxyPlugin.willEndDraggingWasCalled)
+        XCTAssertFalse(proxyPlugin.didEndDraggingWasCalled)
+        XCTAssertFalse(proxyPlugin.didScrollToTopWasCalled)
+        XCTAssertFalse(proxyPlugin.willBeginDeceleratingWasCalled)
+        XCTAssertFalse(proxyPlugin.didEndDeceleratingWasCalled)
+        XCTAssertFalse(proxyPlugin.willBeginZoomingWasCalled)
+        XCTAssertFalse(proxyPlugin.didEndZoomingWasCalled)
+        XCTAssertFalse(proxyPlugin.didZoomWasCalled)
+        XCTAssertFalse(proxyPlugin.didEndScrollingAnimationWasCalled)
     }
 
-    func testThatAnimationScrollCalledDidScrollAndDidEndScrollingAnimationEvents() {
-        // given
-        let generators = Array(0...10).map { StubTableCellGenerator(model: "\($0)") }
-        ddm.addCellGenerators(generators)
-        ddm.forceRefill()
+    func testProxy_whenScrollViewDidScroll_thenPluginEventCalled() {
 
         // when
-        table.scrollToRow(at: .init(row: 3, section: 0), at: .top, animated: true)
+        table.delegate?.scrollViewDidScroll?(table)
 
         // then
-        XCTAssertTrue(scrollPlugin.didScrollWasCalled)
-        XCTAssertTrue(scrollPlugin.didEndScrollingAnimationWasCalled)
+        XCTAssertTrue(proxyPlugin.didScrollWasCalled)
+    }
+
+    func testProxy_whenScrollViewWillBeginDragging_thenPluginEventCalled() {
+
+        // when
+        table.delegate?.scrollViewWillBeginDragging?(table)
+
+        // then
+        XCTAssertTrue(proxyPlugin.willBeginDraggingWasCalled)
+    }
+
+    func testProxy_whenScrollViewWillEndDragging_thenPluginEventCalled() {
+
+        var velocity: CGPoint?
+        proxyPlugin.willEndDragging += { params in
+            velocity = params.velocity
+        }
+
+        // given
+        XCTAssertNil(velocity)
+        let expectedVelocity = CGPoint(x: Double.anyRandom(), y: Double.anyRandom())
+        var targetContentOffset: CGPoint = .zero
+
+        // when
+        table.delegate?.scrollViewWillEndDragging?(table,
+                                                        withVelocity: expectedVelocity,
+                                                        targetContentOffset: &targetContentOffset)
+
+        // then
+        XCTAssertTrue(proxyPlugin.willEndDraggingWasCalled)
+        XCTAssertNotNil(velocity)
+        XCTAssertEqual(velocity, expectedVelocity)
+    }
+
+    func testProxy_whenScrollViewDidEndDragging_thenPluginEventCalled() {
+
+        var willDecelerate: Bool?
+        proxyPlugin.didEndDragging += { params in
+            willDecelerate = params.decelerate
+        }
+
+        // given
+        XCTAssertNil(willDecelerate)
+
+        // when
+        table.delegate?.scrollViewDidEndDragging?(table, willDecelerate: true)
+
+        // then
+        XCTAssertTrue(proxyPlugin.didEndDraggingWasCalled)
+        XCTAssertTrue(willDecelerate!)
+    }
+
+    func testProxy_whenScrollViewDidScrollToTop_thenPluginEventCalled() {
+
+        // when
+        table.delegate?.scrollViewDidScrollToTop?(table)
+
+        // then
+        XCTAssertTrue(proxyPlugin.didScrollToTopWasCalled)
+    }
+
+    func testProxy_whenScrollViewWillBeginDecelerating_thenPluginEventCalled() {
+
+        // when
+        table.delegate?.scrollViewWillBeginDecelerating?(table)
+
+        // then
+        XCTAssertTrue(proxyPlugin.willBeginDeceleratingWasCalled)
+    }
+
+    func testProxy_whenScrollViewDidEndDecelerating_thenPluginEventCalled() {
+
+        // when
+        table.delegate?.scrollViewDidEndDecelerating?(table)
+
+        // then
+        XCTAssertTrue(proxyPlugin.didEndDeceleratingWasCalled)
+    }
+
+    func testProxy_whenScrollViewWillBeginZooming_thenPluginEventCalled() {
+
+        var view: UIView?
+        proxyPlugin.willBeginZooming += { params in
+            view = params.view
+        }
+
+        // given
+        XCTAssertNil(view)
+        let expectedView = UIView()
+        expectedView.tag = Int.anyRandom()
+
+        // when
+        table.delegate?.scrollViewWillBeginZooming?(table, with: expectedView)
+
+        // then
+        XCTAssertTrue(proxyPlugin.willBeginZoomingWasCalled)
+        XCTAssertIdentical(view, expectedView)
+    }
+
+    func testProxy_whenScrollViewDidEndZooming_thenPluginEventCalled() {
+
+        var view: UIView?
+        var scale: CGFloat?
+        proxyPlugin.didEndZooming += { params in
+            view = params.view
+            scale = params.scale
+        }
+
+        // given
+        XCTAssertNil(view)
+        XCTAssertNil(scale)
+        let expectedView = UIView()
+        expectedView.tag = Int.anyRandom()
+        let expectedScale = CGFloat.anyRandom()
+
+        // when
+        table.delegate?.scrollViewDidEndZooming?(table, with: expectedView, atScale: expectedScale)
+
+        // then
+        XCTAssertTrue(proxyPlugin.didEndZoomingWasCalled)
+        XCTAssertIdentical(view, expectedView)
+        XCTAssertEqual(scale!, expectedScale)
+    }
+
+    func testProxy_whenScrollViewDidZoom_thenPluginEventCalled() {
+
+        // when
+        table.delegate?.scrollViewDidZoom?(table)
+
+        // then
+        XCTAssertTrue(proxyPlugin.didZoomWasCalled)
+    }
+
+    func testProxy_whenScrollViewDidEndScrollingAnimation_thenPluginEventCalled() {
+
+        // when
+        table.delegate?.scrollViewDidEndScrollingAnimation?(table)
+
+        // then
+        XCTAssertTrue(proxyPlugin.didEndScrollingAnimationWasCalled)
+    }
+
+    @available(iOS 11.0, *)
+    func testProxy_whenScrollViewDidChangeAdjustedContentInset_thenPluginEventCalled() {
+
+        // when
+        table.delegate?.scrollViewDidChangeAdjustedContentInset?(table)
+
+        // then
+        XCTAssertTrue(proxyPlugin.didChangeAdjustedContentInsetWasCalled)
     }
 
 }

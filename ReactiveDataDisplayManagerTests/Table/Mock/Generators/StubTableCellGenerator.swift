@@ -21,6 +21,8 @@ final class StubTableCell: UITableViewCell, ConfigurableItem {
 
     func configure(with model: String) {
         accessibilityIdentifier = model
+
+        frame = .init(origin: .zero, size: .init(width: UIScreen.main.bounds.width, height: 20))
     }
 
 }

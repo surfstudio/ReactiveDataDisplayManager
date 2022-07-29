@@ -20,6 +20,7 @@ final class SpyProxyCollectionScrollPlugin: CollectionScrollViewDelegateProxyPlu
     var didEndZoomingWasCalled = false
     var didZoomWasCalled = false
     var didEndScrollingAnimationWasCalled = false
+    var didChangeAdjustedContentInsetWasCalled = false
 
     override init() {
         super.init()
@@ -59,6 +60,9 @@ final class SpyProxyCollectionScrollPlugin: CollectionScrollViewDelegateProxyPlu
         }
         didEndScrollingAnimation += { [weak self] _ in
             self?.didEndScrollingAnimationWasCalled = true
+        }
+        didChangeAdjustedContentInset += { [weak self] _ in
+            self?.didChangeAdjustedContentInsetWasCalled = true
         }
     }
 

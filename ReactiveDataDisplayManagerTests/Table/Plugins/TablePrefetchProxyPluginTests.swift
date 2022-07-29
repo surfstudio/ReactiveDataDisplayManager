@@ -15,12 +15,15 @@ class TablePrefetchProxyPluginTests: XCTestCase {
 
     private var table: UITableView!
     private var builder: TableBuilder<BaseTableManager>!
+    private var plugin: SpyTablePrefetchPlugin!
 
     // MARK: - XCTestCase
 
     override func setUp() {
         super.setUp()
-        table = UITableView()
+        // it's important to set size for tableView
+        table = UITableView(frame: .init(x: .zero, y: .zero, width: 100, height: 500))
+        plugin = .init()
         builder = table.rddm.baseBuilder
     }
 
@@ -47,17 +50,16 @@ class TablePrefetchProxyPluginTests: XCTestCase {
 
     func testThatScrollCalledPrefetchPluginEvents() {
         // given
-        let plugin = SpyPrefetchPlugin()
+
         let ddm = builder.add(plugin: plugin).build()
 
-        for id in 0...300 {
-            ddm.addCellGenerator(StubTableCellGenerator(model: "\(id)"))
-        }
+        let generators = Array(0...300).map { StubTableCellGenerator(model: "\($0)") }
+        ddm.addCellGenerators(generators)
         ddm.forceRefill()
 
         // when
         
-        table.scrollToRow(at: .init(row: 300, section: 0), at: .bottom, animated: true)
+        table.scrollToRow(at: .init(row: 200, section: 0), at: .bottom, animated: true)
 
         // then
         XCTAssertTrue(plugin.prefetchEventWasCalled)
