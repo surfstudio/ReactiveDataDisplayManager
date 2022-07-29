@@ -40,7 +40,7 @@ class TableScrollViewDelegateProxyPluginTests: XCTestCase {
     func testThatScrollCalledDidScrollEvent() {
 
         // given
-        let generators = Array(0...10).map { StubTableCell.rddm.baseGenerator(with: "\($0)", and: .class) }
+        let generators = Array(0...10).map { StubTableCellGenerator(model: "\($0)") }
         ddm.addCellGenerators(generators)
         ddm.forceRefill()
 
@@ -53,7 +53,7 @@ class TableScrollViewDelegateProxyPluginTests: XCTestCase {
 
     func testThatAnimationScrollCalledDidScrollAndDidEndScrollingAnimationEvents() {
         // given
-        let generators = Array(0...10).map { StubTableCell.rddm.baseGenerator(with: "\($0)", and: .class) }
+        let generators = Array(0...10).map { StubTableCellGenerator(model: "\($0)") }
         ddm.addCellGenerators(generators)
         ddm.forceRefill()
 

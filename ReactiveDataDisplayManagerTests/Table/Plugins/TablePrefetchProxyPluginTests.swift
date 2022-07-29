@@ -51,7 +51,7 @@ class TablePrefetchProxyPluginTests: XCTestCase {
         let ddm = builder.add(plugin: plugin).build()
 
         for id in 0...300 {
-            ddm.addCellGenerator(StubTableCell.rddm.baseGenerator(with: "\(id)", and: .class))
+            ddm.addCellGenerator(StubTableCellGenerator(model: "\(id)"))
         }
         ddm.forceRefill()
 

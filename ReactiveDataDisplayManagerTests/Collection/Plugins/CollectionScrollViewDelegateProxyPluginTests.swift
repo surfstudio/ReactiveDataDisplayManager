@@ -44,7 +44,7 @@ class CollectionScrollViewDelegateProxyPluginTests: XCTestCase {
 
     func testThatScrollCalledDidScrollEvent() {
         // given
-        let generators = Array(0...10).map { StubCollectionCell.rddm.baseGenerator(with: "\($0)", and: .class) }
+        let generators = Array(0...10).map { StubCollectionCellGenerator(model: "\($0)") }
         ddm.addCellGenerators(generators)
         ddm.forceRefill()
 
@@ -58,7 +58,7 @@ class CollectionScrollViewDelegateProxyPluginTests: XCTestCase {
 
     func testThatAnimationScrollCalledDidScrollAndDidEndScrollingAnimationEvents() {
         // given
-        let generators = Array(0...10).map { StubCollectionCell.rddm.baseGenerator(with: "\($0)", and: .class) }
+        let generators = Array(0...10).map { StubCollectionCellGenerator(model: "\($0)") }
         ddm.addCellGenerators(generators)
         ddm.forceRefill()
 
