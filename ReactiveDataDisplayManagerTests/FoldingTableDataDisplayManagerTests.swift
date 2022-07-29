@@ -33,7 +33,7 @@ final class FoldingHeaderGenerator: TableCellGenerator, FoldableItem {
     }
 }
 
-final class CellGenerator: TableCellGenerator {
+private final class CellGenerator: TableCellGenerator {
 
     // MARK: - TableCellGenerator
 
