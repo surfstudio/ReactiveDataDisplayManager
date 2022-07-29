@@ -14,35 +14,76 @@ class CollectionPrefetchProxyPluginTests: XCTestCase {
     // MARK: - Properties
 
     private var collection: UICollectionView!
-    private var builder: CollectionBuilder<BaseCollectionManager>!
+    private var ddm: BaseCollectionManager!
+    private var proxyPlugin: SpyCollectionPrefetchProxyPlugin!
 
     // MARK: - XCTestCase
 
     override func setUp() {
         super.setUp()
-        collection = UICollectionView(frame: .zero, collectionViewLayout: .init())
-        builder = collection.rddm.baseBuilder
+        collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        proxyPlugin = .init()
+        ddm = collection.rddm.baseBuilder.add(plugin: proxyPlugin).build()
     }
 
     override func tearDown() {
         super.tearDown()
         collection = nil
-        builder = nil
+        proxyPlugin = nil
+        ddm = nil
     }
 
     // MARK: - Tests
 
-    func testThatBuilderAddedPlugin() {
-        // given
-        let plugin: CollectionPrefetchProxyPlugin = .proxyPrefetch(to: .top)
-
-        // when
-        let ddm = builder.add(plugin: plugin).build()
+    func testProxy_whenInitialState_thenEmptySpyState() {
 
         // then
-        XCTAssertTrue(builder.manager === ddm)
-        XCTAssertFalse(builder.prefetchPlugins.plugins.isEmpty)
-        XCTAssertTrue(builder.prefetchPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
+        XCTAssertFalse(proxyPlugin.prefetchEventWasCalled)
+        XCTAssertFalse(proxyPlugin.cancelPrefetchingEventWasCalled)
+    }
+
+    func testProxy_whenDataSource_prefetchItemsAtCalled_thenProxyEventCalled() {
+
+        var indexPaths: [IndexPath]?
+        proxyPlugin.prefetchEvent += { params in
+            indexPaths = params
+        }
+
+        // given
+        let item = Int.anyRandom()
+        let section = Int.anyRandom()
+        let expectedIndexPaths: [IndexPath] = [
+            .init(item: item, section: section)
+        ]
+
+        // when
+        collection.prefetchDataSource?.collectionView(collection, prefetchItemsAt: expectedIndexPaths)
+
+        // then
+        XCTAssertTrue(proxyPlugin.prefetchEventWasCalled)
+        XCTAssertEqual(indexPaths!, expectedIndexPaths)
+    }
+
+    func testProxy_whenDataSource_cancelPrefetchingCalled_thenProxyEventCalled() {
+
+        var indexPaths: [IndexPath]?
+        proxyPlugin.cancelPrefetchingEvent += { params in
+            indexPaths = params
+        }
+
+        // given
+        let item = Int.anyRandom()
+        let section = Int.anyRandom()
+        let expectedIndexPaths: [IndexPath] = [
+            .init(item: item, section: section)
+        ]
+
+        // when
+        collection.prefetchDataSource?.collectionView?(collection, cancelPrefetchingForItemsAt: expectedIndexPaths)
+
+        // then
+        XCTAssertTrue(proxyPlugin.cancelPrefetchingEventWasCalled)
+        XCTAssertEqual(indexPaths!, expectedIndexPaths)
     }
 
 }

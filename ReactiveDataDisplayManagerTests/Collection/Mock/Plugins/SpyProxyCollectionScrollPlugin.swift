@@ -9,18 +9,18 @@
 
 final class SpyProxyCollectionScrollPlugin: CollectionScrollViewDelegateProxyPlugin {
 
-    var didScrollWasCalled = false
-    var willBeginDraggingWasCalled = false
-    var willEndDraggingWasCalled = false
-    var didEndDraggingWasCalled = false
-    var didScrollToTopWasCalled = false
-    var willBeginDeceleratingWasCalled = false
-    var didEndDeceleratingWasCalled = false
-    var willBeginZoomingWasCalled = false
-    var didEndZoomingWasCalled = false
-    var didZoomWasCalled = false
-    var didEndScrollingAnimationWasCalled = false
-    var didChangeAdjustedContentInsetWasCalled = false
+    private(set) var didScrollWasCalled = false
+    private(set) var willBeginDraggingWasCalled = false
+    private(set) var willEndDraggingWasCalled = false
+    private(set) var didEndDraggingWasCalled = false
+    private(set) var didScrollToTopWasCalled = false
+    private(set) var willBeginDeceleratingWasCalled = false
+    private(set) var didEndDeceleratingWasCalled = false
+    private(set) var willBeginZoomingWasCalled = false
+    private(set) var didEndZoomingWasCalled = false
+    private(set) var didZoomWasCalled = false
+    private(set) var didEndScrollingAnimationWasCalled = false
+    private(set) var didChangeAdjustedContentInsetWasCalled = false
 
     override init() {
         super.init()

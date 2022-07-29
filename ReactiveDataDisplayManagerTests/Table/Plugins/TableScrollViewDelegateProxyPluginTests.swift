@@ -9,7 +9,7 @@
 import XCTest
 @testable import ReactiveDataDisplayManager
 
-class TableScrollViewDelegateProxyPluginTests: XCTestCase {
+final class TableScrollViewDelegateProxyPluginTests: XCTestCase {
 
     // MARK: - Properties
 

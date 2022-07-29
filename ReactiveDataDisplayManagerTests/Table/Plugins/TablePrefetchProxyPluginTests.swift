@@ -9,60 +9,81 @@
 import XCTest
 @testable import ReactiveDataDisplayManager
 
-class TablePrefetchProxyPluginTests: XCTestCase {
+final class TablePrefetchProxyPluginTests: XCTestCase {
 
     // MARK: - Properties
 
     private var table: UITableView!
-    private var builder: TableBuilder<BaseTableManager>!
-    private var plugin: SpyTablePrefetchPlugin!
+    private var ddm: BaseTableManager!
+    private var proxyPlugin: SpyTablePrefetchPlugin!
 
     // MARK: - XCTestCase
 
     override func setUp() {
         super.setUp()
-        // it's important to set size for tableView
-        table = UITableView(frame: .init(x: .zero, y: .zero, width: 100, height: 500))
-        plugin = .init()
-        builder = table.rddm.baseBuilder
+        table = UITableView()
+        proxyPlugin = .init()
+        ddm = table.rddm.baseBuilder.add(plugin: proxyPlugin).build()
     }
 
     override func tearDown() {
         super.tearDown()
         table = nil
-        builder = nil
+        proxyPlugin = nil
+        ddm = nil
     }
 
     // MARK: - Tests
 
-    func testThatBuilderAddedPlugin() {
-        // given
-        let plugin: TablePrefetchProxyPlugin = .proxyPrefetch()
-
-        // when
-        let ddm = builder.add(plugin: plugin).build()
+    func testProxy_whenInitialState_thenEmptySpyState() {
 
         // then
-        XCTAssertTrue(builder.manager === ddm)
-        XCTAssertFalse(builder.prefetchPlugins.plugins.isEmpty)
-        XCTAssertTrue(builder.prefetchPlugins.plugins.contains(where: { $0.pluginName == plugin.pluginName }))
+        XCTAssertFalse(proxyPlugin.prefetchEventWasCalled)
+        XCTAssertFalse(proxyPlugin.cancelPrefetchingEventWasCalled)
     }
 
-    func testThatScrollCalledPrefetchPluginEvents() {
+    func testProxy_whenDataSource_prefetchRowsAtCalled_thenProxyEventCalled() {
+
+        var indexPaths: [IndexPath]?
+        proxyPlugin.prefetchEvent += { params in
+            indexPaths = params
+        }
+
         // given
-
-        let ddm = builder.add(plugin: plugin).build()
-
-        let generators = Array(0...300).map { StubTableCellGenerator(model: "\($0)") }
-        ddm.addCellGenerators(generators)
-        ddm.forceRefill()
+        let row = Int.anyRandom()
+        let section = Int.anyRandom()
+        let expectedIndexPaths: [IndexPath] = [
+            .init(row: row, section: section)
+        ]
 
         // when
-        
-        table.scrollToRow(at: .init(row: 200, section: 0), at: .bottom, animated: true)
+        table.prefetchDataSource?.tableView(table, prefetchRowsAt: expectedIndexPaths)
 
         // then
-        XCTAssertTrue(plugin.prefetchEventWasCalled)
+        XCTAssertTrue(proxyPlugin.prefetchEventWasCalled)
+        XCTAssertEqual(indexPaths!, expectedIndexPaths)
+    }
+
+    func testProxy_whenDataSource_cancelPrefetchingCalled_thenProxyEventCalled() {
+
+        var indexPaths: [IndexPath]?
+        proxyPlugin.cancelPrefetchingEvent += { params in
+            indexPaths = params
+        }
+
+        // given
+        let row = Int.anyRandom()
+        let section = Int.anyRandom()
+        let expectedIndexPaths: [IndexPath] = [
+            .init(row: row, section: section)
+        ]
+
+        // when
+        table.prefetchDataSource?.tableView?(table, cancelPrefetchingForRowsAt: expectedIndexPaths)
+
+        // then
+        XCTAssertTrue(proxyPlugin.cancelPrefetchingEventWasCalled)
+        XCTAssertEqual(indexPaths!, expectedIndexPaths)
     }
 
 }
