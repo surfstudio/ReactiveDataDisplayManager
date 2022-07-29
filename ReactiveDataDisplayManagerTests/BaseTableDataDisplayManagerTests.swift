@@ -507,7 +507,7 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
     }
 
-    class CellGenerator: TableCellGenerator {
+    private class CellGenerator: TableCellGenerator {
 
         var identifier: String {
             return String(describing: UITableViewCell.self)
@@ -523,9 +523,9 @@ final class BaseTableDataDisplayManagerTests: XCTestCase {
 
     }
 
-    final class MovableToAnotherSectionGenerator: CellGenerator, MovableGenerator { }
+    final private class MovableToAnotherSectionGenerator: CellGenerator, MovableGenerator { }
 
-    final class NotMovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
+    final private class NotMovableToAnotherSectionGenerator: CellGenerator, MovableGenerator {
         func canMoveInOtherSection() -> Bool {
             return false
         }

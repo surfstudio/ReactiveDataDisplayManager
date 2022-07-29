@@ -14,17 +14,18 @@ class TableScrollViewDelegateProxyPluginUnitTests: XCTestCase {
     // MARK: - Properties
 
     private var table: UITableView!
-    private var scrollPlugin: ProxyScrollPluginSpy!
+    private var scrollPlugin: SpyProxyTableScrollPlugin!
     private var ddm: BaseTableManager!
 
     // MARK: - XCTestCase
 
     override func setUp() {
         super.setUp()
+        // it's important to set size for tableView
         table = UITableView(frame: .init(x: .zero, y: .zero, width: 100, height: 500))
+
         scrollPlugin = .init()
         ddm = table.rddm.baseBuilder.add(plugin: scrollPlugin).build()
-        scrollPlugin.setSpyEvents()
     }
 
     override func tearDown() {
@@ -37,13 +38,14 @@ class TableScrollViewDelegateProxyPluginUnitTests: XCTestCase {
     // MARK: - Tests
 
     func testThatScrollCalledDidScrollEvent() {
+
         // given
-        let generator = CellGenerator()
+        let generators = Array(0...10).map { StubTableCell.rddm.baseGenerator(with: "\($0)", and: .class) }
+        ddm.addCellGenerators(generators)
+        ddm.forceRefill()
 
         // when
-        for _ in 0...10 { ddm.addCellGenerator(generator) }
-        ddm.forceRefill()
-        ddm.scrollTo(generator: ddm.generators[0][3], scrollPosition: .top, animated: false)
+        table.scrollToRow(at: .init(row: 3, section: 0), at: .top, animated: true)
 
         // then
         XCTAssertTrue(scrollPlugin.didScrollWasCalled)
@@ -51,50 +53,16 @@ class TableScrollViewDelegateProxyPluginUnitTests: XCTestCase {
 
     func testThatAnimationScrollCalledDidScrollAndDidEndScrollingAnimationEvents() {
         // given
-        let generator = CellGenerator()
+        let generators = Array(0...10).map { StubTableCell.rddm.baseGenerator(with: "\($0)", and: .class) }
+        ddm.addCellGenerators(generators)
+        ddm.forceRefill()
 
         // when
-        for _ in 0...10 { ddm.addCellGenerator(generator) }
-        ddm.forceRefill()
-        ddm.scrollTo(generator: ddm.generators[0][3], scrollPosition: .top, animated: true)
+        table.scrollToRow(at: .init(row: 3, section: 0), at: .top, animated: true)
 
         // then
         XCTAssertTrue(scrollPlugin.didScrollWasCalled)
         XCTAssertTrue(scrollPlugin.didEndScrollingAnimationWasCalled)
-    }
-
-    // MARK: - Mocks
-
-    final class ProxyScrollPluginSpy: TableScrollViewDelegateProxyPlugin {
-
-        var didScrollWasCalled = false
-        var didEndScrollingAnimationWasCalled = false
-
-        func setSpyEvents() {
-            didScroll += { [weak self] _ in
-                self?.didScrollWasCalled = true
-            }
-            didEndScrollingAnimation += { [weak self] _ in
-                self?.didEndScrollingAnimationWasCalled = true
-            }
-        }
-
-    }
-
-    class CellGenerator: TableCellGenerator {
-
-        var identifier: String {
-            return String(describing: UITableViewCell.self)
-        }
-
-        func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-            return UITableViewCell()
-        }
-
-        func registerCell(in tableView: UITableView) {
-            tableView.registerNib(identifier)
-        }
-
     }
 
 }

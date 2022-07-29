@@ -47,57 +47,20 @@ class TablePrefetchProxyPluginUnitTests: XCTestCase {
 
     func testThatScrollCalledPrefetchPluginEvents() {
         // given
-        let plugin = PrefetchPlugin()
+        let plugin = SpyPrefetchPlugin()
         let ddm = builder.add(plugin: plugin).build()
 
-        // when
         for id in 0...300 {
-            ddm.addCellGenerator(CellGenerator(id: id))
+            ddm.addCellGenerator(StubTableCell.rddm.baseGenerator(with: "\(id)", and: .class))
         }
         ddm.forceRefill()
-        ddm.scrollTo(generator: ddm.generators[0][100], scrollPosition: .top, animated: true)
-        ddm.scrollTo(generator: ddm.generators[0][200], scrollPosition: .bottom, animated: true)
-        ddm.scrollTo(generator: ddm.generators[0][50], scrollPosition: .top, animated: true)
+
+        // when
+        
+        table.scrollToRow(at: .init(row: 300, section: 0), at: .bottom, animated: true)
 
         // then
         XCTAssertTrue(plugin.prefetchEventWasCalled)
-    }
-
-    // MARK: - Mock
-
-    class PrefetchPlugin: TablePrefetchProxyPlugin {
-
-        var prefetchEventWasCalled = false
-        var cancelPrefetchingEventWasCalled = false
-
-        func setSpyEvents() {
-            prefetchEvent += { [weak self] _ in
-                self?.prefetchEventWasCalled = true
-            }
-            cancelPrefetchingEvent += { [weak self] _ in
-                self?.cancelPrefetchingEventWasCalled = true
-            }
-        }
-
-    }
-
-    class CellGenerator: TableCellGenerator, PrefetcherableItem {
-
-        var requestId: Int?
-        var identifier: String { String(describing: UITableViewCell.self) }
-
-        init(id: Int) {
-            requestId = id
-        }
-
-        func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-            return UITableViewCell()
-        }
-
-        func registerCell(in tableView: UITableView) {
-            tableView.registerNib(identifier)
-        }
-
     }
 
 }
