@@ -69,11 +69,11 @@ update_version:
 
 ## Lint lib for cocoapods
 lint_lib:
-	pod lib lint --allow-warnings
+	bundle exec pod lib lint --allow-warnings
 
 ## Publish Lib in cocoapods
 publish_lib:
-	pod trunk push --allow-warnings
+	bundle exec pod trunk push --allow-warnings
 
 ## Colors
 GREEN  := $(shell tput -Txterm setaf 2)
