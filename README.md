@@ -129,7 +129,7 @@ You can check more examples in our [example project](/Example/) or in full [docu
 Just add ReactiveDataDisplayManager to your `Podfile` like this
 
 ```
-pod 'ReactiveDataDisplayManager' ~> 7.2.1
+pod 'ReactiveDataDisplayManager' ~> 7.3
 ```
 
 ## Changelog
