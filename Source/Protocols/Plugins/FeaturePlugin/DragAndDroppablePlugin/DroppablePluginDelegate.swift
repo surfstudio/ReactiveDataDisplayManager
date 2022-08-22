@@ -88,7 +88,6 @@ private extension DroppablePluginDelegate {
             destinationIndexPath.row < generatorsCount
         else { return }
 
-
         var removed: [Provider.GeneratorType] = []
 
         coordinator.items.enumerated().forEach {
