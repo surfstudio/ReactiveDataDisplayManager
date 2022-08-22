@@ -14,7 +14,7 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     // MARK: - Typealias
 
     public typealias CollectionType = UITableView
-    public typealias CellGeneratorType = TableCellGenerator
+    public typealias GeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
 
     // MARK: - Public properties
@@ -23,12 +23,13 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     public weak var view: UITableView!
     // swiftlint:enable implicitly_unwrapped_optional
 
-    var delegate: TableDelegate?
     var dataSource: TableDataSource?
+    var delegate: TableDelegate?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
+        TablePluginsChecker(delegate: delegate, generators: generators).asyncCheckPlugins()
         dataSource?.modifier?.reload()
     }
 

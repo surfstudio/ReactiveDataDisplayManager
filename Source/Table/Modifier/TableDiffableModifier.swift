@@ -14,7 +14,7 @@ import UIKit
 @available(iOS 13.0, tvOS 13.0, *)
 class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
-    typealias CellGeneratorType = TableCellGenerator & DiffableItemSource
+    typealias GeneratorType = TableCellGenerator & DiffableItemSource
     typealias HeaderGeneratorType = TableHeaderGenerator & DiffableItemSource
     typealias FooterGeneratorType = TableFooterGenerator & DiffableItemSource
 
@@ -138,7 +138,7 @@ private extension TableDiffableModifier {
         guard let provider = provider else { return nil }
 
         provider.sections.forEach { section in
-            assert(section.generators is [CellGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
+            assert(section.generators is [GeneratorType], "This strategy support only \(GeneratorType.Type.self)")
             assert(section.header is HeaderGeneratorType, "This strategy support only \(HeaderGeneratorType.Type.self)")
             assert(section.footer is FooterGeneratorType, "This strategy support only \(FooterGeneratorType.Type.self)")
         }

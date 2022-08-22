@@ -14,7 +14,7 @@ import UIKit
 @available(iOS 13.0, tvOS 13.0, *)
 class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnimation> {
 
-    typealias CellGeneratorType = CollectionCellGenerator & DiffableItemSource
+    typealias GeneratorType = CollectionCellGenerator & DiffableItemSource
     typealias HeaderGeneratorType = CollectionHeaderGenerator & DiffableItemSource
     typealias FooterGeneratorType = CollectionFooterGenerator & DiffableItemSource
 
@@ -137,7 +137,7 @@ private extension CollectionDiffableModifier {
         guard let provider = provider else { return nil }
 
         provider.sections.forEach { section in
-            assert(section.generators is [CellGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
+            assert(section.generators is [GeneratorType], "This strategy support only \(GeneratorType.Type.self)")
             assert(section.header is HeaderGeneratorType, "This strategy support only \(HeaderGeneratorType.Type.self)")
             assert(section.footer is FooterGeneratorType, "This strategy support only \(FooterGeneratorType.Type.self)")
         }

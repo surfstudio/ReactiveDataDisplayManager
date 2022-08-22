@@ -13,6 +13,9 @@ public protocol PluginAction {
     associatedtype Event
     associatedtype Manager: DataDisplayManager
 
+    /// Plugin name, must match child class name
+    var pluginName: String { get }
+
     /// Setup optional references to manager properties
     ///
     /// - parameter manager: instance of `DataDisplayManager`
@@ -23,4 +26,8 @@ public protocol PluginAction {
     /// - parameter event: event of  view, delegate or dataSource
     /// - parameter manager: instance of `DataDisplayManager`
     func process(event: Event, with manager: Manager?)
+}
+
+extension PluginAction {
+    public static var pluginName: String { String(describing: Self.self) }
 }

@@ -1,7 +1,8 @@
 # ReactiveDataDisplayManager
 
 [![Build](https://github.com/surfstudio/ReactiveDataDisplayManager/actions/workflows/Build.yml/badge.svg)](https://github.com/surfstudio/ReactiveDataDisplayManager/actions/workflows/Build.yml)
-[![codebeat badge](https://codebeat.co/badges/30f4100b-ee0e-4bc6-8aad-c2128544c0c6)](https://codebeat.co/projects/github-com-surfstudio-reactivedatadisplaymanager-master) [![codecov](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager/branch/master/graph/badge.svg)](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager)
+[![codebeat badge](https://codebeat.co/badges/aa8b4a6a-970f-4e1b-8400-bfe902f8aa68)](https://codebeat.co/projects/github-com-surfstudio-reactivedatadisplaymanager-develop)
+[![codecov](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager/branch/master/graph/badge.svg)](https://codecov.io/gh/surfstudio/ReactiveDataDisplayManager)
 
 It is the whole approach to working with scrollable lists or collections.
 
@@ -128,7 +129,7 @@ You can check more examples in our [example project](/Example/) or in full [docu
 Just add ReactiveDataDisplayManager to your `Podfile` like this
 
 ```
-pod 'ReactiveDataDisplayManager' ~> 7.2.1
+pod 'ReactiveDataDisplayManager' ~> 7.3
 ```
 
 ## Changelog

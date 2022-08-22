@@ -22,6 +22,12 @@ open class TableMovableItemPlugin: TableFeaturePlugin, Movable {
     open var delegate = MovablePluginDelegate<Provider>()
     open var dataSource = MovablePluginDataSource<Provider>()
 
+    // MARK: - Initialization
+
+    public init(cellDidChangePosition: ((ResultChangeCellPosition) -> Void)? = nil) {
+        dataSource.cellDidChangePosition = cellDidChangePosition
+    }
+
 }
 
 // MARK: - Public init
@@ -33,6 +39,16 @@ public extension TableFeaturePlugin {
     /// Allow moving cells builded with `MovableItem` generators
     static func movable() -> TableMovableItemPlugin {
         .init()
+    }
+
+    /// Plugin to move cells
+    ///
+    /// Allow moving cells builded with `MovableItem` generators
+    ///
+    /// - Parameters:
+    ///     - cellDidChangePosition: signal that the cell has been moved
+    static func movable(cellDidChangePosition: ((ResultChangeCellPosition) -> Void)?) -> TableMovableItemPlugin {
+        .init(cellDidChangePosition: cellDidChangePosition)
     }
 
 }
@@ -51,6 +67,12 @@ open class CollectionMovableItemPlugin: CollectionFeaturePlugin, Movable {
     open var delegate = MovablePluginDelegate<Provider>()
     open var dataSource = MovablePluginDataSource<Provider>()
 
+    // MARK: - Initialization
+
+    public init(cellDidChangePosition: ((ResultChangeCellPosition) -> Void)? = nil) {
+        dataSource.cellDidChangePosition = cellDidChangePosition
+    }
+
 }
 
 public extension CollectionFeaturePlugin {
@@ -60,6 +82,16 @@ public extension CollectionFeaturePlugin {
     /// Allow moving cells builded with `MovableItem` generators
     static func movable() -> CollectionMovableItemPlugin {
         .init()
+    }
+
+    /// Plugin to move cells
+    ///
+    /// Allow moving cells builded with `MovableItem` generators
+    ///
+    /// - Parameters:
+    ///     - cellDidChangePosition: signal that the cell has been moved
+    static func movable(cellDidChangePosition: ((ResultChangeCellPosition) -> Void)?) -> CollectionMovableItemPlugin {
+        .init(cellDidChangePosition: cellDidChangePosition)
     }
 
 }

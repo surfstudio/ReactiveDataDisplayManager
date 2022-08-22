@@ -8,6 +8,10 @@
 
 open class BaseCollectionPlugin<Event>: PluginAction {
 
+    public var pluginName: String {
+        Self.pluginName
+    }
+
     public init() { }
 
     open func setup(with manager: BaseCollectionManager?) {

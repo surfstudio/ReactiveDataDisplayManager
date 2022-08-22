@@ -9,12 +9,15 @@
 /// Collection to store and execute `PluginAction`
 public struct PluginCollection<Plugin: PluginAction> {
 
-    private var plugins = [Plugin]()
+    private(set) var plugins = [Plugin]()
 
     /// Add plugin to collection
     ///
     /// - parameter plugin: instance of `PluginAction`
     mutating func add(_ plugin: Plugin) {
+        if plugins.contains(where: { $0.pluginName == plugin.pluginName }) {
+            debugPrint("❗️ Plugin \(plugin.pluginName) added multiple times")
+        }
         plugins.append(plugin)
     }
 

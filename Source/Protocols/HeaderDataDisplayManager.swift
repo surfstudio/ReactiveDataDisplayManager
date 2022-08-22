@@ -14,7 +14,7 @@ public protocol HeaderDataDisplayManager: AnyObject {
 
     // MARK: - Associatedtypes
 
-    associatedtype CellGeneratorType
+    associatedtype GeneratorType
     associatedtype HeaderGeneratorType
 
     // MARK: - Data source methods
@@ -24,9 +24,9 @@ public protocol HeaderDataDisplayManager: AnyObject {
     /// - Parameter generator: The new generator.
     func addSectionHeaderGenerator(_ generator: HeaderGeneratorType)
 
-    func addCellGenerator(_ generator: CellGeneratorType, toHeader header: HeaderGeneratorType)
+    func addCellGenerator(_ generator: GeneratorType, toHeader header: HeaderGeneratorType)
 
-    func addCellGenerators(_ generators: [CellGeneratorType], toHeader header: HeaderGeneratorType)
+    func addCellGenerators(_ generators: [GeneratorType], toHeader header: HeaderGeneratorType)
 
     func removeAllGenerators(from header: HeaderGeneratorType)
 

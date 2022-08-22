@@ -162,6 +162,11 @@ extension BaseCollectionDelegate {
         return draggableDelegate?.makeDragItems(at: indexPath, with: manager) ?? []
     }
 
+    open func collectionView(_ collectionView: UICollectionView,
+                             dragPreviewParametersForItemAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        return draggableDelegate?.draggableParameters?.parameters
+    }
+
 }
 
 // MARK: - UICollectionViewDropDelegate
@@ -183,6 +188,11 @@ extension BaseCollectionDelegate {
             return UICollectionViewDropProposal(operation: .forbidden)
         }
         return UICollectionViewDropProposal(operation: operation)
+    }
+
+    open func collectionView(_ collectionView: UICollectionView,
+                             dropPreviewParametersForItemAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        return droppableDelegate?.droppableParameters
     }
 
 }

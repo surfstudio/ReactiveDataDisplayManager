@@ -230,6 +230,10 @@ extension BaseTableDelegate: TableDragAndDropDelegate {
         return draggableDelegate?.makeDragItems(at: indexPath, with: manager) ?? []
     }
 
+    open func tableView(_ tableView: UITableView, dragPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        return draggableDelegate?.draggableParameters?.parameters
+    }
+
     // MARK: - UITableViewDropDelegate
 
     open func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
@@ -246,6 +250,10 @@ extension BaseTableDelegate: TableDragAndDropDelegate {
             return UITableViewDropProposal(operation: .forbidden)
         }
         return UITableViewDropProposal(operation: operation)
+    }
+
+    open func tableView(_ tableView: UITableView, dropPreviewParametersForRowAt indexPath: IndexPath) -> UIDragPreviewParameters? {
+        return droppableDelegate?.droppableParameters
     }
 
 }

@@ -1,8 +1,14 @@
+
+include:
+  - path: targets/template.yml
+    relativePaths: false
+
+
 # Название проекта
 name: ReactiveDataDisplayManagerExample
 options:
   # Версия Xcode
-  xcodeVersion: 12.5
+  xcodeVersion: 13.4.1
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
@@ -10,62 +16,54 @@ options:
 settings:
   DEVELOPMENT_TEAM: EFAAG9GXN4
 targets:
+
     ReactiveDataDisplayManagerExample_iOS:
-      dependencies:
-        - sdk: UIKit.framework
-      type: application
       platform: iOS
       deploymentTarget: 11.0
-      scheme:
-        configVariants: all
       sources:
         - path: ReactiveDataDisplayManager
+      dependencies:
+        - target: ReactiveDataDisplayManager_iOS
       info:
         path: ReactiveDataDisplayManager/Application/Info.plist
-        properties:
-          UIUserInterfaceStyle: light
-          UILaunchStoryboardName: LaunchScreen
-          UIMainStoryboardFile: Main
-          CFBundleName: ReactiveDataDisplayManagerExample
-          CFBundleShortVersionString: $(MARKETING_VERSION)
-          CFBundleVersion: $(CURRENT_PROJECT_VERSION)
-      settings:
-        base:
-          PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm.example
-          MARKETING_VERSION: "8.0.10"
-          CURRENT_PROJECT_VERSION: 8
-          VERSIONING_SYSTEM: "apple-generic"
-          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
-          LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
-          CODE_SIGN_IDENTITY: "iPhone Developer"
-          CODE_SIGN_STYLE: Automatic
+      templates:
+        - BaseApp
+        - BaseSettings
+      templateAttributes:
+        bundle_id: ru.surfstudio.rddm.example
+        bundle_name: ReactiveDataDisplayManagerExample
+        ui_test: ReactiveDataDisplayManagerExampleUITests
 
     ReactiveDataDisplayManagerExample_tvOS:
-      dependencies:
-        - sdk: UIKit.framework
-      type: application
       platform: tvOS
       deploymentTarget: 13.0
-      scheme:
-        configVariants: all
       sources:
         - path: ReactiveDataDisplayManagerExampleTv
+      dependencies:
+        - target: ReactiveDataDisplayManager_tvOS
       info:
         path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
-        properties:
-          UIUserInterfaceStyle: light
-          UILaunchStoryboardName: LaunchScreen
-          UIMainStoryboardFile: Main
-          CFBundleName: ReactiveDataDisplayManagerExampleTv
-          CFBundleShortVersionString: $(MARKETING_VERSION)
-          CFBundleVersion: $(CURRENT_PROJECT_VERSION)
-      settings:
-        base:
-          PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm.example
-          MARKETING_VERSION: "8.0.10"
-          CURRENT_PROJECT_VERSION: 8
-          VERSIONING_SYSTEM: "apple-generic"
-          DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
-          LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
-          CODE_SIGN_IDENTITY: "iPhone Developer"
-          CODE_SIGN_STYLE: Automatic
+      templates:
+        - BaseApp
+        - BaseSettings
+      templateAttributes:
+        bundle_id: ru.surfstudio.rddm.tv_example
+        bundle_name: ReactiveDataDisplayManagerExampleTv
+        ui_test: ReactiveDataDisplayManagerExampleUITests
+
+    ReactiveDataDisplayManagerExampleUITests:
+        templates:
+          - BaseUITest
+          - BaseSettings
+        templateAttributes:
+          bundle_id: ru.surfstudio.rddm.tv_example.tests
+        dependencies:
+          - target: ReactiveDataDisplayManagerExample_iOS
+        sources: [ReactiveDataDisplayManagerExampleUITests]
+        info:
+          path: ReactiveDataDisplayManagerExampleUITests/Info.plist
+          properties: []
+        settings:
+          configs:
+            Debug:
+              TEST_TARGET_NAME: ReactiveDataDisplayManagerExample_iOS

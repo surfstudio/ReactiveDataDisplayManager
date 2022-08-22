@@ -1,8 +1,12 @@
+include:
+  - path: Example/project.yml
+    relativePaths: true
+
 # Название проекта
 name: ReactiveDataDisplayManager
 options:
   # Версия Xcode
-  xcodeVersion: 12.5
+  xcodeVersion: 13.3
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
@@ -18,7 +22,9 @@ targets:
         tvOS: 10.0
       scheme:
         configVariants: all
-        testTargets: ReactiveDataDisplayManagerTests_${platform}
+        testTargets:
+          - ReactiveDataDisplayManagerTests_${platform}
+        gatherCoverageData: true
       sources:
         - path: Source
       info:
@@ -30,13 +36,14 @@ targets:
       settings:
         base:
           PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm
-          MARKETING_VERSION: "8.0.10"
-          CURRENT_PROJECT_VERSION: 8
+          MARKETING_VERSION: "7.3"
+          CURRENT_PROJECT_VERSION: 0
           VERSIONING_SYSTEM: "apple-generic"
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
           LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks"
-          CODE_SIGN_IDENTITY: "iPhone Developer"
-          CODE_SIGN_STYLE: Automatic
+          CODE_SIGN_IDENTITY: None
+          CODE_SIGN_STYLE: Manual
+
 
     ReactiveDataDisplayManagerTests:
       type: bundle.unit-test
@@ -52,7 +59,10 @@ targets:
         properties: []
       dependencies:
         - target: ReactiveDataDisplayManager_${platform}
+      preBuildScripts:
+        - script: sourcery
+          name: Sourcery
       settings:
-        configs:
-          Debug:
-            EXCLUDED_ARCHS[sdk=iphonesimulator*]: "arm64"
+        base:
+          CODE_SIGN_IDENTITY: None
+          CODE_SIGN_STYLE: Manual

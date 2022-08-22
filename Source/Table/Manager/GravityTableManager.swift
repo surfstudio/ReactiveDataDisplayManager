@@ -25,16 +25,16 @@ extension EmptyTableHeaderGenerator: GravityItem {
 /// Warning. Do not forget to conform TableCellGenerator to GravityItem (GravityTableCellGenerator)
 open class GravityTableManager: BaseTableManager {
 
-    public typealias CellGeneratorType = GravityTableCellGenerator
+    public typealias GeneratorType = GravityTableCellGenerator
     public typealias HeaderGeneratorType = GravityTableHeaderGenerator
 
     // MARK: - Public methods
 
     open override func addCellGenerator(_ generator: TableCellGenerator) {
-        assert(generator is CellGeneratorType, "This strategy support only \(CellGeneratorType.Type.self)")
+        assert(generator is GeneratorType, "This strategy support only \(GeneratorType.Type.self)")
 
         guard
-            let gravityGenerator = generator as? CellGeneratorType,
+            let gravityGenerator = generator as? GeneratorType,
             checkDuplicate(generator: gravityGenerator),
             let tableView = view
         else {
@@ -57,11 +57,11 @@ open class GravityTableManager: BaseTableManager {
     }
 
     open override func addCellGenerator(_ generator: TableCellGenerator, after: TableCellGenerator) {
-        assert(generator is CellGeneratorType, "This strategy support only \(CellGeneratorType.Type.self)")
-        assert(after is CellGeneratorType, "This strategy support only \(CellGeneratorType.Type.self)")
+        assert(generator is GeneratorType, "This strategy support only \(GeneratorType.Type.self)")
+        assert(after is GeneratorType, "This strategy support only \(GeneratorType.Type.self)")
 
-        guard let gravityGenerator = generator as? CellGeneratorType,
-              let gravityGeneratorAfter = after as? CellGeneratorType,
+        guard let gravityGenerator = generator as? GeneratorType,
+              let gravityGeneratorAfter = after as? GeneratorType,
               let path = indexPath(for: gravityGeneratorAfter)
         else {
             assertionFailure("Generator doesn't exist")
@@ -93,12 +93,12 @@ open class GravityTableManager: BaseTableManager {
         sections = combined.map { $0.1 }
     }
 
-    public func addCellGenerator(_ generator: CellGeneratorType, toHeader header: HeaderGeneratorType) {
+    public func addCellGenerator(_ generator: GeneratorType, toHeader header: HeaderGeneratorType) {
         guard checkDuplicate(generator: generator) else { return }
         addCellGenerators([generator], toHeader: header)
     }
 
-    public func addCellGenerators(_ generators: [CellGeneratorType], toHeader header: HeaderGeneratorType) {
+    public func addCellGenerators(_ generators: [GeneratorType], toHeader header: HeaderGeneratorType) {
         guard let tableView = self.view else { return }
 
         generators.forEach { $0.registerCell(in: tableView) }
@@ -120,8 +120,8 @@ open class GravityTableManager: BaseTableManager {
         self.sections[index].generators.removeAll()
     }
 
-    open func replace(oldGenerator: CellGeneratorType,
-                      on newGenerator: CellGeneratorType,
+    open func replace(oldGenerator: GeneratorType,
+                      on newGenerator: GeneratorType,
                       removeAnimation: UITableView.RowAnimation = .automatic,
                       insertAnimation: UITableView.RowAnimation = .automatic) {
         guard let index = self.findGenerator(oldGenerator) else { return }
@@ -143,7 +143,7 @@ open class GravityTableManager: BaseTableManager {
         dataSource?.modifier?.reloadSections(at: [indexOfHeader], with: animation)
     }
 
-    open func remove(_ generator: CellGeneratorType,
+    open func remove(_ generator: GeneratorType,
                      with animation: UITableView.RowAnimation = .automatic,
                      needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                      needRemoveEmptySection: Bool = false) {
@@ -169,13 +169,13 @@ private extension GravityTableManager {
         }
     }
 
-    func checkDuplicate(generator: CellGeneratorType) -> Bool {
+    func checkDuplicate(generator: GeneratorType) -> Bool {
         return !sections.asGravityCellCompatible.contains(where: { section in
             section.contains { $0.heaviness == generator.heaviness }
         })
     }
 
-    func insert(generators: [CellGeneratorType], to section: Int) {
+    func insert(generators: [GeneratorType], to section: Int) {
         guard !generators.isEmpty else { return }
 
         self.sections[section].generators = self.sections[section].generators.asGravityCellCompatible.sorted { $0.heaviness < $1.heaviness }
@@ -192,7 +192,7 @@ private extension GravityTableManager {
         dataSource?.modifier?.insertRows(at: indexPaths, with: .none)
     }
 
-    func nearestIndex(for generator: CellGeneratorType, in section: Int) -> Int? {
+    func nearestIndex(for generator: GeneratorType, in section: Int) -> Int? {
         let generators = sections[section].generators.asGravityCellCompatible
         let nearestIndex = generators.enumerated().min { lhs, rhs in
             let lhsValue = abs(lhs.element.heaviness - generator.heaviness)
@@ -203,7 +203,7 @@ private extension GravityTableManager {
         return nearestIndex?.offset
     }
 
-    func indexPath(for generator: CellGeneratorType) -> IndexPath? {
+    func indexPath(for generator: GeneratorType) -> IndexPath? {
         for (sectionIndex, section) in sections.enumerated() {
             if let generatorIndex = section.generators.firstIndex(where: { $0 === generator }) {
                 return IndexPath(row: generatorIndex, section: sectionIndex)
@@ -223,10 +223,10 @@ fileprivate extension Array where Element == Section<TableCellGenerator, TableHe
         compactMap { $0.header as? GravityTableManager.HeaderGeneratorType }
     }
 
-    var asGravityCellCompatible: [[GravityTableManager.CellGeneratorType]] {
+    var asGravityCellCompatible: [[GravityTableManager.GeneratorType]] {
         map { section in
             section.generators.compactMap {
-                $0 as? GravityTableManager.CellGeneratorType
+                $0 as? GravityTableManager.GeneratorType
             }
         }
     }
@@ -235,9 +235,9 @@ fileprivate extension Array where Element == Section<TableCellGenerator, TableHe
 
 fileprivate extension Array where Element == TableCellGenerator {
 
-    var asGravityCellCompatible: [GravityTableManager.CellGeneratorType] {
+    var asGravityCellCompatible: [GravityTableManager.GeneratorType] {
         compactMap {
-            $0 as? GravityTableManager.CellGeneratorType
+            $0 as? GravityTableManager.GeneratorType
         }
     }
 

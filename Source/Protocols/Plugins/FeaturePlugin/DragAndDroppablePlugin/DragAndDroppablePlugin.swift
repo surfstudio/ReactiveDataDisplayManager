@@ -26,8 +26,15 @@ open class TableDragAndDroppablePlugin: TableFeaturePlugin, DragAndDroppable {
 
     // MARK: - Initializations
 
-    init(dropStrategy: StrategyDropable) {
+    init(dropStrategy: StrategyDropable,
+         draggableParameters: DragablePreviewParameters?,
+         droppableParameters: UIDragPreviewParameters?,
+         cellDidChangePosition: ((ResultChangeCellPosition) -> Void)? = nil) {
+
         droppableDelegate.dropStrategy = dropStrategy
+        droppableDelegate.droppableParameters = droppableParameters
+        draggableDelegate.draggableParameters = draggableParameters
+        droppableDelegate.cellDidChangePosition = cellDidChangePosition
     }
 
 }
@@ -41,9 +48,19 @@ public extension TableFeaturePlugin {
     /// Allow dragging and dropping cells builded with `DragAndDroppableItemSource` generators by section
     /// - parameters:
     ///     - sections: allow dropping across sections (all or current)
+    ///     - draggableParameters: setting view display when dragging
+    ///     - droppableParameters: setting view display when dropp
+    ///     - setting view display when dropping
     @available(iOS 11.0, *)
-    static func dragAndDroppable(by sections: DropStrategy = .all) -> TableDragAndDroppablePlugin {
-        .init(dropStrategy: sections)
+    static func dragAndDroppable(by sections: DropStrategy = .all,
+                                 draggableParameters: DragablePreviewParameters? = nil,
+                                 droppableParameters: UIDragPreviewParameters? = nil,
+                                 positionChanged: ((ResultChangeCellPosition) -> Void)? = nil) -> TableDragAndDroppablePlugin {
+
+        return .init(dropStrategy: sections,
+                     draggableParameters: draggableParameters,
+                     droppableParameters: droppableParameters,
+                     cellDidChangePosition: positionChanged)
     }
 
 }
@@ -65,8 +82,14 @@ open class CollectionDragAndDroppablePlugin: CollectionFeaturePlugin, DragAndDro
 
     // MARK: - Initializations
 
-    init(dropStrategy: StrategyDropable) {
+    init(dropStrategy: StrategyDropable,
+         draggableParameters: DragablePreviewParameters?,
+         droppableParameters: UIDragPreviewParameters?,
+         cellDidChangePosition: ((ResultChangeCellPosition) -> Void)? = nil) {
+        draggableDelegate.draggableParameters = draggableParameters
+        droppableDelegate.droppableParameters = droppableParameters
         droppableDelegate.dropStrategy = dropStrategy
+        droppableDelegate.cellDidChangePosition = cellDidChangePosition
     }
 
 }
@@ -78,9 +101,19 @@ public extension CollectionFeaturePlugin {
     /// Allow dragging and dropping cells builded with `DragAndDroppableItemSource` generators by section
     /// - parameters:
     ///     - sections: allow dropping across sections (all or current)
+    ///     - draggableParameters: setting view display when dragging
+    ///     - droppableParameters: setting view display when dropp
+    ///     - cellDidChangePosition: signal that the cell has been moved
     @available(iOS 11.0, *)
-    static func dragAndDroppable(by sections: DropStrategy = .all) -> CollectionDragAndDroppablePlugin {
-        .init(dropStrategy: sections)
+    static func dragAndDroppable(by sections: DropStrategy = .all,
+                                 draggableParameters: DragablePreviewParameters? = nil,
+                                 droppableParameters: UIDragPreviewParameters? = nil,
+                                 positionChanged: ((ResultChangeCellPosition) -> Void)? = nil) -> CollectionDragAndDroppablePlugin {
+
+        return .init(dropStrategy: sections,
+                     draggableParameters: draggableParameters,
+                     droppableParameters: droppableParameters,
+                     cellDidChangePosition: positionChanged)
     }
 
 }

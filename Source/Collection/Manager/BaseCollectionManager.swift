@@ -13,7 +13,7 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     // MARK: - Typealias
 
     public typealias CollectionType = UICollectionView
-    public typealias CellGeneratorType = CollectionCellGenerator
+    public typealias GeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
     public typealias FooterGeneratorType = CollectionFooterGenerator
 
@@ -25,12 +25,13 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     public weak var view: UICollectionView!
     // swiftlint:enable implicitly_unwrapped_optional
 
-    var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
+    var delegate: CollectionDelegate?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
+        CollectionPluginsChecker(delegate: delegate, generators: generators).asyncCheckPlugins()
         dataSource?.modifier?.reload()
     }
 

@@ -15,7 +15,7 @@ public protocol DataDisplayManager: AnyObject {
     // MARK: - Associatedtypes
 
     associatedtype CollectionType
-    associatedtype CellGeneratorType
+    associatedtype GeneratorType
 
     // swiftlint:disable implicitly_unwrapped_optional
     var view: CollectionType! { get }
@@ -30,32 +30,32 @@ public protocol DataDisplayManager: AnyObject {
     ///
     /// - Parameters:
     ///   - generator: The new cell generator.
-    func addCellGenerator(_ generator: CellGeneratorType)
+    func addCellGenerator(_ generator: GeneratorType)
 
     /// Adds a new array of cell generators.
     ///
     /// - Parameters:
     ///   - generator: New cell generators.
     ///   - after: Generator after which generators should be added.
-    func addCellGenerators(_ generators: [CellGeneratorType], after: CellGeneratorType)
+    func addCellGenerators(_ generators: [GeneratorType], after: GeneratorType)
 
     /// Adds a new cell generator.
     ///
     /// - Parameters:
     ///   - generator: New cell generator.
     ///   - after: Generator after which generator should be added.
-    func addCellGenerator(_ generator: CellGeneratorType, after: CellGeneratorType)
+    func addCellGenerator(_ generator: GeneratorType, after: GeneratorType)
 
     /// Adds a new array of cell generators.
     ///
     /// - Parameters:
     ///   - generator: Array of cell generators.
-    func addCellGenerators(_ generators: [CellGeneratorType])
+    func addCellGenerators(_ generators: [GeneratorType])
 
     /// Updates generators
     ///
     /// - Parameter generators: generators to update
-    func update(generators: [CellGeneratorType])
+    func update(generators: [GeneratorType])
 
     /// Removes all cells generators and sections.
     func clearCellGenerators()

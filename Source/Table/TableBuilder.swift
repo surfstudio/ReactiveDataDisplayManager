@@ -94,12 +94,12 @@ public class TableBuilder<T: BaseTableManager> {
 
         switch featurePlugin {
         case let plugin as TableMovableItemPlugin:
-            movablePlugin = plugin
+            movablePlugin == nil ? movablePlugin = plugin : printDebugMessage(plugin)
         case let plugin as TableSectionTitleDisplayable:
-            sectionTitleDisplayablePlugin = plugin
+            sectionTitleDisplayablePlugin == nil ? sectionTitleDisplayablePlugin = plugin : printDebugMessage(plugin)
         #if os(tvOS)
         case let plugin as TableFocusablePlugin:
-            focusablePlugin = plugin
+            focusablePlugin == nil ? focusablePlugin = plugin : printDebugMessage(plugin)
         #endif
         default:
             break
@@ -181,4 +181,8 @@ private extension TableBuilder {
         return true
     }
     #endif
+
+    func printDebugMessage(_ featurePlugin: TableFeaturePlugin) {
+        debugPrint("❗️ Plugin \(featurePlugin.pluginName) added multiple times")
+    }
 }

@@ -15,6 +15,10 @@ open class MovablePluginDataSource<Provider: SectionsProvider> {
 
     public typealias GeneratorType = MovableItem
 
+    // MARK: - Properties
+
+    var cellDidChangePosition: ((ResultChangeCellPosition) -> Void)?
+
 }
 
 // MARK: - MovableDataSource
@@ -49,6 +53,8 @@ extension MovablePluginDataSource: MovableDataSource {
         provider.sections[destinationIndexPath.section].generators.insert(itemToMove, at: destinationIndexPath.row)
 
         animator?.perform(in: view, animated: true, operation: { })
+
+        cellDidChangePosition?(.init(id: generator.id, oldIndex: sourceIndexPath, newIndex: destinationIndexPath))
     }
 
     /// Asks whether a given item can be moved to another location

@@ -3,12 +3,12 @@ name: Build
 on:
   push:
     branches:
-      - master
       - develop
+      - preview/version-8
   pull_request:
 
 jobs:
-      
+
   build_iOS:
     runs-on: macOS-latest
     steps:
@@ -16,11 +16,43 @@ jobs:
     - name: Generate projects
       run: make init
     - name: Build
-      run: xcodebuild -target ReactiveDataDisplayManager_iOS
+      run: make build_lib_iOS
     - name: Run tests
-      run: xcodebuild test -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination 'platform=iOS Simulator,name=iPhone 8' | xcpretty -c
+      run: make test_lib_iOS
+    - name: Prepare Report
+      run: make prepare_report
     - name: Upload Coverage
-      run: bash <(curl -s https://codecov.io/bash) -J 'ReactiveDataDisplayManager'
+      uses: codecov/codecov-action@v3.1.0
+      with:
+        files: build/reports/cobertura.xml
+        flags: unittests
+        name: codecov-unit
+        xcode: true
+        fail_ci_if_error: true
+        verbose: true
+
+
+  build_Example:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Generate projects
+      run: make init
+    - name: Build
+      run: make build_example_iOS
+    - name: Run tests
+      run: make test_example_iOS
+    - name: Prepare Report
+      run: make prepare_example_report
+    - name: Upload Coverage
+      uses: codecov/codecov-action@v3.1.0
+      with:
+        files: build/reports/cobertura.xml
+        flags: uitests
+        name: codecov-ui
+        xcode: true
+        fail_ci_if_error: true
+        verbose: true
 
   build_tvOS:
     runs-on: macOS-latest
@@ -29,4 +61,4 @@ jobs:
     - name: Generate projects
       run: make init
     - name: Build
-      run: xcodebuild -target ReactiveDataDisplayManager_tvOS
+      run: make build_lib_tvOS

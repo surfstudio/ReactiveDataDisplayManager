@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -427,11 +427,12 @@
                         <segue destination="2CJ-Yf-yLR" kind="show" identifier="differenceTable" id="ZLw-LG-i1S"/>
                         <segue destination="d7e-TN-VWx" kind="show" identifier="dragAndDroppableTable" id="E9M-n5-zrb"/>
                         <segue destination="Vhr-xd-Kz0" kind="show" identifier="selectableTable" id="71J-yg-dJ0"/>
+                        <segue destination="B1B-Kf-5MV" kind="show" identifier="highlightableTable" id="XeT-nU-sXM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kEa-HS-aMh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2302.898550724638" y="-881.25"/>
+            <point key="canvasLocation" x="2181" y="-817"/>
         </scene>
         <!--Image Table View Controller-->
         <scene sceneID="S6E-Ns-Rdg">
@@ -467,7 +468,7 @@
         <!--Foldable Table View Controller-->
         <scene sceneID="2Yh-EU-tvP">
             <objects>
-                <viewController id="3su-Fg-CaX" customClass="FoldableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FoldableTableViewController" id="3su-Fg-CaX" customClass="FoldableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IMj-pk-iBT">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -529,7 +530,7 @@
         <!--Table-->
         <scene sceneID="z3D-wM-wuI">
             <objects>
-                <navigationController storyboardIdentifier="MainTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="eGj-CY-oeJ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainTableViewController" automaticallyAdjustsScrollViewInsets="NO" id="eGj-CY-oeJ" customClass="NavigationController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Table" image="table" catalog="system" id="o9b-bQ-AI4"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -548,6 +549,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VEV-g7-gNO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="883" y="-881"/>
+        </scene>
+        <!--Highlightable Table View Controller-->
+        <scene sceneID="lPh-53-zrg">
+            <objects>
+                <viewController id="B1B-Kf-5MV" customClass="HighlightableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ga9-eC-ec8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="79h-7z-tBv">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="wuD-7U-shO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="79h-7z-tBv" firstAttribute="top" secondItem="wuD-7U-shO" secondAttribute="top" id="4r4-9T-nUb"/>
+                            <constraint firstItem="79h-7z-tBv" firstAttribute="leading" secondItem="wuD-7U-shO" secondAttribute="leading" id="D9T-N0-ovZ"/>
+                            <constraint firstItem="wuD-7U-shO" firstAttribute="trailing" secondItem="79h-7z-tBv" secondAttribute="trailing" id="gOV-ki-suw"/>
+                            <constraint firstItem="wuD-7U-shO" firstAttribute="bottom" secondItem="79h-7z-tBv" secondAttribute="bottom" id="nUb-Bj-SVb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="f7p-Q5-L6j"/>
+                    <connections>
+                        <outlet property="tableView" destination="79h-7z-tBv" id="HtW-8j-oC0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cvc-BG-xAE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8936" y="-1842"/>
         </scene>
     </scenes>
     <resources>
