@@ -39,6 +39,7 @@ final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplay
         self.model = model
         self.title = model
         self.needIndexTitle = needSectionIndexTitle
+        super.init()
     }
 
     // MARK: - TableHeaderGenerator

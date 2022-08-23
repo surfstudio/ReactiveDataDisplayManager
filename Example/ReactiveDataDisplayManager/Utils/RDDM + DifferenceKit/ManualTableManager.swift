@@ -13,12 +13,12 @@ extension TableHeaderGenerator: Differentiable {
 
     // MARK: - Differentiable
 
-    public var differenceIdentifier: String {
-        return uuid
+    public var differenceIdentifier: AnyHashable {
+        return id
     }
 
     public func isContentEqual(to source: TableHeaderGenerator) -> Bool {
-        return uuid == source.uuid
+        return id == source.id
     }
 
 }
@@ -115,10 +115,9 @@ private extension ManualTableManager {
     }
 
     func makeSnapshot() -> [Section]? {
-        guard let generators = generators as? [[DiffableItemSource]] else { return nil }
-        return sections.enumerated().map {
-            let elements = generators.asDiffableItems[safe: $0] ?? []
-            return Section(model: $1, elements: elements)
+        return sections.compactMap { section -> Section? in
+            guard let diffableSection = section.asDiffableItemSource() else { return nil }
+            return Section(model: section.header, elements: diffableSection.generators.compactMap { $0.diffableItem })
         }
     }
 

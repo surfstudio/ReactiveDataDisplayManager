@@ -25,7 +25,7 @@ public struct DragablePreviewParameters {
 
 /// Delegate based on `DraggableDelegate` protocol.
 @available(iOS 11.0, *)
-open class DraggablePluginDelegate<Provider: GeneratorsProvider> {
+open class DraggablePluginDelegate<Provider: SectionsProvider> {
 
     // MARK: - Typealias
 
@@ -51,7 +51,7 @@ extension DraggablePluginDelegate: DraggableDelegate {
     /// - returns: items to drag or an empty array if dragging the selected item is not possible
     /// - warning: Currently supports single item drag
     public func makeDragItems(at indexPath: IndexPath, with provider: Provider?) -> [UIDragItem] {
-        guard let generator = provider?.generators[safe: indexPath.section]?[safe: indexPath.row] as? GeneratorType else { return [] }
+        guard let generator = provider?.sections[safe: indexPath.section]?.generators[safe: indexPath.row] as? GeneratorType else { return [] }
         let mainDragItem = makeDragItem(for: generator.dropableItem)
 
         if let preview = draggableParameters?.preview {

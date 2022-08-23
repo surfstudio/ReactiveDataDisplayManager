@@ -9,11 +9,11 @@
 import UIKit
 
 extension DataDisplayManager {
-    static func += (left: Self, right: CellGeneratorType) {
+    static func += (left: Self, right: GeneratorType) {
         left.addCellGenerator(right)
     }
 
-    static func += (left: Self, right: [CellGeneratorType]) {
+    static func += (left: Self, right: [GeneratorType]) {
         left.addCellGenerators(right)
     }
 }

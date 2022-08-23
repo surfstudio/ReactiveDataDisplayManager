@@ -14,7 +14,7 @@ open class BaseStackManager: DataDisplayManager {
     // MARK: - Typealias
 
     public typealias CollectionType = UIStackView
-    public typealias CellGeneratorType = StackCellGenerator
+    public typealias GeneratorType = StackCellGenerator
 
     // MARK: - Properties
 

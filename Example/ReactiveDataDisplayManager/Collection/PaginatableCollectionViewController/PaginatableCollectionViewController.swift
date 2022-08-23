@@ -111,7 +111,7 @@ private extension PaginatableCollectionViewController {
             newGenerators.append(makeGenerator())
         }
 
-        if let lastGenerator = adapter.generators.last?.last {
+        if let lastGenerator = adapter.sections.last?.generators.last {
             adapter.insert(after: lastGenerator, new: newGenerators)
         } else {
             adapter.addCellGenerators(newGenerators)

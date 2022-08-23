@@ -20,7 +20,7 @@ final class CollectionDelegateStub: NSObject, CollectionDelegate {
     var manager: BaseCollectionManager?
     var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
-    var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>?
+    var movablePlugin: MovablePluginDelegate<CollectionSectionsProvider>?
 
     // MARK: - CollectionDelegate Methods
 

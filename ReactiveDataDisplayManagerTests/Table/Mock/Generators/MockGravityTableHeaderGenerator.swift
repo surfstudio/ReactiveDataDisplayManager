@@ -19,6 +19,7 @@ final class MockGravityTableHeaderGenerator: GravityTableHeaderGenerator {
 
     init(heaviness: Int = .zero) {
         _heaviness = heaviness
+        super.init(uniqueId: Int.anyRandom())
     }
 
     override func getHeaviness() -> Int {

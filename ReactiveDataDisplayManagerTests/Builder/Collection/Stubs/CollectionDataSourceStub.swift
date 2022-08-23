@@ -18,12 +18,12 @@ final class CollectionDataSourceStub: NSObject, CollectionDataSource {
 
     // MARK: - CollectionDataSource Properties
 
-    var provider: CollectionGeneratorsProvider?
+    var provider: CollectionSectionsProvider?
     var modifier: Modifier<UICollectionView, CollectionItemAnimation>?
     var prefetchPlugins = PluginCollection<BaseCollectionPlugin<PrefetchEvent>>()
     var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     var itemTitleDisplayablePlugin: CollectionItemTitleDisplayable?
-    var movablePlugin: MovablePluginDataSource<CollectionGeneratorsProvider>?
+    var movablePlugin: MovablePluginDataSource<CollectionSectionsProvider>?
 
     // MARK: - CollectionDataSource Methods
 

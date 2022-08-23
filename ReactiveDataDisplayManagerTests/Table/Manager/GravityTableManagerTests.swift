@@ -34,8 +34,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addSectionHeaderGenerator(gen2)
 
         // then
-        XCTAssertIdentical(ddm.sections[0], gen2)
-        XCTAssertIdentical(ddm.sections[1], gen1)
+        XCTAssertIdentical(ddm.sections[0].header, gen2)
+        XCTAssertIdentical(ddm.sections[1].header, gen1)
     }
 
     func testThatAddCellGeneratorAppendsNewSectionToCellGeneratorsCorrectly() {
@@ -159,7 +159,7 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen1, gen1, gen2, gen2])
 
         // when
-        ddm.clearHeaderGenerators()
+        ddm.clearCellGenerators()
 
         // then
         XCTAssertTrue(ddm.sections.isEmpty)

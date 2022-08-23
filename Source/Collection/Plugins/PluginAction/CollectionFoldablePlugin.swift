@@ -15,7 +15,7 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
         switch event {
         case .didSelect(let indexPath):
             guard
-                let generator = manager?.generators[indexPath.section][indexPath.row],
+                let generator = manager?.sections[indexPath.section].generators[indexPath.row],
                 let foldable = generator as? CollectionFoldableItem
             else {
                 return

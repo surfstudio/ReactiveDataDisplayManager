@@ -8,12 +8,18 @@
 
 import UIKit
 
-public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
+public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator, IdOwner {
 
-    public let uuid = UUID().uuidString
+    public let id: AnyHashable
     public let elementKind = UICollectionView.elementKindSectionHeader
 
-    public init() { }
+    public init() {
+        self.id = UUID().uuidString
+    }
+
+    public init(uniqueId: AnyHashable) {
+        self.id = uniqueId
+    }
 
     public func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
         return .zero
@@ -35,6 +41,7 @@ public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
     public var identifier: UICollectionReusableView.Type {
         return UICollectionReusableView.self
     }
+
 }
 
 // MARK: - DiffableItemSource
@@ -42,7 +49,7 @@ public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
 extension EmptyCollectionHeaderGenerator: DiffableItemSource {
 
     public var diffableItem: DiffableItem {
-        DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection"))
+        DiffableItem(id: id, state: .init("RDDM.Diffable.EmptySection"))
     }
 
 }

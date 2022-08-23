@@ -19,7 +19,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
     // MARK: - Properties
 
-    public weak var provider: TableGeneratorsProvider? {
+    public weak var provider: TableSectionsProvider? {
         didSet {
             let manager = provider as? BaseTableManager
             prefetchPlugins.setup(with: manager)
@@ -32,7 +32,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
     public var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
-    public var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>?
+    public var movablePlugin: MovablePluginDataSource<TableSectionsProvider>?
 
     // MARK: - Initialization
 
@@ -41,7 +41,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 
         super.init(tableView: provider.view) { (table, indexPath, item) -> UITableViewCell? in
             return provider
-                .generators[indexPath.section][indexPath.row]
+                .sections[indexPath.section].generators[indexPath.row]
                 .generate(tableView: table, for: indexPath)
         }
 

@@ -66,7 +66,7 @@ final class ManualTableManagerTests: XCTestCase {
 
         // then
         XCTAssertNotEqual(initialNumberOfSections, ddm.sections.count)
-        XCTAssertIdentical(ddm.sections[1], headerGen2)
+        XCTAssertIdentical(ddm.sections[1].header, headerGen2)
         XCTAssertEqual(ddm.generators[1].count, 3)
     }
 
@@ -94,9 +94,9 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertIdentical(ddm.sections[1], headerGen4)
-        XCTAssertIdentical(ddm.sections[3], headerGen5)
-        XCTAssertIdentical(ddm.sections[5], headerGen3)
+        XCTAssertIdentical(ddm.sections[1].header, headerGen4)
+        XCTAssertIdentical(ddm.sections[3].header, headerGen5)
+        XCTAssertIdentical(ddm.sections[5].header, headerGen3)
     }
 
     func testThatInsertSectionHeaderBeforeSectionHeaderCorrectly() {
@@ -119,8 +119,8 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertIdentical(ddm.sections[0], headerGen4)
-        XCTAssertIdentical(ddm.sections[1], headerGen1)
+        XCTAssertIdentical(ddm.sections[0].header, headerGen4)
+        XCTAssertIdentical(ddm.sections[1].header, headerGen1)
     }
 
     func testThatInsertSectionHeaderWithGeneratorsAfterSectionHeaderCorrectly() {
@@ -153,9 +153,9 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertIdentical(self.ddm?.sections[0], headerGen1)
-        XCTAssertIdentical(self.ddm?.sections[3], headerGen5)
-        XCTAssertIdentical(self.ddm?.sections[1], headerGen4)
+        XCTAssertIdentical(self.ddm?.sections[0].header, headerGen1)
+        XCTAssertIdentical(self.ddm?.sections[3].header, headerGen5)
+        XCTAssertIdentical(self.ddm?.sections[1].header, headerGen4)
         XCTAssertEqual(self.ddm?.generators[1].count, 1)
         XCTAssertEqual(self.ddm?.generators[3].count, 3)
         XCTAssertEqual(self.ddm?.generators[4].count, 2)
@@ -182,8 +182,8 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertIdentical(ddm.sections[0], headerGen3)
-        XCTAssertIdentical(ddm.sections[1], headerGen1)
+        XCTAssertIdentical(ddm.sections[0].header, headerGen3)
+        XCTAssertIdentical(ddm.sections[1].header, headerGen1)
         XCTAssertEqual(ddm.generators[0].count, 3)
         XCTAssertEqual(ddm.generators[1].count, 0)
     }
@@ -215,8 +215,8 @@ final class ManualTableManagerTests: XCTestCase {
         wait(for: [expect], timeout: 3)
 
         // then
-        XCTAssertIdentical(self.ddm?.sections[2], headerGen4)
-        XCTAssertIdentical(self.ddm?.sections[0], headerGen5)
+        XCTAssertIdentical(self.ddm?.sections[2].header, headerGen4)
+        XCTAssertIdentical(self.ddm?.sections[0].header, headerGen5)
         XCTAssertEqual(self.ddm?.generators[2].count, 1)
         XCTAssertEqual(self.ddm?.generators[0].count, 3)
     }
@@ -400,7 +400,7 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen1, gen1, gen2, gen2])
 
         // when
-        ddm.clearHeaderGenerators()
+        ddm.clearCellGenerators()
 
         // then
         XCTAssertTrue(ddm.sections.isEmpty)

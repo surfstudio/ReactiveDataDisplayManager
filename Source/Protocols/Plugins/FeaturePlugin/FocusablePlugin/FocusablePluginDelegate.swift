@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 /// Delegate based on `FocusableDelegate` protocol.
-open class FocusablePluginDelegate<Provider: GeneratorsProvider, CollectionType>: FocusableDelegate {
+open class FocusablePluginDelegate<Provider: SectionsProvider, CollectionType>: FocusableDelegate {
 
     // MARK: - Typealias
 

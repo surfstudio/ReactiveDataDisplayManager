@@ -11,6 +11,8 @@ import ReactiveDataDisplayManager
 
 final class DifferenceTableViewController: UIViewController {
 
+    typealias DiffableGenerator = DiffableCellGenerator<TitleTableViewCell>
+
     // MARK: - Constants
 
     private enum Constants {
@@ -42,29 +44,36 @@ private extension DifferenceTableViewController {
 
     func fillAdapter() {
         adapter.reload(animation: .bottom) { adapter in
-            let headerGenerator = TitleHeaderGenerator(model: "Section 1")
-            let generators = Constants.models.map { DiffableCellGenerator(with: $0) }
+            let headerGenerator = TitleHeaderGenerator(id: 1, model: "Section 1")
+            let generators = Constants.models.enumerated().map {
+                TitleTableViewCell.rddm.diffableGenerator(uniqueId: $0.offset, with: $0.element)
+            }
             adapter.addSection(TableHeaderGenerator: headerGenerator, cells: generators)
         }
 
         delay(.now() + .seconds(3)) { [weak self] in
             self?.adapter.reload(insertRowsAnimation: .left) { adapter in
-                let generators = Constants.models.map { DiffableCellGenerator(with: $0) }
+                let generators = Constants.models.enumerated().map {
+                    TitleTableViewCell.rddm.diffableGenerator(uniqueId: $0.offset + Constants.models.count,
+                                                              with: $0.element)
+                }
                 adapter.addCellGenerators(generators)
             }
         }
 
         delay(.now() + .seconds(2)) { [weak self] in
             self?.adapter.reload(insertSectionsAnimation: .right) { adapter in
-                let headerGenerator = TitleHeaderGenerator(model: "Section 2")
-                let generators = Constants.models.map { DiffableCellGenerator(with: $0) }
+                let headerGenerator = TitleHeaderGenerator(id: 2, model: "Section 2")
+                let generators = Constants.models.enumerated().map {
+                    TitleTableViewCell.rddm.diffableGenerator(uniqueId: $0.offset, with: $0.element)
+                }
                 adapter.addSection(TableHeaderGenerator: headerGenerator, cells: generators)
             }
         }
 
         delay(.now() + .seconds(4)) { [weak self] in
             self?.adapter.reload(insertRowsAnimation: .top) { adapter in
-                let generator = DiffableCellGenerator(with: "Last cell")
+                let generator = TitleTableViewCell.rddm.diffableGenerator(uniqueId: "Last cell", with: "Last cell")
                 adapter.addCellGenerator(generator)
             }
         }

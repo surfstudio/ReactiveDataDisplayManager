@@ -8,8 +8,6 @@
 
 import UIKit
 
-extension UICollectionViewCell: DataDisplayConstructable { }
-
 public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & ConfigurableItem {
 
     func baseGenerator(with model: Base.Model, and registerType: CellRegisterType = .nib) -> BaseCollectionCellGenerator<Base> {

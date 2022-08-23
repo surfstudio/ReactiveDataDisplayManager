@@ -14,12 +14,13 @@ import UIKit
 @available(iOS 13.0, tvOS 13.0, *)
 class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
-    typealias CellGeneratorType = TableCellGenerator & DiffableItemSource
+    typealias GeneratorType = TableCellGenerator & DiffableItemSource
     typealias HeaderGeneratorType = TableHeaderGenerator & DiffableItemSource
+    typealias FooterGeneratorType = TableFooterGenerator & DiffableItemSource
 
     // MARK: - Properties
 
-    private weak var provider: TableGeneratorsProvider?
+    private weak var provider: TableSectionsProvider?
     private weak var dataSource: DiffableTableDataSource?
 
     // MARK: - Init
@@ -27,7 +28,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter view: parent view
     /// - parameter provider: wrapped collection of sections and generators
     /// - parameter dataSource: `UITableViewDiffableDataSource` to apply new snapshots
-    init(view: UITableView, provider: TableGeneratorsProvider, dataSource: DiffableTableDataSource) {
+    init(view: UITableView, provider: TableSectionsProvider, dataSource: DiffableTableDataSource) {
         super.init(view: view)
         self.provider = provider
         self.dataSource = dataSource
@@ -136,23 +137,22 @@ private extension TableDiffableModifier {
     func makeSnapshot() -> DiffableSnapshot? {
         guard let provider = provider else { return nil }
 
-        assert(provider.generators is [[CellGeneratorType]], "This strategy support only \(CellGeneratorType.Type.self)")
-        assert(provider.sections is [HeaderGeneratorType], "This strategy support only \(CellGeneratorType.Type.self)")
-
-        guard
-            let sections = provider.sections as? [HeaderGeneratorType],
-            let generators = provider.generators as? [[CellGeneratorType]]
-        else { return nil }
+        provider.sections.forEach { section in
+            assert(section.generators is [GeneratorType], "This strategy support only \(GeneratorType.Type.self)")
+            assert(section.header is HeaderGeneratorType, "This strategy support only \(HeaderGeneratorType.Type.self)")
+            assert(section.footer is FooterGeneratorType, "This strategy support only \(FooterGeneratorType.Type.self)")
+        }
 
         var snapshot = DiffableSnapshot()
 
-        for (index, section) in sections.enumerated() {
-            snapshot.appendSections([section.diffableItem])
+        for section in provider.sections {
+            guard
+                let diffableSection = section.asDiffableItemSource(),
+                let header = diffableSection.header?.diffableItem
+            else { continue }
 
-            guard let generators = generators[safe: index] else { continue }
-
-            let items = generators.map { $0.diffableItem }
-            snapshot.appendItems(items, toSection: section.diffableItem)
+            snapshot.appendSections([header])
+            snapshot.appendItems(diffableSection.generators.compactMap { $0.diffableItem }, toSection: header)
         }
 
         return snapshot

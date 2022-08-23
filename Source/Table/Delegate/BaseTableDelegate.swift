@@ -24,10 +24,11 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
     public var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     public var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
-    public var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>?
     #if os(tvOS)
-    public var focusablePlugin: FocusablePluginDelegate<TableGeneratorsProvider, UITableView>?
+    public var focusablePlugin: FocusablePluginDelegate<TableSectionsProvider, UITableView>?
     #endif
+    public var movablePlugin: MovablePluginDelegate<TableSectionsProvider>?
+
     #if os(iOS)
     @available(iOS 11.0, *)
     public var swipeActionsPlugin: TableSwipeActionsConfigurable? {
@@ -36,15 +37,15 @@ open class BaseTableDelegate: NSObject, TableDelegate {
     }
 
     @available(iOS 11.0, *)
-    public var draggableDelegate: DraggablePluginDelegate<TableGeneratorsProvider>? {
+    public var draggableDelegate: DraggablePluginDelegate<TableSectionsProvider>? {
         set { _draggableDelegate = newValue }
-        get { _draggableDelegate as? DraggablePluginDelegate<TableGeneratorsProvider> }
+        get { _draggableDelegate as? DraggablePluginDelegate<TableSectionsProvider> }
     }
 
     @available(iOS 11.0, *)
-    public var droppableDelegate: DroppablePluginDelegate<TableGeneratorsProvider, UITableViewDropCoordinator>? {
+    public var droppableDelegate: DroppablePluginDelegate<TableSectionsProvider, UITableViewDropCoordinator>? {
         set { _droppableDelegate = newValue }
-        get { _droppableDelegate as? DroppablePluginDelegate<TableGeneratorsProvider, UITableViewDropCoordinator> }
+        get { _droppableDelegate as? DroppablePluginDelegate<TableSectionsProvider, UITableViewDropCoordinator> }
     }
 
     // MARK: - Private Properties
@@ -132,25 +133,25 @@ extension BaseTableDelegate {
     }
 
     open func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        manager?.generators[indexPath.section][indexPath.row].cellHeight ?? UITableView.automaticDimension
+        manager?.sections[indexPath.section].generators[indexPath.row].cellHeight ?? UITableView.automaticDimension
     }
 
     open func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        manager?.generators[indexPath.section][indexPath.row].estimatedCellHeight ?? estimatedHeight
+        manager?.sections[indexPath.section].generators[indexPath.row].estimatedCellHeight ?? estimatedHeight
     }
 
     open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let manager = manager, section <= manager.sections.count - 1 else {
             return nil
         }
-        return manager.sections[section].generate()
+        return manager.sections[section].header.generate()
     }
 
     open func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard let manager = manager, section <= manager.sections.count - 1 else {
             return 0.1
         }
-        return manager.sections[section].height(tableView, forSection: section)
+        return manager.sections[section].header.height(tableView, forSection: section)
     }
 
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -9,11 +9,38 @@
 import UIKit
 
 // sourcery: AutoMockable
-open class TableHeaderGenerator: ViewGenerator {
+open class TableHeaderGenerator: ViewGenerator, IdOwner {
 
-    public let uuid = UUID().uuidString
+    public let id: AnyHashable
 
-    public init() { }
+    public init() {
+        self.id = UUID().uuidString
+    }
+
+    public init(uniqueId: AnyHashable) {
+        self.id = uniqueId
+    }
+
+    open func generate() -> UIView {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+
+    open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+}
+
+open class TableFooterGenerator: ViewGenerator {
+
+    public let id: AnyHashable
+
+    public init() {
+        self.id = UUID().uuidString
+    }
+
+    public init(uniqueId: AnyHashable) {
+        self.id = uniqueId
+    }
 
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
@@ -156,53 +183,6 @@ public protocol ViewBuilder {
     func build(view: ViewType)
 }
 
-@available(*, deprecated, message: "Use FoldableItem")
-public protocol GravityFoldableItem: AnyObject {
-    var didFoldEvent: BaseEvent<Bool> { get }
-    var isExpanded: Bool { get set }
-    var childGenerators: [GravityTableCellGenerator] { get set }
-}
-
-@available(*, deprecated, message: "Use DisplayableItem")
-public protocol DisplayableFlow: AnyObject {
-
-    /// Invokes when cell will displaying.
-    var willDisplayEvent: BaseEvent<Void> { get }
-
-    /// SORTA DEPRECATED
-    /// Invokes when cell did end displaying.
-    var didEndDisplayEvent: BaseEvent<Void> { get }
-
-    /// Invokes when cell did end displaying. (Replacement for didEndDisplayEvent:; makes cell management easier.)
-    /// To be clear, it is just a workaround.
-    var didEndDisplayCellEvent: BaseEvent<UITableViewCell>? { get }
-
-}
-
-@available(*, deprecated, message: "Use DeletableItem")
-public protocol DeletableGenerator {
-    var eventDelete: BaseEmptyEvent { get }
-}
-
-@available(*, deprecated, message: "Use MovableItem")
-public protocol MovableGenerator {
-    func canMove() -> Bool
-    func canMoveInOtherSection() -> Bool
-}
-
-@available(*, deprecated, message: "Use MovableItem")
-public extension MovableGenerator {
-
-    func canMove() -> Bool {
-        return true
-    }
-
-    func canMoveInOtherSection() -> Bool {
-        return true
-    }
-
-}
-
 public extension TableCellGenerator {
 
     var cellHeight: CGFloat {
@@ -302,12 +282,6 @@ public extension StackCellGenerator where Self: ViewBuilder {
         self.build(view: view)
         return view
     }
-}
-
-@available(*, deprecated, message: "Use GravityItem")
-public protocol Gravity: AnyObject {
-    var heaviness: Int { get set }
-    func getHeaviness() -> Int
 }
 
 public typealias GravityTableCellGenerator = TableCellGenerator & GravityItem

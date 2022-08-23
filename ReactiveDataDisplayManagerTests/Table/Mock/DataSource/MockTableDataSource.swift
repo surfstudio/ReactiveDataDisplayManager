@@ -13,12 +13,12 @@ class MockTableDataSource: NSObject, TableDataSource {
 
     // MARK: - Properties
 
-    weak var provider: TableGeneratorsProvider?
+    weak var provider: TableSectionsProvider?
     var modifier: Modifier<UITableView, UITableView.RowAnimation>?
     var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
-    var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>?
+    var movablePlugin: MovablePluginDataSource<TableSectionsProvider>?
 
     // MARK: - Initialization
 

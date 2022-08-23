@@ -14,7 +14,7 @@ fileprivate enum Constants {
 
 /// Delegate based on `DroppableDelegate` protocol.
 @available(iOS 11.0, *)
-open class DroppablePluginDelegate<Provider: GeneratorsProvider, CoordinatorType: NSObjectProtocol>: DroppableDelegate {
+open class DroppablePluginDelegate<Provider: SectionsProvider, CoordinatorType: NSObjectProtocol>: DroppableDelegate {
 
     // MARK: - Typealias
 
@@ -88,7 +88,7 @@ private extension DroppablePluginDelegate {
             destinationIndexPath.row < generatorsCount
         else { return }
 
-        var removed = [Provider.CellGeneratorType]()
+        var removed: [Provider.GeneratorType] = []
 
         coordinator.items.enumerated().forEach {
             guard
@@ -97,6 +97,7 @@ private extension DroppablePluginDelegate {
                 dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true,
                 let itemToMove = provider?.generators[sourceIndexPath.section][sourceIndexPath.row]
             else { return }
+
             sourceIndexPath > destinationIndexPath || sourceIndexPath.section < destinationIndexPath.section
                 ? removed.insert(itemToMove, at: 0)
                 : removed.append(itemToMove)
@@ -105,11 +106,12 @@ private extension DroppablePluginDelegate {
         removed.enumerated().forEach {
             guard
                 let sourceIndexPath = getIndexPath(for: $0.element, provider: provider),
-                let itemToMove = provider?.generators[sourceIndexPath.section].remove(at: sourceIndexPath.row),
-                let generator = itemToMove as? GeneratorType
+                let itemToMove = provider?.sections[sourceIndexPath.section].generators.remove(at: sourceIndexPath.row),
+                let generator = itemToMove as? GeneratorType,
+				dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true
             else { return }
 
-            provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
+            provider?.sections[destinationIndexPath.section].generators.insert(itemToMove, at: destinationIndexPath.row)
             modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: animation, and: animation)
             coordinator.drop(coordinator.items[$0.offset].dragItem, toItemAt: destinationIndexPath)
 
@@ -117,7 +119,7 @@ private extension DroppablePluginDelegate {
         }
     }
 
-    func getIndexPath(for item: Provider.CellGeneratorType, provider: Provider?) -> IndexPath? {
+    func getIndexPath(for item: Provider.GeneratorType, provider: Provider?) -> IndexPath? {
         guard let generators = provider?.generators as? [[GeneratorType]],
               let generator = item as? GeneratorType,
               let section = generators.firstIndex(where: { $0.contains(where: { $0 === generator }) }),

@@ -21,7 +21,7 @@ final class TableDelegateStub: NSObject, TableDelegate {
     var manager: BaseTableManager?
     var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     var scrollPlugins = PluginCollection<BaseTablePlugin<ScrollEvent>>()
-    var movablePlugin: MovablePluginDelegate<TableGeneratorsProvider>?
+    var movablePlugin: MovablePluginDelegate<TableSectionsProvider>?
     #if os(iOS)
     var swipeActionsPlugin: TableSwipeActionsConfigurable?
     #endif

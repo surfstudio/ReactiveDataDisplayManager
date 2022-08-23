@@ -13,7 +13,7 @@ public protocol FooterDataDisplayManager: AnyObject {
 
     // MARK: - Associatedtypes
 
-    associatedtype CellGeneratorType
+    associatedtype GeneratorType
     associatedtype FooterGeneratorType
 
     // MARK: - Data source methods
@@ -23,12 +23,10 @@ public protocol FooterDataDisplayManager: AnyObject {
     /// - Parameter generator: The new generator.
     func addSectionFooterGenerator(_ generator: FooterGeneratorType)
 
-    func addCellGenerator(_ generator: CellGeneratorType, toFooter footer: FooterGeneratorType)
+    func addCellGenerator(_ generator: GeneratorType, toFooter footer: FooterGeneratorType)
 
-    func addCellGenerators(_ generators: [CellGeneratorType], toFooter footer: FooterGeneratorType)
+    func addCellGenerators(_ generators: [GeneratorType], toFooter footer: FooterGeneratorType)
 
     func removeAllGenerators(from header: FooterGeneratorType)
 
-    /// Removes all header generators.
-    func clearFooterGenerators()
 }

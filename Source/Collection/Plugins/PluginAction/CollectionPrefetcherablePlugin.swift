@@ -53,7 +53,7 @@ private extension CollectionPrefetcherablePlugin {
     }
 
     func getPrefetcherableFlowCell(from manager: BaseCollectionManager?, at indexPath: IndexPath) -> Generator? {
-        return manager?.generators[safe: indexPath.section]?[safe: indexPath.row] as? Generator
+        return manager?.sections[safe: indexPath.section]?.generators[safe: indexPath.row] as? Generator
     }
 
 }

@@ -165,7 +165,7 @@ final class BaseCollectionManagerTests: XCTestCase {
         ddm.addCellGenerators([gen1, gen1, gen2, gen2])
 
         // when
-        ddm.clearHeaderGenerators()
+        ddm.clearCellGenerators()
 
         // then
         XCTAssertTrue(ddm.sections.isEmpty)
@@ -225,7 +225,7 @@ final class BaseCollectionManagerTests: XCTestCase {
         let gen3 = CollectionCellGeneratorMock()
         let gen4 = CollectionCellGeneratorMock()
 
-        ddm.clearHeaderGenerators()
+        ddm.clearCellGenerators()
         ddm.clearCellGenerators()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -249,7 +249,7 @@ final class BaseCollectionManagerTests: XCTestCase {
         let gen3 = CollectionCellGeneratorMock()
         let gen4 = CollectionCellGeneratorMock()
 
-        ddm.clearHeaderGenerators()
+        ddm.clearCellGenerators()
         ddm.clearCellGenerators()
 
         // when

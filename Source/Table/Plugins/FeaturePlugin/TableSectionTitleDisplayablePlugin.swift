@@ -28,13 +28,13 @@ open class TableSectionTitleDisplayablePlugin: TableFeaturePlugin, TableSectionT
 
     // MARK: - TableSectionTitleDisplayable
 
-    open func numberOfSections(with provider: TableGeneratorsProvider?) -> Int {
+    open func numberOfSections(with provider: TableSectionsProvider?) -> Int {
         titleWrapper?.titles?.count ?? provider?.sections.count ?? 0
     }
 
-    open func sectionIndexTitles(with provider: TableGeneratorsProvider?) -> [String]? {
-        let sectionTitles = provider?.sections.compactMap { generator -> String? in
-            guard let generator = generator as? GeneratorType else {
+    open func sectionIndexTitles(with provider: TableSectionsProvider?) -> [String]? {
+        let sectionTitles = provider?.sections.compactMap { section -> String? in
+            guard let generator = section.header as? GeneratorType else {
                 return nil
             }
             return generator.needIndexTitle ? generator.title : nil
@@ -42,7 +42,7 @@ open class TableSectionTitleDisplayablePlugin: TableFeaturePlugin, TableSectionT
         return titleWrapper?.titles ?? sectionTitles
     }
 
-    open func sectionForSectionIndexTitle(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int {
+    open func sectionForSectionIndexTitle(_ title: String, at index: Int, with provider: TableSectionsProvider?) -> Int {
         return titleWrapper?.titles != nil ? index : getIndexForTitleFromHeaderGenerators(title, at: index, with: provider)
     }
 
@@ -52,8 +52,8 @@ open class TableSectionTitleDisplayablePlugin: TableFeaturePlugin, TableSectionT
 
 private extension TableSectionTitleDisplayablePlugin {
 
-    func getIndexForTitleFromHeaderGenerators(_ title: String, at index: Int, with provider: TableGeneratorsProvider?) -> Int {
-        return provider?.sections.firstIndex(where: { ($0 as? IndexTitleDisplaybleItem)?.title == title }) ?? -1
+    func getIndexForTitleFromHeaderGenerators(_ title: String, at index: Int, with provider: TableSectionsProvider?) -> Int {
+        return provider?.sections.firstIndex(where: { ($0.header as? IndexTitleDisplaybleItem)?.title == title }) ?? -1
     }
 
 }

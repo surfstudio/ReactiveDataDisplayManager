@@ -18,12 +18,12 @@ final class TableDataSourceStub: NSObject, TableDataSource {
 
     // MARK: - CollectionDataSource Properties
 
-    var provider: TableGeneratorsProvider?
+    var provider: TableSectionsProvider?
     var modifier: Modifier<UITableView, UITableView.RowAnimation>?
     var prefetchPlugins = PluginCollection<BaseTablePlugin<PrefetchEvent>>()
     var tablePlugins = PluginCollection<BaseTablePlugin<TableEvent>>()
     var sectionTitleDisplayablePlugin: TableSectionTitleDisplayable?
-    var movablePlugin: MovablePluginDataSource<TableGeneratorsProvider>?
+    var movablePlugin: MovablePluginDataSource<TableSectionsProvider>?
 
     // MARK: - CollectionDataSource Methods
 

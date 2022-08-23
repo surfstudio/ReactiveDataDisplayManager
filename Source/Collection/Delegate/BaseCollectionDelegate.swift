@@ -26,10 +26,10 @@ open class BaseCollectionDelegate: NSObject, CollectionDelegate {
 
     public var collectionPlugins = PluginCollection<BaseCollectionPlugin<CollectionEvent>>()
     public var scrollPlugins = PluginCollection<BaseCollectionPlugin<ScrollEvent>>()
-    public var movablePlugin: MovablePluginDelegate<CollectionGeneratorsProvider>?
     #if os(tvOS)
-    public var focusablePlugin: FocusablePluginDelegate<CollectionGeneratorsProvider, UICollectionView>?
+    public var focusablePlugin: FocusablePluginDelegate<CollectionSectionsProvider, UICollectionView>?
     #endif
+    public var movablePlugin: MovablePluginDelegate<CollectionSectionsProvider>?
 
     // MARK: - Private Properties
 
@@ -138,15 +138,15 @@ extension BaseCollectionDelegate {
 extension BaseCollectionDelegate: CollectionDragAndDropDelegate {
 
     @available(iOS 11.0, *)
-    public var draggableDelegate: DraggablePluginDelegate<CollectionGeneratorsProvider>? {
+    public var draggableDelegate: DraggablePluginDelegate<CollectionSectionsProvider>? {
         set { _draggableDelegate = newValue }
-        get { _draggableDelegate as? DraggablePluginDelegate<CollectionGeneratorsProvider> }
+        get { _draggableDelegate as? DraggablePluginDelegate<CollectionSectionsProvider> }
     }
 
     @available(iOS 11.0, *)
-    public var droppableDelegate: DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator>? {
+    public var droppableDelegate: DroppablePluginDelegate<CollectionSectionsProvider, UICollectionViewDropCoordinator>? {
         set { _droppableDelegate = newValue }
-        get { _droppableDelegate as? DroppablePluginDelegate<CollectionGeneratorsProvider, UICollectionViewDropCoordinator> }
+        get { _droppableDelegate as? DroppablePluginDelegate<CollectionSectionsProvider, UICollectionViewDropCoordinator> }
     }
 
 }
