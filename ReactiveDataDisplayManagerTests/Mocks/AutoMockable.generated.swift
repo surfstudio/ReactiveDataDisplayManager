@@ -27,6 +27,11 @@ class CollectionCellGeneratorMock: CollectionCellGenerator {
         set(value) { underlyingIdentifier = value }
     }
     var underlyingIdentifier: String!
+    var descriptor: String {
+        get { return underlyingDescriptor }
+        set(value) { underlyingDescriptor = value }
+    }
+    var underlyingDescriptor: String!
 
     //MARK: - generate
 
@@ -50,23 +55,6 @@ class CollectionCellGeneratorMock: CollectionCellGenerator {
         }
     }
 
-    //MARK: - registerCell
-
-    var registerCellInCallsCount = 0
-    var registerCellInCalled: Bool {
-        return registerCellInCallsCount > 0
-    }
-    var registerCellInReceivedCollectionView: UICollectionView?
-    var registerCellInReceivedInvocations: [UICollectionView] = []
-    var registerCellInClosure: ((UICollectionView) -> Void)?
-
-    func registerCell(in collectionView: UICollectionView) {
-        registerCellInCallsCount += 1
-        registerCellInReceivedCollectionView = collectionView
-        registerCellInReceivedInvocations.append(collectionView)
-        registerCellInClosure?(collectionView)
-    }
-
     //MARK: - bundle
 
     var bundleCallsCount = 0
@@ -83,6 +71,23 @@ class CollectionCellGeneratorMock: CollectionCellGenerator {
         } else {
             return bundleReturnValue
         }
+    }
+
+    //MARK: - registerCell
+
+    var registerCellInCallsCount = 0
+    var registerCellInCalled: Bool {
+        return registerCellInCallsCount > 0
+    }
+    var registerCellInReceivedCollectionView: UICollectionView?
+    var registerCellInReceivedInvocations: [UICollectionView] = []
+    var registerCellInClosure: ((UICollectionView) -> Void)?
+
+    func registerCell(in collectionView: UICollectionView) {
+        registerCellInCallsCount += 1
+        registerCellInReceivedCollectionView = collectionView
+        registerCellInReceivedInvocations.append(collectionView)
+        registerCellInClosure?(collectionView)
     }
 
 }
@@ -106,6 +111,11 @@ class CollectionFooterGeneratorMock: CollectionFooterGenerator {
         set(value) { underlyingIdentifier = value }
     }
     var underlyingIdentifier: UICollectionReusableView.Type!
+    var descriptor: String {
+        get { return underlyingDescriptor }
+        set(value) { underlyingDescriptor = value }
+    }
+    var underlyingDescriptor: String!
 
     //MARK: - generate
 
@@ -127,23 +137,6 @@ class CollectionFooterGeneratorMock: CollectionFooterGenerator {
         } else {
             return generateCollectionViewForReturnValue
         }
-    }
-
-    //MARK: - registerFooter
-
-    var registerFooterInCallsCount = 0
-    var registerFooterInCalled: Bool {
-        return registerFooterInCallsCount > 0
-    }
-    var registerFooterInReceivedCollectionView: UICollectionView?
-    var registerFooterInReceivedInvocations: [UICollectionView] = []
-    var registerFooterInClosure: ((UICollectionView) -> Void)?
-
-    func registerFooter(in collectionView: UICollectionView) {
-        registerFooterInCallsCount += 1
-        registerFooterInReceivedCollectionView = collectionView
-        registerFooterInReceivedInvocations.append(collectionView)
-        registerFooterInClosure?(collectionView)
     }
 
     //MARK: - size
@@ -168,6 +161,23 @@ class CollectionFooterGeneratorMock: CollectionFooterGenerator {
         }
     }
 
+    //MARK: - registerFooter
+
+    var registerFooterInCallsCount = 0
+    var registerFooterInCalled: Bool {
+        return registerFooterInCallsCount > 0
+    }
+    var registerFooterInReceivedCollectionView: UICollectionView?
+    var registerFooterInReceivedInvocations: [UICollectionView] = []
+    var registerFooterInClosure: ((UICollectionView) -> Void)?
+
+    func registerFooter(in collectionView: UICollectionView) {
+        registerFooterInCallsCount += 1
+        registerFooterInReceivedCollectionView = collectionView
+        registerFooterInReceivedInvocations.append(collectionView)
+        registerFooterInClosure?(collectionView)
+    }
+
 }
 class CollectionHeaderGeneratorMock: CollectionHeaderGenerator {
     var identifier: UICollectionReusableView.Type {
@@ -175,6 +185,11 @@ class CollectionHeaderGeneratorMock: CollectionHeaderGenerator {
         set(value) { underlyingIdentifier = value }
     }
     var underlyingIdentifier: UICollectionReusableView.Type!
+    var descriptor: String {
+        get { return underlyingDescriptor }
+        set(value) { underlyingDescriptor = value }
+    }
+    var underlyingDescriptor: String!
 
     //MARK: - generate
 
@@ -196,23 +211,6 @@ class CollectionHeaderGeneratorMock: CollectionHeaderGenerator {
         } else {
             return generateCollectionViewForReturnValue
         }
-    }
-
-    //MARK: - registerHeader
-
-    var registerHeaderInCallsCount = 0
-    var registerHeaderInCalled: Bool {
-        return registerHeaderInCallsCount > 0
-    }
-    var registerHeaderInReceivedCollectionView: UICollectionView?
-    var registerHeaderInReceivedInvocations: [UICollectionView] = []
-    var registerHeaderInClosure: ((UICollectionView) -> Void)?
-
-    func registerHeader(in collectionView: UICollectionView) {
-        registerHeaderInCallsCount += 1
-        registerHeaderInReceivedCollectionView = collectionView
-        registerHeaderInReceivedInvocations.append(collectionView)
-        registerHeaderInClosure?(collectionView)
     }
 
     //MARK: - size
@@ -253,6 +251,23 @@ class CollectionHeaderGeneratorMock: CollectionHeaderGenerator {
         } else {
             return bundleReturnValue
         }
+    }
+
+    //MARK: - registerHeader
+
+    var registerHeaderInCallsCount = 0
+    var registerHeaderInCalled: Bool {
+        return registerHeaderInCallsCount > 0
+    }
+    var registerHeaderInReceivedCollectionView: UICollectionView?
+    var registerHeaderInReceivedInvocations: [UICollectionView] = []
+    var registerHeaderInClosure: ((UICollectionView) -> Void)?
+
+    func registerHeader(in collectionView: UICollectionView) {
+        registerHeaderInCallsCount += 1
+        registerHeaderInReceivedCollectionView = collectionView
+        registerHeaderInReceivedInvocations.append(collectionView)
+        registerHeaderInClosure?(collectionView)
     }
 
 }
@@ -293,6 +308,11 @@ class TableCellGeneratorMock: TableCellGenerator {
     }
     var underlyingCellHeight: CGFloat!
     var estimatedCellHeight: CGFloat?
+    var descriptor: String {
+        get { return underlyingDescriptor }
+        set(value) { underlyingDescriptor = value }
+    }
+    var underlyingDescriptor: String!
 
     //MARK: - generate
 
@@ -316,23 +336,6 @@ class TableCellGeneratorMock: TableCellGenerator {
         }
     }
 
-    //MARK: - registerCell
-
-    var registerCellInCallsCount = 0
-    var registerCellInCalled: Bool {
-        return registerCellInCallsCount > 0
-    }
-    var registerCellInReceivedTableView: UITableView?
-    var registerCellInReceivedInvocations: [UITableView] = []
-    var registerCellInClosure: ((UITableView) -> Void)?
-
-    func registerCell(in tableView: UITableView) {
-        registerCellInCallsCount += 1
-        registerCellInReceivedTableView = tableView
-        registerCellInReceivedInvocations.append(tableView)
-        registerCellInClosure?(tableView)
-    }
-
     //MARK: - bundle
 
     var bundleCallsCount = 0
@@ -349,6 +352,23 @@ class TableCellGeneratorMock: TableCellGenerator {
         } else {
             return bundleReturnValue
         }
+    }
+
+    //MARK: - registerCell
+
+    var registerCellInCallsCount = 0
+    var registerCellInCalled: Bool {
+        return registerCellInCallsCount > 0
+    }
+    var registerCellInReceivedTableView: UITableView?
+    var registerCellInReceivedInvocations: [UITableView] = []
+    var registerCellInClosure: ((UITableView) -> Void)?
+
+    func registerCell(in tableView: UITableView) {
+        registerCellInCallsCount += 1
+        registerCellInReceivedTableView = tableView
+        registerCellInReceivedInvocations.append(tableView)
+        registerCellInClosure?(tableView)
     }
 
 }

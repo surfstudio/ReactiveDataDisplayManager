@@ -29,7 +29,6 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
 
     var delegate: CollectionDelegate?
     var dataSource: CollectionDataSource?
-    var delegate: CollectionDelegate?
 
     // MARK: - DataDisplayManager
 

@@ -49,6 +49,7 @@ final class BaseTableManagerTests: XCTestCase {
 
         // when
         ddm.addCellGenerator(gen)
+        ddm.forceRefill()
 
         // then
         XCTAssertTrue(table.registerWasCalled)
@@ -62,6 +63,7 @@ final class BaseTableManagerTests: XCTestCase {
 
         // Act
         ddm += [gen1, gen2]
+        ddm.forceRefill()
 
         // Assert
         XCTAssertTrue(table.registerWasCalled)

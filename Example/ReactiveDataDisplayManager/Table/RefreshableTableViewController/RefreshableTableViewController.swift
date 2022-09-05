@@ -67,7 +67,12 @@ extension RefreshableTableViewController: RefreshableOutput {
 
     func refreshContent(with input: RefreshableInput) {
         delay(.now() + .seconds(3)) { [weak self, weak input] in
-            self?.adapter -= .all
+
+            guard let adapter = self?.adapter else {
+                return
+            }
+
+            adapter -= .all
 
 	        for id in 1...4 {
 				if let generator = self?.makeGenerator(name: "Refreshing", id: id) {
@@ -75,7 +80,7 @@ extension RefreshableTableViewController: RefreshableOutput {
                 }
 			}
 
-        	self?.adapter => .reload
+        	adapter => .reload
 
             input?.endRefreshing()
         }

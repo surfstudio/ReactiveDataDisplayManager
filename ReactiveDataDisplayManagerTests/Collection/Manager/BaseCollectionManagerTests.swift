@@ -54,7 +54,7 @@ final class BaseCollectionManagerTests: XCTestCase {
     func testThatAddCellGeneratorAppendsNewSectionToCellGeneratorsCorrectly() {
         // given
         let headerGen = CollectionHeaderGeneratorMock()
-        let gen = CollectionCellGeneratorMock()
+        let gen = Mocks.collectionCell()
         let initialNumberOfSections = ddm.sections.count
 
         // when
@@ -67,7 +67,7 @@ final class BaseCollectionManagerTests: XCTestCase {
 
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
         // given
-        let gen = CollectionCellGeneratorMock()
+        let gen = Mocks.collectionCell()
 
         // when
         ddm.addCellGenerator(gen)
@@ -79,8 +79,8 @@ final class BaseCollectionManagerTests: XCTestCase {
     func testThatAddCellGeneratorAddsGeneratorCorrectly() {
         // given
         let headerGen = CollectionHeaderGeneratorMock()
-        let gen1 = CollectionCellGeneratorMock()
-        let gen2 = CollectionCellGeneratorMock()
+        let gen1 = Mocks.collectionCell()
+        let gen2 = Mocks.collectionCell()
 
         // when
         ddm.addSectionHeaderGenerator(headerGen)
@@ -100,12 +100,12 @@ final class BaseCollectionManagerTests: XCTestCase {
     func testThatAddCellGeneratorAfterGeneratorWorksCorrectly() {
         // given
         let headerGen1 = CollectionHeaderGeneratorMock()
-        let gen1 = CollectionCellGeneratorMock()
-        let gen2 = CollectionCellGeneratorMock()
+        let gen1 = Mocks.collectionCell()
+        let gen2 = Mocks.collectionCell()
         let headerGen2 = CollectionHeaderGeneratorMock()
-        let gen3 = CollectionCellGeneratorMock()
-        let gen4 = CollectionCellGeneratorMock()
-        let gen5 = CollectionCellGeneratorMock()
+        let gen3 = Mocks.collectionCell()
+        let gen4 = Mocks.collectionCell()
+        let gen5 = Mocks.collectionCell()
 
         // when
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -126,8 +126,8 @@ final class BaseCollectionManagerTests: XCTestCase {
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
         // given
         let headerGen1 = CollectionHeaderGeneratorMock()
-        let gen1 = CollectionCellGeneratorMock()
-        let gen2 = CollectionCellGeneratorMock()
+        let gen1 = Mocks.collectionCell()
+        let gen2 = Mocks.collectionCell()
         self.ddm.addSectionHeaderGenerator(headerGen1)
 
         // when
@@ -139,8 +139,8 @@ final class BaseCollectionManagerTests: XCTestCase {
     func testThatClearCellGeneratorsWorksCorrectly() {
         // given
         let headerGen1 = CollectionHeaderGeneratorMock()
-        let gen1 = CollectionCellGeneratorMock()
-        let gen2 = CollectionCellGeneratorMock()
+        let gen1 = Mocks.collectionCell()
+        let gen2 = Mocks.collectionCell()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen1, gen2, gen2])
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -156,8 +156,8 @@ final class BaseCollectionManagerTests: XCTestCase {
     func testThatClearHeaderGeneratorsWorksCorrectly() {
         // given
         let headerGen1 = CollectionHeaderGeneratorMock()
-        let gen1 = CollectionCellGeneratorMock()
-        let gen2 = CollectionCellGeneratorMock()
+        let gen1 = Mocks.collectionCell()
+        let gen2 = Mocks.collectionCell()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addCellGenerators([gen1, gen1, gen2, gen2])
         ddm.addSectionHeaderGenerator(headerGen1)
@@ -173,8 +173,8 @@ final class BaseCollectionManagerTests: XCTestCase {
     func testThatAddCellGeneratorToHeaderAddsGeneratorsToCorrectHeader() {
         // given
         let headerGen1 = CollectionHeaderGeneratorMock()
-        let gen1 = CollectionCellGeneratorMock()
-        let gen2 = CollectionCellGeneratorMock()
+        let gen1 = Mocks.collectionCell()
+        let gen2 = Mocks.collectionCell()
         let headerGen2 = CollectionHeaderGeneratorMock()
         ddm.addSectionHeaderGenerator(headerGen1)
         ddm.addSectionHeaderGenerator(headerGen2)
@@ -194,11 +194,11 @@ final class BaseCollectionManagerTests: XCTestCase {
         // given
         let expect = expectation(description: "reloading")
 
-        let gen0 = CollectionCellGeneratorMock()
-        let gen1 = CollectionCellGeneratorMock()
-        let gen2 = CollectionCellGeneratorMock()
-        let gen3 = CollectionCellGeneratorMock()
-        let gen4 = CollectionCellGeneratorMock()
+        let gen0 = Mocks.collectionCell()
+        let gen1 = Mocks.collectionCell()
+        let gen2 = Mocks.collectionCell()
+        let gen3 = Mocks.collectionCell()
+        let gen4 = Mocks.collectionCell()
 
         ddm.clearCellGenerators()
         ddm.addCellGenerators([gen0, gen1, gen2])
@@ -219,10 +219,10 @@ final class BaseCollectionManagerTests: XCTestCase {
         // given
         let headerGen1 = CollectionHeaderGeneratorMock()
         let headerGen2 = CollectionHeaderGeneratorMock()
-        let gen1 = CollectionCellGeneratorMock()
-        let gen2 = CollectionCellGeneratorMock()
-        let gen3 = CollectionCellGeneratorMock()
-        let gen4 = CollectionCellGeneratorMock()
+        let gen1 = Mocks.collectionCell()
+        let gen2 = Mocks.collectionCell()
+        let gen3 = Mocks.collectionCell()
+        let gen4 = Mocks.collectionCell()
 
         ddm.clearCellGenerators()
         ddm.clearCellGenerators()
@@ -242,10 +242,10 @@ final class BaseCollectionManagerTests: XCTestCase {
 
     func testThatCustomOperationAddCellGenerator() {
         // given
-        let gen1 = CollectionCellGeneratorMock()
-        let gen2 = CollectionCellGeneratorMock()
-        let gen3 = CollectionCellGeneratorMock()
-        let gen4 = CollectionCellGeneratorMock()
+        let gen1 = Mocks.collectionCell()
+        let gen2 = Mocks.collectionCell()
+        let gen3 = Mocks.collectionCell()
+        let gen4 = Mocks.collectionCell()
 
         ddm.clearCellGenerators()
         ddm.clearCellGenerators()

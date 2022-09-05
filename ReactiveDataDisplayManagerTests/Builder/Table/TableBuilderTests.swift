@@ -225,7 +225,7 @@ class TableBuilderTests: XCTestCase {
         // given
         let builder = table.rddm.baseBuilder
         let dataSource = TableDataSourceStub()
-        let generator = TableCellGeneratorMock()
+        let generator = Mocks.tableCell()
 
         // when
         let ddm = builder.set(dataSource: { manager in
@@ -248,7 +248,7 @@ class TableBuilderTests: XCTestCase {
         // given
         let builder = table.rddm.baseBuilder
         let animator = TableAnimatorStub()
-        let generator = TableCellGeneratorMock()
+        let generator = Mocks.tableCell()
 
         // when
         let ddm = builder.set(animator: animator).build()
