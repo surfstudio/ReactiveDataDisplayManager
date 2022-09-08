@@ -75,7 +75,9 @@ private extension SelectableTableViewController {
 
     @objc
     func toggleAllowsMultiple() {
-        adapter.generators.forEach { $0.forEach { ($0 as? SelectableItem)?.isNeedDeselect.toggle() } }
+        adapter.sections
+            .flatMap(\.generators)
+            .forEach { ($0 as? SelectableItem)?.isNeedDeselect.toggle() }
         adapter.view.allowsMultipleSelection.toggle()
         updateBarButtonItem(with: tableView.allowsMultipleSelection ? Constants.multiple : Constants.standart)
     }
