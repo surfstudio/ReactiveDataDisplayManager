@@ -261,7 +261,7 @@ class CollectionBuilderTests: XCTestCase {
         // then
         XCTAssertIdentical(dataSource, ddm.dataSource)
         XCTAssertIdentical(dataSource, builder.dataSource)
-        XCTAssertEqual(dataSource.provider?.generators[0].count, 3)
+        XCTAssertEqual(dataSource.provider?.sections[0].generators.count, 3)
         XCTAssertTrue(dataSource.builderConfigured)
     }
 

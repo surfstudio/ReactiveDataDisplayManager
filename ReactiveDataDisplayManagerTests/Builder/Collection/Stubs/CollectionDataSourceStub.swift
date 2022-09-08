@@ -32,10 +32,10 @@ final class CollectionDataSourceStub: NSObject, CollectionDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let provider = provider, provider.generators.indices.contains(section) else {
+        guard let provider = provider, provider.sections.indices.contains(section) else {
             return 0
         }
-        return provider.generators[section].count
+        return provider.sections[section].generators.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

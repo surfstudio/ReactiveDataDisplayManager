@@ -26,7 +26,7 @@ final class BaseTableManagerTests: XCTestCase {
         // when
         let ddm = BaseTableManager()
         // then
-        XCTAssertTrue(ddm.generators.isEmpty)
+        XCTAssertTrue(ddm.sections.isEmpty)
         XCTAssertTrue(ddm.sections.isEmpty)
         XCTAssertNil(ddm.delegate)
         XCTAssertNil(ddm.dataSource)
@@ -52,7 +52,7 @@ final class BaseTableManagerTests: XCTestCase {
 
         // then
         XCTAssertTrue(table.registerWasCalled)
-        XCTAssertEqual(ddm.generators.first?.count, 1)
+        XCTAssertEqual(ddm.sections.first?.generators.count, 1)
     }
 
     func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
@@ -66,7 +66,7 @@ final class BaseTableManagerTests: XCTestCase {
         // Assert
         XCTAssertTrue(table.registerWasCalled)
         XCTAssertEqual(ddm.sections.count, 1)
-        XCTAssertEqual(ddm.generators.first?.count, 2)
+        XCTAssertEqual(ddm.sections.first?.generators.count, 2)
     }
 
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
@@ -78,7 +78,7 @@ final class BaseTableManagerTests: XCTestCase {
 
         // then
         XCTAssertEqual(ddm.sections.count, 1)
-        XCTAssertEqual(ddm.generators.first?.count, 1)
+        XCTAssertEqual(ddm.sections.first?.generators.count, 1)
     }
 
     func testThatAddCellGeneratorAfterGenerator() {
@@ -90,7 +90,7 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen2, after: gen1)
 
         // when
-        XCTAssertEqual(ddm.generators.first?.count, 2)
+        XCTAssertEqual(ddm.sections.first?.generators.count, 2)
     }
 
     func testThatAddCellGeneratorAfterGeneratorCallsFatalErrorCorrectly() {
@@ -136,7 +136,7 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.clearCellGenerators()
 
         // then
-        XCTAssertTrue(ddm.generators.isEmpty)
+        XCTAssertTrue(ddm.sections.isEmpty)
     }
 
     // MARK: - Table actions tests
@@ -176,8 +176,8 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-        XCTAssertIdentical(ddm.generators.first?.first, gen2)
-        XCTAssertEqual(ddm.generators.first?.count, 3)
+        XCTAssertIdentical(ddm.sections.first?.generators.first, gen2)
+        XCTAssertEqual(ddm.sections.first?.generators.count, 3)
     }
 
 }

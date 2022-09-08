@@ -29,7 +29,7 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        TablePluginsChecker(delegate: delegate, generators: generators).asyncCheckPlugins()
+        TablePluginsChecker(delegate: delegate, sections: sections).asyncCheckPlugins()
         dataSource?.modifier?.reload()
     }
 

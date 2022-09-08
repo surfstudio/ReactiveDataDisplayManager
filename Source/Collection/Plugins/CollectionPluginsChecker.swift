@@ -8,12 +8,14 @@ import UIKit
 
 final class CollectionPluginsChecker {
 
-    weak var delegate: CollectionDelegate?
-    var generators: [[CollectionCellGenerator]]
+    typealias CollectionSection = Section<CollectionCellGenerator, CollectionHeaderGenerator, CollectionFooterGenerator>
 
-    init(delegate: CollectionDelegate?, generators: [[CollectionCellGenerator]]) {
+    weak var delegate: CollectionDelegate?
+    var sections: [CollectionSection]
+
+    init(delegate: CollectionDelegate?, sections: [CollectionSection]) {
         self.delegate = delegate
-        self.generators = generators
+        self.sections = sections
     }
 
     /// Async check plugins
@@ -27,11 +29,9 @@ final class CollectionPluginsChecker {
     /// Here is a list of plugins to check
     ///
     func checkPlugins() {
-        generators.forEach { generators in
-            generators.forEach {
-                checkPlugin(for: $0 as? SelectableItem)
-                checkPlugin(for: $0 as? CollectionFoldableItem, pluginName: CollectionFoldablePlugin.pluginName)
-            }
+        sections.flatMap(\.generators).forEach {
+            checkPlugin(for: $0 as? SelectableItem)
+            checkPlugin(for: $0 as? CollectionFoldableItem, pluginName: CollectionFoldablePlugin.pluginName)
         }
     }
 

@@ -25,7 +25,7 @@ public class CollectionSelectablePlugin: BaseCollectionPlugin<CollectionEvent> {
                 manager?.view?.deselectItem(at: indexPath, animated: true)
             }
         case .didDeselect(let indexPath):
-            guard let selectable = manager?.generators[indexPath.section][indexPath.row] as? SelectableItem else {
+            guard let selectable = manager?.sections[indexPath.section].generators[indexPath.row] as? SelectableItem else {
                 return
             }
             selectable.didDeselectEvent.invoke(with: ())
