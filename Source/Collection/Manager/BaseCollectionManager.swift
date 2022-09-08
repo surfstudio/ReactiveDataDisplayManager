@@ -31,7 +31,7 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
-        CollectionPluginsChecker(delegate: delegate, generators: generators).asyncCheckPlugins()
+        CollectionPluginsChecker(delegate: delegate, sections: sections).asyncCheckPlugins()
         dataSource?.modifier?.reload()
     }
 

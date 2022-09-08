@@ -104,7 +104,7 @@ public class ManualTableManager: BaseTableManager {
             return
         }
 
-        let generatorsCount = generators[index].count
+        let generatorsCount = sections[index].generators.count
 
         self.sections[index].generators.removeAll()
 

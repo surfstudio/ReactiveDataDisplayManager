@@ -42,14 +42,14 @@ final class GravityTableManagerTests: XCTestCase {
         // given
         let headerGen = MockGravityTableHeaderGenerator()
         let gen = MockGravityTableCellGenerator()
-        let initialNumberOfSections = ddm.generators.count
+        let initialNumberOfSections = ddm.sections.count
 
         // when
         ddm.addSectionHeaderGenerator(headerGen)
         ddm.addCellGenerator(gen)
 
         // then
-        XCTAssertNotEqual(initialNumberOfSections, ddm.generators.count)
+        XCTAssertNotEqual(initialNumberOfSections, ddm.sections.count)
     }
 
     func testThatCustomOperationAddCellGeneratorsCallsRegisterNib() {
@@ -64,9 +64,9 @@ final class GravityTableManagerTests: XCTestCase {
 
         // Assert
         XCTAssertTrue(table.registerWasCalled)
-        XCTAssertIdentical(ddm.generators[0][0], gen2)
-        XCTAssertIdentical(ddm.generators[0][1], gen1)
-        XCTAssertEqual(ddm.generators[0].count, 2)
+        XCTAssertIdentical(ddm.sections[0].generators[0], gen2)
+        XCTAssertIdentical(ddm.sections[0].generators[1], gen1)
+        XCTAssertEqual(ddm.sections[0].generators.count, 2)
     }
 
     func testThatAddCellGeneratorAddsEmptyHeaderIfThereIsNoCellHeaderGenerators() {
@@ -98,9 +98,9 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen3)
 
         // then
-        XCTAssertIdentical(ddm.generators[1][0], gen3)
-        XCTAssertIdentical(ddm.generators[0][0], gen1)
-        XCTAssertEqual(ddm.generators.first?.count, 2)
+        XCTAssertIdentical(ddm.sections[1].generators[0], gen3)
+        XCTAssertIdentical(ddm.sections[0].generators[0], gen1)
+        XCTAssertEqual(ddm.sections.first?.generators.count, 2)
     }
 
     func testThatAddCellGeneratorAfterGeneratorWorksCorrectly() {
@@ -122,11 +122,11 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen4, after: gen3)
 
         // then
-        XCTAssertIdentical(ddm.generators[0][0], gen1)
-        XCTAssertIdentical(ddm.generators[0][1], gen2)
-        XCTAssertIdentical(ddm.generators[1][0], gen3)
-        XCTAssertIdentical(ddm.generators[1][1], gen4)
-        XCTAssertIdentical(ddm.generators[1][2], gen5)
+        XCTAssertIdentical(ddm.sections[0].generators[0], gen1)
+        XCTAssertIdentical(ddm.sections[0].generators[1], gen2)
+        XCTAssertIdentical(ddm.sections[1].generators[0], gen3)
+        XCTAssertIdentical(ddm.sections[1].generators[1], gen4)
+        XCTAssertIdentical(ddm.sections[1].generators[2], gen5)
     }
 
     func testThatClearCellGeneratorsWorksCorrectly() {
@@ -144,7 +144,7 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.clearCellGenerators()
 
         // then
-        XCTAssertTrue(ddm.generators.isEmpty)
+        XCTAssertTrue(ddm.sections.isEmpty)
     }
 
     func testThatClearHeaderGeneratorsWorksCorrectly() {
@@ -183,8 +183,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.addCellGenerator(gen2, toHeader: headerGen2)
 
         // then
-        XCTAssertEqual(ddm.generators.first?.count, 3)
-        XCTAssertEqual(ddm.generators.last?.count, 1)
+        XCTAssertEqual(ddm.sections.first?.generators.count, 3)
+        XCTAssertEqual(ddm.sections.last?.generators.count, 1)
     }
 
     // MARK: - Table actions tests
@@ -211,7 +211,6 @@ final class GravityTableManagerTests: XCTestCase {
 
         // then
         XCTAssertEqual(ddm.sections.count, 1)
-        XCTAssertEqual(ddm.generators.count, 1)
     }
 
     func testThatRemoveGeneratorCallsScrolling() {
@@ -255,8 +254,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // then
-        XCTAssertIdentical(ddm.generators.first?.first, gen2)
-        XCTAssertEqual(ddm.generators.first?.count, 1)
+        XCTAssertIdentical(ddm.sections.first?.generators.first, gen2)
+        XCTAssertEqual(ddm.sections.first?.generators.count, 1)
     }
 
     func testThatReplaceOldGeneratorOnNewReplacesGeneratorCorrectly() {
@@ -272,8 +271,8 @@ final class GravityTableManagerTests: XCTestCase {
         ddm.replace(oldGenerator: gen1, on: gen3)
 
         // then
-        XCTAssertIdentical(ddm.generators[0][0], gen3)
-        XCTAssertIdentical(ddm.generators[0][1], gen2)
+        XCTAssertIdentical(ddm.sections[0].generators[0], gen3)
+        XCTAssertIdentical(ddm.sections[0].generators[1], gen2)
     }
 
     func testThatRemoveAllGeneratorsClearsSection() {

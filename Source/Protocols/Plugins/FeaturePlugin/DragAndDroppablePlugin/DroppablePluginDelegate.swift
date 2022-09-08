@@ -84,7 +84,8 @@ private extension DroppablePluginDelegate {
         guard
             let value = Constants.animation as? Animation.RawValue,
             let animation = Animation(rawValue: value),
-            let generatorsCount = provider?.generators[destinationIndexPath.section].count,
+            let sections = provider?.sections.map({ $0.generators as? [GeneratorType] }),
+            let generatorsCount = sections[destinationIndexPath.section]?.count,
             destinationIndexPath.row < generatorsCount
         else { return }
 
@@ -95,7 +96,9 @@ private extension DroppablePluginDelegate {
                 let sourceIndexPath = $0.element.sourceIndexPath,
                 destinationIndexPath != sourceIndexPath,
                 dropStrategy?.canDrop(from: sourceIndexPath, to: destinationIndexPath) ?? true,
-                let itemToMove = provider?.generators[sourceIndexPath.section][sourceIndexPath.row]
+                let itemToMove = provider?
+                    .sections[sourceIndexPath.section]
+                    .generators[sourceIndexPath.row]
             else { return }
 
             sourceIndexPath > destinationIndexPath || sourceIndexPath.section < destinationIndexPath.section
@@ -120,7 +123,7 @@ private extension DroppablePluginDelegate {
     }
 
     func getIndexPath(for item: Provider.GeneratorType, provider: Provider?) -> IndexPath? {
-        guard let generators = provider?.generators as? [[GeneratorType]],
+        guard let generators = provider?.sections.map({ $0.generators as? [GeneratorType] }) as? [[GeneratorType]],
               let generator = item as? GeneratorType,
               let section = generators.firstIndex(where: { $0.contains(where: { $0 === generator }) }),
               let row = generators[section].firstIndex(where: { $0 === generator }) else { return nil }

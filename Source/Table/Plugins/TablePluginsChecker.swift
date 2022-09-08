@@ -8,12 +8,14 @@ import UIKit
 
 final class TablePluginsChecker {
 
-    weak var delegate: TableDelegate?
-    var generators: [[TableCellGenerator]]
+    typealias TableSection = Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>
 
-    init(delegate: TableDelegate?, generators: [[TableCellGenerator]]) {
+    weak var delegate: TableDelegate?
+    var sections: [TableSection]
+
+    init(delegate: TableDelegate?, sections: [TableSection]) {
         self.delegate = delegate
-        self.generators = generators
+        self.sections = sections
     }
 
     /// Async check plugins
@@ -27,11 +29,9 @@ final class TablePluginsChecker {
     /// Here is a list of plugins to check
     ///
     func checkPlugins() {
-        generators.forEach { generators in
-            generators.forEach {
-                checkPlugin(for: $0 as? SelectableItem)
-                checkPlugin(for: $0 as? FoldableItem, pluginName: TableFoldablePlugin.pluginName)
-            }
+        sections.flatMap(\.generators).forEach {
+            checkPlugin(for: $0 as? SelectableItem)
+            checkPlugin(for: $0 as? FoldableItem, pluginName: TableFoldablePlugin.pluginName)
         }
     }
 

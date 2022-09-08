@@ -67,7 +67,7 @@ public class CollectionHighlightPlugin: BaseCollectionPlugin<CollectionEvent> {
     // MARK: - Private
 
     private func animationDeselect(cell: HighlightableItem, manager: BaseCollectionManager?, indexPath: IndexPath) {
-        guard (manager?.generators[indexPath.section][indexPath.row] as? SelectableItem)?.isNeedDeselect == true else {
+        guard (manager?.sections[indexPath.section].generators[indexPath.row] as? SelectableItem)?.isNeedDeselect == true else {
             return
         }
         UIView.animate(withDuration: animationDuration, delay: animationDelay) {

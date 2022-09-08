@@ -26,7 +26,7 @@ open class FocusablePluginDelegate<Provider: SectionsProvider, CollectionType>: 
     ///     - indexPath: IndexPath table or collection
     ///     - provider: Takes a collection or table manager
     public func canFocusRow(at indexPath: IndexPath, with provider: Provider?) -> Bool {
-        if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
+        if let generator = provider?.sections[indexPath.section].generators[indexPath.row] as? GeneratorType {
             return generator.canBeFocused()
         }
         return false

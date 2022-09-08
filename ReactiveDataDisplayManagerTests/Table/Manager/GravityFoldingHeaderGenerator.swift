@@ -103,8 +103,8 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
         (header as? SelectableItem)?.didSelectEvent += { [unowned self] in
 
             // then
-            XCTAssertIdentical(ddm?.generators[0][0], header)
-            XCTAssertEqual(ddm?.generators[0].count, 1)
+            XCTAssertIdentical(ddm?.sections[0].generators[0], header)
+            XCTAssertEqual(ddm?.sections[0].generators.count, 1)
         }
     }
 
@@ -127,8 +127,8 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
         (header as? SelectableItem)?.didSelectEvent += { [unowned self] in
 
             // then
-            XCTAssertIdentical(ddm?.generators[0][0], header)
-            XCTAssertEqual(ddm?.generators[0].count, 4)
+            XCTAssertIdentical(ddm?.sections[0].generators[0], header)
+            XCTAssertEqual(ddm?.sections[0].generators.count, 4)
         }
     }
 }
