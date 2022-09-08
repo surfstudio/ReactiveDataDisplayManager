@@ -111,7 +111,12 @@ private extension ManualTableManager {
                     deleteRowsAnimation: deleteRowsAnimation,
                     insertRowsAnimation: insertRowsAnimation,
                     reloadRowsAnimation: reloadRowsAnimation,
-                    interrupt: interrupt) { _ in }
+                    interrupt: interrupt) { [weak self] _ in
+            guard let registrator = self?.registrator else {
+                return
+            }
+            self?.sections.registerAllIfNeeded(with: view, using: registrator)
+        }
     }
 
     func makeSnapshot() -> [Section]? {

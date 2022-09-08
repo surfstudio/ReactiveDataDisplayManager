@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension Array where Element == Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator> {
+public extension Array where Element == Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator> {
 
     func registerAllIfNeeded(with view: UITableView, using registrator: Registrator<UITableView>) {
         forEach { section in

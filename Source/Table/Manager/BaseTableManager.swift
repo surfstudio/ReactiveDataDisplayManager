@@ -23,7 +23,7 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     public weak var view: UITableView!
     // swiftlint:enable implicitly_unwrapped_optional
 
-    private(set) lazy var registrator: TableRegistrator = .init(view: view)
+    private(set) public lazy var registrator: TableRegistrator = .init(view: view)
 
     var delegate: TableDelegate?
     var dataSource: TableDataSource?

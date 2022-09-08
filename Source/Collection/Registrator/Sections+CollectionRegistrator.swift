@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension Array where Element == Section<CollectionCellGenerator, CollectionHeaderGenerator, CollectionFooterGenerator> {
+public extension Array where Element == Section<CollectionCellGenerator, CollectionHeaderGenerator, CollectionFooterGenerator> {
 
     func registerAllIfNeeded(with view: UICollectionView, using registrator: Registrator<UICollectionView>) {
         forEach { section in
