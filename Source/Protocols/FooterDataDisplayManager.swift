@@ -27,6 +27,6 @@ public protocol FooterDataDisplayManager: AnyObject {
 
     func addCellGenerators(_ generators: [GeneratorType], toFooter footer: FooterGeneratorType)
 
-    func removeAllGenerators(from header: FooterGeneratorType)
+    func removeAllGenerators(from footer: FooterGeneratorType)
 
 }

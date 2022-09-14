@@ -246,7 +246,7 @@ class CollectionBuilderTests: XCTestCase {
         // given
         let builder = collection.rddm.baseBuilder
         let dataSource = CollectionDataSourceStub()
-        let generator = CollectionCellGeneratorMock()
+        let generator = Mocks.collectionCell()
 
         // when
         let ddm = builder.set(dataSource: { manager in
@@ -269,7 +269,7 @@ class CollectionBuilderTests: XCTestCase {
         // given
         let builder = collection.rddm.baseBuilder
         let animator = CollectionAnimatorStub()
-        let generator = CollectionCellGeneratorMock()
+        let generator = Mocks.collectionCell()
 
         // when
         let ddm = builder.set(animator: animator).build()

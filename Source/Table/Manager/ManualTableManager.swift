@@ -21,7 +21,6 @@ public class ManualTableManager: BaseTableManager {
     open func addSection(TableHeaderGenerator generator: TableHeaderGenerator,
                          footerGenerator: TableFooterGenerator = EmptyTableFooterGenerator(),
                          cells: [TableCellGenerator]) {
-        cells.forEach { $0.registerCell(in: view) }
         addTableGenerators(with: cells, choice: .newSection(header: generator, footer: footerGenerator))
     }
 
@@ -79,6 +78,7 @@ public class ManualTableManager: BaseTableManager {
     ///   - sectionHeaderGenerator: TableHeaderGenerator of section which you want to reload.
     ///   - animation: Type of reload animation
     open func reloadSection(by sectionHeaderGenerator: TableHeaderGenerator, with animation: UITableView.RowAnimation = .none) {
+        sections.registerAllIfNeeded(with: view, using: registrator)
         if let index = sections.firstIndex(where: { $0.header === sectionHeaderGenerator }) {
             dataSource?.modifier?.reloadSections(at: [index], with: animation)
         }
@@ -90,7 +90,6 @@ public class ManualTableManager: BaseTableManager {
     ///   - generators: Generators to insert
     ///   - TableHeaderGenerator: TableHeaderGenerator generator in which you want to insert.
     open func addCellGenerators(_ generators: [TableCellGenerator], toHeader headerGenerator: TableHeaderGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
 
         if let index = sections.firstIndex(where: { $0.header === headerGenerator }) {
             addTableGenerators(with: generators, choice: .byIndex(index))
@@ -324,6 +323,7 @@ public class ManualTableManager: BaseTableManager {
         sections[index.sectionIndex].generators.insert(newGenerator, at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
@@ -346,6 +346,7 @@ public class ManualTableManager: BaseTableManager {
         sections[secondIndex.sectionIndex].generators.insert(firstGenerator, at: secondIndex.generatorIndex)
         sections[firstIndex.sectionIndex].generators.insert(secondGenerator, at: firstIndex.generatorIndex)
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.reload()
     }
 
@@ -365,6 +366,7 @@ private extension ManualTableManager {
                                    header: headGenerator,
                                    footer: EmptyTableFooterGenerator()), at: index)
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.insertSections(at: [index], with: animation)
     }
 
@@ -372,7 +374,6 @@ private extension ManualTableManager {
                 with animation: UITableView.RowAnimation = .automatic) {
 
         elements.forEach { [weak self] element in
-            element.generator.registerCell(in: view)
             self?.sections[element.sectionIndex]
                 .generators
                 .insert(element.generator, at: element.generatorIndex)
@@ -382,6 +383,7 @@ private extension ManualTableManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.insertRows(at: indexPaths, with: animation)
     }
 

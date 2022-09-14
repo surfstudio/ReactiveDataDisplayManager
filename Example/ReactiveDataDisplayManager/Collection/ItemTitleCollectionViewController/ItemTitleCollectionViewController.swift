@@ -66,18 +66,18 @@ private extension ItemTitleCollectionViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         let header = TitleCollectionHeaderGenerator(title: "Header")
-        adapter.addSectionHeaderGenerator(header)
+        adapter += header
 
         for index in 0...50 {
             // Create generator
             let generator = TitleCollectionGenerator(model: "Item \(index)", needIndexTitle: index % 2 == 0 ? true : false)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     @objc

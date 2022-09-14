@@ -72,16 +72,16 @@ extension DiffableTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
         // clear existing generators
-        adapter.clearCellGenerators()
+        adapter -= .all
 
         // add header with static id
-        adapter.addSectionHeaderGenerator(EmptyTableHeaderGenerator(uniqueId: Constants.sectionId))
+        adapter += EmptyTableHeaderGenerator(uniqueId: Constants.sectionId)
 
         // add filtered generators
-        adapter.addCellGenerators(filterGenerators(with: searchText))
+        adapter += filterGenerators(with: searchText)
 
         // apply snapshot
-        adapter.forceRefill()
+        adapter => .reload
 
         // all insert, remove, reload animations will be selected automatically
     }
@@ -110,13 +110,13 @@ private extension DiffableTableViewController {
         generators = makeCellGenerators()
 
         // add header with static id
-        adapter.addSectionHeaderGenerator(EmptyTableHeaderGenerator(uniqueId: Constants.sectionId))
+        adapter += EmptyTableHeaderGenerator(uniqueId: Constants.sectionId)
 
         // add generators
-        adapter.addCellGenerators(generators)
+        adapter += generators
 
         // apply snapshot
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     // Create cells generators
@@ -141,16 +141,16 @@ private extension DiffableTableViewController {
         generators.removeFirst()
 
         // clear existing generators
-        adapter.clearCellGenerators()
+        adapter -= .all
 
         // add header with static id
-        adapter.addSectionHeaderGenerator(EmptyTableHeaderGenerator(uniqueId: Constants.sectionId))
+        adapter += EmptyTableHeaderGenerator(uniqueId: Constants.sectionId)
 
         // add generators
-        adapter.addCellGenerators(generators)
+        adapter += generators
 
         // apply snapshot
-        adapter.forceRefill()
+        adapter => .reload
 
         // expected remove animation
     }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Nuke
+import ReactiveDataDisplayManager
 
 final class AlignedCollectionViewController: UIViewController {
 
@@ -58,11 +59,11 @@ private extension AlignedCollectionViewController {
             let generator = ImageCollectionViewCell.rddm.baseGenerator(with: viewModel)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     /// This method load image and set to UIImageView

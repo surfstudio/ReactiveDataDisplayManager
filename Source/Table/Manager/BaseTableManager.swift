@@ -23,12 +23,15 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     public weak var view: UITableView!
     // swiftlint:enable implicitly_unwrapped_optional
 
-    var dataSource: TableDataSource?
+    private(set) public lazy var registrator: TableRegistrator = .init(view: view)
+
     var delegate: TableDelegate?
+    var dataSource: TableDataSource?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
+        sections.registerAllIfNeeded(with: view, using: registrator)
         TablePluginsChecker(delegate: delegate, sections: sections).asyncCheckPlugins()
         dataSource?.modifier?.reload()
     }
@@ -38,7 +41,6 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     }
 
     open func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
-        generators.forEach { $0.registerCell(in: view) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
             fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
         }
@@ -50,13 +52,14 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     }
 
     open func addCellGenerators(_ generators: [TableCellGenerator]) {
-        generators.forEach { $0.registerCell(in: view) }
         addTableGenerators(with: generators, choice: .lastSection)
     }
 
     open func update(generators: [TableCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
+
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.reloadRows(at: indexPaths, with: .none)
     }
 

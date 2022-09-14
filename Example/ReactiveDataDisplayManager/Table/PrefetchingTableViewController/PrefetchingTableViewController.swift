@@ -58,11 +58,11 @@ private extension PrefetchingTableViewController {
             let generator = ImageTableGenerator(with: viewModel)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     /// This method load image and set to UIImageView

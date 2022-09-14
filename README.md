@@ -88,7 +88,7 @@ final class ExampleTableController: UIViewController {
 
 ### Fill collection
 
-Convert models to generators and call `ddm.forceRefill()`
+Convert models to generators and call `ddm => .reload`
 
 ```swift
 private extension MainTableViewController {
@@ -106,9 +106,11 @@ private extension MainTableViewController {
 
             // Add generator to adapter
             ddm.addCellGenerator(generator)
+            // or simple use operator `+=`
+            ddm += generator
         }
 
-        ddm.forceRefill()
+        ddm => .reload
     }
 
 }
@@ -121,7 +123,8 @@ You can extend table functionality with adding plugins and replacing generator.
 
 [![Feature](https://i.ibb.co/WFrzQNK/2021-02-20-15-52-34.png)](https://ibb.co/mtnymrz)
 
-You can check more examples in our [example project](/Example/) or in full [documentation](/Documentation/Entities.md)
+You can check more examples in our [example project](/Example/) or in full [documentation](/Documentation/Entities.md).
+Small [cheat sheet](/Documentation/Operations.md) table could also be usefull.
 
 
 ## Installation

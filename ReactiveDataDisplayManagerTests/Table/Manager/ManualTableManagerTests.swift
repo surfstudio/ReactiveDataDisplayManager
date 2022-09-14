@@ -243,6 +243,7 @@ final class ManualTableManagerTests: XCTestCase {
         // when
         ddm.addSectionHeaderGenerator(headerGen)
         ddm.addCellGenerator(gen)
+        ddm.forceRefill()
 
         // then
         XCTAssertTrue(table.registerWasCalled)
@@ -256,6 +257,7 @@ final class ManualTableManagerTests: XCTestCase {
         // Act
         ddm.addSectionHeaderGenerator(headerGen)
         ddm += gen
+        ddm.forceRefill()
 
         // Assert
         XCTAssertTrue(table.registerWasCalled)
@@ -270,6 +272,7 @@ final class ManualTableManagerTests: XCTestCase {
         // Act
         ddm.addSectionHeaderGenerator(headerGen)
         ddm += [gen1, gen2]
+        ddm.forceRefill()
 
         // Assert
         XCTAssertTrue(table.registerWasCalled)

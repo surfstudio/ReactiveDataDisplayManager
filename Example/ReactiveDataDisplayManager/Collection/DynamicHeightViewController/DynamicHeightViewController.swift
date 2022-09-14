@@ -32,8 +32,8 @@ final class DynamicHeightViewController: UIViewController {
 private extension DynamicHeightViewController {
 
     func fillAdapter() {
-        adapter.addCellGenerator(DynamicHeightTableViewCell.rddm.nonReusableGenerator(with: ()))
-        adapter.forceRefill()
+        adapter += DynamicHeightTableViewCell.rddm.nonReusableGenerator(with: ())
+        adapter => .reload
         tableView.layoutIfNeeded()
     }
 

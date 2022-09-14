@@ -89,10 +89,10 @@ private extension FoldableCollectionViewController {
 
         // Add foldable cell generators to adapter
         let visibleGenerators = getVisibleGenerators(for: folder1)
-        adapter.addCellGenerators(visibleGenerators)
+        adapter += visibleGenerators
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func makeFoldableCellGenerator(color: UIColor, expanded: Bool) -> FoldableCollectionCellGenerator {

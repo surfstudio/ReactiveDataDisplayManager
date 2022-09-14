@@ -48,7 +48,7 @@ private extension CollectionViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
         let header = TitleCollectionHeaderGenerator(title: "Header")
-        adapter.addSectionHeaderGenerator(header)
+        adapter += header
         for title in titles {
             // Create generator
             let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
@@ -59,11 +59,11 @@ private extension CollectionViewController {
                 debugPrint("\(title) deselected")
             }
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator * header
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func updateBarButtonItem(with title: String) {

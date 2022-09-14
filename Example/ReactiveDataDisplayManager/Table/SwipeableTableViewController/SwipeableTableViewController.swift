@@ -56,10 +56,10 @@ private extension SwipeableTableViewController {
         }
 
         // Add generators into adapter
-        adapter.addCellGenerators(generators)
+        adapter += generators
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
 }

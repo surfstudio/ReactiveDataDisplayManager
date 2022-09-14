@@ -56,7 +56,7 @@ private extension SwipeableCollectionListViewController {
         let header = HeaderCollectionListGenerator(title: "Section header")
 
         // Add the header generator into adapter
-        adapter.addSectionHeaderGenerator(header)
+        adapter += header
 
         for title in Constants.titles {
             // Create cell generator
@@ -68,11 +68,11 @@ private extension SwipeableCollectionListViewController {
             }
 
             // Add cell generator into adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func configureLayoutFlow(with appearance: UICollectionLayoutListConfiguration.Appearance) {

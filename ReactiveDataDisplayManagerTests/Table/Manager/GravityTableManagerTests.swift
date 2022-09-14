@@ -61,6 +61,7 @@ final class GravityTableManagerTests: XCTestCase {
         // Act
         ddm.addSectionHeaderGenerator(headerGen)
         ddm += [gen2, gen1]
+        ddm.forceRefill()
 
         // Assert
         XCTAssertTrue(table.registerWasCalled)

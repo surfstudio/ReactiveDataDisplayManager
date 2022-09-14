@@ -35,13 +35,11 @@ open class GravityTableManager: BaseTableManager {
 
         guard
             let gravityGenerator = generator as? GeneratorType,
-            checkDuplicate(generator: gravityGenerator),
-            let tableView = view
+            checkDuplicate(generator: gravityGenerator)
         else {
             return
         }
 
-        generator.registerCell(in: tableView)
         addTableGenerators(with: [generator], choice: .lastSection)
 
         let index = sections.count - 1
@@ -51,7 +49,6 @@ open class GravityTableManager: BaseTableManager {
 
     open override func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
         generators.reversed().forEach {
-            $0.registerCell(in: view)
             addCellGenerator($0, after: after)
         }
     }
@@ -99,10 +96,6 @@ open class GravityTableManager: BaseTableManager {
     }
 
     public func addCellGenerators(_ generators: [GeneratorType], toHeader header: HeaderGeneratorType) {
-        guard let tableView = self.view else { return }
-
-        generators.forEach { $0.registerCell(in: tableView) }
-
         if let index = sections.firstIndex(where: { $0.header === header }) {
             self.sections[index].generators.append(contentsOf: generators)
             insert(generators: generators, to: index)
@@ -130,6 +123,7 @@ open class GravityTableManager: BaseTableManager {
         sections[index.sectionIndex].generators.insert(newGenerator, at: index.generatorIndex)
 
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
@@ -140,6 +134,7 @@ open class GravityTableManager: BaseTableManager {
         }
 
         self.sections[indexOfHeader].header = header
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.reloadSections(at: [indexOfHeader], with: animation)
     }
 
@@ -189,6 +184,7 @@ private extension GravityTableManager {
             return IndexPath(row: index, section: section)
         }
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         dataSource?.modifier?.insertRows(at: indexPaths, with: .none)
     }
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
 final class LandingStackViewController: UIViewController {
 
@@ -80,12 +81,12 @@ private extension LandingStackViewController {
                                               childGenerators: [mainButton, secondaryButton])
 
         // Add generators to adapter
-        adapter.addCellGenerator(title)
-        adapter.addCellGenerator(description)
-        adapter.addCellGenerator(buttons)
+        adapter += title
+        adapter += description
+        adapter += buttons
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
 }

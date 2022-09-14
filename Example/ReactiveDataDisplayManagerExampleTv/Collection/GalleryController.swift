@@ -62,7 +62,7 @@ private extension GalleryController {
         for i in 0...10 {
             let headerGenerator = TitleCollectionHeaderGenerator(title: "Recommendations \(i)")
 
-            adapter.addSectionHeaderGenerator(headerGenerator)
+            adapter += headerGenerator
             for _ in 0...31 {
                 // Create viewModels for cell
                 guard let viewModel = ImageViewModel.make(with: loadImage) else { continue }
@@ -75,12 +75,12 @@ private extension GalleryController {
                 }
 
                 // Add generator to adapter
-                adapter.addCellGenerator(generator)
+                adapter += generator
             }
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     /// This method load image and set to UIImageView

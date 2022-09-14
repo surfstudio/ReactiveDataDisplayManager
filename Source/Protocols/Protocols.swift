@@ -9,7 +9,7 @@
 import UIKit
 
 // sourcery: AutoMockable
-open class TableHeaderGenerator: ViewGenerator, IdOwner {
+open class TableHeaderGenerator: ViewGenerator, IdOwner, TableHeaderRegisterableItem {
 
     public let id: AnyHashable
 
@@ -24,13 +24,16 @@ open class TableHeaderGenerator: ViewGenerator, IdOwner {
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
     }
+
+    /// Registeration needed only for `UITableViewHeaderFooterView` descendant classes
+    open func registerHeader(in tableView: UITableView) { }
 
     open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
         preconditionFailure("\(#function) must be overriden in child")
     }
 }
 
-open class TableFooterGenerator: ViewGenerator {
+open class TableFooterGenerator: ViewGenerator, TableFooterRegisterableItem {
 
     public let id: AnyHashable
 
@@ -45,6 +48,9 @@ open class TableFooterGenerator: ViewGenerator {
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
     }
+
+    /// Registeration needed only for `UITableViewHeaderFooterView` descendant classes
+    open func registerFooter(in tableView: UITableView) { }
 
     open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
         preconditionFailure("\(#function) must be overriden in child")
@@ -53,7 +59,7 @@ open class TableFooterGenerator: ViewGenerator {
 
 // sourcery: AutoMockable
 /// Protocol that incapsulated type of current cell
-public protocol TableCellGenerator: AnyObject {
+public protocol TableCellGenerator: AnyObject, TableCellRegisterableItem {
 
     /// Nib type, which create this generator
     var identifier: String { get }
@@ -63,11 +69,6 @@ public protocol TableCellGenerator: AnyObject {
     /// - Parameter tableView: TableView, which controlled cell grations
     /// - Return: New (may reused) cell.
     func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell
-
-    /// Register cell in tableView
-    ///
-    /// - Parameter in: TableView, in which cell will be registered
-    func registerCell(in tableView: UITableView)
 
     /// Height for cell.
     ///
@@ -95,13 +96,11 @@ public extension TableCellGenerator {
 
 // sourcery: AutoMockable
 /// Protocol that incapsulated type of Header
-public protocol CollectionHeaderGenerator: AnyObject {
+public protocol CollectionHeaderGenerator: AnyObject, CollectionHeaderRegisterableItem {
 
     var identifier: UICollectionReusableView.Type { get }
 
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView
-
-    func registerHeader(in collectionView: UICollectionView)
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
 
@@ -121,20 +120,18 @@ public extension CollectionHeaderGenerator {
 
 // sourcery: AutoMockable
 /// Protocol that incapsulated type of Footer
-public protocol CollectionFooterGenerator: AnyObject {
+public protocol CollectionFooterGenerator: AnyObject, CollectionFooterRegisterableItem {
 
     var identifier: UICollectionReusableView.Type { get }
 
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionReusableView
-
-    func registerFooter(in collectionView: UICollectionView)
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize
 }
 
 // sourcery: AutoMockable
 /// Protocol that incapsulated type of current cell
-public protocol CollectionCellGenerator: AnyObject {
+public protocol CollectionCellGenerator: AnyObject, CollectionCellRegisterableItem {
 
     /// Nib type, which create this generator
     var identifier: String { get }
@@ -144,11 +141,6 @@ public protocol CollectionCellGenerator: AnyObject {
     /// - Parameter tableView: TableView, which controlled cell grations
     /// - Return: New (may reused) cell.
     func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell
-
-    /// Register cell in collectionView
-    ///
-    /// - Parameter in: CollectionView, in which cell will be registered
-    func registerCell(in collectionView: UICollectionView)
 
     /// Method for SPM support
     /// 

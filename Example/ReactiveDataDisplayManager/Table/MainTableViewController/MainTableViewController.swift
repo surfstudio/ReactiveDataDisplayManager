@@ -90,10 +90,10 @@ private extension MainTableViewController {
             }
 
             // Add generator to adapter
-            ddm.addCellGenerator(generator)
+            ddm += generator
         }
 
-        ddm.forceRefill()
+        ddm => .reload
     }
 
     func openScreen(by segueId: SegueIdentifier) {

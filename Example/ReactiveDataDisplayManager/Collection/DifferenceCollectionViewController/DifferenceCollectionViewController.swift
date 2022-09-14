@@ -65,13 +65,13 @@ extension DifferenceCollectionViewController: UISearchBarDelegate {
         // apply snapshot
         adapter.reload { adapter in
             // clear existing generators
-            adapter.clearCellGenerators()
+            adapter -= .all
 
             // add header with static id
-            adapter.addSectionHeaderGenerator(EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId))
+            adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
 
             // add filtered  generators
-            adapter.addCellGenerators(filterGenerators(with: searchText))
+            adapter += filterGenerators(with: searchText)
         }
 
         // all insert, remove, reload animations will be selected automatically
@@ -102,10 +102,10 @@ private extension DifferenceCollectionViewController {
             generators = makeCellGenerators()
 
             // add header with static id
-            adapter.addSectionHeaderGenerator(EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId))
+            adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
 
             // add generators
-            adapter.addCellGenerators(generators)
+            adapter += generators
         })
     }
 
@@ -133,13 +133,13 @@ private extension DifferenceCollectionViewController {
         // apply snapshot
         adapter.reload { adapter in
             // clear existing generators
-            adapter.clearCellGenerators()
+            adapter -= .all
 
             // add header with static id
-            adapter.addSectionHeaderGenerator(EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId))
+            adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
 
             // add generators
-            adapter.addCellGenerators(generators)
+            adapter += generators
         }
 
         // expected remove animation

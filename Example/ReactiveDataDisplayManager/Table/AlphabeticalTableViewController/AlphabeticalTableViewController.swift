@@ -54,13 +54,13 @@ private extension AlphabeticalTableViewController {
             // Create header generator
             let headerGenerator = TitleHeaderGenerator(model: $0)
             // Add header generator into adapter
-            adapter.addSectionHeaderGenerator(headerGenerator)
+            adapter += headerGenerator
             // Add cell generators into adapter
-            adapter.addCellGenerators(makeCellGenerators())
+            adapter += makeCellGenerators()
         }
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     // Make cells generators

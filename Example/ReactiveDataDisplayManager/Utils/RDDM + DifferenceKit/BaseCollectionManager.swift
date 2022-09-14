@@ -23,6 +23,7 @@ extension BaseCollectionManager {
     ///   - interrupt: A closure that takes an changeset as its argument and returns `true` if the animated
     ///                updates should be stopped and performed reloadData. Default is nil.
     func reload(with changes: ChangesClosure, interrupt: ChangesetClosure? = nil) {
+
         let oldSnapshot = makeSnapshot()
 
         changes(self)
@@ -33,7 +34,12 @@ extension BaseCollectionManager {
         else { return }
 
         let changeset = StagedChangeset(source: source, target: data)
-        view.reload(using: changeset, interrupt: interrupt) { _ in }
+        view.reload(using: changeset, interrupt: interrupt) { [weak self] _ in
+            guard let registrator = self?.registrator else {
+                return
+            }
+            self?.sections.registerAllIfNeeded(with: view, using: registrator)
+        }
     }
 
 }

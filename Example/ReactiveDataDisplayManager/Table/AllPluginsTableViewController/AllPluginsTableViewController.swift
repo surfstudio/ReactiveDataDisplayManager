@@ -88,7 +88,7 @@ private extension AllPluginsTableViewController {
         addPrefetcherableSection()
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func updateBarButtonItem(with title: String) {
@@ -120,7 +120,7 @@ private extension AllPluginsTableViewController {
             }
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -136,7 +136,7 @@ private extension AllPluginsTableViewController {
             generator.childGenerators = Constants.titles.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -146,7 +146,7 @@ private extension AllPluginsTableViewController {
 
         Constants.movableTitles.forEach {
             let generator = MovableCellGenerator(with: $0)
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -164,7 +164,7 @@ private extension AllPluginsTableViewController {
             }
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -180,7 +180,7 @@ private extension AllPluginsTableViewController {
             let generator = ImageTableGenerator(with: viewModel)
 
             // Add generator to adapter
-            adapter.addCellGenerator(generator)
+            adapter += generator
         }
     }
 
@@ -198,7 +198,7 @@ private extension AllPluginsTableViewController {
         }
 
         // Add header generator into adapter
-        adapter.addSectionHeaderGenerator(headerGenerator)
+        adapter += headerGenerator
     }
 
 }
@@ -210,7 +210,7 @@ extension AllPluginsTableViewController: RefreshableOutput {
     func refreshContent(with input: RefreshableInput) {
         DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(3)) { [weak self, weak input] in
             DispatchQueue.main.async { [weak self, weak input] in
-                self?.adapter.clearCellGenerators()
+                self?.adapter -= .all
                 self?.fillAdapter()
                 input?.endRefreshing()
             }

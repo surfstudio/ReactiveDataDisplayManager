@@ -92,10 +92,10 @@ private extension PaginatableTableViewController {
     func fillAdapter() {
 
         for _ in 0...Constants.pageSize {
-            adapter.addCellGenerator(makeGenerator())
+            adapter += makeGenerator()
         }
 
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func makeGenerator() -> TableCellGenerator {
@@ -106,10 +106,10 @@ private extension PaginatableTableViewController {
         currentPage += 1
 
         for _ in 0...Constants.pageSize {
-            adapter.addCellGenerator(makeGenerator())
+            adapter += makeGenerator()
         }
 
-        adapter.forceRefill()
+        adapter => .reload
 
         return currentPage < Constants.pagesCount
     }

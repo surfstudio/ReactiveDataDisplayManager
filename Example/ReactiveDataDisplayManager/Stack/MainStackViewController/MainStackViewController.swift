@@ -64,10 +64,10 @@ private extension MainStackViewController {
             }
 
             // Add generator to adapter
-            ddm.addCellGenerator(generator)
+            ddm += generator
         }
 
-        ddm.forceRefill()
+        ddm => .reload
     }
 
 }

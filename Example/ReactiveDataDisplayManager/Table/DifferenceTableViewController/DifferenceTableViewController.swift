@@ -57,7 +57,7 @@ private extension DifferenceTableViewController {
                     TitleTableViewCell.rddm.diffableGenerator(uniqueId: $0.offset + Constants.models.count,
                                                               with: $0.element)
                 }
-                adapter.addCellGenerators(generators)
+                adapter += generators
             }
         }
 
@@ -74,7 +74,7 @@ private extension DifferenceTableViewController {
         delay(.now() + .seconds(4)) { [weak self] in
             self?.adapter.reload(insertRowsAnimation: .top) { adapter in
                 let generator = TitleTableViewCell.rddm.diffableGenerator(uniqueId: "Last cell", with: "Last cell")
-                adapter.addCellGenerator(generator)
+                adapter += generator
             }
         }
     }
