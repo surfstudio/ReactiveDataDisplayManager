@@ -27,7 +27,7 @@ public class StackBuilder<T: BaseStackManager> {
 
     // MARK: - Initialization
 
-    init(view: UIStackView, manager: T) {
+    public init(view: UIStackView, manager: T) {
         self.view = view
         self.manager = manager
     }

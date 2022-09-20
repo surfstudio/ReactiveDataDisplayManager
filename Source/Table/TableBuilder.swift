@@ -52,7 +52,7 @@ public class TableBuilder<T: BaseTableManager> {
 
     // MARK: - Initialization
 
-    init(view: UITableView, manager: T) {
+    public init(view: UITableView, manager: T) {
         self.view = view
         self.manager = manager
         self.manager.view = view

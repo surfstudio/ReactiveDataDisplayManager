@@ -49,7 +49,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     // MARK: - Initialization
 
-    init(view: UICollectionView, manager: T) {
+    public init(view: UICollectionView, manager: T) {
         self.view = view
         self.manager = manager
         self.manager.view = view
