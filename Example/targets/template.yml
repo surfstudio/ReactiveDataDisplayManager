@@ -34,7 +34,7 @@ targetTemplates:
       settings:
         base:
           PRODUCT_BUNDLE_IDENTIFIER: ${bundle_id}
-          MARKETING_VERSION: "7.3"
+          MARKETING_VERSION: "8.0.0"
           CURRENT_PROJECT_VERSION: 0
           VERSIONING_SYSTEM: "apple-generic"
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym

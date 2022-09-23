@@ -11,7 +11,12 @@ let package = Package(
             name: "ReactiveDataDisplayManager",
             targets: [
                 "ReactiveDataDisplayManager"
-            ])
+            ]),
+          .library(
+              name: "ReactiveDataComponents",
+              targets: [
+                  "ReactiveDataComponents"
+              ])
     ],
     targets: [
         .target(
@@ -24,6 +29,24 @@ let package = Package(
                 "ReactiveDataDisplayManager"
             ],
             path: "ReactiveDataDisplayManagerTests",
+            exclude: [
+                "Info.plist"
+            ]
+        ),
+        .target(
+            name: "ReactiveDataComponents",
+            dependencies: [
+                "ReactiveDataDisplayManager"
+            ],
+            path: "Components/Source"
+        ),
+        .testTarget(
+            name: "ReactiveDataComponentsTests",
+            dependencies: [
+                "ReactiveDataDisplayManager",
+                "ReactiveDataComponents"
+            ],
+            path: "ReactiveDataComponentsTests",
             exclude: [
                 "Info.plist"
             ]

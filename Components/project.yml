@@ -1,12 +1,5 @@
-include:
-  - path: Example/project.yml
-    relativePaths: true
-  - path: Components/project.yml
-    relativePaths: true
-
-
 # Название проекта
-name: ReactiveDataDisplayManager
+name: ReactiveDataComponents
 options:
   # Версия Xcode
   xcodeVersion: 13.4.1
@@ -15,7 +8,7 @@ options:
   # Создание групп
   createIntermediateGroups: true
 targets:
-    ReactiveDataDisplayManager:
+    ReactiveDataComponents:
       dependencies:
         - sdk: UIKit.framework
       type: framework
@@ -26,19 +19,21 @@ targets:
       scheme:
         configVariants: all
         testTargets:
-          - ReactiveDataDisplayManagerTests_${platform}
+          - ReactiveDataComponentsTests_${platform}
         gatherCoverageData: true
       sources:
         - path: Source
+      dependencies:
+        - target: ReactiveDataDisplayManager_${platform}
       info:
         path: Info.plist
         properties:
-          CFBundleName: ReactiveDataDisplayManager
+          CFBundleName: ReactiveDataComponents
           CFBundleShortVersionString: $(MARKETING_VERSION)
           CFBundleVersion: $(CURRENT_PROJECT_VERSION)
       settings:
         base:
-          PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm
+          PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm.components
           MARKETING_VERSION: "8.0.0"
           CURRENT_PROJECT_VERSION: 0
           VERSIONING_SYSTEM: "apple-generic"
@@ -48,7 +43,7 @@ targets:
           CODE_SIGN_STYLE: Manual
 
 
-    ReactiveDataDisplayManagerTests:
+    ReactiveDataComponentsTests:
       type: bundle.unit-test
       platform: [iOS, tvOS]
       deploymentTarget:
@@ -56,12 +51,12 @@ targets:
         tvOS: 10.0
       scheme:
         configVariants: all
-      sources: [ReactiveDataDisplayManagerTests]
+      sources: [Tests]
       info:
-        path: ReactiveDataDisplayManagerTests/Info.plist
+        path: ReactiveDataComponentsTests/Info.plist
         properties: []
       dependencies:
-        - target: ReactiveDataDisplayManager_${platform}
+        - target: ReactiveDataComponents_${platform}
       preBuildScripts:
         - script: sourcery
           name: Sourcery
