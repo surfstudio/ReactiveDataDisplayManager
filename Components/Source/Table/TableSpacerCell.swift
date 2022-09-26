@@ -9,7 +9,7 @@ import UIKit
 import ReactiveDataDisplayManager
 
 /// Empty table cell with `SpacerView`
-final public class TableSpacerCell: UITableViewCell, SpacerWrapper {
+public final class TableSpacerCell: UITableViewCell, SpacerWrapper {
 
     public typealias Model = SpacerView.Model
 
