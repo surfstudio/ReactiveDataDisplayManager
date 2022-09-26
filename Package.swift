@@ -12,11 +12,11 @@ let package = Package(
             targets: [
                 "ReactiveDataDisplayManager"
             ]),
-          .library(
-              name: "ReactiveDataComponents",
-              targets: [
-                  "ReactiveDataComponents"
-              ])
+        .library(
+            name: "ReactiveDataComponents",
+            targets: [
+                "ReactiveDataComponents"
+            ])
     ],
     targets: [
         .target(
