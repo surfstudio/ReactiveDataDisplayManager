@@ -47,8 +47,6 @@ private extension HighlightableTableViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
 
-        adapter += TableSpacerCell.rddm.baseGenerator(with: .init(height: 40, color: .rddm), and: .class)
-
         // Create cell generators
         let generators = Constants.models.map { model -> TableCellGenerator in
             HighlightableTableCell.rddm.baseGenerator(with: model)
