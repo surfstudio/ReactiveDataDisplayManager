@@ -22,7 +22,7 @@ targets:
           - ReactiveDataComponentsTests_${platform}
         gatherCoverageData: true
       sources:
-        - path: Source
+        - path: Sources/ReactiveDataComponents
       dependencies:
         - target: ReactiveDataDisplayManager_${platform}
       info:
@@ -51,9 +51,10 @@ targets:
         tvOS: 10.0
       scheme:
         configVariants: all
-      sources: [ReactiveDataComponentsTests]
+      sources:
+        - path: Tests/ReactiveDataComponentsTests
       info:
-        path: ReactiveDataComponentsTests/Info.plist
+        path: Tests/Info.plist
         properties: []
       dependencies:
         - target: ReactiveDataComponents_${platform}

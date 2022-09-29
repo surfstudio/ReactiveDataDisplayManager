@@ -1,7 +1,7 @@
 include:
   - path: Example/project.yml
     relativePaths: true
-  - path: Components/project.yml
+  - path: ReactiveDataComponents/project.yml
     relativePaths: true
 
 

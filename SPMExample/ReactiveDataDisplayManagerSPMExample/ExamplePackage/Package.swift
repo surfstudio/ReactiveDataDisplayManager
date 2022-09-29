@@ -13,11 +13,12 @@ let package = Package(
             targets: ["ExamplePackage"])
     ],
     dependencies: [
-        .package(path: "../../../")
+        .package(name: "ReactiveDataDisplayManager", path: "../../../"),
+        .package(name: "ReactiveDataComponents", path: "../../../ReactiveDataComponents/"),
     ],
     targets: [
         .target(
             name: "ExamplePackage",
-            dependencies: ["ReactiveDataDisplayManager"])
+            dependencies: ["ReactiveDataDisplayManager", "ReactiveDataComponents"])
     ]
 )

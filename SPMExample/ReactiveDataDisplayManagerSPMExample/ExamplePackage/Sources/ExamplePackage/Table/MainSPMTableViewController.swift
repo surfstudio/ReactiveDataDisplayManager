@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveDataDisplayManager
+import ReactiveDataComponents
 
 /// This class is for displaying data only
 /// The examples of Spm support located in:
