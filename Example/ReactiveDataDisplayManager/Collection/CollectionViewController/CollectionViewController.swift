@@ -60,7 +60,7 @@ private extension CollectionViewController {
 
     func makeGenerators() -> [CollectionCellGenerator] {
         CollectionGenerators {
-            for title in titles {
+            titles.map { title -> CollectionCellGenerator in
                 // Create generator
                 let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
                 generator.didSelectEvent += {
@@ -69,6 +69,7 @@ private extension CollectionViewController {
                 generator.didDeselectEvent += {
                     debugPrint("\(title) deselected")
                 }
+                return generator
             }
         }
     }
