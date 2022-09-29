@@ -37,10 +37,18 @@ public extension TableSectionsProvider {
 
     typealias GeneratorsLinkedWithFooter = (generators: [GeneratorType], footer: FooterGeneratorType)
 
-    static func += (left: TableSectionsProvider, right: Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType>) {
+    static func += (left: TableSectionsProvider, right: TableSection) {
         left.addTableGenerators(with: right.generators,
                                 choice: .newSection(header: right.header,
                                                     footer: right.footer))
+    }
+
+    static func += (left: TableSectionsProvider, right: [TableSection]) {
+        right.forEach { section in
+            left.addTableGenerators(with: section.generators,
+                                    choice: .newSection(header: section.header,
+                                                        footer: section.footer))
+        }
     }
 
     static func += (left: TableSectionsProvider, right: GeneratorsLinkedWithHeader) {
