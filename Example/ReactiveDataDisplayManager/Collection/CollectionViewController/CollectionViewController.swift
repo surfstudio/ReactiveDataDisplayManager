@@ -47,23 +47,30 @@ private extension CollectionViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        let header = TitleCollectionHeaderGenerator(title: "Header")
-        adapter += header
-        for title in titles {
-            // Create generator
-            let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
-            generator.didSelectEvent += {
-                debugPrint("\(title) selected")
-            }
-            generator.didDeselectEvent += {
-                debugPrint("\(title) deselected")
-            }
-            // Add generator to adapter
-            adapter += generator * header
-        }
+
+        // Added one section
+        adapter += CollectionSection(
+            generators: makeGenerators(),
+            header: TitleCollectionHeaderGenerator(title: "Header")
+        )
 
         // Tell adapter that we've changed generators
         adapter => .reload
+    }
+
+    func makeGenerators() -> [CollectionCellGenerator] {
+        CollectionGenerators {
+            for title in titles {
+                // Create generator
+                let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
+                generator.didSelectEvent += {
+                    debugPrint("\(title) selected")
+                }
+                generator.didDeselectEvent += {
+                    debugPrint("\(title) deselected")
+                }
+            }
+        }
     }
 
     func updateBarButtonItem(with title: String) {
