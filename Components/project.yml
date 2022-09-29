@@ -51,7 +51,7 @@ targets:
         tvOS: 10.0
       scheme:
         configVariants: all
-      sources: [Tests]
+      sources: [ReactiveDataComponentsTests]
       info:
         path: ReactiveDataComponentsTests/Info.plist
         properties: []

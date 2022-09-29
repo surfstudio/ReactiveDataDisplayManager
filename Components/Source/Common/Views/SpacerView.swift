@@ -37,7 +37,7 @@ extension SpacerView: ConfigurableItem {
         public let height: CGFloat
         public let color: UIColor?
 
-        public init(height: CGFloat, color: UIColor?) {
+        public init(height: CGFloat, color: UIColor? = .clear) {
             self.height = height
             self.color = color
         }

@@ -46,7 +46,7 @@ let package = Package(
                 "ReactiveDataDisplayManager",
                 "ReactiveDataComponents"
             ],
-            path: "ReactiveDataComponentsTests",
+            path: "Components/ReactiveDataComponentsTests",
             exclude: [
                 "Info.plist"
             ]

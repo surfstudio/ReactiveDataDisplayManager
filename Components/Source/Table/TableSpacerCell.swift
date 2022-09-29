@@ -22,6 +22,7 @@ public final class TableSpacerCell: UITableViewCell, SpacerWrapper {
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureViews()
+        selectionStyle = .none
     }
 
     @available(*, unavailable)
