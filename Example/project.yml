@@ -42,7 +42,7 @@ targets:
         - path: ReactiveDataDisplayManagerExampleTv
       dependencies:
         - target: ReactiveDataDisplayManager_tvOS
-        - target: ReactiveDataDisplayManager_tvOS
+        - target: ReactiveDataComponents_tvOS
       info:
         path: ReactiveDataDisplayManagerExampleTv/Application/Info.plist
       templates:

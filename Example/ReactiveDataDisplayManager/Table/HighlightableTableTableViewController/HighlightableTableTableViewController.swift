@@ -6,7 +6,6 @@
 //
 import UIKit
 import ReactiveDataDisplayManager
-import ReactiveDataComponents
 
 final class HighlightableTableViewController: UIViewController {
 
