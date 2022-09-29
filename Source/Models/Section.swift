@@ -73,10 +73,16 @@ public struct DiffableSection {
 
 // MARK: - Global Typealias
 
-public typealias TableSection = Section<TableCellGenerator, TableHeaderGenerator, TableFooterGenerator>
-public typealias CollectionSection = Section<CollectionCellGenerator,
-                                             CollectionHeaderGenerator,
-                                             CollectionFooterGenerator>
+public typealias TableSection = Section<
+    TableCellGenerator,
+    TableHeaderGenerator,
+    TableFooterGenerator
+>
+public typealias CollectionSection = Section<
+    CollectionCellGenerator,
+    CollectionHeaderGenerator,
+    CollectionFooterGenerator
+>
 
 // MARK: - Alternative initialization with empty footer
 

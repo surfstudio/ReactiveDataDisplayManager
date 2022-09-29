@@ -24,7 +24,7 @@ public enum GeneratorsBuilder<Generator> {
     public static func buildBlock(_ generators: [Generator]...) -> [Generator] {
         return generators.flatMap { $0 }
     }
-    
+
     public static func buildArray(_ generators: [[Generator]]) -> [Generator] {
         Array(generators.joined())
     }
