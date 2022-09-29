@@ -1,5 +1,5 @@
 //
-//  CollectionGeneratorsBuilder.swift
+//  GeneratorsBuilder.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by porohov on 29.09.2022.

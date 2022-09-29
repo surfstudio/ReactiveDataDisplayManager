@@ -70,34 +70,3 @@ public struct DiffableSection {
         self.generators = generators
     }
 }
-
-// MARK: - Global Typealias
-
-public typealias TableSection = Section<
-    TableCellGenerator,
-    TableHeaderGenerator,
-    TableFooterGenerator
->
-public typealias CollectionSection = Section<
-    CollectionCellGenerator,
-    CollectionHeaderGenerator,
-    CollectionFooterGenerator
->
-
-// MARK: - Alternative initialization with empty footer
-
-public extension TableSection {
-
-    init(generators: [TableCellGenerator], header: TableHeaderGenerator) {
-        self.init(generators: generators, header: header, footer: TableFooterGenerator())
-    }
-
-}
-
-public extension CollectionSection {
-
-    init(generators: [CollectionCellGenerator], header: CollectionHeaderGenerator) {
-        self.init(generators: generators, header: header, footer: EmptyCollectionFooterGenerator())
-    }
-
-}

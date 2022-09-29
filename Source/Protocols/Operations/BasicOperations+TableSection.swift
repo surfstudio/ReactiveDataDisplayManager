@@ -45,9 +45,7 @@ public extension TableSectionsProvider {
 
     static func += (left: TableSectionsProvider, right: [TableSection]) {
         right.forEach { section in
-            left.addTableGenerators(with: section.generators,
-                                    choice: .newSection(header: section.header,
-                                                        footer: section.footer))
+            left += section
         }
     }
 

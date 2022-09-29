@@ -45,9 +45,7 @@ public extension CollectionSectionsProvider {
 
     static func += (left: CollectionSectionsProvider, right: [CollectionSection]) {
         right.forEach { section in
-            left.addCollectionGenerators(with: section.generators,
-                                         choice: .newSection(header: section.header,
-                                                             footer: section.footer))
+            left += section
         }
     }
 
