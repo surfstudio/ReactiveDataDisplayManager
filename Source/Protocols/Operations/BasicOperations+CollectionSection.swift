@@ -37,10 +37,16 @@ public extension CollectionSectionsProvider {
 
     typealias GeneratorsLinkedWithFooter = (generators: [GeneratorType], footer: FooterGeneratorType)
 
-    static func += (left: CollectionSectionsProvider, right: Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType>) {
+    static func += (left: CollectionSectionsProvider, right: CollectionSection) {
         left.addCollectionGenerators(with: right.generators,
                                      choice: .newSection(header: right.header,
                                                          footer: right.footer))
+    }
+
+    static func += (left: CollectionSectionsProvider, right: [CollectionSection]) {
+        right.forEach { section in
+            left += section
+        }
     }
 
     static func += (left: CollectionSectionsProvider, right: GeneratorsLinkedWithHeader) {
