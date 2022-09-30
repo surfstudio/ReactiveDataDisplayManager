@@ -53,7 +53,6 @@ private extension HighlightableTableViewController {
         }
 
         // Add generators into adapter
-        adapter += TableSpacerCell.rddm.baseGenerator(with: .init(height: 24), and: .class)
         adapter += generators
 
         // Tell adapter that we've changed generators

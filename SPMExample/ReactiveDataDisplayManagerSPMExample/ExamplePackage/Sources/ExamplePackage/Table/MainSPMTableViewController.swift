@@ -58,6 +58,7 @@ private extension MainSPMTableViewController {
     func fillAdapter() {
         let generator = SPMTableViewCell.rddm.nonReusableGenerator(with: "BaseNonReusableCellGenerator")
 
+        ddm += TableSpacerCell.rddm.baseGenerator(with: .init(height: 24), and: .class)
         ddm.addCellGenerator(generator)
         Constants.models.forEach { (generator) in
             ddm.addCellGenerator(generator)
