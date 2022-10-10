@@ -17,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01D42DBD28F4443C00C29FAA /* ReactiveDataDisplayManager */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ReactiveDataDisplayManager; path = ..; sourceTree = "<group>"; };
+		01D42DBF28F4492000C29FAA /* Components */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Components; path = ../Components; sourceTree = "<group>"; };
 		41040B7726111B6A008BFFDA /* ExamplePackage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ExamplePackage; sourceTree = "<group>"; };
 		41E1578E26111A3300E5E4BF /* ReactiveDataDisplayManagerSPMExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveDataDisplayManagerSPMExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41E1579126111A3300E5E4BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +42,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01D42DBC28F4443C00C29FAA /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				01D42DBD28F4443C00C29FAA /* ReactiveDataDisplayManager */,
+				01D42DBF28F4492000C29FAA /* Components */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		41040B792611200C008BFFDA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -50,6 +61,7 @@
 		41E1578526111A3300E5E4BF = {
 			isa = PBXGroup;
 			children = (
+				01D42DBC28F4443C00C29FAA /* Packages */,
 				41E1579026111A3300E5E4BF /* ReactiveDataDisplayManagerSPMExample */,
 				41E1578F26111A3300E5E4BF /* Products */,
 				41040B792611200C008BFFDA /* Frameworks */,

@@ -6,6 +6,7 @@
 //
 import UIKit
 import ReactiveDataDisplayManager
+import ReactiveDataComponents
 
 final class HighlightableTableViewController: UIViewController {
 
@@ -45,16 +46,17 @@ private extension HighlightableTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+
         // Create cell generators
         let generators = Constants.models.map { model -> TableCellGenerator in
             HighlightableTableCell.rddm.baseGenerator(with: model)
         }
 
         // Add generators into adapter
-        adapter.addCellGenerators(generators)
+        adapter += generators
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter => .reload
     }
 
     func updateBarButtonItem(with title: String) {
