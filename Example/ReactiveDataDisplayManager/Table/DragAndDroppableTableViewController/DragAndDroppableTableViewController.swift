@@ -55,11 +55,20 @@ private extension DragAndDroppableTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
-        // Add generators to adapter
-        adapter += TitleHeaderGenerator(model: Constants.titleForSectionFirst)
-        adapter += makeCellGenerators(for: Array(1...10))
-        adapter += TitleHeaderGenerator(model: Constants.titleForSectionLast)
-        adapter += makeCellGenerators(for: Array(11...20))
+
+        adapter += TableSections {
+            // First section
+            Section(
+                generators: makeCellGenerators(for: Array(1...10)),
+                header: TitleHeaderGenerator(model: Constants.titleForSectionFirst)
+            )
+
+            // Second section
+            Section(
+                generators: makeCellGenerators(for: Array(11...20)),
+                header: TitleHeaderGenerator(model: Constants.titleForSectionLast)
+            )
+        }
 
         // Tell adapter that we've changed generators
         adapter => .reload
