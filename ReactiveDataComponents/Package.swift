@@ -16,7 +16,8 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "ReactiveDataComponents"
+            name: "ReactiveDataComponents",
+            path: "Sources"
         )
     ]
 )

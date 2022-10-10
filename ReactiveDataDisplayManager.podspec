@@ -14,6 +14,6 @@ Pod::Spec.new do |s|
   s.swift_version = '5.3'
 
   s.subspec 'ReactiveDataComponents' do |sp|
-    sp.source_files = 'ReactiveDataComponents/Sources/ReactiveDataComponents/**/*.swift'
+    sp.source_files = 'ReactiveDataComponents/Sources/**/*.swift'
   end
 end
