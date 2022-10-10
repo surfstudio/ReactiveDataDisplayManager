@@ -3,7 +3,7 @@ name: Lint
 on: [pull_request]
 
 jobs:
-  build:
+  danger:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -14,3 +14,12 @@ jobs:
         env:
           # add token to secrets
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  pod:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Generate projects
+      run: make init
+    - name: Lint
+      run: make lint_lib
