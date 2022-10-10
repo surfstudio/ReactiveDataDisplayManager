@@ -14,7 +14,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "ReactiveDataDisplayManager", path: "../../../"),
-        .package(name: "ReactiveDataComponents", path: "../../../ReactiveDataComponents/")
+        .package(name: "ReactiveDataComponents", path: "../../../Components/")
     ],
     targets: [
         .target(

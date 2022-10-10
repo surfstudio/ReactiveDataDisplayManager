@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '9.0'
   s.swift_version = '5.3'
 
-  s.subspec 'ReactiveDataComponents' do |sp|
-    sp.source_files = 'ReactiveDataComponents/Sources/**/*.swift'
+  s.subspec 'Components' do |sp|
+    sp.source_files = 'Components/Sources/**/*.swift'
   end
 end

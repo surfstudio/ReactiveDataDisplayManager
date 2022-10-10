@@ -22,7 +22,7 @@ targets:
           - ReactiveDataComponentsTests_${platform}
         gatherCoverageData: true
       sources:
-        - path: Sources/ReactiveDataComponents
+        - path: Sources
       dependencies:
         - target: ReactiveDataDisplayManager_${platform}
       info:
@@ -52,7 +52,7 @@ targets:
       scheme:
         configVariants: all
       sources:
-        - path: Tests/ReactiveDataComponentsTests
+        - path: Tests
       info:
         path: Tests/Info.plist
         properties: []
