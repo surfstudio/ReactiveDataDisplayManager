@@ -39,6 +39,11 @@ test_lib_iOS:
 prepare_report:
 	bundle exec slather
 
+## Build Example of usage with Swift Package Manager for specified **iOS** version
+build_example_SPM:
+	cd SPMExample
+	swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios${version}-simulator"
+
 ## Build Example sources for **iOS** platform (produce xctestrun)
 build_example_iOS:
 	xcodebuild -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -sdk iphonesimulator -destination ${destination} build-for-testing
