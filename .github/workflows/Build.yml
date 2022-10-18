@@ -10,7 +10,7 @@ on:
 jobs:
 
   build_iOS:
-    runs-on: macOS-latest
+    runs-on: macOS-12
     steps:
     - uses: actions/checkout@v1
     - name: Generate projects
@@ -33,7 +33,7 @@ jobs:
 
 
   build_Example:
-    runs-on: macOS-latest
+    runs-on: macOS-12
     steps:
     - uses: actions/checkout@v1
     - name: Generate projects
@@ -55,7 +55,7 @@ jobs:
         verbose: true
 
   build_tvOS:
-    runs-on: macOS-latest
+    runs-on: macOS-12
     steps:
     - uses: actions/checkout@v1
     - name: Generate projects
