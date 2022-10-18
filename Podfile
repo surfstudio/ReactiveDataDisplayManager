@@ -1,25 +1,30 @@
 use_frameworks!
 
-$NukeRepository = "https://github.com/kean/Nuke.git"
-$NukeTag = "9.5.1"
-
 def utils
   pod 'SurfUtils/ItemsScrollManager', :git => "https://github.com/surfstudio/iOS-Utils.git", :tag => '11.0.0'
+end
+
+def diffKit
   pod 'DifferenceKit', '1.1.5'
-  pod 'Nuke', :git => $NukeRepository, :tag => $NukeTag
+end
+
+def nuke
+  pod 'Nuke', :git => "https://github.com/kean/Nuke.git", :tag => "10.11.2"
 end
 
 abstract_target 'Targets' do
-  platform :ios, '11.0'
-  utils
+
+  nuke
 
   target 'ReactiveDataDisplayManagerExample_iOS' do
+    platform :ios, '11.0'
+    utils
+    diffKit
     target 'ReactiveDataDisplayManagerExampleUITests'
   end
-  
-end
 
-target 'ReactiveDataDisplayManagerExample_tvOS' do
-  platform :ios, '13.0'
-  pod 'Nuke', :git => $NukeRepository, :tag => $NukeTag
+  target 'ReactiveDataDisplayManagerExample_tvOS' do
+    platform :tvos, '13.0'
+  end
+
 end
