@@ -6,6 +6,7 @@
 //  
 //
 
+import UIKit
 import ReactiveDataDisplayManager
 
 final class ImageDefaultBehavoirCollectionViewCell: UICollectionViewCell {

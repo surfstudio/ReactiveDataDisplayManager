@@ -16,13 +16,16 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     public typealias GeneratorType = CollectionCellGenerator
     public typealias HeaderGeneratorType = CollectionHeaderGenerator
     public typealias FooterGeneratorType = CollectionFooterGenerator
-
-    public typealias CollectionAnimator = Animator<CollectionType>
+    public typealias CollectionModifier = Modifier<CollectionType, CollectionItemAnimation>
 
     // MARK: - Public properties
 
+    public var modifier: CollectionModifier? {
+        dataSource?.modifier
+    }
+
     // swiftlint:disable implicitly_unwrapped_optional
-    public weak var view: UICollectionView!
+    public weak var view: CollectionType!
     // swiftlint:enable implicitly_unwrapped_optional
 
     private(set) public lazy var registrator: CollectionRegistrator = .init(view: view)
@@ -35,7 +38,7 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     public func forceRefill() {
         sections.registerAllIfNeeded(with: view, using: registrator)
         CollectionPluginsChecker(delegate: delegate, sections: sections).asyncCheckPlugins()
-        dataSource?.modifier?.reload()
+        modifier?.reload()
     }
 
     public func addCellGenerator(_ generator: CollectionCellGenerator) {
@@ -62,7 +65,7 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     public func update(generators: [CollectionCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        dataSource?.modifier?.reloadRows(at: indexPaths, with: .animated)
+        modifier?.reloadRows(at: indexPaths, with: .animated)
     }
 
     public func clearCellGenerators() {
@@ -184,7 +187,7 @@ private extension BaseCollectionManager {
         }
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-        dataSource?.modifier?.insertRows(at: indexPaths, with: .animated)
+        modifier?.insertRows(at: indexPaths, with: .animated)
     }
 
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
@@ -213,7 +216,7 @@ private extension BaseCollectionManager {
         }
 
         // apply changes in table
-        dataSource?.modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: .animated)
+        modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: .animated)
 
         // scroll if needed
         if let scrollPosition = scrollPosition {

@@ -22,10 +22,11 @@ projects:
 
 ## Build Configuration
 destination='platform=iOS Simulator,name=iPhone 8'
+destination_tv='platform=tvOS Simulator,name=Apple TV'
 
 ## Build lib sources for **tvOS** platform
 build_lib_tvOS:
-	xcodebuild -scheme ReactiveDataDisplayManager_tvOS -sdk iphonesimulator -destination 'platform=tvOS Simulator,name=Apple TV'
+	xcodebuild -scheme ReactiveDataDisplayManager_tvOS -sdk appletvsimulator -destination ${destination_tv}
 
 ## Build lib sources for **iOS** platform (produce xctestrun)
 build_lib_iOS:
@@ -38,6 +39,10 @@ test_lib_iOS:
 ## Preparing report contains test-coverage results
 prepare_report:
 	bundle exec slather
+
+## Build Example sources for **tvOS** platform
+build_example_tvOS:
+	xcodebuild -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_tvOS -sdk appletvsimulator -destination ${destination_tv}
 
 ## Build Example of usage with Swift Package Manager for specified **iOS** version
 build_example_SPM:

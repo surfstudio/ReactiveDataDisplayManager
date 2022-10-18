@@ -80,7 +80,7 @@ public class ManualTableManager: BaseTableManager {
     open func reloadSection(by sectionHeaderGenerator: TableHeaderGenerator, with animation: UITableView.RowAnimation = .none) {
         sections.registerAllIfNeeded(with: view, using: registrator)
         if let index = sections.firstIndex(where: { $0.header === sectionHeaderGenerator }) {
-            dataSource?.modifier?.reloadSections(at: [index], with: animation)
+            modifier?.reloadSections(at: [index], with: animation)
         }
     }
 
@@ -113,7 +113,7 @@ public class ManualTableManager: BaseTableManager {
             return
         }
 
-        dataSource?.modifier?.removeRows(at: indexes, and: nil, with: .automatic)
+        modifier?.removeRows(at: indexes, and: nil, with: .automatic)
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator, toHeader headerGenerator: TableHeaderGenerator) {
@@ -324,7 +324,7 @@ public class ManualTableManager: BaseTableManager {
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-        dataSource?.modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
+        modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
     /// Swaps two generators between each other.
@@ -347,7 +347,7 @@ public class ManualTableManager: BaseTableManager {
         sections[firstIndex.sectionIndex].generators.insert(secondGenerator, at: firstIndex.generatorIndex)
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-        dataSource?.modifier?.reload()
+        modifier?.reload()
     }
 
 }
@@ -367,7 +367,7 @@ private extension ManualTableManager {
                                    footer: EmptyTableFooterGenerator()), at: index)
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-        dataSource?.modifier?.insertSections(at: [index], with: animation)
+        modifier?.insertSections(at: [index], with: animation)
     }
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
@@ -384,7 +384,7 @@ private extension ManualTableManager {
         }
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-        dataSource?.modifier?.insertRows(at: indexPaths, with: animation)
+        modifier?.insertRows(at: indexPaths, with: animation)
     }
 
 }

@@ -16,24 +16,27 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     public typealias CollectionType = UITableView
     public typealias GeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
+    public typealias TableModifier = Modifier<CollectionType, CollectionType.RowAnimation>
 
     // MARK: - Public properties
 
     // swiftlint:disable implicitly_unwrapped_optional
-    public weak var view: UITableView!
+    public weak var view: CollectionType!
     // swiftlint:enable implicitly_unwrapped_optional
 
-    private(set) public lazy var registrator: TableRegistrator = .init(view: view)
+    public var modifier: TableModifier? {
+        dataSource?.modifier
+    }
 
-    var delegate: TableDelegate?
     var dataSource: TableDataSource?
+    var delegate: TableDelegate?
 
     // MARK: - DataDisplayManager
 
     public func forceRefill() {
         sections.registerAllIfNeeded(with: view, using: registrator)
         TablePluginsChecker(delegate: delegate, sections: sections).asyncCheckPlugins()
-        dataSource?.modifier?.reload()
+        modifier?.reload()
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
@@ -60,7 +63,7 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-        dataSource?.modifier?.reloadRows(at: indexPaths, with: .none)
+        modifier?.reloadRows(at: indexPaths, with: .none)
     }
 
     open func clearCellGenerators() {
@@ -119,7 +122,7 @@ extension BaseTableManager {
         }
 
         // apply changes in table
-        dataSource?.modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: animation)
+        modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: animation)
 
         // scroll if needed
         if let scrollPosition = scrollPosition {
