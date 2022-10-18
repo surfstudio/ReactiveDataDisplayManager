@@ -13,7 +13,7 @@ targetTemplates:
         - sdk: UIKit.framework
       info:
         properties:
-          UIUserInterfaceStyle: light
+          UIUserInterfaceStyle: Light
           UILaunchStoryboardName: LaunchScreen
           UIMainStoryboardFile: Main
           CFBundleName: ${bundle_name}
