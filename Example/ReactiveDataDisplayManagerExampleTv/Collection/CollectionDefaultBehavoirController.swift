@@ -7,6 +7,7 @@
 //
 
 import Nuke
+import UIKit
 import ReactiveDataDisplayManager
 
 final class CollectionDefaultBehavoirController: UIViewController {
