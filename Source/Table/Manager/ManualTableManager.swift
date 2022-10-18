@@ -81,7 +81,7 @@ public class ManualTableManager: BaseTableManager {
         guard let index = sections.firstIndex(where: { (headerGenerator) -> Bool in
             return headerGenerator === sectionHeaderGenerator
         }) else { return }
-        dataSource?.modifier?.reloadSections(at: [index], with: animation)
+        modifier?.reloadSections(at: [index], with: animation)
     }
 
     /// Inserts new generators to provided TableHeaderGenerator generator.
@@ -117,7 +117,7 @@ public class ManualTableManager: BaseTableManager {
             return
         }
 
-        dataSource?.modifier?.removeRows(at: indexes, and: nil, with: .automatic)
+        modifier?.removeRows(at: indexes, and: nil, with: .automatic)
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator, toHeader headerGenerator: TableHeaderGenerator) {
@@ -327,7 +327,7 @@ public class ManualTableManager: BaseTableManager {
         generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
-        dataSource?.modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
+        modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
     }
 
     /// Swaps two generators between each other.
@@ -349,7 +349,7 @@ public class ManualTableManager: BaseTableManager {
         generators[secondIndex.sectionIndex].insert(firstGenerator, at: secondIndex.generatorIndex)
         generators[firstIndex.sectionIndex].insert(secondGenerator, at: firstIndex.generatorIndex)
 
-        dataSource?.modifier?.reload()
+        modifier?.reload()
     }
 
 }
@@ -367,7 +367,7 @@ private extension ManualTableManager {
         self.sections.insert(headGenerator, at: index)
         self.generators.insert([], at: index)
 
-        dataSource?.modifier?.insertSections(at: [index], with: animation)
+        modifier?.insertSections(at: [index], with: animation)
     }
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
@@ -382,7 +382,7 @@ private extension ManualTableManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
-        dataSource?.modifier?.insertRows(at: indexPaths, with: animation)
+        modifier?.insertRows(at: indexPaths, with: animation)
     }
 
 }
