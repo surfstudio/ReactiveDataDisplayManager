@@ -24,6 +24,8 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     public weak var view: CollectionType!
     // swiftlint:enable implicitly_unwrapped_optional
 
+    private(set) public lazy var registrator: TableRegistrator = .init(view: view)
+
     public var modifier: TableModifier? {
         dataSource?.modifier
     }
