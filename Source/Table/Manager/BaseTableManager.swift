@@ -16,12 +16,17 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     public typealias CollectionType = UITableView
     public typealias CellGeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
+    public typealias TableModifier = Modifier<CollectionType, CollectionType.RowAnimation>
 
     // MARK: - Public properties
 
     // swiftlint:disable implicitly_unwrapped_optional
-    public weak var view: UITableView!
+    public weak var view: CollectionType!
     // swiftlint:enable implicitly_unwrapped_optional
+
+    public var modifier: TableModifier? {
+        dataSource?.modifier
+    }
 
     var dataSource: TableDataSource?
     var delegate: TableDelegate?
@@ -30,7 +35,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
 
     public func forceRefill() {
         TablePluginsChecker(delegate: delegate, generators: generators).asyncCheckPlugins()
-        dataSource?.modifier?.reload()
+        modifier?.reload()
     }
 
     open func addCellGenerator(_ generator: TableCellGenerator) {
@@ -67,7 +72,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     open func update(generators: [TableCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        dataSource?.modifier?.reloadRows(at: indexPaths, with: .none)
+        modifier?.reloadRows(at: indexPaths, with: .none)
     }
 
     open func clearCellGenerators() {
@@ -127,7 +132,7 @@ extension BaseTableManager {
         }
 
         // apply changes in table
-        dataSource?.modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: animation)
+        modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: animation)
 
         // scroll if needed
         if let scrollPosition = scrollPosition {
