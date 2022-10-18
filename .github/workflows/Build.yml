@@ -60,5 +60,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Generate projects
       run: make init
-    - name: Build
+    - name: Build lib
       run: make build_lib_tvOS
+    - name: Build example
+      run: make build_example_tvOS
