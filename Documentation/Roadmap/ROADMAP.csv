@@ -1,69 +1,48 @@
-Id,Name,Shape Library,Page ID,Contained By,Group,Line Source,Line Destination,Source Arrow,Destination Arrow,Text Area 1
-1,Page,,,,,,,,,Mind map with lines
-2,Rounded Rectangle Container,Flowchart Shapes,1,,59,,,,,
-3,Text,Standard,1,2,59,,,,,"Tutorials (Hold Shift + ⌘ or Ctrl, then click)
- 
-"
-4,Button,UI Mockups,1,2,59,,,,,Watch lucidchart basic tutorials
-5,Text,Standard,1,2,59,,,,,Learn more about this template
-6,Text,Standard,1,2,59,,,,,"Mind maps are visual representations of thoughts or information that can help you brainstorm ideas, see new connections, and retain information. 	
-
-To customize this template, simply put a subject in the center, and add your supporting ideas using custom shapes and lines.
-
-
-
-"
-7,Button,UI Mockups,1,2,59,,,,,"See an example (Hold Shift + ⌘ or Ctrl, then click)"
-8,User Image,User Images,1,2,59,,,,,
-9,Connector,Flowchart Shapes,1,,,,,,,
-10,Connector,Flowchart Shapes,1,,,,,,,
-11,Connector,Flowchart Shapes,1,,,,,,,
-12,Connector,Flowchart Shapes,1,,,,,,,
-13,Connector,Flowchart Shapes,1,,,,,,,
-14,Connector,Flowchart Shapes,1,,,,,,,
-15,Connector,Flowchart Shapes,1,,,,,,,
-16,Connector,Flowchart Shapes,1,,,,,,,
-17,Connector,Flowchart Shapes,1,,,,,,,
-18,Connector,Flowchart Shapes,1,,,,,,,
-19,Connector,Flowchart Shapes,1,,,,,,,
-20,Connector,Flowchart Shapes,1,,,,,,,
-21,Connector,Flowchart Shapes,1,,,,,,,
-22,Connector,Flowchart Shapes,1,,,,,,,
-23,Connector,Flowchart Shapes,1,,,,,,,
-24,Connector,Flowchart Shapes,1,,,,,,,
-25,Text,Standard,1,,60,,,,,RDDM Mindmap
-26,Text,Standard,1,,60,,,,,"Никита Коробейников  |  April 14, 2021"
-27,Connector,Flowchart Shapes,1,,,,,,,
-28,Connector,Flowchart Shapes,1,,,,,,,
-29,User Image,User Images,1,,,,,,,
-30,Connector,Flowchart Shapes,1,,,,,,,
-31,Connector,Flowchart Shapes,1,,,,,,,
-32,Connector,Flowchart Shapes,1,,,,,,,
-33,Connector,Flowchart Shapes,1,,,,,,,
-34,Connector,Flowchart Shapes,1,,,,,,,
-35,Line,,1,,,29,13,None,None,Поддержка
-36,Line,,1,,,13,20,None,None,Продвижение
-37,Line,,1,,,13,17,None,None,Проекты
-38,Line,,1,,,20,19,None,None,Снаружи
-39,Line,,1,,,20,21,None,None,Внутри
-40,Line,,1,,,29,15,None,None,Улучшение
-41,Line,,1,,,15,14,None,None,Стэк
-42,Line,,1,,,15,18,None,None,Секции
-43,Line,,1,,,9,12,None,None,DiffableDataSource
-44,Line,,1,,,9,10,None,None,Unit-тесты
-45,Line,,1,,,9,11,None,None,Deprecated
-46,Line,,1,,,29,24,None,None,Переиспользование
-47,Line,,1,,,24,23,None,None,Плагины
-48,Line,,1,,,24,22,None,None,Ячейки
-49,Line,,1,,,9,29,None,None,Бэклог
-50,Line,,1,,,15,16,None,None,Коллекция
-51,Line,,1,,60,25,25,None,None,
-52,Line,,1,,,17,27,None,None,Баги
-53,Line,,1,,,17,28,None,None,Консультация
-54,Line,,1,,,16,31,None,None,layoutBuilder
-55,Line,,1,,,16,30,None,None,tvOs
-56,Line,,1,,,14,32,None,None,layoutBuilder
-57,Line,,1,,,18,33,None,None,оптимизации
-58,Line,,1,,,18,34,None,None,структура
-59,Group 1,,1,,,,,,,
-60,Group 2,,1,,,,,,,
+Id,Name,Shape Library,Page ID,Contained By,Group,Line Source,Line Destination,Source Arrow,Destination Arrow,Status,Text Area 1,Comments
+1,Document,,,,,,,,,,Mind map,
+2,Page,,,,,,,,,,Page 1,
+3,Circle,Geometric Shapes,2,,,,,,,,,
+4,Circle,Geometric Shapes,2,,,,,,,,SUPPORT,
+5,Circle,Geometric Shapes,2,,,,,,,,STABILITY,
+6,Circle,Geometric Shapes,2,,,,,,,,PLUGINS,
+7,Circle,Geometric Shapes,2,,,,,,,,PR,
+8,Circle,Geometric Shapes,2,,,,,,,,COLLECT AND FIX BUGS,
+9,Circle,Geometric Shapes,2,,,,,,,,OPTIMIZE UI TESTS,
+10,Circle,Geometric Shapes,2,,,,,,,,IDEAS,
+11,Circle,Geometric Shapes,2,,,,,,,,COMPONENTS,
+12,Circle,Geometric Shapes,2,,,,,,,,TELEGRAM POSTS,
+13,Circle,Geometric Shapes,2,,,,,,,,"MIGRATION
+OF
+PROJECTS",
+14,Circle,Geometric Shapes,2,,,,,,,,IDEAS,
+15,Circle,Geometric Shapes,2,,,,,,,,HABR/MEDIUM ARTICLES,
+16,Circle,Geometric Shapes,2,,,,,,,,IMPL,
+17,User Image,User Images,2,,,,,,,,,
+18,Circle,Geometric Shapes,2,,,,,,,,"UPDATING OF
+DOCS",
+19,Circle,Geometric Shapes,2,,,,,,,,IMPL,
+20,Circle,Geometric Shapes,2,,,,,,,,DECORATION,
+21,Circle,Geometric Shapes,2,,,,,,,,EXAMPLE,
+22,Circle,Geometric Shapes,2,,,,,,,,EXAMPLE,
+23,Circle,Geometric Shapes,2,,,,,,,,UI/UIT TESTS,
+24,Circle,Geometric Shapes,2,,,,,,,,SNAPSHOT TEST,
+25,Line,,2,,,3,4,None,None,,,
+26,Line,,2,,,3,5,None,None,,,
+27,Line,,2,,,3,6,None,None,,,
+28,Line,,2,,,3,7,None,None,,,
+29,Line,,2,,,5,9,None,None,,,
+30,Line,,2,,,5,8,None,None,,,
+31,Line,,2,,,6,10,None,None,,,
+32,Line,,2,,,3,11,None,None,,,
+33,Line,,2,,,13,4,None,None,,,
+34,Line,,2,,,15,7,None,None,,,
+35,Line,,2,,,12,7,None,None,,,
+36,Line,,2,,,14,11,None,None,,,
+37,Line,,2,,,10,16,None,None,,,
+38,Line,,2,,,18,4,None,None,,,
+39,Line,,2,,,19,14,None,None,,,
+40,Line,,2,,,20,19,None,None,,,
+41,Line,,2,,,21,19,None,None,,,
+42,Line,,2,,,16,22,None,None,,,
+43,Line,,2,,,16,23,None,None,,,
+44,Line,,2,,,24,19,None,None,,,
