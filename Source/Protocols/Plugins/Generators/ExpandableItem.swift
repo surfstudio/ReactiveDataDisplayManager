@@ -12,5 +12,5 @@ public protocol ExpandableItem: AnyObject {
 
     /// Called when the height of the cell changes
     var onHeightChanged: BaseEvent<CGFloat?> { get }
-    var animated: Bool { get set }
+    var animatedExpandable: Bool { get set }
 }

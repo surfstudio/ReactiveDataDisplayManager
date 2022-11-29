@@ -22,7 +22,7 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
     // MARK: - ExpandableItem Properties
 
     public var onHeightChanged: BaseEvent<CGFloat?> = .init()
-    public var animated: Bool = true
+    public var animatedExpandable: Bool = true
 
     // MARK: - @IBActions
 
@@ -32,8 +32,8 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
         isSmall.toggle()
     }
 
-    @IBAction func switchAnimated(_ sender: UISwitch) {
-        animated = sender.isOn
+    @IBAction private func switchAnimated(_ sender: UISwitch) {
+        animatedExpandable = sender.isOn
     }
 
 }
@@ -43,7 +43,7 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
 extension ExpandableTableCell: ConfigurableItem {
 
     func configure(with animated: Bool) {
-        self.animated = animated
+        self.animatedExpandable = animated
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
     }
