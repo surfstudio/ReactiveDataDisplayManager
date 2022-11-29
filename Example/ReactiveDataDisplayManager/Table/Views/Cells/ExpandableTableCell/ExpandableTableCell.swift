@@ -22,7 +22,7 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
     // MARK: - ExpandableItem Properties
 
     public var onHeightChanged: BaseEvent<CGFloat?> = .init()
-    public var animatedExpandable: Bool = true
+    public var animatedExpandable = true
 
     // MARK: - @IBActions
 
