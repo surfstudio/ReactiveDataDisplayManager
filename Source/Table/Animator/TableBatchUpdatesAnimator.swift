@@ -16,7 +16,9 @@ public class TableBatchUpdatesAnimator: Animator<UITableView> {
         if animated {
             collection.performBatchUpdates(operation)
         } else {
-            operation()
+            UIView.performWithoutAnimation {
+                collection.performBatchUpdates(operation)
+            }
         }
     }
 

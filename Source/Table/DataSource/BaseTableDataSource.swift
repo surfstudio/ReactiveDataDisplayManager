@@ -126,7 +126,7 @@ private extension BaseTableDataSource {
             return
         }
         expandable.onHeightChanged += { [weak self] _ in
-            self?.animator?.perform(in: tableView, animated: true) { }
+            self?.animator?.perform(in: tableView, animated: expandable.animated) { }
         }
     }
 

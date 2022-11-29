@@ -17,7 +17,11 @@ public class TableUpdatesAnimator: Animator<UITableView> {
             operation()
             collection.endUpdates()
         } else {
-            operation()
+            UIView.performWithoutAnimation {
+                collection.beginUpdates()
+                operation()
+                collection.endUpdates()
+            }
         }
     }
 }

@@ -15,7 +15,9 @@ public class CollectionBatchUpdatesAnimator: Animator<UICollectionView> {
         if animated {
             collection.performBatchUpdates(operation)
         } else {
-            operation()
+            UIView.performWithoutAnimation {
+                collection.performBatchUpdates(operation)
+            }
         }
     }
 
