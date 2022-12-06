@@ -24,7 +24,7 @@ targetTemplates:
         type: bundle.ui-testing
         platform: iOS
         deploymentTarget:
-          iOS: 10.0
+          iOS: 11.0
           tvOS: 10.0
         scheme:
           configVariants: all
