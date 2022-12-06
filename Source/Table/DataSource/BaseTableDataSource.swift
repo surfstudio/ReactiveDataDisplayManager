@@ -37,7 +37,7 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
 extension BaseTableDataSource {
 
-    open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
+    public func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
 
         modifier = TableCommonModifier(view: builder.view, animator: builder.animator)
 

@@ -32,11 +32,11 @@ extension MovablePluginDataSource: MovableDataSource {
     ///     - with: current provider with generators
     ///     - and: view object requesting this action.
     ///     - animator: an animator object for animating movement
-    open func moveRow<Collection: UIView>(at sourceIndexPath: IndexPath,
-                                          to destinationIndexPath: IndexPath,
-                                          with provider: Provider?,
-                                          and view: Collection,
-                                          animator: Animator<Collection>?) {
+    public func moveRow<Collection: UIView>(at sourceIndexPath: IndexPath,
+                                            to destinationIndexPath: IndexPath,
+                                            with provider: Provider?,
+                                            and view: Collection,
+                                            animator: Animator<Collection>?) {
         let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
         guard
             let provider = provider,
@@ -61,7 +61,7 @@ extension MovablePluginDataSource: MovableDataSource {
     /// - parameters:
     ///     - at: index path of a given item
     ///     - with: current provider with generators
-    open func canMoveRow(at indexPath: IndexPath, with provider: Provider?) -> Bool {
+    public func canMoveRow(at indexPath: IndexPath, with provider: Provider?) -> Bool {
         if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
             return generator.canMove()
         }

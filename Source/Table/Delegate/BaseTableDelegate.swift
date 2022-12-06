@@ -62,7 +62,7 @@ open class BaseTableDelegate: NSObject, TableDelegate {
 
 extension BaseTableDelegate {
 
-    open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
+    public func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
         animator = builder.animator
 
         movablePlugin = builder.movablePlugin?.delegate
