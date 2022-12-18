@@ -70,7 +70,7 @@ open class DiffableTableDataSource: UITableViewDiffableDataSource<DiffableItem, 
 @available(iOS 13.0, tvOS 13.0, *)
 extension DiffableTableDataSource {
 
-    open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
+    public func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
 
         modifier = TableDiffableModifier(view: builder.view, provider: builder.manager, dataSource: self)
 

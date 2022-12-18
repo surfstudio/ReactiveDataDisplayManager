@@ -24,7 +24,7 @@ open class TableMovablePlugin: TableFeaturePlugin {
 @available(iOS, deprecated, renamed: "MovablePlugin")
 extension TableMovablePlugin: TableMovableDelegate {
 
-    open func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
+    public func canMoveRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
         if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
             return generator.canMove()
         }
@@ -38,7 +38,7 @@ extension TableMovablePlugin: TableMovableDelegate {
 @available(iOS, deprecated, renamed: "MovablePlugin")
 extension TableMovablePlugin: TableMovableDataSource {
 
-    open func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, with provider: TableGeneratorsProvider?) {
+    public func moveRow(at sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath, with provider: TableGeneratorsProvider?) {
         let moveToTheSameSection = sourceIndexPath.section == destinationIndexPath.section
         guard
             let manager = provider as? BaseTableManager,
@@ -64,7 +64,7 @@ extension TableMovablePlugin: TableMovableDataSource {
         }
     }
 
-    open func canFocusRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
+    public func canFocusRow(at indexPath: IndexPath, with provider: TableGeneratorsProvider?) -> Bool {
         if let generator = provider?.generators[indexPath.section][indexPath.row] as? GeneratorType {
             return generator.canMove()
         }

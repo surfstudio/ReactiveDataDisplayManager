@@ -183,8 +183,8 @@ extension BaseCollectionManager {
     /// - Parameters:
     ///   - after: Generator after which new generator will be added. Must be in the DDM.
     ///   - new: Generators which you want to insert after current generator.
-    open func insert(after generator: CollectionCellGenerator,
-                     new newGenerators: [CollectionCellGenerator]) {
+    public func insert(after generator: CollectionCellGenerator,
+                       new newGenerators: [CollectionCellGenerator]) {
         guard let index = self.findGenerator(generator) else { return }
 
         let elements = newGenerators.enumerated().map { item in
@@ -201,9 +201,9 @@ extension BaseCollectionManager {
     /// A constant that identifies a relative position in the collection view (top, middle, bottom)
     /// for item when scrolling concludes. See UICollectionViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
-    open func remove(_ generator: CollectionCellGenerator,
-                     needScrollAt scrollPosition: UICollectionView.ScrollPosition?,
-                     needRemoveEmptySection: Bool) {
+    public func remove(_ generator: CollectionCellGenerator,
+                       needScrollAt scrollPosition: UICollectionView.ScrollPosition?,
+                       needRemoveEmptySection: Bool) {
         guard let index = findGenerator(generator) else { return }
         self.removeGenerator(with: index,
                              needScrollAt: scrollPosition,
