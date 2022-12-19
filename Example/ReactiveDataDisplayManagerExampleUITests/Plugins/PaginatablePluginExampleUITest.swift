@@ -9,22 +9,25 @@ import XCTest
 
 final class PaginatablePluginExampleUITest: BaseUITestCase {
 
+    private enum Constants {
+        static let timeout: TimeInterval = 3
+    }
+
     // Description: The first cell of the table is always the same
     func testTable_whenSwipeUp_thenCellsCountChanged() throws {
-        let itemsInOnePage = 17
+        let pageSize = 17
 
         setTab("Table")
         tapTableElement("Table with pagination")
 
-        sleep(3)
         let table = app.tables.firstMatch
+        XCTAssertTrue(table.waitForExistence(timeout: Constants.timeout))
 
-        while table.cells.count <= itemsInOnePage {
+        while table.cells.count <= pageSize {
             table.swipeUp()
         }
 
-        let currentPage = table.cells.count / itemsInOnePage
-        XCTAssertTrue(currentPage == 2)
+        XCTAssertGreaterThan(table.cells.count, pageSize)
     }
 
     // Description: In a collection, the first cell is the first visible cell
@@ -32,8 +35,8 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         setTab("Collection")
         tapTableElement("Collection with pagination")
 
-        sleep(3)
         let collection = app.collectionViews.firstMatch
+        XCTAssertTrue(collection.waitForExistence(timeout: Constants.timeout))
 
         while collection.cells.firstMatch.label.contains("page 0") {
             collection.swipeUp()
@@ -49,8 +52,9 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         setTab("Table")
         tapTableElement("Table with pagination")
 
-        sleep(4)
         let table = app.tables.firstMatch
+        XCTAssertTrue(table.waitForExistence(timeout: Constants.timeout))
+
 
         while !activityIndicator.isHittable {
             table.swipeUp()
@@ -65,8 +69,8 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         setTab("Collection")
         tapTableElement("Collection with pagination")
 
-        sleep(4)
         let collection = app.collectionViews.firstMatch
+        XCTAssertTrue(collection.waitForExistence(timeout: Constants.timeout))
 
         while !activityIndicator.isHittable {
             collection.swipeUp()
