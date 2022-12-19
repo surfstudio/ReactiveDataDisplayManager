@@ -25,7 +25,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
         let sourceCell = getCell(for: .collection, collectionId: collectionId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .collection, collectionId: collectionId, cellId: destinationDraggable)
-        sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .slow, thenHoldForDuration: duration)
+        sourceCell.press(forDuration: duration, thenDragTo: destinationCell)
 
         sleep(Constants.waitTime)
         let firstCell = getFirstCell(for: .collection, id: collectionId)
@@ -44,7 +44,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
         let sourceCell = getCell(for: .table, collectionId: tableId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .table, collectionId: tableId, cellId: destinationDraggable)
-        sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .slow, thenHoldForDuration: duration)
+        sourceCell.press(forDuration: duration, thenDragTo: destinationCell)
 
         sleep(Constants.waitTime)
         let firstCell = getFirstCell(for: .table, id: tableId)
