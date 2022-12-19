@@ -45,31 +45,31 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter updateAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
-    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: CollectionItemAnimation) {
-        apply(animated: updateAnimation != .none)
+    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: CollectionItemAnimation?) {
+        apply(animated: updateAnimation != nil)
     }
 
     /// Reload items with animation
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter updateAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
-    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: CollectionItemAnimation) {
-        apply(animated: updateAnimation != .none)
+    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: CollectionItemAnimation?) {
+        apply(animated: updateAnimation != nil)
     }
 
     /// Update snapshot after items replaced
     ///
     /// - parameter indexPath: **ignored**, automatically calculated using `DiffableSnapshot`
-    /// - parameter removeAnimation: **ignored**,  see insertAnimation
-    /// - parameter insertAnimation:
-    ///     - **allowed** none to disable animation
+    /// - parameter animation:
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
-    override func replace(at indexPath: IndexPath, with removeAnimation: CollectionItemAnimation, and insertAnimation: CollectionItemAnimation) {
-        apply(animated: insertAnimation != .none)
+    override func replace(at indexPath: IndexPath,
+                          with animation: Modifier<UICollectionView, CollectionItemAnimation>.AnimationGroup?) {
+        apply(animated: animation != nil)
     }
 
     /// Replace row at specified indexPath
@@ -77,35 +77,33 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameters:
     ///     - indexPaths: indexPath: **ignored**, automatically calculated using `DiffableSnapshot`
     ///     - insertIndexPaths: indexPath: **ignored**, automatically calculated using `DiffableSnapshot`
-    ///     - removeAnimation: **ignored**,  see insertAnimation
-    ///     - insertAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - animation:
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
-    open override func replace(at indexPaths: [IndexPath],
-                               on insertIndexPaths: [IndexPath],
-                               with removeAnimation: CollectionItemAnimation,
-                               and insertAnimation: CollectionItemAnimation) {
-        apply(animated: insertAnimation != .none)
+    override func replace(at indexPaths: [IndexPath],
+                          on insertIndexPaths: [IndexPath],
+                          with animation: Modifier<UICollectionView, CollectionItemAnimation>.AnimationGroup?) {
+        apply(animated: animation != nil)
     }
 
     /// Update snapshot after sections inserted
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter insertAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
-    override func insertSections(at indexPaths: IndexSet, with insertAnimation: CollectionItemAnimation) {
-        apply(animated: insertAnimation != .none)
+    override func insertSections(at indexPaths: IndexSet, with insertAnimation: CollectionItemAnimation?) {
+        apply(animated: insertAnimation != nil)
     }
 
     /// Update snapshot after items inserted
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter insertAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
-    override func insertRows(at indexPaths: [IndexPath], with insertAnimation: CollectionItemAnimation) {
-        apply(animated: insertAnimation != .none)
+    override func insertRows(at indexPaths: [IndexPath], with insertAnimation: CollectionItemAnimation?) {
+        apply(animated: insertAnimation != nil)
     }
 
     /// Remove items and section with animation
@@ -113,10 +111,10 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter section: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter removeAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
-    override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: CollectionItemAnimation) {
-        apply(animated: removeAnimation != .none)
+    override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: CollectionItemAnimation?) {
+        apply(animated: removeAnimation != nil)
     }
 
 }

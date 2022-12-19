@@ -36,9 +36,9 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     ///
     /// - parameter indexPaths: indexes of reloaded items
     /// - parameter updateAnimation: animation of reloaded items
-    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: CollectionItemAnimation) {
+    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: CollectionItemAnimation?) {
         guard let view = view else { return }
-        animator?.perform(in: view, animated: updateAnimation != .none) { [weak view] in
+        animator?.perform(in: view, animated: updateAnimation != nil) { [weak view] in
             view?.reloadItems(at: indexPaths)
         }
     }
@@ -47,9 +47,9 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     ///
     /// - parameter indexPaths: indexes of reloaded sections
     /// - parameter updateAnimation: animation of reloaded sections
-    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: CollectionItemAnimation) {
+    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: CollectionItemAnimation?) {
         guard let view = view else { return }
-        animator?.perform(in: view, animated: updateAnimation != .none) { [weak view] in
+        animator?.perform(in: view, animated: updateAnimation != nil) { [weak view] in
             view?.reloadSections(indexPaths)
         }
     }
@@ -57,11 +57,11 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     /// Replace row at specified indexPath
     ///
     /// - parameter indexPath: index of replaced row
-    /// - parameter removeAnimation: animation of removing old row
-    /// - parameter insertAnimation: animation of inserting new row
-    override func replace(at indexPath: IndexPath, with removeAnimation: CollectionItemAnimation, and insertAnimation: CollectionItemAnimation) {
+    /// - parameter animation: group of animation to remove old item and insert new
+    override func replace(at indexPath: IndexPath,
+                          with animation: Modifier<UICollectionView, CollectionItemAnimation>.AnimationGroup?) {
         guard let view = view else { return }
-        animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
+        animator?.perform(in: view, animated: animation != nil) { [weak view] in
             view?.deleteItems(at: [indexPath])
             view?.insertItems(at: [indexPath])
         }
@@ -72,14 +72,12 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     /// - parameters:
     ///     - indexPaths: array with index of removed row
     ///     - insertIndexPaths: array with index of inserted row
-    ///     - removeAnimation: animation of removing old row
-    ///     - insertAnimation: animation of inserting new row
-    open override func replace(at indexPaths: [IndexPath],
-                               on insertIndexPaths: [IndexPath],
-                               with removeAnimation: CollectionItemAnimation,
-                               and insertAnimation: CollectionItemAnimation) {
+    ///     - animation: group of animation to remove old item and insert new
+    override func replace(at indexPaths: [IndexPath],
+                          on insertIndexPaths: [IndexPath],
+                          with animation: Modifier<UICollectionView, CollectionItemAnimation>.AnimationGroup?) {
         guard let view = view else { return }
-        animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
+        animator?.perform(in: view, animated: animation != nil) { [weak view] in
             view?.deleteItems(at: indexPaths)
             view?.insertItems(at: insertIndexPaths)
         }
@@ -89,9 +87,9 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     ///
     /// - parameter indexPaths: indexes of inserted sections
     /// - parameter insertAnimation: animation of inserted sections
-    override func insertSections(at indexPaths: IndexSet, with insertAnimation: CollectionItemAnimation) {
+    override func insertSections(at indexPaths: IndexSet, with insertAnimation: CollectionItemAnimation?) {
         guard let view = view else { return }
-        animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
+        animator?.perform(in: view, animated: insertAnimation != nil) { [weak view] in
             view?.insertSections(indexPaths)
         }
     }
@@ -100,9 +98,9 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     ///
     /// - parameter indexPaths: indexes of inserted items
     /// - parameter insertAnimation: animation of inserted items
-    override func insertRows(at indexPaths: [IndexPath], with insertAnimation: CollectionItemAnimation) {
+    override func insertRows(at indexPaths: [IndexPath], with insertAnimation: CollectionItemAnimation?) {
         guard let view = view else { return }
-        animator?.perform(in: view, animated: insertAnimation != .none) { [weak view] in
+        animator?.perform(in: view, animated: insertAnimation != nil) { [weak view] in
             view?.insertItems(at: indexPaths)
         }
     }
@@ -112,9 +110,9 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     /// - parameter indexPaths: index of removed items
     /// - parameter section: index of removed sections
     /// - parameter removeAnimation: animation of removing old row
-    override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: CollectionItemAnimation) {
+    override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: CollectionItemAnimation?) {
         guard let view = view else { return }
-        animator?.perform(in: view, animated: removeAnimation != .none) { [weak view] in
+        animator?.perform(in: view, animated: removeAnimation != nil) { [weak view] in
             view?.deleteItems(at: indexPaths)
             if let section = section {
                 view?.deleteSections(section)

@@ -110,7 +110,7 @@ private extension DroppablePluginDelegate {
             else { return }
 
             provider?.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
-            modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: animation, and: animation)
+            modifier?.replace(at: [sourceIndexPath], on: [destinationIndexPath], with: (remove: animation, insert: animation))
             coordinator.drop(coordinator.items[$0.offset].dragItem, toItemAt: destinationIndexPath)
 
             cellDidChangePosition?(.init(id: generator.id, oldIndex: sourceIndexPath, newIndex: destinationIndexPath))
