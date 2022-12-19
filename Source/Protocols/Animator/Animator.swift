@@ -32,5 +32,4 @@ open class Animator<Collection: UIView> {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
-
 }

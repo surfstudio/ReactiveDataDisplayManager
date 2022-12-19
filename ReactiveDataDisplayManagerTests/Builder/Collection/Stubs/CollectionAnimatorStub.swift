@@ -21,7 +21,6 @@ final class CollectionAnimatorStub: Animator<BaseCollectionManager.CollectionTyp
         generatorsUpdated = true
     }
 
-    override func performAnimated(in collection: BaseCollectionManager.CollectionType, operation: () -> Void) {
-    }
+    override func performAnimated(in collection: BaseCollectionManager.CollectionType, operation: () -> Void) { }
 
 }
