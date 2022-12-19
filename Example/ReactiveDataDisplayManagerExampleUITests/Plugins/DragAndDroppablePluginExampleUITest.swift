@@ -10,8 +10,8 @@ import XCTest
 final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
     private enum Constants {
-        static let dragDuration = 0.3
-        static let waitTime: UInt32 = 4
+        static let dragDuration: TimeInterval = 1
+        static let waitTime: UInt32 = UInt32(dragDuration)
     }
 
     func testСollection_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
@@ -48,6 +48,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
         sleep(Constants.waitTime)
         let firstCell = getFirstCell(for: .table, id: tableId)
+
         XCTAssertTrue(firstCell.label == destinationDraggable)
     }
 
