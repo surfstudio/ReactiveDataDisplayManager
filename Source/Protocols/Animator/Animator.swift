@@ -20,7 +20,9 @@ open class Animator<Collection: UIView> {
         if animated {
             performAnimated(in: collection, operation: operation)
         } else {
-            UIView.performWithoutAnimation(operation)
+            UIView.performWithoutAnimation {
+                performAnimated(in: collection, operation: operation)
+            }
         }
     }
 
