@@ -72,7 +72,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     open func update(generators: [TableCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
-        modifier?.reloadRows(at: indexPaths, with: .none)
+        modifier?.reloadRows(at: indexPaths, with: Optional.none)
     }
 
     open func clearCellGenerators() {
@@ -89,7 +89,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
     open func remove(_ generator: TableCellGenerator,
-                     with animation: UITableView.RowAnimation,
+                     with animation: UITableView.RowAnimation?,
                      needScrollAt scrollPosition: UITableView.ScrollPosition?,
                      needRemoveEmptySection: Bool) {
         guard let index = findGenerator(generator) else { return }
@@ -115,7 +115,7 @@ extension BaseTableManager {
     }
 
     func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
-                         with animation: UITableView.RowAnimation = .automatic,
+                         with animation: UITableView.RowAnimation? = .automatic,
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 

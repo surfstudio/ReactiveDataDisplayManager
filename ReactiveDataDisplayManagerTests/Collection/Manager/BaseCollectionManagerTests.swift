@@ -234,7 +234,7 @@ final class BaseCollectionManagerTests: XCTestCase {
         collection.layoutSubviews()
 
         // when
-        ddm.remove(gen2, needScrollAt: .top, needRemoveEmptySection: true)
+        ddm.remove(gen2, needScrollAt: Optional.none, needRemoveEmptySection: true)
         ddm.remove(gen1, needScrollAt: .top, needRemoveEmptySection: true)
 
         // then
