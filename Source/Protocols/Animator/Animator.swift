@@ -17,6 +17,20 @@ open class Animator<Collection: UIView> {
     /// - parameter animated: Should execute operation animated?
     /// - parameter operation: Operation block. Might be any operation with collection.
     func perform(in collection: Collection, animated: Bool, operation: () -> Void) {
+        if animated {
+            performAnimated(in: collection, operation: operation)
+        } else {
+            UIView.performWithoutAnimation(operation)
+        }
+    }
+
+    /// Perform animation block.
+    /// For example. Insert, or delete rows of collecton
+    /// - parameter collection: Collection containing animating row
+    /// - parameter operation: Operation block. Might be any operation with collection.
+    func performAnimated(in collection: Collection, operation: () -> Void) {
         preconditionFailure("\(#function) must be overriden in child")
     }
+
+
 }
