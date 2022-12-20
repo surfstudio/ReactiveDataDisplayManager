@@ -210,7 +210,8 @@ private extension GravityTableManager {
             return IndexPath(row: index, section: section)
         }
 
-        modifier?.insertRows(at: indexPaths, with: .none)
+        guard !view.visibleCells.isEmpty else { return }
+        modifier?.insertRows(at: indexPaths, with: Optional.none)
     }
 
     func nearestIndex(for generator: CellGeneratorType, in section: Int) -> Int? {
