@@ -55,7 +55,6 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         let table = app.tables.firstMatch
         XCTAssertTrue(table.waitForExistence(timeout: Constants.timeout))
 
-
         while !activityIndicator.isHittable {
             table.swipeUp()
         }
