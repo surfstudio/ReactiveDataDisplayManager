@@ -10,6 +10,8 @@ import UIKit
 /// Helper class to modify view subviews or cells
 open class Modifier<View: UIView, Animation> {
 
+    public typealias AnimationGroup = (remove: Animation, insert: Animation)
+
     public private(set) weak var view: View?
 
     /// - parameter view: View which contains subviews or cells
@@ -26,7 +28,7 @@ open class Modifier<View: UIView, Animation> {
     ///
     /// - parameter indexPaths: location of subviews to update
     /// - parameter updateAnimation: animation of update  operation
-    open func reloadRows(at indexPaths: [IndexPath], with updateAnimation: Animation) {
+    open func reloadRows(at indexPaths: [IndexPath], with updateAnimation: Animation?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
@@ -34,30 +36,27 @@ open class Modifier<View: UIView, Animation> {
     ///
     /// - parameter indexPaths: location of sections to update
     /// - parameter updateAnimation: animation of update  operation
-    open func reloadSections(at indexPaths: IndexSet, with updateAnimation: Animation) {
+    open func reloadSections(at indexPaths: IndexSet, with updateAnimation: Animation?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
     /// Replace specific subview to new subview with animation
     ///
     /// - parameter indexPath: location of subview to replace
-    /// - parameter removeAnimation: animation of remove operation
-    /// - parameter insertAnimation: animation of insert operation
-    open func replace(at indexPath: IndexPath, with removeAnimation: Animation, and insertAnimation: Animation) {
+    /// - parameter animation: group of animations to remove and insert operation
+    open func replace(at indexPath: IndexPath, with animation: AnimationGroup?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
     /// Replace row at specified indexPath
     ///
     /// - parameters:
-    ///     - indexPaths: array with index of removed row
-    ///     - insertIndexPaths: array with index of inserted row
-    ///     - removeAnimation: animation of removing old row
-    ///     - insertAnimation: animation of inserting new row
+    ///     - parameter indexPaths: array with index of removed row
+    ///     - parameter insertIndexPaths: array with index of inserted row
+    ///     - parameter animation: group of animations to remove and insert operation
     open func replace(at indexPaths: [IndexPath],
                       on insertIndexPaths: [IndexPath],
-                      with removeAnimation: Animation,
-                      and insertAnimation: Animation) {
+                      with animation: AnimationGroup?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
@@ -65,7 +64,7 @@ open class Modifier<View: UIView, Animation> {
     ///
     /// - parameter indexPaths: location of sections to insert
     /// - parameter insertAnimation: animation of insert operation
-    open func insertSections(at indexPaths: IndexSet, with insertAnimation: Animation) {
+    open func insertSections(at indexPaths: IndexSet, with insertAnimation: Animation?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
@@ -73,7 +72,7 @@ open class Modifier<View: UIView, Animation> {
     ///
     /// - parameter indexPaths: location of subviews to insert
     /// - parameter insertAnimation: animation of insert operation
-    open func insertRows(at indexPaths: [IndexPath], with insertAnimation: Animation) {
+    open func insertRows(at indexPaths: [IndexPath], with insertAnimation: Animation?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
@@ -81,7 +80,7 @@ open class Modifier<View: UIView, Animation> {
     ///
     /// - parameter indexPaths: location of subviews to remove
     /// - parameter removeAnimation: animation of remove operation
-    open func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: Animation) {
+    open func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: Animation?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 }

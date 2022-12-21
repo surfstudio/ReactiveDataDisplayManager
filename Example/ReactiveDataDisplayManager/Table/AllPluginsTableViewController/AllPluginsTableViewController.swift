@@ -104,7 +104,7 @@ private extension AllPluginsTableViewController {
 
     func addExpandableSection() {
         addHeaderGenerator(with: "Expandable")
-        let generator = ExpandableTableCell.rddm.baseGenerator(with: ())
+        let generator = ExpandableTableCell.rddm.baseGenerator(with: true)
         adapter.addCellGenerator(generator)
     }
 

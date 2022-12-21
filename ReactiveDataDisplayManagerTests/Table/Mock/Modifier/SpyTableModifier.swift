@@ -18,11 +18,11 @@ final class SpyTableModifier: Modifier<UITableView, UITableView.RowAnimation> {
 
     // MARK: - Modifier
 
-    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
+    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation?) {
         sectionWasReloaded = true
     }
 
-    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: UITableView.RowAnimation) {
+    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: UITableView.RowAnimation?) {
         lastReloadedRows = indexPaths
     }
 

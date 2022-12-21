@@ -45,68 +45,64 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter updateAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
-    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: UITableView.RowAnimation) {
-        apply(animated: updateAnimation != .none)
+    override func reloadRows(at indexPaths: [IndexPath], with updateAnimation: UITableView.RowAnimation?) {
+        apply(animated: updateAnimation != nil)
     }
 
     /// Reload rows with animation
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter updateAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
-    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation) {
-        apply(animated: updateAnimation != .none)
+    override func reloadSections(at indexPaths: IndexSet, with updateAnimation: UITableView.RowAnimation?) {
+        apply(animated: updateAnimation != nil)
     }
 
     /// Update snapshot after rows replaced
     ///
     /// - parameter indexPath: **ignored**, automatically calculated using `DiffableSnapshot`
-    /// - parameter removeAnimation: **ignored**,  see insertAnimation
-    /// - parameter insertAnimation:
-    ///     - **allowed** none to disable animation
+    /// - parameter animation:
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     override func replace(at indexPath: IndexPath,
-                          with removeAnimation: UITableView.RowAnimation,
-                          and insertAnimation: UITableView.RowAnimation) {
-        apply(animated: insertAnimation != .none)
+                          with animation: Modifier<UITableView, UITableView.RowAnimation>.AnimationGroup?) {
+        apply(animated: animation != nil)
     }
 
     /// Update snapshot after rows replaced
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter insertIndexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
-    /// - parameter removeAnimation: **ignored**,  see insertAnimation
-    /// - parameter insertAnimation:
-    ///     - **allowed** none to disable animation
+    /// - parameter animation:
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
     open override func replace(at indexPaths: [IndexPath],
                                on insertIndexPaths: [IndexPath],
-                               with removeAnimation: UITableView.RowAnimation,
-                               and insertAnimation: UITableView.RowAnimation) {
-        apply(animated: insertAnimation != .none)
+                               with animation: Modifier<UITableView, UITableView.RowAnimation>.AnimationGroup?) {
+        apply(animated: animation != nil)
     }
 
     /// Update snapshot after sections inserted
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter insertAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
-    override func insertSections(at indexPaths: IndexSet, with insertAnimation: UITableView.RowAnimation) {
-        apply(animated: insertAnimation != .none)
+    override func insertSections(at indexPaths: IndexSet, with insertAnimation: UITableView.RowAnimation?) {
+        apply(animated: insertAnimation != nil)
     }
 
     /// Update snapshot after rows inserted
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter insertAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
-    override func insertRows(at indexPaths: [IndexPath], with insertAnimation: UITableView.RowAnimation) {
-        apply(animated: insertAnimation != .none)
+    override func insertRows(at indexPaths: [IndexPath], with insertAnimation: UITableView.RowAnimation?) {
+        apply(animated: insertAnimation != nil)
     }
 
     /// Remove rows and section with animation
@@ -114,10 +110,10 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter section: **ignored**, automatically calculated using `DiffableSnapshot`
     /// - parameter removeAnimation:
-    ///     - **allowed** none to disable animation
+    ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
-    override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: UITableView.RowAnimation) {
-        apply(animated: removeAnimation != .none)
+    override func removeRows(at indexPaths: [IndexPath], and section: IndexSet?, with removeAnimation: UITableView.RowAnimation?) {
+        apply(animated: removeAnimation != nil)
     }
 
 }

@@ -16,6 +16,16 @@ final class SpyUITableView: UITableView {
     var lastReloadedRows: [IndexPath] = []
     var sectionWasReloaded = false
 
+    // MARK: - Helper methods
+
+    /// Special method to force layout, to recalculate frames and make scrolling methods work
+    func forceLayout() {
+        setNeedsLayout()
+        layoutIfNeeded()
+    }
+
+    // MARK: - Spy methods
+
     override func reloadData() {
         super.reloadData()
         reloadDataWasCalled = true

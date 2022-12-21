@@ -21,4 +21,6 @@ final class TableAnimatorStub: Animator<BaseTableManager.CollectionType> {
         generatorsUpdated = true
     }
 
+    override func performAnimated(in collection: BaseTableManager.CollectionType, operation: () -> Void) { }
+
 }
