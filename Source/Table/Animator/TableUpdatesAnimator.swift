@@ -11,13 +11,10 @@ import UIKit
 /// UITableView Animator based on beginUpdates and endUpdates
 public class TableUpdatesAnimator: Animator<UITableView> {
 
-    public override func perform(in collection: UITableView, animated: Bool, operation: () -> Void) {
-        if animated {
-            collection.beginUpdates()
-            operation()
-            collection.endUpdates()
-        } else {
-            operation()
-        }
+    public override func performAnimated(in collection: UITableView, operation: () -> Void) {
+        collection.beginUpdates()
+        operation()
+        collection.endUpdates()
     }
+
 }

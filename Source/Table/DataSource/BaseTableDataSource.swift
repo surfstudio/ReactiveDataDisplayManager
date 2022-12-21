@@ -37,7 +37,7 @@ open class BaseTableDataSource: NSObject, TableDataSource {
 
 extension BaseTableDataSource {
 
-    open func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
+    public func configure<T>(with builder: TableBuilder<T>) where T: BaseTableManager {
 
         modifier = TableCommonModifier(view: builder.view, animator: builder.animator)
 
@@ -126,7 +126,7 @@ private extension BaseTableDataSource {
             return
         }
         expandable.onHeightChanged += { [weak self] _ in
-            self?.animator?.perform(in: tableView, animated: true) { }
+            self?.animator?.perform(in: tableView, animated: expandable.animatedExpandable) { }
         }
     }
 

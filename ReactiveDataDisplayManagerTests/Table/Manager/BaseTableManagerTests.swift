@@ -154,8 +154,10 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen3, gen4])
         ddm.forceRefill()
 
+        table.forceLayout()
+
         // when
-        ddm.remove(gen3, with: .none, needScrollAt: .top, needRemoveEmptySection: false)
+        ddm.remove(gen3, with: nil, needScrollAt: .top, needRemoveEmptySection: false)
         ddm.forceRefill()
 
         // then
@@ -173,8 +175,10 @@ final class BaseTableManagerTests: XCTestCase {
         ddm.addCellGenerators([gen3, gen4])
         ddm.forceRefill()
 
+        table.forceLayout()
+
         // when
-        ddm.remove(gen1, with: .none, needScrollAt: nil, needRemoveEmptySection: false)
+        ddm.remove(gen1, with: nil, needScrollAt: nil, needRemoveEmptySection: false)
         ddm.forceRefill()
 
         // then

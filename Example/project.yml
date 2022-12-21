@@ -1,7 +1,7 @@
 
 include:
   - path: targets/template.yml
-    relativePaths: false
+    relativePaths: true
 
 
 # Название проекта

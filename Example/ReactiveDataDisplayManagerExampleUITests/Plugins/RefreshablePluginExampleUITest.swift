@@ -10,23 +10,28 @@ import UIKit
 
 final class RefreshablePluginExampleUITest: BaseUITestCase {
 
+    private enum Constants {
+        static let dragDuration: TimeInterval = 0.5
+        static let timeout: TimeInterval = 3
+    }
+
     func testTable_whenScrollDown_thenShowRefreshControl() throws {
         setTab("Table")
         tapTableElement("Table with refresh control")
 
-        let table = app.tables["Table_with_refresh_control"]
         let cell = getFirstCell(for: .table, id: "Table_with_refresh_control")
         let refreshControl = app.otherElements["RefreshableTableViewController_RefreshControl"]
 
-        let dragBegin = table.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0))
-        let dragEnd = table.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        dragBegin.press(forDuration: 0.1, thenDragTo: dragEnd)
+        let start = cell.coordinate(withNormalizedOffset: .zero)
+        let end = cell.coordinate(withNormalizedOffset: .init(dx: 0, dy: 6))
 
-        XCTAssertTrue(refreshControl.exists)
+        start.press(forDuration: Constants.dragDuration,
+                    thenDragTo: end)
+
+        XCTAssertTrue(refreshControl.waitForExistence(timeout: Constants.timeout))
         XCTAssertTrue(cell.label == "Cell 1")
 
-        sleep(3)
-        XCTAssertFalse(refreshControl.exists)
+        XCTAssertTrue(refreshControl.waitForNonExistence(timeout: Constants.timeout))
         XCTAssertTrue(cell.label == "Refreshing 1")
     }
 
@@ -34,19 +39,19 @@ final class RefreshablePluginExampleUITest: BaseUITestCase {
         setTab("Collection")
         tapTableElement("Collection list with refreshing")
 
-        let collection = app.collectionViews["Refrashable_collection_list"]
         let cell = getFirstCell(for: .collection, id: "Refrashable_collection_list")
         let refreshControl = app.otherElements["RefreshableCollectionViewController_RefreshControl"]
 
-        let dragBegin = collection.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0))
-        let dragEnd = collection.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-        dragBegin.press(forDuration: 0.1, thenDragTo: dragEnd)
+        let start = cell.coordinate(withNormalizedOffset: .init(dx: 10, dy: 10))
+        let end = cell.coordinate(withNormalizedOffset: .init(dx: 10, dy: 20))
 
-        XCTAssertTrue(refreshControl.exists)
+        start.press(forDuration: Constants.dragDuration,
+                    thenDragTo: end)
+
+        XCTAssertTrue(refreshControl.waitForExistence(timeout: Constants.timeout))
         XCTAssertTrue(cell.label == "Item 1")
 
-        sleep(3)
-        XCTAssertFalse(refreshControl.exists)
+        XCTAssertTrue(refreshControl.waitForNonExistence(timeout: Constants.timeout))
         XCTAssertTrue(cell.label == "Refreshing 1")
     }
 

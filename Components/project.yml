@@ -14,8 +14,8 @@ targets:
       type: framework
       platform: [iOS, tvOS]
       deploymentTarget:
-        iOS: 10.0
-        tvOS: 10.0
+        iOS: 11.0
+        tvOS: 11.0
       scheme:
         configVariants: all
         testTargets:
@@ -47,8 +47,8 @@ targets:
       type: bundle.unit-test
       platform: [iOS, tvOS]
       deploymentTarget:
-        iOS: 10.0
-        tvOS: 10.0
+        iOS: 11.0
+        tvOS: 11.0
       scheme:
         configVariants: all
       sources:

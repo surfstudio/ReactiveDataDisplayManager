@@ -324,7 +324,7 @@ public class ManualTableManager: BaseTableManager {
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-        modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
+        modifier?.replace(at: indexPath, with: (remove: removeAnimation, insert: insertAnimation))
     }
 
     /// Swaps two generators between each other.

@@ -124,7 +124,7 @@ open class GravityTableManager: BaseTableManager {
 
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
         sections.registerAllIfNeeded(with: view, using: registrator)
-        modifier?.replace(at: indexPath, with: removeAnimation, and: insertAnimation)
+        modifier?.replace(at: indexPath, with: (remove: removeAnimation, insert: insertAnimation))
     }
 
     open func replace(header: HeaderGeneratorType, with animation: UITableView.RowAnimation = .fade) {
@@ -185,7 +185,8 @@ private extension GravityTableManager {
         }
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-        modifier?.insertRows(at: indexPaths, with: .none)
+		guard !view.visibleCells.isEmpty else { return }        
+        modifier?.insertRows(at: indexPaths, with: Optional.none)
     }
 
     func nearestIndex(for generator: GeneratorType, in section: Int) -> Int? {
