@@ -13,6 +13,26 @@ public protocol ProgressDisplayableItem {
     /// - parameter isLoading: `true` if want to animate loading progress in `progressView`
     func showProgress(_ isLoading: Bool)
 
+    /// - parameter error: some error got while loading of next page.
+    ///  You should transfer this error into UI representation.
+    /// - Warning: - default implementation is empty.
+    func showError(_ error: Error?)
+
+    /// - parameter action: bind to `PaginatableOutput.loadNextPage` inside plugin
+    ///  - Implement this method if you have retry button on your error-state view.
+    /// - Warning: - default implementation is empty.
+    func setOnRetry(action: @escaping () -> Void)
+
+}
+
+// MARK: - Default ProgressDisplayableItem
+
+extension ProgressDisplayableItem {
+
+    func showError(_ error: Error?) { }
+
+    func setOnRetry(action: @escaping () -> Void) { }
+
 }
 
 /// Input signals to control visibility of progressView in footer
@@ -27,6 +47,10 @@ public protocol PaginatableInput: AnyObject {
     ///
     /// - parameter isLoading: `true` if want to show `progressView` in footer
     func updateProgress(isLoading: Bool)
+
+    /// - parameter error: some error got while loading of next page.
+    ///  You should transfer this error into UI representation.
+    func updateError(_ error: Error?)
 }
 
 /// Output signals for loading next page of content
@@ -86,6 +110,12 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
         self.tableView = manager?.view
         self.canIterate = false
         self.output?.onPaginationInitialized(with: self)
+        self.progressView.setOnRetry { [weak self] in
+            guard let input = self, let output = self?.output else {
+                return
+            }
+            output.loadNextPage(with: input)
+        }
     }
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
@@ -115,6 +145,10 @@ extension TablePaginatablePlugin: PaginatableInput {
 
     public func updateProgress(isLoading: Bool) {
         progressView.showProgress(isLoading)
+    }
+
+    public func updateError(_ error: Error?) {
+        progressView.showError(error)
     }
 
     public func updatePagination(canIterate: Bool) {
