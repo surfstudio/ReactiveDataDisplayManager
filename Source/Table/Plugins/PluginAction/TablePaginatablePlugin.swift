@@ -82,6 +82,8 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
     private let progressView: ProgressView
     private weak var output: PaginatableOutput?
 
+    private var isLoading: Bool = false
+
     private weak var tableView: UITableView?
 
     /// Property which indicating availability of pages
@@ -129,7 +131,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
             let lastCellInLastSectionIndex = generators[lastSectionIndex].count - 1
 
             let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
-            if indexPath == lastCellIndexPath && canIterate {
+            if indexPath == lastCellIndexPath && canIterate && !isLoading {
                 output?.loadNextPage(with: self)
             }
         default:
@@ -144,6 +146,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
 extension TablePaginatablePlugin: PaginatableInput {
 
     public func updateProgress(isLoading: Bool) {
+        self.isLoading = isLoading
         progressView.showProgress(isLoading)
     }
 
