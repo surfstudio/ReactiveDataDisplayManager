@@ -21,7 +21,16 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         tapTableElement("Table with pagination")
 
         let table = app.tables.firstMatch
+        let retryButton = app.buttons["Retry"]
+
         XCTAssertTrue(table.waitForExistence(timeout: Constants.timeout))
+        XCTAssertTrue(retryButton.waitForExistence(timeout: Constants.timeout * 2))
+
+        while !retryButton.isHittable {
+            table.swipeUp()
+        }
+
+        retryButton.tap()
 
         while table.cells.count <= pageSize {
             table.swipeUp()
