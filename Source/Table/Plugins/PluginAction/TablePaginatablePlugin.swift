@@ -82,7 +82,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
     private let progressView: ProgressView
     private weak var output: PaginatableOutput?
 
-    private var isLoading: Bool
+    private var isLoading: Bool = false
 
     private weak var tableView: UITableView?
 
