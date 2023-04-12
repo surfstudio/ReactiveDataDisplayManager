@@ -101,6 +101,10 @@ extension CollectionPaginatablePlugin: PaginatableInput {
         progressView.showProgress(isLoading)
     }
 
+    public func updateError(_ error: Error?) {
+        progressView.showError(error)
+    }
+
     public func updatePagination(canIterate: Bool) {
         self.canIterate = canIterate
     }

@@ -21,7 +21,16 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         tapTableElement("Table with pagination")
 
         let table = app.tables.firstMatch
+        let retryButton = app.buttons["Retry"]
+
         XCTAssertTrue(table.waitForExistence(timeout: Constants.timeout))
+        XCTAssertTrue(retryButton.waitForExistence(timeout: Constants.timeout * 2))
+
+        while !retryButton.isHittable {
+            table.swipeUp()
+        }
+
+        retryButton.tap()
 
         while table.cells.count <= pageSize {
             table.swipeUp()
@@ -46,8 +55,9 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         XCTAssertTrue(cell.label.contains("page 1"))
     }
 
-    func testTable_whenSwipeUp_thenHittableActivityIndicator() {
+    func testTable_whenSwipeUp_thenPaginatorErrorAppear_thenHittableActivityIndicator() {
         let activityIndicator = app.activityIndicators["PaginatorView"]
+        let retryButton = app.buttons["Retry"]
 
         setTab("Table")
         tapTableElement("Table with pagination")
@@ -55,9 +65,15 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         let table = app.tables.firstMatch
         XCTAssertTrue(table.waitForExistence(timeout: Constants.timeout))
 
-        while !activityIndicator.isHittable {
+        XCTAssertTrue(retryButton.waitForExistence(timeout: Constants.timeout * 2))
+
+        while !retryButton.isHittable {
             table.swipeUp()
         }
+
+        XCTAssertFalse(activityIndicator.isHittable)
+
+        retryButton.tap()
 
         XCTAssertTrue(activityIndicator.isHittable)
     }
