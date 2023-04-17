@@ -25,6 +25,8 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
     private let progressView: ProgressView
     private weak var output: PaginatableOutput?
 
+    private var isLoading: Bool = false
+
     private weak var collectionView: UICollectionView?
 
     /// Property which indicating availability of pages
@@ -63,6 +65,12 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
         collectionView = manager?.view
         canIterate = false
         output?.onPaginationInitialized(with: self)
+        self.progressView.setOnRetry { [weak self] in
+            guard let input = self, let output = self?.output else {
+                return
+            }
+            output.loadNextPage(with: input)
+        }
     }
 
     public override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
@@ -76,7 +84,7 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
             let lastCellInLastSectionIndex = sections[lastSectionIndex].generators.count - 1
 
             let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
-            guard indexPath == lastCellIndexPath, canIterate else {
+            guard indexPath == lastCellIndexPath, canIterate, !isLoading else {
                 return
             }
 
@@ -98,7 +106,12 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
 extension CollectionPaginatablePlugin: PaginatableInput {
 
     public func updateProgress(isLoading: Bool) {
+        self.isLoading = isLoading
         progressView.showProgress(isLoading)
+    }
+
+    public func updateError(_ error: Error?) {
+        progressView.showError(error)
     }
 
     public func updatePagination(canIterate: Bool) {

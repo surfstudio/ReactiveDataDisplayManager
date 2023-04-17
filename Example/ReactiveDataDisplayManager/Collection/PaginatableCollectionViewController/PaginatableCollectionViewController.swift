@@ -33,6 +33,7 @@ final class PaginatableCollectionViewController: UIViewController {
 
     private weak var paginatableInput: PaginatableInput?
 
+    private var isFirstPageLoading = true
     private var currentPage = 0
 
     // MARK: - UIViewController
@@ -102,6 +103,15 @@ private extension PaginatableCollectionViewController {
         return TitleCollectionViewCell.rddm.baseGenerator(with: title)
     }
 
+    func canFillNext() -> Bool {
+        if isFirstPageLoading {
+            isFirstPageLoading.toggle()
+            return false
+        } else {
+            return true
+        }
+    }
+
     func fillNext() -> Bool {
         currentPage += 1
 
@@ -136,10 +146,16 @@ extension PaginatableCollectionViewController: PaginatableOutput {
         input.updateProgress(isLoading: true)
 
         delay(.now() + .seconds(3)) { [weak self, weak input] in
-            let canIterate = self?.fillNext() ?? false
+            let canFillNext = self?.canFillNext() ?? false
+            if canFillNext {
+                let canIterate = self?.fillNext() ?? false
 
-            input?.updateProgress(isLoading: false)
-            input?.updatePagination(canIterate: canIterate)
+                input?.updateProgress(isLoading: false)
+                input?.updatePagination(canIterate: canIterate)
+            } else {
+                input?.updateProgress(isLoading: false)
+                input?.updateError(SampleError.sample)
+            }
         }
     }
 
