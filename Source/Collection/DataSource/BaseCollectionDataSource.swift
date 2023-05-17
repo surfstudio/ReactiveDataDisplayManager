@@ -151,4 +151,16 @@ private extension BaseCollectionDataSource {
         }
     }
 
+    func checkIfNumberOfCellsMatches(for collectionView: UICollectionView) -> Bool {
+        let numberOfSectionsAreEqual = collectionView.numberOfSections == provider?.sections.count
+        guard numberOfSectionsAreEqual else {
+            return false
+        }
+        let numberOfCellsAreEqual = (0...(collectionView.numberOfSections - 1))
+            .map { provider?.generators[$0].count == collectionView.numberOfItems(inSection: $0) }
+            .allSatisfy { $0 == true }
+
+        return numberOfCellsAreEqual
+    }
+
 }
