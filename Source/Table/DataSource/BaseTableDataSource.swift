@@ -125,9 +125,24 @@ private extension BaseTableDataSource {
         guard let expandable = cell as? ExpandableItem else {
             return
         }
-        expandable.onHeightChanged += { [weak self] _ in
+        expandable.onHeightChanged += { [weak self, weak tableView] _ in
+            guard let tableView = tableView, self?.checkIfNumberOfCellsMatches(for: tableView) == true else {
+                return
+            }
             self?.animator?.perform(in: tableView, animated: expandable.animatedExpandable) { }
         }
+    }
+
+    func checkIfNumberOfCellsMatches(for tableView: UITableView) -> Bool {
+        let numberOfSectionsAreEqual = tableView.numberOfSections == provider?.generators.count
+        guard numberOfSectionsAreEqual else {
+            return false
+        }
+        let numberOfCellsAreEqual = (0...(tableView.numberOfSections - 1))
+            .map { provider?.generators[$0].count == tableView.numberOfRows(inSection: $0) }
+            .allSatisfy { $0 == true }
+
+        return numberOfCellsAreEqual
     }
 
 }
