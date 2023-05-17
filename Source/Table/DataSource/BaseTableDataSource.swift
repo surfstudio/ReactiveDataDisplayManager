@@ -134,7 +134,7 @@ private extension BaseTableDataSource {
     }
 
     func checkIfNumberOfCellsMatches(for tableView: UITableView) -> Bool {
-        let numberOfSectionsAreEqual = tableView.numberOfSections == provider?.generators.count
+        let numberOfSectionsAreEqual = tableView.numberOfSections == provider?.sections.count
         guard numberOfSectionsAreEqual else {
             return false
         }
