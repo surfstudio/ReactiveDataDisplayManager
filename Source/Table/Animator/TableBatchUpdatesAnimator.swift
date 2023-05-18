@@ -12,8 +12,8 @@ import UIKit
 @available(iOS 11.0, tvOS 11.0, *)
 public class TableBatchUpdatesAnimator: Animator<UITableView> {
 
-    public override func performAnimated(in collection: UITableView, operation: () -> Void) {
-        collection.performBatchUpdates(operation)
+    public override func performAnimated(in collection: UITableView, operation: Operation?) {
+        collection.performBatchUpdates(operation ?? {})
     }
 
 }
