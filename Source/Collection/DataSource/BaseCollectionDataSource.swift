@@ -39,7 +39,7 @@ extension BaseCollectionDataSource {
 
         modifier = CollectionCommonModifier(view: builder.view, animator: builder.animator)
 
-        animator = builder.animator
+        animator = CollectionSafeAnimator(baseAnimator: builder.animator, generatorsProvider: builder.manager)
         movablePlugin = builder.movablePlugin?.dataSource
         collectionPlugins = builder.collectionPlugins
         itemTitleDisplayablePlugin = builder.itemTitleDisplayablePlugin
@@ -147,23 +147,11 @@ private extension BaseCollectionDataSource {
             return
         }
         expandable.onHeightChanged += { [weak self, weak collectionView] _ in
-            guard let collectionView = collectionView, self?.checkIfNumberOfCellsMatches(for: collectionView) == true else {
+            guard let collectionView = collectionView else {
                 return
             }
-            self?.animator?.perform(in: collectionView, animated: true) { }
+            self?.animator?.perform(in: collectionView, animated: true, operation: nil)
         }
-    }
-
-    func checkIfNumberOfCellsMatches(for collectionView: UICollectionView) -> Bool {
-        let numberOfSectionsAreEqual = collectionView.numberOfSections == provider?.sections.count
-        guard numberOfSectionsAreEqual else {
-            return false
-        }
-        let numberOfCellsAreEqual = (0...(collectionView.numberOfSections - 1))
-            .map { provider?.generators[$0].count == collectionView.numberOfItems(inSection: $0) }
-            .allSatisfy { $0 == true }
-
-        return numberOfCellsAreEqual
     }
 
 }

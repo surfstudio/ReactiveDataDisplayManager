@@ -11,12 +11,14 @@ import UIKit
 /// Entity to animate specific collection operations like insert or remove rows
 open class Animator<Collection: UIView> {
 
+    public typealias Operation = () -> Void
+
     /// Perform animation block.
     /// For example. Insert, or delete rows of collecton
     /// - parameter collection: Collection containing animating rows
     /// - parameter animated: Should execute operation animated?
     /// - parameter operation: Operation block. Might be any operation with collection.
-    func perform(in collection: Collection, animated: Bool, operation: () -> Void) {
+    func perform(in collection: Collection, animated: Bool, operation: Operation?) {
         if animated {
             performAnimated(in: collection, operation: operation)
         } else {
@@ -30,7 +32,7 @@ open class Animator<Collection: UIView> {
     /// For example. Insert, or delete rows of collecton
     /// - parameter collection: Collection containing animating row
     /// - parameter operation: Operation block. Might be any operation with collection.
-    func performAnimated(in collection: Collection, operation: () -> Void) {
+    func performAnimated(in collection: Collection, operation: Operation?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
