@@ -68,8 +68,13 @@ final class AllPluginsTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.accessibilityIdentifier = "main_table"
         fillAdapter()
         updateBarButtonItem(with: Constants.startEditing)
+
+        scheduleIfNeeded { [weak self] in
+            self?.insertRandomCell()
+        }
     }
 
 }
@@ -80,6 +85,10 @@ private extension AllPluginsTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+
+        adapter.clearCellGenerators()
+        adapter.clearHeaderGenerators()
+
         addExpandableSection()
         addSelectableSection()
         addFoldableSection()
@@ -90,10 +99,22 @@ private extension AllPluginsTableViewController {
         // Tell adapter that we've changed generators
         adapter.forceRefill()
     }
-
+    
     func updateBarButtonItem(with title: String) {
         let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeTableEditing))
         navigationItem.rightBarButtonItem = button
+    }
+
+    func insertRandomCell() {
+        guard let sectionGenerator = adapter.sections
+            .compactMap({ $0 as? SectionTitleHeaderGenerator })
+            .first(where: { $0.title == "Expandable" }),
+                let title = Constants.titles.randomElement()?
+            .appending("_generated_\(Int.random(in: 0...100))")
+        else {
+            return
+        }
+        adapter.insertAtBeginning(to: sectionGenerator, new: [createSelectableGenerator(with: title)])
     }
 
     @objc
@@ -114,14 +135,20 @@ private extension AllPluginsTableViewController {
 
         for titleStr in Constants.titles {
             // Create generator
-            let generator = TitleTableViewCell.rddm.baseGenerator(with: titleStr)
-            generator.didSelectEvent += {
-                debugPrint("\(titleStr) selected")
-            }
+            let generator = createSelectableGenerator(with: titleStr)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)
         }
+    }
+
+    func createSelectableGenerator(with title: String) -> TableCellGenerator {
+        let generator = TitleTableViewCell.rddm.baseGenerator(with: title)
+        generator.didSelectEvent += {
+            debugPrint("\(title) selected")
+        }
+
+        return generator
     }
 
     /// Method allow add header and foldable cells into adapter
