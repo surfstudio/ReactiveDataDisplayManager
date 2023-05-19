@@ -13,7 +13,7 @@ import UIKit
 public class TableBatchUpdatesAnimator: Animator<UITableView> {
 
     public override func performAnimated(in collection: UITableView, operation: Operation?) {
-        collection.performBatchUpdates(operation ?? {})
+        collection.performBatchUpdates(operation ?? { })
     }
 
 }

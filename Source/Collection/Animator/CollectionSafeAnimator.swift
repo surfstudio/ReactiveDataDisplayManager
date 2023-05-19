@@ -7,8 +7,8 @@
 
 import UIKit
 
-/// UITableView Animator wrapper created to avoid crashing on empty operation in parallel with updates of data source
-public class CollectionSafeAnimator: Animator<UICollectionView> {
+/// UICollectionView Animator wrapper created to avoid crashing on empty operation in parallel with updates of data source
+public final class CollectionSafeAnimator: Animator<UICollectionView> {
 
     private let baseAnimator: Animator<UICollectionView>
     private weak var generatorsProvider: CollectionGeneratorsProvider?
@@ -19,7 +19,7 @@ public class CollectionSafeAnimator: Animator<UICollectionView> {
     }
 
     public override func performAnimated(in collection: UICollectionView, operation: Operation?) {
-        if (operation == nil) {
+        if operation == nil {
             let numberOfSectionsAreEqual = collection.numberOfSections == generatorsProvider?.sections.count
             guard numberOfSectionsAreEqual else {
                 return
