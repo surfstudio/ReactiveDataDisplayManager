@@ -105,16 +105,28 @@ private extension AllPluginsTableViewController {
         navigationItem.rightBarButtonItem = button
     }
 
+    /// Use this method for UI stress test only
     func insertRandomCell() {
-        guard let sectionGenerator = adapter.sections
+        guard let (sectionIndex, sectionGenerator) = adapter.sections
             .compactMap({ $0 as? SectionTitleHeaderGenerator })
-            .first(where: { $0.title == "Expandable" }),
-                let title = Constants.titles.randomElement()?
-            .appending("_generated_\(Int.random(in: 0...100))")
+            .enumerated()
+            .first(where: { $0.element.title == "Selectable" })
         else {
             return
         }
-        adapter.insertAtBeginning(to: sectionGenerator, new: [createSelectableGenerator(with: title)])
+
+
+        let oldIndexes = adapter.generators[sectionIndex].enumerated().map { IndexPath(row: $0.offset, section: sectionIndex) }
+
+        adapter.generators[sectionIndex].removeAll()
+
+        let titles = Bool.random() ? ["One", "Two", "Three"] : ["Four", "Five"]
+        let generators = titles.map(createSelectableGenerator(with:))
+        adapter.generators[sectionIndex].append(contentsOf: generators)
+
+        let indexes = generators.enumerated().map { IndexPath(row: $0.offset, section: sectionIndex) }
+
+        adapter.modifier?.replace(at: oldIndexes, on: indexes, with: nil)
     }
 
     @objc

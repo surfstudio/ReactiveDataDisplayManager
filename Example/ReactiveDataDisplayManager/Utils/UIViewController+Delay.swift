@@ -8,10 +8,10 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
+extension UIResponder {
 
     func delay(_ deadline: DispatchTime, completion: @escaping () -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: deadline) {
+        DispatchQueue.global(qos: .utility).asyncAfter(deadline: deadline) {
             DispatchQueue.main.async {
                 completion()
             }
@@ -22,15 +22,15 @@ extension UIViewController {
     #if DEBUG
         if CommandLine.arguments.contains("-stress") {
             delay(.now() + .milliseconds(500) + .milliseconds(10), completion: closure)
-            delay(.now() + .milliseconds(500) + .milliseconds(50), completion: closure)
-            delay(.now() + .milliseconds(500) + .milliseconds(100), completion: closure)
-            delay(.now() + .milliseconds(500) + .milliseconds(150), completion: closure)
-            delay(.now() + .milliseconds(500) + .milliseconds(200), completion: closure)
-            delay(.now() + .seconds(1) + .milliseconds(10), completion: closure)
-            delay(.now() + .seconds(1) + .milliseconds(50), completion: closure)
-            delay(.now() + .seconds(1) + .milliseconds(100), completion: closure)
-            delay(.now() + .seconds(1) + .milliseconds(150), completion: closure)
+            delay(.now() + .milliseconds(500) + .milliseconds(300), completion: closure)
             delay(.now() + .seconds(1) + .milliseconds(200), completion: closure)
+            delay(.now() + .seconds(1) + .milliseconds(800), completion: closure)
+            delay(.now() + .seconds(2) + .milliseconds(200), completion: closure)
+            delay(.now() + .seconds(2) + .milliseconds(500), completion: closure)
+            delay(.now() + .seconds(3) + .milliseconds(100), completion: closure)
+            delay(.now() + .seconds(4) + .milliseconds(600), completion: closure)
+            delay(.now() + .seconds(5) + .milliseconds(400), completion: closure)
+            delay(.now() + .seconds(5) + .milliseconds(700), completion: closure)
         }
     #endif
     }

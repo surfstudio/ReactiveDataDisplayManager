@@ -23,6 +23,8 @@ final class AllPluginsStressTest: BaseUITestCase {
         let cell = getCell(for: .table, collectionId: "main_table", cellId: "expandable_cell")
 
         cell.tap(withNumberOfTaps: 10, numberOfTouches: 1)
+        cell.tap(withNumberOfTaps: 10, numberOfTouches: 1)
+        cell.tap(withNumberOfTaps: 10, numberOfTouches: 1)
     }
 
 }
