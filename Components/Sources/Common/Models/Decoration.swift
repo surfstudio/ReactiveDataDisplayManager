@@ -9,10 +9,9 @@ import UIKit
 
 public enum Decoration {
 
-    /// empty cell with concrete `height`
-    case space(height: CGFloat)
+    /// Base view to implement space between other views or cells.
+    case space(model: SpacerView.Model)
     case divider(height: CGFloat, inset: UIEdgeInsets)
-    case coloredSpace(color: UIColor, height: CGFloat)
     case coloredDivider(color: UIColor, height: CGFloat, inset: UIEdgeInsets)
     case custom(generator: () -> UIView)
 

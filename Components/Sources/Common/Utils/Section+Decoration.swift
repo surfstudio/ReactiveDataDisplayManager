@@ -7,7 +7,7 @@
 
 import ReactiveDataDisplayManager
 
-public extension Section where GeneratorType: IdentifiableItem {
+public extension Section where GeneratorType: IdOwner {
 
     func decorateCells(with decoration: Decoration, at anchor: DecorationAnchor, and rule: DecorationRule) -> Section {
         let decorator = rule.decorator

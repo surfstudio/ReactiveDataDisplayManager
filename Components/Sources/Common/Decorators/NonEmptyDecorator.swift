@@ -18,8 +18,8 @@ final class NonEmptyDecorator: Decorator {
     }
 
     func insert(decoration: Decoration,
-                to items: [IdentifiableItem],
-                at anchor: DecorationAnchor) -> [IdentifiableItem] {
+                to items: [IdOwner],
+                at anchor: DecorationAnchor) -> [IdOwner] {
         guard !items.isEmpty else {
             return items
         }

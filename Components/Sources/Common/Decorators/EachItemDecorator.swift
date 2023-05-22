@@ -10,13 +10,10 @@ import ReactiveDataDisplayManager
 final class EachItemDecorator: Decorator {
 
     func insert(decoration: Decoration,
-                to items: [IdentifiableItem],
-                at anchor: DecorationAnchor) -> [IdentifiableItem] {
-        items.reduce([IdentifiableItem](), { (result, item) in
-            guard let itemId = item.id else {
-                return result
-            }
-            let decorationItem = decoration.provider.provideDecoration(with: itemId)
+                to items: [IdOwner],
+                at anchor: DecorationAnchor) -> [IdOwner] {
+        items.reduce([IdOwner](), { (result, item) in
+            let decorationItem = decoration.provider.provideDecoration(with: item.id)
             var result = result
             switch anchor {
             case .start:
