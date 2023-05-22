@@ -69,6 +69,23 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
         }
     }
 
+    /// Inserts new generators after provided generator.
+    ///
+    /// - Parameters:
+    ///   - after: Generator after which new generator will be added. Must be in the DDM.
+    ///   - new: Generators which you want to insert after current generator.
+    ///   - with: Animation for row action.
+    open func insert(after generator: TableCellGenerator,
+                     new newGenerators: [TableCellGenerator],
+                     with animation: UITableView.RowAnimation = .automatic) {
+        guard let index = self.findGenerator(generator) else { return }
+
+        let elements = newGenerators.enumerated().map { item in
+            (item.element, index.sectionIndex, index.generatorIndex + item.offset + 1)
+        }
+        self.insert(elements: elements, with: animation)
+    }
+
     open func update(generators: [TableCellGenerator]) {
         let indexes = generators.compactMap { [weak self] in self?.findGenerator($0) }
         let indexPaths = indexes.compactMap { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
@@ -165,4 +182,27 @@ public extension BaseTableManager {
         }
     }
 
+}
+
+// MARK: - Internal
+
+extension BaseTableManager {
+
+    // MARK: - Inserting
+
+    func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
+                with animation: UITableView.RowAnimation = .automatic) {
+
+        elements.forEach { [weak self] element in
+            element.generator.registerCell(in: view)
+            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+        }
+
+        let indexPaths = elements.map {
+            IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
+        }
+
+        modifier?.insertRows(at: indexPaths, with: animation)
+    }
+    
 }

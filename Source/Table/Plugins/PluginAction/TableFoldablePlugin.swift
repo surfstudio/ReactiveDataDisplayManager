@@ -51,12 +51,10 @@ private extension TableFoldablePlugin {
     func addCellGenerators(_ childGenerators: [TableCellGenerator],
                            after generator: TableCellGenerator,
                            with manager: BaseTableManager?) {
-        if let manager = manager as? ManualTableManager {
-            manager.insert(after: generator, new: childGenerators, with: .fade)
-        } else if let manager = manager as? GravityTableManager {
+        if let manager = manager as? GravityTableManager {
             manager.addCellGenerators(childGenerators, after: generator)
         } else {
-            assertionFailure("❗️The base manager cannot control the show/hide. Install ManualTableManager or GravityTableManager")
+            manager?.insert(after: generator, new: childGenerators, with: .fade)
         }
     }
 
