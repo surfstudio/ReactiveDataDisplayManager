@@ -10,9 +10,16 @@ import ReactiveDataDisplayManager
 public extension Section where GeneratorType: IdentifiableItem {
 
     func decorateCells(with decoration: Decoration, at anchor: DecorationAnchor, and rule: DecorationRule) -> Section {
-        // TODO: - implement decoration with rules
+        let decorator = rule.decorator
 
-        return self
+        let decoratedItems = decorator.insert(decoration: decoration,
+                                              to: generators,
+                                              at: anchor)
+            .compactMap { $0 as? GeneratorType }
+
+        return Section(generators: decoratedItems,
+                       header: header,
+                       footer: footer)
     }
     
 

@@ -21,7 +21,7 @@ extension DecorationRule {
         }
     }
 
-    /// Wrapping of decorator with safe `NonEmptyDecorator`
+    /// Decorator resolved based on `DecorationRule` and wrapped in safe `NonEmptyDecorator`
     var decorator: Decorator {
         NonEmptyDecorator(decorator: resolvedDecorator)
     }
