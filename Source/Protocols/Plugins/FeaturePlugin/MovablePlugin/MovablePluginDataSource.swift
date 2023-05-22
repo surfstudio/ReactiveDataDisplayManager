@@ -52,7 +52,7 @@ extension MovablePluginDataSource: MovableDataSource {
         // findNewSection and add items to this array
         provider.generators[destinationIndexPath.section].insert(itemToMove, at: destinationIndexPath.row)
 
-        animator?.perform(in: view, animated: true, operation: { })
+        animator?.perform(in: view, animated: true, operation: nil)
 
         cellDidChangePosition?(.init(id: generator.id, oldIndex: sourceIndexPath, newIndex: destinationIndexPath))
     }
