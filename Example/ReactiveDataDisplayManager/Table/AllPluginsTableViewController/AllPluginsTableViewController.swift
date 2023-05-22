@@ -105,7 +105,9 @@ private extension AllPluginsTableViewController {
         navigationItem.rightBarButtonItem = button
     }
 
-    /// Use this method for UI stress test only
+    /// Use this method for UI stress test only.
+    /// You can traine here usage of manual manager and different replacing and insertions.
+    ///  - Note: some combinations of functions may cause crash and it's normal, because manualBuilder is just wrapper under tableView functions.
     func insertRandomCell() {
         guard let (sectionIndex, sectionGenerator) = adapter.sections
             .compactMap({ $0 as? SectionTitleHeaderGenerator })
@@ -115,7 +117,6 @@ private extension AllPluginsTableViewController {
             return
         }
 
-
         let oldIndexes = adapter.generators[sectionIndex].enumerated().map { IndexPath(row: $0.offset, section: sectionIndex) }
 
         adapter.generators[sectionIndex].removeAll()
@@ -123,10 +124,16 @@ private extension AllPluginsTableViewController {
         let titles = Bool.random() ? ["One", "Two", "Three"] : ["Four", "Five"]
         let generators = titles.map(createSelectableGenerator(with:))
         adapter.generators[sectionIndex].append(contentsOf: generators)
+        adapter.sections.remove(at: sectionIndex)
 
         let indexes = generators.enumerated().map { IndexPath(row: $0.offset, section: sectionIndex) }
 
+        adapter.sections.insert(sectionGenerator, at: sectionIndex)
         adapter.modifier?.replace(at: oldIndexes, on: indexes, with: nil)
+
+        adapter.addSectionHeaderGenerator(SectionTitleHeaderGenerator(model: "Buggy_addition \(Int.random(in: 0...100))",
+                                                                      needSectionIndexTitle: false))
+        adapter.modifier?.insertSections(at: IndexSet(integer: adapter.generators.count - 1), with: nil)
     }
 
     @objc
