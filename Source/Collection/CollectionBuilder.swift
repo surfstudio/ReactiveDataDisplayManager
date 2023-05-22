@@ -127,6 +127,7 @@ public class CollectionBuilder<T: BaseCollectionManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
+        collectionPlugins.add(.accessibility())
         manager.view = view
 
         delegate.configure(with: self)
