@@ -204,5 +204,5 @@ extension BaseTableManager {
 
         modifier?.insertRows(at: indexPaths, with: animation)
     }
-    
+
 }
