@@ -199,6 +199,18 @@ public class ManualTableManager: BaseTableManager {
         self.insert(elements: elements, with: animation)
     }
 
+    /// Inserts new generators after provided generator.
+    ///
+    /// - Parameters:
+    ///   - after: Generator after which new generator will be added. Must be in the DDM.
+    ///   - new: Generators which you want to insert after current generator.
+    ///   - with: Animation for row action.
+    open func insert(after generator: TableCellGenerator,
+                     new newGenerators: [TableCellGenerator],
+                     with animation: UITableView.RowAnimation = .automatic) {
+        insertManual(after: generator, new: newGenerators, with: animation)
+    }
+
     /// Inserts new generators before provided generator.
     ///
     /// - Parameters:
