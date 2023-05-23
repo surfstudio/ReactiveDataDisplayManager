@@ -12,7 +12,7 @@ struct ImageViewModel {
     let loadImage: (URL, UIImageView) -> Void
 
     static func make(with loadImage: @escaping (URL, UIImageView) -> Void) -> Self? {
-        let stringImageUrl = "https://picsum.photos/id/\(Int.random(in: 0...1000))/640/480"
+        let stringImageUrl = "https://loremflickr.com/640/480/cat"
         guard let imageUrl = URL(string: stringImageUrl) else { return nil }
         return .init(imageUrl: imageUrl, loadImage: loadImage)
     }
