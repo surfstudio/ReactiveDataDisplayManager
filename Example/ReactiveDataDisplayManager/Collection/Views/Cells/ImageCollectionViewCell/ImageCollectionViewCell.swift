@@ -19,7 +19,7 @@ final class ImageCollectionViewCell: UICollectionViewCell {
         let loadImage: (URL, UIImageView) -> Void
 
         static func make(with loadImage: @escaping (URL, UIImageView) -> Void) -> Self? {
-            let stringImageUrl = "https://loremflickr.com/640/480/cat"
+            let stringImageUrl = ImageUrlProvider.getRandomImage(of: .init(width: 640, height: 480))
             guard let imageUrl = URL(string: stringImageUrl) else { return nil }
             return .init(imageUrl: imageUrl, loadImage: loadImage)
         }
