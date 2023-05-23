@@ -29,7 +29,7 @@ public final class TableSafeAnimator: Animator<UITableView> {
                 .allSatisfy { $0 == true }
 
             guard numberOfCellsAreEqual else {
-                return  
+                return
             }
         }
         baseAnimator.performAnimated(in: collection, operation: operation)

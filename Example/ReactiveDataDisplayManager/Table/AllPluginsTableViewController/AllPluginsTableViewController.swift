@@ -99,7 +99,7 @@ private extension AllPluginsTableViewController {
         // Tell adapter that we've changed generators
         adapter.forceRefill()
     }
-    
+
     func updateBarButtonItem(with title: String) {
         let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeTableEditing))
         navigationItem.rightBarButtonItem = button
