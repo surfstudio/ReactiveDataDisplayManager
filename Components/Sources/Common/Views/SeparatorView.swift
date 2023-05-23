@@ -14,7 +14,6 @@ public class SeparatorView: UIView {
     // MARK: - Private properties
 
     private var heightConstraint: NSLayoutConstraint?
-    private var separator: UIEdgeInsets = .zero
 
     // MARK: - Initialization
     
