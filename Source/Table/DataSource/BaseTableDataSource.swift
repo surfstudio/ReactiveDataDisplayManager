@@ -41,7 +41,7 @@ extension BaseTableDataSource {
 
         modifier = TableCommonModifier(view: builder.view, animator: builder.animator)
 
-        animator = TableSafeAnimator(baseAnimator: builder.animator, generatorsProvider: builder.manager)
+        animator = builder.animator
         movablePlugin = builder.movablePlugin?.dataSource
         sectionTitleDisplayablePlugin = builder.sectionTitleDisplayablePlugin
         tablePlugins = builder.tablePlugins

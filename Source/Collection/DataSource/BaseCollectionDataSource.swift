@@ -39,7 +39,7 @@ extension BaseCollectionDataSource {
 
         modifier = CollectionCommonModifier(view: builder.view, animator: builder.animator)
 
-        animator = CollectionSafeAnimator(baseAnimator: builder.animator, generatorsProvider: builder.manager)
+        animator = builder.animator
         movablePlugin = builder.movablePlugin?.dataSource
         collectionPlugins = builder.collectionPlugins
         itemTitleDisplayablePlugin = builder.itemTitleDisplayablePlugin
