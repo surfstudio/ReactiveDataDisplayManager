@@ -18,5 +18,3 @@ enum ImageUrlProvider {
     }
 
 }
-
-
