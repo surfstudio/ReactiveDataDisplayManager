@@ -16,7 +16,7 @@ public class SeparatorView: UIView {
     private var heightConstraint: NSLayoutConstraint?
 
     // MARK: - Initialization
-    
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         configureConstraints()
