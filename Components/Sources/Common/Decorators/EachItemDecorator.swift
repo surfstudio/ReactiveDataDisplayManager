@@ -9,11 +9,11 @@ import ReactiveDataDisplayManager
 
 final class EachItemDecorator: Decorator {
 
-    func insert(decoration: Decoration,
+    func insert(decoration: any DecorationProvider,
                 to items: [IdOwner],
                 at anchor: DecorationAnchor) -> [IdOwner] {
         items.reduce([IdOwner](), { (result, item) in
-            let decorationItem = decoration.provider.provideDecoration(with: item.id)
+            let decorationItem = decoration.provideDecoration(with: item.id)
             var result = result
             switch anchor {
             case .start:

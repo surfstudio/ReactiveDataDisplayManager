@@ -9,7 +9,7 @@ import ReactiveDataDisplayManager
 
 final class FirstItemDecorator: Decorator {
 
-    func insert(decoration: Decoration,
+    func insert(decoration: any DecorationProvider,
                 to items: [IdOwner],
                 at anchor: DecorationAnchor) -> [IdOwner] {
         guard let firstItem = items.first else {
@@ -18,7 +18,7 @@ final class FirstItemDecorator: Decorator {
 
         var result = items
 
-        let decorationItem = decoration.provider.provideDecoration(with: firstItem.id)
+        let decorationItem = decoration.provideDecoration(with: firstItem.id)
 
         switch anchor {
         case .start:
