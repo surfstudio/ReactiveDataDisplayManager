@@ -14,9 +14,11 @@ public final class CollectionSeparatorCell: UICollectionViewCell, SeparatorWrapp
     public typealias Model = SeparatorView.Model
 
     // MARK: - Properties
+
     public private(set) var separator: SeparatorView = .init(frame: .zero)
 
     // MARK: - Initialization
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -27,4 +29,3 @@ public final class CollectionSeparatorCell: UICollectionViewCell, SeparatorWrapp
     }
 
 }
-

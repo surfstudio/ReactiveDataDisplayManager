@@ -14,9 +14,11 @@ public final class TableSeparatorCell: UITableViewCell, SeparatorWrapper {
     public typealias Model = SeparatorView.Model
 
     // MARK: - Properties
+
     public private(set) var separator: SeparatorView = .init(frame: .zero)
 
     // MARK: - Initialization
+    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }

@@ -12,10 +12,12 @@ import ReactiveDataDisplayManager
 public class SeparatorView: UIView {
 
     // MARK: - Private properties
+
     private var heightConstraint: NSLayoutConstraint?
     private var separator: UIEdgeInsets = .zero
 
     // MARK: - Initialization
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         configureConstraints()
@@ -29,6 +31,7 @@ public class SeparatorView: UIView {
 }
 
 // MARK: - ConfigurableItem
+
 extension SeparatorView: ConfigurableItem {
 
     public struct Model {
@@ -53,6 +56,7 @@ extension SeparatorView: ConfigurableItem {
 }
 
 // MARK: - Private
+
 private extension SeparatorView {
 
     func configureConstraints() {
@@ -66,6 +70,7 @@ private extension SeparatorView {
 }
 
 // MARK: - Wrapper
+
 public protocol SeparatorWrapper: ConfigurableItem {
 
     var separator: SeparatorView { get }
