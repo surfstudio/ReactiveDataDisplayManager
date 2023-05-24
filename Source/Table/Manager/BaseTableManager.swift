@@ -169,7 +169,6 @@ extension BaseTableManager {
                 with animation: UITableView.RowAnimation = .automatic) {
 
         elements.forEach { [weak self] element in
-            element.generator.registerCell(in: view)
             self?.sections[element.sectionIndex]
                 .generators
                 .insert(element.generator,
@@ -180,6 +179,7 @@ extension BaseTableManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         modifier?.insertRows(at: indexPaths, with: animation)
     }
     

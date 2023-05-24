@@ -109,7 +109,7 @@ private extension AllPluginsTableViewController {
     ///  - Note: some combinations of functions may cause crash and it's normal, because manualBuilder is just wrapper under tableView functions.
     func insertRandomCell() {
         guard let (sectionIndex, sectionGenerator) = adapter.sections
-            .compactMap({ $0 as? SectionTitleHeaderGenerator })
+            .compactMap({ $0.header as? SectionTitleHeaderGenerator })
             .enumerated()
             .first(where: { $0.element.title == "Selectable" })
         else {
