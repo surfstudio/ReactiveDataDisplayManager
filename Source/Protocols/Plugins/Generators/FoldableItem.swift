@@ -11,6 +11,9 @@ import UIKit
 /// Protocol for `TableCellGenerator` to manage expand/collapse state
 public protocol FoldableItem: AnyObject {
 
+    /// Set animation for folder's expand / shrink
+    var animation: TableFoldablePlugin.AnimationGroup { get }
+
     /// Invokes when cell `didSelect`
     var didFoldEvent: BaseEvent<Bool> { get }
 
@@ -19,4 +22,13 @@ public protocol FoldableItem: AnyObject {
 
     /// Generators describing cells to be inserted in expanded state
     var childGenerators: [TableCellGenerator] { get set }
+    
+}
+
+public extension FoldableItem {
+
+    var animation: TableFoldablePlugin.AnimationGroup {
+        return (.none, .fade)
+    }
+
 }
