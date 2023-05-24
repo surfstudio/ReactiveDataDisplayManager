@@ -9,25 +9,28 @@ import UIKit
 
 
 public protocol AccessibilityModifier {
-    static func modify(view: UIView, with item: AccessibilityItem)
+    static func modify(view: UIView, with cell: AccessibilityCell, generator: AccessibilityItem?)
 }
 
 enum DefaultAccessibilityModifier: AccessibilityModifier {
-
-    static func modify(view: UIView, with item: AccessibilityItem) {
+    static func modify(view: UIView, with cell: AccessibilityCell, generator: AccessibilityItem?) {
         view.isAccessibilityElement = true
 
-        if !item.labelStrategy.isIgnored {
-            view.accessibilityLabel = item.labelStrategy.value
+        if !cell.labelStrategy.isIgnored || generator?.labelStrategy.isIgnored == false {
+            view.accessibilityLabel = cell.accessibilityStrategyConflictResolver(cellStrategy: cell.labelStrategy,
+                                                                                 generatorStrategy: generator?.labelStrategy)
         }
 
-        if !item.valueStrategy.isIgnored {
-            view.accessibilityValue = item.valueStrategy.value
+        if !cell.valueStrategy.isIgnored || generator?.valueStrategy.isIgnored == false {
+            view.accessibilityValue = cell.accessibilityStrategyConflictResolver(cellStrategy: cell.valueStrategy,
+                                                                                 generatorStrategy: generator?.valueStrategy)
         }
 
-        if !item.traitsStrategy.isIgnored, let traits = item.traitsStrategy.value {
-            view.accessibilityTraits.insert(traits)
+        if !cell.traitsStrategy.isIgnored || generator?.traitsStrategy.isIgnored == false {
+            let traits = [cell.traitsStrategy.value, generator?.traitsStrategy.value]
+                .compactMap { $0 }
+                .reduce(UIAccessibilityTraits(), { $0.union($1) })
+            view.accessibilityTraits = traits
         }
     }
-
 }

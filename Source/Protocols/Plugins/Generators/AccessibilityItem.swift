@@ -29,8 +29,8 @@ public enum AccessibilityStrategy {
             return string
         case .from(let object, let keyPath):
             return object[keyPath: keyPath]
-        case .joined(let cases, let separator):
-            return cases.compactMap(\.value).joined(separator: separator)
+        case .joined(let strategies, let separator):
+            return strategies.compactMap(\.value).joined(separator: separator)
         }
     }
 }
@@ -61,30 +61,31 @@ public enum AccessibilityTraitsStrategy {
             return objects.map(\.accessibilityTraits).reduce(UIAccessibilityTraits(), { $0.union($1) })
         }
     }
-
-//    mutating func insert(traits: UIAccessibilityTraits) {
-//        self = .just(value.map { $0.union(traits) } ?? traits)
-//    }
-//
-//    mutating func remove(traits: UIAccessibilityTraits) {
-//        self = .just(value.map { $0.subtracting(traits) } ?? traits)
-//    }
 }
 
 public protocol AccessibilityItem {
-    typealias AccessibilityModifierType = AccessibilityModifier.Type
-    var modifierType: AccessibilityModifierType { get }
-
     var labelStrategy: AccessibilityStrategy { get }
     var valueStrategy: AccessibilityStrategy { get }
     var traitsStrategy: AccessibilityTraitsStrategy { get }
 }
 
 public extension AccessibilityItem {
-    var parcerType: AccessibilityModifierType { DefaultAccessibilityModifier.self }
-    
     var labelStrategy: AccessibilityStrategy { .ignored }
     var valueStrategy: AccessibilityStrategy { .ignored }
     var traitsStrategy: AccessibilityTraitsStrategy { .ignored }
 }
 
+public protocol AccessibilityCell: AccessibilityItem {
+    typealias AccessibilityModifierType = AccessibilityModifier.Type
+    var modifierType: AccessibilityModifierType { get }
+
+    func accessibilityStrategyConflictResolver(cellStrategy: AccessibilityStrategy, generatorStrategy: AccessibilityStrategy?) -> String?
+}
+
+public extension AccessibilityCell {
+    var modifierType: AccessibilityModifierType { DefaultAccessibilityModifier.self }
+
+    func accessibilityStrategyConflictResolver(cellStrategy: AccessibilityStrategy, generatorStrategy: AccessibilityStrategy?) -> String? {
+        return [generatorStrategy?.value, cellStrategy.value].compactMap { $0 }.joined(separator: " ")
+    }
+}

@@ -12,14 +12,17 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
     override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
         switch event {
         case .willDisplayCell(let indexPath, let cell):
-            let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityItem
-            if let accessibilityItem = generator ?? cell as? AccessibilityItem {
-                accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem)
+            if let accessibilityItem = cell as? AccessibilityCell {
+                let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityItem
+                accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem, generator: generator)
             }
-        case .willDisplaySupplementaryView(let indexPath, let view, _):
-            let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityItem
-            if let accessibilityItem = generator ?? view as? AccessibilityItem {
-                accessibilityItem.modifierType.modify(view: view, with: accessibilityItem)
+        case .willDisplaySupplementaryView(let indexPath, let view, let kind):
+            guard [UICollectionView.elementKindSectionHeader, UICollectionView.elementKindSectionFooter].contains(kind) else {
+                return
+            }
+            if let accessibilityItem = view as? AccessibilityCell {
+                let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityItem
+                accessibilityItem.modifierType.modify(view: view, with: accessibilityItem, generator: generator)
             }
         default:
             break
