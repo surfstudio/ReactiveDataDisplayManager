@@ -30,6 +30,7 @@ final class MainTableViewController: UIViewController {
         case dragAndDroppableTable
         case selectableTable
         case highlightableTable
+        case customizableComponentsTable
     }
 
     // MARK: - Constants
@@ -51,7 +52,8 @@ final class MainTableViewController: UIViewController {
             ("Table with DifferenceKit", .differenceTable),
             ("Table with drag and drop cells", .dragAndDroppableTable),
             ("Table with selectable cells", .selectableTable),
-            ("Table with highlightable cells", .highlightableTable)
+            ("Table with highlightable cells", .highlightableTable),
+            ("Table with custom components", .customizableComponentsTable)
         ]
     }
 
