@@ -111,7 +111,7 @@ public class ManualTableManager: BaseTableManager {
 
         self.generators[index].removeAll()
 
-        let indexes = (0...generatorsCount).map { IndexPath(row: $0, section: index) }
+        let indexes = (0..<generatorsCount).map { IndexPath(row: $0, section: index) }
 
         guard !indexes.isEmpty else {
             return
