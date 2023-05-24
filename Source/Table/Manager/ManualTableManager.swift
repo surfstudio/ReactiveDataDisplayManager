@@ -111,7 +111,7 @@ public class ManualTableManager: BaseTableManager {
 
         self.generators[index].removeAll()
 
-        let indexes = (0...generatorsCount).map { IndexPath(row: $0, section: index) }
+        let indexes = (0..<generatorsCount).map { IndexPath(row: $0, section: index) }
 
         guard !indexes.isEmpty else {
             return
@@ -208,12 +208,7 @@ public class ManualTableManager: BaseTableManager {
     open func insert(after generator: TableCellGenerator,
                      new newGenerators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation = .automatic) {
-        guard let index = self.findGenerator(generator) else { return }
-
-        let elements = newGenerators.enumerated().map { item in
-            (item.element, index.sectionIndex, index.generatorIndex + item.offset + 1)
-        }
-        self.insert(elements: elements, with: animation)
+        insertManual(after: generator, new: newGenerators, with: animation)
     }
 
     /// Inserts new generators before provided generator.
@@ -368,21 +363,6 @@ private extension ManualTableManager {
         self.generators.insert([], at: index)
 
         modifier?.insertSections(at: [index], with: animation)
-    }
-
-    func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
-                with animation: UITableView.RowAnimation = .automatic) {
-
-        elements.forEach { [weak self] element in
-            element.generator.registerCell(in: view)
-            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
-        }
-
-        let indexPaths = elements.map {
-            IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
-        }
-
-        modifier?.insertRows(at: indexPaths, with: animation)
     }
 
 }

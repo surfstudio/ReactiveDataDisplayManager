@@ -13,6 +13,8 @@ open class Animator<Collection: UIView> {
 
     public typealias Operation = () -> Void
 
+    public init() { }
+
     /// Perform animation block.
     /// For example. Insert, or delete rows of collecton
     /// - parameter collection: Collection containing animating rows

@@ -17,10 +17,8 @@ final class TableAnimatorStub: Animator<BaseTableManager.CollectionType> {
 
     // MARK: - Animator
 
-    override func perform(in collection: BaseTableManager.CollectionType, animated: Bool, operation: Operation?) {
+    override func performAnimated(in collection: BaseTableManager.CollectionType, operation: Operation?) {
         generatorsUpdated = true
     }
-
-    override func performAnimated(in collection: BaseTableManager.CollectionType, operation: Operation?) { }
 
 }

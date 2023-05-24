@@ -17,10 +17,8 @@ final class CollectionAnimatorStub: Animator<BaseCollectionManager.CollectionTyp
 
     // MARK: - Animator
 
-    override func perform(in collection: BaseCollectionManager.CollectionType, animated: Bool, operation: Operation?) {
+    override func performAnimated(in collection: BaseCollectionManager.CollectionType, operation: Operation?) {
         generatorsUpdated = true
     }
-
-    override func performAnimated(in collection: BaseCollectionManager.CollectionType, operation: Operation?) { }
 
 }
