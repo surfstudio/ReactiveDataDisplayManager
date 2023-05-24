@@ -72,6 +72,7 @@ public class TableBuilder<T: BaseTableManager> {
     // MARK: - Public Methods
 
     /// `emptyAnimatorDebounceTime` which used in `QueuedAnimator`  to improve performance of empty animation processing.
+    /// - Default value is equal to 150 milliseconds.
     public func set(emptyAnimatorDebounceTime: DispatchTimeInterval) -> TableBuilder<T> {
         self.emptyAnimatorDebounceTime = emptyAnimatorDebounceTime
         return self
