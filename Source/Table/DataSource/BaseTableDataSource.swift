@@ -125,8 +125,11 @@ private extension BaseTableDataSource {
         guard let expandable = cell as? ExpandableItem else {
             return
         }
-        expandable.onHeightChanged += { [weak self] _ in
-            self?.animator?.perform(in: tableView, animated: expandable.animatedExpandable) { }
+        expandable.onHeightChanged += { [weak self, weak tableView] _ in
+            guard let tableView = tableView else {
+                return
+            }
+            self?.animator?.perform(in: tableView, animated: expandable.animatedExpandable, operation: nil)
         }
     }
 

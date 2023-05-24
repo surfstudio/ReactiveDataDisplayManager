@@ -20,7 +20,7 @@ final class ImageTableViewCell: UITableViewCell {
         let loadImage: (URL, UIImageView) -> Void
 
         static func make(with loadImage: @escaping (URL, UIImageView) -> Void) -> Self? {
-            let stringImageUrl = "https://picsum.photos/id/\(Int.random(in: 0...1000))/1280/720"
+            let stringImageUrl = ImageUrlProvider.getRandomImage(of: .init(width: 1280, height: 720))
             guard let imageUrl = URL(string: stringImageUrl) else { return nil }
             return .init(imageUrl: imageUrl, title: stringImageUrl, loadImage: loadImage)
         }

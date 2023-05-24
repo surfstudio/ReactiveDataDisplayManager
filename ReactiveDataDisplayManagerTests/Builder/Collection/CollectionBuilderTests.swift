@@ -272,12 +272,14 @@ class CollectionBuilderTests: XCTestCase {
         let generator = Mocks.collectionCell()
 
         // when
-        let ddm = builder.set(animator: animator).build()
+        let ddm = builder
+            .set(animator: animator)
+            .set(emptyAnimatorDebounceTime: .milliseconds(0))
+            .build()
         ddm.addCellGenerator(generator)
         ddm.update(generators: [generator])
 
         // then
-        XCTAssertIdentical(animator, builder.animator)
         XCTAssertTrue(animator.generatorsUpdated)
     }
 

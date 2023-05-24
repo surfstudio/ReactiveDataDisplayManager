@@ -158,3 +158,40 @@ public extension BaseTableManager {
     }
 
 }
+
+// MARK: - Internal
+
+extension BaseTableManager {
+
+    // MARK: - Inserting
+
+    func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
+                with animation: UITableView.RowAnimation = .automatic) {
+
+        elements.forEach { [weak self] element in
+            element.generator.registerCell(in: view)
+            self?.sections[element.sectionIndex]
+                .generators
+                .insert(element.generator,
+                        at: element.generatorIndex)
+        }
+
+        let indexPaths = elements.map {
+            IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
+        }
+
+        modifier?.insertRows(at: indexPaths, with: animation)
+    }
+    
+    func insertManual(after generator: TableCellGenerator,
+                     new newGenerators: [TableCellGenerator],
+                     with animation: UITableView.RowAnimation = .automatic) {
+        guard let index = self.findGenerator(generator) else { return }
+
+        let elements = newGenerators.enumerated().map { item in
+            (item.element, index.sectionIndex, index.generatorIndex + item.offset + 1)
+        }
+        self.insert(elements: elements, with: animation)
+    }
+
+}

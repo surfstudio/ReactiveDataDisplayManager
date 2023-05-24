@@ -25,6 +25,8 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     var dataSource: CollectionDataSource
     var animator: CollectionAnimator
 
+    var emptyAnimatorDebounceTime: DispatchTimeInterval = .milliseconds(150)
+
     var collectionPlugins = CollectionPluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
@@ -60,6 +62,13 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     }
 
     // MARK: - Public Methods
+
+    /// `emptyAnimatorDebounceTime` which used in `QueuedAnimator`  to improve performance of empty animation processing.
+    /// - Default value is equal to 150 milliseconds.
+    public func set(emptyAnimatorDebounceTime: DispatchTimeInterval) -> CollectionBuilder<T> {
+        self.emptyAnimatorDebounceTime = emptyAnimatorDebounceTime
+        return self
+    }
 
     /// Change delegate
     public func set(delegate: CollectionDelegate) -> CollectionBuilder<T> {
@@ -128,6 +137,10 @@ public class CollectionBuilder<T: BaseCollectionManager> {
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
         manager.view = view
+
+        animator = QueuedAnimator(baseAnimator: CollectionSafeAnimator(baseAnimator: animator,
+                                                                       sectionsProvider: manager),
+                                  debounceTime: emptyAnimatorDebounceTime)
 
         delegate.configure(with: self)
         view.delegate = delegate

@@ -28,6 +28,8 @@ public class TableBuilder<T: BaseTableManager> {
     var dataSource: TableDataSource
     var animator: TableAnimator
 
+    var emptyAnimatorDebounceTime: DispatchTimeInterval = .milliseconds(150)
+
     var tablePlugins = TablePluginsCollection()
     var scrollPlugins = ScrollPluginsCollection()
     var prefetchPlugins = PrefetchPluginsCollection()
@@ -68,6 +70,13 @@ public class TableBuilder<T: BaseTableManager> {
     }
 
     // MARK: - Public Methods
+
+    /// `emptyAnimatorDebounceTime` which used in `QueuedAnimator`  to improve performance of empty animation processing.
+    /// - Default value is equal to 150 milliseconds.
+    public func set(emptyAnimatorDebounceTime: DispatchTimeInterval) -> TableBuilder<T> {
+        self.emptyAnimatorDebounceTime = emptyAnimatorDebounceTime
+        return self
+    }
 
     /// Change delegate
     public func set(delegate: TableDelegate) -> TableBuilder<T> {
@@ -134,6 +143,10 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
+
+        animator = QueuedAnimator(baseAnimator: TableSafeAnimator(baseAnimator: animator,
+                                                                  sectionsProvider: manager),
+                                  debounceTime: emptyAnimatorDebounceTime)
 
         delegate.configure(with: self)
         view.delegate = delegate
