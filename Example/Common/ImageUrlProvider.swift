@@ -1,8 +1,8 @@
 //
 //  ImageUrlProvider.swift
-//  ReactiveDataDisplayManager
+//  ReactiveDataDisplayManagerExample_tvOS
 //
-//  Created by Никита Коробейников on 23.05.2023.
+//  Created by Никита Коробейников on 24.05.2023.
 //
 
 import Foundation
