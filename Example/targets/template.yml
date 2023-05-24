@@ -11,6 +11,8 @@ targetTemplates:
         gatherCoverageData: true
       dependencies:
         - sdk: UIKit.framework
+      sources:
+        - path: ../Common
       info:
         properties:
           UIUserInterfaceStyle: Light
