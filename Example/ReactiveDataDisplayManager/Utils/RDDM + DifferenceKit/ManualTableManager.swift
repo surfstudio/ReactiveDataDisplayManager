@@ -112,7 +112,7 @@ private extension ManualTableManager {
                     insertRowsAnimation: insertRowsAnimation,
                     reloadRowsAnimation: reloadRowsAnimation,
                     interrupt: interrupt) { [weak self] _ in
-            guard let registrator = self?.registrator else {
+            guard let registrator = self?.registrator, let view = self?.view else {
                 return
             }
             self?.sections.registerAllIfNeeded(with: view, using: registrator)
