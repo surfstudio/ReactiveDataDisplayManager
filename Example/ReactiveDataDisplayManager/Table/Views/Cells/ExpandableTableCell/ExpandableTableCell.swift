@@ -43,6 +43,7 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
 extension ExpandableTableCell: ConfigurableItem {
 
     func configure(with animated: Bool) {
+        accessibilityIdentifier = "expandable_cell"
         self.animatedExpandable = animated
         button.layer.cornerRadius = 20
         button.clipsToBounds = true
