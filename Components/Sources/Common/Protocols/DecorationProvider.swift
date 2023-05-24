@@ -9,7 +9,7 @@ import ReactiveDataDisplayManager
 
 public protocol DecorationProvider {
 
-    associatedtype GeneratorType: IdOwner
+    associatedtype GeneratorType: DiffableItemSource
 
     func provideDecoration(with parentId: AnyHashable) -> GeneratorType
 

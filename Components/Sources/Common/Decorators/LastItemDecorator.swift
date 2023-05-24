@@ -10,8 +10,8 @@ import ReactiveDataDisplayManager
 final class LastItemDecorator: Decorator {
 
     func insert(decoration: any DecorationProvider,
-                to items: [IdOwner],
-                at anchor: DecorationAnchor) -> [IdOwner] {
+                to items: [DiffableItemSource],
+                at anchor: DecorationAnchor) -> [DiffableItemSource] {
 
         guard let lastItem = items.last else {
             return items
@@ -19,7 +19,7 @@ final class LastItemDecorator: Decorator {
 
         var result = items
 
-        let decorationItem = decoration.provideDecoration(with: lastItem.id)
+        let decorationItem = decoration.provideDecoration(with: lastItem.diffableItem.id)
 
         switch anchor {
         case .start:

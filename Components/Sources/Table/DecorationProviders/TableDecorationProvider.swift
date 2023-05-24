@@ -25,7 +25,8 @@ final class TableDecorationProvider<Cell: ConfigurableItem & UITableViewCell>: D
     func provideDecoration(with parentId: AnyHashable) -> GeneratorType {
         Cell.rddm.diffableGenerator(uniqueId: hashCombiner.combine(first: parentId,
                                                                    with: hash),
-                                    with: model)
+                                    with: model,
+                                    and: .class)
     }
 
 }

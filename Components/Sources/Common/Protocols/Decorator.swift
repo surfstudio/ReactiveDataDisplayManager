@@ -9,6 +9,6 @@ import ReactiveDataDisplayManager
 
 public protocol Decorator {
 
-    func insert(decoration: any DecorationProvider, to items: [IdOwner], at anchor: DecorationAnchor) -> [IdOwner]
+    func insert(decoration: any DecorationProvider, to items: [DiffableItemSource], at anchor: DecorationAnchor) -> [DiffableItemSource]
 
 }
