@@ -6,11 +6,14 @@
 //
 import UIKit
 import ReactiveDataDisplayManager
+import ReactiveDataComponents
 
 @available(iOS 13.0, *)
 final class DiffableCollectionViewController: UIViewController {
 
     typealias DiffableGenerator = DiffableCollectionCellGenerator<TitleCollectionListCell>
+
+    typealias FirstSection = Section<DiffableGenerator, EmptyCollectionHeaderGenerator, CollectionFooterGenerator>
 
     // MARK: - Constants
 
@@ -56,7 +59,8 @@ final class DiffableCollectionViewController: UIViewController {
 
         setupSearch()
         setupBarButtonItem()
-        fillAdapter()
+        generators = makeCellGenerators()
+        fillAdapter(with: generators)
     }
 
 }
@@ -67,21 +71,9 @@ final class DiffableCollectionViewController: UIViewController {
 extension DiffableCollectionViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        // clear existing generators
-        adapter -= .all
-
-        // add header with static id
-        adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
-
-        // add filtered  generators
-        adapter += filterGenerators(with: searchText)
-
-        // apply snapshot
-        adapter => .reload
-
+        // show filtered generators
+        fillAdapter(with: filterGenerators(with: searchText))
         // all insert, remove, reload animations will be selected automatically
-
     }
 
 }
@@ -103,15 +95,15 @@ private extension DiffableCollectionViewController {
     }
 
     /// This method is used to fill adapter
-    func fillAdapter() {
+    func fillAdapter(with generators: [DiffableGenerator]) {
 
-        generators = makeCellGenerators()
+        adapter -= .all
 
-        // add header with static id
-        adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
+        let section = FirstSection(generators: generators,
+                                   header: EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId),
+                                   footer: EmptyCollectionFooterGenerator())
 
-        // add generators
-        adapter += generators
+        adapter += section.generators * section.header
 
         // apply snapshot
         adapter => .reload
@@ -136,21 +128,11 @@ private extension DiffableCollectionViewController {
     func removeFirst() {
         guard !generators.isEmpty else { return }
 
+        // remove
         generators.removeFirst()
-
-        // clear existing generators
-        adapter -= .all
-
-        // add header with static id
-        adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
-
-        // add generators
-        adapter += generators
-
-        // apply snapshot
-        adapter => .reload
-
-        // expected remove animation
+        // show
+        fillAdapter(with: generators)
+        // all insert, remove, reload animations will be selected automatically
     }
 
 }

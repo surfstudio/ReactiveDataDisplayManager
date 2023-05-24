@@ -9,7 +9,7 @@ import ReactiveDataDisplayManager
 
 public extension Section where GeneratorType: TableCellGenerator, GeneratorType: DiffableItemSource {
 
-    func decorate(with decoration: Decoration, at anchor: DecorationAnchor, and rule: DecorationRule) -> Section<any TableCellGenerator & DiffableItemSource, HeaderGeneratorType, FooterGeneratorType> {
+    func decorate(with decoration: Decoration, at anchor: DecorationAnchor, and rule: DecorationRule) -> Section<AnyIdentifiableTableCellGenerator, HeaderGeneratorType, FooterGeneratorType> {
         let decorator = rule.decorator
 
         let decoratedItems = decorator.insert(decoration: decoration.tableProvider,
@@ -26,17 +26,17 @@ public extension Section where GeneratorType: TableCellGenerator, GeneratorType:
 
 public extension Section where GeneratorType: CollectionCellGenerator, GeneratorType: DiffableItemSource {
 
-    func decorate(with decoration: Decoration, at anchor: DecorationAnchor, and rule: DecorationRule) -> Self {
+    func decorate(with decoration: Decoration, at anchor: DecorationAnchor, and rule: DecorationRule) -> Section<AnyIdentifiableCollectionGenerator, HeaderGeneratorType, FooterGeneratorType> {
         let decorator = rule.decorator
 
         let decoratedItems = decorator.insert(decoration: decoration.collectionProvider,
                                               to: generators,
                                               at: anchor)
-            .compactMap { $0 as? GeneratorType }
+            .compactMap { AnyIdentifiableCollectionGenerator(identifiable: $0) }
 
-        return Section(generators: decoratedItems,
-                       header: header,
-                       footer: footer)
+        return .init(generators: decoratedItems,
+                     header: header,
+                     footer: footer)
     }
 
 }

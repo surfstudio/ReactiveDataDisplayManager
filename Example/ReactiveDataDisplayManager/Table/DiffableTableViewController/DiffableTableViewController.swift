@@ -15,7 +15,7 @@ final class DiffableTableViewController: UIViewController {
 
     typealias DiffableGenerator = DiffableCellGenerator<TitleTableViewCell>
 
-    typealias DiffableSection = Section<DiffableGenerator, EmptyTableHeaderGenerator, TableFooterGenerator>
+    typealias FirstSection = Section<DiffableGenerator, EmptyTableHeaderGenerator, TableFooterGenerator>
 
     // MARK: - Constants
 
@@ -108,7 +108,7 @@ private extension DiffableTableViewController {
 
         adapter -= .all
 
-        let section = DiffableSection(
+        let section = FirstSection(
             generators: generators,
             header: EmptyTableHeaderGenerator(uniqueId: Constants.sectionId),
             footer: TableFooterGenerator()
