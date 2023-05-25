@@ -14,19 +14,7 @@ public func TableGenerators(
 }
 
 public func TableSections(
-    @GeneratorsBuilder<Section<
-    TableCellGenerator,
-    TableHeaderGenerator,
-    TableFooterGenerator
->>_ content: () -> [Section<
-                    TableCellGenerator,
-                    TableHeaderGenerator,
-                    TableFooterGenerator
-                >]
-) -> [Section<
-      TableCellGenerator,
-      TableHeaderGenerator,
-      TableFooterGenerator
-  >] {
+    @GeneratorsBuilder<TableSection>_ content: () -> [TableSection]
+) -> [TableSection] {
     content()
 }
