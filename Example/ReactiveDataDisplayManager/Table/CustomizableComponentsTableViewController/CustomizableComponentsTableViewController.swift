@@ -9,7 +9,7 @@ import UIKit
 import ReactiveDataDisplayManager
 import ReactiveDataComponents
 
-final class CustomizableComponentsTableViewController: UIViewController {
+final class ComponentsOverviewTableViewController: UIViewController {
 
     // MARK: - Nested types
 
