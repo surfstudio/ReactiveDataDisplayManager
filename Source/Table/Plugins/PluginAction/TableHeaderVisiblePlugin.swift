@@ -26,9 +26,9 @@ public class TableHeaderVisiblePlugin: BaseTablePlugin<TableEvent> {
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
-        case .willDisplayHeader(let section):
+        case .willDisplayHeader(let section, _):
             willDisplayHeader(with: section, manager: manager)
-        case .didEndDisplayHeader(let section):
+        case .didEndDisplayHeader(let section, _):
             didEndDisplayHeader(with: section, manager: manager)
         default:
             break
