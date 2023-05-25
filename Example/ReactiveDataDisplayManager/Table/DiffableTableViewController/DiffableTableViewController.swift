@@ -15,8 +15,6 @@ final class DiffableTableViewController: UIViewController {
 
     typealias DiffableGenerator = DiffableCellGenerator<TitleTableViewCell>
 
-    typealias FirstSection = Section<DiffableGenerator, EmptyTableHeaderGenerator, TableFooterGenerator>
-
     // MARK: - Constants
 
     private enum Constants {
@@ -108,15 +106,16 @@ private extension DiffableTableViewController {
 
         adapter -= .all
 
-        let section = FirstSection(
-            generators: generators,
-            header: EmptyTableHeaderGenerator(uniqueId: Constants.sectionId),
-            footer: TableFooterGenerator()
-        ).decorate(with: .space(model: .init(height: 16, color: .rddm)),
-                   at: .end,
-                   and: .each)
-
-        adapter += section.generators * section.header
+        adapter += TableSections {
+            Section(
+                generators: generators,
+                header: EmptyTableHeaderGenerator(uniqueId: Constants.sectionId.appending("header")),
+                footer: EmptyTableFooterGenerator(uniqueId: Constants.sectionId.appending("footer"))
+            ).decorate(with: .space(model: .init(height: 16, color: .rddm)),
+                       at: .end,
+                       and: .each)
+            .erased()
+        }
 
         // apply snapshot
         adapter => .reload

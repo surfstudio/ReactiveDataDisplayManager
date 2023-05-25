@@ -12,15 +12,21 @@ final class CollectionDecorationProvider<Cell: ConfigurableItem & UICollectionVi
 
     typealias GeneratorType = DiffableCollectionCellGenerator<Cell>
 
+    // MARK: - Properties
+
     private let hashCombiner: HashCombiner
     private let hash: AnyHashable
     private let model: Cell.Model
+
+    // MARK: - Initialisation
 
     init(model: Cell.Model, hash: AnyHashable, hashCombiner: HashCombiner) {
         self.model = model
         self.hash = hash
         self.hashCombiner = hashCombiner
     }
+
+    // MARK: - DecorationProvider
 
     func provideDecoration(with parentId: AnyHashable) -> GeneratorType {
         Cell.rddm.diffableGenerator(uniqueId: hashCombiner.combine(first: parentId,

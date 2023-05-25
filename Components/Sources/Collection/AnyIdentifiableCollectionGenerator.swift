@@ -8,6 +8,8 @@
 import UIKit
 import ReactiveDataDisplayManager
 
+/// Wrapper class to erase type of original `CollectionCellGenerator`.
+/// Used to merge different types of generators into one array.
 public final class AnyIdentifiableCollectionGenerator: CollectionCellGenerator, DiffableItemSource {
 
     public typealias IdentifiableGenerator = CollectionCellGenerator & DiffableItemSource

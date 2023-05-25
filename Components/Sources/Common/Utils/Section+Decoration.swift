@@ -9,7 +9,9 @@ import ReactiveDataDisplayManager
 
 public extension Section where GeneratorType: TableCellGenerator, GeneratorType: DiffableItemSource {
 
-    func decorate(with decoration: Decoration, at anchor: DecorationAnchor, and rule: DecorationRule) -> Section<AnyIdentifiableTableCellGenerator, HeaderGeneratorType, FooterGeneratorType> {
+    func decorate(with decoration: Decoration,
+                  at anchor: DecorationAnchor,
+                  and rule: DecorationRule) -> Section<AnyIdentifiableTableCellGenerator, HeaderGeneratorType, FooterGeneratorType> {
         let decorator = rule.decorator
 
         let decoratedItems = decorator.insert(decoration: decoration.tableProvider,
@@ -22,11 +24,19 @@ public extension Section where GeneratorType: TableCellGenerator, GeneratorType:
                      footer: footer)
     }
 
+    func erased() -> Section<TableCellGenerator, HeaderGeneratorType, FooterGeneratorType> {
+        .init(generators: generators,
+              header: header,
+              footer: footer)
+    }
+
 }
 
 public extension Section where GeneratorType: CollectionCellGenerator, GeneratorType: DiffableItemSource {
 
-    func decorate(with decoration: Decoration, at anchor: DecorationAnchor, and rule: DecorationRule) -> Section<AnyIdentifiableCollectionGenerator, HeaderGeneratorType, FooterGeneratorType> {
+    func decorate(with decoration: Decoration,
+                  at anchor: DecorationAnchor,
+                  and rule: DecorationRule) -> Section<AnyIdentifiableCollectionGenerator, HeaderGeneratorType, FooterGeneratorType> {
         let decorator = rule.decorator
 
         let decoratedItems = decorator.insert(decoration: decoration.collectionProvider,
@@ -39,6 +49,10 @@ public extension Section where GeneratorType: CollectionCellGenerator, Generator
                      footer: footer)
     }
 
+    func erased() -> Section<CollectionCellGenerator, HeaderGeneratorType, FooterGeneratorType> {
+        .init(generators: generators,
+              header: header,
+              footer: footer)
+    }
+
 }
-
-

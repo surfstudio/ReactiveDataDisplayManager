@@ -8,6 +8,8 @@
 import UIKit
 import ReactiveDataDisplayManager
 
+/// Wrapper class to erase type of original `TableCellGenerator`.
+/// Used to merge different types of generators into one array.
 public final class AnyIdentifiableTableCellGenerator: TableCellGenerator, DiffableItemSource {
 
     public typealias IdentifiableGenerator = TableCellGenerator & DiffableItemSource
