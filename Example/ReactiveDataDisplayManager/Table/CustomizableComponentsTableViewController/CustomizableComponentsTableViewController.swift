@@ -67,7 +67,6 @@ final class CustomizableComponentsTableViewController: UIViewController {
                                                                    edgeInsets:  UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 16))
     private lazy var recievedMessageGenerator = BaseCellGenerator<TableLabelCell>(with: recievedMessageModel, registerType: .class)
 
-
     // MARK: - UIViewController
 
     override func viewDidLoad() {

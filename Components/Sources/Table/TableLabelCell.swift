@@ -14,9 +14,11 @@ public final class TableLabelCell: UITableViewCell, LabelWrapper {
     public typealias Model = LabelView.Model
 
     // MARK: - Properties
+
     public private(set) var label: LabelView = .init(frame: .zero)
 
     // MARK: - Initialization
+    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
