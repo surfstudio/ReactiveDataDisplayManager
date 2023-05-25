@@ -99,8 +99,8 @@ private extension DiffableCollectionViewController {
 
         adapter += CollectionSections {
             Section(generators: generators,
-                                       header: EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId.appending("header")),
-                                       footer: EmptyCollectionFooterGenerator(uniqueId: Constants.sectionId.appending("footer")))
+                    header: EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId.appending("header")),
+                    footer: EmptyCollectionFooterGenerator(uniqueId: Constants.sectionId.appending("footer")))
         }
 
         // apply snapshot
