@@ -34,14 +34,46 @@ public class LabelView: UIView {
 
 extension LabelView: ConfigurableItem {
 
-    public typealias TextStyle = (color: UIColor, font: UIFont)
-    public typealias TextLayout = (alignment: NSTextAlignment, lineBreakMode: NSLineBreakMode, numberOfLines: Int)
+    // MARK: - Model
 
-    public struct Model {
+    public struct Model: Equatable {
+
+        // MARK: - Nested types
+
+        public struct TextStyle: Equatable {
+
+            public let color: UIColor
+            public let font: UIFont
+
+            public init(color: UIColor, font: UIFont) {
+                self.color = color
+                self.font = font
+            }
+
+        }
+
+        public struct TextLayout: Equatable {
+
+            public let alignment: NSTextAlignment
+            public let lineBreakMode: NSLineBreakMode
+            public let numberOfLines: Int
+
+            public init(alignment: NSTextAlignment, lineBreakMode: NSLineBreakMode, numberOfLines: Int) {
+                self.alignment = alignment
+                self.lineBreakMode = lineBreakMode
+                self.numberOfLines = numberOfLines
+            }
+
+        }
+
+        // MARK: - Public properties
+
         public let text: String
         public let style: TextStyle
         public let layout: TextLayout
         public let edgeInsets: UIEdgeInsets
+
+        // MARK: - Initialization
 
         public init(text: String, style: TextStyle, layout: TextLayout, edgeInsets: UIEdgeInsets) {
             self.text = text
@@ -49,7 +81,10 @@ extension LabelView: ConfigurableItem {
             self.layout = layout
             self.edgeInsets = edgeInsets
         }
+
     }
+
+    // MARK: - Methods
 
     public func configure(with model: Model) {
         self.backgroundColor = .clear
@@ -90,17 +125,6 @@ public extension LabelWrapper where Model == LabelView.Model {
     func configure(with model: Model) {
         wrap(subview: label, with: model.edgeInsets)
         label.configure(with: model)
-    }
-
-}
-
-// MARK: - Equatable
-
-extension LabelView.Model: Equatable {
-
-    public static func == (lhs: LabelView.Model, rhs: LabelView.Model) -> Bool {
-        return lhs.text == rhs.text && lhs.style == rhs.style
-        && lhs.layout == rhs.layout && lhs.edgeInsets == rhs.edgeInsets
     }
 
 }
