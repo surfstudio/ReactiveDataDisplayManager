@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
-final class HeaderCollectionListView: UICollectionReusableView {
+final class HeaderCollectionListView: UICollectionReusableView, AccessibilityItem {
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
+
+    // MARK: - AccessibilityItem
+
+    var labelStrategy: AccessibilityStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
 
     // MARK: - Internal Methods
 
