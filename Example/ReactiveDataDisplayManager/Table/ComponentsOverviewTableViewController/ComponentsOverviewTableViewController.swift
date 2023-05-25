@@ -1,5 +1,5 @@
 //
-//  CustomizableComponentsTableViewController.swift
+//  ComponentsOverviewTableViewController.swift
 //  ReactiveDataComponentsTests_iOS
 //
 //  Created by Антон Голубейков on 24.05.2023.
@@ -77,7 +77,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.accessibilityIdentifier = "CustomizableComponentsTableViewController"
+        tableView.accessibilityIdentifier = "ComponentsOverviewTableViewController"
         tableView.separatorStyle = .none
         fillAdapter()
     }
@@ -86,7 +86,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
 
 // MARK: - Private Methods
 
-private extension CustomizableComponentsTableViewController {
+private extension ComponentsOverviewTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {

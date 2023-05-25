@@ -582,10 +582,10 @@
             </objects>
             <point key="canvasLocation" x="8936" y="-1842"/>
         </scene>
-        <!--Customizable Components Table View Controller-->
+        <!--Components Overview Table View Controller-->
         <scene sceneID="cNK-l3-n32">
             <objects>
-                <viewController id="DKn-Su-lHd" customClass="CustomizableComponentsTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DKn-Su-lHd" customClass="ComponentsOverviewTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tMT-uz-4UG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
