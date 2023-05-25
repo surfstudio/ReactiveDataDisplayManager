@@ -63,29 +63,29 @@ public enum AccessibilityTraitsStrategy {
     }
 }
 
-public protocol AccessibilityItem {
+public protocol AccessibilityStrategyProvider {
     var labelStrategy: AccessibilityStrategy { get }
     var valueStrategy: AccessibilityStrategy { get }
     var traitsStrategy: AccessibilityTraitsStrategy { get }
 }
 
-public extension AccessibilityItem {
+public extension AccessibilityStrategyProvider {
     var labelStrategy: AccessibilityStrategy { .ignored }
     var valueStrategy: AccessibilityStrategy { .ignored }
     var traitsStrategy: AccessibilityTraitsStrategy { .ignored }
 }
 
-public protocol AccessibilityCell: AccessibilityItem {
+public protocol AccessibilityItem: AccessibilityStrategyProvider {
     typealias AccessibilityModifierType = AccessibilityModifier.Type
     var modifierType: AccessibilityModifierType { get }
 
-    func accessibilityStrategyConflictResolver(cellStrategy: AccessibilityStrategy, generatorStrategy: AccessibilityStrategy?) -> String?
+    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStrategy, generatorStrategy: AccessibilityStrategy?) -> String?
 }
 
-public extension AccessibilityCell {
+public extension AccessibilityItem {
     var modifierType: AccessibilityModifierType { DefaultAccessibilityModifier.self }
 
-    func accessibilityStrategyConflictResolver(cellStrategy: AccessibilityStrategy, generatorStrategy: AccessibilityStrategy?) -> String? {
-        return [generatorStrategy?.value, cellStrategy.value].compactMap { $0 }.joined(separator: " ")
+    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStrategy, generatorStrategy: AccessibilityStrategy?) -> String? {
+        return [generatorStrategy?.value, itemStrategy.value].compactMap { $0 }.joined(separator: " ")
     }
 }
