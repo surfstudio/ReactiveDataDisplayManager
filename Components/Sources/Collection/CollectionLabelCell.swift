@@ -15,17 +15,6 @@ public final class CollectionLabelCell: UICollectionViewCell, LabelWrapper {
 
     // MARK: - Properties
 
-    public private(set) var label: LabelView = .init(frame: .zero)
-
-    // MARK: - Initialization
-
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    public let label: LabelView = .init(frame: .zero)
 
 }

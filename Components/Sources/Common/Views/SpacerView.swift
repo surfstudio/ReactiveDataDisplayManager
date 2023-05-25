@@ -46,7 +46,8 @@ extension SpacerView: ConfigurableItem {
     public func configure(with model: Model) {
         backgroundColor = model.color
         heightConstraint?.constant = model.height
-        setNeedsUpdateConstraints()
+        
+        layoutIfNeeded()
     }
 
 }
