@@ -92,27 +92,27 @@ extension BaseTableDelegate {
 extension BaseTableDelegate {
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        tablePlugins.process(event: .willDisplayCell(indexPath), with: manager)
+        tablePlugins.process(event: .willDisplayCell(indexPath, cell), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        tablePlugins.process(event: .willDisplayHeader(section), with: manager)
+        tablePlugins.process(event: .willDisplayHeader(section, view), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        tablePlugins.process(event: .didEndDisplayHeader(section), with: manager)
+        tablePlugins.process(event: .didEndDisplayHeader(section, view), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        tablePlugins.process(event: .didEndDisplayCell(indexPath), with: manager)
+        tablePlugins.process(event: .didEndDisplayCell(indexPath, cell), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        tablePlugins.process(event: .willDisplayFooter(section), with: manager)
+        tablePlugins.process(event: .willDisplayFooter(section, view), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        tablePlugins.process(event: .didEndDisplayFooter(section), with: manager)
+        tablePlugins.process(event: .didEndDisplayFooter(section, view), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
