@@ -13,27 +13,7 @@ open class TableHeaderGenerator: ViewGenerator, AccessibilityStrategyProvider {
 
     public let uuid = UUID().uuidString
 
-    open var labelStrategy: AccessibilityStringStrategy = .ignored
-    open var traitsStrategy: AccessibilityTraitsStrategy = .just(.header)
-
-    public init() { }
-
-    open func generate() -> UIView {
-        preconditionFailure("\(#function) must be overriden in child")
-    }
-
-    open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
-        preconditionFailure("\(#function) must be overriden in child")
-    }
-}
-
-// sourcery: AutoMockable
-open class TableFooterGenerator: ViewGenerator, AccessibilityStrategyProvider {
-
-    public let uuid = UUID().uuidString
-
-    open var labelStrategy: AccessibilityStringStrategy = .ignored
-    open var traitsStrategy: AccessibilityTraitsStrategy = .ignored
+    open var traitsStrategy: AccessibilityTraitsStrategy { .just(.header) }
 
     public init() { }
 
@@ -112,7 +92,6 @@ public extension CollectionHeaderGenerator {
         return nil
     }
 
-    var labelStrategy: AccessibilityStringStrategy { .ignored }
     var traitsStrategy: AccessibilityTraitsStrategy { .just(.header) }
 
 }
