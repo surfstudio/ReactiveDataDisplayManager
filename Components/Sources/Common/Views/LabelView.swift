@@ -28,6 +28,11 @@ public class LabelView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    public init(labelClass: UILabel.Type) {
+        super.init(frame: .zero)
+        textView = labelClass.init()
+    }
+
 }
 
 // MARK: - ConfigurableItem
