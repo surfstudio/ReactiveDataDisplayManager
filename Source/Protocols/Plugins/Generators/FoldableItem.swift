@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for `TableCellGenerator` to manage expand/collapse state
-public protocol FoldableItem: AnyObject {
+public protocol FoldableItem: AnyObject, AccessibilityStrategyProvider {
 
     /// Set animation for folder's expand / shrink
     var animation: TableFoldablePlugin.AnimationGroup { get }
@@ -22,7 +22,7 @@ public protocol FoldableItem: AnyObject {
 
     /// Generators describing cells to be inserted in expanded state
     var childGenerators: [TableCellGenerator] { get set }
-    
+
 }
 
 public extension FoldableItem {
@@ -30,5 +30,7 @@ public extension FoldableItem {
     var animation: TableFoldablePlugin.AnimationGroup {
         return (.none, .fade)
     }
+
+    var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
 
 }
