@@ -14,7 +14,7 @@ public protocol FoldableStateHolder: AnyObject {
 }
 
 /// Protocol for `TableCellGenerator` to manage expand/collapse state
-public protocol FoldableItem: AnyObject {
+public protocol FoldableItem: AnyObject, AccessibilityStrategyProvider {
 
     /// Set animation for folder's expand / shrink
     var animation: TableFoldablePlugin.AnimationGroup { get }
@@ -35,5 +35,7 @@ public extension FoldableItem {
     var animation: TableFoldablePlugin.AnimationGroup {
         return (.none, .fade)
     }
+
+    var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
 
 }

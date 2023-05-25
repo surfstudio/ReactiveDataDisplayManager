@@ -7,8 +7,12 @@
 //
 
 // sourcery: AutoMockable
-public protocol CollectionFoldableItem: AnyObject {
+public protocol CollectionFoldableItem: AnyObject, AccessibilityStrategyProvider {
     var didFoldEvent: BaseEvent<Bool> { get }
     var isExpanded: Bool { get set }
     var childGenerators: [CollectionCellGenerator] { get set }
+}
+
+extension CollectionFoldableItem {
+    public var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
 }
