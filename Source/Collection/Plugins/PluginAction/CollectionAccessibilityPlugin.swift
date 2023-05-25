@@ -12,22 +12,33 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
     override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
         switch event {
         case .willDisplayCell(let indexPath, let cell):
-            if let accessibilityItem = cell as? AccessibilityItem {
-                let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider
-                accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem, generator: generator)
-            }
-        case .willDisplaySupplementaryView(let indexPath, let view, let kind):
-            guard [UICollectionView.elementKindSectionHeader, UICollectionView.elementKindSectionFooter].contains(kind) else {
+            guard let accessibilityItem = cell as? AccessibilityItem else {
                 return
             }
-            if let accessibilityItem = view as? AccessibilityItem {
-                let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider
-                accessibilityItem.modifierType.modify(view: view, with: accessibilityItem, generator: generator)
+            let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider
+            accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem, generator: generator)
+
+        case .willDisplaySupplementaryView(let indexPath, let view, let kind):
+            guard let accessibilityItem = view as? AccessibilityItem else {
+                return
             }
+
+            var supplementaryGenerator: AccessibilityStrategyProvider?
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                supplementaryGenerator = manager?.sections[indexPath.section] as? AccessibilityStrategyProvider
+            case UICollectionView.elementKindSectionFooter:
+                supplementaryGenerator = manager?.footers[indexPath.section] as? AccessibilityStrategyProvider
+            default:
+                break
+            }
+            accessibilityItem.modifierType.modify(view: view, with: accessibilityItem, generator: supplementaryGenerator)
+
         default:
             break
         }
     }
+
 }
 
 extension BaseCollectionPlugin {
