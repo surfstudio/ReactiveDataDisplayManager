@@ -16,6 +16,11 @@ abstract_target 'Targets' do
 
   nuke
 
+  target 'ReactiveChat_iOS' do
+    platform :ios, '13.0'
+    utils
+  end
+
   target 'ReactiveDataDisplayManagerExample_iOS' do
     platform :ios, '11.0'
     utils
