@@ -45,7 +45,7 @@ extension LabelView: ConfigurableItem {
             public let color: UIColor
             public let font: UIFont
 
-            public init(color: UIColor, font: UIFont) {
+            public init(color: UIColor = .black, font: UIFont = .systemFont(ofSize: 16)) {
                 self.color = color
                 self.font = font
             }
@@ -58,7 +58,7 @@ extension LabelView: ConfigurableItem {
             public let lineBreakMode: NSLineBreakMode
             public let numberOfLines: Int
 
-            public init(alignment: NSTextAlignment, lineBreakMode: NSLineBreakMode, numberOfLines: Int) {
+            public init(alignment: NSTextAlignment = .left, lineBreakMode: NSLineBreakMode = .byWordWrapping, numberOfLines: Int = 0) {
                 self.alignment = alignment
                 self.lineBreakMode = lineBreakMode
                 self.numberOfLines = numberOfLines
