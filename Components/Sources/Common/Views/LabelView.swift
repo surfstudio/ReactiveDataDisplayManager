@@ -66,16 +66,23 @@ extension LabelView: ConfigurableItem {
 
         }
 
+        // Mind that attributed string may re-configure other model`s properties
+
+        public enum TextType: Equatable {
+            case string(String)
+            case attributedString(NSAttributedString)
+        }
+
         // MARK: - Public properties
 
-        public let text: String
+        public let text: TextType
         public let style: TextStyle
         public let layout: TextLayout
         public let edgeInsets: UIEdgeInsets
 
         // MARK: - Initialization
 
-        public init(text: String, style: TextStyle, layout: TextLayout, edgeInsets: UIEdgeInsets) {
+        public init(text: TextType, style: TextStyle, layout: TextLayout, edgeInsets: UIEdgeInsets) {
             self.text = text
             self.style = style
             self.layout = layout
@@ -89,13 +96,14 @@ extension LabelView: ConfigurableItem {
     public func configure(with model: Model) {
         self.backgroundColor = .clear
         textView.backgroundColor = .clear
-        textView.text = model.text
         textView.textColor = model.style.color
         textView.font = model.style.font
 
         textView.textAlignment = model.layout.alignment
         textView.lineBreakMode = model.layout.lineBreakMode
         textView.numberOfLines = model.layout.numberOfLines
+
+        configureText(with: model.text)
 
         layoutIfNeeded()
     }
@@ -108,6 +116,15 @@ private extension LabelView {
 
     func configureConstraints() {
         wrap(subview: textView, with: .zero)
+    }
+
+    func configureText(with text: Model.TextType) {
+        switch text {
+        case .string(let text):
+            textView.text = text
+        case .attributedString(let attrubutedText):
+            textView.attributedText = attrubutedText
+        }
     }
 
 }

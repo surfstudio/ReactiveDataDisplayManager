@@ -35,7 +35,7 @@ final class CustomizableComponentsTableViewController: UIViewController {
 
     private lazy var sentMessageTimeStyle = TextStyle(color: .gray, font: .systemFont(ofSize: 12, weight: .light))
     private lazy var sentMessageTimeLayout = TextLayout(alignment: .left, lineBreakMode: .byWordWrapping, numberOfLines: 0)
-    private lazy var sentMessageTimeModel = Model(text: "17:05",
+    private lazy var sentMessageTimeModel = Model(text: .string("17:05"),
                                                   style: sentMessageTimeStyle,
                                                   layout: sentMessageTimeLayout,
                                                   edgeInsets: UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 0))
@@ -43,7 +43,7 @@ final class CustomizableComponentsTableViewController: UIViewController {
 
     private lazy var recievedTimeMessageStyle = TextStyle(color: .gray, font: .systemFont(ofSize: 12, weight: .light))
     private lazy var recievedTimeMessageLayout = TextLayout(alignment: .right, lineBreakMode: .byWordWrapping, numberOfLines: 0)
-    private lazy var recievedTimeMessageModel = Model(text: "17:32",
+    private lazy var recievedTimeMessageModel = Model(text: .string("17:32"),
                                                       style: recievedTimeMessageStyle,
                                                       layout: recievedTimeMessageLayout,
                                                       edgeInsets: UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 16))
@@ -51,7 +51,7 @@ final class CustomizableComponentsTableViewController: UIViewController {
 
     private lazy var dateStyle = TextStyle(color: .black, font: .systemFont(ofSize: 12, weight: .light))
     private lazy var dateLayout = TextLayout(alignment: .center, lineBreakMode: .byWordWrapping, numberOfLines: 0)
-    private lazy var dateModel = Model(text: "24 мая 2023",
+    private lazy var dateModel = Model(text: .string("24 мая 2023"),
                                        style: dateStyle,
                                        layout: dateLayout,
                                        edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
@@ -59,7 +59,7 @@ final class CustomizableComponentsTableViewController: UIViewController {
 
     private lazy var sentMessageStyle = TextStyle(color: .black, font: .systemFont(ofSize: 16, weight: .regular))
     private lazy var sentMessageLayout = TextLayout(alignment: .left, lineBreakMode: .byWordWrapping, numberOfLines: 0)
-    private lazy var sentMessageModel: LabelView.Model = .init(text: "Lorem ipsum dolor sit amet",
+    private lazy var sentMessageModel: LabelView.Model = .init(text: .string("Lorem ipsum dolor sit amet"),
                                                                style: sentMessageStyle,
                                                                layout: sentMessageLayout,
                                                                edgeInsets: UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 0))
@@ -67,7 +67,7 @@ final class CustomizableComponentsTableViewController: UIViewController {
 
     private lazy var recievedMessageStyle = TextStyle(color: .black, font: .systemFont(ofSize: 16, weight: .regular))
     private lazy var recievedMessageLayout = TextLayout(alignment: .right, lineBreakMode: .byWordWrapping, numberOfLines: 0)
-    private lazy var recievedMessageModel = Model(text: "Lorem ipsum dolor sit amet",
+    private lazy var recievedMessageModel = Model(text: .string("Lorem ipsum dolor sit amet"),
                                                   style: recievedMessageStyle,
                                                   layout: recievedMessageLayout,
                                                   edgeInsets:  UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 16))
