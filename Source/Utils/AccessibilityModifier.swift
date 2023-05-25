@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 public protocol AccessibilityModifier {
     static func modify(view: UIView, with item: AccessibilityItem, generator: AccessibilityStrategyProvider?)
 }
