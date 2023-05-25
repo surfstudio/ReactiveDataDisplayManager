@@ -9,11 +9,16 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-class TitleCollectionListCell: UICollectionViewCell, ConfigurableItem {
+class TitleCollectionListCell: UICollectionViewCell, ConfigurableItem, AccessibilityItem {
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
+
+    // MARK: - AccessibilityItem
+
+    var labelStrategy: AccessibilityStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
 
     // MARK: - Configurable
 
