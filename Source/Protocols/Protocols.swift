@@ -9,9 +9,11 @@
 import UIKit
 
 // sourcery: AutoMockable
-open class TableHeaderGenerator: ViewGenerator {
+open class TableHeaderGenerator: ViewGenerator, AccessibilityStrategyProvider {
 
     public let uuid = UUID().uuidString
+
+    open var traitsStrategy: AccessibilityTraitsStrategy { .just(.header) }
 
     public init() { }
 
@@ -68,7 +70,7 @@ public extension TableCellGenerator {
 
 // sourcery: AutoMockable
 /// Protocol that incapsulated type of Header
-public protocol CollectionHeaderGenerator: AnyObject {
+public protocol CollectionHeaderGenerator: AnyObject, AccessibilityStrategyProvider {
 
     var identifier: UICollectionReusableView.Type { get }
 
@@ -89,6 +91,8 @@ public extension CollectionHeaderGenerator {
     static func bundle() -> Bundle? {
         return nil
     }
+
+    var traitsStrategy: AccessibilityTraitsStrategy { .just(.header) }
 
 }
 

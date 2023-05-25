@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class BaseCollectionCellGenerator<Cell: ConfigurableItem>: SelectableItem, AccessibilityItem where Cell: UICollectionViewCell {
+open class BaseCollectionCellGenerator<Cell: ConfigurableItem>: SelectableItem where Cell: UICollectionViewCell {
 
     // MARK: - Public Properties
 
@@ -16,7 +16,6 @@ open class BaseCollectionCellGenerator<Cell: ConfigurableItem>: SelectableItem, 
     public var didSelectEvent = BaseEvent<Void>()
     public var didDeselectEvent = BaseEvent<Void>()
     public let model: Cell.Model
-    public var traitsStrategy: AccessibilityTraitsStrategy = .just(.button)
 
     // MARK: - Private Properties
 

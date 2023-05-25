@@ -9,7 +9,7 @@
 import UIKit
 
 /// Protocol for `Generator` to handle didSelect event
-public protocol SelectableItem: AnyObject {
+public protocol SelectableItem: AnyObject, AccessibilityStrategyProvider {
 
     /// Invokes when user taps on the item. Requires .selectable plugin!!!
     var didSelectEvent: BaseEvent<Void> { get }
@@ -21,4 +21,8 @@ public protocol SelectableItem: AnyObject {
     /// If the value of this property is **true** (the default), cells deselect
     /// immediately after tap. If you set it to **false**, they don't deselect.
     var isNeedDeselect: Bool { get set }
+}
+
+extension SelectableItem {
+    public var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
 }
