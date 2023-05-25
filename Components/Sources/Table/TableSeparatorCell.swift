@@ -15,17 +15,6 @@ public final class TableSeparatorCell: UITableViewCell, SeparatorWrapper {
 
     // MARK: - Properties
 
-    public private(set) var separator: SeparatorView = .init(frame: .zero)
-
-    // MARK: - Initialization
-
-    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    public let separator: SeparatorView = .init(frame: .zero)
 
 }

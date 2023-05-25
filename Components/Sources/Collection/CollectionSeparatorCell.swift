@@ -15,17 +15,6 @@ public final class CollectionSeparatorCell: UICollectionViewCell, SeparatorWrapp
 
     // MARK: - Properties
 
-    public private(set) var separator: SeparatorView = .init(frame: .zero)
-
-    // MARK: - Initialization
-
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    public let separator: SeparatorView = .init(frame: .zero)
 
 }

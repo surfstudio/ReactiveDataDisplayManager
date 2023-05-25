@@ -49,7 +49,7 @@ extension SeparatorView: ConfigurableItem {
         backgroundColor = model.color
         heightConstraint?.constant = model.height
 
-        setNeedsUpdateConstraints()
+        layoutIfNeeded()
     }
 
 }
