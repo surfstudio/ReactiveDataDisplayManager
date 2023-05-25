@@ -93,18 +93,30 @@ private extension ComponentsOverviewTableViewController {
 
         adapter += TableGenerators {
             dateGenerator
-            sentMessageGenerator
-            sentMessageGenerator
-            sentMessageGenerator
+            generateSentMessages()
             sentMessageTimeGenerator
-            recievedMessageGenerator
-            recievedMessageGenerator
-            recievedMessageGenerator
+            generateRecievedMessages()
             recievedMessageTimeGenerator
         }
 
         // Tell adapter that we've changed generators
         adapter => .reload
+    }
+
+    func generateSentMessages() -> [TableCellGenerator] {
+        var generators = [TableCellGenerator]()
+        for _ in 0...3 {
+            generators.append(sentMessageGenerator)
+        }
+        return generators
+    }
+
+    func generateRecievedMessages() -> [TableCellGenerator] {
+        var generators = [TableCellGenerator]()
+        for _ in 0...3 {
+            generators.append(recievedMessageGenerator)
+        }
+        return generators
     }
 
 }
