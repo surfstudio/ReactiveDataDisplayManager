@@ -30,7 +30,6 @@ final class ComponentsOverviewTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.baseBuilder
-        .add(plugin: .foldable())
         .build()
 
     private let sentMessageTimeStyle = TextStyle(color: .gray, font: .systemFont(ofSize: 12, weight: .light))
