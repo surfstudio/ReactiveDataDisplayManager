@@ -62,7 +62,7 @@ extension LabelView: ConfigurableItem {
         textView.lineBreakMode = model.layout.lineBreakMode
         textView.numberOfLines = model.layout.numberOfLines
 
-        setNeedsUpdateConstraints()
+        layoutIfNeeded()
     }
 
 }
