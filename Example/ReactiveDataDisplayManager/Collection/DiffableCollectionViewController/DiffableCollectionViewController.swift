@@ -13,30 +13,28 @@ final class DiffableCollectionViewController: UIViewController {
 
     typealias DiffableGenerator = DiffableCollectionCellGenerator<TitleCollectionListCell>
 
-    typealias FirstSection = Section<DiffableGenerator, EmptyCollectionHeaderGenerator, CollectionFooterGenerator>
-
     // MARK: - Constants
 
     private enum Constants {
         static let sectionId = "Section"
-        static let models = [
-            "Afghanistan",
-            "Afghanistan",
-            "Albania",
-            "Algeria",
-            "Andorra",
-            "Angola",
-            "Antigua and Barbuda",
-            "Argentina",
-            "Armenia",
-            "Australia",
-            "Austria",
-            "Azerbaijan",
-            "Bahamas",
-            "Bahrain",
-            "Bangladesh",
-            "Barbados",
-            "Belarus"
+        static let models: [String: String] = [
+            UUID().uuidString: "Afghanistan",
+            UUID().uuidString: "Afghanistan",
+            UUID().uuidString: "Albania",
+            UUID().uuidString: "Algeria",
+            UUID().uuidString: "Andorra",
+            UUID().uuidString: "Angola",
+            UUID().uuidString: "Antigua and Barbuda",
+            UUID().uuidString: "Argentina",
+            UUID().uuidString: "Armenia",
+            UUID().uuidString: "Australia",
+            UUID().uuidString: "Austria",
+            UUID().uuidString: "Azerbaijan",
+            UUID().uuidString: "Bahamas",
+            UUID().uuidString: "Bahrain",
+            UUID().uuidString: "Bangladesh",
+            UUID().uuidString: "Barbados",
+            UUID().uuidString: "Belarus"
         ]
     }
 
@@ -99,11 +97,11 @@ private extension DiffableCollectionViewController {
 
         adapter -= .all
 
-        let section = FirstSection(generators: generators,
-                                   header: EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId),
-                                   footer: EmptyCollectionFooterGenerator())
-
-        adapter += section.generators * section.header
+        adapter += CollectionSections {
+            Section(generators: generators,
+                                       header: EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId.appending("header")),
+                                       footer: EmptyCollectionFooterGenerator(uniqueId: Constants.sectionId.appending("footer")))
+        }
 
         // apply snapshot
         adapter => .reload
@@ -111,8 +109,8 @@ private extension DiffableCollectionViewController {
 
     // Create cells generators
     func makeCellGenerators() -> [DiffableGenerator] {
-        Constants.models.enumerated().map { item in
-            TitleCollectionListCell.rddm.diffableGenerator(uniqueId: item.offset, with: item.element)
+        Constants.models.map { key, value in
+            TitleCollectionListCell.rddm.diffableGenerator(uniqueId: key, with: value)
         }
     }
 

@@ -19,24 +19,24 @@ final class DiffableTableViewController: UIViewController {
 
     private enum Constants {
         static let sectionId = "Section"
-        static let models = [
-            "Afghanistan",
-            "Afghanistan",
-            "Albania",
-            "Algeria",
-            "Andorra",
-            "Angola",
-            "Antigua and Barbuda",
-            "Argentina",
-            "Armenia",
-            "Australia",
-            "Austria",
-            "Azerbaijan",
-            "Bahamas",
-            "Bahrain",
-            "Bangladesh",
-            "Barbados",
-            "Belarus"
+        static let models: [String: String] = [
+            UUID().uuidString: "Afghanistan",
+            UUID().uuidString: "Afghanistan",
+            UUID().uuidString: "Albania",
+            UUID().uuidString: "Algeria",
+            UUID().uuidString: "Andorra",
+            UUID().uuidString: "Angola",
+            UUID().uuidString: "Antigua and Barbuda",
+            UUID().uuidString: "Argentina",
+            UUID().uuidString: "Armenia",
+            UUID().uuidString: "Australia",
+            UUID().uuidString: "Austria",
+            UUID().uuidString: "Azerbaijan",
+            UUID().uuidString: "Bahamas",
+            UUID().uuidString: "Bahrain",
+            UUID().uuidString: "Bangladesh",
+            UUID().uuidString: "Barbados",
+            UUID().uuidString: "Belarus"
         ]
     }
 
@@ -123,8 +123,8 @@ private extension DiffableTableViewController {
 
     // Create cells generators
     func makeCellGenerators() -> [DiffableGenerator] {
-        Constants.models.enumerated().map { item in
-            TitleTableViewCell.rddm.diffableGenerator(uniqueId: item.offset, with: item.element)
+        Constants.models.map { key, value in
+            TitleTableViewCell.rddm.diffableGenerator(uniqueId: key, with: value)
         }
     }
 
