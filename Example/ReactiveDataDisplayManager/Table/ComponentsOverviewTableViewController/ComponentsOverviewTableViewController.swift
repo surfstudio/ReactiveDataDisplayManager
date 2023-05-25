@@ -69,7 +69,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private lazy var recievedMessageModel = Model(text: .string("Lorem ipsum dolor sit amet"),
                                                   style: recievedMessageStyle,
                                                   layout: recievedMessageLayout,
-                                                  edgeInsets:  UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 16))
+                                                  edgeInsets: UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 16))
     private lazy var recievedMessageGenerator = TableLabelCell.rddm.baseGenerator(with: recievedMessageModel, and: .class)
 
     // MARK: - UIViewController
