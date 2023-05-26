@@ -7,7 +7,9 @@
 
 import UIKit
 
+/// Protocol for accessibility parameters modifier
 public protocol AccessibilityModifier {
+    /// Modifies the view with strategies from item and generator
     static func modify(view: UIView, with item: AccessibilityItem, generator: AccessibilityStrategyProvider?)
 }
 
