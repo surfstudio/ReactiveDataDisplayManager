@@ -12,7 +12,7 @@ import UIKit
 public class CollectionBatchUpdatesAnimator: Animator<UICollectionView> {
 
     public override func performAnimated(in collection: UICollectionView, operation: Operation?) {
-        if let operation {
+        if let operation = operation {
             collection.performBatchUpdates(operation)
         } else {
             collection.collectionViewLayout.invalidateLayout()
