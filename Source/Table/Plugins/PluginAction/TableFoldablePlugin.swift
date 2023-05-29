@@ -6,10 +6,16 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 /// Plugin to support `FoldableItem`
 ///
 /// Allow  expand or collapse child cells
 public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
+
+    // MARK: - Nested types
+
+    public typealias AnimationGroup = (remove: UITableView.RowAnimation, insert: UITableView.RowAnimation)
 
     // MARK: - BaseTablePlugin
 
@@ -25,7 +31,7 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
 
             if foldable.isExpanded {
                 foldable.childGenerators.forEach { manager?.remove($0,
-                                                                   with: .none,
+                                                                   with: foldable.animation.remove,
                                                                    needScrollAt: nil,
                                                                    needRemoveEmptySection: false)
                 }
@@ -51,12 +57,12 @@ private extension TableFoldablePlugin {
     func addCellGenerators(_ childGenerators: [TableCellGenerator],
                            after generator: TableCellGenerator,
                            with manager: BaseTableManager?) {
-        if let manager = manager as? ManualTableManager {
-            manager.insert(after: generator, new: childGenerators, with: .fade)
-        } else if let manager = manager as? GravityTableManager {
+        if let manager = manager as? GravityTableManager {
             manager.addCellGenerators(childGenerators, after: generator)
+        } else if let foldable = generator as? FoldableItem {
+            manager?.insertManual(after: generator, new: childGenerators, with: foldable.animation.insert)
         } else {
-            assertionFailure("❗️The base manager cannot control the show/hide. Install ManualTableManager or GravityTableManager")
+            manager?.insertManual(after: generator, new: childGenerators)
         }
     }
 

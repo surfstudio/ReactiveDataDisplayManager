@@ -12,6 +12,7 @@ class FoldableCellGenerator: BaseCellGenerator<FoldableTableViewCell>, FoldableI
 
     // MARK: - FoldableItem
 
+    var animation: TableFoldablePlugin.AnimationGroup = (.left, .top)
     var didFoldEvent = BaseEvent<Bool>()
     var isExpanded = false
     var childGenerators: [TableCellGenerator] = []

@@ -16,11 +16,14 @@ open class BaseUITestCase: XCTestCase {
     //swiftlint:disable:next implicitly_unwrapped_optional
     var app: XCUIApplication!
 
+    var additionalCommands: [String] = []
+
     override open func setUpWithError() throws {
         try super.setUpWithError()
         continueAfterFailure = false
         app = XCUIApplication()
         app.launchArguments.append("-disableAnimations")
+        app.launchArguments.append(contentsOf: additionalCommands)
         app.launch()
     }
 

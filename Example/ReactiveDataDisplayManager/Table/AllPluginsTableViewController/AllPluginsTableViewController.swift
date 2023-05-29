@@ -68,8 +68,13 @@ final class AllPluginsTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.accessibilityIdentifier = "main_table"
         fillAdapter()
         updateBarButtonItem(with: Constants.startEditing)
+
+        scheduleIfNeeded { [weak self] in
+            self?.insertRandomCell()
+        }
     }
 
 }
@@ -80,6 +85,9 @@ private extension AllPluginsTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+
+        adapter.clearCellGenerators()
+
         addExpandableSection()
         addSelectableSection()
         addFoldableSection()
@@ -94,6 +102,37 @@ private extension AllPluginsTableViewController {
     func updateBarButtonItem(with title: String) {
         let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeTableEditing))
         navigationItem.rightBarButtonItem = button
+    }
+
+    /// Use this method for UI stress test only.
+    /// You can traine here usage of manual manager and different replacing and insertions.
+    ///  - Note: some combinations of functions may cause crash and it's normal, because manualBuilder is just wrapper under tableView functions.
+    func insertRandomCell() {
+        guard let (sectionIndex, sectionGenerator) = adapter.sections
+            .compactMap({ $0.header as? SectionTitleHeaderGenerator })
+            .enumerated()
+            .first(where: { $0.element.title == "Selectable" })
+        else {
+            return
+        }
+
+        let oldIndexes = adapter.sections[sectionIndex].generators.enumerated().map { IndexPath(row: $0.offset, section: sectionIndex) }
+
+        adapter.sections[sectionIndex].generators.removeAll()
+
+        let titles = Bool.random() ? ["One", "Two", "Three"] : ["Four", "Five"]
+        let generators = titles.map(createSelectableGenerator(with:))
+        adapter.sections[sectionIndex].generators.append(contentsOf: generators)
+        adapter.sections.remove(at: sectionIndex)
+
+        let indexes = generators.enumerated().map { IndexPath(row: $0.offset, section: sectionIndex) }
+
+        adapter.sections.insert(Section(generators: generators, header: sectionGenerator), at: sectionIndex)
+        adapter.modifier?.replace(at: oldIndexes, on: indexes, with: nil)
+
+        adapter.addSectionHeaderGenerator(SectionTitleHeaderGenerator(model: "Buggy_addition \(Int.random(in: 0...100))",
+                                                                      needSectionIndexTitle: false))
+        adapter.modifier?.insertSections(at: IndexSet(integer: adapter.sections.count - 1), with: nil)
     }
 
     @objc
@@ -114,14 +153,20 @@ private extension AllPluginsTableViewController {
 
         for titleStr in Constants.titles {
             // Create generator
-            let generator = TitleTableViewCell.rddm.baseGenerator(with: titleStr)
-            generator.didSelectEvent += {
-                debugPrint("\(titleStr) selected")
-            }
+            let generator = createSelectableGenerator(with: titleStr)
 
             // Add generator to adapter
             adapter += generator
         }
+    }
+
+    func createSelectableGenerator(with title: String) -> TableCellGenerator {
+        let generator = TitleTableViewCell.rddm.baseGenerator(with: title)
+        generator.didSelectEvent += {
+            debugPrint("\(title) selected")
+        }
+
+        return generator
     }
 
     /// Method allow add header and foldable cells into adapter
