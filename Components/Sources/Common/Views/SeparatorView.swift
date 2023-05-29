@@ -33,7 +33,7 @@ public class SeparatorView: UIView {
 
 extension SeparatorView: ConfigurableItem {
 
-    public struct Model {
+    public struct Model: Equatable {
         public let height: CGFloat
         public let color: UIColor?
         public let edgeInsets: UIEdgeInsets
