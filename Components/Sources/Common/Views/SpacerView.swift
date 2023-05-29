@@ -33,7 +33,7 @@ public class SpacerView: UIView {
 
 extension SpacerView: ConfigurableItem {
 
-    public struct Model {
+    public struct Model: Equatable {
         public let height: CGFloat
         public let color: UIColor?
 

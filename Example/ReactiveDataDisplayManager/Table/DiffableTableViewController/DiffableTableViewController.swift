@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveDataDisplayManager
+import ReactiveDataComponents
 
 @available(iOS 13.0, *)
 final class DiffableTableViewController: UIViewController {
@@ -18,24 +19,24 @@ final class DiffableTableViewController: UIViewController {
 
     private enum Constants {
         static let sectionId = "Section"
-        static let models = [
-            "Afghanistan",
-            "Afghanistan",
-            "Albania",
-            "Algeria",
-            "Andorra",
-            "Angola",
-            "Antigua and Barbuda",
-            "Argentina",
-            "Armenia",
-            "Australia",
-            "Austria",
-            "Azerbaijan",
-            "Bahamas",
-            "Bahrain",
-            "Bangladesh",
-            "Barbados",
-            "Belarus"
+        static let models: [String: String] = [
+            UUID().uuidString: "Afghanistan",
+            UUID().uuidString: "Afghanistan",
+            UUID().uuidString: "Albania",
+            UUID().uuidString: "Algeria",
+            UUID().uuidString: "Andorra",
+            UUID().uuidString: "Angola",
+            UUID().uuidString: "Antigua and Barbuda",
+            UUID().uuidString: "Argentina",
+            UUID().uuidString: "Armenia",
+            UUID().uuidString: "Australia",
+            UUID().uuidString: "Austria",
+            UUID().uuidString: "Azerbaijan",
+            UUID().uuidString: "Bahamas",
+            UUID().uuidString: "Bahrain",
+            UUID().uuidString: "Bangladesh",
+            UUID().uuidString: "Barbados",
+            UUID().uuidString: "Belarus"
         ]
     }
 
@@ -45,7 +46,7 @@ final class DiffableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = tableView.rddm.manualBuilder
+    private lazy var adapter = tableView.rddm.baseBuilder
         .set(dataSource: { DiffableTableDataSource(provider: $0) })
         .build()
 
@@ -59,7 +60,8 @@ final class DiffableTableViewController: UIViewController {
 
         setupSearch()
         setupBarButtonItem()
-        fillAdapter()
+        generators = makeCellGenerators()
+        fillAdapter(with: generators)
     }
 
 }
@@ -70,19 +72,8 @@ final class DiffableTableViewController: UIViewController {
 extension DiffableTableViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        // clear existing generators
-        adapter -= .all
-
-        // add header with static id
-        adapter += EmptyTableHeaderGenerator(uniqueId: Constants.sectionId)
-
-        // add filtered generators
-        adapter += filterGenerators(with: searchText)
-
-        // apply snapshot
-        adapter => .reload
-
+        // show filtered generators
+        fillAdapter(with: filterGenerators(with: searchText))
         // all insert, remove, reload animations will be selected automatically
     }
 
@@ -104,16 +95,27 @@ private extension DiffableTableViewController {
         navigationItem.rightBarButtonItem = button
     }
 
+    func DiffableSections(
+        @GeneratorsBuilder<DiffableSection>_ content: () -> [DiffableSection]
+    ) -> [DiffableSection] {
+        content()
+    }
+
     /// This method is used to fill adapter
-    func fillAdapter() {
+    func fillAdapter(with generators: [DiffableGenerator]) {
 
-        generators = makeCellGenerators()
+        adapter -= .all
 
-        // add header with static id
-        adapter += EmptyTableHeaderGenerator(uniqueId: Constants.sectionId)
-
-        // add generators
-        adapter += generators
+        adapter += TableSections {
+            Section(
+                generators: generators,
+                header: EmptyTableHeaderGenerator(uniqueId: Constants.sectionId.appending("header")),
+                footer: EmptyTableFooterGenerator(uniqueId: Constants.sectionId.appending("footer"))
+            ).decorate(with: .space(model: .init(height: 16, color: .rddm)),
+                       at: .end,
+                       and: .each)
+            .erased()
+        }
 
         // apply snapshot
         adapter => .reload
@@ -121,8 +123,8 @@ private extension DiffableTableViewController {
 
     // Create cells generators
     func makeCellGenerators() -> [DiffableGenerator] {
-        Constants.models.enumerated().map { item in
-            TitleTableViewCell.rddm.diffableGenerator(uniqueId: item.offset, with: item.element)
+        Constants.models.map { key, value in
+            TitleTableViewCell.rddm.diffableGenerator(uniqueId: key, with: value)
         }
     }
 
@@ -138,21 +140,11 @@ private extension DiffableTableViewController {
     func removeFirst() {
         guard !generators.isEmpty else { return }
 
+        // remove
         generators.removeFirst()
-
-        // clear existing generators
-        adapter -= .all
-
-        // add header with static id
-        adapter += EmptyTableHeaderGenerator(uniqueId: Constants.sectionId)
-
-        // add generators
-        adapter += generators
-
-        // apply snapshot
-        adapter => .reload
-
-        // expected remove animation
+        // show
+        fillAdapter(with: generators)
+        // all insert, remove, reload animations will be selected automatically
     }
 
 }
