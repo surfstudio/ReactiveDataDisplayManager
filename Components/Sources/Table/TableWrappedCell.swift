@@ -10,7 +10,7 @@ import ReactiveDataDisplayManager
 
 /// Empty table cell with `View`
 public final class TableWrappedCell<View: ConfigurableItem>: UITableViewCell, ViewWrapper {
-    
+
     public typealias Model = View.Model
 
     // MARK: - Properties

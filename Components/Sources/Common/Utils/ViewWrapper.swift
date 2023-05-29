@@ -25,5 +25,3 @@ public extension ViewWrapper where Self: UIView {
     }
 
 }
-
-
