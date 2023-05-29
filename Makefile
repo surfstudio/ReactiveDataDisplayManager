@@ -18,6 +18,7 @@ init:
 ## Regenerate Framework and Example projects
 projects:
 	xcodegen generate
+	-bundle install --path .bundle
 	-bundle exec pod install
 
 ## Build Configuration
