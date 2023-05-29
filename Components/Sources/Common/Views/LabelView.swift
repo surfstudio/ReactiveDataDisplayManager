@@ -31,6 +31,7 @@ public class LabelView: UIView {
     public init(labelClass: UILabel.Type) {
         super.init(frame: .zero)
         textView = labelClass.init()
+        configureConstraints()
     }
 
 }
