@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
 
     func wrap(subview: UIView, with insets: UIEdgeInsets) {
         subview.translatesAutoresizingMaskIntoConstraints = false

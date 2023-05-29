@@ -33,10 +33,10 @@ public class SeparatorView: UIView {
 
 extension SeparatorView: ConfigurableItem {
 
-    public struct Model: Equatable {
+    public struct Model: Equatable, InsetsProvider {
         public let height: CGFloat
         public let color: UIColor?
-        public let edgeInsets: UIEdgeInsets
+        public var edgeInsets: UIEdgeInsets
 
         public init(height: CGFloat, color: UIColor? = nil, edgeInsets: UIEdgeInsets = .zero) {
             self.height = height
@@ -64,23 +64,6 @@ private extension SeparatorView {
 
         heightConstraint = heightAnchor.constraint(equalToConstant: 0)
         heightConstraint?.isActive = true
-    }
-
-}
-
-// MARK: - Wrapper
-
-public protocol SeparatorWrapper: ConfigurableItem {
-
-    var separator: SeparatorView { get }
-
-}
-
-public extension SeparatorWrapper where Model == SeparatorView.Model {
-
-    func configure(with model: Model) {
-        wrap(subview: separator, with: model.edgeInsets)
-        separator.configure(with: model)
     }
 
 }
