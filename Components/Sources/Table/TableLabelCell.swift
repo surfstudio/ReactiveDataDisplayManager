@@ -15,6 +15,6 @@ public final class TableLabelCell: UITableViewCell, LabelWrapper {
 
     // MARK: - Properties
 
-    public let label: LabelView = .init(frame: .zero)
+    public let label = LabelView(frame: .zero)
 
 }
