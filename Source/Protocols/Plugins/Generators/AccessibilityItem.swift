@@ -8,7 +8,7 @@
 import UIKit
 
 /// Default accessibility strategy for string value
-public enum AccessibilityStrategy {
+public enum AccessibilityStringStrategy {
 
     /// value will not be change by this strategy
     case ignored
@@ -18,10 +18,10 @@ public enum AccessibilityStrategy {
 
     /// a reference value from object. By default it's `accessibilityLabel`
     /// - parameter keyPath: specified keypath from value would be taken
-    case from(NSObject, keyPath: KeyPath<NSObject, String?> = \.accessibilityLabel)
+    case from(object: NSObject, keyPath: KeyPath<NSObject, String?> = \.accessibilityLabel)
 
     /// a combination of strategies, joined by provided separator
-    indirect case joined([AccessibilityStrategy], separator: String)
+    indirect case joined([AccessibilityStringStrategy], separator: String)
 
     var isIgnored: Bool {
         if case .ignored = self {
@@ -55,7 +55,7 @@ public enum AccessibilityTraitsStrategy {
     case just(UIAccessibilityTraits)
 
     /// a reference traits from another object
-    case from(NSObject)
+    case from(object: NSObject)
 
     /// a reference traits merged from another objects
     case merge([NSObject])
@@ -88,19 +88,25 @@ public enum AccessibilityTraitsStrategy {
 public protocol AccessibilityStrategyProvider {
 
     /// strategy for `accessibilityLabel`. Default: `.ignored`
-    var labelStrategy: AccessibilityStrategy { get }
+    var labelStrategy: AccessibilityStringStrategy { get }
 
     /// strategy for `accessibilityValue`. Default: `.ignored`
-    var valueStrategy: AccessibilityStrategy { get }
+    var valueStrategy: AccessibilityStringStrategy { get }
 
     /// strategy for `accessibilityTraits`. Default: `.ignored`
     var traitsStrategy: AccessibilityTraitsStrategy { get }
+
+    /// Idicates that `AccessibilityItem` should become an accessibility element. Equals `true` if all strategies is in state `.ignored`
+    var isAccessibilityIgnored: Bool { get }
 }
 
 public extension AccessibilityStrategyProvider {
-    var labelStrategy: AccessibilityStrategy { .ignored }
-    var valueStrategy: AccessibilityStrategy { .ignored }
+    var labelStrategy: AccessibilityStringStrategy { .ignored }
+    var valueStrategy: AccessibilityStringStrategy { .ignored }
     var traitsStrategy: AccessibilityTraitsStrategy { .ignored }
+    var isAccessibilityIgnored: Bool {
+        return [labelStrategy.isIgnored, valueStrategy.isIgnored, traitsStrategy.isIgnored].allSatisfy { $0 }
+    }
 }
 
 /// Protocol for cells
@@ -113,19 +119,21 @@ public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider {
     /// Also `AccessibilityStrategyProvider` can be extended by your protocol to add new parameters. And to apply new parameters you need to provide a custom modifier
     var modifierType: AccessibilityModifierType { get }
 
-    /// Conficts resolver when generator and item contains `AccessibilityStrategy`. By default values will be joined with a space separator in next order: generator, item
+    /// Conficts resolver when generator and item contains `AccessibilityStringStrategy`. By default values will be joined with a space separator in next order: generator, item
     ///
     /// You can define your own implementation to change separator or order of values.
     /// - parameter itemStrategy: strategy defined in cell
-    /// - parameter generatorStrategy: stategy provided  from cell's generator. Often this is `nil` or `.ignored`
+    /// - parameter generatorStrategy: stategy provided  from cell's generator
     /// - returns: value combined from both strategies
-    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStrategy, generatorStrategy: AccessibilityStrategy?) -> String?
+    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStringStrategy,
+                                               generatorStrategy: AccessibilityStringStrategy) -> String?
 }
 
 public extension AccessibilityItem {
     var modifierType: AccessibilityModifierType { DefaultAccessibilityModifier.self }
 
-    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStrategy, generatorStrategy: AccessibilityStrategy?) -> String? {
-        return [generatorStrategy, itemStrategy].compactMap(\.?.value).joined(separator: " ")
+    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStringStrategy,
+                                               generatorStrategy: AccessibilityStringStrategy) -> String? {
+        return [generatorStrategy, itemStrategy].compactMap(\.value).joined(separator: " ")
     }
 }
