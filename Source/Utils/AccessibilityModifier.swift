@@ -16,8 +16,8 @@ public protocol AccessibilityModifier {
     static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider)
 }
 
-enum DefaultAccessibilityModifier: AccessibilityModifier {
-    static func modify(item: AccessibilityItem) {
+public enum DefaultAccessibilityModifier: AccessibilityModifier {
+    static public func modify(item: AccessibilityItem) {
         item.isAccessibilityElement = !item.isAccessibilityIgnored
 
         if !item.labelStrategy.isIgnored {
@@ -33,7 +33,7 @@ enum DefaultAccessibilityModifier: AccessibilityModifier {
         }
     }
 
-    static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
+    static public func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
         item.isAccessibilityElement = !item.isAccessibilityIgnored || !generator.isAccessibilityIgnored
 
         if !item.labelStrategy.isIgnored || !generator.labelStrategy.isIgnored {
