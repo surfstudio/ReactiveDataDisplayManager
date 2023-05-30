@@ -24,7 +24,7 @@ extension LabelView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: InsetsProvider {
+    public struct Model: InsetsProvider, AlignmentProvider {
 
         // MARK: - Nested types
 
@@ -42,12 +42,10 @@ extension LabelView: ConfigurableItem {
 
         public struct TextLayout: Equatable {
 
-            public let alignment: NSTextAlignment
             public let lineBreakMode: NSLineBreakMode
             public let numberOfLines: Int
 
-            public init(alignment: NSTextAlignment = .left, lineBreakMode: NSLineBreakMode = .byWordWrapping, numberOfLines: Int = 0) {
-                self.alignment = alignment
+            public init(lineBreakMode: NSLineBreakMode = .byWordWrapping, numberOfLines: Int = 0) {
                 self.lineBreakMode = lineBreakMode
                 self.numberOfLines = numberOfLines
             }
@@ -67,13 +65,15 @@ extension LabelView: ConfigurableItem {
         public let layout: TextLayout
         public var edgeInsets: UIEdgeInsets
         public var labelClass: UILabel.Type
+        public var alignment: NSTextAlignment
 
         // MARK: - Initialization
 
-        public init(text: TextType, style: TextStyle, layout: TextLayout, edgeInsets: UIEdgeInsets, labelClass: UILabel.Type = UILabel.self) {
+        public init(text: TextType, style: TextStyle, layout: TextLayout, alignment: NSTextAlignment, edgeInsets: UIEdgeInsets, labelClass: UILabel.Type = UILabel.self) {
             self.text = text
             self.style = style
             self.layout = layout
+            self.alignment = alignment
             self.edgeInsets = edgeInsets
             self.labelClass = labelClass
         }
@@ -91,13 +91,13 @@ extension LabelView: ConfigurableItem {
         textView.textColor = model.style.color
         textView.font = model.style.font
 
-        textView.textAlignment = model.layout.alignment
+        textView.textAlignment = model.alignment
         textView.lineBreakMode = model.layout.lineBreakMode
         textView.numberOfLines = model.layout.numberOfLines
 
         configureText(with: model.text)
 
-        layoutIfNeeded()
+        layoutSubviews()
     }
 
 }

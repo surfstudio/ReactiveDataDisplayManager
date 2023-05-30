@@ -20,7 +20,16 @@ public extension ViewWrapper where Self: UIView {
 
     func configure(with model: NestedView.Model) {
         let insets = (model as? InsetsProvider)?.edgeInsets ?? .zero
-        wrap(subview: nestedView, with: insets)
+        let alignmentRule = (model as? AlignmentProvider)?.alignment ?? .center
+
+        switch alignmentRule {
+        case .right:
+            wrapWithLeadingGreaterThenOrEqualRule(subview: nestedView, with: insets)
+        case .left:
+            wrapWithTrailingLessThenOrEqualRule(subview: nestedView, with: insets)
+        default:
+            wrap(subview: nestedView, with: insets)
+        }
         nestedView.configure(with: model)
     }
 

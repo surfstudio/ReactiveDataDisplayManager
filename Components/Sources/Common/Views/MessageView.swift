@@ -13,8 +13,7 @@ public class MessageView: UIView {
 
     // MARK: - Private properties
 
-    private var heightConstraint: NSLayoutConstraint?
-    private var labelView = LabelView(frame: .zero)
+    private var textView = UITextView(frame: .zero)
 
 }
 
@@ -24,7 +23,7 @@ extension MessageView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: Equatable, InsetsProvider {
+    public struct Model: Equatable, InsetsProvider, AlignmentProvider {
 
         // MARK: - Nested types
 
@@ -40,20 +39,26 @@ extension MessageView: ConfigurableItem {
 
         }
 
+        public enum TextType: Equatable {
+            case string(String)
+            /// Mind that attributed string may re-configure other model's properties.
+            case attributedString(NSAttributedString)
+        }
+
         // MARK: - Public properties
 
-        public let text: String
+        public let text: TextType
         public let style: MessageStyle
-        public let textAlignment: NSTextAlignment
+        public var alignment: NSTextAlignment
         public var edgeInsets: UIEdgeInsets
         public let internalEdgeInsets: UIEdgeInsets
 
         // MARK: - Initialization
 
-        public init(text: String, style: MessageStyle, textAlignment: NSTextAlignment, externalEdgeInsets: UIEdgeInsets, internalEdgeInsets: UIEdgeInsets) {
+        public init(text: TextType, style: MessageStyle, alignment: NSTextAlignment, externalEdgeInsets: UIEdgeInsets, internalEdgeInsets: UIEdgeInsets) {
             self.text = text
             self.style = style
-            self.textAlignment = textAlignment
+            self.alignment = alignment
             self.edgeInsets = externalEdgeInsets
             self.internalEdgeInsets = internalEdgeInsets
         }
@@ -64,19 +69,36 @@ extension MessageView: ConfigurableItem {
 
     public func configure(with model: Model) {
         self.backgroundColor = .clear
+        textView.isEditable = false
+        textView.isScrollEnabled = false
 
-        let labelViewStyle = LabelView.Model.TextStyle(color: model.style.color, font: model.style.font)
-        let labelViewLayout = LabelView.Model.TextLayout(alignment: model.textAlignment)
-        labelView.configure(with: LabelView.Model(text: .string(model.text),
-                                                  style: labelViewStyle,
-                                                  layout: labelViewLayout,
-                                                  edgeInsets: .zero))
-        wrap(subview: labelView, with: model.internalEdgeInsets)
+        configureTextView(textView, with: model)
+        textView.textColor = model.style.color
+        textView.font = model.style.font
+        textView.textAlignment = model.alignment
+
+        wrap(subview: textView, with: model.internalEdgeInsets)
+
         layer.cornerRadius = 9
         layer.borderColor = model.style.color.cgColor
         layer.borderWidth = 1
 
         layoutIfNeeded()
+    }
+
+}
+
+// MARK: - Private methods
+
+private extension MessageView {
+
+    func configureTextView(_ textView: UITextView, with model: Model) {
+        switch model.text {
+        case .string(let string):
+            textView.text = string
+        case .attributedString(let attributedString):
+            textView.attributedText = attributedString
+        }
     }
 
 }
