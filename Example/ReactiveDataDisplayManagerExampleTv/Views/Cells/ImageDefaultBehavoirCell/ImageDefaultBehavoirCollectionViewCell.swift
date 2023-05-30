@@ -30,13 +30,22 @@ final class ImageDefaultBehavoirCollectionViewCell: UICollectionViewCell {
 
 }
 
-// MARK: - Configurable
+// MARK: - ConfigurableItem
 
 extension ImageDefaultBehavoirCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: ImageViewModel) {
         viewModel.loadImage(viewModel.imageUrl, iconView)
     }
+
+}
+
+// MARK: - AccessibilityItem
+
+extension ImageDefaultBehavoirCollectionViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .just("some image") }
+    var traitsStrategy: AccessibilityTraitsStrategy { .just(.image) }
 
 }
 
