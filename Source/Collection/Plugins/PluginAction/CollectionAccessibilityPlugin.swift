@@ -15,8 +15,11 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
             guard let accessibilityItem = cell as? AccessibilityItem else {
                 return
             }
-            let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider
-            accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem, generator: generator)
+            if let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider {
+                accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem, generator: generator)
+            } else {
+                accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem)
+            }
 
         case .willDisplaySupplementaryView(let indexPath, let view, let kind):
             guard let accessibilityItem = view as? AccessibilityItem else {
@@ -32,7 +35,12 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
             default:
                 break
             }
-            accessibilityItem.modifierType.modify(view: view, with: accessibilityItem, generator: supplementaryGenerator)
+            if let supplementaryGenerator {
+                accessibilityItem.modifierType.modify(view: view, with: accessibilityItem, generator: supplementaryGenerator)
+            } else {
+                accessibilityItem.modifierType.modify(view: view, with: accessibilityItem)
+            }
+
 
         default:
             break
