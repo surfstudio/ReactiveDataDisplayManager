@@ -109,8 +109,12 @@ public extension AccessibilityStrategyProvider {
     }
 }
 
-/// Protocol for cells
-public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider {
+public protocol AccessibilityActionsProvider {
+    func accessibilityActions() -> [UIAccessibilityCustomAction]
+}
+
+/// Protocol for cells to adopt accesibility
+public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider & AccessibilityActionsProvider {
     typealias AccessibilityModifierType = AccessibilityModifier.Type
 
     /// Type of modifier that will be used to apply strategies to view. Default it's internal implementation
@@ -130,10 +134,12 @@ public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider {
 }
 
 public extension AccessibilityItem {
-    var modifierType: AccessibilityModifierType { DefaultAccessibilityModifier.self }
+    var modifierType: AccessibilityModifierType { BaseAccessibilityModifier.self }
 
     func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStringStrategy,
                                                generatorStrategy: AccessibilityStringStrategy) -> String? {
         return [generatorStrategy, itemStrategy].compactMap(\.value).joined(separator: " ")
     }
+
+    func accessibilityActions() -> [UIAccessibilityCustomAction] { [] }
 }

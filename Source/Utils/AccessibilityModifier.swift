@@ -16,7 +16,8 @@ public protocol AccessibilityModifier {
     static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider)
 }
 
-public enum DefaultAccessibilityModifier: AccessibilityModifier {
+/// Base modifier which handle only `AccessibilityItem` properties
+public enum BaseAccessibilityModifier: AccessibilityModifier {
     static public func modify(item: AccessibilityItem) {
         guard !item.isAccessibilityIgnored else {
             return
@@ -34,6 +35,8 @@ public enum DefaultAccessibilityModifier: AccessibilityModifier {
         if !item.traitsStrategy.isIgnored, let traits = item.traitsStrategy.value {
             item.accessibilityTraits = traits
         }
+
+        item.accessibilityCustomActions = item.accessibilityActions()
     }
 
     static public func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
@@ -57,6 +60,12 @@ public enum DefaultAccessibilityModifier: AccessibilityModifier {
                 .compactMap { $0 }
                 .reduce(UIAccessibilityTraits(), { $0.union($1) })
             item.accessibilityTraits = traits
+        }
+
+        item.accessibilityCustomActions = item.accessibilityActions()
+
+        if let actionsProvider = generator as? AccessibilityActionsProvider {
+            item.accessibilityCustomActions?.append(contentsOf: actionsProvider.accessibilityActions())
         }
     }
 }
