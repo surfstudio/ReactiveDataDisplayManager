@@ -6,6 +6,7 @@
 //
 import UIKit
 import ReactiveDataDisplayManager
+import ReactiveDataComponents
 
 @available(iOS 13.0, *)
 final class DiffableCollectionViewController: UIViewController {
@@ -16,24 +17,24 @@ final class DiffableCollectionViewController: UIViewController {
 
     private enum Constants {
         static let sectionId = "Section"
-        static let models = [
-            "Afghanistan",
-            "Afghanistan",
-            "Albania",
-            "Algeria",
-            "Andorra",
-            "Angola",
-            "Antigua and Barbuda",
-            "Argentina",
-            "Armenia",
-            "Australia",
-            "Austria",
-            "Azerbaijan",
-            "Bahamas",
-            "Bahrain",
-            "Bangladesh",
-            "Barbados",
-            "Belarus"
+        static let models: [String: String] = [
+            UUID().uuidString: "Afghanistan",
+            UUID().uuidString: "Afghanistan",
+            UUID().uuidString: "Albania",
+            UUID().uuidString: "Algeria",
+            UUID().uuidString: "Andorra",
+            UUID().uuidString: "Angola",
+            UUID().uuidString: "Antigua and Barbuda",
+            UUID().uuidString: "Argentina",
+            UUID().uuidString: "Armenia",
+            UUID().uuidString: "Australia",
+            UUID().uuidString: "Austria",
+            UUID().uuidString: "Azerbaijan",
+            UUID().uuidString: "Bahamas",
+            UUID().uuidString: "Bahrain",
+            UUID().uuidString: "Bangladesh",
+            UUID().uuidString: "Barbados",
+            UUID().uuidString: "Belarus"
         ]
     }
 
@@ -56,7 +57,8 @@ final class DiffableCollectionViewController: UIViewController {
 
         setupSearch()
         setupBarButtonItem()
-        fillAdapter()
+        generators = makeCellGenerators()
+        fillAdapter(with: generators)
     }
 
 }
@@ -67,21 +69,9 @@ final class DiffableCollectionViewController: UIViewController {
 extension DiffableCollectionViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        // clear existing generators
-        adapter -= .all
-
-        // add header with static id
-        adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
-
-        // add filtered  generators
-        adapter += filterGenerators(with: searchText)
-
-        // apply snapshot
-        adapter => .reload
-
+        // show filtered generators
+        fillAdapter(with: filterGenerators(with: searchText))
         // all insert, remove, reload animations will be selected automatically
-
     }
 
 }
@@ -103,15 +93,15 @@ private extension DiffableCollectionViewController {
     }
 
     /// This method is used to fill adapter
-    func fillAdapter() {
+    func fillAdapter(with generators: [DiffableGenerator]) {
 
-        generators = makeCellGenerators()
+        adapter -= .all
 
-        // add header with static id
-        adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
-
-        // add generators
-        adapter += generators
+        adapter += CollectionSections {
+            Section(generators: generators,
+                    header: EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId.appending("header")),
+                    footer: EmptyCollectionFooterGenerator(uniqueId: Constants.sectionId.appending("footer")))
+        }
 
         // apply snapshot
         adapter => .reload
@@ -119,8 +109,8 @@ private extension DiffableCollectionViewController {
 
     // Create cells generators
     func makeCellGenerators() -> [DiffableGenerator] {
-        Constants.models.enumerated().map { item in
-            TitleCollectionListCell.rddm.diffableGenerator(uniqueId: item.offset, with: item.element)
+        Constants.models.map { key, value in
+            TitleCollectionListCell.rddm.diffableGenerator(uniqueId: key, with: value)
         }
     }
 
@@ -136,21 +126,11 @@ private extension DiffableCollectionViewController {
     func removeFirst() {
         guard !generators.isEmpty else { return }
 
+        // remove
         generators.removeFirst()
-
-        // clear existing generators
-        adapter -= .all
-
-        // add header with static id
-        adapter += EmptyCollectionHeaderGenerator(uniqueId: Constants.sectionId)
-
-        // add generators
-        adapter += generators
-
-        // apply snapshot
-        adapter => .reload
-
-        // expected remove animation
+        // show
+        fillAdapter(with: generators)
+        // all insert, remove, reload animations will be selected automatically
     }
 
 }

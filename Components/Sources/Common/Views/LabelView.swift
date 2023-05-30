@@ -16,23 +16,6 @@ public class LabelView: UIView {
     private var heightConstraint: NSLayoutConstraint?
     private var textView = UILabel(frame: .zero)
 
-    // MARK: - Initialization
-
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        configureConstraints()
-    }
-
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    public init(labelClass: UILabel.Type) {
-        super.init(frame: .zero)
-        textView = labelClass.init()
-    }
-
 }
 
 // MARK: - ConfigurableItem
@@ -41,7 +24,7 @@ extension LabelView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: Equatable {
+    public struct Model: InsetsProvider {
 
         // MARK: - Nested types
 
@@ -71,10 +54,9 @@ extension LabelView: ConfigurableItem {
 
         }
 
-        // Mind that attributed string may re-configure other model`s properties
-
         public enum TextType: Equatable {
             case string(String)
+            /// Mind that attributed string may re-configure other model's properties.
             case attributedString(NSAttributedString)
         }
 
@@ -83,15 +65,17 @@ extension LabelView: ConfigurableItem {
         public let text: TextType
         public let style: TextStyle
         public let layout: TextLayout
-        public let edgeInsets: UIEdgeInsets
+        public var edgeInsets: UIEdgeInsets
+        public var labelClass: UILabel.Type
 
         // MARK: - Initialization
 
-        public init(text: TextType, style: TextStyle, layout: TextLayout, edgeInsets: UIEdgeInsets) {
+        public init(text: TextType, style: TextStyle, layout: TextLayout, edgeInsets: UIEdgeInsets, labelClass: UILabel.Type = UILabel.self) {
             self.text = text
             self.style = style
             self.layout = layout
             self.edgeInsets = edgeInsets
+            self.labelClass = labelClass
         }
 
     }
@@ -99,6 +83,9 @@ extension LabelView: ConfigurableItem {
     // MARK: - Methods
 
     public func configure(with model: Model) {
+        textView = model.labelClass.init()
+        configureConstraints()
+
         self.backgroundColor = .clear
         textView.backgroundColor = .clear
         textView.textColor = model.style.color
@@ -134,19 +121,13 @@ private extension LabelView {
 
 }
 
-// MARK: - Wrapper
+// MARK: - LabelView.Model Equatable
 
-public protocol LabelWrapper: ConfigurableItem {
+extension LabelView.Model: Equatable {
 
-    var label: LabelView { get }
-
-}
-
-public extension LabelWrapper where Model == LabelView.Model {
-
-    func configure(with model: Model) {
-        wrap(subview: label, with: model.edgeInsets)
-        label.configure(with: model)
+    public static func == (lhs: LabelView.Model, rhs: LabelView.Model) -> Bool {
+        return lhs.style == rhs.style && lhs.layout == rhs.layout && lhs.text == rhs.text &&
+        lhs.edgeInsets == rhs.edgeInsets && lhs.labelClass == rhs.labelClass
     }
 
 }
