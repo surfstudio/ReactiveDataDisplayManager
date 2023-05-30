@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,8 +32,8 @@
                             <action selector="buttonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="d5C-VL-9Es"/>
                         </connections>
                     </button>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Srq-MG-Ccz">
-                        <rect key="frame" x="272" y="43" width="0.0" height="0.0"/>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Srq-MG-Ccz">
+                        <rect key="frame" x="247" y="43" width="51" height="31"/>
                         <connections>
                             <action selector="switchAnimated:" destination="KGk-i7-Jjw" eventType="valueChanged" id="Per-G4-XZk"/>
                         </connections>
@@ -52,6 +52,7 @@
             <connections>
                 <outlet property="button" destination="hU3-WF-wob" id="Sqk-gN-Dvd"/>
                 <outlet property="buttonHeightConstraint" destination="VnP-p5-jxg" id="iAv-yI-FKt"/>
+                <outlet property="switcher" destination="Srq-MG-Ccz" id="YXv-9v-cV8"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="56.584821428571423"/>
         </tableViewCell>
