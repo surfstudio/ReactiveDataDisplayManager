@@ -54,7 +54,10 @@ extension MessageView: ConfigurableItem {
             public let borderWidth: CGFloat
             public let borderColor: CGColor
 
-            public init(cornerRadius: CGFloat, maskedCorners: CACornerMask, borderWidth: CGFloat = 0, borderColor: CGColor = UIColor.clear.cgColor) {
+            public init(cornerRadius: CGFloat,
+                        maskedCorners: CACornerMask,
+                        borderWidth: CGFloat = 0,
+                        borderColor: CGColor = UIColor.clear.cgColor) {
                 self.cornerRadius = cornerRadius
                 self.maskedCorners = maskedCorners
                 self.borderWidth = borderWidth
@@ -74,7 +77,12 @@ extension MessageView: ConfigurableItem {
 
         // MARK: - Initialization
 
-        public init(text: TextType, style: MessageStyle, alignment: NSTextAlignment, externalEdgeInsets: UIEdgeInsets, internalEdgeInsets: UIEdgeInsets, borderStyle: BorderStyle) {
+        public init(text: TextType,
+                    style: MessageStyle,
+                    alignment: NSTextAlignment,
+                    externalEdgeInsets: UIEdgeInsets,
+                    internalEdgeInsets: UIEdgeInsets,
+                    borderStyle: BorderStyle) {
             self.text = text
             self.style = style
             self.alignment = alignment

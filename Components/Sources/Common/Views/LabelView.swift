@@ -69,7 +69,12 @@ extension LabelView: ConfigurableItem {
 
         // MARK: - Initialization
 
-        public init(text: TextType, style: TextStyle, layout: TextLayout, alignment: NSTextAlignment, edgeInsets: UIEdgeInsets, labelClass: UILabel.Type = UILabel.self) {
+        public init(text: TextType,
+                    style: TextStyle,
+                    layout: TextLayout,
+                    alignment: NSTextAlignment,
+                    edgeInsets: UIEdgeInsets,
+                    labelClass: UILabel.Type = UILabel.self) {
             self.text = text
             self.style = style
             self.layout = layout
