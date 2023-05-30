@@ -24,7 +24,7 @@ extension MessageView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: Equatable {
+    public struct Model: Equatable, InsetsProvider {
 
         // MARK: - Nested types
 
@@ -45,7 +45,7 @@ extension MessageView: ConfigurableItem {
         public let text: String
         public let style: MessageStyle
         public let textAlignment: NSTextAlignment
-        public let externalEdgeInsets: UIEdgeInsets
+        public var edgeInsets: UIEdgeInsets
         public let internalEdgeInsets: UIEdgeInsets
 
         // MARK: - Initialization
@@ -54,7 +54,7 @@ extension MessageView: ConfigurableItem {
             self.text = text
             self.style = style
             self.textAlignment = textAlignment
-            self.externalEdgeInsets = externalEdgeInsets
+            self.edgeInsets = externalEdgeInsets
             self.internalEdgeInsets = internalEdgeInsets
         }
 
@@ -80,21 +80,3 @@ extension MessageView: ConfigurableItem {
     }
 
 }
-
-// MARK: - Wrapper
-
-public protocol MessageWrapper: ConfigurableItem {
-
-    var message: MessageView { get }
-
-}
-
-public extension MessageWrapper where Model == MessageView.Model {
-
-    func configure(with model: Model) {
-        wrap(subview: message, with: model.externalEdgeInsets)
-        message.configure(with: model)
-    }
-
-}
-
