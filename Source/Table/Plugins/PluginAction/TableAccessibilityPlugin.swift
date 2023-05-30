@@ -18,9 +18,9 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
                 return
             }
             if let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider {
-                accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem, generator: generator)
+                accessibilityItem.modifierType.modify(item: accessibilityItem, generator: generator)
             } else {
-                accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem)
+                accessibilityItem.modifierType.modify(item: accessibilityItem)
             }
 
         case .willDisplayHeader(let section, let view):
@@ -28,9 +28,9 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
                 return
             }
             if let headerGenerator = manager?.sections[section] as? AccessibilityStrategyProvider {
-                accessibilityItem.modifierType.modify(view: view, with: accessibilityItem, generator: headerGenerator)
+                accessibilityItem.modifierType.modify(item: accessibilityItem, generator: headerGenerator)
             } else {
-                accessibilityItem.modifierType.modify(view: view, with: accessibilityItem)
+                accessibilityItem.modifierType.modify(item: accessibilityItem)
             }
 
         case .willDisplayFooter(_, let view):
@@ -39,7 +39,7 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
             }
             // AccessibilityStrategyProvider for a footer generator is not supported yet
             // TODO: SPT-1468
-            accessibilityItem.modifierType.modify(view: view, with: accessibilityItem)
+            accessibilityItem.modifierType.modify(item: accessibilityItem)
 
         default:
             break
