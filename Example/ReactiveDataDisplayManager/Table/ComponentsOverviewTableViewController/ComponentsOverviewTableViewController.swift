@@ -87,13 +87,18 @@ final class ComponentsOverviewTableViewController: UIViewController {
     // Recieved message
     private let recievedMessageStyle = MessageStyle(textColor: .black, font: .systemFont(ofSize: 16, weight: .regular))
     private let recievedMessageBorderStyle = MessageBorderStyle(cornerRadius: 9,
-                                                                maskedCorners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMaxXMinYCorner],
+                                                                maskedCorners: [.layerMinXMinYCorner,
+                                                                                .layerMaxXMaxYCorner,
+                                                                                .layerMaxXMinYCorner],
                                                                 borderWidth: 1,
                                                                 borderColor: UIColor.black.cgColor)
     private lazy var recievedMessageModel = MessageModel(text: .string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"),
                                                          style: recievedMessageStyle,
                                                          alignment: .left,
-                                                         externalEdgeInsets: UIEdgeInsets(top: 12, left: 16, bottom: 12, right: UIScreen.main.bounds.width / 2),
+                                                         externalEdgeInsets: UIEdgeInsets(top: 12,
+                                                                                          left: 16,
+                                                                                          bottom: 12,
+                                                                                          right: UIScreen.main.bounds.width / 2),
                                                          internalEdgeInsets: UIEdgeInsets(top: 3, left: 5, bottom: 3, right: 5),
                                                          borderStyle: recievedMessageBorderStyle)
     private lazy var recievedMessageGenerator = TableWrappedCell<MessageView>.rddm.baseGenerator(with: recievedMessageModel, and: .class)
