@@ -12,13 +12,16 @@ public protocol AccessibilityModifier {
     /// Modifies`AccessibilityItem` with provided strategies from
     static func modify(item: AccessibilityItem)
 
-    /// Modifies  `AccessibilityItem` with provided strategies  and `AccessibilityStrategyProvider`
+    /// Modifies `AccessibilityItem` with provided strategies  and `AccessibilityStrategyProvider`
     static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider)
 }
 
 public enum DefaultAccessibilityModifier: AccessibilityModifier {
     static public func modify(item: AccessibilityItem) {
-        item.isAccessibilityElement = !item.isAccessibilityIgnored
+        guard !item.isAccessibilityIgnored else {
+            return
+        }
+        item.isAccessibilityElement = true
 
         if !item.labelStrategy.isIgnored {
             item.accessibilityLabel = item.labelStrategy.value
@@ -34,7 +37,10 @@ public enum DefaultAccessibilityModifier: AccessibilityModifier {
     }
 
     static public func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
-        item.isAccessibilityElement = !item.isAccessibilityIgnored || !generator.isAccessibilityIgnored
+        guard !item.isAccessibilityIgnored || !generator.isAccessibilityIgnored else {
+            return
+        }
+        item.isAccessibilityElement = true
 
         if !item.labelStrategy.isIgnored || !generator.labelStrategy.isIgnored {
             item.accessibilityLabel = item.accessibilityStrategyConflictResolver(itemStrategy: item.labelStrategy,
