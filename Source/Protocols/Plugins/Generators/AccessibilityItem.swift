@@ -20,8 +20,8 @@ public enum AccessibilityStringStrategy {
     /// - parameter keyPath: specified keypath from value would be taken
     case from(object: NSObject, keyPath: KeyPath<NSObject, String?> = \.accessibilityLabel)
 
-    /// a combination of strategies, joined by provided separator
-    indirect case joined([AccessibilityStringStrategy], separator: String)
+    /// a combination of strategies
+    indirect case joined([AccessibilityStringStrategy])
 
     var isIgnored: Bool {
         if case .ignored = self {
@@ -39,8 +39,8 @@ public enum AccessibilityStringStrategy {
             return string
         case .from(let object, let keyPath):
             return object[keyPath: keyPath]
-        case .joined(let strategies, let separator):
-            return strategies.compactMap(\.value).joined(separator: separator)
+        case .joined(let strategies):
+            return strategies.compactMap(\.value).joined()
         }
     }
 }

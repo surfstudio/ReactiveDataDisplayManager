@@ -17,7 +17,7 @@ class TitleIconCollectionFooterView: UICollectionReusableView, AccessibilityItem
 
     // MARK: - AccessibilityItem
 
-    var labelStrategy: AccessibilityStringStrategy { .joined([.just("some image"), .from(object: titleLabel)], separator: " with ") }
+    var labelStrategy: AccessibilityStringStrategy { .joined([.just("some image with title: "), .from(object: titleLabel)]) }
 
     // MARK: - Internal methods
 
