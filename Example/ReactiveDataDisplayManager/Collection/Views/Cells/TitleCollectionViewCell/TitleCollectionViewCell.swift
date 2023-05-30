@@ -28,8 +28,15 @@ extension TitleCollectionViewCell: ConfigurableItem {
 
     func configure(with title: String) {
         titleLabel.text = title
-        accessibilityLabel = title
     }
+
+}
+
+// MARK: - AccessibilityItem
+
+extension TitleCollectionViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
 
 }
 
@@ -39,23 +46,23 @@ extension TitleCollectionViewCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .gray
-        accessibilityLabel = "Normal"
+        accessibilityValue = "Normal"
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .white.withAlphaComponent(0.5)
-        accessibilityLabel = "Highlighted"
+        accessibilityValue = "Highlighted"
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
-        accessibilityLabel = "Selected"
+        accessibilityValue = "Selected"
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
-        accessibilityLabel = "Normal"
+        accessibilityValue = "Normal"
     }
 
 }
