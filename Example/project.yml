@@ -22,6 +22,7 @@ targets:
       deploymentTarget: 13.0
       sources:
         - path: ReactiveChat
+        - path: ReactiveServer/Sources/Model
       dependencies:
         - target: ReactiveDataDisplayManager_iOS
         - target: ReactiveDataComponents_iOS

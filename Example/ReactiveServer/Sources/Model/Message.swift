@@ -7,8 +7,16 @@
 
 import Foundation
 
+struct RawMessage: Codable {
+
+    let author: User
+    let body: String
+
+}
+
 struct Message: Codable {
 
+    let id: String
     let author: User
     let body: String
     let timestamp: TimeInterval
