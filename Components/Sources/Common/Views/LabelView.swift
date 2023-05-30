@@ -54,10 +54,9 @@ extension LabelView: ConfigurableItem {
 
         }
 
-        // Mind that attributed string may re-configure other model`s properties
-
         public enum TextType: Equatable {
             case string(String)
+            /// Mind that attributed string may re-configure other model's properties.
             case attributedString(NSAttributedString)
         }
 
