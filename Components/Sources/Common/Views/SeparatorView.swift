@@ -1,17 +1,17 @@
 //
-//  Spacer.swift
-//  ReactiveDataComponentsTests_iOS
+//  SeparatorView.swift
+//  
 //
-//  Created by Никита Коробейников on 23.09.2022.
+//  Created by Антон Голубейков on 23.05.2023.
 //
 
 import UIKit
 import ReactiveDataDisplayManager
 
-/// Base view to implement space between other views or cells.
-public class SpacerView: UIView {
+/// Base view to implement separator between other views or cells.
+public class SeparatorView: UIView {
 
-    // MARK: - Properties
+    // MARK: - Private properties
 
     private var heightConstraint: NSLayoutConstraint?
 
@@ -31,21 +31,24 @@ public class SpacerView: UIView {
 
 // MARK: - ConfigurableItem
 
-extension SpacerView: ConfigurableItem {
+extension SeparatorView: ConfigurableItem {
 
-    public struct Model: Equatable {
+    public struct Model: Equatable, InsetsProvider {
         public let height: CGFloat
         public let color: UIColor?
+        public var edgeInsets: UIEdgeInsets
 
-        public init(height: CGFloat, color: UIColor? = .clear) {
+        public init(height: CGFloat, color: UIColor? = nil, edgeInsets: UIEdgeInsets = .zero) {
             self.height = height
             self.color = color
+            self.edgeInsets = edgeInsets
         }
     }
 
     public func configure(with model: Model) {
         backgroundColor = model.color
         heightConstraint?.constant = model.height
+
         layoutIfNeeded()
     }
 
@@ -53,7 +56,7 @@ extension SpacerView: ConfigurableItem {
 
 // MARK: - Private
 
-private extension SpacerView {
+private extension SeparatorView {
 
     func configureConstraints() {
 
@@ -61,28 +64,6 @@ private extension SpacerView {
 
         heightConstraint = heightAnchor.constraint(equalToConstant: 0)
         heightConstraint?.isActive = true
-    }
-
-}
-
-// MARK: - Wrapper
-
-public protocol SpacerWrapper: ConfigurableItem {
-
-    var spacer: SpacerView { get }
-
-    func configureViews()
-}
-
-public extension SpacerWrapper where Model == SpacerView.Model {
-
-    func configureViews() {
-        backgroundColor = nil
-        wrap(subview: spacer, with: .zero)
-    }
-
-    func configure(with model: Model) {
-        spacer.configure(with: model)
     }
 
 }
