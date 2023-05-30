@@ -66,8 +66,8 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private lazy var dateGenerator = TableWrappedCell<LabelView>.rddm.baseGenerator(with: dateModel, and: .class)
 
     // Sent message
-    private let sentMessageStyle = MessageStyle(color: .black, font: .systemFont(ofSize: 16, weight: .regular))
-    private let sentMessageBorderStyle = MessageBorderStyle(cornerRadius: 9, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner], borderWidth: 1, borderColor: UIColor.black.cgColor)
+    private let sentMessageStyle = MessageStyle(textColor: .white, font: .systemFont(ofSize: 16, weight: .regular), backgroundColor: .systemBlue)
+    private let sentMessageBorderStyle = MessageBorderStyle(cornerRadius: 9, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
     private lazy var sentMessageModel: MessageModel = .init(text: .string("Lorem"),
                                                             style: sentMessageStyle,
                                                             alignment: .right,
@@ -78,7 +78,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private lazy var sentMessageGenerator = TableWrappedCell<MessageView>.rddm.baseGenerator(with: sentMessageModel, and: .class)
 
     // Recieved message
-    private let recievedMessageStyle = MessageStyle(color: .black, font: .systemFont(ofSize: 16, weight: .regular))
+    private let recievedMessageStyle = MessageStyle(textColor: .black, font: .systemFont(ofSize: 16, weight: .regular))
     private let recievedMessageBorderStyle = MessageBorderStyle(cornerRadius: 9, maskedCorners: [.layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMaxXMinYCorner], borderWidth: 1, borderColor: UIColor.black.cgColor)
     private lazy var recievedMessageModel = MessageModel(text: .string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"),
                                                          style: recievedMessageStyle,

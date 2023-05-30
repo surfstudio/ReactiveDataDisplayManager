@@ -29,12 +29,14 @@ extension MessageView: ConfigurableItem {
 
         public struct MessageStyle: Equatable {
 
-            public let color: UIColor
+            public let textColor: UIColor
             public let font: UIFont
+            public let backgroundColor: UIColor
 
-            public init(color: UIColor = .black, font: UIFont = .systemFont(ofSize: 16)) {
-                self.color = color
+            public init(textColor: UIColor = .black, font: UIFont = .systemFont(ofSize: 16), backgroundColor: UIColor = .white) {
+                self.textColor = textColor
                 self.font = font
+                self.backgroundColor = backgroundColor
             }
 
         }
@@ -86,12 +88,13 @@ extension MessageView: ConfigurableItem {
     // MARK: - Methods
 
     public func configure(with model: Model) {
-        self.backgroundColor = .clear
+        self.backgroundColor = model.style.backgroundColor
+
+        textView.backgroundColor = .clear
         textView.isEditable = false
         textView.isScrollEnabled = false
-
         configureTextView(textView, with: model)
-        textView.textColor = model.style.color
+        textView.textColor = model.style.textColor
         textView.font = model.style.font
         textView.textAlignment = model.alignment
 
