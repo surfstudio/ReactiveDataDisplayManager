@@ -19,6 +19,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private typealias MessageModel = MessageView.Model
     private typealias MessageStyle = MessageView.Model.MessageStyle
     private typealias MessageBorderStyle = MessageView.Model.BorderStyle
+    private typealias SeparatorModel = SeparatorView.Model
 
     // MARK: - Constants
 
@@ -88,6 +89,11 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                          borderStyle: recievedMessageBorderStyle)
     private lazy var recievedMessageGenerator = TableWrappedCell<MessageView>.rddm.baseGenerator(with: recievedMessageModel, and: .class)
 
+    // Separator
+
+    private let separatorModel = SeparatorModel(height: 1, color: .lightGray, edgeInsets: UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32))
+    private lazy var separatorGenerator = TableWrappedCell<SeparatorView>.rddm.baseGenerator(with: separatorModel, and: .class)
+
     // MARK: - UIViewController
 
     override func viewDidLoad() {
@@ -110,6 +116,7 @@ private extension ComponentsOverviewTableViewController {
             dateGenerator
             generateSentMessages()
             sentMessageTimeGenerator
+            separatorGenerator
             generateRecievedMessages()
             recievedMessageTimeGenerator
         }
