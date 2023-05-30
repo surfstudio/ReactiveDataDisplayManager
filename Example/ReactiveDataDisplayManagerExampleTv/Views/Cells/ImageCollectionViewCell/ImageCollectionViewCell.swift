@@ -44,13 +44,22 @@ final class ImageCollectionViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Configurable
+// MARK: - ConfigurableItem
 
 extension ImageCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: ImageViewModel) {
         viewModel.loadImage(viewModel.imageUrl, iconView)
     }
+
+}
+
+// MARK: - AccessibilityItem
+
+extension ImageCollectionViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .just("some image") }
+    var traitsStrategy: AccessibilityTraitsStrategy { .just(.image) }
 
 }
 

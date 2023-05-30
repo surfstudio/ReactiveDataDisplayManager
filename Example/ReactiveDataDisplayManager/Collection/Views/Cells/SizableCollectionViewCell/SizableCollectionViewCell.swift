@@ -37,13 +37,21 @@ final class SizableCollectionViewCell: UICollectionViewCell {
 
 }
 
-// MARK: - Configurable
+// MARK: - ConfigurableItem
 
 extension SizableCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: String) {
         titleLabel.text = viewModel
     }
+
+}
+
+// MARK: - AccessibilityItem
+
+extension SizableCollectionViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
 
 }
 

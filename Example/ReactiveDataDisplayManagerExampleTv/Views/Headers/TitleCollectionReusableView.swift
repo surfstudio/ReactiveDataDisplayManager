@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
-final class TitleCollectionReusableView: UICollectionReusableView {
+final class TitleCollectionReusableView: UICollectionReusableView, AccessibilityItem {
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
+
+    // MARK: - AccessibilityItem
+
+    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
 
     // MARK: - Internal methods
 
