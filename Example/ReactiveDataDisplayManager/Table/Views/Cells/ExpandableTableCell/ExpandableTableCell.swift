@@ -13,6 +13,7 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
     // MARK: - IBOutlets
 
     @IBOutlet private weak var button: UIButton!
+    @IBOutlet private weak var switcher: UISwitch!
     @IBOutlet private weak var buttonHeightConstraint: NSLayoutConstraint!
 
     // MARK: - Private Properties
@@ -24,7 +25,7 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
     public var onHeightChanged: BaseEvent<CGFloat?> = .init()
     public var animatedExpandable = true
 
-    // MARK: - @IBActions
+    // MARK: - Actions
 
     @IBAction private func buttonTap(_ sender: UIButton) {
         buttonHeightConstraint.constant += isSmall ? 50 : -50
@@ -34,6 +35,39 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
 
     @IBAction private func switchAnimated(_ sender: UISwitch) {
         animatedExpandable = sender.isOn
+    }
+
+    override func accessibilityActivate() -> Bool {
+        buttonTap(button)
+        return true
+    }
+
+    @objc
+    private func accessibilityActivateSwitch() -> Bool {
+        switcher.isOn.toggle()
+        return true
+    }
+
+}
+
+// MARK: - AccessibilityItem
+
+extension ExpandableTableCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .from(object: button) }
+    var valueStrategy: AccessibilityStringStrategy {
+        .joined([
+            .just(isSmall ? "collapsed" : "expanded"),
+            .just(", is animated: "),
+            .from(object: switcher, keyPath: \.accessibilityValue)
+        ])
+    }
+
+    var traitsStrategy: AccessibilityTraitsStrategy { .merge([button]) }
+
+    func accessibilityActions() -> [UIAccessibilityCustomAction] {
+        let switchAction = UIAccessibilityCustomAction(name: "Toggle animated", target: self, selector: #selector(accessibilityActivateSwitch))
+        return [switchAction]
     }
 
 }
