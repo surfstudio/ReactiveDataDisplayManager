@@ -16,9 +16,9 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
                 return
             }
             if let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider {
-                accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem, generator: generator)
+                accessibilityItem.modifierType.modify(item: accessibilityItem, generator: generator)
             } else {
-                accessibilityItem.modifierType.modify(view: cell.contentView, with: accessibilityItem)
+                accessibilityItem.modifierType.modify(item: accessibilityItem)
             }
 
         case .willDisplaySupplementaryView(let indexPath, let view, let kind):
@@ -36,9 +36,9 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
                 break
             }
             if let supplementaryGenerator {
-                accessibilityItem.modifierType.modify(view: view, with: accessibilityItem, generator: supplementaryGenerator)
+                accessibilityItem.modifierType.modify(item: accessibilityItem, generator: supplementaryGenerator)
             } else {
-                accessibilityItem.modifierType.modify(view: view, with: accessibilityItem)
+                accessibilityItem.modifierType.modify(item: accessibilityItem)
             }
 
 

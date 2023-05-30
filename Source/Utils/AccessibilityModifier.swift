@@ -9,38 +9,40 @@ import UIKit
 
 /// Protocol for accessibility parameters modifier
 public protocol AccessibilityModifier {
-    /// Modifies the view with strategies from `AccessibilityItem`
-    static func modify(view: UIView, with item: AccessibilityItem)
+    /// Modifies`AccessibilityItem` with provided strategies from
+    static func modify(item: AccessibilityItem)
 
-    /// Modifies the view with strategies from `AccessibilityItem` and `AccessibilityStrategyProvider`
-    static func modify(view: UIView, with item: AccessibilityItem, generator: AccessibilityStrategyProvider)
+    /// Modifies  `AccessibilityItem` with provided strategies  and `AccessibilityStrategyProvider`
+    static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider)
 }
 
 enum DefaultAccessibilityModifier: AccessibilityModifier {
+    static func modify(item: AccessibilityItem) {
+        item.isAccessibilityElement = !item.isAccessibilityIgnored
 
-    static func modify(view: UIView, with item: AccessibilityItem) {
-        guard !item.isAccessibilityIgnored else {
-            return
+        if !item.labelStrategy.isIgnored {
+            item.accessibilityLabel = item.labelStrategy.value
         }
-        view.isAccessibilityElement = true
-        view.accessibilityLabel = item.labelStrategy.value
-        view.accessibilityValue = item.valueStrategy.value
-        view.accessibilityTraits = item.traitsStrategy.value ?? .none
+
+        if !item.valueStrategy.isIgnored {
+            item.accessibilityValue = item.valueStrategy.value
+        }
+
+        if !item.traitsStrategy.isIgnored, let traits = item.traitsStrategy.value {
+            item.accessibilityTraits = traits
+        }
     }
 
-    static func modify(view: UIView, with item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
-        guard !item.isAccessibilityIgnored || !generator.isAccessibilityIgnored else {
-            return
-        }
-        view.isAccessibilityElement = true
+    static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
+        item.isAccessibilityElement = !item.isAccessibilityIgnored || !generator.isAccessibilityIgnored
 
         if !item.labelStrategy.isIgnored || !generator.labelStrategy.isIgnored {
-            view.accessibilityLabel = item.accessibilityStrategyConflictResolver(itemStrategy: item.labelStrategy,
+            item.accessibilityLabel = item.accessibilityStrategyConflictResolver(itemStrategy: item.labelStrategy,
                                                                                  generatorStrategy: generator.labelStrategy)
         }
 
         if !item.valueStrategy.isIgnored || !generator.valueStrategy.isIgnored {
-            view.accessibilityValue = item.accessibilityStrategyConflictResolver(itemStrategy: item.valueStrategy,
+            item.accessibilityValue = item.accessibilityStrategyConflictResolver(itemStrategy: item.valueStrategy,
                                                                                  generatorStrategy: generator.valueStrategy)
         }
 
@@ -48,7 +50,7 @@ enum DefaultAccessibilityModifier: AccessibilityModifier {
             let traits = [item.traitsStrategy.value, generator.traitsStrategy.value]
                 .compactMap { $0 }
                 .reduce(UIAccessibilityTraits(), { $0.union($1) })
-            view.accessibilityTraits = traits
+            item.accessibilityTraits = traits
         }
     }
 }
