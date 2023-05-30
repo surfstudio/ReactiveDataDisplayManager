@@ -45,6 +45,22 @@ extension MessageView: ConfigurableItem {
             case attributedString(NSAttributedString)
         }
 
+        public struct BorderStyle: Equatable {
+
+            public let cornerRadius: CGFloat
+            public let maskedCorners: CACornerMask
+            public let borderWidth: CGFloat
+            public let borderColor: CGColor
+
+            public init(cornerRadius: CGFloat, maskedCorners: CACornerMask, borderWidth: CGFloat = 0, borderColor: CGColor = UIColor.clear.cgColor) {
+                self.cornerRadius = cornerRadius
+                self.maskedCorners = maskedCorners
+                self.borderWidth = borderWidth
+                self.borderColor = borderColor
+            }
+
+        }
+
         // MARK: - Public properties
 
         public let text: TextType
@@ -52,15 +68,17 @@ extension MessageView: ConfigurableItem {
         public var alignment: NSTextAlignment
         public var edgeInsets: UIEdgeInsets
         public let internalEdgeInsets: UIEdgeInsets
+        public let borderStyle: BorderStyle
 
         // MARK: - Initialization
 
-        public init(text: TextType, style: MessageStyle, alignment: NSTextAlignment, externalEdgeInsets: UIEdgeInsets, internalEdgeInsets: UIEdgeInsets) {
+        public init(text: TextType, style: MessageStyle, alignment: NSTextAlignment, externalEdgeInsets: UIEdgeInsets, internalEdgeInsets: UIEdgeInsets, borderStyle: BorderStyle) {
             self.text = text
             self.style = style
             self.alignment = alignment
             self.edgeInsets = externalEdgeInsets
             self.internalEdgeInsets = internalEdgeInsets
+            self.borderStyle = borderStyle
         }
 
     }
@@ -79,9 +97,10 @@ extension MessageView: ConfigurableItem {
 
         wrap(subview: textView, with: model.internalEdgeInsets)
 
-        layer.cornerRadius = 9
-        layer.borderColor = model.style.color.cgColor
-        layer.borderWidth = 1
+        layer.cornerRadius = model.borderStyle.cornerRadius
+        layer.borderColor = model.borderStyle.borderColor
+        layer.borderWidth = model.borderStyle.borderWidth
+        layer.maskedCorners = model.borderStyle.maskedCorners
 
         layoutIfNeeded()
     }
