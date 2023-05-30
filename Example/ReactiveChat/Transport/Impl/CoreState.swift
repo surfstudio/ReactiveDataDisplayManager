@@ -28,7 +28,7 @@ final class CoreState {
 
 extension CoreState: StateKeeper {
 
-    func addDelegate<T>(delegate: T, with key: String) where T : AnyObject {
+    func addDelegate<T>(delegate: T, with key: String) where T: AnyObject {
         delegates.updateValue(delegate, forKey: key)
     }
 
@@ -37,7 +37,6 @@ extension CoreState: StateKeeper {
     }
 
 }
-
 
 // MARK: - Authenticator
 

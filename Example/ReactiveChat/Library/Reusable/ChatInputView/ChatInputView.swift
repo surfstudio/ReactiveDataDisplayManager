@@ -288,4 +288,3 @@ private extension ChatInputView {
         sendButton.isEnabled = textInLimit && textIsNotEmpty
     }
 }
-

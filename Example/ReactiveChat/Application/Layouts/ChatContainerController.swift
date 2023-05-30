@@ -28,7 +28,9 @@ final class ChatContainerController: UIViewController {
 
     private var layout: LayoutType?
     private lazy var keyboardObservable = AutoConstraintKeyboardPositionManager(view: view,
-                                                                                configurations: [.init(constraint: chatInputViewBottomToSafeArea)])
+                                                                                configurations: [
+                                                                                    .init(constraint: chatInputViewBottomToSafeArea)
+                                                                                ])
 
     // MARK: - Lifecycle
 
@@ -55,7 +57,6 @@ final class ChatContainerController: UIViewController {
         }
     }
 }
-
 
 // MARK: - LayoutDependable
 

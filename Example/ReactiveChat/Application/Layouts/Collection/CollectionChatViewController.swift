@@ -32,7 +32,6 @@ final class CollectionChatViewController: UIViewController {
 
 }
 
-
 // MARK: - ChatDelegate
 
 extension CollectionChatViewController: ChatDelegate {
