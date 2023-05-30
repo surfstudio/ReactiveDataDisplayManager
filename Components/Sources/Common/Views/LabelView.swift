@@ -42,7 +42,7 @@ extension LabelView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: Equatable {
+    public struct Model: Equatable, InsetsProvider {
 
         // MARK: - Nested types
 
@@ -84,7 +84,7 @@ extension LabelView: ConfigurableItem {
         public let text: TextType
         public let style: TextStyle
         public let layout: TextLayout
-        public let edgeInsets: UIEdgeInsets
+        public var edgeInsets: UIEdgeInsets
 
         // MARK: - Initialization
 
