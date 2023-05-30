@@ -73,7 +73,7 @@ final class HelloController: UIViewController {
 extension HelloController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        !(textField.text?.isEmpty ?? true)
+        textField.text?.isEmpty == false
     }
 
 }
