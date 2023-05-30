@@ -70,11 +70,15 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private let sentMessageStyle = MessageStyle(textColor: .white,
                                                 font: .systemFont(ofSize: 16, weight: .regular),
                                                 backgroundColor: .systemBlue)
-    private let sentMessageBorderStyle = MessageBorderStyle(cornerRadius: 9, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
+    private let sentMessageBorderStyle = MessageBorderStyle(cornerRadius: 9,
+                                                            maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
     private lazy var sentMessageModel: MessageModel = .init(text: .string("Lorem"),
                                                             style: sentMessageStyle,
                                                             alignment: .right,
-                                                            externalEdgeInsets: UIEdgeInsets(top: 12, left: UIScreen.main.bounds.width / 2, bottom: 12, right: 16),
+                                                            externalEdgeInsets: UIEdgeInsets(top: 12,
+                                                                                             left: UIScreen.main.bounds.width / 2,
+                                                                                             bottom: 12,
+                                                                                             right: 16),
                                                             internalEdgeInsets: UIEdgeInsets(top: 3, left: 5, bottom: 3, right: 5),
                                                             borderStyle: sentMessageBorderStyle)
 
