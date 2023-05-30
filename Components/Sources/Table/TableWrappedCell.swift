@@ -8,7 +8,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-/// Empty table cell with `View`
+/// Empty table cell with `View`. Configuration is implemented within `ViewWrapper`.
 public final class TableWrappedCell<View: ConfigurableItem>: UITableViewCell, ViewWrapper {
 
     public typealias Model = View.Model
