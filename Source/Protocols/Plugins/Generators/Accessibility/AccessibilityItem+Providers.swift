@@ -5,4 +5,33 @@
 //  Created by korshunov on 31.05.2023.
 //
 
-import Foundation
+import UIKit
+
+/// Accessibility strategies provider protocol for generators
+public protocol AccessibilityStrategyProvider {
+
+    /// strategy for `accessibilityLabel`. Default: `.ignored`
+    var labelStrategy: AccessibilityStringStrategy { get }
+
+    /// strategy for `accessibilityValue`. Default: `.ignored`
+    var valueStrategy: AccessibilityStringStrategy { get }
+
+    /// strategy for `accessibilityTraits`. Default: `.ignored`
+    var traitsStrategy: AccessibilityTraitsStrategy { get }
+
+    /// Idicates that `AccessibilityItem` should become an accessibility element. Equals `true` if all strategies is in state `.ignored`
+    var isAccessibilityIgnored: Bool { get }
+}
+
+public extension AccessibilityStrategyProvider {
+    var labelStrategy: AccessibilityStringStrategy { .ignored }
+    var valueStrategy: AccessibilityStringStrategy { .ignored }
+    var traitsStrategy: AccessibilityTraitsStrategy { .ignored }
+    var isAccessibilityIgnored: Bool {
+        return [labelStrategy.isIgnored, valueStrategy.isIgnored, traitsStrategy.isIgnored].allSatisfy { $0 }
+    }
+}
+
+public protocol AccessibilityActionsProvider {
+    func accessibilityActions() -> [UIAccessibilityCustomAction]
+}
