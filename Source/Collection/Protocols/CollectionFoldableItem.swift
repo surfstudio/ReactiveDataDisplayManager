@@ -14,5 +14,5 @@ public protocol CollectionFoldableItem: AnyObject, AccessibilityStrategyProvider
 }
 
 extension CollectionFoldableItem {
-    public var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
+    public var traitsStrategy: AccessibilityTraitsStrategy { childGenerators.isEmpty ? .ignored : .just(.button) }
 }
