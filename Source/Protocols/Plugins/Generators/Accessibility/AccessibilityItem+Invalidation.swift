@@ -7,28 +7,37 @@
 
 import Foundation
 
+/// Type of `AccessibilityItem` with provided index
 public enum AccessibilityItemKind {
     case header(Int), cell(IndexPath), footer(Int)
 }
 
-public struct AccessibilityItemInvalidator {
+public protocol AccessibilityItemInvalidator {
+    /// Invalidates and sets all accessibility parameters for on-screen item
+    func invalidateAccessibilityParameters()
+}
+
+struct CommonAccessibilityItemInvalidator: AccessibilityItemInvalidator {
     let accessibilityItemKind: AccessibilityItemKind
     weak var item: AccessibilityItem?
     weak var accessibilityDelegate: AccessibilityItemDelegate?
 
-    public func invalidateAccessibility() {
+    public func invalidateAccessibilityParameters() {
         guard let item else { return }
         accessibilityDelegate?.didInvalidateAccessibility(for: item, of: accessibilityItemKind)
     }
 }
 
+/// Protocol for invalidation mechanism
 public protocol AccessibilityInvalidatable: AccessibilityItem {
+    /// Stored invalidator that can be used for accessibility parameters invalidation.
+    /// Fully managed by accessibility plugins. This value is `nil` if item isn't displaying
     var accessibilityInvalidator: AccessibilityItemInvalidator? { get set }
 }
 
 extension AccessibilityInvalidatable {
     func setInvalidator(kind: AccessibilityItemKind, delegate: AccessibilityItemDelegate?) {
-        accessibilityInvalidator = AccessibilityItemInvalidator(accessibilityItemKind: kind, item: self, accessibilityDelegate: delegate)
+        accessibilityInvalidator = CommonAccessibilityItemInvalidator(accessibilityItemKind: kind, item: self, accessibilityDelegate: delegate)
     }
 
     func removeInvalidator() {
@@ -36,6 +45,7 @@ extension AccessibilityInvalidatable {
     }
 }
 
+/// Invalidation delegate for `CollectionDelegate` or `TableDelegate`
 public protocol AccessibilityItemDelegate: AnyObject {
     func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind)
 }
