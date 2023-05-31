@@ -93,26 +93,32 @@ extension BaseTableDelegate {
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tablePlugins.process(event: .willDisplayCell(indexPath, cell), with: manager)
+        (cell as? AccessibilityInvalidatable)?.setInvalidator(kind: .cell(indexPath), delegate: self)
     }
 
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         tablePlugins.process(event: .willDisplayHeader(section, view), with: manager)
+        (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .header(section), delegate: self)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         tablePlugins.process(event: .didEndDisplayHeader(section, view), with: manager)
+        (view as? AccessibilityInvalidatable)?.removeInvalidator()
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tablePlugins.process(event: .didEndDisplayCell(indexPath, cell), with: manager)
+        (cell as? AccessibilityInvalidatable)?.removeInvalidator()
     }
 
     open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         tablePlugins.process(event: .willDisplayFooter(section, view), with: manager)
+        (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .footer(section), delegate: self)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         tablePlugins.process(event: .didEndDisplayFooter(section, view), with: manager)
+        (view as? AccessibilityInvalidatable)?.removeInvalidator()
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
@@ -257,6 +263,24 @@ extension BaseTableDelegate: TableDragAndDropDelegate {
 
 }
 #endif
+
+// MARK: AccessibilityItemDelegate
+
+extension BaseTableDelegate: AccessibilityItemDelegate {
+
+    public func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind) {
+        switch kind {
+        case .header(let section):
+            tablePlugins.process(event: .invalidatedHeaderAccessibility(section, item), with: manager)
+        case .cell(let indexPath):
+            guard let cell = item as? UITableViewCell else { return }
+            tablePlugins.process(event: .invalidatedCellAccessibility(indexPath, cell), with: manager)
+        case .footer(let section):
+            tablePlugins.process(event: .invalidatedFooterAccessibility(section, item), with: manager)
+        }
+    }
+
+}
 
 // MARK: UIScrollViewDelegate
 

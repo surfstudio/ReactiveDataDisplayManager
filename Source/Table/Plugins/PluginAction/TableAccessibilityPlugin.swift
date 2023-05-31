@@ -13,7 +13,7 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
 
     override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
-        case .willDisplayCell(let indexPath, let cell):
+        case let .willDisplayCell(indexPath, cell), let .invalidatedCellAccessibility(indexPath, cell):
             guard let accessibilityItem = cell as? AccessibilityItem else {
                 return
             }
@@ -23,7 +23,7 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
                 accessibilityItem.modifierType.modify(item: accessibilityItem)
             }
 
-        case .willDisplayHeader(let section, let view):
+        case let .willDisplayHeader(section, view), let .invalidatedHeaderAccessibility(section, view):
             guard let accessibilityItem = view as? AccessibilityItem else {
                 return
             }
@@ -33,7 +33,7 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
                 accessibilityItem.modifierType.modify(item: accessibilityItem)
             }
 
-        case .willDisplayFooter(_, let view):
+        case let .willDisplayFooter(_, view), let .invalidatedFooterAccessibility(_, view):
             guard let accessibilityItem = view as? AccessibilityItem else {
                 return
             }
