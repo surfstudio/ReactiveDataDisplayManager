@@ -5,10 +5,7 @@ targetTemplates:
     BaseApp:
       type: application
       scheme:
-        configVariants: all
-        testTargets:
-            - ${ui_test}
-        gatherCoverageData: true
+          configVariants: all
       dependencies:
         - sdk: UIKit.framework
       sources:

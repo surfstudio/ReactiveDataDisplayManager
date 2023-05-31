@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6cF-bi-aPE">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="TPs-sE-a0M">
+            <objects>
+                <navigationController id="6cF-bi-aPE" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1cP-n2-MqY">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YgY-aH-NQT" kind="relationship" relationship="rootViewController" id="scF-0h-OJd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pxf-nX-HRA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1251" y="129"/>
+        </scene>
+        <!--Hello-->
+        <scene sceneID="Cyn-Iw-xci">
+            <objects>
+                <viewController id="YgY-aH-NQT" customClass="HelloController" customModule="ReactiveChat_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dUn-Lb-0t7">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your name?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ZP-yM-bu4">
+                                <rect key="frame" x="144.66666666666666" y="443.66666666666669" width="103.66666666666666" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="nameEntered:" destination="YgY-aH-NQT" eventType="primaryActionTriggered" id="Ekn-9W-cES"/>
+                                </connections>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ReactiveIconHorizontal" translatesAutoresizingMaskIntoConstraints="NO" id="wx5-c5-DtO">
+                                <rect key="frame" x="160" y="338.33333333333331" width="73.333333333333314" height="73.333333333333314"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="IA4-Bw-Qdz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1ZP-yM-bu4" firstAttribute="centerY" secondItem="IA4-Bw-Qdz" secondAttribute="centerY" id="9i1-IB-bc4"/>
+                            <constraint firstItem="1ZP-yM-bu4" firstAttribute="centerX" secondItem="IA4-Bw-Qdz" secondAttribute="centerX" id="A4K-6Y-cBH"/>
+                            <constraint firstItem="wx5-c5-DtO" firstAttribute="centerX" secondItem="IA4-Bw-Qdz" secondAttribute="centerX" id="Bhd-U1-UGc"/>
+                            <constraint firstItem="1ZP-yM-bu4" firstAttribute="top" secondItem="wx5-c5-DtO" secondAttribute="bottom" constant="32" id="bUu-gY-pIs"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Hello" id="kAL-q1-oHX"/>
+                    <connections>
+                        <outlet property="nameField" destination="1ZP-yM-bu4" id="M8i-YH-WvZ"/>
+                        <outlet property="nameFieldCenterY" destination="9i1-IB-bc4" id="7r1-fe-M3N"/>
+                        <segue destination="0YV-66-pGs" kind="show" identifier="Chat" id="lnx-oR-RlZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fKL-qd-3RX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-317" y="129"/>
+        </scene>
+        <!--Chat Container Controller-->
+        <scene sceneID="b7A-Ge-laL">
+            <objects>
+                <viewController id="0YV-66-pGs" customClass="ChatContainerController" customModule="ReactiveChat_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rdI-Gx-Sxh">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gvQ-ht-RAR">
+                                <rect key="frame" x="0.0" y="103" width="393" height="651"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="64" translatesAutoresizingMaskIntoConstraints="NO" id="8Gf-H5-efg" customClass="ChatInputView" customModule="ReactiveChat_iOS" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="754" width="393" height="64"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="maxLines">
+                                        <integer key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="characterLimit">
+                                        <integer key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hyu-mN-z6d"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hyu-mN-z6d" firstAttribute="trailing" secondItem="8Gf-H5-efg" secondAttribute="trailing" id="3Ut-X4-M1X"/>
+                            <constraint firstItem="hyu-mN-z6d" firstAttribute="bottom" secondItem="8Gf-H5-efg" secondAttribute="bottom" id="7KS-mQ-4C2"/>
+                            <constraint firstItem="8Gf-H5-efg" firstAttribute="top" secondItem="gvQ-ht-RAR" secondAttribute="bottom" id="9RD-AW-dzu"/>
+                            <constraint firstItem="gvQ-ht-RAR" firstAttribute="top" secondItem="hyu-mN-z6d" secondAttribute="top" id="JLd-gu-Ap5"/>
+                            <constraint firstItem="gvQ-ht-RAR" firstAttribute="leading" secondItem="hyu-mN-z6d" secondAttribute="leading" id="Kxa-V4-0jc"/>
+                            <constraint firstItem="8Gf-H5-efg" firstAttribute="leading" secondItem="hyu-mN-z6d" secondAttribute="leading" id="pI6-0Z-ShC"/>
+                            <constraint firstItem="hyu-mN-z6d" firstAttribute="trailing" secondItem="gvQ-ht-RAR" secondAttribute="trailing" id="weT-zj-WXK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="oza-l6-r6Z"/>
+                    <connections>
+                        <outlet property="chatInputView" destination="8Gf-H5-efg" id="QTV-Iu-tJZ"/>
+                        <outlet property="chatInputViewBottomToSafeArea" destination="7KS-mQ-4C2" id="lnC-Dn-zbb"/>
+                        <outlet property="containerView" destination="gvQ-ht-RAR" id="8Vb-sb-vyN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d14-6T-sHm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="685" y="129"/>
+        </scene>
+    </scenes>
+    <designables>
+        <designable name="8Gf-H5-efg">
+            <size key="intrinsicContentSize" width="0.0" height="64"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="ReactiveIconHorizontal" width="73.333335876464844" height="73.333335876464844"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

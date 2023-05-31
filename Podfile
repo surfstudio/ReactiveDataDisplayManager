@@ -1,7 +1,7 @@
 use_frameworks!
 
 def utils
-  pod 'SurfUtils/ItemsScrollManager', :git => "https://github.com/surfstudio/iOS-Utils.git", :tag => '13.1.0'
+  pod 'SurfUtils', :subspecs => ['StringAttributes', 'KeyboardPresentable', 'UIStyle', 'XibView', 'ItemsScrollManager'], :git => "https://github.com/surfstudio/iOS-Utils.git", :tag => '13.1.0'
 end
 
 def diffKit
@@ -15,6 +15,11 @@ end
 abstract_target 'Targets' do
 
   nuke
+
+  target 'ReactiveChat_iOS' do
+    platform :ios, '13.0'
+    utils
+  end
 
   target 'ReactiveDataDisplayManagerExample_iOS' do
     platform :ios, '11.0'
