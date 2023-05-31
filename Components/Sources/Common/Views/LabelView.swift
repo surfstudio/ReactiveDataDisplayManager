@@ -102,7 +102,7 @@ extension LabelView: ConfigurableItem {
 
         configureText(with: model.text)
 
-        layoutSubviews()
+        setNeedsLayout()
     }
 
 }
