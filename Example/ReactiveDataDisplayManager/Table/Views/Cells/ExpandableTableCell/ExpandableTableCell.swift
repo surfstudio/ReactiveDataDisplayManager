@@ -8,7 +8,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-class ExpandableTableCell: UITableViewCell, ExpandableItem {
+class ExpandableTableCell: UITableViewCell, ExpandableItem, AccessibilityInvalidatable {
 
     // MARK: - IBOutlets
 
@@ -18,12 +18,24 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
 
     // MARK: - Private Properties
 
-    private var isSmall = true
+    private var isSmall = true {
+        didSet {
+            accessibilityInvalidator?.invalidateAccessibility()
+        }
+    }
 
     // MARK: - ExpandableItem Properties
 
     public var onHeightChanged: BaseEvent<CGFloat?> = .init()
-    public var animatedExpandable = true
+    public var animatedExpandable = true {
+        didSet {
+            accessibilityInvalidator?.invalidateAccessibility()
+        }
+    }
+
+    // MARK: - AccessibilityInvalidatable
+
+    var accessibilityInvalidator: AccessibilityItemInvalidator?
 
     // MARK: - Actions
 
@@ -63,7 +75,7 @@ extension ExpandableTableCell: AccessibilityItem {
         ])
     }
 
-    var traitsStrategy: AccessibilityTraitsStrategy { .merge([button]) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: button) }
 
     func accessibilityActions() -> [UIAccessibilityCustomAction] {
         let switchAction = UIAccessibilityCustomAction(name: "Toggle animated", target: self, selector: #selector(accessibilityActivateSwitch))
