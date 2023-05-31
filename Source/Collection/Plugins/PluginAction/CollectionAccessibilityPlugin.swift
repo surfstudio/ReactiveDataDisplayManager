@@ -11,39 +11,69 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
 
     override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
         switch event {
-        case .willDisplayCell(let indexPath, let cell):
-            guard let accessibilityItem = cell as? AccessibilityItem else {
-                return
-            }
-            if let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider {
-                accessibilityItem.modifierType.modify(item: accessibilityItem, generator: generator)
-            } else {
-                accessibilityItem.modifierType.modify(item: accessibilityItem)
-            }
+        case let .willDisplayCell(indexPath, cell):
+            processCollectionCell(indexPath, cell, with: manager)
+            (cell as? AccessibilityInvalidatable)?.setInvalidator(kind: .cell(indexPath), delegate: manager?.delegate)
 
-        case .willDisplaySupplementaryView(let indexPath, let view, let kind):
-            guard let accessibilityItem = view as? AccessibilityItem else {
-                return
-            }
+        case let .invalidatedCellAccessibility(indexPath, cell):
+            processCollectionCell(indexPath, cell, with: manager)
 
-            var supplementaryGenerator: AccessibilityStrategyProvider?
+        case let .willDisplaySupplementaryView(indexPath, view, kind):
             switch kind {
             case UICollectionView.elementKindSectionHeader:
-                supplementaryGenerator = manager?.sections[indexPath.section] as? AccessibilityStrategyProvider
+                processCollectionHeader(indexPath.section, view, with: manager)
+                (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .header(indexPath.section), delegate: manager?.delegate)
             case UICollectionView.elementKindSectionFooter:
-                supplementaryGenerator = manager?.footers[indexPath.section] as? AccessibilityStrategyProvider
+                processCollectionFooter(indexPath.section, view, with: manager)
+                (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .footer(indexPath.section), delegate: manager?.delegate)
             default:
                 break
             }
-            if let supplementaryGenerator {
-                accessibilityItem.modifierType.modify(item: accessibilityItem, generator: supplementaryGenerator)
-            } else {
-                accessibilityItem.modifierType.modify(item: accessibilityItem)
-            }
 
+        case let .invalidatedHeaderAccessibility(section, view):
+            processCollectionHeader(section, view, with: manager)
+
+        case let .invalidatedFooterAccessibility(section, view):
+            processCollectionFooter(section, view, with: manager)
+
+        case let .didEndDisplayCell(_, view as UIView), let .didEndDisplayingSupplementaryView(_, view as UIView, _):
+            (view as? AccessibilityInvalidatable)?.removeInvalidator()
 
         default:
             break
+        }
+    }
+
+    private func processCollectionCell(_ indexPath: IndexPath, _ cell: UICollectionViewCell, with manager: BaseCollectionManager?) {
+        guard let accessibilityItem = cell as? AccessibilityItem else {
+            return
+        }
+        if let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider {
+            accessibilityItem.modifierType.modify(item: accessibilityItem, generator: generator)
+        } else {
+            accessibilityItem.modifierType.modify(item: accessibilityItem)
+        }
+    }
+
+    private func processCollectionHeader(_ section: Int, _ view: UICollectionReusableView, with manager: BaseCollectionManager?) {
+        guard let accessibilityItem = view as? AccessibilityItem else {
+            return
+        }
+        if let header = manager?.sections[section] as? AccessibilityStrategyProvider {
+            accessibilityItem.modifierType.modify(item: accessibilityItem, generator: header)
+        } else {
+            accessibilityItem.modifierType.modify(item: accessibilityItem)
+        }
+    }
+
+    private func processCollectionFooter(_ section: Int, _ view: UICollectionReusableView, with manager: BaseCollectionManager?) {
+        guard let accessibilityItem = view as? AccessibilityItem else {
+            return
+        }
+        if let footer = manager?.footers[section] as? AccessibilityStrategyProvider {
+            accessibilityItem.modifierType.modify(item: accessibilityItem, generator: footer)
+        } else {
+            accessibilityItem.modifierType.modify(item: accessibilityItem)
         }
     }
 

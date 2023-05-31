@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol TableDelegate: TableBuilderConfigurable, UITableViewDelegate {
+public protocol TableDelegate: TableBuilderConfigurable, UITableViewDelegate, AccessibilityItemDelegate {
     var manager: BaseTableManager? { get set }
 
     var tablePlugins: PluginCollection<BaseTablePlugin<TableEvent>> { get set }
