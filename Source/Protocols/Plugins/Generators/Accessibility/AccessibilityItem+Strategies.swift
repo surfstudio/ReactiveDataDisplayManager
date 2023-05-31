@@ -23,7 +23,7 @@ public enum AccessibilityStringStrategy {
     /// a combination of strategies
     indirect case joined([AccessibilityStringStrategy])
 
-    var isIgnored: Bool {
+    public var isIgnored: Bool {
         if case .ignored = self {
             return true
         } else {
@@ -31,7 +31,7 @@ public enum AccessibilityStringStrategy {
         }
     }
 
-    var value: String? {
+    public var value: String? {
         switch self {
         case .ignored:
             return nil
@@ -60,7 +60,7 @@ public enum AccessibilityTraitsStrategy {
     /// a reference traits merged from another objects
     case merge([NSObject])
 
-    var isIgnored: Bool {
+    public var isIgnored: Bool {
         if case .ignored = self {
             return true
         } else {
@@ -70,7 +70,7 @@ public enum AccessibilityTraitsStrategy {
 
     /// accessibility traits of current strategy
     /// - Returns: nil if `isIgnored`, otherwise `UIAccessibilityTraits`
-    var value: UIAccessibilityTraits? {
+    public var value: UIAccessibilityTraits? {
         switch self {
         case .ignored:
             return nil
