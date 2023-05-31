@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChatInputView" customModule="ReactiveChat_iOS" customModuleProvider="target">
+            <connections>
+                <outlet property="attachmentButton" destination="KwU-kJ-1pq" id="tY0-Pb-0ki"/>
+                <outlet property="bottomConstraint" destination="71j-so-FJk" id="flG-eQ-Vzt"/>
+                <outlet property="placeholderView" destination="8n5-Tb-aog" id="sHB-Zh-1yN"/>
+                <outlet property="sendButton" destination="YjY-aH-Apg" id="9hw-Uh-JJD"/>
+                <outlet property="textView" destination="tVi-zp-a82" id="6HX-hm-C6X"/>
+                <outlet property="topConstraint" destination="KK4-SH-Qw3" id="3QV-Tb-GlX"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3B3-bK-6GI">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YjY-aH-Apg" userLabel="sendButton">
+                    <rect key="frame" x="370" y="44" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="9zW-uh-PhY"/>
+                        <constraint firstAttribute="height" constant="24" id="gS9-p8-Nx8"/>
+                    </constraints>
+                    <color key="tintColor" name="RDDMMainColor"/>
+                    <state key="normal" image="paperplane" catalog="system"/>
+                    <connections>
+                        <action selector="sendTapped:" destination="-1" eventType="touchUpInside" id="kpK-gU-C1v"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KwU-kJ-1pq" userLabel="AttachmentButton">
+                    <rect key="frame" x="20" y="44" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="r8E-ST-BPg"/>
+                        <constraint firstAttribute="height" constant="24" id="vyJ-df-kcq"/>
+                    </constraints>
+                    <color key="tintColor" name="RDDMMainColor"/>
+                    <state key="normal" image="paperclip" catalog="system"/>
+                    <connections>
+                        <action selector="attachmentTapped:" destination="-1" eventType="touchUpInside" id="f6F-u4-3Im"/>
+                    </connections>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tVi-zp-a82">
+                    <rect key="frame" x="60" y="16" width="294" height="48"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8n5-Tb-aog">
+                    <rect key="frame" x="60" y="16" width="294" height="48"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="4fM-I5-Kvi"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="YjY-aH-Apg" firstAttribute="leading" secondItem="tVi-zp-a82" secondAttribute="trailing" constant="16" id="2HK-ZS-2yH"/>
+                <constraint firstAttribute="bottom" secondItem="tVi-zp-a82" secondAttribute="bottom" constant="16" id="71j-so-FJk"/>
+                <constraint firstItem="8n5-Tb-aog" firstAttribute="trailing" secondItem="tVi-zp-a82" secondAttribute="trailing" id="8cW-Sz-KJ7"/>
+                <constraint firstAttribute="bottom" secondItem="KwU-kJ-1pq" secondAttribute="bottom" constant="12" id="CtP-OQ-Gbt"/>
+                <constraint firstItem="tVi-zp-a82" firstAttribute="leading" secondItem="KwU-kJ-1pq" secondAttribute="trailing" constant="16" id="DTd-qM-UPc"/>
+                <constraint firstAttribute="trailing" secondItem="YjY-aH-Apg" secondAttribute="trailing" constant="20" id="IgI-rl-jUi">
+                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                </constraint>
+                <constraint firstItem="tVi-zp-a82" firstAttribute="top" secondItem="3B3-bK-6GI" secondAttribute="top" constant="16" id="KK4-SH-Qw3"/>
+                <constraint firstItem="8n5-Tb-aog" firstAttribute="leading" secondItem="tVi-zp-a82" secondAttribute="leading" id="PMt-Ah-Fs4"/>
+                <constraint firstItem="KwU-kJ-1pq" firstAttribute="leading" secondItem="3B3-bK-6GI" secondAttribute="leading" constant="20" id="TZx-Xp-62P">
+                    <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                </constraint>
+                <constraint firstItem="8n5-Tb-aog" firstAttribute="top" secondItem="tVi-zp-a82" secondAttribute="top" id="aTB-jd-gmJ"/>
+                <constraint firstAttribute="bottom" secondItem="YjY-aH-Apg" secondAttribute="bottom" constant="12" id="cpz-JE-IJM"/>
+                <constraint firstItem="8n5-Tb-aog" firstAttribute="bottom" secondItem="tVi-zp-a82" secondAttribute="bottom" id="rbM-rQ-hVB"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="120.61068702290076" y="-219.71830985915494"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="paperclip" catalog="system" width="121" height="128"/>
+        <image name="paperplane" catalog="system" width="128" height="119"/>
+        <namedColor name="RDDMMainColor">
+            <color red="0.90588235294117647" green="0.29411764705882354" blue="0.20784313725490197" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

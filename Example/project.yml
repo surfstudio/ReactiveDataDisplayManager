@@ -17,9 +17,31 @@ settings:
   DEVELOPMENT_TEAM: EFAAG9GXN4
 targets:
 
+    ReactiveChat_iOS:
+      platform: iOS
+      deploymentTarget: 13.0
+      sources:
+        - path: ReactiveChat
+      dependencies:
+        - target: ReactiveDataDisplayManager_iOS
+        - target: ReactiveDataComponents_iOS
+      info:
+        path: ReactiveChat/Application/Info.plist
+      templates:
+        - BaseApp
+        - BaseSettings
+      templateAttributes:
+        bundle_id: ru.surfstudio.rddm.chat
+        bundle_name: ReactiveChatExample
+
     ReactiveDataDisplayManagerExample_iOS:
       platform: iOS
       deploymentTarget: 11.0
+      scheme:
+          configVariants: all
+          testTargets:
+            - ReactiveDataDisplayManagerExampleUITests
+          gatherCoverageData: true
       sources:
         - path: ReactiveDataDisplayManager
       dependencies:
@@ -33,7 +55,6 @@ targets:
       templateAttributes:
         bundle_id: ru.surfstudio.rddm.example
         bundle_name: ReactiveDataDisplayManagerExample
-        ui_test: ReactiveDataDisplayManagerExampleUITests
 
     ReactiveDataDisplayManagerExample_tvOS:
       platform: tvOS
@@ -51,7 +72,6 @@ targets:
       templateAttributes:
         bundle_id: ru.surfstudio.rddm.tv_example
         bundle_name: ReactiveDataDisplayManagerExampleTv
-        ui_test: ReactiveDataDisplayManagerExampleUITests
 
     ReactiveDataDisplayManagerExampleUITests:
         templates:
