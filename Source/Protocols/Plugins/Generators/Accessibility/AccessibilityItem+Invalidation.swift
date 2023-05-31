@@ -27,7 +27,7 @@ public protocol AccessibilityInvalidatable: AccessibilityItem {
 }
 
 extension AccessibilityInvalidatable {
-    func setInvalidator(kind: AccessibilityItemKind, delegate: AccessibilityItemDelegate) {
+    func setInvalidator(kind: AccessibilityItemKind, delegate: AccessibilityItemDelegate?) {
         accessibilityInvalidator = AccessibilityItemInvalidator(accessibilityItemKind: kind, item: self, accessibilityDelegate: delegate)
     }
 
