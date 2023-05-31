@@ -35,7 +35,5 @@ public extension AccessibilityItem {
                                                generatorStrategy: AccessibilityStringStrategy) -> String? {
         return [generatorStrategy, itemStrategy].compactMap(\.value).joined(separator: " ")
     }
-
-    func accessibilityActions() -> [UIAccessibilityCustomAction] { [] }
 }
 

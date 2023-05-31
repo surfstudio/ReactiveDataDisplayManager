@@ -32,6 +32,12 @@ public extension AccessibilityStrategyProvider {
     }
 }
 
+/// `UIAccessibilityCustomAction`'s provider
 public protocol AccessibilityActionsProvider {
     func accessibilityActions() -> [UIAccessibilityCustomAction]
+}
+
+/// `AccessibilityItem`default actions
+public extension AccessibilityItem {
+    func accessibilityActions() -> [UIAccessibilityCustomAction] { [] }
 }

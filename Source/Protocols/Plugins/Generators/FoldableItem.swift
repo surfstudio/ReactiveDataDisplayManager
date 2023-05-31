@@ -31,11 +31,9 @@ public protocol FoldableItem: AnyObject, AccessibilityStrategyProvider {
 }
 
 public extension FoldableItem {
-
     var animation: TableFoldablePlugin.AnimationGroup {
         return (.none, .fade)
     }
 
-    var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
-
+    var traitsStrategy: AccessibilityTraitsStrategy { childGenerators.isEmpty ? .ignored : .just(.button) }
 }
