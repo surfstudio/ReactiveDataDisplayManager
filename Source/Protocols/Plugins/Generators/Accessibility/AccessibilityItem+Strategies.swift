@@ -10,7 +10,7 @@ import UIKit
 /// Default accessibility strategy for string value
 public enum AccessibilityStringStrategy {
 
-    /// value will not be change by this strategy
+    /// value will not be changed by this strategy
     case ignored
 
     /// simple string value, can be nil
@@ -31,6 +31,7 @@ public enum AccessibilityStringStrategy {
         }
     }
 
+    /// value of current strategy
     public var value: String? {
         switch self {
         case .ignored:
@@ -48,7 +49,7 @@ public enum AccessibilityStringStrategy {
 /// Accessibility strategy for `UIAccessibilityTraits` parameter
 public enum AccessibilityTraitsStrategy {
 
-    /// value will not be change by this strategy
+    /// value will not be changed by this strategy
     case ignored
 
     /// simple accessibility traits
