@@ -93,32 +93,26 @@ extension BaseTableDelegate {
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tablePlugins.process(event: .willDisplayCell(indexPath, cell), with: manager)
-        (cell as? AccessibilityInvalidatable)?.setInvalidator(kind: .cell(indexPath), delegate: self)
     }
 
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         tablePlugins.process(event: .willDisplayHeader(section, view), with: manager)
-        (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .header(section), delegate: self)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         tablePlugins.process(event: .didEndDisplayHeader(section, view), with: manager)
-        (view as? AccessibilityInvalidatable)?.removeInvalidator()
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         tablePlugins.process(event: .didEndDisplayCell(indexPath, cell), with: manager)
-        (cell as? AccessibilityInvalidatable)?.removeInvalidator()
     }
 
     open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         tablePlugins.process(event: .willDisplayFooter(section, view), with: manager)
-        (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .footer(section), delegate: self)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
         tablePlugins.process(event: .didEndDisplayFooter(section, view), with: manager)
-        (view as? AccessibilityInvalidatable)?.removeInvalidator()
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
@@ -266,7 +260,7 @@ extension BaseTableDelegate: TableDragAndDropDelegate {
 
 // MARK: AccessibilityItemDelegate
 
-extension BaseTableDelegate: AccessibilityItemDelegate {
+extension BaseTableDelegate {
 
     public func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind) {
         switch kind {
