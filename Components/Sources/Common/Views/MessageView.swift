@@ -4,7 +4,7 @@
 //
 //  Created by Антон Голубейков on 25.05.2023.
 //
-
+#if os(iOS)
 import UIKit
 import ReactiveDataDisplayManager
 
@@ -132,3 +132,4 @@ private extension MessageView {
     }
 
 }
+#endif
