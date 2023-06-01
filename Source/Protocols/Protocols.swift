@@ -27,6 +27,24 @@ open class TableHeaderGenerator: ViewGenerator, AccessibilityStrategyProvider {
 }
 
 // sourcery: AutoMockable
+open class TableFooterGenerator: ViewGenerator, AccessibilityStrategyProvider {
+
+    public let uuid = UUID().uuidString
+
+    open var traitsStrategy: AccessibilityTraitsStrategy { .ignored }
+
+    public init() { }
+
+    open func generate() -> UIView {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+
+    open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+}
+
+// sourcery: AutoMockable
 /// Protocol that incapsulated type of current cell
 public protocol TableCellGenerator: AnyObject {
 
