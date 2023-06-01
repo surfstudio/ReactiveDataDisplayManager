@@ -27,6 +27,24 @@ open class TableHeaderGenerator: ViewGenerator, AccessibilityStrategyProvider {
 }
 
 // sourcery: AutoMockable
+open class TableFooterGenerator: ViewGenerator, AccessibilityStrategyProvider {
+
+    public let uuid = UUID().uuidString
+
+    open var traitsStrategy: AccessibilityTraitsStrategy { .ignored }
+
+    public init() { }
+
+    open func generate() -> UIView {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+
+    open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+}
+
+// sourcery: AutoMockable
 /// Protocol that incapsulated type of current cell
 public protocol TableCellGenerator: AnyObject {
 
@@ -317,6 +335,14 @@ public protocol Gravity: AnyObject {
 public typealias GravityTableCellGenerator = TableCellGenerator & GravityItem
 
 open class GravityTableHeaderGenerator: TableHeaderGenerator, GravityItem {
+    open var heaviness = 0
+
+    open func getHeaviness() -> Int {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+}
+
+open class GravityTableFooterGenerator: TableFooterGenerator, GravityItem {
     open var heaviness = 0
 
     open func getHeaviness() -> Int {
