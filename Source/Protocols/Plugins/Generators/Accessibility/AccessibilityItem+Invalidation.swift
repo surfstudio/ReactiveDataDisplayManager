@@ -14,7 +14,7 @@ public enum AccessibilityItemKind {
 
 public protocol AccessibilityItemInvalidator {
     /// Invalidates and sets all accessibility parameters for on-screen item
-    func invalidateAccessibilityParameters()
+    func invalidateParameters()
 }
 
 struct CommonAccessibilityItemInvalidator: AccessibilityItemInvalidator {
@@ -22,7 +22,7 @@ struct CommonAccessibilityItemInvalidator: AccessibilityItemInvalidator {
     weak var item: AccessibilityItem?
     weak var accessibilityDelegate: AccessibilityItemDelegate?
 
-    public func invalidateAccessibilityParameters() {
+    public func invalidateParameters() {
         guard let item else { return }
         accessibilityDelegate?.didInvalidateAccessibility(for: item, of: accessibilityItemKind)
     }
