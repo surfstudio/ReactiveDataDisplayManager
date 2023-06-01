@@ -18,9 +18,12 @@ final class TitleCollectionViewCell: UICollectionViewCell, AccessibilityInvalida
     // MARK: - AccessibilityInvalidatable
 
     var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
-    var valueStrategy: AccessibilityStringStrategy = .just(nil)
-    lazy var traitsStrategy: AccessibilityTraitsStrategy = .from(object: titleLabel)
-    var shouldOverrideStateTraits: Bool { true }
+    var valueStrategy: AccessibilityStringStrategy = .just(nil) {
+        didSet {
+            accessibilityInvalidator?.invalidateParameters()
+        }
+    }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
 
     var accessibilityInvalidator: AccessibilityItemInvalidator?
 
@@ -49,35 +52,23 @@ extension TitleCollectionViewCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .gray
-        updateState(state: "Normal", isSelected: false)
+        valueStrategy = .just("Normal")
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .white.withAlphaComponent(0.5)
-        updateState(state: "Highlighted", isSelected: false)
+        valueStrategy = .just("Highlighted")
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
-        updateState(state: "Selected", isSelected: true)
+        valueStrategy = .just("Selected")
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
-        updateState(state: "Normal", isSelected: false)
-    }
-
-}
-
-extension TitleCollectionViewCell: CalculatableHeightItem {
-
-    static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
-        let horizontalInsets: CGFloat = 32
-        let verticalInsets: CGFloat = 29
-        let titleHeight = model.getHeight(withConstrainedWidth: width - horizontalInsets,
-                                          font: .preferredFont(forTextStyle: .body))
-        return verticalInsets + titleHeight
+        valueStrategy = .just("Normal")
     }
 
 }
