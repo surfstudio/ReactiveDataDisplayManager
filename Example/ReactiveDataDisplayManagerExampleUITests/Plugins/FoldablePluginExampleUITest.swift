@@ -15,7 +15,7 @@ final class FoldablePluginExampleUITest: BaseUITestCase {
         setTab("Table")
         tapTableElement("Table with foldable cell")
 
-        let foldable = getCell(for: .table, collectionId: tableId, cellId: "Foldable cell1")
+        let foldable = getCell(for: .table, collectionId: tableId, cellId: "Foldable cell 1")
         foldable.tap()
 
         XCTAssertTrue(getCell(for: .table, collectionId: tableId, cellId: "First subcell").exists)

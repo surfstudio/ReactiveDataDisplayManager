@@ -22,14 +22,14 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         let cell = getFirstCell(for: .table, id: "Higlighted_cells")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
-            wasPresed = cell.label == highlightedStyle
+            wasPresed = cell.stringValue == highlightedStyle
             expectation.fulfill()
         }
         cell.press(forDuration: 2)
 
         wait(for: [expectation], timeout: timeout)
         XCTAssertTrue(wasPresed)
-        XCTAssertEqual(cell.label, normalStyle)
+        XCTAssertEqual(cell.stringValue, normalStyle)
     }
 
     func testTable_whenCellTaped_thenTurnedSelectStyleAndDeselectStyle() throws {
@@ -43,11 +43,11 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         let cell = getFirstCell(for: .table, id: "Higlighted_cells")
 
         cell.tap()
-        XCTAssertEqual(cell.label, selectedStyle)
+        XCTAssertEqual(cell.stringValue, selectedStyle)
         XCTAssertTrue(cell.isSelected)
 
         cell.tap()
-        XCTAssertEqual(cell.label, normalStyle)
+        XCTAssertEqual(cell.stringValue, normalStyle)
         XCTAssertFalse(cell.isSelected)
     }
 

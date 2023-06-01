@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class FoldableTableViewCell: UITableViewCell {
+final class FoldableTableViewCell: UITableViewCell, AccessibilityInvalidatable {
 
     struct Model {
         let title: String
@@ -28,6 +28,18 @@ final class FoldableTableViewCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var arrowImageView: UIImageView!
 
+    // MARK: - Private Properties
+
+    private var isExpanded: Bool = false {
+        didSet {
+            accessibilityInvalidator?.invalidateParameters()
+        }
+    }
+
+    // MARK: - AccessibilityInvalidatable
+
+    var accessibilityInvalidator: AccessibilityItemInvalidator?
+
     // MARK: - UITableViewCell
 
     override func awakeFromNib() {
@@ -38,6 +50,7 @@ final class FoldableTableViewCell: UITableViewCell {
     // MARK: - Internal Methods
 
     func update(isExpanded: Bool) {
+        self.isExpanded = isExpanded
         UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
             self?.arrowImageView.transform = isExpanded ? .identity : CGAffineTransform(rotationAngle: .pi)
         }
@@ -45,14 +58,24 @@ final class FoldableTableViewCell: UITableViewCell {
 
 }
 
-// MARK: - Configurable
+// MARK: - AccessibilityItem
+
+extension FoldableTableViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var valueStrategy: AccessibilityStringStrategy { .just("isExpanded: \(isExpanded)") }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
+
+}
+
+// MARK: - ConfigurableItem
 
 extension FoldableTableViewCell: ConfigurableItem {
 
     func configure(with model: Model) {
         titleLabel.text = String(format: "Foldable cell %@", model.title)
-        accessibilityLabel = Constants.titleLabelText + model.title
         arrowImageView.transform = model.isExpanded ? .identity : CGAffineTransform(rotationAngle: .pi)
+        isExpanded = model.isExpanded
     }
 
 }

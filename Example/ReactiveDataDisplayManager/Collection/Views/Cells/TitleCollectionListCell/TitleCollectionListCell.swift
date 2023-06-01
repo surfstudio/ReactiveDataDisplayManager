@@ -18,6 +18,7 @@ class TitleCollectionListCell: UICollectionViewCell, ConfigurableItem, Accessibi
     // MARK: - AccessibilityItem
 
     var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
 
     // MARK: - Configurable
 

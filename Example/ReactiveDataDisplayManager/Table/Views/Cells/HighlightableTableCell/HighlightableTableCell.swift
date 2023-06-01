@@ -8,21 +8,29 @@
 import ReactiveDataDisplayManager
 import UIKit
 
-final class HighlightableTableCell: UITableViewCell {
+final class HighlightableTableCell: UITableViewCell, AccessibilityInvalidatable {
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
 
+    // MARK: - AccessibilityInvalidatable
+
+    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var valueStrategy: AccessibilityStringStrategy = .just(nil) {
+        didSet {
+            accessibilityInvalidator?.invalidateParameters()
+        }
+    }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
+
+    var accessibilityInvalidator: AccessibilityItemInvalidator?
+
+    // MARK: - AccessibilityInvalidatable
+
     override func awakeFromNib() {
         super.awakeFromNib()
         configureAppearance()
-    }
-
-    // MARK: - Internal methods
-
-    func fill(with title: String) {
-        titleLabel.text = title
     }
 
 }
@@ -43,23 +51,23 @@ extension HighlightableTableCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .white
-        accessibilityLabel = "Normal"
+        valueStrategy = .just("Normal")
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .red.withAlphaComponent(0.3)
-        accessibilityLabel = "Highlighted"
+        valueStrategy = .just("Highlighted")
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
-        accessibilityLabel = "Selected"
+        valueStrategy = .just("Selected")
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
-        accessibilityLabel = "Normal"
+        valueStrategy = .just("Normal")
     }
 
 }
