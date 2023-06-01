@@ -63,6 +63,10 @@ private extension SectionTitleTableViewController {
             let headerGenerator = SectionTitleHeaderGenerator(model: $0.title, needSectionIndexTitle: $0.needDisplaySectionTitle)
             // Add header generator into adapter
             adapter.addSectionHeaderGenerator(headerGenerator)
+            // Create footer generator
+            let footerGenerator = SectionTitleFooterGenerator(model: $0.title)
+            // Add footer generator into adapter
+            adapter.addSectionFooterGenerator(footerGenerator)
             // Add cell generators into adapter
             adapter.addCellGenerators(makeCellGenerators())
         }
