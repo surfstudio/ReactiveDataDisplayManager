@@ -218,12 +218,9 @@ private extension BaseCollectionManager {
 
     func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)]) {
 
-        elements.forEach { [weak self] element in
-            guard let view = self?.view else {
-                return
-            }
+        elements.forEach { element in
             element.generator.registerCell(in: view)
-            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
 
         let indexPaths = elements.map {
