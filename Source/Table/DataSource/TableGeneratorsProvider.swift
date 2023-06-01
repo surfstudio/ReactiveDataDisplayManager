@@ -11,4 +11,5 @@ open class TableGeneratorsProvider: GeneratorsProvider {
 
     open var sections = [TableHeaderGenerator]()
     open var generators = [[TableCellGenerator]]()
+    open var footers = [TableFooterGenerator]()
 }

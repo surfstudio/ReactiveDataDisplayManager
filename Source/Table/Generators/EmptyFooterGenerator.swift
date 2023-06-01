@@ -1,14 +1,13 @@
 //
-//  EmptyHeaderGenerator.swift
+//  EmptyTableFooterGenerator.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by Ivan Smetanin on 27/05/2018.
-//  Copyright © 2018 Александр Кравченков. All rights reserved.
+//  Created by Никита Коробейников on 01.06.2023.
 //
 
 import UIKit
 
-public class EmptyTableHeaderGenerator: TableHeaderGenerator {
+public class EmptyTableFooterGenerator: TableFooterGenerator {
 
     open override func generate() -> UIView {
         let view = UIView()
@@ -24,10 +23,10 @@ public class EmptyTableHeaderGenerator: TableHeaderGenerator {
 
 // MARK: - DiffableItemSource
 
-extension EmptyTableHeaderGenerator: DiffableItemSource {
+extension EmptyTableFooterGenerator: DiffableItemSource {
 
     public var diffableItem: DiffableItem {
-        DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection.header"))
+        DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection.footer"))
     }
 
 }

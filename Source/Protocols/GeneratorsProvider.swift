@@ -10,7 +10,9 @@ import Foundation
 public protocol GeneratorsProvider: AnyObject {
     associatedtype CellGeneratorType
     associatedtype HeaderGeneratorType
+    associatedtype FooterGeneratorType
 
     var generators: [[CellGeneratorType]] { get set }
     var sections: [HeaderGeneratorType] { get set }
+    var footers: [FooterGeneratorType] { get set }
 }
