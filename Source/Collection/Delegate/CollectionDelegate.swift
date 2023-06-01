@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol CollectionDelegate: CollectionBuilderConfigurable, UICollectionViewDelegate, AccessibilityItemDelegate {
+public protocol CollectionDelegate: CollectionBuilderConfigurable, UICollectionViewDelegate {
     var manager: BaseCollectionManager? { get set }
     var collectionPlugins: PluginCollection<BaseCollectionPlugin<CollectionEvent>> { get set }
     var scrollPlugins: PluginCollection<BaseCollectionPlugin<ScrollEvent>> { get set }

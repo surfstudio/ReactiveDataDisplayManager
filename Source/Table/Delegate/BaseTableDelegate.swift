@@ -260,7 +260,7 @@ extension BaseTableDelegate: TableDragAndDropDelegate {
 
 // MARK: AccessibilityItemDelegate
 
-extension BaseTableDelegate {
+extension BaseTableDelegate: AccessibilityItemDelegate {
 
     public func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind) {
         switch kind {

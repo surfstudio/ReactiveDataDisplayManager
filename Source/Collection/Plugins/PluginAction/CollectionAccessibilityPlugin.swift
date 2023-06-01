@@ -13,7 +13,7 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
         switch event {
         case let .willDisplayCell(indexPath, cell):
             processCollectionCell(indexPath, cell, with: manager)
-            (cell as? AccessibilityInvalidatable)?.setInvalidator(kind: .cell(indexPath), delegate: manager?.delegate)
+            tryToSetInvalidator(for: cell, of: .cell(indexPath), with: manager)
 
         case let .invalidatedCellAccessibility(indexPath, cell):
             processCollectionCell(indexPath, cell, with: manager)
@@ -22,10 +22,10 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
             switch kind {
             case UICollectionView.elementKindSectionHeader:
                 processCollectionHeader(indexPath.section, view, with: manager)
-                (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .header(indexPath.section), delegate: manager?.delegate)
+                tryToSetInvalidator(for: view, of: .header(indexPath.section), with: manager)
             case UICollectionView.elementKindSectionFooter:
                 processCollectionFooter(indexPath.section, view, with: manager)
-                (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .footer(indexPath.section), delegate: manager?.delegate)
+                tryToSetInvalidator(for: view, of: .footer(indexPath.section), with: manager)
             default:
                 break
             }
@@ -43,8 +43,19 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
             break
         }
     }
+}
 
-    private func processCollectionCell(_ indexPath: IndexPath, _ cell: UICollectionViewCell, with manager: BaseCollectionManager?) {
+private extension CollectionAccessibilityPlugin {
+
+    func tryToSetInvalidator(for view: UIView, of kind: AccessibilityItemKind, with manager: BaseCollectionManager?) {
+        guard let invalidatable = view as? AccessibilityInvalidatable,
+                let invalidateDelegate = manager?.delegate as? AccessibilityItemDelegate else {
+            return
+        }
+        invalidatable.setInvalidator(kind: kind, delegate: invalidateDelegate)
+    }
+
+    func processCollectionCell(_ indexPath: IndexPath, _ cell: UICollectionViewCell, with manager: BaseCollectionManager?) {
         guard let accessibilityItem = cell as? AccessibilityItem else {
             return
         }
@@ -55,7 +66,7 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
         }
     }
 
-    private func processCollectionHeader(_ section: Int, _ view: UICollectionReusableView, with manager: BaseCollectionManager?) {
+    func processCollectionHeader(_ section: Int, _ view: UICollectionReusableView, with manager: BaseCollectionManager?) {
         guard let accessibilityItem = view as? AccessibilityItem else {
             return
         }
@@ -66,7 +77,7 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
         }
     }
 
-    private func processCollectionFooter(_ section: Int, _ view: UICollectionReusableView, with manager: BaseCollectionManager?) {
+    func processCollectionFooter(_ section: Int, _ view: UICollectionReusableView, with manager: BaseCollectionManager?) {
         guard let accessibilityItem = view as? AccessibilityItem else {
             return
         }

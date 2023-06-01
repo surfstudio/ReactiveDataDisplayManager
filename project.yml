@@ -60,7 +60,7 @@ targets:
       dependencies:
         - target: ReactiveDataDisplayManager_${platform}
       preBuildScripts:
-        - script: sourcery
+        - script: source ~/.bash_profile sourcery
           name: Sourcery
       settings:
         base:

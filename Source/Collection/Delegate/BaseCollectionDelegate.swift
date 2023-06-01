@@ -200,7 +200,7 @@ extension BaseCollectionDelegate {
 
 // MARK: AccessibilityItemDelegate
 
-extension BaseCollectionDelegate {
+extension BaseCollectionDelegate: AccessibilityItemDelegate {
 
     public func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind) {
         switch kind {
