@@ -17,6 +17,7 @@ final class RectangleColorCollectionViewCell: UICollectionViewCell, Configurable
     // MARK: - AccessibilityItem
 
     var labelStrategy: AccessibilityStringStrategy = .ignored
+    var traitsStrategy: AccessibilityTraitsStrategy { .just(.none) }
 
     // MARK: - ConfigurableItem
 

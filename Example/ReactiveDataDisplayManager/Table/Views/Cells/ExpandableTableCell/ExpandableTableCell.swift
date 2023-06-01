@@ -20,7 +20,7 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem, AccessibilityInvalid
 
     private var isSmall = true {
         didSet {
-            accessibilityInvalidator?.invalidateAccessibilityParameters()
+            accessibilityInvalidator?.invalidateParameters()
         }
     }
 
@@ -29,7 +29,7 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem, AccessibilityInvalid
     public var onHeightChanged: BaseEvent<CGFloat?> = .init()
     public var animatedExpandable = true {
         didSet {
-            accessibilityInvalidator?.invalidateAccessibilityParameters()
+            accessibilityInvalidator?.invalidateParameters()
         }
     }
 
