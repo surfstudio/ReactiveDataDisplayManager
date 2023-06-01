@@ -53,6 +53,7 @@ extension FittingCompressedSizeCollectionViewCell: ConfigurableItem {
 extension FittingCompressedSizeCollectionViewCell: AccessibilityItem {
 
     var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
 
 }
 
