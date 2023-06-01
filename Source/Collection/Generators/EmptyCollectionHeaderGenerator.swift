@@ -42,7 +42,7 @@ public class EmptyCollectionHeaderGenerator: CollectionHeaderGenerator {
 extension EmptyCollectionHeaderGenerator: DiffableItemSource {
 
     public var diffableItem: DiffableItem {
-        DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection"))
+        DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection.header"))
     }
 
 }

@@ -137,10 +137,6 @@ open class GravityTableManager: BaseTableManager {
         self.generators[index].removeAll()
     }
 
-    public func clearHeaderGenerators() {
-        sections.removeAll()
-    }
-
     open func replace(oldGenerator: CellGeneratorType,
                       on newGenerator: CellGeneratorType,
                       removeInsertAnimation: TableRowAnimationGroup = .animated(.automatic, .automatic)) {
