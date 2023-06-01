@@ -259,7 +259,7 @@ extension BaseTableManager {
 
         elements.forEach { element in
             element.generator.registerCell(in: view)
-            self.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
 
         let indexPaths = elements.map { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
