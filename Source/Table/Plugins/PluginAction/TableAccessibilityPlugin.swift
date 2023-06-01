@@ -15,21 +15,21 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
         switch event {
         case let .willDisplayCell(indexPath, cell):
             processTableCell(indexPath, cell, with: manager)
-            (cell as? AccessibilityInvalidatable)?.setInvalidator(kind: .cell(indexPath), delegate: manager?.delegate)
+            tryToSetInvalidator(for: cell, of: .cell(indexPath), with: manager)
 
         case let .invalidatedCellAccessibility(indexPath, cell):
             processTableCell(indexPath, cell, with: manager)
 
         case let .willDisplayHeader(section, view):
             processTableHeader(section, view, with: manager)
-            (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .header(section), delegate: manager?.delegate)
+            tryToSetInvalidator(for: view, of: .header(section), with: manager)
 
         case let .invalidatedHeaderAccessibility(section, view):
             processTableHeader(section, view, with: manager)
 
         case let .willDisplayFooter(section, view):
             processTableFooter(section, view, with: manager)
-            (view as? AccessibilityInvalidatable)?.setInvalidator(kind: .footer(section), delegate: manager?.delegate)
+            tryToSetInvalidator(for: view, of: .footer(section), with: manager)
 
         case let .invalidatedFooterAccessibility(section, view):
             processTableFooter(section, view, with: manager)
@@ -42,7 +42,19 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
         }
     }
 
-    private func processTableCell(_ indexPath: IndexPath, _ cell: UITableViewCell, with manager: BaseTableManager?) {
+}
+
+private extension TableAccessibilityPlugin {
+
+    func tryToSetInvalidator(for view: UIView, of kind: AccessibilityItemKind, with manager: BaseTableManager?) {
+        guard let invalidatable = view as? AccessibilityInvalidatable,
+              let invalidateDelegate = manager?.delegate as? AccessibilityItemDelegate else {
+            return
+        }
+        invalidatable.setInvalidator(kind: kind, delegate: invalidateDelegate)
+    }
+
+    func processTableCell(_ indexPath: IndexPath, _ cell: UITableViewCell, with manager: BaseTableManager?) {
         guard let accessibilityItem = cell as? AccessibilityItem else {
             return
         }
@@ -53,7 +65,7 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
         }
     }
 
-    private func processTableHeader(_ section: Int, _ view: UIView, with manager: BaseTableManager?) {
+    func processTableHeader(_ section: Int, _ view: UIView, with manager: BaseTableManager?) {
         guard let accessibilityItem = view as? AccessibilityItem else {
             return
         }
@@ -64,7 +76,7 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
         }
     }
 
-    private func processTableFooter(_ section: Int, _ view: UIView, with manager: BaseTableManager?) {
+    func processTableFooter(_ section: Int, _ view: UIView, with manager: BaseTableManager?) {
         guard let accessibilityItem = view as? AccessibilityItem else {
             return
         }

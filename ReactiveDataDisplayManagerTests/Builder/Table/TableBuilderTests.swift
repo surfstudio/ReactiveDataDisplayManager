@@ -28,7 +28,7 @@ class TableBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.scrollPlugins.plugins.isEmpty)
-        XCTAssertTrue(builder.tablePlugins.plugins.isEmpty)
+        XCTAssertTrue(builder.tablePlugins.plugins.filter { !($0 is TableAccessibilityPlugin) }.isEmpty)
         XCTAssertTrue(builder.prefetchPlugins.plugins.isEmpty)
         XCTAssertNil(builder.swipeActionsPlugin)
         XCTAssertNil(builder.movablePlugin)
