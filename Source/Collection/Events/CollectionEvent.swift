@@ -17,8 +17,10 @@ public enum CollectionEvent {
     case didEndDisplayCell(IndexPath, UICollectionViewCell)
     case willDisplaySupplementaryView(IndexPath, UICollectionReusableView, String)
     case didEndDisplayingSupplementaryView(IndexPath, UICollectionReusableView, String)
+    case move(from: IndexPath, to: IndexPath)
+
+    // MARK: - Accessibility Events
     case invalidatedCellAccessibility(IndexPath, UICollectionViewCell)
     case invalidatedHeaderAccessibility(Int, UICollectionReusableView)
     case invalidatedFooterAccessibility(Int, UICollectionReusableView)
-    case move(from: IndexPath, to: IndexPath)
 }

@@ -24,9 +24,11 @@ public enum TableEvent {
     case didEndDisplayHeader(Int, UIView)
     case willDisplayFooter(Int, UIView)
     case didEndDisplayFooter(Int, UIView)
+    case didUpdateFocus(context: UITableViewFocusUpdateContext, coordinator: UIFocusAnimationCoordinator)
+    case move(from: IndexPath, to: IndexPath)
+
+    // MARK: - Accessibility Events
     case invalidatedCellAccessibility(IndexPath, UITableViewCell)
     case invalidatedHeaderAccessibility(Int, UIView)
     case invalidatedFooterAccessibility(Int, UIView)
-    case didUpdateFocus(context: UITableViewFocusUpdateContext, coordinator: UIFocusAnimationCoordinator)
-    case move(from: IndexPath, to: IndexPath)
 }
