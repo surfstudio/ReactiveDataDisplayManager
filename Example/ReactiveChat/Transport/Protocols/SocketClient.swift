@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+protocol SocketClient {
+
+    func setDelegate(_ delegate: SocketEventsDelegate)
+
+    func connect()
+
+    func disconnect()
+
+}

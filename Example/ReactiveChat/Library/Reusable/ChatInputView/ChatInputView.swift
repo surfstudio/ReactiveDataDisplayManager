@@ -226,7 +226,7 @@ extension ChatInputView: NSTextStorageDelegate {
 extension ChatInputView: NSLayoutManagerDelegate {
 
     func layoutManagerDidInvalidateLayout(_ sender: NSLayoutManager) {
-        debugPrint("ChatInputView invalidate layout")
+//        debugPrint("ChatInputView invalidate layout")
     }
 
 }

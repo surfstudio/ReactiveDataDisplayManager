@@ -27,13 +27,14 @@ public struct Server {
                                   author: rawMessage.author,
                                   body: rawMessage.body,
                                   timestamp: Date().timeIntervalSince1970)
-            if let encodedMessage = try? JSONEncoder().encode(message) {
+            let event = SocketEvent.newMessageReceived(message)
+            if let encodedMessage = try? JSONEncoder().encode(event) {
                 socketWire.broadcast(data: encodedMessage)
             }
 
             return Feedback(description: "got your message").responseEncoded
         })
-        app.webSocket("newMessage", onUpgrade: { request, socket in
+        app.webSocket("connect", onUpgrade: { request, socket in
             // TODO: - get id from request (deviceId or sessionId)
             socketWire.addSocket(socket, with: UUID().uuidString)
         })

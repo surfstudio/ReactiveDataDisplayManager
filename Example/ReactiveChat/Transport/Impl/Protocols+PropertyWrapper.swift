@@ -35,7 +35,30 @@ struct Api {
         }
     }
 
-    init(server: String) {
+    init(server: String = Server.api.rawValue) {
+        self.server = server
+    }
+
+}
+
+@propertyWrapper
+struct Socket {
+
+    private static var instances: [String: SocketClient] = [:]
+
+    private let server: String
+
+    var wrappedValue: SocketClient {
+        if let storedInstance = Self.instances[server] {
+            return storedInstance
+        } else {
+            let newInstance = URLSessionWebSocketClient(server: server)
+            Self.instances.updateValue(newInstance, forKey: server)
+            return newInstance
+        }
+    }
+
+    init(server: String = Server.webSockets.rawValue) {
         self.server = server
     }
 

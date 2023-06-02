@@ -16,12 +16,16 @@ final class CoreState {
 
     // MARK: - Clients
 
-    @Api(server: "http://localhost:8080")
+    @Api
     private var apiClient: ApiClient
+
+    @Socket
+    private var socketClient: SocketClient
 
     // MARK: - Properties
 
     private var currentUser: User?
+    private var allMessages: [Message] = []
     private var delegates: [String: AnyObject] = [:]
     private var cancellables: [AnyCancellable] = []
 
@@ -53,15 +57,15 @@ extension CoreState: Authenticator {
         currentUser = User(name: name)
         notifyAuthDelegates(with: { $0.onAuthanticated() })
 
-        guard let currentUser else {
-            return
-        }
-
         apiClient.get("greet",
                       responseType: Feedback.self)
         .sink(receiveCompletion: {_ in },
-              receiveValue: { response in
+              receiveValue: { [weak self] response in
             debugPrint("ReCh response: - \(response)")
+            guard let self else {
+                return
+            }
+            self.socketClient.setDelegate(self)
         })
         .store(in: &cancellables)
     }
@@ -92,12 +96,33 @@ extension CoreState: Sender {
 
 }
 
+// MARK: - ChatDelegate
+
+extension CoreState: SocketEventsDelegate {
+
+    func onReceive(message: Message) {
+        allMessages.append(message)
+        allMessages.sort(by: { $0.timestamp < $1.timestamp })
+        notifyChatDelegates { [weak self] delegate in
+            guard let messages = self?.allMessages else {
+                return
+            }
+            delegate.onUpdated(messages: messages)
+        }
+    }
+
+}
+
 // MARK: - Private
 
 private extension CoreState {
 
     func notifyAuthDelegates(with event: @escaping (AuthDelegate) -> Void) {
         delegates.values.compactMap { $0 as? AuthDelegate }.forEach(event)
+    }
+
+    func notifyChatDelegates(with event: @escaping (ChatDelegate) -> Void) {
+        delegates.values.compactMap { $0 as? ChatDelegate }.forEach(event)
     }
 
 }

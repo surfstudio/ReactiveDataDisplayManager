@@ -36,8 +36,8 @@ final class TableChatViewController: UIViewController {
 
 extension TableChatViewController: ChatDelegate {
 
-    func onReceived(messages: Message...) {
-        // TODO: - convert messages to cells and reload data
+    func onUpdated(messages: [Message]) {
+        debugPrint("Messages in table: \(messages)")
     }
 
 }

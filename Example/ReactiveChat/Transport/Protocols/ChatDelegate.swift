@@ -9,6 +9,6 @@ import Foundation
 
 protocol ChatDelegate: AnyObject {
 
-    func onReceived(messages: Message...)
+    func onUpdated(messages: [Message])
 
 }
