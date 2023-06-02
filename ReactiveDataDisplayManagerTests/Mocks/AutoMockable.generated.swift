@@ -98,6 +98,21 @@ class CollectionFoldableItemMock: CollectionFoldableItem {
     }
     var underlyingIsExpanded: Bool!
     var childGenerators: [CollectionCellGenerator] = []
+    var labelStrategy: AccessibilityStrategy {
+        get { return underlyingLabelStrategy }
+        set(value) { underlyingLabelStrategy = value }
+    }
+    var underlyingLabelStrategy: AccessibilityStrategy!
+    var valueStrategy: AccessibilityStrategy {
+        get { return underlyingValueStrategy }
+        set(value) { underlyingValueStrategy = value }
+    }
+    var underlyingValueStrategy: AccessibilityStrategy!
+    var traitsStrategy: AccessibilityTraitsStrategy {
+        get { return underlyingTraitsStrategy }
+        set(value) { underlyingTraitsStrategy = value }
+    }
+    var underlyingTraitsStrategy: AccessibilityTraitsStrategy!
 
 }
 class CollectionFooterGeneratorMock: CollectionFooterGenerator {
@@ -175,6 +190,21 @@ class CollectionHeaderGeneratorMock: CollectionHeaderGenerator {
         set(value) { underlyingIdentifier = value }
     }
     var underlyingIdentifier: UICollectionReusableView.Type!
+    var labelStrategy: AccessibilityStrategy {
+        get { return underlyingLabelStrategy }
+        set(value) { underlyingLabelStrategy = value }
+    }
+    var underlyingLabelStrategy: AccessibilityStrategy!
+    var valueStrategy: AccessibilityStrategy {
+        get { return underlyingValueStrategy }
+        set(value) { underlyingValueStrategy = value }
+    }
+    var underlyingValueStrategy: AccessibilityStrategy!
+    var traitsStrategy: AccessibilityTraitsStrategy {
+        get { return underlyingTraitsStrategy }
+        set(value) { underlyingTraitsStrategy = value }
+    }
+    var underlyingTraitsStrategy: AccessibilityTraitsStrategy!
 
     //MARK: - generate
 

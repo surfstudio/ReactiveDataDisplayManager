@@ -16,6 +16,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     public typealias CollectionType = UITableView
     public typealias CellGeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
+    public typealias FooterGeneratorType = TableFooterGenerator
     public typealias TableModifier = Modifier<CollectionType, CollectionType.RowAnimation>
 
     // MARK: - Public properties
@@ -45,6 +46,9 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
         }
         if sections.count <= 0 {
             sections.append(EmptyTableHeaderGenerator())
+        }
+        if footers.count <= 0 {
+            footers.append(EmptyTableFooterGenerator())
         }
         // Add to last section
         let index = sections.count - 1
@@ -97,6 +101,83 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
                              with: animation,
                              needScrollAt: scrollPosition,
                              needRemoveEmptySection: needRemoveEmptySection)
+    }
+
+    // MARK: - HeaderDataDisplayManager
+
+     open func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
+         self.sections.append(generator)
+         if sections.count > generators.count {
+             self.generators.append([])
+         }
+    }
+
+    open func addCellGenerator(_ generator: CellGeneratorType, toHeader header: TableHeaderGenerator) {
+        addCellGenerators([generator], toHeader: header)
+    }
+
+    open func addCellGenerators(_ generators: [CellGeneratorType], toHeader header: TableHeaderGenerator) {
+        generators.forEach { $0.registerCell(in: view) }
+
+        if self.generators.count != self.sections.count || sections.isEmpty {
+            self.generators.append([TableCellGenerator]())
+        }
+
+        if let index = self.sections.firstIndex(where: { $0 === header }) {
+            self.generators[index].append(contentsOf: generators)
+        }
+    }
+
+    open func removeAllGenerators(from header: TableHeaderGenerator) {
+        guard
+            let index = self.sections.firstIndex(where: { $0 === header }),
+            self.generators.count > index
+        else {
+            return
+        }
+
+        self.generators[index].removeAll()
+    }
+
+    open func clearHeaderGenerators() {
+        self.sections.removeAll()
+    }
+
+    // MARK: - FooterDataDisplayManager
+
+    open func addSectionFooterGenerator(_ generator: TableFooterGenerator) {
+        self.footers.append(generator)
+    }
+
+    open func addCellGenerator(_ generator: CellGeneratorType, toFooter footer: TableFooterGenerator) {
+        addCellGenerators([generator], toFooter: footer)
+    }
+
+    open func addCellGenerators(_ generators: [CellGeneratorType], toFooter footer: TableFooterGenerator) {
+        generators.forEach { $0.registerCell(in: view) }
+
+        if self.generators.count != self.footers.count || footers.isEmpty {
+            self.generators.append([TableCellGenerator]())
+        }
+
+        if let index = self.footers.firstIndex(where: { $0 === footer }) {
+            self.generators[index].append(contentsOf: generators)
+        }
+    }
+
+    open func removeAllGenerators(from footer: TableFooterGenerator) {
+        guard
+            let index = self.footers.firstIndex(where: { $0 === footer }),
+            self.generators.count > index
+        else {
+            return
+        }
+
+        self.generators[index].removeAll()
+    }
+
+    open func clearFooterGenerators() {
+        self.footers.removeAll()
     }
 
 }
@@ -176,9 +257,9 @@ extension BaseTableManager {
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
                 with animation: UITableView.RowAnimation = .automatic) {
 
-        elements.forEach { [weak self] element in
+        elements.forEach { element in
             element.generator.registerCell(in: view)
-            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
 
         let indexPaths = elements.map {
@@ -187,7 +268,7 @@ extension BaseTableManager {
 
         modifier?.insertRows(at: indexPaths, with: animation)
     }
-    
+
     func insertManual(after generator: TableCellGenerator,
                      new newGenerators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation = .automatic) {
