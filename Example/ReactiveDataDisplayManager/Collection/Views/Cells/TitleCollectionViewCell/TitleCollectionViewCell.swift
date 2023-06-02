@@ -18,12 +18,9 @@ final class TitleCollectionViewCell: UICollectionViewCell, AccessibilityInvalida
     // MARK: - AccessibilityInvalidatable
 
     var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
-    var valueStrategy: AccessibilityStringStrategy = .just(nil) {
-        didSet {
-            accessibilityInvalidator?.invalidateParameters()
-        }
-    }
-    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
+    var valueStrategy: AccessibilityStringStrategy = .just(nil)
+    lazy var traitsStrategy: AccessibilityTraitsStrategy = .from(object: titleLabel)
+    var shouldOverrideStateTraits: Bool { true }
 
     var accessibilityInvalidator: AccessibilityItemInvalidator?
 
@@ -52,23 +49,23 @@ extension TitleCollectionViewCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .gray
-        valueStrategy = .just("Normal")
+        updateState(state: "Normal", isSelected: false)
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .white.withAlphaComponent(0.5)
-        valueStrategy = .just("Highlighted")
+        updateState(state: "Highlighted", isSelected: false)
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
-        valueStrategy = .just("Selected")
+        updateState(state: "Selected", isSelected: true)
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
-        valueStrategy = .just("Normal")
+        updateState(state: "Normal", isSelected: false)
     }
 
 }
@@ -76,11 +73,15 @@ extension TitleCollectionViewCell: HighlightableItem {
 // MARK: - Private
 
 private extension TitleCollectionViewCell {
-
     func configureAppearance() {
         contentView.backgroundColor = .gray
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
     }
 
+    func updateState(state: String, isSelected: Bool) {
+        valueStrategy = .just(state)
+        isSelected ? traitsStrategy.insert(.selected) : traitsStrategy.remove(.selected)
+        accessibilityInvalidator?.invalidateParameters()
+    }
 }

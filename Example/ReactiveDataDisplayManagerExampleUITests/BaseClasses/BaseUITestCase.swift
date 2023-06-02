@@ -23,7 +23,7 @@ open class BaseUITestCase: XCTestCase {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launchArguments.append("-disableAnimations")
-        app.launchArguments.append("-doNotOverrideTraits")
+        app.launchArguments.append("-rddm.XCUITestsCompatible")
         app.launchArguments.append(contentsOf: additionalCommands)
         app.launch()
     }
