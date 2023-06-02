@@ -44,6 +44,7 @@ public enum AccessibilityStringStrategy {
             return strategies.compactMap(\.value).joined()
         }
     }
+
 }
 
 /// Accessibility strategy for `UIAccessibilityTraits` parameter
@@ -83,4 +84,22 @@ public enum AccessibilityTraitsStrategy {
             return objects.map(\.accessibilityTraits).reduce(UIAccessibilityTraits(), { $0.union($1) })
         }
     }
+
+    /// Evaluates strategy and inserts provided traits
+    mutating public func insert(_ traits: UIAccessibilityTraits) {
+        guard let value else {
+            self = .just(traits)
+            return
+        }
+        self = .just(value.union(traits))
+    }
+
+    /// Evaluates strategy and removes provided traits
+    mutating public func remove(_ traits: UIAccessibilityTraits) {
+        guard let value else {
+            return
+        }
+        self = .just(value.subtracting(traits))
+    }
+
 }
