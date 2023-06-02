@@ -18,6 +18,9 @@ public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider & Acces
     /// Also `AccessibilityStrategyProvider` can be extended by your protocol to add new parameters. And to apply new parameters you need to provide a custom modifier
     var modifierType: AccessibilityModifierType { get }
 
+    /// Defines the behaviour for traits `[.selected, .notEnabled]`. By default, modifier will not override these traits
+    var shouldOverrideStateTraits: Bool { get }
+
     /// Conficts resolver when generator and item contains `AccessibilityStringStrategy`. By default values will be joined with a space separator in next order: generator, item
     ///
     /// You can define your own implementation to change separator or order of values.
@@ -29,7 +32,21 @@ public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider & Acces
 }
 
 public extension AccessibilityItem {
-    var modifierType: AccessibilityModifierType { BaseAccessibilityModifier.self }
+
+    var modifierType: AccessibilityModifierType {
+        #if DEBUG
+        if CommandLine.arguments.contains("-rddm.XCUITestsCompatible") {
+            return XCUITestsAccessibilityModifier.self
+        } else {
+            return BaseAccessibilityModifier.self
+        }
+        #else
+        return BaseAccessibilityModifier.self
+        #endif
+    }
+
+
+    var shouldOverrideStateTraits: Bool { false }
 
     func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStringStrategy,
                                                generatorStrategy: AccessibilityStringStrategy) -> String? {
