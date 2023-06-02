@@ -28,6 +28,7 @@ public enum TableEvent {
     case move(from: IndexPath, to: IndexPath)
 
     // MARK: - Accessibility Events
+
     case invalidatedCellAccessibility(IndexPath, UITableViewCell)
     case invalidatedHeaderAccessibility(Int, UIView)
     case invalidatedFooterAccessibility(Int, UIView)
