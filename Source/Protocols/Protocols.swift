@@ -32,7 +32,8 @@ open class TableFooterGenerator: ViewGenerator, AccessibilityStrategyProvider {
 
     public let uuid = UUID().uuidString
 
-    open var traitsStrategy: AccessibilityTraitsStrategy { .ignored }
+    open var labelStrategy: AccessibilityStringStrategy = .ignored
+    open var traitsStrategy: AccessibilityTraitsStrategy = .ignored
 
     public init() { }
 
