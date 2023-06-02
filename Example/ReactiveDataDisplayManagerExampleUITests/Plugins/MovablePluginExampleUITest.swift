@@ -42,10 +42,16 @@ final class MovablePluginExampleUITest: BaseUITestCase {
         tapTableElement("Table with movable cell")
 
         let sourceCell = getCell(for: .table, collectionId: tableId, cellId: sourceDraggable)
-        let destinationSection = app.tables[tableId].otherElements["Section 2"]
+        let destinationSection = app.tables[tableId].otherElements["Section 2"].firstMatch
 
-        sourceCell.buttons.firstMatch
-            .press(forDuration: duration, thenDragTo: destinationSection, withVelocity: .slow, thenHoldForDuration: duration)
+        sourceCell
+            .firstMatch
+            .buttons
+            .firstMatch
+            .press(forDuration: duration,
+                   thenDragTo: destinationSection,
+                   withVelocity: .slow,
+                   thenHoldForDuration: duration)
 
         sleep(Constants.waitTime)
         let firstCell = getFirstCell(for: .table, id: tableId)
