@@ -52,4 +52,3 @@ public extension AccessibilityItem {
         return [generatorStrategy, itemStrategy].compactMap(\.value).joined(separator: " ")
     }
 }
-
