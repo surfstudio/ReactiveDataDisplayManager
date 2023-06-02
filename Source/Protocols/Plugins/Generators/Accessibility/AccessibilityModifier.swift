@@ -18,9 +18,9 @@ public protocol AccessibilityModifier {
 
 /// Base modifier which handle only `AccessibilityItem` properties
 public enum BaseAccessibilityModifier: AccessibilityModifier {
-    static let stateTraits: UIAccessibilityTraits = [.selected, .notEnabled]
+    public static let stateTraits: UIAccessibilityTraits = [.selected, .notEnabled]
 
-    static public func modify(item: AccessibilityItem) {
+    public static func modify(item: AccessibilityItem) {
         guard !item.isAccessibilityIgnored else {
             return
         }
@@ -45,7 +45,7 @@ public enum BaseAccessibilityModifier: AccessibilityModifier {
         item.accessibilityCustomActions = item.accessibilityActions()
     }
 
-    static public func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
+    public static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
         guard !item.isAccessibilityIgnored || !generator.isAccessibilityIgnored else {
             return
         }
@@ -85,7 +85,7 @@ public enum BaseAccessibilityModifier: AccessibilityModifier {
 /// Also adds trait `.staticText` for headers and footers to make them accessible by identifier
 public enum XCUITestsAccessibilityModifier: AccessibilityModifier {
 
-    static public func modify(item: AccessibilityItem) {
+    public static func modify(item: AccessibilityItem) {
         BaseAccessibilityModifier.modify(item: item)
         if item is UITableViewCell || item is UICollectionViewCell {
             item.accessibilityTraits.insert(.button)
@@ -94,7 +94,7 @@ public enum XCUITestsAccessibilityModifier: AccessibilityModifier {
         }
     }
 
-    static public func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
+    public static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
         BaseAccessibilityModifier.modify(item: item, generator: generator)
         if item is UITableViewCell || item is UICollectionViewCell {
             item.accessibilityTraits.insert(.button)

@@ -32,7 +32,6 @@ extension TitleWithIconTableViewCell: AccessibilityItem {
 
 }
 
-
 // MARK: - ConfigurableItem
 
 extension TitleWithIconTableViewCell: ConfigurableItem {

@@ -20,6 +20,7 @@ public enum CollectionEvent {
     case move(from: IndexPath, to: IndexPath)
 
     // MARK: - Accessibility Events
+    
     case invalidatedCellAccessibility(IndexPath, UICollectionViewCell)
     case invalidatedHeaderAccessibility(Int, UICollectionReusableView)
     case invalidatedFooterAccessibility(Int, UICollectionReusableView)
