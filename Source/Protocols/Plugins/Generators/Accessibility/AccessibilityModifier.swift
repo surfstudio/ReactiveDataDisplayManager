@@ -18,6 +18,8 @@ public protocol AccessibilityModifier {
 
 /// Base modifier which handle only `AccessibilityItem` properties
 public enum BaseAccessibilityModifier: AccessibilityModifier {
+    static let stateTraits: UIAccessibilityTraits = [.selected, .notEnabled]
+
     static public func modify(item: AccessibilityItem) {
         guard !item.isAccessibilityIgnored else {
             return
@@ -33,7 +35,11 @@ public enum BaseAccessibilityModifier: AccessibilityModifier {
         }
 
         if !item.traitsStrategy.isIgnored, let traits = item.traitsStrategy.value {
-            item.accessibilityTraits = traits
+            if item.shouldOverrideStateTraits {
+                item.accessibilityTraits = traits
+            } else {
+                item.accessibilityTraits = traits.union(item.accessibilityTraits.intersection(stateTraits))
+            }
         }
 
         item.accessibilityCustomActions = item.accessibilityActions()
@@ -59,7 +65,11 @@ public enum BaseAccessibilityModifier: AccessibilityModifier {
             let traits = [item.traitsStrategy.value, generator.traitsStrategy.value]
                 .compactMap { $0 }
                 .reduce(UIAccessibilityTraits(), { $0.union($1) })
-            item.accessibilityTraits = traits
+            if item.shouldOverrideStateTraits {
+                item.accessibilityTraits = traits
+            } else {
+                item.accessibilityTraits = traits.union(item.accessibilityTraits.intersection(stateTraits))
+            }
         }
 
         item.accessibilityCustomActions = item.accessibilityActions()
@@ -69,3 +79,29 @@ public enum BaseAccessibilityModifier: AccessibilityModifier {
         }
     }
 }
+
+#if DEBUG
+/// Special modifier for UI tests, which adds `.button` trait for `UITableViewCell` and `UICollectionViewCell` to make them conform to cell `XCUIElement` type.
+/// Also adds trait `.staticText` for headers and footers to make them accessible by identifier
+public enum XCUITestsAccessibilityModifier: AccessibilityModifier {
+
+    static public func modify(item: AccessibilityItem) {
+        BaseAccessibilityModifier.modify(item: item)
+        if item is UITableViewCell || item is UICollectionViewCell {
+            item.accessibilityTraits.insert(.button)
+        } else {
+            item.accessibilityTraits.insert(.staticText)
+        }
+    }
+
+    static public func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
+        BaseAccessibilityModifier.modify(item: item, generator: generator)
+        if item is UITableViewCell || item is UICollectionViewCell {
+            item.accessibilityTraits.insert(.button)
+        } else {
+            item.accessibilityTraits.insert(.staticText)
+        }
+    }
+
+}
+#endif
