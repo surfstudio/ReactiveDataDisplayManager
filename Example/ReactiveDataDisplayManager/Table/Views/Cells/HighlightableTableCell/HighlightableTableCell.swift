@@ -8,7 +8,7 @@
 import ReactiveDataDisplayManager
 import UIKit
 
-final class HighlightableTableCell: UITableViewCell {
+final class HighlightableTableCell: UITableViewCell, AccessibilityInvalidatable {
 
     // MARK: - IBOutlets
 
@@ -17,8 +17,14 @@ final class HighlightableTableCell: UITableViewCell {
     // MARK: - AccessibilityInvalidatable
 
     var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
-    var valueStrategy: AccessibilityStringStrategy = .ignored
+    var valueStrategy: AccessibilityStringStrategy = .just(nil) {
+        didSet {
+            accessibilityInvalidator?.invalidateParameters()
+        }
+    }
     var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
+
+    var accessibilityInvalidator: AccessibilityItemInvalidator?
 
     // MARK: - AccessibilityInvalidatable
 
@@ -45,23 +51,23 @@ extension HighlightableTableCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .white
-        accessibilityValue = "Normal"
+        valueStrategy = .just("Normal")
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .red.withAlphaComponent(0.3)
-        accessibilityValue = "Highlighted"
+        valueStrategy = .just("Highlighted")
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
-        accessibilityValue = "Selected"
+        valueStrategy = .just("Selected")
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
-        accessibilityValue = "Normal"
+        valueStrategy = .just("Normal")
     }
 
 }

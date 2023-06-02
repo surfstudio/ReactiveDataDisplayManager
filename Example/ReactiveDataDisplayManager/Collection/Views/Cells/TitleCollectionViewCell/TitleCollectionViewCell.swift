@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class TitleCollectionViewCell: UICollectionViewCell {
+final class TitleCollectionViewCell: UICollectionViewCell, AccessibilityInvalidatable {
 
     // MARK: - IBOutlets
 
@@ -18,7 +18,11 @@ final class TitleCollectionViewCell: UICollectionViewCell {
     // MARK: - AccessibilityInvalidatable
 
     var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
-    var valueStrategy: AccessibilityStringStrategy = .ignored
+    var valueStrategy: AccessibilityStringStrategy = .just(nil) {
+        didSet {
+            accessibilityInvalidator?.invalidateParameters()
+        }
+    }
     var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
 
     var accessibilityInvalidator: AccessibilityItemInvalidator?
@@ -48,23 +52,23 @@ extension TitleCollectionViewCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .gray
-        accessibilityValue = "Normal"
+        valueStrategy = .just("Normal")
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .white.withAlphaComponent(0.5)
-        accessibilityValue = "Highlighted"
+        valueStrategy = .just("Highlighted")
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
-        accessibilityValue = "Selected"
+        valueStrategy = .just("Selected")
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
-        accessibilityValue = "Normal"
+        valueStrategy = .just("Normal")
     }
 
 }
