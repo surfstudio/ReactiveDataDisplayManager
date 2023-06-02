@@ -30,7 +30,7 @@ final class FoldableTableViewCell: UITableViewCell, AccessibilityInvalidatable {
 
     // MARK: - Private Properties
 
-    private var isExpanded: Bool = false {
+    private var isExpanded = false {
         didSet {
             accessibilityInvalidator?.invalidateParameters()
         }

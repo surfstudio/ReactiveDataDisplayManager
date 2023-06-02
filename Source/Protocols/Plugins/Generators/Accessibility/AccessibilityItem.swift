@@ -9,7 +9,7 @@ import UIKit
 
 /// Protocol for cells to adopt accesibility
 public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider & AccessibilityActionsProvider {
-    
+
     typealias AccessibilityModifierType = AccessibilityModifier.Type
 
     /// Type of modifier that will be used to apply strategies to view. Default it's internal implementation
@@ -44,7 +44,6 @@ public extension AccessibilityItem {
         return BaseAccessibilityModifier.self
         #endif
     }
-
 
     var shouldOverrideStateTraits: Bool { false }
 
