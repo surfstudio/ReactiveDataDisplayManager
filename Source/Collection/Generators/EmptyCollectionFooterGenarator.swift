@@ -9,6 +9,7 @@ import UIKit
 
 public class EmptyCollectionFooterGenerator: CollectionFooterGenerator {
 
+    public let uuid = UUID().uuidString
     public let elementKind = UICollectionView.elementKindSectionFooter
 
     public func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
@@ -31,4 +32,14 @@ public class EmptyCollectionFooterGenerator: CollectionFooterGenerator {
     public var identifier: UICollectionReusableView.Type {
         return UICollectionReusableView.self
     }
+}
+
+// MARK: - DiffableItemSource
+
+extension EmptyCollectionFooterGenerator: DiffableItemSource {
+
+    public var diffableItem: DiffableItem {
+        DiffableItem(id: uuid, state: .init("RDDM.Diffable.EmptySection.footer"))
+    }
+
 }
