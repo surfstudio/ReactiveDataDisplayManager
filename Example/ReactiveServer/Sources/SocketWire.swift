@@ -19,4 +19,10 @@ final class SocketWire {
         openSockets.updateValue(socket, forKey: id)
     }
 
+    func broadcast(data: Data) {
+        openSockets.values.forEach { socket in
+            socket.send(.init(data: data))
+        }
+    }
+
 }
