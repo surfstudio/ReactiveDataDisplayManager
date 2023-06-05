@@ -101,7 +101,7 @@ extension CoreState: Sender {
 extension CoreState: SocketEventsDelegate {
 
     func onReceive(message: Message) {
-        allMessages.append(message)
+        allMessages.insert(message, at: 0)
         allMessages.sort(by: { $0.timestamp > $1.timestamp })
         notifyChatDelegates { [weak self] delegate in
             guard let messages = self?.allMessages else {
