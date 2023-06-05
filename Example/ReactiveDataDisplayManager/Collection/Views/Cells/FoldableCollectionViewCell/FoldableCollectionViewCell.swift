@@ -46,13 +46,22 @@ final class FoldableCollectionViewCell: UICollectionViewCell {
 
 }
 
-// MARK: - Configurable
+// MARK: - ConfigurableItem
 
 extension FoldableCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: ViewModel) {
         contentView.backgroundColor = viewModel.color
     }
+
+}
+
+// MARK: - AccessibilityItem
+
+extension FoldableCollectionViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .just("Expandable item") }
+    var traitsStrategy: AccessibilityTraitsStrategy { .just(.none) }
 
 }
 

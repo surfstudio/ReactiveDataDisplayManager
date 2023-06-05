@@ -47,6 +47,15 @@ final class ImageTableViewCell: UITableViewCell {
 
 }
 
+// MARK: - AccessibilityItem
+
+extension ImageTableViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .merge([iconView, titleLabel]) }
+
+}
+
 // MARK: - ConfigurableItem
 
 extension ImageTableViewCell: ConfigurableItem {

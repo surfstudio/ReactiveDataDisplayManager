@@ -17,15 +17,14 @@ class TitleCollectionListCell: UICollectionViewCell, ConfigurableItem, Accessibi
 
     // MARK: - AccessibilityItem
 
-    var labelStrategy: AccessibilityStrategy { .from(titleLabel) }
-    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
+    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
 
     // MARK: - Configurable
 
     func configure(with title: String) {
         titleLabel.text = title
         backgroundColor = .lightGray
-        accessibilityLabel = title
     }
 
 }

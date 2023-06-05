@@ -272,6 +272,24 @@ extension BaseTableDelegate: TableDragAndDropDelegate {
 }
 #endif
 
+// MARK: AccessibilityItemDelegate
+
+extension BaseTableDelegate: AccessibilityItemDelegate {
+
+    public func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind) {
+        switch kind {
+        case .header(let section):
+            tablePlugins.process(event: .invalidatedHeaderAccessibility(section, item), with: manager)
+        case .cell(let indexPath):
+            guard let cell = item as? UITableViewCell else { return }
+            tablePlugins.process(event: .invalidatedCellAccessibility(indexPath, cell), with: manager)
+        case .footer(let section):
+            tablePlugins.process(event: .invalidatedFooterAccessibility(section, item), with: manager)
+        }
+    }
+
+}
+
 // MARK: UIScrollViewDelegate
 
 extension BaseTableDelegate {

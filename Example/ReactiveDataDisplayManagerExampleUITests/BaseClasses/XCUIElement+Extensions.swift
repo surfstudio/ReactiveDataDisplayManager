@@ -1,5 +1,5 @@
 //
-//  XCUIElement+Expectations.swift
+//  XCUIElement+Extensions.swift
 //  ReactiveDataDisplayManagerExampleUITests
 //
 //  Created by Никита Коробейников on 19.12.2022.
@@ -8,6 +8,10 @@
 import XCTest
 
 extension XCUIElement {
+
+    var stringValue: String? {
+        value as? String
+    }
 
     func waitForNonExistence(timeout: TimeInterval) -> Bool {
         let predicate = NSPredicate(format: "exists == false")

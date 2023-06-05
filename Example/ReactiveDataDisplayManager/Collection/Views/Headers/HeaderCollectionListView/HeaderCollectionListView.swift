@@ -17,8 +17,8 @@ final class HeaderCollectionListView: UICollectionReusableView, AccessibilityIte
 
     // MARK: - AccessibilityItem
 
-    var labelStrategy: AccessibilityStrategy { .from(titleLabel) }
-    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
+    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
 
     // MARK: - Internal Methods
 

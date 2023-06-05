@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
 extension UIView {
 
@@ -19,11 +20,16 @@ extension UIView {
 
 }
 
-final class HeaderView: UIView {
+final class HeaderView: UIView, AccessibilityItem {
 
     // MARK: - IBOutlet
 
     @IBOutlet private weak var titleLabel: UILabel!
+
+    // MARK: - AccessibilityItem
+
+    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
 
     // MARK: - Internal Methods
 

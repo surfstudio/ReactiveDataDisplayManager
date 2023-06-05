@@ -198,6 +198,26 @@ extension BaseCollectionDelegate {
 }
 #endif
 
+// MARK: AccessibilityItemDelegate
+
+extension BaseCollectionDelegate: AccessibilityItemDelegate {
+
+    public func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind) {
+        switch kind {
+        case .header(let section):
+            guard let view = item as? UICollectionReusableView else { return }
+            collectionPlugins.process(event: .invalidatedHeaderAccessibility(section, view), with: manager)
+        case .cell(let indexPath):
+            guard let cell = item as? UICollectionViewCell else { return }
+            collectionPlugins.process(event: .invalidatedCellAccessibility(indexPath, cell), with: manager)
+        case .footer(let section):
+            guard let view = item as? UICollectionReusableView else { return }
+            collectionPlugins.process(event: .invalidatedFooterAccessibility(section, view), with: manager)
+        }
+    }
+
+}
+
 // MARK: UIScrollViewDelegate
 
 extension BaseCollectionDelegate {

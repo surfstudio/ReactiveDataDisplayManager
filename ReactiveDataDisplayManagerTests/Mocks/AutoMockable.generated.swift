@@ -1,4 +1,4 @@
-// Generated using Sourcery 1.9.2 — https://github.com/krzysztofzablocki/Sourcery
+// Generated using Sourcery 1.8.1 — https://github.com/krzysztofzablocki/Sourcery
 // DO NOT EDIT
 // swiftlint:disable all
 
@@ -98,21 +98,26 @@ class CollectionFoldableItemMock: CollectionFoldableItem {
     }
     var underlyingIsExpanded: Bool!
     var childGenerators: [CollectionCellGenerator] = []
-    var labelStrategy: AccessibilityStrategy {
+    var labelStrategy: AccessibilityStringStrategy {
         get { return underlyingLabelStrategy }
         set(value) { underlyingLabelStrategy = value }
     }
-    var underlyingLabelStrategy: AccessibilityStrategy!
-    var valueStrategy: AccessibilityStrategy {
+    var underlyingLabelStrategy: AccessibilityStringStrategy!
+    var valueStrategy: AccessibilityStringStrategy {
         get { return underlyingValueStrategy }
         set(value) { underlyingValueStrategy = value }
     }
-    var underlyingValueStrategy: AccessibilityStrategy!
+    var underlyingValueStrategy: AccessibilityStringStrategy!
     var traitsStrategy: AccessibilityTraitsStrategy {
         get { return underlyingTraitsStrategy }
         set(value) { underlyingTraitsStrategy = value }
     }
     var underlyingTraitsStrategy: AccessibilityTraitsStrategy!
+    var isAccessibilityIgnored: Bool {
+        get { return underlyingIsAccessibilityIgnored }
+        set(value) { underlyingIsAccessibilityIgnored = value }
+    }
+    var underlyingIsAccessibilityIgnored: Bool!
 
 }
 class CollectionFooterGeneratorMock: CollectionFooterGenerator {
@@ -190,21 +195,26 @@ class CollectionHeaderGeneratorMock: CollectionHeaderGenerator {
         set(value) { underlyingIdentifier = value }
     }
     var underlyingIdentifier: UICollectionReusableView.Type!
-    var labelStrategy: AccessibilityStrategy {
+    var labelStrategy: AccessibilityStringStrategy {
         get { return underlyingLabelStrategy }
         set(value) { underlyingLabelStrategy = value }
     }
-    var underlyingLabelStrategy: AccessibilityStrategy!
-    var valueStrategy: AccessibilityStrategy {
+    var underlyingLabelStrategy: AccessibilityStringStrategy!
+    var valueStrategy: AccessibilityStringStrategy {
         get { return underlyingValueStrategy }
         set(value) { underlyingValueStrategy = value }
     }
-    var underlyingValueStrategy: AccessibilityStrategy!
+    var underlyingValueStrategy: AccessibilityStringStrategy!
     var traitsStrategy: AccessibilityTraitsStrategy {
         get { return underlyingTraitsStrategy }
         set(value) { underlyingTraitsStrategy = value }
     }
     var underlyingTraitsStrategy: AccessibilityTraitsStrategy!
+    var isAccessibilityIgnored: Bool {
+        get { return underlyingIsAccessibilityIgnored }
+        set(value) { underlyingIsAccessibilityIgnored = value }
+    }
+    var underlyingIsAccessibilityIgnored: Bool!
 
     //MARK: - generate
 

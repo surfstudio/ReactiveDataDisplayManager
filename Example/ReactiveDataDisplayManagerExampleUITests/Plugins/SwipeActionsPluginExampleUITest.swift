@@ -19,12 +19,12 @@ final class SwipeActionsPluginExampleUITest: BaseUITestCase {
         cell.swipeLeft()
         XCTAssertTrue(collectionView.buttons["Flag"].exists)
         XCTAssertTrue(collectionView.buttons["More"].exists)
-//        XCTAssertTrue(collectionView.buttons.count == 3)
+        XCTAssertTrue(collectionView.buttons.count == 3)
 
         cell.swipeRight()
         XCTAssertFalse(collectionView.buttons["Flag"].exists)
         XCTAssertFalse(collectionView.buttons["More"].exists)
-//        XCTAssertTrue(collectionView.buttons.count == 0)
+        XCTAssertTrue(collectionView.buttons.count == 0)
     }
 
     func testCollection_whenSwipeRightFirstCell_thenCellHaveThreeButtons() throws {
@@ -38,13 +38,13 @@ final class SwipeActionsPluginExampleUITest: BaseUITestCase {
         XCTAssertTrue(collectionView.buttons["Delete"].exists)
         XCTAssertTrue(collectionView.buttons["Info"].exists)
         XCTAssertTrue(collectionView.buttons["Apply"].exists)
-//        XCTAssertTrue(collectionView.buttons.count == 3)
+        XCTAssertTrue(collectionView.buttons.count == 3)
 
         cell.swipeLeft()
         XCTAssertFalse(collectionView.buttons["Delete"].exists)
         XCTAssertFalse(collectionView.buttons["Info"].exists)
         XCTAssertFalse(collectionView.buttons["Apply"].exists)
-//        XCTAssertTrue(collectionView.buttons.count == 0)
+        XCTAssertTrue(collectionView.buttons.count == 0)
     }
 
     func testTable_whenSwipeLeftFirstCell_thenCellHaveThreeButtons() throws {

@@ -13,6 +13,7 @@ public protocol CollectionFoldableItem: AnyObject, AccessibilityStrategyProvider
     var childGenerators: [CollectionCellGenerator] { get set }
 }
 
-extension CollectionFoldableItem {
-    public var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
+public extension CollectionFoldableItem {
+    var labelStrategy: AccessibilityStringStrategy { .ignored }
+    var traitsStrategy: AccessibilityTraitsStrategy { childGenerators.isEmpty ? .ignored : .just(.button) }
 }
