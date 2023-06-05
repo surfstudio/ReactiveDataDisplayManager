@@ -90,9 +90,11 @@ final class ComponentsOverviewTableViewController: UIViewController {
     // Recieved message
     private let recievedMessageStyle = MessageStyle(textColor: .black, font: .systemFont(ofSize: 16, weight: .regular))
     private let recievedMessageBorderStyle = MessageBorderStyle(cornerRadius: 9,
-                                                                maskedCorners: [.layerMinXMinYCorner,
-                                                                                .layerMaxXMaxYCorner,
-                                                                                .layerMaxXMinYCorner],
+                                                                maskedCorners: [
+                                                                    .layerMinXMinYCorner,
+                                                                    .layerMaxXMaxYCorner,
+                                                                    .layerMaxXMinYCorner
+                                                                ],
                                                                 borderWidth: 1,
                                                                 borderColor: UIColor.black.cgColor)
     private lazy var recievedMessageModel = MessageModel(text: .string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"),
