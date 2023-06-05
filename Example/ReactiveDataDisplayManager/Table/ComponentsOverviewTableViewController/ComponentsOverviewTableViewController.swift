@@ -141,7 +141,7 @@ private extension ComponentsOverviewTableViewController {
 
     func generateSentMessages() -> [TableCellGenerator] {
         var generators = [TableCellGenerator]()
-        for _ in 0..<2 {
+        for _ in 0..<20 {
             generators.append(sentMessageGenerator)
         }
         return generators
@@ -149,7 +149,7 @@ private extension ComponentsOverviewTableViewController {
 
     func generateRecievedMessages() -> [TableCellGenerator] {
         var generators = [TableCellGenerator]()
-        for _ in 0..<3 {
+        for _ in 0..<30 {
             generators.append(recievedMessageGenerator)
         }
         return generators

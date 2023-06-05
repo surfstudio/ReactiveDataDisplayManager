@@ -14,15 +14,37 @@ public protocol ViewWrapper: ConfigurableItem {
 
     var nestedView: NestedView { get }
 
+    var cachedInsets: UIEdgeInsets? { get set }
+    var cachedAlignment: NSTextAlignment? { get set }
+
 }
+
+// MARK: - Common implementation
 
 public extension ViewWrapper where Self: UIView {
 
     func configure(with model: NestedView.Model) {
-        let insets = (model as? InsetsProvider)?.edgeInsets ?? .zero
-        let alignmentRule = (model as? AlignmentProvider)?.alignment ?? .center
+        wrapNestedViewIfNeeded(with: model)
+        nestedView.configure(with: model)
+    }
 
-        switch alignmentRule {
+}
+
+// MARK: - Private
+
+private extension ViewWrapper where Self: UIView {
+
+    /// Adding nestedView as subview only if constraint specific parameters were changed
+    func wrapNestedViewIfNeeded(with model: NestedView.Model) {
+        let insets = (model as? InsetsProvider)?.edgeInsets ?? .zero
+        let alignment = (model as? AlignmentProvider)?.alignment ?? .center
+
+        guard alignment != cachedAlignment || insets != cachedInsets else {
+            return
+        }
+
+        nestedView.removeFromSuperview()
+        switch alignment {
         case .right:
             wrapWithLeadingGreaterThenOrEqualRule(subview: nestedView, with: insets)
         case .left:
@@ -30,7 +52,8 @@ public extension ViewWrapper where Self: UIView {
         default:
             wrap(subview: nestedView, with: insets)
         }
-        nestedView.configure(with: model)
+        cachedInsets = insets
+        cachedAlignment = alignment
     }
 
 }
