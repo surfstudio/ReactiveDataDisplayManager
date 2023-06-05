@@ -59,7 +59,7 @@ extension CoreState: Authenticator {
 
         apiClient.get("greet",
                       responseType: Feedback.self)
-        .sink(receiveCompletion: {_ in },
+        .sink(receiveCompletion: { _ in },
               receiveValue: { [weak self] response in
             debugPrint("ReCh response: - \(response)")
             guard let self else {
@@ -91,7 +91,7 @@ extension CoreState: Sender {
             debugPrint("ReCh response: - \(response.description)")
         })
         .store(in: &cancellables)
-            
+
     }
 
 }
@@ -102,7 +102,7 @@ extension CoreState: SocketEventsDelegate {
 
     func onReceive(message: Message) {
         allMessages.append(message)
-        allMessages.sort(by: { $0.timestamp < $1.timestamp })
+        allMessages.sort(by: { $0.timestamp > $1.timestamp })
         notifyChatDelegates { [weak self] delegate in
             guard let messages = self?.allMessages else {
                 return

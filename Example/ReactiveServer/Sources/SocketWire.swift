@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SocketWire.swift
 //  
 //
 //  Created by Никита Коробейников on 30.05.2023.

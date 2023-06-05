@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Codable+Response.swift
 //  
 //
 //  Created by Никита Коробейников on 02.06.2023.
