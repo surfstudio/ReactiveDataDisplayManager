@@ -19,6 +19,6 @@ public final class CollectionWrappedCell<View: ConfigurableItem>: UICollectionVi
 
     public var cachedInsets: UIEdgeInsets?
 
-    public var cachedAlignment: NSTextAlignment?
+    public var cachedAlignment: Alignment?
 
 }

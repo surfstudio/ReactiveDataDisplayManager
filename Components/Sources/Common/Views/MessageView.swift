@@ -70,7 +70,8 @@ extension MessageView: ConfigurableItem {
 
         public let text: TextType
         public let style: MessageStyle
-        public var alignment: NSTextAlignment
+        public var textAlignment: NSTextAlignment
+        public var alignment: Alignment?
         public var edgeInsets: UIEdgeInsets
         public let internalEdgeInsets: UIEdgeInsets
         public let borderStyle: BorderStyle
@@ -79,13 +80,15 @@ extension MessageView: ConfigurableItem {
 
         public init(text: TextType,
                     style: MessageStyle,
-                    alignment: NSTextAlignment,
+                    textAlignment: NSTextAlignment,
+                    externalAlignment: Alignment?,
                     externalEdgeInsets: UIEdgeInsets,
                     internalEdgeInsets: UIEdgeInsets,
                     borderStyle: BorderStyle) {
             self.text = text
             self.style = style
-            self.alignment = alignment
+            self.textAlignment = textAlignment
+            self.alignment = externalAlignment
             self.edgeInsets = externalEdgeInsets
             self.internalEdgeInsets = internalEdgeInsets
             self.borderStyle = borderStyle
@@ -104,7 +107,7 @@ extension MessageView: ConfigurableItem {
         configureTextView(textView, with: model)
         textView.textColor = model.style.textColor
         textView.font = model.style.font
-        textView.textAlignment = model.alignment
+        textView.textAlignment = model.textAlignment
 
         wrap(subview: textView, with: model.internalEdgeInsets)
 

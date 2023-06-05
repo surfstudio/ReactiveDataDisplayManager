@@ -19,6 +19,6 @@ public final class TableWrappedCell<View: ConfigurableItem>: UITableViewCell, Vi
 
     public var cachedInsets: UIEdgeInsets?
 
-    public var cachedAlignment: NSTextAlignment?
+    public var cachedAlignment: Alignment?
 
 }

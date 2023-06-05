@@ -62,21 +62,24 @@ extension LabelView: ConfigurableItem {
         public let text: TextType
         public let style: TextStyle
         public let layout: TextLayout
+        public var alignment: Alignment?
         public var edgeInsets: UIEdgeInsets
-        public var alignment: NSTextAlignment
+        public let textAlignment: NSTextAlignment
 
         // MARK: - Initialization
 
         public init(text: TextType,
                     style: TextStyle,
                     layout: TextLayout,
-                    alignment: NSTextAlignment,
-                    edgeInsets: UIEdgeInsets) {
+                    textAlignment: NSTextAlignment,
+                    edgeInsets: UIEdgeInsets,
+                    externalAlignment: Alignment? = .none) {
             self.text = text
             self.style = style
             self.layout = layout
-            self.alignment = alignment
+            self.textAlignment = textAlignment
             self.edgeInsets = edgeInsets
+            self.alignment = externalAlignment
         }
 
     }
@@ -91,7 +94,7 @@ extension LabelView: ConfigurableItem {
         label.textColor = model.style.color
         label.font = model.style.font
 
-        label.textAlignment = model.alignment
+        label.textAlignment = model.textAlignment
         label.lineBreakMode = model.layout.lineBreakMode
         label.numberOfLines = model.layout.numberOfLines
 

@@ -42,8 +42,9 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private lazy var recievedMessageTimeModel = LabelModel(text: .string("17:05"),
                                                            style: recievedMessageTimeStyle,
                                                            layout: recievedMessageTimeLayout,
-                                                           alignment: .left,
-                                                           edgeInsets: UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 0))
+                                                           textAlignment: .left,
+                                                           edgeInsets: UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 0),
+                                                           externalAlignment: .leading)
     private lazy var recievedMessageTimeGenerator = TableWrappedCell<LabelView>.rddm.baseGenerator(with: recievedMessageTimeModel, and: .class)
 
     // Sent message time
@@ -52,8 +53,9 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private lazy var sentTimeMessageModel = LabelModel(text: .string("17:32"),
                                                        style: sentTimeMessageStyle,
                                                        layout: sentTimeMessageLayout,
-                                                       alignment: .right,
-                                                       edgeInsets: UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 16))
+                                                       textAlignment: .right,
+                                                       edgeInsets: UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 16),
+                                                       externalAlignment: .trailing)
     private lazy var sentMessageTimeGenerator = TableWrappedCell<LabelView>.rddm.baseGenerator(with: sentTimeMessageModel, and: .class)
 
     // Date
@@ -62,7 +64,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private lazy var dateModel = LabelModel(text: .string("24 мая 2023"),
                                             style: dateStyle,
                                             layout: dateLayout,
-                                            alignment: .center,
+                                            textAlignment: .center,
                                             edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
     private lazy var dateGenerator = TableWrappedCell<LabelView>.rddm.baseGenerator(with: dateModel, and: .class)
 
@@ -74,7 +76,8 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                             maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
     private lazy var sentMessageModel: MessageModel = .init(text: .string("Lorem"),
                                                             style: sentMessageStyle,
-                                                            alignment: .right,
+                                                            textAlignment: .right,
+                                                            externalAlignment: .trailing,
                                                             externalEdgeInsets: UIEdgeInsets(top: 12,
                                                                                              left: UIScreen.main.bounds.width / 2,
                                                                                              bottom: 12,
@@ -94,7 +97,8 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                                 borderColor: UIColor.black.cgColor)
     private lazy var recievedMessageModel = MessageModel(text: .string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"),
                                                          style: recievedMessageStyle,
-                                                         alignment: .left,
+                                                         textAlignment: .left,
+                                                         externalAlignment: .leading,
                                                          externalEdgeInsets: UIEdgeInsets(top: 12,
                                                                                           left: 16,
                                                                                           bottom: 12,
