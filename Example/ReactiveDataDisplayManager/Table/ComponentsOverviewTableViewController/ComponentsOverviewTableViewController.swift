@@ -45,7 +45,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                            textAlignment: .left,
                                                            edgeInsets: UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 0),
                                                            externalAlignment: .leading)
-    private lazy var recievedMessageTimeGenerator = TableWrappedCell<LabelView>.rddm.baseGenerator(with: recievedMessageTimeModel, and: .class)
+    private lazy var recievedMessageTimeGenerator = LabelView.rddm.tableGenerator(with: recievedMessageTimeModel, and: .class)
 
     // Sent message time
     private let sentTimeMessageStyle = TextStyle(color: .gray, font: .systemFont(ofSize: 12, weight: .light))
@@ -56,7 +56,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                        textAlignment: .right,
                                                        edgeInsets: UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 16),
                                                        externalAlignment: .trailing)
-    private lazy var sentMessageTimeGenerator = TableWrappedCell<LabelView>.rddm.baseGenerator(with: sentTimeMessageModel, and: .class)
+    private lazy var sentMessageTimeGenerator = LabelView.rddm.tableGenerator(with: sentTimeMessageModel, and: .class)
 
     // Date
     private let dateStyle = TextStyle(color: .black, font: .systemFont(ofSize: 12, weight: .light))
@@ -66,7 +66,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                             layout: dateLayout,
                                             textAlignment: .center,
                                             edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0))
-    private lazy var dateGenerator = TableWrappedCell<LabelView>.rddm.baseGenerator(with: dateModel, and: .class)
+    private lazy var dateGenerator = LabelView.rddm.tableGenerator(with: dateModel, and: .class)
 
     // Sent message
     private let sentMessageStyle = MessageStyle(textColor: .white,
@@ -85,7 +85,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                             internalEdgeInsets: UIEdgeInsets(top: 3, left: 5, bottom: 3, right: 5),
                                                             borderStyle: sentMessageBorderStyle)
 
-    private lazy var sentMessageGenerator = TableWrappedCell<MessageView>.rddm.baseGenerator(with: sentMessageModel, and: .class)
+    private lazy var sentMessageGenerator = MessageView.rddm.tableGenerator(with: sentMessageModel, and: .class)
 
     // Recieved message
     private let recievedMessageStyle = MessageStyle(textColor: .black, font: .systemFont(ofSize: 16, weight: .regular))
@@ -105,7 +105,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                                                           right: UIScreen.main.bounds.width / 2),
                                                          internalEdgeInsets: UIEdgeInsets(top: 3, left: 5, bottom: 3, right: 5),
                                                          borderStyle: recievedMessageBorderStyle)
-    private lazy var recievedMessageGenerator = TableWrappedCell<MessageView>.rddm.baseGenerator(with: recievedMessageModel, and: .class)
+    private lazy var recievedMessageGenerator = MessageView.rddm.tableGenerator(with: recievedMessageModel, and: .class)
 
     // Separator
 
