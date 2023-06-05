@@ -30,6 +30,10 @@ targets:
       sources: ReactiveServer/Sources
       dependencies:
         - package: Vapor
+      templates:
+        - BaseSettings
+      templateAttributes:
+        bundle_id: ru.surfstudio.rddm.server
 
     ReactiveChat_iOS:
       platform: iOS
