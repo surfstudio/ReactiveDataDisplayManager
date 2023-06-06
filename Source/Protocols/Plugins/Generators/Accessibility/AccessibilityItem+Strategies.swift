@@ -16,8 +16,8 @@ public enum AccessibilityStringStrategy {
     /// simple string value, can be nil
     case just(String?)
 
-    /// a reference value from object. By default it's `accessibilityLabel`
-    /// - parameter keyPath: specified keypath from value would be taken
+    /// a reference value from object.
+    /// - parameter keyPath: specified keypath from value would be taken.  By default it's `accessibilityLabel`
     case from(object: NSObject, keyPath: KeyPath<NSObject, String?> = \.accessibilityLabel)
 
     /// a combination of strategies
@@ -59,7 +59,7 @@ public enum AccessibilityTraitsStrategy {
     /// a reference traits from another object
     case from(object: NSObject)
 
-    /// a reference traits merged from another objects
+    /// a reference traits merged from specified objects
     case merge([NSObject])
 
     public var isIgnored: Bool {
