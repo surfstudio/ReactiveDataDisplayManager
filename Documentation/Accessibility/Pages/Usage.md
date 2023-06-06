@@ -8,6 +8,8 @@ By default, all cells inside tables and collections are not accessibility elemen
 
 **RDDM** in initial will not make any changes to accessibility elements hierarchy, so you can manage your own optimization. But it enables an accessibility plugin at all builders to be work with `AccessibilityItems`.
 
+<br>
+
 ## AccessibilityItem
 
 ```swift
@@ -34,13 +36,18 @@ After that, a cell, header or footer which is `AccessibilityItem`, becomes an [a
 
 <img src="https://i.ibb.co/vBN0RLL/2023-06-06-15-49-52.png" alt="before" width=49%> <img src="https://i.ibb.co/4P079Qb/2023-06-06-15-49-28.png" alt="after" width=49%>
 
+***
+<br>
+
 ## Strategies
 
 To provide accessibility parameters you can use **RDDM**'s strategies `AccessibilityStringStrategy` and `AccessibilityTraitsStrategy`. With these strategies you can easy provide default accessibility parameters such as `accessibilityLabel, accessibilityValue, accessibilityTraits`.
 
 *If you need other parameters, you can define your own item and modifier for it, see [Advanced Usage](./Advanced%20Usage.md). Also you can provide `self` propetries and use [invalidation mechanism](./Invalidation.md) to update them.*
 
-### `AccessibilityStringStrategy`
+<br>
+
+#### AccessibilityStringStrategy
 This strategy is used for string parameters [`accessibilityLabel`](./UIAccessibility%20Basics.md#accessibilitylabel) and [`AccessibilityValue`](./UIAccessibility%20Basics.md#Accessibilityvalue).
 Strategy for label is required for item.
 
@@ -74,7 +81,9 @@ var valueStrategy: AccessibilityStringStrategy {
 }
 ```
 
-### `AccessibilityStringStrategy`
+<br>
+
+#### AccessibilityTraitsStrategy
 
 This strategy is used for [`accessibilityTraits`](./UIAccessibility%20Basics.md#accessibilitytraits) parameter. Is required for item.
 
@@ -99,13 +108,18 @@ var traitsStrategy: AccessibilityTraitsStrategy { .from(object: button) }
 
 *Note: `UISwitch` has a unique hidden trait, that only reads values 0 or 1 and localize them. If you want to use this trait, you need use `accessibilityValue` only from switcher and do not change it.*
 
+***
+<br><br>
+
 ## Providers
 
 Providers in **RDDM** is a separate parameters containers which are included in `AccessibilityItem`. But these providers can be used for generators to combine them with cell's parameters.
 
 *Note: only `AccessibilityItem` defined for a cell modifies it and apply provided parameters.*
 
-### AccessibilityStrategyProvider
+<br>
+
+#### AccessibilityStrategyProvider
 
 This is common provider for `accessibilityLabel, accessibilityValue` and `accessibilityTraits` strategies.
 
@@ -132,7 +146,9 @@ extension SelectableItem: AccessibilityStrategyProvider {
 
 `labelStrategy` and `traitsStrategy` is required parameters and `valueStrategy` is `.ignored` by default.
 
-### AccessibilityActionsProvider
+<br>
+
+#### AccessibilityActionsProvider
 
 A provider for [custom actions](./UIAccessibility%20Basics.md#accessibilitycustomactions). In item is defined as empty array.
 
@@ -142,7 +158,7 @@ public protocol AccessibilityActionsProvider {
 }
 ```
 
-*Note: all system actions such as swipes, editing, moving, drag and drop are already provided by UIKit in another way. Use these actions to add custom interaction with the cell content.*
+*Note: all system actions such as swipes, editing, moving, drag and drop are already provided by UIKit in another way. Use this actions provider to add custom interaction with the cell content.*
 
 *Example:*
 ```swift
