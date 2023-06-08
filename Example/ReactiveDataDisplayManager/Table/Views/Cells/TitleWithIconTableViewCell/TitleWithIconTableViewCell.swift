@@ -18,7 +18,8 @@ class TitleWithIconTableViewCell: UITableViewCell, CalculatableHeightItem {
     // MARK: - CalculatableHeightItem
 
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
-        return 44
+        return model.getHeight(withConstrainedWidth: UIScreen.main.bounds.width,
+                               font: .preferredFont(forTextStyle: .body))
     }
 
 }
