@@ -14,7 +14,7 @@ final class SizableCollectionViewCell: UICollectionViewCell {
     // MARK: - Constants
 
     private enum Constants {
-        static let titleFont = UIFont.systemFont(ofSize: 15.0)
+        static let titleFont = UIFont.preferredFont(forTextStyle: .subheadline)
     }
 
     // MARK: - IBOutlet
