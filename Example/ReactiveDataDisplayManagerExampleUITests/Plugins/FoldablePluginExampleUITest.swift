@@ -13,7 +13,7 @@ final class FoldablePluginExampleUITest: BaseUITestCase {
         let tableId = "FoldableTableViewController"
 
         setTab("Table")
-        tapTableElement("Table with foldable cell")
+        tapTableElement("foldable cell")
 
         let foldable = getCell(for: .table, collectionId: tableId, cellId: "Foldable cell 1")
         foldable.tap()

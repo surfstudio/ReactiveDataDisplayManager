@@ -18,7 +18,7 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         let pageSize = 16
 
         setTab("Table")
-        tapTableElement("Table with pagination")
+        tapTableElement("pagination")
 
         let table = app.tables.firstMatch
         let retryButton = app.buttons["Retry"]
@@ -42,7 +42,7 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
     // Description: In a collection, the first cell is the first visible cell
     func testCollection_whenSwipeUp_thenFirstVisibleCellChanged() throws {
         setTab("Collection")
-        tapTableElement("Collection with pagination")
+        tapTableElement("pagination")
 
         let collection = app.collectionViews.firstMatch
         let firstCell = app.collectionViews.cells.firstMatch
@@ -67,7 +67,7 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         let retryButton = app.buttons["Retry"]
 
         setTab("Table")
-        tapTableElement("Table with pagination")
+        tapTableElement("pagination")
 
         let table = app.tables.firstMatch
         XCTAssertTrue(table.waitForExistence(timeout: Constants.timeout))
@@ -90,7 +90,7 @@ final class PaginatablePluginExampleUITest: BaseUITestCase {
         let retryButton = app.buttons["Retry"]
 
         setTab("Collection")
-        tapTableElement("Collection with pagination")
+        tapTableElement("pagination")
 
         let collection = app.collectionViews.firstMatch
         XCTAssertTrue(collection.waitForExistence(timeout: Constants.timeout))

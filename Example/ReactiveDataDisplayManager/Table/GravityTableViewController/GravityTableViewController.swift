@@ -25,7 +25,7 @@ final class GravityTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Gravity table with foldable cell"
+        title = "Gravity foldable cell"
         fillAdapter()
     }
 

@@ -38,20 +38,20 @@ final class MainTableViewController: UIViewController {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
             ("Gallery without prefetching", .imageTable),
             ("Gallery with prefetching", .prefetchingTable),
-            ("Table with foldable cell", .foldableCellTable),
-            ("Gravity table with foldable cell", .gravityTable),
-            ("Table with movable cell", .movableTable),
-            ("Table with alphabetize sections", .alphabetizeSectionsTable),
-            ("Table with sections titles", .sectionTitlesTable),
-            ("Table with diffableDataSource", .diffableTable),
-            ("Table with swipeable cells", .swipeableTable),
-            ("Table with refresh control", .refreshableTable),
-            ("Table with pagination", .paginatableTable),
-            ("Table with all plugins", .allPluginsTable),
-            ("Table with DifferenceKit", .differenceTable),
-            ("Table with drag and drop cells", .dragAndDroppableTable),
-            ("Table with selectable cells", .selectableTable),
-            ("Table with highlightable cells", .highlightableTable)
+            ("foldable cell", .foldableCellTable),
+            ("Gravity foldable cell", .gravityTable),
+            ("movable cell", .movableTable),
+            ("alphabetize sections", .alphabetizeSectionsTable),
+            ("sections titles", .sectionTitlesTable),
+            ("diffableDataSource", .diffableTable),
+            ("swipeable cells", .swipeableTable),
+            ("refresh control", .refreshableTable),
+            ("pagination", .paginatableTable),
+            ("all plugins", .allPluginsTable),
+            ("DifferenceKit", .differenceTable),
+            ("drag and drop cells", .dragAndDroppableTable),
+            ("selectable cells", .selectableTable),
+            ("highlightable cells", .highlightableTable)
         ]
     }
 

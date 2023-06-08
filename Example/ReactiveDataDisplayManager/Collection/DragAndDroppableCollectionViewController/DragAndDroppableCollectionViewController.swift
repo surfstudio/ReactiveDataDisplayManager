@@ -43,7 +43,7 @@ final class DragAndDroppableCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Collection with drag'n'drop items"
+        title = "drag'n'drop items"
 
         configureLayoutFlow()
         collectionView.accessibilityIdentifier = "Collection_with_drag_n_drop_items"

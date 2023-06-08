@@ -45,7 +45,7 @@ final class SectionTitleTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with section title"
+        title = "section title"
         fillAdapter()
     }
 
