@@ -40,7 +40,7 @@ final class PaginatableCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Collection with pagination"
+        title = "pagination"
 
         configureActivityIndicatorIfNeeded()
         loadFirstPage()

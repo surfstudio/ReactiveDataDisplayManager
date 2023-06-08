@@ -21,7 +21,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
         let duration = Constants.dragDuration
 
         setTab("Collection")
-        tapTableElement("Collection with drag and drop item")
+        tapTableElement("drag and drop item")
 
         let sourceCell = getCell(for: .collection, collectionId: collectionId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .collection, collectionId: collectionId, cellId: destinationDraggable)
@@ -40,7 +40,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
         let duration = Constants.dragDuration
 
         setTab("Table")
-        tapTableElement("Table with drag and drop cells")
+        tapTableElement("drag and drop cells")
 
         let sourceCell = getCell(for: .table, collectionId: tableId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .table, collectionId: tableId, cellId: destinationDraggable)

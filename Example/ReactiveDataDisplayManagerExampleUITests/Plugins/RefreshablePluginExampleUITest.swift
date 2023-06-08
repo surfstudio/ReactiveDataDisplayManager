@@ -17,7 +17,7 @@ final class RefreshablePluginExampleUITest: BaseUITestCase {
 
     func testTable_whenScrollDown_thenShowRefreshControl() throws {
         setTab("Table")
-        tapTableElement("Table with refresh control")
+        tapTableElement("refresh control")
 
         let cell = getFirstCell(for: .table, id: "Table_with_refresh_control")
         let refreshControl = app.otherElements["RefreshableTableViewController_RefreshControl"]

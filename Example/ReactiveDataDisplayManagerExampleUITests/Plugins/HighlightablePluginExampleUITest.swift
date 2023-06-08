@@ -17,7 +17,7 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         var wasPresed = false
 
         setTab("Table")
-        tapTableElement("Table with highlightable cells")
+        tapTableElement("highlightable cells")
 
         let cell = getFirstCell(for: .table, id: "Higlighted_cells")
 
@@ -37,7 +37,7 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         let normalStyle = "Normal"
 
         setTab("Table")
-        tapTableElement("Table with highlightable cells")
+        tapTableElement("highlightable cells")
         tapButton("Single mode")
 
         let cell = getFirstCell(for: .table, id: "Higlighted_cells")

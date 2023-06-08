@@ -21,7 +21,7 @@ final class MovablePluginExampleUITest: BaseUITestCase {
         let duration = Constants.dragDuration
 
         setTab("Collection")
-        tapTableElement("Collection with movable items")
+        tapTableElement("movable items")
 
         let sourceCell = getCell(for: .collection, collectionId: collectionId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .collection, collectionId: collectionId, cellId: destinationDraggable)
@@ -39,7 +39,7 @@ final class MovablePluginExampleUITest: BaseUITestCase {
         let duration = Constants.dragDuration
 
         setTab("Table")
-        tapTableElement("Table with movable cell")
+        tapTableElement("movable cell")
 
         let sourceCell = getCell(for: .table, collectionId: tableId, cellId: sourceDraggable)
         let destinationSection = app.tables[tableId].otherElements["Section 2"].firstMatch

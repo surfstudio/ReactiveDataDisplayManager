@@ -36,7 +36,7 @@ final class SwipeableCollectionListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "List Appearances with swipeable items"
+        title = "list with swipes"
         fillAdapter()
 
         configureLayoutFlow(with: appearance)

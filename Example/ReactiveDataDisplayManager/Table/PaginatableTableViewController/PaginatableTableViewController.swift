@@ -41,7 +41,7 @@ final class PaginatableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with pagination"
+        title = "pagination"
 
         configureActivityIndicatorIfNeeded()
         loadFirstPage()
