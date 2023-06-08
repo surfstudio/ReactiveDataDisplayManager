@@ -81,6 +81,11 @@ private extension DifferenceCollectionViewController {
     func setupSearch() {
         let searchBar = UISearchBar()
         searchBar.delegate = self
+        if #available(iOS 13.0, *) {
+            searchBar.searchTextField.accessibilityLabel = "Search field"
+        } else {
+            // Fallback on earlier versions
+        }
         navigationItem.titleView = searchBar
     }
 

@@ -91,6 +91,7 @@ private extension DiffableTableViewController {
     func setupSearch() {
         let searchBar = UISearchBar()
         searchBar.delegate = self
+        searchBar.searchTextField.accessibilityLabel = "Search field"
         navigationItem.titleView = searchBar
     }
 
