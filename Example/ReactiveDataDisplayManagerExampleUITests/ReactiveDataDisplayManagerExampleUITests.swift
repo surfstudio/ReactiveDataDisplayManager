@@ -9,19 +9,24 @@ import XCTest
 
 class ReactiveDataDisplayManagerExampleUITests: BaseUITestCase {
 
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        continueAfterFailure = true
+    }
+
     func testCollectionScreen() throws {
         setTab("Collection")
-        assertAllScreensOpeningWithoutCrashes()
+        try assertAllScreensOpeningWithoutCrashes()
     }
 
     func testTableScreen() throws {
         setTab("Table")
-        assertAllScreensOpeningWithoutCrashes()
+        try assertAllScreensOpeningWithoutCrashes()
     }
 
     func testStackScreen() throws {
         setTab("Stack")
-        assertAllScreensOpeningWithoutCrashes()
+        try assertAllScreensOpeningWithoutCrashes()
     }
 }
 
@@ -29,11 +34,12 @@ class ReactiveDataDisplayManagerExampleUITests: BaseUITestCase {
 
 private extension ReactiveDataDisplayManagerExampleUITests {
 
-    func assertAllScreensOpeningWithoutCrashes() {
+    func assertAllScreensOpeningWithoutCrashes() throws {
         let tablesQuery = app.tables
         for i in 0...tablesQuery.cells.count - 1 {
             print("===== cell number: \(i) =====")
             tablesQuery.cells.element(boundBy: i).tap()
+            try app.performAccessibilityAudit()
             app.navigationBars.firstMatch.buttons["Back"].tap()
         }
     }
