@@ -23,7 +23,7 @@ extension LabelView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: InsetsProvider, AlignmentProvider {
+    public struct Model: AlignmentProvider {
 
         // MARK: - Nested types
 
@@ -62,8 +62,7 @@ extension LabelView: ConfigurableItem {
         public let text: TextType
         public let style: TextStyle
         public let layout: TextLayout
-        public var alignment: Alignment?
-        public var edgeInsets: UIEdgeInsets
+        public let alignment: Alignment
         public let textAlignment: NSTextAlignment
 
         // MARK: - Initialization
@@ -72,14 +71,12 @@ extension LabelView: ConfigurableItem {
                     style: TextStyle,
                     layout: TextLayout,
                     textAlignment: NSTextAlignment,
-                    edgeInsets: UIEdgeInsets,
-                    externalAlignment: Alignment? = .none) {
+                    viewAlignment: Alignment = .all(.zero)) {
             self.text = text
             self.style = style
             self.layout = layout
             self.textAlignment = textAlignment
-            self.edgeInsets = edgeInsets
-            self.alignment = externalAlignment
+            self.alignment = viewAlignment
         }
 
     }

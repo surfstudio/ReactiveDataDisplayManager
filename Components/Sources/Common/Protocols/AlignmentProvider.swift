@@ -9,6 +9,6 @@ import UIKit
 
 public protocol AlignmentProvider {
 
-    var alignment: Alignment? { get set }
+    var alignment: Alignment { get }
 
 }
