@@ -31,7 +31,7 @@ extension TitleCollectionHeaderGenerator: CollectionHeaderGenerator {
     }
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 44.0)
+        return CGSize(width: collectionView.bounds.width, height: 56.0)
     }
 
 }
