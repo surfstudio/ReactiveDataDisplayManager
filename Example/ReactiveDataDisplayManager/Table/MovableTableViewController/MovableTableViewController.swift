@@ -32,7 +32,7 @@ final class MovableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "table with movable cell"
+        title = "movable cell"
         tableView.accessibilityIdentifier = "Table_with_movable_cell"
         tableView.dragInteractionEnabled = false
         fillAdapter()

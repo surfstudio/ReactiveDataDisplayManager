@@ -33,7 +33,7 @@ class ItemTitleCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Collection with item index titles"
+        title = "item index titles"
 
         configureLayoutFlow(with: appearance)
         updateBarButtonItem(with: appearance.title)

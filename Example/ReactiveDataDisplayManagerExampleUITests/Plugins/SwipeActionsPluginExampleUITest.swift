@@ -11,7 +11,7 @@ final class SwipeActionsPluginExampleUITest: BaseUITestCase {
 
     func testCollection_whenSwipeLeftFirstCell_thenCellHaveThreeButtons() throws {
         setTab("Collection")
-        tapTableElement("List Appearances with swipeable items")
+        tapTableElement("list with swipes")
 
         let collectionView = app.collectionViews.firstMatch
         let cell = collectionView.firstMatch.cells.firstMatch
@@ -29,7 +29,7 @@ final class SwipeActionsPluginExampleUITest: BaseUITestCase {
 
     func testCollection_whenSwipeRightFirstCell_thenCellHaveThreeButtons() throws {
         setTab("Collection")
-        tapTableElement("List Appearances with swipeable items")
+        tapTableElement("list with swipes")
 
         let collectionView = app.collectionViews.firstMatch
         let cell = collectionView.firstMatch.cells.firstMatch
@@ -49,7 +49,7 @@ final class SwipeActionsPluginExampleUITest: BaseUITestCase {
 
     func testTable_whenSwipeLeftFirstCell_thenCellHaveThreeButtons() throws {
         setTab("Table")
-        tapTableElement("Table with swipeable cells")
+        tapTableElement("swipeable cells")
 
         let cell = app.tables.firstMatch.cells.firstMatch
 
@@ -66,7 +66,7 @@ final class SwipeActionsPluginExampleUITest: BaseUITestCase {
 
     func testTable_whenSwipeRightFirstCell_thenCellHaveThreeButtons() throws {
         setTab("Table")
-        tapTableElement("Table with swipeable cells")
+        tapTableElement("swipeable cells")
 
         let cell = app.tables.firstMatch.cells.firstMatch
 

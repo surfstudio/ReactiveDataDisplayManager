@@ -53,7 +53,7 @@ final class DiffableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with diffableDataSource"
+        title = "diffableDataSource"
 
         setupSearch()
         setupBarButtonItem()

@@ -33,7 +33,7 @@ final class AlphabeticalTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with alphabetize sections"
+        title = "alphabetize sections"
         fillAdapter()
     }
 

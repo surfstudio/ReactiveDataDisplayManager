@@ -47,7 +47,7 @@ final class MovableCollectionViewController: UIViewController {
 private extension MovableCollectionViewController {
 
     func setupInitialState() {
-        title = "Collection with movable cell"
+        title = "movable cell"
 
         configureCollectionView()
         fillAdapter()

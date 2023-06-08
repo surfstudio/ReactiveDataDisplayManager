@@ -30,7 +30,7 @@ final class DifferenceTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "table with DifferenceKit"
+        title = "DifferenceKit"
         fillAdapter()
     }
 

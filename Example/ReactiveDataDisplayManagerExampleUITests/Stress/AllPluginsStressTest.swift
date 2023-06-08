@@ -18,7 +18,7 @@ final class AllPluginsStressTest: BaseUITestCase {
     func testTable_whenAllPluginsScreenIsConstantlyUpdating_thenExpandableCellDidntCrashing() {
 
         setTab("Table")
-        tapTableElement("Table with all plugins")
+        tapTableElement("all plugins")
 
         let cell = getCell(for: .table, collectionId: "main_table", cellId: "expandable_cell")
 
