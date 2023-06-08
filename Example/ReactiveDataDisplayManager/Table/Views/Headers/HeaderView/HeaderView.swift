@@ -35,7 +35,7 @@ final class HeaderView: UIView, AccessibilityItem {
 
     func configure(with title: String) {
         titleLabel.text = title
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        titleLabel.font = .preferredFont(forTextStyle: .headline)
     }
 
 }
