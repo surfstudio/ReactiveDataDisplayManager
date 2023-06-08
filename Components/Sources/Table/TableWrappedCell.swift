@@ -17,4 +17,8 @@ public final class TableWrappedCell<View: ConfigurableItem>: UITableViewCell, Vi
 
     public let nestedView: View = .init(frame: .zero)
 
+    public var cachedInsets: UIEdgeInsets?
+
+    public var cachedAlignment: Alignment?
+
 }

@@ -13,8 +13,7 @@ public class LabelView: UIView {
 
     // MARK: - Private properties
 
-    private var heightConstraint: NSLayoutConstraint?
-    private var textView = UILabel(frame: .zero)
+    private var label: UILabel = .init(frame: .zero)
 
 }
 
@@ -24,7 +23,7 @@ extension LabelView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: InsetsProvider, AlignmentProvider {
+    public struct Model: AlignmentProvider {
 
         // MARK: - Nested types
 
@@ -63,24 +62,21 @@ extension LabelView: ConfigurableItem {
         public let text: TextType
         public let style: TextStyle
         public let layout: TextLayout
-        public var edgeInsets: UIEdgeInsets
-        public var labelClass: UILabel.Type
-        public var alignment: NSTextAlignment
+        public let alignment: Alignment
+        public let textAlignment: NSTextAlignment
 
         // MARK: - Initialization
 
         public init(text: TextType,
                     style: TextStyle,
                     layout: TextLayout,
-                    alignment: NSTextAlignment,
-                    edgeInsets: UIEdgeInsets,
-                    labelClass: UILabel.Type = UILabel.self) {
+                    textAlignment: NSTextAlignment,
+                    viewAlignment: Alignment = .all(.zero)) {
             self.text = text
             self.style = style
             self.layout = layout
-            self.alignment = alignment
-            self.edgeInsets = edgeInsets
-            self.labelClass = labelClass
+            self.textAlignment = textAlignment
+            self.alignment = viewAlignment
         }
 
     }
@@ -88,17 +84,16 @@ extension LabelView: ConfigurableItem {
     // MARK: - Methods
 
     public func configure(with model: Model) {
-        textView = model.labelClass.init()
         configureConstraints()
 
         self.backgroundColor = .clear
-        textView.backgroundColor = .clear
-        textView.textColor = model.style.color
-        textView.font = model.style.font
+        label.backgroundColor = .clear
+        label.textColor = model.style.color
+        label.font = model.style.font
 
-        textView.textAlignment = model.alignment
-        textView.lineBreakMode = model.layout.lineBreakMode
-        textView.numberOfLines = model.layout.numberOfLines
+        label.textAlignment = model.textAlignment
+        label.lineBreakMode = model.layout.lineBreakMode
+        label.numberOfLines = model.layout.numberOfLines
 
         configureText(with: model.text)
 
@@ -112,27 +107,16 @@ extension LabelView: ConfigurableItem {
 private extension LabelView {
 
     func configureConstraints() {
-        wrap(subview: textView, with: .zero)
+        wrap(subview: label, with: .zero)
     }
 
     func configureText(with text: Model.TextType) {
         switch text {
         case .string(let text):
-            textView.text = text
+            label.text = text
         case .attributedString(let attrubutedText):
-            textView.attributedText = attrubutedText
+            label.attributedText = attrubutedText
         }
-    }
-
-}
-
-// MARK: - LabelView.Model Equatable
-
-extension LabelView.Model: Equatable {
-
-    public static func == (lhs: LabelView.Model, rhs: LabelView.Model) -> Bool {
-        return lhs.style == rhs.style && lhs.layout == rhs.layout && lhs.text == rhs.text &&
-        lhs.edgeInsets == rhs.edgeInsets && lhs.labelClass == rhs.labelClass
     }
 
 }

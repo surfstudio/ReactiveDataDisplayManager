@@ -17,4 +17,8 @@ public final class CollectionWrappedCell<View: ConfigurableItem>: UICollectionVi
 
     public let nestedView: View = .init(frame: .zero)
 
+    public var cachedInsets: UIEdgeInsets?
+
+    public var cachedAlignment: Alignment?
+
 }

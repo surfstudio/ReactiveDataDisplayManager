@@ -23,7 +23,7 @@ extension MessageView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: Equatable, InsetsProvider, AlignmentProvider {
+    public struct Model: Equatable, AlignmentProvider {
 
         // MARK: - Nested types
 
@@ -70,8 +70,8 @@ extension MessageView: ConfigurableItem {
 
         public let text: TextType
         public let style: MessageStyle
-        public var alignment: NSTextAlignment
-        public var edgeInsets: UIEdgeInsets
+        public var textAlignment: NSTextAlignment
+        public var alignment: Alignment
         public let internalEdgeInsets: UIEdgeInsets
         public let borderStyle: BorderStyle
 
@@ -79,14 +79,14 @@ extension MessageView: ConfigurableItem {
 
         public init(text: TextType,
                     style: MessageStyle,
-                    alignment: NSTextAlignment,
-                    externalEdgeInsets: UIEdgeInsets,
+                    textAlignment: NSTextAlignment,
+                    viewAlignment: Alignment,
                     internalEdgeInsets: UIEdgeInsets,
                     borderStyle: BorderStyle) {
             self.text = text
             self.style = style
-            self.alignment = alignment
-            self.edgeInsets = externalEdgeInsets
+            self.textAlignment = textAlignment
+            self.alignment = viewAlignment
             self.internalEdgeInsets = internalEdgeInsets
             self.borderStyle = borderStyle
         }
@@ -104,7 +104,7 @@ extension MessageView: ConfigurableItem {
         configureTextView(textView, with: model)
         textView.textColor = model.style.textColor
         textView.font = model.style.font
-        textView.textAlignment = model.alignment
+        textView.textAlignment = model.textAlignment
 
         wrap(subview: textView, with: model.internalEdgeInsets)
 
