@@ -29,7 +29,7 @@ final class ImageTableViewCell: UITableViewCell {
     // MARK: - Constants
 
     private enum Constants {
-        static let titleFont: UIFont = .systemFont(ofSize: 15, weight: .semibold)
+        static let titleFont: UIFont = .preferredFont(forTextStyle: .subheadline)
         static let cornerRadius: CGFloat = 10
     }
 
