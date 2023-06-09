@@ -16,17 +16,17 @@ class ReactiveDataDisplayManagerExampleUITests: BaseUITestCase {
 
     func testCollectionScreen() throws {
         setTab("Collection")
-        try assertAllScreensOpeningWithoutCrashes()
+        try assertAllScreensOpeningWithoutCrashesAndPassingAudit()
     }
 
     func testTableScreen() throws {
         setTab("Table")
-        try assertAllScreensOpeningWithoutCrashes()
+        try assertAllScreensOpeningWithoutCrashesAndPassingAudit()
     }
 
     func testStackScreen() throws {
         setTab("Stack")
-        try assertAllScreensOpeningWithoutCrashes()
+        try assertAllScreensOpeningWithoutCrashesAndPassingAudit()
     }
 }
 
@@ -34,7 +34,7 @@ class ReactiveDataDisplayManagerExampleUITests: BaseUITestCase {
 
 private extension ReactiveDataDisplayManagerExampleUITests {
 
-    func assertAllScreensOpeningWithoutCrashes() throws {
+    func assertAllScreensOpeningWithoutCrashesAndPassingAudit() throws {
         let tablesQuery = app.tables
         for i in 0...tablesQuery.cells.count - 1 {
             print("===== cell number: \(i) =====")
