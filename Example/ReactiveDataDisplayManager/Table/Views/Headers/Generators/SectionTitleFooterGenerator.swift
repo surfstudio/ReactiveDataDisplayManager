@@ -10,12 +10,6 @@ import ReactiveDataDisplayManager
 
 final class SectionTitleFooterGenerator: TableFooterGenerator {
 
-    // MARK: - Constants
-
-    private enum Constants {
-        static let defaultHeight: CGFloat = 24
-    }
-
     // MARK: - Events
 
     var willDisplayEvent = BaseEvent<Void>()
@@ -42,7 +36,7 @@ final class SectionTitleFooterGenerator: TableFooterGenerator {
     }
 
     override func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
-        view?.frame.height ?? Constants.defaultHeight
+        HeaderView.getHeight(forWidth: tableView.bounds.width, with: model)
     }
 
 }

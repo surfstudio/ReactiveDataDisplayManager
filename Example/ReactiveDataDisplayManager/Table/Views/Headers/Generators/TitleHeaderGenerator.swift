@@ -11,12 +11,6 @@ import UIKit
 
 final class TitleHeaderGenerator: TableHeaderGenerator {
 
-    // MARK: - Constants
-
-    private enum Constants {
-        static let defaultHeight: CGFloat = 30
-    }
-
     // MARK: - Private Property
 
     private let model: String
@@ -37,7 +31,7 @@ final class TitleHeaderGenerator: TableHeaderGenerator {
     }
 
     override func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
-        view?.frame.height ?? Constants.defaultHeight
+        HeaderView.getHeight(forWidth: tableView.bounds.width, with: model)
     }
 
 }
