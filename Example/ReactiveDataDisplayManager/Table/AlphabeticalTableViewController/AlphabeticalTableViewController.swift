@@ -14,7 +14,7 @@ final class AlphabeticalTableViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let alphabets = ["A", "B", "C", "D"]
+        static let alphabets = ["AAA", "BBB", "CCC", "DDD"]
         static let models = [String](repeating: "Cell", count: 5)
     }
 

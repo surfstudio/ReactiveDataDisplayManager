@@ -20,7 +20,16 @@ extension UIView {
 
 }
 
-final class HeaderView: UIView, AccessibilityItem {
+final class HeaderView: UIView, AccessibilityItem, CalculatableHeightItem {
+
+    // MARK: - CalculatableHeightItem
+
+    static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
+        let verticalInsets: CGFloat = 9
+        let titleHeight = model.getHeight(withConstrainedWidth: width, font: .preferredFont(forTextStyle: .headline))
+        return verticalInsets + titleHeight
+    }
+    
 
     // MARK: - IBOutlet
 
