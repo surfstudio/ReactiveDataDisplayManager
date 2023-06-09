@@ -19,7 +19,8 @@ final class CollectionCompositionalViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let boundaryItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50.0))
+        static let boundaryItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(TitleCollectionReusableView.getHeight(forWidth: UIScreen.main.bounds.width,
+                                                                                                                                                                      with: "Some section")))
         static let edgeInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
         static let fraction: CGFloat = 1.0 / 3.0
         static let minScale: CGFloat = 0.7
