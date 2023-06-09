@@ -8,7 +8,16 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class TitleCollectionReusableView: UICollectionReusableView, AccessibilityItem {
+final class TitleCollectionReusableView: UICollectionReusableView, AccessibilityItem, CalculatableHeightItem {
+
+    // MARK: - CalculatableHeightItem
+
+    static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
+        let verticalInsets: CGFloat = 48
+        let titleHeight = model.getHeight(withConstrainedWidth: width,
+                                          font: .preferredFont(forTextStyle: .headline))
+        return verticalInsets + titleHeight
+    }
 
     // MARK: - IBOutlets
 
@@ -21,8 +30,25 @@ final class TitleCollectionReusableView: UICollectionReusableView, Accessibility
 
     // MARK: - Internal methods
 
-    func fill(title: String) {
-        self.titleLabel.text = title
+    func configure(with model: String) {
+        titleLabel.text = model
+    }
+
+}
+
+// MARK: - Helper
+
+extension String {
+
+    func getHeight(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+
+        let boundingBox = self.boundingRect(with: constraintRect,
+                                            options: .usesLineFragmentOrigin,
+                                            attributes: [.font: font],
+                                            context: nil)
+
+        return ceil(boundingBox.height)
     }
 
 }
