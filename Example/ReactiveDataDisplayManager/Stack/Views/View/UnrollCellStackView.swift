@@ -50,6 +50,8 @@ private extension UnrollCellStackView {
         let mainStack = UIStackView()
         mainStack.axis = .vertical
         mainStack.distribution = .fill
+        bigTextLabel.font = .preferredFont(forTextStyle: .body)
+        unrollButton.titleLabel?.font = .preferredFont(forTextStyle: .callout)
         unrollButton.setTitleColor(.blue, for: .normal)
         unrollButton.addTarget(self, action: #selector(unrollAction), for: .touchUpInside)
         mainStack.addArrangedSubview(bigTextLabel)
