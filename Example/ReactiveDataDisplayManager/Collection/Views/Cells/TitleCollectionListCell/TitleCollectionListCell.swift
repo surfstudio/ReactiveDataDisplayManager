@@ -28,3 +28,17 @@ class TitleCollectionListCell: UICollectionViewCell, ConfigurableItem, Accessibi
     }
 
 }
+
+// MARK: - CalculatableHeightItem
+
+extension TitleCollectionListCell: CalculatableHeightItem {
+
+    static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
+        let horizontalInsets: CGFloat = 32
+        let verticalInsets: CGFloat = 42
+        let titleHeight = model.getHeight(withConstrainedWidth: width - horizontalInsets,
+                                          font: .preferredFont(forTextStyle: .body))
+        return verticalInsets + titleHeight
+    }
+
+}

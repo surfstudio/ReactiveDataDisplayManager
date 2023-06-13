@@ -14,11 +14,24 @@ final class MovableCollectionCellGenerator: BaseCollectionCellGenerator<TitleCol
 
     var id: AnyHashable?
 
+    private var referencedWidth: CGFloat
+
     // MARK: - Initialization
 
-    init(id: Int, model: String) {
+    init(id: Int, model: String, referencedWidth: CGFloat) {
         self.id = id
+        self.referencedWidth = referencedWidth
         super.init(with: model)
+    }
+
+}
+
+extension MovableCollectionCellGenerator: SizableItem {
+
+    func getSize() -> CGSize {
+        .init(width: referencedWidth,
+              height: TitleCollectionListCell.getHeight(forWidth: referencedWidth, with: model)
+        )
     }
 
 }
