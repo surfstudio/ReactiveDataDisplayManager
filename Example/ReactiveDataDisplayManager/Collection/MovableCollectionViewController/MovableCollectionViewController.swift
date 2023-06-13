@@ -79,9 +79,11 @@ private extension MovableCollectionViewController {
 
     // Create cells generators
     func makeMovableCellGenerators() -> [MovableCollectionCellGenerator] {
-        return Constants.models.enumerated().map { MovableCollectionCellGenerator(id: $0.offset,
-                                                                                  model: "\($0.element) \($0.offset)",
-                                                                                  referencedWidth: 128) }
+        Constants.models.enumerated()
+            .map { MovableCollectionCellGenerator(id: $0.offset,
+                                                  model: "\($0.element) \($0.offset)",
+                                                  referencedWidth: 128)
+            }
     }
 
 }
