@@ -100,7 +100,8 @@ private extension PaginatableCollectionViewController {
 
     func makeGenerator() -> CollectionCellGenerator {
         let title = "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)"
-        return TitleCollectionViewCell.rddm.baseGenerator(with: title)
+        return TitleCollectionViewCell.rddm.calculatableHeightGenerator(with: title,
+                                                                        referencedWidth: 200)
     }
 
     func canFillNext() -> Bool {
