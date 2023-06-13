@@ -26,6 +26,7 @@ class ItemTitleCollectionViewController: UIViewController {
     private var appearance: Appearance = .grid
 
     private lazy var adapter = collectionView.rddm.baseBuilder
+        .set(delegate: FlowCollectionDelegate())
         .add(featurePlugin: .sectionTitleDisplayable())
         .build()
 
@@ -70,7 +71,9 @@ private extension ItemTitleCollectionViewController {
 
         for index in 0...50 {
             // Create generator
-            let generator = TitleCollectionGenerator(model: "Item \(index)", needIndexTitle: index % 2 == 0 ? true : false)
+            let generator = TitleCollectionGenerator(model: "Item \(index)",
+                                                     referencedWidth: 128,
+                                                     needIndexTitle: index % 2 == 0 ? true : false)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)
