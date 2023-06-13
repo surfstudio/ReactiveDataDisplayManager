@@ -30,7 +30,6 @@ final class HeaderView: UIView, AccessibilityItem, CalculatableHeightItem {
                                           font: .preferredFont(forTextStyle: .headline))
         return verticalInsets + titleHeight
     }
-    
 
     // MARK: - IBOutlet
 
