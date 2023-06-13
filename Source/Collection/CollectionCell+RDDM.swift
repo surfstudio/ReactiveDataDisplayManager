@@ -17,3 +17,11 @@ public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & Con
     }
 
 }
+
+public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & CalculatableHeightItem {
+
+    func calculatableHeightGenerator(with model: Base.Model, and registerType: CellRegisterType = .nib, referencedWidth: CGFloat) -> CalculatableHeightCollectionCellGenerator<Base> {
+        .init(with: model, width: referencedWidth, registerType: registerType)
+    }
+
+}

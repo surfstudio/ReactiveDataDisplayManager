@@ -23,6 +23,7 @@ class CollectionViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = collectionView.rddm.baseBuilder
+        .set(delegate: FlowCollectionDelegate())
         .add(plugin: .selectable())
         .add(plugin: .highlightable())
         .build()
@@ -51,7 +52,8 @@ private extension CollectionViewController {
         adapter.addSectionHeaderGenerator(header)
         for title in titles {
             // Create generator
-            let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
+            let generator = TitleCollectionViewCell.rddm.calculatableHeightGenerator(with: title,
+                                                                                     referencedWidth: 100)
             generator.didSelectEvent += {
                 debugPrint("\(title) selected")
             }
