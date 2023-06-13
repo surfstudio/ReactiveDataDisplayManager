@@ -31,7 +31,8 @@ final class VerticalSizableTextGenerator: BaseCollectionCellGenerator<SizableCol
 extension VerticalSizableTextGenerator: SizableItem {
 
     func getSize() -> CGSize {
-        return SizableCollectionViewCell.getCellSize(for: text, withWight: maxWight)
+        .init(width: maxWight,
+              height: SizableCollectionViewCell.getHeight(forWidth: maxWight, with: text))
     }
 
 }

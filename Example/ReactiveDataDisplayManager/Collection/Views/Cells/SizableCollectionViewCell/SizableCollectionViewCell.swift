@@ -11,12 +11,6 @@ import ReactiveDataDisplayManager
 
 final class SizableCollectionViewCell: UICollectionViewCell {
 
-    // MARK: - Constants
-
-    private enum Constants {
-        static var titleFont = UIFont.preferredFont(forTextStyle: .subheadline)
-    }
-
     // MARK: - IBOutlet
 
     @IBOutlet private weak var titleLabel: UILabel!
@@ -28,13 +22,6 @@ final class SizableCollectionViewCell: UICollectionViewCell {
         setupInitialState()
     }
 
-    // MARK: - Static Methods
-
-    static func getCellSize(for viewModel: String, withWight wight: CGFloat) -> CGSize {
-        let height = viewModel.getHeight(withConstrainedWidth: wight, font: Constants.titleFont)
-        return CGSize(width: wight, height: height)
-    }
-
 }
 
 // MARK: - ConfigurableItem
@@ -43,6 +30,17 @@ extension SizableCollectionViewCell: ConfigurableItem {
 
     func configure(with viewModel: String) {
         titleLabel.text = viewModel
+    }
+
+}
+
+// MARK: - CalculatableHeightItem
+
+extension SizableCollectionViewCell: CalculatableHeightItem {
+
+    static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
+        model.getHeight(withConstrainedWidth: width,
+                        font: .preferredFont(forTextStyle: .subheadline))
     }
 
 }
@@ -63,7 +61,7 @@ private extension SizableCollectionViewCell {
     func setupInitialState() {
         // configure titleLabel
         titleLabel.numberOfLines = 0
-        titleLabel.font = Constants.titleFont
+        titleLabel.font = .preferredFont(forTextStyle: .subheadline)
     }
 
 }
