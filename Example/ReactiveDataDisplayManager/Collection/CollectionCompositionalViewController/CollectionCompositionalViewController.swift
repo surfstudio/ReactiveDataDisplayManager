@@ -191,7 +191,19 @@ private extension CollectionCompositionalViewController {
         let footer = makeSectionFooter()
 
         // Item
-        let item = makeItem(with: .init(width: 0.33, height: 1.0))
+        let item: NSCollectionLayoutItem = {
+            if #available(iOS 17.0, *) {
+                let item = makeItem(with: makeAutoLayoutSize(for: .init(width: 128, height: 128)))
+                item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(12),
+                                                                 top: .fixed(12),
+                                                                 trailing: .fixed(12),
+                                                                 bottom: .fixed(12))
+                return item
+            } else {
+                return makeItem(with: makeLayoutSize(for: .init(width: 0.33, height: 1)))
+            }
+
+        }()
 
         // Group
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: makeLayoutSize(for: .init(width: 1.0, height: 0.2)), subitems: [item])
@@ -211,10 +223,10 @@ private extension CollectionCompositionalViewController {
         let footer = makeSectionFooter()
 
         // Item medium image
-        let leadingItem = makeItem(with: .init(width: 0.7, height: 1.0))
+        let leadingItem = makeItem(with: makeLayoutSize(for: .init(width: 0.7, height: 1.0)))
 
         // Item small image
-        let trailingItem = makeItem(with: .init(width: 1.0, height: 0.3))
+        let trailingItem = makeItem(with: makeLayoutSize(for: .init(width: 1.0, height: 0.3)))
 
         // Group combine 2 small image
         let trailingGroup = NSCollectionLayoutGroup.vertical(layoutSize: makeLayoutSize(for: .init(width: 0.3, height: 1.0)),
@@ -226,7 +238,7 @@ private extension CollectionCompositionalViewController {
                                                                    subitems: [leadingItem, trailingGroup])
 
         // Item long image)
-        let topItem = makeItem(with: .init(width: 1.0, height: 0.3))
+        let topItem = makeItem(with: makeLayoutSize(for: .init(width: 1.0, height: 0.3)))
 
         // Main Group long image / medium image | 2 small image
         let nestedGroup = NSCollectionLayoutGroup.vertical(layoutSize: makeLayoutSize(for: .init(width: 1.0, height: 0.4)),
@@ -251,8 +263,7 @@ private extension CollectionCompositionalViewController {
                                                            alignment: .bottom)
     }
 
-    func makeItem(with size: CGSize, contentInsets: NSDirectionalEdgeInsets = Constants.edgeInsets) -> NSCollectionLayoutItem {
-        let layoutSize = makeLayoutSize(for: size)
+    func makeItem(with layoutSize: NSCollectionLayoutSize, contentInsets: NSDirectionalEdgeInsets = Constants.edgeInsets) -> NSCollectionLayoutItem {
         let item = NSCollectionLayoutItem(layoutSize: layoutSize)
         item.contentInsets = contentInsets
         return item
@@ -261,6 +272,12 @@ private extension CollectionCompositionalViewController {
     func makeLayoutSize(for size: CGSize) -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(size.width),
                                       heightDimension: .fractionalHeight(size.height))
+    }
+
+    @available(iOS 17.0, *)
+    func makeAutoLayoutSize(for estimatedSize: CGSize) -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .uniformAcrossSiblings(estimate: estimatedSize.width),
+                                      heightDimension: .estimated(estimatedSize.height))
     }
 
 }
