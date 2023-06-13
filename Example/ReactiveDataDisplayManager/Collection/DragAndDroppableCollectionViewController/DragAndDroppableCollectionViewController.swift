@@ -86,7 +86,8 @@ private extension DragAndDroppableCollectionViewController {
         var generators = [TitleCollectionGenerator]()
 
         for index in range {
-            let generator = TitleCollectionGenerator(model: "Cell: \(index)")
+            let generator = TitleCollectionGenerator(model: "Cell: \(index)",
+                                                     referencedWidth: 128)
             generators.append(generator)
         }
 

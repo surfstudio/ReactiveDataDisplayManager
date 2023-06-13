@@ -82,7 +82,9 @@ private extension CollectionCompositionalViewController {
         for index in 0...11 {
             // Create generator
             let needIndexTitle = index % 2 == 0 ? true : false
-            let generator = TitleCollectionGenerator(model: "Item \(index)", needIndexTitle: needIndexTitle)
+            let generator = TitleCollectionGenerator(model: "Item \(index)",
+                                                     referencedWidth: 128,
+                                                     needIndexTitle: needIndexTitle)
 
             // Add generator to adapter
             adapter.addCellGenerator(generator)
