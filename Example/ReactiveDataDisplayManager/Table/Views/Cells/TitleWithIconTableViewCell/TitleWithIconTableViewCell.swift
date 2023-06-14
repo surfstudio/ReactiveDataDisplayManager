@@ -39,7 +39,7 @@ extension TitleWithIconTableViewCell: ConfigurableItem {
 
     func configure(with model: String) {
         accessoryType = .disclosureIndicator
-        titleLabel.text = model
+        titleLabel.text = model.lowercased()
         iconImageView.image = #imageLiteral(resourceName: "ReactiveIconHorizontal")
     }
 
