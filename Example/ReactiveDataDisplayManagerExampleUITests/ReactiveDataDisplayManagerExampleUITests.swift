@@ -39,8 +39,11 @@ private extension ReactiveDataDisplayManagerExampleUITests {
         for i in 0...tablesQuery.cells.count - 1 {
             print("===== cell number: \(i) =====")
             tablesQuery.cells.element(boundBy: i).tap()
+            #if swift(>=5.9)
             try app.performAccessibilityAudit()
+            #endif
             app.navigationBars.firstMatch.buttons["Back"].tap()
         }
     }
+
 }
