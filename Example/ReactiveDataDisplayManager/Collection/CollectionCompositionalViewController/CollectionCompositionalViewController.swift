@@ -196,6 +196,8 @@ private extension CollectionCompositionalViewController {
 
         // Item
         let item: NSCollectionLayoutItem = {
+
+            #if swift(>=5.9)
             if #available(iOS 17.0, *) {
                 let item = makeItem(with: makeAutoLayoutSize(for: .init(width: 128, height: 128)))
                 item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: .fixed(12),
@@ -206,6 +208,9 @@ private extension CollectionCompositionalViewController {
             } else {
                 return makeItem(with: makeLayoutSize(for: .init(width: 0.33, height: 1)))
             }
+            #else
+            return makeItem(with: makeLayoutSize(for: .init(width: 0.33, height: 1)))
+            #endif
 
         }()
 
@@ -279,10 +284,12 @@ private extension CollectionCompositionalViewController {
                                       heightDimension: .fractionalHeight(size.height))
     }
 
+    #if swift(>=5.9)
     @available(iOS 17.0, *)
     func makeAutoLayoutSize(for estimatedSize: CGSize) -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .uniformAcrossSiblings(estimate: estimatedSize.width),
                                       heightDimension: .estimated(estimatedSize.height))
     }
+    #endif
 
 }
