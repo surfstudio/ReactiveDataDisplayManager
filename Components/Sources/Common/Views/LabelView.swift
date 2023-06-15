@@ -25,58 +25,92 @@ extension LabelView: ConfigurableItem {
 
     public struct Model: AlignmentProvider {
 
-        // MARK: - Nested types
+        public struct Property: Editor {
+            public typealias Model = LabelView.Model
 
-        public struct TextStyle: Equatable {
+            private let closure: (Model) -> Model
 
-            public let color: UIColor
-            public let font: UIFont
-
-            public init(color: UIColor = .black, font: UIFont = .systemFont(ofSize: 16)) {
-                self.color = color
-                self.font = font
+            public init(closure: @escaping (Model) -> Model) {
+                self.closure = closure
             }
 
-        }
-
-        public struct TextLayout: Equatable {
-
-            public let lineBreakMode: NSLineBreakMode
-            public let numberOfLines: Int
-
-            public init(lineBreakMode: NSLineBreakMode = .byWordWrapping, numberOfLines: Int = 0) {
-                self.lineBreakMode = lineBreakMode
-                self.numberOfLines = numberOfLines
+            public func edit(_ model: LabelView.Model) -> LabelView.Model {
+                return closure(model)
             }
 
-        }
+            public static func text(_ value: TextValue) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(text: value)
+                    return model
+                })
+            }
 
-        public enum TextType: Equatable {
-            case string(String)
-            /// Mind that attributed string may re-configure other model's properties.
-            case attributedString(NSAttributedString)
+            public static func style(_ value: TextStyle) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(style: value)
+                    return model
+                })
+            }
+
+            public static func layout(_ value: TextLayout) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(layout: value)
+                    return model
+                })
+            }
+
+            public static func alignment(_ value: Alignment) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(alignment: value)
+                    return model
+                })
+            }
+
+            public static func textAlignment(_ value: NSTextAlignment) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(textAlignment: value)
+                    return model
+                })
+            }
         }
 
         // MARK: - Public properties
 
-        public let text: TextType
-        public let style: TextStyle
-        public let layout: TextLayout
-        public let alignment: Alignment
-        public let textAlignment: NSTextAlignment
+        private(set) public var text: TextValue = .string("")
+        private(set) public var style: TextStyle = .init()
+        private(set) public var layout: TextLayout = .init()
+        private(set) public var alignment: Alignment = .all(.zero)
+        private(set) public var textAlignment: NSTextAlignment = .left
 
-        // MARK: - Initialization
-
-        public init(text: TextType,
-                    style: TextStyle,
-                    layout: TextLayout,
-                    textAlignment: NSTextAlignment,
-                    viewAlignment: Alignment = .all(.zero)) {
+        mutating func set(text: TextValue) {
             self.text = text
+        }
+
+        mutating func set(style: TextStyle) {
             self.style = style
+        }
+
+        mutating func set(layout: TextLayout) {
             self.layout = layout
+        }
+
+        mutating func set(alignment: Alignment) {
+            self.alignment = alignment
+        }
+
+        mutating func set(textAlignment: NSTextAlignment) {
             self.textAlignment = textAlignment
-            self.alignment = viewAlignment
+        }
+
+        public static func build(@EditorBuilder<Property> content: () -> [Property]) -> Self {
+            return content().reduce(.init(), { model, editor in
+                editor.edit(model)
+            })
         }
 
     }
@@ -110,7 +144,7 @@ private extension LabelView {
         wrap(subview: label, with: .zero)
     }
 
-    func configureText(with text: Model.TextType) {
+    func configureText(with text: TextValue) {
         switch text {
         case .string(let text):
             label.text = text

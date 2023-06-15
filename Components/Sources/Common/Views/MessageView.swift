@@ -25,86 +25,30 @@ extension MessageView: ConfigurableItem {
 
     public struct Model: Equatable, AlignmentProvider {
 
-        // MARK: - Nested types
-
-        public struct MessageStyle: Equatable {
-
-            public let textColor: UIColor
-            public let font: UIFont
-            public let backgroundColor: UIColor
-
-            public init(textColor: UIColor = .black, font: UIFont = .systemFont(ofSize: 16), backgroundColor: UIColor = .white) {
-                self.textColor = textColor
-                self.font = font
-                self.backgroundColor = backgroundColor
-            }
-
-        }
-
-        public enum TextType: Equatable {
-            case string(String)
-            /// Mind that attributed string may re-configure other model's properties.
-            case attributedString(NSAttributedString)
-        }
-
-        public struct BorderStyle: Equatable {
-
-            public let cornerRadius: CGFloat
-            public let maskedCorners: CACornerMask
-            public let borderWidth: CGFloat
-            public let borderColor: CGColor
-
-            public init(cornerRadius: CGFloat,
-                        maskedCorners: CACornerMask,
-                        borderWidth: CGFloat = 0,
-                        borderColor: CGColor = UIColor.clear.cgColor) {
-                self.cornerRadius = cornerRadius
-                self.maskedCorners = maskedCorners
-                self.borderWidth = borderWidth
-                self.borderColor = borderColor
-            }
-
-        }
-
         // MARK: - Public properties
 
-        public let text: TextType
-        public let style: MessageStyle
-        public var textAlignment: NSTextAlignment
+        public let text: TextValue = .string("")
+        public let textStyle: TextStyle = .init()
+        public let textLayout: TextLayout = .init()
+        public let backgroundStyle: BackgroundStyle = .solid(.clear)
         public var alignment: Alignment
-        public let internalEdgeInsets: UIEdgeInsets
+        public let internalEdgeInsets: UIEdgeInsets = .zero
         public let borderStyle: BorderStyle
-
-        // MARK: - Initialization
-
-        public init(text: TextType,
-                    style: MessageStyle,
-                    textAlignment: NSTextAlignment,
-                    viewAlignment: Alignment,
-                    internalEdgeInsets: UIEdgeInsets,
-                    borderStyle: BorderStyle) {
-            self.text = text
-            self.style = style
-            self.textAlignment = textAlignment
-            self.alignment = viewAlignment
-            self.internalEdgeInsets = internalEdgeInsets
-            self.borderStyle = borderStyle
-        }
 
     }
 
     // MARK: - Methods
 
     public func configure(with model: Model) {
-        self.backgroundColor = model.style.backgroundColor
-
-        textView.backgroundColor = .clear
-        textView.isEditable = false
-        textView.isScrollEnabled = false
-        configureTextView(textView, with: model)
-        textView.textColor = model.style.textColor
-        textView.font = model.style.font
-        textView.textAlignment = model.textAlignment
+//        self.backgroundColor = model.style.backgroundColor
+//
+//        textView.backgroundColor = .clear
+//        textView.isEditable = false
+//        textView.isScrollEnabled = false
+//        configureTextView(textView, with: model)
+//        textView.textColor = model.style.textColor
+//        textView.font = model.style.font
+//        textView.textAlignment = model.textAlignment
 
         wrap(subview: textView, with: model.internalEdgeInsets)
 
