@@ -35,7 +35,7 @@ public struct EditorBuilder<T: Editor> {
         Array(components.joined())
     }
 
-    // to use like if else
+    // to use like if-else
 
     public static func buildEither(first component: T) -> T {
         return component
@@ -43,5 +43,9 @@ public struct EditorBuilder<T: Editor> {
 
     public static func buildEither(second component: T) -> T {
         return component
+    }
+
+    public static func buildOptional(_ component: [T]?) -> [T] {
+        return []
     }
 }
