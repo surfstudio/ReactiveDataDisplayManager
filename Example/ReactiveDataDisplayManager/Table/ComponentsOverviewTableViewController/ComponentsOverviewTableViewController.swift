@@ -79,44 +79,54 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private lazy var dateGenerator = LabelView.rddm.tableGenerator(with: dateModel, and: .class)
 
     // Sent message
-//    private let sentMessageStyle = MessageStyle(textColor: .white,
-//                                                font: .systemFont(ofSize: 16, weight: .regular),
-//                                                backgroundColor: .systemBlue)
-//    private let sentMessageBorderStyle = MessageBorderStyle(cornerRadius: 9,
-//                                                            maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
-//    private lazy var sentMessageModel: MessageModel = .init(text: .string("Lorem"),
-//                                                            style: sentMessageStyle,
-//                                                            textAlignment: .right,
-//                                                            viewAlignment: .trailing(UIEdgeInsets(top: 12,
-//                                                                                                  left: UIScreen.main.bounds.width / 2,
-//                                                                                                  bottom: 12,
-//                                                                                                  right: 16)
-//                                                            ),
-//                                                            internalEdgeInsets: UIEdgeInsets(top: 3, left: 5, bottom: 3, right: 5),
-//                                                            borderStyle: sentMessageBorderStyle)
-//
-//    private lazy var sentMessageGenerator = MessageView.rddm.tableGenerator(with: sentMessageModel, and: .class)
+    private let sentMessageStyle = TextStyle(color: .white,
+                                             font: .systemFont(ofSize: 16, weight: .regular))
+    private let sentMessageBorderStyle = BorderStyle(cornerRadius: 9,
+                                                            maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
+    private lazy var sentMessageModel: MessageView.Model = .build {
+        MessageView.Model.Property.background(.solid(.systemBlue))
+        MessageView.Model.Property.border(sentMessageBorderStyle)
+        MessageView.Model.Property.style(sentMessageStyle)
+        MessageView.Model.Property.textAlignment(.right)
+        MessageView.Model.Property.alignment(.trailing(UIEdgeInsets(top: 12,
+                                                                    left: UIScreen.main.bounds.width / 2,
+                                                                    bottom: 12,
+                                                                    right: 16)
+                              ))
+        MessageView.Model.Property.insets(UIEdgeInsets(top: 3,
+                                                       left: 5,
+                                                       bottom: 3,
+                                                       right: 5))
+        MessageView.Model.Property.text(.string("Lorem"))
+    }
+
+    private lazy var sentMessageGenerator = MessageView.rddm.tableGenerator(with: sentMessageModel, and: .class)
 
     // Recieved message
-//    private let recievedMessageStyle = MessageStyle(textColor: .black, font: .systemFont(ofSize: 16, weight: .regular))
-//    private let recievedMessageBorderStyle = MessageBorderStyle(cornerRadius: 9,
-//                                                                maskedCorners: [
-//                                                                    .layerMinXMinYCorner,
-//                                                                    .layerMaxXMaxYCorner,
-//                                                                    .layerMaxXMinYCorner
-//                                                                ],
-//                                                                borderWidth: 1,
-//                                                                borderColor: UIColor.black.cgColor)
-//    private lazy var recievedMessageModel = MessageModel(text: .string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"),
-//                                                         style: recievedMessageStyle,
-//                                                         textAlignment: .left,
-//                                                         viewAlignment: .leading(UIEdgeInsets(top: 12,
-//                                                                                              left: 16,
-//                                                                                              bottom: 12,
-//                                                                                              right: UIScreen.main.bounds.width / 2)),
-//                                                         internalEdgeInsets: UIEdgeInsets(top: 3, left: 5, bottom: 3, right: 5),
-//                                                         borderStyle: recievedMessageBorderStyle)
-//    private lazy var recievedMessageGenerator = MessageView.rddm.tableGenerator(with: recievedMessageModel, and: .class)
+    private let recievedMessageStyle = TextStyle(color: .black, font: .systemFont(ofSize: 16, weight: .regular))
+    private let recievedMessageBorderStyle = BorderStyle(cornerRadius: 9,
+                                                                maskedCorners: [
+                                                                    .layerMinXMinYCorner,
+                                                                    .layerMaxXMaxYCorner,
+                                                                    .layerMaxXMinYCorner
+                                                                ],
+                                                                borderWidth: 1,
+                                                                borderColor: UIColor.black.cgColor)
+    private lazy var recievedMessageModel: MessageView.Model = .build {
+        MessageView.Model.Property.border(recievedMessageBorderStyle)
+        MessageView.Model.Property.style(recievedMessageStyle)
+        MessageView.Model.Property.alignment(.leading(UIEdgeInsets(top: 12,
+                                                                   left: 16,
+                                                                   bottom: 12,
+                                                                   right: UIScreen.main.bounds.width / 2)))
+        MessageView.Model.Property.insets(UIEdgeInsets(top: 3,
+                                                       left: 5,
+                                                       bottom: 3,
+                                                       right: 5))
+        MessageView.Model.Property.text(.string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"))
+    }
+
+    private lazy var recievedMessageGenerator = MessageView.rddm.tableGenerator(with: recievedMessageModel, and: .class)
 
     // Separator
 
@@ -143,10 +153,10 @@ private extension ComponentsOverviewTableViewController {
 
         adapter += TableGenerators {
             dateGenerator
-//            generateSentMessages()
+            generateSentMessages()
             sentMessageTimeGenerator
             separatorGenerator
-//            generateRecievedMessages()
+            generateRecievedMessages()
             recievedMessageTimeGenerator
         }
 
@@ -154,20 +164,20 @@ private extension ComponentsOverviewTableViewController {
         adapter => .reload
     }
 
-//    func generateSentMessages() -> [TableCellGenerator] {
-//        var generators = [TableCellGenerator]()
-//        for _ in 0..<20 {
-//            generators.append(sentMessageGenerator)
-//        }
-//        return generators
-//    }
-//
-//    func generateRecievedMessages() -> [TableCellGenerator] {
-//        var generators = [TableCellGenerator]()
-//        for _ in 0..<30 {
-//            generators.append(recievedMessageGenerator)
-//        }
-//        return generators
-//    }
+    func generateSentMessages() -> [TableCellGenerator] {
+        var generators = [TableCellGenerator]()
+        for _ in 0..<20 {
+            generators.append(sentMessageGenerator)
+        }
+        return generators
+    }
+
+    func generateRecievedMessages() -> [TableCellGenerator] {
+        var generators = [TableCellGenerator]()
+        for _ in 0..<30 {
+            generators.append(recievedMessageGenerator)
+        }
+        return generators
+    }
 
 }

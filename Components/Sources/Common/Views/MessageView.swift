@@ -25,37 +25,157 @@ extension MessageView: ConfigurableItem {
 
     public struct Model: Equatable, AlignmentProvider {
 
+        // MARK: - Editor
+
+        public struct Property: Editor {
+            public typealias Model = MessageView.Model
+
+            private let closure: (Model) -> Model
+
+            public init(closure: @escaping (Model) -> Model) {
+                self.closure = closure
+            }
+
+            public func edit(_ model: Model) -> Model {
+                return closure(model)
+            }
+
+            public static func text(_ value: TextValue) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(text: value)
+                    return model
+                })
+            }
+
+            public static func style(_ value: TextStyle) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(style: value)
+                    return model
+                })
+            }
+
+            public static func layout(_ value: TextLayout) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(layout: value)
+                    return model
+                })
+            }
+
+            public static func alignment(_ value: Alignment) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(alignment: value)
+                    return model
+                })
+            }
+
+            public static func textAlignment(_ value: NSTextAlignment) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(textAlignment: value)
+                    return model
+                })
+            }
+
+            public static func insets(_ value: UIEdgeInsets) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(insets: value)
+                    return model
+                })
+            }
+
+            public static func background(_ value: BackgroundStyle) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(background: value)
+                    return model
+                })
+            }
+
+            public static func border(_ value: BorderStyle) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(border: value)
+                    return model
+                })
+            }
+        }
+
         // MARK: - Public properties
 
-        public let text: TextValue = .string("")
-        public let textStyle: TextStyle = .init()
-        public let textLayout: TextLayout = .init()
-        public let backgroundStyle: BackgroundStyle = .solid(.clear)
-        public var alignment: Alignment
-        public let internalEdgeInsets: UIEdgeInsets = .zero
-        public let borderStyle: BorderStyle
+        private(set) public var text: TextValue = .string("")
+        private(set) public var textStyle: TextStyle = .init()
+        private(set) public var textLayout: TextLayout = .init()
+        private(set) public var textAlignment: NSTextAlignment = .left
+        private(set) public var backgroundStyle: BackgroundStyle = .solid(.clear)
+        private(set) public var alignment: Alignment = .all(.zero)
+        private(set) public var internalEdgeInsets: UIEdgeInsets = .zero
+        private(set) public var borderStyle: BorderStyle? = nil
+
+        // MARK: - Mutation
+
+        mutating func set(text: TextValue) {
+            self.text = text
+        }
+
+        mutating func set(style: TextStyle) {
+            self.textStyle = style
+        }
+
+        mutating func set(layout: TextLayout) {
+            self.textLayout = layout
+        }
+
+        mutating func set(alignment: Alignment) {
+            self.alignment = alignment
+        }
+
+        mutating func set(textAlignment: NSTextAlignment) {
+            self.textAlignment = textAlignment
+        }
+
+        mutating func set(insets: UIEdgeInsets) {
+            self.internalEdgeInsets = insets
+        }
+
+        mutating func set(background: BackgroundStyle) {
+            self.backgroundStyle = background
+        }
+
+        mutating func set(border: BorderStyle) {
+            self.borderStyle = border
+        }
+
+        // MARK: - Builder
+
+        public static func build(@EditorBuilder<Property> content: () -> [Property]) -> Self {
+            return content().reduce(.init(), { model, editor in
+                editor.edit(model)
+            })
+        }
 
     }
 
     // MARK: - Methods
 
     public func configure(with model: Model) {
-//        self.backgroundColor = model.style.backgroundColor
-//
-//        textView.backgroundColor = .clear
-//        textView.isEditable = false
-//        textView.isScrollEnabled = false
-//        configureTextView(textView, with: model)
-//        textView.textColor = model.style.textColor
-//        textView.font = model.style.font
-//        textView.textAlignment = model.textAlignment
+
+        textView.backgroundColor = .clear
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        configureTextView(textView, with: model)
+        textView.textColor = model.textStyle.color
+        textView.font = model.textStyle.font
+        textView.textAlignment = model.textAlignment
 
         wrap(subview: textView, with: model.internalEdgeInsets)
 
-        layer.cornerRadius = model.borderStyle.cornerRadius
-        layer.borderColor = model.borderStyle.borderColor
-        layer.borderWidth = model.borderStyle.borderWidth
-        layer.maskedCorners = model.borderStyle.maskedCorners
+        applyBackground(style: model.backgroundStyle)
+        applyBorder(style: model.borderStyle)
 
         layoutIfNeeded()
     }
@@ -73,6 +193,23 @@ private extension MessageView {
         case .attributedString(let attributedString):
             textView.attributedText = attributedString
         }
+    }
+
+    func applyBackground(style: BackgroundStyle) {
+        switch style {
+        case .solid(let color):
+            backgroundColor = color
+        }
+    }
+
+    func applyBorder(style: BorderStyle?) {
+        guard let borderStyle = style else {
+            return
+        }
+        layer.cornerRadius = borderStyle.cornerRadius
+        layer.borderColor = borderStyle.borderColor
+        layer.borderWidth = borderStyle.borderWidth
+        layer.maskedCorners = borderStyle.maskedCorners
     }
 
 }

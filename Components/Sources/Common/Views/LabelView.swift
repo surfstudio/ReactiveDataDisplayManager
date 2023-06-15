@@ -25,6 +25,8 @@ extension LabelView: ConfigurableItem {
 
     public struct Model: AlignmentProvider {
 
+        // MARK: - Editor
+
         public struct Property: Editor {
             public typealias Model = LabelView.Model
 
@@ -34,7 +36,7 @@ extension LabelView: ConfigurableItem {
                 self.closure = closure
             }
 
-            public func edit(_ model: LabelView.Model) -> LabelView.Model {
+            public func edit(_ model: Model) -> Model {
                 return closure(model)
             }
 
@@ -87,6 +89,8 @@ extension LabelView: ConfigurableItem {
         private(set) public var alignment: Alignment = .all(.zero)
         private(set) public var textAlignment: NSTextAlignment = .left
 
+        // MARK: - Mutation
+
         mutating func set(text: TextValue) {
             self.text = text
         }
@@ -106,6 +110,8 @@ extension LabelView: ConfigurableItem {
         mutating func set(textAlignment: NSTextAlignment) {
             self.textAlignment = textAlignment
         }
+
+        // MARK: - Builder
 
         public static func build(@EditorBuilder<Property> content: () -> [Property]) -> Self {
             return content().reduce(.init(), { model, editor in
