@@ -32,7 +32,7 @@ public struct EditorBuilder<T: Editor> {
     }
 
     public static func buildArray(_ components: [[T]]) -> [T] {
-        Array(components.joined())
+        return Array(components.joined())
     }
 
     // to use like if-else
@@ -46,6 +46,6 @@ public struct EditorBuilder<T: Editor> {
     }
 
     public static func buildOptional(_ component: [T]?) -> [T] {
-        return []
+        return component ?? []
     }
 }
