@@ -33,9 +33,15 @@ public protocol AccessibilityInvalidatable: AccessibilityItem {
     /// Stored invalidator that can be used for accessibility parameters invalidation.
     /// Fully managed by accessibility plugins. This value is `nil` if item isn't displaying
     var accessibilityInvalidator: AccessibilityItemInvalidator? { get set }
+
+    /// Sets invalidation object to `accessibilityInvalidator` property
+    func setInvalidator(kind: AccessibilityItemKind, delegate: AccessibilityItemDelegate?)
+
+    /// Removes invalidation object from `accessibilityInvalidator` property
+    func removeInvalidator()
 }
 
-extension AccessibilityInvalidatable {
+public extension AccessibilityInvalidatable {
     func setInvalidator(kind: AccessibilityItemKind, delegate: AccessibilityItemDelegate?) {
         accessibilityInvalidator = CommonAccessibilityItemInvalidator(accessibilityItemKind: kind, item: self, accessibilityDelegate: delegate)
     }
