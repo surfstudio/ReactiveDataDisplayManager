@@ -9,13 +9,13 @@ let testMacros: [String: Macro.Type] = [
 
 final class MutableMacroTests: XCTestCase {
 
-    func testMutableMacro_expansion() {
+    func testExpansionSucceded_whenAppliedToStruct_withVariablesAndType() {
         assertMacroExpansion(
             """
             @Mutable
             struct SomeStruct {
-               let id: String = ""
-               var someVar: Bool = false
+                let id: String = ""
+                var someVar: Bool = false
             }
             """,
             expandedSource: """
@@ -33,8 +33,44 @@ final class MutableMacroTests: XCTestCase {
         )
     }
 
-    func testMutableMacro_application() {
-        // TODO: - check that macro throwing error 
+    func testExpansionFailed_whenAppliedTo_nonStruct() {
+        assertMacroExpansion(
+            """
+            @Mutable
+            class SomeStruct {
+                let id: String = ""
+                var someVar: Bool = false
+            }
+            """,
+            expandedSource: """
+            @Mutable
+            class SomeStruct {
+                let id: String = ""
+                var someVar: Bool = false
+            }
+            """,
+            macros: testMacros
+        )
+    }
+
+    func testExpansionFailed_whenAppliedTo_variableWithoutAnnotation() {
+        assertMacroExpansion(
+            """
+            @Mutable
+            struct SomeStruct {
+                let id: String = ""
+                var someVar = false
+            }
+            """,
+            expandedSource: """
+            @Mutable
+            struct SomeStruct {
+                let id: String = ""
+                var someVar = false
+            }
+            """,
+            macros: testMacros
+        )
     }
 
 }
