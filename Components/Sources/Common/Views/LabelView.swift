@@ -8,6 +8,8 @@
 import UIKit
 import ReactiveDataDisplayManager
 
+public typealias LabelProperty = LabelView.Model.Property
+
 /// Base view to implement label within cell
 public class LabelView: UIView {
 

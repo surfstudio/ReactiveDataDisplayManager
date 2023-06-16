@@ -8,6 +8,8 @@
 import UIKit
 import ReactiveDataDisplayManager
 
+public typealias MessageProperty = MessageView.Model.Property
+
 /// Base view to implement label within cell
 public class MessageView: UIView {
 
@@ -114,7 +116,7 @@ extension MessageView: ConfigurableItem {
         private(set) public var backgroundStyle: BackgroundStyle = .solid(.clear)
         private(set) public var alignment: Alignment = .all(.zero)
         private(set) public var internalEdgeInsets: UIEdgeInsets = .zero
-        private(set) public var borderStyle: BorderStyle? = nil
+        private(set) public var borderStyle: BorderStyle?
 
         // MARK: - Mutation
 

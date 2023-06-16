@@ -37,11 +37,11 @@ public struct EditorBuilder<T: Editor> {
 
     // to use like if-else
 
-    public static func buildEither(first component: T) -> T {
+    public static func buildEither(first component: [T]) -> [T] {
         return component
     }
 
-    public static func buildEither(second component: T) -> T {
+    public static func buildEither(second component: [T]) -> [T] {
         return component
     }
 

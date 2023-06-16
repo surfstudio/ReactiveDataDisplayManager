@@ -10,7 +10,7 @@ import UIKit
 public enum BackgroundStyle: Equatable {
 
     /// Solid background filled with single color
-    case solid(UIColor)
+    case solid(UIColor?)
 
     // TODO: - gradient, image, bezierPath, bordered
 

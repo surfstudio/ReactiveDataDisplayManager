@@ -34,14 +34,14 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private let recievedMessageTimeStyle = TextStyle(color: .gray, font: .systemFont(ofSize: 12, weight: .light))
     private let recievedMessageTimeLayout = TextLayout(lineBreakMode: .byWordWrapping, numberOfLines: 0)
     private lazy var recievedMessageTimeModel: LabelView.Model = .build {
-        LabelView.Model.Property.text(.string("17:05"))
-        LabelView.Model.Property.style(recievedMessageTimeStyle)
-        LabelView.Model.Property.layout(recievedMessageTimeLayout)
-        LabelView.Model.Property.textAlignment(.left)
-        LabelView.Model.Property.alignment(.leading(UIEdgeInsets(top: 12,
-                                                                 left: 16,
-                                                                 bottom: 12,
-                                                                 right: 0)))
+        LabelProperty.text(.string("17:05"))
+        LabelProperty.style(recievedMessageTimeStyle)
+        LabelProperty.layout(recievedMessageTimeLayout)
+        LabelProperty.textAlignment(.left)
+        LabelProperty.alignment(.leading(UIEdgeInsets(top: 12,
+                                                      left: 16,
+                                                      bottom: 12,
+                                                      right: 0)))
     }
 
     private lazy var recievedMessageTimeGenerator = LabelView.rddm.tableGenerator(with: recievedMessageTimeModel, and: .class)
@@ -50,14 +50,14 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private let sentTimeMessageStyle = TextStyle(color: .gray, font: .systemFont(ofSize: 12, weight: .light))
     private let sentTimeMessageLayout = TextLayout(lineBreakMode: .byWordWrapping, numberOfLines: 0)
     private lazy var sentTimeMessageModel: LabelView.Model = .build {
-        LabelView.Model.Property.text(.string("17:32"))
-        LabelView.Model.Property.style(sentTimeMessageStyle)
-        LabelView.Model.Property.layout(sentTimeMessageLayout)
-        LabelView.Model.Property.textAlignment(.right)
-        LabelView.Model.Property.alignment(.trailing(UIEdgeInsets(top: 12,
-                                                                  left: 0,
-                                                                  bottom: 12,
-                                                                  right: 16)))
+        LabelProperty.text(.string("17:32"))
+        LabelProperty.style(sentTimeMessageStyle)
+        LabelProperty.layout(sentTimeMessageLayout)
+        LabelProperty.textAlignment(.right)
+        LabelProperty.alignment(.trailing(UIEdgeInsets(top: 12,
+                                                       left: 0,
+                                                       bottom: 12,
+                                                       right: 16)))
     }
 
     private lazy var sentMessageTimeGenerator = LabelView.rddm.tableGenerator(with: sentTimeMessageModel, and: .class)
@@ -66,14 +66,14 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private let dateStyle = TextStyle(color: .black, font: .systemFont(ofSize: 12, weight: .light))
     private let dateLayout = TextLayout(lineBreakMode: .byWordWrapping, numberOfLines: 0)
     private lazy var dateModel: LabelView.Model = .build {
-        LabelView.Model.Property.text(.string("24 мая 2023"))
-        LabelView.Model.Property.style(dateStyle)
-        LabelView.Model.Property.layout(dateLayout)
-        LabelView.Model.Property.textAlignment(.center)
-        LabelView.Model.Property.alignment(.all(UIEdgeInsets(top: 0,
-                                                             left: 0,
-                                                             bottom: 12,
-                                                             right: 0)))
+        LabelProperty.text(.string("24 мая 2023"))
+        LabelProperty.style(dateStyle)
+        LabelProperty.layout(dateLayout)
+        LabelProperty.textAlignment(.center)
+        LabelProperty.alignment(.all(UIEdgeInsets(top: 0,
+                                                  left: 0,
+                                                  bottom: 12,
+                                                  right: 0)))
     }
 
     private lazy var dateGenerator = LabelView.rddm.tableGenerator(with: dateModel, and: .class)
@@ -84,20 +84,24 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private let sentMessageBorderStyle = BorderStyle(cornerRadius: 9,
                                                             maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
     private lazy var sentMessageModel: MessageView.Model = .build {
-        MessageView.Model.Property.background(.solid(.systemBlue))
-        MessageView.Model.Property.border(sentMessageBorderStyle)
-        MessageView.Model.Property.style(sentMessageStyle)
-        MessageView.Model.Property.textAlignment(.right)
-        MessageView.Model.Property.alignment(.trailing(UIEdgeInsets(top: 12,
-                                                                    left: UIScreen.main.bounds.width / 2,
-                                                                    bottom: 12,
-                                                                    right: 16)
-                              ))
-        MessageView.Model.Property.insets(UIEdgeInsets(top: 3,
-                                                       left: 5,
-                                                       bottom: 3,
-                                                       right: 5))
-        MessageView.Model.Property.text(.string("Lorem"))
+        if Bool.random() {
+            MessageProperty.background(.solid(.systemBlue))
+        } else {
+            MessageProperty.background(.solid(.rddm))
+        }
+        MessageProperty.border(sentMessageBorderStyle)
+        MessageProperty.style(sentMessageStyle)
+        MessageProperty.textAlignment(.right)
+        MessageProperty.alignment(.trailing(UIEdgeInsets(top: 12,
+                                                         left: UIScreen.main.bounds.width / 2,
+                                                         bottom: 12,
+                                                         right: 16)
+        ))
+        MessageProperty.insets(UIEdgeInsets(top: 3,
+                                            left: 5,
+                                            bottom: 3,
+                                            right: 5))
+        MessageProperty.text(.string("Lorem"))
     }
 
     private lazy var sentMessageGenerator = MessageView.rddm.tableGenerator(with: sentMessageModel, and: .class)
@@ -113,17 +117,17 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                                 borderWidth: 1,
                                                                 borderColor: UIColor.black.cgColor)
     private lazy var recievedMessageModel: MessageView.Model = .build {
-        MessageView.Model.Property.border(recievedMessageBorderStyle)
-        MessageView.Model.Property.style(recievedMessageStyle)
-        MessageView.Model.Property.alignment(.leading(UIEdgeInsets(top: 12,
-                                                                   left: 16,
-                                                                   bottom: 12,
-                                                                   right: UIScreen.main.bounds.width / 2)))
-        MessageView.Model.Property.insets(UIEdgeInsets(top: 3,
-                                                       left: 5,
-                                                       bottom: 3,
-                                                       right: 5))
-        MessageView.Model.Property.text(.string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"))
+        MessageProperty.border(recievedMessageBorderStyle)
+        MessageProperty.style(recievedMessageStyle)
+        MessageProperty.alignment(.leading(UIEdgeInsets(top: 12,
+                                                        left: 16,
+                                                        bottom: 12,
+                                                        right: UIScreen.main.bounds.width / 2)))
+        MessageProperty.insets(UIEdgeInsets(top: 3,
+                                            left: 5,
+                                            bottom: 3,
+                                            right: 5))
+        MessageProperty.text(.string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"))
     }
 
     private lazy var recievedMessageGenerator = MessageView.rddm.tableGenerator(with: recievedMessageModel, and: .class)
