@@ -15,7 +15,7 @@ jobs:
     - name: Get issues keys
       id: issues_keys
       env:
-        branch_name: ${{ github.ref_name }}
+        branch_name: ${{ github.head_ref }}
       run: |
         keys=$(echo $branch_name | grep -E -o "SPT-[0-9]{1,}")
         echo "${keys}"
@@ -27,6 +27,7 @@ jobs:
         # api: ${{ secrets.API }}
       run: |
         for issue_key in $issue_keys; do
+          echo $issue_key
           # curl -d "status_name=In Progress&issue_key=$issue_key" -X POST $api
         done
         
@@ -71,6 +72,7 @@ jobs:
         # api: ${{ secrets.API }}
       run: |
         for issue_key in $issue_keys; do
+          echo $issue_key
           # curl -d "status_name=$issues_status&issue_key=$issue_key" -X POST $api
         done
         
