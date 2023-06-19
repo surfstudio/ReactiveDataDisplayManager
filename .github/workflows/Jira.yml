@@ -28,13 +28,14 @@ jobs:
         echo "PR state: $pr_state; is merged: $pr_is_merged"
         
         if [[ "$pr_state" == "open" ]]; then
-          echo "issues_status=Code Review" >> $GITHUB_OUTPUT
+          issues_status="Code Review"
         elif [[ $pr_is_merged == true ]]; then
-          echo "issues_status=Done" >> $GITHUB_OUTPUT
+          issues_status="Done"
         else
-          echo "issues_status=Reopened" >> $GITHUB_OUTPUT
+          issues_status="Reopened"
         fi
 
+        echo "issues_status=${issues_status}" >> $GITHUB_OUTPUT
         echo "Issues status: $issues_status"
 
     # - name: Update tasks on Jira board
