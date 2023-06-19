@@ -4,18 +4,18 @@ on:
   create:
   pull_request:
     # пока для тестов будет запускаться для всех ивентов
-    types: [opened, reopened, closed, synchronize]
+    types: [opened, reopened, closed, synchronize, edited]
 
 jobs:
   update-jira-board-on-create:
-    name: "Update Jira Board on branch create"
+    name: "Update Jira Board (Create)"
     runs-on: ubuntu-latest
-    # if: ${{ github.event_name == 'create' }}
+    if: ${{ github.event_name == 'create' }}
     steps:
     - name: Get issues keys
       id: issues_keys
       env:
-        branch_name: ${{ github.head_ref }}
+        branch_name: ${{ github.ref_name }}
       run: |
         keys=$(echo $branch_name | grep -E -o "SPT-[0-9]{1,}")
         echo "${keys}"
@@ -31,11 +31,12 @@ jobs:
           # curl -d "status_name=In Progress&issue_key=$issue_key" -X POST $api
         done
         
-      
-
-  update-jira-board:
-    name: "Update Jira Board"
+  
+  update-jira-board-on-pull-request:
+    name: "Update Jira Board (PR)"
     runs-on: ubuntu-latest
+    # if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ github.event.changes.title != github.event.changes.title.from }}
     steps:
     - name: Get issues keys
       id: issues_keys
@@ -43,8 +44,13 @@ jobs:
         pr_title: ${{ github.event.pull_request.title }}
       run: |
         keys=$(echo $pr_title | grep -E -o "SPT-[0-9]{1,}")
+
+        if [[ "$keys" == "" ]]; then
+          echo "::error::can't find any issue key"
+        fi
+
         echo "${keys}"
-        echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
+        echo "issues_keys=${keys}" >> $GITHUB_OUTPUT 
 
     - name: Resolve issues status
       id: issues_status
@@ -75,6 +81,9 @@ jobs:
           echo $issue_key
           # curl -d "status_name=$issues_status&issue_key=$issue_key" -X POST $api
         done
+
+        echo "### Jira issues have been synced! :white_checkmark:" >> $GITHUB_STEP_SUMMARY
+        echo $issue_keys >> $GITHUB_STEP_SUMMARY
         
 
         
