@@ -1,43 +1,17 @@
 name: Jira
 
 on:
-  create:
   pull_request:
     # пока для тестов будет запускаться для всех ивентов
-    types: [opened, reopened, closed, synchronize, edited]
+    # не хватает edited
+    types: [opened, reopened, closed, synchronize]
 
-jobs:
-  update-jira-board-on-create:
-    name: "Update Jira Board (Create)"
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'create' }}
-    steps:
-    - name: Get issues keys
-      id: issues_keys
-      env:
-        branch_name: ${{ github.ref_name }}
-      run: |
-        keys=$(echo $branch_name | grep -E -o "SPT-[0-9]{1,}")
-        echo "${keys}"
-        echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
-
-    - name: Update tasks on Jira board
-      env:
-        issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
-        # api: ${{ secrets.API }}
-      continue-on-error: true
-      run: |
-        for issue_key in $issue_keys; do
-          echo $issue_key
-          # curl -d "status_name=In Progress&issue_key=$issue_key" -X POST $api
-        done
-        
-  
-  update-jira-board-on-pull-request:
+jobs:  
+  update-jira-board:
     name: "Update Jira Board (PR)"
     runs-on: ubuntu-latest
-    # if: ${{ github.event_name == 'pull_request' }}
-    if: ${{ github.event.changes.title != github.event.changes.title.from }}
+    # при создании нового ПР, title == title.from и скипает джоб
+    # if: ${{ github.event.changes.title != github.event.changes.title.from }}
     steps:
     - name: Get issues keys
       id: issues_keys
@@ -48,10 +22,10 @@ jobs:
 
         if [[ "$keys" == "" ]]; then
           echo "::error ::can't find any issue key"
+        else 
+          echo "${keys}"
+          echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
         fi
-
-        echo "${keys}"
-        echo "issues_keys=${keys}" >> $GITHUB_OUTPUT 
 
     - name: Resolve issues status
       id: issues_status

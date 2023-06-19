@@ -1,0 +1,33 @@
+name: Jira (on create)
+
+on:
+  create:
+
+jobs:
+  update-jira-board:
+    name: "Update Jira Board"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get issues keys
+      id: issues_keys
+      env:
+        branch_name: ${{ github.ref_name }}
+      run: |
+        keys=$(echo $branch_name | grep -E -o "SPT-[0-9]{1,}")
+        if [[ "$keys" == "" ]]; then
+          echo "::error ::can't find any issue key"
+        else 
+          echo "${keys}"
+          echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Update tasks on Jira board
+      env:
+        issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
+        # api: ${{ secrets.API }}
+      continue-on-error: true
+      run: |
+        for issue_key in $issue_keys; do
+          echo $issue_key
+          # curl -d "status_name=In Progress&issue_key=$issue_key" -X POST $api
+        done
