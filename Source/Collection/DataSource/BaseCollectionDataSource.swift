@@ -150,7 +150,7 @@ private extension BaseCollectionDataSource {
             guard let collectionView = collectionView else {
                 return
             }
-            self?.animator?.perform(in: collectionView, animated: true, operation: nil)
+            self?.animator?.perform(in: collectionView, animated: expandable.animatedExpandable, operation: nil)
         }
     }
 
