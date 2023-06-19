@@ -1,0 +1,16 @@
+name: Jira
+
+on:
+  pull_request:
+
+jobs:
+
+  update-jira-task-status:
+    name: "Update Jira task status"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get task token
+      id: task_token
+      run: echo "token=${{ github.event.pull_request.title }} | grep -E -o "SPT-[0-9]{1,}" >> $GITHUB_OUTPUT
+    - name: Move task on Jira board
+      run: echo "${{ steps.task_token.outputs.token }}"
