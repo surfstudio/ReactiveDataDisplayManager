@@ -2,17 +2,21 @@ name: Jira
 
 on:
   pull_request:
+    types: [opened, closed]
 
 jobs:
-
-  update-jira-task-status:
-    name: "Update Jira task status"
+  update-jira-board:
+    name: "Update Jira Board"
     runs-on: ubuntu-latest
     steps:
-    - name: Get task token
-      id: task_token
+    - name: Get tasks tokens
+      id: tasks_tokens
       run: |
-        token=$(echo ${{ github.event.pull_request.title }} | grep -E -o "SPT-[0-9]{1,}")
-        echo "token=${token}" >> $GITHUB_OUTPUT
-    - name: Move task on Jira board
-      run: echo "${{ steps.task_token.outputs.token }}"
+        tokens=$(echo ${{ github.event.pull_request.title }} | grep -E -o "SPT-[0-9]{1,}")
+        echo "tokens=${tokens}" >> $GITHUB_OUTPUT
+        echo "Obtained next tokens:\n{$tokens}"
+    - name: Update tasks on Jira board
+      run: |
+        echo "${{ steps.tasks_tokens.outputs.tokens }}"
+        echo "PR is merged: ${{ github.event.pull_request.merged }}"
+
