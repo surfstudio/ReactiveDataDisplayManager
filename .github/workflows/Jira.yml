@@ -2,15 +2,12 @@ name: Jira
 
 on:
   pull_request:
-    # пока для тестов будет запускаться для всех ивентов
-    # не хватает edited
     types: [opened, reopened, closed, edited]
 
 jobs:  
   update-jira-board:
     name: "Update Jira Board"
     runs-on: ubuntu-latest
-    # при создании нового ПР, title == title.from и скипает джоб
     if: ${{ github.event.action != 'edited' || github.event.changes.title != github.event.changes.title.from }}
     steps:
     - name: Get issues keys
@@ -56,8 +53,3 @@ jobs:
           echo "Updating issue $issue_key to status '$issues_status'"
           curl -d "status_name=$issues_status&issue_key=$issue_key" -X POST $issues_api
         done
-        
-
-        
-  
-  
