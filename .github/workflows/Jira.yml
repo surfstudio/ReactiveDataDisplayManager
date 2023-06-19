@@ -55,7 +55,7 @@ jobs:
       run: |
         for issue_key in $issue_keys; do
           echo $issue_key
-          curl -d "status_name=$issues_status&issue_key=$issue_key" -X POST $api
+          curl -d "status_name=$issues_status&issue_key=$issue_key" -X POST $issues_api
         done
         
 
