@@ -8,8 +8,6 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-public typealias LabelProperty = LabelView.Model.Property
-
 /// Base view to implement label within cell
 public class LabelView: UIView {
 
@@ -115,8 +113,8 @@ extension LabelView: ConfigurableItem {
 
         // MARK: - Builder
 
-        public static func build(@EditorBuilder<Property> content: () -> [Property]) -> Self {
-            return content().reduce(.init(), { model, editor in
+        public static func build(@EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
+            return content(Property.self).reduce(.init(), { model, editor in
                 editor.edit(model)
             })
         }
