@@ -1,11 +1,37 @@
 name: Jira
 
 on:
+  create:
   pull_request:
     # пока для тестов будет запускаться для всех ивентов
     types: [opened, reopened, closed, synchronize]
 
 jobs:
+  update-jira-board-on-create:
+    name: "Update Jira Board on branch create"
+    runs-on: ubuntu-latest
+    # if: ${{ github.event_name == 'create' }}
+    steps:
+    - name: Get issues keys
+      id: issues_keys
+      env:
+        branch_name: ${{ github.ref_name }}
+      run: |
+        keys=$(echo $branch_name | grep -E -o "SPT-[0-9]{1,}")
+        echo "${keys}"
+        echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
+
+    - name: Update tasks on Jira board
+      env:
+        issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
+        # api: ${{ secrets.API }}
+      run: |
+        for issue_key in $issue_keys; do
+          # curl -d "status_name=In Progress&issue_key=$issue_key" -X POST $api
+        done
+        
+      
+
   update-jira-board:
     name: "Update Jira Board"
     runs-on: ubuntu-latest
@@ -38,16 +64,15 @@ jobs:
         echo "issues_status=${issues_status}" >> $GITHUB_OUTPUT
         echo "Issues status: $issues_status"
 
-    # - name: Update tasks on Jira board
-    #   env:
-    #     issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
-    #     issues_status: ${{ steps.issues_status.outputs.issues_status }}
-    #     api: ${{ secrets.GITHUB_TOKEN }}
-    #   run: |
-    #     for issue_key in $issue_keys; do
-    #       echo "issue key: $issue_key"
-    #       curl -d "status_name=$issues_status&issue_key=$issue_key" -H "Content-Type: application/x-www-form-urlencoded" -X POST $api
-    #     done
+    - name: Update tasks on Jira board
+      env:
+        issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
+        issues_status: ${{ steps.issues_status.outputs.issues_status }}
+        # api: ${{ secrets.API }}
+      run: |
+        for issue_key in $issue_keys; do
+          # curl -d "status_name=$issues_status&issue_key=$issue_key" -X POST $api
+        done
         
 
         
