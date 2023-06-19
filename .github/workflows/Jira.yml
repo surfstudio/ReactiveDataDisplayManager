@@ -10,17 +10,44 @@ jobs:
     name: "Update Jira Board"
     runs-on: ubuntu-latest
     steps:
-    - name: Get tasks tokens
-      id: tasks_tokens
+    - name: Get issues keys
+      id: issues_keys
+      env:
+        pr_title: ${{ github.event.pull_request.title }}
       run: |
-        tokens=$(echo ${{ github.event.pull_request.title }} | grep -E -o "SPT-[0-9]{1,}")
-        echo "tokens=${tokens}" >> $GITHUB_OUTPUT
-        echo "Obtained next tokens:\n $tokens"
-    - name: Update tasks on Jira board
+        keys=$(echo $pr_title | grep -E -o "SPT-[0-9]{1,}")
+        echo "${keys}"
+        echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
+
+    - name: Resolve issues status
+      id: issues_status
+      env:
+        pr_state: ${{ github.event.pull_request.state }}
       run: |
-        for token in ${{ steps.tasks_tokens.outputs.tokens }}; do
-          echo "task: $token"
-        done
-        echo "PR is merged: ${{ github.event.pull_request.merged }}"
+        echo $pr_state
+        
+        # isMerged=${{ github.event.pull_request.merged }}
+        # echo "PR is merged: ${isMerged}"
+        
+        # if [[ "$isMerged" == true ]]; then
+        #   echo "issues_status=Done" >> $GITHUB_OUTPUT
+        #   echo "Done"
+        # else
+        #   echo "issues_status=" >> $GITHUB_OUTPUT
+        # fi
+
+    # - name: Update tasks on Jira board
+    #   env:
+    #     issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
+    #     issues_status: ${{ steps.issues_status.outputs.issues_status }}
+    #     api: ${{ secrets.GITHUB_TOKEN }}
+    #   run: |
+    #     for issue_key in $issue_keys; do
+    #       echo "issue key: $issue_key"
+    #       curl -d "status_name=$issues_status&issue_key=$issue_key" -H "Content-Type: application/x-www-form-urlencoded" -X POST $api
+    #     done
+        
+
+        
   
   
