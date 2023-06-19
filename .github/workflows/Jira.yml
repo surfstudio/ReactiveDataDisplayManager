@@ -46,7 +46,7 @@ jobs:
         keys=$(echo $pr_title | grep -E -o "SPT-[0-9]{1,}")
 
         if [[ "$keys" == "" ]]; then
-          echo "::error::can't find any issue key"
+          echo "::error ::can't find any issue key"
         fi
 
         echo "${keys}"
