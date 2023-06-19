@@ -18,8 +18,12 @@ jobs:
         branch_name: ${{ github.ref_name }}
       run: |
         keys=$(echo $branch_name | grep -E -o "SPT-[0-9]{1,}")
-        echo "${keys}"
-        echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
+        if [[ "$keys" == "" ]]; then
+          echo "::error ::can't find any issue key"
+        else 
+          echo "${keys}"
+          echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
+        fi
 
     - name: Update tasks on Jira board
       env:
@@ -48,10 +52,10 @@ jobs:
 
         if [[ "$keys" == "" ]]; then
           echo "::error ::can't find any issue key"
+        else 
+          echo "${keys}"
+          echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
         fi
-
-        echo "${keys}"
-        echo "issues_keys=${keys}" >> $GITHUB_OUTPUT 
 
     - name: Resolve issues status
       id: issues_status
