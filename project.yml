@@ -4,12 +4,18 @@ include:
   - path: Components/project.yml
     relativePaths: true
 
+packages:
+  Macro:
+    path: Components/Macro
+  Vapor:
+    github: vapor/vapor
+    from: 4.0.0
 
 # Название проекта
 name: ReactiveDataDisplayManager
 options:
   # Версия Xcode
-  xcodeVersion: 13.4.1
+  xcodeVersion: 15.0.0
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
@@ -21,7 +27,7 @@ targets:
       type: framework
       platform: [iOS, tvOS]
       deploymentTarget:
-        iOS: 11.0
+        iOS: 13.0
         tvOS: 10.0
       scheme:
         configVariants: all
@@ -52,7 +58,7 @@ targets:
       type: bundle.unit-test
       platform: [iOS, tvOS]
       deploymentTarget:
-        iOS: 11.0
+        iOS: 13.0
         tvOS: 10.0
       scheme:
         configVariants: all

@@ -2,11 +2,12 @@
 name: ReactiveDataComponents
 options:
   # Версия Xcode
-  xcodeVersion: 13.4.1
+  xcodeVersion: 15.0.0
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
   createIntermediateGroups: true
+
 targets:
     ReactiveDataComponents:
       dependencies:
@@ -14,8 +15,8 @@ targets:
       type: framework
       platform: [iOS, tvOS]
       deploymentTarget:
-        iOS: 11.0
-        tvOS: 11.0
+        iOS: 13.0
+        tvOS: 13.0
       scheme:
         configVariants: all
         testTargets:
@@ -24,7 +25,9 @@ targets:
       sources:
         - path: Sources
       dependencies:
+        - package: Macro
         - target: ReactiveDataDisplayManager_${platform}
+        
       info:
         path: Info.plist
         properties:
@@ -47,8 +50,8 @@ targets:
       type: bundle.unit-test
       platform: [iOS, tvOS]
       deploymentTarget:
-        iOS: 11.0
-        tvOS: 11.0
+        iOS: 13.0
+        tvOS: 13.0
       scheme:
         configVariants: all
       sources:

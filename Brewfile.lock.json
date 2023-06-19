@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/cask": {
-        "revision": "266747f8b172dd47e6c80ce2590889a8a7c96501"
+        "revision": "c896fe86403b4515fddc15421cce660a306dc3f0"
       },
       "yonaskolb/xcodegen": {
         "revision": "372f20fe5a3823dc398f52cb6cc1af5003d452f7",
@@ -19,7 +19,7 @@
     },
     "brew": {
       "xcodegen": {
-        "version": "2.25.0",
+        "version": "2.35.0",
         "bottle": {
           "rebuild": 0,
           "root_url": "https://ghcr.io/v2/homebrew/core",
@@ -58,7 +58,7 @@
         }
       },
       "sourcery": {
-        "version": "1.8.1",
+        "version": "2.0.2",
         "bottle": {
           "rebuild": 0,
           "root_url": "https://ghcr.io/v2/homebrew/core",
@@ -107,11 +107,11 @@
         "macOS": "11.5.1"
       },
       "ventura": {
-        "HOMEBREW_VERSION": "4.0.19",
-        "HOMEBREW_PREFIX": "/opt/homebrew",
+        "HOMEBREW_VERSION": "4.0.23-10-g6abf680",
+        "HOMEBREW_PREFIX": "/usr/local",
         "Homebrew/homebrew-core": "api",
         "CLT": "",
-        "Xcode": "14.3",
+        "Xcode": "15.0",
         "macOS": "13.4"
       }
     }
