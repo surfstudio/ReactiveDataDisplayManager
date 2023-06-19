@@ -1,11 +1,11 @@
-name: Jira (on create)
+name: Jira
 
 on:
   create:
 
 jobs:
   update-jira-board:
-    name: "Update Jira Board"
+    name: "Update Jira Board (on-create)"
     runs-on: ubuntu-latest
     steps:
     - name: Get issues keys
@@ -24,7 +24,7 @@ jobs:
     - name: Update tasks on Jira board
       env:
         issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
-        # api: ${{ secrets.API }}
+        issues_api: ${{ secrets.ISSUES_API }}
       continue-on-error: true
       run: |
         for issue_key in $issue_keys; do
