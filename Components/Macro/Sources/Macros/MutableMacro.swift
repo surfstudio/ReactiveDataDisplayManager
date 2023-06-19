@@ -49,6 +49,6 @@ public struct MutableMacro: MemberMacro {
 @main
 struct MacroPlugin: CompilerPlugin {
     let providingMacros: [Macro.Type] = [
-        MutableMacro.self,
+        MutableMacro.self
     ]
 }

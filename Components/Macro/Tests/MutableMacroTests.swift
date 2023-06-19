@@ -4,7 +4,7 @@ import XCTest
 import Macros
 
 let testMacros: [String: Macro.Type] = [
-    "mutable": MutableMacro.self,
+    "mutable": MutableMacro.self
 ]
 
 final class MutableMacroTests: XCTestCase {
