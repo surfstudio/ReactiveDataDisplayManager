@@ -25,6 +25,7 @@ jobs:
       env:
         issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
         # api: ${{ secrets.API }}
+      continue-on-error: true
       run: |
         for issue_key in $issue_keys; do
           echo $issue_key
@@ -76,14 +77,12 @@ jobs:
         issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
         issues_status: ${{ steps.issues_status.outputs.issues_status }}
         # api: ${{ secrets.API }}
+      continue-on-error: true
       run: |
         for issue_key in $issue_keys; do
           echo $issue_key
           # curl -d "status_name=$issues_status&issue_key=$issue_key" -X POST $api
         done
-
-        echo "### Jira issues have been synced! :white_checkmark:" >> $GITHUB_STEP_SUMMARY
-        echo $issue_keys >> $GITHUB_STEP_SUMMARY
         
 
         
