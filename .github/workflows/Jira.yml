@@ -3,7 +3,7 @@ name: Jira
 on:
   pull_request:
     # пока для тестов будет запускаться для всех ивентов
-    # types: [opened, reopened, closed]
+    types: [opened, reopened, closed, synchronize]
 
 jobs:
   update-jira-board:
@@ -25,7 +25,7 @@ jobs:
         pr_state: ${{ github.event.pull_request.state }}
       run: |
         echo $pr_state
-        
+
         # isMerged=${{ github.event.pull_request.merged }}
         # echo "PR is merged: ${isMerged}"
         
