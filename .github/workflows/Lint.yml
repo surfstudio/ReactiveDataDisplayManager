@@ -16,7 +16,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   pod:
-    runs-on: macOS-12
+    runs-on: macOS-13
     steps:
     - uses: actions/checkout@v1
     - name: Generate projects

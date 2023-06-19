@@ -72,7 +72,7 @@ jobs:
       run: make build_example_tvOS
 
   build_SPM:
-    runs-on: macOS-12
+    runs-on: macOS-13
     steps:
     - uses: actions/checkout@v1
     - name: Build
