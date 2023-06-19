@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: Get task token
       id: task_token
-      run: echo "token=${{ github.event.pull_request.title }} | grep -E -o \"SPT-[0-9]{1,}"\" >> $GITHUB_OUTPUT
+      run: |
+        token=$(echo ${{ github.event.pull_request.title }} | grep -E -o "SPT-[0-9]{1,}")
+        echo "token=${token}" >> $GITHUB_OUTPUT
     - name: Move task on Jira board
       run: echo "${{ steps.task_token.outputs.token }}"
