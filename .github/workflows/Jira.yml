@@ -51,10 +51,9 @@ jobs:
         issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
         issues_status: ${{ steps.issues_status.outputs.issues_status }}
         issues_api: ${{ secrets.ISSUES_API }}
-      continue-on-error: true
       run: |
         for issue_key in $issue_keys; do
-          echo $issue_key
+          echo "Updating issue $issue_key to status '$issues_status'"
           curl -d "status_name=$issues_status&issue_key=$issue_key" -X POST $issues_api
         done
         
