@@ -2,7 +2,7 @@
 
 # Usage
 
-To make your App more freandly for disabled users **RDDM** provides a set of instruments for accessibility optimizations.
+To make your App more friendly for disabled users **RDDM** provides a set of instruments for accessibility optimizations.
 
 By default, all cells inside tables and collections are not accessibility elements, that can add difficult to users to navigate and read them. Despite this fact, many accessibility consultants recommend to make cells a single accessibility element.
 
