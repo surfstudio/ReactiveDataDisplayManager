@@ -27,6 +27,13 @@ jobs:
         issues_api: ${{ secrets.ISSUES_API }}
       run: |
         for issue_key in $issue_keys; do
-        echo "Updating issue $issue_key to status 'In Progress'"
-          curl -d "status_name=In Progress&issue_key=$issue_key" -X POST $issues_api
+          echo "Updating issue $issue_key to status 'In Progress'"
+
+          statusCode=$(curl -w "%{http_code}\n" -d "status_name=In Progress&issue_key=$issue_key" -X POST $issues_api | tail -n1)
+          successCode=$(echo $statusCode | grep -E -o "2[0-9]{2}")
+
+          if [[ "$successCode" == "" ]]; then
+            echo "::error ::update was not successful. Code: ${statusCode}"
+          fi
+
         done
