@@ -7,6 +7,9 @@ on:
       - preview/version-8
   pull_request:
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_15.0.app/Contents/Developer
+
 jobs:
 
   build_iOS:
