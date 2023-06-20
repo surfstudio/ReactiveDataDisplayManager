@@ -151,7 +151,7 @@ private extension BaseCollectionDataSource {
                   let animated = expandable?.animatedExpandable else {
                 return
             }
-            
+
             self?.animator?.perform(in: collectionView,
                                     animated: animated,
                                     operation: nil)
