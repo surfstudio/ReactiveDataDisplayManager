@@ -146,11 +146,15 @@ private extension BaseCollectionDataSource {
         guard let expandable = cell as? ExpandableItem else {
             return
         }
-        expandable.onHeightChanged += { [weak self, weak collectionView] _ in
-            guard let collectionView = collectionView else {
+        expandable.onHeightChanged += { [weak self, weak expandable, weak collectionView] _ in
+            guard let collectionView = collectionView,
+                  let animated = expandable?.animatedExpandable else {
                 return
             }
-            self?.animator?.perform(in: collectionView, animated: expandable.animatedExpandable, operation: nil)
+            
+            self?.animator?.perform(in: collectionView,
+                                    animated: animated,
+                                    operation: { })
         }
     }
 
