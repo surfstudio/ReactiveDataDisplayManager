@@ -429,6 +429,7 @@
                         <segue destination="Vhr-xd-Kz0" kind="show" identifier="selectableTable" id="71J-yg-dJ0"/>
                         <segue destination="B1B-Kf-5MV" kind="show" identifier="highlightableTable" id="XeT-nU-sXM"/>
                         <segue destination="DKn-Su-lHd" kind="show" identifier="customizableComponentsTable" id="AL3-f0-sR0"/>
+                        <segue destination="etF-3y-fmb" kind="show" identifier="twoDirectionPaginatableTable" id="weN-W5-hzB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kEa-HS-aMh" sceneMemberID="firstResponder"/>
@@ -612,6 +613,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kTe-W0-MJS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9733" y="-1842"/>
+        </scene>
+        <!--Two Direction Paginatable Table View Controller-->
+        <scene sceneID="ju5-h9-hv2">
+            <objects>
+                <viewController id="etF-3y-fmb" customClass="TwoDirectionPaginatableTableViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wr5-hV-Uny">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Bz7-Bn-yEN">
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SiV-61-mfB">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6zo-EQ-Sey"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SiV-61-mfB" firstAttribute="centerX" secondItem="wr5-hV-Uny" secondAttribute="centerX" id="3ZT-7w-1Sb"/>
+                            <constraint firstItem="Bz7-Bn-yEN" firstAttribute="leading" secondItem="6zo-EQ-Sey" secondAttribute="leading" id="Fu6-0u-2A2"/>
+                            <constraint firstItem="6zo-EQ-Sey" firstAttribute="trailing" secondItem="Bz7-Bn-yEN" secondAttribute="trailing" id="I09-Vb-pVs"/>
+                            <constraint firstItem="SiV-61-mfB" firstAttribute="centerY" secondItem="wr5-hV-Uny" secondAttribute="centerY" id="W5J-7N-sFZ"/>
+                            <constraint firstItem="6zo-EQ-Sey" firstAttribute="bottom" secondItem="Bz7-Bn-yEN" secondAttribute="bottom" id="kjG-Yt-4U6"/>
+                            <constraint firstItem="Bz7-Bn-yEN" firstAttribute="top" secondItem="6zo-EQ-Sey" secondAttribute="top" id="y10-5R-ZwS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="tps-Nt-ZjL"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="SiV-61-mfB" id="RnB-YG-LA9"/>
+                        <outlet property="tableView" destination="Bz7-Bn-yEN" id="WNV-tc-nbd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KuT-ri-pKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10536" y="-1842"/>
         </scene>
     </scenes>
     <resources>
