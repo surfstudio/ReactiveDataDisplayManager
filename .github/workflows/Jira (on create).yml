@@ -1,4 +1,4 @@
-name: Jira
+name: Jira (on create)
 
 on:
   create:
