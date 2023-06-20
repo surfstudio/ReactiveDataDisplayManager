@@ -8,6 +8,8 @@ By default, all cells inside tables and collections are not accessibility elemen
 
 **RDDM** in initial will not make any changes to accessibility elements hierarchy, so you can manage your own optimization. But it enables an accessibility plugin at all builders to be work with `AccessibilityItems`.
 
+You can see how the accessibility plugin works in the Example project. It completely includes all basic usage.
+
 <br>
 
 ## AccessibilityItem
