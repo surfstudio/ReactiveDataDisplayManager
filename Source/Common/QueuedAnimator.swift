@@ -20,7 +20,7 @@ public final class QueuedAnimator<Collection: UIView>: Animator<Collection> {
         self.debouncer = .init(queue: .global(qos: .userInitiated), delay: debounceTime)
     }
 
-    override func performAnimated(in collection: Collection, operation: Animator<Collection>.Operation?) {
+    override func perform(in collection: Collection, animated: Bool, operation: Animator<Collection>.Operation?) {
         if operation == nil {
             // debounce
             debouncer.run { [weak baseAnimator, weak collection] in
@@ -29,11 +29,11 @@ public final class QueuedAnimator<Collection: UIView>: Animator<Collection> {
                 }
                 // waiting for main thread available
                 DispatchQueue.main.async {
-                    animator.performAnimated(in: collection, operation: operation)
+                    animator.perform(in: collection, animated: animated, operation: operation)
                 }
             }
         } else {
-            baseAnimator.performAnimated(in: collection, operation: operation)
+            baseAnimator.perform(in: collection, animated: animated, operation: operation)
         }
     }
 }

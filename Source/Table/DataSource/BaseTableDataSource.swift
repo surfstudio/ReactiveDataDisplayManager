@@ -132,7 +132,7 @@ private extension BaseTableDataSource {
             }
             self?.animator?.perform(in: tableView,
                                     animated: animated,
-                                    operation: { })
+                                    operation: nil)
         }
     }
 

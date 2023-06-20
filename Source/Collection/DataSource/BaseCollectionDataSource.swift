@@ -154,7 +154,7 @@ private extension BaseCollectionDataSource {
             
             self?.animator?.perform(in: collectionView,
                                     animated: animated,
-                                    operation: { })
+                                    operation: nil)
         }
     }
 
