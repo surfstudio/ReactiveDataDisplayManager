@@ -4,7 +4,7 @@ import XCTest
 import Macros
 
 let testMacros: [String: Macro.Type] = [
-    "mutable": MutableMacro.self
+    "Mutable": MutableMacro.self
 ]
 
 final class MutableMacroTests: XCTestCase {
@@ -18,8 +18,9 @@ final class MutableMacroTests: XCTestCase {
                 var someVar: Bool = false
             }
             """,
-            expandedSource: """
-            @Mutable
+            expandedSource:
+            """
+
             struct SomeStruct {
                 let id: String = ""
                 var someVar: Bool = false
@@ -42,13 +43,19 @@ final class MutableMacroTests: XCTestCase {
                 var someVar: Bool = false
             }
             """,
-            expandedSource: """
-            @Mutable
+            expandedSource:
+            """
+
             class SomeStruct {
                 let id: String = ""
                 var someVar: Bool = false
             }
             """,
+            diagnostics: [
+                .init(message: "onlyApplicableToStruct",
+                      line: 1,
+                      column: 1)
+            ],
             macros: testMacros
         )
     }
@@ -62,13 +69,19 @@ final class MutableMacroTests: XCTestCase {
                 var someVar = false
             }
             """,
-            expandedSource: """
-            @Mutable
+            expandedSource:
+            """
+
             struct SomeStruct {
                 let id: String = ""
                 var someVar = false
             }
             """,
+            diagnostics: [
+                .init(message: "typeAnnotationRequiredFor(variableName: \"someVar\")",
+                      line: 1,
+                      column: 1)
+            ],
             macros: testMacros
         )
     }

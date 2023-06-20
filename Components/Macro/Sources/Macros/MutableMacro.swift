@@ -23,8 +23,9 @@ public struct MutableMacro: MemberMacro {
 
               let functions = try variables.compactMap { variableDecl -> FunctionDeclSyntax? in
                   guard let variableBinding = variableDecl.bindings.first,
-                        let variableType = variableBinding.typeAnnotation?.type else {
-                      throw MacroError.typeAnnotationRequiredFor(variableName: variableDecl.bindings.first?.pattern.description ?? "unknown")
+                        let variableType = variableBinding.typeAnnotation?.type.trimmed else {
+                      let variableName = variableDecl.bindings.first?.pattern.trimmedDescription
+                      throw MacroError.typeAnnotationRequiredFor(variableName: variableName ?? "unknown")
                   }
 
                   let variableName = TokenSyntax(stringLiteral: variableBinding.pattern.description)
@@ -34,7 +35,9 @@ public struct MutableMacro: MemberMacro {
                   let modifiers = ModifierListSyntax(arrayLiteral: .init(name: .keyword(.mutating)))
                   let bodyItem = CodeBlockItemSyntax.Item.expr(.init(stringLiteral: "self.\(variableName.text)=\(variableName.text)"))
                   let body = CodeBlockSyntax(statements: .init(arrayLiteral: .init(item: bodyItem)))
-                  return FunctionDeclSyntax(modifiers: modifiers,
+
+                  return FunctionDeclSyntax(leadingTrivia: .newlines(2),
+                                            modifiers: modifiers,
                                             identifier: .identifier("set"),
                                             signature: .init(input: .init(parameterList: parameterList)),
                                             body: body
