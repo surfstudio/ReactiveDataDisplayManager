@@ -10,8 +10,8 @@ import XCTest
 final class MovablePluginExampleUITest: BaseUITestCase {
 
     private enum Constants {
-        static let dragDuration = 0.5
-        static let waitTime: UInt32 = 1
+        static let dragDuration: TimeInterval = 1
+        static let waitTime: TimeInterval = 1.5 * dragDuration
     }
 
     func testСollection_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
@@ -27,7 +27,8 @@ final class MovablePluginExampleUITest: BaseUITestCase {
         let destinationCell = getCell(for: .collection, collectionId: collectionId, cellId: destinationDraggable)
         sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .slow, thenHoldForDuration: duration)
 
-        sleep(Constants.waitTime)
+        wait(for: [], timeout: Constants.waitTime, enforceOrder: false)
+
         let firstCell = getFirstCell(for: .collection, id: collectionId)
 
         XCTAssertTrue(firstCell.label == destinationDraggable)
@@ -53,7 +54,8 @@ final class MovablePluginExampleUITest: BaseUITestCase {
                    withVelocity: .slow,
                    thenHoldForDuration: duration)
 
-        sleep(Constants.waitTime)
+        wait(for: [], timeout: Constants.waitTime, enforceOrder: false)
+
         let firstCell = getFirstCell(for: .table, id: tableId)
 
         XCTAssertTrue(firstCell.label == "Cell: 2")
