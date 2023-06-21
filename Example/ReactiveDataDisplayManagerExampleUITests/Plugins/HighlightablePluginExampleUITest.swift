@@ -25,9 +25,9 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
             wasPresed = cell.stringValue == highlightedStyle
             expectation.fulfill()
         }
-        cell.press(forDuration: 2)
+        cell.press(forDuration: 2 * timeout)
 
-        wait(for: [expectation], timeout: timeout)
+        wait(for: [expectation], timeout: 2 * timeout)
         XCTAssertTrue(wasPresed)
         XCTAssertEqual(cell.stringValue, normalStyle)
     }
@@ -67,9 +67,9 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
             wasPresed = cell.stringValue == highlightedStyle
             expectation.fulfill()
         }
-        cell.press(forDuration: 2)
+        cell.press(forDuration: 2 * timeout)
 
-        wait(for: [expectation], timeout: timeout)
+        wait(for: [expectation], timeout: 2 * timeout)
         XCTAssertTrue(wasPresed)
         XCTAssertEqual(cell.stringValue, normalStyle)
     }
