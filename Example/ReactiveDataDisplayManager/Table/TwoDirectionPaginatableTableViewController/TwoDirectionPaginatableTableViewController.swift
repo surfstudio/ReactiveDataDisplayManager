@@ -30,7 +30,8 @@ final class TwoDirectionPaginatableTableViewController: UIViewController, Pagina
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .paginatable(progressView: forwardProgressView,
-                                  output: forwardPaginationDelegate))
+                                  output: forwardPaginationDelegate,
+                                  direction: .forward))
         .add(plugin: .paginatable(progressView: backwardProgressView,
                                   output: backwardPaginationDelegate,
                                   direction: .backward))
