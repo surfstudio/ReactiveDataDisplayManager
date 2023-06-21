@@ -9,9 +9,9 @@ import UIKit
 
 public extension UIBarButtonItem {
 
-    static var empty: UIBarButtonItem = {
+    static var empty: UIBarButtonItem {
         let button = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         return button
-    }()
+    }
 
 }
