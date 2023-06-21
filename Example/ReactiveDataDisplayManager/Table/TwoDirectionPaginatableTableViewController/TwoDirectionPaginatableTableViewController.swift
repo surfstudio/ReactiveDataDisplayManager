@@ -151,7 +151,10 @@ private extension TwoDirectionPaginatableTableViewController {
         currentPage += 1
 
         for _ in 0...Constants.pageSize {
-            adapter.insert(before: adapter.sections[safe: 0]!.generators[safe: 0]!, new: makeGenerator())
+            guard let firstSection = adapter.sections[safe: 0], let firstGenerator = firstSection.generators[safe: 0] else {
+                break
+            }
+            adapter.insert(before: firstGenerator, new: makeGenerator())
         }
 
         adapter => .reload
