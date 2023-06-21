@@ -37,7 +37,7 @@ final class SelectablePluginExampleUITest: BaseUITestCase {
 
     func testCollectionMultipleTap_whenCellTapped_thenCellSelected_thenCellDeselected() throws {
         setTab("Collection")
-        tapTableElement("Base collection view")
+        tapTableElement("base collection view")
         tapButton("Single mode")
 
         let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
@@ -51,7 +51,7 @@ final class SelectablePluginExampleUITest: BaseUITestCase {
 
     func testCollectionSingleTap_whenCellTapped_thenCellNotSelected() throws {
         setTab("Collection")
-        tapTableElement("Base collection view")
+        tapTableElement("base collection view")
 
         let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
 

@@ -59,7 +59,7 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         var wasPresed = false
 
         setTab("Collection")
-        tapTableElement("Base collection view")
+        tapTableElement("base collection view")
 
         let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
 
@@ -79,7 +79,7 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         let normalStyle = "Normal"
 
         setTab("Collection")
-        tapTableElement("Base collection view")
+        tapTableElement("base collection view")
         tapButton("Single mode")
 
         let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
