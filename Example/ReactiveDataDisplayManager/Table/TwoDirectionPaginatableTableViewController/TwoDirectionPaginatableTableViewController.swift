@@ -8,7 +8,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class TwoDirectionPaginatableTableViewController: UIViewController {
+final class TwoDirectionPaginatableTableViewController: UIViewController, PaginationDelegatable {
 
     // MARK: - Constants
 
@@ -30,14 +30,17 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .paginatable(progressView: forwardProgressView,
-                                  output: self))
+                                  output: forwardPaginationDelegate))
         .add(plugin: .paginatable(progressView: backwardProgressView,
-                                  output: self,
+                                  output: backwardPaginationDelegate,
                                   direction: .backward))
         .build()
 
     private weak var forwardPaginatableInput: PaginatableInput?
     private weak var backwardPaginatableInput: PaginatableInput?
+
+    private lazy var forwardPaginationDelegate = ForwardPaginationDelegate(input: self, nextPageAction: loadNextPage)
+    private lazy var backwardPaginationDelegate = BackwardPaginationDelegate(input: self, prevPageAction: loadPrevPage)
 
     private var isFirstPageLoading = true
     private var currentPage = 0
@@ -50,6 +53,16 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
 
         configureActivityIndicatorIfNeeded()
         loadFirstPage()
+    }
+
+    // MARK: - Methods
+
+    func initializePaginationInput(input: PaginatableInput) {
+        if isTableBackwardPaginationInput(input) {
+            backwardPaginatableInput = input
+        } else {
+            forwardPaginatableInput = input
+        }
     }
 
 }
@@ -146,61 +159,51 @@ private extension TwoDirectionPaginatableTableViewController {
         return currentPage < Constants.pagesCount
     }
 
-}
-
-// MARK: - RefreshableOutput
-
-extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
-
-    func onPaginationInitialized(with input: PaginatableInput) {
+    func isTableBackwardPaginationInput(_ input: PaginatableInput) -> Bool {
         if ((input as? TableBackwardPaginatablePlugin) != nil) {
-            backwardPaginatableInput = input
+            return true
         } else {
-            forwardPaginatableInput = input
+            return false
         }
     }
 
-    func loadNextPage(with input: PaginatableInput) {
-        if ((input as? TablePaginatablePlugin) != nil) {
-            input.updateProgress(isLoading: true)
-            
-            delay(.now() + .seconds(2)) { [weak self, weak input] in
-                let canFillPages = self?.canFillPages() ?? false
+    func loadNextPage() {
+        forwardPaginatableInput?.updateProgress(isLoading: true)
 
-                if canFillPages {
-                    let canIterate = self?.fillNext() ?? false
-                    
-                    input?.updateProgress(isLoading: false)
-                    input?.updatePagination(canIterate: canIterate)
-                } else {
-                    input?.updateProgress(isLoading: false)
-                    input?.updateError(SampleError.sample)
-                }
+        delay(.now() + .seconds(2)) { [weak self] in
+            let canFillPages = self?.canFillPages() ?? false
+
+            if canFillPages {
+                let canIterate = self?.fillNext() ?? false
+
+                self?.forwardPaginatableInput?.updateProgress(isLoading: false)
+                self?.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
+            } else {
+                self?.forwardPaginatableInput?.updateProgress(isLoading: false)
+                self?.forwardPaginatableInput?.updateError(SampleError.sample)
             }
         }
     }
 
-    func loadPrevPage(with input: PaginatableInput) {
-        if ((input as? TableBackwardPaginatablePlugin) != nil) {
-            input.updateProgress(isLoading: true)
+    func loadPrevPage() {
+        backwardPaginatableInput?.updateProgress(isLoading: true)
 
-            delay(.now() + .seconds(2)) { [weak self, weak input] in
-                guard let self = self else {
-                    return
-                }
+        delay(.now() + .seconds(2)) { [weak self] in
+            guard let self = self else {
+                return
+            }
 
-                if self.canFillPages() {
-                    let canIterate = self.fillPrev()
-                    let middleSection = self.adapter.sections.count / 2
-                    let middleRow = ((self.adapter.sections[safe: self.adapter.sections.count / 2]?.generators.count ?? 0) / 2)
-                    self.adapter.scrollTo(generator: self.adapter.sections[middleSection].generators[middleRow], scrollPosition: .middle, animated: false)
+            if self.canFillPages() {
+                let canIterate = self.fillPrev()
+                let middleSection = self.adapter.sections.count / 2
+                let middleRow = ((self.adapter.sections[safe: self.adapter.sections.count / 2]?.generators.count ?? 0) / 2)
+                self.adapter.scrollTo(generator: self.adapter.sections[middleSection].generators[middleRow], scrollPosition: .middle, animated: false)
 
-                    input?.updateProgress(isLoading: false)
-                    input?.updatePagination(canIterate: canIterate)
-                } else {
-                    input?.updateProgress(isLoading: false)
-                    input?.updateError(SampleError.sample)
-                }
+                self.backwardPaginatableInput?.updateProgress(isLoading: false)
+                self.backwardPaginatableInput?.updatePagination(canIterate: canIterate)
+            } else {
+                self.backwardPaginatableInput?.updateProgress(isLoading: false)
+                self.backwardPaginatableInput?.updateError(SampleError.sample)
             }
         }
     }
