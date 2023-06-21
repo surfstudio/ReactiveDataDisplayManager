@@ -18,7 +18,7 @@ public final class CollectionSafeAnimator: Animator<UICollectionView> {
         self.generatorsProvider = generatorsProvider
     }
 
-    public override func performAnimated(in collection: UICollectionView, operation: Operation?) {
+    override func perform(in collection: UICollectionView, animated: Bool, operation: Animator<UICollectionView>.Operation?) {
         if operation == nil {
             let numberOfSectionsAreEqual = collection.numberOfSections == generatorsProvider?.sections.count
             guard numberOfSectionsAreEqual else {
@@ -32,7 +32,7 @@ public final class CollectionSafeAnimator: Animator<UICollectionView> {
                 return
             }
         }
-        baseAnimator.performAnimated(in: collection, operation: operation)
+        baseAnimator.perform(in: collection, animated: animated, operation: operation)
     }
 
 }
