@@ -14,7 +14,6 @@ final class TwoDirectionPaginatableTableViewController: UIViewController, Pagina
 
     private enum Constants {
         static let pageSize = 40
-        static let pagesCount = 10
         static let firstPageMiddleIndexPath = IndexPath(row: Constants.pageSize / 2, section: 0)
     }
 
@@ -149,11 +148,11 @@ private extension TwoDirectionPaginatableTableViewController {
         }
         adapter.insertAtEnd(to: sectionHeader, new: generators, with: .none)
 
-        return currentPage < Constants.pagesCount
+        return currentPage != 0
     }
 
     func fillPrev() -> Bool {
-        currentPage += 1
+        currentPage -= 1
         var generators = [TableCellGenerator]()
 
         for _ in 0...Constants.pageSize {
@@ -162,7 +161,7 @@ private extension TwoDirectionPaginatableTableViewController {
         }
         adapter.insertAtBeginning(to: sectionHeader, new: generators, with: .none)
 
-        return currentPage < Constants.pagesCount
+        return currentPage != 0
     }
 
     func loadNextPage() {
