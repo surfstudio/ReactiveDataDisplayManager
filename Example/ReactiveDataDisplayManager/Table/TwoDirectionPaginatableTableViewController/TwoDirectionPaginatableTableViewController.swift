@@ -55,14 +55,14 @@ final class TwoDirectionPaginatableTableViewController: UIViewController, Pagina
         loadFirstPage()
     }
 
-    // MARK: - Methods
+    // MARK: - PaginationDelegatable
 
-    func initializePaginationInput(input: PaginatableInput) {
-        if isTableBackwardPaginationInput(input) {
-            backwardPaginatableInput = input
-        } else {
-            forwardPaginatableInput = input
-        }
+    func initializeForwardPaginationInput(input: PaginatableInput) {
+        forwardPaginatableInput = input
+    }
+    
+    func initializeBackwardPaginationInput(input: PaginatableInput) {
+        backwardPaginatableInput = input
     }
 
 }
@@ -160,14 +160,6 @@ private extension TwoDirectionPaginatableTableViewController {
         adapter => .reload
 
         return currentPage < Constants.pagesCount
-    }
-
-    func isTableBackwardPaginationInput(_ input: PaginatableInput) -> Bool {
-        if ((input as? TableBackwardPaginatablePlugin) != nil) {
-            return true
-        } else {
-            return false
-        }
     }
 
     func loadNextPage() {

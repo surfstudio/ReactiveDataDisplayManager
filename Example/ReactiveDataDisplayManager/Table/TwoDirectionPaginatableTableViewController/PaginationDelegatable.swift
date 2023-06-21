@@ -9,6 +9,7 @@ import ReactiveDataDisplayManager
 
 protocol PaginationDelegatable: AnyObject {
 
-    func initializePaginationInput(input: PaginatableInput)
+    func initializeForwardPaginationInput(input: PaginatableInput)
+    func initializeBackwardPaginationInput(input: PaginatableInput)
 
 }

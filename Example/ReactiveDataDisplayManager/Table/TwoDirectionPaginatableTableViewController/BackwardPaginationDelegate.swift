@@ -26,7 +26,7 @@ final class BackwardPaginationDelegate {
 extension BackwardPaginationDelegate: PaginatableOutput {
 
     func onPaginationInitialized(with input: PaginatableInput) {
-        self.input?.initializePaginationInput(input: input)
+        self.input?.initializeBackwardPaginationInput(input: input)
     }
 
     func loadNextPage(with input: PaginatableInput) { }
