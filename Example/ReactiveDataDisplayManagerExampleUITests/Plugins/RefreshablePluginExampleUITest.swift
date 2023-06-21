@@ -37,7 +37,7 @@ final class RefreshablePluginExampleUITest: BaseUITestCase {
 
     func testCollection_whenScrollDown_thenShowRefreshControl() throws {
         setTab("Collection")
-        tapTableElement("Collection list with refreshing")
+        tapTableElement("collection list with refreshing")
 
         let cell = getFirstCell(for: .collection, id: "Refrashable_collection_list")
         let refreshControl = app.otherElements["RefreshableCollectionViewController_RefreshControl"]

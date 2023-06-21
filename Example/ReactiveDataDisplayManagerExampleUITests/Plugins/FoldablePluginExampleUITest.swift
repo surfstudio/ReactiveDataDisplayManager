@@ -28,7 +28,7 @@ final class FoldablePluginExampleUITest: BaseUITestCase {
 
     func testCollectionMultipleTap_whenCellTapped_thenCellSelected_thenCellDeselected() throws {
         setTab("Collection")
-        tapTableElement("Foldable collection")
+        tapTableElement("foldable collection")
 
         let collection = app.collectionViews.firstMatch
 
