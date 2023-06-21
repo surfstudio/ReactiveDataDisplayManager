@@ -20,7 +20,7 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
     // MARK: - Private Properties
 
     private let progressView: ProgressView
-    private weak var output: PaginatableOutput?
+    private weak var output: BackwardPaginatableOutput?
 
     private var isLoading: Bool = false
 
@@ -41,7 +41,7 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
-    init(progressView: ProgressView, with output: PaginatableOutput) {
+    init(progressView: ProgressView, with output: BackwardPaginatableOutput) {
         self.progressView = progressView
         self.output = output
     }
@@ -51,7 +51,7 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
     public override func setup(with manager: BaseTableManager?) {
         self.tableView = manager?.view
         self.canIterate = false
-        self.output?.onPaginationInitialized(with: self)
+        self.output?.onBackwardPaginationInitialized(with: self)
         self.progressView.setOnRetry { [weak self] in
             guard let input = self, let output = self?.output else {
                 return

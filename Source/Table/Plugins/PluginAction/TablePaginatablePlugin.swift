@@ -62,18 +62,27 @@ public protocol PaginatableInput: AnyObject {
     func updateError(_ error: Error?)
 }
 
-/// Output signals for loading next/previous page of content
+/// Output signals for loading next page of content
 public protocol PaginatableOutput: AnyObject {
 
     /// Called when collection has setup `TablePaginatablePlugin`
     ///
-    /// - parameter input: input signals to hide  `progressView` from header/footer
+    /// - parameter input: input signals to hide  `progressView` from footer
     func onPaginationInitialized(with input: PaginatableInput)
 
     /// Called when collection scrolled to last cell
     ///
     /// - parameter input: input signals to hide  `progressView` from footer
     func loadNextPage(with input: PaginatableInput)
+}
+
+/// Output signals for loading previous page of content
+public protocol BackwardPaginatableOutput: AnyObject {
+
+    /// Called when collection has setup `TableBackwardPaginatablePlugin`
+    ///
+    /// - parameter input: input signals to hide  `progressView` from header
+    func onBackwardPaginationInitialized(with input: PaginatableInput)
 
     /// Called when collection scrolled to first cell
     ///
@@ -190,16 +199,15 @@ public extension BaseTablePlugin {
     ///
     /// - parameter progressView: indicator view to add inside header/footer. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header/footer
-    /// - parameter direction: direction of pagination (e.g. for backward pagination user scrolls up to load next page)
     static func paginatable(progressView: PaginatableInput.ProgressView,
-                            output: PaginatableOutput,
-                            direction: PaginationDirection = .forward) -> BaseTablePlugin<TableEvent> {
-        switch direction {
-        case .backward:
-            return TableBackwardPaginatablePlugin(progressView: progressView, with: output)
-        case .forward:
-            return TablePaginatablePlugin(progressView: progressView, with: output)
-        }
+                            output: PaginatableOutput) -> TablePaginatablePlugin {
+        return TablePaginatablePlugin(progressView: progressView, with: output)
+
+    }
+    static func backwardPaginatable(progressView: PaginatableInput.ProgressView,
+                                    output: BackwardPaginatableOutput) -> TableBackwardPaginatablePlugin {
+        return TableBackwardPaginatablePlugin(progressView: progressView, with: output)
+
     }
 
 }

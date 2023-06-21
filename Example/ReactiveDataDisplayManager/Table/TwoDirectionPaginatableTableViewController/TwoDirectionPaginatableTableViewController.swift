@@ -8,7 +8,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class TwoDirectionPaginatableTableViewController: UIViewController, PaginationDelegatable {
+final class TwoDirectionPaginatableTableViewController: UIViewController {
 
     // MARK: - Constants
 
@@ -29,18 +29,13 @@ final class TwoDirectionPaginatableTableViewController: UIViewController, Pagina
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .paginatable(progressView: forwardProgressView,
-                                  output: forwardPaginationDelegate,
-                                  direction: .forward))
-        .add(plugin: .paginatable(progressView: backwardProgressView,
-                                  output: backwardPaginationDelegate,
-                                  direction: .backward))
+                                  output: self))
+        .add(plugin: .backwardPaginatable(progressView: backwardProgressView,
+                                  output: self))
         .build()
 
     private weak var forwardPaginatableInput: PaginatableInput?
     private weak var backwardPaginatableInput: PaginatableInput?
-
-    private lazy var forwardPaginationDelegate = ForwardPaginationDelegate(input: self, nextPageAction: loadNextPage)
-    private lazy var backwardPaginationDelegate = BackwardPaginationDelegate(input: self, prevPageAction: loadPrevPage)
 
     private var isFirstPageLoading = true
     private var currentPage = 0
@@ -55,16 +50,6 @@ final class TwoDirectionPaginatableTableViewController: UIViewController, Pagina
 
         configureActivityIndicatorIfNeeded()
         loadFirstPage()
-    }
-
-    // MARK: - PaginationDelegatable
-
-    func initializeForwardPaginationInput(input: PaginatableInput) {
-        forwardPaginatableInput = input
-    }
-    
-    func initializeBackwardPaginationInput(input: PaginatableInput) {
-        backwardPaginatableInput = input
     }
 
 }
@@ -164,28 +149,48 @@ private extension TwoDirectionPaginatableTableViewController {
         return currentPage != 0
     }
 
-    func loadNextPage() {
-        forwardPaginatableInput?.updateProgress(isLoading: true)
+}
 
-        delay(.now() + .seconds(2)) { [weak self] in
+// MARK: - PaginatableOutput
+
+extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
+
+    func onPaginationInitialized(with input: PaginatableInput) {
+        forwardPaginatableInput = input
+    }
+
+    func loadNextPage(with input: PaginatableInput) {
+        input.updateProgress(isLoading: true)
+
+        delay(.now() + .seconds(2)) { [weak self, weak input] in
             let canFillPages = self?.canFillPages() ?? false
 
             if canFillPages {
                 let canIterate = self?.fillNext() ?? false
 
-                self?.forwardPaginatableInput?.updateProgress(isLoading: false)
-                self?.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
+                input?.updateProgress(isLoading: false)
+                input?.updatePagination(canIterate: canIterate)
             } else {
-                self?.forwardPaginatableInput?.updateProgress(isLoading: false)
-                self?.forwardPaginatableInput?.updateError(SampleError.sample)
+                input?.updateProgress(isLoading: false)
+                input?.updateError(SampleError.sample)
             }
         }
     }
 
-    func loadPrevPage() {
-        backwardPaginatableInput?.updateProgress(isLoading: true)
+}
 
-        delay(.now() + .seconds(2)) { [weak self] in
+// MARK: - BackwardPaginatableOutput
+
+extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput {
+
+    func onBackwardPaginationInitialized(with input: PaginatableInput) {
+        backwardPaginatableInput = input
+    }
+
+    func loadPrevPage(with input: PaginatableInput) {
+        input.updateProgress(isLoading: true)
+
+        delay(.now() + .seconds(2)) { [weak self, weak input] in
             guard let self = self else {
                 return
             }
@@ -197,11 +202,11 @@ private extension TwoDirectionPaginatableTableViewController {
                 if let currentFirstGenerator = currentFirstGenerator {
                     self.adapter.scrollTo(generator: currentFirstGenerator, scrollPosition: .top, animated: false)
                 }
-                self.backwardPaginatableInput?.updateProgress(isLoading: false)
-                self.backwardPaginatableInput?.updatePagination(canIterate: canIterate)
+                input?.updateProgress(isLoading: false)
+                input?.updatePagination(canIterate: canIterate)
             } else {
-                self.backwardPaginatableInput?.updateProgress(isLoading: false)
-                self.backwardPaginatableInput?.updateError(SampleError.sample)
+                input?.updateProgress(isLoading: false)
+                input?.updateError(SampleError.sample)
             }
         }
     }
