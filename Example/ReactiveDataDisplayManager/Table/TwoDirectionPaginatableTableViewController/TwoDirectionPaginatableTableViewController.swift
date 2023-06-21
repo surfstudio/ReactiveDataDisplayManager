@@ -45,6 +45,8 @@ final class TwoDirectionPaginatableTableViewController: UIViewController, Pagina
     private var isFirstPageLoading = true
     private var currentPage = 0
 
+    private var sectionHeader: TableHeaderGenerator = EmptyTableHeaderGenerator()
+
     // MARK: - UIViewController
 
     override func viewDidLoad() {
@@ -114,6 +116,7 @@ private extension TwoDirectionPaginatableTableViewController {
 
     /// This method is used to fill adapter
     func fillAdapter() {
+        adapter.addSectionHeaderGenerator(sectionHeader)
 
         for _ in 0...Constants.pageSize {
             adapter += makeGenerator()
@@ -137,27 +140,26 @@ private extension TwoDirectionPaginatableTableViewController {
 
     func fillNext() -> Bool {
         currentPage += 1
+        var generators = [TableCellGenerator]()
 
         for _ in 0...Constants.pageSize {
-            adapter += makeGenerator()
+            let generator = makeGenerator()
+            generators.append(generator)
         }
-
-        adapter => .reload
+        adapter.insertAtEnd(to: sectionHeader, new: generators, with: .none)
 
         return currentPage < Constants.pagesCount
     }
 
     func fillPrev() -> Bool {
         currentPage += 1
+        var generators = [TableCellGenerator]()
 
         for _ in 0...Constants.pageSize {
-            guard let firstSection = adapter.sections[safe: 0], let firstGenerator = firstSection.generators[safe: 0] else {
-                break
-            }
-            adapter.insert(before: firstGenerator, new: makeGenerator())
+            let generator = makeGenerator()
+            generators.append(generator)
         }
-
-        adapter => .reload
+        adapter.insertAtBeginning(to: sectionHeader, new: generators, with: .none)
 
         return currentPage < Constants.pagesCount
     }
@@ -189,11 +191,12 @@ private extension TwoDirectionPaginatableTableViewController {
             }
 
             if self.canFillPages() {
+                let currentFirstGenerator = self.adapter.sections.first?.generators.first
                 let canIterate = self.fillPrev()
-                let middleSection = self.adapter.sections.count / 2
-                let middleRow = ((self.adapter.sections[safe: self.adapter.sections.count / 2]?.generators.count ?? 0) / 2)
-                self.adapter.scrollTo(generator: self.adapter.sections[middleSection].generators[middleRow], scrollPosition: .middle, animated: false)
 
+                if let currentFirstGenerator = currentFirstGenerator {
+                    self.adapter.scrollTo(generator: currentFirstGenerator, scrollPosition: .top, animated: false)
+                }
                 self.backwardPaginatableInput?.updateProgress(isLoading: false)
                 self.backwardPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
