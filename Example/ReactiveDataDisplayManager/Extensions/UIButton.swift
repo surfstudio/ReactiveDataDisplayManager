@@ -9,9 +9,9 @@ import UIKit
 
 public extension UIButton {
 
-    static var base: UIButton = {
+    static var base: UIButton {
         let button = UIButton(type: .roundedRect)
         return button
-    }()
+    }
 
 }
