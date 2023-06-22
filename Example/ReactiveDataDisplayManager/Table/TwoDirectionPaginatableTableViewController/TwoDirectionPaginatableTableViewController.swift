@@ -130,7 +130,7 @@ private extension TwoDirectionPaginatableTableViewController {
             return makeGenerator()
         }
 
-        adapter.insertAtEnd(to: sectionHeader, new: generators, with: .none)
+        adapter.insertAtEnd(to: sectionHeader, new: generators, with: .bottom)
 
         return currentPage != 0
     }
