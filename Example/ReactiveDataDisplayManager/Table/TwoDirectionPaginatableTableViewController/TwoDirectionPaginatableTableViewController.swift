@@ -38,7 +38,7 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
         .add(plugin: .paginatable(progressView: forwardProgressView,
                                   output: self))
         .add(plugin: .backwardPaginatable(progressView: backwardProgressView,
-                                  output: self))
+                                          output: self))
         .build()
 
     private weak var forwardPaginatableInput: PaginatableInput?
