@@ -195,11 +195,11 @@ extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput 
             }
 
             if self.canFillPages() {
-                let currentFirstGenerator = self.adapter.sections.first?.generators.first
                 let canIterate = self.fillPrev()
 
+                let currentFirstGenerator = self.adapter.sections.first?.generators[safe: Constants.pageSize]
                 if let currentFirstGenerator = currentFirstGenerator {
-                    self.adapter.scrollTo(generator: currentFirstGenerator, scrollPosition: .top, animated: false)
+                    self.adapter.scrollTo(generator: currentFirstGenerator, scrollPosition: .top, animated: true)
                 }
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
