@@ -125,12 +125,11 @@ private extension TwoDirectionPaginatableTableViewController {
 
     func fillNext() -> Bool {
         currentPage += 1
-        var generators = [TableCellGenerator]()
 
-        for _ in 0...Constants.pageSize {
-            let generator = makeGenerator()
-            generators.append(generator)
+        let generators = (0...Constants.pageSize).map { _ in
+            return makeGenerator()
         }
+
         adapter.insertAtEnd(to: sectionHeader, new: generators, with: .none)
 
         return currentPage != 0
@@ -138,12 +137,11 @@ private extension TwoDirectionPaginatableTableViewController {
 
     func fillPrev() -> Bool {
         currentPage -= 1
-        var generators = [TableCellGenerator]()
 
-        for _ in 0...Constants.pageSize {
-            let generator = makeGenerator()
-            generators.append(generator)
+        let generators = (0...Constants.pageSize).map { _ in
+            return makeGenerator()
         }
+
         adapter.insertAtBeginning(to: sectionHeader, new: generators, with: .none)
 
         return currentPage != 0
