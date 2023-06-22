@@ -105,7 +105,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
     private let progressView: ProgressView
     private weak var output: PaginatableOutput?
 
-    private var isLoading: Bool = false
+    private var isLoading = false
 
     private weak var tableView: UITableView?
 

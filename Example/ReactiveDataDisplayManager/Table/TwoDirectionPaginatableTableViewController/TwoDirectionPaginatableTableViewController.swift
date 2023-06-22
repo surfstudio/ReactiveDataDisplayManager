@@ -25,8 +25,14 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var forwardProgressView = PaginatorView(frame: .init(x: 0, y: 0, width: tableView.frame.width, height: Constants.paginatorViewHeight))
-    private lazy var backwardProgressView = PaginatorView(frame: .init(x: 0, y: 0, width: tableView.frame.width, height: Constants.paginatorViewHeight))
+    private lazy var forwardProgressView = PaginatorView(frame: .init(x: 0,
+                                                                      y: 0,
+                                                                      width: tableView.frame.width,
+                                                                      height: Constants.paginatorViewHeight))
+    private lazy var backwardProgressView = PaginatorView(frame: .init(x: 0,
+                                                                       y: 0,
+                                                                       width: tableView.frame.width,
+                                                                       height: Constants.paginatorViewHeight))
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .paginatable(progressView: forwardProgressView,

@@ -24,7 +24,7 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
     private let progressView: ProgressView
     private weak var output: BackwardPaginatableOutput?
 
-    private var isLoading: Bool = false
+    private var isLoading = false
 
     private weak var tableView: UITableView?
 

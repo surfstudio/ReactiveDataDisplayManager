@@ -63,4 +63,3 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
     }
 
 }
-

@@ -182,7 +182,7 @@ extension BaseTableManager {
         sections.registerAllIfNeeded(with: view, using: registrator)
         modifier?.insertRows(at: indexPaths, with: animation)
     }
-    
+
     func insertManual(after generator: TableCellGenerator,
                      new newGenerators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation = .automatic) {
