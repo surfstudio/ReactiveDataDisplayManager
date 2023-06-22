@@ -168,6 +168,7 @@ extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
 
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
+                self?.backwardPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
@@ -202,6 +203,7 @@ extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput 
                 }
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
+                self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
