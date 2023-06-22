@@ -1,0 +1,62 @@
+name: Jira
+
+on:
+  pull_request:
+    types: [opened, reopened, closed, edited]
+
+jobs:  
+  update-jira-board:
+    name: "Update Jira Board"
+    runs-on: ubuntu-latest
+    if: ${{ github.event.action != 'edited' || github.event.changes.title != github.event.changes.title.from }}
+    steps:
+    - name: Get issues keys
+      id: issues_keys
+      env:
+        pr_title: ${{ github.event.pull_request.title }}
+      run: |
+        keys=$(echo $pr_title | grep -E -o "SPT-[0-9]{1,}")
+
+        if [[ "$keys" == "" ]]; then
+          echo "::error:: Can't find any issue key"
+        else 
+          echo "${keys}"
+          echo "issues_keys=${keys}" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Resolve issues status
+      id: issues_status
+      env:
+        pr_state: ${{ github.event.pull_request.state }}
+        pr_is_merged: ${{ github.event.pull_request.merged }}
+      run: |
+        echo "PR state: $pr_state; is merged: $pr_is_merged"
+        
+        if [[ "$pr_state" == "open" ]]; then
+          issues_status="Code Review"
+        elif [[ $pr_is_merged == true ]]; then
+          issues_status="Done"
+        else
+          issues_status="Reopened"
+        fi
+
+        echo "issues_status=${issues_status}" >> $GITHUB_OUTPUT
+        echo "Issues status: $issues_status"
+
+    - name: Update tasks on Jira board
+      env:
+        issue_keys: ${{ steps.issues_keys.outputs.issues_keys }}
+        issues_status: ${{ steps.issues_status.outputs.issues_status }}
+        issues_api: ${{ secrets.ISSUES_API }}
+      run: |
+        for issue_key in $issue_keys; do
+          echo "Updating issue $issue_key to status '$issues_status'"
+
+          statusCode=$(curl -w "%{http_code}\n" -d "status_name=$issues_status&issue_key=$issue_key" -X POST $issues_api | tail -n1)
+          successCode=$(echo $statusCode | grep -E -o "2[0-9]{2}")
+
+          if [[ "$successCode" == "" ]]; then
+            echo "::error:: Update was not successful. Code: ${statusCode}"
+          fi
+
+        done

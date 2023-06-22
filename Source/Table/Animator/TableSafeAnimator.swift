@@ -18,7 +18,7 @@ public final class TableSafeAnimator: Animator<UITableView> {
         self.sectionsProvider = sectionsProvider
     }
 
-    public override func performAnimated(in collection: UITableView, operation: Operation?) {
+    override func perform(in collection: UITableView, animated: Bool, operation: Animator<UITableView>.Operation?) {
         if operation == nil {
             let numberOfSectionsAreEqual = collection.numberOfSections == sectionsProvider?.sections.count
             guard numberOfSectionsAreEqual else {
@@ -32,7 +32,7 @@ public final class TableSafeAnimator: Animator<UITableView> {
                 return
             }
         }
-        baseAnimator.performAnimated(in: collection, operation: operation)
+        baseAnimator.perform(in: collection, animated: animated, operation: operation)
     }
 
 }
