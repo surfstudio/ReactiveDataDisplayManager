@@ -166,7 +166,7 @@ extension BaseTableManager {
     // MARK: - Inserting
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
-                with animation: UITableView.RowAnimation = .automatic) {
+                with animation: UITableView.RowAnimation? = .automatic) {
 
         elements.forEach { [weak self] element in
             self?.sections[element.sectionIndex]

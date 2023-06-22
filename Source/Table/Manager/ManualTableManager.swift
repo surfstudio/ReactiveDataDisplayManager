@@ -272,7 +272,7 @@ public class ManualTableManager: BaseTableManager {
     ///   - with: Animation for row action.
     open func insertAtBeginning(to headerGenerator: TableHeaderGenerator,
                                 new generators: [TableCellGenerator],
-                                with animation: UITableView.RowAnimation = .automatic) {
+                                with animation: UITableView.RowAnimation? = .automatic) {
         guard let headerIndex = self.sections.firstIndex(where: { $0.header === headerGenerator }) else {
             return
         }

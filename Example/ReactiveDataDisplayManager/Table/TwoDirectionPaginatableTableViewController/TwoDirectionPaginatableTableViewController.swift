@@ -142,7 +142,7 @@ private extension TwoDirectionPaginatableTableViewController {
             return makeGenerator()
         }
 
-        adapter.insertAtBeginning(to: sectionHeader, new: generators, with: .top)
+        adapter.insertAtBeginning(to: sectionHeader, new: generators, with: nil)
 
         return currentPage != 0
     }
@@ -199,7 +199,7 @@ extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput 
 
                 let currentFirstGenerator = self.adapter.sections.first?.generators[safe: Constants.pageSize]
                 if let currentFirstGenerator = currentFirstGenerator {
-                    self.adapter.scrollTo(generator: currentFirstGenerator, scrollPosition: .top, animated: true)
+                    self.adapter.scrollTo(generator: currentFirstGenerator, scrollPosition: .top, animated: false)
                 }
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
