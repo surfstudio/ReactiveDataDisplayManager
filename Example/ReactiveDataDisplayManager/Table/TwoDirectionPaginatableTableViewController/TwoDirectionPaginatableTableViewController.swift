@@ -111,7 +111,7 @@ private extension TwoDirectionPaginatableTableViewController {
     }
 
     func makeGenerator() -> TableCellGenerator {
-        TitleTableViewCell.rddm.baseGenerator(with: "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)" )
+        TitleTableViewCell.rddm.calculatableHeightGenerator(with: "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)" )
     }
 
     func canFillPages() -> Bool {
@@ -193,17 +193,25 @@ extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput 
             guard let self = self else {
                 return
             }
-
             if self.canFillPages() {
-                let canIterate = self.fillPrev()
-
-                let currentFirstGenerator = self.adapter.sections.first?.generators[safe: Constants.pageSize]
-                if let currentFirstGenerator = currentFirstGenerator {
-                    self.adapter.scrollTo(generator: currentFirstGenerator, scrollPosition: .top, animated: false)
+                let initialGeneratorsHeight = self.adapter.sections.first?.generators.reduce(0) {
+                    return ($0 + $1.cellHeight)
                 }
+
+                let canIterate = self.fillPrev()
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
                 self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
+
+                let newGeneratorsHeight = self.adapter.sections.first?.generators.reduce(0) {
+                    print($1.cellHeight)
+                    return ($0 + $1.cellHeight)
+                }
+
+                if let initialGeneratorsHeight = initialGeneratorsHeight, let newGeneratorsHeight = newGeneratorsHeight {
+                    let finalOffset = CGPoint(x: 0, y: newGeneratorsHeight - initialGeneratorsHeight)
+                    self.tableView.setContentOffset(finalOffset, animated: false)
+                }
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
