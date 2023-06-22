@@ -15,33 +15,33 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
 
     // Description: The first cell of the table is always the same
     func testTable_whenSwipeUpAndDown_thenCellsCountChanged() throws {
-        let pageSize = 40
+        let threePagesSize = 120
 
         setTab("Table")
         tapTableElement("Table with two direction pagination")
 
         let table = app.tables.firstMatch
-        let retryButton = app.buttons["Retry"]
+        let retryButton = app.buttons["Retry"].firstMatch
 
         XCTAssertTrue(table.waitForExistence(timeout: Constants.timeout))
         XCTAssertTrue(retryButton.waitForExistence(timeout: Constants.timeout * 2))
 
         while !retryButton.isHittable {
-            table.swipeUp(velocity: .fast)
+            table.swipeDown(velocity: .fast)
         }
 
         retryButton.tap()
 
-        while table.cells.count <= pageSize {
-            table.swipeDown(velocity: .fast)
+        while table.cells.count < threePagesSize {
+            table.swipeUp(velocity: .fast)
         }
 
-        XCTAssertGreaterThan(table.cells.count, pageSize)
+        XCTAssertGreaterThan(table.cells.count, threePagesSize)
     }
 
     func testTable_whenSwipeDown_thenPaginatorErrorAppear_thenHittableActivityIndicator() {
-        let activityIndicator = app.activityIndicators["PaginatorView"]
-        let retryButton = app.buttons["Retry"]
+        let activityIndicator = app.activityIndicators["PaginatorView"].firstMatch
+        let retryButton = app.buttons["Retry"].firstMatch
 
         setTab("Table")
         tapTableElement("Table with two direction pagination")
