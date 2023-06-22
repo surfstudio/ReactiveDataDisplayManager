@@ -15,6 +15,8 @@ import UIKit
 /// - Warning: Specify estimatedRowHeight of your layout to proper `willDisplay` calls and correct `contentSize`
 public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
+    // MARK: - Nested types
+
     public typealias ProgressView = UIView & ProgressDisplayableItem
 
     // MARK: - Private Properties

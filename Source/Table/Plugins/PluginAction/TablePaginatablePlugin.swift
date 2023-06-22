@@ -45,8 +45,6 @@ extension ProgressDisplayableItem {
 /// Input signals to control visibility of progressView in header/footer
 public protocol PaginatableInput: AnyObject {
 
-    typealias ProgressView = UIView & ProgressDisplayableItem
-
     /// Call this method to control availability of **loadNextPage**/**loadPrevPage** action
     ///
     /// - parameter canIterate: `true` if want to use last cell will display event to execute **loadNextPage** /**loadPrevPage**action
@@ -104,6 +102,10 @@ public extension PaginatableOutput {
 ///
 /// - Warning: Specify estimatedRowHeight of your layout to proper `willDisplay` calls and correct `contentSize`
 public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
+
+    // MARK: - Nested types
+
+    public typealias ProgressView = UIView & ProgressDisplayableItem
 
     // MARK: - Private Properties
 
@@ -199,12 +201,12 @@ public extension BaseTablePlugin {
     ///
     /// - parameter progressView: indicator view to add inside header/footer. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header/footer
-    static func paginatable(progressView: PaginatableInput.ProgressView,
+    static func paginatable(progressView: TablePaginatablePlugin.ProgressView,
                             output: PaginatableOutput) -> TablePaginatablePlugin {
         return TablePaginatablePlugin(progressView: progressView, with: output)
 
     }
-    static func backwardPaginatable(progressView: PaginatableInput.ProgressView,
+    static func backwardPaginatable(progressView: TableBackwardPaginatablePlugin.ProgressView,
                                     output: BackwardPaginatableOutput) -> TableBackwardPaginatablePlugin {
         return TableBackwardPaginatablePlugin(progressView: progressView, with: output)
 
