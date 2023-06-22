@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 // sourcery: AutoMockable
 public protocol CollectionFoldableItem: AnyObject, AccessibilityStrategyProvider {
     var didFoldEvent: BaseEvent<Bool> { get }
@@ -13,6 +15,7 @@ public protocol CollectionFoldableItem: AnyObject, AccessibilityStrategyProvider
     var childGenerators: [CollectionCellGenerator] { get set }
 }
 
-extension CollectionFoldableItem {
-    public var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
+public extension CollectionFoldableItem {
+    var labelStrategy: AccessibilityStrategy<String> { .ignored }
+    var traitsStrategy: AccessibilityStrategy<UIAccessibilityTraits> { childGenerators.isEmpty ? .ignored : .just(.button) }
 }

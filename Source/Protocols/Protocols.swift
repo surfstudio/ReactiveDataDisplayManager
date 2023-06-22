@@ -13,7 +13,8 @@ open class TableHeaderGenerator: ViewGenerator, AccessibilityStrategyProvider {
 
     public let uuid = UUID().uuidString
 
-    open var traitsStrategy: AccessibilityTraitsStrategy { .just(.header) }
+    open var labelStrategy: AccessibilityStrategy<String> = .ignored
+    open var traitsStrategy: AccessibilityStrategy<UIAccessibilityTraits> = .just(.header)
 
     public init() { }
 
@@ -31,7 +32,8 @@ open class TableFooterGenerator: ViewGenerator, AccessibilityStrategyProvider {
 
     public let uuid = UUID().uuidString
 
-    open var traitsStrategy: AccessibilityTraitsStrategy { .ignored }
+    open var labelStrategy: AccessibilityStrategy<String> = .ignored
+    open var traitsStrategy: AccessibilityStrategy<UIAccessibilityTraits> = .ignored
 
     public init() { }
 
@@ -110,7 +112,8 @@ public extension CollectionHeaderGenerator {
         return nil
     }
 
-    var traitsStrategy: AccessibilityTraitsStrategy { .just(.header) }
+    var labelStrategy: AccessibilityStrategy<String> { .ignored }
+    var traitsStrategy: AccessibilityStrategy<UIAccessibilityTraits> { .just(.header) }
 
 }
 

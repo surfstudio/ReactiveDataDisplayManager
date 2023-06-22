@@ -24,5 +24,6 @@ public protocol SelectableItem: AnyObject, AccessibilityStrategyProvider {
 }
 
 extension SelectableItem {
-    public var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
+    public var labelStrategy: AccessibilityStrategy<String> { .ignored }
+    public var traitsStrategy: AccessibilityStrategy<UIAccessibilityTraits> { didSelectEvent.isEmpty ? .ignored : .just(.button) }
 }

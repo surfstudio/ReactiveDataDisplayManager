@@ -11,20 +11,22 @@ import UIKit
 public protocol AccessibilityStrategyProvider {
 
     /// strategy for `accessibilityLabel`
-    var labelStrategy: AccessibilityStringStrategy { get }
+    var labelStrategy: AccessibilityStrategy<String> { get }
 
     /// strategy for `accessibilityValue`. Default: `.ignored`
-    var valueStrategy: AccessibilityStringStrategy { get }
+    var valueStrategy: AccessibilityStrategy<String> { get }
 
-    /// strategy for `accessibilityTraits`
-    var traitsStrategy: AccessibilityTraitsStrategy { get }
+    /// strategy for `accessibilityTraits`.  Default: `.ignored`
+    var traitsStrategy: AccessibilityStrategy<UIAccessibilityTraits> { get }
 
     /// Idicates that `AccessibilityItem` should become an accessibility element. Equals `true` if all strategies is in state `.ignored`
     var isAccessibilityIgnored: Bool { get }
 }
 
 public extension AccessibilityStrategyProvider {
-    var valueStrategy: AccessibilityStringStrategy { .ignored }
+    var valueStrategy: AccessibilityStrategy<String> { .ignored }
+    var traitsStrategy: AccessibilityStrategy<UIAccessibilityTraits> { .ignored }
+
     var isAccessibilityIgnored: Bool {
         return [labelStrategy.isIgnored, valueStrategy.isIgnored, traitsStrategy.isIgnored].allSatisfy { $0 }
     }

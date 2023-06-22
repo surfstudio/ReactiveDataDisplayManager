@@ -35,6 +35,6 @@ public extension FoldableItem {
         return (.none, .fade)
     }
 
-    var traitsStrategy: AccessibilityTraitsStrategy { .just(.button) }
-
+    var labelStrategy: AccessibilityStrategy<String> { .ignored }
+    var traitsStrategy: AccessibilityStrategy<UIAccessibilityTraits> { childGenerators.isEmpty ? .ignored : .just(.button) }
 }

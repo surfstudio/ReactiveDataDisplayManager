@@ -21,14 +21,14 @@ public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider & Acces
     /// Defines the behaviour for traits `[.selected, .notEnabled]`. By default, modifier will not override these traits
     var shouldOverrideStateTraits: Bool { get }
 
-    /// Conficts resolver when generator and item contains `AccessibilityStringStrategy`. By default values will be joined with a space separator in next order: generator, item
+    /// Conficts resolver when generator and item contains `AccessibilityStrategy<String>`. By default values will be joined with a space separator in next order: generator, item
     ///
     /// You can define your own implementation to change separator or order of values.
     /// - parameter itemStrategy: strategy defined in cell
     /// - parameter generatorStrategy: stategy provided  from cell's generator
     /// - returns: value combined from both strategies
-    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStringStrategy,
-                                               generatorStrategy: AccessibilityStringStrategy) -> String?
+    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStrategy<String>,
+                                               generatorStrategy: AccessibilityStrategy<String>) -> String?
 }
 
 public extension AccessibilityItem {
@@ -47,8 +47,8 @@ public extension AccessibilityItem {
 
     var shouldOverrideStateTraits: Bool { false }
 
-    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStringStrategy,
-                                               generatorStrategy: AccessibilityStringStrategy) -> String? {
+    func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStrategy<String>,
+                                               generatorStrategy: AccessibilityStrategy<String>) -> String? {
         return [generatorStrategy, itemStrategy].compactMap(\.value).joined(separator: " ")
     }
 }

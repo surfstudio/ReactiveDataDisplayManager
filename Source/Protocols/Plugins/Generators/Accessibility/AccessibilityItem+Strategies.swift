@@ -7,99 +7,54 @@
 
 import UIKit
 
-/// Default accessibility strategy for string value
-public enum AccessibilityStringStrategy {
+public struct AccessibilityStrategy<ValueType> {
+
+    public var value: ValueType?
+    public var isIgnored: Bool
 
     /// value will not be changed by this strategy
-    case ignored
-
-    /// simple string value, can be nil
-    case just(String?)
-
-    /// a reference value from object.
-    /// - parameter keyPath: specified keypath from value would be taken.  By default it's `accessibilityLabel`
-    case from(object: NSObject, keyPath: KeyPath<NSObject, String?> = \.accessibilityLabel)
-
-    /// a combination of strategies
-    indirect case joined([AccessibilityStringStrategy])
-
-    public var isIgnored: Bool {
-        if case .ignored = self {
-            return true
-        } else {
-            return false
-        }
+    public static var ignored: Self {
+        return .init(nil, isIgnored: true)
     }
 
-    /// value of current strategy
-    public var value: String? {
-        switch self {
-        case .ignored:
-            return nil
-        case .just(let string):
-            return string
-        case .from(let object, let keyPath):
-            return object[keyPath: keyPath]
-        case .joined(let strategies):
-            return strategies.compactMap(\.value).joined()
-        }
+    public init(_ value: ValueType?, isIgnored: Bool = false) {
+        self.value = value
+        self.isIgnored = isIgnored
+    }
+
+    /// just a value
+    public static func just(_ value: ValueType?) -> Self {
+        return .init(value)
+    }
+
+    /// a reference value from object.
+    /// - parameter keyPath: specified keypath from value would be taken.
+    public static func from<T>(_ object: T, keyPath: KeyPath<T, ValueType?>) -> Self {
+        return .init(object[keyPath: keyPath])
+    }
+
+    /// a reference value from object.
+    /// - parameter keyPath: specified keypath from value would be taken.
+    public static func from<T>(_ object: T, keyPath: KeyPath<T, ValueType>) -> Self {
+        return .init(object[keyPath: keyPath])
+    }
+}
+
+public extension AccessibilityStrategy where ValueType == String {
+
+    /// a combination of strings
+    static func merge(_ values: ValueType?..., separator: String = "") -> Self {
+        return .init(values.compactMap { $0 }.joined(separator: separator))
     }
 
 }
 
-/// Accessibility strategy for `UIAccessibilityTraits` parameter
-public enum AccessibilityTraitsStrategy {
-
-    /// value will not be changed by this strategy
-    case ignored
-
-    /// simple accessibility traits
-    case just(UIAccessibilityTraits)
-
-    /// a reference traits from another object
-    case from(object: NSObject)
+public extension AccessibilityStrategy where ValueType == UIAccessibilityTraits {
 
     /// a reference traits merged from specified objects
-    case merge([NSObject])
-
-    public var isIgnored: Bool {
-        if case .ignored = self {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    /// accessibility traits of current strategy
-    /// - Returns: nil if `isIgnored`, otherwise `UIAccessibilityTraits`
-    public var value: UIAccessibilityTraits? {
-        switch self {
-        case .ignored:
-            return nil
-        case .just(let traits):
-            return traits
-        case .from(let object):
-            return object.accessibilityTraits
-        case .merge(let objects):
-            return objects.map(\.accessibilityTraits).reduce(UIAccessibilityTraits(), { $0.union($1) })
-        }
-    }
-
-    /// Evaluates strategy and inserts provided traits
-    mutating public func insert(_ traits: UIAccessibilityTraits) {
-        guard let value else {
-            self = .just(traits)
-            return
-        }
-        self = .just(value.union(traits))
-    }
-
-    /// Evaluates strategy and removes provided traits
-    mutating public func remove(_ traits: UIAccessibilityTraits) {
-        guard let value else {
-            return
-        }
-        self = .just(value.subtracting(traits))
+    static func merge(objects: NSObject...) -> Self {
+        let traits = objects.map(\.accessibilityTraits).reduce(UIAccessibilityTraits(), { $0.union($1) })
+        return .init(traits)
     }
 
 }
