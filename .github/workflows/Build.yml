@@ -18,12 +18,9 @@ jobs:
     - name: Build
       run: make build_lib_iOS
     - name: Run tests
-      run: |
-        test_output=$( make test_lib_iOS )
-        if [[ echo $test_output | grep "** TEST EXECUTE FAILED **" ]]; then
-          echo "::error:: Test execute failed"
-        fi
-
+      run: make test_lib_iOS
+    - name: Check Log
+      run: make check_test_log
     - name: Prepare Report
       run: make prepare_report
     - name: Upload Coverage
@@ -46,12 +43,9 @@ jobs:
     - name: Build
       run: make build_example_iOS
     - name: Run tests
-      run: |
-        test_output=$( make test_example_iOS )
-        if [[ echo $test_output | grep "** TEST EXECUTE FAILED **" ]]; then
-          echo "::error:: Test execute failed"
-        fi
-
+      run: make test_example_iOS
+    - name: Check Log
+      run: make check_test_log
     - name: Prepare Report
       run: make prepare_example_report
     - name: Upload Coverage

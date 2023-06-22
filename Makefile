@@ -34,7 +34,20 @@ build_lib_iOS:
 
 ## Run tests of lib for **iOS** platform
 test_lib_iOS:
-	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | bundle exec xcpretty -c
+	xcodebuild test-without-building -scheme ReactiveDataDisplayManager_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | bundle exec xcpretty -c | tee build/reports/xcodebuild.log
+
+## Count failures in xcodebuild.log and `exit 0` if no failures or `exit 1` otherwise
+check_test_log:
+	echo "Test results: build/reports/xcodebuild.log"
+	$(eval failures_count := $(shell cat build/reports/xcodebuild.log | grep -Eo "[0-9]+ failures" | grep -Eo "[0-9]+"))
+	echo "Failures count: $(failures_count)"
+	@if [ $(failures_count) == "0" ]; then\
+		echo "Tests passed";\
+		exit 0;\
+	else\
+		echo "Tests failed";\
+		exit 1;\
+	fi
 
 ## Preparing report contains test-coverage results
 prepare_report:
@@ -50,7 +63,7 @@ build_example_iOS:
 
 ## Run tests of Example for **iOS** platform
 test_example_iOS:
-	xcodebuild test-without-building -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | bundle exec xcpretty -c
+	xcodebuild test-without-building -workspace ReactiveDataDisplayManager.xcworkspace -scheme ReactiveDataDisplayManagerExample_iOS -configuration "Debug" -sdk iphonesimulator -enableCodeCoverage YES -destination ${destination} | bundle exec xcpretty -c | tee build/reports/xcodebuild.log
 
 ## Preparing report contains test-coverage results
 prepare_example_report:
