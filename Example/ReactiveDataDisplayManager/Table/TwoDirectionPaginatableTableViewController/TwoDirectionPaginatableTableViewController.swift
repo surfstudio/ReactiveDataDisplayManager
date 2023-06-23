@@ -139,6 +139,7 @@ private extension TwoDirectionPaginatableTableViewController {
 
         adapter.insertAtEnd(to: sectionHeader, new: generators, with: .bottom)
 
+        // pages count is infinite if it`s a single direction scroll
         return currentPage != 0
     }
 
@@ -151,6 +152,7 @@ private extension TwoDirectionPaginatableTableViewController {
 
         adapter.insertAtBeginning(to: sectionHeader, new: generators, with: nil)
 
+        // pages count is infinite if it`s a single direction scroll
         return currentPage != 0
     }
 
