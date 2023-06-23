@@ -120,7 +120,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     ///
     /// - Parameters:
     ///   - generator: Generator to delete.
-    ///   - animation: Animation for row action.
+    ///   - animateOption: Animation for row action.
     ///   - needScrollAt: If not nil than performs scroll before removing generator.
     /// A constant that identifies a relative position in the table view (top, middle, bottom)
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
