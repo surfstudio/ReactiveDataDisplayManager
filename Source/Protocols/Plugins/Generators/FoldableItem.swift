@@ -27,7 +27,7 @@ public protocol FoldableItem: AnyObject {
 
     /// Generators describing cells to be inserted in expanded state
     var childGenerators: [TableCellGenerator] { get set }
-    
+
 }
 
 public extension FoldableItem {

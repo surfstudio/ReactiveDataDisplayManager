@@ -7,6 +7,7 @@
 
 import UIKit
 
+// swiftlint:disable:next line_length
 open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & ConfigurableItem & FoldableStateHolder>: BaseCollectionCellGenerator<Cell>, CollectionFoldableItem {
 
     // MARK: - FoldableItem
@@ -19,7 +20,7 @@ open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & Configur
 
     open override func configure(cell: Cell, with model: Cell.Model) {
         super.configure(cell: cell, with: model)
-        
+
         cell.setExpanded(isExpanded)
 
         didFoldEvent.addListner(with: "rddm.foldable-on-dequeue") { [weak cell] isExpanded in

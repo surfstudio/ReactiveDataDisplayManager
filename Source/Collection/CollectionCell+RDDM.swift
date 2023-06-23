@@ -25,4 +25,3 @@ public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & Con
     }
 
 }
-

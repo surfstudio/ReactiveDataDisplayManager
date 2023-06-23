@@ -81,7 +81,7 @@ public class BaseEvent<Input>: Event {
         self.listners = [:]
     }
 
-    public func addListner(with id: String = UUID().uuidString,_ listner: @escaping Lambda) {
+    public func addListner(with id: String = UUID().uuidString, _ listner: @escaping Lambda) {
         self.listners[id] = listner
     }
 
