@@ -11,6 +11,22 @@ import UIKit
 /// Base implementation of DataDisplayManager for UITableView that contains minimal interface
 open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
 
+    // MARK: - Nested
+
+    public enum AnimateOption {
+        case animated(UITableView.RowAnimation)
+        case none
+
+        var animation: UITableView.RowAnimation? {
+            switch self {
+            case .animated(let animation):
+                return animation
+            case .none:
+                return nil
+            }
+        }
+    }
+
     // MARK: - Typealias
 
     public typealias CollectionType = UITableView
@@ -88,6 +104,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     /// A constant that identifies a relative position in the table view (top, middle, bottom)
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
+    @available(*, deprecated, message: "Please use method with a new `AnimateOption` parameter")
     open func remove(_ generator: TableCellGenerator,
                      with animation: UITableView.RowAnimation?,
                      needScrollAt scrollPosition: UITableView.ScrollPosition?,
@@ -95,6 +112,26 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
         guard let index = findGenerator(generator) else { return }
         self.removeGenerator(with: index,
                              with: animation,
+                             needScrollAt: scrollPosition,
+                             needRemoveEmptySection: needRemoveEmptySection)
+    }
+
+    /// Removes generator from data display manager. Generators compares by references.
+    ///
+    /// - Parameters:
+    ///   - generator: Generator to delete.
+    ///   - animation: Animation for row action.
+    ///   - needScrollAt: If not nil than performs scroll before removing generator.
+    /// A constant that identifies a relative position in the table view (top, middle, bottom)
+    /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
+    ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
+    open func remove(_ generator: TableCellGenerator,
+                     with animateOption: AnimateOption,
+                     needScrollAt scrollPosition: UITableView.ScrollPosition?,
+                     needRemoveEmptySection: Bool) {
+        guard let index = findGenerator(generator) else { return }
+        self.removeGenerator(with: index,
+                             with: animateOption.animation,
                              needScrollAt: scrollPosition,
                              needRemoveEmptySection: needRemoveEmptySection)
     }
