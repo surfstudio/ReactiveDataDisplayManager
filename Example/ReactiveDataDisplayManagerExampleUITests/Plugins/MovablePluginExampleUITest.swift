@@ -27,11 +27,11 @@ final class MovablePluginExampleUITest: BaseUITestCase {
         let destinationCell = getCell(for: .collection, collectionId: collectionId, cellId: destinationDraggable)
         sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .slow, thenHoldForDuration: duration)
 
-        wait(for: [], timeout: Constants.waitTime, enforceOrder: false)
-
         let firstCell = getFirstCell(for: .collection, id: collectionId)
 
-        XCTAssertTrue(firstCell.label == destinationDraggable)
+        XCTAssertTrue(firstCell.waitForLabelEqualTo(destinationDraggable,
+                                                    timeout: Constants.waitTime)
+        )
     }
 
     func testTable_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
@@ -54,11 +54,11 @@ final class MovablePluginExampleUITest: BaseUITestCase {
                    withVelocity: .slow,
                    thenHoldForDuration: duration)
 
-        wait(for: [], timeout: Constants.waitTime, enforceOrder: false)
-
         let firstCell = getFirstCell(for: .table, id: tableId)
 
-        XCTAssertTrue(firstCell.label == "Cell: 2")
+        XCTAssertTrue(firstCell.waitForLabelEqualTo("Cell: 2",
+                                                    timeout: Constants.waitTime)
+        )
     }
 
 }

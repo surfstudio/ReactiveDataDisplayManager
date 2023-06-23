@@ -27,11 +27,11 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
         let destinationCell = getCell(for: .collection, collectionId: collectionId, cellId: destinationDraggable)
         sourceCell.press(forDuration: duration, thenDragTo: destinationCell)
 
-        wait(for: [], timeout: Constants.waitTime)
-
         let firstCell = getFirstCell(for: .collection, id: collectionId)
 
-        XCTAssertTrue(firstCell.label == destinationDraggable)
+        XCTAssertTrue(firstCell.waitForLabelEqualTo(destinationDraggable,
+                                                    timeout: Constants.waitTime)
+        )
     }
 
     func testTable_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
@@ -47,11 +47,11 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
         let destinationCell = getCell(for: .table, collectionId: tableId, cellId: destinationDraggable)
         sourceCell.press(forDuration: duration, thenDragTo: destinationCell)
 
-        wait(for: [], timeout: Constants.waitTime)
-
         let firstCell = getFirstCell(for: .table, id: tableId)
 
-        XCTAssertTrue(firstCell.label == destinationDraggable)
+        XCTAssertTrue(firstCell.waitForLabelEqualTo("Cell: 2",
+                                                    timeout: Constants.waitTime)
+        )
     }
 
 }
