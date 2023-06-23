@@ -81,9 +81,9 @@ public class CollectionBackwardPaginatablePlugin: BaseCollectionPlugin<Collectio
                 return
             }
 
-            // Hack: Update progressView position. Imitation of global header view like `tableFooterView`
+            // Hack: Update progressView position. Imitation of global header view like `tableHeaderView`
 
-            progressView.frame = .init(origin: .init(x: progressView.frame.origin.x, y: 0),
+            progressView.frame = .init(origin: .init(x: progressView.frame.origin.x, y: -progressView.frame.height),
                                        size: progressView.frame.size)
 
             output?.loadPrevPage(with: self)
