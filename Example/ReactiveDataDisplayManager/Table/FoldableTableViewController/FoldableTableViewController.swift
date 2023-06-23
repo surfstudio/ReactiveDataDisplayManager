@@ -68,9 +68,9 @@ private extension FoldableTableViewController {
         return generators
     }
 
-    func makeFoldableCellGenerator(id: String) -> FoldableCellGenerator {
+    func makeFoldableCellGenerator(id: String) -> TableCellGenerator {
         // Create foldable generator
-        let generator = FoldableCellGenerator(with: .init(title: id, isExpanded: false))
+        let generator = FoldableTableViewCell.rddm.foldableGenerator(with: .init(title: id, isExpanded: false))
 
         // Create and add child generators
         generator.childGenerators = Constants.titleForSubcells.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
