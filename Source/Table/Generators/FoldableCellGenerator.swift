@@ -12,20 +12,9 @@ open class FoldableCellGenerator<Cell: UITableViewCell & ConfigurableItem & Fold
     // MARK: - FoldableItem
 
     open var animation: TableFoldablePlugin.AnimationGroup = (.left, .top)
-
-    public var didFoldEvent = BaseEvent<Bool>()
-
-    public var isExpanded = false {
-        didSet {
-            onStateChanged?(isExpanded)
-        }
-    }
-
+    open var didFoldEvent = BaseEvent<Bool>()
+    open var isExpanded = false
     open var childGenerators: [TableCellGenerator] = []
-
-    // MARK: - Private
-
-    private var onStateChanged: ((Bool) -> Void)?
 
     // MARK: - BaseCellGenerator
 
@@ -34,7 +23,7 @@ open class FoldableCellGenerator<Cell: UITableViewCell & ConfigurableItem & Fold
 
         cell.setExpanded(isExpanded)
 
-        onStateChanged = { [weak cell] isExpanded in
+        didFoldEvent.addListner(with: "rddm.foldable-on-dequeue") { [weak cell] isExpanded in
             cell?.setExpanded(isExpanded)
         }
     }

@@ -11,17 +11,9 @@ open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & Configur
 
     // MARK: - FoldableItem
 
-    public var didFoldEvent = BaseEvent<Bool>()
-    public var isExpanded = false {
-        didSet {
-            onStateChanged?(isExpanded)
-        }
-    }
-    public var childGenerators: [CollectionCellGenerator] = []
-
-    // MARK: - Private
-
-    private var onStateChanged: ((Bool) -> Void)?
+    open var didFoldEvent = BaseEvent<Bool>()
+    open var isExpanded = false
+    open var childGenerators: [CollectionCellGenerator] = []
 
     // MARK: - BaseCollectionCellGenerator
 
@@ -30,7 +22,7 @@ open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & Configur
         
         cell.setExpanded(isExpanded)
 
-        onStateChanged = { [weak cell] isExpanded in
+        didFoldEvent.addListner(with: "rddm.foldable-on-dequeue") { [weak cell] isExpanded in
             cell?.setExpanded(isExpanded)
         }
     }

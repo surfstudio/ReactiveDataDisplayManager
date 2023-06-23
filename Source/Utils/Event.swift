@@ -15,8 +15,9 @@ public protocol EmptyEvent {
 
     /// Add new listner.
     ///
+    /// - Parameter id: a unique id for listner
     /// - Parameter listner: New listner.
-    func addListner(_ listner: @escaping Lambda)
+    func addListner(with id: String, _ listner: @escaping Lambda)
 
     /// Notify all listners.
     func invoke()
@@ -33,8 +34,9 @@ public protocol Event {
 
     /// Add new listner.
     ///
+    /// - Parameter id: a unique id for listner
     /// - Parameter listner: New listner.
-    func addListner(_ listner: @escaping Lambda)
+    func addListner(with id: String, _ listner: @escaping Lambda)
 
     /// Notify all listners.
     ///
@@ -69,22 +71,22 @@ public class BaseEvent<Input>: Event {
         left.addListner(right)
     }
 
-    private var listners: [Lambda]
+    private var listners: [String: Lambda]
 
     public var isEmpty: Bool {
         return listners.isEmpty
     }
 
     public init() {
-        self.listners = []
+        self.listners = [:]
     }
 
-    public func addListner(_ listner: @escaping Lambda) {
-        self.listners.append(listner)
+    public func addListner(with id: String = UUID().uuidString,_ listner: @escaping Lambda) {
+        self.listners[id] = listner
     }
 
     public func invoke(with input: Input) {
-        self.listners.forEach({ $0(input) })
+        self.listners.values.forEach({ $0(input) })
     }
 
     public func clear() {
@@ -110,18 +112,18 @@ public class BaseEmptyEvent: EmptyEvent {
         left.addListner(right)
     }
 
-    private var listners: [Lambda]
+    private var listners: [String: Lambda]
 
     public init() {
-        self.listners = [Lambda]()
+        self.listners = [:]
     }
 
-    public func addListner(_ listner: @escaping Lambda) {
-        self.listners.append(listner)
+    public func addListner(with id: String = UUID().uuidString, _ listner: @escaping Lambda) {
+        self.listners[id] = listner
     }
 
     public func invoke() {
-        self.listners.forEach({ $0() })
+        self.listners.values.forEach({ $0() })
     }
 
     public func clear() {
