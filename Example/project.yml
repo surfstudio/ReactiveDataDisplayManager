@@ -20,6 +20,11 @@ targets:
     ReactiveDataDisplayManagerExample_iOS:
       platform: iOS
       deploymentTarget: 11.0
+      scheme:
+        configVariants: all
+        testTargets:
+            - ReactiveDataDisplayManagerExampleUITests
+        gatherCoverageData: true
       sources:
         - path: ReactiveDataDisplayManager
       dependencies:
@@ -32,7 +37,6 @@ targets:
       templateAttributes:
         bundle_id: ru.surfstudio.rddm.example
         bundle_name: ReactiveDataDisplayManagerExample
-        ui_test: ReactiveDataDisplayManagerExampleUITests
 
     ReactiveDataDisplayManagerExample_tvOS:
       platform: tvOS
@@ -49,7 +53,6 @@ targets:
       templateAttributes:
         bundle_id: ru.surfstudio.rddm.tv_example
         bundle_name: ReactiveDataDisplayManagerExampleTv
-        ui_test: ReactiveDataDisplayManagerExampleUITests
 
     ReactiveDataDisplayManagerExampleUITests:
         templates:

@@ -6,8 +6,6 @@ targetTemplates:
       type: application
       scheme:
         configVariants: all
-        testTargets:
-            - ${ui_test}
         gatherCoverageData: true
       dependencies:
         - sdk: UIKit.framework
