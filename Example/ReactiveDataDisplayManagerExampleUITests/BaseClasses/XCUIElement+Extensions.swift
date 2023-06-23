@@ -22,4 +22,13 @@ extension XCUIElement {
         return result == .completed
     }
 
+    func waitForLabelEqualTo(_ expectedLabel: String, timeout: TimeInterval) -> Bool {
+        let predicate = NSPredicate(format: "label == %@", expectedLabel)
+        let expectation = XCTNSPredicateExpectation(predicate: predicate, object: self)
+
+        let result = XCTWaiter().wait(for: [expectation], timeout: timeout)
+
+        return result == .completed
+    }
+
 }
