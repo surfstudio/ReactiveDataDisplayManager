@@ -213,7 +213,6 @@ extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput 
                 self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
 
                 let newGeneratorsHeight = self.adapter.sections.first?.generators.reduce(0) {
-                    print($1.cellHeight)
                     return ($0 + $1.cellHeight)
                 }
 
