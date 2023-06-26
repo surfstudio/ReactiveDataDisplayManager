@@ -143,8 +143,45 @@ open class GravityTableManager: BaseTableManager {
 
     open func replace(oldGenerator: CellGeneratorType,
                       on newGenerator: CellGeneratorType,
-                      removeAnimation: UITableView.RowAnimation = .automatic,
-                      insertAnimation: UITableView.RowAnimation = .automatic) {
+                      removeInsertAnimation: TableRowAnimationGroup = .animated(.automatic, .automatic)) {
+        guard let index = self.findGenerator(oldGenerator) else { return }
+
+        generators[index.sectionIndex].remove(at: index.generatorIndex)
+        generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
+
+        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
+
+        modifier?.replace(at: indexPath, with: removeInsertAnimation.value)
+    }
+
+    open func replace(header: HeaderGeneratorType, with animation: TableRowAnimation = .animated(.fade)) {
+        guard let indexOfHeader = self.sections.firstIndex(where: { $0 === header }) else {
+            self.addSectionHeaderGenerator(header)
+            return
+        }
+
+        self.sections[indexOfHeader] = header
+        modifier?.reloadSections(at: [indexOfHeader], with: animation.value)
+    }
+
+    open func remove(_ generator: CellGeneratorType,
+                     with animation: TableRowAnimation = .animated(.automatic),
+                     needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
+                     needRemoveEmptySection: Bool = false) {
+        guard let index = self.findGenerator(generator) else { return }
+        self.removeGenerator(with: index,
+                             with: animation,
+                             needScrollAt: scrollPosition,
+                             needRemoveEmptySection: needRemoveEmptySection)
+    }
+
+    // MARK: - Depcrecated
+
+    @available(*, deprecated, message: "Please use method with a new `TableRowAnimationGroup` parameters")
+    open func replace(oldGenerator: CellGeneratorType,
+                      on newGenerator: CellGeneratorType,
+                      removeAnimation: UITableView.RowAnimation,
+                      insertAnimation: UITableView.RowAnimation) {
         guard let index = self.findGenerator(oldGenerator) else { return }
 
         generators[index.sectionIndex].remove(at: index.generatorIndex)
@@ -154,7 +191,8 @@ open class GravityTableManager: BaseTableManager {
         modifier?.replace(at: indexPath, with: (remove: removeAnimation, insert: insertAnimation))
     }
 
-    open func replace(header: HeaderGeneratorType, with animation: UITableView.RowAnimation = .fade) {
+    @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
+    open func replace(header: HeaderGeneratorType, with animation: UITableView.RowAnimation) {
         guard let indexOfHeader = self.sections.firstIndex(where: { $0 === header }) else {
             self.addSectionHeaderGenerator(header)
             return
@@ -164,13 +202,14 @@ open class GravityTableManager: BaseTableManager {
         modifier?.reloadSections(at: [indexOfHeader], with: animation)
     }
 
+    @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
     open func remove(_ generator: CellGeneratorType,
-                     with animation: UITableView.RowAnimation = .automatic,
+                     with animation: UITableView.RowAnimation,
                      needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                      needRemoveEmptySection: Bool = false) {
         guard let index = self.findGenerator(generator) else { return }
         self.removeGenerator(with: index,
-                             with: animation,
+                             with: .animated(animation),
                              needScrollAt: scrollPosition,
                              needRemoveEmptySection: needRemoveEmptySection)
     }

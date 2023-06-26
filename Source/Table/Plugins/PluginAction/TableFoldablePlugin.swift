@@ -60,9 +60,9 @@ private extension TableFoldablePlugin {
         if let manager = manager as? GravityTableManager {
             manager.addCellGenerators(childGenerators, after: generator)
         } else if let foldable = generator as? FoldableItem {
-            manager?.insertManual(after: generator, new: childGenerators, with: foldable.animation.insert)
+            manager?.insertManual(after: generator, new: childGenerators, with: .animated(foldable.animation.insert))
         } else {
-            manager?.insertManual(after: generator, new: childGenerators)
+            manager?.insertManual(after: generator, new: childGenerators, with: .notAnimated)
         }
     }
 

@@ -11,22 +11,6 @@ import UIKit
 /// Base implementation of DataDisplayManager for UITableView that contains minimal interface
 open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
 
-    // MARK: - Nested
-
-    public enum AnimateOption {
-        case animated(UITableView.RowAnimation)
-        case none
-
-        var animation: UITableView.RowAnimation? {
-            switch self {
-            case .animated(let animation):
-                return animation
-            case .none:
-                return nil
-            }
-        }
-    }
-
     // MARK: - Typealias
 
     public typealias CollectionType = UITableView
@@ -104,9 +88,8 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     /// A constant that identifies a relative position in the table view (top, middle, bottom)
     /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
     ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
-    @available(*, deprecated, message: "Please use method with a new `AnimateOption` parameter")
     open func remove(_ generator: TableCellGenerator,
-                     with animation: UITableView.RowAnimation?,
+                     with animation: TableRowAnimation,
                      needScrollAt scrollPosition: UITableView.ScrollPosition?,
                      needRemoveEmptySection: Bool) {
         guard let index = findGenerator(generator) else { return }
@@ -116,22 +99,16 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
                              needRemoveEmptySection: needRemoveEmptySection)
     }
 
-    /// Removes generator from data display manager. Generators compares by references.
-    ///
-    /// - Parameters:
-    ///   - generator: Generator to delete.
-    ///   - animateOption: Animation for row action.
-    ///   - needScrollAt: If not nil than performs scroll before removing generator.
-    /// A constant that identifies a relative position in the table view (top, middle, bottom)
-    /// for row when scrolling concludes. See UITableViewScrollPosition for descriptions of valid constants.
-    ///   - needRemoveEmptySection: Pass **true** if you need to remove section if it'll be empty after deleting.
+    // MARK: - Deprecated
+
+    @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
     open func remove(_ generator: TableCellGenerator,
-                     with animateOption: AnimateOption,
+                     with animation: UITableView.RowAnimation?,
                      needScrollAt scrollPosition: UITableView.ScrollPosition?,
                      needRemoveEmptySection: Bool) {
         guard let index = findGenerator(generator) else { return }
         self.removeGenerator(with: index,
-                             with: animateOption.animation,
+                             with: animation.map { .animated($0) } ?? .notAnimated,
                              needScrollAt: scrollPosition,
                              needRemoveEmptySection: needRemoveEmptySection)
     }
@@ -152,7 +129,7 @@ extension BaseTableManager {
     }
 
     func removeGenerator(with index: (sectionIndex: Int, generatorIndex: Int),
-                         with animation: UITableView.RowAnimation? = .automatic,
+                         with animation: TableRowAnimation,
                          needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                          needRemoveEmptySection: Bool = false) {
 
@@ -169,7 +146,7 @@ extension BaseTableManager {
         }
 
         // apply changes in table
-        modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: animation)
+        modifier?.removeRows(at: [indexPath], and: sectionIndexPath, with: animation.value)
 
         // scroll if needed
         if let scrollPosition = scrollPosition {
@@ -211,7 +188,7 @@ extension BaseTableManager {
     // MARK: - Inserting
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
-                with animation: UITableView.RowAnimation = .automatic) {
+                with animation: TableRowAnimation) {
 
         elements.forEach { [weak self] element in
             element.generator.registerCell(in: view)
@@ -222,12 +199,12 @@ extension BaseTableManager {
             IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
         }
 
-        modifier?.insertRows(at: indexPaths, with: animation)
+        modifier?.insertRows(at: indexPaths, with: animation.value)
     }
     
     func insertManual(after generator: TableCellGenerator,
-                     new newGenerators: [TableCellGenerator],
-                     with animation: UITableView.RowAnimation = .automatic) {
+                      new newGenerators: [TableCellGenerator],
+                      with animation: TableRowAnimation) {
         guard let index = self.findGenerator(generator) else { return }
 
         let elements = newGenerators.enumerated().map { item in
