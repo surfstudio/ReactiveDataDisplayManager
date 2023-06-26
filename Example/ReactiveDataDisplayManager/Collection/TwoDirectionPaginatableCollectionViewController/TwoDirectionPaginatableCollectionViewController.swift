@@ -155,7 +155,7 @@ private extension TwoDirectionPaginatableCollectionViewController {
         let newGenerators = (0...Constants.pageSize).map { _ in
             return makeGenerator()
         }
-        adapter.insert(after: emptyCell, new: newGenerators)
+        adapter.insert(after: emptyCell, new: newGenerators, with: nil)
 
         // pages count is infinite if it`s a single direction scroll
         return currentPage != 0
@@ -208,48 +208,19 @@ extension TwoDirectionPaginatableCollectionViewController: BackwardPaginatableOu
                 return
             }
             if self.canFillPages() {
+                let initialContentHeight = self.collectionView.contentSize.height
+
                 let canIterate = self.fillPrev()
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
                 self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
-                
+
                 self.collectionView.scrollToItem(at: IndexPath(item: Constants.pageSize, section: 0), at: .top, animated: false)
 
-                //option 1
-//                let initialGeneratorsHeight = self.adapter.sections.first?.generators.reduce(0) {
-//                    if let cell = $1 as? CalculatableHeightCollectionCellGenerator<TitleCollectionViewCell> {
-//                        return ($0 + cell.getSize().height)
-//                    } else {
-//                        return $0
-//                    }
-//                }
-//option 2
-//                let initialContentHeight = self.collectionView.collectionViewLayout.collectionViewContentSize.height
-//
-//                let canIterate = self.fillPrev()
-//                input?.updateProgress(isLoading: false)
-//                input?.updatePagination(canIterate: canIterate)
-//                self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
-//option 1
-//                let newGeneratorsHeight = self.adapter.sections.first?.generators.reduce(0) {
-//                    if let cell = $1 as? CalculatableHeightCollectionCellGenerator<TitleCollectionViewCell> {
-//                        return ($0 + cell.getSize().height)
-//                    } else {
-//                        return $0
-//                    }
-//                }
-//
-//                if let initialGeneratorsHeight = initialGeneratorsHeight, let newGeneratorsHeight = newGeneratorsHeight {
-//                    let finalOffset = CGPoint(x: 0, y: newGeneratorsHeight - initialGeneratorsHeight)
-//                    self.collectionView.setContentOffset(finalOffset, animated: false)
-//                }
-//option 2
+                let newContentHeight = self.collectionView.contentSize.height
 
-//                self.view.layoutIfNeeded()
-//                let newContentHeight = self.collectionView.collectionViewLayout.collectionViewContentSize.height
-//
-//                let finalOffset = CGPoint(x: 0, y: initialContentHeight - newContentHeight)
-//                self.collectionView.setContentOffset(finalOffset, animated: false)
+                let finalOffset = CGPoint(x: 0, y: newContentHeight - initialContentHeight - Constants.paginatorHeight)
+                self.collectionView.setContentOffset(finalOffset, animated: false)
             } else {
                     input?.updateProgress(isLoading: false)
                     input?.updateError(SampleError.sample)

@@ -144,13 +144,14 @@ extension BaseCollectionManager {
     ///   - after: Generator after which new generator will be added. Must be in the DDM.
     ///   - new: Generators which you want to insert after current generator.
     public func insert(after generator: CollectionCellGenerator,
-                       new newGenerators: [CollectionCellGenerator]) {
+                       new newGenerators: [CollectionCellGenerator],
+                       with animation: CollectionItemAnimation? = .animated) {
         guard let index = self.findGenerator(generator) else { return }
 
         let elements = newGenerators.enumerated().map { item in
             (item.element, index.sectionIndex, index.generatorIndex + item.offset + 1)
         }
-        self.insert(elements: elements)
+        self.insert(elements: elements, with: animation)
     }
 
     /// Removes generator from data display manager. Generators compares by references.
@@ -176,7 +177,7 @@ extension BaseCollectionManager {
 
 private extension BaseCollectionManager {
 
-    func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)]) {
+    func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)], with animation: CollectionItemAnimation? = .animated) {
 
         elements.forEach { [weak self] element in
             self?.sections[element.sectionIndex].generators.insert(element.generator, at: element.generatorIndex)
@@ -187,7 +188,7 @@ private extension BaseCollectionManager {
         }
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-        modifier?.insertRows(at: indexPaths, with: .animated)
+        modifier?.insertRows(at: indexPaths, with: animation ?? .none)
     }
 
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {
