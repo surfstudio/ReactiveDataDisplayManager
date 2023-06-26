@@ -31,7 +31,7 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
 
             if foldable.isExpanded {
                 foldable.childGenerators.forEach { manager?.remove($0,
-                                                                   with: foldable.animation.remove,
+                                                                   with: .animated(foldable.animation.remove),
                                                                    needScrollAt: nil,
                                                                    needRemoveEmptySection: false)
                 }
