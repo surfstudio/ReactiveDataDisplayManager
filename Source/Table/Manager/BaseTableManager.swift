@@ -201,7 +201,7 @@ extension BaseTableManager {
 
         modifier?.insertRows(at: indexPaths, with: animation.value)
     }
-    
+
     func insertManual(after generator: TableCellGenerator,
                       new newGenerators: [TableCellGenerator],
                       with animation: TableRowAnimation) {
