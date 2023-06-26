@@ -8,12 +8,18 @@
 import UIKit
 
 // swiftlint:disable:next line_length
+/// A generator that can insert and remove child generators by tap
 open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & ConfigurableItem & FoldableStateHolder>: BaseCollectionCellGenerator<Cell>, CollectionFoldableItem {
 
     // MARK: - FoldableItem
 
+    /// Event on changed `isExpanded` state
     open var didFoldEvent = BaseEvent<Bool>()
+
+    /// Folded/unfolded state
     open var isExpanded = false
+
+    /// Child generators which can be folded/unfolded
     open var childGenerators: [CollectionCellGenerator] = []
 
     // MARK: - BaseCollectionCellGenerator

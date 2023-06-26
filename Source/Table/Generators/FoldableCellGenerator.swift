@@ -7,13 +7,21 @@
 
 import UIKit
 
+/// A generator that can insert and remove child generators by tap
 open class FoldableCellGenerator<Cell: UITableViewCell & ConfigurableItem & FoldableStateHolder>: BaseCellGenerator<Cell>, FoldableItem {
 
     // MARK: - FoldableItem
 
+    /// Animations for cells insertion and deletion
     open var animation: TableFoldablePlugin.AnimationGroup = (.left, .top)
+
+    /// Event on changed `isExpanded` state
     open var didFoldEvent = BaseEvent<Bool>()
+
+    /// Folded/unfolded state
     open var isExpanded = false
+
+    /// Child generators which can be folded/unfolded
     open var childGenerators: [TableCellGenerator] = []
 
     // MARK: - BaseCellGenerator
