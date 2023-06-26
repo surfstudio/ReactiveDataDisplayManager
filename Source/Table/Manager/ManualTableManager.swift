@@ -310,8 +310,7 @@ public class ManualTableManager: BaseTableManager {
     /// - Parameters:
     ///   - oldGenerator: Generator that should be replaced. Must be in the DDM.
     ///   - newGenerator: Generator that should be added instead an old generator.
-    ///   - removeAnimation: Animation for remove action.
-    ///   - insertAnimation: Animation for insert action.
+    ///   - removeInsertAnimation: Animation for remove and insert action.
     open func replace(oldGenerator: TableCellGenerator,
                       on newGenerator: TableCellGenerator,
                       removeInsertAnimation: TableRowAnimationGroup = .animated(.automatic, .automatic)) {
