@@ -177,7 +177,8 @@ extension BaseCollectionManager {
 
 private extension BaseCollectionManager {
 
-    func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)], with animation: CollectionItemAnimation? = .animated) {
+    func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)],
+                with animation: CollectionItemAnimation? = .animated) {
 
         elements.forEach { [weak self] element in
             self?.sections[element.sectionIndex].generators.insert(element.generator, at: element.generatorIndex)

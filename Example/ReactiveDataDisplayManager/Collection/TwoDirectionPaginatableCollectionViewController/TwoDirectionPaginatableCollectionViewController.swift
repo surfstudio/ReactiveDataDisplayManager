@@ -26,9 +26,14 @@ final class TwoDirectionPaginatableCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var forwardProgressView = PaginatorView(frame: .init(x: 0, y: 0, width: collectionView.frame.width, height: Constants.paginatorHeight))
-    private lazy var backwardProgressView = PaginatorView(frame: .init(x: 0, y: 0, width: collectionView.frame.width, height: Constants.paginatorHeight))
-    
+    private lazy var forwardProgressView = PaginatorView(frame: .init(x: 0,
+                                                                      y: 0,
+                                                                      width: collectionView.frame.width,
+                                                                      height: Constants.paginatorHeight))
+    private lazy var backwardProgressView = PaginatorView(frame: .init(x: 0,
+                                                                       y: 0,
+                                                                       width: collectionView.frame.width,
+                                                                       height: Constants.paginatorHeight))
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .paginatable(progressView: forwardProgressView, output: self))
@@ -222,10 +227,10 @@ extension TwoDirectionPaginatableCollectionViewController: BackwardPaginatableOu
                 let finalOffset = CGPoint(x: 0, y: newContentHeight - initialContentHeight - Constants.paginatorHeight)
                 self.collectionView.setContentOffset(finalOffset, animated: false)
             } else {
-                    input?.updateProgress(isLoading: false)
-                    input?.updateError(SampleError.sample)
-                }
+                input?.updateProgress(isLoading: false)
+                input?.updateError(SampleError.sample)
             }
         }
+    }
 
 }
