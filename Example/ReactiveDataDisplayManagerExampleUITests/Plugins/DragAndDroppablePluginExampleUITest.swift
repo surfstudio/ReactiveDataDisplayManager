@@ -11,7 +11,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
     private enum Constants {
         static let dragDuration: TimeInterval = 1
-        static let waitTime: TimeInterval = 5 + dragDuration
+        static let waitTime: TimeInterval = 1.5 + dragDuration * 2
     }
 
     func testСollection_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
@@ -25,7 +25,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
         let sourceCell = getCell(for: .collection, collectionId: collectionId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .collection, collectionId: collectionId, cellId: destinationDraggable)
-        sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .fast, thenHoldForDuration: .zero)
+        sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .slow, thenHoldForDuration: duration)
 
         let firstCell = getFirstCell(for: .collection, id: collectionId)
 
@@ -45,7 +45,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
         let sourceCell = getCell(for: .table, collectionId: tableId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .table, collectionId: tableId, cellId: destinationDraggable)
-        sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .fast, thenHoldForDuration: .zero)
+        sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .slow, thenHoldForDuration: duration)
 
         let firstCell = getFirstCell(for: .table, id: tableId)
 
