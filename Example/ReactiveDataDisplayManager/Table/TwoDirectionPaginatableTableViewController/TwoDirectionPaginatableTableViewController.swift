@@ -203,23 +203,17 @@ extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput 
                 return
             }
             if self.canFillPages() {
-                let initialGeneratorsHeight = self.adapter.sections.first?.generators.reduce(0) {
-                    return ($0 + $1.cellHeight)
-                }
+                let initialContentSizeHeight = self.tableView.contentSize.height
 
                 let canIterate = self.fillPrev()
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
                 self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
 
-                let newGeneratorsHeight = self.adapter.sections.first?.generators.reduce(0) {
-                    return ($0 + $1.cellHeight)
-                }
+                let newContentSizeHeight = self.tableView.contentSize.height
 
-                if let initialGeneratorsHeight = initialGeneratorsHeight, let newGeneratorsHeight = newGeneratorsHeight {
-                    let finalOffset = CGPoint(x: 0, y: newGeneratorsHeight - initialGeneratorsHeight)
-                    self.tableView.setContentOffset(finalOffset, animated: false)
-                }
+                let finalOffset = CGPoint(x: 0, y: newContentSizeHeight - initialContentSizeHeight)
+                self.tableView.setContentOffset(finalOffset, animated: false)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
