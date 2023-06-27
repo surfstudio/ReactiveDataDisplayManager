@@ -77,6 +77,10 @@ public class BaseEvent<Input>: Event {
         return listners.isEmpty
     }
 
+    public var count: Int {
+        return listners.count
+    }
+
     public init() {
         self.listners = [:]
     }
