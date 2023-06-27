@@ -11,7 +11,7 @@ final class MovablePluginExampleUITest: BaseUITestCase {
 
     private enum Constants {
         static let dragDuration: TimeInterval = 1
-        static let waitTime: TimeInterval = 1.5 * dragDuration
+        static let waitTime: TimeInterval = 1.5 + dragDuration * 2
     }
 
     func testСollection_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
