@@ -41,7 +41,7 @@ final class TwoDirectionPaginatableCollectionViewController: UIViewController {
         .build()
 
     private weak var forwardPaginatableInput: PaginatableInput?
-    private weak var backwardPaginatableInput: PaginatableInput?
+    private weak var backwardPaginatableInput: BackwardPaginatableInput?
 
     private var isFirstPageLoading = true
     private var currentPage = 0
@@ -201,11 +201,11 @@ extension TwoDirectionPaginatableCollectionViewController: PaginatableOutput {
 
 extension TwoDirectionPaginatableCollectionViewController: BackwardPaginatableOutput {
 
-    func onBackwardPaginationInitialized(with input: ReactiveDataDisplayManager.PaginatableInput) {
+    func onBackwardPaginationInitialized(with input: ReactiveDataDisplayManager.BackwardPaginatableInput) {
         backwardPaginatableInput = input
     }
 
-    func loadPrevPage(with input: ReactiveDataDisplayManager.PaginatableInput) {
+    func loadPrevPage(with input: ReactiveDataDisplayManager.BackwardPaginatableInput) {
         input.updateProgress(isLoading: true)
 
         delay(.now() + .seconds(2)) { [weak self, weak input] in
@@ -213,19 +213,11 @@ extension TwoDirectionPaginatableCollectionViewController: BackwardPaginatableOu
                 return
             }
             if self.canFillPages() {
-                let initialContentHeight = self.collectionView.contentSize.height
-
                 let canIterate = self.fillPrev()
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
+                input?.returnToScrollPositionBeforeLoading()
                 self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
-
-                self.collectionView.scrollToItem(at: IndexPath(item: Constants.pageSize, section: 0), at: .top, animated: false)
-
-                let newContentHeight = self.collectionView.contentSize.height
-
-                let finalOffset = CGPoint(x: 0, y: newContentHeight - initialContentHeight - Constants.paginatorHeight)
-                self.collectionView.setContentOffset(finalOffset, animated: false)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)

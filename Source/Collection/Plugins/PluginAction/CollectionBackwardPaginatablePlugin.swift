@@ -28,6 +28,8 @@ public class CollectionBackwardPaginatablePlugin: BaseCollectionPlugin<Collectio
 
     private weak var collectionView: UICollectionView?
 
+    private var currentContentHeight: CGFloat = 0
+
     /// Property which indicating availability of pages
     public private(set) var canIterate = false {
         didSet {
@@ -96,11 +98,14 @@ public class CollectionBackwardPaginatablePlugin: BaseCollectionPlugin<Collectio
 
 // MARK: - PaginatableInput
 
-extension CollectionBackwardPaginatablePlugin: PaginatableInput {
+extension CollectionBackwardPaginatablePlugin: BackwardPaginatableInput {
 
     public func updateProgress(isLoading: Bool) {
         self.isLoading = isLoading
         progressView.showProgress(isLoading)
+        if isLoading {
+            currentContentHeight = collectionView?.contentSize.height ?? 0
+        }
     }
 
     public func updateError(_ error: Error?) {
@@ -109,6 +114,12 @@ extension CollectionBackwardPaginatablePlugin: PaginatableInput {
 
     public func updatePagination(canIterate: Bool) {
         self.canIterate = canIterate
+    }
+
+    public func returnToScrollPositionBeforeLoading() {
+        let newContentHeight = collectionView?.contentSize.height ?? 0
+        let finalOffset = CGPoint(x: 0, y: newContentHeight - currentContentHeight - progressView.frame.height)
+        collectionView?.setContentOffset(finalOffset, animated: false)
     }
 
 }

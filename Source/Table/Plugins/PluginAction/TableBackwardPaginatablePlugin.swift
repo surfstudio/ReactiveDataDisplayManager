@@ -28,6 +28,8 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
     private weak var tableView: UITableView?
 
+    private var currentContentSizeHeight: CGFloat = 0
+
     /// Property which indicating availability of pages
     public private(set) var canIterate = false {
         didSet {
@@ -79,11 +81,14 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
 // MARK: - PaginatableInput
 
-extension TableBackwardPaginatablePlugin: PaginatableInput {
+extension TableBackwardPaginatablePlugin: BackwardPaginatableInput {
 
     public func updateProgress(isLoading: Bool) {
         self.isLoading = isLoading
         progressView.showProgress(isLoading)
+        if isLoading {
+            currentContentSizeHeight = tableView?.contentSize.height ?? 0
+        }
     }
 
     public func updateError(_ error: Error?) {
@@ -92,6 +97,13 @@ extension TableBackwardPaginatablePlugin: PaginatableInput {
 
     public func updatePagination(canIterate: Bool) {
         self.canIterate = canIterate
+    }
+
+    public func returnToScrollPositionBeforeLoading() {
+        let newContentSizeHeight = tableView?.contentSize.height ?? 0
+
+        let finalOffset = CGPoint(x: 0, y: newContentSizeHeight - currentContentSizeHeight)
+        tableView?.setContentOffset(finalOffset, animated: false)
     }
 
 }

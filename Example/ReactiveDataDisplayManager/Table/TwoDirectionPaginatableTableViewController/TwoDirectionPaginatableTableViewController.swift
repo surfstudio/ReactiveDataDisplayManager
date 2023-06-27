@@ -42,7 +42,7 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
         .build()
 
     private weak var forwardPaginatableInput: PaginatableInput?
-    private weak var backwardPaginatableInput: PaginatableInput?
+    private weak var backwardPaginatableInput: BackwardPaginatableInput?
 
     private var isFirstPageLoading = true
     private var currentPage = 0
@@ -191,11 +191,11 @@ extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
 
 extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput {
 
-    func onBackwardPaginationInitialized(with input: PaginatableInput) {
+    func onBackwardPaginationInitialized(with input: BackwardPaginatableInput) {
         backwardPaginatableInput = input
     }
 
-    func loadPrevPage(with input: PaginatableInput) {
+    func loadPrevPage(with input: BackwardPaginatableInput) {
         input.updateProgress(isLoading: true)
 
         delay(.now() + .seconds(2)) { [weak self, weak input] in
@@ -203,17 +203,11 @@ extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput 
                 return
             }
             if self.canFillPages() {
-                let initialContentSizeHeight = self.tableView.contentSize.height
-
                 let canIterate = self.fillPrev()
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
+                input?.returnToScrollPositionBeforeLoading()
                 self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
-
-                let newContentSizeHeight = self.tableView.contentSize.height
-
-                let finalOffset = CGPoint(x: 0, y: newContentSizeHeight - initialContentSizeHeight)
-                self.tableView.setContentOffset(finalOffset, animated: false)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)

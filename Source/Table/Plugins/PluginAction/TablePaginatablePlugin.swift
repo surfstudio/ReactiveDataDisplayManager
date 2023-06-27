@@ -42,12 +42,12 @@ extension ProgressDisplayableItem {
 
 }
 
-/// Input signals to control visibility of progressView in header/footer
+/// Input signals to control visibility of progressView in footer
 public protocol PaginatableInput: AnyObject {
 
-    /// Call this method to control availability of **loadNextPage**/**loadPrevPage** action
+    /// Call this method to control availability of **loadNextPage** action
     ///
-    /// - parameter canIterate: `true` if want to use last cell will display event to execute **loadNextPage** /**loadPrevPage**action
+    /// - parameter canIterate: `true` if want to use last cell will display event to execute **loadNextPage** action
     func updatePagination(canIterate: Bool)
 
     /// Call this method to control visibility of progressView in header/footer
@@ -56,6 +56,27 @@ public protocol PaginatableInput: AnyObject {
     func updateProgress(isLoading: Bool)
 
     /// - parameter error: some error got while loading of next/previous page.
+    ///  You should transfer this error into UI representation.
+    func updateError(_ error: Error?)
+}
+
+/// Input signals to control visibility of progressView in header
+public protocol BackwardPaginatableInput: AnyObject {
+
+    /// Call this method to control availability of **loadPrevPage** action
+    ///
+    /// - parameter canIterate: `true` if want to use first cell will display event to execute **loadPrevPage**action
+    func updatePagination(canIterate: Bool)
+
+    /// Call this method to return to initial scroll position before loading. Must be called just **after** finish updateProgress(isLoading: true) and updatePagination actions
+    func returnToScrollPositionBeforeLoading()
+
+    /// Call this method to control visibility of progressView in footer
+    ///
+    /// - parameter isLoading: `true` if want to show `progressView` in footer
+    func updateProgress(isLoading: Bool)
+
+    /// - parameter error: some error got while loading of previous page.
     ///  You should transfer this error into UI representation.
     func updateError(_ error: Error?)
 }
@@ -80,12 +101,12 @@ public protocol BackwardPaginatableOutput: AnyObject {
     /// Called when collection has setup `TableBackwardPaginatablePlugin`
     ///
     /// - parameter input: input signals to hide  `progressView` from header
-    func onBackwardPaginationInitialized(with input: PaginatableInput)
+    func onBackwardPaginationInitialized(with input: BackwardPaginatableInput)
 
     /// Called when collection scrolled to first cell
     ///
     /// - parameter input: input signals to hide  `progressView` from header
-    func loadPrevPage(with input: PaginatableInput)
+    func loadPrevPage(with input: BackwardPaginatableInput)
 }
 
 /// Plugin to display `progressView` while next/previous page is loading
