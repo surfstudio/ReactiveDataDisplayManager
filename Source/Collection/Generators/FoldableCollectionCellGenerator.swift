@@ -7,9 +7,10 @@
 
 import UIKit
 
-// swiftlint:disable:next line_length
+// swiftlint:disable line_length
 /// A generator that can insert and remove child generators by tap
 open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & ConfigurableItem & FoldableStateHolder>: BaseCollectionCellGenerator<Cell>, CollectionFoldableItem {
+// swiftlint:enable line_length
 
     // MARK: - FoldableItem
 
