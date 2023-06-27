@@ -58,7 +58,7 @@ open class BaseTableManager: TableGeneratorsProvider, DataDisplayManager {
     open func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
         generators.forEach { $0.registerCell(in: view) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
-            fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
+            return FatalErrorUtil.fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
         }
         self.generators[sectionIndex].insert(contentsOf: generators, at: generatorIndex + 1)
     }

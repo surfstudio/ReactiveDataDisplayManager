@@ -31,10 +31,10 @@ public class ManualTableManager: BaseTableManager {
     ///   - after: TableHeaderGenerator, after which new TableHeaderGenerator will be added.
     open func insert(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) {
         if self.sections.contains(where: { $0 === headGenerator }) {
-            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
+            return FatalErrorUtil.fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
         }
         guard let anchorIndex = self.sections.firstIndex(where: { $0 === after }) else {
-            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
+            return FatalErrorUtil.fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
         }
         let newIndex = anchorIndex + 1
         self.insert(headGenerator: headGenerator, by: newIndex)
@@ -47,10 +47,10 @@ public class ManualTableManager: BaseTableManager {
     ///   - after: TableHeaderGenerator, before which new TableHeaderGenerator will be added.
     open func insert(headGenerator: TableHeaderGenerator, before: TableHeaderGenerator) {
         if self.sections.contains(where: { $0 === headGenerator }) {
-            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
+            return FatalErrorUtil.fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
         }
         guard let anchorIndex = self.sections.firstIndex(where: { $0 === before }) else {
-            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
+            return FatalErrorUtil.fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
         }
         let newIndex = max(anchorIndex - 1, 0)
         self.insert(headGenerator: headGenerator, by: newIndex)
