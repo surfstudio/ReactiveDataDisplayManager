@@ -71,10 +71,10 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
 
     public func insert(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) {
         if self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) {
-            fatalError("Error adding header generator. Header generator was added earlier")
+            return FatalErrorUtil.fatalError("Error adding header generator. Header generator was added earlier")
         }
         guard let anchorIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === after }) else {
-            fatalError("Error adding header generator. You tried to add generators after unexisted generator")
+            return FatalErrorUtil.fatalError("Error adding header generator. You tried to add generators after unexisted generator")
         }
         let newIndex = anchorIndex + 1
         self.insert(headGenerator: headGenerator, by: newIndex)
@@ -82,10 +82,10 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
 
     public func insert(headGenerator: TableHeaderGenerator, before: TableHeaderGenerator) {
         if self.sectionHeaderGenerators.contains(where: { $0 === headGenerator }) {
-            fatalError("Error adding header generator. Header generator was added earlier")
+            return FatalErrorUtil.fatalError("Error adding header generator. Header generator was added earlier")
         }
         guard let anchorIndex = self.sectionHeaderGenerators.firstIndex(where: { $0 === before }) else {
-            fatalError("Error adding header generator. You tried to add generators after unexisted generator")
+            return FatalErrorUtil.fatalError("Error adding header generator. You tried to add generators after unexisted generator")
         }
         let newIndex = max(anchorIndex - 1, 0)
         self.insert(headGenerator: headGenerator, by: newIndex)
@@ -117,7 +117,7 @@ extension BaseTableDataDisplayManager: DataDisplayManager {
     public func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
         generators.forEach { $0.registerCell(in: view) }
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
-            fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
+            return FatalErrorUtil.fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
         }
         self.cellGenerators[sectionIndex].insert(contentsOf: generators, at: generatorIndex + 1)
     }

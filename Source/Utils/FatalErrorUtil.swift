@@ -8,17 +8,17 @@
 
 import UIKit
 
-func fatalError(_ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) -> Never {
-    FatalErrorUtil.fatalErrorClosure(message(), file, line)
-}
+enum FatalErrorUtil {
 
-struct FatalErrorUtil {
+    static var fatalErrorClosure: (String, StaticString, UInt) -> Void = defaultFatalErrorClosure
 
-    static var fatalErrorClosure: (String, StaticString, UInt) -> Never = defaultFatalErrorClosure
+    private static let defaultFatalErrorClosure: (String, StaticString, UInt) -> Void = { Swift.fatalError($0, file: $1, line: $2) }
 
-    private static let defaultFatalErrorClosure = { Swift.fatalError($0, file: $1, line: $2) }
+    static func fatalError(_ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
+        fatalErrorClosure(message(), file, line)
+    }
 
-    static func replaceFatalError(closure: @escaping (String, StaticString, UInt) -> Never) {
+    static func replaceFatalError(closure: @escaping (String, StaticString, UInt) -> Void) {
         fatalErrorClosure = closure
     }
 

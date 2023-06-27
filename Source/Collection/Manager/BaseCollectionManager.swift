@@ -68,7 +68,7 @@ open class BaseCollectionManager: CollectionGeneratorsProvider, DataDisplayManag
         generators.forEach { $0.registerCell(in: view) }
 
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
-            fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
+            return FatalErrorUtil.fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
         }
 
         self.generators[sectionIndex].insert(contentsOf: generators, at: generatorIndex + 1)
