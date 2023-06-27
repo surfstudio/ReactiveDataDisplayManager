@@ -10,6 +10,23 @@ import XCTest
 
 final class BaseEventTests: XCTestCase {
 
+    func testWhenValueInvokesCorrectly() {
+        // given
+
+        let event = BaseEvent<String>()
+        var result = ""
+
+        event.addListner { result = $0 }
+
+        // when
+
+        event.invoke(with: "invoked")
+
+        // then
+
+        XCTAssertEqual(result, "invoked")
+    }
+
     func testWhenNListnersThenNEvents() {
         // given
 
@@ -89,6 +106,25 @@ final class BaseEventTests: XCTestCase {
         // then
 
         XCTAssertEqual(event.count, n)
+    }
+
+    func testWhenClearThenNoEvents() {
+        // given
+
+        let event = BaseEvent<Int>()
+        var result = false
+
+        event.addListner { _ in result = true }
+
+        // when
+
+        event.clear()
+        event.invoke(with: 0)
+
+        // then
+
+        XCTAssertFalse(result)
+        XCTAssertTrue(event.isEmpty)
     }
 
 }
