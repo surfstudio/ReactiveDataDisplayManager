@@ -22,7 +22,7 @@ extension XCTestCase {
             self.unreachable()
         }
 
-        DispatchQueue.global(qos: .userInitiated).async(execute: testcase)
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .milliseconds(200), execute: testcase)
 
         waitForExpectations(timeout: 3) { _ in
             XCTAssertEqual(assertionMessage, expectedMessage)
