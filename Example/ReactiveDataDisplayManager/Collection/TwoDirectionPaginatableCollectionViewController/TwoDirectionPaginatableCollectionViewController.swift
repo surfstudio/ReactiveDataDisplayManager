@@ -47,7 +47,6 @@ final class TwoDirectionPaginatableCollectionViewController: UIViewController {
     private var currentPage = 0
 
     private lazy var emptyCell = CollectionSpacerCell.rddm.baseGenerator(with: CollectionSpacerCell.Model(height: 0), and: .class)
-    private var currentFirstItem: CollectionCellGenerator?
 
     // MARK: - UIViewController
 
@@ -154,8 +153,6 @@ private extension TwoDirectionPaginatableCollectionViewController {
 
     func fillPrev() -> Bool {
         currentPage -= 1
-        // as the first item is an empty cell
-        currentFirstItem = adapter.sections.first?.generators[safe: 1]
 
         let newGenerators = (0...Constants.pageSize).map { _ in
             return makeGenerator()
