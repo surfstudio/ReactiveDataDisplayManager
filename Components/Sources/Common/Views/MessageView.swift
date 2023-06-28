@@ -103,6 +103,22 @@ extension MessageView: ConfigurableItem {
                     return model
                 })
             }
+
+            public static func dataDetectorTypes(_ value: UIDataDetectorTypes) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(dataDetectorTypes: value)
+                    return model
+                })
+            }
+
+            public static func linkTextAttributes(_ value: [NSAttributedString.Key: Any]?) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(linkTextAttributes: value)
+                    return model
+                })
+            }
         }
 
         // MARK: - Public properties
@@ -115,6 +131,8 @@ extension MessageView: ConfigurableItem {
         private(set) public var alignment: Alignment = .all(.zero)
         private(set) public var internalEdgeInsets: UIEdgeInsets = .zero
         private(set) public var borderStyle: BorderStyle?
+        private(set) public var dataDetectorTypes: UIDataDetectorTypes = []
+        private(set) public var linkTextAttributes: [NSAttributedString.Key: Any]?
 
         // MARK: - Mutation
 
@@ -150,12 +168,45 @@ extension MessageView: ConfigurableItem {
             self.borderStyle = border
         }
 
+        mutating func set(dataDetectorTypes: UIDataDetectorTypes) {
+            self.dataDetectorTypes = dataDetectorTypes
+        }
+
+        mutating func set(linkTextAttributes: [NSAttributedString.Key: Any]?) {
+            self.linkTextAttributes = linkTextAttributes
+        }
+
         // MARK: - Builder
 
         public static func build(@EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
             return content(Property.self).reduce(.init(), { model, editor in
                 editor.edit(model)
             })
+        }
+
+        // MARK: - Equatable
+
+        public static func == (lhs: MessageView.Model, rhs: MessageView.Model) -> Bool {
+            return lhs.text == rhs.text &&
+                lhs.textStyle == rhs.textStyle &&
+                lhs.textLayout == rhs.textLayout &&
+                lhs.textAlignment == rhs.textAlignment &&
+                lhs.backgroundStyle == rhs.backgroundStyle &&
+                lhs.alignment == rhs.alignment &&
+                lhs.internalEdgeInsets == rhs.internalEdgeInsets &&
+                lhs.borderStyle == rhs.borderStyle &&
+                lhs.dataDetectorTypes == rhs.dataDetectorTypes &&
+                areDictionariesEqual(lhs.linkTextAttributes, rhs.linkTextAttributes)
+        }
+
+        // MARK: - Private methods
+
+        private static func areDictionariesEqual(_ lhs: [NSAttributedString.Key: Any]?, _ rhs: [NSAttributedString.Key: Any]?) -> Bool {
+            guard let lhs = lhs, let rhs = rhs else {
+                return lhs == nil && rhs == nil
+            }
+
+            return NSDictionary(dictionary: lhs).isEqual(to: rhs)
         }
 
     }
@@ -180,6 +231,18 @@ extension MessageView: ConfigurableItem {
         layoutIfNeeded()
     }
 
+    public func setLinkTextAttributes(_ attributes: [NSAttributedString.Key: Any]?, for state: UIControl.State) {
+        textView.linkTextAttributes = attributes
+    }
+
+    public func setDataDetectorTypes(_ types: UIDataDetectorTypes) {
+        textView.dataDetectorTypes = types
+    }
+
+    // MARK: - Equatable
+
+
+
 }
 
 // MARK: - Private methods
@@ -193,6 +256,9 @@ private extension MessageView {
         case .attributedString(let attributedString):
             textView.attributedText = attributedString
         }
+
+        textView.dataDetectorTypes = model.dataDetectorTypes
+        textView.linkTextAttributes = model.linkTextAttributes
     }
 
     func applyBackground(style: BackgroundStyle) {

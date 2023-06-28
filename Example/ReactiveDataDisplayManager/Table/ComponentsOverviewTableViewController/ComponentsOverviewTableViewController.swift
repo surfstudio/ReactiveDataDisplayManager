@@ -101,7 +101,10 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                      left: 5,
                                      bottom: 3,
                                      right: 5))
-        property.text(.string("Lorem"))
+        property.text(.string("Check out link: www.example.com"))
+        property.dataDetectorTypes(.link)
+        property.linkTextAttributes([.foregroundColor: UIColor.blue])
+
     }
 
     private lazy var sentMessageGenerator = MessageView.rddm.tableGenerator(with: sentMessageModel, and: .class)
