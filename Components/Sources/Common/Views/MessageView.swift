@@ -14,6 +14,7 @@ public class MessageView: UIView {
     // MARK: - Private properties
 
     private var textView = UITextView(frame: .zero)
+    private var dataDetectionHandler: Model.DataDetectionHandler?
 
 }
 
@@ -24,6 +25,15 @@ extension MessageView: ConfigurableItem {
     // MARK: - Model
 
     public struct Model: Equatable, AlignmentProvider {
+
+        // MARK: - Nested types
+
+        public typealias DataDetectionHandler = (DataDetectionType, String) -> Void
+
+        public enum DataDetectionType {
+            case link
+            case phoneNumber
+        }
 
         // MARK: - Editor
 
@@ -119,6 +129,14 @@ extension MessageView: ConfigurableItem {
                     return model
                 })
             }
+
+            public static func dataDetectionHandler(_ value: DataDetectionHandler?) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(dataDetectionHandler: value)
+                    return model
+                })
+            }
         }
 
         // MARK: - Public properties
@@ -133,6 +151,7 @@ extension MessageView: ConfigurableItem {
         private(set) public var borderStyle: BorderStyle?
         private(set) public var dataDetectorTypes: UIDataDetectorTypes = []
         private(set) public var linkTextAttributes: [NSAttributedString.Key: Any]?
+        private(set) public var dataDetectionHandler: DataDetectionHandler?
 
         // MARK: - Mutation
 
@@ -176,6 +195,10 @@ extension MessageView: ConfigurableItem {
             self.linkTextAttributes = linkTextAttributes
         }
 
+        mutating func set(dataDetectionHandler: DataDetectionHandler?) {
+            self.dataDetectionHandler = dataDetectionHandler
+        }
+
         // MARK: - Builder
 
         public static func build(@EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
@@ -188,15 +211,15 @@ extension MessageView: ConfigurableItem {
 
         public static func == (lhs: MessageView.Model, rhs: MessageView.Model) -> Bool {
             return lhs.text == rhs.text &&
-                lhs.textStyle == rhs.textStyle &&
-                lhs.textLayout == rhs.textLayout &&
-                lhs.textAlignment == rhs.textAlignment &&
-                lhs.backgroundStyle == rhs.backgroundStyle &&
-                lhs.alignment == rhs.alignment &&
-                lhs.internalEdgeInsets == rhs.internalEdgeInsets &&
-                lhs.borderStyle == rhs.borderStyle &&
-                lhs.dataDetectorTypes == rhs.dataDetectorTypes &&
-                areDictionariesEqual(lhs.linkTextAttributes, rhs.linkTextAttributes)
+            lhs.textStyle == rhs.textStyle &&
+            lhs.textLayout == rhs.textLayout &&
+            lhs.textAlignment == rhs.textAlignment &&
+            lhs.backgroundStyle == rhs.backgroundStyle &&
+            lhs.alignment == rhs.alignment &&
+            lhs.internalEdgeInsets == rhs.internalEdgeInsets &&
+            lhs.borderStyle == rhs.borderStyle &&
+            lhs.dataDetectorTypes == rhs.dataDetectorTypes &&
+            areDictionariesEqual(lhs.linkTextAttributes, rhs.linkTextAttributes)
         }
 
         // MARK: - Private methods
@@ -217,6 +240,8 @@ extension MessageView: ConfigurableItem {
 
         textView.backgroundColor = .clear
         textView.isEditable = false
+        textView.isSelectable = true
+        textView.isUserInteractionEnabled = true
         textView.isScrollEnabled = false
         configureTextView(textView, with: model)
         textView.textColor = model.textStyle.color
@@ -239,10 +264,6 @@ extension MessageView: ConfigurableItem {
         textView.dataDetectorTypes = types
     }
 
-    // MARK: - Equatable
-
-
-
 }
 
 // MARK: - Private methods
@@ -259,6 +280,8 @@ private extension MessageView {
 
         textView.dataDetectorTypes = model.dataDetectorTypes
         textView.linkTextAttributes = model.linkTextAttributes
+        textView.delegate = self
+        dataDetectionHandler = model.dataDetectionHandler
     }
 
     func applyBackground(style: BackgroundStyle) {
@@ -276,6 +299,25 @@ private extension MessageView {
         layer.borderColor = borderStyle.borderColor
         layer.borderWidth = borderStyle.borderWidth
         layer.maskedCorners = borderStyle.maskedCorners
+    }
+
+    func handleDataDetection(_ type: Model.DataDetectionType, _ data: String) {
+        guard let dataDetectionHandler = dataDetectionHandler else {
+            return
+        }
+
+        dataDetectionHandler(type, data)
+    }
+
+}
+
+// MARK: - UITextViewDelegate
+
+extension MessageView: UITextViewDelegate {
+
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        handleDataDetection(.link, URL.absoluteString)
+        return false
     }
 
 }
