@@ -269,14 +269,6 @@ extension MessageView: ConfigurableItem {
         layoutIfNeeded()
     }
 
-    public func setLinkTextAttributes(_ attributes: [NSAttributedString.Key: Any]?, for state: UIControl.State) {
-        textView.linkTextAttributes = attributes
-    }
-
-    public func setDataDetectorTypes(_ types: UIDataDetectorTypes) {
-        textView.dataDetectorTypes = types
-    }
-
 }
 
 // MARK: - Private methods
