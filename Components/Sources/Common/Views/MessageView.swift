@@ -137,6 +137,14 @@ extension MessageView: ConfigurableItem {
                     return model
                 })
             }
+
+            public static func selectable(_ selectable: Bool) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(selectable: selectable)
+                    return model
+                })
+            }
         }
 
         // MARK: - Public properties
@@ -152,6 +160,7 @@ extension MessageView: ConfigurableItem {
         private(set) public var dataDetectorTypes: UIDataDetectorTypes = []
         private(set) public var linkTextAttributes: [NSAttributedString.Key: Any]?
         private(set) public var dataDetectionHandler: DataDetectionHandler?
+        private(set) public var selectable: Bool = false
 
         // MARK: - Mutation
 
@@ -199,6 +208,10 @@ extension MessageView: ConfigurableItem {
             self.dataDetectionHandler = dataDetectionHandler
         }
 
+        mutating func set(selectable: Bool) {
+            self.selectable = selectable
+        }
+
         // MARK: - Builder
 
         public static func build(@EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
@@ -240,7 +253,7 @@ extension MessageView: ConfigurableItem {
 
         textView.backgroundColor = .clear
         textView.isEditable = false
-        textView.isSelectable = true
+        textView.isSelectable = model.selectable
         textView.isUserInteractionEnabled = true
         textView.isScrollEnabled = false
         configureTextView(textView, with: model)

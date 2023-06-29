@@ -109,6 +109,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
+        property.selectable(true)
 
     }
 
