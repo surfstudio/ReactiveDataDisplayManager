@@ -143,9 +143,9 @@ public extension BaseCollectionPlugin {
     ///
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
-    static func backwardPaginatable(progressView: CollectionBackwardPaginatablePlugin.ProgressView,
-                                    output: BackwardPaginatableOutput) -> CollectionBackwardPaginatablePlugin {
-        return CollectionBackwardPaginatablePlugin(progressView: progressView, with: output)
+    static func topPaginatable(progressView: CollectionTopPaginatablePlugin.ProgressView,
+                                    output: TopPaginatableOutput) -> CollectionTopPaginatablePlugin {
+        return CollectionTopPaginatablePlugin(progressView: progressView, with: output)
 
     }
 

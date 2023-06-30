@@ -1,5 +1,5 @@
 //
-//  CollectionBackwardPaginatablePlugin.swift
+//  CollectionTopPaginatablePlugin.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Антон Голубейков on 23.06.2023.
@@ -13,7 +13,7 @@ import UIKit
 /// Hide `progressView` when finish loading request
 ///
 /// - Warning: Specify itemSize of your layout to proper `willDisplay` calls and correct `contentSize`
-public class CollectionBackwardPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> {
+public class CollectionTopPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> {
 
     // MARK: - Nested types
 
@@ -22,7 +22,7 @@ public class CollectionBackwardPaginatablePlugin: BaseCollectionPlugin<Collectio
     // MARK: - Private Properties
 
     private let progressView: ProgressView
-    private weak var output: BackwardPaginatableOutput?
+    private weak var output: TopPaginatableOutput?
 
     private var isLoading = false
 
@@ -55,7 +55,7 @@ public class CollectionBackwardPaginatablePlugin: BaseCollectionPlugin<Collectio
 
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
-    init(progressView: ProgressView, with output: BackwardPaginatableOutput) {
+    init(progressView: ProgressView, with output: TopPaginatableOutput) {
         self.progressView = progressView
         self.output = output
     }
@@ -65,7 +65,7 @@ public class CollectionBackwardPaginatablePlugin: BaseCollectionPlugin<Collectio
     public override func setup(with manager: BaseCollectionManager?) {
         collectionView = manager?.view
         canIterate = false
-        output?.onBackwardPaginationInitialized(with: self)
+        output?.onTopPaginationInitialized(with: self)
         self.progressView.setOnRetry { [weak self] in
             guard let input = self, let output = self?.output else {
                 return
@@ -98,7 +98,7 @@ public class CollectionBackwardPaginatablePlugin: BaseCollectionPlugin<Collectio
 
 // MARK: - PaginatableInput
 
-extension CollectionBackwardPaginatablePlugin: BackwardPaginatableInput {
+extension CollectionTopPaginatablePlugin: TopPaginatableInput {
 
     public func updateProgress(isLoading: Bool) {
         self.isLoading = isLoading

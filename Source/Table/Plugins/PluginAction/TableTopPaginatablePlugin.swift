@@ -1,5 +1,5 @@
 //
-//  TableBackwardPaginatablePlugin.swift
+//  TableTopPaginatablePlugin.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Антон Голубейков on 20.06.2023.
@@ -13,7 +13,7 @@ import UIKit
 /// Hide `progressView` when finish loading request
 ///
 /// - Warning: Specify estimatedRowHeight of your layout to proper `willDisplay` calls and correct `contentSize`
-public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
+public class TableTopPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - Nested types
 
@@ -22,7 +22,7 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
     // MARK: - Private Properties
 
     private let progressView: ProgressView
-    private weak var output: BackwardPaginatableOutput?
+    private weak var output: TopPaginatableOutput?
 
     private var isLoading = false
 
@@ -45,7 +45,7 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
-    init(progressView: ProgressView, with output: BackwardPaginatableOutput) {
+    init(progressView: ProgressView, with output: TopPaginatableOutput) {
         self.progressView = progressView
         self.output = output
     }
@@ -55,7 +55,7 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
     public override func setup(with manager: BaseTableManager?) {
         self.tableView = manager?.view
         self.canIterate = false
-        self.output?.onBackwardPaginationInitialized(with: self)
+        self.output?.onTopPaginationInitialized(with: self)
         self.progressView.setOnRetry { [weak self] in
             guard let input = self, let output = self?.output else {
                 return
@@ -81,7 +81,7 @@ public class TableBackwardPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
 // MARK: - PaginatableInput
 
-extension TableBackwardPaginatablePlugin: BackwardPaginatableInput {
+extension TableTopPaginatablePlugin: TopPaginatableInput {
 
     public func updateProgress(isLoading: Bool) {
         self.isLoading = isLoading

@@ -26,22 +26,22 @@ final class TwoDirectionPaginatableCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var forwardProgressView = PaginatorView(frame: .init(x: 0,
+    private lazy var bottomProgressView = PaginatorView(frame: .init(x: 0,
                                                                       y: 0,
                                                                       width: collectionView.frame.width,
                                                                       height: Constants.paginatorHeight))
-    private lazy var backwardProgressView = PaginatorView(frame: .init(x: 0,
+    private lazy var topProgressView = PaginatorView(frame: .init(x: 0,
                                                                        y: 0,
                                                                        width: collectionView.frame.width,
                                                                        height: Constants.paginatorHeight))
 
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(plugin: .paginatable(progressView: forwardProgressView, output: self))
-        .add(plugin: .backwardPaginatable(progressView: backwardProgressView, output: self))
+        .add(plugin: .paginatable(progressView: bottomProgressView, output: self))
+        .add(plugin: .topPaginatable(progressView: topProgressView, output: self))
         .build()
 
-    private weak var forwardPaginatableInput: PaginatableInput?
-    private weak var backwardPaginatableInput: BackwardPaginatableInput?
+    private weak var bottomPaginatableInput: PaginatableInput?
+    private weak var topPaginatableInput: TopPaginatableInput?
 
     private var isFirstPageLoading = true
     private var currentPage = 0
@@ -84,10 +84,10 @@ private extension TwoDirectionPaginatableCollectionViewController {
         activityIndicator.startAnimating()
 
         // hide footer
-        forwardPaginatableInput?.updatePagination(canIterate: false)
-        backwardPaginatableInput?.updatePagination(canIterate: false)
-        forwardPaginatableInput?.updateProgress(isLoading: false)
-        backwardPaginatableInput?.updateProgress(isLoading: false)
+        bottomPaginatableInput?.updatePagination(canIterate: false)
+        topPaginatableInput?.updatePagination(canIterate: false)
+        bottomPaginatableInput?.updateProgress(isLoading: false)
+        topPaginatableInput?.updateProgress(isLoading: false)
 
         // imitation of loading first page
         delay(.now() + .seconds(3)) { [weak self] in
@@ -101,8 +101,8 @@ private extension TwoDirectionPaginatableCollectionViewController {
             self?.collectionView.scrollToItem(at: Constants.firstPageMiddleIndexPath, at: .centeredVertically, animated: false)
 
             // show pagination loader if update is needed
-            self?.forwardPaginatableInput?.updatePagination(canIterate: true)
-            self?.backwardPaginatableInput?.updatePagination(canIterate: true)
+            self?.bottomPaginatableInput?.updatePagination(canIterate: true)
+            self?.topPaginatableInput?.updatePagination(canIterate: true)
         }
     }
 
@@ -170,7 +170,7 @@ private extension TwoDirectionPaginatableCollectionViewController {
 extension TwoDirectionPaginatableCollectionViewController: PaginatableOutput {
 
     func onPaginationInitialized(with input: PaginatableInput) {
-        forwardPaginatableInput = input
+        bottomPaginatableInput = input
     }
 
     func loadNextPage(with input: PaginatableInput) {
@@ -184,7 +184,7 @@ extension TwoDirectionPaginatableCollectionViewController: PaginatableOutput {
 
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
-                self?.backwardPaginatableInput?.updatePagination(canIterate: canIterate)
+                self?.topPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
@@ -194,15 +194,15 @@ extension TwoDirectionPaginatableCollectionViewController: PaginatableOutput {
 
 }
 
-// MARK: - BackwardPaginatableOutput
+// MARK: - TopPaginatableOutput
 
-extension TwoDirectionPaginatableCollectionViewController: BackwardPaginatableOutput {
+extension TwoDirectionPaginatableCollectionViewController: TopPaginatableOutput {
 
-    func onBackwardPaginationInitialized(with input: ReactiveDataDisplayManager.BackwardPaginatableInput) {
-        backwardPaginatableInput = input
+    func onTopPaginationInitialized(with input: ReactiveDataDisplayManager.TopPaginatableInput) {
+        topPaginatableInput = input
     }
 
-    func loadPrevPage(with input: ReactiveDataDisplayManager.BackwardPaginatableInput) {
+    func loadPrevPage(with input: ReactiveDataDisplayManager.TopPaginatableInput) {
         input.updateProgress(isLoading: true)
 
         delay(.now() + .seconds(2)) { [weak self, weak input] in
@@ -214,7 +214,7 @@ extension TwoDirectionPaginatableCollectionViewController: BackwardPaginatableOu
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
                 input?.returnToScrollPositionBeforeLoading()
-                self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
+                self.bottomPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
