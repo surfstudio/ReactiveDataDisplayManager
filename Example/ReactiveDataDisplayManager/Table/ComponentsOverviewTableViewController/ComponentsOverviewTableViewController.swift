@@ -101,19 +101,11 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                      left: 5,
                                      bottom: 3,
                                      right: 5))
-        property.text(.string("Check out link: https://stackoverflow.com/"))
-        property.dataDetectorTypes(.link)
-        property.linkTextAttributes([.foregroundColor: UIColor.blue])
-        property.dataDetectionHandler { _, urlString in
-            if let url = URL(string: urlString) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
-        property.selectable(true)
+        property.text(.string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"))
 
     }
 
-    private lazy var sentMessageGenerator = TableWrappedCell<MessageView>.rddm.baseGenerator(with: sentMessageModel, and: .class)
+    private lazy var sentMessageGenerator = MessageView.rddm.tableGenerator(with: sentMessageModel, and: .class)
 
     // Recieved message
     private let recievedMessageStyle = TextStyle(color: .black, font: .systemFont(ofSize: 16, weight: .regular))
@@ -136,7 +128,15 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                      left: 5,
                                      bottom: 3,
                                      right: 5))
-        property.text(.string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"))
+        property.text(.string("Check out link: https://stackoverflow.com/"))
+        property.dataDetectorTypes(.link)
+        property.linkTextAttributes([.foregroundColor: UIColor.blue])
+        property.dataDetectionHandler { _, urlString in
+            if let url = URL(string: urlString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        property.selectable(true)
     }
 
     private lazy var recievedMessageGenerator = MessageView.rddm.tableGenerator(with: recievedMessageModel, and: .class)
