@@ -11,6 +11,12 @@ import ReactiveDataDisplayManager
 /// Base view to implement label within cell
 public class MessageView: UIView {
 
+    // MARK: - Constants
+
+    private enum Constants {
+        static let tapGestureName = "TapGesture"
+    }
+
     // MARK: - Private properties
 
     private var textView = UITextView(frame: .zero)
@@ -265,6 +271,9 @@ extension MessageView: ConfigurableItem {
     // MARK: - Methods
 
     public func configure(with model: Model) {
+        if let tapGesture = textView.gestureRecognizers?.first(where: { $0.name == Constants.tapGestureName }) {
+            textView.removeGestureRecognizer(tapGesture)
+        }
 
         textView.backgroundColor = .clear
         textView.isEditable = false
@@ -303,9 +312,12 @@ private extension MessageView {
         textView.delegate = self
         dataDetectionHandler = model.dataDetectionHandler
 
-        tapHandler = model.tapHandler
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
-        textView.addGestureRecognizer(tapGesture)
+        if let tapHandler = model.tapHandler {
+            self.tapHandler = tapHandler
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+            tapGesture.name = "TapGesture"
+            textView.addGestureRecognizer(tapGesture)
+        }
     }
 
     func applyBackground(style: BackgroundStyle) {
