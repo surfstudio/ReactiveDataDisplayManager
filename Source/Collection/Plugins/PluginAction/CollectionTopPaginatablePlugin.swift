@@ -23,12 +23,13 @@ public class CollectionTopPaginatablePlugin: BaseCollectionPlugin<CollectionEven
 
     private let progressView: ProgressView
     private weak var output: TopPaginatableOutput?
+    private let isSaveScrollPositionNeeded: Bool
 
     private var isLoading = false
 
     private weak var collectionView: UICollectionView?
 
-    private var currentContentHeight: CGFloat = 0
+    private var currentContentHeight: CGFloat?
 
     /// Property which indicating availability of pages
     public private(set) var canIterate = false {
@@ -55,9 +56,10 @@ public class CollectionTopPaginatablePlugin: BaseCollectionPlugin<CollectionEven
 
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
-    init(progressView: ProgressView, with output: TopPaginatableOutput) {
+    init(progressView: ProgressView, with output: TopPaginatableOutput, isSaveScrollPositionNeeded: Bool = true) {
         self.progressView = progressView
         self.output = output
+        self.isSaveScrollPositionNeeded = isSaveScrollPositionNeeded
     }
 
     // MARK: - BaseTablePlugin
@@ -104,7 +106,7 @@ extension CollectionTopPaginatablePlugin: TopPaginatableInput {
         self.isLoading = isLoading
         progressView.showProgress(isLoading)
         if isLoading {
-            currentContentHeight = collectionView?.contentSize.height ?? 0
+            currentContentHeight = collectionView?.contentSize.height
         }
     }
 
@@ -114,12 +116,15 @@ extension CollectionTopPaginatablePlugin: TopPaginatableInput {
 
     public func updatePagination(canIterate: Bool) {
         self.canIterate = canIterate
-    }
-
-    public func returnToScrollPositionBeforeLoading() {
-        let newContentHeight = collectionView?.contentSize.height ?? 0
-        let finalOffset = CGPoint(x: 0, y: newContentHeight - currentContentHeight - progressView.frame.height)
-        collectionView?.setContentOffset(finalOffset, animated: false)
+        if
+            canIterate,
+            let currentContentHeight = currentContentHeight,
+            let newContentHeight = collectionView?.contentSize.height
+        {
+            let finalOffset = CGPoint(x: 0, y: newContentHeight - currentContentHeight - progressView.frame.height)
+            collectionView?.setContentOffset(finalOffset, animated: false)
+            self.currentContentHeight = nil
+        }
     }
 
 }

@@ -23,12 +23,13 @@ public class TableTopPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
     private let progressView: ProgressView
     private weak var output: TopPaginatableOutput?
+    private let isSaveScrollPositionNeeded: Bool
 
     private var isLoading = false
 
     private weak var tableView: UITableView?
 
-    private var currentContentSizeHeight: CGFloat = 0
+    private var currentContentSizeHeight: CGFloat?
 
     /// Property which indicating availability of pages
     public private(set) var canIterate = false {
@@ -45,9 +46,10 @@ public class TableTopPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
-    init(progressView: ProgressView, with output: TopPaginatableOutput) {
+    init(progressView: ProgressView, with output: TopPaginatableOutput, isSaveScrollPositionNeeded: Bool = true) {
         self.progressView = progressView
         self.output = output
+        self.isSaveScrollPositionNeeded = isSaveScrollPositionNeeded
     }
 
     // MARK: - BaseTablePlugin
@@ -87,7 +89,7 @@ extension TableTopPaginatablePlugin: TopPaginatableInput {
         self.isLoading = isLoading
         progressView.showProgress(isLoading)
         if isLoading {
-            currentContentSizeHeight = tableView?.contentSize.height ?? 0
+            currentContentSizeHeight = tableView?.contentSize.height
         }
     }
 
@@ -97,13 +99,15 @@ extension TableTopPaginatablePlugin: TopPaginatableInput {
 
     public func updatePagination(canIterate: Bool) {
         self.canIterate = canIterate
-    }
-
-    public func returnToScrollPositionBeforeLoading() {
-        let newContentSizeHeight = tableView?.contentSize.height ?? 0
-
-        let finalOffset = CGPoint(x: 0, y: newContentSizeHeight - currentContentSizeHeight)
-        tableView?.setContentOffset(finalOffset, animated: false)
+        if
+            canIterate,
+            let currentContentSizeHeight = currentContentSizeHeight,
+            let newContentSizeHeight = tableView?.contentSize.height
+        {
+            let finalOffset = CGPoint(x: 0, y: newContentSizeHeight - currentContentSizeHeight)
+            tableView?.setContentOffset(finalOffset, animated: false)
+            self.currentContentSizeHeight = nil
+        }
     }
 
 }

@@ -25,7 +25,7 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var forwardProgressView = PaginatorView(frame: .init(x: 0,
+    private lazy var bottomProgressView = PaginatorView(frame: .init(x: 0,
                                                                       y: 0,
                                                                       width: tableView.frame.width,
                                                                       height: Constants.paginatorViewHeight))
@@ -35,13 +35,13 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
                                                                        height: Constants.paginatorViewHeight))
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(plugin: .paginatable(progressView: forwardProgressView,
+        .add(plugin: .paginatable(progressView: bottomProgressView,
                                   output: self))
         .add(plugin: .topPaginatable(progressView: topProgressView,
                                           output: self))
         .build()
 
-    private weak var forwardPaginatableInput: PaginatableInput?
+    private weak var bottomPaginatableInput: PaginatableInput?
     private weak var topPaginatableInput: TopPaginatableInput?
 
     private var isFirstPageLoading = true
@@ -84,7 +84,7 @@ private extension TwoDirectionPaginatableTableViewController {
         activityIndicator.startAnimating()
 
         // hide footer and header
-        forwardPaginatableInput?.updatePagination(canIterate: false)
+        bottomPaginatableInput?.updatePagination(canIterate: false)
         topPaginatableInput?.updatePagination(canIterate: false)
 
         // imitation of loading first page
@@ -101,7 +101,7 @@ private extension TwoDirectionPaginatableTableViewController {
             self?.activityIndicator?.isHidden = true
 
             // show pagination loader if update is needed
-            self?.forwardPaginatableInput?.updatePagination(canIterate: true)
+            self?.bottomPaginatableInput?.updatePagination(canIterate: true)
             self?.topPaginatableInput?.updatePagination(canIterate: true)
         }
     }
@@ -163,7 +163,7 @@ private extension TwoDirectionPaginatableTableViewController {
 extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
 
     func onPaginationInitialized(with input: PaginatableInput) {
-        forwardPaginatableInput = input
+        bottomPaginatableInput = input
     }
 
     func loadNextPage(with input: PaginatableInput) {
@@ -206,8 +206,7 @@ extension TwoDirectionPaginatableTableViewController: TopPaginatableOutput {
                 let canIterate = self.fillPrev()
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
-                input?.returnToScrollPositionBeforeLoading()
-                self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
+                self.bottomPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)

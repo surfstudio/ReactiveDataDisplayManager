@@ -213,7 +213,6 @@ extension TwoDirectionPaginatableCollectionViewController: TopPaginatableOutput 
                 let canIterate = self.fillPrev()
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
-                input?.returnToScrollPositionBeforeLoading()
                 self.bottomPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
                 input?.updateProgress(isLoading: false)

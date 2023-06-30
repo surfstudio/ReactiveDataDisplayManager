@@ -61,9 +61,6 @@ public protocol TopPaginatableInput: AnyObject {
     /// - parameter canIterate: `true` if want to use first cell will display event to execute **loadPrevPage**action
     func updatePagination(canIterate: Bool)
 
-    /// Call this method to return to initial scroll position before loading. Must be called just **after** finish updateProgress(isLoading: true) and updatePagination actions
-    func returnToScrollPositionBeforeLoading()
-
     /// Call this method to control visibility of progressView in footer
     ///
     /// - parameter isLoading: `true` if want to show `progressView` in footer
