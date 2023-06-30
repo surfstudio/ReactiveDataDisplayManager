@@ -15,6 +15,7 @@ public class MessageView: UIView {
 
     private var textView = UITextView(frame: .zero)
     private var dataDetectionHandler: Model.DataDetectionHandler?
+    private var tapHandler: Model.TapHandler?
 
 }
 
@@ -29,6 +30,7 @@ extension MessageView: ConfigurableItem {
         // MARK: - Nested types
 
         public typealias DataDetectionHandler = (DataDetectionType, String) -> Void
+        public typealias TapHandler = () -> Void
 
         public enum DataDetectionType {
             case link
@@ -138,6 +140,14 @@ extension MessageView: ConfigurableItem {
                 })
             }
 
+            public static func tapHandler(_ value: TapHandler?) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(tapHandler: value)
+                    return model
+                })
+            }
+
             public static func selectable(_ selectable: Bool) -> Property {
                 .init(closure: { model in
                     var model = model
@@ -160,6 +170,7 @@ extension MessageView: ConfigurableItem {
         private(set) public var dataDetectorTypes: UIDataDetectorTypes = []
         private(set) public var linkTextAttributes: [NSAttributedString.Key: Any]?
         private(set) public var dataDetectionHandler: DataDetectionHandler?
+        private(set) public var tapHandler: TapHandler?
         private(set) public var selectable: Bool = false
 
         // MARK: - Mutation
@@ -206,6 +217,10 @@ extension MessageView: ConfigurableItem {
 
         mutating func set(dataDetectionHandler: DataDetectionHandler?) {
             self.dataDetectionHandler = dataDetectionHandler
+        }
+
+        mutating func set(tapHandler: TapHandler?) {
+            self.tapHandler = tapHandler
         }
 
         mutating func set(selectable: Bool) {
@@ -287,6 +302,10 @@ private extension MessageView {
         textView.linkTextAttributes = model.linkTextAttributes
         textView.delegate = self
         dataDetectionHandler = model.dataDetectionHandler
+
+        tapHandler = model.tapHandler
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        textView.addGestureRecognizer(tapGesture)
     }
 
     func applyBackground(style: BackgroundStyle) {
@@ -312,6 +331,13 @@ private extension MessageView {
         }
 
         dataDetectionHandler(type, data)
+    }
+
+    @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+        guard let tapHandler = tapHandler else {
+            return
+        }
+        tapHandler()
     }
 
 }

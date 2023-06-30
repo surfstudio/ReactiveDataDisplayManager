@@ -102,6 +102,17 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                      bottom: 3,
                                      right: 5))
         property.text(.string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"))
+        property.tapHandler {
+            if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
+
+                let alertController = UIAlertController(title: "MessageView Tapped", message: "The MessageView was tapped!", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                topController.present(alertController, animated: true, completion: nil)
+            }
+        }
 
     }
 
