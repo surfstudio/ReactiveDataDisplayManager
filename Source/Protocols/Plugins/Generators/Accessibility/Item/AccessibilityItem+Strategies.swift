@@ -49,6 +49,10 @@ public extension AccessibilityStrategy where ValueType == String {
         return .init(values.compactMap { $0 }.joined(separator: separator))
     }
 
+    static func from(_ object: NSObject, keyPath: KeyPath<NSObject, String?> = \.accessibilityLabel) -> Self {
+        return .init(object[keyPath: keyPath])
+    }
+
 }
 
 public typealias AccessibilityTraitsStrategy = AccessibilityStrategy<UIAccessibilityTraits>
@@ -56,9 +60,21 @@ public typealias AccessibilityTraitsStrategy = AccessibilityStrategy<UIAccessibi
 public extension AccessibilityStrategy where ValueType == UIAccessibilityTraits {
 
     /// a reference traits merged from specified objects
-    static func merge(objects: NSObject...) -> Self {
+    static func merge(_ objects: NSObject...) -> Self {
         let traits = objects.map(\.accessibilityTraits).reduce(UIAccessibilityTraits(), { $0.union($1) })
         return .init(traits)
+    }
+
+    static func from(_ object: NSObject) -> Self {
+        return .init(object.accessibilityTraits)
+    }
+
+    mutating func insert(_ traits: UIAccessibilityTraits) {
+        value?.insert(traits)
+    }
+
+    mutating func remove(_ traits: UIAccessibilityTraits) {
+        value?.remove(traits)
     }
 
 }
