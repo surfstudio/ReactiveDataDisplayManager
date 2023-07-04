@@ -37,8 +37,8 @@ final class HeaderView: UIView, AccessibilityItem, CalculatableHeightItem {
 
     // MARK: - AccessibilityItem
 
-    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
-    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
 
     // MARK: - Internal Methods
 

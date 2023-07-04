@@ -29,8 +29,8 @@ final class TitleTableViewCell: UITableViewCell {
 
 extension TitleTableViewCell: AccessibilityItem {
 
-    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
-    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
 
 }
 

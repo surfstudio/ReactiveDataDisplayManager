@@ -17,8 +17,8 @@ class TitleIconCollectionFooterView: UICollectionReusableView, AccessibilityItem
 
     // MARK: - AccessibilityItem
 
-    var labelStrategy: AccessibilityStringStrategy { .joined([.just("some image with title: "), .from(object: titleLabel)]) }
-    var traitsStrategy: AccessibilityTraitsStrategy { .merge([iconImageView, titleLabel]) }
+    var labelStrategy: AccessibilityStringStrategy { .merge("some image with title: ", titleLabel.text) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .merge(iconImageView, titleLabel) }
 
     // MARK: - Internal methods
 

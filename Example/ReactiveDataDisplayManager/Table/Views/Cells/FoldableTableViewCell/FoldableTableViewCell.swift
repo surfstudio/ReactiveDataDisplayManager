@@ -62,9 +62,9 @@ final class FoldableTableViewCell: UITableViewCell, FoldableStateHolder, Accessi
 
 extension FoldableTableViewCell: AccessibilityItem {
 
-    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
     var valueStrategy: AccessibilityStringStrategy { .just("isExpanded: \(isExpanded)") }
-    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
 
 }
 

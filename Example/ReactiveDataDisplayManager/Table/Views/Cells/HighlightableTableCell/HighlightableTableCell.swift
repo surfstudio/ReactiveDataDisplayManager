@@ -16,13 +16,11 @@ final class HighlightableTableCell: UITableViewCell, AccessibilityInvalidatable 
 
     // MARK: - AccessibilityInvalidatable
 
-    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
-    var valueStrategy: AccessibilityStringStrategy = .just(nil) {
-        didSet {
-            accessibilityInvalidator?.invalidateParameters()
-        }
-    }
-    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: titleLabel) }
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var valueStrategy: AccessibilityStringStrategy = .just(nil)
+    lazy var traitsStrategy: AccessibilityTraitsStrategy = .from(titleLabel)
+
+    var shouldOverrideStateTraits: Bool { true }
 
     var accessibilityInvalidator: AccessibilityItemInvalidator?
 
