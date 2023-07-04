@@ -1,23 +1,14 @@
 //
-//  AccessibilityModifier.swift
+//  AccessibilityItemModifier.swift
 //  ReactiveDataDisplayManager
 //
-//  Created by korshunov on 22.05.2023.
+//  Created by korshunov on 04.07.2023.
 //
 
 import UIKit
 
-/// Protocol for accessibility parameters modifier
-public protocol AccessibilityModifier {
-    /// Modifies`AccessibilityItem` with provided strategies from
-    static func modify(item: AccessibilityItem)
-
-    /// Modifies `AccessibilityItem` with provided strategies  and `AccessibilityStrategyProvider`
-    static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider)
-}
-
 /// Base modifier which handle only `AccessibilityItem` properties
-public enum BaseAccessibilityModifier: AccessibilityModifier {
+public enum AccessibilityItemModifier: AccessibilityModifier {
     public static let stateTraits: UIAccessibilityTraits = [.selected, .notEnabled]
 
     public static func modify(item: AccessibilityItem) {
@@ -79,29 +70,3 @@ public enum BaseAccessibilityModifier: AccessibilityModifier {
         }
     }
 }
-
-#if DEBUG
-/// Special modifier for UI tests, which adds `.button` trait for `UITableViewCell` and `UICollectionViewCell` to make them conform to cell `XCUIElement` type.
-/// Also adds trait `.staticText` for headers and footers to make them accessible by identifier
-public enum XCUITestsAccessibilityModifier: AccessibilityModifier {
-
-    public static func modify(item: AccessibilityItem) {
-        BaseAccessibilityModifier.modify(item: item)
-        if item is UITableViewCell || item is UICollectionViewCell {
-            item.accessibilityTraits.insert(.button)
-        } else {
-            item.accessibilityTraits.insert(.staticText)
-        }
-    }
-
-    public static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
-        BaseAccessibilityModifier.modify(item: item, generator: generator)
-        if item is UITableViewCell || item is UICollectionViewCell {
-            item.accessibilityTraits.insert(.button)
-        } else {
-            item.accessibilityTraits.insert(.staticText)
-        }
-    }
-
-}
-#endif

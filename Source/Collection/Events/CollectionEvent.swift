@@ -21,7 +21,7 @@ public enum CollectionEvent {
 
     // MARK: - Accessibility Events
 
-    case invalidatedCellAccessibility(IndexPath, UICollectionViewCell)
-    case invalidatedHeaderAccessibility(Int, UICollectionReusableView)
-    case invalidatedFooterAccessibility(Int, UICollectionReusableView)
+    case invalidatedCellAccessibility(IndexPath, AccessibilityItem)
+    case invalidatedHeaderAccessibility(Int, AccessibilityItem)
+    case invalidatedFooterAccessibility(Int, AccessibilityItem)
 }

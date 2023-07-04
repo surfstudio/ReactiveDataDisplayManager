@@ -205,14 +205,11 @@ extension BaseCollectionDelegate: AccessibilityItemDelegate {
     public func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind) {
         switch kind {
         case .header(let section):
-            guard let view = item as? UICollectionReusableView else { return }
-            collectionPlugins.process(event: .invalidatedHeaderAccessibility(section, view), with: manager)
+            collectionPlugins.process(event: .invalidatedHeaderAccessibility(section, item), with: manager)
         case .cell(let indexPath):
-            guard let cell = item as? UICollectionViewCell else { return }
-            collectionPlugins.process(event: .invalidatedCellAccessibility(indexPath, cell), with: manager)
+            collectionPlugins.process(event: .invalidatedCellAccessibility(indexPath, item), with: manager)
         case .footer(let section):
-            guard let view = item as? UICollectionReusableView else { return }
-            collectionPlugins.process(event: .invalidatedFooterAccessibility(section, view), with: manager)
+            collectionPlugins.process(event: .invalidatedFooterAccessibility(section, item), with: manager)
         }
     }
 

@@ -7,8 +7,11 @@
 
 import UIKit
 
+/// Typealias for all providers which are supported by `AccessibilityItem`
+public typealias AccessibilityItemContentProvider = AccessibilityStrategyProvider & AccessibilityActionsProvider
+
 /// Protocol for cells to adopt accesibility
-public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider & AccessibilityActionsProvider {
+public protocol AccessibilityItem: UIResponder, AccessibilityItemContentProvider {
 
     typealias AccessibilityModifierType = AccessibilityModifier.Type
 
@@ -38,10 +41,10 @@ public extension AccessibilityItem {
         if CommandLine.arguments.contains("-rddm.XCUITestsCompatible") {
             return XCUITestsAccessibilityModifier.self
         } else {
-            return BaseAccessibilityModifier.self
+            return AccessibilityItemModifier.self
         }
         #else
-        return BaseAccessibilityModifier.self
+        return AccessibilityItemModifier.self
         #endif
     }
 

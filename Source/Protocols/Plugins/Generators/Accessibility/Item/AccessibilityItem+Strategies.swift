@@ -40,6 +40,8 @@ public struct AccessibilityStrategy<ValueType> {
     }
 }
 
+public typealias AccessibilityStringStrategy = AccessibilityStrategy<String>
+
 public extension AccessibilityStrategy where ValueType == String {
 
     /// a combination of strings
@@ -48,6 +50,8 @@ public extension AccessibilityStrategy where ValueType == String {
     }
 
 }
+
+public typealias AccessibilityTraitsStrategy = AccessibilityStrategy<UIAccessibilityTraits>
 
 public extension AccessibilityStrategy where ValueType == UIAccessibilityTraits {
 

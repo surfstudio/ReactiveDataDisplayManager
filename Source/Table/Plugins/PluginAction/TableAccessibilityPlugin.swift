@@ -14,6 +14,8 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
     override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
         case let .willDisplayCell(indexPath, cell):
+            guard let cell = cell as? AccessibilityItem else { return }
+
             processTableCell(indexPath, cell, with: manager)
             tryToSetInvalidator(for: cell, of: .cell(indexPath), with: manager)
 
@@ -21,6 +23,8 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
             processTableCell(indexPath, cell, with: manager)
 
         case let .willDisplayHeader(section, view):
+            guard let view = view as? AccessibilityItem else { return }
+
             processTableHeader(section, view, with: manager)
             tryToSetInvalidator(for: view, of: .header(section), with: manager)
 
@@ -28,6 +32,8 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
             processTableHeader(section, view, with: manager)
 
         case let .willDisplayFooter(section, view):
+            guard let view = view as? AccessibilityItem else { return }
+
             processTableFooter(section, view, with: manager)
             tryToSetInvalidator(for: view, of: .footer(section), with: manager)
 
@@ -46,43 +52,34 @@ final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
 
 private extension TableAccessibilityPlugin {
 
-    func tryToSetInvalidator(for view: UIView, of kind: AccessibilityItemKind, with manager: BaseTableManager?) {
-        guard let invalidatable = view as? AccessibilityInvalidatable,
+    func tryToSetInvalidator(for item: AccessibilityItem, of kind: AccessibilityItemKind, with manager: BaseTableManager?) {
+        guard let invalidatable = item as? AccessibilityInvalidatable,
               let invalidateDelegate = manager?.delegate as? AccessibilityItemDelegate else {
             return
         }
         invalidatable.setInvalidator(kind: kind, delegate: invalidateDelegate)
     }
 
-    func processTableCell(_ indexPath: IndexPath, _ cell: UITableViewCell, with manager: BaseTableManager?) {
-        guard let accessibilityItem = cell as? AccessibilityItem else {
-            return
-        }
+    func processTableCell(_ indexPath: IndexPath, _ cell: AccessibilityItem, with manager: BaseTableManager?) {
         if let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider {
-            accessibilityItem.modifierType.modify(item: accessibilityItem, generator: generator)
+            cell.modifierType.modify(item: cell, generator: generator)
         } else {
-            accessibilityItem.modifierType.modify(item: accessibilityItem)
+            cell.modifierType.modify(item: cell)
         }
     }
 
-    func processTableHeader(_ section: Int, _ view: UIView, with manager: BaseTableManager?) {
-        guard let accessibilityItem = view as? AccessibilityItem else {
-            return
-        }
+    func processTableHeader(_ section: Int, _ view: AccessibilityItem, with manager: BaseTableManager?) {
         if let header = manager?.sections[section] as? AccessibilityStrategyProvider {
-            accessibilityItem.modifierType.modify(item: accessibilityItem, generator: header)
+            view.modifierType.modify(item: view, generator: header)
         } else {
-            accessibilityItem.modifierType.modify(item: accessibilityItem)
+            view.modifierType.modify(item: view)
         }
     }
 
-    func processTableFooter(_ section: Int, _ view: UIView, with manager: BaseTableManager?) {
-        guard let accessibilityItem = view as? AccessibilityItem else {
-            return
-        }
+    func processTableFooter(_ section: Int, _ view: AccessibilityItem, with manager: BaseTableManager?) {
         // AccessibilityStrategyProvider for a footer generator is not supported yet
         // TODO: SPT-1468
-        accessibilityItem.modifierType.modify(item: accessibilityItem)
+        view.modifierType.modify(item: view)
     }
 
 }
