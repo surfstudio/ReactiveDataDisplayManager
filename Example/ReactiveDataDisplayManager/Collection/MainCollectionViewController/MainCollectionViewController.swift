@@ -33,6 +33,7 @@ final class MainCollectionViewController: UIViewController {
         case carouselCollection
         case alignedCollection
         case dynamicHeightViewController
+        case stackCellCollectionViewController
     }
 
     // MARK: - Constants
@@ -57,7 +58,8 @@ final class MainCollectionViewController: UIViewController {
             ("Collection with drag and drop item", .dragAndDroppableCollection),
             ("Carousel collection view layout", .carouselCollection),
             ("Aligned collection layout", .alignedCollection),
-            ("Dynamic height ViewController", .dynamicHeightViewController)
+            ("Dynamic height ViewController", .dynamicHeightViewController),
+            ("Collection with stack cell", .stackCellCollectionViewController)
         ]
     }
 
