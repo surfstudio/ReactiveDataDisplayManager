@@ -166,7 +166,7 @@ extension BaseTableManager {
     // MARK: - Inserting
 
     func insert(elements: [(generator: TableCellGenerator, sectionIndex: Int, generatorIndex: Int)],
-                with animation: UITableView.RowAnimation = .automatic) {
+                with animation: UITableView.RowAnimation? = .automatic) {
 
         elements.forEach { [weak self] element in
             self?.sections[element.sectionIndex]
@@ -182,7 +182,7 @@ extension BaseTableManager {
         sections.registerAllIfNeeded(with: view, using: registrator)
         modifier?.insertRows(at: indexPaths, with: animation)
     }
-    
+
     func insertManual(after generator: TableCellGenerator,
                      new newGenerators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation = .automatic) {

@@ -8,17 +8,24 @@
 
 import UIKit
 
+public enum PaginationDirection {
+
+    case backward
+    case forward
+
+}
+
 public protocol ProgressDisplayableItem {
 
     /// - parameter isLoading: `true` if want to animate loading progress in `progressView`
     func showProgress(_ isLoading: Bool)
 
-    /// - parameter error: some error got while loading of next page.
+    /// - parameter error: some error got while loading of next/previous page.
     ///  You should transfer this error into UI representation.
     /// - Warning: - default implementation is empty.
     func showError(_ error: Error?)
 
-    /// - parameter action: bind to `PaginatableOutput.loadNextPage` inside plugin
+    /// - parameter action: bind to `PaginatableOutput.loadNextPage` / `PaginatableOutput.loadPrevPage` inside plugin
     ///  - Implement this method if you have retry button on your error-state view.
     /// - Warning: - default implementation is empty.
     func setOnRetry(action: @escaping () -> Void)
@@ -35,20 +42,20 @@ extension ProgressDisplayableItem {
 
 }
 
-/// Input signals to control visibility of progressView in footer
+/// Input signals to control visibility of progressView in header/footer
 public protocol PaginatableInput: AnyObject {
 
-    /// Call this method to control availability of **loadNextPage** action
+    /// Call this method to control availability of **loadNextPage**/**loadPrevPage** action
     ///
-    /// - parameter canIterate: `true` if want to use last cell will display event to execute **loadNextPage** action
+    /// - parameter canIterate: `true` if want to use last cell will display event to execute **loadNextPage** /**loadPrevPage**action
     func updatePagination(canIterate: Bool)
 
-    /// Call this method to control visibility of progressView in footer
+    /// Call this method to control visibility of progressView in header/footer
     ///
-    /// - parameter isLoading: `true` if want to show `progressView` in footer
+    /// - parameter isLoading: `true` if want to show `progressView` in header/footer
     func updateProgress(isLoading: Bool)
 
-    /// - parameter error: some error got while loading of next page.
+    /// - parameter error: some error got while loading of next/previous page.
     ///  You should transfer this error into UI representation.
     func updateError(_ error: Error?)
 }
@@ -67,13 +74,29 @@ public protocol PaginatableOutput: AnyObject {
     func loadNextPage(with input: PaginatableInput)
 }
 
-/// Plugin to display `progressView` while next page is loading
+/// Output signals for loading previous page of content
+public protocol BackwardPaginatableOutput: AnyObject {
+
+    /// Called when collection has setup `TableBackwardPaginatablePlugin`
+    ///
+    /// - parameter input: input signals to hide  `progressView` from header
+    func onBackwardPaginationInitialized(with input: PaginatableInput)
+
+    /// Called when collection scrolled to first cell
+    ///
+    /// - parameter input: input signals to hide  `progressView` from header
+    func loadPrevPage(with input: PaginatableInput)
+}
+
+/// Plugin to display `progressView` while next/previous page is loading
 ///
-/// Show `progressView` on `willDisplay` last cell.
+/// Show `progressView` on `willDisplay` first/last cell.
 /// Hide `progressView` when finish loading request
 ///
 /// - Warning: Specify estimatedRowHeight of your layout to proper `willDisplay` calls and correct `contentSize`
 public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
+
+    // MARK: - Nested types
 
     public typealias ProgressView = UIView & ProgressDisplayableItem
 
@@ -82,7 +105,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
     private let progressView: ProgressView
     private weak var output: PaginatableOutput?
 
-    private var isLoading: Bool = false
+    private var isLoading = false
 
     private weak var tableView: UITableView?
 
@@ -173,7 +196,21 @@ public extension BaseTablePlugin {
     /// - parameter output: output signals to hide  `progressView` from footer
     static func paginatable(progressView: TablePaginatablePlugin.ProgressView,
                             output: PaginatableOutput) -> TablePaginatablePlugin {
-        .init(progressView: progressView, with: output)
+        return TablePaginatablePlugin(progressView: progressView, with: output)
+
+    }
+
+    /// Plugin to display `progressView` while previous page is loading
+    ///
+    /// Show `progressView` on `willDisplay` first cell.
+    /// Hide `progressView` when finish loading request
+    ///
+    /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
+    /// - parameter output: output signals to hide  `progressView` from header
+    static func backwardPaginatable(progressView: TableBackwardPaginatablePlugin.ProgressView,
+                                    output: BackwardPaginatableOutput) -> TableBackwardPaginatablePlugin {
+        return TableBackwardPaginatablePlugin(progressView: progressView, with: output)
+
     }
 
 }
