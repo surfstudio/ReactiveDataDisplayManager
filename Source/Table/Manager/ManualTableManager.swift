@@ -146,6 +146,7 @@ public class ManualTableManager: BaseTableManager {
                             with animation: TableRowAnimation = .animated(.automatic)) {
 
         let headerIndex = getIndexOf(headGenerator: sectionHeader, before: headerGenerator)
+        self.sections.insert(sectionHeader, at: headerIndex)
 
         let elements = generators.enumerated().map {
             ($0.element, headerIndex, $0.offset)
@@ -166,6 +167,7 @@ public class ManualTableManager: BaseTableManager {
                             generators: [TableCellGenerator],
                             with animation: TableRowAnimation = .animated(.automatic)) {
         let headerIndex = getIndexOf(headGenerator: sectionHeader, after: headerGenerator)
+        self.sections.insert(sectionHeader, at: headerIndex)
 
         let elements = generators.enumerated().map { item in
             (item.element, headerIndex, item.offset)

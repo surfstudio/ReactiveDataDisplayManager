@@ -192,7 +192,11 @@ extension BaseTableManager {
 
         elements.forEach { [weak self] element in
             element.generator.registerCell(in: view)
-            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            if self?.generators.count == element.sectionIndex {
+                self?.generators.append([element.generator])
+            } else {
+                self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            }
         }
 
         let indexDictionary = elements.reduce([Int: [IndexPath]]()) { result, value in
