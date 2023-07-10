@@ -192,25 +192,12 @@ extension BaseTableManager {
 
         elements.forEach { [weak self] element in
             element.generator.registerCell(in: view)
-            if self?.generators.count == element.sectionIndex {
-                self?.generators.append([element.generator])
-            } else {
-                self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
-            }
+            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
 
-        let indexDictionary = elements.reduce([Int: [IndexPath]]()) { result, value in
-            var result = result
-            let indexPath = IndexPath(row: value.generatorIndex, section: value.sectionIndex)
-            if result[value.sectionIndex] == nil {
-                result[value.sectionIndex] = [indexPath]
-            } else {
-                result[value.sectionIndex]?.append(indexPath)
-            }
-            return result
-        }
+        let indexPaths = elements.map { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
 
-        modifier?.insertSectionsAndRows(at: indexDictionary, with: animation.value)
+        modifier?.insertRows(at: indexPaths, with: animation.value)
     }
 
     func insertManual(after generator: TableCellGenerator,

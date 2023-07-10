@@ -91,13 +91,11 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
                                         with insertAnimation: UITableView.RowAnimation?) {
         guard let view = view else { return }
         animator?.perform(in: view, animated: insertAnimation != nil) { [weak view] in
-            let numberOfSections = view?.numberOfSections ?? 0
-            let setOfKeys = IndexSet(indexDictionary.keys.filter { $0 >= numberOfSections })
+            let setOfKeys = IndexSet(indexDictionary.keys)
             let allValues = indexDictionary.values.flatMap { $0 }
-            if !setOfKeys.isEmpty {
-                view?.insertSections(setOfKeys, with: insertAnimation ?? .none)
-            }
+            view?.insertSections(setOfKeys, with: insertAnimation ?? .none)
             view?.insertRows(at: allValues, with: insertAnimation ?? .none)
+
         }
     }
 

@@ -110,7 +110,7 @@ private extension AllPluginsTableViewController {
     /// Insertion of new section with some cells
     func insertMoreSections() {
 
-        guard let lastSectionGenerator = adapter.sections.last else {
+        guard let existingSectionGenerator = adapter.sections.last else {
             return
         }
 
@@ -119,7 +119,7 @@ private extension AllPluginsTableViewController {
         let generators = Constants.titles.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
 
         // Insert them
-        adapter.insertSection(after: lastSectionGenerator,
+        adapter.insertSection(after: existingSectionGenerator,
                               new: newHeaderGenerator,
                               generators: generators)
     }

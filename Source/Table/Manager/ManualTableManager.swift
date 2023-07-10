@@ -124,13 +124,8 @@ public class ManualTableManager: BaseTableManager {
                      generators: [TableCellGenerator],
                      with animation: TableRowAnimation = .animated(.automatic)) {
         let headerIndex = min(max(headerIndex, 0), self.sections.count)
-        self.sections.insert(headGenerator, at: headerIndex)
 
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
-        }
-
-        self.insert(elements: elements, with: animation)
+        self.insert(header: headGenerator, generators: generators, at: headerIndex, with: animation)
     }
 
     /// Inserts new section.
@@ -146,13 +141,8 @@ public class ManualTableManager: BaseTableManager {
                             with animation: TableRowAnimation = .animated(.automatic)) {
 
         let headerIndex = getIndexOf(headGenerator: sectionHeader, before: headerGenerator)
-        self.sections.insert(sectionHeader, at: headerIndex)
 
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
-        }
-
-        self.insert(elements: elements, with: animation)
+        self.insert(header: sectionHeader, generators: generators, at: headerIndex, with: animation)
     }
 
     /// Inserts new section.
@@ -167,13 +157,8 @@ public class ManualTableManager: BaseTableManager {
                             generators: [TableCellGenerator],
                             with animation: TableRowAnimation = .animated(.automatic)) {
         let headerIndex = getIndexOf(headGenerator: sectionHeader, after: headerGenerator)
-        self.sections.insert(sectionHeader, at: headerIndex)
 
-        let elements = generators.enumerated().map { item in
-            (item.element, headerIndex, item.offset)
-        }
-
-        self.insert(elements: elements, with: animation)
+        self.insert(header: sectionHeader, generators: generators, at: headerIndex, with: animation)
     }
 
     /// Inserts new generators after provided generator.
@@ -498,6 +483,19 @@ private extension ManualTableManager {
         self.generators.insert([], at: index)
 
         modifier?.insertSections(at: [index], with: animation.value)
+    }
+
+    func insert(header: TableHeaderGenerator,
+                generators: [TableCellGenerator],
+                at sectionIndex: Int,
+                with animation: TableRowAnimation) {
+
+        self.sections.insert(header, at: sectionIndex)
+        self.generators.insert(generators, at: sectionIndex)
+
+        let indexPaths = generators.enumerated().map { IndexPath(row: $0.offset, section: sectionIndex) }
+
+        modifier?.insertSectionsAndRows(at: [sectionIndex: indexPaths], with: animation.value)
     }
 
 }
