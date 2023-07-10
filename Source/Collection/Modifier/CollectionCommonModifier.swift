@@ -87,16 +87,13 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     ///
     /// - parameter indexDictionary: dictionary where **key** is new section index and value is location of items to insert
     /// - parameter insertAnimation: animation of insert operation
-    override func insertSectionsAndRows(at indexDictionary: [Int : [IndexPath]],
+    override func insertSectionsAndRows(at indexDictionary: [Int: [IndexPath]],
                                         with insertAnimation: CollectionItemAnimation?) {
         guard let view = view else { return }
         animator?.perform(in: view, animated: insertAnimation != nil) { [weak view] in
-            let numberOfSections = view?.numberOfSections ?? 0
-            let setOfKeys = IndexSet(indexDictionary.keys.filter { $0 >= numberOfSections })
+            let setOfKeys = IndexSet(indexDictionary.keys)
             let allValues = indexDictionary.values.flatMap { $0 }
-            if !setOfKeys.isEmpty {
-                view?.insertSections(setOfKeys)
-            }
+            view?.insertSections(setOfKeys)
             view?.insertItems(at: allValues)
         }
     }

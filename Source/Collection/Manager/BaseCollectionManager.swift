@@ -227,18 +227,9 @@ private extension BaseCollectionManager {
             }
         }
 
-        let indexDictionary = elements.reduce([Int: [IndexPath]]()) { result, value in
-            var result = result
-            let indexPath = IndexPath(item: value.generatorIndex, section: value.sectionIndex)
-            if result[value.sectionIndex] == nil {
-                result[value.sectionIndex] = [indexPath]
-            } else {
-                result[value.sectionIndex]?.append(indexPath)
-            }
-            return result
-        }
+        let indexPaths = elements.map { IndexPath(item: $0.generatorIndex, section: $0.sectionIndex) }
 
-        modifier?.insertSectionsAndRows(at: indexDictionary, with: .animated)
+        modifier?.insertRows(at: indexPaths, with: .animated)
     }
 
     func findGenerator(_ generator: CollectionCellGenerator) -> (sectionIndex: Int, generatorIndex: Int)? {

@@ -92,7 +92,7 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
     /// - parameter insertAnimation:
     ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
-    override func insertSectionsAndRows(at indexDictionary: [Int : [IndexPath]],
+    override func insertSectionsAndRows(at indexDictionary: [Int: [IndexPath]],
                                         with insertAnimation: CollectionItemAnimation?) {
         apply(animated: insertAnimation != nil)
     }

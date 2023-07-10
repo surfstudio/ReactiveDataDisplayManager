@@ -91,7 +91,7 @@ class TableDiffableModifier: Modifier<UITableView, UITableView.RowAnimation> {
     /// - parameter insertAnimation:
     ///     - **allowed** nil to disable animation
     ///     - **ignored** any other, because automatically selected by `UITableDiffableDataSource`
-    override func insertSectionsAndRows(at indexDictionary: [Int : [IndexPath]],
+    override func insertSectionsAndRows(at indexDictionary: [Int: [IndexPath]],
                                         with insertAnimation: UITableView.RowAnimation?) {
         apply(animated: insertAnimation != nil)
     }
