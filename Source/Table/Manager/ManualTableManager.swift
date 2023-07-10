@@ -41,13 +41,7 @@ public class ManualTableManager: BaseTableManager {
     ///   - headGenerator: TableHeaderGenerator which you want to insert.
     ///   - after: TableHeaderGenerator, after which new TableHeaderGenerator will be added.
     open func insert(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) {
-        if self.sections.contains(where: { $0 === headGenerator }) {
-            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
-        }
-        guard let anchorIndex = self.sections.firstIndex(where: { $0 === after }) else {
-            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
-        }
-        let newIndex = anchorIndex + 1
+        let newIndex = getIndexOf(headGenerator: headGenerator, after: after)
         self.insert(headGenerator: headGenerator, by: newIndex, animation: .notAnimated)
     }
 
@@ -57,13 +51,7 @@ public class ManualTableManager: BaseTableManager {
     ///   - headGenerator: TableHeaderGenerator which you want to insert.
     ///   - after: TableHeaderGenerator, before which new TableHeaderGenerator will be added.
     open func insert(headGenerator: TableHeaderGenerator, before: TableHeaderGenerator) {
-        if self.sections.contains(where: { $0 === headGenerator }) {
-            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
-        }
-        guard let anchorIndex = self.sections.firstIndex(where: { $0 === before }) else {
-            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
-        }
-        let newIndex = max(anchorIndex - 1, 0)
+        let newIndex = getIndexOf(headGenerator: headGenerator, before: before)
         self.insert(headGenerator: headGenerator, by: newIndex, animation: .notAnimated)
     }
 
@@ -135,7 +123,7 @@ public class ManualTableManager: BaseTableManager {
                      by headerIndex: Int,
                      generators: [TableCellGenerator],
                      with animation: TableRowAnimation = .animated(.automatic)) {
-        let index = min(max(headerIndex, 0), self.sections.count)
+        let headerIndex = min(max(headerIndex, 0), self.sections.count)
         self.sections.insert(headGenerator, at: headerIndex)
 
         let elements = generators.enumerated().map {
@@ -156,13 +144,8 @@ public class ManualTableManager: BaseTableManager {
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: TableRowAnimation = .animated(.automatic)) {
-        self.insert(headGenerator: sectionHeader, before: headerGenerator)
 
-        guard let headerIndex = self.sections.firstIndex(where: {
-            $0 === sectionHeader
-        }) else {
-            return
-        }
+        let headerIndex = getIndexOf(headGenerator: sectionHeader, before: headerGenerator)
 
         let elements = generators.enumerated().map {
             ($0.element, headerIndex, $0.offset)
@@ -182,13 +165,7 @@ public class ManualTableManager: BaseTableManager {
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: TableRowAnimation = .animated(.automatic)) {
-        self.insert(headGenerator: sectionHeader, after: headerGenerator)
-
-        guard let headerIndex = self.sections.firstIndex(where: {
-            $0 === sectionHeader
-        }) else {
-            return
-        }
+        let headerIndex = getIndexOf(headGenerator: sectionHeader, after: headerGenerator)
 
         let elements = generators.enumerated().map { item in
             (item.element, headerIndex, item.offset)
@@ -491,7 +468,25 @@ public class ManualTableManager: BaseTableManager {
 
 private extension ManualTableManager {
 
-    // MARK: - Private methods
+    func getIndexOf(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) -> Int {
+        if self.sections.contains(where: { $0 === headGenerator }) {
+            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
+        }
+        guard let anchorIndex = self.sections.firstIndex(where: { $0 === after }) else {
+            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
+        }
+        return anchorIndex + 1
+    }
+
+    func getIndexOf(headGenerator: TableHeaderGenerator, before: TableHeaderGenerator) -> Int {
+        if self.sections.contains(where: { $0 === headGenerator }) {
+            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
+        }
+        guard let anchorIndex = self.sections.firstIndex(where: { $0 === before }) else {
+            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators before unexisted generator")
+        }
+        return max(anchorIndex - 1, 0)
+    }
 
     func insert(headGenerator: TableHeaderGenerator,
                 by index: Int,
