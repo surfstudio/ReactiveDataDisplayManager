@@ -25,7 +25,7 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
     private let progressView: ProgressView
     private weak var output: PaginatableOutput?
 
-    private var isLoading: Bool = false
+    private var isLoading = false
 
     private weak var collectionView: UICollectionView?
 
@@ -134,6 +134,19 @@ public extension BaseCollectionPlugin {
     static func paginatable(progressView: CollectionPaginatablePlugin.ProgressView,
                             output: PaginatableOutput) -> CollectionPaginatablePlugin {
         .init(progressView: progressView, with: output)
+    }
+
+    /// Plugin to display `progressView` while previous page is loading
+    ///
+    /// Show `progressView` on `willDisplay` first cell.
+    /// Hide `progressView` when finish loading request
+    ///
+    /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
+    /// - parameter output: output signals to hide  `progressView` from header
+    static func backwardPaginatable(progressView: CollectionBackwardPaginatablePlugin.ProgressView,
+                                    output: BackwardPaginatableOutput) -> CollectionBackwardPaginatablePlugin {
+        return CollectionBackwardPaginatablePlugin(progressView: progressView, with: output)
+
     }
 
 }
