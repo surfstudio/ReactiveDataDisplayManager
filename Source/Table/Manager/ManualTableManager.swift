@@ -132,13 +132,11 @@ public class ManualTableManager: BaseTableManager {
     ///   - generators: Generators which you want to insert.
     ///   - with: Animation for row action.
     open func insert(headGenerator: TableHeaderGenerator,
-                     by index: Int,
+                     by headerIndex: Int,
                      generators: [TableCellGenerator],
                      with animation: TableRowAnimation = .animated(.automatic)) {
-        self.insert(headGenerator: headGenerator, by: index, animation: animation)
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === headGenerator }) else {
-            return
-        }
+        let index = min(max(headerIndex, 0), self.sections.count)
+        self.sections.insert(headGenerator, at: headerIndex)
 
         let elements = generators.enumerated().map {
             ($0.element, headerIndex, $0.offset)
@@ -349,13 +347,11 @@ public class ManualTableManager: BaseTableManager {
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
     open func insert(headGenerator: TableHeaderGenerator,
-                     by index: Int,
+                     by headerIndex: Int,
                      generators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation) {
-        self.insert(headGenerator: headGenerator, by: index, animation: .animated(animation))
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === headGenerator }) else {
-            return
-        }
+        let index = min(max(headerIndex, 0), self.sections.count)
+        self.sections.insert(headGenerator, at: headerIndex)
 
         let elements = generators.enumerated().map {
             ($0.element, headerIndex, $0.offset)

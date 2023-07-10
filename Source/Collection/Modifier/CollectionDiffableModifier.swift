@@ -86,6 +86,17 @@ class CollectionDiffableModifier: Modifier<UICollectionView, CollectionItemAnima
         apply(animated: animation != nil)
     }
 
+    /// Insert new sections with items at specific position with animation
+    ///
+    /// - parameter indexDictionary: **ignored**, automatically calculated using `DiffableSnapshot`
+    /// - parameter insertAnimation:
+    ///     - **allowed** nil to disable animation
+    ///     - **ignored** any other, because automatically selected by `UICollectionViewDiffableDataSource`
+    override func insertSectionsAndRows(at indexDictionary: [Int : [IndexPath]],
+                                        with insertAnimation: CollectionItemAnimation?) {
+        apply(animated: insertAnimation != nil)
+    }
+
     /// Update snapshot after sections inserted
     ///
     /// - parameter indexPaths: **ignored**, automatically calculated using `DiffableSnapshot`

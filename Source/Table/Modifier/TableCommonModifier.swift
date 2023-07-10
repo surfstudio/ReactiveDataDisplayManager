@@ -83,10 +83,29 @@ class TableCommonModifier: Modifier<UITableView, UITableView.RowAnimation> {
         }
     }
 
+    /// Insert new sections with rows at specific position with animation
+    ///
+    /// - parameter indexDictionary: dictionary where **key** is new section index and value is location of subviews to insert
+    /// - parameter insertAnimation: animation of insert operation
+    override func insertSectionsAndRows(at indexDictionary: [Int : [IndexPath]],
+                                        with insertAnimation: UITableView.RowAnimation?) {
+        guard let view = view else { return }
+        animator?.perform(in: view, animated: insertAnimation != nil) { [weak view] in
+            let numberOfSections = view?.numberOfSections ?? 0
+            let setOfKeys = IndexSet(indexDictionary.keys.filter { $0 >= numberOfSections })
+            let allValues = indexDictionary.values.flatMap { $0 }
+            if !setOfKeys.isEmpty {
+                view?.insertSections(setOfKeys, with: insertAnimation ?? .none)
+            }
+            view?.insertRows(at: allValues, with: insertAnimation ?? .none)
+        }
+    }
+
     /// Insert sections with animation
     ///
     /// - parameter indexPaths: indexes of inserted sections
     /// - parameter insertAnimation: animation of inserted sections
+    ///  - Warning: This method will insert an **empty** section only. If you need to insert section with rows use `insertSectionsAndRows` instead.
     override func insertSections(at indexPaths: IndexSet, with insertAnimation: UITableView.RowAnimation?) {
         guard let view = view else { return }
         animator?.perform(in: view, animated: insertAnimation != nil) { [weak view] in

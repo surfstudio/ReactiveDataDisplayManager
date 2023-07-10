@@ -195,11 +195,18 @@ extension BaseTableManager {
             self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
 
-        let indexPaths = elements.map {
-            IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
+        let indexDictionary = elements.reduce([Int: [IndexPath]]()) { result, value in
+            var result = result
+            let indexPath = IndexPath(row: value.generatorIndex, section: value.sectionIndex)
+            if result[value.sectionIndex] == nil {
+                result[value.sectionIndex] = [indexPath]
+            } else {
+                result[value.sectionIndex]?.append(indexPath)
+            }
+            return result
         }
 
-        modifier?.insertRows(at: indexPaths, with: animation.value)
+        modifier?.insertSectionsAndRows(at: indexDictionary, with: animation.value)
     }
 
     func insertManual(after generator: TableCellGenerator,

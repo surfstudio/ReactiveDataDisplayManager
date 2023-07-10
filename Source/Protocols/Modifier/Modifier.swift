@@ -60,10 +60,19 @@ open class Modifier<View: UIView, Animation> {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
+    /// Insert new sections with rows at specific position with animation
+    ///
+    /// - parameter indexDictionary: dictionary where **key** is new section index and value is location of subviews to insert
+    /// - parameter insertAnimation: animation of insert operation
+    open func insertSectionsAndRows(at indexDictionary: [Int : [IndexPath]], with insertAnimation: Animation?) {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+
     /// Insert new sections at specific position with animation
     ///
     /// - parameter indexPaths: location of sections to insert
     /// - parameter insertAnimation: animation of insert operation
+    ///  - Warning: This method will insert an **empty** section only. If you need to insert section with rows use `insertSectionsAndRows: [Int : [IndexPath]]` instead.
     open func insertSections(at indexPaths: IndexSet, with insertAnimation: Animation?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
