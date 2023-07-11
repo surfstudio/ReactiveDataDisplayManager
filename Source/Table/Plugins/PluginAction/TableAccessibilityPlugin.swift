@@ -62,24 +62,24 @@ private extension TableAccessibilityPlugin {
 
     func processTableCell(_ indexPath: IndexPath, _ cell: AccessibilityItem, with manager: BaseTableManager?) {
         if let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider {
-            cell.modifierType.modify(item: cell, generator: generator)
+            cell.modifySelf(with: generator)
         } else {
-            cell.modifierType.modify(item: cell)
+            cell.modifySelf()
         }
     }
 
     func processTableHeader(_ section: Int, _ view: AccessibilityItem, with manager: BaseTableManager?) {
         if let header = manager?.sections[section] as? AccessibilityStrategyProvider {
-            view.modifierType.modify(item: view, generator: header)
+            view.modifySelf(with: header)
         } else {
-            view.modifierType.modify(item: view)
+            view.modifySelf()
         }
     }
 
     func processTableFooter(_ section: Int, _ view: AccessibilityItem, with manager: BaseTableManager?) {
         // AccessibilityStrategyProvider for a footer generator is not supported yet
         // TODO: SPT-1468
-        view.modifierType.modify(item: view)
+        view.modifySelf()
     }
 
 }

@@ -54,4 +54,15 @@ public extension AccessibilityItem {
                                                generatorStrategy: AccessibilityStrategy<String>) -> String? {
         return [generatorStrategy, itemStrategy].compactMap(\.value).joined(separator: " ")
     }
+
+    /// Shortcut to modify self with default modifier
+    func modifySelf() {
+        self.modifierType.modify(item: self)
+    }
+
+    /// Shortcut to modify self with additional strategy
+    ///  - parameter additionalStrategy: additional strategy provider to apply (most probably generator)
+    func modifySelf(with additionalStrategy: AccessibilityStrategyProvider) {
+        self.modifierType.modify(item: self, generator: additionalStrategy)
+    }
 }

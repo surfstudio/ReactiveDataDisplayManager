@@ -61,25 +61,25 @@ private extension CollectionAccessibilityPlugin {
 
     func processCollectionCell(_ indexPath: IndexPath, _ cell: AccessibilityItem, with manager: BaseCollectionManager?) {
         if let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider {
-            cell.modifierType.modify(item: cell, generator: generator)
+            cell.modifySelf(with: generator)
         } else {
-            cell.modifierType.modify(item: cell)
+            cell.modifySelf()
         }
     }
 
     func processCollectionHeader(_ section: Int, _ view: AccessibilityItem, with manager: BaseCollectionManager?) {
         if let header = manager?.sections[section] as? AccessibilityStrategyProvider {
-            view.modifierType.modify(item: view, generator: header)
+            view.modifySelf(with: header)
         } else {
-            view.modifierType.modify(item: view)
+            view.modifySelf()
         }
     }
 
     func processCollectionFooter(_ section: Int, _ view: AccessibilityItem, with manager: BaseCollectionManager?) {
         if let footer = manager?.footers[section] as? AccessibilityStrategyProvider {
-            view.modifierType.modify(item: view, generator: footer)
+            view.modifySelf(with: footer)
         } else {
-            view.modifierType.modify(item: view)
+            view.modifySelf()
         }
     }
 
