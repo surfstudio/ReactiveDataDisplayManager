@@ -11,9 +11,17 @@ import ReactiveDataComponents
 
 final class TwoDirectionPaginatableCollectionViewController: UIViewController {
 
+    // MARK: - Nested types
+
+    private enum ScrollDirection {
+        case top
+        case bottom
+    }
+
     // MARK: - Constants
 
     private enum Constants {
+        static let maxPagesCount = 5
         static let pageSize = 20
         static let paginatorHeight: CGFloat = 80
         static let firstPageMiddleIndexPath = IndexPath(row: Constants.pageSize / 2, section: 0)
@@ -44,7 +52,8 @@ final class TwoDirectionPaginatableCollectionViewController: UIViewController {
     private weak var topPaginatableInput: TopPaginatableInput?
 
     private var isFirstPageLoading = true
-    private var currentPage = 0
+    private var currentTopPage = 0
+    private var currentBottomPage = 0
 
     private lazy var emptyCell = CollectionSpacerCell.rddm.baseGenerator(with: CollectionSpacerCell.Model(height: 0), and: .class)
 
@@ -117,7 +126,17 @@ private extension TwoDirectionPaginatableCollectionViewController {
         adapter => .reload
     }
 
-    func makeGenerator() -> CollectionCellGenerator {
+    private func makeGenerator(for scrollDirection: ScrollDirection? = nil) -> CollectionCellGenerator {
+        var currentPage = 0
+        if let scrollDirection = scrollDirection {
+            switch scrollDirection {
+            case .top:
+                currentPage = currentTopPage
+            case .bottom:
+                currentPage = currentBottomPage
+            }
+        }
+
         let title = "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)"
         return TitleCollectionViewCell.rddm.baseGenerator(with: title)
     }
@@ -132,12 +151,12 @@ private extension TwoDirectionPaginatableCollectionViewController {
     }
 
     func fillNext() -> Bool {
-        currentPage += 1
+        currentBottomPage += 1
 
         var newGenerators = [CollectionCellGenerator]()
 
         for _ in 0...Constants.pageSize {
-            newGenerators.append(makeGenerator())
+            newGenerators.append(makeGenerator(for: .bottom))
         }
 
         if let lastGenerator = adapter.sections.last?.generators.last {
@@ -147,20 +166,18 @@ private extension TwoDirectionPaginatableCollectionViewController {
             adapter => .reload
         }
 
-        // pages count is infinite if it`s a single direction scroll
-        return currentPage != 0
+        return currentBottomPage != Constants.maxPagesCount
     }
 
     func fillPrev() -> Bool {
-        currentPage -= 1
+        currentTopPage -= 1
 
         let newGenerators = (0...Constants.pageSize).map { _ in
-            return makeGenerator()
+            return makeGenerator(for: .top)
         }
         adapter.insert(after: emptyCell, new: newGenerators, with: nil)
 
-        // pages count is infinite if it`s a single direction scroll
-        return currentPage != 0
+        return abs(currentTopPage) != Constants.maxPagesCount
     }
 
 }
@@ -184,7 +201,6 @@ extension TwoDirectionPaginatableCollectionViewController: PaginatableOutput {
 
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
-                self?.topPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
@@ -213,7 +229,6 @@ extension TwoDirectionPaginatableCollectionViewController: TopPaginatableOutput 
                 let canIterate = self.fillPrev()
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
-                self.bottomPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
