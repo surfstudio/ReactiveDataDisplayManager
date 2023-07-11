@@ -26,6 +26,7 @@ public class CollectionTopPaginatablePlugin: BaseCollectionPlugin<CollectionEven
     private let isSaveScrollPositionNeeded: Bool
 
     private var isLoading = false
+    private var isLoadError = false
 
     private weak var collectionView: UICollectionView?
 
@@ -72,6 +73,7 @@ public class CollectionTopPaginatablePlugin: BaseCollectionPlugin<CollectionEven
             guard let input = self, let output = self?.output else {
                 return
             }
+            self?.isLoadError = false
             output.loadPrevPage(with: input)
         }
     }
@@ -81,7 +83,7 @@ public class CollectionTopPaginatablePlugin: BaseCollectionPlugin<CollectionEven
         switch event {
         case .willDisplayCell(let indexPath):
             let firstCellIndexPath = IndexPath(row: 0, section: 0)
-            guard indexPath == firstCellIndexPath, canIterate, !isLoading else {
+            guard indexPath == firstCellIndexPath, canIterate, !isLoading, !isLoadError else {
                 return
             }
 
@@ -112,6 +114,7 @@ extension CollectionTopPaginatablePlugin: TopPaginatableInput {
 
     public func updateError(_ error: Error?) {
         progressView.showError(error)
+        isLoadError = true
     }
 
     public func updatePagination(canIterate: Bool) {
