@@ -79,6 +79,9 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
 
         switch event {
         case .willDisplayCell(let indexPath):
+            if progressView.frame.minY != collectionView?.contentSize.height {
+                setProgressViewFinalFrame()
+            }
             guard let sections = manager?.sections, !isLoadError else {
                 return
             }
@@ -90,15 +93,19 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
                 return
             }
 
-            // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
-            progressView.frame = .init(origin: .init(x: progressView.frame.origin.x,
-                                                     y: collectionView?.contentSize.height ?? 0),
-                                       size: progressView.frame.size)
-
             output?.loadNextPage(with: self)
         default:
             break
         }
+    }
+
+    // MARK: - Private methods
+
+    func setProgressViewFinalFrame() {
+        // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
+        progressView.frame = .init(origin: .init(x: progressView.frame.origin.x,
+                                                 y: collectionView?.contentSize.height ?? 0),
+                                   size: progressView.frame.size)
     }
 
 }
