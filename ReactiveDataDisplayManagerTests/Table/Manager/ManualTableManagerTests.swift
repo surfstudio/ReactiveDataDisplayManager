@@ -751,8 +751,8 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // when
-        ddm.remove(gen3, with: Optional.none, needScrollAt: nil, needRemoveEmptySection: true)
-        ddm.remove(gen4, with: Optional.none, needScrollAt: nil, needRemoveEmptySection: true)
+        ddm.remove(gen3, with: .notAnimated, needScrollAt: nil, needRemoveEmptySection: true)
+        ddm.remove(gen4, with: .notAnimated, needScrollAt: nil, needRemoveEmptySection: true)
         ddm.forceRefill()
 
         XCTAssertEqual(ddm.sections.count, 1)
@@ -774,7 +774,7 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // when
-        ddm.remove(gen3, with: .top, needScrollAt: .top, needRemoveEmptySection: true)
+        ddm.remove(gen3, with: .animated(.top), needScrollAt: .top, needRemoveEmptySection: true)
         ddm.forceRefill()
 
         //then
@@ -797,7 +797,7 @@ final class ManualTableManagerTests: XCTestCase {
         ddm.forceRefill()
 
         // when
-        ddm.remove(gen1, with: Optional.none, needScrollAt: .top, needRemoveEmptySection: false)
+        ddm.remove(gen1, with: .notAnimated, needScrollAt: .top, needRemoveEmptySection: false)
         ddm.forceRefill()
 
         // then

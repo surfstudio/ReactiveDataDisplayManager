@@ -49,23 +49,23 @@ extension TitleCollectionViewCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .gray
-        valueStrategy = .just("Normal")
+        updateState(state: "Normal", isSelected: false)
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .white.withAlphaComponent(0.5)
-        valueStrategy = .just("Highlighted")
+        updateState(state: "Highlighted", isSelected: true)
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
-        valueStrategy = .just("Selected")
+        updateState(state: "Selected", isSelected: true)
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
-        valueStrategy = .just("Normal")
+        updateState(state: "Normal", isSelected: false)
     }
 
 }
