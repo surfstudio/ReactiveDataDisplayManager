@@ -222,7 +222,7 @@ public extension BaseTablePlugin {
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
     static func topPaginatable(progressView: TableTopPaginatablePlugin.ProgressView,
-                                    output: TopPaginatableOutput) -> TableTopPaginatablePlugin {
+                               output: TopPaginatableOutput) -> TableTopPaginatablePlugin {
         return TableTopPaginatablePlugin(progressView: progressView, with: output)
 
     }
