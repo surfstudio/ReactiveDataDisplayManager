@@ -87,6 +87,8 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
     ///
     /// - parameter indexDictionary: dictionary where **key** is new section index and value is location of items to insert
     /// - parameter insertAnimation: animation of insert operation
+    ///  - Warning: make sure that you do not have mistake in indexes inside `indexDictionary`.
+    ///  For example, if you are inserting **many sections** using this method you should notice that **index** cannot be greater than **final number of sections**.
     override func insertSectionsAndRows(at indexDictionary: [Int: [IndexPath]],
                                         with insertAnimation: CollectionItemAnimation?) {
         guard let view = view else { return }

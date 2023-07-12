@@ -64,6 +64,8 @@ open class Modifier<View: UIView, Animation> {
     ///
     /// - parameter indexDictionary: dictionary where **key** is new section index and value is location of subviews to insert
     /// - parameter insertAnimation: animation of insert operation
+    ///  - Warning: make sure that you do not have mistake in indexes inside `indexDictionary`.
+    ///  For example, if you are inserting **many sections** using this method you should notice that **index** cannot be greater than **final number of sections**.
     open func insertSectionsAndRows(at indexDictionary: [Int: [IndexPath]], with insertAnimation: Animation?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
