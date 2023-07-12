@@ -314,14 +314,10 @@ public class ManualTableManager: BaseTableManager {
                      by headerIndex: Int,
                      generators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation) {
-        let index = min(max(headerIndex, 0), self.sections.count)
-        self.sections.insert(headGenerator, at: headerIndex)
-
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
-        }
-
-        self.insert(elements: elements, with: .animated(animation))
+        self.insert(headGenerator: headGenerator,
+                    by: headerIndex,
+                    generators: generators,
+                    with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
@@ -329,19 +325,10 @@ public class ManualTableManager: BaseTableManager {
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: UITableView.RowAnimation) {
-        self.insert(headGenerator: sectionHeader, before: headerGenerator)
-
-        guard let headerIndex = self.sections.firstIndex(where: {
-            $0 === sectionHeader
-        }) else {
-            return
-        }
-
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
-        }
-
-        self.insert(elements: elements, with: .animated(animation))
+        self.insertSection(before: headerGenerator,
+                           new: sectionHeader,
+                           generators: generators,
+                           with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
@@ -349,19 +336,11 @@ public class ManualTableManager: BaseTableManager {
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: UITableView.RowAnimation) {
-        self.insert(headGenerator: sectionHeader, after: headerGenerator)
 
-        guard let headerIndex = self.sections.firstIndex(where: {
-            $0 === sectionHeader
-        }) else {
-            return
-        }
-
-        let elements = generators.enumerated().map { item in
-            (item.element, headerIndex, item.offset)
-        }
-
-        self.insert(elements: elements, with: .animated(animation))
+        self.insertSection(after: headerGenerator,
+                           new: sectionHeader,
+                           generators: generators,
+                           with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
