@@ -30,6 +30,7 @@ final class StackCellExampleCollectionViewController: UIViewController {
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(delegate: FlowCollectionDelegate())
         .add(plugin: .highlightable())
+        .add(plugin: .selectable())
         .build()
 
     lazy var horizontalNestedStackCell = HorizontalCollectionStack {

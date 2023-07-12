@@ -31,6 +31,14 @@ public struct Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
         self.header = header
         self.footer = footer
     }
+
+    /// Generic section for tables and collections with @resultBuilder support
+    public init(header: HeaderGeneratorType,
+                footer: FooterGeneratorType,
+                @GeneratorsBuilder<GeneratorType> generators: () -> [GeneratorType]) {
+        self.init(generators: generators(), header: header, footer: footer)
+    }
+
 }
 
 public extension Section {

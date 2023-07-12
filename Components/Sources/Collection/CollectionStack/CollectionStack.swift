@@ -8,32 +8,36 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-open class CollectionStack: UIView, ConfigurableItem {
+open class CollectionStack: UIView, ConfigurableItem, SelectableItem {
 
-    // MARK: - Properties
+    // MARK: - Public properties
 
-    open var axis: NSLayoutConstraint.Axis {
-        .vertical
-    }
+    public var isNeedDeselect = true
+    public var didSelectEvent = BaseEvent<Void>()
+    public var didDeselectEvent = BaseEvent<Void>()
+
+    public var views: [UIView] = []
 
     // MARK: - Private properties
 
-    private var views: [UIView] = []
     private var cell: StackCollectionCell?
     private let stackView = UIStackView()
 
     // MARK: - Initialization
 
-    public init(space: CGFloat, insets: UIEdgeInsets, @ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
+    public init(space: CGFloat,
+                insets: UIEdgeInsets,
+                axis: NSLayoutConstraint.Axis,
+                @ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
+
         self.views = items().compactMap { item in
             return (item as? UICollectionViewCell)?.contentView
             ?? (item as? UITableViewCell)?.contentView
             ?? item
         }
         super.init(frame: .zero)
-        setupStackView(with: space, insets: insets)
+        setupStackView(with: space, insets: insets, axis: axis)
         configure(with: views)
-        updateFrameByContent()
     }
 
     public required init?(coder: NSCoder) {
@@ -60,19 +64,18 @@ open class CollectionStack: UIView, ConfigurableItem {
 
     public func configure(with model: [UIView]) {
         views = model
-        cell?.configure(with: self)
 
         stackView.removeAllArrangedSubviews()
-        // надо обновить все дочерние ячейки
         model.forEach { view in
             stackView.addArrangedSubview(view)
         }
         updateFrameByContent()
+        cell?.configure(with: stackView)
     }
 
     // MARK: - Private methods
 
-    private func setupStackView(with spacing: CGFloat, insets: UIEdgeInsets) {
+    private func setupStackView(with spacing: CGFloat, insets: UIEdgeInsets, axis: NSLayoutConstraint.Axis) {
         stackView.axis = axis
         stackView.alignment = .fill
         stackView.spacing = spacing
@@ -114,50 +117,18 @@ extension CollectionStack: CollectionCellGenerator {
 
 }
 
-public final class VerticalCollectionStack: CollectionStack {
+// MARK: - Events
 
-    // MARK: - Public properties
+public extension CollectionStack {
 
-    public override var axis: NSLayoutConstraint.Axis {
-        .vertical
+    func didSelectEvent(_ closure: @escaping () -> Void) -> Self {
+        didSelectEvent.addListner(closure)
+        return self
     }
 
-    // MARK: - Initialization
-
-    public override init(space: CGFloat, insets: UIEdgeInsets = .zero, @ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
-        super.init(space: space, insets: insets, items: items)
-    }
-
-    public init(@ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
-        super.init(space: .zero, insets: .zero, items: items)
-    }
-
-    public required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-}
-
-public final class HorizontalCollectionStack: CollectionStack {
-
-    // MARK: - Public properties
-
-    public override var axis: NSLayoutConstraint.Axis {
-        .horizontal
-    }
-
-    // MARK: - Initialization
-
-    public override init(space: CGFloat, insets: UIEdgeInsets = .zero, @ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
-        super.init(space: space, insets: insets, items: items)
-    }
-
-    public init(@ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
-        super.init(space: 0, insets: .zero, items: items)
-    }
-
-    public required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func didDeselectEvent(_ closure: @escaping () -> Void) -> Self {
+        didDeselectEvent.addListner(closure)
+        return self
     }
 
 }

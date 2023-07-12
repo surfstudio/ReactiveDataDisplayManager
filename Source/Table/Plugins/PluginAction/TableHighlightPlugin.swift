@@ -30,34 +30,30 @@ public class TableHighlightPlugin: BaseTablePlugin<TableEvent> {
 
         switch event {
         case .didHighlight(let indexPath):
-            guard let cell = manager?.view.cellForRow(at: indexPath),
-                  let highlightable = cell as? HighlightableItem else {
-                      return
-                  }
+            guard let item = getHighlightableItem(indexPath: indexPath, manager: manager) else {
+                return
+            }
 
-            highlightable.applyHighlightedStyle()
+            item.applyHighlightedStyle()
         case .didUnhighlight(let indexPath):
-            guard let cell = manager?.view.cellForRow(at: indexPath),
-                  let highlightable = cell as? HighlightableItem else {
-                      return
-                  }
+            guard let item = getHighlightableItem(indexPath: indexPath, manager: manager) else {
+                return
+            }
 
-            highlightable.applyUnhighlightedStyle()
+            item.applyUnhighlightedStyle()
         case .didSelect(let indexPath):
-            guard let cell = manager?.view.cellForRow(at: indexPath),
-                  let highlightable = cell as? HighlightableItem else {
-                      return
-                  }
+            guard let item = getHighlightableItem(indexPath: indexPath, manager: manager) else {
+                return
+            }
 
-            highlightable.applySelectedStyle()
-            animationDeselect(cell: highlightable, manager: manager, indexPath: indexPath)
+            item.applySelectedStyle()
+            animationDeselect(item: item, manager: manager, indexPath: indexPath)
         case .didDeselect(let indexPath):
-            guard let cell = manager?.view.cellForRow(at: indexPath),
-                  let highlightable = cell as? HighlightableItem else {
-                      return
-                  }
+            guard let item = getHighlightableItem(indexPath: indexPath, manager: manager) else {
+                return
+            }
 
-            highlightable.applyDeselectedStyle()
+            item.applyDeselectedStyle()
         default:
             break
         }
@@ -65,13 +61,20 @@ public class TableHighlightPlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - Private
 
-    private func animationDeselect(cell: HighlightableItem, manager: BaseTableManager?, indexPath: IndexPath) {
+    private func animationDeselect(item: HighlightableItem, manager: BaseTableManager?, indexPath: IndexPath) {
         guard (manager?.sections[indexPath.section].generators[indexPath.row] as? SelectableItem)?.isNeedDeselect == true else {
             return
         }
         UIView.animate(withDuration: animationDuration, delay: animationDelay) {
-            cell.applyDeselectedStyle()
+            item.applyDeselectedStyle()
         }
+    }
+
+    private func getHighlightableItem(indexPath: IndexPath, manager: BaseTableManager?) -> HighlightableItem? {
+        let generator = manager?.sections[safe: indexPath.section]?.generators[safe: indexPath.row] as? HighlightableItem
+        let cell = manager?.view.cellForRow(at: indexPath) as? HighlightableItem
+
+        return cell ?? generator
     }
 
 }

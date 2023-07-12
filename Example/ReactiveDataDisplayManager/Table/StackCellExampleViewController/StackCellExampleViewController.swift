@@ -47,19 +47,21 @@ private extension StackCellExampleViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
 
-        // Create vertical cell generators
-        let verticalGenerators = VerticalTableStack {
-            TitleTableViewCell.build(with: "Текст 1")
-            TitleTableViewCell.build(with: "Текст 2")
-            HorizontalTableStack {
-                TitleTableViewCell.build(with: "Текст 4")
-                TitleTableViewCell.build(with: "Текст 5")
-            }
-            TitleTableViewCell.build(with: "Текст 3")
-        }
-
         // Add stack generators into adapter
-        adapter += verticalGenerators
+        adapter += Section(header: EmptyTableHeaderGenerator(), footer: EmptyTableFooterGenerator()) {
+            TableVStack {
+                TitleTableViewCell.build(with: "Текст 1")
+                TitleTableViewCell.build(with: "Текст 2")
+                TableHStack {
+                    TitleTableViewCell.build(with: "Текст 4")
+                    TitleTableViewCell.build(with: "Текст 5")
+                }
+                TitleTableViewCell.build(with: "Текст 3")
+            }
+            .didSelectEvent {
+                print("VerticalTableStack did select event")
+            }
+        }
 
         // Tell adapter that we've changed generators
         adapter => .reload

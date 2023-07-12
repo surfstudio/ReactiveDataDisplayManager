@@ -8,15 +8,13 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-open class TableStack: UIView, ConfigurableItem {
-
-    // MARK: - Properties
-
-    open var axis: NSLayoutConstraint.Axis {
-        .vertical
-    }
+open class TableStack: UIView, ConfigurableItem, SelectableItem {
 
     // MARK: - Public properties
+
+    public var isNeedDeselect = true
+    public var didSelectEvent = BaseEvent<Void>()
+    public var didDeselectEvent = BaseEvent<Void>()
 
     public var cell: StackTableCell?
 
@@ -27,16 +25,19 @@ open class TableStack: UIView, ConfigurableItem {
 
     // MARK: - Initialization
 
-    public init(space: CGFloat, insets: UIEdgeInsets, @ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
+    public init(space: CGFloat,
+                insets: UIEdgeInsets,
+                axis: NSLayoutConstraint.Axis,
+                @ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
+
         self.views = items().compactMap { item in
             return (item as? UICollectionViewCell)?.contentView
             ?? (item as? UITableViewCell)?.contentView
             ?? item
         }
         super.init(frame: .zero)
-        setupStackView(with: space, insets: insets)
+        setupStackView(with: space, insets: insets, axis: axis)
         configure(with: views)
-        updateFrameByContent()
     }
 
     public required init?(coder: NSCoder) {
@@ -63,7 +64,6 @@ open class TableStack: UIView, ConfigurableItem {
 
     public func configure(with model: [UIView]) {
         views = model
-        cell?.configure(with: self)
 
         stackView.removeAllArrangedSubviews()
         // надо обновить все дочерние ячейки
@@ -71,11 +71,12 @@ open class TableStack: UIView, ConfigurableItem {
             stackView.addArrangedSubview(view)
         }
         updateFrameByContent()
+        cell?.configure(with: stackView)
     }
 
     // MARK: - Private methods
 
-    private func setupStackView(with spacing: CGFloat, insets: UIEdgeInsets) {
+    private func setupStackView(with spacing: CGFloat, insets: UIEdgeInsets, axis: NSLayoutConstraint.Axis) {
         stackView.axis = axis
         stackView.alignment = .fill
         stackView.spacing = spacing
@@ -118,50 +119,18 @@ extension TableStack: TableCellGenerator {
 
 }
 
-public final class VerticalTableStack: TableStack {
+// MARK: - Events
 
-    // MARK: - Public properties
+public extension TableStack {
 
-    public override var axis: NSLayoutConstraint.Axis {
-        .vertical
+    func didSelectEvent(_ closure: @escaping () -> Void) -> Self {
+        didSelectEvent.addListner(closure)
+        return self
     }
 
-    // MARK: - Initialization
-
-    public override init(space: CGFloat, insets: UIEdgeInsets = .zero, @ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
-        super.init(space: space, insets: insets, items: items)
-    }
-
-    public init(@ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
-        super.init(space: .zero, insets: .zero, items: items)
-    }
-
-    public required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-}
-
-public final class HorizontalTableStack: TableStack {
-
-    // MARK: - Public properties
-
-    public override var axis: NSLayoutConstraint.Axis {
-        .horizontal
-    }
-
-    // MARK: - Initialization
-
-    public override init(space: CGFloat, insets: UIEdgeInsets = .zero, @ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
-        super.init(space: space, insets: insets, items: items)
-    }
-
-    public init(@ConfigurableItemBuilder items: () -> [any ConfigurableItem]) {
-        super.init(space: .zero, insets: .zero, items: items)
-    }
-
-    public required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func didDeselectEvent(_ closure: @escaping () -> Void) -> Self {
+        didDeselectEvent.addListner(closure)
+        return self
     }
 
 }
