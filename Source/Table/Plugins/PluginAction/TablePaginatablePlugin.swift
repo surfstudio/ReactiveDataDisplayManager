@@ -117,7 +117,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
     private weak var output: PaginatableOutput?
 
     private var isLoading = false
-    private var isLoadError = false
+    private var isErrorWasReceived = false
 
     private weak var tableView: UITableView?
 
@@ -151,7 +151,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
             guard let input = self, let output = self?.output else {
                 return
             }
-            self?.isLoadError = false
+            self?.isErrorWasReceived = false
             output.loadNextPage(with: input)
         }
     }
@@ -160,7 +160,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
 
         switch event {
         case .willDisplayCell(let indexPath):
-            guard let sections = manager?.sections, !isLoadError else {
+            guard let sections = manager?.sections, !isErrorWasReceived else {
                 return
             }
             let lastSectionIndex = sections.count - 1
@@ -188,7 +188,7 @@ extension TablePaginatablePlugin: PaginatableInput {
 
     public func updateError(_ error: Error?) {
         progressView.showError(error)
-        isLoadError = true
+        isErrorWasReceived = true
     }
 
     public func updatePagination(canIterate: Bool) {

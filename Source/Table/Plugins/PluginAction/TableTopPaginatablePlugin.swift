@@ -26,7 +26,7 @@ public class TableTopPaginatablePlugin: BaseTablePlugin<TableEvent> {
     private let isSaveScrollPositionNeeded: Bool
 
     private var isLoading = false
-    private var isLoadError = false
+    private var isErrorWasReceived = false
 
     private weak var tableView: UITableView?
 
@@ -63,7 +63,7 @@ public class TableTopPaginatablePlugin: BaseTablePlugin<TableEvent> {
             guard let input = self, let output = self?.output else {
                 return
             }
-            self?.isLoadError = false
+            self?.isErrorWasReceived = false
             output.loadPrevPage(with: input)
         }
     }
@@ -73,7 +73,7 @@ public class TableTopPaginatablePlugin: BaseTablePlugin<TableEvent> {
         switch event {
         case .willDisplayCell(let indexPath):
             let firstCellIndexPath = IndexPath(row: 0, section: 0)
-            if indexPath == firstCellIndexPath && canIterate && !isLoading && !isLoadError {
+            if indexPath == firstCellIndexPath && canIterate && !isLoading && !isErrorWasReceived {
                 output?.loadPrevPage(with: self)
             }
         default:
@@ -97,7 +97,7 @@ extension TableTopPaginatablePlugin: TopPaginatableInput {
 
     public func updateError(_ error: Error?) {
         progressView.showError(error)
-        isLoadError = true
+        isErrorWasReceived = true
     }
 
     public func updatePagination(canIterate: Bool) {
