@@ -8,6 +8,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
+/// Base class for  table stack (generator)
 open class TableStack: UIView, ConfigurableItem, SelectableItem {
 
     // MARK: - Public properties
@@ -25,6 +26,11 @@ open class TableStack: UIView, ConfigurableItem, SelectableItem {
 
     // MARK: - Initialization
 
+    /// - Parameters:
+    ///  - space: Space between items
+    ///  - insets: Insets for stack
+    ///  - axis: Axis for stack
+    ///  - items: Items for stack
     public init(space: CGFloat,
                 insets: UIEdgeInsets,
                 axis: NSLayoutConstraint.Axis,
@@ -46,32 +52,43 @@ open class TableStack: UIView, ConfigurableItem, SelectableItem {
 
     // MARK: - Public methods
 
+    /// Update items in stack
+    /// - Parameter items: new items
     public func updateItems(_ items: [any ConfigurableItem]) {
         self.views = items.compactMap { item in
-            return (item as? UICollectionViewCell)?.contentView ?? (item as? UITableViewCell)?.contentView
+            return (item as? UICollectionViewCell)?.contentView ?? (item as? UITableViewCell)?.contentView ?? item
         }
         configure(with: views)
     }
 
+    /// Remove item from stack
+    /// - Parameter item: item for remove
     public func removeItem(_ item: any ConfigurableItem) {
-        guard let view = (item as? UICollectionViewCell)?.contentView ?? (item as? UITableViewCell)?.contentView,
-              let index = views.firstIndex(where: { $0 === view }) else {
+        let view = (item as? UICollectionViewCell)?.contentView ?? (item as? UITableViewCell)?.contentView ?? item
+        guard let index = views.firstIndex(where: { $0 === view }) else {
             return
         }
         views.remove(at: index)
         configure(with: views)
     }
 
+    /// Update size after update content
+    public func updateSizeIfNeaded() {
+        updateFrameByContent()
+        cell?.configure(with: self)
+    }
+
+    // MARK: - ConfigurableItem
+
     public func configure(with model: [UIView]) {
         views = model
 
         stackView.removeAllArrangedSubviews()
-        // надо обновить все дочерние ячейки
         model.forEach { view in
             stackView.addArrangedSubview(view)
         }
         updateFrameByContent()
-        cell?.configure(with: stackView)
+        cell?.configure(with: self)
     }
 
     // MARK: - Private methods
@@ -106,7 +123,6 @@ extension TableStack: TableCellGenerator {
         self.cell = cell
         configure(with: views)
         return cell
-    
     }
 
     public func registerCell(in tableView: UITableView) {

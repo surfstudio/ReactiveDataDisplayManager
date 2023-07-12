@@ -8,6 +8,7 @@
 import ReactiveDataDisplayManager
 import UIKit
 
+/// Base class for horizontal collection stack (generator)
 open class HorizontalCollectionStack: CollectionStack {
 
     // MARK: - Initialization

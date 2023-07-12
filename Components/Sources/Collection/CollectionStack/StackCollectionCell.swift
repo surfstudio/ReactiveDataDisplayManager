@@ -20,6 +20,9 @@ open class StackCollectionCell: UICollectionViewCell, ConfigurableItem, Expandab
 
     public func configure(with model: UIView) {
         guard !contentView.contains(model) else {
+            if contentView.frame != model.frame {
+                onHeightChanged.invoke(with: nil)
+            }
             return
         }
         model.attach(to: contentView)

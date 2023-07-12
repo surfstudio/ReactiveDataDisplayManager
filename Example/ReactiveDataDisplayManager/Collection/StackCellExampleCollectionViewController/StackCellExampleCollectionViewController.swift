@@ -23,10 +23,11 @@ final class StackCellExampleCollectionViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet private weak var collectionView: UICollectionView!
-    private lazy var cell1 = TitleTableViewCell.build(with: "Cell 1")
+    private lazy var titleCell = TitleTableViewCell.buildView(with: "Title")
 
     // MARK: - Private Properties
 
+    private var cellBaseState = true
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(delegate: FlowCollectionDelegate())
         .add(plugin: .highlightable())
@@ -34,15 +35,17 @@ final class StackCellExampleCollectionViewController: UIViewController {
         .build()
 
     lazy var horizontalNestedStackCell = HorizontalCollectionStack {
-        TitleTableViewCell.build(with: "Текст 1")
-        TitleTableViewCell.build(with: "Текст 2")
+        TitleTableViewCell.buildView(with: "Text 3")
+        TitleTableViewCell.buildView(with: "Text 4")
     }
 
     lazy var verticalStackCell = VerticalCollectionStack(space: 8) {
-        cell1
-        TitleTableViewCell.build(with: "Текст 1")
-        TitleTableViewCell.build(with: "Текст 2")
+        titleCell
+            .set(font: UIFont.boldSystemFont(ofSize: 20))
+        TitleTableViewCell.buildView(with: "Text 1")
+        TitleTableViewCell.buildView(with: "Text 2")
         horizontalNestedStackCell
+        SeparatorView.buildView(with: .init(height: 1, color: .lightGray), and: .class)
     }
 
     // MARK: - UIViewController
@@ -62,29 +65,30 @@ final class StackCellExampleCollectionViewController: UIViewController {
 // MARK: - Private Methods
 
 private extension StackCellExampleCollectionViewController {
-    
+
     func makeFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.minimumLineSpacing = 10.0
         flowLayout.sectionInset = Constants.sectionInset
         flowLayout.scrollDirection = .vertical
         flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        
+
         return flowLayout
     }
-    
+
     /// This method is used to fill adapter
     func fillAdapter() {
-    
+
         // Add stack generators into adapter
         adapter += verticalStackCell
+            .didSelectEvent { [weak self] in
+                self?.cellBaseState.toggle()
+                self?.titleCell.configure(with: (self?.cellBaseState ?? true) ? "Title" : "Very very very long title")
+                self?.verticalStackCell.updateSizeIfNeaded()
+            }
     
         // Tell adapter that we've changed generators
         adapter => .reload
-    
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.cell1.configure(with: "12345")
-        }
     }
 
 }
