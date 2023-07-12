@@ -95,10 +95,9 @@ private extension FoldableCollectionViewController {
         adapter => .reload
     }
 
-    func makeFoldableCellGenerator(color: UIColor, expanded: Bool) -> FoldableCollectionCellGenerator {
+    func makeFoldableCellGenerator(color: UIColor, expanded: Bool) -> CollectionCellGenerator & CollectionFoldableItem {
         // Create foldable generator
-        let viewModel = FoldableCollectionViewCell.ViewModel(color: color)
-        let generator = FoldableCollectionCellGenerator(with: viewModel)
+        let generator = FoldableCollectionViewCell.rddm.foldableGenerator(with: .init(color: color))
 
         // Configure foldable initial state
         generator.isExpanded = expanded

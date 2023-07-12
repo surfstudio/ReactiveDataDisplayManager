@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class FoldableTableViewCell: UITableViewCell {
+final class FoldableTableViewCell: UITableViewCell, FoldableStateHolder {
 
     struct Model {
         let title: String
@@ -35,9 +35,9 @@ final class FoldableTableViewCell: UITableViewCell {
         setupInitialState()
     }
 
-    // MARK: - Internal Methods
+    // MARK: - Foldable
 
-    func update(isExpanded: Bool) {
+    func setExpanded(_ isExpanded: Bool) {
         UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
             self?.arrowImageView.transform = isExpanded ? .identity : CGAffineTransform(rotationAngle: .pi)
         }

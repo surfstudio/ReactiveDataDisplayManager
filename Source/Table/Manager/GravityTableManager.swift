@@ -113,33 +113,35 @@ open class GravityTableManager: BaseTableManager {
         self.sections[index].generators.removeAll()
     }
 
+    public func clearHeaderGenerators() {
+        sections.removeAll()
+    }
+
     open func replace(oldGenerator: GeneratorType,
                       on newGenerator: GeneratorType,
-                      removeAnimation: UITableView.RowAnimation = .automatic,
-                      insertAnimation: UITableView.RowAnimation = .automatic) {
+                      removeInsertAnimation: TableRowAnimationGroup = .animated(.automatic, .automatic)) {
         guard let index = self.findGenerator(oldGenerator) else { return }
 
         sections[index.sectionIndex].generators.remove(at: index.generatorIndex)
         sections[index.sectionIndex].generators.insert(newGenerator, at: index.generatorIndex)
 
         let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-        sections.registerAllIfNeeded(with: view, using: registrator)
-        modifier?.replace(at: indexPath, with: (remove: removeAnimation, insert: insertAnimation))
+
+        modifier?.replace(at: indexPath, with: removeInsertAnimation.value)
     }
 
-    open func replace(header: HeaderGeneratorType, with animation: UITableView.RowAnimation = .fade) {
+    open func replace(header: HeaderGeneratorType, with animation: TableRowAnimation = .animated(.fade)) {
         guard let indexOfHeader = self.sections.firstIndex(where: { $0.header === header }) else {
             self.addSectionHeaderGenerator(header)
             return
         }
 
         self.sections[indexOfHeader].header = header
-        sections.registerAllIfNeeded(with: view, using: registrator)
-        modifier?.reloadSections(at: [indexOfHeader], with: animation)
+        modifier?.reloadSections(at: [indexOfHeader], with: animation.value)
     }
 
     open func remove(_ generator: GeneratorType,
-                     with animation: UITableView.RowAnimation = .automatic,
+                     with animation: TableRowAnimation = .animated(.automatic),
                      needScrollAt scrollPosition: UITableView.ScrollPosition? = nil,
                      needRemoveEmptySection: Bool = false) {
         guard let index = self.findGenerator(generator) else { return }
