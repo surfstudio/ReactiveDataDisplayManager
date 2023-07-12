@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class GravityFoldableCellGenerator: FoldableCellGenerator {
+final class GravityFoldableCellGenerator: FoldableCellGenerator<FoldableTableViewCell> {
 
     // MARK: - Properties
 

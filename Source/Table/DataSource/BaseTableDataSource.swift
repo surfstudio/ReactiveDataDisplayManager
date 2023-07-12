@@ -125,7 +125,7 @@ private extension BaseTableDataSource {
         guard let expandable = cell as? ExpandableItem else {
             return
         }
-        expandable.onHeightChanged += { [weak self, weak expandable, weak tableView] _ in
+        expandable.onHeightChanged.addListner(with: "rddm.expandable-on-dequeue") { [weak self, weak expandable, weak tableView] _ in
             guard let tableView = tableView,
                   let animated = expandable?.animatedExpandable else {
                 return
