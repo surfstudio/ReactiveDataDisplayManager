@@ -36,7 +36,7 @@ targets:
       settings:
         base:
           PRODUCT_BUNDLE_IDENTIFIER: ru.surfstudio.rddm
-          MARKETING_VERSION: "7.3.6"
+          MARKETING_VERSION: "7.3.7"
           CURRENT_PROJECT_VERSION: 0
           VERSIONING_SYSTEM: "apple-generic"
           DEBUG_INFORMATION_FORMAT: dwarf-with-dsym
