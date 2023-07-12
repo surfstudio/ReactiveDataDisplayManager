@@ -13,6 +13,9 @@ public enum AccessibilityContainerModifier: AccessibilityModifier {
         guard let item = item as? AccessibilityContainer else {
             return
         }
+
+        item.isAccessibilityElement = !item.isAccessibilityIgnored
+
         item.accessibilityChildItems.forEach {
             $0.modifierType.modify(item: $0)
         }
