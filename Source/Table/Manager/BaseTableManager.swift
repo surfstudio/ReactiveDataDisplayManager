@@ -195,9 +195,7 @@ extension BaseTableManager {
             self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
         }
 
-        let indexPaths = elements.map {
-            IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
-        }
+        let indexPaths = elements.map { IndexPath(row: $0.generatorIndex, section: $0.sectionIndex) }
 
         modifier?.insertRows(at: indexPaths, with: animation.value)
     }

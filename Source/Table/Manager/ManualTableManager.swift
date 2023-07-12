@@ -41,13 +41,7 @@ public class ManualTableManager: BaseTableManager {
     ///   - headGenerator: TableHeaderGenerator which you want to insert.
     ///   - after: TableHeaderGenerator, after which new TableHeaderGenerator will be added.
     open func insert(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) {
-        if self.sections.contains(where: { $0 === headGenerator }) {
-            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
-        }
-        guard let anchorIndex = self.sections.firstIndex(where: { $0 === after }) else {
-            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
-        }
-        let newIndex = anchorIndex + 1
+        let newIndex = getIndexOf(headGenerator: headGenerator, after: after)
         self.insert(headGenerator: headGenerator, by: newIndex, animation: .notAnimated)
     }
 
@@ -57,13 +51,7 @@ public class ManualTableManager: BaseTableManager {
     ///   - headGenerator: TableHeaderGenerator which you want to insert.
     ///   - after: TableHeaderGenerator, before which new TableHeaderGenerator will be added.
     open func insert(headGenerator: TableHeaderGenerator, before: TableHeaderGenerator) {
-        if self.sections.contains(where: { $0 === headGenerator }) {
-            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
-        }
-        guard let anchorIndex = self.sections.firstIndex(where: { $0 === before }) else {
-            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
-        }
-        let newIndex = max(anchorIndex - 1, 0)
+        let newIndex = getIndexOf(headGenerator: headGenerator, before: before)
         self.insert(headGenerator: headGenerator, by: newIndex, animation: .notAnimated)
     }
 
@@ -132,19 +120,12 @@ public class ManualTableManager: BaseTableManager {
     ///   - generators: Generators which you want to insert.
     ///   - with: Animation for row action.
     open func insert(headGenerator: TableHeaderGenerator,
-                     by index: Int,
+                     by headerIndex: Int,
                      generators: [TableCellGenerator],
                      with animation: TableRowAnimation = .animated(.automatic)) {
-        self.insert(headGenerator: headGenerator, by: index, animation: animation)
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === headGenerator }) else {
-            return
-        }
+        let headerIndex = min(max(headerIndex, 0), self.sections.count)
 
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
-        }
-
-        self.insert(elements: elements, with: animation)
+        self.insert(header: headGenerator, generators: generators, at: headerIndex, with: animation)
     }
 
     /// Inserts new section.
@@ -158,19 +139,10 @@ public class ManualTableManager: BaseTableManager {
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: TableRowAnimation = .animated(.automatic)) {
-        self.insert(headGenerator: sectionHeader, before: headerGenerator)
 
-        guard let headerIndex = self.sections.firstIndex(where: {
-            $0 === sectionHeader
-        }) else {
-            return
-        }
+        let headerIndex = getIndexOf(headGenerator: sectionHeader, before: headerGenerator)
 
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
-        }
-
-        self.insert(elements: elements, with: animation)
+        self.insert(header: sectionHeader, generators: generators, at: headerIndex, with: animation)
     }
 
     /// Inserts new section.
@@ -184,19 +156,9 @@ public class ManualTableManager: BaseTableManager {
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: TableRowAnimation = .animated(.automatic)) {
-        self.insert(headGenerator: sectionHeader, after: headerGenerator)
+        let headerIndex = getIndexOf(headGenerator: sectionHeader, after: headerGenerator)
 
-        guard let headerIndex = self.sections.firstIndex(where: {
-            $0 === sectionHeader
-        }) else {
-            return
-        }
-
-        let elements = generators.enumerated().map { item in
-            (item.element, headerIndex, item.offset)
-        }
-
-        self.insert(elements: elements, with: animation)
+        self.insert(header: sectionHeader, generators: generators, at: headerIndex, with: animation)
     }
 
     /// Inserts new generators after provided generator.
@@ -349,19 +311,13 @@ public class ManualTableManager: BaseTableManager {
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
     open func insert(headGenerator: TableHeaderGenerator,
-                     by index: Int,
+                     by headerIndex: Int,
                      generators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation) {
-        self.insert(headGenerator: headGenerator, by: index, animation: .animated(animation))
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === headGenerator }) else {
-            return
-        }
-
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
-        }
-
-        self.insert(elements: elements, with: .animated(animation))
+        self.insert(headGenerator: headGenerator,
+                    by: headerIndex,
+                    generators: generators,
+                    with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
@@ -369,19 +325,10 @@ public class ManualTableManager: BaseTableManager {
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: UITableView.RowAnimation) {
-        self.insert(headGenerator: sectionHeader, before: headerGenerator)
-
-        guard let headerIndex = self.sections.firstIndex(where: {
-            $0 === sectionHeader
-        }) else {
-            return
-        }
-
-        let elements = generators.enumerated().map {
-            ($0.element, headerIndex, $0.offset)
-        }
-
-        self.insert(elements: elements, with: .animated(animation))
+        self.insertSection(before: headerGenerator,
+                           new: sectionHeader,
+                           generators: generators,
+                           with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
@@ -389,19 +336,10 @@ public class ManualTableManager: BaseTableManager {
                             new sectionHeader: TableHeaderGenerator,
                             generators: [TableCellGenerator],
                             with animation: UITableView.RowAnimation) {
-        self.insert(headGenerator: sectionHeader, after: headerGenerator)
-
-        guard let headerIndex = self.sections.firstIndex(where: {
-            $0 === sectionHeader
-        }) else {
-            return
-        }
-
-        let elements = generators.enumerated().map { item in
-            (item.element, headerIndex, item.offset)
-        }
-
-        self.insert(elements: elements, with: .animated(animation))
+        self.insertSection(after: headerGenerator,
+                           new: sectionHeader,
+                           generators: generators,
+                           with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
@@ -415,64 +353,42 @@ public class ManualTableManager: BaseTableManager {
     open func insert(before generator: TableCellGenerator,
                      new newGenerators: [TableCellGenerator],
                      with animation: UITableView.RowAnimation) {
-        guard let index = self.findGenerator(generator) else { return }
-        let elements = newGenerators.enumerated().map { item in
-            (item.element, index.sectionIndex, index.generatorIndex + item.offset)
-        }
-        self.insert(elements: elements, with: .animated(animation))
+        self.insert(before: generator, new: newGenerators, with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
     open func insert(after generator: TableCellGenerator,
                      new newGenerator: TableCellGenerator,
                      with animation: UITableView.RowAnimation) {
-        guard let index = self.findGenerator(generator) else { return }
-        self.insert(elements: [(newGenerator, index.sectionIndex, index.generatorIndex + 1)], with: .animated(animation))
+        self.insert(after: generator, new: [newGenerator], with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
     open func insert(before generator: TableCellGenerator,
                      new newGenerator: TableCellGenerator,
                      with animation: UITableView.RowAnimation) {
-        guard let index = self.findGenerator(generator) else { return }
-        self.insert(elements: [(newGenerator, index.sectionIndex, index.generatorIndex)], with: .animated(animation))
+        self.insert(before: generator, new: [newGenerator], with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
     open func insert(to headerGenerator: TableHeaderGenerator,
                      new generator: TableCellGenerator,
                      with animation: UITableView.RowAnimation) {
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === headerGenerator }) else {
-            return
-        }
-        self.insert(elements: [(generator, headerIndex, 0)], with: .animated(animation))
+        self.insert(to: headerGenerator, new: generator, with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
     open func insertAtBeginning(to headerGenerator: TableHeaderGenerator,
                                 new generators: [TableCellGenerator],
                                 with animation: UITableView.RowAnimation) {
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === headerGenerator }) else {
-            return
-        }
-        let elements = generators.enumerated().map { item in
-            (item.element, headerIndex, item.offset)
-        }
-        self.insert(elements: elements, with: .animated(animation))
+        self.insertAtBeginning(to: headerGenerator, new: generators, with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
     open func insertAtEnd(to headerGenerator: TableHeaderGenerator,
                           new generators: [TableCellGenerator],
                           with animation: UITableView.RowAnimation) {
-        guard let headerIndex = self.sections.firstIndex(where: { $0 === headerGenerator }) else {
-            return
-        }
-        let base = self.generators[headerIndex].count
-        let elements = generators.enumerated().map { item in
-            (item.element, headerIndex, base + item.offset)
-        }
-        self.insert(elements: elements, with: .animated(animation))
+        self.insertAtEnd(to: headerGenerator, new: generators, with: .animated(animation))
     }
 
     @available(*, deprecated, message: "Please use method with a new `TableRowAnimationGroup` parameter")
@@ -480,13 +396,9 @@ public class ManualTableManager: BaseTableManager {
                       on newGenerator: TableCellGenerator,
                       removeAnimation: UITableView.RowAnimation,
                       insertAnimation: UITableView.RowAnimation) {
-        guard let index = self.findGenerator(oldGenerator) else { return }
-
-        generators[index.sectionIndex].remove(at: index.generatorIndex)
-        generators[index.sectionIndex].insert(newGenerator, at: index.generatorIndex)
-        let indexPath = IndexPath(row: index.generatorIndex, section: index.sectionIndex)
-
-        modifier?.replace(at: indexPath, with: (remove: removeAnimation, insert: insertAnimation))
+        self.replace(oldGenerator: oldGenerator,
+                     on: newGenerator,
+                     removeInsertAnimation: .animated(removeAnimation, insertAnimation))
     }
 
 }
@@ -495,7 +407,25 @@ public class ManualTableManager: BaseTableManager {
 
 private extension ManualTableManager {
 
-    // MARK: - Private methods
+    func getIndexOf(headGenerator: TableHeaderGenerator, after: TableHeaderGenerator) -> Int {
+        if self.sections.contains(where: { $0 === headGenerator }) {
+            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
+        }
+        guard let anchorIndex = self.sections.firstIndex(where: { $0 === after }) else {
+            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators after unexisted generator")
+        }
+        return anchorIndex + 1
+    }
+
+    func getIndexOf(headGenerator: TableHeaderGenerator, before: TableHeaderGenerator) -> Int {
+        if self.sections.contains(where: { $0 === headGenerator }) {
+            fatalError("Error adding TableHeaderGenerator generator. TableHeaderGenerator generator was added earlier")
+        }
+        guard let anchorIndex = self.sections.firstIndex(where: { $0 === before }) else {
+            fatalError("Error adding TableHeaderGenerator generator. You tried to add generators before unexisted generator")
+        }
+        return max(anchorIndex - 1, 0)
+    }
 
     func insert(headGenerator: TableHeaderGenerator,
                 by index: Int,
@@ -505,6 +435,19 @@ private extension ManualTableManager {
         self.generators.insert([], at: index)
 
         modifier?.insertSections(at: [index], with: animation.value)
+    }
+
+    func insert(header: TableHeaderGenerator,
+                generators: [TableCellGenerator],
+                at sectionIndex: Int,
+                with animation: TableRowAnimation) {
+
+        self.sections.insert(header, at: sectionIndex)
+        self.generators.insert(generators, at: sectionIndex)
+
+        let indexPaths = generators.enumerated().map { IndexPath(row: $0.offset, section: sectionIndex) }
+
+        modifier?.insertSectionsAndRows(at: [sectionIndex: indexPaths], with: animation.value)
     }
 
 }

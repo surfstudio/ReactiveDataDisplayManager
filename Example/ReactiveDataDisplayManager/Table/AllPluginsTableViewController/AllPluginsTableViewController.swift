@@ -97,12 +97,31 @@ private extension AllPluginsTableViewController {
         addPrefetcherableSection()
 
         // Tell adapter that we've changed generators
-        adapter.forceRefill()
+        adapter.forceRefill { [weak self] in
+            self?.insertMoreSections()
+        }
     }
 
     func updateBarButtonItem(with title: String) {
         let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeTableEditing))
         navigationItem.rightBarButtonItem = button
+    }
+
+    /// Insertion of new section with some cells
+    func insertMoreSections() {
+
+        guard let existingSectionGenerator = adapter.sections.last else {
+            return
+        }
+
+        // Create generators
+        let newHeaderGenerator = SectionTitleHeaderGenerator(model: "One more section", needSectionIndexTitle: true)
+        let generators = Constants.titles.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
+
+        // Insert them
+        adapter.insertSection(after: existingSectionGenerator,
+                              new: newHeaderGenerator,
+                              generators: generators)
     }
 
     /// Use this method for UI stress test only.

@@ -220,12 +220,14 @@ private extension BaseCollectionManager {
 
         elements.forEach { [weak self] element in
             element.generator.registerCell(in: view)
-            self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            if self?.generators.count == element.sectionIndex {
+                self?.generators.append([element.generator])
+            } else {
+                self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+            }
         }
 
-        let indexPaths = elements.map {
-            IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
-        }
+        let indexPaths = elements.map { IndexPath(item: $0.generatorIndex, section: $0.sectionIndex) }
 
         modifier?.insertRows(at: indexPaths, with: .animated)
     }
