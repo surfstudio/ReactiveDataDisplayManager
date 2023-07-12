@@ -45,7 +45,9 @@ final class TwoDirectionPaginatableCollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .paginatable(progressView: bottomProgressView, output: self))
-        .add(plugin: .topPaginatable(progressView: topProgressView, output: self))
+        .add(plugin: .topPaginatable(progressView: topProgressView,
+                                     output: self,
+                                     isSaveScrollPositionNeeded: true))
         .build()
 
     private weak var bottomPaginatableInput: PaginatableInput?

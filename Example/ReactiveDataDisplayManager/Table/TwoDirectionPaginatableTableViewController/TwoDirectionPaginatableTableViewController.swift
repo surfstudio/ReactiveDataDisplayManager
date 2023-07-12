@@ -46,7 +46,8 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
         .add(plugin: .paginatable(progressView: bottomProgressView,
                                   output: self))
         .add(plugin: .topPaginatable(progressView: topProgressView,
-                                     output: self))
+                                     output: self,
+                                     isSaveScrollPositionNeeded: true))
         .build()
 
     private weak var bottomPaginatableInput: PaginatableInput?

@@ -57,7 +57,7 @@ public class CollectionTopPaginatablePlugin: BaseCollectionPlugin<CollectionEven
 
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
-    init(progressView: ProgressView, with output: TopPaginatableOutput, isSaveScrollPositionNeeded: Bool = true) {
+    init(progressView: ProgressView, with output: TopPaginatableOutput, isSaveScrollPositionNeeded: Bool) {
         self.progressView = progressView
         self.output = output
         self.isSaveScrollPositionNeeded = isSaveScrollPositionNeeded
