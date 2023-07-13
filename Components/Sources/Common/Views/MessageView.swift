@@ -127,7 +127,8 @@ extension MessageView: ConfigurableItem {
                     return model
                 })
             }
-
+            
+            /// To set it to **false**, dataDetection and tapHandler must be nil
             public static func selectable(_ selectable: Bool) -> Property {
                 .init(closure: { model in
                     var model = model
