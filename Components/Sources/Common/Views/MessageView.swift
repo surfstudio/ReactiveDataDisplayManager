@@ -216,7 +216,7 @@ extension MessageView: ConfigurableItem {
 
         textView.backgroundColor = .clear
         textView.isEditable = false
-        textView.isSelectable = model.selectable
+        setIsSelectablePropertyIfNeeded(for: model)
         textView.isUserInteractionEnabled = true
         textView.isScrollEnabled = false
         configureTextView(textView, with: model)
@@ -289,6 +289,14 @@ private extension MessageView {
             return
         }
         tapAction()
+    }
+
+    func setIsSelectablePropertyIfNeeded(for model: Model) {
+        if model.dataDetection != nil || model.tapHandler != nil {
+            textView.isSelectable = true
+        } else {
+            textView.isSelectable = model.selectable
+        }
     }
 
 }
