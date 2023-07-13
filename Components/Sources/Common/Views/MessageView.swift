@@ -20,7 +20,7 @@ public class MessageView: UIView {
     // MARK: - Private properties
 
     private var textView = UITextView(frame: .zero)
-    private var dataDetectionHandler: Model.DataDetectionHandler?
+    private var dataDetection: DataDetection?
     private var tapHandler: Model.TapHandler?
 
 }
@@ -35,13 +35,7 @@ extension MessageView: ConfigurableItem {
 
         // MARK: - Nested types
 
-        public typealias DataDetectionHandler = (DataDetectionType, String) -> Void
         public typealias TapHandler = () -> Void
-
-        public enum DataDetectionType {
-            case link
-            case phoneNumber
-        }
 
         // MARK: - Editor
 
@@ -122,26 +116,10 @@ extension MessageView: ConfigurableItem {
                 })
             }
 
-            public static func dataDetectorTypes(_ value: UIDataDetectorTypes) -> Property {
+            public static func dataDetection(_ value: DataDetection) -> Property {
                 .init(closure: { model in
                     var model = model
-                    model.set(dataDetectorTypes: value)
-                    return model
-                })
-            }
-
-            public static func linkTextAttributes(_ value: [NSAttributedString.Key: Any]?) -> Property {
-                .init(closure: { model in
-                    var model = model
-                    model.set(linkTextAttributes: value)
-                    return model
-                })
-            }
-
-            public static func dataDetectionHandler(_ value: DataDetectionHandler?) -> Property {
-                .init(closure: { model in
-                    var model = model
-                    model.set(dataDetectionHandler: value)
+                    model.set(dataDetection: value)
                     return model
                 })
             }
@@ -173,9 +151,7 @@ extension MessageView: ConfigurableItem {
         private(set) public var alignment: Alignment = .all(.zero)
         private(set) public var internalEdgeInsets: UIEdgeInsets = .zero
         private(set) public var borderStyle: BorderStyle?
-        private(set) public var dataDetectorTypes: UIDataDetectorTypes = []
-        private(set) public var linkTextAttributes: [NSAttributedString.Key: Any]?
-        private(set) public var dataDetectionHandler: DataDetectionHandler?
+        private(set) public var dataDetection: DataDetection?
         private(set) public var tapHandler: TapHandler?
         private(set) public var selectable: Bool = false
 
@@ -213,16 +189,8 @@ extension MessageView: ConfigurableItem {
             self.borderStyle = border
         }
 
-        mutating func set(dataDetectorTypes: UIDataDetectorTypes) {
-            self.dataDetectorTypes = dataDetectorTypes
-        }
-
-        mutating func set(linkTextAttributes: [NSAttributedString.Key: Any]?) {
-            self.linkTextAttributes = linkTextAttributes
-        }
-
-        mutating func set(dataDetectionHandler: DataDetectionHandler?) {
-            self.dataDetectionHandler = dataDetectionHandler
+        mutating func set(dataDetection: DataDetection) {
+            self.dataDetection = dataDetection
         }
 
         mutating func set(tapHandler: TapHandler?) {
@@ -252,18 +220,7 @@ extension MessageView: ConfigurableItem {
             lhs.alignment == rhs.alignment &&
             lhs.internalEdgeInsets == rhs.internalEdgeInsets &&
             lhs.borderStyle == rhs.borderStyle &&
-            lhs.dataDetectorTypes == rhs.dataDetectorTypes &&
-            areDictionariesEqual(lhs.linkTextAttributes, rhs.linkTextAttributes)
-        }
-
-        // MARK: - Private methods
-
-        private static func areDictionariesEqual(_ lhs: [NSAttributedString.Key: Any]?, _ rhs: [NSAttributedString.Key: Any]?) -> Bool {
-            guard let lhs = lhs, let rhs = rhs else {
-                return lhs == nil && rhs == nil
-            }
-
-            return NSDictionary(dictionary: lhs).isEqual(to: rhs)
+            lhs.dataDetection == rhs.dataDetection
         }
 
     }
@@ -307,10 +264,10 @@ private extension MessageView {
             textView.attributedText = attributedString
         }
 
-        textView.dataDetectorTypes = model.dataDetectorTypes
-        textView.linkTextAttributes = model.linkTextAttributes
+        textView.dataDetectorTypes = model.dataDetection?.dataDetectorTypes ?? []
+        textView.linkTextAttributes = model.dataDetection?.linkTextAttributes
         textView.delegate = self
-        dataDetectionHandler = model.dataDetectionHandler
+        dataDetection = model.dataDetection
 
         if let tapHandler = model.tapHandler {
             self.tapHandler = tapHandler
@@ -337,12 +294,12 @@ private extension MessageView {
         layer.maskedCorners = borderStyle.maskedCorners
     }
 
-    func handleDataDetection(_ type: Model.DataDetectionType, _ data: String) {
-        guard let dataDetectionHandler = dataDetectionHandler else {
+    func handleDataDetection(_ data: String) {
+        guard let dataDetectionHandler = dataDetection?.dataDetectionHandler else {
             return
         }
 
-        dataDetectionHandler(type, data)
+        dataDetectionHandler(data)
     }
 
     @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
@@ -359,7 +316,7 @@ private extension MessageView {
 extension MessageView: UITextViewDelegate {
 
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        handleDataDetection(.link, URL.absoluteString)
+        handleDataDetection(URL.absoluteString)
         return false
     }
 

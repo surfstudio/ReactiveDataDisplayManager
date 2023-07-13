@@ -128,6 +128,14 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                                 ],
                                                                 borderWidth: 1,
                                                                 borderColor: UIColor.black.cgColor)
+    let dataDetectionHandler: DataDetection.DataDetectionHandler = { urlString in
+        if let url = URL(string: urlString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    private lazy var dataDetection = DataDetection(linkTextAttributes: [.foregroundColor: UIColor.blue],
+                                      dataDetectionHandler: dataDetectionHandler,
+                                      dataDetectorTypes: [.link])
     private lazy var recievedMessageModel: MessageView.Model = .build { property in
         property.border(recievedMessageBorderStyle)
         property.style(recievedMessageStyle)
@@ -140,13 +148,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                      bottom: 3,
                                      right: 5))
         property.text(.string("Check out link: https://stackoverflow.com/"))
-        property.dataDetectorTypes(.link)
-        property.linkTextAttributes([.foregroundColor: UIColor.blue])
-        property.dataDetectionHandler { _, urlString in
-            if let url = URL(string: urlString) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
+        property.dataDetection(dataDetection)
         property.selectable(true)
     }
 
