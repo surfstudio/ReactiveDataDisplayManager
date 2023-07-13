@@ -83,10 +83,28 @@ class CollectionCommonModifier: Modifier<UICollectionView, CollectionItemAnimati
         }
     }
 
+    /// Insert new sections with items at specific position with animation
+    ///
+    /// - parameter indexDictionary: dictionary where **key** is new section index and value is location of items to insert
+    /// - parameter insertAnimation: animation of insert operation
+    ///  - Warning: make sure that you do not have mistake in indexes inside `indexDictionary`.
+    ///  For example, if you are inserting **many sections** using this method you should notice that **index** cannot be greater than **final number of sections**.
+    override func insertSectionsAndRows(at indexDictionary: [Int: [IndexPath]],
+                                        with insertAnimation: CollectionItemAnimation?) {
+        guard let view = view else { return }
+        animator?.perform(in: view, animated: insertAnimation != nil) { [weak view] in
+            let setOfKeys = IndexSet(indexDictionary.keys)
+            let allValues = indexDictionary.values.flatMap { $0 }
+            view?.insertSections(setOfKeys)
+            view?.insertItems(at: allValues)
+        }
+    }
+
     /// Insert sections with animation
     ///
     /// - parameter indexPaths: indexes of inserted sections
     /// - parameter insertAnimation: animation of inserted sections
+    ///  - Warning: This method will insert an **empty** section only. If you need to insert section with items use `insertSectionsAndRows` instead.
     override func insertSections(at indexPaths: IndexSet, with insertAnimation: CollectionItemAnimation?) {
         guard let view = view else { return }
         animator?.perform(in: view, animated: insertAnimation != nil) { [weak view] in

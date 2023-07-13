@@ -96,12 +96,32 @@ private extension AllPluginsTableViewController {
         addPrefetcherableSection()
 
         // Tell adapter that we've changed generators
-        adapter => .reload
+        adapter => .reloadWithCompletion { [weak self] in
+            self?.insertMoreSections()
+        }
+
     }
 
     func updateBarButtonItem(with title: String) {
         let button = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeTableEditing))
         navigationItem.rightBarButtonItem = button
+    }
+
+    /// Insertion of new section with some cells
+    func insertMoreSections() {
+
+        guard let existingSectionGenerator = adapter.sections.last?.header else {
+            return
+        }
+
+        // Create generators
+        let newHeaderGenerator = SectionTitleHeaderGenerator(model: "One more section", needSectionIndexTitle: true)
+        let generators = Constants.titles.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
+
+        // Insert them
+        adapter.insertSection(after: existingSectionGenerator,
+                              new: newHeaderGenerator,
+                              generators: generators)
     }
 
     /// Use this method for UI stress test only.
@@ -175,7 +195,7 @@ private extension AllPluginsTableViewController {
 
         for _ in 0...3 {
             // Create foldable generator
-            let generator = FoldableCellGenerator(with: .init(title: "", isExpanded: false))
+            let generator = FoldableTableViewCell.rddm.foldableGenerator(with: .init(title: "", isExpanded: false))
 
             // Create and add child generators
             generator.childGenerators = Constants.titles.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }

@@ -157,7 +157,7 @@ final class BaseTableManagerTests: XCTestCase {
         table.forceLayout()
 
         // when
-        ddm.remove(gen3, with: nil, needScrollAt: .top, needRemoveEmptySection: false)
+        ddm.remove(gen3, with: .notAnimated, needScrollAt: .top, needRemoveEmptySection: false)
         ddm.forceRefill()
 
         // then
@@ -178,7 +178,7 @@ final class BaseTableManagerTests: XCTestCase {
         table.forceLayout()
 
         // when
-        ddm.remove(gen1, with: nil, needScrollAt: nil, needRemoveEmptySection: false)
+        ddm.remove(gen1, with: .notAnimated, needScrollAt: nil, needRemoveEmptySection: false)
         ddm.forceRefill()
 
         // then
