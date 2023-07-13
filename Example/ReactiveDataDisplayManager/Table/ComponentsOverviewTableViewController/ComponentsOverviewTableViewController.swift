@@ -102,7 +102,8 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                      bottom: 3,
                                      right: 5))
         property.text(.string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"))
-        property.tapHandler {
+
+        let tapAction: () -> Void = {
             if var topController = UIApplication.shared.keyWindow?.rootViewController {
                 while let presentedViewController = topController.presentedViewController {
                     topController = presentedViewController
@@ -113,6 +114,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                 topController.present(alertController, animated: true, completion: nil)
             }
         }
+        property.tapHandler(TapHandler(tapAction: tapAction))
 
     }
 

@@ -21,7 +21,7 @@ public class MessageView: UIView {
 
     private var textView = UITextView(frame: .zero)
     private var dataDetection: DataDetection?
-    private var tapHandler: Model.TapHandler?
+    private var tapHandler: TapHandler?
 
 }
 
@@ -32,10 +32,6 @@ extension MessageView: ConfigurableItem {
     // MARK: - Model
 
     public struct Model: Equatable, AlignmentProvider {
-
-        // MARK: - Nested types
-
-        public typealias TapHandler = () -> Void
 
         // MARK: - Editor
 
@@ -209,20 +205,6 @@ extension MessageView: ConfigurableItem {
             })
         }
 
-        // MARK: - Equatable
-
-        public static func == (lhs: MessageView.Model, rhs: MessageView.Model) -> Bool {
-            return lhs.text == rhs.text &&
-            lhs.textStyle == rhs.textStyle &&
-            lhs.textLayout == rhs.textLayout &&
-            lhs.textAlignment == rhs.textAlignment &&
-            lhs.backgroundStyle == rhs.backgroundStyle &&
-            lhs.alignment == rhs.alignment &&
-            lhs.internalEdgeInsets == rhs.internalEdgeInsets &&
-            lhs.borderStyle == rhs.borderStyle &&
-            lhs.dataDetection == rhs.dataDetection
-        }
-
     }
 
     // MARK: - Methods
@@ -303,10 +285,10 @@ private extension MessageView {
     }
 
     @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
-        guard let tapHandler = tapHandler else {
+        guard let tapAction = tapHandler?.tapAction else {
             return
         }
-        tapHandler()
+        tapAction()
     }
 
 }
