@@ -86,7 +86,7 @@ private extension StackCellExampleCollectionViewController {
                 self?.titleCell.configure(with: (self?.cellBaseState ?? true) ? "Title" : "Very very very long title")
                 self?.verticalStackCell.updateSizeIfNeaded()
             }
-    
+
         // Tell adapter that we've changed generators
         adapter => .reload
     }
