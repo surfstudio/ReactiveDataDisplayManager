@@ -49,11 +49,6 @@ extension SpacerView: ConfigurableItem {
         layoutIfNeeded()
     }
 
-    public func getSpacer(with model: Model) -> Self {
-        configure(with: model)
-        return self
-    }
-
 }
 
 // MARK: - Private
