@@ -108,7 +108,7 @@ open class CollectionStack: UIView, ConfigurableItem, SelectableItem {
 
 }
 
-// MARK: - TableCellGenerator
+// MARK: - CollectionCellGenerator
 
 extension CollectionStack: CollectionCellGenerator {
 
