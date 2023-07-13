@@ -121,6 +121,7 @@ extension CollectionTopPaginatablePlugin: TopPaginatableInput {
         self.canIterate = canIterate
         if
             canIterate,
+            isSaveScrollPositionNeeded,
             let currentContentHeight = currentContentHeight,
             let newContentHeight = collectionView?.contentSize.height
         {

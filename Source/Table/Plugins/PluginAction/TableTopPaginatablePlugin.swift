@@ -104,6 +104,7 @@ extension TableTopPaginatablePlugin: TopPaginatableInput {
         self.canIterate = canIterate
         if
             canIterate,
+            isSaveScrollPositionNeeded,
             let currentContentSizeHeight = currentContentSizeHeight,
             let newContentSizeHeight = tableView?.contentSize.height
         {
