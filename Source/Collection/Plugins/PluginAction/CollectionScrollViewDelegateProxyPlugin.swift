@@ -73,6 +73,7 @@ public extension BaseCollectionPlugin {
 }
 
 /// Proxy of  `CollectionScrollViewDelegateProxyPlugin` events
+#if os(iOS)
 @available(iOS 13.0, *)
 public extension CollectionScrollViewDelegateProxyPlugin {
 
@@ -83,8 +84,8 @@ public extension CollectionScrollViewDelegateProxyPlugin {
     // MARK: Nested types
 
     typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
- 
-    // MARK: - Properties
+
+    // MARK: - Ppublic properties
 
     /// Setter requires calling the NSCollectionLayoutSection method `setHorizontalScroll(type: with plugin:)`
     var didScrollCompositionLayoutSection: BaseEvent<ItemsInvalidationResult> {
@@ -114,3 +115,4 @@ public extension NSCollectionLayoutSection {
     }
 
 }
+#endif
