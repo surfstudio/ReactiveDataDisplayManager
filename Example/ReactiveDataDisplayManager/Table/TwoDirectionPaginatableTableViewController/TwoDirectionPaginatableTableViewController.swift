@@ -157,7 +157,7 @@ private extension TwoDirectionPaginatableTableViewController {
             return makeGenerator(for: .bottom)
         }
 
-        adapter.insertAtEnd(to: sectionHeader, new: generators, with: .bottom)
+        adapter.insertAtEnd(to: sectionHeader, new: generators, with: .animated(.bottom))
 
         return currentBottomPage != Constants.maxPagesCount
     }
@@ -169,7 +169,7 @@ private extension TwoDirectionPaginatableTableViewController {
             return makeGenerator(for: .top)
         }
 
-        adapter.insertAtBeginning(to: sectionHeader, new: generators, with: nil)
+        adapter.insertAtBeginning(to: sectionHeader, new: generators, with: .notAnimated)
 
         return abs(currentTopPage) != Constants.maxPagesCount
     }

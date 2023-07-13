@@ -184,9 +184,7 @@ private extension BaseCollectionManager {
             self?.sections[element.sectionIndex].generators.insert(element.generator, at: element.generatorIndex)
         }
 
-        let indexPaths = elements.map {
-            IndexPath(row: $0.generatorIndex, section: $0.sectionIndex)
-        }
+        let indexPaths = elements.map { IndexPath(item: $0.generatorIndex, section: $0.sectionIndex) }
 
         sections.registerAllIfNeeded(with: view, using: registrator)
         modifier?.insertRows(at: indexPaths, with: animation ?? .none)

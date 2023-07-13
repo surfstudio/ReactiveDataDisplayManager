@@ -59,6 +59,18 @@ private extension FoldableTableViewController {
             makeFoldableCellGenerator(id: "2")
         }
 
+        // Add foldable cell generator to adapter
+        adapter.addCellGenerator(makeFoldableCellGenerator(id: "3"))
+
+        // Add foldable cell generator to adapter
+        adapter.addCellGenerator(makeFoldableCellGenerator(id: "4"))
+
+        // Add foldable cell generator to adapter
+        adapter.addCellGenerator(makeFoldableCellGenerator(id: "5"))
+
+        // Add foldable cell generator to adapter
+        adapter.addCellGenerator(makeFoldableCellGenerator(id: "6"))
+
         // Tell adapter that we've changed generators
         adapter => .reload
     }
@@ -71,9 +83,9 @@ private extension FoldableTableViewController {
         return generators
     }
 
-    func makeFoldableCellGenerator(id: String) -> FoldableCellGenerator {
+    func makeFoldableCellGenerator(id: String) -> TableCellGenerator {
         // Create foldable generator
-        let generator = FoldableCellGenerator(with: .init(title: id, isExpanded: false))
+        let generator = FoldableTableViewCell.rddm.foldableGenerator(with: .init(title: id, isExpanded: false))
 
         // Create and add child generators
         generator.childGenerators = Constants.titleForSubcells.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }

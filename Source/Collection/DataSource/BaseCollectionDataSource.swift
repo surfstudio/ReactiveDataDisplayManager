@@ -149,7 +149,7 @@ private extension BaseCollectionDataSource {
         guard let expandable = cell as? ExpandableItem else {
             return
         }
-        expandable.onHeightChanged += { [weak self, weak expandable, weak collectionView] _ in
+        expandable.onHeightChanged.addListner(with: "rddm.expandable-on-dequeue") { [weak self, weak expandable, weak collectionView] _ in
             guard let collectionView = collectionView,
                   let animated = expandable?.animatedExpandable else {
                 return

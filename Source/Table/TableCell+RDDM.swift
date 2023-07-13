@@ -16,6 +16,14 @@ public extension StaticDataDisplayWrapper where Base: UITableViewCell & Configur
 
 }
 
+public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & FoldableStateHolder {
+
+    func foldableGenerator(with model: Base.Model, and registerType: CellRegisterType = .nib) -> FoldableCellGenerator<Base> {
+        .init(with: model, registerType: registerType)
+    }
+
+}
+
 public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & ConstractableItem {
 
     func nonReusableGenerator(with model: Base.Model) -> BaseNonReusableCellGenerator<Base> {
