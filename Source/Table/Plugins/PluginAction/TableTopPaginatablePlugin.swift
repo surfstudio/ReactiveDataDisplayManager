@@ -13,6 +13,7 @@ import UIKit
 /// Hide `progressView` when finish loading request
 ///
 /// - Warning: Specify estimatedRowHeight of your layout to proper `willDisplay` calls and correct `contentSize`
+/// - Warning: UITableView.style must be plain style for keeping scroll position 
 public class TableTopPaginatablePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - Nested types

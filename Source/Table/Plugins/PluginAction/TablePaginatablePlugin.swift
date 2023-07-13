@@ -221,6 +221,7 @@ public extension BaseTablePlugin {
     ///
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
+    /// - Warning: UITableView.style must be plain style for keeping scroll position 
     static func topPaginatable(progressView: TableTopPaginatablePlugin.ProgressView,
                                output: TopPaginatableOutput,
                                isSaveScrollPositionNeeded: Bool) -> TableTopPaginatablePlugin {
