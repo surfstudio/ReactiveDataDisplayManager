@@ -35,8 +35,11 @@ final class CollectionCompositionalViewController: UIViewController {
     private let prefetcher = NukeImagePrefetcher(placeholder: #imageLiteral(resourceName: "ReactiveLogo"))
     private lazy var prefetcherablePlugin: CollectionImagePrefetcherablePlugin = .prefetch(prefetcher: prefetcher)
 
+    let scrrollPlugin = CollectionScrollViewDelegateProxyPlugin()
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)
+        .add(plugin: scrrollPlugin)
+        .add(plugin: .scrollOnSelect(to: .centeredHorizontally))
         .build()
 
     // MARK: - UIViewController
@@ -60,6 +63,35 @@ private extension CollectionCompositionalViewController {
         addGridSection()
         addCompositeGroupSection()
         adapter => .reload
+
+        // Handle table offset
+        scrrollPlugin.didScroll += { collectionView in
+            print(collectionView.contentOffset.y)
+        }
+
+        // Handle section offset
+        scrrollPlugin.didScrollCompositionLayoutSection += { [weak self] result in
+            print(result.offset.x)
+            self?.handleVisibleItemsInvalidation(result)
+        }
+    }
+
+    func handleVisibleItemsInvalidation(_ result: ItemsInvalidationResult) {
+        // Remove header from cells
+        let cellWithoutHeaderOrFooter = result.items.filter { $0.representedElementKind == .none }
+
+        let contentWidth = result.environment.container.contentSize.width
+
+        // Transform cells
+        cellWithoutHeaderOrFooter.forEach { item in
+            let height = item.bounds.height / 2
+            let distanceFromCenter = abs(item.frame.midX - result.offset.x - contentWidth / 2.0)
+            let scale = max(Constants.maxScale - distanceFromCenter / contentWidth, Constants.minScale)
+
+            item.transform = CGAffineTransform(translationX: 0, y: height)
+                .scaledBy(x: scale, y: scale)
+                .translatedBy(x: 0, y: -height)
+        }
     }
 
     func addAnimationSection() {
@@ -155,28 +187,9 @@ private extension CollectionCompositionalViewController {
         // Section
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0)
-        section.orthogonalScrollingBehavior = .groupPaging
         section.boundarySupplementaryItems = [header, footer] // add custom element (footer, header, ....)
-        section.visibleItemsInvalidationHandler = { [weak self] in self?.handleVisibleItemsInvalidation(($0, $1, $2)) }
+        section.setHorizontalScroll(type: .groupPaging, with: scrrollPlugin)
         return section
-    }
-
-    func handleVisibleItemsInvalidation(_ result: ItemsInvalidationResult) {
-        // Remove header from cells
-        let cellWithoutHeaderOrFooter = result.items.filter { $0.representedElementKind == .none }
-
-        let contentWidth = result.environment.container.contentSize.width
-
-        // Transform cells
-        cellWithoutHeaderOrFooter.forEach { item in
-            let height = item.bounds.height / 2
-            let distanceFromCenter = abs(item.frame.midX - result.offset.x - contentWidth / 2.0)
-            let scale = max(Constants.maxScale - distanceFromCenter / contentWidth, Constants.minScale)
-
-            item.transform = CGAffineTransform(translationX: 0, y: height)
-                .scaledBy(x: scale, y: scale)
-                .translatedBy(x: 0, y: -height)
-        }
     }
 
     // Grid section

@@ -71,3 +71,46 @@ public extension BaseCollectionPlugin {
     }
 
 }
+
+/// Proxy of  `CollectionScrollViewDelegateProxyPlugin` events
+@available(iOS 13.0, *)
+public extension CollectionScrollViewDelegateProxyPlugin {
+
+    // MARK: - Private static properties
+
+    private static var didScrollCompositionLayoutSection = BaseEvent<ItemsInvalidationResult>()
+
+    // MARK: Nested types
+
+    typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
+ 
+    // MARK: - Properties
+
+    /// Setter requires calling the NSCollectionLayoutSection method `setHorizontalScroll(type: with plugin:)`
+    var didScrollCompositionLayoutSection: BaseEvent<ItemsInvalidationResult> {
+        get {
+            Self.didScrollCompositionLayoutSection
+        }
+        set {
+            Self.didScrollCompositionLayoutSection = newValue
+        }
+    }
+
+}
+
+@available(iOS 13.0, *)
+public extension NSCollectionLayoutSection {
+
+    /// Set horizontal scroll type
+    ///  - Parameters:
+    ///   - type: Type of horizontal scroll
+    ///   - plugin: Plugin `CollectionScrollViewDelegateProxyPlugin`
+    func setHorizontalScroll(type: UICollectionLayoutSectionOrthogonalScrollingBehavior,
+                             with plugin: CollectionScrollViewDelegateProxyPlugin? = nil) {
+        orthogonalScrollingBehavior = type
+        visibleItemsInvalidationHandler = {
+            plugin?.didScrollCompositionLayoutSection.invoke(with: ($0, $1, $2))
+        }
+    }
+
+}
