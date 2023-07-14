@@ -4,7 +4,7 @@
 //
 //  Created by Антон Голубейков on 13.07.2023.
 //
-
+#if os(iOS)
 import Foundation
 import UIKit
 
@@ -50,3 +50,4 @@ private extension DataDetection {
     }
 
 }
+#endif
