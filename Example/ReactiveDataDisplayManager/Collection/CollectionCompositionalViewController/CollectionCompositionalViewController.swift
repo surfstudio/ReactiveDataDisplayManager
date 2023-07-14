@@ -35,7 +35,7 @@ final class CollectionCompositionalViewController: UIViewController {
     private let prefetcher = NukeImagePrefetcher(placeholder: #imageLiteral(resourceName: "ReactiveLogo"))
     private lazy var prefetcherablePlugin: CollectionImagePrefetcherablePlugin = .prefetch(prefetcher: prefetcher)
 
-    let scrrollPlugin = CollectionScrollViewDelegateProxyPlugin()
+    private let scrrollPlugin = CollectionScrollViewDelegateProxyPlugin()
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)
         .add(plugin: scrrollPlugin)
