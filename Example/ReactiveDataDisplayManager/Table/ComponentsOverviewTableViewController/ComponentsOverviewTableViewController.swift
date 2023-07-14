@@ -114,7 +114,9 @@ final class ComponentsOverviewTableViewController: UIViewController {
                 topController.present(alertController, animated: true, completion: nil)
             }
         }
-        property.tapHandler(TapHandler(tapAction: tapAction))
+        property.tapHandler(TapHandler(textStyle: TextStyle(color: .random),
+                                       backgroundStyle: BackgroundStyle.solid(.random),
+                                       tapAction: tapAction))
 
     }
 

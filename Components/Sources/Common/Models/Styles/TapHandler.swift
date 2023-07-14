@@ -13,11 +13,15 @@ public struct TapHandler: Equatable {
     // MARK: - Properties
 
     public let id = UUID()
+    public let textStyle: TextStyle?
+    public let backgroundStyle: BackgroundStyle?
     public let tapAction: (() -> Void)?
 
     // MARK: - Public init
 
-    public init(tapAction: (() -> Void)?) {
+    public init(textStyle: TextStyle?, backgroundStyle: BackgroundStyle?, tapAction: (() -> Void)?) {
+        self.textStyle = textStyle
+        self.backgroundStyle = backgroundStyle
         self.tapAction = tapAction
     }
 

@@ -22,6 +22,7 @@ public class MessageView: UIView {
     private var textView = UITextView(frame: .zero)
     private var dataDetection: DataDetection?
     private var tapHandler: TapHandler?
+    private var pressStateAction: (() -> Void)?
 
 }
 
@@ -258,6 +259,9 @@ private extension MessageView {
             tapGesture.name = "TapGesture"
             textView.addGestureRecognizer(tapGesture)
         }
+        pressStateAction = { [weak self] in
+            self?.animatePressStateIfNeeded(for: model)
+        }
     }
 
     func applyBackground(style: BackgroundStyle) {
@@ -289,6 +293,7 @@ private extension MessageView {
         guard let tapAction = tapHandler?.tapAction else {
             return
         }
+        pressStateAction?()
         tapAction()
     }
 
@@ -298,6 +303,33 @@ private extension MessageView {
         } else {
             textView.isSelectable = model.selectable
         }
+    }
+
+    func animatePressStateIfNeeded(for model: Model) {
+        if model.tapHandler?.textStyle != nil || model.tapHandler?.backgroundStyle != nil {
+            UIView.animate(
+                withDuration: 0.5,
+                delay: 0,
+                animations: {
+                    self.setPressState(for: model)
+                },
+                completion: { [weak self] _ in
+                    self?.setInitialState(for: model)
+                }
+            )
+        }
+    }
+
+    func setPressState(for model: Model) {
+        textView.textColor = model.tapHandler?.textStyle?.color ?? model.textStyle.color
+        textView.font = model.tapHandler?.textStyle?.font ?? model.textStyle.font
+        applyBackground(style: model.tapHandler?.backgroundStyle ?? model.backgroundStyle)
+    }
+
+    func setInitialState(for model: Model) {
+        textView.textColor = model.textStyle.color
+        textView.font = model.textStyle.font
+        applyBackground(style: model.backgroundStyle)
     }
 
 }
