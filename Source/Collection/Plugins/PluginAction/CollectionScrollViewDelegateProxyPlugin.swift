@@ -83,7 +83,7 @@ public extension CollectionScrollViewDelegateProxyPlugin {
 
     // MARK: Nested types
 
-    typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
+    public typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
 
     // MARK: - Ppublic properties
 
