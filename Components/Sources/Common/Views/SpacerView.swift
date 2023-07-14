@@ -63,6 +63,16 @@ extension SpacerView: ConfigurableItem {
 
 }
 
+// MARK: - Static methods
+
+extension SpacerView {
+
+    static func getCellSize(for model: Model, width: CGFloat) -> CGSize {
+        return CGSize(width: width, height: model.height)
+    }
+
+}
+
 // MARK: - Private
 
 private extension SpacerView {

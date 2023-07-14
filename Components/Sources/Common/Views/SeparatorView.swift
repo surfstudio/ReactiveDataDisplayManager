@@ -66,6 +66,16 @@ extension SeparatorView: ConfigurableItem {
 
 }
 
+// MARK: - Static methods
+
+extension SeparatorView {
+
+    static func getCellSize(for model: Model, width: CGFloat) -> CGSize {
+        return CGSize(width: width, height: model.height)
+    }
+
+}
+
 // MARK: - Private
 
 private extension SeparatorView {
