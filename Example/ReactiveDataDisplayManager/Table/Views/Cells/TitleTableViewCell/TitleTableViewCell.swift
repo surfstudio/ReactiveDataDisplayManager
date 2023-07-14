@@ -21,6 +21,11 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
         titleLabel.text = title
     }
 
+    func set(font: UIFont) -> Self {
+        titleLabel.font = font
+        return self
+    }
+
     // MARK: - CalculatableHeightItem
 
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
