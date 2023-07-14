@@ -87,7 +87,7 @@ public extension CollectionScrollViewDelegateProxyPlugin {
 
     // MARK: - Ppublic properties
 
-    /// Setter requires calling the NSCollectionLayoutSection method `setHorizontalScroll(type: with plugin:)`
+    /// - Note: To enable events you should link your `NSCollectionLayoutSection` with `CollectionScrollViewDelegateProxyPlugin` using method `NSCollectionLayoutSection.setHorizontalScroll`
     var didScrollCompositionLayoutSection: BaseEvent<ItemsInvalidationResult> {
         get {
             Self.didScrollCompositionLayoutSection
