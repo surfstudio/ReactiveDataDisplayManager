@@ -17,7 +17,11 @@ public struct AccessibilityStrategy<ValueType> {
         return .init(nil, isIgnored: true)
     }
 
-    public init(_ value: ValueType?, isIgnored: Bool = false) {
+    /// - Parameters:
+    ///   - value: Current accessibility value
+    ///   - isIgnored: flag to disable setting of value
+    public init(_ value: ValueType?,
+                isIgnored: Bool = false) {
         self.value = value
         self.isIgnored = isIgnored
     }

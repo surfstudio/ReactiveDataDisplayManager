@@ -57,7 +57,7 @@ private extension TableAccessibilityPlugin {
               let invalidateDelegate = manager?.delegate as? AccessibilityItemDelegate else {
             return
         }
-        invalidatable.setInvalidator(kind: kind, delegate: invalidateDelegate)
+        invalidatable.setDelegatedInvalidator(kind: kind, delegate: invalidateDelegate)
     }
 
     func processTableCell(_ indexPath: IndexPath, _ cell: AccessibilityItem, with manager: BaseTableManager?) {

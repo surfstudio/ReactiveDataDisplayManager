@@ -56,7 +56,7 @@ private extension CollectionAccessibilityPlugin {
                 let invalidateDelegate = manager?.delegate as? AccessibilityItemDelegate else {
             return
         }
-        invalidatable.setInvalidator(kind: kind, delegate: invalidateDelegate)
+        invalidatable.setDelegatedInvalidator(kind: kind, delegate: invalidateDelegate)
     }
 
     func processCollectionCell(_ indexPath: IndexPath, _ cell: AccessibilityItem, with manager: BaseCollectionManager?) {

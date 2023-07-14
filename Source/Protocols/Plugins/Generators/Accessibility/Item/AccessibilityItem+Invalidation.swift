@@ -17,14 +17,32 @@ public protocol AccessibilityItemInvalidator {
     func invalidateParameters()
 }
 
-struct CommonAccessibilityItemInvalidator: AccessibilityItemInvalidator {
+struct DelegatedAccessibilityItemInvalidator: AccessibilityItemInvalidator {
     let accessibilityItemKind: AccessibilityItemKind
     weak var item: AccessibilityItem?
     weak var accessibilityDelegate: AccessibilityItemDelegate?
 
+    init(item: AccessibilityItem?,
+         accessibilityItemKind: AccessibilityItemKind,
+         accessibilityDelegate: AccessibilityItemDelegate?) {
+        self.item = item
+        self.accessibilityItemKind = accessibilityItemKind
+        self.accessibilityDelegate = accessibilityDelegate
+    }
+
     public func invalidateParameters() {
         guard let item else { return }
         accessibilityDelegate?.didInvalidateAccessibility(for: item, of: accessibilityItemKind)
+    }
+}
+
+struct BasicAccessibilityItemInvalidator: AccessibilityItemInvalidator {
+    weak var item: AccessibilityItem?
+    
+    public func invalidateParameters() {
+        guard let item else { return }
+        item.modifySelf()
+        
     }
 }
 
@@ -35,19 +53,43 @@ public protocol AccessibilityInvalidatable: AccessibilityItem {
     var accessibilityInvalidator: AccessibilityItemInvalidator? { get set }
 
     /// Sets invalidation object to `accessibilityInvalidator` property
-    func setInvalidator(kind: AccessibilityItemKind, delegate: AccessibilityItemDelegate?)
+    ///  - Parameters:
+    ///     - invalidator: Implementation of invalidator
+    func setInvalidator(invalidator: AccessibilityItemInvalidator)
 
     /// Removes invalidation object from `accessibilityInvalidator` property
+    /// Also removes all observations added
     func removeInvalidator()
 }
 
 public extension AccessibilityInvalidatable {
-    func setInvalidator(kind: AccessibilityItemKind, delegate: AccessibilityItemDelegate?) {
-        accessibilityInvalidator = CommonAccessibilityItemInvalidator(accessibilityItemKind: kind, item: self, accessibilityDelegate: delegate)
+
+    // MARK: - Defaults
+
+    func setInvalidator(invalidator: AccessibilityItemInvalidator) {
+        accessibilityInvalidator = invalidator
     }
 
     func removeInvalidator() {
         accessibilityInvalidator = nil
+    }
+
+    // MARK: - Shortcuts
+
+    /// Setting invalidator which will call ``AccessibilityItem/modifySelf`` method
+    func setBasicInvalidator() {
+        setInvalidator(invalidator: BasicAccessibilityItemInvalidator(item: self))
+    }
+
+    /// Setting invalidator which will delegate invalidation to `AccessibilityItemDelegate` to combine item with generator
+    /// - Parameters:
+    ///    - accessibilityItemKind: Type of `AccessibilityItem` with provided index
+    ///    - accessibilityDelegate: Delegate for invalidation
+    func setDelegatedInvalidator(kind: AccessibilityItemKind,
+                                 delegate: AccessibilityItemDelegate) {
+        setInvalidator(invalidator: DelegatedAccessibilityItemInvalidator(item: self,
+                                                                          accessibilityItemKind: kind,
+                                                                          accessibilityDelegate: delegate))
     }
 }
 

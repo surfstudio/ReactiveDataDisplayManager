@@ -17,7 +17,7 @@ public enum AccessibilityContainerModifier: AccessibilityModifier {
         item.isAccessibilityElement = !item.isAccessibilityIgnored
 
         item.accessibilityChildItems.forEach {
-            $0.modifierType.modify(item: $0)
+            $0.modifySelf()
         }
     }
 
