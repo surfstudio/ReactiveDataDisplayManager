@@ -14,7 +14,7 @@ final class CollectionCompositionalViewController: UIViewController {
 
     // MARK: - Typealias
 
-    typealias ItemsInvalidationResult = (items: [NSCollectionLayoutVisibleItem], offset: CGPoint, environment: NSCollectionLayoutEnvironment)
+    typealias ItemsInvalidationResult = CollectionScrollViewDelegateProxyPlugin.ItemsInvalidationResult
 
     // MARK: - Constants
 
