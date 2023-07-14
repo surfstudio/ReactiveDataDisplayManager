@@ -16,6 +16,7 @@ public struct DataDetection: Equatable {
 
     // MARK: - Properties
 
+    public let id = UUID()
     public let linkTextAttributes: [NSAttributedString.Key: Any]
     public var dataDetectionHandler: DataDetectionHandler?
     public var dataDetectorTypes: UIDataDetectorTypes = []
@@ -29,6 +30,7 @@ public struct DataDetection: Equatable {
     // MARK: - Equatable
 
     public static func == (lhs: DataDetection, rhs: DataDetection) -> Bool {
+        lhs.id == rhs.id &&
         areDictionariesEqual(lhs.linkTextAttributes, rhs.linkTextAttributes) &&
         lhs.dataDetectorTypes == rhs.dataDetectorTypes
     }

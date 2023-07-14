@@ -12,6 +12,7 @@ public struct TapHandler: Equatable {
 
     // MARK: - Properties
 
+    public let id = UUID()
     public let tapAction: (() -> Void)?
 
     // MARK: - Public init
@@ -23,7 +24,7 @@ public struct TapHandler: Equatable {
     // MARK: - Equatable
 
     public static func == (lhs: TapHandler, rhs: TapHandler) -> Bool {
-        return true
+        return lhs.id == rhs.id
     }
 
 }
