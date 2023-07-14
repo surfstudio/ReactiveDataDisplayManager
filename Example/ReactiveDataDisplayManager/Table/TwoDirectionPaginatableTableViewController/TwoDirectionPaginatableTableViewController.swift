@@ -10,9 +10,17 @@ import ReactiveDataDisplayManager
 
 final class TwoDirectionPaginatableTableViewController: UIViewController {
 
+    // MARK: - Nested types
+
+    private enum ScrollDirection {
+        case top
+        case bottom
+    }
+
     // MARK: - Constants
 
     private enum Constants {
+        static let maxPagesCount = 5
         static let pageSize = 40
         static let firstPageMiddleIndexPath = IndexPath(row: Constants.pageSize / 2, section: 0)
         static let paginatorViewHeight: CGFloat = 80
@@ -25,27 +33,29 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var forwardProgressView = PaginatorView(frame: .init(x: 0,
-                                                                      y: 0,
-                                                                      width: tableView.frame.width,
-                                                                      height: Constants.paginatorViewHeight))
-    private lazy var backwardProgressView = PaginatorView(frame: .init(x: 0,
-                                                                       y: 0,
-                                                                       width: tableView.frame.width,
-                                                                       height: Constants.paginatorViewHeight))
+    private lazy var bottomProgressView = PaginatorView(frame: .init(x: 0,
+                                                                     y: 0,
+                                                                     width: tableView.frame.width,
+                                                                     height: Constants.paginatorViewHeight))
+    private lazy var topProgressView = PaginatorView(frame: .init(x: 0,
+                                                                  y: 0,
+                                                                  width: tableView.frame.width,
+                                                                  height: Constants.paginatorViewHeight))
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(plugin: .paginatable(progressView: forwardProgressView,
+        .add(plugin: .paginatable(progressView: bottomProgressView,
                                   output: self))
-        .add(plugin: .backwardPaginatable(progressView: backwardProgressView,
-                                          output: self))
+        .add(plugin: .topPaginatable(progressView: topProgressView,
+                                     output: self,
+                                     isSaveScrollPositionNeeded: true))
         .build()
 
-    private weak var forwardPaginatableInput: PaginatableInput?
-    private weak var backwardPaginatableInput: PaginatableInput?
+    private weak var bottomPaginatableInput: PaginatableInput?
+    private weak var topPaginatableInput: TopPaginatableInput?
 
     private var isFirstPageLoading = true
-    private var currentPage = 0
+    private var currentTopPage = 0
+    private var currentBottomPage = 0
 
     private var sectionHeader: TableHeaderGenerator = EmptyTableHeaderGenerator()
 
@@ -84,8 +94,8 @@ private extension TwoDirectionPaginatableTableViewController {
         activityIndicator.startAnimating()
 
         // hide footer and header
-        forwardPaginatableInput?.updatePagination(canIterate: false)
-        backwardPaginatableInput?.updatePagination(canIterate: false)
+        bottomPaginatableInput?.updatePagination(canIterate: false)
+        topPaginatableInput?.updatePagination(canIterate: false)
 
         // imitation of loading first page
         delay(.now() + .seconds(1)) { [weak self] in
@@ -101,8 +111,8 @@ private extension TwoDirectionPaginatableTableViewController {
             self?.activityIndicator?.isHidden = true
 
             // show pagination loader if update is needed
-            self?.forwardPaginatableInput?.updatePagination(canIterate: true)
-            self?.backwardPaginatableInput?.updatePagination(canIterate: true)
+            self?.bottomPaginatableInput?.updatePagination(canIterate: true)
+            self?.topPaginatableInput?.updatePagination(canIterate: true)
         }
     }
 
@@ -117,8 +127,18 @@ private extension TwoDirectionPaginatableTableViewController {
         adapter => .reload
     }
 
-    func makeGenerator() -> TableCellGenerator {
-        TitleTableViewCell.rddm.calculatableHeightGenerator(with: "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)" )
+    private func makeGenerator(for scrollDirection: ScrollDirection? = nil) -> TableCellGenerator {
+        var currentPage = 0
+        if let scrollDirection = scrollDirection {
+            switch scrollDirection {
+            case .top:
+                currentPage = currentTopPage
+            case .bottom:
+                currentPage = currentBottomPage
+            }
+        }
+
+        return TitleTableViewCell.rddm.calculatableHeightGenerator(with: "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)" )
     }
 
     func canFillPages() -> Bool {
@@ -131,29 +151,27 @@ private extension TwoDirectionPaginatableTableViewController {
     }
 
     func fillNext() -> Bool {
-        currentPage += 1
+        currentBottomPage += 1
 
         let generators = (0...Constants.pageSize).map { _ in
-            return makeGenerator()
+            return makeGenerator(for: .bottom)
         }
 
         adapter.insertAtEnd(to: sectionHeader, new: generators, with: .animated(.bottom))
 
-        // pages count is infinite if it`s a single direction scroll
-        return currentPage != 0
+        return currentBottomPage != Constants.maxPagesCount
     }
 
     func fillPrev() -> Bool {
-        currentPage -= 1
+        currentTopPage -= 1
 
         let generators = (0...Constants.pageSize).map { _ in
-            return makeGenerator()
+            return makeGenerator(for: .top)
         }
 
         adapter.insertAtBeginning(to: sectionHeader, new: generators, with: .notAnimated)
 
-        // pages count is infinite if it`s a single direction scroll
-        return currentPage != 0
+        return abs(currentTopPage) != Constants.maxPagesCount
     }
 
 }
@@ -163,7 +181,7 @@ private extension TwoDirectionPaginatableTableViewController {
 extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
 
     func onPaginationInitialized(with input: PaginatableInput) {
-        forwardPaginatableInput = input
+        bottomPaginatableInput = input
     }
 
     func loadNextPage(with input: PaginatableInput) {
@@ -177,7 +195,6 @@ extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
 
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
-                self?.backwardPaginatableInput?.updatePagination(canIterate: canIterate)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
@@ -187,15 +204,15 @@ extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
 
 }
 
-// MARK: - BackwardPaginatableOutput
+// MARK: - TopPaginatableOutput
 
-extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput {
+extension TwoDirectionPaginatableTableViewController: TopPaginatableOutput {
 
-    func onBackwardPaginationInitialized(with input: PaginatableInput) {
-        backwardPaginatableInput = input
+    func onTopPaginationInitialized(with input: TopPaginatableInput) {
+        topPaginatableInput = input
     }
 
-    func loadPrevPage(with input: PaginatableInput) {
+    func loadPrevPage(with input: TopPaginatableInput) {
         input.updateProgress(isLoading: true)
 
         delay(.now() + .seconds(2)) { [weak self, weak input] in
@@ -203,17 +220,9 @@ extension TwoDirectionPaginatableTableViewController: BackwardPaginatableOutput 
                 return
             }
             if self.canFillPages() {
-                let initialContentSizeHeight = self.tableView.contentSize.height
-
                 let canIterate = self.fillPrev()
                 input?.updateProgress(isLoading: false)
                 input?.updatePagination(canIterate: canIterate)
-                self.forwardPaginatableInput?.updatePagination(canIterate: canIterate)
-
-                let newContentSizeHeight = self.tableView.contentSize.height
-
-                let finalOffset = CGPoint(x: 0, y: newContentSizeHeight - initialContentSizeHeight)
-                self.tableView.setContentOffset(finalOffset, animated: false)
             } else {
                 input?.updateProgress(isLoading: false)
                 input?.updateError(SampleError.sample)
