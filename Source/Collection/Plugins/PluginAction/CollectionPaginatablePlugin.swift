@@ -26,6 +26,7 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
     private weak var output: PaginatableOutput?
 
     private var isLoading = false
+    private var isErrorWasReceived = false
 
     private weak var collectionView: UICollectionView?
 
@@ -69,6 +70,7 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
             guard let input = self, let output = self?.output else {
                 return
             }
+            self?.isErrorWasReceived = false
             output.loadNextPage(with: input)
         }
     }
@@ -77,7 +79,10 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
 
         switch event {
         case .willDisplayCell(let indexPath):
-            guard let sections = manager?.sections else {
+            if progressView.frame.minY != collectionView?.contentSize.height {
+                setProgressViewFinalFrame()
+            }
+            guard let sections = manager?.sections, !isErrorWasReceived else {
                 return
             }
             let lastSectionIndex = sections.count - 1
@@ -88,15 +93,19 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
                 return
             }
 
-            // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
-            progressView.frame = .init(origin: .init(x: progressView.frame.origin.x,
-                                                     y: collectionView?.contentSize.height ?? 0),
-                                       size: progressView.frame.size)
-
             output?.loadNextPage(with: self)
         default:
             break
         }
+    }
+
+    // MARK: - Private methods
+
+    func setProgressViewFinalFrame() {
+        // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
+        progressView.frame = .init(origin: .init(x: progressView.frame.origin.x,
+                                                 y: collectionView?.contentSize.height ?? 0),
+                                   size: progressView.frame.size)
     }
 
 }
@@ -112,6 +121,7 @@ extension CollectionPaginatablePlugin: PaginatableInput {
 
     public func updateError(_ error: Error?) {
         progressView.showError(error)
+        isErrorWasReceived = true
     }
 
     public func updatePagination(canIterate: Bool) {
@@ -143,9 +153,10 @@ public extension BaseCollectionPlugin {
     ///
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
-    static func backwardPaginatable(progressView: CollectionBackwardPaginatablePlugin.ProgressView,
-                                    output: BackwardPaginatableOutput) -> CollectionBackwardPaginatablePlugin {
-        return CollectionBackwardPaginatablePlugin(progressView: progressView, with: output)
+    static func topPaginatable(progressView: CollectionTopPaginatablePlugin.ProgressView,
+                               output: TopPaginatableOutput,
+                               isSaveScrollPositionNeeded: Bool = true) -> CollectionTopPaginatablePlugin {
+        return CollectionTopPaginatablePlugin(progressView: progressView, with: output, isSaveScrollPositionNeeded: isSaveScrollPositionNeeded)
 
     }
 
