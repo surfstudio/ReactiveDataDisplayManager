@@ -33,7 +33,9 @@ public enum AccessibilityItemModifier: AccessibilityModifier {
             }
         }
 
-        item.accessibilityCustomActions = item.accessibilityActions()
+        if !item.actionsStrategy.isIgnored {
+            item.accessibilityCustomActions = item.actionsStrategy.value?.map { $0.action }
+        }
     }
 
     public static func modify(item: AccessibilityItem, generator: AccessibilityStrategyProvider) {
@@ -63,10 +65,8 @@ public enum AccessibilityItemModifier: AccessibilityModifier {
             }
         }
 
-        item.accessibilityCustomActions = item.accessibilityActions()
-
-        if let actionsProvider = generator as? AccessibilityActionsProvider {
-            item.accessibilityCustomActions?.append(contentsOf: actionsProvider.accessibilityActions())
+        if !item.actionsStrategy.isIgnored {
+            item.accessibilityCustomActions = item.actionsStrategy.value?.map { $0.action }
         }
     }
 }

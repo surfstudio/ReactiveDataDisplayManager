@@ -16,6 +16,6 @@ public protocol CollectionFoldableItem: AnyObject, AccessibilityStrategyProvider
 }
 
 public extension CollectionFoldableItem {
-    var labelStrategy: AccessibilityStrategy<String> { .ignored }
-    var traitsStrategy: AccessibilityStrategy<UIAccessibilityTraits> { childGenerators.isEmpty ? .ignored : .just(.button) }
+    var labelStrategy: AccessibilityStringStrategy { .ignored }
+    var traitsStrategy: AccessibilityTraitsStrategy { childGenerators.isEmpty ? .ignored : .just(.button) }
 }

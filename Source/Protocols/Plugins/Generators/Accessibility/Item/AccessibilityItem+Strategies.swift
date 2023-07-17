@@ -44,6 +44,8 @@ public struct AccessibilityStrategy<ValueType> {
     }
 }
 
+// MARK: - String
+
 public typealias AccessibilityStringStrategy = AccessibilityStrategy<String>
 
 public extension AccessibilityStrategy where ValueType == String {
@@ -58,6 +60,8 @@ public extension AccessibilityStrategy where ValueType == String {
     }
 
 }
+
+// MARK: - Traits
 
 public typealias AccessibilityTraitsStrategy = AccessibilityStrategy<UIAccessibilityTraits>
 
@@ -79,6 +83,26 @@ public extension AccessibilityStrategy where ValueType == UIAccessibilityTraits 
 
     mutating func remove(_ traits: UIAccessibilityTraits) {
         value?.remove(traits)
+    }
+
+}
+
+// MARK: - Actions
+
+public typealias AccessibilityActionsStrategy = AccessibilityStrategy<[AccessibilityAction]>
+
+public extension AccessibilityStrategy where ValueType == [AccessibilityAction] {
+
+    mutating func append(_ action: AccessibilityAction) {
+        value?.append(action)
+    }
+
+    mutating func remove(_ action: AccessibilityAction) {
+        value?.removeAll { $0.name == action.name }
+    }
+
+    mutating func removeAll() {
+        value?.removeAll()
     }
 
 }

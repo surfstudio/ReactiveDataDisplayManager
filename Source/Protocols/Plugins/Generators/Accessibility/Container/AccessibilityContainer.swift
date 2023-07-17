@@ -15,7 +15,9 @@ public protocol AccessibilityContainer: AccessibilityItem {
 
 public extension AccessibilityContainer {
 
-    var labelStrategy: AccessibilityStrategy<String> { .ignored }
+    var labelStrategy: AccessibilityStringStrategy { .ignored }
+
+    var actionsStrategy: AccessibilityActionsStrategy { .ignored }
 
     var modifierType: AccessibilityModifier.Type { AccessibilityContainerModifier.self }
 }
