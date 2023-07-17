@@ -50,7 +50,7 @@ public extension AccessibilityStrategy where ValueType == String {
 
     /// a combination of strings
     static func merge(_ values: ValueType?..., separator: String = "") -> Self {
-        return .init(values.compactMap { $0 }.joined(separator: separator))
+        return .init(values.compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: separator))
     }
 
     static func from(_ object: NSObject, keyPath: KeyPath<NSObject, String?> = \.accessibilityLabel) -> Self {
