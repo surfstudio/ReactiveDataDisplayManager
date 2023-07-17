@@ -21,9 +21,9 @@ final class CollectionCompositionalViewController: UIViewController {
     private enum Constants {
         static let boundaryItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50.0))
         static let edgeInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-        static let fraction: CGFloat = 1.0 / 3.0
-        static let minScale: CGFloat = 0.7
-        static let maxScale: CGFloat = 1.1
+        static let fraction: CGFloat = 1.0 / 2
+        static let minScale: CGFloat = 0.8
+        static let maxScale: CGFloat = 1
     }
 
     // MARK: - IBOutlets
@@ -72,25 +72,8 @@ private extension CollectionCompositionalViewController {
         // Handle section offset
         scrrollPlugin.didScrollCompositionLayoutSection += { [weak self] result in
             print(result.offset.x)
-            self?.handleVisibleItemsInvalidation(result)
-        }
-    }
-
-    func handleVisibleItemsInvalidation(_ result: ItemsInvalidationResult) {
-        // Remove header from cells
-        let cellWithoutHeaderOrFooter = result.items.filter { $0.representedElementKind == .none }
-
-        let contentWidth = result.environment.container.contentSize.width
-
-        // Transform cells
-        cellWithoutHeaderOrFooter.forEach { item in
-            let height = item.bounds.height / 2
-            let distanceFromCenter = abs(item.frame.midX - result.offset.x - contentWidth / 2.0)
-            let scale = max(Constants.maxScale - distanceFromCenter / contentWidth, Constants.minScale)
-
-            item.transform = CGAffineTransform(translationX: 0, y: height)
-                .scaledBy(x: scale, y: scale)
-                .translatedBy(x: 0, y: -height)
+            result.applyScale(minScale: Constants.minScale, maxScale: Constants.maxScale, aligment: .center)
+            result.applyCentredPosition(collectionView: self?.collectionView)
         }
     }
 
@@ -188,7 +171,7 @@ private extension CollectionCompositionalViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0)
         section.boundarySupplementaryItems = [header, footer] // add custom element (footer, header, ....)
-        section.setHorizontalScroll(type: .groupPaging, with: scrrollPlugin)
+        section.setHorizontalScroll(type: .groupPagingCentered, with: scrrollPlugin)
         return section
     }
 
