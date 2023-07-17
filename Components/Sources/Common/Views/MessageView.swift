@@ -17,6 +17,20 @@ public class MessageView: UIView {
         static let tapGestureName = "TapGesture"
     }
 
+    // MARK: - Public initialization
+
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        tapGesture.cancelsTouchesInView = false
+        textView.addGestureRecognizer(tapGesture)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - Private properties
 
     private var textView = UITextView(frame: .zero)
@@ -212,10 +226,6 @@ extension MessageView: ConfigurableItem {
     // MARK: - Methods
 
     public func configure(with model: Model) {
-        if let tapGesture = textView.gestureRecognizers?.first(where: { $0.name == Constants.tapGestureName }) {
-            textView.removeGestureRecognizer(tapGesture)
-        }
-
         textView.backgroundColor = .clear
         textView.isEditable = false
         setIsSelectablePropertyIfNeeded(for: model)
@@ -253,12 +263,7 @@ private extension MessageView {
         textView.delegate = self
         dataDetection = model.dataDetection
 
-        if let tapHandler = model.tapHandler {
-            self.tapHandler = tapHandler
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
-            tapGesture.name = "TapGesture"
-            textView.addGestureRecognizer(tapGesture)
-        }
+        self.tapHandler = model.tapHandler
         pressStateAction = { [weak self] in
             self?.animatePressStateIfNeeded(for: model)
         }
