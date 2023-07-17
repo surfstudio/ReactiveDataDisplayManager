@@ -56,7 +56,6 @@ extension ImageTableViewCell: AccessibilityItem {
 
 }
 
-
 // MARK: - ConfigurableItem
 
 extension ImageTableViewCell: ConfigurableItem {

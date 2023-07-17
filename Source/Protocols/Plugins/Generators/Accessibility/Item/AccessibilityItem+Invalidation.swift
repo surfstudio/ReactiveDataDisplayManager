@@ -38,11 +38,11 @@ struct DelegatedAccessibilityItemInvalidator: AccessibilityItemInvalidator {
 
 struct BasicAccessibilityItemInvalidator: AccessibilityItemInvalidator {
     weak var item: AccessibilityItem?
-    
+
     public func invalidateParameters() {
         guard let item else { return }
         item.modifySelf()
-        
+
     }
 }
 

@@ -22,7 +22,7 @@ public struct AccessibilityAction {
     /// - Parameters:
     ///    - name: name of action
     ///    - handler: closure that will be called when action will be triggered
-    @available(iOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, *)
     public static func closure(name: String, handler: (() -> Void)?) -> AccessibilityAction {
         .init(name: name,
               action: .init(name: name,

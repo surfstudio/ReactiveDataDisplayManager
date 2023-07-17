@@ -10,7 +10,7 @@ import Foundation
 public protocol AccessibilityContainer: AccessibilityItem {
 
     /// Child items of this container
-    var accessibilityChildItems: [AccessibilityItem] { get}
+    var accessibilityChildItems: [AccessibilityItem] { get }
 }
 
 public extension AccessibilityContainer {
