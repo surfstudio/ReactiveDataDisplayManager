@@ -10,7 +10,7 @@ import UIKit
 import ReactiveDataDisplayManager
 import Nuke
 
-final class FoldableCollectionViewCell: UICollectionViewCell {
+final class FoldableCollectionViewCell: UICollectionViewCell, FoldableStateHolder {
 
     // MARK: - ViewModel
 
@@ -36,9 +36,9 @@ final class FoldableCollectionViewCell: UICollectionViewCell {
         setupInitialState()
     }
 
-    // MARK: - Internal Methods
+    // MARK: - Foldable
 
-    func update(isExpanded: Bool) {
+    func setExpanded(_ isExpanded: Bool) {
         UIView.animate(withDuration: Constants.animationDuration) { [weak self] in
             self?.arrowImageView.transform = isExpanded ? .identity : CGAffineTransform(rotationAngle: .pi)
         }

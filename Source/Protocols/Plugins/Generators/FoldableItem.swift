@@ -8,6 +8,11 @@
 
 import UIKit
 
+/// Protocol for cells to handle `isExpanded` state
+public protocol FoldableStateHolder: AnyObject {
+    func setExpanded(_ isExpanded: Bool)
+}
+
 /// Protocol for `TableCellGenerator` to manage expand/collapse state
 public protocol FoldableItem: AnyObject {
 
@@ -22,7 +27,7 @@ public protocol FoldableItem: AnyObject {
 
     /// Generators describing cells to be inserted in expanded state
     var childGenerators: [TableCellGenerator] { get set }
-    
+
 }
 
 public extension FoldableItem {
