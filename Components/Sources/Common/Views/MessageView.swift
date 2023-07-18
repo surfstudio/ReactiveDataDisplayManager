@@ -36,7 +36,7 @@ public class MessageView: UIView {
     private var textView = UITextView(frame: .zero)
     private var dataDetection: DataDetection?
     private var tapHandler: TapHandler?
-    private var pressStateAction: (() -> Void)?
+    private var pressStateAction: ((UITapGestureRecognizer.State) -> Void)?
 
 }
 
@@ -264,8 +264,8 @@ private extension MessageView {
         dataDetection = model.dataDetection
 
         self.tapHandler = model.tapHandler
-        pressStateAction = { [weak self] in
-            self?.animatePressStateIfNeeded(for: model)
+        pressStateAction = { [weak self] state in
+            self?.handleTapGesture(state, with: model)
         }
     }
 
@@ -298,7 +298,7 @@ private extension MessageView {
         guard let tapAction = tapHandler?.tapAction else {
             return
         }
-        pressStateAction?()
+        pressStateAction?(gesture.state)
         tapAction()
     }
 
@@ -310,18 +310,14 @@ private extension MessageView {
         }
     }
 
-    func animatePressStateIfNeeded(for model: Model) {
-        if model.tapHandler?.textStyle != nil || model.tapHandler?.backgroundStyle != nil {
-            UIView.animate(
-                withDuration: 0.5,
-                delay: 0,
-                animations: {
-                    self.setPressState(for: model)
-                },
-                completion: { [weak self] _ in
-                    self?.setInitialState(for: model)
-                }
-            )
+    func handleTapGesture(_ state: UITapGestureRecognizer.State, with model: Model) {
+        switch state {
+        case .began:
+            setPressState(for: model)
+        case .ended, .cancelled:
+            setInitialState(for: model)
+        default:
+            break
         }
     }
 
