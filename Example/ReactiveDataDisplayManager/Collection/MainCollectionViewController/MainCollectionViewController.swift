@@ -30,6 +30,7 @@ final class MainCollectionViewController: UIViewController {
         case swipeableListAppearances
         case movableCollection
         case dragAndDroppableCollection
+        case stackCellCollectionViewController
         case carouselCollection
         case alignedCollection
         case dynamicHeightViewController
@@ -57,6 +58,7 @@ final class MainCollectionViewController: UIViewController {
             ("List Appearances with swipeable items", .swipeableListAppearances),
             ("Collection with movable items", .movableCollection),
             ("Collection with drag and drop item", .dragAndDroppableCollection),
+            ("Collection with stack cell", .stackCellCollectionViewController),
             ("Carousel collection view layout", .carouselCollection),
             ("Aligned collection layout", .alignedCollection),
             ("Dynamic height ViewController", .dynamicHeightViewController)

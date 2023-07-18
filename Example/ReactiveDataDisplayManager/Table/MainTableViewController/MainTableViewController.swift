@@ -32,6 +32,7 @@ final class MainTableViewController: UIViewController {
         case highlightableTable
         case customizableComponentsTable
         case twoDirectionPaginatableTable
+        case stackCellExampleTable
     }
 
     // MARK: - Constants
@@ -55,7 +56,9 @@ final class MainTableViewController: UIViewController {
             ("Table with selectable cells", .selectableTable),
             ("Table with highlightable cells", .highlightableTable),
             ("Table with custom components", .customizableComponentsTable),
-            ("Table with two direction pagination", .twoDirectionPaginatableTable)
+            ("Table with two direction pagination", .twoDirectionPaginatableTable),
+            ("Table with custom components", .customizableComponentsTable),
+            ("Table with stack cell", .stackCellExampleTable)
         ]
     }
 

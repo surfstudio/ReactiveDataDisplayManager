@@ -8,13 +8,6 @@
 
 import UIKit
 
-public enum PaginationDirection {
-
-    case backward
-    case forward
-
-}
-
 public protocol ProgressDisplayableItem {
 
     /// - parameter isLoading: `true` if want to animate loading progress in `progressView`
@@ -42,12 +35,12 @@ extension ProgressDisplayableItem {
 
 }
 
-/// Input signals to control visibility of progressView in header/footer
+/// Input signals to control visibility of progressView in footer
 public protocol PaginatableInput: AnyObject {
 
-    /// Call this method to control availability of **loadNextPage**/**loadPrevPage** action
+    /// Call this method to control availability of **loadNextPage** action
     ///
-    /// - parameter canIterate: `true` if want to use last cell will display event to execute **loadNextPage** /**loadPrevPage**action
+    /// - parameter canIterate: `true` if want to use last cell will display event to execute **loadNextPage** action
     func updatePagination(canIterate: Bool)
 
     /// Call this method to control visibility of progressView in header/footer
@@ -56,6 +49,24 @@ public protocol PaginatableInput: AnyObject {
     func updateProgress(isLoading: Bool)
 
     /// - parameter error: some error got while loading of next/previous page.
+    ///  You should transfer this error into UI representation.
+    func updateError(_ error: Error?)
+}
+
+/// Input signals to control visibility of progressView in header
+public protocol TopPaginatableInput: AnyObject {
+
+    /// Call this method to control availability of **loadPrevPage** action
+    ///
+    /// - parameter canIterate: `true` if want to use first cell will display event to execute **loadPrevPage**action
+    func updatePagination(canIterate: Bool)
+
+    /// Call this method to control visibility of progressView in footer
+    ///
+    /// - parameter isLoading: `true` if want to show `progressView` in footer
+    func updateProgress(isLoading: Bool)
+
+    /// - parameter error: some error got while loading of previous page.
     ///  You should transfer this error into UI representation.
     func updateError(_ error: Error?)
 }
@@ -75,17 +86,17 @@ public protocol PaginatableOutput: AnyObject {
 }
 
 /// Output signals for loading previous page of content
-public protocol BackwardPaginatableOutput: AnyObject {
+public protocol TopPaginatableOutput: AnyObject {
 
-    /// Called when collection has setup `TableBackwardPaginatablePlugin`
+    /// Called when collection has setup `TableTopPaginatablePlugin`
     ///
     /// - parameter input: input signals to hide  `progressView` from header
-    func onBackwardPaginationInitialized(with input: PaginatableInput)
+    func onTopPaginationInitialized(with input: TopPaginatableInput)
 
     /// Called when collection scrolled to first cell
     ///
     /// - parameter input: input signals to hide  `progressView` from header
-    func loadPrevPage(with input: PaginatableInput)
+    func loadPrevPage(with input: TopPaginatableInput)
 }
 
 /// Plugin to display `progressView` while next/previous page is loading
@@ -106,6 +117,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
     private weak var output: PaginatableOutput?
 
     private var isLoading = false
+    private var isErrorWasReceived = false
 
     private weak var tableView: UITableView?
 
@@ -139,6 +151,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
             guard let input = self, let output = self?.output else {
                 return
             }
+            self?.isErrorWasReceived = false
             output.loadNextPage(with: input)
         }
     }
@@ -147,7 +160,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
 
         switch event {
         case .willDisplayCell(let indexPath):
-            guard let sections = manager?.sections else {
+            guard let sections = manager?.sections, !isErrorWasReceived else {
                 return
             }
             let lastSectionIndex = sections.count - 1
@@ -175,6 +188,7 @@ extension TablePaginatablePlugin: PaginatableInput {
 
     public func updateError(_ error: Error?) {
         progressView.showError(error)
+        isErrorWasReceived = true
     }
 
     public func updatePagination(canIterate: Bool) {
@@ -207,9 +221,11 @@ public extension BaseTablePlugin {
     ///
     /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from header
-    static func backwardPaginatable(progressView: TableBackwardPaginatablePlugin.ProgressView,
-                                    output: BackwardPaginatableOutput) -> TableBackwardPaginatablePlugin {
-        return TableBackwardPaginatablePlugin(progressView: progressView, with: output)
+    /// - Warning: UITableView.style must be plain style for keeping scroll position 
+    static func topPaginatable(progressView: TableTopPaginatablePlugin.ProgressView,
+                               output: TopPaginatableOutput,
+                               isSaveScrollPositionNeeded: Bool) -> TableTopPaginatablePlugin {
+        return TableTopPaginatablePlugin(progressView: progressView, with: output, isSaveScrollPositionNeeded: isSaveScrollPositionNeeded)
 
     }
 

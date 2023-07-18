@@ -39,6 +39,29 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
         XCTAssertGreaterThan(table.cells.count, threePagesSize)
     }
 
+    // Description: In a collection, the first cell is the first visible cell
+    func testCollection_whenSwipeUpAndDown_thenFirstVisibleCellChanged() throws {
+        setTab("Collection")
+        tapTableElement("Collection with two direction pagination")
+
+        let collection = app.collectionViews.firstMatch
+        let firstCell = app.collectionViews.cells.firstMatch
+        let retryButton = app.buttons["Retry"].firstMatch
+        XCTAssertTrue(collection.waitForExistence(timeout: Constants.timeout))
+
+        while !retryButton.isHittable {
+            collection.swipeDown(velocity: .fast)
+        }
+
+        retryButton.tap()
+
+        while firstCell.label.hasSuffix("page -1") || firstCell.label.hasSuffix("page 0") {
+            collection.swipeUp(velocity: .fast)
+        }
+
+        XCTAssertTrue(firstCell.label.hasSuffix("page 1"))
+    }
+
     func testTable_whenSwipeDown_thenPaginatorErrorAppear_thenHittableActivityIndicator() {
         let activityIndicator = app.activityIndicators["PaginatorView"].firstMatch
         let retryButton = app.buttons["Retry"].firstMatch
@@ -53,6 +76,27 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
 
         while !retryButton.isHittable {
             table.swipeDown(velocity: .fast)
+        }
+
+        XCTAssertFalse(activityIndicator.isHittable)
+
+        retryButton.tap()
+
+        XCTAssertTrue(activityIndicator.isHittable)
+    }
+
+    func testCollection_whenSwipeUp_thenHittableActivityIndicator() {
+        let activityIndicator = app.activityIndicators["PaginatorView"]
+        let retryButton = app.buttons["Retry"]
+
+        setTab("Collection")
+        tapTableElement("Collection with two direction pagination")
+
+        let collection = app.collectionViews.firstMatch
+        XCTAssertTrue(collection.waitForExistence(timeout: Constants.timeout))
+
+        while !retryButton.isHittable {
+            collection.swipeDown(velocity: .fast)
         }
 
         XCTAssertFalse(activityIndicator.isHittable)

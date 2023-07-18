@@ -430,6 +430,7 @@
                         <segue destination="B1B-Kf-5MV" kind="show" identifier="highlightableTable" id="XeT-nU-sXM"/>
                         <segue destination="DKn-Su-lHd" kind="show" identifier="customizableComponentsTable" id="AL3-f0-sR0"/>
                         <segue destination="etF-3y-fmb" kind="show" identifier="twoDirectionPaginatableTable" id="weN-W5-hzB"/>
+                        <segue destination="0O5-Nc-nFF" kind="show" identifier="stackCellExampleTable" id="gsz-Zr-dlw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kEa-HS-aMh" sceneMemberID="firstResponder"/>
@@ -649,6 +650,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KuT-ri-pKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="10536" y="-1842"/>
+        </scene>
+        <!--Stack Cell Example View Controller-->
+        <scene sceneID="A8a-EG-KKN">
+            <objects>
+                <viewController id="0O5-Nc-nFF" customClass="StackCellExampleViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="naI-i7-P8M">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nIr-BG-gYP">
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="4Me-MH-PyQ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4Me-MH-PyQ" firstAttribute="bottom" secondItem="nIr-BG-gYP" secondAttribute="bottom" id="8be-Qa-PSc"/>
+                            <constraint firstItem="nIr-BG-gYP" firstAttribute="top" secondItem="4Me-MH-PyQ" secondAttribute="top" id="JuE-nR-IlN"/>
+                            <constraint firstItem="nIr-BG-gYP" firstAttribute="leading" secondItem="4Me-MH-PyQ" secondAttribute="leading" id="LNr-Sw-sKE"/>
+                            <constraint firstItem="4Me-MH-PyQ" firstAttribute="trailing" secondItem="nIr-BG-gYP" secondAttribute="trailing" id="yai-5n-bxH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="QOr-aO-5uw"/>
+                    <connections>
+                        <outlet property="tableView" destination="nIr-BG-gYP" id="aEz-Wb-0qN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nsj-Vl-EF4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="11313" y="-1842"/>
         </scene>
     </scenes>
     <resources>
