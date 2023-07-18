@@ -171,6 +171,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
         super.viewDidLoad()
         tableView.accessibilityIdentifier = "ComponentsOverviewTableViewController"
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         fillAdapter()
     }
 
