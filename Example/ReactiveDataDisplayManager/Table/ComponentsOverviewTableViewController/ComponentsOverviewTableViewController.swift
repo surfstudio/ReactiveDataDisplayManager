@@ -82,7 +82,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private let sentMessageStyle = TextStyle(color: .white,
                                              font: .systemFont(ofSize: 16, weight: .regular))
     private let sentMessageBorderStyle = BorderStyle(cornerRadius: 9,
-                                                            maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
+                                                     maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
     private lazy var sentMessageModel: MessageView.Model = .build { property in
         if Bool.random() {
             property.background(.solid(.systemBlue))
@@ -114,7 +114,8 @@ final class ComponentsOverviewTableViewController: UIViewController {
                 topController.present(alertController, animated: true, completion: nil)
             }
         }
-        property.tapHandler(TapHandler(textStyle: TextStyle(color: .random),
+        property.tapHandler(TapHandler(id: "Handling tap on message",
+                                       textStyle: TextStyle(color: .random),
                                        backgroundStyle: BackgroundStyle.solid(.random),
                                        tapAction: tapAction))
 
@@ -125,21 +126,22 @@ final class ComponentsOverviewTableViewController: UIViewController {
     // Recieved message
     private let recievedMessageStyle = TextStyle(color: .black, font: .systemFont(ofSize: 16, weight: .regular))
     private let recievedMessageBorderStyle = BorderStyle(cornerRadius: 9,
-                                                                maskedCorners: [
-                                                                    .layerMinXMinYCorner,
-                                                                    .layerMaxXMaxYCorner,
-                                                                    .layerMaxXMinYCorner
-                                                                ],
-                                                                borderWidth: 1,
-                                                                borderColor: UIColor.black.cgColor)
+                                                         maskedCorners: [
+                                                            .layerMinXMinYCorner,
+                                                            .layerMaxXMaxYCorner,
+                                                            .layerMaxXMinYCorner
+                                                         ],
+                                                         borderWidth: 1,
+                                                         borderColor: UIColor.black.cgColor)
     let dataDetectionHandler: DataDetection.DataDetectionHandler = { urlString in
         if let url = URL(string: urlString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-    private lazy var dataDetection = DataDetection(linkTextAttributes: [.foregroundColor: UIColor.blue],
-                                      dataDetectionHandler: dataDetectionHandler,
-                                      dataDetectorTypes: [.link])
+    private lazy var dataDetection = DataDetection(id: "Highlighting links and open them by tap",
+                                                   linkTextAttributes: [.foregroundColor: UIColor.blue],
+                                                   dataDetectionHandler: dataDetectionHandler,
+                                                   dataDetectorTypes: [.link])
     private lazy var recievedMessageModel: MessageView.Model = .build { property in
         property.border(recievedMessageBorderStyle)
         property.style(recievedMessageStyle)

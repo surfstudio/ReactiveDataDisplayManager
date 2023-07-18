@@ -16,12 +16,13 @@ public struct DataDetection: Equatable {
 
     // MARK: - Properties
 
-    public let id = UUID()
+    public let id: AnyHashable
     public let linkTextAttributes: [NSAttributedString.Key: Any]
     public var dataDetectionHandler: DataDetectionHandler?
     public var dataDetectorTypes: UIDataDetectorTypes = []
 
-    public init(linkTextAttributes: [NSAttributedString.Key: Any], dataDetectionHandler: @escaping DataDetectionHandler, dataDetectorTypes: UIDataDetectorTypes) {
+    public init(id: AnyHashable, linkTextAttributes: [NSAttributedString.Key: Any], dataDetectionHandler: @escaping DataDetectionHandler, dataDetectorTypes: UIDataDetectorTypes) {
+        self.id = id
         self.linkTextAttributes = linkTextAttributes
         self.dataDetectionHandler = dataDetectionHandler
         self.dataDetectorTypes = dataDetectorTypes
