@@ -32,6 +32,11 @@ public extension AccessibilityStrategyProvider {
     var actionsStrategy: AccessibilityActionsStrategy { .ignored }
 
     var isAccessibilityIgnored: Bool {
-        return [labelStrategy.isIgnored, valueStrategy.isIgnored, traitsStrategy.isIgnored].allSatisfy { $0 }
+        return [
+            labelStrategy.isIgnored,
+            valueStrategy.isIgnored,
+            traitsStrategy.isIgnored,
+            actionsStrategy.isIgnored
+        ].allSatisfy { $0 }
     }
 }
