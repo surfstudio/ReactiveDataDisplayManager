@@ -20,6 +20,7 @@ class CollectionListViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     private var titles = ["Item 1", "Item 2", "Item 3", "Item 4"]

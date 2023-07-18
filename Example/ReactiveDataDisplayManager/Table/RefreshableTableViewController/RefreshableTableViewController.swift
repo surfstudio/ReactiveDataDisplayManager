@@ -26,6 +26,7 @@ final class RefreshableTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: .refreshable(refreshControl: refreshControl, output: self))
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

@@ -28,6 +28,7 @@ final class SwipeableCollectionListViewController: UIViewController {
     private lazy var plugin = CollectionSwipeActionsConfigurationPlugin(swipeProvider: swipeProvider)
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(featurePlugin: plugin)
+        .add(plugin: .accessibility())
         .build()
 
     private var appearance = UICollectionLayoutListConfiguration.Appearance.plain

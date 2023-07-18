@@ -26,6 +26,7 @@ final class SelectableTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

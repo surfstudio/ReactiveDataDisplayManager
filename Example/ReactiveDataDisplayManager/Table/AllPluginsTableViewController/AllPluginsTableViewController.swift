@@ -62,6 +62,7 @@ final class AllPluginsTableViewController: UIViewController {
         .add(plugin: .refreshable(refreshControl: UIRefreshControl(), output: self))
         .add(featurePlugin: .swipeActions(swipeProvider: swipeActionProvider))
         .add(featurePlugin: .sectionTitleDisplayable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

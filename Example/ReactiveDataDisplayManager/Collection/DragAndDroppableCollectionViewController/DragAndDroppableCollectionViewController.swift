@@ -37,6 +37,7 @@ final class DragAndDroppableCollectionViewController: UIViewController {
         .add(featurePlugin: .dragAndDroppable(by: .current, draggableParameters: draggableParameters, positionChanged: {
             print($0.id ?? "")
         }))
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

@@ -32,6 +32,7 @@ final class DragAndDroppableTableViewController: UIViewController {
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(featurePlugin: .dragAndDroppable(draggableParameters: draggableParameters))
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

@@ -11,6 +11,12 @@ import UIKit
 
 final class TableAccessibilityPlugin: BaseTablePlugin<TableEvent> {
 
+    let invalidatorCreationBlock: AccessibilityInvalidatorCreationBlock
+
+    init(invalidatorCreationBlock: @escaping AccessibilityInvalidatorCreationBlock) {
+        self.invalidatorCreationBlock = invalidatorCreationBlock
+    }
+
     override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
         case let .willDisplayCell(indexPath, cell):
@@ -57,7 +63,7 @@ private extension TableAccessibilityPlugin {
               let invalidateDelegate = manager?.delegate as? AccessibilityItemDelegate else {
             return
         }
-        invalidatable.setDelegatedInvalidator(kind: kind, delegate: invalidateDelegate)
+        invalidatable.setInvalidator(invalidator: invalidatorCreationBlock(item, kind, invalidateDelegate))
     }
 
     func processTableCell(_ indexPath: IndexPath, _ cell: AccessibilityItem, with manager: BaseTableManager?) {
@@ -85,7 +91,16 @@ private extension TableAccessibilityPlugin {
 }
 
 extension BaseTablePlugin {
-    static func accessibility() -> BaseTablePlugin<TableEvent> {
-        TableAccessibilityPlugin()
+
+    /// Creates accessibility plugin with provided invalidator creation block
+    ///  - Parameter invalidatorCreationBlock: Block that creates invalidator for item to update accessibility properties on item state changes
+    ///  - Note: To setup accessibility your cell should extend `AccessibilityItem`, `AccessibilityInvalidatable` or `AccessibilityContainer`.
+    ///  More info in documentation.
+    public static func accessibility(invalidatorCreationBlock: @escaping AccessibilityInvalidatorCreationBlock = { item, kind, delegate in
+        DelegatedAccessibilityItemInvalidator(item: item,
+                                              accessibilityItemKind: kind,
+                                              accessibilityDelegate: delegate)
+    }) -> BaseTablePlugin<TableEvent> {
+        TableAccessibilityPlugin(invalidatorCreationBlock: invalidatorCreationBlock)
     }
 }

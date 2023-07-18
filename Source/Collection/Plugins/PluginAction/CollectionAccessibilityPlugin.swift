@@ -9,6 +9,12 @@ import UIKit
 
 final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent> {
 
+    let invalidatorCreationBlock: AccessibilityInvalidatorCreationBlock
+
+    init(invalidatorCreationBlock: @escaping AccessibilityInvalidatorCreationBlock) {
+        self.invalidatorCreationBlock = invalidatorCreationBlock
+    }
+
     override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
         switch event {
         case let .willDisplayCell(indexPath, cell):
@@ -56,7 +62,7 @@ private extension CollectionAccessibilityPlugin {
                 let invalidateDelegate = manager?.delegate as? AccessibilityItemDelegate else {
             return
         }
-        invalidatable.setDelegatedInvalidator(kind: kind, delegate: invalidateDelegate)
+        invalidatable.setInvalidator(invalidator: invalidatorCreationBlock(item, kind, invalidateDelegate))
     }
 
     func processCollectionCell(_ indexPath: IndexPath, _ cell: AccessibilityItem, with manager: BaseCollectionManager?) {
@@ -86,7 +92,16 @@ private extension CollectionAccessibilityPlugin {
 }
 
 extension BaseCollectionPlugin {
-    static func accessibility() -> BaseCollectionPlugin<CollectionEvent> {
-        CollectionAccessibilityPlugin()
+
+    /// Creates accessibility plugin with provided invalidator creation block
+    ///  - Parameter invalidatorCreationBlock: Block that creates invalidator for item to update accessibility properties on item state changes
+    ///  - Note: To setup accessibility your cell should extend `AccessibilityItem`, `AccessibilityInvalidatable` or `AccessibilityContainer`.
+    ///  More info in documentation.
+    public static func accessibility(invalidatorCreationBlock: @escaping AccessibilityInvalidatorCreationBlock = { item, kind, delegate in
+        DelegatedAccessibilityItemInvalidator(item: item,
+                                              accessibilityItemKind: kind,
+                                              accessibilityDelegate: delegate)
+    }) -> BaseCollectionPlugin<CollectionEvent> {
+        CollectionAccessibilityPlugin(invalidatorCreationBlock: invalidatorCreationBlock)
     }
 }

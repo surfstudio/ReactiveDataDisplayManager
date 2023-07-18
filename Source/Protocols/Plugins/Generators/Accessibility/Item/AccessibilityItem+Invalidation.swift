@@ -17,14 +17,19 @@ public protocol AccessibilityItemInvalidator {
     func invalidateParameters()
 }
 
-struct DelegatedAccessibilityItemInvalidator: AccessibilityItemInvalidator {
+/// Invalidator which will delegate invalidation to `AccessibilityItemDelegate` to combine item with generator
+open class DelegatedAccessibilityItemInvalidator: AccessibilityItemInvalidator {
     let accessibilityItemKind: AccessibilityItemKind
     weak var item: AccessibilityItem?
     weak var accessibilityDelegate: AccessibilityItemDelegate?
 
-    init(item: AccessibilityItem?,
-         accessibilityItemKind: AccessibilityItemKind,
-         accessibilityDelegate: AccessibilityItemDelegate?) {
+    /// - Parameters:
+    ///    - item: `AccessibilityItem` to invalidate
+    ///    - accessibilityItemKind: Type of `AccessibilityItem` with provided index
+    ///    - accessibilityDelegate: Delegate for invalidation
+    public init(item: AccessibilityItem?,
+                accessibilityItemKind: AccessibilityItemKind,
+                accessibilityDelegate: AccessibilityItemDelegate?) {
         self.item = item
         self.accessibilityItemKind = accessibilityItemKind
         self.accessibilityDelegate = accessibilityDelegate
@@ -80,18 +85,9 @@ public extension AccessibilityInvalidatable {
     func setBasicInvalidator() {
         setInvalidator(invalidator: BasicAccessibilityItemInvalidator(item: self))
     }
-
-    /// Setting invalidator which will delegate invalidation to `AccessibilityItemDelegate` to combine item with generator
-    /// - Parameters:
-    ///    - accessibilityItemKind: Type of `AccessibilityItem` with provided index
-    ///    - accessibilityDelegate: Delegate for invalidation
-    func setDelegatedInvalidator(kind: AccessibilityItemKind,
-                                 delegate: AccessibilityItemDelegate) {
-        setInvalidator(invalidator: DelegatedAccessibilityItemInvalidator(item: self,
-                                                                          accessibilityItemKind: kind,
-                                                                          accessibilityDelegate: delegate))
-    }
 }
+
+public typealias AccessibilityInvalidatorCreationBlock = (AccessibilityItem, AccessibilityItemKind, AccessibilityItemDelegate) -> AccessibilityItemInvalidator
 
 /// Invalidation delegate for `CollectionDelegate` or `TableDelegate`
 public protocol AccessibilityItemDelegate: AnyObject {

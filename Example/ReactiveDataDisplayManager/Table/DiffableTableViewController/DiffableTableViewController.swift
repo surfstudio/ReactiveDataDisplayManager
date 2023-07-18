@@ -45,6 +45,7 @@ final class DiffableTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .set(dataSource: { DiffableTableDataSource(provider: $0) })
+        .add(plugin: .accessibility())
         .build()
 
     private var generators: [DiffableCellGenerator] = []

@@ -19,6 +19,7 @@ final class ImageTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.baseBuilder
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

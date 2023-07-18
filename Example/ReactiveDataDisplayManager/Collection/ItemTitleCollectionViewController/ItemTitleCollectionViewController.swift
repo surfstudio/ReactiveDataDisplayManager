@@ -28,6 +28,7 @@ class ItemTitleCollectionViewController: UIViewController {
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(delegate: FlowCollectionDelegate())
         .add(featurePlugin: .sectionTitleDisplayable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

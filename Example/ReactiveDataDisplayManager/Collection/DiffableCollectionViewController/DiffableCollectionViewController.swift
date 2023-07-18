@@ -43,6 +43,7 @@ final class DiffableCollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(dataSource: { DiffableCollectionDataSource(provider: $0) })
+        .add(plugin: .accessibility())
         .build()
 
     private var generators: [DiffableCollectionCellGenerator] = []
