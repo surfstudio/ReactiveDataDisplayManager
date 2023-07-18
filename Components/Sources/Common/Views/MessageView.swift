@@ -24,7 +24,7 @@ extension MessageView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: Equatable, AlignmentProvider {
+    public struct Model: Equatable, AlignmentProvider, TextProvider {
 
         // MARK: - Editor
 
@@ -213,7 +213,7 @@ extension MessageView: ConfigurableItem {
 
 // MARK: - CalculatableHeightItem
 
-extension MessageView: CalculatableHeightItem {
+extension MessageView: CalculatableHeightItem, FrameProvider {
 
     public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
@@ -242,20 +242,6 @@ extension MessageView: CalculatableWidthItem {
 // MARK: - Private methods
 
 private extension MessageView {
-
-    static func getFrame(constraintRect: CGSize, model: Model) -> CGRect {
-        switch model.text {
-        case .string(let text):
-            return text.boundingRect(with: constraintRect,
-                                     options: .usesLineFragmentOrigin,
-                                     attributes: model.getAttributes(),
-                                     context: nil)
-        case .attributedString(let attributedText):
-            return attributedText.boundingRect(with: constraintRect,
-                                               options: .usesLineFragmentOrigin,
-                                               context: nil)
-        }
-    }
 
     func configureTextView(_ textView: UITextView, with model: Model) {
         switch model.text {

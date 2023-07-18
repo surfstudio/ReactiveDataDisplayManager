@@ -23,7 +23,7 @@ extension LabelView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: AlignmentProvider {
+    public struct Model: AlignmentProvider, TextProvider {
 
         // MARK: - Editor
 
@@ -158,7 +158,7 @@ extension LabelView: CalculatableHeightItem {
 
 // MARK: - CalculatableHeightItem
 
-extension LabelView: CalculatableWidthItem {
+extension LabelView: CalculatableWidthItem, FrameProvider {
 
     public static func getWidth(forHeight height: CGFloat, with model: Model) -> CGFloat {
         let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
@@ -173,20 +173,6 @@ extension LabelView: CalculatableWidthItem {
 // MARK: - Private
 
 private extension LabelView {
-
-    static func getFrame(constraintRect: CGSize, model: Model) -> CGRect {
-        switch model.text {
-        case .string(let text):
-            return text.boundingRect(with: constraintRect,
-                                     options: .usesLineFragmentOrigin,
-                                     attributes: model.getAttributes(),
-                                     context: nil)
-        case .attributedString(let attributedText):
-            return attributedText.boundingRect(with: constraintRect,
-                                               options: .usesLineFragmentOrigin,
-                                               context: nil)
-        }
-    }
 
     func configureConstraints() {
         wrap(subview: label, with: .zero)
@@ -205,7 +191,7 @@ private extension LabelView {
 
 extension LabelView.Model {
 
-    func getAttributes() -> [NSAttributedString.Key: Any] {
+    public func getAttributes() -> [NSAttributedString.Key: Any] {
         switch text {
         case .string:
             let edgeInsets: UIEdgeInsets
