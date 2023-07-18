@@ -211,27 +211,30 @@ extension MessageView: ConfigurableItem {
 
 }
 
-// MARK: - Static methods
+// MARK: - CalculatableHeightItem
 
-extension MessageView {
+extension MessageView: CalculatableHeightItem {
 
-    static func getCellSize(for model: Model, width: CGFloat) -> CGSize {
+    public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox: CGRect
-        switch model.text {
-        case .string(let text):
-            boundingBox = text.boundingRect(with: constraintRect,
-                                            options: .usesLineFragmentOrigin,
-                                            attributes: model.getAttributes(),
-                                            context: nil)
-        case .attributedString(let attributedText):
-            boundingBox = attributedText.boundingRect(with: constraintRect,
-                                                      options: .usesLineFragmentOrigin,
-                                                      context: nil)
-        }
+        let boundingBox = getFrame(constraintRect: constraintRect, model: model)
         let height = ceil(boundingBox.height)
 
-        return CGSize(width: width, height: height)
+        return height
+    }
+
+}
+
+// MARK: - CalculatableWidthItem
+
+extension MessageView: CalculatableWidthItem {
+
+    public static func getWidth(forHeight height: CGFloat, with model: Model) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = getFrame(constraintRect: constraintRect, model: model)
+        let width = ceil(boundingBox.width)
+
+        return width
     }
 
 }
@@ -239,6 +242,20 @@ extension MessageView {
 // MARK: - Private methods
 
 private extension MessageView {
+
+    static func getFrame(constraintRect: CGSize, model: Model) -> CGRect {
+        switch model.text {
+        case .string(let text):
+            return text.boundingRect(with: constraintRect,
+                                     options: .usesLineFragmentOrigin,
+                                     attributes: model.getAttributes(),
+                                     context: nil)
+        case .attributedString(let attributedText):
+            return attributedText.boundingRect(with: constraintRect,
+                                               options: .usesLineFragmentOrigin,
+                                               context: nil)
+        }
+    }
 
     func configureTextView(_ textView: UITextView, with model: Model) {
         switch model.text {

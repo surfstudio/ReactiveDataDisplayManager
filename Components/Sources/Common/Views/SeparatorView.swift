@@ -66,12 +66,12 @@ extension SeparatorView: ConfigurableItem {
 
 }
 
-// MARK: - Static methods
+// MARK: - CalculatableHeightItem
 
-extension SeparatorView {
+extension SeparatorView: CalculatableHeightItem {
 
-    static func getCellSize(for model: Model, width: CGFloat) -> CGSize {
-        return CGSize(width: width, height: model.height)
+    public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
+        return model.height
     }
 
 }

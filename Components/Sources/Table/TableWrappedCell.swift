@@ -22,3 +22,13 @@ public final class TableWrappedCell<View: ConfigurableItem>: UITableViewCell, Vi
     public var cachedAlignment: Alignment?
 
 }
+
+// MARK: - CalculatableHeightItem
+
+extension TableWrappedCell: CalculatableHeightItem where View: CalculatableHeightItem {
+
+    public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
+        return View.getHeight(forWidth: width, with: model)
+    }
+
+}

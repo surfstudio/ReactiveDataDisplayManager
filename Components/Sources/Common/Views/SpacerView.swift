@@ -63,12 +63,12 @@ extension SpacerView: ConfigurableItem {
 
 }
 
-// MARK: - Static methods
+// MARK: - CalculatableHeightItem
 
-extension SpacerView {
+extension SpacerView: CalculatableHeightItem {
 
-    static func getCellSize(for model: Model, width: CGFloat) -> CGSize {
-        return CGSize(width: width, height: model.height)
+    public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
+        return model.height
     }
 
 }

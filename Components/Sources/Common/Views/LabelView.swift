@@ -142,27 +142,30 @@ extension LabelView: ConfigurableItem {
 
 }
 
-// MARK: - Static methods
+// MARK: - CalculatableHeightItem
 
-public extension LabelView {
+extension LabelView: CalculatableHeightItem {
 
-    static func getCellSize(for model: Model, width: CGFloat) -> CGSize {
+    public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox: CGRect
-        switch model.text {
-        case .string(let text):
-            boundingBox = text.boundingRect(with: constraintRect,
-                                            options: .usesLineFragmentOrigin,
-                                            attributes: model.getAttributes(),
-                                            context: nil)
-        case .attributedString(let attributedText):
-            boundingBox = attributedText.boundingRect(with: constraintRect,
-                                                      options: .usesLineFragmentOrigin,
-                                                      context: nil)
-        }
+        let boundingBox = getFrame(constraintRect: constraintRect, model: model)
         let height = ceil(boundingBox.height)
 
-        return CGSize(width: width, height: height)
+        return height
+    }
+
+}
+
+// MARK: - CalculatableHeightItem
+
+extension LabelView: CalculatableWidthItem {
+
+    public static func getWidth(forHeight height: CGFloat, with model: Model) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = getFrame(constraintRect: constraintRect, model: model)
+        let width = ceil(boundingBox.width)
+
+        return width
     }
 
 }
@@ -170,6 +173,20 @@ public extension LabelView {
 // MARK: - Private
 
 private extension LabelView {
+
+    static func getFrame(constraintRect: CGSize, model: Model) -> CGRect {
+        switch model.text {
+        case .string(let text):
+            return text.boundingRect(with: constraintRect,
+                                     options: .usesLineFragmentOrigin,
+                                     attributes: model.getAttributes(),
+                                     context: nil)
+        case .attributedString(let attributedText):
+            return attributedText.boundingRect(with: constraintRect,
+                                               options: .usesLineFragmentOrigin,
+                                               context: nil)
+        }
+    }
 
     func configureConstraints() {
         wrap(subview: label, with: .zero)
