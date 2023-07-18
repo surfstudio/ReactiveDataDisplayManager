@@ -301,7 +301,7 @@ extension MessageView: UITextViewDelegate {
 
 extension MessageView.Model {
 
-    func getAttributes() -> [NSAttributedString.Key: Any] {
+    public func getAttributes() -> [NSAttributedString.Key: Any] {
         switch text {
         case .string:
             let edgeInsets: UIEdgeInsets
