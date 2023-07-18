@@ -48,6 +48,7 @@ public extension BaseCollectionPlugin {
     /// - parameter scrollProvider: allows you to organize the scroll inside the collection
     ///
     /// For example that the beginning of a new element always appears on the left of the screen.
+    /// - Warning: Do not work with UICollectionViewCompositionalLayout (use CollectionScrollViewDelegateProxyPlugin with didScrollCompositionLayoutSection event
     static func scrollableBehaviour(scrollProvider: CollectionScrollProvider) -> CollectionScrollablePlugin {
         .init(scrollProvider: scrollProvider)
     }
