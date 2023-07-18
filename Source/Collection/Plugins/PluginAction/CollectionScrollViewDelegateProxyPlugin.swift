@@ -95,7 +95,6 @@ public extension CollectionScrollViewDelegateProxyPlugin {
             self.offset = offset
             self.environment = environment
         }
-    
     }
 
     // MARK: - Ppublic properties
@@ -221,7 +220,7 @@ extension CollectionScrollViewDelegateProxyPlugin.ItemsInvalidationResult {
 
         // Step 3: Iterate through the visible cells to find the center most
         var minDistance: CGFloat = .greatestFiniteMagnitude
-        var centerCell: NSCollectionLayoutVisibleItem? = nil
+        var centerCell: NSCollectionLayoutVisibleItem?
         for cell in visibleCells {
             let cellCenter = cell.center
             let distance = hypot(centerPoint.x - cellCenter.x, centerPoint.y - cellCenter.y)
