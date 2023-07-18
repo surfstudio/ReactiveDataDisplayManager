@@ -87,6 +87,21 @@ private extension StackCellExampleCollectionViewController {
                 self?.verticalStackCell.updateSizeIfNeaded()
             }
 
+        adapter += VerticalCollectionStack {
+            SeparatorView.buildView(with: .init(height: 1, color: .black), and: .class)
+
+            HorizontalCollectionStack {
+                SeparatorView.buildView(with: .init(width: 1, color: .black), and: .class)
+                SpacerView.buildView(with: .init(width: 64), and: .class)
+
+                TitleTableViewCell.buildView(with: "Some text")
+
+                SeparatorView.buildView(with: .init(width: 1, color: .black), and: .class)
+            }
+
+            SeparatorView.buildView(with: .init(height: 1, color: .black), and: .class)
+        }
+
         // Tell adapter that we've changed generators
         adapter => .reload
     }
