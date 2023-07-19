@@ -84,11 +84,8 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private let sentMessageBorderStyle = BorderStyle(cornerRadius: 9,
                                                      maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
     private lazy var sentMessageModel: MessageView.Model = .build { property in
-        if Bool.random() {
-            property.background(.solid(.systemBlue))
-        } else {
-            property.background(.solid(.rddm))
-        }
+        let backgorundColor: UIColor? = Bool.random() ? .systemBlue : .rddm
+        property.background(.solid(backgorundColor))
         property.border(sentMessageBorderStyle)
         property.style(sentMessageStyle)
         property.textAlignment(.right)
@@ -115,8 +112,9 @@ final class ComponentsOverviewTableViewController: UIViewController {
             }
         }
         property.tapHandler(TapHandler(id: "Handling tap on message",
-                                       textStyle: TextStyle(color: .random),
-                                       backgroundStyle: BackgroundStyle.solid(.random),
+                                       textStyle: .init(color: .white.withAlphaComponent(0.5),
+                                                        font: .systemFont(ofSize: 16, weight: .regular)),
+                                       backgroundStyle: .solid(backgorundColor?.withAlphaComponent(0.5)),
                                        tapAction: tapAction))
 
     }
