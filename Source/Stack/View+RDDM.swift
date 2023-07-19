@@ -7,8 +7,8 @@
 
 public extension StaticDataDisplayWrapper where Base: ConfigurableItem {
 
-    func baseStackGenerator(with model: Base.Model) -> BaseStackCellGenerator<Base> {
-        .init(with: model)
+    func baseStackGenerator(with model: Base.Model, and registerType: CellRegisterType = .class) -> BaseStackCellGenerator<Base> {
+        .init(with: model, registerType: registerType)
     }
 
 }
