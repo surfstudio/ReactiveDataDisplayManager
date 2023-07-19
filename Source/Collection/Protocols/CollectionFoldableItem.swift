@@ -8,7 +8,7 @@
 
 // sourcery: AutoMockable
 public protocol CollectionFoldableItem: AnyObject {
-    var didFoldEvent: BaseEvent<Bool> { get }
+    var didFoldEvent: InputEvent<Bool> { get }
     var isExpanded: Bool { get set }
     var childGenerators: [CollectionCellGenerator] { get set }
 }

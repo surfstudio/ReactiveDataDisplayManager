@@ -15,7 +15,7 @@ open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & Configur
     // MARK: - FoldableItem
 
     /// Event on changed `isExpanded` state
-    open var didFoldEvent = BaseEvent<Bool>()
+    open var didFoldEvent = InputEvent<Bool>()
 
     /// Folded/unfolded state
     open var isExpanded = false

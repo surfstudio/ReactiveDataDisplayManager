@@ -13,8 +13,8 @@ public class TablePrefetchProxyPlugin: BaseTablePlugin<PrefetchEvent> {
 
     // MARK: - Properties
 
-    public var prefetchEvent = BaseEvent<[IndexPath]>()
-    public var cancelPrefetchingEvent = BaseEvent<[IndexPath]>()
+    public var prefetchEvent = InputEvent<[IndexPath]>()
+    public var cancelPrefetchingEvent = InputEvent<[IndexPath]>()
 
     // MARK: - BaseTablePlugin
 

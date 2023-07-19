@@ -9,5 +9,5 @@
 import UIKit
 
 public protocol DeletableItem {
-    var eventDelete: BaseEmptyEvent { get }
+    var eventDelete: EmptyEvent { get }
 }

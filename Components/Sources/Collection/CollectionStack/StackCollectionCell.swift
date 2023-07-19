@@ -13,7 +13,7 @@ open class StackCollectionCell: UICollectionViewCell, ConfigurableItem, Expandab
 
     // MARK: - ExpandableItem
 
-    public var onHeightChanged = ReactiveDataDisplayManager.BaseEvent<CGFloat?>()
+    public var onHeightChanged = ReactiveDataDisplayManager.InputEvent<CGFloat?>()
     public var animatedExpandable = true
 
     // MARK: - Public methods

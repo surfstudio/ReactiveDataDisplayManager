@@ -14,8 +14,8 @@ public class CalculatableHeightNonReusableCellGenerator<Cell: CalculatableHeight
     // MARK: - Public properties
 
     public var isNeedDeselect = true
-    public var didSelectEvent = BaseEvent<Void>()
-    public var didDeselectEvent = BaseEvent<Void>()
+    public var didSelectEvent = EmptyEvent()
+    public var didDeselectEvent = EmptyEvent()
     private(set) public var model: Cell.Model
     private(set) public lazy var cell: Cell? = {
         return Cell.fromXib(bundle: Cell.bundle())

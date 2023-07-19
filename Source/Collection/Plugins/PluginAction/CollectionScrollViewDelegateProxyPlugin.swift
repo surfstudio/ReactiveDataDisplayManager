@@ -13,18 +13,18 @@ public class CollectionScrollViewDelegateProxyPlugin: BaseCollectionPlugin<Scrol
 
     // MARK: - Properties
 
-    public var didScroll = BaseEvent<UICollectionView>()
-    public var willBeginDragging = BaseEvent<UICollectionView>()
-    public var willEndDragging = BaseEvent<(collectionView: UICollectionView, velocity: CGPoint, targetContentOffset: CGPoint)>()
-    public var didEndDragging = BaseEvent<(collectionView: UICollectionView, decelerate: Bool)>()
-    public var didScrollToTop = BaseEvent<UICollectionView>()
-    public var willBeginDecelerating = BaseEvent<UICollectionView>()
-    public var didEndDecelerating = BaseEvent<UICollectionView>()
-    public var willBeginZooming = BaseEvent<(collectionView: UICollectionView, view: UIView?)>()
-    public var didEndZooming = BaseEvent<(collectionView: UICollectionView, view: UIView?, scale: CGFloat)>()
-    public var didZoom = BaseEvent<UICollectionView>()
-    public var didEndScrollingAnimation = BaseEvent<UICollectionView>()
-    public var didChangeAdjustedContentInset = BaseEvent<UICollectionView>()
+    public var didScroll = InputEvent<UICollectionView>()
+    public var willBeginDragging = InputEvent<UICollectionView>()
+    public var willEndDragging = InputEvent<(collectionView: UICollectionView, velocity: CGPoint, targetContentOffset: CGPoint)>()
+    public var didEndDragging = InputEvent<(collectionView: UICollectionView, decelerate: Bool)>()
+    public var didScrollToTop = InputEvent<UICollectionView>()
+    public var willBeginDecelerating = InputEvent<UICollectionView>()
+    public var didEndDecelerating = InputEvent<UICollectionView>()
+    public var willBeginZooming = InputEvent<(collectionView: UICollectionView, view: UIView?)>()
+    public var didEndZooming = InputEvent<(collectionView: UICollectionView, view: UIView?, scale: CGFloat)>()
+    public var didZoom = InputEvent<UICollectionView>()
+    public var didEndScrollingAnimation = InputEvent<UICollectionView>()
+    public var didChangeAdjustedContentInset = InputEvent<UICollectionView>()
 
     // MARK: - BaseCollectionPlugin
 
@@ -79,7 +79,7 @@ public extension CollectionScrollViewDelegateProxyPlugin {
 
     // MARK: - Private static properties
 
-    private static var didScrollCompositionLayoutSection = BaseEvent<ItemsInvalidationResult>()
+    private static var didScrollCompositionLayoutSection = InputEvent<ItemsInvalidationResult>()
 
     // MARK: Nested types
 
@@ -100,7 +100,7 @@ public extension CollectionScrollViewDelegateProxyPlugin {
     // MARK: - Ppublic properties
 
     /// - Note: To enable events you should link your `NSCollectionLayoutSection` with `CollectionScrollViewDelegateProxyPlugin` using method `NSCollectionLayoutSection.setHorizontalScroll`
-    var didScrollCompositionLayoutSection: BaseEvent<ItemsInvalidationResult> {
+    var didScrollCompositionLayoutSection: InputEvent<ItemsInvalidationResult> {
         get {
             Self.didScrollCompositionLayoutSection
         }

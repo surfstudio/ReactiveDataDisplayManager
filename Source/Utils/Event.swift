@@ -9,7 +9,7 @@
 import UIKit
 
 /// Event with input, but without output data.
-public protocol UniversalEvent {
+public protocol Event {
 
     associatedtype Input
     associatedtype Result
@@ -32,11 +32,11 @@ public protocol UniversalEvent {
 
 // MARK: - Universal Base Event
 
-open class UniversalBaseEvent<Input, Result>: UniversalEvent {
+open class BaseEvent<Input, Result>: Event {
 
     public typealias Lambda = (Input) -> Result
 
-    public static func += (left: UniversalBaseEvent<Input, Result>, right: Lambda?) {
+    public static func += (left: BaseEvent<Input, Result>, right: Lambda?) {
         guard let right = right else {
             return
         }
@@ -74,9 +74,9 @@ open class UniversalBaseEvent<Input, Result>: UniversalEvent {
 
 // MARK: - Subclasses
 
-public class BaseEvent<Input>: UniversalBaseEvent<Input, Void> { }
+public class InputEvent<Input>: BaseEvent<Input, Void> { }
 
-public class BaseEmptyEvent: UniversalBaseEvent<Void, Void> {
+public class EmptyEvent: BaseEvent<Void, Void> {
 
     public func invoke() {
         super.invoke(with: ())

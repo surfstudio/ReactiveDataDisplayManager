@@ -18,8 +18,8 @@ open class BaseNonReusableCellGenerator<Cell: ConfigurableItem & ConstractableIt
     // MARK: - Public Properties
 
     public var isNeedDeselect = true
-    public var didSelectEvent = BaseEvent<Void>()
-    public var didDeselectEvent = BaseEvent<Void>()
+    public var didSelectEvent = EmptyEvent()
+    public var didDeselectEvent = EmptyEvent()
 
     // MARK: - Properties
 
