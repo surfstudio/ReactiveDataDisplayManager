@@ -19,6 +19,16 @@ open class AccessibilityItemWrapper: UIAccessibilityElement, AccessibilityItem {
     open var modifierType: AccessibilityModifierType = AccessibilityItemModifier.self
 
     required public init(
+        parentView: UIView
+    ) {
+        self.labelStrategy = .ignored
+        self.valueStrategy = .ignored
+        self.traitsStrategy = .ignored
+        self.actionsStrategy = .ignored
+        super.init(accessibilityContainer: parentView)
+    }
+
+    public init(
         parentView: UIView,
         labelStrategy: AccessibilityStringStrategy,
         valueStrategy: AccessibilityStringStrategy = .ignored,
