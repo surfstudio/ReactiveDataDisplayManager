@@ -218,12 +218,12 @@ private extension BaseCollectionManager {
 
     func insert(elements: [(generator: CollectionCellGenerator, sectionIndex: Int, generatorIndex: Int)]) {
 
-        elements.forEach { [weak self] element in
+        elements.forEach { element in
             element.generator.registerCell(in: view)
-            if self?.generators.count == element.sectionIndex {
-                self?.generators.append([element.generator])
+            if self.generators.count == element.sectionIndex {
+                self.generators.append([element.generator])
             } else {
-                self?.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
+                self.generators[element.sectionIndex].insert(element.generator, at: element.generatorIndex)
             }
         }
 
