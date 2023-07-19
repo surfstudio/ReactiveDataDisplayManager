@@ -442,6 +442,10 @@ private extension ManualTableManager {
                 at sectionIndex: Int,
                 with animation: TableRowAnimation) {
 
+        generators.forEach {
+            $0.registerCell(in: view)
+        }
+
         self.sections.insert(header, at: sectionIndex)
         self.generators.insert(generators, at: sectionIndex)
 
