@@ -26,6 +26,10 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
         return self
     }
 
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: UIView.noIntrinsicMetric, height: 44)
+    }
+
     // MARK: - CalculatableHeightItem
 
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {

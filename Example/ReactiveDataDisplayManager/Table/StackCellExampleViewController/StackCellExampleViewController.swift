@@ -49,7 +49,7 @@ private extension StackCellExampleViewController {
     func fillAdapter() {
 
         // Add section into adapter
-        adapter += Section(header: EmptyTableHeaderGenerator(), footer: EmptyTableFooterGenerator()) {
+        adapter += Section(header: TitleHeaderGenerator(model: "TableVStack"), footer: EmptyTableFooterGenerator()) {
             TableVStack {
                 TitleTableViewCell.buildView(with: "Текст 1")
                 TitleTableViewCell.buildView(with: "Текст 2")
@@ -62,6 +62,34 @@ private extension StackCellExampleViewController {
             .didSelectEvent {
                 print("VerticalTableStack did select event")
             }
+        }
+
+        // Note that using `UITableViewCell` or `UICollectionViewCell` inside stack is not recommended, but it possible
+        adapter += Section(header: TitleHeaderGenerator(model: "StackView based cells"), footer: EmptyTableFooterGenerator()) {
+            StackView.rddm.tableGenerator(with: .build { vStack in
+                vStack.background(.solid(.rddm))
+                vStack.style(.init(axis: .vertical,
+                                   spacing: 8,
+                                   alignment: .fill,
+                                   distribution: .fill))
+                vStack.children([
+                    TitleTableViewCell.rddm.baseStackGenerator(with: "Текст 1", and: .nib),
+                    TitleTableViewCell.rddm.baseStackGenerator(with: "Текст 2", and: .nib),
+                    StackView.rddm.baseStackGenerator(with: .build { hStack in
+                        hStack.background(.solid(.systemBlue))
+                        hStack.style(.init(axis: .horizontal,
+                                           spacing: 4,
+                                           alignment: .fill,
+                                           distribution: .fillEqually))
+
+                        hStack.children([
+                            TitleTableViewCell.rddm.baseStackGenerator(with: "Текст 4", and: .nib),
+                            TitleTableViewCell.rddm.baseStackGenerator(with: "Текст 5", and: .nib)
+                        ])
+                    }),
+                    TitleTableViewCell.rddm.baseStackGenerator(with: "Текст 3", and: .nib)
+                ])
+            }, and: .class)
         }
 
         // Tell adapter that we've changed generators

@@ -8,7 +8,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final public class StackView: UIView {
+public final class StackView: UIView {
 
     // MARK: - Private Properties
 
