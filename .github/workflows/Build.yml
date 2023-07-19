@@ -24,6 +24,7 @@ jobs:
     - name: Upload Coverage
       uses: codecov/codecov-action@v3.1.4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: build/reports/cobertura.xml
         flags: unittests
         name: codecov-unit
@@ -47,6 +48,7 @@ jobs:
     - name: Upload Coverage
       uses: codecov/codecov-action@v3.1.4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: build/reports/cobertura.xml
         flags: uitests
         name: codecov-ui
