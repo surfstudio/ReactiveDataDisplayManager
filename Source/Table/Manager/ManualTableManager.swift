@@ -349,6 +349,7 @@ private extension ManualTableManager {
 
         let indexPaths = generators.enumerated().map { IndexPath(row: $0.offset, section: sectionIndex) }
 
+        sections.registerAllIfNeeded(with: view, using: registrator)
         modifier?.insertSectionsAndRows(at: [sectionIndex: indexPaths], with: animation.value)
     }
 
