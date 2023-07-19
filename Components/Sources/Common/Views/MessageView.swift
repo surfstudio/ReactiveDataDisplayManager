@@ -11,10 +11,14 @@ import ReactiveDataDisplayManager
 /// Base view to implement label within cell
 public class MessageView: UIView {
 
+    // MARK: - Aliases
+
+    typealias TapGesture = UILongPressGestureRecognizer
+
     // MARK: - Constants
 
     private enum Constants {
-        static let tapGestureName = "TapGesture"
+        static let minimumPressDuration: TimeInterval = 0.001
     }
 
     // MARK: - Public initialization
@@ -22,9 +26,10 @@ public class MessageView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(_:)))
+        let tapGesture = TapGesture(target: self, action: #selector(handleTapGesture(_:)))
         tapGesture.cancelsTouchesInView = false
-        textView.addGestureRecognizer(tapGesture)
+        tapGesture.minimumPressDuration = Constants.minimumPressDuration
+        addGestureRecognizer(tapGesture)
     }
 
     required init?(coder: NSCoder) {
@@ -36,7 +41,7 @@ public class MessageView: UIView {
     private var textView = UITextView(frame: .zero)
     private var dataDetection: DataDetection?
     private var tapHandler: TapHandler?
-    private var pressStateAction: ((UITapGestureRecognizer.State) -> Void)?
+    private var pressStateAction: ((TapGesture.State) -> Void)?
 
 }
 
@@ -294,12 +299,11 @@ private extension MessageView {
         dataDetectionHandler(data)
     }
 
-    @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
-        guard let tapAction = tapHandler?.tapAction else {
+    @objc func handleTapGesture(_ gesture: TapGesture) {
+        guard tapHandler?.tapAction != nil else {
             return
         }
         pressStateAction?(gesture.state)
-        tapAction()
     }
 
     func setIsSelectablePropertyIfNeeded(for model: Model) {
@@ -310,12 +314,15 @@ private extension MessageView {
         }
     }
 
-    func handleTapGesture(_ state: UITapGestureRecognizer.State, with model: Model) {
+    func handleTapGesture(_ state: TapGesture.State, with model: Model) {
         switch state {
         case .began:
             setPressState(for: model)
-        case .ended, .cancelled:
+        case .cancelled, .failed:
             setInitialState(for: model)
+        case .ended:
+            setInitialState(for: model)
+            tapHandler?.tapAction?()
         default:
             break
         }
