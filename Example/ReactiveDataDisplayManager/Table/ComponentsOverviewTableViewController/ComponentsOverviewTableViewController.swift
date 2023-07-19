@@ -111,11 +111,6 @@ final class ComponentsOverviewTableViewController: UIViewController {
                 topController.present(alertController, animated: true, completion: nil)
             }
         }
-        property.tapHandler(TapHandler(id: "Handling tap on message",
-                                       textStyle: .init(color: .white.withAlphaComponent(0.5),
-                                                        font: .systemFont(ofSize: 16, weight: .regular)),
-                                       backgroundStyle: .solid(backgorundColor?.withAlphaComponent(0.5)),
-                                       tapAction: tapAction))
 
     }
 
@@ -131,14 +126,12 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                          ],
                                                          borderWidth: 1,
                                                          borderColor: UIColor.black.cgColor)
-    let dataDetectionHandler: DataDetection.DataDetectionHandler = { urlString in
-        if let url = URL(string: urlString) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
+    let dataDetectionHandler: DataDetectionStyle.Handler = { url in
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
-    private lazy var dataDetection = DataDetection(id: "Highlighting links and open them by tap",
+    private lazy var dataDetection = DataDetectionStyle(id: "Basic handling of links using UIApplication",
                                                    linkTextAttributes: [.foregroundColor: UIColor.blue],
-                                                   dataDetectionHandler: dataDetectionHandler,
+                                                   handler: dataDetectionHandler,
                                                    dataDetectorTypes: [.link])
     private lazy var recievedMessageModel: MessageView.Model = .build { property in
         property.border(recievedMessageBorderStyle)

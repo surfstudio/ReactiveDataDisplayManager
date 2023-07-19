@@ -11,37 +11,10 @@ import ReactiveDataDisplayManager
 /// Base view to implement label within cell
 public class MessageView: UIView {
 
-    // MARK: - Aliases
-
-    typealias TapGesture = UILongPressGestureRecognizer
-
-    // MARK: - Constants
-
-    private enum Constants {
-        static let minimumPressDuration: TimeInterval = 0.001
-    }
-
-    // MARK: - Public initialization
-
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        let tapGesture = TapGesture(target: self, action: #selector(handleTapGesture(_:)))
-        tapGesture.cancelsTouchesInView = false
-        tapGesture.minimumPressDuration = Constants.minimumPressDuration
-        addGestureRecognizer(tapGesture)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     // MARK: - Private properties
 
     private var textView = UITextView(frame: .zero)
-    private var dataDetection: DataDetection?
-    private var tapHandler: TapHandler?
-    private var pressStateAction: ((TapGesture.State) -> Void)?
+    private var dataDetectionHandler: DataDetectionStyle.Handler?
 
 }
 
@@ -132,18 +105,10 @@ extension MessageView: ConfigurableItem {
                 })
             }
 
-            public static func dataDetection(_ value: DataDetection) -> Property {
+            public static func dataDetection(_ value: DataDetectionStyle) -> Property {
                 .init(closure: { model in
                     var model = model
                     model.set(dataDetection: value)
-                    return model
-                })
-            }
-
-            public static func tapHandler(_ value: TapHandler?) -> Property {
-                .init(closure: { model in
-                    var model = model
-                    model.set(tapHandler: value)
                     return model
                 })
             }
@@ -168,8 +133,7 @@ extension MessageView: ConfigurableItem {
         private(set) public var alignment: Alignment = .all(.zero)
         private(set) public var internalEdgeInsets: UIEdgeInsets = .zero
         private(set) public var borderStyle: BorderStyle?
-        private(set) public var dataDetection: DataDetection?
-        private(set) public var tapHandler: TapHandler?
+        private(set) public var dataDetection: DataDetectionStyle?
         private(set) public var selectable: Bool = false
 
         // MARK: - Mutation
@@ -206,12 +170,8 @@ extension MessageView: ConfigurableItem {
             self.borderStyle = border
         }
 
-        mutating func set(dataDetection: DataDetection) {
+        mutating func set(dataDetection: DataDetectionStyle) {
             self.dataDetection = dataDetection
-        }
-
-        mutating func set(tapHandler: TapHandler?) {
-            self.tapHandler = tapHandler
         }
 
         mutating func set(selectable: Bool) {
@@ -266,12 +226,7 @@ private extension MessageView {
         textView.dataDetectorTypes = model.dataDetection?.dataDetectorTypes ?? []
         textView.linkTextAttributes = model.dataDetection?.linkTextAttributes
         textView.delegate = self
-        dataDetection = model.dataDetection
-
-        self.tapHandler = model.tapHandler
-        pressStateAction = { [weak self] state in
-            self?.handleTapGesture(state, with: model)
-        }
+        dataDetectionHandler = model.dataDetection?.handler
     }
 
     func applyBackground(style: BackgroundStyle) {
@@ -291,53 +246,16 @@ private extension MessageView {
         layer.maskedCorners = borderStyle.maskedCorners
     }
 
-    func handleDataDetection(_ data: String) {
-        guard let dataDetectionHandler = dataDetection?.dataDetectionHandler else {
-            return
-        }
-
-        dataDetectionHandler(data)
-    }
-
-    @objc func handleTapGesture(_ gesture: TapGesture) {
-        guard tapHandler?.tapAction != nil else {
-            return
-        }
-        pressStateAction?(gesture.state)
+    func handleDataDetection(_ data: URL) {
+        dataDetectionHandler?(data)
     }
 
     func setIsSelectablePropertyIfNeeded(for model: Model) {
-        if model.dataDetection != nil || model.tapHandler != nil {
+        if model.dataDetection != nil {
             textView.isSelectable = true
         } else {
             textView.isSelectable = model.selectable
         }
-    }
-
-    func handleTapGesture(_ state: TapGesture.State, with model: Model) {
-        switch state {
-        case .began:
-            setPressState(for: model)
-        case .cancelled, .failed:
-            setInitialState(for: model)
-        case .ended:
-            setInitialState(for: model)
-            tapHandler?.tapAction?()
-        default:
-            break
-        }
-    }
-
-    func setPressState(for model: Model) {
-        textView.textColor = model.tapHandler?.textStyle?.color ?? model.textStyle.color
-        textView.font = model.tapHandler?.textStyle?.font ?? model.textStyle.font
-        applyBackground(style: model.tapHandler?.backgroundStyle ?? model.backgroundStyle)
-    }
-
-    func setInitialState(for model: Model) {
-        textView.textColor = model.textStyle.color
-        textView.font = model.textStyle.font
-        applyBackground(style: model.backgroundStyle)
     }
 
 }
@@ -347,7 +265,7 @@ private extension MessageView {
 extension MessageView: UITextViewDelegate {
 
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        handleDataDetection(URL.absoluteString)
+        handleDataDetection(URL)
         return false
     }
 
