@@ -22,8 +22,9 @@ jobs:
     - name: Prepare Report
       run: make prepare_report
     - name: Upload Coverage
-      uses: codecov/codecov-action@v3.1.0
+      uses: codecov/codecov-action@v3.1.4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: build/reports/cobertura.xml
         flags: unittests
         name: codecov-unit
@@ -45,8 +46,9 @@ jobs:
     - name: Prepare Report
       run: make prepare_example_report
     - name: Upload Coverage
-      uses: codecov/codecov-action@v3.1.0
+      uses: codecov/codecov-action@v3.1.4
       with:
+        token: ${{ secrets.CODECOV_TOKEN }}
         files: build/reports/cobertura.xml
         flags: uitests
         name: codecov-ui
