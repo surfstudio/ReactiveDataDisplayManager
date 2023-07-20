@@ -14,6 +14,7 @@ public class MessageView: UIView {
     // MARK: - Private properties
 
     private var textView = UITextView(frame: .zero)
+    private var dataDetectionHandler: DataDetectionStyle.Handler?
 
 }
 
@@ -103,6 +104,23 @@ extension MessageView: ConfigurableItem {
                     return model
                 })
             }
+
+            public static func dataDetection(_ value: DataDetectionStyle) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(dataDetection: value)
+                    return model
+                })
+            }
+            
+            /// To set it to **false**, dataDetection and tapHandler must be nil
+            public static func selectable(_ selectable: Bool) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(selectable: selectable)
+                    return model
+                })
+            }
         }
 
         // MARK: - Public properties
@@ -115,6 +133,8 @@ extension MessageView: ConfigurableItem {
         private(set) public var alignment: Alignment = .all(.zero)
         private(set) public var internalEdgeInsets: UIEdgeInsets = .zero
         private(set) public var borderStyle: BorderStyle?
+        private(set) public var dataDetection: DataDetectionStyle?
+        private(set) public var selectable: Bool = false
 
         // MARK: - Mutation
 
@@ -150,6 +170,14 @@ extension MessageView: ConfigurableItem {
             self.borderStyle = border
         }
 
+        mutating func set(dataDetection: DataDetectionStyle) {
+            self.dataDetection = dataDetection
+        }
+
+        mutating func set(selectable: Bool) {
+            self.selectable = selectable
+        }
+
         // MARK: - Builder
 
         public static func build(@EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
@@ -163,9 +191,10 @@ extension MessageView: ConfigurableItem {
     // MARK: - Methods
 
     public func configure(with model: Model) {
-
         textView.backgroundColor = .clear
         textView.isEditable = false
+        setIsSelectablePropertyIfNeeded(for: model)
+        textView.isUserInteractionEnabled = true
         textView.isScrollEnabled = false
         configureTextView(textView, with: model)
         textView.textColor = model.textStyle.color
@@ -193,6 +222,11 @@ private extension MessageView {
         case .attributedString(let attributedString):
             textView.attributedText = attributedString
         }
+
+        textView.dataDetectorTypes = model.dataDetection?.dataDetectorTypes ?? []
+        textView.linkTextAttributes = model.dataDetection?.linkTextAttributes
+        textView.delegate = self
+        dataDetectionHandler = model.dataDetection?.handler
     }
 
     func applyBackground(style: BackgroundStyle) {
@@ -210,6 +244,29 @@ private extension MessageView {
         layer.borderColor = borderStyle.borderColor
         layer.borderWidth = borderStyle.borderWidth
         layer.maskedCorners = borderStyle.maskedCorners
+    }
+
+    func handleDataDetection(_ data: URL) {
+        dataDetectionHandler?(data)
+    }
+
+    func setIsSelectablePropertyIfNeeded(for model: Model) {
+        if model.dataDetection != nil {
+            textView.isSelectable = true
+        } else {
+            textView.isSelectable = model.selectable
+        }
+    }
+
+}
+
+// MARK: - UITextViewDelegate
+
+extension MessageView: UITextViewDelegate {
+
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        handleDataDetection(URL)
+        return false
     }
 
 }
