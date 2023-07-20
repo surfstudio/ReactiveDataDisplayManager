@@ -16,7 +16,7 @@ open class FoldableCellGenerator<Cell: UITableViewCell & ConfigurableItem & Fold
     open var animation: TableFoldablePlugin.AnimationGroup = (.left, .top)
 
     /// Event on changed `isExpanded` state
-    open var didFoldEvent = InputEvent<Bool>()
+    open var didFoldEvent = Event<Bool>()
 
     /// Folded/unfolded state
     open var isExpanded = false

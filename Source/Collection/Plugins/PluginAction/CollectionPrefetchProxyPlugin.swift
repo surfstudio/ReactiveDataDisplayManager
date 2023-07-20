@@ -13,8 +13,8 @@ public class CollectionPrefetchProxyPlugin: BaseCollectionPlugin<PrefetchEvent> 
 
     // MARK: - Properties
 
-    public var prefetchEvent = InputEvent<[IndexPath]>()
-    public var cancelPrefetchingEvent = InputEvent<[IndexPath]>()
+    public var prefetchEvent = Event<[IndexPath]>()
+    public var cancelPrefetchingEvent = Event<[IndexPath]>()
 
     // MARK: - BaseCollectionPlugin
 

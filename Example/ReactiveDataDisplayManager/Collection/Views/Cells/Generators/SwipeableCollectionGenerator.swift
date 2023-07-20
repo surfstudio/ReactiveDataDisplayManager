@@ -12,7 +12,7 @@ final class SwipeableCollectionGenerator: BaseCollectionCellGenerator<TitleColle
 
     // MARK: - SwipeableItem
 
-    var didSwipeEvent = InputEvent<String>()
+    var didSwipeEvent = Event<String>()
     var actionTypes = [String]()
 
 }

@@ -34,7 +34,7 @@ public struct PluginCollection<Plugin: PluginAction> {
     ///
     /// - parameter event: event of  view, delegate or dataSource
     /// - parameter manager: instance of `DataDisplayManager`
-    func process(event: Plugin.Event, with manager: Plugin.Manager?) {
+    func process(event: Plugin.EventType, with manager: Plugin.Manager?) {
         plugins.forEach {
             $0.process(event: event, with: manager)
         }

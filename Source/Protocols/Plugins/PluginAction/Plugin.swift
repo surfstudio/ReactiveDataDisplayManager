@@ -10,7 +10,7 @@
 ///
 /// **For example**: add support of SelectableItem without overriding whole adapter
 public protocol PluginAction {
-    associatedtype Event
+    associatedtype EventType
     associatedtype Manager: DataDisplayManager
 
     /// Plugin name, must match child class name
@@ -25,7 +25,7 @@ public protocol PluginAction {
     ///
     /// - parameter event: event of  view, delegate or dataSource
     /// - parameter manager: instance of `DataDisplayManager`
-    func process(event: Event, with manager: Manager?)
+    func process(event: EventType, with manager: Manager?)
 }
 
 extension PluginAction {

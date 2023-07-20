@@ -21,7 +21,7 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem {
 
     // MARK: - ExpandableItem Properties
 
-    public var onHeightChanged: InputEvent<CGFloat?> = .init()
+    public var onHeightChanged: Event<CGFloat?> = .init()
     public var animatedExpandable = true
 
     // MARK: - @IBActions

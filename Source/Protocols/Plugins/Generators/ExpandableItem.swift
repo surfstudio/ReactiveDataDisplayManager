@@ -11,6 +11,6 @@ import UIKit
 public protocol ExpandableItem: AnyObject {
 
     /// Called when the height of the cell changes
-    var onHeightChanged: InputEvent<CGFloat?> { get }
+    var onHeightChanged: Event<CGFloat?> { get }
     var animatedExpandable: Bool { get set }
 }

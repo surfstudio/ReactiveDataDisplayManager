@@ -20,7 +20,7 @@ public protocol FoldableItem: AnyObject {
     var animation: TableFoldablePlugin.AnimationGroup { get }
 
     /// Invokes when cell `didSelect`
-    var didFoldEvent: InputEvent<Bool> { get }
+    var didFoldEvent: Event<Bool> { get }
 
     /// `true` if cell where expanded, `false` if cell where collapsed
     var isExpanded: Bool { get set }

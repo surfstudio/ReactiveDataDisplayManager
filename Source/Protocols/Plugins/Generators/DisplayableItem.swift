@@ -19,6 +19,6 @@ public protocol DisplayableItem: AnyObject {
 
     /// Invokes when cell did end displaying. (Replacement for didEndDisplayEvent:; makes cell management easier.)
     /// To be clear, it is just a workaround.
-    var didEndDisplayCellEvent: InputEvent<UITableViewCell>? { get }
+    var didEndDisplayCellEvent: Event<UITableViewCell>? { get }
 
 }

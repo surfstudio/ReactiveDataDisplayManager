@@ -92,11 +92,11 @@ class CollectionCellGeneratorMock: CollectionCellGenerator {
 
 }
 class CollectionFoldableItemMock: CollectionFoldableItem {
-    var didFoldEvent: BaseEvent<Bool> {
+    var didFoldEvent: Event<Bool> {
         get { return underlyingDidFoldEvent }
         set(value) { underlyingDidFoldEvent = value }
     }
-    var underlyingDidFoldEvent: BaseEvent<Bool>!
+    var underlyingDidFoldEvent: Event<Bool>!
     var isExpanded: Bool {
         get { return underlyingIsExpanded }
         set(value) { underlyingIsExpanded = value }

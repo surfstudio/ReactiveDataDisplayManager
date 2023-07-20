@@ -14,7 +14,7 @@ final class GravityFoldingHeaderGenerator: GravityTableCellGenerator, FoldableIt
 
     // MARK: - FoldableItem
 
-    var didFoldEvent = BaseEvent<Bool>()
+    var didFoldEvent = Event<Bool>()
     var isExpanded = true
     var childGenerators = [TableCellGenerator]()
 

@@ -8,8 +8,8 @@
 
 import UIKit
 
-/// Event with input, but without output data.
-public protocol Event {
+/// Protocol for events to wrap closure with many listeners in one object.
+public protocol EventProtocol {
 
     associatedtype Input
     associatedtype Result
@@ -32,7 +32,7 @@ public protocol Event {
 
 // MARK: - Universal Base Event
 
-open class BaseEvent<Input, Result>: Event {
+open class BaseEvent<Input, Result>: EventProtocol {
 
     public typealias Lambda = (Input) -> Result
 
@@ -74,7 +74,7 @@ open class BaseEvent<Input, Result>: Event {
 
 // MARK: - Subclasses
 
-public class InputEvent<Input>: BaseEvent<Input, Void> { }
+public class Event<Input>: BaseEvent<Input, Void> { }
 
 public class EmptyEvent: BaseEvent<Void, Void> {
 
