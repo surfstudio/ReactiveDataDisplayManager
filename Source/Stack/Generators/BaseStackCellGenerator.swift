@@ -1,5 +1,5 @@
 //
-//  BaseStackCellGenerator.swift
+//  BaseViewGenerator.swift
 //  Pods
 //
 //  Created by Никита Коробейников on 06.09.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-open class BaseStackCellGenerator<View: ConfigurableItem>: StackCellGenerator, ViewBuilder {
+open class BaseViewGenerator<View: ConfigurableItem>: StackCellGenerator, ViewBuilder {
 
     public let model: View.Model
 
@@ -35,7 +35,7 @@ open class BaseStackCellGenerator<View: ConfigurableItem>: StackCellGenerator, V
 
 // MARK: - Private
 
-private extension BaseStackCellGenerator {
+private extension BaseViewGenerator {
 
     func createView() -> ViewType {
         switch registerType {

@@ -109,6 +109,12 @@ extension StackView: ConfigurableItem {
                 editor.edit(model)
             })
         }
+
+        public static func copy(of original: Model, @EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
+            return content(Property.self).reduce(original, { model, editor in
+                editor.edit(model)
+            })
+        }
     }
 
     // MARK: - Methods

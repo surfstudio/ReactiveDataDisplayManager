@@ -66,62 +66,58 @@ private extension StackCellExampleViewController {
 
         // Note that using `UITableViewCell` or `UICollectionViewCell` inside stack is not recommended, but it possible
         adapter += Section(header: TitleHeaderGenerator(model: "StackView based cells"), footer: EmptyTableFooterGenerator()) {
-            StackView.rddm.tableGenerator(with: .build { vStack in
+            Stack(model: .build { vStack in
                 vStack.background(.solid(.rddm))
                 vStack.style(.init(axis: .vertical,
                                    spacing: 8,
                                    alignment: .fill,
                                    distribution: .fill))
-                vStack.children([
-                    TitleTableViewCell.rddm.baseStackGenerator(with: "1", and: .nib),
-                    TitleTableViewCell.rddm.baseStackGenerator(with: "2", and: .nib),
-                    StackView.rddm.baseStackGenerator(with: .build { hStack in
-                        hStack.background(.solid(.systemBlue))
-                        hStack.style(.init(axis: .horizontal,
-                                           spacing: 4,
-                                           alignment: .fill,
-                                           distribution: .fillEqually))
+            }) {
+                TitleTableViewCell.rddm.viewGenerator(with: "1", and: .nib)
+                TitleTableViewCell.rddm.viewGenerator(with: "2", and: .nib)
+                StackView.rddm.viewGenerator(with: .build { hStack in
+                    hStack.background(.solid(.systemBlue))
+                    hStack.style(.init(axis: .horizontal,
+                                       spacing: 4,
+                                       alignment: .fill,
+                                       distribution: .fillEqually))
 
-                        hStack.children([
-                            TitleTableViewCell.rddm.baseStackGenerator(with: "4", and: .nib),
-                            TitleTableViewCell.rddm.baseStackGenerator(with: "5", and: .nib)
-                        ])
-                    }),
-                    TitleTableViewCell.rddm.baseStackGenerator(with: "3", and: .nib)
-                ])
-            }, and: .class)
+                    hStack.children([
+                        TitleTableViewCell.rddm.viewGenerator(with: "4", and: .nib),
+                        TitleTableViewCell.rddm.viewGenerator(with: "5", and: .nib)
+                    ])
+                })
+                TitleTableViewCell.rddm.viewGenerator(with: "3", and: .nib)
+            }
             LabelView.rddm.tableGenerator(with: .build { label in
                 label.textAlignment(.center)
                 label.text(.string("Wrapped LabelView"))
                 label.style(.init(color: .systemBlue, font: .systemFont(ofSize: 16)))
             }, and: .class)
             TitleTableViewCell.rddm.baseGenerator(with: "Cell outside from stack", and: .nib)
-            StackView.rddm.tableGenerator(with: .build { hStack in
+            Stack(model: .build { hStack in
                 hStack.background(.solid(.systemGreen))
                 hStack.style(.init(axis: .horizontal,
                                    spacing: 0,
                                    alignment: .fill,
                                    distribution: .fillEqually))
-                hStack.children([
-                    TitleTableViewCell.rddm.baseStackGenerator(with: "6", and: .nib),
-                    StackView.rddm.baseStackGenerator(with: .build { vStack in
-                        vStack.background(.solid(.systemPink))
-                        vStack.style(.init(axis: .vertical,
-                                           spacing: 20,
-                                           alignment: .fill,
-                                           distribution: .fillEqually))
-                        vStack.children([
-                            TitleTableViewCell.rddm.baseStackGenerator(with: "6", and: .nib),
-                            TitleTableViewCell.rddm.baseStackGenerator(with: "7", and: .nib),
-                            TitleTableViewCell.rddm.baseStackGenerator(with: "8", and: .nib),
-                            TitleTableViewCell.rddm.baseStackGenerator(with: "9", and: .nib)
-                        ])
-                    },
-                                                      and: .class)
-                ])
-
-            },
-                                          and: .class)
+            }) {
+                TitleTableViewCell.rddm.viewGenerator(with: "6", and: .nib)
+                StackView.rddm.viewGenerator(with: .build { vStack in
+                    vStack.background(.solid(.systemPink))
+                    vStack.style(.init(axis: .vertical,
+                                       spacing: 20,
+                                       alignment: .fill,
+                                       distribution: .fillEqually))
+                    vStack.children([
+                        TitleTableViewCell.rddm.viewGenerator(with: "6", and: .nib),
+                        TitleTableViewCell.rddm.viewGenerator(with: "7", and: .nib),
+                        TitleTableViewCell.rddm.viewGenerator(with: "8", and: .nib),
+                        TitleTableViewCell.rddm.viewGenerator(with: "9", and: .nib)
+                    ])
+                },
+                                                  and: .class)
+            }
         }
 
         // Tell adapter that we've changed generators
