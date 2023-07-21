@@ -14,7 +14,7 @@ final class AlphabeticalTableViewController: UIViewController {
     // MARK: - Constants
 
     private enum Constants {
-        static let alphabets = ["A", "B", "C", "D"]
+        static let alphabets = ["AAA", "BBB", "CCC", "DDD"]
         static let models = [String](repeating: "Cell", count: 5)
     }
 
@@ -27,13 +27,14 @@ final class AlphabeticalTableViewController: UIViewController {
     private let sectionTitleWrapper = TableSectionTitleWrapper()
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(featurePlugin: .sectionTitleDisplayable(titleWrapper: sectionTitleWrapper))
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with alphabetize sections"
+        title = "alphabetize sections"
         fillAdapter()
     }
 

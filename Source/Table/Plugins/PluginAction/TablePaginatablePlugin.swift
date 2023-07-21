@@ -159,7 +159,7 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
 
         switch event {
-        case .willDisplayCell(let indexPath):
+        case .willDisplayCell(let indexPath, _):
             guard let sections = manager?.sections, !isErrorWasReceived else {
                 return
             }

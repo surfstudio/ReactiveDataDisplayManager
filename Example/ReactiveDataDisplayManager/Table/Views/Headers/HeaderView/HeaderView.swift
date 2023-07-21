@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
 extension UIView {
 
@@ -19,17 +20,31 @@ extension UIView {
 
 }
 
-final class HeaderView: UIView {
+final class HeaderView: UIView, AccessibilityItem, CalculatableHeightItem {
+
+    // MARK: - CalculatableHeightItem
+
+    static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
+        let verticalInsets: CGFloat = 9
+        let titleHeight = model.getHeight(withConstrainedWidth: width,
+                                          font: .preferredFont(forTextStyle: .headline))
+        return verticalInsets + titleHeight
+    }
 
     // MARK: - IBOutlet
 
     @IBOutlet private weak var titleLabel: UILabel!
 
+    // MARK: - AccessibilityItem
+
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
+
     // MARK: - Internal Methods
 
     func configure(with title: String) {
         titleLabel.text = title
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        titleLabel.font = .preferredFont(forTextStyle: .headline)
     }
 
 }

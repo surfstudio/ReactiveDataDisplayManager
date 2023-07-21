@@ -46,6 +46,7 @@ final class DiffableCollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(dataSource: { DiffableCollectionDataSource(provider: $0) })
+        .add(plugin: .accessibility())
         .build()
 
     private var generators: [DiffableGenerator] = []
@@ -84,6 +85,7 @@ private extension DiffableCollectionViewController {
     func setupSearch() {
         let searchBar = UISearchBar()
         searchBar.delegate = self
+        searchBar.searchTextField.accessibilityLabel = "Search field"
         navigationItem.titleView = searchBar
     }
 

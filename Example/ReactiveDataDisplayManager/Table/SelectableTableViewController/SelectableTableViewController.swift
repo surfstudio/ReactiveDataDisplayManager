@@ -26,13 +26,14 @@ final class SelectableTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with selectable cells"
+        title = "selectable cells"
         tableView.accessibilityIdentifier = "Table_with_selectable_cells"
         fillAdapter()
         updateBarButtonItem(with: Constants.standart)

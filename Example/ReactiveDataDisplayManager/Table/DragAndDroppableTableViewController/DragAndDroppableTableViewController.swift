@@ -32,13 +32,14 @@ final class DragAndDroppableTableViewController: UIViewController {
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(featurePlugin: .dragAndDroppable(draggableParameters: draggableParameters))
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "table with drag'n'drop cell"
+        title = "drag'n'drop cell"
 
         tableView.accessibilityIdentifier = "Table_with_drag_n_drop_cell"
         tableView.dragInteractionEnabled = true

@@ -34,6 +34,7 @@ final class CollectionDefaultBehavoirController: UIViewController {
             by: CompositeFocusableStrategy(strategys: makeFocusableStrategy())
         ))
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

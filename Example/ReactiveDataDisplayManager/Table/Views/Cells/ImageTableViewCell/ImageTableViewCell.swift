@@ -29,7 +29,7 @@ final class ImageTableViewCell: UITableViewCell {
     // MARK: - Constants
 
     private enum Constants {
-        static let titleFont: UIFont = .systemFont(ofSize: 15, weight: .semibold)
+        static let titleFont: UIFont = .preferredFont(forTextStyle: .subheadline)
         static let cornerRadius: CGFloat = 10
     }
 
@@ -44,6 +44,15 @@ final class ImageTableViewCell: UITableViewCell {
         super.awakeFromNib()
         setupInitialState()
     }
+
+}
+
+// MARK: - AccessibilityItem
+
+extension ImageTableViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .merge(iconView, titleLabel) }
 
 }
 

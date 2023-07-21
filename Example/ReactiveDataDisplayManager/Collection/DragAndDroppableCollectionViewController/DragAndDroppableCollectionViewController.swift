@@ -37,13 +37,14 @@ final class DragAndDroppableCollectionViewController: UIViewController {
         .add(featurePlugin: .dragAndDroppable(by: .current, draggableParameters: draggableParameters, positionChanged: {
             print($0.id ?? "")
         }))
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Collection with drag'n'drop items"
+        title = "drag'n'drop items"
 
         configureLayoutFlow()
         collectionView.accessibilityIdentifier = "Collection_with_drag_n_drop_items"
@@ -86,7 +87,8 @@ private extension DragAndDroppableCollectionViewController {
         var generators = [TitleCollectionGenerator]()
 
         for index in range {
-            let generator = TitleCollectionGenerator(model: "Cell: \(index)")
+            let generator = TitleCollectionGenerator(model: "Cell: \(index)",
+                                                     referencedWidth: 128)
             generators.append(generator)
         }
 

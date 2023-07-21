@@ -44,7 +44,8 @@ extension InnerStackCellGenerator: ViewBuilder {
         view.distribution = model.distribution
         view.spacing = model.spacing
 
-        let adapter = view.rddm.baseBuilder.build()
+        let adapter = view.rddm.baseBuilder
+            .build()
 
         adapter += childGenerators
 

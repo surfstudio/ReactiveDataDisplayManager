@@ -93,27 +93,27 @@ extension BaseTableDelegate {
 extension BaseTableDelegate {
 
     open func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        tablePlugins.process(event: .willDisplayCell(indexPath), with: manager)
+        tablePlugins.process(event: .willDisplayCell(indexPath, cell), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        tablePlugins.process(event: .willDisplayHeader(section), with: manager)
+        tablePlugins.process(event: .willDisplayHeader(section, view), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
-        tablePlugins.process(event: .didEndDisplayHeader(section), with: manager)
+        tablePlugins.process(event: .didEndDisplayHeader(section, view), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        tablePlugins.process(event: .didEndDisplayCell(indexPath), with: manager)
+        tablePlugins.process(event: .didEndDisplayCell(indexPath, cell), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        tablePlugins.process(event: .willDisplayFooter(section), with: manager)
+        tablePlugins.process(event: .willDisplayFooter(section, view), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, didEndDisplayingFooterView view: UIView, forSection section: Int) {
-        tablePlugins.process(event: .didEndDisplayFooter(section), with: manager)
+        tablePlugins.process(event: .didEndDisplayFooter(section, view), with: manager)
     }
 
     open func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
@@ -152,6 +152,20 @@ extension BaseTableDelegate {
             return 0.1
         }
         return manager.sections[section].header.height(tableView, forSection: section)
+    }
+
+    open func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let manager = manager, section <= manager.sections.count - 1 else {
+            return nil
+        }
+        return manager.sections[section].footer.generate()
+    }
+
+    open func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let manager = manager, section <= manager.sections.count - 1 else {
+            return 0.1
+        }
+        return manager.sections[section].footer.height(tableView, forSection: section)
     }
 
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -258,6 +272,23 @@ extension BaseTableDelegate: TableDragAndDropDelegate {
 
 }
 #endif
+
+// MARK: AccessibilityItemDelegate
+
+extension BaseTableDelegate: AccessibilityItemDelegate {
+
+    public func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind) {
+        switch kind {
+        case .header(let section):
+            tablePlugins.process(event: .invalidatedHeaderAccessibility(section, item), with: manager)
+        case .cell(let indexPath):
+            tablePlugins.process(event: .invalidatedCellAccessibility(indexPath, item), with: manager)
+        case .footer(let section):
+            tablePlugins.process(event: .invalidatedFooterAccessibility(section, item), with: manager)
+        }
+    }
+
+}
 
 // MARK: UIScrollViewDelegate
 

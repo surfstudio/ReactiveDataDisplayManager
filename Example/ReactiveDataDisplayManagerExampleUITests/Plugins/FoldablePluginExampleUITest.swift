@@ -13,9 +13,9 @@ final class FoldablePluginExampleUITest: BaseUITestCase {
         let tableId = "FoldableTableViewController"
 
         setTab("Table")
-        tapTableElement("Table with foldable cell")
+        tapTableElement("foldable cell")
 
-        let foldable = getCell(for: .table, collectionId: tableId, cellId: "Foldable cell1")
+        let foldable = getCell(for: .table, collectionId: tableId, cellId: "Foldable cell 1")
         foldable.tap()
 
         XCTAssertTrue(getCell(for: .table, collectionId: tableId, cellId: "First subcell").exists)
@@ -28,7 +28,7 @@ final class FoldablePluginExampleUITest: BaseUITestCase {
 
     func testCollectionMultipleTap_whenCellTapped_thenCellSelected_thenCellDeselected() throws {
         setTab("Collection")
-        tapTableElement("Foldable collection")
+        tapTableElement("foldable collection")
 
         let collection = app.collectionViews.firstMatch
 

@@ -72,7 +72,7 @@ public class TableTopPaginatablePlugin: BaseTablePlugin<TableEvent> {
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
 
         switch event {
-        case .willDisplayCell(let indexPath):
+        case .willDisplayCell(let indexPath, _):
             let firstCellIndexPath = IndexPath(row: 0, section: 0)
             if indexPath == firstCellIndexPath && canIterate && !isLoading && !isErrorWasReceived {
                 output?.loadPrevPage(with: self)

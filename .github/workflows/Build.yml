@@ -10,7 +10,7 @@ on:
 jobs:
 
   build_iOS:
-    runs-on: macOS-12
+    runs-on: macOS-13
     steps:
     - uses: actions/checkout@v1
     - name: Generate projects
@@ -19,6 +19,8 @@ jobs:
       run: make build_lib_iOS
     - name: Run tests
       run: make test_lib_iOS
+    - name: Check Log
+      run: make check_test_log
     - name: Prepare Report
       run: make prepare_report
     - name: Upload Coverage
@@ -34,7 +36,7 @@ jobs:
 
 
   build_Example:
-    runs-on: macOS-12
+    runs-on: macOS-13
     steps:
     - uses: actions/checkout@v1
     - name: Generate projects
@@ -43,6 +45,8 @@ jobs:
       run: make build_example_iOS
     - name: Run tests
       run: make test_example_iOS
+    - name: Check Log
+      run: make check_test_log
     - name: Prepare Report
       run: make prepare_example_report
     - name: Upload Coverage
@@ -57,7 +61,7 @@ jobs:
         verbose: true
 
   build_tvOS:
-    runs-on: macOS-12
+    runs-on: macOS-13
     steps:
     - uses: actions/checkout@v1
     - name: Generate projects

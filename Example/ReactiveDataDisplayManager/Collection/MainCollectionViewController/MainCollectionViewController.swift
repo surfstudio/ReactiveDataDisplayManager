@@ -49,16 +49,16 @@ final class MainCollectionViewController: UIViewController {
             ("Horizontal image collection", .imageHorizontalCollection),
             ("Sizable collection", .sizableCollection),
             ("Foldable collection", .foldableCollection),
-            ("Collection with item index titles", .itemTitleCollection),
-            ("Collection with diffableDataSource", .diffableCollection),
-            ("Collection with pagination", .paginatableCollection),
-            ("Collection with two direction pagination", .twoDirectionPaginatableCollection),
-            ("Collection with compositional layout", .compositionalCollection),
-            ("Collection with DifferenceKit", .differenceCollection),
-            ("List Appearances with swipeable items", .swipeableListAppearances),
-            ("Collection with movable items", .movableCollection),
-            ("Collection with drag and drop item", .dragAndDroppableCollection),
-            ("Collection with stack cell", .stackCellCollectionViewController),
+            ("item index titles", .itemTitleCollection),
+            ("diffableDataSource", .diffableCollection),
+            ("pagination", .paginatableCollection),
+			("back/forward pagination", .twoDirectionPaginatableCollection),
+            ("compositional layout", .compositionalCollection),
+            ("DifferenceKit", .differenceCollection),
+            ("list with swipes", .swipeableListAppearances),
+            ("movable items", .movableCollection),
+            ("drag and drop item", .dragAndDroppableCollection),
+			("stack cell inside", .stackCellCollectionViewController),
             ("Carousel collection view layout", .carouselCollection),
             ("Aligned collection layout", .alignedCollection),
             ("Dynamic height ViewController", .dynamicHeightViewController)
@@ -73,6 +73,7 @@ final class MainCollectionViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

@@ -18,12 +18,18 @@ public enum TableEvent {
     case didUnhighlight(IndexPath)
     case willBeginEditing(IndexPath)
     case didEndEditing(IndexPath?)
-    case willDisplayCell(IndexPath)
-    case didEndDisplayCell(IndexPath)
-    case willDisplayHeader(Int)
-    case didEndDisplayHeader(Int)
-    case willDisplayFooter(Int)
-    case didEndDisplayFooter(Int)
+    case willDisplayCell(IndexPath, UITableViewCell)
+    case didEndDisplayCell(IndexPath, UITableViewCell)
+    case willDisplayHeader(Int, UIView)
+    case didEndDisplayHeader(Int, UIView)
+    case willDisplayFooter(Int, UIView)
+    case didEndDisplayFooter(Int, UIView)
     case didUpdateFocus(context: UITableViewFocusUpdateContext, coordinator: UIFocusAnimationCoordinator)
     case move(from: IndexPath, to: IndexPath)
+
+    // MARK: - Accessibility Events
+
+    case invalidatedCellAccessibility(IndexPath, AccessibilityItem)
+    case invalidatedHeaderAccessibility(Int, AccessibilityItem)
+    case invalidatedFooterAccessibility(Int, AccessibilityItem)
 }

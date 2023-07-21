@@ -91,11 +91,11 @@ extension BaseCollectionDelegate {
     }
 
     open func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        collectionPlugins.process(event: .willDisplayCell(indexPath), with: manager)
+        collectionPlugins.process(event: .willDisplayCell(indexPath, cell), with: manager)
     }
 
     open func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        collectionPlugins.process(event: .didEndDisplayCell(indexPath), with: manager)
+        collectionPlugins.process(event: .didEndDisplayCell(indexPath, cell), with: manager)
     }
 
     open func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
@@ -120,13 +120,13 @@ extension BaseCollectionDelegate {
     open func collectionView(_ collectionView: UICollectionView,
                              willDisplaySupplementaryView view: UICollectionReusableView,
                              forElementKind elementKind: String, at indexPath: IndexPath) {
-        collectionPlugins.process(event: .willDisplaySupplementaryView(indexPath), with: manager)
+        collectionPlugins.process(event: .willDisplaySupplementaryView(indexPath, view, elementKind), with: manager)
     }
 
     open func collectionView(_ collectionView: UICollectionView,
                              didEndDisplayingSupplementaryView view: UICollectionReusableView,
                              forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        collectionPlugins.process(event: .didEndDisplayingSupplementaryView(indexPath), with: manager)
+        collectionPlugins.process(event: .didEndDisplayingSupplementaryView(indexPath, view, elementKind), with: manager)
     }
 
 }
@@ -197,6 +197,23 @@ extension BaseCollectionDelegate {
 
 }
 #endif
+
+// MARK: AccessibilityItemDelegate
+
+extension BaseCollectionDelegate: AccessibilityItemDelegate {
+
+    public func didInvalidateAccessibility(for item: AccessibilityItem, of kind: AccessibilityItemKind) {
+        switch kind {
+        case .header(let section):
+            collectionPlugins.process(event: .invalidatedHeaderAccessibility(section, item), with: manager)
+        case .cell(let indexPath):
+            collectionPlugins.process(event: .invalidatedCellAccessibility(indexPath, item), with: manager)
+        case .footer(let section):
+            collectionPlugins.process(event: .invalidatedFooterAccessibility(section, item), with: manager)
+        }
+    }
+
+}
 
 // MARK: UIScrollViewDelegate
 

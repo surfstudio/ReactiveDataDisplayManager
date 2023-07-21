@@ -52,7 +52,7 @@ open class BaseCollectionManager: CollectionSectionsProvider, DataDisplayManager
     public func addCellGenerators(_ generators: [CollectionCellGenerator], after: CollectionCellGenerator) {
 
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
-            fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
+            return FatalErrorUtil.fatalError("Error adding cell generator. You tried to add generators after unexisted generator")
         }
 
         self.sections[sectionIndex].generators.insert(contentsOf: generators, at: generatorIndex + 1)

@@ -17,16 +17,16 @@ public class TableDisplayablePlugin: BaseTablePlugin<TableEvent> {
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
-        case .willDisplayCell(let indexPath):
+        case .willDisplayCell(let indexPath, _):
             let displayable = getDisplayableFlowCell(from: manager, at: indexPath)
             displayable?.willDisplayEvent.invoke()
-        case .didEndDisplayCell(let indexPath):
+        case .didEndDisplayCell(let indexPath, _):
             let displayable = getDisplayableFlowCell(from: manager, at: indexPath)
             displayable?.didEndDisplayEvent.invoke()
-        case .willDisplayHeader(let section):
+        case .willDisplayHeader(let section, _):
             let displayable = getDisplayableFlowHeader(from: manager, at: section)
             displayable?.willDisplayEvent.invoke()
-        case .didEndDisplayHeader(let section):
+        case .didEndDisplayHeader(let section, _):
             let displayable = getDisplayableFlowHeader(from: manager, at: section)
             displayable?.didEndDisplayEvent.invoke()
         default:

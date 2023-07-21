@@ -7,17 +7,32 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
-final class HeaderCollectionListView: UICollectionReusableView {
+final class HeaderCollectionListView: UICollectionReusableView, AccessibilityItem, CalculatableHeightItem {
+
+    // MARK: - CalculatableHeightItem
+
+    static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
+        let verticalInsets: CGFloat = 0
+        let titleHeight = model.getHeight(withConstrainedWidth: width,
+                                          font: .preferredFont(forTextStyle: .headline))
+        return verticalInsets + titleHeight
+    }
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
 
+    // MARK: - AccessibilityItem
+
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
+
     // MARK: - Internal Methods
 
-    func fill(title: String) {
-        self.titleLabel.text = title
+    func configure(with model: String) {
+        titleLabel.text = model
     }
 
 }

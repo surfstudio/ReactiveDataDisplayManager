@@ -26,13 +26,14 @@ final class DifferenceTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.manualBuilder
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "table with DifferenceKit"
+        title = "DifferenceKit"
         fillAdapter()
     }
 

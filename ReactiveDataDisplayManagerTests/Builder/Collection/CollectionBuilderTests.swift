@@ -28,7 +28,7 @@ class CollectionBuilderTests: XCTestCase {
 
         // then
         XCTAssertTrue(builder.scrollPlugins.plugins.isEmpty)
-        XCTAssertTrue(builder.collectionPlugins.plugins.isEmpty)
+        XCTAssertTrue(builder.collectionPlugins.plugins.filter { !($0 is CollectionAccessibilityPlugin) }.isEmpty)
         XCTAssertTrue(builder.prefetchPlugins.plugins.isEmpty)
         XCTAssertNil(builder.movablePlugin)
 

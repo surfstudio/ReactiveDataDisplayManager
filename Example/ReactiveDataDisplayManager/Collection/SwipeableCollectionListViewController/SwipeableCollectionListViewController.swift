@@ -28,6 +28,7 @@ final class SwipeableCollectionListViewController: UIViewController {
     private lazy var plugin = CollectionSwipeActionsConfigurationPlugin(swipeProvider: swipeProvider)
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(featurePlugin: plugin)
+        .add(plugin: .accessibility())
         .build()
 
     private var appearance = UICollectionLayoutListConfiguration.Appearance.plain
@@ -36,7 +37,7 @@ final class SwipeableCollectionListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "List Appearances with swipeable items"
+        title = "list with swipes"
         fillAdapter()
 
         configureLayoutFlow(with: appearance)

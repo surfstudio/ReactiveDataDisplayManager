@@ -30,7 +30,9 @@ extension TitleCollectionHeaderGenerator: CollectionHeaderGenerator {
     }
 
     func size(_ collectionView: UICollectionView, forSection section: Int) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: 100.0)
+        let width = collectionView.bounds.width
+        let height = TitleCollectionReusableView.getHeight(forWidth: width, with: title)
+        return CGSize(width: width, height: height)
     }
 
 }
@@ -40,7 +42,7 @@ extension TitleCollectionHeaderGenerator: CollectionHeaderGenerator {
 extension TitleCollectionHeaderGenerator: ViewBuilder {
 
     func build(view: TitleCollectionReusableView) {
-        view.fill(title: title)
+        view.configure(with: title)
     }
 
 }

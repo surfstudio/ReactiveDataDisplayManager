@@ -26,7 +26,8 @@ final class LandingStackViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = stackView.rddm.baseBuilder.build()
+    private lazy var adapter = stackView.rddm.baseBuilder
+        .build()
 
     // MARK: - UIViewController
 
@@ -55,12 +56,13 @@ private extension LandingStackViewController {
         let sampleText = "LongText".localized
 
         // Create generators
+
         let title = TextStackCellGenerator(model: .init(title: "Title text",
-                                                       alignment: .left,
-                                                       font: .systemFont(ofSize: 43, weight: .bold)))
+                                                        alignment: .left,
+                                                        font: .preferredFont(forTextStyle: .largeTitle)))
         let description = TextStackCellGenerator(model: .init(title: sampleText,
                                                               alignment: .left,
-                                                              font: .systemFont(ofSize: 30)))
+                                                              font: .preferredFont(forTextStyle: .title1)))
 
         let mainButton = ButtonStackCellGenerator(model: .init(title: "Main",
                                                                titleColor: .black,

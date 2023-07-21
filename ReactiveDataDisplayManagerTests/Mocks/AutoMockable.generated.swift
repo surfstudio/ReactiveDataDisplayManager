@@ -103,6 +103,26 @@ class CollectionFoldableItemMock: CollectionFoldableItem {
     }
     var underlyingIsExpanded: Bool!
     var childGenerators: [CollectionCellGenerator] = []
+    var labelStrategy: AccessibilityStringStrategy {
+        get { return underlyingLabelStrategy }
+        set(value) { underlyingLabelStrategy = value }
+    }
+    var underlyingLabelStrategy: AccessibilityStringStrategy!
+    var valueStrategy: AccessibilityStringStrategy {
+        get { return underlyingValueStrategy }
+        set(value) { underlyingValueStrategy = value }
+    }
+    var underlyingValueStrategy: AccessibilityStringStrategy!
+    var traitsStrategy: AccessibilityTraitsStrategy {
+        get { return underlyingTraitsStrategy }
+        set(value) { underlyingTraitsStrategy = value }
+    }
+    var underlyingTraitsStrategy: AccessibilityTraitsStrategy!
+    var isAccessibilityIgnored: Bool {
+        get { return underlyingIsAccessibilityIgnored }
+        set(value) { underlyingIsAccessibilityIgnored = value }
+    }
+    var underlyingIsAccessibilityIgnored: Bool!
 
 }
 class CollectionFooterGeneratorMock: CollectionFooterGenerator {
@@ -190,6 +210,26 @@ class CollectionHeaderGeneratorMock: CollectionHeaderGenerator {
         set(value) { underlyingDescriptor = value }
     }
     var underlyingDescriptor: String!
+    var labelStrategy: AccessibilityStringStrategy {
+        get { return underlyingLabelStrategy }
+        set(value) { underlyingLabelStrategy = value }
+    }
+    var underlyingLabelStrategy: AccessibilityStringStrategy!
+    var valueStrategy: AccessibilityStringStrategy {
+        get { return underlyingValueStrategy }
+        set(value) { underlyingValueStrategy = value }
+    }
+    var underlyingValueStrategy: AccessibilityStringStrategy!
+    var traitsStrategy: AccessibilityTraitsStrategy {
+        get { return underlyingTraitsStrategy }
+        set(value) { underlyingTraitsStrategy = value }
+    }
+    var underlyingTraitsStrategy: AccessibilityTraitsStrategy!
+    var isAccessibilityIgnored: Bool {
+        get { return underlyingIsAccessibilityIgnored }
+        set(value) { underlyingIsAccessibilityIgnored = value }
+    }
+    var underlyingIsAccessibilityIgnored: Bool!
 
     //MARK: - generate
 

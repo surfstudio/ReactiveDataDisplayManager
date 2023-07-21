@@ -9,28 +9,33 @@
 import UIKit
 
 // sourcery: AutoMockable
-open class TableHeaderGenerator: ViewGenerator, IdOwner, TableHeaderRegisterableItem {
+open class TableHeaderGenerator: ViewGenerator, IdOwner, TableHeaderRegisterableItem, AccessibilityStrategyProvider {
 
     public let id: AnyHashable
 
-    public init() {
-        self.id = UUID().uuidString
-    }
+    open var labelStrategy: AccessibilityStringStrategy = .ignored
+    open var traitsStrategy: AccessibilityTraitsStrategy = .just(.header)
 
-    public init(uniqueId: AnyHashable) {
-        self.id = uniqueId
-    }
+    public init() { 
+		self.id = UUID().uuidString
+	}
+
+	public init(uniqueId: AnyHashable) {
+		self.id = uniqueId
+	}
 
     open func generate() -> UIView {
         preconditionFailure("\(#function) must be overriden in child")
     }
 
-    /// Registeration needed only for `UITableViewHeaderFooterView` descendant classes
-    open func registerHeader(in tableView: UITableView) { }
-
     open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
         preconditionFailure("\(#function) must be overriden in child")
     }
+
+
+    /// Registeration needed only for `UITableViewHeaderFooterView` descendant classes
+    open func registerHeader(in tableView: UITableView) { }
+
 }
 
 open class TableFooterGenerator: ViewGenerator, TableFooterRegisterableItem {
@@ -96,7 +101,7 @@ public extension TableCellGenerator {
 
 // sourcery: AutoMockable
 /// Protocol that incapsulated type of Header
-public protocol CollectionHeaderGenerator: AnyObject, CollectionHeaderRegisterableItem {
+public protocol CollectionHeaderGenerator: AnyObject, CollectionHeaderRegisterableItem, AccessibilityStrategyProvider {
 
     var identifier: UICollectionReusableView.Type { get }
 
@@ -115,6 +120,9 @@ public extension CollectionHeaderGenerator {
     static func bundle() -> Bundle? {
         return nil
     }
+
+    var labelStrategy: AccessibilityStringStrategy { .ignored }
+    var traitsStrategy: AccessibilityTraitsStrategy { .just(.header) }
 
 }
 
@@ -279,6 +287,14 @@ public extension StackCellGenerator where Self: ViewBuilder {
 public typealias GravityTableCellGenerator = TableCellGenerator & GravityItem
 
 open class GravityTableHeaderGenerator: TableHeaderGenerator, GravityItem {
+    open var heaviness = 0
+
+    open func getHeaviness() -> Int {
+        preconditionFailure("\(#function) must be overriden in child")
+    }
+}
+
+open class GravityTableFooterGenerator: TableFooterGenerator, GravityItem {
     open var heaviness = 0
 
     open func getHeaviness() -> Int {

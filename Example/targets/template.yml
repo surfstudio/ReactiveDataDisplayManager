@@ -5,7 +5,8 @@ targetTemplates:
     BaseApp:
       type: application
       scheme:
-          configVariants: all
+        configVariants: all
+        gatherCoverageData: true
       dependencies:
         - sdk: UIKit.framework
       sources:

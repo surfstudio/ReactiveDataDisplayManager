@@ -19,13 +19,14 @@ final class GravityTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.gravityBuilder
         .add(plugin: .foldable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Gravity table with foldable cell"
+        title = "Gravity foldable cell"
         fillAdapter()
     }
 

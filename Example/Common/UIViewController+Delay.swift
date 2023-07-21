@@ -11,7 +11,15 @@ import UIKit
 extension UIResponder {
 
     func delay(_ deadline: DispatchTime, completion: @escaping () -> Void) {
-        DispatchQueue.global(qos: .utility).asyncAfter(deadline: deadline) {
+        let normalizedDeadline: DispatchTime
+
+        if CommandLine.arguments.contains("-decreaseDelay") {
+            // to improve UI tests performance we are using one delay for any values
+            normalizedDeadline = .now() + .nanoseconds(100)
+        } else {
+            normalizedDeadline = deadline
+        }
+        DispatchQueue.global(qos: .utility).asyncAfter(deadline: normalizedDeadline) {
             DispatchQueue.main.async {
                 completion()
             }

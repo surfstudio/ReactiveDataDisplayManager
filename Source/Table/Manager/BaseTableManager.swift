@@ -16,6 +16,7 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
     public typealias CollectionType = UITableView
     public typealias GeneratorType = TableCellGenerator
     public typealias HeaderGeneratorType = TableHeaderGenerator
+    public typealias FooterGeneratorType = TableFooterGenerator
     public typealias TableModifier = Modifier<CollectionType, CollectionType.RowAnimation>
 
     // MARK: - Public properties
@@ -47,7 +48,7 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
 
     open func addCellGenerators(_ generators: [TableCellGenerator], after: TableCellGenerator) {
         guard let (sectionIndex, generatorIndex) = findGenerator(after) else {
-            fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
+            return FatalErrorUtil.fatalError("Error adding TableCellGenerator generator. You tried to add generators after unexisted generator")
         }
         self.sections[sectionIndex].generators.insert(contentsOf: generators, at: generatorIndex + 1)
     }
@@ -92,18 +93,64 @@ open class BaseTableManager: TableSectionsProvider, DataDisplayManager {
                              needRemoveEmptySection: needRemoveEmptySection)
     }
 
-    // MARK: - Deprecated
+    // MARK: - HeaderDataDisplayManager
 
-    @available(*, deprecated, message: "Please use method with a new `TableRowAnimation` parameter")
-    open func remove(_ generator: TableCellGenerator,
-                     with animation: UITableView.RowAnimation?,
-                     needScrollAt scrollPosition: UITableView.ScrollPosition?,
-                     needRemoveEmptySection: Bool) {
-        guard let index = findGenerator(generator) else { return }
-        self.removeGenerator(with: index,
-                             with: animation.map { .animated($0) } ?? .notAnimated,
-                             needScrollAt: scrollPosition,
-                             needRemoveEmptySection: needRemoveEmptySection)
+     open func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
+         addHeader(header: generator)
+    }
+
+    open func addCellGenerator(_ generator: GeneratorType, toHeader header: TableHeaderGenerator) {
+        addCellGenerators([generator], toHeader: header)
+    }
+
+    open func addCellGenerators(_ generators: [GeneratorType], toHeader header: TableHeaderGenerator) {
+        guard let index = self.sections.firstIndex(where: { $0.header === header }) else { return }
+        addTableGenerators(with: generators, choice: .byIndex(index))
+    }
+
+    open func removeAllGenerators(from header: TableHeaderGenerator) {
+        guard
+            let index = self.sections.firstIndex(where: { $0.header === header }),
+            self.sections.count > index
+        else {
+            return
+        }
+
+        self.sections.remove(at: index)
+    }
+
+    open func clearHeaderGenerators() {
+        self.sections.removeAll()
+    }
+
+    // MARK: - FooterDataDisplayManager
+
+    open func addSectionFooterGenerator(_ generator: TableFooterGenerator) {
+        addFooter(footer: generator)
+    }
+
+    open func addCellGenerator(_ generator: GeneratorType, toFooter footer: TableFooterGenerator) {
+        addCellGenerators([generator], toFooter: footer)
+    }
+
+    open func addCellGenerators(_ generators: [GeneratorType], toFooter footer: TableFooterGenerator) {
+        guard let index = self.sections.firstIndex(where: { $0.footer === footer }) else { return }
+        addTableGenerators(with: generators, choice: .byIndex(index))
+    }
+
+    open func removeAllGenerators(from footer: TableFooterGenerator) {
+        guard
+            let index = self.sections.firstIndex(where: { $0.footer === footer }),
+            self.sections.count > index
+        else {
+            return
+        }
+
+        self.sections.remove(at: index)
+    }
+
+    open func clearFooterGenerators() {
+        self.sections.removeAll()
     }
 
 }
