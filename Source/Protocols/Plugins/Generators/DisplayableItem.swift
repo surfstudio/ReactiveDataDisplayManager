@@ -12,13 +12,13 @@ import UIKit
 public protocol DisplayableItem: AnyObject {
 
     /// Invokes when cell will displaying.
-    var willDisplayEvent: BaseEvent<Void> { get }
+    var willDisplayEvent: EmptyEvent { get }
 
     /// Invokes when cell did end displaying.
-    var didEndDisplayEvent: BaseEvent<Void> { get }
+    var didEndDisplayEvent: EmptyEvent { get }
 
     /// Invokes when cell did end displaying. (Replacement for didEndDisplayEvent:; makes cell management easier.)
     /// To be clear, it is just a workaround.
-    var didEndDisplayCellEvent: BaseEvent<UITableViewCell>? { get }
+    var didEndDisplayCellEvent: Event<UITableViewCell>? { get }
 
 }

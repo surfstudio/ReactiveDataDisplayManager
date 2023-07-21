@@ -19,16 +19,16 @@ public class TableDisplayablePlugin: BaseTablePlugin<TableEvent> {
         switch event {
         case .willDisplayCell(let indexPath):
             let displayable = getDisplayableFlowCell(from: manager, at: indexPath)
-            displayable?.willDisplayEvent.invoke(with: ())
+            displayable?.willDisplayEvent.invoke()
         case .didEndDisplayCell(let indexPath):
             let displayable = getDisplayableFlowCell(from: manager, at: indexPath)
-            displayable?.didEndDisplayEvent.invoke(with: ())
+            displayable?.didEndDisplayEvent.invoke()
         case .willDisplayHeader(let section):
             let displayable = getDisplayableFlowHeader(from: manager, at: section)
-            displayable?.willDisplayEvent.invoke(with: ())
+            displayable?.willDisplayEvent.invoke()
         case .didEndDisplayHeader(let section):
             let displayable = getDisplayableFlowHeader(from: manager, at: section)
-            displayable?.didEndDisplayEvent.invoke(with: ())
+            displayable?.didEndDisplayEvent.invoke()
         default:
             break
         }

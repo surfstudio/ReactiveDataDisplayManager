@@ -8,29 +8,12 @@
 
 import UIKit
 
-/// Event without input and output data.
-public protocol EmptyEvent {
-
-    typealias Lambda = () -> Void
-
-    /// Add new listner.
-    ///
-    /// - Parameter id: a unique id for listner
-    /// - Parameter listner: New listner.
-    func addListner(with id: String, _ listner: @escaping Lambda)
-
-    /// Notify all listners.
-    func invoke()
-
-    /// Remove all listners.
-    func clear()
-}
-
-/// Event with input, but without output data.
-public protocol Event {
+/// Protocol for events to wrap closure with many listeners in one object.
+public protocol EventProtocol {
 
     associatedtype Input
-    typealias Lambda = (Input) -> Void
+    associatedtype Result
+    typealias Lambda = (Input) -> (Result)
 
     /// Add new listner.
     ///
@@ -41,37 +24,26 @@ public protocol Event {
     /// Notify all listners.
     ///
     /// - Parameter input: Data for listners.
-    func invoke(with input: Input)
+    func invoke(with input: Input) -> [Result]
 
     /// Remove all listners.
     func clear()
 }
 
-/// Event with input and output values, but it can have only one listner.
-public protocol ValueEvent {
+// MARK: - Universal Base Event
 
-    associatedtype Input
-    associatedtype Return
+open class BaseEvent<Input, Result>: EventProtocol {
 
-    typealias Lambda = (Input) -> (Return)
+    public typealias Lambda = (Input) -> Result
 
-    var valueListner: Lambda? { get set }
-}
-
-public class BaseEvent<Input>: Event {
-
-    // MARK: - Other
-
-    public typealias Lambda = (Input) -> Void
-
-    public static func += (left: BaseEvent<Input>, right: Lambda?) {
+    public static func += (left: BaseEvent<Input, Result>, right: Lambda?) {
         guard let right = right else {
             return
         }
         left.addListner(right)
     }
 
-    private var listners: [String: Lambda]
+    var listners: [String: Lambda]
 
     public var isEmpty: Bool {
         return listners.isEmpty
@@ -89,48 +61,25 @@ public class BaseEvent<Input>: Event {
         self.listners[id] = listner
     }
 
-    public func invoke(with input: Input) {
-        self.listners.values.forEach({ $0(input) })
+    @discardableResult
+    public func invoke(with input: Input) -> [Result] {
+        self.listners.values.map { $0(input) }
     }
 
     public func clear() {
         self.listners.removeAll()
     }
+
 }
 
-public class BaseValueEvent<Input, Return>: ValueEvent {
+// MARK: - Subclasses
 
-    public typealias Lambda = (Input) -> (Return)
+public class Event<Input>: BaseEvent<Input, Void> { }
 
-    public var valueListner: Lambda?
-}
-
-public class BaseEmptyEvent: EmptyEvent {
-
-    public typealias Lambda = () -> Void
-
-    public static func += (left: BaseEmptyEvent, right: Lambda?) {
-        guard let right = right else {
-            return
-        }
-        left.addListner(right)
-    }
-
-    private var listners: [String: Lambda]
-
-    public init() {
-        self.listners = [:]
-    }
-
-    public func addListner(with id: String = UUID().uuidString, _ listner: @escaping Lambda) {
-        self.listners[id] = listner
-    }
+public class EmptyEvent: BaseEvent<Void, Void> {
 
     public func invoke() {
-        self.listners.values.forEach({ $0() })
+        super.invoke(with: ())
     }
 
-    public func clear() {
-        self.listners.removeAll()
-    }
 }

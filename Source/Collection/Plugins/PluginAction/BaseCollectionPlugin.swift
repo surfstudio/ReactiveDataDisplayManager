@@ -6,7 +6,7 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
-open class BaseCollectionPlugin<Event>: PluginAction {
+open class BaseCollectionPlugin<EventType>: PluginAction {
 
     public var pluginName: String {
         Self.pluginName
@@ -18,7 +18,7 @@ open class BaseCollectionPlugin<Event>: PluginAction {
         /// Most of plugins do not need any setup
     }
 
-    open func process(event: Event, with manager: BaseCollectionManager?) {
+    open func process(event: EventType, with manager: BaseCollectionManager?) {
         preconditionFailure("\(#function) must be overriden in child")
     }
 

@@ -13,7 +13,7 @@ open class StackTableCell: UITableViewCell, ConfigurableItem, ExpandableItem {
 
     // MARK: - ExpandableItem
 
-    public var onHeightChanged = ReactiveDataDisplayManager.BaseEvent<CGFloat?>()
+    public var onHeightChanged = Event<CGFloat?>()
     public var animatedExpandable = true
 
     // MARK: - Public methods

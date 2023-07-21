@@ -13,18 +13,18 @@ public class TableScrollViewDelegateProxyPlugin: BaseTablePlugin<ScrollEvent> {
 
     // MARK: - Properties
 
-    public var didScroll = BaseEvent<UITableView>()
-    public var willBeginDragging = BaseEvent<UITableView>()
-    public var willEndDragging = BaseEvent<(tableView: UITableView, velocity: CGPoint, targetContentOffset: CGPoint)>()
-    public var didEndDragging = BaseEvent<(tableView: UITableView, decelerate: Bool)>()
-    public var didScrollToTop = BaseEvent<UITableView>()
-    public var willBeginDecelerating = BaseEvent<UITableView>()
-    public var didEndDecelerating = BaseEvent<UITableView>()
-    public var willBeginZooming = BaseEvent<(tableView: UITableView, view: UIView?)>()
-    public var didEndZooming = BaseEvent<(tableView: UITableView, view: UIView?, scale: CGFloat)>()
-    public var didZoom = BaseEvent<UITableView>()
-    public var didEndScrollingAnimation = BaseEvent<UITableView>()
-    public var didChangeAdjustedContentInset = BaseEvent<UITableView>()
+    public var didScroll = Event<UITableView>()
+    public var willBeginDragging = Event<UITableView>()
+    public var willEndDragging = Event<(tableView: UITableView, velocity: CGPoint, targetContentOffset: CGPoint)>()
+    public var didEndDragging = Event<(tableView: UITableView, decelerate: Bool)>()
+    public var didScrollToTop = Event<UITableView>()
+    public var willBeginDecelerating = Event<UITableView>()
+    public var didEndDecelerating = Event<UITableView>()
+    public var willBeginZooming = Event<(tableView: UITableView, view: UIView?)>()
+    public var didEndZooming = Event<(tableView: UITableView, view: UIView?, scale: CGFloat)>()
+    public var didZoom = Event<UITableView>()
+    public var didEndScrollingAnimation = Event<UITableView>()
+    public var didChangeAdjustedContentInset = Event<UITableView>()
 
     // MARK: - BaseTablePlugin
 

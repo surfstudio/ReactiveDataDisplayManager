@@ -19,9 +19,9 @@ final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplay
 
     // MARK: - Events
 
-    var willDisplayEvent = BaseEvent<Void>()
-    var didEndDisplayEvent = BaseEvent<Void>()
-    var didEndDisplayCellEvent: BaseEvent<UITableViewCell>?
+    var willDisplayEvent = Event<Void>()
+    var didEndDisplayEvent = Event<Void>()
+    var didEndDisplayCellEvent: Event<UITableViewCell>?
 
     // MARK: - Properties
 

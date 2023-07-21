@@ -12,9 +12,9 @@ import UIKit
 public protocol SelectableItem: AnyObject {
 
     /// Invokes when user taps on the item. Requires .selectable plugin!!!
-    var didSelectEvent: BaseEvent<Void> { get }
+    var didSelectEvent: EmptyEvent { get }
     /// Called when the user takes their finger off the element. Requires .selectable plugin!!!
-    var didDeselectEvent: BaseEvent<Void> { get }
+    var didDeselectEvent: EmptyEvent { get }
 
     /// A Boolean value that determines whether to perform a cell deselect.
     ///

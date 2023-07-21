@@ -13,7 +13,7 @@ final class BaseEventTests: XCTestCase {
     func testWhenValueInvokesCorrectly() {
         // given
 
-        let event = BaseEvent<String>()
+        let event = Event<String>()
         var result = ""
 
         event.addListner { result = $0 }
@@ -30,7 +30,7 @@ final class BaseEventTests: XCTestCase {
     func testWhenNListnersThenNEvents() {
         // given
 
-        let event = BaseEvent<Int>()
+        let event = Event<Int>()
         let n = 100
         var eventHandled = 0
 
@@ -50,7 +50,7 @@ final class BaseEventTests: XCTestCase {
     func testWhenNListnersThenClear() {
         // given
 
-        let event = BaseEvent<Int>()
+        let event = Event<Int>()
         let n = 100
 
         for _ in 0..<n {
@@ -69,7 +69,7 @@ final class BaseEventTests: XCTestCase {
     func testWhenUniqueListnerThenReplaced() {
         // given
 
-        let event = BaseEvent<Int>()
+        let event = Event<Int>()
         let id = "uniqueId"
         var result = 0
 
@@ -93,7 +93,7 @@ final class BaseEventTests: XCTestCase {
     func testWhenNUniqueListnersThenReplaced() {
         // given
 
-        let event = BaseEvent<Int>()
+        let event = Event<Int>()
         let n = 100
         let ids = Array(repeating: 0, count: n).map { _ in UUID().uuidString }
 
@@ -111,7 +111,7 @@ final class BaseEventTests: XCTestCase {
     func testWhenClearThenNoEvents() {
         // given
 
-        let event = BaseEvent<Int>()
+        let event = Event<Int>()
         var result = false
 
         event.addListner { _ in result = true }

@@ -20,5 +20,5 @@ public protocol SwipeableItem {
     /// Invokes when action is selected
     ///
     /// Parameter: identifier of action
-    var didSwipeEvent: BaseEvent<String> { get }
+    var didSwipeEvent: Event<String> { get }
 }

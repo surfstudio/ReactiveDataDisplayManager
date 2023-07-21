@@ -19,7 +19,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
             guard let selectable = manager?.sections[indexPath.section].generators[indexPath.row] as? SelectableItem else {
                 return
             }
-            selectable.didSelectEvent.invoke(with: ())
+            selectable.didSelectEvent.invoke()
 
             if selectable.isNeedDeselect {
                 manager?.view?.deselectRow(at: indexPath, animated: true)
@@ -28,7 +28,7 @@ public class TableSelectablePlugin: BaseTablePlugin<TableEvent> {
             guard let selectable = manager?.sections[indexPath.section].generators[indexPath.row] as? SelectableItem else {
                 return
             }
-            selectable.didDeselectEvent.invoke(with: ())
+            selectable.didDeselectEvent.invoke()
         default:
             break
         }

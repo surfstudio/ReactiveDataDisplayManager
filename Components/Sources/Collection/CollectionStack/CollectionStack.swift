@@ -14,8 +14,8 @@ open class CollectionStack: UIView, ConfigurableItem, SelectableItem {
     // MARK: - Public properties
 
     public var isNeedDeselect = true
-    public var didSelectEvent = BaseEvent<Void>()
-    public var didDeselectEvent = BaseEvent<Void>()
+    public var didSelectEvent = EmptyEvent()
+    public var didDeselectEvent = EmptyEvent()
 
     public var views: [UIView] = []
 

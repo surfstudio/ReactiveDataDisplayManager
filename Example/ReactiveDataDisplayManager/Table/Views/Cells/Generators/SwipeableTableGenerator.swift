@@ -12,7 +12,7 @@ class SwipeableTableGenerator: BaseCellGenerator<TitleTableViewCell>, SwipeableI
 
     // MARK: - SwipeableItem
 
-    var didSwipeEvent = BaseEvent<String>()
+    var didSwipeEvent = Event<String>()
     var actionTypes = [String]()
 
 }
