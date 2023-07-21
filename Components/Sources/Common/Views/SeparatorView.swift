@@ -14,6 +14,7 @@ public class SeparatorView: UIView {
     // MARK: - Private properties
 
     private var heightConstraint: NSLayoutConstraint?
+    private var widthConstraint: NSLayoutConstraint?
 
     // MARK: - Initialization
 
@@ -34,12 +35,13 @@ public class SeparatorView: UIView {
 extension SeparatorView: ConfigurableItem {
 
     public struct Model: Equatable {
-        public let height: CGFloat
+
+        public let size: ViewSize
         public let color: UIColor?
         public var edgeInsets: UIEdgeInsets
 
-        public init(height: CGFloat, color: UIColor? = nil, edgeInsets: UIEdgeInsets = .zero) {
-            self.height = height
+        public init(size: ViewSize, color: UIColor? = nil, edgeInsets: UIEdgeInsets = .zero) {
+            self.size = size
             self.color = color
             self.edgeInsets = edgeInsets
         }
@@ -47,7 +49,17 @@ extension SeparatorView: ConfigurableItem {
 
     public func configure(with model: Model) {
         backgroundColor = model.color
-        heightConstraint?.constant = model.height
+        switch model.size {
+        case .height(let height):
+            heightConstraint?.constant = height
+            heightConstraint?.isActive = true
+            widthConstraint?.isActive = false
+
+        case .width(let width):
+            widthConstraint?.constant = width
+            widthConstraint?.isActive = true
+            heightConstraint?.isActive = false
+        }
 
         layoutIfNeeded()
     }
@@ -63,7 +75,7 @@ private extension SeparatorView {
         translatesAutoresizingMaskIntoConstraints = false
 
         heightConstraint = heightAnchor.constraint(equalToConstant: 0)
-        heightConstraint?.isActive = true
+        widthConstraint = widthAnchor.constraint(equalToConstant: 0)
     }
 
 }

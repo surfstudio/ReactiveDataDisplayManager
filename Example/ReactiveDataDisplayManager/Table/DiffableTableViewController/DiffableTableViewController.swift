@@ -111,7 +111,7 @@ private extension DiffableTableViewController {
                 generators: generators,
                 header: EmptyTableHeaderGenerator(uniqueId: Constants.sectionId.appending("header")),
                 footer: EmptyTableFooterGenerator(uniqueId: Constants.sectionId.appending("footer"))
-            ).decorate(with: .space(model: .init(height: 16, color: .rddm)),
+            ).decorate(with: .space(model: .init(size: .height(16), color: .rddm)),
                        at: .end,
                        and: .each)
             .erased()

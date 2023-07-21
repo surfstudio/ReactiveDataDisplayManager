@@ -57,7 +57,7 @@ final class TwoDirectionPaginatableCollectionViewController: UIViewController {
     private var currentTopPage = 0
     private var currentBottomPage = 0
 
-    private lazy var emptyCell = CollectionSpacerCell.rddm.baseGenerator(with: CollectionSpacerCell.Model(height: 0), and: .class)
+    private lazy var emptyCell = CollectionSpacerCell.rddm.baseGenerator(with: CollectionSpacerCell.Model(size: .height(0)), and: .class)
 
     // MARK: - UIViewController
 

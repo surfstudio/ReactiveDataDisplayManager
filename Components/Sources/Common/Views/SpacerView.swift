@@ -14,6 +14,7 @@ public class SpacerView: UIView {
     // MARK: - Properties
 
     private var heightConstraint: NSLayoutConstraint?
+    private var widthConstraint: NSLayoutConstraint?
 
     // MARK: - Initialization
 
@@ -34,18 +35,29 @@ public class SpacerView: UIView {
 extension SpacerView: ConfigurableItem {
 
     public struct Model: Equatable {
-        public let height: CGFloat
+
+        public let size: ViewSize
         public let color: UIColor?
 
-        public init(height: CGFloat, color: UIColor? = .clear) {
-            self.height = height
+        public init(size: ViewSize, color: UIColor? = nil) {
+            self.size = size
             self.color = color
         }
     }
 
     public func configure(with model: Model) {
         backgroundColor = model.color
-        heightConstraint?.constant = model.height
+        switch model.size {
+        case .height(let height):
+            heightConstraint?.constant = height
+            heightConstraint?.isActive = true
+            widthConstraint?.isActive = false
+
+        case .width(let width):
+            widthConstraint?.constant = width
+            widthConstraint?.isActive = true
+            heightConstraint?.isActive = false
+        }
         layoutIfNeeded()
     }
 
@@ -60,7 +72,7 @@ private extension SpacerView {
         translatesAutoresizingMaskIntoConstraints = false
 
         heightConstraint = heightAnchor.constraint(equalToConstant: 0)
-        heightConstraint?.isActive = true
+        widthConstraint = widthAnchor.constraint(equalToConstant: 0)
     }
 
 }
