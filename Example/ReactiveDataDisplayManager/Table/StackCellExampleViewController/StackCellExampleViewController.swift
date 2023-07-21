@@ -65,8 +65,7 @@ private extension StackCellExampleViewController {
         }
 
         // Note that using `UITableViewCell` or `UICollectionViewCell` inside stack is not recommended, but it possible
-        adapter += TableSection.create(contextType: TableFactory.self,
-                                       header: TitleHeaderGenerator(model: "StackView based cells"),
+        adapter += TableSection.create(header: TitleHeaderGenerator(model: "StackView based cells"),
                                        footer: EmptyTableFooterGenerator()) { it in
             it.stack(
                 model: .build { vStack in

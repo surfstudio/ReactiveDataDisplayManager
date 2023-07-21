@@ -21,4 +21,10 @@ public extension TableSection {
         self.init(generators: generators, header: header, footer: EmptyTableFooterGenerator())
     }
 
+    static func create(header: HeaderGeneratorType,
+                       footer: FooterGeneratorType,
+                       @GeneratorsBuilder<GeneratorType> generators: (TableContext.Type) -> [GeneratorType]) -> Self {
+        Self(generators: generators(TableContext.self), header: header, footer: footer)
+    }
+
 }

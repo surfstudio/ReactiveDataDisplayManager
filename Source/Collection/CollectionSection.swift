@@ -21,4 +21,10 @@ public extension CollectionSection {
         self.init(generators: generators, header: header, footer: EmptyCollectionFooterGenerator())
     }
 
+    static func create(header: HeaderGeneratorType,
+                       footer: FooterGeneratorType,
+                       @GeneratorsBuilder<GeneratorType> generators: (CollectionContext.Type) -> [GeneratorType]) -> Self {
+        Self(generators: generators(CollectionContext.self), header: header, footer: footer)
+    }
+
 }

@@ -40,10 +40,10 @@ public struct Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
     }
 
     /// Context based generic section for tables and collections with @resultBuilder support
-    public static func create<Context>(contextType: Context.Type,
-                                       header: HeaderGeneratorType,
-                                       footer: FooterGeneratorType,
-                                       @GeneratorsBuilder<GeneratorType> generators: (Context.Type) -> [GeneratorType]) -> Self {
+    static func create<Context>(contextType: Context.Type,
+                                header: HeaderGeneratorType,
+                                footer: FooterGeneratorType,
+                                @GeneratorsBuilder<GeneratorType> generators: (Context.Type) -> [GeneratorType]) -> Self {
         Self(generators: generators(Context.self), header: header, footer: footer)
     }
 
