@@ -15,6 +15,7 @@ public final class TableWrappedCell<View: ConfigurableItem>: UITableViewCell, Vi
 
     // MARK: - Properties
 
+    // TODO: - Add way to construct nested view from nib (like in BaseViewGenerator)
     public let nestedView: View = .init(frame: .zero)
 
     public var cachedInsets: UIEdgeInsets?
