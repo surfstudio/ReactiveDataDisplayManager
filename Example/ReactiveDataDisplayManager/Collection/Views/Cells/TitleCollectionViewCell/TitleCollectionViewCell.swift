@@ -17,9 +17,9 @@ final class TitleCollectionViewCell: UICollectionViewCell, AccessibilityInvalida
 
     // MARK: - AccessibilityInvalidatable
 
-    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
     var valueStrategy: AccessibilityStringStrategy = .just(nil)
-    lazy var traitsStrategy: AccessibilityTraitsStrategy = .from(object: titleLabel)
+    lazy var traitsStrategy: AccessibilityTraitsStrategy = .from(titleLabel)
     var shouldOverrideStateTraits: Bool { true }
 
     var accessibilityInvalidator: AccessibilityItemInvalidator?
@@ -54,7 +54,7 @@ extension TitleCollectionViewCell: HighlightableItem {
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .white.withAlphaComponent(0.5)
-        updateState(state: "Highlighted", isSelected: false)
+        updateState(state: "Highlighted", isSelected: true)
     }
 
     func applySelectedStyle() {

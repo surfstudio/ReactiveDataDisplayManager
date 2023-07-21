@@ -29,7 +29,7 @@ public enum TableEvent {
 
     // MARK: - Accessibility Events
 
-    case invalidatedCellAccessibility(IndexPath, UITableViewCell)
-    case invalidatedHeaderAccessibility(Int, UIView)
-    case invalidatedFooterAccessibility(Int, UIView)
+    case invalidatedCellAccessibility(IndexPath, AccessibilityItem)
+    case invalidatedHeaderAccessibility(Int, AccessibilityItem)
+    case invalidatedFooterAccessibility(Int, AccessibilityItem)
 }

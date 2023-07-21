@@ -40,7 +40,9 @@ final class DifferenceCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = collectionView.rddm.baseBuilder.build()
+    private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: .accessibility())
+        .build()
 
     private var generators: [DiffableCollectionCellGenerator] = []
 

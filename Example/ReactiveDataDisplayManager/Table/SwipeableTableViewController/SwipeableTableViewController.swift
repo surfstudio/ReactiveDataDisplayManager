@@ -26,6 +26,7 @@ final class SwipeableTableViewController: UIViewController {
     private let swipeActionProvider = SwipeActionProvider()
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(featurePlugin: .swipeActions(swipeProvider: swipeActionProvider))
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

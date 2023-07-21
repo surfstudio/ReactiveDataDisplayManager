@@ -28,8 +28,8 @@ class TitleWithIconTableViewCell: UITableViewCell, CalculatableHeightItem {
 
 extension TitleWithIconTableViewCell: AccessibilityItem {
 
-    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
-    var traitsStrategy: AccessibilityTraitsStrategy { .merge([iconImageView, titleLabel]) }
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .merge(iconImageView, titleLabel) }
 
 }
 

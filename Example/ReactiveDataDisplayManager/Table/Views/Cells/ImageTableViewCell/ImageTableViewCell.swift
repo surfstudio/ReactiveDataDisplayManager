@@ -51,8 +51,8 @@ final class ImageTableViewCell: UITableViewCell {
 
 extension ImageTableViewCell: AccessibilityItem {
 
-    var labelStrategy: AccessibilityStringStrategy { .from(object: titleLabel) }
-    var traitsStrategy: AccessibilityTraitsStrategy { .merge([iconView, titleLabel]) }
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .merge(iconView, titleLabel) }
 
 }
 

@@ -15,7 +15,8 @@ final class UnrollStackViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = stackView.rddm.baseBuilder.build()
+    private lazy var adapter = stackView.rddm.baseBuilder
+        .build()
 
     // MARK: - UIViewController
 

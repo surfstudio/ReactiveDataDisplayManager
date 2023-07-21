@@ -61,7 +61,7 @@ extension FoldableCollectionViewCell: ConfigurableItem {
 extension FoldableCollectionViewCell: AccessibilityItem {
 
     var labelStrategy: AccessibilityStringStrategy { .just("Expandable item") }
-    var traitsStrategy: AccessibilityTraitsStrategy { .just(.none) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .just(Optional.none) }
 
 }
 

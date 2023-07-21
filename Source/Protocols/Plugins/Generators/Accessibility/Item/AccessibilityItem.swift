@@ -8,7 +8,7 @@
 import UIKit
 
 /// Protocol for cells to adopt accesibility
-public protocol AccessibilityItem: UIView, AccessibilityStrategyProvider & AccessibilityActionsProvider {
+public protocol AccessibilityItem: UIResponder, AccessibilityStrategyProvider {
 
     typealias AccessibilityModifierType = AccessibilityModifier.Type
 
@@ -38,10 +38,10 @@ public extension AccessibilityItem {
         if CommandLine.arguments.contains("-rddm.XCUITestsCompatible") {
             return XCUITestsAccessibilityModifier.self
         } else {
-            return BaseAccessibilityModifier.self
+            return AccessibilityItemModifier.self
         }
         #else
-        return BaseAccessibilityModifier.self
+        return AccessibilityItemModifier.self
         #endif
     }
 
@@ -50,5 +50,16 @@ public extension AccessibilityItem {
     func accessibilityStrategyConflictResolver(itemStrategy: AccessibilityStringStrategy,
                                                generatorStrategy: AccessibilityStringStrategy) -> String? {
         return [generatorStrategy, itemStrategy].compactMap(\.value).joined(separator: " ")
+    }
+
+    /// Shortcut to modify self with default modifier
+    func modifySelf() {
+        self.modifierType.modify(item: self)
+    }
+
+    /// Shortcut to modify self with additional strategy
+    ///  - parameter additionalStrategy: additional strategy provider to apply (most probably generator)
+    func modifySelf(with additionalStrategy: AccessibilityStrategyProvider) {
+        self.modifierType.modify(item: self, generator: additionalStrategy)
     }
 }

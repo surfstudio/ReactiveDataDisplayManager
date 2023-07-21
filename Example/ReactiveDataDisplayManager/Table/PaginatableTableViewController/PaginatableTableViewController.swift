@@ -30,6 +30,7 @@ final class PaginatableTableViewController: UIViewController {
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: .paginatable(progressView: progressView,
                                   output: self))
+        .add(plugin: .accessibility())
         .build()
 
     private weak var paginatableInput: PaginatableInput?

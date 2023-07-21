@@ -143,7 +143,6 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
-        tablePlugins.add(.accessibility())
         animator = QueuedAnimator(baseAnimator: TableSafeAnimator(baseAnimator: animator,
                                                                   generatorsProvider: manager),
                                   debounceTime: emptyAnimatorDebounceTime)

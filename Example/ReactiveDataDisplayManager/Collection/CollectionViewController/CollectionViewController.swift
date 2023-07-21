@@ -26,6 +26,7 @@ class CollectionViewController: UIViewController {
         .set(delegate: FlowCollectionDelegate())
         .add(plugin: .selectable())
         .add(plugin: .highlightable())
+        .add(plugin: .accessibility())
         .build()
 
     private lazy var titles: [String] = ["One", "Two", "Three", "Four"]

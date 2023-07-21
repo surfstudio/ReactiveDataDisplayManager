@@ -19,6 +19,7 @@ final class GravityTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.gravityBuilder
         .add(plugin: .foldable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

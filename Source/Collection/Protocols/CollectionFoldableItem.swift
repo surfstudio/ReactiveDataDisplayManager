@@ -6,6 +6,8 @@
 //  Copyright © 2021 Александр Кравченков. All rights reserved.
 //
 
+import UIKit
+
 // sourcery: AutoMockable
 public protocol CollectionFoldableItem: AnyObject, AccessibilityStrategyProvider {
     var didFoldEvent: BaseEvent<Bool> { get }

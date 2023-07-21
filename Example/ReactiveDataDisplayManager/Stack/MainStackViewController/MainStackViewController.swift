@@ -36,6 +36,7 @@ final class MainStackViewController: UIViewController {
 
     private lazy var ddm = tableView.rddm.baseBuilder
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

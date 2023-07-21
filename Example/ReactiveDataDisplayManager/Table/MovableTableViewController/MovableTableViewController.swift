@@ -26,6 +26,7 @@ final class MovableTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(featurePlugin: .movable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

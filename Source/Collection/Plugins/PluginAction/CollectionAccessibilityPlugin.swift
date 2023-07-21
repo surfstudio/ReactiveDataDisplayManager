@@ -9,9 +9,17 @@ import UIKit
 
 final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent> {
 
+    let invalidatorCreationBlock: AccessibilityInvalidatorCreationBlock
+
+    init(invalidatorCreationBlock: @escaping AccessibilityInvalidatorCreationBlock) {
+        self.invalidatorCreationBlock = invalidatorCreationBlock
+    }
+
     override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
         switch event {
         case let .willDisplayCell(indexPath, cell):
+            guard let cell = cell as? AccessibilityItem else { return }
+
             processCollectionCell(indexPath, cell, with: manager)
             tryToSetInvalidator(for: cell, of: .cell(indexPath), with: manager)
 
@@ -19,6 +27,8 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
             processCollectionCell(indexPath, cell, with: manager)
 
         case let .willDisplaySupplementaryView(indexPath, view, kind):
+            guard let view = view as? AccessibilityItem else { return }
+
             switch kind {
             case UICollectionView.elementKindSectionHeader:
                 processCollectionHeader(indexPath.section, view, with: manager)
@@ -47,51 +57,51 @@ final class CollectionAccessibilityPlugin: BaseCollectionPlugin<CollectionEvent>
 
 private extension CollectionAccessibilityPlugin {
 
-    func tryToSetInvalidator(for view: UIView, of kind: AccessibilityItemKind, with manager: BaseCollectionManager?) {
-        guard let invalidatable = view as? AccessibilityInvalidatable,
+    func tryToSetInvalidator(for item: AccessibilityItem, of kind: AccessibilityItemKind, with manager: BaseCollectionManager?) {
+        guard let invalidatable = item as? AccessibilityInvalidatable,
                 let invalidateDelegate = manager?.delegate as? AccessibilityItemDelegate else {
             return
         }
-        invalidatable.setInvalidator(kind: kind, delegate: invalidateDelegate)
+        invalidatable.setInvalidator(invalidator: invalidatorCreationBlock(item, kind, invalidateDelegate))
     }
 
-    func processCollectionCell(_ indexPath: IndexPath, _ cell: UICollectionViewCell, with manager: BaseCollectionManager?) {
-        guard let accessibilityItem = cell as? AccessibilityItem else {
-            return
-        }
+    func processCollectionCell(_ indexPath: IndexPath, _ cell: AccessibilityItem, with manager: BaseCollectionManager?) {
         if let generator = manager?.generators[indexPath.section][indexPath.row] as? AccessibilityStrategyProvider {
-            accessibilityItem.modifierType.modify(item: accessibilityItem, generator: generator)
+            cell.modifySelf(with: generator)
         } else {
-            accessibilityItem.modifierType.modify(item: accessibilityItem)
+            cell.modifySelf()
         }
     }
 
-    func processCollectionHeader(_ section: Int, _ view: UICollectionReusableView, with manager: BaseCollectionManager?) {
-        guard let accessibilityItem = view as? AccessibilityItem else {
-            return
-        }
+    func processCollectionHeader(_ section: Int, _ view: AccessibilityItem, with manager: BaseCollectionManager?) {
         if let header = manager?.sections[section] as? AccessibilityStrategyProvider {
-            accessibilityItem.modifierType.modify(item: accessibilityItem, generator: header)
+            view.modifySelf(with: header)
         } else {
-            accessibilityItem.modifierType.modify(item: accessibilityItem)
+            view.modifySelf()
         }
     }
 
-    func processCollectionFooter(_ section: Int, _ view: UICollectionReusableView, with manager: BaseCollectionManager?) {
-        guard let accessibilityItem = view as? AccessibilityItem else {
-            return
-        }
+    func processCollectionFooter(_ section: Int, _ view: AccessibilityItem, with manager: BaseCollectionManager?) {
         if let footer = manager?.footers[section] as? AccessibilityStrategyProvider {
-            accessibilityItem.modifierType.modify(item: accessibilityItem, generator: footer)
+            view.modifySelf(with: footer)
         } else {
-            accessibilityItem.modifierType.modify(item: accessibilityItem)
+            view.modifySelf()
         }
     }
 
 }
 
 extension BaseCollectionPlugin {
-    static func accessibility() -> BaseCollectionPlugin<CollectionEvent> {
-        CollectionAccessibilityPlugin()
+
+    /// Creates accessibility plugin with provided invalidator creation block
+    ///  - Parameter invalidatorCreationBlock: Block that creates invalidator for item to update accessibility properties on item state changes
+    ///  - Note: To setup accessibility your cell should extend `AccessibilityItem`, `AccessibilityInvalidatable` or `AccessibilityContainer`.
+    ///  More info in documentation.
+    public static func accessibility(invalidatorCreationBlock: @escaping AccessibilityInvalidatorCreationBlock = { item, kind, delegate in
+        DelegatedAccessibilityItemInvalidator(item: item,
+                                              accessibilityItemKind: kind,
+                                              accessibilityDelegate: delegate)
+    }) -> BaseCollectionPlugin<CollectionEvent> {
+        CollectionAccessibilityPlugin(invalidatorCreationBlock: invalidatorCreationBlock)
     }
 }

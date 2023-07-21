@@ -62,19 +62,28 @@ By this way you can add any other functionality to accessibility items.
 
 ## Customize invalidation
 
-If you want to perform additional logic on invalidate, you can define your own methods from `AccessibilityInvalidatable` protocol and set implemented `AccessibilityItemInvalidator` inside.
 
+### in table or collection
+If you want to perform additional logic on invalidate, you can implement your own `AccessibilityItemInvalidator` and set `AccessibilityInvalidatorCreationBlock` 
+
+**For example**
 ```swift
-public protocol AccessibilityItemInvalidator {
-    func invalidateParameters()
-}
 
-public protocol AccessibilityInvalidatable: AccessibilityItem {
-    var accessibilityInvalidator: AccessibilityItemInvalidator? { get set }
-
-    func setInvalidator(kind: AccessibilityItemKind, delegate: AccessibilityItemDelegate?)
-
-    func removeInvalidator()
-}
+    private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: .accessibility({ item, kind, delegate in
+            return CustomInvalidator(item, kind, delegate)
+        }))
+        .build()
 ```
-There is a delegate to collection or table delegate to call `didInvalidateAccessibility` on it with provided parameter `AccessibilityItemKind`. This kind contains additonal info about the accessibility item which is required for invalidation mechanism.
+
+*Note that we have `DelegatedAccessibilityItemInvalidator` which could be used as base for your custom invalidator. This class is needed to combine strategies from item and generator.*
+
+### in other view
+
+Any view can implement `AccessibilityItem`, but you need adittionaly call `AccessibilityItem.modifySelf()` to setup accessibility-properties for real.
+
+`AcessibilityInvalidatable.setBasicInvalidator` is also available for invalidation.
+
+*Note that is recomended to call*
+- `setBasicInvalidator` when view become **visible**
+- `removeInvalidator` when view become **invisible**

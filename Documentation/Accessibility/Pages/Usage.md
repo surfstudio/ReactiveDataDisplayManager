@@ -6,7 +6,17 @@ To make your App more friendly for disabled users **RDDM** provides a set of ins
 
 By default, all cells inside tables and collections are not accessibility elements, that can add difficult to users to navigate and read them. Despite this fact, many accessibility consultants recommend to make cells a single accessibility element.
 
-**RDDM** in initial will not make any changes to accessibility elements hierarchy, so you can manage your own optimization. But it enables an accessibility plugin at all builders to be work with `AccessibilityItems`.
+**RDDM** in initial will not make any changes to accessibility elements hierarchy, so you can manage your own optimization.
+
+To enable accessibility plugin you need to add it to builder
+
+*like below*
+```swift
+
+    private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: .accessibility())
+        .build()
+```
 
 You can see how the accessibility plugin works in the Example project. It completely includes all basic usage.
 
@@ -113,6 +123,45 @@ var traitsStrategy: AccessibilityTraitsStrategy { .from(object: button) }
 ***
 <br><br>
 
+#### AccessibilityActionsStrategy
+
+This strategy is used for [custom actions](./UIAccessibility%20Basics.md#accessibilitycustomactions).
+
+*Note: all system actions such as swipes, editing, moving, drag and drop are already provided by UIKit in another way. Use this actions provider to add custom interaction with the cell content.*
+
+*Static values*
+- `.ignored` - value will not be changed by this strategy.
+- `.just([AccessibilityAction])` - array of actions.
+
+*Mutation functions*
+- `.append(AccessibilityAction)` - appending existing array of actions
+- `.remove(AccessibilityAction)` - removing action from array
+- `.removeAll()` - removing all actions from current array 
+
+*Example:*
+```swift
+        actionsStrategy = .just([])
+
+        if isEditable {
+
+            actionsStrategy.append(.selector(name: "Buy", 
+                                             target: nil, 
+                                             selector: #selector(buyMethod)))
+            actionsStrategy.append(.closure(name: "Add to favorite", handler: { 
+                // do something
+            }))
+            actionsStrategy.append(.closure(name: "Delete", handler: onDeleteTapped))
+            
+
+        } else {
+            actionsStrategy.removeAll()
+        }
+```
+
+*Note that closure based init is available only from iOS 13*
+
+<br>
+
 ## Providers
 
 Providers in **RDDM** is a separate parameters containers which are included in `AccessibilityItem`. But these providers can be used for generators to combine them with cell's parameters.
@@ -130,6 +179,7 @@ public protocol AccessibilityStrategyProvider {
     var labelStrategy: AccessibilityStringStrategy { get }
     var valueStrategy: AccessibilityStringStrategy { get }
     var traitsStrategy: AccessibilityTraitsStrategy { get }
+    var actionsStrategy: AccessibilityActionsStrategy { get }
     var isAccessibilityIgnored: Bool { get }
 }
 ```
@@ -146,31 +196,7 @@ extension SelectableItem: AccessibilityStrategyProvider {
 }
 ```
 
-`labelStrategy` and `traitsStrategy` is required parameters and `valueStrategy` is `.ignored` by default.
-
-<br>
-
-#### AccessibilityActionsProvider
-
-A provider for [custom actions](./UIAccessibility%20Basics.md#accessibilitycustomactions). In item is defined as empty array.
-
-```swift
-public protocol AccessibilityActionsProvider {
-    func accessibilityActions() -> [UIAccessibilityCustomAction]
-}
-```
-
-*Note: all system actions such as swipes, editing, moving, drag and drop are already provided by UIKit in another way. Use this actions provider to add custom interaction with the cell content.*
-
-*Example:*
-```swift
-func accessibilityActions() -> [UIAccessibilityCustomAction] {
-    let switchAction = UIAccessibilityCustomAction(name: "Toggle animated",
-                                                   target: self,
-                                                   selector: #selector(accessibilityActivateSwitch))
-    return [switchAction]
-}
-```
+`labelStrategy` and `traitsStrategy` is required parameters but `valueStrategy` and `actionsStrategy` is `.ignored` by default.
 
 <br>
 

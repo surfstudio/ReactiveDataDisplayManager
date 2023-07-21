@@ -26,6 +26,7 @@ final class SizableCollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .set(delegate: FlowCollectionDelegate())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

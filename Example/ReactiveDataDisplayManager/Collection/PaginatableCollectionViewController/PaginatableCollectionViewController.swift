@@ -29,6 +29,7 @@ final class PaginatableCollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .paginatable(progressView: progressView, output: self))
+        .add(plugin: .accessibility())
         .build()
 
     private weak var paginatableInput: PaginatableInput?

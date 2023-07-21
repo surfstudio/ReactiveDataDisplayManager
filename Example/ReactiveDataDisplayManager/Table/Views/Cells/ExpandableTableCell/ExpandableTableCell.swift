@@ -66,16 +66,16 @@ class ExpandableTableCell: UITableViewCell, ExpandableItem, AccessibilityInvalid
 
 extension ExpandableTableCell: AccessibilityItem {
 
-    var labelStrategy: AccessibilityStringStrategy { .from(object: button) }
+    var labelStrategy: AccessibilityStringStrategy { .from(button) }
     var valueStrategy: AccessibilityStringStrategy {
-        .joined([
-            .just(isSmall ? "collapsed" : "expanded"),
-            .just(", is animated: "),
-            .from(object: switcher, keyPath: \.accessibilityValue)
-        ])
+        .merge(
+            isSmall ? "collapsed" : "expanded",
+            ", is animated: ",
+            switcher.accessibilityValue
+        )
     }
 
-    var traitsStrategy: AccessibilityTraitsStrategy { .from(object: button) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(button) }
 
     func accessibilityActions() -> [UIAccessibilityCustomAction] {
         let switchAction = UIAccessibilityCustomAction(name: "Toggle animated", target: self, selector: #selector(accessibilityActivateSwitch))

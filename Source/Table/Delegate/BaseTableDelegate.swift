@@ -281,8 +281,7 @@ extension BaseTableDelegate: AccessibilityItemDelegate {
         case .header(let section):
             tablePlugins.process(event: .invalidatedHeaderAccessibility(section, item), with: manager)
         case .cell(let indexPath):
-            guard let cell = item as? UITableViewCell else { return }
-            tablePlugins.process(event: .invalidatedCellAccessibility(indexPath, cell), with: manager)
+            tablePlugins.process(event: .invalidatedCellAccessibility(indexPath, item), with: manager)
         case .footer(let section):
             tablePlugins.process(event: .invalidatedFooterAccessibility(section, item), with: manager)
         }

@@ -42,6 +42,7 @@ final class CollectionCompositionalViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
