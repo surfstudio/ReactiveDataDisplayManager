@@ -65,8 +65,10 @@ private extension StackCellExampleViewController {
         }
 
         // Note that using `UITableViewCell` or `UICollectionViewCell` inside stack is not recommended, but it possible
-        adapter += TableSection(header: TitleHeaderGenerator(model: "StackView based cells"), footer: EmptyTableFooterGenerator()) {
-            TableFactory.stack(
+        adapter += TableSection.create(contextType: TableFactory.self,
+                                       header: TitleHeaderGenerator(model: "StackView based cells"),
+                                       footer: EmptyTableFooterGenerator()) { it in
+            it.stack(
                 model: .build { vStack in
                     vStack.background(.solid(.rddm))
                     vStack.style(.init(axis: .vertical,
@@ -90,13 +92,13 @@ private extension StackCellExampleViewController {
                         it.viewNib(type: TitleTableViewCell.self, model: "3")
                     }
                 })
-            TableFactory.viewClass(type: LabelView.self, model: .build { label in
+            it.viewClass(type: LabelView.self, model: .build { label in
                 label.textAlignment(.center)
                 label.text(.string("Wrapped LabelView"))
                 label.style(.init(color: .systemBlue, font: .systemFont(ofSize: 16)))
             })
-            TableFactory.cell(type: TitleTableViewCell.self, model: "Cell outside from stack", registerType: .nib)
-            TableFactory.stack(model: .build { hStack in
+            it.cell(type: TitleTableViewCell.self, model: "Cell outside from stack", registerType: .nib)
+            it.stack(model: .build { hStack in
                 hStack.background(.solid(.systemGreen))
                 hStack.style(.init(axis: .horizontal,
                                    spacing: 0,
