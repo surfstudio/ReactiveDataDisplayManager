@@ -22,3 +22,23 @@ public final class CollectionWrappedCell<View: ConfigurableItem>: UICollectionVi
     public var cachedAlignment: Alignment?
 
 }
+
+// MARK: - CalculatableHeightItem
+
+extension CollectionWrappedCell: CalculatableHeightItem where View: CalculatableHeightItem {
+
+    public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
+        return View.getHeight(forWidth: width, with: model)
+    }
+
+}
+
+// MARK: - CalculatableWidthItem
+
+extension CollectionWrappedCell: CalculatableWidthItem where View: CalculatableWidthItem {
+
+    public static func getWidth(forHeight height: CGFloat, with model: View.Model) -> CGFloat {
+        return View.getWidth(forHeight: height, with: model)
+    }
+
+}

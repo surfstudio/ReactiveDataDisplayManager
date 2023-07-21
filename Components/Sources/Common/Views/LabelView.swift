@@ -23,7 +23,7 @@ extension LabelView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: AlignmentProvider {
+    public struct Model: AlignmentProvider, TextProvider {
 
         // MARK: - Editor
 
@@ -142,6 +142,34 @@ extension LabelView: ConfigurableItem {
 
 }
 
+// MARK: - CalculatableHeightItem
+
+extension LabelView: CalculatableHeightItem {
+
+    public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = getFrame(constraintRect: constraintRect, model: model)
+        let height = ceil(boundingBox.height)
+
+        return height
+    }
+
+}
+
+// MARK: - CalculatableHeightItem
+
+extension LabelView: CalculatableWidthItem, FrameProvider {
+
+    public static func getWidth(forHeight height: CGFloat, with model: Model) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = getFrame(constraintRect: constraintRect, model: model)
+        let width = ceil(boundingBox.width)
+
+        return width
+    }
+
+}
+
 // MARK: - Private
 
 private extension LabelView {
@@ -156,6 +184,40 @@ private extension LabelView {
             label.text = text
         case .attributedString(let attrubutedText):
             label.attributedText = attrubutedText
+        }
+    }
+
+}
+
+extension LabelView.Model {
+
+    public func getAttributes() -> [NSAttributedString.Key: Any] {
+        switch text {
+        case .string:
+            let edgeInsets: UIEdgeInsets
+            switch alignment {
+            case .leading(let insets):
+                edgeInsets = insets
+            case .trailing(let insets):
+                edgeInsets = insets
+            case .all(let insets):
+                edgeInsets = insets
+            }
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineBreakMode = layout.lineBreakMode
+            paragraphStyle.firstLineHeadIndent = edgeInsets.left
+            paragraphStyle.headIndent = edgeInsets.right
+            paragraphStyle.paragraphSpacingBefore = edgeInsets.top
+            paragraphStyle.paragraphSpacing = edgeInsets.bottom
+            paragraphStyle.alignment = textAlignment
+
+            var attributes: [NSAttributedString.Key: Any] = [:]
+            attributes[.font] = style.font
+            attributes[.foregroundColor] = style.color
+            attributes[.paragraphStyle] = paragraphStyle
+            return attributes
+        case .attributedString(let attributedText):
+            return attributedText.attributes(at: 0, effectiveRange: nil)
         }
     }
 

@@ -24,7 +24,7 @@ extension MessageView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: Equatable, AlignmentProvider {
+    public struct Model: Equatable, AlignmentProvider, TextProvider {
 
         // MARK: - Editor
 
@@ -211,6 +211,34 @@ extension MessageView: ConfigurableItem {
 
 }
 
+// MARK: - CalculatableHeightItem
+
+extension MessageView: CalculatableHeightItem, FrameProvider {
+
+    public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = getFrame(constraintRect: constraintRect, model: model)
+        let height = ceil(boundingBox.height)
+
+        return height
+    }
+
+}
+
+// MARK: - CalculatableWidthItem
+
+extension MessageView: CalculatableWidthItem {
+
+    public static func getWidth(forHeight height: CGFloat, with model: Model) -> CGFloat {
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: height)
+        let boundingBox = getFrame(constraintRect: constraintRect, model: model)
+        let width = ceil(boundingBox.width)
+
+        return width
+    }
+
+}
+
 // MARK: - Private methods
 
 private extension MessageView {
@@ -267,6 +295,40 @@ extension MessageView: UITextViewDelegate {
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         handleDataDetection(URL)
         return false
+    }
+
+}
+
+extension MessageView.Model {
+
+    public func getAttributes() -> [NSAttributedString.Key: Any] {
+        switch text {
+        case .string:
+            let edgeInsets: UIEdgeInsets
+            switch alignment {
+            case .leading(let insets):
+                edgeInsets = insets
+            case .trailing(let insets):
+                edgeInsets = insets
+            case .all(let insets):
+                edgeInsets = insets
+            }
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineBreakMode = textLayout.lineBreakMode
+            paragraphStyle.firstLineHeadIndent = edgeInsets.left
+            paragraphStyle.headIndent = edgeInsets.right
+            paragraphStyle.paragraphSpacingBefore = edgeInsets.top
+            paragraphStyle.paragraphSpacing = edgeInsets.bottom
+            paragraphStyle.alignment = textAlignment
+
+            var attributes: [NSAttributedString.Key: Any] = [:]
+            attributes[.font] = textStyle.font
+            attributes[.foregroundColor] = textStyle.color
+            attributes[.paragraphStyle] = paragraphStyle
+            return attributes
+        case .attributedString(let attributedText):
+            return attributedText.attributes(at: 0, effectiveRange: nil)
+        }
     }
 
 }

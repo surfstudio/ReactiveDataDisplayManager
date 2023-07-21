@@ -49,19 +49,29 @@ extension SeparatorView: ConfigurableItem {
 
     public func configure(with model: Model) {
         backgroundColor = model.color
-        switch model.size {
-        case .height(let height):
-            heightConstraint?.constant = height
-            heightConstraint?.isActive = true
-            widthConstraint?.isActive = false
-
-        case .width(let width):
-            widthConstraint?.constant = width
-            widthConstraint?.isActive = true
-            heightConstraint?.isActive = false
-        }
+        model.size.applyTo(heightConstraint: heightConstraint, widthConstraint: widthConstraint)
 
         layoutIfNeeded()
+    }
+
+}
+
+// MARK: - CalculatableHeightItem
+
+extension SeparatorView: CalculatableHeightItem {
+
+    public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
+        return model.size.height
+    }
+
+}
+
+// MARK: - CalculatableWidthItem
+
+extension SeparatorView: CalculatableWidthItem {
+
+    public static func getWidth(forHeight height: CGFloat, with model: Model) -> CGFloat {
+        return model.size.width
     }
 
 }
