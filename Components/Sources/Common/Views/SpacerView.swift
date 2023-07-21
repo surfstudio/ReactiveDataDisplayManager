@@ -47,17 +47,8 @@ extension SpacerView: ConfigurableItem {
 
     public func configure(with model: Model) {
         backgroundColor = model.color
-        switch model.size {
-        case .height(let height):
-            heightConstraint?.constant = height
-            heightConstraint?.isActive = true
-            widthConstraint?.isActive = false
+        model.size.applyTo(heightConstraint: heightConstraint, widthConstraint: widthConstraint)
 
-        case .width(let width):
-            widthConstraint?.constant = width
-            widthConstraint?.isActive = true
-            heightConstraint?.isActive = false
-        }
         layoutIfNeeded()
     }
 
@@ -68,7 +59,17 @@ extension SpacerView: ConfigurableItem {
 extension SpacerView: CalculatableHeightItem {
 
     public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
-        return model.height
+        return model.size.height
+    }
+
+}
+
+// MARK: - CalculatableWidthItem
+
+extension SpacerView: CalculatableWidthItem {
+
+    public static func getWidth(forHeight height: CGFloat, with model: Model) -> CGFloat {
+        return model.size.width
     }
 
 }
