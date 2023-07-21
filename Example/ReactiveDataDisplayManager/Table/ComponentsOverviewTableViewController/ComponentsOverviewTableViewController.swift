@@ -153,7 +153,9 @@ final class ComponentsOverviewTableViewController: UIViewController {
 
     // Separator
 
-    private let separatorModel = SeparatorModel(height: 1, color: .lightGray, edgeInsets: UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32))
+    private let separatorModel = SeparatorModel(size: .height(1),
+                                                color: .lightGray,
+                                                edgeInsets: UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32))
     private lazy var separatorGenerator = TableWrappedCell<SeparatorView>.rddm.baseGenerator(with: separatorModel, and: .class)
 
     // MARK: - UIViewController

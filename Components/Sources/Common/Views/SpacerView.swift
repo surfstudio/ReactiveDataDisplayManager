@@ -36,34 +36,24 @@ extension SpacerView: ConfigurableItem {
 
     public struct Model: Equatable {
 
-        public enum Axis: Equatable {
-            case vertical(CGFloat)
-            case horizontal(CGFloat)
-        }
-
-        public let axis: Axis
+        public let size: ViewSize
         public let color: UIColor?
 
-        public init(height: CGFloat, color: UIColor? = nil) {
-            self.axis = .vertical(height)
-            self.color = color
-        }
-
-        public init(width: CGFloat, color: UIColor? = nil) {
-            self.axis = .horizontal(width)
+        public init(size: ViewSize, color: UIColor? = nil) {
+            self.size = size
             self.color = color
         }
     }
 
     public func configure(with model: Model) {
         backgroundColor = model.color
-        switch model.axis {
-        case .vertical(let height):
+        switch model.size {
+        case .height(let height):
             heightConstraint?.constant = height
             heightConstraint?.isActive = true
             widthConstraint?.isActive = false
 
-        case .horizontal(let width):
+        case .width(let width):
             widthConstraint?.constant = width
             widthConstraint?.isActive = true
             heightConstraint?.isActive = false

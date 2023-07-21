@@ -45,7 +45,7 @@ final class StackCellExampleCollectionViewController: UIViewController {
         TitleTableViewCell.buildView(with: "Text 1")
         TitleTableViewCell.buildView(with: "Text 2")
         horizontalNestedStackCell
-        SeparatorView.buildView(with: .init(height: 1, color: .lightGray), and: .class)
+        SeparatorView.buildView(with: .init(size: .height(1), color: .lightGray), and: .class)
     }
 
     // MARK: - UIViewController
@@ -88,18 +88,18 @@ private extension StackCellExampleCollectionViewController {
             }
 
         adapter += VerticalCollectionStack {
-            SeparatorView.buildView(with: .init(height: 1, color: .black), and: .class)
+            SeparatorView.buildView(with: .init(size: .height(1), color: .black), and: .class)
 
             HorizontalCollectionStack {
-                SeparatorView.buildView(with: .init(width: 1, color: .black), and: .class)
-                SpacerView.buildView(with: .init(width: 64), and: .class)
+                SeparatorView.buildView(with: .init(size: .width(1), color: .black), and: .class)
+                SpacerView.buildView(with: .init(size: .width(64)), and: .class)
 
                 TitleTableViewCell.buildView(with: "Some text")
 
-                SeparatorView.buildView(with: .init(width: 1, color: .black), and: .class)
+                SeparatorView.buildView(with: .init(size: .width(1), color: .black), and: .class)
             }
 
-            SeparatorView.buildView(with: .init(height: 1, color: .black), and: .class)
+            SeparatorView.buildView(with: .init(size: .height(1), color: .black), and: .class)
         }
 
         // Tell adapter that we've changed generators

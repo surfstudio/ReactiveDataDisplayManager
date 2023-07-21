@@ -36,23 +36,12 @@ extension SeparatorView: ConfigurableItem {
 
     public struct Model: Equatable {
 
-        public enum Axis: Equatable {
-            case vertical(CGFloat)
-            case horizontal(CGFloat)
-        }
-
-        public let axis: Axis
+        public let size: ViewSize
         public let color: UIColor?
         public var edgeInsets: UIEdgeInsets
 
-        public init(height: CGFloat, color: UIColor? = nil, edgeInsets: UIEdgeInsets = .zero) {
-            self.axis = .vertical(height)
-            self.color = color
-            self.edgeInsets = edgeInsets
-        }
-
-        public init(width: CGFloat, color: UIColor? = nil, edgeInsets: UIEdgeInsets = .zero) {
-            self.axis = .horizontal(width)
+        public init(size: ViewSize, color: UIColor? = nil, edgeInsets: UIEdgeInsets = .zero) {
+            self.size = size
             self.color = color
             self.edgeInsets = edgeInsets
         }
@@ -60,13 +49,13 @@ extension SeparatorView: ConfigurableItem {
 
     public func configure(with model: Model) {
         backgroundColor = model.color
-        switch model.axis {
-        case .vertical(let height):
+        switch model.size {
+        case .height(let height):
             heightConstraint?.constant = height
             heightConstraint?.isActive = true
             widthConstraint?.isActive = false
 
-        case .horizontal(let width):
+        case .width(let width):
             widthConstraint?.constant = width
             widthConstraint?.isActive = true
             heightConstraint?.isActive = false
