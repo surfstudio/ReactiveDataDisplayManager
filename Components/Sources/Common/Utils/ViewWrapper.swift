@@ -15,6 +15,9 @@ public protocol ViewWrapper: ConfigurableItem {
     /// Inner configurable view with content
     var nestedView: NestedView { get }
 
+    /// View that will be used as container for `nestedView`
+    var contentView: UIView { get }
+
     /// Previous value of `Alignment` applyed to `nestedView`
     var cachedAlignment: Alignment? { get set }
 
@@ -46,11 +49,11 @@ private extension ViewWrapper where Self: UIView {
         nestedView.removeFromSuperview()
         switch alignment {
         case .trailing(let insets):
-            wrapWithLeadingGreaterThenOrEqualRule(subview: nestedView, with: insets)
+            contentView.wrapWithLeadingGreaterThenOrEqualRule(subview: nestedView, with: insets)
         case .leading(let insets):
-            wrapWithTrailingLessThenOrEqualRule(subview: nestedView, with: insets)
+            contentView.wrapWithTrailingLessThenOrEqualRule(subview: nestedView, with: insets)
         case .all(let insets):
-            wrap(subview: nestedView, with: insets)
+            contentView.wrap(subview: nestedView, with: insets)
         case .none:
             break
         }
