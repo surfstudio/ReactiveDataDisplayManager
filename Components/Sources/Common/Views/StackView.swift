@@ -48,6 +48,15 @@ extension StackView: ConfigurableItem {
                 })
             }
 
+            /// Only for stack. Cannot be included in common macros.
+            public static func children(@GeneratorsBuilder<StackCellGenerator>_ content: @escaping (ViewFactory.Type) -> [StackCellGenerator]) -> Property {
+                .init(closure: { model in
+                    var model = model
+                    model.set(children: content(ViewFactory.self))
+                    return model
+                })
+            }
+
             public static func style(_ value: StackStyle) -> Property {
                 .init(closure: { model in
                     var model = model

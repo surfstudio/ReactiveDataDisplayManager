@@ -11,14 +11,10 @@ import ReactiveDataDisplayManager
 
 public enum ViewFactory {
 
-    public static func stack(model: StackView.Model,
-                             @GeneratorsBuilder<StackCellGenerator>_ content: (ViewFactory.Type) -> [StackCellGenerator]
-    ) -> StackCellGenerator {
-        StackView.rddm.viewGenerator(with: .copy(of: model) { property in
-            property.children(content(ViewFactory.self))
-        }, and: .class)
+    public static func stack(model: StackView.Model) -> StackCellGenerator {
+        StackView.rddm.viewGenerator(with: model, and: .class)
     }
-    
+
     public static func viewClass<T: UIView & ConfigurableItem>(type: T.Type,
                                                                model: T.Model) -> BaseViewGenerator<T> {
         T.rddm.viewGenerator(with: model, and: .class)
@@ -31,14 +27,12 @@ public enum ViewFactory {
 
 }
 
+// MARK: - Table
+
 public enum TableFactory {
 
-    public static func stack(model: StackView.Model,
-                             @GeneratorsBuilder<StackCellGenerator>_ content: (ViewFactory.Type) -> [StackCellGenerator]
-    ) -> TableCellGenerator {
-        StackView.rddm.tableGenerator(with: .copy(of: model) { property in
-            property.children(content(ViewFactory.self))
-        }, and: .class)
+    public static func stack(model: StackView.Model) -> TableCellGenerator {
+        StackView.rddm.tableGenerator(with: model, and: .class)
     }
 
     public static func cell<T: UITableViewCell & ConfigurableItem>(type: T.Type,
@@ -59,16 +53,14 @@ public enum TableFactory {
 
 }
 
+// MARK: - Collection
+
 public enum CollectionFactory {
 
-    public static func stack(model: StackView.Model,
-                             @GeneratorsBuilder<StackCellGenerator>_ content: (ViewFactory.Type) -> [StackCellGenerator]
-    ) -> CollectionCellGenerator {
-        StackView.rddm.collectionGenerator(with: .copy(of: model) { property in
-            property.children(content(ViewFactory.self))
-        }, and: .class)
+    public static func stack(model: StackView.Model) -> CollectionCellGenerator {
+        StackView.rddm.collectionGenerator(with: model, and: .class)
     }
-    
+
     public static func cell<T: UICollectionViewCell & ConfigurableItem>(type: T.Type,
                                                                         model: T.Model,
                                                                         registerType: CellRegisterType) -> BaseCollectionCellGenerator<T> {

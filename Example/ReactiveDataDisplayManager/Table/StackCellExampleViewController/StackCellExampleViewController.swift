@@ -66,25 +66,30 @@ private extension StackCellExampleViewController {
 
         // Note that using `UITableViewCell` or `UICollectionViewCell` inside stack is not recommended, but it possible
         adapter += TableSection(header: TitleHeaderGenerator(model: "StackView based cells"), footer: EmptyTableFooterGenerator()) {
-            TableFactory.stack(model: .build { vStack in
-                vStack.background(.solid(.rddm))
-                vStack.style(.init(axis: .vertical,
-                                   spacing: 8,
-                                   alignment: .fill,
-                                   distribution: .fill))
-            }) { context in
-                context.stack(model: .build { hStack in
-                    hStack.background(.solid(.systemBlue))
-                    hStack.style(.init(axis: .horizontal,
-                                       spacing: 4,
+            TableFactory.stack(
+                model: .build { vStack in
+                    vStack.background(.solid(.rddm))
+                    vStack.style(.init(axis: .vertical,
+                                       spacing: 8,
                                        alignment: .fill,
-                                       distribution: .fillEqually))
-                }) { context in
-                    context.viewNib(type: TitleTableViewCell.self, model: "4")
-                    context.viewNib(type: TitleTableViewCell.self, model: "5")
-                }
-                context.viewNib(type: TitleTableViewCell.self, model: "3")
-            }
+                                       distribution: .fill))
+                    vStack.children { it in
+                        it.viewNib(type: TitleTableViewCell.self, model: "1")
+                        it.viewNib(type: TitleTableViewCell.self, model: "2")
+                        it.stack(model: .build { hStack in
+                            hStack.background(.solid(.systemBlue))
+                            hStack.style(.init(axis: .horizontal,
+                                               spacing: 4,
+                                               alignment: .fill,
+                                               distribution: .fillEqually))
+                            hStack.children { it in
+                                it.viewNib(type: TitleTableViewCell.self, model: "4")
+                                it.viewNib(type: TitleTableViewCell.self, model: "5")
+                            }
+                        })
+                        it.viewNib(type: TitleTableViewCell.self, model: "3")
+                    }
+                })
             TableFactory.viewClass(type: LabelView.self, model: .build { label in
                 label.textAlignment(.center)
                 label.text(.string("Wrapped LabelView"))
@@ -97,21 +102,23 @@ private extension StackCellExampleViewController {
                                    spacing: 0,
                                    alignment: .fill,
                                    distribution: .fillEqually))
-            }) { context in
-                context.viewNib(type: TitleTableViewCell.self, model: "6")
-                context.stack(model: .build { vStack in
-                    vStack.background(.solid(.systemPink))
-                    vStack.style(.init(axis: .vertical,
-                                       spacing: 20,
-                                       alignment: .fill,
-                                       distribution: .fillEqually))
-                }) { context in
-                    context.viewNib(type: TitleTableViewCell.self, model: "7")
-                    context.viewNib(type: TitleTableViewCell.self, model: "8")
-                    context.viewNib(type: TitleTableViewCell.self, model: "9")
-                    context.viewNib(type: TitleTableViewCell.self, model: "10")
+                hStack.children { it in
+                    it.viewNib(type: TitleTableViewCell.self, model: "6")
+                    it.stack(model: .build { vStack in
+                        vStack.background(.solid(.systemPink))
+                        vStack.style(.init(axis: .vertical,
+                                           spacing: 20,
+                                           alignment: .fill,
+                                           distribution: .fillEqually))
+                        vStack.children { it in
+                            it.viewNib(type: TitleTableViewCell.self, model: "7")
+                            it.viewNib(type: TitleTableViewCell.self, model: "8")
+                            it.viewNib(type: TitleTableViewCell.self, model: "9")
+                            it.viewNib(type: TitleTableViewCell.self, model: "10")
+                        }
+                    })
                 }
-            }
+            })
         }
 
         // Tell adapter that we've changed generators
