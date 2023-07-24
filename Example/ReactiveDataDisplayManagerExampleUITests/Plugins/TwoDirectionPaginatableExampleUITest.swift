@@ -18,7 +18,7 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
         let threePagesSize = 120
 
         setTab("Table")
-        tapTableElement("Table with two direction pagination")
+        tapTableElement("back/forward pagination")
 
         let table = app.tables.firstMatch
         let retryButton = app.buttons["Retry"].firstMatch
@@ -42,7 +42,7 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
     // Description: In a collection, the first cell is the first visible cell
     func testCollection_whenSwipeUpAndDown_thenFirstVisibleCellChanged() throws {
         setTab("Collection")
-        tapTableElement("Collection with two direction pagination")
+        tapTableElement("back/forward pagination")
 
         let collection = app.collectionViews.firstMatch
         let firstCell = app.collectionViews.cells.firstMatch
@@ -55,11 +55,11 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
 
         retryButton.tap()
 
-        while firstCell.label.hasSuffix("page -1") || firstCell.label.hasSuffix("page 0") {
+        while firstCell.label.hasSuffix("page 1") || firstCell.label.hasSuffix("page 0") {
             collection.swipeUp(velocity: .fast)
         }
 
-        XCTAssertTrue(firstCell.label.hasSuffix("page 1"))
+        XCTAssertTrue(firstCell.label.hasSuffix("page 0"))
     }
 
     func testTable_whenSwipeDown_thenPaginatorErrorAppear_thenHittableActivityIndicator() {
@@ -67,7 +67,7 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
         let retryButton = app.buttons["Retry"].firstMatch
 
         setTab("Table")
-        tapTableElement("Table with two direction pagination")
+        tapTableElement("back/forward pagination")
 
         let table = app.tables.firstMatch
         XCTAssertTrue(table.waitForExistence(timeout: Constants.timeout))
@@ -90,7 +90,7 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
         let retryButton = app.buttons["Retry"]
 
         setTab("Collection")
-        tapTableElement("Collection with two direction pagination")
+        tapTableElement("back/forward pagination")
 
         let collection = app.collectionViews.firstMatch
         XCTAssertTrue(collection.waitForExistence(timeout: Constants.timeout))

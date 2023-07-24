@@ -63,7 +63,7 @@ final class TwoDirectionPaginatableCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Collection with two direction pagination"
+        title = "two directional pagination"
 
         configureActivityIndicatorIfNeeded()
         loadFirstPage()
