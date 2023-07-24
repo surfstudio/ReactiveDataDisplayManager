@@ -21,7 +21,7 @@ extension UITextView {
 extension UIStyle {
 
     static var chatInput: UIStyle<UITextView> {
-        return TextViewStyle(font: UIFont.systemFont(ofSize: 14),
+        return TextViewStyle(font: UIFont.preferredFont(forTextStyle: .subheadline),
                              textColor: .black,
                              lineHeight: 20,
                              kern: -0.24,
@@ -31,7 +31,7 @@ extension UIStyle {
     }
 
     static var chatInputError: UIStyle<UITextView> {
-        return TextViewStyle(font: UIFont.systemFont(ofSize: 14),
+        return TextViewStyle(font: UIFont.preferredFont(forTextStyle: .subheadline),
                              textColor: .red,
                              lineHeight: 20,
                              kern: -0.24,
@@ -41,7 +41,7 @@ extension UIStyle {
     }
 
     static var chatPlaceholder: UIStyle<UITextView> {
-        return TextViewStyle(font: UIFont.systemFont(ofSize: 14),
+        return TextViewStyle(font: UIFont.preferredFont(forTextStyle: .subheadline),
                              textColor: .lightGray,
                              lineHeight: 20,
                              kern: -0.24,

@@ -12,7 +12,7 @@ public struct TextStyle: Equatable {
     public let color: UIColor
     public let font: UIFont
 
-    public init(color: UIColor = .black, font: UIFont = .systemFont(ofSize: 16)) {
+    public init(color: UIColor = .black, font: UIFont = .preferredFont(forTextStyle: .body)) {
         self.color = color
         self.font = font
     }
