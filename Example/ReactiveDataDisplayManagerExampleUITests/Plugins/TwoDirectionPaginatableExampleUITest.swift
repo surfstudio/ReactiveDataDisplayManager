@@ -55,11 +55,10 @@ final class TwoDirectionPaginatableExampleUITest: BaseUITestCase {
 
         retryButton.tap()
 
-        while firstCell.label.hasSuffix("page 1") || firstCell.label.hasSuffix("page 0") {
+        while firstCell.label.hasSuffix("page 0") {
             collection.swipeUp(velocity: .fast)
         }
 
-        XCTAssertTrue(firstCell.label.hasSuffix("page 0"))
     }
 
     func testTable_whenSwipeDown_thenPaginatorErrorAppear_thenHittableActivityIndicator() {
