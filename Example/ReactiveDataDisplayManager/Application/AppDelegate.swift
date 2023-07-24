@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = .rddm
         UITableView.appearance().sectionIndexColor = .rddm
         UICollectionView.appearance().tintColor = .rddm
+        UITextView.appearance().adjustsFontForContentSizeCategory = true
         UILabel.appearance().adjustsFontForContentSizeCategory = true
         UIButton.appearance().adjustsImageSizeForAccessibilityContentSizeCategory = true
 

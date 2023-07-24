@@ -34,7 +34,7 @@ final class StackCellExampleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Stack cell example view controller"
+        title = "Stack inside table"
         tableView.accessibilityIdentifier = "Stack_Cell_Example_View_Controller"
         fillAdapter()
     }

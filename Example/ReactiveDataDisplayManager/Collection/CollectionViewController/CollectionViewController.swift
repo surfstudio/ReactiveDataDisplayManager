@@ -64,7 +64,7 @@ private extension CollectionViewController {
         CollectionGenerators {
             titles.map { title -> CollectionCellGenerator in
                 // Create generator
-                let generator = TitleCollectionViewCell.rddm.baseGenerator(with: title)
+                let generator = TitleCollectionViewCell.rddm.calculatableHeightGenerator(with: title, referencedWidth: 100)
                 generator.didSelectEvent += {
                     debugPrint("\(title) selected")
                 }

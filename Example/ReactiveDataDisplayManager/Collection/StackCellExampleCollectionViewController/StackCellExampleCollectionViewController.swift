@@ -53,7 +53,7 @@ final class StackCellExampleCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Stack cell collection"
+        title = "Stack incide collection"
 
         let flowLayout = makeFlowLayout()
         collectionView.setCollectionViewLayout(flowLayout, animated: false)

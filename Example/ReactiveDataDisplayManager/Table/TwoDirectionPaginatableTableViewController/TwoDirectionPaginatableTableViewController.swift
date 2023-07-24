@@ -64,7 +64,7 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with two directions pagination"
+        title = "two directional pagination"
 
         configureActivityIndicatorIfNeeded()
         loadFirstPage()
