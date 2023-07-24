@@ -18,7 +18,7 @@ public typealias TableSection = Section<
 public extension TableSection {
 
     init(generators: [TableCellGenerator], header: TableHeaderGenerator) {
-        self.init(generators: generators, header: header, footer: TableFooterGenerator())
+        self.init(generators: generators, header: header, footer: EmptyTableFooterGenerator())
     }
 
 }
