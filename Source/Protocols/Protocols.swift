@@ -16,7 +16,7 @@ open class TableHeaderGenerator: ViewGenerator, IdOwner, TableHeaderRegisterable
     open var labelStrategy: AccessibilityStringStrategy = .ignored
     open var traitsStrategy: AccessibilityTraitsStrategy = .just(.header)
 
-    public init() { 
+    public init() {
 		self.id = UUID().uuidString
 	}
 
@@ -31,7 +31,6 @@ open class TableHeaderGenerator: ViewGenerator, IdOwner, TableHeaderRegisterable
     open func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
         preconditionFailure("\(#function) must be overriden in child")
     }
-
 
     /// Registeration needed only for `UITableViewHeaderFooterView` descendant classes
     open func registerHeader(in tableView: UITableView) { }

@@ -55,7 +55,7 @@ final class MainTableViewController: UIViewController {
             ("drag and drop cells", .dragAndDroppableTable),
             ("selectable cells", .selectableTable),
             ("highlightable cells", .highlightableTable),
-			("custom components", .customizableComponentsTable),
+            ("custom components", .customizableComponentsTable),
             ("two direction pagination", .twoDirectionPaginatableTable),
             ("stack cell inside", .stackCellExampleTable)
         ]

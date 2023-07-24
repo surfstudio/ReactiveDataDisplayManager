@@ -183,7 +183,7 @@ private extension GravityTableManager {
         }
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-		guard !view.visibleCells.isEmpty else { return }        
+		guard !view.visibleCells.isEmpty else { return }
         modifier?.insertRows(at: indexPaths, with: Optional.none)
     }
 

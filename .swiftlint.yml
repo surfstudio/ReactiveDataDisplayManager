@@ -86,12 +86,6 @@ custom_rules:
         message: "Every MARK should be surrounded with 1 newline before and 1 after it"
         severity: warning
 
-    redundant_default_type:
-        included: ".*.swift"
-        name: "Redundant explicit type"
-        regex: "(var|let) [0-9a-zA-Z_]*: (Int|String|Double|Bool)[ ]*= "
-        message: "Redundant explicit declaration of default types should be avoided"
-
     class_modificators_order:
         include: ".*.swift"
         name: "Class modificators order"
