@@ -27,6 +27,7 @@ final class StackCellExampleViewController: UIViewController {
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .selectable())
         .add(plugin: .highlightable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

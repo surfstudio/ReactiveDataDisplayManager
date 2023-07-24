@@ -28,6 +28,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.baseBuilder
+        .add(plugin: .accessibility())
         .build()
 
     // Recieved message time
