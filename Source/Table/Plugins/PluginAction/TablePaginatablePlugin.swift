@@ -124,15 +124,21 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
     // MARK: - Properties
 
     weak var tableView: UITableView?
-    var paginationStrategy: PaginationStrategy?
+    var strategy: PaginationStrategy?
 
     /// Property which indicating availability of pages
     public private(set) var canIterate = false {
         didSet {
             if canIterate {
-                tableView?.tableFooterView = progressView
+                guard progressView.superview == nil else {
+                    return
+                }
+                strategy?.addPafinationView()
             } else {
-                tableView?.tableFooterView = nil
+                guard progressView.superview != nil else {
+                    return
+                }
+                strategy?.removePafinationView()
             }
         }
     }
@@ -151,6 +157,8 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
 
     public override func setup(with manager: BaseTableManager?) {
         self.tableView = manager?.view
+        self.strategy?.scrollView = manager?.view
+        self.strategy?.progressView = progressView
         self.canIterate = false
         self.output?.onPaginationInitialized(with: self, at: direction)
         self.progressView.setOnRetry { [weak self] in
@@ -166,16 +174,13 @@ public class TablePaginatablePlugin: BaseTablePlugin<TableEvent> {
 
         switch event {
         case .willDisplayCell(let indexPath):
-            guard let sections = manager?.sections, !isErrorWasReceived else {
+            if progressView.frame.minY != tableView?.contentSize.height {
+                strategy?.setProgressViewFinalFrame()
+            }
+            guard indexPath == strategy?.getIndexPath(with: manager?.sections), canIterate, !isLoading, !isErrorWasReceived else {
                 return
             }
-            let lastSectionIndex = sections.count - 1
-            let lastCellInLastSectionIndex = sections[lastSectionIndex].generators.count - 1
-
-            let lastCellIndexPath = IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
-            if indexPath == lastCellIndexPath && canIterate && !isLoading {
-                output?.loadNextPage(with: self, at: direction)
-            }
+            output?.loadNextPage(with: self, at: direction)
         default:
             break
         }
@@ -190,6 +195,8 @@ extension TablePaginatablePlugin: PaginatableInput {
     public func updatePaginationEnabled(_ canIterate: Bool, at direction: PagingDirection) {
         self.canIterate = canIterate
         self.direction = direction
+
+        strategy?.resetOffset(canIterate: canIterate)
     }
 
     public func updatePaginationState(_ state: PaginationState, at direction: PagingDirection) {
@@ -198,6 +205,7 @@ extension TablePaginatablePlugin: PaginatableInput {
             isLoading = false
         case .loading:
             isLoading = true
+            strategy?.saveCurrentState()
         case .error(let error):
             isLoading = false
             isErrorWasReceived = true
@@ -220,26 +228,20 @@ public extension BaseTablePlugin {
     /// - parameter progressView: indicator view to add inside footer. Do not forget to init this view with valid frame size.
     /// - parameter output: output signals to hide  `progressView` from footer
     /// - parameter direction: direction of pagination
-    static func paginatable(progressView: TablePaginatablePlugin.ProgressView,
-                            output: PaginatableOutput,
-                            direction: PagingDirection = .forward(.bottom)) -> TablePaginatablePlugin {
-        return TablePaginatablePlugin(progressView: progressView, with: output, direction: direction)
-
+    static func topPaginatable(progressView: TablePaginatablePlugin.ProgressView,
+                               output: PaginatableOutput,
+                               direction: PagingDirection = .backward(.top)) -> TablePaginatablePlugin {
+        let plugin = TablePaginatablePlugin(progressView: progressView, with: output, direction: direction)
+        plugin.strategy = TopPaginationStrategy()
+        return plugin
     }
 
-//    /// Plugin to display `progressView` while previous page is loading
-//    ///
-//    /// Show `progressView` on `willDisplay` first cell.
-//    /// Hide `progressView` when finish loading request
-//    ///
-//    /// - parameter progressView: indicator view to add inside header. Do not forget to init this view with valid frame size.
-//    /// - parameter output: output signals to hide  `progressView` from header
-//    /// - Warning: UITableView.style must be plain style for keeping scroll position
-//    static func topPaginatable(progressView: TableTopPaginatablePlugin.ProgressView,
-//                               output: TopPaginatableOutput,
-//                               isSaveScrollPositionNeeded: Bool) -> TableTopPaginatablePlugin {
-//        return TableTopPaginatablePlugin(progressView: progressView, with: output, isSaveScrollPositionNeeded: isSaveScrollPositionNeeded)
-//
-//    }
+    static func bottomPaginatable(progressView: TablePaginatablePlugin.ProgressView,
+                                  output: PaginatableOutput,
+                                  direction: PagingDirection = .forward(.bottom)) -> TablePaginatablePlugin {
+        let plugin = TablePaginatablePlugin(progressView: progressView, with: output, direction: direction)
+        plugin.strategy = BottomPaginationStrategy()
+        return plugin
+    }
 
 }

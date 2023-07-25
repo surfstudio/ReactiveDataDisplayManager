@@ -1,5 +1,5 @@
 //
-//  BottomPaginationStrategy.swift
+//  RightPaginationStrategy.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Konstantin Porokhov on 25.07.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BottomPaginationStrategy: PaginationStrategy {
+final class RightPaginationStrategy: PaginationStrategy {
 
     // MARK: - Properties
 
@@ -21,30 +21,33 @@ final class BottomPaginationStrategy: PaginationStrategy {
             return
         }
         scrollView?.addSubview(progressView)
-        scrollView?.contentInset.bottom += progressView.frame.height
+        scrollView?.contentInset.right += progressView.frame.width
     }
 
     func removePafinationView() {
         progressView?.removeFromSuperview()
-        scrollView?.contentInset.bottom -= progressView?.frame.height ?? .zero
+        scrollView?.contentInset.right -= progressView?.frame.width ?? .zero
     }
 
-    func getIndexPath(with manager: BaseCollectionManager?) -> IndexPath? {
-        guard let sections = manager?.sections else {
+    func getIndexPath<GeneratorType, HeaderGeneratorType, FooterGeneratorType>(
+        with sections: [Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType>]?
+    ) -> IndexPath? {
+        guard let sections = sections else {
             return nil
         }
         let lastSectionIndex = sections.count - 1
         let lastCellInLastSectionIndex = sections[lastSectionIndex].generators.count - 1
-
+        
         return IndexPath(row: lastCellInLastSectionIndex, section: lastSectionIndex)
     }
 
     func setProgressViewFinalFrame() {
-        guard let progressViewFrame = progressView?.frame else {
+        guard let progressViewFrame = progressView?.frame, let scrollViewHeight = scrollView?.bounds.height else {
             return
         }
-        // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
-        progressView?.frame = .init(origin: .init(x: progressViewFrame.origin.x, y: scrollView?.contentSize.height ?? 0),
+        // Hack: Update progressView position.
+        progressView?.frame = .init(origin: .init(x: scrollView?.contentSize.width ?? 0,
+                                                  y: (scrollViewHeight / 2) - progressViewFrame.height),
                                     size: progressViewFrame.size)
     }
 

@@ -9,7 +9,9 @@ import UIKit
 
 protocol PaginationStrategy: ContentOffsetStateKeeper {
 
-    func getIndexPath(with manager: BaseCollectionManager?) -> IndexPath?
+    func getIndexPath<GeneratorType, HeaderGeneratorType, FooterGeneratorType>(
+        with sections: [Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType>]?
+    ) -> IndexPath?
     func addPafinationView()
     func removePafinationView()
     func setProgressViewFinalFrame()

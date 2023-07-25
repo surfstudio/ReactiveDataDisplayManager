@@ -32,7 +32,7 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
     // MARK: - Properties
 
     weak var collectionView: UICollectionView?
-    var paginationStrategy: PaginationStrategy?
+    var strategy: PaginationStrategy?
 
     /// Property which indicating availability of pages
     public private(set) var canIterate = false {
@@ -41,12 +41,12 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
                 guard progressView.superview == nil else {
                     return
                 }
-                paginationStrategy?.addPafinationView()
+                strategy?.addPafinationView()
             } else {
                 guard progressView.superview != nil else {
                     return
                 }
-                paginationStrategy?.removePafinationView()
+                strategy?.removePafinationView()
             }
         }
     }
@@ -65,8 +65,8 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
 
     public override func setup(with manager: BaseCollectionManager?) {
         collectionView = manager?.view
-        paginationStrategy?.scrollView = manager?.view
-        paginationStrategy?.progressView = progressView
+        strategy?.scrollView = manager?.view
+        strategy?.progressView = progressView
         canIterate = false
         output?.onPaginationInitialized(with: self, at: direction)
         self.progressView.setOnRetry { [weak self] in
@@ -83,9 +83,9 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
         switch event {
         case .willDisplayCell(let indexPath):
             if progressView.frame.minY != collectionView?.contentSize.height {
-                paginationStrategy?.setProgressViewFinalFrame()
+                strategy?.setProgressViewFinalFrame()
             }
-            guard indexPath == paginationStrategy?.getIndexPath(with: manager), canIterate, !isLoading, !isErrorWasReceived else {
+            guard indexPath == strategy?.getIndexPath(with: manager?.sections), canIterate, !isLoading, !isErrorWasReceived else {
                 return
             }
             output?.loadNextPage(with: self, at: self.direction)
@@ -104,7 +104,7 @@ extension CollectionPaginatablePlugin: PaginatableInput {
         self.canIterate = canIterate
         self.direction = direction
 
-        paginationStrategy?.resetOffset(canIterate: canIterate)
+        strategy?.resetOffset(canIterate: canIterate)
     }
 
     public func updatePaginationState(_ state: PaginationState, at direction: PagingDirection) {
@@ -113,7 +113,7 @@ extension CollectionPaginatablePlugin: PaginatableInput {
             isLoading = false
         case .loading:
             isLoading = true
-            paginationStrategy?.saveCurrentState()
+            strategy?.saveCurrentState()
         case .error(let error):
             isLoading = false
             isErrorWasReceived = true
@@ -138,7 +138,7 @@ public extension BaseCollectionPlugin {
     static func topPaginatable(progressView: CollectionPaginatablePlugin.ProgressView,
                                output: PaginatableOutput) -> CollectionPaginatablePlugin {
         let plugin = CollectionPaginatablePlugin(progressView: progressView, with: output, direction: .backward(.top))
-        plugin.paginationStrategy = TopPaginationStrategy()
+        plugin.strategy = TopPaginationStrategy()
         return plugin
     }
 
@@ -152,7 +152,14 @@ public extension BaseCollectionPlugin {
     static func bottomPaginatable(progressView: CollectionPaginatablePlugin.ProgressView,
                                   output: PaginatableOutput) -> CollectionPaginatablePlugin {
         let plugin = CollectionPaginatablePlugin(progressView: progressView, with: output, direction: .forward(.bottom))
-        plugin.paginationStrategy = BottomPaginationStrategy()
+        plugin.strategy = BottomPaginationStrategy()
+        return plugin
+    }
+
+    static func rightPaginatable(progressView: CollectionPaginatablePlugin.ProgressView,
+                                  output: PaginatableOutput) -> CollectionPaginatablePlugin {
+        let plugin = CollectionPaginatablePlugin(progressView: progressView, with: output, direction: .forward(.bottom))
+        plugin.strategy = RightPaginationStrategy()
         return plugin
     }
 

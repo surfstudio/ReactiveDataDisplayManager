@@ -50,7 +50,9 @@ final class TopPaginationStrategy: PaginationStrategy {
         scrollView?.contentInset.top -= progressView?.frame.height ?? .zero
     }
 
-    func getIndexPath(with manager: BaseCollectionManager?) -> IndexPath? {
+    func getIndexPath<GeneratorType, HeaderGeneratorType, FooterGeneratorType>(
+        with sections: [Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType>]?
+    ) -> IndexPath? {
         IndexPath(row: 0, section: 0)
     }
 
@@ -58,7 +60,7 @@ final class TopPaginationStrategy: PaginationStrategy {
         guard let progressViewFrame = progressView?.frame else {
             return
         }
-        // Hack: Update progressView position. Imitation of global footer view like `tableFooterView`
+        // Hack: Update progressView position.
         progressView?.frame = .init(origin: .init(x: progressViewFrame.origin.x, y: -progressViewFrame.height),
                                     size: progressViewFrame.size)
     }

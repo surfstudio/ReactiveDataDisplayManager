@@ -43,8 +43,8 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
                                                                   height: Constants.paginatorViewHeight))
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(plugin: .paginatable(progressView: topProgressView, output: self, direction: .backward(.top)))
-//        .add(plugin: .paginatable(progressView: bottomProgressView, output: self))
+        .add(plugin: .topPaginatable(progressView: topProgressView, output: self))
+        .add(plugin: .bottomPaginatable(progressView: bottomProgressView, output: self))
         .build()
 
     private weak var bottomPaginatableInput: PaginatableInput?
@@ -187,13 +187,19 @@ extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
     }
 
     func loadNextPage(with input: PaginatableInput, at direction: PagingDirection) {
+
         input.updatePaginationState(.loading, at: direction)
 
-        delay(.now() + .seconds(2)) { [weak self, weak input] in
-            let canFillPages = self?.canFillPages() ?? false
-
-            if canFillPages {
-                let canIterate = self?.fillNext() ?? false
+        delay(.now() + .seconds(3)) { [weak self, weak input] in
+            let canFillNext = self?.canFillPages() ?? false
+            if canFillNext {
+                let canIterate: Bool
+                switch direction {
+                case .backward:
+                    canIterate = self?.fillPrev() ?? false
+                case .forward:
+                    canIterate = self?.fillNext() ?? false
+                }
 
                 input?.updatePaginationState(.idle, at: direction)
                 input?.updatePaginationEnabled(canIterate, at: direction)

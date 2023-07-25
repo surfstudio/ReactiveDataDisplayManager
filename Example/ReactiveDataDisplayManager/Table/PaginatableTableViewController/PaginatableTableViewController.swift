@@ -28,8 +28,7 @@ final class PaginatableTableViewController: UIViewController {
     private lazy var progressView = PaginatorView(frame: .init(x: 0, y: 0, width: tableView.frame.width, height: 80))
 
     private lazy var adapter = tableView.rddm.baseBuilder
-        .add(plugin: .paginatable(progressView: progressView,
-                                  output: self))
+        .add(plugin: .bottomPaginatable(progressView: progressView, output: self))
         .build()
 
     private weak var paginatableInput: PaginatableInput?
