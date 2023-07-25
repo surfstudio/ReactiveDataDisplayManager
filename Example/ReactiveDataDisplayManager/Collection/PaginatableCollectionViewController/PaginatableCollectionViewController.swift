@@ -28,7 +28,7 @@ final class PaginatableCollectionViewController: UIViewController {
     private lazy var progressView = PaginatorView(frame: .init(x: 0, y: 0, width: collectionView.frame.width, height: 80))
 
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(plugin: .paginatable(progressView: progressView, output: self))
+        .add(plugin: .bottomPaginatable(progressView: progressView, output: self))
         .build()
 
     private weak var paginatableInput: PaginatableInput?
@@ -72,8 +72,8 @@ private extension PaginatableCollectionViewController {
         activityIndicator.startAnimating()
 
         // hide footer
-        paginatableInput?.updatePagination(canIterate: false)
-        paginatableInput?.updateProgress(isLoading: false)
+        paginatableInput?.updatePaginationEnabled(false, at: .forward(.bottom))
+        paginatableInput?.updatePaginationState(.idle, at: .forward(.bottom))
 
         // imitation of loading first page
         delay(.now() + .seconds(3)) { [weak self] in
@@ -84,7 +84,7 @@ private extension PaginatableCollectionViewController {
             self?.activityIndicator?.stopAnimating()
 
             // show footer
-            self?.paginatableInput?.updatePagination(canIterate: true)
+            self?.paginatableInput?.updatePaginationEnabled(true, at: .forward(.bottom))
         }
     }
 
@@ -137,24 +137,23 @@ private extension PaginatableCollectionViewController {
 
 extension PaginatableCollectionViewController: PaginatableOutput {
 
-    func onPaginationInitialized(with input: PaginatableInput) {
+    func onPaginationInitialized(with input: PaginatableInput, at direction: PagingDirection) {
         paginatableInput = input
     }
 
-    func loadNextPage(with input: PaginatableInput) {
+    func loadNextPage(with input: PaginatableInput, at direction: PagingDirection) {
 
-        input.updateProgress(isLoading: true)
+        input.updatePaginationState(.loading, at: direction)
 
         delay(.now() + .seconds(3)) { [weak self, weak input] in
             let canFillNext = self?.canFillNext() ?? false
             if canFillNext {
                 let canIterate = self?.fillNext() ?? false
 
-                input?.updateProgress(isLoading: false)
-                input?.updatePagination(canIterate: canIterate)
+                input?.updatePaginationState(.idle, at: direction)
+                input?.updatePaginationEnabled(canIterate, at: direction)
             } else {
-                input?.updateProgress(isLoading: false)
-                input?.updateError(SampleError.sample)
+                input?.updatePaginationState(.error(SampleError.sample), at: direction)
             }
         }
     }

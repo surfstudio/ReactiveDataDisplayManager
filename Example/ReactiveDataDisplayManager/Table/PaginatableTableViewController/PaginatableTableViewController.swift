@@ -72,7 +72,7 @@ private extension PaginatableTableViewController {
         activityIndicator.startAnimating()
 
         // hide footer
-        paginatableInput?.updatePagination(canIterate: false)
+        paginatableInput?.updatePaginationEnabled(false, at: .forward(.bottom))
 
         // imitation of loading first page
         delay(.now() + .seconds(3)) { [weak self] in
@@ -85,7 +85,7 @@ private extension PaginatableTableViewController {
             self?.activityIndicator?.isHidden = true
 
             // show footer
-            self?.paginatableInput?.updatePagination(canIterate: true)
+            self?.paginatableInput?.updatePaginationEnabled(true, at: .forward(.bottom))
         }
     }
 
@@ -130,24 +130,23 @@ private extension PaginatableTableViewController {
 
 extension PaginatableTableViewController: PaginatableOutput {
 
-    func onPaginationInitialized(with input: PaginatableInput) {
+    func onPaginationInitialized(with input: PaginatableInput, at direction: PagingDirection) {
         paginatableInput = input
     }
 
-    func loadNextPage(with input: PaginatableInput) {
+    func loadNextPage(with input: PaginatableInput, at direction: ReactiveDataDisplayManager.PagingDirection) {
 
-        input.updateProgress(isLoading: true)
+        input.updatePaginationState(.loading, at: direction)
 
         delay(.now() + .seconds(3)) { [weak self, weak input] in
             let canFillNext = self?.canFillNext() ?? false
             if canFillNext {
                 let canIterate = self?.fillNext() ?? false
 
-                input?.updateProgress(isLoading: false)
-                input?.updatePagination(canIterate: canIterate)
+                input?.updatePaginationState(.idle, at: direction)
+                input?.updatePaginationEnabled(canIterate, at: direction)
             } else {
-                input?.updateProgress(isLoading: false)
-                input?.updateError(SampleError.sample)
+                input?.updatePaginationState(.error(SampleError.sample), at: direction)
             }
         }
     }

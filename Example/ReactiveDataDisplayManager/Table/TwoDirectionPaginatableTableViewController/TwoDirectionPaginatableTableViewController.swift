@@ -43,15 +43,12 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
                                                                   height: Constants.paginatorViewHeight))
 
     private lazy var adapter = tableView.rddm.manualBuilder
-        .add(plugin: .paginatable(progressView: bottomProgressView,
-                                  output: self))
-        .add(plugin: .topPaginatable(progressView: topProgressView,
-                                     output: self,
-                                     isSaveScrollPositionNeeded: true))
+        .add(plugin: .paginatable(progressView: topProgressView, output: self, direction: .backward(.top)))
+//        .add(plugin: .paginatable(progressView: bottomProgressView, output: self))
         .build()
 
     private weak var bottomPaginatableInput: PaginatableInput?
-    private weak var topPaginatableInput: TopPaginatableInput?
+    private weak var topPaginatableInput: PaginatableInput?
 
     private var isFirstPageLoading = true
     private var currentTopPage = 0
@@ -94,8 +91,8 @@ private extension TwoDirectionPaginatableTableViewController {
         activityIndicator.startAnimating()
 
         // hide footer and header
-        bottomPaginatableInput?.updatePagination(canIterate: false)
-        topPaginatableInput?.updatePagination(canIterate: false)
+        bottomPaginatableInput?.updatePaginationEnabled(false, at: .forward(.bottom))
+        topPaginatableInput?.updatePaginationEnabled(false, at: .backward(.top))
 
         // imitation of loading first page
         delay(.now() + .seconds(1)) { [weak self] in
@@ -111,8 +108,8 @@ private extension TwoDirectionPaginatableTableViewController {
             self?.activityIndicator?.isHidden = true
 
             // show pagination loader if update is needed
-            self?.bottomPaginatableInput?.updatePagination(canIterate: true)
-            self?.topPaginatableInput?.updatePagination(canIterate: true)
+            self?.bottomPaginatableInput?.updatePaginationEnabled(true, at: .forward(.bottom))
+            self?.topPaginatableInput?.updatePaginationEnabled(true, at: .backward(.top))
         }
     }
 
@@ -180,12 +177,17 @@ private extension TwoDirectionPaginatableTableViewController {
 
 extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
 
-    func onPaginationInitialized(with input: PaginatableInput) {
-        bottomPaginatableInput = input
+    func onPaginationInitialized(with input: PaginatableInput, at direction: PagingDirection) {
+        switch direction {
+        case .backward:
+            topPaginatableInput = input
+        case .forward:
+            bottomPaginatableInput = input
+        }
     }
 
-    func loadNextPage(with input: PaginatableInput) {
-        input.updateProgress(isLoading: true)
+    func loadNextPage(with input: PaginatableInput, at direction: PagingDirection) {
+        input.updatePaginationState(.loading, at: direction)
 
         delay(.now() + .seconds(2)) { [weak self, weak input] in
             let canFillPages = self?.canFillPages() ?? false
@@ -193,39 +195,10 @@ extension TwoDirectionPaginatableTableViewController: PaginatableOutput {
             if canFillPages {
                 let canIterate = self?.fillNext() ?? false
 
-                input?.updateProgress(isLoading: false)
-                input?.updatePagination(canIterate: canIterate)
+                input?.updatePaginationState(.idle, at: direction)
+                input?.updatePaginationEnabled(canIterate, at: direction)
             } else {
-                input?.updateProgress(isLoading: false)
-                input?.updateError(SampleError.sample)
-            }
-        }
-    }
-
-}
-
-// MARK: - TopPaginatableOutput
-
-extension TwoDirectionPaginatableTableViewController: TopPaginatableOutput {
-
-    func onTopPaginationInitialized(with input: TopPaginatableInput) {
-        topPaginatableInput = input
-    }
-
-    func loadPrevPage(with input: TopPaginatableInput) {
-        input.updateProgress(isLoading: true)
-
-        delay(.now() + .seconds(2)) { [weak self, weak input] in
-            guard let self = self else {
-                return
-            }
-            if self.canFillPages() {
-                let canIterate = self.fillPrev()
-                input?.updateProgress(isLoading: false)
-                input?.updatePagination(canIterate: canIterate)
-            } else {
-                input?.updateProgress(isLoading: false)
-                input?.updateError(SampleError.sample)
+                input?.updatePaginationState(.error(SampleError.sample), at: direction)
             }
         }
     }

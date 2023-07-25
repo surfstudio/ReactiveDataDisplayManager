@@ -44,14 +44,12 @@ final class TwoDirectionPaginatableCollectionViewController: UIViewController {
                                                                        height: Constants.paginatorHeight))
 
     private lazy var adapter = collectionView.rddm.baseBuilder
-        .add(plugin: .paginatable(progressView: bottomProgressView, output: self))
-        .add(plugin: .topPaginatable(progressView: topProgressView,
-                                     output: self,
-                                     isSaveScrollPositionNeeded: true))
+        .add(plugin: .bottomPaginatable(progressView: bottomProgressView, output: self))
+        .add(plugin: .topPaginatable(progressView: topProgressView, output: self))
         .build()
 
     private weak var bottomPaginatableInput: PaginatableInput?
-    private weak var topPaginatableInput: TopPaginatableInput?
+    private weak var topPaginatableInput: PaginatableInput?
 
     private var isFirstPageLoading = true
     private var currentTopPage = 0
@@ -95,10 +93,10 @@ private extension TwoDirectionPaginatableCollectionViewController {
         activityIndicator.startAnimating()
 
         // hide footer
-        bottomPaginatableInput?.updatePagination(canIterate: false)
-        topPaginatableInput?.updatePagination(canIterate: false)
-        bottomPaginatableInput?.updateProgress(isLoading: false)
-        topPaginatableInput?.updateProgress(isLoading: false)
+        bottomPaginatableInput?.updatePaginationEnabled(false, at: .forward(.bottom))
+        topPaginatableInput?.updatePaginationEnabled(false, at: .backward(.top))
+        bottomPaginatableInput?.updatePaginationState(.idle, at: .forward(.bottom))
+        topPaginatableInput?.updatePaginationState(.loading, at: .backward(.top))
 
         // imitation of loading first page
         delay(.now() + .seconds(3)) { [weak self] in
@@ -112,8 +110,8 @@ private extension TwoDirectionPaginatableCollectionViewController {
             self?.collectionView.scrollToItem(at: Constants.firstPageMiddleIndexPath, at: .centeredVertically, animated: false)
 
             // show pagination loader if update is needed
-            self?.bottomPaginatableInput?.updatePagination(canIterate: true)
-            self?.topPaginatableInput?.updatePagination(canIterate: true)
+            self?.bottomPaginatableInput?.updatePaginationEnabled(true, at: .forward(.bottom))
+            self?.topPaginatableInput?.updatePaginationEnabled(true, at: .backward(.top))
         }
     }
 
@@ -188,52 +186,34 @@ private extension TwoDirectionPaginatableCollectionViewController {
 
 extension TwoDirectionPaginatableCollectionViewController: PaginatableOutput {
 
-    func onPaginationInitialized(with input: PaginatableInput) {
-        bottomPaginatableInput = input
+    func onPaginationInitialized(with input: PaginatableInput, at direction: PagingDirection) {
+        switch direction {
+        case .backward:
+            topPaginatableInput = input
+        case .forward:
+            bottomPaginatableInput = input
+        }
     }
 
-    func loadNextPage(with input: PaginatableInput) {
+    func loadNextPage(with input: PaginatableInput, at direction: PagingDirection) {
 
-        input.updateProgress(isLoading: true)
+        input.updatePaginationState(.loading, at: direction)
 
         delay(.now() + .seconds(3)) { [weak self, weak input] in
             let canFillNext = self?.canFillPages() ?? false
             if canFillNext {
-                let canIterate = self?.fillNext() ?? false
+                let canIterate: Bool
+                switch direction {
+                case .backward:
+                    canIterate = self?.fillPrev() ?? false
+                case .forward:
+                    canIterate = self?.fillNext() ?? false
+                }
 
-                input?.updateProgress(isLoading: false)
-                input?.updatePagination(canIterate: canIterate)
+                input?.updatePaginationState(.idle, at: direction)
+                input?.updatePaginationEnabled(canIterate, at: direction)
             } else {
-                input?.updateProgress(isLoading: false)
-                input?.updateError(SampleError.sample)
-            }
-        }
-    }
-
-}
-
-// MARK: - TopPaginatableOutput
-
-extension TwoDirectionPaginatableCollectionViewController: TopPaginatableOutput {
-
-    func onTopPaginationInitialized(with input: ReactiveDataDisplayManager.TopPaginatableInput) {
-        topPaginatableInput = input
-    }
-
-    func loadPrevPage(with input: ReactiveDataDisplayManager.TopPaginatableInput) {
-        input.updateProgress(isLoading: true)
-
-        delay(.now() + .seconds(2)) { [weak self, weak input] in
-            guard let self = self else {
-                return
-            }
-            if self.canFillPages() {
-                let canIterate = self.fillPrev()
-                input?.updateProgress(isLoading: false)
-                input?.updatePagination(canIterate: canIterate)
-            } else {
-                input?.updateProgress(isLoading: false)
-                input?.updateError(SampleError.sample)
+                input?.updatePaginationState(.error(SampleError.sample), at: direction)
             }
         }
     }
