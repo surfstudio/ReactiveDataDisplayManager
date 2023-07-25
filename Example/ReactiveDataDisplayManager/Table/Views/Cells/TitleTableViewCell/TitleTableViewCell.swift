@@ -29,7 +29,11 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
     // MARK: - CalculatableHeightItem
 
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
-        return 44
+        let verticalInsets: CGFloat = 22
+        let horizontalInsets: CGFloat = 96
+        let titleHeight = model.getHeight(withConstrainedWidth: width - horizontalInsets,
+                                          font: .preferredFont(forTextStyle: .body))
+        return titleHeight + verticalInsets
     }
 
 }
