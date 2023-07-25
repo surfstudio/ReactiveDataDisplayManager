@@ -29,7 +29,7 @@ extension TitleStackCellGenerator: ViewBuilder {
 
     func build(view: UILabel) {
         view.text = title
-        view.font = UIFont.systemFont(ofSize: 34.0, weight: .bold)
+        view.font = UIFont.preferredFont(forTextStyle: .largeTitle)
     }
 
 }

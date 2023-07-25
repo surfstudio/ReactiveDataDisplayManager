@@ -29,6 +29,7 @@ final class PaginatableCollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .paginatable(progressView: progressView, output: self))
+        .add(plugin: .accessibility())
         .build()
 
     private weak var paginatableInput: PaginatableInput?
@@ -40,7 +41,7 @@ final class PaginatableCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Collection with pagination"
+        title = "pagination"
 
         configureActivityIndicatorIfNeeded()
         loadFirstPage()
@@ -100,7 +101,8 @@ private extension PaginatableCollectionViewController {
 
     func makeGenerator() -> CollectionCellGenerator {
         let title = "Random cell \(Int.random(in: 0...1000)) from page \(currentPage)"
-        return TitleCollectionViewCell.rddm.baseGenerator(with: title)
+        return TitleCollectionViewCell.rddm.calculatableHeightGenerator(with: title,
+                                                                        referencedWidth: 200)
     }
 
     func canFillNext() -> Bool {

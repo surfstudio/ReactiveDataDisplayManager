@@ -81,7 +81,7 @@ public class CollectionTopPaginatablePlugin: BaseCollectionPlugin<CollectionEven
     public override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
 
         switch event {
-        case .willDisplayCell(let indexPath):
+        case .willDisplayCell(let indexPath, _):
             let firstCellIndexPath = IndexPath(row: 0, section: 0)
             guard indexPath == firstCellIndexPath, canIterate, !isLoading, !isErrorWasReceived else {
                 return

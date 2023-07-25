@@ -23,6 +23,7 @@ final class PrefetchingTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: prefetcherablePlugin)
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

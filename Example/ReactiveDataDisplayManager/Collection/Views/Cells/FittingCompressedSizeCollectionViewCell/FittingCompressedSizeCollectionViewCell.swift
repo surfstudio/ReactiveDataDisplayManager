@@ -50,6 +50,13 @@ extension FittingCompressedSizeCollectionViewCell: ConfigurableItem {
 
 }
 
+extension FittingCompressedSizeCollectionViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
+
+}
+
 // MARK: - Configuration
 
 private extension FittingCompressedSizeCollectionViewCell {

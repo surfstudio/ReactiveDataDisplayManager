@@ -15,17 +15,21 @@ class TitleWithIconTableViewCell: UITableViewCell, CalculatableHeightItem {
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
 
-    // MARK: - Internal methods
-
-    func fill(with title: String) {
-        titleLabel.text = title
-    }
-
     // MARK: - CalculatableHeightItem
 
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
-        return 44
+        return model.getHeight(withConstrainedWidth: UIScreen.main.bounds.width,
+                               font: .preferredFont(forTextStyle: .body))
     }
+
+}
+
+// MARK: - AccessibilityItem
+
+extension TitleWithIconTableViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .merge(iconImageView, titleLabel) }
 
 }
 
@@ -35,7 +39,7 @@ extension TitleWithIconTableViewCell: ConfigurableItem {
 
     func configure(with model: String) {
         accessoryType = .disclosureIndicator
-        titleLabel.text = model
+        titleLabel.text = model.lowercased()
         iconImageView.image = #imageLiteral(resourceName: "ReactiveIconHorizontal")
     }
 

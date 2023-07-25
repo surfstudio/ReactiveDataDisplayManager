@@ -48,6 +48,7 @@ final class DiffableTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.baseBuilder
         .set(dataSource: { DiffableTableDataSource(provider: $0) })
+        .add(plugin: .accessibility())
         .build()
 
     private var generators: [DiffableGenerator] = []
@@ -56,7 +57,7 @@ final class DiffableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with diffableDataSource"
+        title = "diffableDataSource"
 
         setupSearch()
         setupBarButtonItem()
@@ -87,6 +88,7 @@ private extension DiffableTableViewController {
     func setupSearch() {
         let searchBar = UISearchBar()
         searchBar.delegate = self
+        searchBar.searchTextField.accessibilityLabel = "Search field"
         navigationItem.titleView = searchBar
     }
 
@@ -111,9 +113,9 @@ private extension DiffableTableViewController {
                 generators: generators,
                 header: EmptyTableHeaderGenerator(uniqueId: Constants.sectionId.appending("header")),
                 footer: EmptyTableFooterGenerator(uniqueId: Constants.sectionId.appending("footer"))
-            ).decorate(with: .space(model: .init(size: .height(16), color: .rddm)),
+            ).decorate(with: .space(model: .init(size: .height(32), color: .rddm)),
                        at: .end,
-                       and: .each)
+                       and: .first)
             .erased()
         }
 

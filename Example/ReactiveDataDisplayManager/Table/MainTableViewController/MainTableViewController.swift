@@ -41,24 +41,23 @@ final class MainTableViewController: UIViewController {
         static let models: [(title: String, segueId: SegueIdentifier)] = [
             ("Gallery without prefetching", .imageTable),
             ("Gallery with prefetching", .prefetchingTable),
-            ("Table with foldable cell", .foldableCellTable),
-            ("Gravity table with foldable cell", .gravityTable),
-            ("Table with movable cell", .movableTable),
-            ("Table with alphabetize sections", .alphabetizeSectionsTable),
-            ("Table with sections titles", .sectionTitlesTable),
-            ("Table with diffableDataSource", .diffableTable),
-            ("Table with swipeable cells", .swipeableTable),
-            ("Table with refresh control", .refreshableTable),
-            ("Table with pagination", .paginatableTable),
-            ("Table with all plugins", .allPluginsTable),
-            ("Table with DifferenceKit", .differenceTable),
-            ("Table with drag and drop cells", .dragAndDroppableTable),
-            ("Table with selectable cells", .selectableTable),
-            ("Table with highlightable cells", .highlightableTable),
-            ("Table with custom components", .customizableComponentsTable),
-            ("Table with two direction pagination", .twoDirectionPaginatableTable),
-            ("Table with custom components", .customizableComponentsTable),
-            ("Table with stack cell", .stackCellExampleTable)
+            ("foldable cell", .foldableCellTable),
+            ("Gravity foldable cell", .gravityTable),
+            ("movable cell", .movableTable),
+            ("alphabetize sections", .alphabetizeSectionsTable),
+            ("sections titles", .sectionTitlesTable),
+            ("diffableDataSource", .diffableTable),
+            ("swipeable cells", .swipeableTable),
+            ("refresh control", .refreshableTable),
+            ("pagination", .paginatableTable),
+            ("all plugins", .allPluginsTable),
+            ("DifferenceKit", .differenceTable),
+            ("drag and drop cells", .dragAndDroppableTable),
+            ("selectable cells", .selectableTable),
+            ("highlightable cells", .highlightableTable),
+            ("custom components", .customizableComponentsTable),
+            ("back/forward pagination", .twoDirectionPaginatableTable),
+            ("stack cell inside", .stackCellExampleTable)
         ]
     }
 
@@ -70,6 +69,7 @@ final class MainTableViewController: UIViewController {
 
     private lazy var ddm = tableView.rddm.baseBuilder
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
@@ -90,7 +90,7 @@ private extension MainTableViewController {
 
         for model in Constants.models {
             // Create generator
-            let generator = TitleWithIconTableViewCell.rddm.calculatableHeightGenerator(with: model.title)
+            let generator = TitleWithIconTableViewCell.rddm.baseGenerator(with: model.title)
 
             generator.didSelectEvent += { [weak self] in
                 self?.openScreen(by: model.segueId)

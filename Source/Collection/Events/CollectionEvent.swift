@@ -13,9 +13,15 @@ public enum CollectionEvent {
     case didDeselect(IndexPath)
     case didHighlight(IndexPath)
     case didUnhighlight(IndexPath)
-    case willDisplayCell(IndexPath)
-    case didEndDisplayCell(IndexPath)
-    case willDisplaySupplementaryView(IndexPath)
-    case didEndDisplayingSupplementaryView(IndexPath)
+    case willDisplayCell(IndexPath, UICollectionViewCell)
+    case didEndDisplayCell(IndexPath, UICollectionViewCell)
+    case willDisplaySupplementaryView(IndexPath, UICollectionReusableView, String)
+    case didEndDisplayingSupplementaryView(IndexPath, UICollectionReusableView, String)
     case move(from: IndexPath, to: IndexPath)
+
+    // MARK: - Accessibility Events
+
+    case invalidatedCellAccessibility(IndexPath, AccessibilityItem)
+    case invalidatedHeaderAccessibility(Int, AccessibilityItem)
+    case invalidatedFooterAccessibility(Int, AccessibilityItem)
 }

@@ -16,7 +16,7 @@ extension EmptyTableHeaderGenerator: GravityItem {
     // swiftlint:disable unused_setter_value
     public var heaviness: Int {
         get { return self.getHeaviness() }
-        set { fatalError() }
+        set { return FatalErrorUtil.fatalError() }
     }
     // swiftlint:enable unused_setter_value
 }
@@ -113,10 +113,6 @@ open class GravityTableManager: BaseTableManager {
         self.sections[index].generators.removeAll()
     }
 
-    public func clearHeaderGenerators() {
-        sections.removeAll()
-    }
-
     open func replace(oldGenerator: GeneratorType,
                       on newGenerator: GeneratorType,
                       removeInsertAnimation: TableRowAnimationGroup = .animated(.automatic, .automatic)) {
@@ -187,7 +183,7 @@ private extension GravityTableManager {
         }
 
         sections.registerAllIfNeeded(with: view, using: registrator)
-		guard !view.visibleCells.isEmpty else { return }        
+		guard !view.visibleCells.isEmpty else { return }
         modifier?.insertRows(at: indexPaths, with: Optional.none)
     }
 

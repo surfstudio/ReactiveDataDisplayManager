@@ -28,6 +28,7 @@ final class ImageCollectionViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

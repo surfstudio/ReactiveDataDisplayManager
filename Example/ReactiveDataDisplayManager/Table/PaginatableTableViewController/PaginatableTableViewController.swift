@@ -30,6 +30,7 @@ final class PaginatableTableViewController: UIViewController {
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: .paginatable(progressView: progressView,
                                   output: self))
+        .add(plugin: .accessibility())
         .build()
 
     private weak var paginatableInput: PaginatableInput?
@@ -41,7 +42,7 @@ final class PaginatableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with pagination"
+        title = "pagination"
 
         configureActivityIndicatorIfNeeded()
         loadFirstPage()

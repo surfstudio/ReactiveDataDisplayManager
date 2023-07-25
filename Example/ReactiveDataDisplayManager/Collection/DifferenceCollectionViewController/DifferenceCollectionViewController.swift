@@ -42,7 +42,9 @@ final class DifferenceCollectionViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = collectionView.rddm.baseBuilder.build()
+    private lazy var adapter = collectionView.rddm.baseBuilder
+        .add(plugin: .accessibility())
+        .build()
 
     private var generators: [DiffableGenerator] = []
 
@@ -86,6 +88,11 @@ private extension DifferenceCollectionViewController {
     func setupSearch() {
         let searchBar = UISearchBar()
         searchBar.delegate = self
+        if #available(iOS 13.0, *) {
+            searchBar.searchTextField.accessibilityLabel = "Search field"
+        } else {
+            // Fallback on earlier versions
+        }
         navigationItem.titleView = searchBar
     }
 

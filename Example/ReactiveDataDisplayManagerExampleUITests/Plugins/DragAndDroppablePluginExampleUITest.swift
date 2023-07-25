@@ -11,7 +11,7 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
 
     private enum Constants {
         static let dragDuration: TimeInterval = 1
-        static let waitTime: UInt32 = UInt32(dragDuration)
+        static let waitTime: TimeInterval = 1.5 + dragDuration * 2
     }
 
     func testСollection_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
@@ -21,16 +21,17 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
         let duration = Constants.dragDuration
 
         setTab("Collection")
-        tapTableElement("Collection with drag and drop item")
+        tapTableElement("drag and drop item")
 
         let sourceCell = getCell(for: .collection, collectionId: collectionId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .collection, collectionId: collectionId, cellId: destinationDraggable)
-        sourceCell.press(forDuration: duration, thenDragTo: destinationCell)
+        sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .slow, thenHoldForDuration: duration)
 
-        sleep(Constants.waitTime)
         let firstCell = getFirstCell(for: .collection, id: collectionId)
 
-        XCTAssertTrue(firstCell.label == destinationDraggable)
+        XCTAssertTrue(firstCell.waitForLabelEqualTo(destinationDraggable,
+                                                    timeout: Constants.waitTime)
+        )
     }
 
     func testTable_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
@@ -40,16 +41,17 @@ final class DragAndDroppablePluginExampleUITest: BaseUITestCase {
         let duration = Constants.dragDuration
 
         setTab("Table")
-        tapTableElement("Table with drag and drop cells")
+        tapTableElement("drag and drop cells")
 
         let sourceCell = getCell(for: .table, collectionId: tableId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .table, collectionId: tableId, cellId: destinationDraggable)
-        sourceCell.press(forDuration: duration, thenDragTo: destinationCell)
+        sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .slow, thenHoldForDuration: duration)
 
-        sleep(Constants.waitTime)
         let firstCell = getFirstCell(for: .table, id: tableId)
 
-        XCTAssertTrue(firstCell.label == destinationDraggable)
+        XCTAssertTrue(firstCell.waitForLabelEqualTo(destinationDraggable,
+                                                    timeout: Constants.waitTime)
+        )
     }
 
 }

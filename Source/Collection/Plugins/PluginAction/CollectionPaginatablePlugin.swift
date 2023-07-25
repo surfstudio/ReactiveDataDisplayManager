@@ -78,7 +78,7 @@ public class CollectionPaginatablePlugin: BaseCollectionPlugin<CollectionEvent> 
     public override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
 
         switch event {
-        case .willDisplayCell(let indexPath):
+        case .willDisplayCell(let indexPath, _):
             if progressView.frame.minY != collectionView?.contentSize.height {
                 setProgressViewFinalFrame()
             }

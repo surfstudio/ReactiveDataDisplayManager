@@ -6,13 +6,19 @@
 //
 
 import UIKit
+import ReactiveDataDisplayManager
 
-class TitleIconCollectionFooterView: UICollectionReusableView {
+class TitleIconCollectionFooterView: UICollectionReusableView, AccessibilityItem {
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
+
+    // MARK: - AccessibilityItem
+
+    var labelStrategy: AccessibilityStringStrategy { .merge("some image with title: ", titleLabel.text) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .merge(iconImageView, titleLabel) }
 
     // MARK: - Internal methods
 

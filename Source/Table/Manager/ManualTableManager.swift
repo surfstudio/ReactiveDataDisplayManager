@@ -24,22 +24,6 @@ public class ManualTableManager: BaseTableManager {
         addTableGenerators(with: cells, choice: .newSection(header: generator, footer: footerGenerator))
     }
 
-    /// Adds section TableHeaderGenerator generator  to the end of collection
-    ///
-    /// - Parameters:
-    ///   - generator: Generator for new section TableHeaderGenerator.
-    open func addSectionHeaderGenerator(_ generator: TableHeaderGenerator) {
-        addHeader(header: generator)
-    }
-
-    /// Adds section TableFooterGenerator generator  to the end of collection
-    ///
-    /// - Parameters:
-    ///   - generator: Generator for current section TableFooterGenerator.
-    open func addSectionFooterGenerator(_ generator: TableFooterGenerator) {
-        addFooter(footer: generator)
-    }
-
     /// Inserts new TableHeaderGenerator generator after another.
     ///
     /// - Parameters:
@@ -72,20 +56,8 @@ public class ManualTableManager: BaseTableManager {
         }
     }
 
-    /// Inserts new generators to provided TableHeaderGenerator generator.
-    ///
-    /// - Parameters:
-    ///   - generators: Generators to insert
-    ///   - TableHeaderGenerator: TableHeaderGenerator generator in which you want to insert.
-    open func addCellGenerators(_ generators: [TableCellGenerator], toHeader headerGenerator: TableHeaderGenerator) {
-
-        if let index = sections.firstIndex(where: { $0.header === headerGenerator }) {
-            addTableGenerators(with: generators, choice: .byIndex(index))
-        }
-    }
-
     /// Removes all TableCellGenerator generators from a given section
-    open func removeAllGenerators(from headerGenerator: TableHeaderGenerator) {
+    open override func removeAllGenerators(from headerGenerator: TableHeaderGenerator) {
         guard let index = self.sections.firstIndex(where: { $0.header === headerGenerator }),
               self.sections.count > index else {
             return
@@ -102,10 +74,6 @@ public class ManualTableManager: BaseTableManager {
         }
 
         modifier?.removeRows(at: indexes, and: nil, with: .automatic)
-    }
-
-    open func addCellGenerator(_ generator: TableCellGenerator, toHeader headerGenerator: TableHeaderGenerator) {
-        addCellGenerators([generator], toHeader: headerGenerator)
     }
 
     /// Inserts new head generator.

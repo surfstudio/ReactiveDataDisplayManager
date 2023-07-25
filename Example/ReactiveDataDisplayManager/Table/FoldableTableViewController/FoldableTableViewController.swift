@@ -26,6 +26,7 @@ final class FoldableTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.baseBuilder
         .add(plugin: .foldable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

@@ -28,7 +28,15 @@ public final class TableWrappedCell<View: ConfigurableItem>: UITableViewCell, Vi
 extension TableWrappedCell: CalculatableHeightItem where View: CalculatableHeightItem {
 
     public static func getHeight(forWidth width: CGFloat, with model: Model) -> CGFloat {
-        return View.getHeight(forWidth: width, with: model)
+        let nestedViewHeight = View.getHeight(forWidth: width, with: model)
+        if let alignment = (model as? AlignmentProvider)?.alignment {
+            switch alignment {
+            case .leading(let insets), .trailing(let insets), .all(let insets):
+                return nestedViewHeight + insets.top + insets.bottom
+            }
+        } else {
+            return nestedViewHeight
+        }
     }
 
 }

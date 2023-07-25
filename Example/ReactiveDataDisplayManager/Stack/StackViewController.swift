@@ -17,7 +17,8 @@ final class StackViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = stackView.rddm.baseBuilder.build()
+    private lazy var adapter = stackView.rddm.baseBuilder
+        .build()
     private let titles = ["One", "Two", "Three", "Four"]
 
     // MARK: - UIViewController

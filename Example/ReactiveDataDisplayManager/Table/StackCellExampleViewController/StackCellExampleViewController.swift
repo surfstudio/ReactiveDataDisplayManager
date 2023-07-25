@@ -27,13 +27,14 @@ final class StackCellExampleViewController: UIViewController {
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .selectable())
         .add(plugin: .highlightable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Stack cell example view controller"
+        title = "Stack inside table"
         tableView.accessibilityIdentifier = "Stack_Cell_Example_View_Controller"
         fillAdapter()
     }

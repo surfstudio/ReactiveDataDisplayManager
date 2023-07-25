@@ -26,13 +26,14 @@ final class MovableTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(featurePlugin: .movable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "table with movable cell"
+        title = "movable cell"
         tableView.accessibilityIdentifier = "Table_with_movable_cell"
         tableView.dragInteractionEnabled = false
         fillAdapter()

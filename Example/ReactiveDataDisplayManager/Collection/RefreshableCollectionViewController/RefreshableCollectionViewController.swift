@@ -33,6 +33,7 @@ final class RefreshableCollectionViewController: UIViewController {
 
     private lazy var adapter = collectionView.rddm.baseBuilder
         .add(plugin: .refreshable(refreshControl: refreshControl, output: self))
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

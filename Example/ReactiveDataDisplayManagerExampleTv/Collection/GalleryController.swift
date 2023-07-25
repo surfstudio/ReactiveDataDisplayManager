@@ -31,6 +31,7 @@ final class GalleryController: UIViewController {
             by: ShadowFocusableStrategy(model: .init(color: .red))
         ))
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

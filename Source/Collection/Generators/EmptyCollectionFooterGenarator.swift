@@ -48,7 +48,7 @@ public class EmptyCollectionFooterGenerator: CollectionFooterGenerator, IdOwner 
 extension EmptyCollectionFooterGenerator: DiffableItemSource {
 
     public var diffableItem: DiffableItem {
-        DiffableItem(id: id, state: .init("RDDM.Diffable.EmptySection"))
+        DiffableItem(id: id, state: .init("RDDM.Diffable.EmptySection.footer"))
     }
 
 }

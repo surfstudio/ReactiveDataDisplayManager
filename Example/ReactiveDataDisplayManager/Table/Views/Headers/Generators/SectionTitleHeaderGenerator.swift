@@ -11,12 +11,6 @@ import ReactiveDataDisplayManager
 
 final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplaybleItem {
 
-    // MARK: - Constants
-
-    private enum Constants {
-        static let defaultHeight: CGFloat = 30
-    }
-
     // MARK: - Events
 
     var willDisplayEvent = Event<Void>()
@@ -51,7 +45,7 @@ final class SectionTitleHeaderGenerator: TableHeaderGenerator, IndexTitleDisplay
     }
 
     override func height(_ tableView: UITableView, forSection section: Int) -> CGFloat {
-        view?.frame.height ?? Constants.defaultHeight
+        HeaderView.getHeight(forWidth: tableView.bounds.width, with: model)
     }
 
 }

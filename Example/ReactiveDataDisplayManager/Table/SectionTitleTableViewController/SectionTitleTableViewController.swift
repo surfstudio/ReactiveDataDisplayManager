@@ -39,13 +39,14 @@ final class SectionTitleTableViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(featurePlugin: .sectionTitleDisplayable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with section title"
+        title = "section title"
         fillAdapter()
     }
 
@@ -61,6 +62,8 @@ private extension SectionTitleTableViewController {
         Constants.headerModels.forEach {
             // Add header generator into adapter
             adapter += SectionTitleHeaderGenerator(model: $0.title, needSectionIndexTitle: $0.needDisplaySectionTitle)
+
+			adapter += SectionTitleFooterGenerator(model: $0.title)
             // Add cell generators into adapter
             adapter += makeCellGenerators()
         }

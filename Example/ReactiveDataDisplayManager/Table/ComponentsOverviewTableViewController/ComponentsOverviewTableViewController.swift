@@ -28,10 +28,11 @@ final class ComponentsOverviewTableViewController: UIViewController {
     // MARK: - Private Properties
 
     private lazy var adapter = tableView.rddm.baseBuilder
+        .add(plugin: .accessibility())
         .build()
 
     // Recieved message time
-    private let recievedMessageTimeStyle = TextStyle(color: .gray, font: .systemFont(ofSize: 12, weight: .light))
+    private let recievedMessageTimeStyle = TextStyle(color: .gray, font: .preferredFont(forTextStyle: .caption1))
     private let recievedMessageTimeLayout = TextLayout(lineBreakMode: .byWordWrapping, numberOfLines: 0)
     private lazy var recievedMessageTimeModel: LabelView.Model = .build { property in
         property.text(.string("17:05"))
@@ -47,7 +48,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private lazy var recievedMessageTimeGenerator = LabelView.rddm.tableGenerator(with: recievedMessageTimeModel, and: .class)
 
     // Sent message time
-    private let sentTimeMessageStyle = TextStyle(color: .gray, font: .systemFont(ofSize: 12, weight: .light))
+    private let sentTimeMessageStyle = TextStyle(color: .gray, font: .preferredFont(forTextStyle: .caption1))
     private let sentTimeMessageLayout = TextLayout(lineBreakMode: .byWordWrapping, numberOfLines: 0)
     private lazy var sentTimeMessageModel: LabelView.Model = .build { property in
         property.text(.string("17:32"))
@@ -63,7 +64,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
     private lazy var sentMessageTimeGenerator = LabelView.rddm.tableGenerator(with: sentTimeMessageModel, and: .class)
 
     // Date
-    private let dateStyle = TextStyle(color: .black, font: .systemFont(ofSize: 12, weight: .light))
+    private let dateStyle = TextStyle(color: .black, font: .preferredFont(forTextStyle: .caption1))
     private let dateLayout = TextLayout(lineBreakMode: .byWordWrapping, numberOfLines: 0)
     private lazy var dateModel: LabelView.Model = .build { property in
         property.text(.string("24 мая 2023"))
@@ -80,7 +81,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
 
     // Sent message
     private let sentMessageStyle = TextStyle(color: .white,
-                                             font: .systemFont(ofSize: 16, weight: .regular))
+                                             font: .preferredFont(forTextStyle: .body))
     private let sentMessageBorderStyle = BorderStyle(cornerRadius: 9,
                                                      maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner])
     private lazy var sentMessageModel: MessageView.Model = .build { property in
@@ -99,25 +100,12 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                      bottom: 3,
                                      right: 5))
         property.text(.string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"))
-
-        let tapAction: () -> Void = {
-            if var topController = UIApplication.shared.keyWindow?.rootViewController {
-                while let presentedViewController = topController.presentedViewController {
-                    topController = presentedViewController
-                }
-
-                let alertController = UIAlertController(title: "MessageView Tapped", message: "The MessageView was tapped!", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                topController.present(alertController, animated: true, completion: nil)
-            }
-        }
-
     }
 
     private lazy var sentMessageGenerator = MessageView.rddm.tableGenerator(with: sentMessageModel, and: .class)
 
     // Recieved message
-    private let recievedMessageStyle = TextStyle(color: .black, font: .systemFont(ofSize: 16, weight: .regular))
+    private let recievedMessageStyle = TextStyle(color: .black, font: .preferredFont(forTextStyle: .body))
     private let recievedMessageBorderStyle = BorderStyle(cornerRadius: 9,
                                                          maskedCorners: [
                                                             .layerMinXMinYCorner,

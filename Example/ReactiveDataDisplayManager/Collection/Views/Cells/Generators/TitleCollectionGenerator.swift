@@ -15,6 +15,7 @@ final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectio
 
     var title: String
     var needIndexTitle: Bool
+    var referencedWidth: CGFloat
     var id: AnyHashable?
 
     // MARK: - Private Properties
@@ -23,8 +24,9 @@ final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectio
 
     // MARK: - Initialization
 
-    public init(model: String, needIndexTitle: Bool = false) {
+    public init(model: String, referencedWidth: CGFloat, needIndexTitle: Bool = false) {
         self.title = model
+        self.referencedWidth = referencedWidth
         self.needIndexTitle = needIndexTitle
         self.id = model
 
@@ -42,6 +44,18 @@ extension TitleCollectionGenerator: DragAndDroppableItemSource {
 
     var dropableItem: DragAndDroppableItem {
         return dragAndDroppableItem
+    }
+
+}
+
+// MARK: - SizableItem
+
+extension TitleCollectionGenerator: SizableItem {
+
+    func getSize() -> CGSize {
+        .init(width: referencedWidth,
+              height: TitleCollectionViewCell.getHeight(forWidth: referencedWidth, with: title)
+        )
     }
 
 }

@@ -43,7 +43,7 @@ extension HeaderCollectionListGenerator: CollectionHeaderGenerator {
 extension HeaderCollectionListGenerator: ViewBuilder {
 
     func build(view: HeaderCollectionListView) {
-        view.fill(title: title)
+        view.configure(with: title)
     }
 
 }

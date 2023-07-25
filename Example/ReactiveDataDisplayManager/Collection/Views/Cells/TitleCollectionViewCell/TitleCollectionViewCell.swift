@@ -9,11 +9,22 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class TitleCollectionViewCell: UICollectionViewCell {
+final class TitleCollectionViewCell: UICollectionViewCell, AccessibilityInvalidatable {
 
     // MARK: - IBOutlets
 
     @IBOutlet private weak var titleLabel: UILabel!
+
+    // MARK: - AccessibilityInvalidatable
+
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var valueStrategy: AccessibilityStringStrategy = .just(nil)
+    lazy var traitsStrategy: AccessibilityTraitsStrategy = .from(titleLabel)
+    var shouldOverrideStateTraits: Bool { true }
+
+    var accessibilityInvalidator: AccessibilityItemInvalidator?
+
+    // MARK: - UICollectionViewCell
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,7 +39,6 @@ extension TitleCollectionViewCell: ConfigurableItem {
 
     func configure(with title: String) {
         titleLabel.text = title
-        accessibilityLabel = title
     }
 
 }
@@ -39,23 +49,23 @@ extension TitleCollectionViewCell: HighlightableItem {
 
     func applyUnhighlightedStyle() {
         contentView.backgroundColor = .gray
-        accessibilityLabel = "Normal"
+        updateState(state: "Normal", isSelected: false)
     }
 
     func applyHighlightedStyle() {
         contentView.backgroundColor = .white.withAlphaComponent(0.5)
-        accessibilityLabel = "Highlighted"
+        updateState(state: "Highlighted", isSelected: true)
     }
 
     func applySelectedStyle() {
         contentView.layer.borderColor = UIColor.blue.cgColor
         contentView.layer.borderWidth = 1
-        accessibilityLabel = "Selected"
+        updateState(state: "Selected", isSelected: true)
     }
 
     func applyDeselectedStyle() {
         contentView.layer.borderWidth = .zero
-        accessibilityLabel = "Normal"
+        updateState(state: "Normal", isSelected: false)
     }
 
 }
@@ -77,11 +87,15 @@ extension TitleCollectionViewCell: CalculatableHeightItem {
 // MARK: - Private
 
 private extension TitleCollectionViewCell {
-
     func configureAppearance() {
         contentView.backgroundColor = .gray
         contentView.layer.cornerRadius = 20
         contentView.clipsToBounds = true
     }
 
+    func updateState(state: String, isSelected: Bool) {
+        valueStrategy = .just(state)
+        isSelected ? traitsStrategy.insert(.selected) : traitsStrategy.remove(.selected)
+        accessibilityInvalidator?.invalidateParameters()
+    }
 }

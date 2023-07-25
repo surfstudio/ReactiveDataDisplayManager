@@ -16,7 +16,9 @@ final class DynamicHeightViewController: UIViewController {
 
     // MARK: - Private Properties
 
-    private lazy var adapter = tableView.rddm.manualBuilder.build()
+    private lazy var adapter = tableView.rddm.manualBuilder
+        .add(plugin: .accessibility())
+        .build()
 
     // MARK: - UIViewController
 

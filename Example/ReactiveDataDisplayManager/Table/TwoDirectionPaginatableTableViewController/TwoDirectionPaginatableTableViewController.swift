@@ -48,6 +48,7 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
         .add(plugin: .topPaginatable(progressView: topProgressView,
                                      output: self,
                                      isSaveScrollPositionNeeded: true))
+        .add(plugin: .accessibility())
         .build()
 
     private weak var bottomPaginatableInput: PaginatableInput?
@@ -63,7 +64,7 @@ final class TwoDirectionPaginatableTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Table with two directions pagination"
+        title = "two directional pagination"
 
         configureActivityIndicatorIfNeeded()
         loadFirstPage()

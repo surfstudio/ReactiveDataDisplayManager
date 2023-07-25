@@ -21,6 +21,7 @@ final class TableController: UIViewController {
             by: BorderFocusableStrategy(model: .init(color: .gray))
         ))
         .add(plugin: .selectable())
+        .add(plugin: .accessibility())
         .build()
 
     // MARK: - UIViewController

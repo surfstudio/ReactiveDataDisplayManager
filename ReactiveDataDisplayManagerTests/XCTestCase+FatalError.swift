@@ -19,22 +19,15 @@ extension XCTestCase {
         FatalErrorUtil.replaceFatalError { message, _, _ in
             assertionMessage = message
             expectation.fulfill()
-            self.unreachable()
         }
 
-        DispatchQueue.global(qos: .userInitiated).async(execute: testcase)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: testcase)
 
-        waitForExpectations(timeout: 3) { _ in
+        waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(assertionMessage, expectedMessage)
 
             FatalErrorUtil.restoreFatalError()
         }
-    }
-
-    private func unreachable() -> Never {
-        repeat {
-            RunLoop.current.run()
-        } while (true)
     }
 
 }

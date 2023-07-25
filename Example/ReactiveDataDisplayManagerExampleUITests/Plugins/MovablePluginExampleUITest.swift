@@ -10,8 +10,8 @@ import XCTest
 final class MovablePluginExampleUITest: BaseUITestCase {
 
     private enum Constants {
-        static let dragDuration = 0.5
-        static let waitTime: UInt32 = 1
+        static let dragDuration: TimeInterval = 1
+        static let waitTime: TimeInterval = 1.5 + dragDuration * 2
     }
 
     func testСollection_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
@@ -21,16 +21,17 @@ final class MovablePluginExampleUITest: BaseUITestCase {
         let duration = Constants.dragDuration
 
         setTab("Collection")
-        tapTableElement("Collection with movable items")
+        tapTableElement("movable items")
 
         let sourceCell = getCell(for: .collection, collectionId: collectionId, cellId: sourceDraggable)
         let destinationCell = getCell(for: .collection, collectionId: collectionId, cellId: destinationDraggable)
         sourceCell.press(forDuration: duration, thenDragTo: destinationCell, withVelocity: .slow, thenHoldForDuration: duration)
 
-        sleep(Constants.waitTime)
         let firstCell = getFirstCell(for: .collection, id: collectionId)
 
-        XCTAssertTrue(firstCell.label == destinationDraggable)
+        XCTAssertTrue(firstCell.waitForLabelEqualTo(destinationDraggable,
+                                                    timeout: Constants.waitTime)
+        )
     }
 
     func testTable_whenFirstCellDragingToDestination_thenDestinationCellBecomesFirst() throws {
@@ -39,18 +40,25 @@ final class MovablePluginExampleUITest: BaseUITestCase {
         let duration = Constants.dragDuration
 
         setTab("Table")
-        tapTableElement("Table with movable cell")
+        tapTableElement("movable cell")
 
         let sourceCell = getCell(for: .table, collectionId: tableId, cellId: sourceDraggable)
-        let destinationSection = app.tables[tableId].otherElements["Section 2"]
+        let destinationSection = app.tables[tableId].otherElements["Section 2"].firstMatch
 
-        sourceCell.buttons.firstMatch
-            .press(forDuration: duration, thenDragTo: destinationSection, withVelocity: .slow, thenHoldForDuration: duration)
+        sourceCell
+            .firstMatch
+            .buttons
+            .firstMatch
+            .press(forDuration: duration,
+                   thenDragTo: destinationSection,
+                   withVelocity: .slow,
+                   thenHoldForDuration: duration)
 
-        sleep(Constants.waitTime)
         let firstCell = getFirstCell(for: .table, id: tableId)
 
-        XCTAssertTrue(firstCell.label == "Cell: 2")
+        XCTAssertTrue(firstCell.waitForLabelEqualTo("Cell: 2",
+                                                    timeout: Constants.waitTime)
+        )
     }
 
 }

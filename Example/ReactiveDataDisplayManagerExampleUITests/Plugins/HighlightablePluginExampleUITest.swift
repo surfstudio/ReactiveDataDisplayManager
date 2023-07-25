@@ -17,19 +17,19 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         var wasPresed = false
 
         setTab("Table")
-        tapTableElement("Table with highlightable cells")
+        tapTableElement("highlightable cells")
 
         let cell = getFirstCell(for: .table, id: "Higlighted_cells")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
-            wasPresed = cell.label == highlightedStyle
+            wasPresed = cell.stringValue == highlightedStyle
             expectation.fulfill()
         }
-        cell.press(forDuration: 2)
+        cell.press(forDuration: 2 * timeout)
 
-        wait(for: [expectation], timeout: timeout)
+        wait(for: [expectation], timeout: 2 * timeout)
         XCTAssertTrue(wasPresed)
-        XCTAssertEqual(cell.label, normalStyle)
+        XCTAssertEqual(cell.stringValue, normalStyle)
     }
 
     func testTable_whenCellTaped_thenTurnedSelectStyleAndDeselectStyle() throws {
@@ -37,17 +37,17 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         let normalStyle = "Normal"
 
         setTab("Table")
-        tapTableElement("Table with highlightable cells")
+        tapTableElement("highlightable cells")
         tapButton("Single mode")
 
         let cell = getFirstCell(for: .table, id: "Higlighted_cells")
 
         cell.tap()
-        XCTAssertEqual(cell.label, selectedStyle)
+        XCTAssertEqual(cell.stringValue, selectedStyle)
         XCTAssertTrue(cell.isSelected)
 
         cell.tap()
-        XCTAssertEqual(cell.label, normalStyle)
+        XCTAssertEqual(cell.stringValue, normalStyle)
         XCTAssertFalse(cell.isSelected)
     }
 
@@ -59,19 +59,19 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         var wasPresed = false
 
         setTab("Collection")
-        tapTableElement("Base collection view")
+        tapTableElement("base collection view")
 
         let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
-            wasPresed = cell.label == highlightedStyle
+            wasPresed = cell.stringValue == highlightedStyle
             expectation.fulfill()
         }
-        cell.press(forDuration: 2)
+        cell.press(forDuration: 2 * timeout)
 
-        wait(for: [expectation], timeout: timeout)
+        wait(for: [expectation], timeout: 2 * timeout)
         XCTAssertTrue(wasPresed)
-        XCTAssertEqual(cell.label, normalStyle)
+        XCTAssertEqual(cell.stringValue, normalStyle)
     }
 
     func testCollection_whenCellTaped_thenTurnedSelectStyleAndDeselectStyle() throws {
@@ -79,17 +79,17 @@ final class HighlightablePluginExampleUITest: BaseUITestCase {
         let normalStyle = "Normal"
 
         setTab("Collection")
-        tapTableElement("Base collection view")
+        tapTableElement("base collection view")
         tapButton("Single mode")
 
         let cell = getFirstCell(for: .collection, id: "Collection_with_selectable_cells")
 
         cell.tap()
-        XCTAssertEqual(cell.label, selectedStyle)
+        XCTAssertEqual(cell.stringValue, selectedStyle)
         XCTAssertTrue(cell.isSelected)
 
         cell.tap()
-        XCTAssertEqual(cell.label, normalStyle)
+        XCTAssertEqual(cell.stringValue, normalStyle)
         XCTAssertFalse(cell.isSelected)
     }
 

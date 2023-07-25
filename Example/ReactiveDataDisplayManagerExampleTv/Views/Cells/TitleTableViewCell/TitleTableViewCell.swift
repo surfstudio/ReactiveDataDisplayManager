@@ -25,6 +25,15 @@ final class TitleTableViewCell: UITableViewCell {
 
 }
 
+// MARK: - AccessibilityItem
+
+extension TitleTableViewCell: AccessibilityItem {
+
+    var labelStrategy: AccessibilityStringStrategy { .from(titleLabel) }
+    var traitsStrategy: AccessibilityTraitsStrategy { .from(titleLabel) }
+
+}
+
 // MARK: - ConfigurableItem
 
 extension TitleTableViewCell: ConfigurableItem {

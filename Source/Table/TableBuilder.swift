@@ -143,7 +143,6 @@ public class TableBuilder<T: BaseTableManager> {
 
     /// Build delegate, dataSource, view and data display manager together and returns DataDisplayManager
     public func build() -> T {
-
         animator = QueuedAnimator(baseAnimator: TableSafeAnimator(baseAnimator: animator,
                                                                   sectionsProvider: manager),
                                   debounceTime: emptyAnimatorDebounceTime)
