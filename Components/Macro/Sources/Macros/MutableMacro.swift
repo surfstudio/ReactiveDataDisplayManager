@@ -1,4 +1,3 @@
-import SwiftCompilerPlugin
 import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
@@ -11,47 +10,45 @@ public struct MutableMacro: MemberMacro {
                                                        in context: Context) throws -> [DeclSyntax]
     where Declaration: DeclGroupSyntax,
           Context: MacroExpansionContext {
-              guard let structDecl = declaration.as(StructDeclSyntax.self) else {
+              guard let baseStruct = declaration.as(StructDeclSyntax.self) else {
                   throw MacroError.onlyApplicableToStruct
               }
 
-              let variables = structDecl.memberBlock
-                  .members
+              let variables = baseStruct.variables
 
-                  .compactMap { $0.decl.as(VariableDeclSyntax.self) }
-                  .filter { $0.bindingKeyword.text == "var" }
-
-              let functions = try variables.compactMap { variableDecl -> FunctionDeclSyntax? in
-                  guard let variableBinding = variableDecl.bindings.first,
-                        let variableType = variableBinding.typeAnnotation?.type.trimmed else {
-                      let variableName = variableDecl.bindings.first?.pattern.trimmedDescription
-                      throw MacroError.typeAnnotationRequiredFor(variableName: variableName ?? "unknown")
-                  }
-
-                  let variableName = TokenSyntax(stringLiteral: variableBinding.pattern.description)
-
-                  let parameter = FunctionParameterSyntax(firstName: variableName, type: variableType)
-                  let parameterList = FunctionParameterListSyntax(arrayLiteral: parameter)
-                  let modifiers = ModifierListSyntax(arrayLiteral: .init(name: .keyword(.mutating)))
-                  let bodyItem = CodeBlockItemSyntax.Item.expr(.init(stringLiteral: "self.\(variableName.text)=\(variableName.text)"))
-                  let body = CodeBlockSyntax(statements: .init(arrayLiteral: .init(item: bodyItem)))
-
-                  return FunctionDeclSyntax(leadingTrivia: .newlines(2),
-                                            modifiers: modifiers,
-                                            identifier: .identifier("set"),
-                                            signature: .init(input: .init(parameterList: parameterList)),
-                                            body: body
-                  )
-              }
+              let functions = try prepareEditorDeclarations(for: variables)
 
               return functions.compactMap { $0.as(DeclSyntax.self) }
     }
 
 }
 
-@main
-struct MacroPlugin: CompilerPlugin {
-    let providingMacros: [Macro.Type] = [
-        MutableMacro.self
-    ]
+// MARK: - Private
+
+private extension MutableMacro {
+
+    static func prepareEditorDeclarations(for variables: [VariableDeclSyntax]) throws -> [FunctionDeclSyntax] {
+        try variables.compactMap { variableDecl -> FunctionDeclSyntax? in
+
+            guard let variable = try variableDecl.parseNameAndType() else {
+                return nil
+            }
+
+            return FunctionDeclSyntax(leadingTrivia: .newlines(2),
+                                      modifiers: .init(itemsBuilder: {
+                DeclModifierSyntax(name: .keyword(.mutating))
+            }),
+                                      identifier: .identifier("set"),
+                                      signature: .init(input: .init(parameterListBuilder: {
+                FunctionParameterSyntax(firstName: variable.name,
+                                        type: variable.type)
+                
+            })),
+                                      body: .init(statementsBuilder: {
+                CodeBlockItemSyntax(stringLiteral: "self.\(variable.name.text)=\(variable.name.text)")
+            })
+            )
+        }
+    }
+
 }

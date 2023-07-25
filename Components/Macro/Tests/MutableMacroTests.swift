@@ -3,11 +3,11 @@ import SwiftSyntaxMacrosTestSupport
 import XCTest
 import Macros
 
-let testMacros: [String: Macro.Type] = [
-    "Mutable": MutableMacro.self
-]
-
 final class MutableMacroTests: XCTestCase {
+
+    let testMacros: [String: Macro.Type] = [
+        "Mutable": MutableMacro.self
+    ]
 
     func testExpansionSucceded_whenAppliedToStruct_withVariablesAndType() {
         assertMacroExpansion(
