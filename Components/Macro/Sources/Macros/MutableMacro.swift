@@ -5,20 +5,16 @@ import SwiftSyntaxMacros
 /// A macro which generate `mutating func` for all variables inside struct.
 public struct MutableMacro: MemberMacro {
 
-    public static func expansion<Declaration, Context>(of node: AttributeSyntax,
-                                                       providingMembersOf declaration: Declaration,
-                                                       in context: Context) throws -> [DeclSyntax]
-    where Declaration: DeclGroupSyntax,
-          Context: MacroExpansionContext {
-              guard let baseStruct = declaration.as(StructDeclSyntax.self) else {
-                  throw MacroError.onlyApplicableToStruct
-              }
+    public static func expansion(of node: SwiftSyntax.AttributeSyntax, providingMembersOf declaration: some SwiftSyntax.DeclGroupSyntax, in context: some SwiftSyntaxMacros.MacroExpansionContext) throws -> [SwiftSyntax.DeclSyntax] {
+        guard let baseStruct = declaration.as(StructDeclSyntax.self) else {
+            throw MacroError.onlyApplicableToStruct
+        }
 
-              let variables = baseStruct.variables
+        let variables = baseStruct.variables
 
-              let functions = try prepareEditorDeclarations(for: variables)
+        let functions = try prepareEditorDeclarations(for: variables)
 
-              return functions.compactMap { $0.as(DeclSyntax.self) }
+        return functions.compactMap { $0.as(DeclSyntax.self) }
     }
 
 }

@@ -13,11 +13,11 @@ import SwiftSyntaxMacros
 /// - Note: builder is based on resultBuilder from Swift 5.4
 public struct BuildableMacro: MemberMacro, ConformanceMacro {
 
-    public static func expansion<Declaration, Context>(of node: AttributeSyntax, providingConformancesOf declaration: Declaration, in context: Context) throws -> [(TypeSyntax, GenericWhereClauseSyntax?)] where Declaration : DeclGroupSyntax, Context : MacroExpansionContext {
+    public static func expansion(of node: SwiftSyntax.AttributeSyntax, providingConformancesOf declaration: some SwiftSyntax.DeclGroupSyntax, in context: some SwiftSyntaxMacros.MacroExpansionContext) throws -> [(SwiftSyntax.TypeSyntax, SwiftSyntax.GenericWhereClauseSyntax?)] {
         return [(TypeSyntax(stringLiteral: "EditorWrapper"), nil)]
     }
 
-    public static func expansion<Declaration, Context>(of node: AttributeSyntax, providingMembersOf declaration: Declaration, in context: Context) throws -> [DeclSyntax] where Declaration : DeclGroupSyntax, Context : MacroExpansionContext {
+    public static func expansion(of node: SwiftSyntax.AttributeSyntax, providingMembersOf declaration: some SwiftSyntax.DeclGroupSyntax, in context: some SwiftSyntaxMacros.MacroExpansionContext) throws -> [SwiftSyntax.DeclSyntax] {
         guard let baseStruct = declaration.as(StructDeclSyntax.self) else {
             throw MacroError.onlyApplicableToStruct
         }
@@ -37,7 +37,7 @@ public struct BuildableMacro: MemberMacro, ConformanceMacro {
 
         return result.compactMap { $0.as(DeclSyntax.self) }
     }
-    
+
 }
 
 // MARK: - Private
@@ -73,7 +73,9 @@ private extension BuildableMacro {
                     identifier:
                             .identifier("Model"),
                     initializer: .init(baseStruct)!)
-
+                VariableDeclSyntax(modifiers: .init(itemsBuilder: {
+                    DeclModifierSyntax(name: .keyword(.private))
+                }), .keyword(.let), name: .init(stringLiteral: "closure"))
             })
         }))
     }
