@@ -15,12 +15,12 @@ public extension CollectionContext {
         StackView.rddm.collectionGenerator(with: model, and: .class)
     }
 
-    static func viewNib<T: UICollectionViewCell & ConfigurableItem>(type: T.Type,
+    static func viewNib<T: UIView & ConfigurableItem>(type: T.Type,
                                                                     model: T.Model) -> BaseCollectionCellGenerator<CollectionWrappedCell<T>> {
         T.rddm.collectionGenerator(with: model, and: .nib)
     }
 
-    static func viewClass<T: UICollectionViewCell & ConfigurableItem>(type: T.Type,
+    static func viewClass<T: UIView & ConfigurableItem>(type: T.Type,
                                                                       model: T.Model) -> BaseCollectionCellGenerator<CollectionWrappedCell<T>> {
         T.rddm.collectionGenerator(with: model, and: .class)
     }
