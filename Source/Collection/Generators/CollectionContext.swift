@@ -8,13 +8,13 @@
 import UIKit
 import Foundation
 
-public enum CollectionContext {
+public struct CollectionContext {
 
+    @available(*, deprecated, renamed: "gen", message: "Please use `gen` method and `RegistrationTypeProvider` instead")
     public static func cell<T: UICollectionViewCell & ConfigurableItem>(type: T.Type,
                                                                         model: T.Model,
-                                                                        registerType: CellRegisterType) -> BaseCollectionCellGenerator<T> {
+                                                                        registerType: RegistrationType) -> BaseCollectionCellGenerator<T> {
         T.rddm.baseGenerator(with: model, and: registerType)
     }
 
-    // TODO: - add support for other types of generators or make (decorated generator)
 }

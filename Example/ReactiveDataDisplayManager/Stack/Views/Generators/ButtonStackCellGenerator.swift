@@ -8,7 +8,7 @@
 import ReactiveDataDisplayManager
 import UIKit
 
-final class ButtonStackCellGenerator: StackCellGenerator {
+final class ButtonStackCellGenerator: ViewGenerator {
 
     // MARK: - Nested
 

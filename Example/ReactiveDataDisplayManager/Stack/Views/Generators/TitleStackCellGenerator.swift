@@ -9,7 +9,7 @@
 import ReactiveDataDisplayManager
 import UIKit
 
-final class TitleStackCellGenerator: StackCellGenerator {
+final class TitleStackCellGenerator: ViewGenerator {
 
     // MARK: - Properties
 

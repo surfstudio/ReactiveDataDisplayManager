@@ -40,7 +40,7 @@ extension StackView: ConfigurableItem {
                 return closure(model)
             }
 
-            public static func children(_ value: [StackCellGenerator]) -> Property {
+            public static func children(_ value: [ViewGenerator]) -> Property {
                 .init(closure: { model in
                     var model = model
                     model.set(children: value)
@@ -49,7 +49,7 @@ extension StackView: ConfigurableItem {
             }
 
             /// Only for stack. Cannot be included in common macros.
-            public static func children(@GeneratorsBuilder<StackCellGenerator>_ content: @escaping (ViewContext.Type) -> [StackCellGenerator]) -> Property {
+            public static func children(@GeneratorsBuilder<ViewGenerator>_ content: @escaping (ViewContext.Type) -> [ViewGenerator]) -> Property {
                 .init(closure: { model in
                     var model = model
                     model.set(children: content(ViewContext.self))
@@ -85,7 +85,7 @@ extension StackView: ConfigurableItem {
 
         // MARK: - Public properties
 
-        private(set) public var children: [StackCellGenerator] = []
+        private(set) public var children: [ViewGenerator] = []
         private(set) public var style: StackStyle = .init(axis: .horizontal,
                                                           spacing: 0,
                                                           alignment: .fill,
@@ -95,7 +95,7 @@ extension StackView: ConfigurableItem {
 
         // MARK: - Mutation
 
-        mutating func set(children: [StackCellGenerator]) {
+        mutating func set(children: [ViewGenerator]) {
             self.children = children
         }
 
@@ -163,5 +163,13 @@ private extension StackView {
             stackView.backgroundColor = nil
         }
     }
+
+}
+
+// MARK: - RegistrationTypeProvider
+
+extension StackView: RegistrationTypeProvider {
+
+    public static var prefferedRegistration: RegistrationType { .class }
 
 }

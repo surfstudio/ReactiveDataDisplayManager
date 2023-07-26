@@ -16,7 +16,7 @@ open class DiffableCollectionCellGenerator<Cell: ConfigurableItem & UICollection
         .init(id: id, state: AnyEquatable(model))
     }
 
-    public init(uniqueId: AnyHashable, with model: Cell.Model, registerType: CellRegisterType = .nib) {
+    public init(uniqueId: AnyHashable, with model: Cell.Model, registerType: RegistrationType = .nib) {
         self.id = uniqueId
         super.init(with: model, registerType: registerType)
     }
@@ -28,7 +28,7 @@ extension StaticDataDisplayWrapper where Base: UICollectionViewCell & Configurab
     public func diffableGenerator(
         uniqueId: AnyHashable,
         with model: Base.Model,
-        and registerType: CellRegisterType = .nib
+        and registerType: RegistrationType = .nib
     ) -> DiffableCollectionCellGenerator<Base> {
         .init(uniqueId: uniqueId, with: model, registerType: registerType)
     }
@@ -39,7 +39,7 @@ extension StaticDataDisplayWrapper where Base: UICollectionViewCell & Configurab
 
     public func diffableGenerator(
         with model: Base.Model,
-        and registerType: CellRegisterType = .nib
+        and registerType: RegistrationType = .nib
     ) -> DiffableCollectionCellGenerator<Base> {
         .init(uniqueId: model.id, with: model, registerType: registerType)
     }

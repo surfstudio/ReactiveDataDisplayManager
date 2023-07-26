@@ -62,3 +62,11 @@ extension TitleTableViewCell: ConfigurableItem {
     }
 
 }
+
+// MARK: - RegistrationTypeProvider
+
+extension TitleTableViewCell: RegistrationTypeProvider {
+
+    static var prefferedRegistration: RegistrationType { .nib }
+
+}

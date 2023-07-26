@@ -222,3 +222,11 @@ extension LabelView.Model {
     }
 
 }
+
+// MARK: - RegistrationTypeProvider
+
+extension LabelView: RegistrationTypeProvider {
+
+    public static var prefferedRegistration: RegistrationType { .class }
+
+}

@@ -11,7 +11,7 @@ import ReactiveDataDisplayManager
 
 public extension ViewContext {
 
-    static func stack(model: StackView.Model) -> StackCellGenerator {
+    static func stack(model: StackView.Model) -> ViewGenerator {
         StackView.rddm.viewGenerator(with: model, and: .class)
     }
 

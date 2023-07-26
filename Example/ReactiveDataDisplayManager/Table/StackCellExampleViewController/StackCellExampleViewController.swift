@@ -75,8 +75,8 @@ private extension StackCellExampleViewController {
                                        alignment: .fill,
                                        distribution: .fill))
                     vStack.children { it in
-                        it.viewNib(type: TitleTableViewCell.self, model: "1")
-                        it.viewNib(type: TitleTableViewCell.self, model: "2")
+                        it.gen(TitleTableViewCell.self, model: "1")
+                        it.gen(TitleTableViewCell.self, model: "2")
                         it.stack(model: .build { hStack in
                             hStack.background(.solid(.systemBlue))
                             hStack.style(.init(axis: .horizontal,
@@ -84,19 +84,19 @@ private extension StackCellExampleViewController {
                                                alignment: .fill,
                                                distribution: .fillEqually))
                             hStack.children { it in
-                                it.viewNib(type: TitleTableViewCell.self, model: "4")
-                                it.viewNib(type: TitleTableViewCell.self, model: "5")
+                                it.gen(TitleTableViewCell.self, model: "4")
+                                it.gen(TitleTableViewCell.self, model: "5")
                             }
                         })
-                        it.viewNib(type: TitleTableViewCell.self, model: "3")
+                        it.gen(TitleTableViewCell.self, model: "3")
                     }
                 })
-            it.viewClass(type: LabelView.self, model: .build { label in
+            it.gen(LabelView.self, model: .build { label in
                 label.textAlignment(.center)
                 label.text(.string("Wrapped LabelView"))
                 label.style(.init(color: .systemBlue, font: .systemFont(ofSize: 16)))
             })
-            it.cell(type: TitleTableViewCell.self, model: "Cell outside from stack", registerType: .nib)
+            it.gen(TitleTableViewCell.self, model: "Cell outside from stack")
             it.stack(model: .build { hStack in
                 hStack.background(.solid(.systemGreen))
                 hStack.style(.init(axis: .horizontal,
@@ -104,7 +104,7 @@ private extension StackCellExampleViewController {
                                    alignment: .fill,
                                    distribution: .fillEqually))
                 hStack.children { it in
-                    it.viewNib(type: TitleTableViewCell.self, model: "6")
+                    it.gen(TitleTableViewCell.self, model: "6")
                     it.stack(model: .build { vStack in
                         vStack.background(.solid(.systemPink))
                         vStack.style(.init(axis: .vertical,
@@ -112,10 +112,10 @@ private extension StackCellExampleViewController {
                                            alignment: .fill,
                                            distribution: .fillEqually))
                         vStack.children { it in
-                            it.viewNib(type: TitleTableViewCell.self, model: "7")
-                            it.viewNib(type: TitleTableViewCell.self, model: "8")
-                            it.viewNib(type: TitleTableViewCell.self, model: "9")
-                            it.viewNib(type: TitleTableViewCell.self, model: "10")
+                            it.gen(TitleTableViewCell.self, model: "7")
+                            it.gen(TitleTableViewCell.self, model: "8")
+                            it.gen(TitleTableViewCell.self, model: "9")
+                            it.gen(TitleTableViewCell.self, model: "10")
                         }
                     })
                 }

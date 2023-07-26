@@ -24,13 +24,13 @@ public class CalculatableHeightNonReusableCellGenerator<Cell: CalculatableHeight
     // MARK: - Private Properties
 
     private let cellWidth: CGFloat
-    private let registerType: CellRegisterType
+    private let registerType: RegistrationType
 
     // MARK: - Initialization
 
     public init(with model: Cell.Model,
                 cellWidth: CGFloat = UIScreen.main.bounds.width,
-                registerType: CellRegisterType = .nib) {
+                registerType: RegistrationType = .nib) {
         self.model = model
         self.cellWidth = cellWidth
         self.registerType = registerType

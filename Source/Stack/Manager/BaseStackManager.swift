@@ -14,13 +14,13 @@ open class BaseStackManager: DataDisplayManager {
     // MARK: - Typealias
 
     public typealias CollectionType = UIStackView
-    public typealias GeneratorType = StackCellGenerator
+    public typealias GeneratorType = ViewGenerator
 
     // MARK: - Properties
 
     // swiftlint:disable implicitly_unwrapped_optional
     public weak var view: UIStackView!
-    public var cellGenerators: [StackCellGenerator] = []
+    public var cellGenerators: [ViewGenerator] = []
     // swiftlint:enable implicitly_unwrapped_optional
 
     // MARK: - DataDisplayManager
@@ -35,11 +35,11 @@ open class BaseStackManager: DataDisplayManager {
         }
     }
 
-    public func addCellGenerator(_ generator: StackCellGenerator) {
+    public func addCellGenerator(_ generator: ViewGenerator) {
         cellGenerators.append(generator)
     }
 
-    public func addCellGenerators(_ generators: [StackCellGenerator], after: StackCellGenerator) {
+    public func addCellGenerators(_ generators: [ViewGenerator], after: ViewGenerator) {
         if let index = index(of: after) {
             generators.enumerated().forEach { offset, generator in
                 cellGenerators.insert(generator, at: index + offset + 1)
@@ -49,7 +49,7 @@ open class BaseStackManager: DataDisplayManager {
         }
     }
 
-    public func addCellGenerator(_ generator: StackCellGenerator, after: StackCellGenerator) {
+    public func addCellGenerator(_ generator: ViewGenerator, after: ViewGenerator) {
         if let index = index(of: after) {
             cellGenerators.insert(generator, at: index + 1)
         } else {
@@ -57,11 +57,11 @@ open class BaseStackManager: DataDisplayManager {
         }
     }
 
-    public func addCellGenerators(_ generators: [StackCellGenerator]) {
+    public func addCellGenerators(_ generators: [ViewGenerator]) {
         cellGenerators.append(contentsOf: generators)
     }
 
-    public func update(generators: [StackCellGenerator]) {
+    public func update(generators: [ViewGenerator]) {
         generators.forEach { generator in
             if let index = index(of: generator) {
                 cellGenerators.remove(at: index)
@@ -82,7 +82,7 @@ open class BaseStackManager: DataDisplayManager {
 
 private extension BaseStackManager {
 
-    func index(of generator: StackCellGenerator) -> Int? {
+    func index(of generator: ViewGenerator) -> Int? {
         return cellGenerators.firstIndex(where: { $0 === generator })
     }
 

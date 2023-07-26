@@ -19,12 +19,12 @@ open class BaseCollectionCellGenerator<Cell: ConfigurableItem>: SelectableItem w
 
     // MARK: - Private Properties
 
-    private let registerType: CellRegisterType
+    private let registerType: RegistrationType
 
     // MARK: - Initialization
 
     public init(with model: Cell.Model,
-                registerType: CellRegisterType = .nib) {
+                registerType: RegistrationType = .nib) {
         self.model = model
         self.registerType = registerType
     }

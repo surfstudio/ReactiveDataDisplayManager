@@ -332,4 +332,12 @@ extension MessageView.Model {
     }
 
 }
+
+// MARK: - RegistrationTypeProvider
+
+extension MessageView: RegistrationTypeProvider {
+
+    public static var prefferedRegistration: RegistrationType { .class }
+
+}
 #endif

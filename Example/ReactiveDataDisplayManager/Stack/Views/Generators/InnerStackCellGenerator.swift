@@ -8,7 +8,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class InnerStackCellGenerator: StackCellGenerator {
+final class InnerStackCellGenerator: ViewGenerator {
 
     // MARK: - Model
 
@@ -22,11 +22,11 @@ final class InnerStackCellGenerator: StackCellGenerator {
     // MARK: - Properties
 
     private let model: Model
-    private let childGenerators: [StackCellGenerator]
+    private let childGenerators: [ViewGenerator]
 
     // MARK: - Initialization
 
-    init(model: Model, childGenerators: [StackCellGenerator]) {
+    init(model: Model, childGenerators: [ViewGenerator]) {
         self.model = model
         self.childGenerators = childGenerators
     }

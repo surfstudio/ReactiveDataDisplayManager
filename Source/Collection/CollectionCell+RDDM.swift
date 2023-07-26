@@ -10,7 +10,7 @@ import UIKit
 
 public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & ConfigurableItem {
 
-    func baseGenerator(with model: Base.Model, and registerType: CellRegisterType = .nib) -> BaseCollectionCellGenerator<Base> {
+    func baseGenerator(with model: Base.Model, and registerType: RegistrationType = .nib) -> BaseCollectionCellGenerator<Base> {
         .init(with: model, registerType: registerType)
     }
 
@@ -19,7 +19,7 @@ public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & Con
 public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & CalculatableHeightItem {
 
     func calculatableHeightGenerator(with model: Base.Model,
-                                     and registerType: CellRegisterType = .nib,
+                                     and registerType: RegistrationType = .nib,
                                      referencedWidth: CGFloat) -> CalculatableHeightCollectionCellGenerator<Base> {
         .init(with: model, width: referencedWidth, registerType: registerType)
 	}
@@ -28,7 +28,7 @@ public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & Cal
 
 public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & ConfigurableItem & FoldableStateHolder {
 
-    func foldableGenerator(with model: Base.Model, and registerType: CellRegisterType = .nib) -> FoldableCollectionCellGenerator<Base> {
+    func foldableGenerator(with model: Base.Model, and registerType: RegistrationType = .nib) -> FoldableCollectionCellGenerator<Base> {
         .init(with: model, registerType: registerType)
     }
 

@@ -11,7 +11,7 @@ import UIKit
 /// Enum with different types of registering cells in collections
 /// - nib - register as nib
 /// - class - register as class
-public enum CellRegisterType {
+public enum RegistrationType {
     case nib
     case `class`
 }

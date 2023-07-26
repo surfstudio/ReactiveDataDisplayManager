@@ -9,7 +9,7 @@ import ReactiveDataDisplayManager
 
 public extension ConfigurableItem {
 
-    static func buildView(with model: Self.Model, and type: CellRegisterType = .nib) -> Self {
+    static func buildView(with model: Self.Model, and type: RegistrationType = .nib) -> Self {
         let cell: Self?
         switch type {
         case .nib:

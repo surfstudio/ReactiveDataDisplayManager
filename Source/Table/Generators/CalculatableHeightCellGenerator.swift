@@ -19,7 +19,7 @@ open class CalculatableHeightCellGenerator<Cell: CalculatableHeightItem>: BaseCe
 
     public init(with model: Cell.Model,
                 cellWidth: CGFloat = UIScreen.main.bounds.width,
-                registerType: CellRegisterType = .nib) {
+                registerType: RegistrationType = .nib) {
         self.cellWidth = cellWidth
         super.init(with: model, registerType: registerType)
     }

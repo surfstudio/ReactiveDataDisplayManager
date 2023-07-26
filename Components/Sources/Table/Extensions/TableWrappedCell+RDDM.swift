@@ -11,7 +11,7 @@ import UIKit
 public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem {
 
     func tableGenerator(with model: Base.Model,
-                        and registerType: CellRegisterType = .nib) -> BaseCellGenerator<TableWrappedCell<Base>> {
+                        and registerType: RegistrationType = .nib) -> BaseCellGenerator<TableWrappedCell<Base>> {
         TableWrappedCell<Base>.rddm.baseGenerator(with: model,
                                                   and: registerType)
     }
@@ -24,7 +24,7 @@ public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem 
 
     func tableCalculatableHightGenerator(
         with model: Base.Model,
-        and registerType: CellRegisterType = .nib
+        and registerType: RegistrationType = .nib
     ) -> CalculatableHeightCellGenerator<TableWrappedCell<Base>> {
 
         CalculatableHeightCellGenerator<TableWrappedCell<Base>>(with: model,

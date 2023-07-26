@@ -9,7 +9,7 @@
 import UIKit
 
 // sourcery: AutoMockable
-open class TableHeaderGenerator: ViewGenerator, IdOwner, TableHeaderRegisterableItem, AccessibilityStrategyProvider {
+open class TableHeaderGenerator: AccessoryViewGenerator, IdOwner, TableHeaderRegisterableItem, AccessibilityStrategyProvider {
 
     public let id: AnyHashable
 
@@ -37,7 +37,7 @@ open class TableHeaderGenerator: ViewGenerator, IdOwner, TableHeaderRegisterable
 
 }
 
-open class TableFooterGenerator: ViewGenerator, TableFooterRegisterableItem {
+open class TableFooterGenerator: AccessoryViewGenerator, TableFooterRegisterableItem {
 
     public let id: AnyHashable
 
@@ -164,7 +164,7 @@ public extension CollectionCellGenerator {
 }
 
 /// Protocol that incapsulated build logics for current View
-public protocol ViewGenerator: AnyObject {
+public protocol AccessoryViewGenerator: AnyObject {
 
     associatedtype ViewType
 
@@ -271,11 +271,11 @@ public extension CollectionFooterGenerator where Self: ViewBuilder {
 }
 
 /// Protocol that incapsulated type of current cell
-public protocol StackCellGenerator: AnyObject {
+public protocol ViewGenerator: AnyObject {
     func generate(stackView: UIStackView, index: Int) -> UIView
 }
 
-public extension StackCellGenerator where Self: ViewBuilder {
+public extension ViewGenerator where Self: ViewBuilder {
     func generate(stackView: UIStackView, index: Int) -> UIView {
         let view = Self.ViewType()
         self.build(view: view)

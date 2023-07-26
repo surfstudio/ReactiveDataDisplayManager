@@ -20,7 +20,7 @@ public class CalculatableHeightCollectionCellGenerator<Cell: ConfigurableItem & 
 
     public init(with model: Cell.Model,
                 width: CGFloat,
-                registerType: CellRegisterType = .nib) {
+                registerType: RegistrationType = .nib) {
         self.width = width
         super.init(with: model, registerType: registerType)
     }

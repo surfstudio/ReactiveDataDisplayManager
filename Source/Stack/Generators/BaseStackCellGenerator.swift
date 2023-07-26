@@ -7,16 +7,16 @@
 
 import UIKit
 
-open class BaseViewGenerator<View: ConfigurableItem>: StackCellGenerator, ViewBuilder {
+open class BaseViewGenerator<View: ConfigurableItem>: ViewGenerator, ViewBuilder {
 
     public let model: View.Model
 
     // MARK: - Private properties
 
-    private let registerType: CellRegisterType
+    private let registerType: RegistrationType
 
     public init(with model: View.Model,
-                registerType: CellRegisterType = .class) {
+                registerType: RegistrationType = .class) {
         self.model = model
         self.registerType = registerType
     }
