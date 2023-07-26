@@ -8,4 +8,3 @@
 public protocol RegistrationTypeProvider {
     static var prefferedRegistration: RegistrationType { get }
 }
-

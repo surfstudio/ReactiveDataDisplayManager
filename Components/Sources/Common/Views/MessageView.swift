@@ -112,7 +112,7 @@ extension MessageView: ConfigurableItem {
                     return model
                 })
             }
-            
+
             /// To set it to **false**, dataDetection and tapHandler must be nil
             public static func selectable(_ selectable: Bool) -> Property {
                 .init(closure: { model in
@@ -292,7 +292,10 @@ private extension MessageView {
 
 extension MessageView: UITextViewDelegate {
 
-    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+    public func textView(_ textView: UITextView,
+                         shouldInteractWith URL: URL,
+                         in characterRange: NSRange,
+                         interaction: UITextItemInteraction) -> Bool {
         handleDataDetection(URL)
         return false
     }

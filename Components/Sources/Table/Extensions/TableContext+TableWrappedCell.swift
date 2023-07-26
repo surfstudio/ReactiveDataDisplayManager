@@ -16,11 +16,14 @@ extension TableContext: BuilderContext {
 
     // TODO: - add support for other types of generators or make (decorated generator)
 
-    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item : ConfigurableItem, Item : RegistrationTypeProvider {
+    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ConfigurableItem,
+                                                                                                Item: RegistrationTypeProvider {
         Item.rddm.tableGenerator(with: model, and: Item.prefferedRegistration)
     }
 
-    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item : ViewType, Item : ConfigurableItem, Item : RegistrationTypeProvider {
+    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ViewType,
+                                                                                                Item: ConfigurableItem,
+                                                                                                Item: RegistrationTypeProvider {
         Item.rddm.baseGenerator(with: model, and: Item.prefferedRegistration)
     }
 

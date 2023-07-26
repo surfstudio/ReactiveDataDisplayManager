@@ -17,5 +17,4 @@ public struct TableContext {
         T.rddm.baseGenerator(with: model, and: registerType)
     }
 
-
 }

@@ -66,56 +66,56 @@ private extension StackCellExampleViewController {
 
         // Note that using `UITableViewCell` or `UICollectionViewCell` inside stack is not recommended, but it possible
         adapter += TableSection.create(header: TitleHeaderGenerator(model: "StackView based cells"),
-                                       footer: EmptyTableFooterGenerator()) { it in
-            it.stack(
-                model: .build { vStack in
-                    vStack.background(.solid(.rddm))
-                    vStack.style(.init(axis: .vertical,
-                                       spacing: 8,
-                                       alignment: .fill,
-                                       distribution: .fill))
-                    vStack.children { it in
-                        it.gen(TitleTableViewCell.self, model: "1")
-                        it.gen(TitleTableViewCell.self, model: "2")
-                        it.stack(model: .build { hStack in
-                            hStack.background(.solid(.systemBlue))
-                            hStack.style(.init(axis: .horizontal,
-                                               spacing: 4,
-                                               alignment: .fill,
-                                               distribution: .fillEqually))
-                            hStack.children { it in
-                                it.gen(TitleTableViewCell.self, model: "4")
-                                it.gen(TitleTableViewCell.self, model: "5")
-                            }
-                        })
-                        it.gen(TitleTableViewCell.self, model: "3")
-                    }
-                })
-            it.gen(LabelView.self, model: .build { label in
+                                       footer: EmptyTableFooterGenerator()) { ctx in
+            StackView.build(in: ctx, with: .build { vStack in
+                vStack.background(.solid(.rddm))
+                vStack.style(.init(axis: .vertical,
+                                   spacing: 8,
+                                   alignment: .fill,
+                                   distribution: .fill))
+                vStack.children { ctx in
+                    TitleTableViewCell.build(in: ctx, with: "1")
+                    TitleTableViewCell.build(in: ctx, with: "2")
+                    StackView.build(in: ctx, with: .build { hStack in
+                        hStack.background(.solid(.systemBlue))
+                        hStack.style(.init(axis: .horizontal,
+                                           spacing: 4,
+                                           alignment: .fill,
+                                           distribution: .fillEqually))
+                        hStack.children { ctx in
+                            TitleTableViewCell.build(in: ctx, with: "4")
+                            TitleTableViewCell.build(in: ctx, with: "5")
+                        }
+                    })
+                    TitleTableViewCell.build(in: ctx, with: "3")
+                }
+            })
+            LabelView.build(in: ctx, with: .build { label in
                 label.textAlignment(.center)
                 label.text(.string("Wrapped LabelView"))
                 label.style(.init(color: .systemBlue, font: .systemFont(ofSize: 16)))
             })
-            it.gen(TitleTableViewCell.self, model: "Cell outside from stack")
-            it.stack(model: .build { hStack in
+            // TODO: - resolve crash with neb loading
+//            TitleTableViewCell.build(in: ctx, with: "Cell outside from stack")
+            StackView.build(in: ctx, with: .build { hStack in
                 hStack.background(.solid(.systemGreen))
                 hStack.style(.init(axis: .horizontal,
                                    spacing: 0,
                                    alignment: .fill,
                                    distribution: .fillEqually))
-                hStack.children { it in
-                    it.gen(TitleTableViewCell.self, model: "6")
-                    it.stack(model: .build { vStack in
+                hStack.children { ctx in
+                    TitleTableViewCell.build(in: ctx, with: "6")
+                    StackView.build(in: ctx, with: .build { vStack in
                         vStack.background(.solid(.systemPink))
                         vStack.style(.init(axis: .vertical,
                                            spacing: 20,
                                            alignment: .fill,
                                            distribution: .fillEqually))
-                        vStack.children { it in
-                            it.gen(TitleTableViewCell.self, model: "7")
-                            it.gen(TitleTableViewCell.self, model: "8")
-                            it.gen(TitleTableViewCell.self, model: "9")
-                            it.gen(TitleTableViewCell.self, model: "10")
+                        vStack.children { ctx in
+                            TitleTableViewCell.build(in: ctx, with: "7")
+                            TitleTableViewCell.build(in: ctx, with: "8")
+                            TitleTableViewCell.build(in: ctx, with: "9")
+                            TitleTableViewCell.build(in: ctx, with: "10")
                         }
                     })
                 }
