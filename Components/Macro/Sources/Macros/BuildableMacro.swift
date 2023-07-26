@@ -81,11 +81,9 @@ private extension BuildableMacro {
                                         type: variable.type)
             })),
                                       body: CodeBlockSyntax(statementsBuilder: {
-                .init([
-                    .init(stringLiteral: "var model = model"),
-                    .init(stringLiteral: "model.set(\(variable.name.text):value)"),
-                    .init(stringLiteral: "return model")
-                ])
+                StmtSyntax(stringLiteral: "var model = model")
+                StmtSyntax(stringLiteral: "model.set(\(variable.name.text):value)")
+                StmtSyntax(stringLiteral: "return model")
             })
             )
         }

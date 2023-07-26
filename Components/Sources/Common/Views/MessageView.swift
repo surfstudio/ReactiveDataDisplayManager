@@ -26,7 +26,13 @@ extension MessageView: ConfigurableItem {
     // MARK: - Model
 
     @Mutable
-    public struct Model: Equatable, AlignmentProvider, TextProvider {
+    public struct Model: Equatable, PropertyWrapper, AlignmentProvider, TextProvider {
+
+        // MARK: - PropertyWrapper
+
+        public static func create() -> MessageView.Model {
+            .init()
+        }
 
         // MARK: - Editor
 
@@ -137,14 +143,6 @@ extension MessageView: ConfigurableItem {
         private(set) public var borderStyle: BorderStyle?
         private(set) public var dataDetection: DataDetectionStyle?
         private(set) public var selectable: Bool = false
-
-        // MARK: - Builder
-
-        public static func build(@EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
-            return content(Property.self).reduce(.init(), { model, editor in
-                editor.edit(model)
-            })
-        }
 
     }
 

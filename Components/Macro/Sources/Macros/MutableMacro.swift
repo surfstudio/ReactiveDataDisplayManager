@@ -45,7 +45,7 @@ private extension MutableMacro {
                 
             })),
                                       body: .init(statementsBuilder: {
-                CodeBlockItemSyntax(stringLiteral: "self.\(variable.name.text)=\(variable.name.text)")
+                StmtSyntax(stringLiteral: "self.\(variable.name.text)=\(variable.name.text)")
             })
             )
         }
