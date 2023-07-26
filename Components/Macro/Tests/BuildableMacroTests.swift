@@ -28,9 +28,13 @@ final class BuildableMacroTests: XCTestCase {
             expandedSource:
             """
 
-            struct SomeStruct {
+            struct SomeStruct: EditorWrapper {
                 let id: String = ""
                 var someVar: Bool = false
+
+                public static func create() -> SomeStruct {
+                    .init()
+                }
 
                 public struct Property: Editor {
                     public typealias Model = SomeStruct
@@ -52,14 +56,6 @@ final class BuildableMacroTests: XCTestCase {
                             return model
                         })
                     }
-                }
-
-                // MARK: - Builder
-
-                public static func build(@EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
-                    return content(Property.self).reduce(.init(), { model, editor in
-                        editor.edit(model)
-                    })
                 }
             }
             """,

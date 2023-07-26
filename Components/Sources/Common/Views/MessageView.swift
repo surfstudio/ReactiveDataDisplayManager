@@ -26,9 +26,9 @@ extension MessageView: ConfigurableItem {
     // MARK: - Model
 
     @Mutable
-    public struct Model: Equatable, PropertyWrapper, AlignmentProvider, TextProvider {
+    public struct Model: Equatable, EditorWrapper, AlignmentProvider, TextProvider {
 
-        // MARK: - PropertyWrapper
+        // MARK: - EditorWrapper
 
         public static func create() -> MessageView.Model {
             .init()

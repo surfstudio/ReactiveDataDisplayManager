@@ -9,5 +9,6 @@ public enum MacroError: Error {
 
     case onlyApplicableToStruct
     case typeAnnotationRequiredFor(variableName: String)
+    case failedToExtractTypeOfBaseStruct
 
 }

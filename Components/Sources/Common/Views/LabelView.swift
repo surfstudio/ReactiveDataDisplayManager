@@ -25,9 +25,9 @@ extension LabelView: ConfigurableItem {
     // MARK: - Model
 
     @Mutable
-    public struct Model: PropertyWrapper, AlignmentProvider, TextProvider {
+    public struct Model: EditorWrapper, AlignmentProvider, TextProvider {
 
-        // MARK: - PropertyWrapper
+        // MARK: - EditorWrapper
 
         public static func create() -> LabelView.Model {
             .init()
