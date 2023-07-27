@@ -29,16 +29,4 @@ extension TableContext: BuilderContext {
         StackView.rddm.tableGenerator(with: model)
     }
 
-    @available(*, deprecated, renamed: "gen", message: "Please use `gen` method and `RegistrationTypeProvider` instead")
-    public static func viewNib<T: UIView & ConfigurableItem>(type: T.Type,
-                                                      model: T.Model) -> BaseCellGenerator<TableWrappedCell<T>> {
-        T.rddm.tableGenerator(with: model)
-    }
-
-    @available(*, deprecated, renamed: "gen", message: "Please use `gen` method and `RegistrationTypeProvider` instead")
-    public static func viewClass<T: UIView & ConfigurableItem>(type: T.Type,
-                                                        model: T.Model) -> BaseCellGenerator<TableWrappedCell<T>> {
-        T.rddm.tableGenerator(with: model)
-    }
-
 }

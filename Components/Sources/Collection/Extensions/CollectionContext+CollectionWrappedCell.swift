@@ -29,16 +29,4 @@ extension CollectionContext: BuilderContext {
         StackView.rddm.collectionGenerator(with: model)
     }
 
-    @available(*, deprecated, renamed: "gen", message: "Please use `gen` method and `RegistrationTypeProvider` instead")
-    public static func viewNib<T: UIView & ConfigurableItem>(type: T.Type,
-                                                             model: T.Model) -> BaseCollectionCellGenerator<CollectionWrappedCell<T>> {
-        T.rddm.collectionGenerator(with: model)
-    }
-
-    @available(*, deprecated, renamed: "gen", message: "Please use `gen` method and `RegistrationTypeProvider` instead")
-    public static func viewClass<T: UIView & ConfigurableItem>(type: T.Type,
-                                                               model: T.Model) -> BaseCollectionCellGenerator<CollectionWrappedCell<T>> {
-        T.rddm.collectionGenerator(with: model)
-    }
-
 }

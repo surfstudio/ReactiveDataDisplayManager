@@ -103,24 +103,22 @@ private extension StackCellExampleCollectionViewController {
             SeparatorView.buildView(with: .init(size: .height(1), color: .black), and: .class)
         }
 
-        adapter += CollectionSection.create(header: EmptyCollectionHeaderGenerator(), footer: EmptyCollectionFooterGenerator()) { it in
-            it.viewClass(type: SeparatorView.self, model: .init(size: .height(1), color: .black))
-            it.stack(model: .build { hStack in
+        adapter += CollectionSection.create(header: EmptyCollectionHeaderGenerator(), footer: EmptyCollectionFooterGenerator()) { ctx in
+            SeparatorView.build(in: ctx, with: .init(size: .height(1), color: .black))
+            StackView.build(in: ctx, with: .build { hStack in
                 hStack.style(.init(axis: .horizontal,
                                    spacing: 0,
                                    alignment: .fill,
                                    distribution: .fillEqually))
-                hStack.children { it in
-                    it.viewClass(type: SeparatorView.self, model: .init(size: .width(1), color: .black))
-                    it.viewClass(type: SpacerView.self, model: .init(size: .width(64)))
-
-                    it.viewNib(type: TitleTableViewCell.self, model: "Some text")
-
-                    it.viewClass(type: SeparatorView.self, model: .init(size: .width(1), color: .black))
+                hStack.children { ctx in
+                    SeparatorView.build(in: ctx, with: .init(size: .width(1), color: .black))
+                    SpacerView.build(in: ctx, with: .init(size: .width(64)))
+                    TitleTableViewCell.build(in: ctx, with: "Some text")
+                    SeparatorView.build(in: ctx, with: .init(size: .width(1), color: .black))
 
                 }
             })
-            it.viewClass(type: SeparatorView.self, model: .init(size: .height(1), color: .black))
+            SeparatorView.build(in: ctx, with: .init(size: .height(1), color: .black))
         }
 
         // Tell adapter that we've changed generators
