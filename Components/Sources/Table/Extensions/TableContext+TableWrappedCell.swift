@@ -14,11 +14,9 @@ extension TableContext: BuilderContext {
     public typealias ViewType = UITableViewCell
     public typealias GeneratorType = TableCellGenerator
 
-    // TODO: - add support for other types of generators or make (decorated generator)
-
     public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ConfigurableItem,
                                                                                                 Item: RegistrationTypeProvider {
-                                                                                                    Item.rddm.tableGenerator(with: model)
+        Item.rddm.tableGenerator(with: model)
     }
 
     public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ViewType,

@@ -102,7 +102,7 @@ class CollectionFoldableItemMock: CollectionFoldableItem {
         set(value) { underlyingIsExpanded = value }
     }
     var underlyingIsExpanded: Bool!
-    var childGenerators: [CollectionCellGenerator] = []
+    var children: [CollectionCellGenerator] = []
     var labelStrategy: AccessibilityStringStrategy {
         get { return underlyingLabelStrategy }
         set(value) { underlyingLabelStrategy = value }

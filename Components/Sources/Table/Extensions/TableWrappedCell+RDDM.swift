@@ -11,8 +11,15 @@ import UIKit
 public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem & RegistrationTypeProvider {
 
     func tableGenerator(with model: Base.Model) -> BaseCellGenerator<TableWrappedCell<Base>> {
-        TableWrappedCell<Base>.rddm.baseGenerator(with: model,
-                                                  and: .class)
+        TableWrappedCell<Base>.rddm.baseGenerator(with: model, and: .class)
+    }
+
+}
+
+public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & RegistrationTypeProvider {
+
+    func tableGenerator(with model: Base.Model) -> BaseCellGenerator<Base> {
+        Base.rddm.baseGenerator(with: model, and: Base.prefferedRegistration)
     }
 
 }

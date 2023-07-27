@@ -22,7 +22,7 @@ open class FoldableCellGenerator<Cell: UITableViewCell & ConfigurableItem & Fold
     open var isExpanded = false
 
     /// Child generators which can be folded/unfolded
-    open var childGenerators: [TableCellGenerator] = []
+    open var children: [TableCellGenerator] = []
 
     // MARK: - BaseCellGenerator
 
@@ -34,6 +34,42 @@ open class FoldableCellGenerator<Cell: UITableViewCell & ConfigurableItem & Fold
         didFoldEvent.addListner(with: "rddm.foldable-on-dequeue") { [weak cell] isExpanded in
             cell?.setExpanded(isExpanded)
         }
+    }
+
+}
+
+// MARK: - Decorations
+
+public extension FoldableCellGenerator {
+
+    /// - Parameter animation: animations for cells insertion and deletion
+    func animation(_ animation: TableFoldablePlugin.AnimationGroup) -> Self {
+        self.animation = animation
+        return self
+    }
+
+    /// - Parameter isExpanded: folded/unfolded state
+    func isExpanded(_ isExpanded: Bool) -> Self {
+        self.isExpanded = isExpanded
+        return self
+    }
+
+    /// - Parameter closure: handler closure for folded/unfolded events
+    func didFoldEvent(_ closure: @escaping (Bool) -> Void) -> Self {
+        self.didFoldEvent.addListner(closure)
+        return self
+    }
+
+    /// - Parameter children: array of child generators
+    func children(_ children: [TableCellGenerator]) -> Self {
+        self.children = children
+        return self
+    }
+
+    /// - Parameter content: resultBuilder based closure that returns an array of child generators
+    func children(@GeneratorsBuilder<TableCellGenerator>_ content: @escaping (TableContext.Type) -> [TableCellGenerator]) -> Self {
+        self.children = content(TableContext.self)
+        return self
     }
 
 }

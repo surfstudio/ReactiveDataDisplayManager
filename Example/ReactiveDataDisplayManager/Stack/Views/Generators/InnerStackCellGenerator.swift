@@ -22,13 +22,13 @@ final class InnerStackCellGenerator: ViewGenerator {
     // MARK: - Properties
 
     private let model: Model
-    private let childGenerators: [ViewGenerator]
+    private let children: [ViewGenerator]
 
     // MARK: - Initialization
 
-    init(model: Model, childGenerators: [ViewGenerator]) {
+    init(model: Model, children: [ViewGenerator]) {
         self.model = model
-        self.childGenerators = childGenerators
+        self.children = children
     }
 
 }
@@ -47,7 +47,7 @@ extension InnerStackCellGenerator: ViewBuilder {
         let adapter = view.rddm.baseBuilder
             .build()
 
-        adapter += childGenerators
+        adapter += children
 
         adapter => .reload
     }

@@ -14,8 +14,6 @@ extension CollectionContext: BuilderContext {
     public typealias ViewType = UICollectionViewCell
     public typealias GeneratorType = CollectionCellGenerator
 
-    // TODO: - add support for other types of generators or make (decorated generator)
-
     public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ConfigurableItem,
                                                                                                 Item: RegistrationTypeProvider {
         Item.rddm.collectionGenerator(with: model)

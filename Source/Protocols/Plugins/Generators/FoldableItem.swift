@@ -26,7 +26,7 @@ public protocol FoldableItem: AnyObject, AccessibilityStrategyProvider {
     var isExpanded: Bool { get set }
 
     /// Generators describing cells to be inserted in expanded state
-    var childGenerators: [TableCellGenerator] { get set }
+    var children: [TableCellGenerator] { get set }
 
 }
 
@@ -36,5 +36,5 @@ public extension FoldableItem {
     }
 
     var labelStrategy: AccessibilityStringStrategy { .ignored }
-    var traitsStrategy: AccessibilityTraitsStrategy { childGenerators.isEmpty ? .ignored : .just(.button) }
+    var traitsStrategy: AccessibilityTraitsStrategy { children.isEmpty ? .ignored : .just(.button) }
 }

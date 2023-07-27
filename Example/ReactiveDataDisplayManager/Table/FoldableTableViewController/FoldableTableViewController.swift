@@ -89,7 +89,7 @@ private extension FoldableTableViewController {
         let generator = FoldableTableViewCell.rddm.foldableGenerator(with: .init(title: id, isExpanded: false))
 
         // Create and add child generators
-        generator.childGenerators = Constants.titleForSubcells.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
+        generator.children = Constants.titleForSubcells.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
         return generator
     }
 

@@ -12,10 +12,10 @@ import UIKit
 public protocol CollectionFoldableItem: AnyObject, AccessibilityStrategyProvider {
     var didFoldEvent: Event<Bool> { get }
     var isExpanded: Bool { get set }
-    var childGenerators: [CollectionCellGenerator] { get set }
+    var children: [CollectionCellGenerator] { get set }
 }
 
 public extension CollectionFoldableItem {
     var labelStrategy: AccessibilityStringStrategy { .ignored }
-    var traitsStrategy: AccessibilityTraitsStrategy { childGenerators.isEmpty ? .ignored : .just(.button) }
+    var traitsStrategy: AccessibilityTraitsStrategy { children.isEmpty ? .ignored : .just(.button) }
 }

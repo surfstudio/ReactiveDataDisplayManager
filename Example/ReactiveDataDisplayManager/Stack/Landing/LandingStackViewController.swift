@@ -80,7 +80,7 @@ private extension LandingStackViewController {
                                                            alignment: .center,
                                                            distribution: .fillEqually,
                                                            spacing: 32),
-                                              childGenerators: [mainButton, secondaryButton])
+                                              children: [mainButton, secondaryButton])
 
         // Add generators to adapter
         adapter += title

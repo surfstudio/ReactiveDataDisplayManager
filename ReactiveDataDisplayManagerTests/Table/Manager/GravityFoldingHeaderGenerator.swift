@@ -16,7 +16,7 @@ final class GravityFoldingHeaderGenerator: GravityTableCellGenerator, FoldableIt
 
     var didFoldEvent = Event<Bool>()
     var isExpanded = true
-    var childGenerators = [TableCellGenerator]()
+    var children = [TableCellGenerator]()
 
     // MARK: - GravityTableCellGenerator
 
@@ -93,7 +93,7 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
         let childGenerator3 = GravityCellGenerator()
 
         let header = GravityFoldingHeaderGenerator()
-        header.childGenerators = [childGenerator1, childGenerator2, childGenerator3]
+        header.children = [childGenerator1, childGenerator2, childGenerator3]
         header.isExpanded = true
 
         ddm.addCellGenerators([header, childGenerator1, childGenerator2, childGenerator3])
@@ -116,7 +116,7 @@ final class GravityFoldingTableDataDisplayManagerTests: XCTestCase {
         let childGenerator3 = GravityCellGenerator()
 
         let header = GravityFoldingHeaderGenerator()
-        header.childGenerators = [childGenerator1, childGenerator2, childGenerator3]
+        header.children = [childGenerator1, childGenerator2, childGenerator3]
         header.isExpanded = false
 
         ddm.addCellGenerator(header)

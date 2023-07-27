@@ -7,11 +7,11 @@
 
 import UIKit
 
-final public class EmptyViewGenerator<View: ConfigurableItem & RegistrationTypeProvider>: AccessoryViewGenerator {
+public final class EmptyViewGenerator<View: ConfigurableItem & RegistrationTypeProvider>: AccessoryViewGenerator {
 
     public typealias ViewType = View
 
-    public init() {}
+    public init() { }
 
     public func generate() -> View {
         switch View.prefferedRegistration {

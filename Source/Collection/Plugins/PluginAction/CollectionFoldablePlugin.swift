@@ -21,7 +21,7 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
                 return
             }
 
-            let visibleGenerators = foldable.childGenerators
+            let visibleGenerators = foldable.children
                 .map { getVisibleGenerators(for: $0) }
                 .reduce([], +)
 
@@ -50,7 +50,7 @@ private extension CollectionFoldablePlugin {
 
     func getVisibleGenerators(for generator: CollectionCellGenerator) -> [CollectionCellGenerator] {
         if let foldableItem = generator as? CollectionFoldableItem, foldableItem.isExpanded {
-            return foldableItem.childGenerators
+            return foldableItem.children
                 .map { getVisibleGenerators(for: $0) }
                 .reduce([generator], +)
         } else {
