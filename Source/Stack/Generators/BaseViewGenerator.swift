@@ -7,6 +7,23 @@
 
 import UIKit
 
+final public class EmptyViewGenerator<View: ConfigurableItem & RegistrationTypeProvider>: AccessoryViewGenerator {
+
+    public typealias ViewType = View
+
+    public init() {}
+
+    public func generate() -> View {
+        switch View.prefferedRegistration {
+        case .nib:
+            return View.loadFromNib(bundle: ViewType.bundle() ?? .main)
+        case .class:
+            return View()
+        }
+    }
+
+}
+
 open class BaseViewGenerator<View: ConfigurableItem>: ViewGenerator, ViewBuilder {
 
     public let model: View.Model

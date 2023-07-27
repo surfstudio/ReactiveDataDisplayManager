@@ -8,7 +8,7 @@
 import ReactiveDataDisplayManager
 import UIKit
 
-public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem {
+public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem & RegistrationTypeProvider {
 
     func tableGenerator(with model: Base.Model,
                         and registerType: RegistrationType = .nib) -> BaseCellGenerator<TableWrappedCell<Base>> {
@@ -20,7 +20,7 @@ public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem 
 
 // MARK: - CalculatableHeightItem
 
-public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem & CalculatableHeightItem {
+public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem & CalculatableHeightItem & RegistrationTypeProvider {
 
     func tableCalculatableHightGenerator(
         with model: Base.Model,

@@ -9,14 +9,13 @@ import UIKit
 import ReactiveDataDisplayManager
 
 /// Empty table cell with `View`. Configuration is implemented within `ViewWrapper`.
-public final class TableWrappedCell<View: ConfigurableItem>: UITableViewCell, ViewWrapper {
+public final class TableWrappedCell<View: ConfigurableItem & RegistrationTypeProvider>: UITableViewCell, ViewWrapper {
 
     public typealias Model = View.Model
 
     // MARK: - Properties
 
-    // TODO: - Add way to construct nested view from nib (like in BaseViewGenerator)
-    public let nestedView: View = .init(frame: .zero)
+    public let nestedView: View = EmptyViewGenerator().generate()
 
     public var cachedInsets: UIEdgeInsets?
 
