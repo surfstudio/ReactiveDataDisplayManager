@@ -93,10 +93,11 @@ private extension StackCellExampleViewController {
             LabelView.build(in: ctx, with: .build { label in
                 label.textAlignment(.center)
                 label.text(.string("Wrapped LabelView"))
-                label.style(.init(color: .systemBlue, font: .systemFont(ofSize: 16)))
+                label.style(.init(color: .systemBlue, font: .preferredFont(forTextStyle: .body)))
             })
-            // TODO: - resolve crash with neb loading
-//            TitleTableViewCell.build(in: ctx, with: "Cell outside from stack")
+            ctx.gen(TitleTableViewCell.self, model: "Cell outside from stack")
+            // TODO: - crash is fixed but we got `TableWrappedCell<TitleTableViewCell> which is not correct`
+            TitleTableViewCell.build(in: ctx, with: "Cell outside from stack")
             StackView.build(in: ctx, with: .build { hStack in
                 hStack.background(.solid(.systemGreen))
                 hStack.style(.init(axis: .horizontal,

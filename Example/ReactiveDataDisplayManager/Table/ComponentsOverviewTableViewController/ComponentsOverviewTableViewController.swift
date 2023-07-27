@@ -45,7 +45,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                  right: 0)))
     }
 
-    private lazy var recievedMessageTimeGenerator = LabelView.rddm.tableGenerator(with: recievedMessageTimeModel, and: .class)
+    private lazy var recievedMessageTimeGenerator = LabelView.rddm.tableGenerator(with: recievedMessageTimeModel)
 
     // Sent message time
     private let sentTimeMessageStyle = TextStyle(color: .gray, font: .preferredFont(forTextStyle: .caption1))
@@ -61,7 +61,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                                   right: 16)))
     }
 
-    private lazy var sentMessageTimeGenerator = LabelView.rddm.tableGenerator(with: sentTimeMessageModel, and: .class)
+    private lazy var sentMessageTimeGenerator = LabelView.rddm.tableGenerator(with: sentTimeMessageModel)
 
     // Date
     private let dateStyle = TextStyle(color: .black, font: .preferredFont(forTextStyle: .caption1))
@@ -77,7 +77,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
                                              right: 0)))
     }
 
-    private lazy var dateGenerator = LabelView.rddm.tableGenerator(with: dateModel, and: .class)
+    private lazy var dateGenerator = LabelView.rddm.tableGenerator(with: dateModel)
 
     // Sent message
     private let sentMessageStyle = TextStyle(color: .white,
@@ -102,7 +102,7 @@ final class ComponentsOverviewTableViewController: UIViewController {
         property.text(.string("Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet"))
     }
 
-    private lazy var sentMessageGenerator = MessageView.rddm.tableGenerator(with: sentMessageModel, and: .class)
+    private lazy var sentMessageGenerator = MessageView.rddm.tableGenerator(with: sentMessageModel)
 
     // Recieved message
     private let recievedMessageStyle = TextStyle(color: .black, font: .preferredFont(forTextStyle: .body))
@@ -137,14 +137,14 @@ final class ComponentsOverviewTableViewController: UIViewController {
         property.selectable(true)
     }
 
-    private lazy var recievedMessageGenerator = MessageView.rddm.tableGenerator(with: recievedMessageModel, and: .class)
+    private lazy var recievedMessageGenerator = MessageView.rddm.tableGenerator(with: recievedMessageModel)
 
     // Separator
 
     private let separatorModel = SeparatorModel(size: .height(1),
                                                 color: .lightGray,
                                                 edgeInsets: UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32))
-    private lazy var separatorGenerator = TableWrappedCell<SeparatorView>.rddm.baseGenerator(with: separatorModel, and: .class)
+    private lazy var separatorGenerator = SeparatorView.rddm.tableGenerator(with: separatorModel)
 
     // MARK: - UIViewController
 

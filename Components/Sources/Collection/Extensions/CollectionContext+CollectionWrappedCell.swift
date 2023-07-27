@@ -18,7 +18,7 @@ extension CollectionContext: BuilderContext {
 
     public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ConfigurableItem,
                                                                                                 Item: RegistrationTypeProvider {
-        Item.rddm.collectionGenerator(with: model, and: Item.prefferedRegistration)
+        Item.rddm.collectionGenerator(with: model)
     }
 
     public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ViewType,
@@ -28,19 +28,19 @@ extension CollectionContext: BuilderContext {
     }
 
     public static func stack(model: StackView.Model) -> CollectionCellGenerator {
-        StackView.rddm.collectionGenerator(with: model, and: .class)
+        StackView.rddm.collectionGenerator(with: model)
     }
 
     @available(*, deprecated, renamed: "gen", message: "Please use `gen` method and `RegistrationTypeProvider` instead")
     public static func viewNib<T: UIView & ConfigurableItem>(type: T.Type,
                                                              model: T.Model) -> BaseCollectionCellGenerator<CollectionWrappedCell<T>> {
-        T.rddm.collectionGenerator(with: model, and: .nib)
+        T.rddm.collectionGenerator(with: model)
     }
 
     @available(*, deprecated, renamed: "gen", message: "Please use `gen` method and `RegistrationTypeProvider` instead")
     public static func viewClass<T: UIView & ConfigurableItem>(type: T.Type,
                                                                model: T.Model) -> BaseCollectionCellGenerator<CollectionWrappedCell<T>> {
-        T.rddm.collectionGenerator(with: model, and: .class)
+        T.rddm.collectionGenerator(with: model)
     }
 
 }

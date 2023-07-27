@@ -18,7 +18,7 @@ extension TableContext: BuilderContext {
 
     public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ConfigurableItem,
                                                                                                 Item: RegistrationTypeProvider {
-        Item.rddm.tableGenerator(with: model, and: Item.prefferedRegistration)
+                                                                                                    Item.rddm.tableGenerator(with: model)
     }
 
     public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ViewType,
@@ -28,19 +28,19 @@ extension TableContext: BuilderContext {
     }
 
     public static func stack(model: StackView.Model) -> TableCellGenerator {
-        StackView.rddm.tableGenerator(with: model, and: .class)
+        StackView.rddm.tableGenerator(with: model)
     }
 
     @available(*, deprecated, renamed: "gen", message: "Please use `gen` method and `RegistrationTypeProvider` instead")
     public static func viewNib<T: UIView & ConfigurableItem>(type: T.Type,
                                                       model: T.Model) -> BaseCellGenerator<TableWrappedCell<T>> {
-        T.rddm.tableGenerator(with: model, and: .nib)
+        T.rddm.tableGenerator(with: model)
     }
 
     @available(*, deprecated, renamed: "gen", message: "Please use `gen` method and `RegistrationTypeProvider` instead")
     public static func viewClass<T: UIView & ConfigurableItem>(type: T.Type,
                                                         model: T.Model) -> BaseCellGenerator<TableWrappedCell<T>> {
-        T.rddm.tableGenerator(with: model, and: .class)
+        T.rddm.tableGenerator(with: model)
     }
 
 }

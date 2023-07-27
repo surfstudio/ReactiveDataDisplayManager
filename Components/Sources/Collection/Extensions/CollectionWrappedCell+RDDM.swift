@@ -10,10 +10,9 @@ import UIKit
 
 public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem & RegistrationTypeProvider {
 
-    func collectionGenerator(with model: Base.Model,
-                             and registerType: RegistrationType = .nib) -> BaseCollectionCellGenerator<CollectionWrappedCell<Base>> {
+    func collectionGenerator(with model: Base.Model) -> BaseCollectionCellGenerator<CollectionWrappedCell<Base>> {
         CollectionWrappedCell<Base>.rddm.baseGenerator(with: model,
-                                                       and: registerType)
+                                                       and: .class)
     }
 
 }
