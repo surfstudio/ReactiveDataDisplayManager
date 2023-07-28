@@ -95,8 +95,6 @@ private extension StackCellExampleViewController {
                 label.text(.string("Wrapped LabelView"))
                 label.style(.init(color: .systemBlue, font: .preferredFont(forTextStyle: .body)))
             })
-            ctx.gen(TitleTableViewCell.self, model: "Cell outside from stack")
-            // TODO: - crash is fixed but we got `TableWrappedCell<TitleTableViewCell> which is not correct`
             TitleTableViewCell.build(in: ctx, with: "Cell outside from stack")
             StackView.build(in: ctx, with: .build { hStack in
                 hStack.background(.solid(.systemGreen))
