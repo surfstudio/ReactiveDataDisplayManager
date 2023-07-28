@@ -48,22 +48,6 @@ private extension StackCellExampleViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
 
-        // Add section into adapter
-        adapter += Section(header: TitleHeaderGenerator(model: "TableVStack"), footer: EmptyTableFooterGenerator()) {
-            TableVStack {
-                TitleTableViewCell.buildView(with: "1")
-                TitleTableViewCell.buildView(with: "2")
-                TableHStack {
-                    TitleTableViewCell.buildView(with: "4")
-                    TitleTableViewCell.buildView(with: "5")
-                }
-                TitleTableViewCell.buildView(with: "3")
-            }
-            .didSelectEvent {
-                print("VerticalTableStack did select event")
-            }
-        }
-
         // Note that using `UITableViewCell` or `UICollectionViewCell` inside stack is not recommended, but it possible
         adapter += TableSection.create(header: TitleHeaderGenerator(model: "StackView based cells"),
                                        footer: EmptyTableFooterGenerator()) { ctx in

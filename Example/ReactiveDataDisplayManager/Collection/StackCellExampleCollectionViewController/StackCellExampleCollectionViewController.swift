@@ -23,7 +23,6 @@ final class StackCellExampleCollectionViewController: UIViewController {
     // MARK: - IBOutlet
 
     @IBOutlet private weak var collectionView: UICollectionView!
-    private lazy var titleCell = TitleTableViewCell.buildView(with: "Title")
 
     // MARK: - Private Properties
 
@@ -34,20 +33,6 @@ final class StackCellExampleCollectionViewController: UIViewController {
         .add(plugin: .selectable())
         .add(plugin: .accessibility())
         .build()
-
-    lazy var horizontalNestedStackCell = HorizontalCollectionStack {
-        TitleTableViewCell.buildView(with: "Text 3")
-        TitleTableViewCell.buildView(with: "Text 4")
-    }
-
-    lazy var verticalStackCell = VerticalCollectionStack(space: 8) {
-        titleCell
-            .set(font: UIFont.boldSystemFont(ofSize: 20))
-        TitleTableViewCell.buildView(with: "Text 1")
-        TitleTableViewCell.buildView(with: "Text 2")
-        horizontalNestedStackCell
-        SeparatorView.buildView(with: .init(size: .height(1), color: .lightGray), and: .class)
-    }
 
     // MARK: - UIViewController
 
@@ -80,45 +65,44 @@ private extension StackCellExampleCollectionViewController {
     /// This method is used to fill adapter
     func fillAdapter() {
 
-        // Add stack generators into adapter
-        adapter += verticalStackCell
-            .didSelectEvent { [weak self] in
-                self?.cellBaseState.toggle()
-                self?.titleCell.configure(with: (self?.cellBaseState ?? true) ? "Title" : "Very very very long title")
-                self?.verticalStackCell.updateSizeIfNeaded()
-            }
-
-        adapter += VerticalCollectionStack {
-            SeparatorView.buildView(with: .init(size: .height(1), color: .black), and: .class)
-
-            HorizontalCollectionStack {
-                SeparatorView.buildView(with: .init(size: .width(1), color: .black), and: .class)
-                SpacerView.buildView(with: .init(size: .width(64)), and: .class)
-
-                TitleTableViewCell.buildView(with: "Some text")
-
-                SeparatorView.buildView(with: .init(size: .width(1), color: .black), and: .class)
-            }
-
-            SeparatorView.buildView(with: .init(size: .height(1), color: .black), and: .class)
-        }
-
         adapter += CollectionSection.create(header: EmptyCollectionHeaderGenerator(), footer: EmptyCollectionFooterGenerator()) { ctx in
-            SeparatorView.build(in: ctx, with: .init(size: .height(1), color: .black))
             StackView.build(in: ctx, with: .build { hStack in
                 hStack.style(.init(axis: .horizontal,
-                                   spacing: 0,
+                                   spacing: 8,
                                    alignment: .fill,
-                                   distribution: .fillEqually))
+                                   distribution: .fill))
+                hStack.background(.solid(.gray))
                 hStack.children { ctx in
                     SeparatorView.build(in: ctx, with: .init(size: .width(1), color: .black))
-                    SpacerView.build(in: ctx, with: .init(size: .width(64)))
-                    TitleTableViewCell.build(in: ctx, with: "Some text")
+                    LabelView.build(in: ctx, with: .build { label in
+                        label.text(.string("Some title"))
+                        label.textAlignment(.left)
+                        label.style(.init(color: .black, font: .preferredFont(forTextStyle: .headline)))
+                    })
+                    SpacerView.build(in: ctx, with: .init(size: .width(16)))
+                    StackView.build(in: ctx, with: .build { vStack in
+                        vStack.style(.init(axis: .vertical,
+                                           spacing: 2,
+                                           alignment: .center,
+                                           distribution: .fill))
+                        vStack.background(.solid(.rddm))
+                        vStack.children { ctx in
+                            LabelView.build(in: ctx, with: .build { label in
+                                label.text(.string("Body 1"))
+                                label.textAlignment(.right)
+                                label.style(.init(color: .black, font: .preferredFont(forTextStyle: .body)))
+                            })
+                            LabelView.build(in: ctx, with: .build { label in
+                                label.text(.string("Body 2"))
+                                label.textAlignment(.right)
+                                label.style(.init(color: .black, font: .preferredFont(forTextStyle: .body)))
+                            })
+                        }
+                    })
                     SeparatorView.build(in: ctx, with: .init(size: .width(1), color: .black))
-
                 }
             })
-            SeparatorView.build(in: ctx, with: .init(size: .height(1), color: .black))
+            TitleCollectionViewCell.build(in: ctx, with: "Some text outside of stack")
         }
 
         // Tell adapter that we've changed generators
