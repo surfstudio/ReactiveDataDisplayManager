@@ -79,9 +79,9 @@ private extension FoldableCollectionViewController {
         let child3 = makeRegularCellWithTitlesGenerators(count: 2)
 
         // Create foldable generators
-        let folder1 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
-        let folder2 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
-        let folder3 = makeFoldableCellGenerator(color: .lightGray, expanded: true)
+        var folder1 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
+        var folder2 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
+        var folder3 = makeFoldableCellGenerator(color: .lightGray, expanded: true)
 
         // Configure relationship
         folder3.children = child3
@@ -96,7 +96,7 @@ private extension FoldableCollectionViewController {
         adapter => .reload
     }
 
-    func makeFoldableCellGenerator(color: UIColor, expanded: Bool) -> CollectionCellGenerator & CollectionFoldableItem {
+    func makeFoldableCellGenerator(color: UIColor, expanded: Bool) -> CollectionCellGenerator & CollectionChildrenHolder {
         // Create foldable generator
         let generator = FoldableCollectionViewCell.rddm.foldableGenerator(with: .init(color: color))
 
@@ -130,7 +130,7 @@ private extension FoldableCollectionViewController {
     }
 
     func getVisibleGenerators(for generator: CollectionCellGenerator) -> [CollectionCellGenerator] {
-        if let foldableItem = generator as? CollectionFoldableItem, foldableItem.isExpanded {
+        if let foldableItem = generator as? FoldableItem & CollectionChildrenHolder, foldableItem.isExpanded {
             return foldableItem.children
                 .map { getVisibleGenerators(for: $0) }
                 .reduce([generator], +)

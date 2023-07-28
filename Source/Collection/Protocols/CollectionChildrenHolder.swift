@@ -1,5 +1,5 @@
 //
-//  CollectionFoldableItem.swift
+//  CollectionChildrenHolder.swift
 //  ReactiveDataDisplayManager
 //
 //  Created by Vadim Tikhonov on 11.02.2021.
@@ -9,13 +9,13 @@
 import UIKit
 
 // sourcery: AutoMockable
-public protocol CollectionFoldableItem: AnyObject, AccessibilityStrategyProvider {
-    var didFoldEvent: Event<Bool> { get }
-    var isExpanded: Bool { get set }
+public protocol CollectionChildrenHolder: AccessibilityStrategyProvider {
     var children: [CollectionCellGenerator] { get set }
 }
 
-public extension CollectionFoldableItem {
+// MARK: - Defaults
+
+public extension CollectionChildrenHolder {
     var labelStrategy: AccessibilityStringStrategy { .ignored }
     var traitsStrategy: AccessibilityTraitsStrategy { children.isEmpty ? .ignored : .just(.button) }
 }

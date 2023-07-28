@@ -31,7 +31,7 @@ final class CollectionPluginsChecker {
     func checkPlugins() {
         sections.flatMap(\.generators).forEach {
             checkPlugin(for: $0 as? SelectableItem)
-            checkPlugin(for: $0 as? CollectionFoldableItem, pluginName: CollectionFoldablePlugin.pluginName)
+            checkPlugin(for: $0 as? FoldableItem, pluginName: CollectionFoldablePlugin.pluginName)
         }
     }
 

@@ -28,7 +28,7 @@ public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & Cal
 
 public extension StaticDataDisplayWrapper where Base: UICollectionViewCell & ConfigurableItem & FoldableStateHolder {
 
-    func foldableGenerator(with model: Base.Model, and registerType: RegistrationType = .nib) -> FoldableCollectionCellGenerator<Base> {
+    func foldableGenerator(with model: Base.Model, and registerType: RegistrationType = .nib) -> FoldableCellGenerator<Base> {
         .init(with: model, registerType: registerType)
     }
 

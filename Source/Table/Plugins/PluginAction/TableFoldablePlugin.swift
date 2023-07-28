@@ -15,16 +15,16 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
 
     // MARK: - Nested types
 
-    public typealias AnimationGroup = (remove: UITableView.RowAnimation, insert: UITableView.RowAnimation)
+    public typealias GeneratorType = FoldableItem & TableChildrenHolder & FoldableStateToggling
 
-    // MARK: - BaseTablePlugin
+    // MARK: - Plugin body
 
     public override func process(event: TableEvent, with manager: BaseTableManager?) {
         switch event {
         case .didSelect(let indexPath):
             guard
                 let generator = manager?.sections[indexPath.section].generators[indexPath.row],
-                let foldable = generator as? FoldableItem
+                let foldable = generator as? GeneratorType
             else {
                 return
             }
@@ -39,7 +39,7 @@ public class TableFoldablePlugin: BaseTablePlugin<TableEvent> {
                 addCellGenerators(foldable.children, after: generator, with: manager)
             }
 
-            foldable.isExpanded = !foldable.isExpanded
+            foldable.toggleEpanded()
             foldable.didFoldEvent.invoke(with: (foldable.isExpanded))
 
             updateIfNeeded(foldable.children, with: manager)
@@ -59,7 +59,7 @@ private extension TableFoldablePlugin {
                            with manager: BaseTableManager?) {
         if let manager = manager as? GravityTableManager {
             manager.addCellGenerators(children, after: generator)
-        } else if let foldable = generator as? FoldableItem {
+        } else if let foldable = generator as? GeneratorType {
             manager?.insertManual(after: generator, new: children, with: .animated(foldable.animation.insert))
         } else {
             manager?.insertManual(after: generator, new: children, with: .notAnimated)

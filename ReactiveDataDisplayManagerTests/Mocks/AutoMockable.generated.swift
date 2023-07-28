@@ -91,40 +91,7 @@ class CollectionCellGeneratorMock: CollectionCellGenerator {
     }
 
 }
-class CollectionFoldableItemMock: CollectionFoldableItem {
-    var didFoldEvent: Event<Bool> {
-        get { return underlyingDidFoldEvent }
-        set(value) { underlyingDidFoldEvent = value }
-    }
-    var underlyingDidFoldEvent: Event<Bool>!
-    var isExpanded: Bool {
-        get { return underlyingIsExpanded }
-        set(value) { underlyingIsExpanded = value }
-    }
-    var underlyingIsExpanded: Bool!
-    var children: [CollectionCellGenerator] = []
-    var labelStrategy: AccessibilityStringStrategy {
-        get { return underlyingLabelStrategy }
-        set(value) { underlyingLabelStrategy = value }
-    }
-    var underlyingLabelStrategy: AccessibilityStringStrategy!
-    var valueStrategy: AccessibilityStringStrategy {
-        get { return underlyingValueStrategy }
-        set(value) { underlyingValueStrategy = value }
-    }
-    var underlyingValueStrategy: AccessibilityStringStrategy!
-    var traitsStrategy: AccessibilityTraitsStrategy {
-        get { return underlyingTraitsStrategy }
-        set(value) { underlyingTraitsStrategy = value }
-    }
-    var underlyingTraitsStrategy: AccessibilityTraitsStrategy!
-    var isAccessibilityIgnored: Bool {
-        get { return underlyingIsAccessibilityIgnored }
-        set(value) { underlyingIsAccessibilityIgnored = value }
-    }
-    var underlyingIsAccessibilityIgnored: Bool!
 
-}
 class CollectionFooterGeneratorMock: CollectionFooterGenerator {
     var identifier: UICollectionReusableView.Type {
         get { return underlyingIdentifier }
