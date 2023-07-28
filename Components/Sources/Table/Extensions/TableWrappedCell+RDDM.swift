@@ -8,7 +8,7 @@
 import ReactiveDataDisplayManager
 import UIKit
 
-public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem & RegistrationTypeProvider {
+public extension StaticDataDisplayWrapper where Base: UIView & BaseItem {
 
     func tableGenerator(with model: Base.Model) -> BaseCellGenerator<TableWrappedCell<Base>> {
         TableWrappedCell<Base>.rddm.baseGenerator(with: model, and: .class)
@@ -16,7 +16,7 @@ public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem 
 
 }
 
-public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & RegistrationTypeProvider {
+public extension StaticDataDisplayWrapper where Base: UITableViewCell & BaseItem {
 
     func tableGenerator(with model: Base.Model) -> BaseCellGenerator<Base> {
         Base.rddm.baseGenerator(with: model, and: Base.prefferedRegistration)

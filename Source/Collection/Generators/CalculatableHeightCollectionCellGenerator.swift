@@ -9,7 +9,7 @@
 import UIKit
 
 // swiftlint:disable line_length
-public class CalculatableHeightCollectionCellGenerator<Cell: ConfigurableItem & CalculatableHeightItem>: BaseCollectionCellGenerator<Cell> & SizableItem where Cell: UICollectionViewCell {
+public class CalculatableHeightCollectionCellGenerator<Cell: ConfigurableItem & CalculatableHeightItem>: BaseCellGenerator<Cell> & SizableItem where Cell: UICollectionViewCell {
 // swiftlint:enable line_length
 
     // MARK: - Private Properties

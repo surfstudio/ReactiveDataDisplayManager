@@ -8,9 +8,9 @@
 import ReactiveDataDisplayManager
 import UIKit
 
-public extension StaticDataDisplayWrapper where Base: UIView & ConfigurableItem & RegistrationTypeProvider {
+public extension StaticDataDisplayWrapper where Base: UIView & BaseItem {
 
-    func collectionGenerator(with model: Base.Model) -> BaseCollectionCellGenerator<CollectionWrappedCell<Base>> {
+    func collectionGenerator(with model: Base.Model) -> BaseCellGenerator<CollectionWrappedCell<Base>> {
         CollectionWrappedCell<Base>.rddm.baseGenerator(with: model,
                                                        and: .class)
     }

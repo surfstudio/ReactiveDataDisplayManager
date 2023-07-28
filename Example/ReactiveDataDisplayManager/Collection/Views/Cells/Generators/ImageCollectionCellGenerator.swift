@@ -9,7 +9,7 @@
 import Foundation
 import ReactiveDataDisplayManager
 
-final class ImageCollectionCellGenerator: BaseCollectionCellGenerator<ImageCollectionViewCell>, PrefetcherableItem {
+final class ImageCollectionCellGenerator: BaseCellGenerator<ImageCollectionViewCell>, PrefetcherableItem {
 
     // MARK: - PrefetcherableFlow
 

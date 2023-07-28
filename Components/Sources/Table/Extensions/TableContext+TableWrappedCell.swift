@@ -14,14 +14,12 @@ extension TableContext: BuilderContext {
     public typealias ViewType = UITableViewCell
     public typealias GeneratorType = TableCellGenerator
 
-    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ConfigurableItem,
-                                                                                                Item: RegistrationTypeProvider {
+    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: BaseItem {
         Item.rddm.tableGenerator(with: model)
     }
 
-    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: ViewType,
-                                                                                                Item: ConfigurableItem,
-                                                                                                Item: RegistrationTypeProvider {
+    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> any GeneratorType where Item: ViewType,
+                                                                                                Item: BaseItem {
         Item.rddm.baseGenerator(with: model, and: Item.prefferedRegistration)
     }
 

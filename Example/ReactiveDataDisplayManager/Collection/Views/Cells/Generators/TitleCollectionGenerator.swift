@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class TitleCollectionGenerator: BaseCollectionCellGenerator<TitleCollectionViewCell>, IndexTitleDisplaybleItem {
+final class TitleCollectionGenerator: BaseCellGenerator<TitleCollectionViewCell>, IndexTitleDisplaybleItem {
 
     // MARK: - IndexTitleDisplayble
 

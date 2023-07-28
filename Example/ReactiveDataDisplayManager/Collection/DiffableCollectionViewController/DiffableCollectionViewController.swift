@@ -11,7 +11,7 @@ import ReactiveDataComponents
 @available(iOS 13.0, *)
 final class DiffableCollectionViewController: UIViewController {
 
-    typealias DiffableGenerator = DiffableCollectionCellGenerator<TitleCollectionListCell>
+    typealias DiffableGenerator = DiffableCellGenerator<TitleCollectionListCell>
 
     // MARK: - Constants
 

@@ -8,10 +8,8 @@
 
 import UIKit
 
-public typealias SelectableTableCellGenerator = TableCellGenerator & SelectableItem
-
 /// Class for generating reusable Configurable UITableViewCell
-open class BaseCellGenerator<Cell: ConfigurableItem>: SelectableTableCellGenerator where Cell: UITableViewCell {
+open class BaseCellGenerator<Cell: ConfigurableItem>: SelectableItem, RegisterableItem {
 
     // MARK: - Public properties
 
@@ -44,13 +42,48 @@ open class BaseCellGenerator<Cell: ConfigurableItem>: SelectableTableCellGenerat
         return String(describing: Cell.self)
     }
 
-    public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? Cell else {
-            return UITableViewCell()
+    // TODO: - add protocol to move it into extension
+
+    open var cellHeight: CGFloat {
+        UITableView.automaticDimension
+    }
+
+    open var estimatedCellHeight: CGFloat? {
+        nil
+    }
+
+}
+
+// MARK: - CollectionCell
+
+extension BaseCellGenerator: CollectionCellRegisterableItem where Cell: UICollectionViewCell {
+
+    public func registerCell(in collectionView: UICollectionView) {
+        switch registerType {
+        case .nib:
+            collectionView.registerNib(identifier, bundle: Cell.bundle())
+        case .class:
+            collectionView.register(Cell.self, forCellWithReuseIdentifier: identifier)
+        }
+    }
+
+}
+
+extension BaseCellGenerator: CollectionCellGenerator where Cell: UICollectionViewCell {
+
+    public func generate(collectionView: UICollectionView, for indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? Cell else {
+            return UICollectionViewCell()
         }
         configure(cell: cell, with: model)
         return cell
     }
+
+}
+
+// MARK: - TableCell
+
+extension BaseCellGenerator: TableCellRegisterableItem where Cell: UITableViewCell {
 
     public func registerCell(in tableView: UITableView) {
         switch registerType {
@@ -61,12 +94,16 @@ open class BaseCellGenerator<Cell: ConfigurableItem>: SelectableTableCellGenerat
         }
     }
 
-    open var cellHeight: CGFloat {
-        UITableView.automaticDimension
-    }
+}
 
-    open var estimatedCellHeight: CGFloat? {
-        nil
+extension BaseCellGenerator: TableCellGenerator where Cell: UITableViewCell {
+
+    public func generate(tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? Cell else {
+            return UITableViewCell()
+        }
+        configure(cell: cell, with: model)
+        return cell
     }
 
 }
@@ -97,7 +134,7 @@ public extension BaseCellGenerator {
 
 // MARK: - Transformations
 
-public extension BaseCellGenerator where Cell: FoldableStateHolder {
+public extension BaseCellGenerator where Cell: FoldableStateHolder, Cell: UITableViewCell {
 
     /// Creates FoldableCellGenerator with predefined children
     /// - Parameter children: array of children
@@ -117,7 +154,7 @@ public extension BaseCellGenerator where Cell: FoldableStateHolder {
 
 }
 
-public extension BaseCellGenerator where Cell.Model: Equatable {
+public extension BaseCellGenerator where Cell.Model: Equatable, Cell: UITableViewCell {
 
     /// Creates DiffableCellGenerator with constant but unique Id
     ///  - Parameter uniqueId: uniqueId to identify cell
@@ -129,7 +166,7 @@ public extension BaseCellGenerator where Cell.Model: Equatable {
 
 }
 
-public extension BaseCellGenerator where Cell.Model: Equatable & IdOwner {
+public extension BaseCellGenerator where Cell.Model: Equatable & IdOwner, Cell: UITableViewCell {
 
     /// Creates DiffableCellGenerator with uniqueId from model
     func asDiffable() -> DiffableCellGenerator<Cell> {

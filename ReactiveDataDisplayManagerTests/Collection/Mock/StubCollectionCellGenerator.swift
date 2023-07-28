@@ -9,7 +9,7 @@ import UIKit
 
 @testable import ReactiveDataDisplayManager
 
-class StubCollectionCellGenerator: BaseCollectionCellGenerator<StubCollectionCell> {
+class StubCollectionCellGenerator: BaseCellGenerator<StubCollectionCell> {
 
     init(model: String) {
         super.init(with: model, registerType: .class)

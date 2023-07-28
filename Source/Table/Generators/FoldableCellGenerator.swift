@@ -8,7 +8,7 @@
 import UIKit
 
 /// A generator that can insert and remove child generators by tap
-open class FoldableCellGenerator<Cell: UITableViewCell & ConfigurableItem & FoldableStateHolder>: BaseCellGenerator<Cell>, FoldableItem {
+open class FoldableCellGenerator<Cell: ConfigurableItem & FoldableStateHolder>: BaseCellGenerator<Cell>, FoldableItem {
 
     // MARK: - FoldableItem
 

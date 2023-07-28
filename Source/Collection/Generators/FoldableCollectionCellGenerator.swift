@@ -9,7 +9,7 @@ import UIKit
 
 // swiftlint:disable line_length
 /// A generator that can insert and remove child generators by tap
-open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & ConfigurableItem & FoldableStateHolder>: BaseCollectionCellGenerator<Cell>, CollectionFoldableItem {
+open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & ConfigurableItem & FoldableStateHolder>: BaseCellGenerator<Cell>, CollectionFoldableItem {
 // swiftlint:enable line_length
 
     // MARK: - FoldableItem
@@ -23,7 +23,7 @@ open class FoldableCollectionCellGenerator<Cell: UICollectionViewCell & Configur
     /// Child generators which can be folded/unfolded
     open var children: [CollectionCellGenerator] = []
 
-    // MARK: - BaseCollectionCellGenerator
+    // MARK: - BaseCellGenerator
 
     open override func configure(cell: Cell, with model: Cell.Model) {
         super.configure(cell: cell, with: model)

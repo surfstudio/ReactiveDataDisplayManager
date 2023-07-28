@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class EmptyViewGenerator<View: ConfigurableItem & RegistrationTypeProvider>: AccessoryViewGenerator {
+public final class EmptyViewGenerator<View: BaseItem>: AccessoryViewGenerator {
 
     public typealias ViewType = View
 
@@ -18,7 +18,7 @@ public final class EmptyViewGenerator<View: ConfigurableItem & RegistrationTypeP
         case .nib:
             return View.loadFromNib(bundle: ViewType.bundle() ?? .main)
         case .class:
-            return View()
+            return View(frame: .zero)
         }
     }
 

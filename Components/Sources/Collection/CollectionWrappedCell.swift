@@ -9,7 +9,7 @@ import UIKit
 import ReactiveDataDisplayManager
 
 /// Empty collection cell with `View`. Configuration is implemented within `ViewWrapper`.
-public final class CollectionWrappedCell<View: ConfigurableItem & RegistrationTypeProvider>: UICollectionViewCell, ViewWrapper {
+public final class CollectionWrappedCell<View: BaseItem>: UICollectionViewCell, ViewWrapper {
 
     public typealias Model = View.Model
 
