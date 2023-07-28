@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ReactiveDataDisplayManager
 
 public protocol ViewWrapper: ConfigurableItem {
 

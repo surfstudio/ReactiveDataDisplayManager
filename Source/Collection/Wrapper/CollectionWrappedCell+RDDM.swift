@@ -5,7 +5,6 @@
 //  Created by Никита Коробейников on 05.06.2023.
 //
 
-import ReactiveDataDisplayManager
 import UIKit
 
 public extension StaticDataDisplayWrapper where Base: UIView & BaseItem {

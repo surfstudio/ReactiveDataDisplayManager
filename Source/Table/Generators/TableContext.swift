@@ -8,4 +8,18 @@
 import UIKit
 import Foundation
 
-public struct TableContext { }
+public struct TableContext: BuilderContext {
+
+    public typealias ViewType = UITableViewCell
+    public typealias GeneratorType = TableCellGenerator
+
+    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: BaseItem {
+        Item.rddm.tableGenerator(with: model)
+    }
+
+    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> any GeneratorType where Item: ViewType,
+                                                                                                Item: BaseItem {
+        Item.rddm.baseGenerator(with: model, and: Item.prefferedRegistration)
+    }
+
+}

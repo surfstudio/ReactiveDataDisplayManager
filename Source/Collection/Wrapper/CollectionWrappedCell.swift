@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import ReactiveDataDisplayManager
 
 /// Empty collection cell with `View`. Configuration is implemented within `ViewWrapper`.
 public final class CollectionWrappedCell<View: BaseItem>: UICollectionViewCell, ViewWrapper {
