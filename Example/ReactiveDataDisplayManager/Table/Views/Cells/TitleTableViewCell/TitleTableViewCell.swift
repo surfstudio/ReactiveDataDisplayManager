@@ -27,7 +27,9 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
     }
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: UIView.noIntrinsicMetric, height: 44)
+        CGSize(width: UIView.noIntrinsicMetric,
+               height: Self.getHeight(forWidth: UIScreen.main.bounds.width,
+                                      with: titleLabel.text ?? ""))
     }
 
     // MARK: - CalculatableHeightItem
