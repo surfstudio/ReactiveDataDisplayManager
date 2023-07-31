@@ -103,6 +103,9 @@ private extension StackCellExampleCollectionViewController {
                 }
             })
             TitleCollectionViewCell.build(in: ctx, with: "Some text outside of stack")
+                .didSelectEvent {
+                    print("Did select cell outside of stack")
+                }
         }
 
         // Tell adapter that we've changed generators

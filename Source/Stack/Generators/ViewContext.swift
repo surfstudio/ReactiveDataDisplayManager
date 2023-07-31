@@ -13,7 +13,7 @@ public struct ViewContext: BuilderContext {
     public typealias ViewType = UIView
     public typealias GeneratorType = ViewGenerator
 
-    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: BaseItem {
+    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> BaseViewGenerator<Item> where Item: BaseItem {
         Item.rddm.viewGenerator(with: model, and: Item.prefferedRegistration)
     }
 

@@ -9,7 +9,7 @@ import ReactiveDataDisplayManager
 
 public extension CollectionContext {
 
-    static func stack(model: StackView.Model) -> CollectionCellGenerator {
+    static func stack(model: StackView.Model) -> BaseCellGenerator<CollectionWrappedCell<StackView>> {
         StackView.rddm.collectionGenerator(with: model)
     }
 

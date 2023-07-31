@@ -13,12 +13,11 @@ public struct TableContext: BuilderContext {
     public typealias ViewType = UITableViewCell
     public typealias GeneratorType = TableCellGenerator
 
-    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> GeneratorType where Item: BaseItem {
+    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> BaseCellGenerator<TableWrappedCell<Item>> where Item: BaseItem {
         Item.rddm.tableGenerator(with: model)
     }
 
-    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> any GeneratorType where Item: ViewType,
-                                                                                                Item: BaseItem {
+    public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> BaseCellGenerator<Item> where Item: ViewType & BaseItem {
         Item.rddm.baseGenerator(with: model, and: Item.prefferedRegistration)
     }
 

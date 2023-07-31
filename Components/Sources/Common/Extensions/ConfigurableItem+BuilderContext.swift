@@ -10,23 +10,23 @@ import ReactiveDataDisplayManager
 
 public extension ConfigurableItem where Self: RegistrationTypeProvider {
 
-    static func build(in ctx: ViewContext.Type, with model: Model) -> ViewContext.GeneratorType {
+    static func build(in ctx: ViewContext.Type, with model: Model) -> BaseViewGenerator<Self> {
         ctx.gen(Self.self, model: model)
     }
 
-    static func build(in ctx: TableContext.Type, with model: Model) -> TableContext.GeneratorType where Self: UITableViewCell {
+    static func build(in ctx: TableContext.Type, with model: Model) -> BaseCellGenerator<Self> where Self: UITableViewCell {
         ctx.gen(Self.self, model: model)
     }
 
-    static func build(in ctx: TableContext.Type, with model: Model) -> TableContext.GeneratorType {
+    static func build(in ctx: TableContext.Type, with model: Model) -> BaseCellGenerator<TableWrappedCell<Self>> {
         ctx.gen(Self.self, model: model)
     }
 
-    static func build(in ctx: TableContext.Type, with model: Model) -> TableContext.GeneratorType where Self: UICollectionViewCell {
+    static func build(in ctx: CollectionContext.Type, with model: Model) -> BaseCellGenerator<Self> where Self: UICollectionViewCell {
         ctx.gen(Self.self, model: model)
     }
 
-    static func build(in ctx: CollectionContext.Type, with model: Model) -> CollectionContext.GeneratorType {
+    static func build(in ctx: CollectionContext.Type, with model: Model) -> BaseCellGenerator<CollectionWrappedCell<Self>> {
         ctx.gen(Self.self, model: model)
     }
 

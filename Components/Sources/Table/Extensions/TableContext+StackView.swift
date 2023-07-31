@@ -9,7 +9,7 @@ import ReactiveDataDisplayManager
 
 public extension TableContext {
 
-    static func stack(model: StackView.Model) -> TableCellGenerator {
+    static func stack(model: StackView.Model) -> BaseCellGenerator<TableWrappedCell<StackView>> {
         StackView.rddm.tableGenerator(with: model)
     }
 

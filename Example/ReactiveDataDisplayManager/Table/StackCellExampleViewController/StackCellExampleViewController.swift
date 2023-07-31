@@ -26,6 +26,7 @@ final class StackCellExampleViewController: UIViewController {
 
     private lazy var adapter = tableView.rddm.manualBuilder
         .add(plugin: .selectable())
+        .add(plugin: .foldable())
         .add(plugin: .highlightable())
         .add(plugin: .accessibility())
         .build()
@@ -73,13 +74,18 @@ private extension StackCellExampleViewController {
                     })
                     TitleTableViewCell.build(in: ctx, with: "3")
                 }
-            })
+            }).didSelectEvent {
+                print("StackView did select")
+            }
             LabelView.build(in: ctx, with: .build { label in
                 label.textAlignment(.center)
                 label.text(.string("Wrapped LabelView"))
                 label.style(.init(color: .systemBlue, font: .preferredFont(forTextStyle: .body)))
             })
             TitleTableViewCell.build(in: ctx, with: "Cell outside from stack")
+                .didSelectEvent {
+                    print("Cell outside from stack did select")
+                }
             StackView.build(in: ctx, with: .build { hStack in
                 hStack.background(.solid(.systemGreen))
                 hStack.style(.init(axis: .horizontal,
@@ -103,6 +109,21 @@ private extension StackCellExampleViewController {
                     })
                 }
             })
+            FoldableTableViewCell.build(in: ctx, with: .init(title: "example", isExpanded: false))
+                .asFoldable { ctx in
+                    TitleTableViewCell.build(in: ctx, with: "first child")
+                        .didSelectEvent {
+                            print("first child did select")
+                        }
+                    TitleTableViewCell.build(in: ctx, with: "second child")
+                        .didSelectEvent {
+                            print("second child did select")
+                        }
+                }
+                .animation((.bottom, .top))
+                .didFoldEvent {
+                    print("Foldable cell is \($0 ? "expanded" : "collapsed")")
+                }
         }
 
         // Tell adapter that we've changed generators
