@@ -11,7 +11,7 @@ import Foundation
 public struct CollectionContext: BuilderContext {
 
     public typealias ViewType = UICollectionViewCell
-    public typealias GeneratorType = CollectionCellGenerator
+    public typealias CellsBuilder = (CollectionContext.Type) -> [CollectionCellGenerator]
 
     public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> BaseCellGenerator<CollectionWrappedCell<Item>> where Item: BaseItem {
         Item.rddm.collectionGenerator(with: model)

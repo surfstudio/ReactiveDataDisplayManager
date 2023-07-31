@@ -93,7 +93,7 @@ public extension FoldableCellGenerator {
         self.isExpanded = isExpanded
         return self
     }
-    
+
     /// - Parameter closure: handler closure for folded/unfolded events
     func didFoldEvent(_ closure: @escaping (Bool) -> Void) -> Self {
         self.didFoldEvent.addListner(closure)
@@ -117,7 +117,7 @@ public extension FoldableCellGenerator where Cell: UITableViewCell {
     }
 
     /// - Parameter content: resultBuilder based closure that returns an array of child generators
-    func children(@GeneratorsBuilder<TableCellGenerator>_ content: @escaping (TableContext.Type) -> [TableCellGenerator]) -> Self {
+    func children(@GeneratorsBuilder<TableCellGenerator>_ content: @escaping TableContext.CellsBuilder) -> Self {
         self.children = content(TableContext.self)
         return self
     }
@@ -133,7 +133,7 @@ public extension FoldableCellGenerator where Cell: UICollectionViewCell {
     }
 
     /// - Parameter content: resultBuilder based closure that returns an array of child generators
-    func children(@GeneratorsBuilder<CollectionCellGenerator>_ content: @escaping (CollectionContext.Type) -> [CollectionCellGenerator]) -> Self {
+    func children(@GeneratorsBuilder<CollectionCellGenerator>_ content: @escaping CollectionContext.CellsBuilder) -> Self {
         self.children = content(CollectionContext.self)
         return self
     }

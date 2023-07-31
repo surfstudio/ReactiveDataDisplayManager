@@ -23,7 +23,7 @@ public extension TableSection {
 
     static func create(header: HeaderGeneratorType,
                        footer: FooterGeneratorType,
-                       @GeneratorsBuilder<GeneratorType> generators: (TableContext.Type) -> [GeneratorType]) -> Self {
+                       @GeneratorsBuilder<GeneratorType> generators: TableContext.CellsBuilder) -> Self {
         Self(generators: generators(TableContext.self), header: header, footer: footer)
     }
 

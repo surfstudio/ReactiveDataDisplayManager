@@ -11,7 +11,7 @@ import Foundation
 public struct TableContext: BuilderContext {
 
     public typealias ViewType = UITableViewCell
-    public typealias GeneratorType = TableCellGenerator
+    public typealias CellsBuilder = (TableContext.Type) -> [TableCellGenerator]
 
     public static func gen<Item>(_ type: Item.Type, model: Item.Model) -> BaseCellGenerator<TableWrappedCell<Item>> where Item: BaseItem {
         Item.rddm.tableGenerator(with: model)

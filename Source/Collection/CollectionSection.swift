@@ -23,7 +23,7 @@ public extension CollectionSection {
 
     static func create(header: HeaderGeneratorType,
                        footer: FooterGeneratorType,
-                       @GeneratorsBuilder<GeneratorType> generators: (CollectionContext.Type) -> [GeneratorType]) -> Self {
+                       @GeneratorsBuilder<GeneratorType> generators: CollectionContext.CellsBuilder) -> Self {
         Self(generators: generators(CollectionContext.self), header: header, footer: footer)
     }
 

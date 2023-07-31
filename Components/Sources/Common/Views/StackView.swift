@@ -49,7 +49,7 @@ extension StackView: ConfigurableItem {
             }
 
             /// Only for stack. Cannot be included in common macros.
-            public static func children(@GeneratorsBuilder<ViewGenerator>_ content: @escaping (ViewContext.Type) -> [ViewGenerator]) -> Property {
+            public static func children(@GeneratorsBuilder<ViewGenerator>_ content: @escaping ViewContext.CellsBuilder) -> Property {
                 .init(closure: { model in
                     var model = model
                     model.set(children: content(ViewContext.self))

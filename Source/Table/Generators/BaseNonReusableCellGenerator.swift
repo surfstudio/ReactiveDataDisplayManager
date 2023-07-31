@@ -13,7 +13,8 @@ import UIKit
 /// Term *non-reusable* means that we are creating cell manually with constructor type defined in **ConstractableItem**.
 /// In other words this generator will not use `tableView.deqeueReusableCell`.
 ///  - Warning: Do not use this generators in tables with many cells of same type. Because you may catch perfomance issues.
-open class BaseNonReusableCellGenerator<Cell: ConfigurableItem & ConstractableItem>: TableCellGenerator & SelectableItem where Cell: UITableViewCell {
+open class BaseNonReusableCellGenerator<Cell: ConfigurableItem & ConstractableItem>: TableCellGenerator & SelectableItem
+where Cell: UITableViewCell {
 
     // MARK: - Public Properties
 

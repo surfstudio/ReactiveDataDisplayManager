@@ -39,3 +39,25 @@ extension TableWrappedCell: CalculatableHeightItem where View: CalculatableHeigh
     }
 
 }
+
+// MARK: - HighlightableItem
+
+extension TableWrappedCell: HighlightableItem where View: HighlightableItem {
+
+    public func applyUnhighlightedStyle() {
+        nestedView.applyUnhighlightedStyle()
+    }
+
+    public func applyHighlightedStyle() {
+        nestedView.applyHighlightedStyle()
+    }
+
+    public func applySelectedStyle() {
+        nestedView.applySelectedStyle()
+    }
+
+    public func applyDeselectedStyle() {
+        nestedView.applyDeselectedStyle()
+    }
+
+}
