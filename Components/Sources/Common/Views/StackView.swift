@@ -131,7 +131,7 @@ extension StackView: ConfigurableItem {
     public func configure(with model: Model) {
         configureConstraints()
         apply(style: model.style)
-        applyBackground(style: model.background)
+        model.background.apply(in: stackView)
 
         adapter -= .all
         adapter += model.children
@@ -153,15 +153,6 @@ private extension StackView {
         stackView.spacing = style.spacing
         stackView.alignment = style.alignment
         stackView.distribution = style.distribution
-    }
-
-    func applyBackground(style: BackgroundStyle?) {
-        switch style {
-        case .solid(let color):
-            stackView.backgroundColor = color
-        case .none:
-            stackView.backgroundColor = nil
-        }
     }
 
 }

@@ -25,3 +25,31 @@ public struct BorderStyle: Equatable {
     }
 
 }
+
+// MARK: - Defaults
+
+public extension BorderStyle {
+
+    func apply(in view: UIView) {
+        view.layer.cornerRadius = cornerRadius
+        view.layer.borderColor = borderColor
+        view.layer.borderWidth = borderWidth
+        view.layer.maskedCorners = maskedCorners
+    }
+
+}
+
+public extension Optional<BorderStyle> {
+
+    func apply(in view: UIView) {
+        if let self {
+            self.apply(in: view)
+        } else {
+            view.layer.cornerRadius = 0
+            view.layer.borderColor = UIColor.clear.cgColor
+            view.layer.borderWidth = 0
+            view.layer.maskedCorners = .init()
+        }
+    }
+
+}
