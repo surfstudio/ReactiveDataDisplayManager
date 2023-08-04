@@ -73,9 +73,10 @@ private extension BuildableMacro {
                     identifier:
                             .identifier("Model"),
                     initializer: .init(baseStruct)!)
-                VariableDeclSyntax(modifiers: .init(itemsBuilder: {
-                    DeclModifierSyntax(name: .keyword(.private))
-                }), .keyword(.let), name: .init(stringLiteral: "closure"))
+
+//                VariableDeclSyntax(modifiers: .init(itemsBuilder: {
+//                    DeclModifierSyntax(name: .keyword(.private))
+//                }), name: .init(stringLiteral: "closure"), .keyword(.let))
             })
         }))
     }
