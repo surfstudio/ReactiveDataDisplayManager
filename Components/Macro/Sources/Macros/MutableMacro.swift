@@ -41,7 +41,7 @@ private extension MutableMacro {
                 
             })),
                                       body: .init(statementsBuilder: {
-                StmtSyntax(stringLiteral: "self.\(variable.name.text)=\(variable.name.text)")
+                ExprSyntax(stringLiteral: "self.\(variable.name.text)=\(variable.name.text)")
             })
             )
         }
