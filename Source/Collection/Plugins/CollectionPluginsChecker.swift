@@ -38,7 +38,9 @@ final class CollectionPluginsChecker {
     /// For selectable plugin. Since it is connected basicly, you need to check the events
     ///
     func checkPlugin(for generator: SelectableItem?) {
-        let plugin = delegate?.collectionPlugins.plugins.first(where: { $0 is CollectionSelectablePlugin })
+        guard let delegate = delegate else { return }
+
+        let plugin = delegate.collectionPlugins.plugins.first(where: { $0 is CollectionSelectablePlugin })
         let eventsNotEmpty = generator?.didSelectEvent.isEmpty == false || generator?.didDeselectEvent.isEmpty == false
 
         guard generator != nil && plugin == nil && eventsNotEmpty else { return }
@@ -51,7 +53,9 @@ final class CollectionPluginsChecker {
     ///   - pluginName: The name of the plugin using the specified ability item
     ///
     func checkPlugin(for generator: AnyObject?, pluginName: String) {
-        let plugin = delegate?.collectionPlugins.plugins.first(where: { $0.pluginName == pluginName })
+        guard let delegate = delegate else { return }
+
+        let plugin = delegate.collectionPlugins.plugins.first(where: { $0.pluginName == pluginName })
 
         guard generator != nil && plugin == nil else { return }
         assertionFailure("❗️Include the \(pluginName).")
