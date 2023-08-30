@@ -35,6 +35,7 @@ final class MainCollectionViewController: UIViewController {
         case alignedCollection
         case dynamicHeightViewController
         case twoDirectionPaginatableCollection
+        case horizontalTwoDirectionPaginatableCollection
     }
 
     // MARK: - Constants
@@ -53,6 +54,7 @@ final class MainCollectionViewController: UIViewController {
             ("Collection with diffableDataSource", .diffableCollection),
             ("Collection with pagination", .paginatableCollection),
             ("Collection with two direction pagination", .twoDirectionPaginatableCollection),
+            ("Collection with two direction horizontal pagination", .horizontalTwoDirectionPaginatableCollection),
             ("Collection with compositional layout", .compositionalCollection),
             ("Collection with DifferenceKit", .differenceCollection),
             ("List Appearances with swipeable items", .swipeableListAppearances),

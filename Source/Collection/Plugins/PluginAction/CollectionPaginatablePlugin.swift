@@ -156,10 +156,31 @@ public extension BaseCollectionPlugin {
         return plugin
     }
 
+    /// Plugin to display `progressView` while next page is loading
+    ///
+    /// Show `progressView` on `willDisplay` last cell.
+    /// Hide `progressView` when finish loading request
+    ///
+    /// - parameter progressView: indicator view to add inside footer. Do not forget to init this view with valid frame size.
+    /// - parameter output: output signals to hide  `progressView` from footer
     static func rightPaginatable(progressView: CollectionPaginatablePlugin.ProgressView,
-                                  output: PaginatableOutput) -> CollectionPaginatablePlugin {
+                                 output: PaginatableOutput) -> CollectionPaginatablePlugin {
         let plugin = CollectionPaginatablePlugin(progressView: progressView, with: output, direction: .forward(.bottom))
         plugin.strategy = RightPaginationStrategy()
+        return plugin
+    }
+
+    /// Plugin to display `progressView` while next page is loading
+    ///
+    /// Show `progressView` on `willDisplay` last cell.
+    /// Hide `progressView` when finish loading request
+    ///
+    /// - parameter progressView: indicator view to add inside footer. Do not forget to init this view with valid frame size.
+    /// - parameter output: output signals to hide  `progressView` from footer
+    static func leftPaginatable(progressView: CollectionPaginatablePlugin.ProgressView,
+                                output: PaginatableOutput) -> CollectionPaginatablePlugin {
+        let plugin = CollectionPaginatablePlugin(progressView: progressView, with: output, direction: .backward(.top))
+        plugin.strategy = LeftPaginationStrategy()
         return plugin
     }
 

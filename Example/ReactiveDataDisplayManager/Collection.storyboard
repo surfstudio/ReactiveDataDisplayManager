@@ -55,6 +55,7 @@
                         <segue destination="EB6-CQ-xkp" kind="show" identifier="refreshingCollection" id="RIR-tI-dAc"/>
                         <segue destination="dcC-YA-wFj" kind="show" identifier="twoDirectionPaginatableCollection" id="EKN-aB-kFO"/>
                         <segue destination="WXf-rM-5r7" kind="show" identifier="stackCellCollectionViewController" id="ljM-KS-ixh"/>
+                        <segue destination="hKO-Fp-O7f" kind="show" identifier="horizontalTwoDirectionPaginatableCollection" id="HOF-Cl-xHy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4hK-7m-aH1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -881,6 +882,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZFe-WX-Mfv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-719" y="2248"/>
+        </scene>
+        <!--Horizontal Two Direction Paginatable Collection View Controller-->
+        <scene sceneID="XXX-DU-TWm">
+            <objects>
+                <viewController id="hKO-Fp-O7f" customClass="HorizontalTwoDirectionPaginatableCollectionViewController" customModule="ReactiveDataDisplayManagerExample_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZaG-oG-SJ4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cxu-Ea-CM2">
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ts6-eB-wfW">
+                                    <size key="itemSize" width="200" height="44"/>
+                                    <size key="estimatedItemSize" width="200" height="44"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="zm3-wO-NvS">
+                                <rect key="frame" x="0.0" y="87" width="414" height="721"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JA2-N8-uyI"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cxu-Ea-CM2" firstAttribute="leading" secondItem="JA2-N8-uyI" secondAttribute="leading" id="6kJ-6j-osI"/>
+                            <constraint firstItem="cxu-Ea-CM2" firstAttribute="top" secondItem="JA2-N8-uyI" secondAttribute="top" id="N6v-T2-rir"/>
+                            <constraint firstItem="JA2-N8-uyI" firstAttribute="bottom" secondItem="cxu-Ea-CM2" secondAttribute="bottom" id="vAG-C2-xWy"/>
+                            <constraint firstItem="JA2-N8-uyI" firstAttribute="trailing" secondItem="cxu-Ea-CM2" secondAttribute="trailing" id="ynm-EV-4bv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Fi2-lE-HDS"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="zm3-wO-NvS" id="WYz-NN-qBg"/>
+                        <outlet property="collectionView" destination="cxu-Ea-CM2" id="bll-ee-4dw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MkR-Rn-Nbi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5842" y="3025"/>
         </scene>
     </scenes>
     <resources>

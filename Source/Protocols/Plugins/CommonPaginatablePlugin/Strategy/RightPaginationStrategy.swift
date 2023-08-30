@@ -42,12 +42,11 @@ final class RightPaginationStrategy: PaginationStrategy {
     }
 
     func setProgressViewFinalFrame() {
-        guard let progressViewFrame = progressView?.frame, let scrollViewHeight = scrollView?.bounds.height else {
+        guard let progressViewFrame = progressView?.frame else {
             return
         }
         // Hack: Update progressView position.
-        progressView?.frame = .init(origin: .init(x: scrollView?.contentSize.width ?? 0,
-                                                  y: (scrollViewHeight / 2) - progressViewFrame.height),
+        progressView?.frame = .init(origin: .init(x: scrollView?.contentSize.width ?? 0, y: .zero),
                                     size: progressViewFrame.size)
     }
 
