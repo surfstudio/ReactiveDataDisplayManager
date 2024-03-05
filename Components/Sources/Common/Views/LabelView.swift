@@ -7,6 +7,7 @@
 
 import UIKit
 import ReactiveDataDisplayManager
+import Macro
 
 /// Base view to implement label within cell
 public class LabelView: UIView {
@@ -23,7 +24,14 @@ extension LabelView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: AlignmentProvider, TextProvider {
+    @Mutable
+    public struct Model: EditorWrapper, AlignmentProvider, TextProvider {
+
+        // MARK: - EditorWrapper
+
+        public static func create() -> LabelView.Model {
+            .init()
+        }
 
         // MARK: - Editor
 
@@ -88,36 +96,6 @@ extension LabelView: ConfigurableItem {
         private(set) public var layout: TextLayout = .init()
         private(set) public var alignment: Alignment = .all(.zero)
         private(set) public var textAlignment: NSTextAlignment = .left
-
-        // MARK: - Mutation
-
-        mutating func set(text: TextValue) {
-            self.text = text
-        }
-
-        mutating func set(style: TextStyle) {
-            self.style = style
-        }
-
-        mutating func set(layout: TextLayout) {
-            self.layout = layout
-        }
-
-        mutating func set(alignment: Alignment) {
-            self.alignment = alignment
-        }
-
-        mutating func set(textAlignment: NSTextAlignment) {
-            self.textAlignment = textAlignment
-        }
-
-        // MARK: - Builder
-
-        public static func build(@EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
-            return content(Property.self).reduce(.init(), { model, editor in
-                editor.edit(model)
-            })
-        }
 
     }
 

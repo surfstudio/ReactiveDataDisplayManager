@@ -2,6 +2,9 @@ name: Lint
 
 on: [pull_request]
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_15.0.app/Contents/Developer
+
 jobs:
   danger:
     runs-on: ubuntu-latest
@@ -16,7 +19,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   pod:
-    runs-on: macOS-12
+    runs-on: macOS-13
     steps:
     - uses: actions/checkout@v1
     - name: Generate projects

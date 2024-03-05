@@ -22,7 +22,7 @@ projects:
 	-bundle exec pod install
 
 ## Build Configuration
-destination='platform=iOS Simulator,name=iPhone 14 Pro'
+destination='platform=iOS Simulator,name=iPhone 14'
 destination_tv='platform=tvOS Simulator,name=Apple TV'
 
 ## Build lib sources for **tvOS** platform

@@ -8,18 +8,13 @@ include:
 name: ReactiveDataDisplayManagerExample
 options:
   # Версия Xcode
-  xcodeVersion: 13.4.1
+  xcodeVersion: 15.0.0
   # Создание пустых директорий
   generateEmptyDirectories: true
   # Создание групп
   createIntermediateGroups: true
 settings:
   DEVELOPMENT_TEAM: EFAAG9GXN4
-
-packages:
-  Vapor:
-    github: vapor/vapor
-    from: 4.0.0
 
 targets:
 
@@ -61,12 +56,12 @@ targets:
 
     ReactiveDataDisplayManagerExample_iOS:
       platform: iOS
-      deploymentTarget: 11.0
+      deploymentTarget: 13.0
       scheme:
           configVariants: all
           testTargets:
             - ReactiveDataDisplayManagerExampleUITests
-          gatherCoverageData: true
+          gatherCoverageData: false
       sources:
         - path: ReactiveDataDisplayManager
       dependencies:

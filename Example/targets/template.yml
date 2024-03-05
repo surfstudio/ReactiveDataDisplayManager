@@ -24,11 +24,11 @@ targetTemplates:
         type: bundle.ui-testing
         platform: iOS
         deploymentTarget:
-          iOS: 11.0
-          tvOS: 10.0
+          iOS: 13.0
+          tvOS: 13.0
         scheme:
           configVariants: all
-          gatherCoverageData: true
+          gatherCoverageData: false
 
     BaseSettings:
       settings:

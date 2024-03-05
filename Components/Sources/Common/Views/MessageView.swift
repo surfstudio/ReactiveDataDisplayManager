@@ -7,6 +7,7 @@
 #if os(iOS)
 import UIKit
 import ReactiveDataDisplayManager
+import Macro
 
 /// Base view to implement label within cell
 public class MessageView: UIView {
@@ -24,7 +25,14 @@ extension MessageView: ConfigurableItem {
 
     // MARK: - Model
 
-    public struct Model: Equatable, AlignmentProvider, TextProvider {
+    @Mutable
+    public struct Model: Equatable, EditorWrapper, AlignmentProvider, TextProvider {
+
+        // MARK: - EditorWrapper
+
+        public static func create() -> MessageView.Model {
+            .init()
+        }
 
         // MARK: - Editor
 
@@ -52,7 +60,7 @@ extension MessageView: ConfigurableItem {
             public static func style(_ value: TextStyle) -> Property {
                 .init(closure: { model in
                     var model = model
-                    model.set(style: value)
+                    model.set(textStyle: value)
                     return model
                 })
             }
@@ -60,7 +68,7 @@ extension MessageView: ConfigurableItem {
             public static func layout(_ value: TextLayout) -> Property {
                 .init(closure: { model in
                     var model = model
-                    model.set(layout: value)
+                    model.set(textLayout: value)
                     return model
                 })
             }
@@ -84,7 +92,7 @@ extension MessageView: ConfigurableItem {
             public static func insets(_ value: UIEdgeInsets) -> Property {
                 .init(closure: { model in
                     var model = model
-                    model.set(insets: value)
+                    model.set(internalEdgeInsets: value)
                     return model
                 })
             }
@@ -92,7 +100,7 @@ extension MessageView: ConfigurableItem {
             public static func background(_ value: BackgroundStyle) -> Property {
                 .init(closure: { model in
                     var model = model
-                    model.set(background: value)
+                    model.set(backgroundStyle: value)
                     return model
                 })
             }
@@ -100,7 +108,7 @@ extension MessageView: ConfigurableItem {
             public static func border(_ value: BorderStyle) -> Property {
                 .init(closure: { model in
                     var model = model
-                    model.set(border: value)
+                    model.set(borderStyle: value)
                     return model
                 })
             }
@@ -135,56 +143,6 @@ extension MessageView: ConfigurableItem {
         private(set) public var borderStyle: BorderStyle?
         private(set) public var dataDetection: DataDetectionStyle?
         private(set) public var selectable: Bool = false
-
-        // MARK: - Mutation
-
-        mutating func set(text: TextValue) {
-            self.text = text
-        }
-
-        mutating func set(style: TextStyle) {
-            self.textStyle = style
-        }
-
-        mutating func set(layout: TextLayout) {
-            self.textLayout = layout
-        }
-
-        mutating func set(alignment: Alignment) {
-            self.alignment = alignment
-        }
-
-        mutating func set(textAlignment: NSTextAlignment) {
-            self.textAlignment = textAlignment
-        }
-
-        mutating func set(insets: UIEdgeInsets) {
-            self.internalEdgeInsets = insets
-        }
-
-        mutating func set(background: BackgroundStyle) {
-            self.backgroundStyle = background
-        }
-
-        mutating func set(border: BorderStyle) {
-            self.borderStyle = border
-        }
-
-        mutating func set(dataDetection: DataDetectionStyle) {
-            self.dataDetection = dataDetection
-        }
-
-        mutating func set(selectable: Bool) {
-            self.selectable = selectable
-        }
-
-        // MARK: - Builder
-
-        public static func build(@EditorBuilder<Property> content: (Property.Type) -> [Property]) -> Self {
-            return content(Property.self).reduce(.init(), { model, editor in
-                editor.edit(model)
-            })
-        }
 
     }
 
