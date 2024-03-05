@@ -9,13 +9,13 @@ import UIKit
 
 @testable import ReactiveDataDisplayManager
 
-final class PrefetchableCollectionCellGeneratorMock: BaseCollectionCellGenerator<CollectionViewCellMock>, PrefetcherableItem {
+final class PrefetchableCollectionCellGeneratorMock: BaseCellGenerator<CollectionViewCellMock>, PrefetcherableItem {
 
     // MARK: - PrefetcherableFlow
 
     var requestId: Int?
 
-    // MARK: - BaseCollectionCellGenerator
+    // MARK: - BaseCellGenerator
 
     init(with model: Bool, requestId: Int) {
         self.requestId = requestId

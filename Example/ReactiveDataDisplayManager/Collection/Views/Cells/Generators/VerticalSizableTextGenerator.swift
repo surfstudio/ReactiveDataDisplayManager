@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class VerticalSizableTextGenerator: BaseCollectionCellGenerator<SizableCollectionViewCell> {
+final class VerticalSizableTextGenerator: BaseCellGenerator<SizableCollectionViewCell> {
 
     // MARK: - Private Properties
 

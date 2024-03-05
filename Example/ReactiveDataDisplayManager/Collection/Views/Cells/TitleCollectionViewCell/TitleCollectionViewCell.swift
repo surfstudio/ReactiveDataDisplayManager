@@ -99,3 +99,13 @@ private extension TitleCollectionViewCell {
         accessibilityInvalidator?.invalidateParameters()
     }
 }
+
+// MARK: - RegistrationTypeProvider
+
+extension TitleCollectionViewCell: RegistrationTypeProvider {
+
+    static var prefferedRegistration: RegistrationType {
+        .nib
+    }
+
+}

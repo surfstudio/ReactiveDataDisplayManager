@@ -79,14 +79,14 @@ private extension FoldableCollectionViewController {
         let child3 = makeRegularCellWithTitlesGenerators(count: 2)
 
         // Create foldable generators
-        let folder1 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
-        let folder2 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
-        let folder3 = makeFoldableCellGenerator(color: .lightGray, expanded: true)
+        var folder1 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
+        var folder2 = makeFoldableCellGenerator(color: .lightGray, expanded: false)
+        var folder3 = makeFoldableCellGenerator(color: .lightGray, expanded: true)
 
         // Configure relationship
-        folder3.childGenerators = child3
-        folder2.childGenerators = child2 + [folder3]
-        folder1.childGenerators = child1 + [folder2]
+        folder3.children = child3
+        folder2.children = child2 + [folder3]
+        folder1.children = child1 + [folder2]
 
         // Add foldable cell generators to adapter
         let visibleGenerators = getVisibleGenerators(for: folder1)
@@ -96,7 +96,7 @@ private extension FoldableCollectionViewController {
         adapter => .reload
     }
 
-    func makeFoldableCellGenerator(color: UIColor, expanded: Bool) -> CollectionCellGenerator & CollectionFoldableItem {
+    func makeFoldableCellGenerator(color: UIColor, expanded: Bool) -> CollectionCellGenerator & CollectionChildrenHolder {
         // Create foldable generator
         let generator = FoldableCollectionViewCell.rddm.foldableGenerator(with: .init(color: color))
 
@@ -130,8 +130,8 @@ private extension FoldableCollectionViewController {
     }
 
     func getVisibleGenerators(for generator: CollectionCellGenerator) -> [CollectionCellGenerator] {
-        if let foldableItem = generator as? CollectionFoldableItem, foldableItem.isExpanded {
-            return foldableItem.childGenerators
+        if let foldableItem = generator as? FoldableItem & CollectionChildrenHolder, foldableItem.isExpanded {
+            return foldableItem.children
                 .map { getVisibleGenerators(for: $0) }
                 .reduce([generator], +)
         } else {

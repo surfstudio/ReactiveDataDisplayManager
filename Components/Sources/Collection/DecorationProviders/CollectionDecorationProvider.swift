@@ -10,7 +10,7 @@ import ReactiveDataDisplayManager
 
 final class CollectionDecorationProvider<Cell: ConfigurableItem & UICollectionViewCell>: DecorationProvider where Cell.Model: Equatable {
 
-    typealias GeneratorType = DiffableCollectionCellGenerator<Cell>
+    typealias GeneratorType = DiffableCellGenerator<Cell>
 
     // MARK: - Properties
 

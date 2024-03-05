@@ -8,7 +8,7 @@
 import UIKit
 import ReactiveDataDisplayManager
 
-final class TextStackCellGenerator: StackCellGenerator {
+final class TextStackCellGenerator: ViewGenerator {
 
     // MARK: - Model
 

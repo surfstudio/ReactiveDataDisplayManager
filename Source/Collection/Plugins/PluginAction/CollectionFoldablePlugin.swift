@@ -5,10 +5,16 @@
 //  Created by Vadim Tikhonov on 11.02.2021.
 //
 
-/// Plugin to support `CollectionFoldableItem`
+/// Plugin to support `FoldableItem` in `UICollectionView`
 ///
 /// Allow  expand or collapse child cells
 public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
+
+    // MARK: - Nested types
+
+    public typealias GeneratorType = FoldableItem & CollectionChildrenHolder & FoldableStateToggling
+
+    // MARK: - Plugin body
 
     public override func process(event: CollectionEvent, with manager: BaseCollectionManager?) {
 
@@ -16,12 +22,12 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
         case .didSelect(let indexPath):
             guard
                 let generator = manager?.sections[indexPath.section].generators[indexPath.row],
-                let foldable = generator as? CollectionFoldableItem
+                let foldable = generator as? GeneratorType
             else {
                 return
             }
 
-            let visibleGenerators = foldable.childGenerators
+            let visibleGenerators = foldable.children
                 .map { getVisibleGenerators(for: $0) }
                 .reduce([], +)
 
@@ -35,7 +41,7 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
                 }
             }
 
-            foldable.isExpanded = !foldable.isExpanded
+            foldable.toggleEpanded()
             foldable.didFoldEvent.invoke(with: (foldable.isExpanded))
         default:
             break
@@ -49,8 +55,8 @@ public class CollectionFoldablePlugin: BaseCollectionPlugin<CollectionEvent> {
 private extension CollectionFoldablePlugin {
 
     func getVisibleGenerators(for generator: CollectionCellGenerator) -> [CollectionCellGenerator] {
-        if let foldableItem = generator as? CollectionFoldableItem, foldableItem.isExpanded {
-            return foldableItem.childGenerators
+        if let foldableItem = generator as? GeneratorType, foldableItem.isExpanded {
+            return foldableItem.children
                 .map { getVisibleGenerators(for: $0) }
                 .reduce([generator], +)
         } else {
@@ -64,7 +70,7 @@ private extension CollectionFoldablePlugin {
 
 public extension BaseCollectionPlugin {
 
-    /// Plugin to support `CollectionFoldableItem`
+    /// Plugin to support `FoldableItem` in `UICollectionView`
     ///
     /// Allow  expand or collapse child cells
     static func foldable() -> BaseCollectionPlugin<CollectionEvent> {

@@ -9,7 +9,7 @@ import ReactiveDataDisplayManager
 
 final class DifferenceCollectionViewController: UIViewController {
 
-    typealias DiffableGenerator = DiffableCollectionCellGenerator<TitleCollectionListCell>
+    typealias DiffableGenerator = DiffableCellGenerator<TitleCollectionListCell>
 
     // MARK: - Constants
 

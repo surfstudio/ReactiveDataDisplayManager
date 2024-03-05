@@ -10,7 +10,7 @@ import UIKit
 
 public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem {
 
-    func baseGenerator(with model: Base.Model, and registerType: CellRegisterType = .nib) -> BaseCellGenerator<Base> {
+    func baseGenerator(with model: Base.Model, and registerType: RegistrationType = .nib) -> BaseCellGenerator<Base> {
         .init(with: model, registerType: registerType)
     }
 
@@ -18,7 +18,7 @@ public extension StaticDataDisplayWrapper where Base: UITableViewCell & Configur
 
 public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & FoldableStateHolder {
 
-    func foldableGenerator(with model: Base.Model, and registerType: CellRegisterType = .nib) -> FoldableCellGenerator<Base> {
+    func foldableGenerator(with model: Base.Model, and registerType: RegistrationType = .nib) -> FoldableCellGenerator<Base> {
         .init(with: model, registerType: registerType)
     }
 
@@ -35,7 +35,7 @@ public extension StaticDataDisplayWrapper where Base: UITableViewCell & Configur
 public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & CalculatableHeightItem {
 
     func calculatableHeightGenerator(with model: Base.Model,
-                                     and registerType: CellRegisterType = .nib,
+                                     and registerType: RegistrationType = .nib,
                                      referenceWidth: CGFloat = UIScreen.main.bounds.width) -> CalculatableHeightCellGenerator<Base> {
         .init(with: model, cellWidth: referenceWidth, registerType: registerType)
     }

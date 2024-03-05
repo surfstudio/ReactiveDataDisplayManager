@@ -15,3 +15,28 @@ public enum BackgroundStyle: Equatable {
     // TODO: - gradient, image, bezierPath, bordered
 
 }
+
+// MARK: - Defaults
+
+public extension BackgroundStyle {
+
+    func apply(in view: UIView) {
+        switch self {
+        case .solid(let color):
+            view.backgroundColor = color
+        }
+    }
+
+}
+
+public extension Optional<BackgroundStyle> {
+
+    func apply(in view: UIView) {
+        if let self {
+            self.apply(in: view)
+        } else {
+            view.backgroundColor = nil
+        }
+    }
+
+}

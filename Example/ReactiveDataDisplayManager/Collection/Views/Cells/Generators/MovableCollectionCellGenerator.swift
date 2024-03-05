@@ -8,7 +8,7 @@
 import Foundation
 import ReactiveDataDisplayManager
 
-final class MovableCollectionCellGenerator: BaseCollectionCellGenerator<TitleCollectionListCell>, MovableItem {
+final class MovableCollectionCellGenerator: BaseCellGenerator<TitleCollectionListCell>, MovableItem {
 
     // MARK: - Properties
 

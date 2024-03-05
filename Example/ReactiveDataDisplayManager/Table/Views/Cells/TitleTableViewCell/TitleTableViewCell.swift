@@ -26,6 +26,12 @@ class TitleTableViewCell: UITableViewCell, CalculatableHeightItem {
         return self
     }
 
+    override var intrinsicContentSize: CGSize {
+        CGSize(width: UIView.noIntrinsicMetric,
+               height: Self.getHeight(forWidth: UIScreen.main.bounds.width,
+                                      with: titleLabel.text ?? ""))
+    }
+
     // MARK: - CalculatableHeightItem
 
     static func getHeight(forWidth width: CGFloat, with model: String) -> CGFloat {
@@ -56,5 +62,13 @@ extension TitleTableViewCell: ConfigurableItem {
         accessibilityLabel = model
         backgroundColor = .clear
     }
+
+}
+
+// MARK: - RegistrationTypeProvider
+
+extension TitleTableViewCell: RegistrationTypeProvider {
+
+    static var prefferedRegistration: RegistrationType { .nib }
 
 }

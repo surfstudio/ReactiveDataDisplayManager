@@ -89,3 +89,11 @@ private extension SeparatorView {
     }
 
 }
+
+// MARK: - RegistrationTypeProvider
+
+extension SeparatorView: RegistrationTypeProvider {
+
+    public static var prefferedRegistration: RegistrationType { .class }
+
+}

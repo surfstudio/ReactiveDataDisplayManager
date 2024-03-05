@@ -39,6 +39,14 @@ public struct Section<GeneratorType, HeaderGeneratorType, FooterGeneratorType> {
         self.init(generators: generators(), header: header, footer: footer)
     }
 
+    /// Context based generic section for tables and collections with @resultBuilder support
+    static func create<Context>(contextType: Context.Type,
+                                header: HeaderGeneratorType,
+                                footer: FooterGeneratorType,
+                                @GeneratorsBuilder<GeneratorType> generators: (Context.Type) -> [GeneratorType]) -> Self {
+        Self(generators: generators(Context.self), header: header, footer: footer)
+    }
+
 }
 
 public extension Section {

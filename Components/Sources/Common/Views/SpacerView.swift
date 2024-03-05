@@ -109,3 +109,11 @@ public extension SpacerWrapper where Model == SpacerView.Model {
     }
 
 }
+
+// MARK: - RegistrationTypeProvider
+
+extension SpacerView: RegistrationTypeProvider {
+
+    public static var prefferedRegistration: RegistrationType { .class }
+
+}

@@ -40,7 +40,7 @@ test_lib_iOS:
 ## Count failures in xcodebuild.log and `exit 0` if no failures or `exit 1` otherwise
 check_test_log:
 	echo "Test results: xcodebuild.log"
-	$(eval failures_count := $(shell cat xcodebuild.log | grep -Eo "[0-9]+ failures" | grep -Eo "[0-9]+"))
+	$(eval failures_count := $(shell cat xcodebuild.log | grep -Eo "[0-9]+ (failure|failures)" | grep -Eo "[0-9]+"))
 	echo "Failures count: $(failures_count)"
 	@if [ $(failures_count) == "0" ]; then\
 		echo "Tests passed";\

@@ -135,7 +135,7 @@ extension LabelView: ConfigurableItem {
         label.lineBreakMode = model.layout.lineBreakMode
         label.numberOfLines = model.layout.numberOfLines
 
-        configureText(with: model.text)
+        model.text.apply(in: label)
 
         setNeedsLayout()
     }
@@ -220,5 +220,13 @@ extension LabelView.Model {
             return attributedText.attributes(at: 0, effectiveRange: nil)
         }
     }
+
+}
+
+// MARK: - RegistrationTypeProvider
+
+extension LabelView: RegistrationTypeProvider {
+
+    public static var prefferedRegistration: RegistrationType { .class }
 
 }

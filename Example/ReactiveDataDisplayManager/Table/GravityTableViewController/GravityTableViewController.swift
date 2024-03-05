@@ -72,7 +72,7 @@ private extension GravityTableViewController {
 
     func makeGravityFoldableCellGenerator(with heaviness: Int) -> GravityFoldableCellGenerator {
         let generator = GravityFoldableCellGenerator(heaviness: heaviness)
-        generator.childGenerators = [
+        generator.children = [
             makeGravityCellGenerator(with: 1),
             makeGravityCellGenerator(with: 2)
         ]

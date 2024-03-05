@@ -199,7 +199,7 @@ private extension AllPluginsTableViewController {
             let generator = FoldableTableViewCell.rddm.foldableGenerator(with: .init(title: "", isExpanded: false))
 
             // Create and add child generators
-            generator.childGenerators = Constants.titles.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
+            generator.children = Constants.titles.map { TitleTableViewCell.rddm.baseGenerator(with: $0) }
 
             // Add generator to adapter
             adapter += generator

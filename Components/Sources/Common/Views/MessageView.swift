@@ -112,7 +112,7 @@ extension MessageView: ConfigurableItem {
                     return model
                 })
             }
-            
+
             /// To set it to **false**, dataDetection and tapHandler must be nil
             public static func selectable(_ selectable: Bool) -> Property {
                 .init(closure: { model in
@@ -203,8 +203,8 @@ extension MessageView: ConfigurableItem {
 
         wrap(subview: textView, with: model.internalEdgeInsets)
 
-        applyBackground(style: model.backgroundStyle)
-        applyBorder(style: model.borderStyle)
+        model.backgroundStyle.apply(in: self)
+        model.borderStyle?.apply(in: self)
 
         layoutIfNeeded()
     }
@@ -244,34 +244,12 @@ extension MessageView: CalculatableWidthItem {
 private extension MessageView {
 
     func configureTextView(_ textView: UITextView, with model: Model) {
-        switch model.text {
-        case .string(let string):
-            textView.text = string
-        case .attributedString(let attributedString):
-            textView.attributedText = attributedString
-        }
+        model.text.apply(in: textView)
 
         textView.dataDetectorTypes = model.dataDetection?.dataDetectorTypes ?? []
         textView.linkTextAttributes = model.dataDetection?.linkTextAttributes
         textView.delegate = self
         dataDetectionHandler = model.dataDetection?.handler
-    }
-
-    func applyBackground(style: BackgroundStyle) {
-        switch style {
-        case .solid(let color):
-            backgroundColor = color
-        }
-    }
-
-    func applyBorder(style: BorderStyle?) {
-        guard let borderStyle = style else {
-            return
-        }
-        layer.cornerRadius = borderStyle.cornerRadius
-        layer.borderColor = borderStyle.borderColor
-        layer.borderWidth = borderStyle.borderWidth
-        layer.maskedCorners = borderStyle.maskedCorners
     }
 
     func handleDataDetection(_ data: URL) {
@@ -292,7 +270,10 @@ private extension MessageView {
 
 extension MessageView: UITextViewDelegate {
 
-    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+    public func textView(_ textView: UITextView,
+                         shouldInteractWith URL: URL,
+                         in characterRange: NSRange,
+                         interaction: UITextItemInteraction) -> Bool {
         handleDataDetection(URL)
         return false
     }
@@ -330,6 +311,14 @@ extension MessageView.Model {
             return attributedText.attributes(at: 0, effectiveRange: nil)
         }
     }
+
+}
+
+// MARK: - RegistrationTypeProvider
+
+extension MessageView: RegistrationTypeProvider {
+
+    public static var prefferedRegistration: RegistrationType { .class }
 
 }
 #endif

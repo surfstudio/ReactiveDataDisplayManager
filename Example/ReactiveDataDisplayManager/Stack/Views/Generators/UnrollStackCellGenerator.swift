@@ -7,7 +7,7 @@
 
 import ReactiveDataDisplayManager
 
-final class UnrollStackCellGenerator: StackCellGenerator {
+final class UnrollStackCellGenerator: ViewGenerator {
 
     // MARK: - Properties
 

@@ -80,6 +80,14 @@ extension FoldableTableViewCell: ConfigurableItem {
 
 }
 
+// MARK: - RegistrationTypeProvider
+
+extension FoldableTableViewCell: RegistrationTypeProvider {
+
+    static var prefferedRegistration: RegistrationType { .nib }
+
+}
+
 // MARK: - Configuration
 
 private extension FoldableTableViewCell {

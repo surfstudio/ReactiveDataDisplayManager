@@ -164,7 +164,7 @@ final class BaseStackManagerTests: XCTestCase {
 
 // MARK: - Mocks
 
-fileprivate final class MockStackCellGenerator: StackCellGenerator {
+fileprivate final class MockStackCellGenerator: ViewGenerator {
 
     var title: String
     var view: UIView?

@@ -8,7 +8,7 @@
 
 import ReactiveDataDisplayManager
 
-final class SwipeableCollectionGenerator: BaseCollectionCellGenerator<TitleCollectionListCell>, SwipeableItem {
+final class SwipeableCollectionGenerator: BaseCellGenerator<TitleCollectionListCell>, SwipeableItem {
 
     // MARK: - SwipeableItem
 

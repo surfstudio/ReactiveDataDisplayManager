@@ -59,7 +59,7 @@ private extension DynamicHeightTableViewCell {
     }
 
     func makeDynamicHeightCellGenerators() -> [CollectionCellGenerator] {
-        return makeModels().map { BaseCollectionCellGenerator<RectangleColorCollectionViewCell>(with: $0) }
+        return makeModels().map { BaseCellGenerator<RectangleColorCollectionViewCell>(with: $0) }
     }
 
     func makeModels() -> [UIColor] {
