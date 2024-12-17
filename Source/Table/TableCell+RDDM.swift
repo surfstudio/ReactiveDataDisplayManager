@@ -34,6 +34,16 @@ public extension StaticDataDisplayWrapper where Base: UITableViewCell & Configur
 
 }
 
+public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & ConstractableItem & CalculatableHeightItem {
+
+    func calculatableHeightGenerator(with model: Base.Model,
+                                     referenceWidth: CGFloat = UIScreen.main.bounds.width) -> CalculatableHeightNonReusableCellGenerator<Base> {
+        .init(with: model, cellWidth: referenceWidth)
+    }
+
+}
+
+
 public extension StaticDataDisplayWrapper where Base: UITableViewCell & ConfigurableItem & CalculatableHeightItem {
 
     func calculatableHeightGenerator(with model: Base.Model,
