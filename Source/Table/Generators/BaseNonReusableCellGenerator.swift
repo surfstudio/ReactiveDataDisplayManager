@@ -74,4 +74,12 @@ open class BaseNonReusableCellGenerator<Cell: ConfigurableItem & ConstractableIt
         // We can leave this empty because we are not using reuse in this generator type
     }
 
+    open var cellHeight: CGFloat {
+        UITableView.automaticDimension
+    }
+
+    open var estimatedCellHeight: CGFloat? {
+        nil
+    }
+
 }

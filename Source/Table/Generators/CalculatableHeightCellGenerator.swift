@@ -35,3 +35,30 @@ open class CalculatableHeightCellGenerator<Cell: CalculatableHeightItem>: BaseCe
     }
 
 }
+
+/// Class for generating reusable Configurable UITableViewCell with calculated height
+open class CalculatableHeightNonReusableCellGenerator<Cell: CalculatableHeightItem>: BaseNonReusableCellGenerator<Cell> where Cell: UITableViewCell & ConstractableItem {
+
+    // MARK: - Private Properties
+
+    private let cellWidth: CGFloat
+
+    // MARK: - Initialization
+
+    public init(with model: Cell.Model,
+                cellWidth: CGFloat = UIScreen.main.bounds.width) {
+        self.cellWidth = cellWidth
+        super.init(with: model)
+    }
+
+    // MARK: - TableCellGenerator
+
+    open override var cellHeight: CGFloat {
+        return Cell.getHeight(forWidth: cellWidth, with: model)
+    }
+
+    open override var estimatedCellHeight: CGFloat? {
+        return Cell.getHeight(forWidth: cellWidth, with: model)
+    }
+
+}
