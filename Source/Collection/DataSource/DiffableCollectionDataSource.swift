@@ -35,7 +35,8 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
         }
 
         self.provider = provider
-        self.supplementaryViewProvider = { (collection, kind, indexPath) -> UICollectionReusableView? in
+        self.supplementaryViewProvider = { [weak self] (collection, kind, indexPath) -> UICollectionReusableView? in
+            guard let provider = self?.provider else { return nil }
             switch kind {
             case UICollectionView.elementKindSectionHeader:
                 return provider.sections[indexPath.section]
