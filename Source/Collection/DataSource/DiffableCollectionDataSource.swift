@@ -28,8 +28,9 @@ open class DiffableCollectionDataSource: UICollectionViewDiffableDataSource<Diff
 
     /// - parameter provider: provider of `UICollectionView` and `UICollectionViewCells`
     public init(provider: BaseCollectionManager) {
-        super.init(collectionView: provider.view) { (collection, indexPath, item) -> UICollectionViewCell? in
-            provider
+        super.init(collectionView: provider.view) { [weak provider] (collection, indexPath, item) -> UICollectionViewCell? in
+            guard let provider else { return nil }
+            return provider
                 .generators[indexPath.section][indexPath.row]
                 .generate(collectionView: collection, for: indexPath)
         }
